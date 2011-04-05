@@ -466,13 +466,10 @@ The interested reader who would like to learn more about any of the assorted dis
 \label{sub:probability-density-functions}
 
 Continuous random variables have supports that look like
-
 \begin{equation}
 S_{X}=[a,b]\mbox{ or }(a,b),
 \end{equation}
-
 or unions of intervals of the above form. Examples of random variables that are often taken to be continuous are:
-
 
 - the height or weight of an individual,
 - other physical measurements such as the length or size of an object, and
@@ -481,59 +478,49 @@ or unions of intervals of the above form. Examples of random variables that are 
 Every continuous random variable $X$ has a /probability density function/ (PDF) denoted $f_{X}$ associated with it[fn:nodens] that satisfies three basic properties:
 
 [fn:nodens] Not true. There are pathological random variables with no density function. (This is one of the crazy things that can happen in the world of measure theory). But in this book we will not get even close to these anomalous beasts, and regardless it can be proved that the CDF always exists.
-
 1. $f_{X}(x)>0$ for $x\in S_{X}$,
 2. $\int_{x\in S_{X}}f_{X}(x)\,\diff x=1$, and
 3. $\P(X\in A)=\int_{x\in A}f_{X}(x)\:\diff x$, for an event $A\subset S_{X}$.
 \label{enu: contrvcond3}
 
-\begin{rem}
+#+latex: \begin{rem}
 We can say the following about continuous random variables:
 
-
 - Usually, the set $A$ in \ref{enu: contrvcond3} takes the form of an interval, for example, $A=[c,d]$, in which case
-
-\begin{equation}
-\P(X\in A)=\int_{c}^{d}f_{X}(x)\:\diff x.
-\end{equation}
+  \begin{equation}
+  \P(X\in A)=\int_{c}^{d}f_{X}(x)\:\diff x.
+  \end{equation}
 
 - It follows that the probability that $X$ falls in a given interval is simply the \emph{area under the curve }of $f_{X}$ over the interval.
 
 - Since the area of a line $x=c$ in the plane is zero, $\P(X=c)=0$  for any value $c$. In other words, the chance that $X$ equals a particular value $c$ is zero, and this is true for any number $c$. Moreover, when $a<b$ all of the following probabilities are the same:
 
-\begin{equation}
-\P(a\leq X\leq b)=\P(a<X\leq b)=\P(a\leq X<b)=\P(a<X<b).
-\end{equation}
+  \begin{equation}
+  \P(a\leq X\leq b)=\P(a<X\leq b)=\P(a\leq X<b)=\P(a<X<b).
+  \end{equation}
 
 - The PDF $f_{X}$ can sometimes be greater than 1. This is in contrast to the discrete case; every nonzero value of a PMF is a probability which is restricted to lie in the interval $[0,1]$.
 
-
-\end{rem}
+#+latex: \end{rem}
 
 We met the cumulative distribution function, $F_{X}$, in Chapter \ref{cha:Discrete-Distributions}. Recall that it is defined by $F_{X}(t)=\P(X\leq t)$, for $-\infty<t<\infty$. While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
-
 \begin{equation}
 F_{X}(t)=\P(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\diff x,\quad-\infty<t<\infty.
 \end{equation}
 
-\begin{rem}
+#+latex: \begin{rem}
 For any continuous CDF $F_{X}$ the following are true.
-\begin{itemize}
-\item $F_{X}$ is nondecreasing , that is, $t_{1}\leq t_{2}$ implies $F_{X}(t_{1})\leq F_{X}(t_{2})$.
-\item $F_{X}$ is continuous (see Appendix \ref{sec:Differential-and-Integral}).
-Note the distinction from the discrete case: CDFs of discrete random
-variables are not continuous, they are only right continuous.
-\item $\lim_{t\to-\infty}F_{X}(t)=0$ and $\lim_{t\to\infty}F_{X}(t)=1$.
-\end{itemize}
-\end{rem}
 
-There is a handy relationship between the CDF and PDF in the continuous
-case. Consider the derivative of $F_{X}$:
+- $F_{X}$ is nondecreasing , that is, $t_{1}\leq t_{2}$ implies $F_{X}(t_{1})\leq F_{X}(t_{2})$.
+- $F_{X}$ is continuous (see Appendix \ref{sec:Differential-and-Integral}). Note the distinction from the discrete case: CDFs of discrete random variables are not continuous, they are only right continuous.
+- $\lim_{t\to-\infty}F_{X}(t)=0$ and $\lim_{t\to\infty}F_{X}(t)=1$.
 
+#+latex: \end{rem}
+
+There is a handy relationship between the CDF and PDF in the continuous case. Consider the derivative of $F_{X}$:
 \begin{equation}
 F'_{X}(t)=\frac{\diff}{\diff t}F_{X}(t)=\frac{\diff}{\diff t}\,\int_{-\infty}^{t}f_{X}(x)\,\diff x=f_{X}(t),
 \end{equation}
-
 the last equality being true by the Fundamental Theorem of Calculus, part (2) (see Appendix \ref{sec:Differential-and-Integral}). In short, $(F_{X})'=f_{X}$ in the continuous case[fn:discCDF]. 
 
 [fn:discCDF] In the discrete case, $f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)$.
@@ -542,41 +529,30 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 \label{sub:Expectation-of-Continuous}
 
 For a continuous random variable $X$ the expected value of $g(X)$ is
-
 \begin{equation}
 \E g(X)=\int_{x\in S}g(x)f_{X}(x)\:\diff x,
 \end{equation}
-
 provided the (potentially improper) integral $\int_{S}|g(x)|\, f(x)\diff x$ is convergent. One important example is the mean $\mu$, also known as $\E X$:
-
 \begin{equation}
 \mu=\E X=\int_{x\in S}xf_{X}(x)\:\diff x,
 \end{equation}
-
 provided $\int_{S}|x|f(x)\diff x$ is finite. Also there is the variance
-
 \begin{equation}
 \sigma^{2}=\E(X-\mu)^{2}=\int_{x\in S}(x-\mu)^{2}f_{X}(x)\,\diff x,
 \end{equation}
-
 which can be computed with the alternate formula $\sigma^{2}=\E X^{2}-(\E X)^{2}$. In addition, there is the standard deviation $\sigma=\sqrt{\sigma^{2}}$. The moment generating function is given by
-
 \begin{equation}
 M_{X}(t)=\E\:\me^{tX}=\int_{-\infty}^{\infty}\me^{tx}f_{X}(x)\:\diff x,
 \end{equation}
-
 provided the integral exists (is finite) for all $t$ in a neighborhood of $t=0$.
 
 #+latex: \begin{example}
 \label{exa:cont-pdf3x2}
 
-Let the continuous random variable $X$ have
-PDF
-
+Let the continuous random variable $X$ have PDF
 \[
-f_{X}(x)=3x^{2},\quad0\leq x\leq1.
+f_{X}(x)=3x^{2},\quad0\leq x\leq 1.
 \]
-
 We will see later that $f_{X}$ belongs to the /Beta/ family of distributions. It is easy to see that $\int_{-\infty}^{\infty}f(x)\diff x=1$.
 
 \begin{align*}
@@ -603,7 +579,6 @@ We can find the mean and variance in an identical manner.
  & =\frac{3}{4}.
 \end{align*}
 
-
 It would perhaps be best to calculate the variance with the shortcut formula $\sigma^{2}=\E X^{2}-\mu^{2}$:
 
 #+latex: \end{example}
@@ -616,12 +591,10 @@ It would perhaps be best to calculate the variance with the shortcut formula $\s
 
 which gives $\sigma^{2}=3/5-(3/4)^{2}=3/80$.
 
-
 #+latex: \begin{example}
 \label{exa:cont-pdf-3x4}
 
 We will try one with unbounded support to brush up on improper integration. Let the random variable $X$ have PDF
-
 \[
 f_{X}(x)=\frac{3}{x^{4}},\quad x>1.
 \]
@@ -724,13 +697,11 @@ Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why
 \label{sec:The-Continuous-Uniform}
 
 A random variable $X$ with the continuous uniform distribution on the interval $(a,b)$ has PDF
-
 \begin{equation}
 f_{X}(x)=\frac{1}{b-a},\quad a<x<b.
 \end{equation}
 
 The associated \textsf{R} function is $\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)$. We write $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$. Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF $F_{X}$:
-
 \begin{equation}
 F_{X}(t)=
 \begin{cases}
@@ -744,12 +715,11 @@ F_{X}(t)=
 The continuous uniform distribution is the continuous analogue of the discrete uniform distribution; it is used to model experiments whose outcome is an interval of numbers that are ``equally likely'' in the sense that any two intervals of equal length in the support have the same probability associated with them.
 
 #+latex: \begin{example}
-Choose a number in {[}0,1{]} at random, and let $X$ be the number chosen. Then $X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$.
+Choose a number in \( [0,1] \) at random, and let $X$ be the number chosen. Then $X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$.
 
 #+latex: \end{example}
 
 The mean of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$ is relatively simple to calculate:
-
 \begin{align*}
 \mu=\E X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\diff x,\\
  & =\int_{a}^{b}x\ \frac{1}{b-a}\ \diff x,\\
@@ -757,38 +727,32 @@ The mean of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$ is relatively 
  & =\frac{1}{b-a}\ \frac{b^{2}-a^{2}}{2},\\
  & =\frac{b+a}{2},
 \end{align*}
-
 using the popular formula for the difference of squares. The variance is left to Exercise \ref{xca:variance-dunif}.
 
 
 ** The Normal Distribution
 \label{sec:The-Normal-Distribution}
 
-We say that $X$ has a \emph{normal distribution} if it has PDF
-
+We say that $X$ has a /normal distribution/ if it has PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \} ,\quad-\infty<x<\infty.
 \end{equation}
 
 We write $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and the associated \textsf{R} function is =dnorm(x, mean = 0, sd = 1)=.
 
-The familiar bell-shaped curve, the normal distribution is also known as the /Gaussian distribution/ because the German mathematician C.~F.~Gauss largely contributed to its mathematical development. This distribution is by far the most important distribution, continuous or discrete. The normal model appears in the theory of all sorts of natural phenomena, from to the way particles of smoke dissipate in a closed room, to the journey of a bottle in the ocean to the white noise of cosmic background radiation.
+The familiar bell-shaped curve, the normal distribution is also known as the /Gaussian distribution/ because the German mathematician C. F. Gauss largely contributed to its mathematical development. This distribution is by far the most important distribution, continuous or discrete. The normal model appears in the theory of all sorts of natural phenomena, from to the way particles of smoke dissipate in a closed room, to the journey of a bottle in the ocean to the white noise of cosmic background radiation.
 
-When $\mu=0$ and $\sigma=1$ we say that the random variable has a \emph{standard normal} distribution and we typically write $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. The lowercase Greek letter phi ($\phi$) is used to denote the standard normal PDF and the capital Greek letter phi $\Phi$ is used to denote the standard normal CDF: for $-\infty<z<\infty$,
-
+When $\mu=0$ and $\sigma=1$ we say that the random variable has a /standard normal/ distribution and we typically write $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. The lowercase Greek letter phi ($\phi$) is used to denote the standard normal PDF and the capital Greek letter phi $\Phi$ is used to denote the standard normal CDF: for $-\infty<z<\infty$,
 \begin{equation}
 \phi(z)=\frac{1}{\sqrt{2\pi}}\,\me^{-z^{2}/2}\mbox{ and }\Phi(t)=\int_{-\infty}^{t}\phi(z)\,\diff z.
 \end{equation}
 
-\begin{prop}
+#+latex: \begin{prop}
 If $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ then
-
 \begin{equation}
 Z=\frac{X-\mu}{\sigma}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 \end{equation}
-
-\end{prop}
-
+#+latex: \end{prop}
 
 The MGF of $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ is relatively easy to derive:
 
@@ -797,43 +761,34 @@ M_{Z}(t) & = & \int_{-\infty}^{\infty}\me^{tz}\frac{1}{\sqrt{2\pi}}\me^{-z^{2}/2
  & = & \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\exp \{ -\frac{1}{2}\left(z^{2}+2tz+t^{2}\right)+\frac{t^{2}}{2} \} \diff z,\\
  & = & \me^{t^{2}/2}\left(\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\me^{-[z-(-t)]^{2}/2}\diff z\right),
 \end{eqnarray*}
-
 and the quantity in the parentheses is the total area under a $\mathsf{norm}(\mathtt{mean}=-t,\,\mathtt{sd}=1)$ density, which is one. Therefore,
-
 \begin{equation}
 M_{Z}(t)=\me^{-t^{2}/2},\quad-\infty<t<\infty.
 \end{equation}
 
 #+latex: \begin{example}
 The MGF of $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ is then not difficult either because 
-
 \[
 Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
 
-Therefore:
-
+Therefore
 \[
 M_{X}(t)=\E\me^{tX}=\E\me^{t(\sigma Z+\mu)}=\E\me^{\sigma tX}\me^{\mu}=\me^{t\mu}M_{Z}(\sigma t),
 \]
-
 and we know that $M_{Z}(t)=\me^{t^{2}/2}$, thus substituting we get
-
 \[
 M_{X}(t)=\me^{t\mu}\me^{(\sigma t)^{2}/2}=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} ,
 \]
-
 for $-\infty<t<\infty$.
 #+latex: \end{example}
 
-\begin{fact}
+#+latex: \begin{fact}
 The same argument above shows that if $X$ has MGF $M_{X}(t)$ then the MGF of $Y=a+bX$ is
-
 \begin{equation}
 M_{Y}(t)=\me^{ta}M_{X}(bt).
 \end{equation}
-
-\end{fact}
+#+latex: \end{fact}
 
 #+latex: \begin{example}
 The 68-95-99.7 Rule. We saw in Section \ref{sub:Measures-of-Spread} that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from -- and obtain more precise proportions -- with the following:
@@ -849,7 +804,7 @@ pnorm(1:3)-pnorm(-(1:3))
 
 Let the random experiment consist of a person taking an IQ test, and let $X$ be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is $\P(85\leq X\leq115)$?
 
-/Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68\%.
+/Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
 #+latex: \end{example}
 
 *** Normal Quantiles and the Quantile Function
@@ -859,9 +814,9 @@ Until now we have been given two values and our task has been to find the area u
 
 #+latex: \begin{example}
 \label{exa:iq-quantile-state-problem}
-Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1\% of all IQ scores?
+Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
 
-/Solution/: If a person is in the top 1\%, then that means that 99\% of the people have lower IQ scores. So, in other words, we are looking for a value $x$ such that $F(x)=\P(X\leq x)$ satisfies $F(x)=0.99$, or yet another way to say it is that we would like to solve the equation $F(x)-0.99=0$. For the sake of argument, let us see how to do this the long way. We define the function $g(x)=F(x)-0.99$, and then look for the root of $g$ with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of $x$ values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
+/Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value $x$ such that $F(x)=\P(X\leq x)$ satisfies $F(x)=0.99$, or yet another way to say it is that we would like to solve the equation $F(x)-0.99=0$. For the sake of argument, let us see how to do this the long way. We define the function $g(x)=F(x)-0.99$, and then look for the root of $g$ with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of $x$ values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp
@@ -873,58 +828,53 @@ uniroot(g, interval = c(130, 145))
 temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 #+end_src
 
-The answer is shown in =$root= which is approximately \Sexpr{temp}, that is, a person with this IQ score or higher falls in the top 1\% of all IQ scores.
+The answer is shown in =$root= which is approximately SRC_R{temp}, that is, a person with this IQ score or higher falls in the top 1% of all IQ scores.
 
 
 The discussion in example \ref{exa:iq-quantile-state-problem} was centered on the search for a value $x$ that solved an equation $F(x)=p$, for some given probability $p$, or in mathematical parlance, the search for $F^{-1}$, the inverse of the CDF of $X$, evaluated at $p$. This is so important that it merits a definition all its own.
 
-
-\begin{defn}
-The /quantile function/[fn:qf] of a random variable $X$ is the inverse of its cumulative distribution function:
-
-[fn:qf] The precise definition of the quantile function is $Q_{X}(p)=\inf \{ x:\ F_{X}(x)\geq p \}$, so at least it is well defined (though perhaps infinite) for the values $p=0$ and $p=1$.
-
+#+latex: \begin{defn}
+The /quantile function/ [fn:qf] of a random variable $X$ is the inverse of its cumulative distribution function:
 \begin{equation}
 Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad0<p<1.
 \end{equation}
+#+latex: \end{defn}
 
-\end{defn}
+[fn:qf] The precise definition of the quantile function is $Q_{X}(p)=\inf \{ x:\ F_{X}(x)\geq p \}$, so at least it is well defined (though perhaps infinite) for the values $p=0$ and $p=1$.
 
-\begin{rem}
+#+latex: \begin{rem}
 Here are some properties of quantile functions:
-\begin{enumerate}
-\item The quantile function is defined and finite for all $0<p<1$.
 
-\item $Q_{X}$ is left-continuous (see Appendix \ref{sec:Differential-and-Integral}). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
+1. The quantile function is defined and finite for all $0<p<1$.
 
-\item In the continuous case the graph of $Q_{X}$ may be obtained by reflecting the graph of $F_{X}$ about the line $y=x$. In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure \ref{fig:binom-plot-distr} for a comparison. 
+1. $Q_{X}$ is left-continuous (see Appendix \ref{sec:Differential-and-Integral}). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
 
-\item The two limits
-\[
-\lim_{p\to0^{+}}Q_{X}(p)\quad\mbox{and}\quad\lim_{p\to1^{-}}Q_{X}(p)
-\]
-always exist, but may be infinite (that is, sometimes $\lim_{p\to0}Q(p)=-\infty$ and/or $\lim_{p\to1}Q(p)=\infty$).
+1. In the continuous case the graph of $Q_{X}$ may be obtained by reflecting the graph of $F_{X}$ about the line $y=x$. In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure \ref{fig:binom-plot-distr} for a comparison. 
 
-\end{enumerate}
-\end{rem}
+1. The two limits
+   \[
+   \lim_{p\to0^{+}}Q_{X}(p)\quad\mbox{and}\quad\lim_{p\to1^{-}}Q_{X}(p)
+   \]
+   always exist, but may be infinite (that is, sometimes $\lim_{p\to0}Q(p)=-\infty$ and/or $\lim_{p\to1}Q(p)=\infty$).
+
+#+latex: \end{rem}
+
 As the reader might expect, the standard normal distribution is a very special case and has its own special notation.
 
-\begin{defn}
+#+latex: \begin{defn}
 For $0<\alpha<1$, the symbol $z_{\alpha}$ denotes the unique solution of the equation $\P(Z>z_{\alpha})=\alpha$, where $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. It can be calculated in one of two equivalent ways: =qnorm(=$1-\alpha$=)= and =qnorm(=$\alpha$=, lower.tail = FALSE)=. 
-
-\end{defn}
+#+latex: \end{defn}
 
 There are a few other very important special cases which we will encounter in later chapters. 
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the $Q_{x}(p)=$=quantile(x, probs = =$p$ =, type = 1)= function. 
+Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the $ Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) $ function. 
 
 
 #+latex: \begin{example}
 Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for $Q_{X}(0.99)$, where $X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)$. It could not be easier to do with \textsf{R}. 
-
 
 #+begin_src R :exports both :results output pp
 qnorm(0.99, mean = 100, sd = 15)
@@ -939,14 +889,11 @@ Find the values $z_{0.025}$, $z_{0.01}$, and $z_{0.005}$ (these will play an imp
 
 #+latex: \end{example}
 
-
 #+begin_src R :exports both :results output pp
 qnorm(c(0.025, 0.01, 0.005), lower.tail = FALSE)
 #+end_src
 
-Note the =lower.tail=
-argument. We would get the same answer with
-
+Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
 
@@ -958,52 +905,45 @@ The goal of this section is to determine the distribution of $U=g(X)$ based on t
 
 
 *** The PDF Method
-\begin{prop}
+
+#+latex: \begin{prop}
 \label{pro:func-cont-rvs-pdf-formula}
 
 Let $X$ have PDF $f_{X}$ and let $g$ be a function which is one-to-one with a differentiable inverse $g^{-1}$. Then the PDF of $U=g(X)$ is given by
-
 \begin{equation}
 f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\diff}{\diff u}g^{-1}(u)\right|.\label{eq:univ-trans-pdf-long}
 \end{equation}
+#+latex: \end{prop}
 
-\end{prop}
-
-
-\begin{rem}
+#+latex: \begin{rem}
 The formula in Equation \ref{eq:univ-trans-pdf-long} is nice, but does not really make any sense. It is better to write in the intuitive form
-
 \begin{equation}
 f_{U}(u)=f_{X}(x)\left|\frac{\diff x}{\diff u}\right|.\label{eq:univ-trans-pdf-short}
 \end{equation}
-\end{rem}
+#+latex: \end{rem}
 
 
 #+latex: \begin{example}
-\label{exa:lnorm-transformation}Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and let $Y=\me^{X}$. What is the PDF of $Y$? 
+\label{exa:lnorm-transformation}
+Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and let $Y=\me^{X}$. What is the PDF of $Y$? 
 
-Solution: Notice first that $\me^{x}>0$ for any $x$, so the support of $Y$ is $(0,\infty)$. Since the transformation is monotone, we can solve $y=\me^{x}$ for $x$ to get $x=\ln\, y$, giving $\diff x/\diff y=1/y$. Therefore, for any $y>0$,
-
+*Solution:* Notice first that $\me^{x}>0$ for any $x$, so the support of $Y$ is $(0,\infty)$. Since the transformation is monotone, we can solve $y=\me^{x}$ for $x$ to get $x=\ln\, y$, giving $\diff x/\diff y=1/y$. Therefore, for any $y>0$,
 \[
 f_{Y}(y)=f_{X}(\ln y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{ \frac{(\ln y-\mu)^{2}}{2\sigma^{2}}\right\} \cdot\frac{1}{y},
 \]
-
 where we have dropped the absolute value bars since $y>0$. The random variable $Y$ is said to have a \emph{lognormal distribution}; see Section \ref{sec:Other-Continuous-Distributions}.
-
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:lin-trans-norm}Suppose $X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and let $Y=4-3X$. What is the PDF of $Y$?
-
+\label{exa:lin-trans-norm}
+Suppose $X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and let $Y=4-3X$. What is the PDF of $Y$?
 #+latex: \end{example}
-The support of $X$ is $(-\infty,\infty)$, and as $x$ goes from $-\infty$ to $\infty$, the quantity $y=4-3x$ also traverses $(-\infty,\infty)$. Solving for $x$ in the equation $y=4-3x$ yields $x=-(y-4)/3$ giving $\diff x/\diff y=-1/3$. And since
 
+The support of $X$ is $(-\infty,\infty)$, and as $x$ goes from $-\infty$ to $\infty$, the quantity $y=4-3x$ also traverses $(-\infty,\infty)$. Solving for $x$ in the equation $y=4-3x$ yields $x=-(y-4)/3$ giving $\diff x/\diff y=-1/3$. And since
 \[
 f_{X}(x)=\frac{1}{\sqrt{2\pi}}\me^{-x^{2}/2},\quad-\infty<x<\infty,
 \]
-
 we have
-
 \begin{eqnarray*}
 f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\quad-\infty<y<\infty,\\
  & = & \frac{1}{3\sqrt{2\pi}}\me^{-(y-4)^{2}/2\cdot3^{2}},\quad-\infty<y<\infty.
@@ -1011,38 +951,29 @@ f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\qu
 
 We recognize the PDF of $Y$ to be that of a $\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)$ distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
-
-\begin{fact}
+#+latex: \begin{fact}
 \label{fac:lin-trans-norm-is-norm}If $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ and if $Y=a+bX$ for constants $a$ and $b$, with $b\neq0$, then $Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)$. 
-\end{fact}
+#+latex: \end{fact}
 
-
-Note that it is sometimes easier to \emph{postpone} solving for the inverse transformation $x=x(u)$. Instead, leave the transformation in the form $u=u(x)$ and calculate the derivative of the /original/ transformation
-
+Note that it is sometimes easier to /postpone/ solving for the inverse transformation $x=x(u)$. Instead, leave the transformation in the form $u=u(x)$ and calculate the derivative of the /original/ transformation
 \begin{equation}
 \diff u/\diff x=g'(x).
 \end{equation}
 
-
 Once this is known, we can get the PDF of $U$ with
-
 \begin{equation}
 f_{U}(u)=f_{X}(x)\left|\frac{1}{\diff u/\diff x}\right|.
 \end{equation}
 
 In many cases there are cancellations and the work is shorter. Of course, it is not always true that
-
 \begin{equation}
 \frac{\diff x}{\diff u}=\frac{1}{\diff u/\diff x},\label{eq:univ-jacob-recip}
 \end{equation}
-
 but for the well-behaved examples in this book the trick works just fine.
 
-
-\begin{rem}
+#+latex: \begin{rem}
 In the case that $g$ is not monotone we cannot apply Proposition \ref{pro:func-cont-rvs-pdf-formula} directly. However, hope is not lost. Rather, we break the support of $X$ into pieces such that $g$ is monotone on each one. We apply Proposition \ref{pro:func-cont-rvs-pdf-formula} on each piece, and finish up by adding the results together.
-\end{rem}
-
+#+latex: \end{rem}
 
 
 *** The CDF method
@@ -1055,31 +986,23 @@ Suppose $X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$ and
 suppose that we let $Y=-\ln\, X$. What is the PDF of $Y$?
 
 The support set of $X$ is $(0,1),$ and $y$ traverses $(0,\infty)$ as $x$ ranges from $0$ to $1$, so the support set of $Y$ is $S_{Y}=(0,\infty)$. For any $y>0$, we consider
-
 \[
 F_{Y}(y)=\P(Y\leq y)=\P(-\ln\, X\leq y)=\P(X\geq\me^{-y})=1-\P(X<\me^{-y}),
 \]
-
 where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since $X$ is continuous the two probabilities $\P(X<\me^{-y})$ and $\P(X\leq\me^{-y})$ are equal; thus
-
 \[
 1-\P(X<\me^{-y})=1-\P(X\leq\me^{-y})=1-F_{X}(\me^{-y}).
 \]
 
-
 Now recalling that the CDF of a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$ random variable satisfies $F(u)=u$ (see Equation \ref{eq:unif-cdf}), we can say
-
 \[
 F_{Y}(y)=1-F_{X}(\me^{-y})=1-\me^{-y},\quad\mbox{for }y>0.
 \]
 
-
 We have consequently found the formula for the CDF of $Y$; to obtain the PDF $f_{Y}$ we need only differentiate $F_{Y}$:
-
 \[
 f_{Y}(y)=\frac{\diff}{\diff y}\left(1-\me^{-y}\right)=0-\me^{-y}(-1),
 \]
-
 or $f_{Y}(y)=\me^{-y}$ for $y>0$. This turns out to be a member of the exponential family of distributions, see Section \ref{sec:Other-Continuous-Distributions}. 
 #+latex: \end{example}
 
@@ -1087,58 +1010,52 @@ or $f_{Y}(y)=\me^{-y}$ for $y>0$. This turns out to be a member of the exponenti
 \textbf{\emph{The Probability Integral Transform}}. Given a continuous random variable $X$ with strictly increasing CDF $F_{X}$, let the random variable $Y$ be defined by $Y=F_{X}(X)$. Then the distribution of $Y$ is $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$.
 #+latex: \end{example}
 
-\begin{proof}
+#+latex: \begin{proof}
 We employ the CDF method. First note that the support of $Y$ is $(0,1)$. Then for any $0<y<1$,
-
 \[
 F_{Y}(y)=\P(Y\leq y)=\P(F_{X}(X)\leq y).
 \]
 
 Now since $F_{X}$ is strictly increasing, it has a well defined inverse function $F_{X}^{-1}$. Therefore,
-
 \[
 \P(F_{X}(X)\leq y)=\P(X\leq F_{X}^{-1}(y))=F_{X}[F_{X}^{-1}(y)]=y.
 \]
 
 Summarizing, we have seen that $F_{Y}(y)=y$, $0<y<1$. But this is exactly the CDF of a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$ random variable. 
-\end{proof}
+#+latex: \end{proof}
 
-\begin{fact}
+#+latex: \begin{fact}
 The Probability Integral Transform is true for all continuous random variables with continuous CDFs, not just for those with strictly increasing CDFs (but the proof is more complicated). The transform is *not* true for discrete random variables, or for continuous random variables having a discrete component (that is, with jumps in their CDF).
-\end{fact}
+#+latex: \end{fact}
 
 #+latex: \begin{example}
-\label{exa:distn-of-z-squared}Let $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$
-and let $U=Z^{2}$. What is the PDF of $U$? 
+\label{exa:distn-of-z-squared}
+
+Let $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and let $U=Z^{2}$. What is the PDF of $U$? 
 
 Notice first that $Z^{2}\geq0$, and thus the support of $U$ is $[0,\infty)$. And for any $u\geq0$, 
-
 \[
 F_{U}(u)=\P(U\leq u)=\P(Z^{2}\leq u).
 \]
 
 
 But $Z^{2}\leq u$ occurs if and only if $-\sqrt{u}\leq Z\leq\sqrt{u}$. The last probability above is simply the area under the standard normal PDF from $-\sqrt{u}$ to $\sqrt{u}$, and since $\phi$ is symmetric about 0, we have
-
 \[
 \P(Z^{2}\leq u)=2\P(0\leq Z\leq\sqrt{u})=2\left[F_{Z}(\sqrt{u})-F_{Z}(0)\right]=2\Phi(\sqrt{u})-1,
 \]
-
 because $\Phi(0)=1/2$. To find the PDF of $U$ we differentiate the CDF recalling that $\Phi'=\phi$.
-
 \[
 f_{U}(u)=\left(2\Phi(\sqrt{u})-1\right)'=2\phi(\sqrt{u})\cdot\frac{1}{2\sqrt{u}}=u^{-1/2}\phi(\sqrt{u}).
 \]
 
 Substituting,
-
 \[
 f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\me^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\me^{-u},\quad u>0.
 \]
-
-This is what we will later call a \emph{chi-square distribution with 1 degree of freedom}. See Section \ref{sec:Other-Continuous-Distributions}.
-
+This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section \ref{sec:Other-Continuous-Distributions}.
 #+latex: \end{example}
+
+
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -1160,23 +1077,20 @@ Y
 
 The result is an object of class =AbscontDistribution=, which is one of the classes that =distr= uses to denote general distributions that it does not recognize (it turns out that $Z$ has a /lognormal/ distribution; see Section \ref{sec:Other-Continuous-Distributions}). A simplified description of the process that =distr= undergoes when it encounters a transformation $Y=g(X)$ that it does not recognize is
 
-\begin{enumerate}
-\item Randomly generate many, many copies $X_{1}$, $X_{2}$, ..., $X_{n}$ from the distribution of $X$,
+1. Randomly generate many, many copies $X_{1}$, $X_{2}$, ..., $X_{n}$ from the distribution of $X$,
 
-\item Compute $Y_{1}=g(X_{1})$, $Y_{2}=g(X_{2})$, ..., $Y_{n}=g(X_{n})$ and store them for use.
+1. Compute $Y_{1}=g(X_{1})$, $Y_{2}=g(X_{2})$, ..., $Y_{n}=g(X_{n})$ and store them for use.
 
-\item Calculate the PDF, CDF, quantiles, and random variates using the simulated values of $Y$.
+1. Calculate the PDF, CDF, quantiles, and random variates using the simulated values of $Y$.
 
-\end{enumerate}
-
-As long as the transformation is sufficiently nice, such as a linear transformation, the exponential, absolute value, /etc./, the d-p-q functions are calculated analytically based on the d-p-q functions associated with $X$. But if we try a crazy transformation then we are greeted by a warning:
+As long as the transformation is sufficiently nice, such as a linear transformation, the exponential, absolute value, /etc./, the \texttt{d-p-q} functions are calculated analytically based on the d-p-q functions associated with $X$. But if we try a crazy transformation then we are greeted by a warning:
 
 #+begin_src R :exports both :results output pp
 W <- sin(exp(X) + 27)
 W
 #+end_src
 
-The warning confirms that the d-p-q functions are not calculated analytically, but are instead based on the randomly simulated values of $Y$. /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute $\P(W\leq0.5)$ using the $W$ above, then define $W$ again, and compute the (supposedly) same $\P(W\leq0.5)$ a few moments later.
+The warning confirms that the \texttt{d-p-q} functions are not calculated analytically, but are instead based on the randomly simulated values of $Y$. /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute $\P(W\leq0.5)$ using the $W$ above, then define $W$ again, and compute the (supposedly) same $\P(W\leq0.5)$ a few moments later.
 
 #+begin_src R :exports both :results output pp
 p(W)(0.5)
@@ -1192,7 +1106,6 @@ The answers were close, though. And the underlying randomly generated $X$'s were
 ** Other Continuous Distributions
 \label{sec:Other-Continuous-Distributions}
 
-
 *** Waiting Time Distributions
 \label{sub:Waiting-Time-Distributions}
 
@@ -1203,40 +1116,31 @@ In some experiments, the random variable being measured is the time until a cert
 \label{sub:The-Exponential-Distribution}
 
 We say that $X$ has an /exponential distribution/ and write $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. 
-
 \begin{equation}
 f_{X}(x)=\lambda\me^{-\lambda x},\quad x>0
 \end{equation}
-
 The associated \textsf{R} functions are =dexp(x, rate = 1)=, =pexp=, =qexp=, and =rexp=, which give the PDF, CDF, quantile function, and simulate random variates, respectively.
 
 The parameter $\lambda$ measures the rate of arrivals (to be described later) and must be positive. The CDF is given by the formula
-
 \begin{equation}
 F_{X}(t)=1-\me^{-\lambda t},\quad t>0.
 \end{equation}
-
-
 The mean is $\mu=1/\lambda$ and the variance is $\sigma^{2}=1/\lambda^{2}$. 
 
 The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate $\lambda$ and if $Y$ counts the number of customers that arrive in the time interval $[0,t)$, then we saw in Section \ref{sec:other-discrete-distributions} that $Y\sim\mathsf{pois}(\mathtt{lambda}=\lambda t).$ Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let $X$ be the length of this random time interval. Then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. Observe the following string of equalities:
-
 \begin{align*}
 \P(X>t) & =\P(\mbox{first arrival after time \emph{t}}),\\
  & =\P(\mbox{no events in [0,\emph{t})}),\\
  & =\P(Y=0),\\
  & =\me^{-\lambda t},
 \end{align*}
-
 where the last line is the PMF of $Y$ evaluated at $y=0$. In other words, $\P(X\leq t)=1-\me^{-\lambda t}$, which is exactly the CDF of an $\mathsf{exp}(\mathtt{rate}=\lambda)$ distribution. 
 
 
-The exponential distribution is said to be \emph{memoryless} because exponential random variables \textquotedbl{}forget\textquotedbl{} how old they are at every instant. That is, the probability that we must wait an additional five hours for a customer to arrive, given that we have already waited seven hours, is exactly the probability that we needed to wait five hours for a customer in the first place. In mathematical symbols, for any $s,\, t>0$,
-
+The exponential distribution is said to be /memoryless/ because exponential random variables "forget" how old they are at every instant. That is, the probability that we must wait an additional five hours for a customer to arrive, given that we have already waited seven hours, is exactly the probability that we needed to wait five hours for a customer in the first place. In mathematical symbols, for any $s,\, t>0$,
 \begin{equation}
 \P(X>s+t\,|\, X>t)=\P(X>s).
 \end{equation}
-
 See Exercise \ref{xca:prove-the-memoryless}.
 
 
@@ -1244,15 +1148,13 @@ See Exercise \ref{xca:prove-the-memoryless}.
 \label{sub:The-Gamma-Distribution}
 
 This is a generalization of the exponential distribution. We say that $X$ has a gamma distribution and write $X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)$. It has PDF
-
 \begin{equation}
 f_{X}(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}\: x^{\alpha-1}\me^{-\lambda x},\quad x>0.
 \end{equation}
 
-
 The associated \textsf{R} functions are =dgamma(x, shape, rate = 1)=, =pgamma=, =qgamma=, and =rgamma=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. If $\alpha=1$ then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. The mean is $\mu=\alpha/\lambda$ and the variance is $\sigma^{2}=\alpha/\lambda^{2}$.
 
-To motivate the gamma distribution recall that if $X$ measures the length of time until the first event occurs in a Poisson process with rate $\lambda$ then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. If we let $Y$ measure the length of time until the $\alpha^{\mathrm{th}}$ event occurs then $Y\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)$. When $\alpha$ is an integer this distribution is also known as the \emph{Erlang} distribution.
+To motivate the gamma distribution recall that if $X$ measures the length of time until the first event occurs in a Poisson process with rate $\lambda$ then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. If we let $Y$ measure the length of time until the $\alpha^{\mathrm{th}}$ event occurs then $Y\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)$. When $\alpha$ is an integer this distribution is also known as the /Erlang/ distribution.
 
 #+latex: \begin{example}
 At a car wash, two customers arrive per hour on the average. We decide to measure how long it takes until the third customer arrives. If $Y$ denotes this random time then $Y\sim\mathsf{gamma}(\mathtt{shape}=3,\,\mathtt{rate}=1/2)$.
@@ -1266,24 +1168,18 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 \label{sub:The-Chi-Square}
 
 A random variable $X$ with PDF
-
 \begin{equation}
 f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\me^{-x/2},\quad x>0,
 \end{equation}
-
 is said to have a /chi-square distribution/ with $p$ /degrees of freedom/. We write $X\sim\mathsf{chisq}(\mathtt{df}=p)$. The associated \textsf{R} functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure \ref{fig:chisq-dist-vary-df}. In an obvious notation we may define $\chi_{\alpha}^{2}(p)$ as the number on the $x$-axis such that there is exactly $\alpha$ area under the $\mathsf{chisq}(\mathtt{df}=p)$ curve to its right.
 
 The code to produce Figure \ref{fig:chisq-dist-vary-df} is
-
-
 
 
 <<eval = FALSE>>=
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
-#+end_src
-
 
 \begin{figure}
 \begin{centering}
@@ -1293,65 +1189,57 @@ ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 #+end_src
 \par\end{centering}
-
 \caption{Chi square distribution for various degrees of freedom\label{fig:chisq-dist-vary-df}}
-
 \end{figure}
 
-\begin{rem}
 
+#+latex: \begin{rem}
 Here are some useful things to know about the chi-square distribution.
 
+1. If $Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, then $Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)$. We saw this in Example \ref{exa:distn-of-z-squared}, and the fact is important when it comes time to find the distribution of the sample variance, $S^{2}$. See Theorem \ref{thm:Xbar-andS} in Section \ref{sub:Samp-Var-Dist}.
 
-\begin{enumerate}
-\item If $Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, then $Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)$.
-We saw this in Example \ref{exa:distn-of-z-squared}, and the fact
-is important when it comes time to find the distribution of the sample
-variance, $S^{2}$. See Theorem \ref{thm:Xbar-andS} in Section \ref{sub:Samp-Var-Dist}.
-\item The chi-square distribution is supported on the positive $x$-axis,
-with a right-skewed distribution.
-\item The $\mathsf{chisq}(\mathtt{df}=p)$ distribution is the same as a
-$\mathsf{gamma}(\mathtt{shape}=p/2,\,\mathtt{rate}=1/2)$ distribution.
-\item The MGF of $X\sim\mathsf{chisq}(\mathtt{df}=p)$ is\begin{equation}
-M_{X}(t)=\left(1-2t\right)^{-p},\quad t<1/2.\label{eq:mgf-chisq}\end{equation}
+1. The chi-square distribution is supported on the positive $x$-axis, with a right-skewed distribution.
 
-\end{enumerate}
-\end{rem}
+1. The $\mathsf{chisq}(\mathtt{df}=p)$ distribution is the same as a $\mathsf{gamma}(\mathtt{shape}=p/2,\,\mathtt{rate}=1/2)$ distribution. 
+
+1. The MGF of $X\sim\mathsf{chisq}(\mathtt{df}=p)$ is
+
+   \begin{equation}
+   M_{X}(t)=\left(1-2t\right)^{-p},\quad t<1/2.\label{eq:mgf-chisq}
+   \end{equation}
+
+#+latex: \end{rem}
+
+
 
 *** Student's $t$ distribution
 \label{sub:Student's-t-distribution}
 
 A random variable $X$ with PDF
-
 \begin{equation}
 f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty
 \end{equation}
-
-is said to have \emph{Student's} $t$ distribution with $r$ /degrees of freedom/, and we write $X\sim\mathsf{t}(\mathtt{df}=r)$. The associated \textsf{R} functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
+is said to have /Student's/ $t$ distribution with $r$ /degrees of freedom/, and we write $X\sim\mathsf{t}(\mathtt{df}=r)$. The associated \textsf{R} functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 
 *** Snedecor's $F$ distribution
 \label{sub:snedecor-F-distribution}
 
 A random variable $X$ with PDF
-
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(m+n)/2]}{\Gamma(m/2)\Gamma(n/2)}\left(\frac{m}{n}\right)^{m/2}x^{m/2-1}\left(1+\frac{m}{n}x\right)^{-(m+n)/2},\quad x>0.
 \end{equation}
-
 is said to have an $F$ distribution with $(m,n)$ degrees of freedom. We write $X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)$. The associated \textsf{R} functions are =df(x, df1, df2)=, =pf=, =qf=, and =rf=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. We define $F_{\alpha}(m,n)$ as the number on the $x$-axis such that there is exactly $\alpha$ area under the $\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)$ curve to its right. 
 
-\begin{rem}
+#+latex: \begin{rem}
 Here are some notes about the $F$ distribution.
-\begin{enumerate}
 
-\item If $X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)$ and $Y=1/X$, then $Y\sim\mathsf{f}(\mathtt{df1}=n,\,\mathtt{df2}=m)$. Historically, this fact was especially convenient. In the old days, statisticians used printed tables for their statistical calculations. Since the $F$ tables were symmetric in $m$ and $n$, it meant that publishers could cut the size of their printed tables in half. It plays less of a role today now that personal computers are widespread.
+1. If $X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)$ and $Y=1/X$, then $Y\sim\mathsf{f}(\mathtt{df1}=n,\,\mathtt{df2}=m)$. Historically, this fact was especially convenient. In the old days, statisticians used printed tables for their statistical calculations. Since the $F$ tables were symmetric in $m$ and $n$, it meant that publishers could cut the size of their printed tables in half. It plays less of a role today now that personal computers are widespread.
 
-\item If $X\sim\mathsf{t}(\mathtt{df}=r)$, then $X^{2}\sim\mathsf{f}(\mathtt{df1}=1,\,\mathtt{df2}=r)$. We will see this again in Section \ref{sub:slr-overall-F-statistic}.
+1. If $X\sim\mathsf{t}(\mathtt{df}=r)$, then $X^{2}\sim\mathsf{f}(\mathtt{df1}=1,\,\mathtt{df2}=r)$. We will see this again in Section \ref{sub:slr-overall-F-statistic}.
 
-\end{enumerate}
+#+latex: \end{rem}
 
-\end{rem}
 
 *** Other Popular Distributions
 \label{sub:Other-Popular-Distributions}
@@ -1361,11 +1249,9 @@ Here are some notes about the $F$ distribution.
 \label{sub:The-Cauchy-Distribution}
 
 This is a special case of the Student's $t$ distribution. It has PDF
-
 \begin{equation}
-f_{X}(x)=\frac{1}{\beta\pi}\left[1+\left(\frac{x-m}{\beta}\right)^{2}\right]^{-1},\quad-\infty<x<\infty
+f_{X}(x)=\frac{1}{\beta\pi}\left[1+\left(\frac{x-m}{\beta}\right)^{2}\right]^{-1},\quad-\infty<x<\infty.
 \end{equation}
-
 
 We write $X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)$. The associated \textsf{R} function is =dcauchy(x, location = 0, scale = 1)=.
 
@@ -1376,17 +1262,14 @@ It is easy to see that a $\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1
 \label{sub:The-Beta-Distribution}
 
 This is a generalization of the continuous uniform distribution.
-
 \begin{equation}
 f_{X}(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\: x^{\alpha-1}(1-x)^{\beta-1},\quad0<x<1
 \end{equation}
 
 We write $X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)$. The associated \textsf{R} function is =dbeta(x, shape1, shape2)=. The mean and variance are
-
 \begin{equation} 
 \mu=\frac{\alpha}{\alpha+\beta}\mbox{ and }\sigma^{2}=\frac{\alpha\beta}{\left(\alpha+\beta\right)^{2}\left(\alpha+\beta+1\right)}.
 \end{equation}
-
 
 See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian statistics because it is a good model for one's prior beliefs about a population proportion $p$, $0\leq p\leq1$.
 
@@ -1400,12 +1283,10 @@ f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left
 
 We write $X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)$. The associated \textsf{R} function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is $\mu$ and the variance is $\pi^{2}\sigma^{2}/3$.
 
-
 #+latex: \paragraph*{The Lognormal Distribution}
 \label{sub:The-Lognormal-Distribution}
 
 This is a distribution derived from the normal distribution (hence the name). If $U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, then $X=\me^{U}$has PDF
-
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^{2}}\right],\quad0<x<\infty.
 \end{equation}
@@ -1417,7 +1298,6 @@ We write $X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)$. Th
 \label{sub:The-Weibull-Distribution}
 
 This has PDF
-
 \begin{equation}
 f_{X}(x)=\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}\exp\left(\frac{x}{\beta}\right)^{\alpha},\quad x>0.
 \end{equation}
@@ -1446,16 +1326,18 @@ For the plot we can use the function in the following form:
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 #+end_src
 
-%
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
-#+end_src
 \par\end{centering}
-
 \caption{Plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF \label{fig:gamma-mgf}}
 \end{figure}
+
+
 
 
 \newpage{}
@@ -1465,76 +1347,64 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
 \addcontentsline{toc}{section}{Chapter Exercises}
 \setcounter{thm}{0}
 
+#+latex: \begin{xca}
+Find the constant $c$ so that the given function is a valid PDF of a random variable $X$.
 
-\begin{xca}
-Find the constant $c$ so that the given function is a valid PDF of
-a random variable $X$.\end{xca}
-\begin{enumerate}
-\item $f(x)=Cx^{n},\quad0<x<1$.
-\item $f(x)=Cx\me^{-x},\quad0<x<\infty$.
-\item $f(x)=\me^{-(x-C)},\quad7<x<\infty.$
-\item $f(x)=Cx^{3}(1-x)^{2},\quad0<x<1.$
-\item ${\displaystyle f(x)=C(1+x^{2}/4)^{-1}},\quad-\infty<x<\infty.$
-\end{enumerate}
+1. $f(x)=Cx^{n},\quad0<x<1$.
+1. $f(x)=Cx\me^{-x},\quad0<x<\infty$.
+1. $f(x)=\me^{-(x-C)},\quad7<x<\infty.$
+1. $f(x)=Cx^{3}(1-x)^{2},\quad0<x<1.$
+1. ${\displaystyle f(x)=C(1+x^{2}/4)^{-1}},\quad-\infty<x<\infty.$
 
+#+latex: \end{xca}
 
-
-\begin{xca}
+#+latex: \begin{xca}
 For the following random experiments, decide what the distribution of $X$ should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not strictly hold in practice).
 
-\begin{enumerate}
-\item We throw a dart at a dart board. Let $X$ denote the squared linear distance from the bulls-eye to the where the dart landed.
+1. We throw a dart at a dart board. Let $X$ denote the squared linear distance from the bulls-eye to the where the dart landed.
 
-\item We randomly choose a textbook from the shelf at the bookstore and let $P$ denote the proportion of the total pages of the book devoted to exercises. 
+1. We randomly choose a textbook from the shelf at the bookstore and let $P$ denote the proportion of the total pages of the book devoted to exercises. 
 
-\item We measure the time it takes for the water to completely drain out of the kitchen sink.
+1. We measure the time it takes for the water to completely drain out of the kitchen sink.
 
-\item We randomly sample strangers at the grocery store and ask them how long it will take them to drive home. 
+1. We randomly sample strangers at the grocery store and ask them how long it will take them to drive home. 
 
-\end{enumerate}
-\end{xca}
+#+latex: \end{xca}
 
-\begin{xca}
+#+latex: \begin{xca}
 If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find 
-\begin{enumerate}
-\item $\P(Z>2.64)$
 
+1. $\P(Z>2.64)$
+   #+begin_src R :exports both :results output pp
+   pnorm(2.64, lower.tail = FALSE)
+   #+end_src
 
-#+begin_src R :exports both :results output pp
-pnorm(2.64, lower.tail = FALSE)
-#+end_src
+1. $\P(0\leq Z<0.87)$
+   #+begin_src R :exports both :results output pp
+   pnorm(0.87) - 1/2
+   #+end_src
 
-\item $\P(0\leq Z<0.87)$
+1. $\P(|Z|>1.39)$ (Hint: draw a picture!)
+   #+begin_src R :exports both :results output pp
+   2 * pnorm(-1.39)
+   #+end_src
 
+#+latex: \end{xca}
 
-#+begin_src R :exports both :results output pp
-pnorm(0.87) - 1/2
-#+end_src
+#+latex: \begin{xca}
+\label{xca:variance-dunif}
 
-\item $\P(|Z|>1.39)$ (Hint: draw a picture!)
+Calculate the variance of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$. /Hint:/ First calculate $\E X^{2}$.
 
+#+latex: \end{xca}
 
-#+begin_src R :exports both :results output pp
-2 * pnorm(-1.39)
-#+end_src
-
-\end{enumerate}
-\end{xca}
-
-\begin{xca}
-\label{xca:variance-dunif}Calculate the variance of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$. Hint: First calculate $\E X^{2}$.
-
-type the exercise here
-\end{xca}
-
-\begin{xca}
-\label{xca:prove-the-memoryless}Prove the memoryless property for exponential random variables. That is, for $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$ show that for any $s,t>0$,
-
+#+latex: \begin{xca}
+\label{xca:prove-the-memoryless}
+Prove the memoryless property for exponential random variables. That is, for $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$ show that for any $s,t>0$,
 \[
 \P(X>s+t\,|\, X>t)=\P(X>s).
 \]
-
-\end{xca}
+#+latex: \end{xca}
 
 
 
@@ -1574,29 +1444,23 @@ The interested reader who would like to learn more about any of the below mentio
 \label{sec:Joint-Probability-Distributions}
 
 Consider two discrete random variables $X$ and $Y$ with PMFs $f_{X}$ and $f_{Y}$ that are supported on the sample spaces $S_{X}$ and $S_{Y}$, respectively. Let $S_{X,Y}$ denote the set of all possible observed /pairs/ $(x,y)$, called the /joint support set/ of $X$ and $Y$. Then the /joint probability mass function/ of $X$ and $Y$ is the function $f_{X,Y}$ defined by
-
 \begin{equation}
 f_{X,Y}(x,y)=\P(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq:joint-pmf}
 \end{equation}
 
 
 Every joint PMF satisfies
-
 \begin{equation}
 f_{X,Y}(x,y)>0\mbox{ for all }(x,y)\in S_{X,Y},
 \end{equation}
-
 and
-
 \begin{equation}
 \sum_{(x,y)\in S_{X,Y}}f_{X,Y}(x,y)=1.
 \end{equation}
 
-
 It is customary to extend the function $f_{X,Y}$ to be defined on all of $\R^{2}$ by setting $f_{X,Y}(x,y)=0$ for $(x,y)\not\in S_{X,Y}$. 
 
 In the context of this chapter, the PMFs $f_{X}$ and $f_{Y}$ are called the /marginal PMFs/ of $X$ and $Y$, respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq:theorem-total-probability}): observe
-
 \begin{eqnarray}
 f_{X}(x) & = & \P(X=x),\\
  & = & \sum_{y\in S_{Y}}\P(X=x,\, Y=y),\\
@@ -1604,7 +1468,6 @@ f_{X}(x) & = & \P(X=x),\\
 \end{eqnarray}
 
 By interchanging the roles of $X$ and $Y$ it is clear that 
-
 \begin{equation}
 f_{Y}(y)=\sum_{x\in S_{Y}}f_{X,Y}(x,y).\label{eq:marginal-pmf}
 \end{equation}
@@ -1615,7 +1478,6 @@ Given the joint PMF we may recover the marginal PMFs, but the converse is not tr
 [fn:frechet] We are not at a total loss, however. There are Frechet bounds which pose limits on how large (and small) the joint distribution must be at each point.
 
 Associated with the joint PMF is the /joint cumulative distribution function/ $F_{X,Y}$ defined by
-
 \[
 F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\R^{2}.
 \]
@@ -1628,29 +1490,25 @@ We now introduce some examples of bivariate discrete distributions. The first we
 \label{exa:toss-two-dice-joint-pmf}
 
 Roll a fair die twice. Let $X$ be the face shown on the first roll, and let $Y$ be the face shown on the second roll. We have already seen this example in Chapter \ref{cha:Probability}, Example \ref{exa:Toss-a-six-sided-die-twice}. For this example, it suffices to define
-
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6.
 \]
 
 The marginal PMFs are given by $f_{X}(x)=1/6$, $x=1,2,\ldots,6$, and $f_{Y}(y)=1/6$, $y=1,2,\ldots,6$, since
-
 \[
 f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6,
 \]
-
 and the same computation with the letters switched works for $Y$. 
 #+latex: \end{example}
 
 
-In the previous example, and in many other ones, the joint support can be written as a product set of the support of $X$ ``times'' the support of $Y$, that is, it may be represented as a cartesian product set, or rectangle, $S_{X,Y}=S_{X}\times S_{Y}$, where $S_{X}\times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} $. As we shall see presently in Section \ref{sec:Independent-Random-Variables}, this form is a necessary condition for $X$ and $Y$ to be \emph{independent} (or alternatively \emph{exchangeable} when $S_{X}=S_{Y}$). But please note that in general it is not required for $S_{X,Y}$ to be of rectangle form. We next investigate just such an example.
+In the previous example, and in many other ones, the joint support can be written as a product set of the support of $X$ ``times'' the support of $Y$, that is, it may be represented as a cartesian product set, or rectangle, $S_{X,Y}=S_{X}\times S_{Y}$, where $S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} $. As we shall see presently in Section \ref{sec:Independent-Random-Variables}, this form is a necessary condition for $X$ and $Y$ to be \emph{independent} (or alternatively \emph{exchangeable} when $S_{X}=S_{Y}$). But please note that in general it is not required for $S_{X,Y}$ to be of rectangle form. We next investigate just such an example.
 
 
 #+latex: \begin{example}
 \label{exa:max-sum-two-dice}
 
 Let the random experiment again be to roll a fair die twice, except now let us define the random variables $U$ and $V$ by
-
 \begin{eqnarray*}
 U & = & \mbox{the maximum of the two rolls, and }\\
 V & = & \mbox{the sum of the two rolls.}
@@ -1659,17 +1517,15 @@ V & = & \mbox{the sum of the two rolls.}
 We see that the support of $U$ is $S_{U}= \{ 1,2,\ldots,6 \} $ and the support of $V$ is $S_{V}= \{ 2,3,\ldots,12 \} $. We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that $U$ assumes. The result is in the left half of Table \ref{tab:max-and-sum-two-dice}. 
 
 We can use the table to calculate the marginal PMF of $U$, because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability $1/36$ associated with it. For instance, there is only one outcome in the matrix with $U=1$, namely, the top left corner. This single entry has probability $1/36$, therefore, it must be that $f_{U}(1)=\P(U=1)=1/36$. Similarly we see that there are three entries in the matrix with $U=2$, thus $f_{U}(2)=3/36$. Continuing in this fashion we will find the marginal distribution of $U$ may be written
-
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
 
-
 We may do a similar thing for $V$; see the right half of Table \ref{tab:max-and-sum-two-dice}. Collecting all of the probability we will find that the marginal PMF of $V$ is
-
 \begin{equation}
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
+
 
 
 %
@@ -1686,7 +1542,6 @@ $U$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 6 & 6 & 6 & 6 & 6 & 6 & 6\tabularnewline
 \end{tabular}
 \par\end{centering}
-
 }\hfill{}\subfloat[$V=X+Y$]{\begin{centering}
 \begin{tabular}{c|cccccc}
 $V$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
@@ -1699,17 +1554,14 @@ $V$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 6 & 7 & 8 & 9 & 10 & 11 & 12\tabularnewline
 \end{tabular}
 \par\end{centering}
-
 }\hfill{}
-
 \caption{Maximum $U$ and sum $V$ of a pair of dice rolls $(X,Y)$\label{tab:max-and-sum-two-dice}}
-
 \end{table}
 
 
 We may collapse the two matrices from Table \ref{tab:max-and-sum-two-dice} into one, big matrix of pairs of values $(u,v)$. The result is shown in Table \ref{tab:-max-sum-two-dice-joint}. 
 
-%
+
 \begin{table}
 \begin{centering}
 \begin{tabular}{c|cccccc}
@@ -1723,15 +1575,13 @@ $(U,V)$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 6 & (6,7) & (6,8) & (6,9) & (6,10) & (6,11) & (6,12)\tabularnewline
 \end{tabular}
 \par\end{centering}
-
 \caption{Joint values of $U=\max(X,Y)$ and $V=X+Y$\label{tab:-max-sum-two-dice-joint}}
-
 \end{table}
 
 
 Again, each of these pairs has probability $1/36$ associated with it and we are looking at the joint PDF of $(U,V)$ albeit in an unusual form. Many of the pairs are repeated, but some of them are not: $(1,2)$ appears twice, but $(2,3)$ appears only once. We can make more sense out of this by writing a new table with $U$ on one side and $V$ along the top. We will accumulate the probability just like we did in Example \ref{exa:toss-two-dice-joint-pmf}. See Table \ref{tab:max-sum-joint-pmf}.
 
-%
+
 \begin{table}
 \begin{centering}
 \begin{tabular}{|c|ccccccccccc|c|}
@@ -1749,9 +1599,7 @@ Again, each of these pairs has probability $1/36$ associated with it and we are 
 \hline
 \end{tabular}
 \par\end{centering}
-
 \caption{The joint PMF of $(U,V)$\label{tab:max-sum-joint-pmf} }
-
 {\small The outcomes of $U$ are along the left and the outcomes of $V$ are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of $U$ and $V$, respectively. }
 \end{table}
 
@@ -1760,34 +1608,26 @@ The joint support of $(U,V)$ is concentrated along the main diagonal;  note that
 #+latex: \end{example}
 
 Continuing the reasoning for the discrete case, given two continuous random variables $X$ and $Y$ there similarly exists[fn:jointPDFexist] a function $f_{X,Y}(x,y)$ associated with $X$ and $Y$ called the /joint probability density function/ of $X$ and $Y$. Every joint PDF satisfies
-
-[fn:jointPDFexist] Strictly speaking, the joint density function does not necessarily exist. But the joint CDF always exists.
-
 \begin{equation}
 f_{X,Y}(x,y)\geq0\mbox{ for all }(x,y)\in S_{X,Y},
 \end{equation}
-
 and
-
 \begin{equation}
 \iintop_{S_{X,Y}}f_{X,Y}(x,y)\,\diff x\,\diff y=1.
 \end{equation}
 
 
-In the continuous case there is not such a simple interpretation for the joint PDF; however, we do have one for the joint CDF, namely,
+[fn:jointPDFexist] Strictly speaking, the joint density function does not necessarily exist. But the joint CDF always exists.
 
+In the continuous case there is not such a simple interpretation for the joint PDF; however, we do have one for the joint CDF, namely,
 \[
 F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\diff v\,\diff u,
 \]
-
 for $(x,y)\in\R^{2}$. If $X$ and $Y$ have the joint PDF $f_{X,Y}$, then the marginal density of $X$ may be recovered by
-
 \begin{equation}
 f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\diff y,\quad x\in S_{X}
 \end{equation}
-
 and the marginal PDF of $Y$ may be found with
-
 \begin{equation}
 f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\diff x,\quad y\in S_{Y}.
 \end{equation}
@@ -1797,35 +1637,29 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\diff x,\quad y\in S_{Y}.
 \label{exa:joint-pdf}
 
 Let the joint PDF of $(X,Y)$ be given by
-
 \[
 f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad0<x<1,\ 0<y<1.
 \]
 
 The marginal PDF of $X$ is
-
 \begin{eqnarray*}
 f_{X}(x) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\diff y,\\
  & = & \left.\frac{6}{5}\left(xy+\frac{y^{3}}{3}\right)\right|_{y=0}^{1},\\
  & = & \frac{6}{5}\left(x+\frac{1}{3}\right),
 \end{eqnarray*}
-
 for $0<x<1$, and the marginal PDF of $Y$ is
-
 \begin{eqnarray*}
 f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\diff x,\\
  & = & \left.\frac{6}{5}\left(\frac{x^{2}}{2}+xy^{2}\right)\right|_{x=0}^{1},\\
  & = & \frac{6}{5}\left(\frac{1}{2}+y^{2}\right),
 \end{eqnarray*}
-
 for $0<y<1$. In this example the joint support set was a rectangle $[0,1]\times[0,1]$, but it turns out that $X$ and $Y$ are not independent. See Section \ref{sec:Independent-Random-Variables}.
-
 #+latex: \end{example}
+
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 We will show how to do Example \ref{exa:max-sum-two-dice} using \textsf{R}; it is much simpler to do it with \textsf{R} than without. First we set up the sample space with the =rolldie= function. Next, we add random variables $U$ and $V$ with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
-
 
 #+begin_src R :exports both :results output pp
 S <- rolldie(2, makespace = TRUE)
@@ -1849,16 +1683,12 @@ xtabs(round(probs,3) ~ U + V, data = UV)
 
 Compare these values to the ones shown in Table \ref{tab:max-sum-joint-pmf}. We can repeat the process with =marginal= to get the univariate marginal distributions of $U$ and $V$ separately.
 
-
 #+begin_src R :exports both :results output pp
 marginal(UV, vars = "U")
 head(marginal(UV, vars = "V"))
 #+end_src
 
-Another way to do the same thing is with the =rowSums=
-and =colSums=
-of the =xtabs=
-object. Compare
+Another way to do the same thing is with the =rowSums= and =colSums= of the =xtabs= object. Compare
 
 #+begin_src R :exports both :results output pp
 temp <- xtabs(probs ~ U + V, data = UV)
@@ -1873,13 +1703,10 @@ You should check that the answers that we have obtained exactly match the same (
 \label{sec:Joint-and-Marginal-Expectation}
 
 Given a function $g$ with arguments $(x,y)$ we would like to know the long-run average behavior of $g(X,Y)$ and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
-
 \begin{equation}
 \E\, g(X,Y)=\iintop_{S_{X,Y}}g(x,y)\, f_{X,Y}(x,y)\,\diff x\,\diff y,
 \end{equation}
-
-or in the discrete case
-
+or in the discrete case,
 \begin{equation}
 \E\, g(X,Y)=\mathop{\sum\sum}\limits _{(x,y)\in S_{X,Y}}g(x,y)\, f_{X,Y}(x,y).
 \end{equation}
@@ -1890,63 +1717,46 @@ or in the discrete case
 
 There are two very special cases of joint expectation: the /covariance/ and the /correlation/. These are measures which help us quantify the dependence between $X$ and $Y$. 
 
-
-\begin{defn}
+#+latex: \begin{defn}
 The /covariance/ of $X$ and $Y$ is
-
 \begin{equation}
 \mbox{Cov}(X,Y)=\E(X-\E X)(Y-\E Y).
 \end{equation}
+#+latex: \end{defn}
 
-\end{defn}
-
-By the way, there is a shortcut formula for covariance which is almost
-as handy as the shortcut for the variance:
-
+By the way, there is a shortcut formula for covariance which is almost as handy as the shortcut for the variance:
 \begin{equation}
 \mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y).
 \end{equation}
-
 The proof is left to Exercise \ref{xca:Prove-cov-shortcut}.
 
 The Pearson product moment correlation between $X$ and $Y$ is the covariance between $X$ and $Y$ rescaled to fall in the interval $[-1,1]$. It is formally defined by 
-
 \begin{equation}
-\mbox{Corr}(X,Y)=\frac{\mbox{Cov}(X,Y)}{\sigma_{X}\sigma_{Y}}
+\mbox{Corr}(X,Y)=\frac{\mbox{Cov}(X,Y)}{\sigma_{X}\sigma_{Y}}.
 \end{equation}
 
 The correlation is usually denoted by $\rho_{X,Y}$ or simply $\rho$ if the random variables are clear from context. There are some importantfacts about the correlation coefficient: 
-
-\begin{enumerate}
-\item The range of correlation is $-1\leq\rho_{X,Y}\leq1$.
-\item Equality holds above ($\rho_{X,Y}=\pm1$) if and only if $Y$ is a
-linear function of $X$ with probability one.
-\end{enumerate}
+1. The range of correlation is $-1\leq\rho_{X,Y}\leq1$.
+1. Equality holds above ($\rho_{X,Y}=\pm1$) if and only if $Y$ is a linear function of $X$ with probability one.
 
 
 #+latex: \begin{example}
 \label{exa:max-sum-dice-covariance}
 
 We will compute the covariance for the discrete distribution in Example \ref{exa:max-sum-two-dice}. The expected value of $U$ is
-
 \[
 \E U=\sum_{u=1}^{6}u\, f_{U}(u)=\sum_{u=1}^{6}u\,\frac{2u-1}{36}=1\left(\frac{1}{36}\right)+2\left(\frac{3}{36}\right)+\cdots+6\left(\frac{11}{36}\right)=\frac{161}{36},
 \]
-
 and the expected value of $V$ is
-
 \[
 \E V=\sum_{v=2}^{12}v\,\frac{6-|7-v|}{36}=2\left(\frac{1}{36}\right)+3\left(\frac{2}{36}\right)+\cdots+12\left(\frac{1}{36}\right)=7,
 \]
-
 and the expected value of $UV$ is
-
 \[
 \E UV=\sum_{u=1}^{6}\sum_{v=2}^{12}uv\, f_{U,V}(u,v)=1\cdot2\left(\frac{1}{36}\right)+2\cdot3\left(\frac{2}{36}\right)+\cdots+6\cdot12\left(\frac{1}{36}\right)=\frac{308}{9}.
 \]
 
 Therefore the covariance of $(U,V)$ is
-
 \[
 \mbox{Cov}(U,V)=\E UV-\left(\E U\right)\left(\E V\right)=\frac{308}{9}-\frac{161}{36}\cdot7=\frac{35}{12}.
 \]
@@ -1955,35 +1765,27 @@ All we need now are the standard deviations of $U$ and $V$ to calculate the corr
 
 #+latex: \end{example}
 
-
 We will do a continuous example so that you can see how it works.
 
 #+latex: \begin{example}
 
 Let us find the covariance of the variables $(X,Y)$ from Example \ref{exa:joint-pdf}. The expected value of $X$ is
-
 \[
 \E X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\diff x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
 \]
-
 and the expected value of $Y$ is
-
 \[
 \E Y=\int_{0}^{1}y\cdot\frac{6}{5}\left(\frac{1}{2}+y^{2}\right)\diff x=\left.\frac{3}{10}y^{2}+\frac{3}{20}y^{4}\right|_{y=0}^{1}=\frac{9}{20}.
 \]
 
-
 Finally, the expected value of $XY$ is
-
 \begin{eqnarray*}
 \E XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\diff x\,\diff y,\\
  & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\diff y,\\
  & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\diff y,\\
  & = & \frac{1}{5}+\frac{3}{50},
 \end{eqnarray*}
-
 which is 13/50. Therefore the covariance of $(X,Y)$ is
-
 \[
 \mbox{Cov}(X,Y)=\frac{13}{50}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=-\frac{1}{100}.
 \]
@@ -2009,14 +1811,18 @@ To do the continuous case we could use the computer algebra utilities of =Yacas=
 ** Conditional Distributions
 \label{sec:Conditional-Distributions}
 
-If $x\in S_{X}$ is such that $f_{X}(x)>0$, then we define the \emph{conditional
-density of} $Y|\, X=x$, denoted $f_{Y|x}$, by \begin{equation}
-f_{Y|x}(y|x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)},\quad y\in S_{Y}.\end{equation}
-We define $f_{X|y}$ in a similar fashion.
-#+latex: \begin{example}
-Let the joint PMF of $X$ and $Y$ be given by\[
-f_{X,Y}(x,y)=\]
+If $x\in S_{X}$ is such that $f_{X}(x)>0$, then we define the /conditional density/ of $Y|\, X=x$, denoted $f_{Y|x}$, by 
+\begin{equation}
+f_{Y|x}(y|x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)},\quad y\in S_{Y}.
+\end{equation}
 
+We define $f_{X|y}$ in a similar fashion.
+
+#+latex: \begin{example}
+Let the joint PMF of $X$ and $Y$ be given by
+\[
+f_{X,Y}(x,y)=
+\]
 #+latex: \end{example}
 
 #+latex: \begin{example}
@@ -2027,223 +1833,203 @@ Let the joint PDF of $X$ and $Y$ be given by
 
 Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter $\theta$ which is of primary interest, and about which we would like to learn. But rather than observing $\theta$ directly, we instead observe a random variable $X$ whose probability distribution depends on $\theta$. Using the information we provided by $X,$ we would like to update the information that we have about $\theta$.
 
-Our initial beliefs about $\theta$ are represented by a probability distribution, called the \emph{prior distribution}, denoted by $\pi$. The PDF $f_{X|\theta}$ is called the \emph{likelihood function}, also called the \emph{likelihood of} $X$ \emph{conditional on} $\theta$. Given an observation $X=x$, we would like to update our beliefs $\pi$ to a new distribution, called the \emph{posterior distribution of} $\theta$ \emph{given the observation} $X=x$, denoted $\pi_{\theta|x}$. It may seem a mystery how to obtain $\pi_{\theta|x}$ based only on the information provided by $\pi$ and $f_{X|\theta}$, but it should not be. We have already studied this in Section \ref{sec:Bayes'-Rule} where it was called Bayes' Rule:
-
-\begin{equation} \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\diff u}.
+Our initial beliefs about $\theta$ are represented by a probability distribution, called the /prior distribution/, denoted by $\pi$. The PDF $f_{X|\theta}$ is called the /likelihood function/, also called the /likelihood of/ $X$ /conditional on/ $\theta$. Given an observation $X=x$, we would like to update our beliefs $\pi$ to a new distribution, called the /posterior distribution of/ $\theta$ /given the observation/ $X=x$, denoted $\pi_{\theta|x}$. It may seem a mystery how to obtain $\pi_{\theta|x}$ based only on the information provided by $\pi$ and $f_{X|\theta}$, but it should not be. We have already studied this in Section \ref{sec:Bayes'-Rule} where it was called Bayes' Rule:
+\begin{equation} 
+\pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\diff u}.
 \end{equation} 
 
 Compare the above expression to Equation \ref{eq:bayes-rule}.
 
 #+latex: \begin{example}
 Suppose the parameter $\theta$ is the $\P(\mbox{Heads})$ for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about $\theta$ with a $\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)$ prior distribution, that is, we assume 
-
 \[
 \theta\sim\pi(\theta)=3(1-\theta)^{2},\quad0<\theta<1.
 \]
 
 To learn more about $\theta$, we will do what is natural: flip the coin. We will observe a random variable $X$ which takes the value $1$ if the coin shows Heads, and 0 if the coin shows Tails. Under these circumstances, $X$ will have a Bernoulli distribution, and in particular, $X|\theta\sim\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=\theta)$:
-
 \[ 
 f_{X|\theta}(x|\theta)=\theta^{x}(1-\theta)^{1-x},\quad x=0,1.
 \]
 
 
 Based on the observation $X=x$, we will update the prior distribution to the posterior distribution, and we will do so with Bayes' Rule: it says
-
 \begin{eqnarray*}
 \pi(\theta|x) & \propto & \pi(\theta)\, f(x|\theta),\\
  & = & \theta^{x}(1-\theta)^{1-x}\cdot3(1-\theta)^{2},\\
- & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad0<\theta<1,\end{eqnarray*}
-where the constant of proportionality is given by \[
-\int3\, u^{x}(1-u)^{3-x}\diff u=\int3\, u^{(1+x)-1}(1-u)^{(4-x)-1}\diff u=3\,\frac{\Gamma(1+x)\Gamma(4-x)}{\Gamma[(1+x)+(4-x)]},\]
-the integral being calculated by inspection of the formula for a $\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x)$
-distribution. That is to say, our posterior distribution is precisely\[
-\theta|x\sim\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x).\]
+ & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad0<\theta<1,
+\end{eqnarray*}
+where the constant of proportionality is given by
+\[
+\int3\, u^{x}(1-u)^{3-x}\diff u=\int3\, u^{(1+x)-1}(1-u)^{(4-x)-1}\diff u=3\,\frac{\Gamma(1+x)\Gamma(4-x)}{\Gamma[(1+x)+(4-x)]},
+\]
+the integral being calculated by inspection of the formula for a $\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x)$ distribution. That is to say, our posterior distribution is precisely
+\[
+\theta|x\sim\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x).
+\]
 
 
 The Bayesian statistician uses the posterior distribution for all matters concerning inference about $\theta$.
 
 #+latex: \end{example}
-\begin{rem}
-We usually do not restrict ourselves to the observation of only one
-$X$ conditional on $\theta$. In fact, it is common to observe an
-entire sample $X_{1}$, $X_{2}$,...,$X_{n}$ conditional on
-$\theta$ (which itself is often multidimensional). Do not be frightened,
-however, because the intuition is the same. There is a prior distribution
-$\pi(\theta)$, a likelihood $f(x_{1},x_{2},\ldots,x_{n}|\theta)$,
-and a posterior distribution $\pi(\theta|x_{1},x_{2},\ldots,x_{n})$.
-Bayes' Rule states that the relationship between the three is\[
-\pi(\theta|x_{1},x_{2},\ldots,x_{n})\propto\pi(\theta)\, f(x_{1},x_{2},\ldots,x_{n}|\theta),\]
-where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\diff u$.
-Any good textbook on Bayesian Statistics will explain these notions
-in detail; to the interested reader I recommend Gelman \cite{Gelman2004}
-or Lee \cite{Lee1997}. 
-\end{rem}
+
+#+latex: \begin{rem}
+We usually do not restrict ourselves to the observation of only one $X$ conditional on $\theta$. In fact, it is common to observe an entire sample $X_{1}$, $X_{2}$,...,$X_{n}$ conditional on $\theta$ (which itself is often multidimensional). Do not be frightened, however, because the intuition is the same. There is a prior distribution $\pi(\theta)$, a likelihood $f(x_{1},x_{2},\ldots,x_{n}|\theta)$, and a posterior distribution $\pi(\theta|x_{1},x_{2},\ldots,x_{n})$. Bayes' Rule states that the relationship between the three is
+\[
+\pi(\theta|x_{1},x_{2},\ldots,x_{n})\propto\pi(\theta)\, f(x_{1},x_{2},\ldots,x_{n}|\theta),
+\]
+where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\diff u$. Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
+#+latex: \end{rem}
+
 
 
 ** Independent Random Variables
 \label{sec:Independent-Random-Variables}
 
-
 *** Independent Random Variables
 \label{sub:Independent-Random-Variables}
 
-We recall from Chapter \ref{cha:Probability} that the events $A$
-and $B$ are said to be independent when\begin{equation}
-\P(A\cap B)=\P(A)\P(B).\end{equation}
-If it happens that\begin{equation}
-\P(X=x,Y=y)=\P(X=x)\P(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},\end{equation}
-then we say that $X$ and $Y$ are \emph{independent random variables}.
-Otherwise, we say that $X$ and $Y$ are \emph{dependent}. Using the
-PMF notation from above, we see that independent discrete random variables
-satisfy \begin{equation}
-f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y}.\end{equation}
-Continuing the reasoning, given two continuous random variables $X$
-and $Y$ with joint PDF $f_{X,Y}$ and respective marginal PDFs $f_{X}$
-and $f_{Y}$ that are supported on the sets $S_{X}$ and $S_{Y}$,
-if it happens that \begin{equation}
-f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},\end{equation}
+We recall from Chapter \ref{cha:Probability} that the events $A$ and $B$ are said to be independent when
+\begin{equation}
+\P(A\cap B)=\P(A)\P(B).
+\end{equation}
+
+If it happens that
+\begin{equation}
+\P(X=x,Y=y)=\P(X=x)\P(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
+\end{equation}
+then we say that $X$ and $Y$ are /independent random variables/. Otherwise, we say that $X$ and $Y$ are /dependent/. Using the PMF notation from above, we see that independent discrete random variables satisfy
+\begin{equation}
+f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y}.
+\end{equation}
+
+Continuing the reasoning, given two continuous random variables $X$ and $Y$ with joint PDF $f_{X,Y}$ and respective marginal PDFs $f_{X}$ and $f_{Y}$ that are supported on the sets $S_{X}$ and $S_{Y}$, if it happens that
+\begin{equation}
+f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
+\end{equation}
 then we say that $X$ and $Y$ are independent.
+
 #+latex: \begin{example}
-In Example \ref{exa:toss-two-dice-joint-pmf} we considered the random
-experiment of rolling a fair die twice. There we found the joint PMF
-to be\[
-f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6,\]
-and we found the marginal PMFs $f_{X}(x)=1/6$, $x=1,2,\ldots,6$,
-and $f_{Y}(y)=1/6$, $y=1,2,\ldots,6$. Therefore in this experiment
-$X$ and $Y$ are independent since for every $x$ and $y$ in the
-joint support the joint PMF satisfies \[
-f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}(x)\, f_{Y}(y).\]
+In Example \ref{exa:toss-two-dice-joint-pmf} we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
+\[
+f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6,
+\]
+and we found the marginal PMFs $f_{X}(x)=1/6$, $x=1,2,\ldots,6$, and $f_{Y}(y)=1/6$, $y=1,2,\ldots,6$. Therefore in this experiment $X$ and $Y$ are independent since for every $x$ and $y$ in the joint support the joint PMF satisfies
+\[
+f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}(x)\, f_{Y}(y).
+\]
 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-In Example \ref{exa:max-sum-two-dice} we considered the same experiment
-but different random variables $U$ and $V$. We can prove that $U$
-and $V$ are not independent if we can find a single pair $(u,v)$
-where the independence equality does not hold. There are many such
-pairs. One of them is $(6,12)$:\[
-f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).\]
+In Example \ref{exa:max-sum-two-dice} we considered the same experiment but different random variables $U$ and $V$. We can prove that $U$ and $V$ are not independent if we can find a single pair $(u,v)$ where the independence equality does not hold. There are many such pairs. One of them is $(6,12)$:
+\[
+f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).
+\]
 
 #+latex: \end{example}
-Independent random variables are very useful to the mathematician.
-They have many, many, tractable properties. We mention some of the
-more important ones.
-\begin{prop}
-\label{pro:indep-implies-prodexpect}If $X$ and $Y$ are independent,
-then for any functions $u$ and $v$, \begin{equation}
-\E\left(u(X)v(Y)\right)=\left(\E u(X)\right)\left(\E v(Y)\right).\end{equation}
+Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
-\end{prop}
-\begin{proof}
-This is straightforward from the definition.\begin{eqnarray*}
+#+latex: \begin{prop}
+\label{pro:indep-implies-prodexpect}
+If $X$ and $Y$ are independent, then for any functions $u$ and $v$, 
+\begin{equation}
+\E\left(u(X)v(Y)\right)=\left(\E u(X)\right)\left(\E v(Y)\right).
+\end{equation}
+#+latex: \end{prop}
+
+#+latex: \begin{proof}
+This is straightforward from the definition.
+\begin{eqnarray*}
 \E\left(u(X)v(Y)\right) & = & \iint\, u(x)v(y)\, f_{X,Y}(x,y)\,\diff x\diff y\\
  & = & \iint\, u(x)v(y)\, f_{X}(x)\, f_{Y}(y)\,\diff x\diff y\\
- & = & \int u(x)\, f_{X}(x)\,\diff x\ \int v(y)\, f_{Y}(y)\,\diff y\end{eqnarray*}
-and this last quantity is exactly $\left(\E u(X)\right)\left(\E v(Y)\right)$.
-\end{proof}
+ & = & \int u(x)\, f_{X}(x)\,\diff x\ \int v(y)\, f_{Y}(y)\,\diff y
+\end{eqnarray*}
+and this last quantity is exactly $\left(\E u(X)\right)\left(\E v(Y)\right)$. 
+#+latex: \end{proof}
 
+Now that we have Proposition \ref{pro:indep-implies-prodexpect} we mention a corollary that will help us later to quickly identify those random variables which are /not/ independent.
 
-Now that we have Proposition \ref{pro:indep-implies-prodexpect} we mention a corollary that will help us later to quickly identify those random variables which are \emph{not} independent.
-
-\begin{cor}
+#+latex: \begin{cor}
 If $X$ and $Y$ are independent, then $\mbox{Cov}(X,Y)=0$, and consequently,
 $\mbox{Corr}(X,Y)=0$.\label{cor:indep-implies-uncorr}
-\end{cor}
+#+latex: \end{cor}
 
-\begin{proof}
-When $X$ and $Y$ are independent then $\E XY=\E X\,\E Y$. And when
-the covariance is zero the numerator of the correlation is 0. 
-\end{proof}
+#+latex: \begin{proof}
+When $X$ and $Y$ are independent then $\E XY=\E X\,\E Y$. And when the covariance is zero the numerator of the correlation is 0.
+#+latex: \end{proof}
 
-
-
-\begin{rem}
+#+latex: \begin{rem}
 \label{rem:cov0-not-imply-indep}
-Unfortunately, the converse of Corollary \ref{cor:indep-implies-uncorr} is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}. 
-\end{rem}
+Unfortunately, the converse of Corollary \ref{cor:indep-implies-uncorr} is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}.
+#+latex: \end{rem}
 
-Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, \emph{etc}.
+Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
 
-\begin{fact}
-\label{fac:indep-then-function-indep}If $X$ and $Y$ are independent,
-then $u(X)$ and $v(Y)$ are independent for any functions $u$ and
-$v$.
-\end{fact}
+#+latex: \begin{fact}
+\label{fac:indep-then-function-indep}
+If $X$ and $Y$ are independent, then $u(X)$ and $v(Y)$ are independent for any functions $u$ and $v$.
+#+latex: \end{fact}
 
 *** Combining Independent Random Variables
 \label{sub:Combining-Independent-Random}
 
-Another important corollary of Proposition \ref{pro:indep-implies-prodexpect}
-will allow us to find the distribution of sums of random variables.
-\begin{cor}
-If $X$ and $Y$ are independent, then the moment generating function
-of $X+Y$ is \begin{equation}
-M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).\end{equation}
+Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
 
-\end{cor}
-\begin{proof}
-Choose $u(x)=\me^{x}$ and $v(y)=\me^{y}$ in Proposition \ref{pro:indep-implies-prodexpect},
-and remember the identity $\me^{t(x+y)}=\me^{tx}\,\me^{ty}$.
-\end{proof}
+#+latex: \begin{cor}
+If $X$ and $Y$ are independent, then the moment generating function of $X+Y$ is 
+\begin{equation}
+M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
+\end{equation}
+#+latex: \end{cor}
 
+#+latex: \begin{proof}
+Choose $u(x)=\me^{x}$ and $v(y)=\me^{y}$ in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity $\me^{t(x+y)}=\me^{tx}\,\me^{ty}$.
+#+latex: \end{proof}
 
 Let us take a look at some examples of the corollary in action.
+
 #+latex: \begin{example}
-Let $X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)$
-and $Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)$
-be independent. Then $X+Y$ has MGF\[
-M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\me^{t}\right)^{n_{1}}\left(q+p\me^{t}\right)^{n_{2}}=\left(q+p\me^{t}\right)^{n_{1}+n_{2}},\]
-which is the MGF of a $\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$
-distribution. Therefore, $X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$.
+Let $X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)$ and $Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)$ be independent. Then $X+Y$ has MGF
+\[
+M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\me^{t}\right)^{n_{1}}\left(q+p\me^{t}\right)^{n_{2}}=\left(q+p\me^{t}\right)^{n_{1}+n_{2}},
+\]
+which is the MGF of a $\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$ distribution. Therefore, $X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$.
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})$
-and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})$
-be independent. Then $X+Y$ has MGF
-
+Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})$ and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})$ be independent. Then $X+Y$ has MGF
 \[
 M_{X}(t)\, M_{Y}(t)=\exp\left\{ \mu_{1}t+t^{2}\sigma_{1}^{2}/2\right\} \exp\left\{ \mu_{2}t+t^{2}\sigma_{2}^{2}/2\right\} =\exp\left\{ \left(\mu_{1}+\mu_{2}\right)t+t^{2}\left(\sigma_{1}^{2}+\sigma_{2}^{2}\right)/2\right\} ,
 \]
-
 which is the MGF of a $\mathsf{norm}(\mathtt{mean}=\mu_{1}+\mu_{2},\,\mathtt{sd}=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}})$ distribution. 
-
 #+latex: \end{example}
 
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
 #+latex: \begin{prop}
-\label{pro:mean-sd-lin-comb-two}Let $X_{1}$ and $X_{2}$ be independent with respective population means $\mu_{1}$ and $\mu_{2}$ and population standard deviations $\sigma_{1}$ and $\sigma_{2}$. For given constants $a_{1}$ and $a_{2}$, define $Y=a_{1}X_{1}+a_{2}X_{2}$. Then the mean and standard deviation of $Y$ are given by the formulas
-
+\label{pro:mean-sd-lin-comb-two}
+Let $X_{1}$ and $X_{2}$ be independent with respective population means $\mu_{1}$ and $\mu_{2}$ and population standard deviations $\sigma_{1}$ and $\sigma_{2}$. For given constants $a_{1}$ and $a_{2}$, define $Y=a_{1}X_{1}+a_{2}X_{2}$. Then the mean and standard deviation of $Y$ are given by the formulas
 \begin{equation}
 \mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
 \end{equation}
-
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
 We use Proposition \ref{pro:expectation-properties}:
-
 \[
 \E Y=\E\left(a_{1}X_{1}+a_{2}X_{2}\right)=a_{1}\E X_{1}+a_{2}\E X_{2}=a_{1}\mu_{1}+a_{2}\mu_{2}.
 \]
 
 For the standard deviation, we will find the variance and take the square root at the end. And to calculate the variance we will first compute $\E Y^{2}$ with an eye toward using the identity $\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}$ as a final step. 
-
 \[
 \E Y^{2}=\E\left(a_{1}X_{1}+a_{2}X_{2}\right)^{2}=\E\left(a_{1}^{2}X_{1}^{2}+a_{2}^{2}X_{2}^{2}+2a_{1}a_{2}X_{1}X_{2}\right).
 \]
-
 Using linearity of expectation the $\E$ distributes through the sum. Now $\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}$, for $i=1$ and 2 and $\E X_{1}X_{2}=\E X_{1}\E X_{2}=\mu_{1}\mu_{2}$ because of independence. Thus
-
 \begin{eqnarray*}
 \E Y^{2} & = & a_{1}^{2}(\sigma_{1}^{2}+\mu_{1}^{2})+a_{2}^{2}(\sigma_{2}^{2}+\mu_{2}^{2})+2a_{1}a_{2}\mu_{1}\mu_{2},\\
  & = & a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}+\left(a_{1}^{2}\mu_{1}^{2}+a_{2}^{2}\mu_{2}^{2}+2a_{1}a_{2}\mu_{1}\mu_{2}\right).
 \end{eqnarray*}
-
 But notice that the expression in the parentheses is exactly $\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\E Y\right)^{2}$, so the proof is complete.. 
-
 #+latex: \end{proof}
 
 
@@ -2252,8 +2038,8 @@ But notice that the expression in the parentheses is exactly $\left(a_{1}\mu_{1}
 \label{sec:Exchangeable-Random-Variables}}
 
 Two random variables $X$ and $Y$ are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
-
-\begin{equation} F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\R^{2}.
+\begin{equation}
+F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\R^{2}.
 \end{equation} 
 
 When the joint density $f$ exists, we may equivalently say that $X$ and $Y$ are exchangeable if $f(x,y)=f(y,x)$ for all $(x,y)$.
@@ -2262,27 +2048,23 @@ Exchangeable random variables exhibit symmetry in the sense that a person may ex
 
 #+latex: \begin{example}
 Let $X$ and $Y$ have joint PDF
-
 \begin{multline}
 f_{X,Y}(x,y)=(1+\alpha)\lambda^{2}\me^{-\lambda(x+y)}+\alpha(2\lambda)^{2}\me^{-2\lambda(x+y)}-2\alpha\lambda^{2}\left(\me^{-\lambda(2x+y)}+\me^{-\lambda(x+2y)}\right).
 \end{multline}
-
 It is straightforward and tedious to check that $\iint f=1$. We may see immediately that $f_{X,Y}(x,y)=f_{X,Y}(y,x)$ for all $(x,y)$, which confirms that $X$ and $Y$ are exchangeable. Here, $\alpha$ is said to be an association parameter. This particular example is one from the Farlie-Gumbel-Morgenstern family of distributions; see \cite{Kotz2000}.
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:binom-exchangeable}Suppose $X$ and $Y$ are i.i.d.~$\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$. Then their joint PMF is
-
+\label{exa:binom-exchangeable}
+Suppose $X$ and $Y$ are i.i.d.~$\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$. Then their joint PMF is
 \begin{eqnarray*}
 f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
  & = & {n \choose x}\, p^{x}(1-p)^{n-x}\,{n \choose y}\, p^{y}(1-p)^{n-y},\\
  & = & {n \choose x}{n \choose y}\, p^{x+y}(1-p)^{2n-(x+y)},
 \end{eqnarray*}
-
 and the value is the same if we exchange $x$ and $y$. Therefore $(X,Y)$ are exchangeable.
 
 #+latex: \end{example}
-
 
 Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that $(X,Y)$ are exchangeable has nothing to do with the $\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 
@@ -2292,19 +2074,15 @@ If $X$ and $Y$ are i.i.d.~(with common marginal distribution $F$) then $X$ and $
 
 Exchangeability thus contains i.i.d. as a special case. 
 
-
 ** The Bivariate Normal Distribution
 \label{sec:The-Bivariate-Normal}
 
 The bivariate normal PDF is given by the unwieldy formula
-
 \begin{multline}
 f_{X,Y}(x,y)=\frac{1}{2\pi\,\sigma_{X}\sigma_{Y}\sqrt{1-\rho^{2}}}\exp\left\{ -\frac{1}{2(1-\rho^{2})}\left[\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)^{2}+\cdots\right.\right.\\
 \left.\left.\cdots+2\rho\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)+\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)^{2}\right]\right\} ,
 \end{multline}
-
 for $(x,y)\in\R^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$, where
-
 \begin{equation}
 \upmu=(\mu_{X},\,\mu_{Y})^{T},\quad\sum=\left(
 \begin{array}{cc}
@@ -2315,11 +2093,9 @@ for $(x,y)\in\R^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\
 \end{equation}
 
 See Appendix \ref{cha:Mathematical-Machinery}. The vector notation allows for a more compact rendering of the joint PDF:
-
 \begin{equation}
 f_{X,Y}(\mathbf{x})=\frac{1}{2\pi\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}{2}\left(\mathbf{x}-\upmu\right)^{\top}\Sigma^{-1}\left(\mathbf{x}-\upmu\right)\right\} ,
 \end{equation}
-
 where in an abuse of notation we have written $\mathbf{x}$ for $(x,y)$. Note that the formula only holds when $\rho\neq\pm1$.
 
 #+latex: \begin{rem}
@@ -2331,23 +2107,18 @@ Inspection of the joint PDF shows that if $\mu_{X}=\mu_{Y}$ and $\sigma_{X}=\sig
 #+latex: \end{rem}
 
 The bivariate normal MGF is
-
 \begin{equation}
 M_{X,Y}(\mathbf{t})=\exp\left(\upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right),
 \end{equation}
-
 where $\mathbf{t}=(t_{1},t_{2})$.
 
 The bivariate normal distribution may be intimidating at first but it turns out to be very tractable compared to other multivariate distributions. An example of this is the following fact about the marginals. 
 
 #+latex: \begin{fact}
-If $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$
-then
-
+If $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ then
 \begin{equation}
 X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}).
 \end{equation}
-
 #+latex: \end{fact}
 
 From this we immediately get that $\E X=\mu_{X}$ and $\mbox{Var}(X)=\sigma_{X}^{2}$ (and the same is true for $Y$ with the letters switched). And it should be no surprise that the correlation between $X$ and $Y$ is exactly $\mbox{Corr}(X,Y)=\rho$.
@@ -2355,19 +2126,15 @@ From this we immediately get that $\E X=\mu_{X}$ and $\mbox{Var}(X)=\sigma_{X}^{
 #+latex: \begin{prop}
 \label{pro:mvnorm-cond-dist}
 The conditional distribution of $Y|\, X=x$ is $\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})$, where
-
 \begin{equation}
 \mu_{Y|x}=\mu_{Y}+\rho\frac{\sigma_{Y}}{\sigma_{X}}\left(x-\mu_{X}\right),\mbox{ and }\sigma_{Y|x}=\sigma_{Y}\sqrt{1-\rho^{2}}.
 \end{equation}
-
 #+latex: \end{prop}
 
 There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} which will be important in Chapter \ref{cha:simple-linear-regression}. First, the conditional mean of $Y|x$ is linear in $x$, with slope
-
 \begin{equation}
 \rho\,\frac{\sigma_{Y}}{\sigma_{X}}.\label{eq:population-slope-slr}
 \end{equation}
-
 Second, the conditional variance of $Y|x$ is independent of $x$. 
 
 
@@ -2375,14 +2142,11 @@ Second, the conditional variance of $Y|x$ is independent of $x$.
 
 The multivariate normal distribution is implemented in both the =mvtnorm= package \cite{Genzmvtnorm} and the =mnormt= package \cite{mnormt}. We use the =mvtnorm= package in this book simply because it is a dependency of another package used in the book. 
 
-The =mvtnorm= package has functions =dmvnorm= and =rmvnorm= for the PDF and to generate random vectors, respectively. Let us get started with a graph of the bivariate normal PDF. We can make the plot with the following code \footnote{Another way to do this is with the =curve3d= function in the =emdbook= package \cite{emdbook}. It looks like this: 
-
-
+The =mvtnorm= package has functions =dmvnorm= and =rmvnorm= for the PDF and to generate random vectors, respectively. Let us get started with a graph of the bivariate normal PDF. We can make the plot with the following code \footnote{Another way to do this is with the =curve3d= function in the =emdbook= package \cite{emdbook}. It looks like this:
 : library(emdbook); library(mvtnorm) # note: the order matters
 : mu <- c(0,0); sigma <- diag(2)
 : f <- function(x,y) dmvnorm(c(x,y), mean = mu, sigma = sigma)
 : curve3d(f(x,y), from = c(-3,-3), to = c(3,3), theta = -30, phi = 30)
-
 The code above is slightly shorter than that using =persp= and is easier to understand. One must be careful, however. If the =library= calls are swapped then the code will not work because both packages =emdbook= and =mvtnorm= have a function called =dmvnorm=; one must load them to the search path in the correct order or \textsf{R} will use the wrong one (the arguments are named differently and the underlying algorithms are different).}, where the workhorse is the =persp= function in base \textsf{R}.
 
 #+begin_src R :eval never
@@ -2418,21 +2182,16 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 \label{sec:Transformations-Multivariate}
 
 We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of $Y=g(X)$ given the PDF of $X$. But now we have two random variables $X$ and Y, with joint PDF $f_{X,Y}$, and we would like to consider the joint PDF of two new random variables
-
 \begin{equation}
 U=g(X,Y)\quad\mbox{and}\quad V=h(X,Y),
 \end{equation}
-
 where $g$ and $h$ are two given functions, typically ``nice'' in the sense of Appendix \ref{sec:Multivariable-Calculus}. 
 
 Suppose that the transformation $(x,y)\longmapsto(u,v)$ is one-to-one. Then an inverse transformation $x=x(u,v)$ and $y=y(u,v)$ exists, so let $\partial(x,y)/\partial(u,v)$ denote the Jacobian of the inverse transformation. Then the joint PDF of $(U,V)$ is given by 
-
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}\left[x(u,v),\, y(u,v)\right]\left|\frac{\partial(x,y)}{\partial(u,v)}\right|,
 \end{equation}
-
 or we can rewrite more shortly as
-
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.\label{eq:biv-trans-pdf-short}
 \end{equation}
@@ -2441,47 +2200,37 @@ Take a moment and compare Equation \ref{eq:biv-trans-pdf-short} to Equation \ref
 
 #+latex: \begin{rem}
 It is sometimes easier to /postpone/ solving for the inverse transformation $x=x(u,v)$ and $y=y(u,v)$. Instead, leave the transformation in the form $u=u(x,y)$ and $v=v(x,y)$ and calculate the Jacobian of the /original/ transformation
-
 \begin{equation}
 \frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{array}{cc}
 \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y}\\
 \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}\end{array}\right|=\frac{\partial u}{\partial x}\frac{\partial v}{\partial y}-\frac{\partial u}{\partial y}\frac{\partial v}{\partial x}.
 \end{equation}
-
 Once this is known, we can get the PDF of $(U,V)$ by
-
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}}\right|.
 \end{equation}
 
 In some cases there will be a cancellation and the work will be lot shorter. Of course, it is not always true that
-
 \begin{equation}
 \frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}},\label{eq:biv-jacob-recip}
 \end{equation}
-
 but for the well-behaved examples that we will see in this book it works just fine... do you see the connection between Equations \ref{eq:biv-jacob-recip} and \ref{eq:univ-jacob-recip}?
-
 #+latex: \end{rem}
 
 
 #+latex: \begin{example}
 Let $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})$ and consider the transformation
-
 \begin{align*}
 U= & \ 3X+4Y,\\
 V= & \ 5X+6Y.
 \end{align*}
 
 We can solve the system of equations to find the inverse transformations; they are
-
 \begin{align*}
 X= & -3U+2V,\\
 Y= & \ \frac{5}{2}U-\frac{3}{2}V,
 \end{align*}
-
 in which case the Jacobian of the inverse transformation is
-
 \[
 \begin{vmatrix}
 -3 & 2\\
@@ -2489,24 +2238,19 @@ in which case the Jacobian of the inverse transformation is
 \end{vmatrix}
 = 3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
 \]
-
 As $(x,y)$ traverses $\R^{2}$, so too does $(u,v)$. Since the joint PDF of $(X,Y)$ is
-
 \[
 f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad(x,y)\in\R^{2},
 \]
-
 we get that the joint PDF of $(U,V)$ is
-
 \begin{equation}
 f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad(u,v)\in\R^{2}.\label{eq:biv-norm-hidden}
 \end{equation}
-
 #+latex: \end{example}
+
 
 #+latex: \begin{rem}
 It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a $\mathsf{mvnorm}$ distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
-
 #+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}
@@ -2521,90 +2265,63 @@ There are not yet any examples of Yacas in this book, but there are online mater
 \label{sec:Remarks-for-the-Multivariate}}
 
 There is nothing spooky about $n\geq3$ random variables. We just have a whole bunch of them: $X_{1}$, $X_{2}$,..., $X_{n}$, which we can shorten to $\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}$ to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For $\mathbf{X}$ supported on the set $S_{\mathbf{X}}$, the joint PDF $f_{\mathbf{X}}$ (if it exists) satisfies
-
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})>0,\quad\mbox{for }\mathbf{x}\in S_{\mathbf{X}},
 \end{equation}
-
 and
-
 \begin{equation}
 \int\!\!\!\int\cdots\int f_{\mathbf{X}}(\mathbf{x})\,\diff x_{1}\diff x_{2}\cdots\diff x_{n}=1,
 \end{equation}
-
 or even shorter: $\int f_{\mathbf{X}}(\mathbf{x})\,\diff\mathbf{x}=1$. The joint CDF $F_{\mathbf{X}}$ is defined by 
-
 \begin{equation}
 F_{\mathbf{X}}(\mathbf{x})=\P(X_{1}\leq x_{1},\, X_{2}\leq x_{2},\ldots,\, X_{n}\leq x_{n}),
 \end{equation}
-
 for $\mathbf{x}\in\R^{n}$. The expectation of a function $g(\mathbf{X})$ is defined just as we would imagine:
-
 \begin{equation}
 \E g(\mathbf{X})=\int g(\mathbf{x})\, f_{\mathbf{X}}(\mathbf{x})\,\diff\mathbf{x}.
 \end{equation}
-
 provided the integral exists and is finite. And the moment generating function in the multivariate case is defined by
-
 \begin{eqnarray} 
-M_{\mathbf{X}}(\mathbf{t}) & = & \E\exp\left\{ \mathbf{t}^{\mathrm{T}}\mathbf{X}\right\} ,
+M_{\mathbf{X}}(\mathbf{t}) & = & \E\exp\left\{ \mathbf{t}^{\mathrm{T}}\mathbf{X}\right\},
 \end{eqnarray}
-
 whenever the integral exists and is finite for all $\mathbf{t}$ in a neighborhood of $\mathbf{0}_{\mathrm{n}\times1}$ (note that $\mathbf{t}^{\mathrm{T}}\mathbf{X}$ is shorthand for $t_{1}X_{1}+t_{2}X_{2}+\cdots+t_{n}X_{n}$). The only difference in any of the above for the discrete case is that integrals are replaced by sums. 
 
 Marginal distributions are obtained by integrating out remaining variables from the joint distribution. And even if we are given all of the univariate marginals it is not enough to determine the joint distribution uniquely.
 
 We say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are /mutually independent/ if their joint PDF factors into the product of the marginals
-
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})=f_{X_{1}}(x_{1})\, f_{X_{2}}(x_{2})\,\cdots\, f_{X_{n}}(x_{n}),
 \end{equation}
-
 for every $\mathbf{x}$ in their joint support $S_{\mathbf{X}}$, and we say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are /exchangeable/ if their joint PDF (or CDF) is a symmetric function of its $n$ arguments, that is, if 
-
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
-
 for any reordering $\mathbf{x^{\ast}}$ of the elements of $\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})$ in the joint support.
 
 #+latex: \begin{prop}
 \label{pro:mean-sd-lin-comb}
-
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be independent with respective population means $\mu_{1}$, $\mu_{2}$, ..., $\mu_{n}$ and standard deviations $\sigma_{1}$, $\sigma_{2}$, ..., $\sigma_{n}$. For given constants $a_{1}$, $a_{2}$, ...,$a_{n}$ define $Y=\sum_{i=1}^{n}a_{i}X_{i}$. Then the mean and standard deviation of $Y$ are given by the formulas
-
 \begin{equation}
 \mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
 \end{equation}
-
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
 The mean is easy:
-
 \[
 \E Y=\E\left(\sum_{i=1}^{n}a_{i}X_{i}\right)=\sum_{i=1}^{n}a_{i}\E X_{i}=\sum_{i=1}^{n}a_{i}\mu_{i}.
 \]
-
 The variance is not too difficult to compute either. As an intermediate step, we calculate $\E Y^{2}$. 
-
 \[
 \E Y^{2}=\E\left(\sum_{i=1}^{n}a_{i}X_{i}\right)^{2}=\E\left(\sum_{i=1}^{n}a_{i}^{2}X_{i}^{2}+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}X_{i}X_{j}\right).
 \]
-
 Using linearity of expectation the $\E$ distributes through the sums. Now $\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}$ and $\E X_{i}X_{j}=\E X_{i}\E X_{j}=\mu_{i}\mu_{j}$ when $i\neq j$ because of independence. Thus
-
 \begin{eqnarray*}
 \E Y^{2} & = & \sum_{i=1}^{n}a_{i}^{2}(\sigma_{i}^{2}+\mu_{i}^{2})+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}\mu_{i}\mu_{j}\\
  & = & \sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}+\left(\sum_{i=1}^{n}a_{i}^{2}\mu_{i}^{2}+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}\mu_{i}\mu_{j}\right)
 \end{eqnarray*}
-
 To complete the proof, note that the expression in the parentheses is exactly $\left(\E Y\right)^{2}$, and recall the identity $\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}$.  
-
 #+latex: \end{proof}
-
-
-
 
 There is a corresponding statement of Fact \ref{fac:indep-then-function-indep} for the multivariate case. The proof is also omitted here. 
 
@@ -2612,33 +2329,26 @@ There is a corresponding statement of Fact \ref{fac:indep-then-function-indep} f
 If $\mathbf{X}$ and $\mathbf{Y}$ are mutually independent random vectors, then $u(\mathbf{X})$ and $v(\mathbf{Y})$ are independent for any functions $u$ and $v$.
 #+latex: \end{fact}
 
-
 Bruno de Finetti was a strong proponent of the subjective approach to probability. He proved an important theorem in 1931 which illuminates the link between exchangeable random variables and independent random variables. Here it is in one of its simplest forms. 
 
 #+latex: \begin{thm}
 *De Finetti's Theorem.* Let $X_{1}$, $X_{2}$, ... be a sequence of $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ random variables such that $(X_{1},\ldots,X_{k})$ are exchangeable for every $k$. Then there exists a random variable $\Theta$ with support $[0,1]$ and PDF $f_{\Theta}(\theta)$ such that
-
 \begin{equation}
 \P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\diff\theta,\label{eq:definetti-binary}
 \end{equation}
-
 for all $x_{i}=0,\,1$, $i=1,\,2,\ldots,k$.
-
 #+latex: \end{thm}
 
 
-To get a handle on the intuitive content de Finetti's theorem, imagine that we have a \emph{bunch} of coins in our pocket with each having its own unique value of $\theta=\P(\mbox{Heads})$. We reach into our pocket and select a coin at random according to some probability -- say, $f_{\Theta}(\theta)$. We take the randomly selected coin and flip it $k$ times. 
+To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of $\theta=\P(\mbox{Heads})$. We reach into our pocket and select a coin at random according to some probability -- say, $f_{\Theta}(\theta)$. We take the randomly selected coin and flip it $k$ times. 
 
-Think carefully: the conditional probability of observing a sequence  $X_{1}=x_{1},\ldots,\, X_{k}=x_{k}$, given a specific coin $\theta$ would just be $\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}$, because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the \emph{unconditional} probability $\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})$ by adding up terms that look like
-
+Think carefully: the conditional probability of observing a sequence  $X_{1}=x_{1},\ldots,\, X_{k}=x_{k}$, given a specific coin $\theta$ would just be $\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}$, because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the /unconditional/ probability $\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})$ by adding up terms that look like
 \begin{equation}
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}
-
 where we sum over all possible coins. The right-hand side of Equation \ref{eq:definetti-binary} is a sophisticated way to denote this process.
 
 Of course, the integral's value does not change if we jumble the $x_{i}$'s, so $(X_{1},\ldots,X_{k})$ are clearly exchangeable. The power of de Finetti's Theorem is that /every/ infinite binary exchangeable sequence can be written in the above form.
-
 
 The connection to subjective probability: our prior information about $\theta$ corresponds to $f_{\Theta}(\theta)$ and the likelihood of the sequence $X_{1}=x_{1},\ldots,\, X_{k}=x_{k}$ (conditional on $\theta$) corresponds to $\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}$. Compare Equation \ref{eq:definetti-binary} to Section \ref{sec:Bayes'-Rule} and Section \ref{sec:Conditional-Distributions}.
 
@@ -2646,63 +2356,50 @@ The multivariate normal distribution immediately generalizes from the bivariate 
 
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})=\frac{1}{(2\pi)^{n/2}\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}{2}\left(\mathbf{x}-\upmu\right)^{\top}\Sigma^{-1}\left(\mathbf{x}-\upmu\right)\right\},
-
 \end{equation}
 and the MGF is
-
 \begin{equation}
-M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right\} .
+M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right\}.
 \end{equation}
 
 We will need the following in Chapter \ref{cha:multiple-linear-regression}.
-
-\begin{thm}
+#+latex: \begin{thm}
 \label{thm:mvnorm-dist-matrix-prod}
 If $\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ and $\mathbf{A}$ is any matrix, then the random vector $\mathbf{Y}=\mathbf{AX}$
 is distributed
-
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}).
 \end{equation}
-\end{thm}
+#+latex: \end{thm}
 
-\begin{proof}
+#+latex: \begin{proof}
 Look at the MGF of $\mathbf{Y}$:
 \begin{eqnarray*}
 M_{\mathbf{Y}}(\mathbf{t}) & = & \E\,\exp\left\{ \mathbf{t}^{\mathrm{T}}(\mathbf{AX})\right\} ,\\
  & = & \E\,\exp\left\{ (\mathbf{A}^{\mathrm{T}}\mathbf{t})^{\mathrm{T}}\mathbf{X}\right\} ,\\
  & = & \exp\left\{ \upmu^{\mathrm{T}}(\mathbf{A}^{\top}\mathbf{t})+\frac{1}{2}(\mathbf{A}^{\mathrm{T}}\mathbf{t})^{\mathrm{T}}\Sigma(\mathbf{A}^{\mathrm{T}}\mathbf{t})\right\} ,\\
- & = & \exp\left\{ \left(\mathbf{A}\upmu\right)^{\mathrm{T}}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\mathrm{T}}\left(\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}\right)\mathbf{t}\right\} ,
+ & = & \exp\left\{ \left(\mathbf{A}\upmu\right)^{\mathrm{T}}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\mathrm{T}}\left(\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}\right)\mathbf{t}\right\},
 \end{eqnarray*}
-
 and the last expression is the MGF of an $\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}})$ distribution.
-
-\end{proof}
-
+#+latex: \end{proof}
 
 
 ** The Multinomial Distribution
 \label{sec:Multinomial}
 
 We sample $n$ times, with replacement, from an urn that contains balls of $k$ different types. Let $X_{1}$ denote the number of balls in our sample of type 1, let $X_{2}$ denote the number of balls of type 2, ..., and let $X_{k}$ denote the number of balls of type $k$. Suppose the urn has proportion $p_{1}$ of balls of type 1, proportion $p_{2}$ of balls of type 2, ..., and proportion $p_{k}$ of balls of type $k$. Then the joint PMF of $(X_{1},\ldots,X_{k})$ is
-
 \begin{eqnarray}
 f_{X_{1},\ldots,X_{k}}(x_{1},\ldots,x_{k}) & = & {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}\, p_{1}^{x_{1}}p_{2}^{x_{2}}\cdots p_{k}^{x_{k}},
 \end{eqnarray}
-
 for $(x_{1},\ldots,x_{k})$ in the joint support $S_{X_{1},\ldots X_{K}}$. We write
-
 \begin{equation}
 (X_{1},\ldots,X_{k})\sim\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{\mathrm{k}\times1}).
 \end{equation}
 
 Several comments are in order. First, the joint support set $S_{X_{1},\ldots X_{K}}$ contains all nonnegative integer $k$-tuples $(x_{1},\ldots,x_{k})$ such that $x_{1}+x_{2}+\cdots+x_{k}=n$. A support set like this is called a \emph{simplex}. Second, the proportions $p_{1}$, $p_{2}$, ..., $p_{k}$ satisfy $p_{i}\geq0$ for all $i$ and $p_{1}+p_{2}+\cdots+p_{k}=1$. Finally, the symbol
-
 \begin{equation}
 {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}=\frac{n!}{x_{1}!\, x_{2}!\,\cdots x_{k}!}
-
 \end{equation}
-
 is called a /multinomial coefficient/ which generalizes the notion of a binomial coefficient we saw in Equation \ref{eq:binomial-coefficient}. 
 
 The form and notation we have just described matches the \textsf{R} usage but is not standard among other texts. Most other books use the above for a $k-1$ dimension multinomial distribution, because the linear constraint $x_{1}+x_{2}+\cdots+x_{k}=n$ means that once the values of $X_{1}$, $X_{2}$, ..., $X_{k-1}$ are known the final value $X_{k}$ is determined, not random. Another term used for this is a /singular/ distribution. 
@@ -2713,28 +2410,21 @@ When $k=2$, we have $x_{1}=x$ and $x_{2}=n-x$, we have $p_{1}=p$ and $p_{2}=1-p$
 
 
 #+latex: \begin{example}
-*Dinner with Barack Obama.* During the 2008 U.S.~presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have dinner \url{http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans} 36 democrat, 27 republican , 37 independent.
+*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have dinner \url{http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans} 36 democrat, 27 republican , 37 independent.
 #+latex: \end{example}
 
-\begin{rem}
-
-
+#+latex: \begin{rem}
 Here are some facts about the multinomial distribution.
 
-\begin{enumerate}
-\item The expected value of $(X_{1},\, X_{2},\,\ldots,\, X_{k})$ is $n\mathbf{p}_{k\times1}$.
-\item The variance-covariance matrix $\Sigma$ is symmetric with diagonal
-entries $\sigma_{i}^{2}=np_{i}(1-p_{i})$, $i=1,\,2,\,\ldots,\, k$
-and off-diagonal entries $\mbox{Cov}(X_{i},\, X_{j})=-np_{i}p_{j}$,
-for $i\neq j$. The correlation between $X_{i}$ and $X_{j}$ is therefore
-$\mbox{Corr}(X_{i},\, X_{j})=-\sqrt{p_{i}p_{j}/(1-p_{i})(1-p_{j})}$.
-\item The marginal distribution of $(X_{1},\, X_{2},\,\ldots,\, X_{k-1})$
-is $\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{(k-1)\times1})$
-with\begin{equation}
-\mathbf{p}_{(k-1)\times1}=\left(p_{1},\, p_{2},\,\ldots,\, p_{k-2},\, p_{k-1}+p_{k}\right),\end{equation}
- and in particular, $X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})$.
-\end{enumerate}
-\end{rem}
+1. The expected value of $(X_{1},\, X_{2},\,\ldots,\, X_{k})$ is $n\mathbf{p}_{k\times1}$.
+1. The variance-covariance matrix $\Sigma$ is symmetric with diagonal entries $\sigma_{i}^{2}=np_{i}(1-p_{i})$, $i=1,\,2,\,\ldots,\, k$ and off-diagonal entries $\mbox{Cov}(X_{i},\, X_{j})=-np_{i}p_{j}$, for $i\neq j$. The correlation between $X_{i}$ and $X_{j}$ is therefore $\mbox{Corr}(X_{i},\, X_{j})=-\sqrt{p_{i}p_{j}/(1-p_{i})(1-p_{j})}$. 
+1. The marginal distribution of $(X_{1},\, X_{2},\,\ldots,\, X_{k-1})$ is $\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{(k-1)\times1})$ with
+   \begin{equation}
+   \mathbf{p}_{(k-1)\times1}=\left(p_{1},\, p_{2},\,\ldots,\, p_{k-2},\, p_{k-1}+p_{k}\right),
+   \end{equation}
+   and in particular, $X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})$.
+
+#+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -2753,14 +2443,12 @@ round(ProbTable, 3)
 Do some examples of =rmultinom=.
 
 Here is another way to do it \footnote{Another way to do the plot is with the =scatterplot3d= function in the =scatterplot3d= package \cite{Liggesscatterplot3d}. It looks like this: 
-
 : library(scatterplot3d)
 : X <- t(as.matrix(expand.grid(0:6, 0:6)))
 : X <- X[, colSums(X) <= 6 ]; X <- rbind(X, 6 - colSums(X))
 : Z <- round(apply(X, 2, function(x) dmultinom(x, prob = 1:3)), 3)
 : A <- data.frame(x = X[1, ], y = X[2, ], probability = Z)
 : scatterplot3d(A, type = "h", lwd = 3, box = FALSE)
-
 The =scatterplot3d= graph looks better in this example, but the code is more difficult to understand. And with =cloud= one can easily do conditional plots of the form =cloud(z ~ x + y|f)=, where =f= is a factor.}.
 
 
@@ -2774,31 +2462,28 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, pch = 16, cex
 \par\end{centering}
 \caption{Plot of a multinomial PMF\label{fig:multinom-pmf2}}
 \end{figure}
-
-
 \newpage{}
+
+
 
 ** Chapter Exercises
 
 \addcontentsline{toc}{section}{Chapter Exercises}
 \setcounter{thm}{0}
 
-
-\begin{xca}
+#+latex: \begin{xca}
 Prove that $\mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y).$\label{xca:Prove-cov-shortcut}
-\end{xca}
+#+latex: \end{xca}
 
-\begin{xca}
+#+latex: \begin{xca}
 \label{xca:sum-indep-chisq}
 Suppose $X\sim\mathsf{chisq}(\mathtt{df}=p_{1})$ and $Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})$ are independent. Find the distribution of $X+Y$ (you may want to refer to Equation \ref{eq:mgf-chisq}).
-\end{xca}
+#+latex: \end{xca}
 
-\begin{xca}
+#+latex: \begin{xca}
 \label{xca:diff-indep-norm}
 Show that when $X$ and $Y$ are independent the MGF of $X-Y$ is $M_{X}(t)M_{Y}(-t)$. Use this to find the distribution of $X-Y$ when $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})$ and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})$ are independent. 
-\end{xca}
-
-
+#+latex: \end{xca}
 
 
 
@@ -2840,53 +2525,42 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 *** Simple Random Samples
 \label{sub:simple-random-samples}
 
-\begin{defn}
+#+latex: \begin{defn}
 If $X_{1}$, $X_{2}$, ..., $X_{n}$ are independent with $X_{i}\sim f$ for $i=1,2,\ldots,n$, then we say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are /independent and identically distributed/ (i.i.d.) from the population $f$ or alternatively we say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are a /simple random sample of size/ $n$, denoted $SRS(n)$, from the population $f$. 
-\end{defn}
+#+latex: \end{defn}
 
-
-\begin{prop}
+#+latex: \begin{prop}
 \label{pro:mean-sd-xbar}
-
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the mean and standard deviation of $\Xbar$ are given by the formulas $\mu_{\Xbar}=\mu$ and $\sigma_{\Xbar}=\sigma/\sqrt{n}$.
-\end{prop}
+#+latex: \end{prop}
 
-\begin{proof}
-Plug in $a_{1}=a_{2}=\cdots=a_{n}=1/n$ in Proposition \ref{pro:mean-sd-lin-comb}. 
-\end{proof}
-
+#+latex: \begin{proof}
+Plug in $a_{1}=a_{2}=\cdots=a_{n}=1/n$ in Proposition \ref{pro:mean-sd-lin-comb}.
+#+latex: \end{proof}
 
 The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section \ref{sec:Central-Limit-Theorem}.
 
-\begin{prop}
+#+latex: \begin{prop}
 \label{pro:mgf-xbar}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with MGF $M(t)$. Then the MGF of $\Xbar$ is given by
-
 \begin{equation}
 M_{\Xbar}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
 \end{equation}
+#+latex: \end{prop}
 
-\end{prop}
-
-\begin{proof}
+#+latex: \begin{proof}
 Go from the definition:
-
 \begin{eqnarray*}
 M_{\Xbar}(t) & = & \E\,\me^{t\Xbar},\\
  & = & \E\,\me^{t(X_{1}+\cdots+X_{n})/n},\\
  & = & \E\,\me^{tX_{1}/n}\me^{tX_{2}/n}\cdots\me^{tX_{n}/n}.
 \end{eqnarray*}
-
 And because $X_{1}$, $X_{2}$, ..., $X_{n}$ are independent, Proposition \ref{pro:indep-implies-prodexpect} allows us to distribute the expectation among each term in the product, which is
-
 \[
 \E\me^{tX_{1}/n}\,\E\me^{tX_{2}/n}\cdots\E\me^{tX_{n}/n}.
 \]
-
 The last step is to recognize that each term in last product above is exactly $M(t/n)$.
-
-\end{proof}
-
+#+latex: \end{proof}
 
 
 ** Sampling from a Normal Distribution
@@ -2896,121 +2570,98 @@ The last step is to recognize that each term in last product above is exactly $M
 *** The Distribution of the Sample Mean
 \label{sub:samp-mean-dist-of}}
 
-\begin{prop}
+#+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Then the sample mean $\Xbar$ has a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$ sampling distribution.
-\end{prop}
+#+latex: \end{prop}
 
-
-\begin{proof}
+#+latex: \begin{proof}
 The mean and standard deviation of $\Xbar$ follow directly from Proposition \ref{pro:mean-sd-xbar}. To address the shape, first remember from Section \ref{sec:The-Normal-Distribution} that the $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ MGF is of the form
-
 \[
 M(t)=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} .
 \]
-
 Now use Proposition \ref{pro:mgf-xbar} to find
-
 \begin{eqnarray*}
 M_{\Xbar}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
  & = & \left[\exp\left\{ \mu(t/n)+\sigma^{2}(t/n)^{2}/2\right\} \right]^{n},\\
  & = & \exp\left\{ \, n\cdot\left[\mu(t/n)+\sigma^{2}(t/n)^{2}/2\right]\right\} ,\\
  & = & \exp\left\{ \mu t+(\sigma/\sqrt{n})^{2}t^{2}/2\right\},
 \end{eqnarray*}
-
 and we recognize this last quantity as the MGF of a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$ distribution.
-
-\end{proof}
+#+latex: \end{proof}
 
 
 
 *** The Distribution of the Sample Variance
 \label{sub:Samp-Var-Dist}
 
-\begin{thm}
+#+latex: \begin{thm}
 \label{thm:Xbar-andS}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, and let
-
 \begin{equation}
 \Xbar=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\Xbar)^{2}.
 \end{equation}
 
 Then
-
 1. $\Xbar$ and $S^{2}$ are independent, and
 
 2. The rescaled sample variance
-
     \begin{equation}
     \frac{(n-1)}{\sigma^{2}}S^{2}=\frac{\sum_{i=1}^{n}(X_{i}-\Xbar)^{2}}{\sigm    a^{2}}
     \end{equation}
-
     has a $\mathsf{chisq}(\mathtt{df}=n-1)$ sampling distribution.
 
-\end{thm}
+#+latex: \end{thm}
 
-
-\begin{proof}
+#+latex: \begin{proof}
 The proof is beyond the scope of the present book, but the theorem is simply too important to be omitted. The interested reader could consult Casella and Berger \cite{Casella2002}, or Hogg \emph{et al} \cite{Hogg2005}. 
-\end{proof}
+#+latex: \end{proof}
 
 
 
 *** The Distribution of Student's $T$ Statistic
 \label{sub:Student's-t-Distribution}
 
-\begin{prop}
+#+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Then the quantity 
-
 \begin{equation}
 T=\frac{\Xbar-\mu}{S/\sqrt{n}}
 \end{equation}
-
 has a $\mathsf{t}(\mathtt{df}=n-1)$ sampling distribution.
-\end{prop}
+#+latex: \end{prop}
 
-
-\begin{proof}
+#+latex: \begin{proof}
 Divide the numerator and denominator by $\sigma$ and rewrite
-
 \[
 T=\frac{\frac{\Xbar-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\Xbar-\mu}{\sigma/\sqrt{n}}}{\sqrt{\left.\frac{(n-1)S^{2}}{\sigma^{2}}\right\slash (n-1)}}.
 \]
-
 Now let 
-
 \[
 Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\quad\mbox{and}\quad V=\frac{(n-1)S^{2}}{\sigma^{2}},
 \]
-
 so that
-
 \begin{equation}
 T=\frac{Z}{\sqrt{V/r}},
 \end{equation}
-
 where $r=n-1$.
 
 We know from Section \ref{sub:samp-mean-dist-of} that $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and we know from Section \ref{sub:Samp-Var-Dist} that $V\sim\mathsf{chisq}(\mathtt{df}=n-1)$. Further, since we are sampling from a normal distribution, Theorem \ref{thm:Xbar-andS} gives that $\Xbar$ and $S^{2}$ are independent and by Fact \ref{fac:indep-then-function-indep} so are $Z$ and $V$. In summary, the distribution of $T$ is the same as the distribution of the quantity $Z/\sqrt{V/r}$, where $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and $V\sim\mathsf{chisq}(\mathtt{df}=r)$ are independent. This is in fact the definition of Student's $t$ distribution.
-\end{proof}
+#+latex: \end{proof}
 
-
-This distribution was first published by W.~S.~Gosset (1900) under the pseudonym Student, and the distribution has consequently come to be known as Student's $t$ distribution. The PDF of $T$ can be derived explicitly using the techniques of Section \ref{sec:Functions-of-Continuous}; it takes the form 
-
+This distribution was first published by W. S. Gosset (1900) under the pseudonym Student, and the distribution has consequently come to be known as Student's $t$ distribution. The PDF of $T$ can be derived explicitly using the techniques of Section \ref{sec:Functions-of-Continuous}; it takes the form 
 \begin{equation}
-f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty
+f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty.
 \end{equation}
-
 
 Any random variable $X$ with the preceding PDF is said to have Student's $t$ distribution with $r$ /degrees of freedom/, and we write $X\sim\mathsf{t}(\mathtt{df}=r)$. The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure \ref{fig:Student's-t-dist-vary-df}. As with the normal distribution, there are four functions in \textsf{R} associated with the $t$ distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
 
 
 The code to produce Figure \ref{fig:Student's-t-dist-vary-df} is
-
 #+begin_src R :eval never
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
 for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 #+end_src
+
 
 
 \begin{figure}
@@ -3035,7 +2686,7 @@ Find $\mathsf{t}{}_{0.01}(\mathtt{df}=23)$ with the quantile function.
 qt(0.01, df = 23, lower.tail = FALSE)
 #+end_src
 
-\begin{rem}
+#+latex: \begin{rem}
 There are a few things to note about the $\mathtt{t}(\mathtt{df}=r)$ distribution.
 
 1. The $\mathtt{t}(\mathtt{df}=1)$ distribution is the same as the $\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)$ distribution. The Cauchy distribution is rather pathological and is a counterexample to many famous results. 
@@ -3044,61 +2695,49 @@ There are a few things to note about the $\mathtt{t}(\mathtt{df}=r)$ distributio
 
 3. As $r\to\infty$, the $\mathtt{t}(\mathtt{df}=r)$ distribution approaches the $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution.
 
-\end{rem}
+#+latex: \end{rem}
 
 
 ** The Central Limit Theorem
 \label{sec:Central-Limit-Theorem}
 
-
 In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when $X_{1}$, $X_{2}$, ... , $X_{n}$ is a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution then $\Xbar\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$. In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of $Z$ defined by
-
 \begin{equation}
 Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}
 \end{equation}
-
 is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. 
 
 However, there are many populations that are /not/ normal ... and the statistician often finds herself sampling from such populations. What can be said in this case? The surprising answer is contained in the following theorem.
 
-
-\begin{thm}
-\textbf{\label{thm:central-limit-thrm}The Central Limit Theorem.}
-
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the sampling distribution of 
-
+#+latex: \begin{thm}
+\label{thm:central-limit-thrm}
+*The Central Limit Theorem.* Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the sampling distribution of 
 \begin{equation}
 Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}
 \end{equation}
-
 approaches a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution as $n\to\infty$.
+#+latex: \end{thm}
 
-\end{thm}
-
-
-\begin{rem}
+#+latex: \begin{rem}
 We suppose that $X_{1}$, $X_{2}$, ... , $X_{n}$ are i.i.d., and we learned in Section \ref{sub:simple-random-samples} that $\Xbar$ has mean $\mu$ and standard deviation $\sigma/\sqrt{n}$, so we already knew that $Z$ has mean 0 and standard deviation 1. The beauty of the CLT is that it addresses the \emph{shape} of $Z$'s distribution when the sample size is large.
-\end{rem}
+#+latex: \end{rem}
 
-\begin{rem}
+#+latex: \begin{rem}
 Notice that the shape of the underlying population's distribution is not mentioned in Theorem \ref{thm:central-limit-thrm}; indeed, the result is true for any population that is well-behaved enough to have a finite standard deviation. In particular, if the population is normally distributed then we know from Section \ref{sub:samp-mean-dist-of} that the distribution of $\Xbar$ (and $Z$ by extension) is /exactly/ normal, for /every/ $n$.
-\end{rem}
+#+latex: \end{rem}
 
-\begin{rem}
-How large is ``sufficiently large''? It is here that the shape of the underlying population distribution plays a role. For populations with distributions that are approximately symmetric and mound-shaped, the samples may need to be only of size four or five, while for highly skewed or heavy-tailed populations the samples may need to be much larger for the distribution of the sample means to begin to show a bell-shape. Regardless, for a given population distribution (with finite standard deviation) the approximation tends to be better for larger sample sizes. 
-\end{rem}
+#+latex: \begin{rem}
+How large is ``sufficiently large''? It is here that the shape of the underlying population distribution plays a role. For populations with distributions that are approximately symmetric and mound-shaped, the samples may need to be only of size four or five, while for highly skewed or heavy-tailed populations the samples may need to be much larger for the distribution of the sample means to begin to show a bell-shape. Regardless, for a given population distribution (with finite standard deviation) the approximation tends to be better for larger sample sizes.
+#+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 The =TeachingDemos= package \cite{Snowteachingdemos} has =clt.examp= and the =distrTeach= \cite{Ruckdescheldistr} package has =illustrateCLT=. Try the following at the command line (output omitted):
-
 #+begin_src R :eval never
 library(TeachingDemos)
 example(clt.examp)
 #+end_src
-
 and
-
 #+begin_src R :eval never
 library(distrTeach)
 example(illustrateCLT)
@@ -3110,113 +2749,86 @@ For example, when the command =clt1()=  is issued a plot window opens to show a 
 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
-
 ** Sampling Distributions of Two-Sample Statistics
 \label{sec:Samp-Dist-Two-Samp}
 
 There are often two populations under consideration, and it sometimes of interest to compare properties between groups. To do so we take independent samples from each population and calculate respective sample statistics for comparison. In some simple cases the sampling distribution of the comparison is known and easy to derive; such cases are the subject of the present section.
 
-
 *** Difference of Independent Sample Means
 
-\begin{prop}
+#+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ be an $SRS(n_{1})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})$ distribution and let $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ be an $SRS(n_{2})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})$ distribution. Suppose that $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ are independent samples. Then the quantity
-
 \begin{equation}
 \frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
-
 has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution. Equivalently, $\Xbar-\Ybar$ has a $\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}})$ sampling distribution.
+#+latex: \end{prop}
 
-\end{prop}
-
-
-\begin{proof}
+#+latex: \begin{proof}
 We know that $\Xbar$ is $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X}/\sqrt{n_{1}})$ and we also know that $\Ybar$ is $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}/\sqrt{n_{2}})$. And since the samples $X_{1}$, $X_{2}$, ..., $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ..., $Y_{n_{2}}$ are independent, so too are $\Xbar$ and $\Ybar$. The distribution of their difference is thus normal as well, and the mean and standard deviation are given by Proposition \ref{pro:mean-sd-lin-comb-two}.
-\end{proof}
+#+latex: \end{proof}
 
-
-\begin{rem}
+#+latex: \begin{rem}
 Even if the distribution of one or both of the samples is not normal, the quantity in Equation \ref{eq:diff-indep-sample-means} will be approximately normal provided both sample sizes are large.
-\end{rem}
+#+latex: \end{rem}
 
-\begin{rem}
+#+latex: \begin{rem}
 For the special case of $\mu_{X}=\mu_{Y}$ we have shown that \begin{equation} \frac{\Xbar-\Ybar}{\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}}}\end{equation} has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution, or in other words, $\Xbar-\Ybar$ has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})$ sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec:Conf-Interv-for-Diff-Means}.
-\end{rem}
+#+latex: \end{rem}
+
 
 *** Difference of Independent Sample Proportions
 
-\begin{prop}
+#+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ..., $X_{n_{1}}$ be an $SRS(n_{1})$ from a $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{1})$ distribution and let $Y_{1}$, $Y_{2}$, ..., $Y_{n_{2}}$ be an $SRS(n_{2})$ from a $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{2})$ distribution. Suppose that $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ are independent samples. Define 
-
 \begin{equation}
 \hat{p}_{1}=\frac{1}{n_{1}}\sum_{i=1}^{n_{1}}X_{i}\quad\mbox{and}\quad\hat{p}_{2}=\frac{1}{n_{2}}\sum_{j=1}^{n_{2}}Y_{j}.
 \end{equation}
-
 Then the sampling distribution of
-
 \begin{equation}
 \frac{\hat{p}_{1}-\hat{p}_{2}-(p_{1}-p_{2})}{\sqrt{\frac{p_{1}(1-p_{1})}{n_{1}}+\frac{p_{2}(1-p_{2})}{n_{2}}}}
 \end{equation}
-
 approaches a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution as both $n_{1},\, n_{2}\to\infty$. In other words, the sampling distribution of $\hat{p}_{1}-\hat{p}_{2}$ is approximately
-
 \begin{equation}
 \mathsf{norm}\left(\mathtt{mean}=p_{1}-p_{2},\,\mathtt{sd}=\sqrt{\frac{p_{1}(1-p_{1})}{n_{1}}+\frac{p_{2}(1-p_{2})}{n_{2}}}\right),
 \end{equation}
-
 provided both $n_{1}$ and $n_{2}$ are sufficiently large.
+#+latex: \end{prop}
 
-\end{prop}
-
-\begin{proof}
+#+latex: \begin{proof}
 We know that $\hat{p}_{1}$ is approximately normal for $n_{1}$ sufficiently large by the CLT, and we know that $\hat{p}_{2}$ is approximately normal for $n_{2}$ sufficiently large, also by the CLT. Further, $\hat{p}_{1}$ and $\hat{p}_{2}$ are independent since they are derived from independent samples. And a difference of independent (approximately) normal distributions is (approximately) normal, by Exercise \ref{xca:diff-indep-norm}[fn:approx]. The expressions for the mean and standard deviation follow immediately from Proposition \ref{pro:mean-sd-lin-comb-two} combined with the formulas for the $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ distribution from Chapter \ref{cha:Discrete-Distributions}.
-\end{proof}
+#+latex: \end{proof}
 
 [fn:approx] This does not explicitly follow, because of our cavalier use of ``approximately'' in too many places. To be more thorough, however, would require more concepts than we can afford at the moment. The interested reader may consult a more advanced text, specifically the topic of weak convergence, that is, convergence in distribution.
 
 *** Ratio of Independent Sample Variances
 
-\begin{prop}
+#+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ..., $X_{n_{1}}$ be an $SRS(n_{1})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})$ distribution and let $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ be an $SRS(n_{2})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})$ distribution. Suppose that $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ are independent samples. Then the ratio
-
 \begin{equation}
 F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}
 \end{equation}
-
 has an $\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)$ sampling distribution.
+#+latex: \end{prop}
 
-\end{prop}
-
-
-\begin{proof}
+#+latex: \begin{proof}
 We know from Theorem \ref{thm:Xbar-andS} that $(n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}$ is distributed $\mathsf{chisq}(\mathtt{df}=n_{1}-1)$ and $(n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}$ is distributed $\mathsf{chisq}(\mathtt{df}=n_{2}-1)$. Now write
-
 \[
 F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{Y}^{2}\right\slash (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right\slash (n_{2}-1)}\cdot\frac{\left.1\right\slash \sigma_{X}^{2}}{\left.1\right\slash \sigma_{Y}^{2}},
 \]
-
-by multiplying and dividing the numerator with $n_{1}-1$ and doing
-likewise for the denominator with $n_{2}-1$. Now we may regroup the
-terms into
-
+by multiplying and dividing the numerator with $n_{1}-1$ and doing likewise for the denominator with $n_{2}-1$. Now we may regroup the terms into
 \[
 F=\frac{\left.\frac{(n_{1}-1)S_{X}^{2}}{\sigma_{X}^{2}}\right\slash (n_{1}-1)}{\left.\frac{(n_{2}-1)S_{Y}^{2}}{\sigma_{Y}^{2}}\right\slash (n_{2}-1)},
 \]
-
 and we recognize $F$ to be the ratio of independent $\mathsf{chisq}$ distributions, each divided by its respective numerator $\mathtt{df}=n_{1}-1$ and denominator $\mathtt{df}=n_{1}-1$ degrees of freedom. This is, indeed, the definition of Snedecor's $F$ distribution. 
+#+latex: \end{proof}
 
-\end{proof}
-
-\begin{rem}
+#+latex: \begin{rem}
 For the special case of $\sigma_{X}=\sigma_{Y}$ we have shown that
-
 \begin{equation}
 F=\frac{S_{X}^{2}}{S_{Y}^{2}}
 \end{equation}
-
 has an $\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)$ sampling distribution. This will be important in Chapters \ref{cha:Estimation} onward.
-
-\end{rem}
+#+latex: \end{rem}
 
 ** Simulated Sampling Distributions
 \label{sec:Simulated-Sampling-Distributions}
@@ -3233,18 +2845,16 @@ iqrs <- replicate(100, IQR(rnorm(100)))
 #+end_src
 
 We can look at the mean of the simulated values
-
 #+begin_src R :exports both :results output pp
 mean(iqrs)    # close to 1
 #+end_src
-
 and we can see the standard deviation
-
 #+begin_src R :exports both :results output pp
 sd(iqrs)
 #+end_src
 
 Now let's take a look at a plot of the simulated values
+
 
 %
 \begin{figure}
@@ -3278,15 +2888,18 @@ sd(mads)
 
 Now let's take a look at a plot of the simulated values
 
-%
+
+
+
+
 \begin{figure}[H]
 \begin{centering}
 <<echo = FALSE, fig=TRUE, height = 4, width = 6>>=
 hist(mads, breaks = 20)
-#+end_src
 \par\end{centering}
 \caption{Plot of simulated MADs\label{fig:simulated-MAD}}
 \end{figure}
+
 
 
 \newpage{}
@@ -3301,82 +2914,58 @@ k = 1
 n = sample(10:30, size=10, replace = TRUE)
 mu = round(rnorm(10, mean = 20))
 #+end_src
-\begin{xca}
+
+#+latex: \begin{xca}
 Suppose that we observe a random sample $X_{1}$, $X_{2}$, ... , $X_{n}$ of size $SRS(n=$\Sexpr{n[k]}) from a $\mathsf{norm}(\mathtt{mean}=$\Sexpr{mu[k]}) distribution. 
+1. What is the mean of $\Xbar$?
+1. What is the standard deviation of $\Xbar$?
+1. What is the distribution of $\Xbar$? (approximately)
+1. Find $\P(a<\Xbar\leq b)$
+1. Find $\P(\Xbar>c)$.\end{enumerate}
+#+latex: \end{xca}
 
-\end{xca}
-\begin{enumerate}
-\item What is the mean of $\Xbar$?
-\item What is the standard deviation of $\Xbar$?
-\item What is the distribution of $\Xbar$? (approximately)
-\item Find $\P(a<\Xbar\leq b)$
-\item Find $\P(\Xbar>c)$.\end{enumerate}
-
-
-\begin{xca}
+#+latex: \begin{xca}
 \label{xca:clt123}
 In this exercise we will investigate how the shape of the population distribution affects the time until the distribution of $\Xbar$ is acceptably normal.
-\end{xca}
-
+#+latex: \end{xca}
 
 Answer the questions and write a report about what you have learned. Use plots and histograms to support your conclusions. See Appendix \ref{cha:Writing-Reports-with} for instructions about writing reports with \textsf{R}. For these problems, the discussion/interpretation parts are the most important, so be sure to ANSWER THE WHOLE QUESTION.
 \vspace{0.02in}
-
-
 
 *** The Central Limit Theorem
 
 For Questions 1-3, we assume that we have observed random variables $X_{1}$, $X_{2}$, ... ,$X_{n}$ that are an $SRS(n)$ from a given population (depending on the problem) and we want to investigate the distribution of $\Xbar$ as the sample size $n$ increases. 
 
-\begin{enumerate}
-\item The population of interest in this problem has a Student's $t$ distribution with $r=3$ degrees of freedom. We begin our investigation with a sample size of $n=2$. Open an \textsf{R} session, make sure to type =library(IPSUR)= and then follow that with =clt1()=. 
+1. The population of interest in this problem has a Student's $t$ distribution with $r=3$ degrees of freedom. We begin our investigation with a sample size of $n=2$. Open an \textsf{R} session, make sure to type =library(IPSUR)= and then follow that with =clt1()=. 
 
-\begin{enumerate}
-\item Look closely and thoughtfully at the first graph. How would you describe the population distribution? Think back to the different properties of distributions in Chapter \ref{cha:Describing-Data-Distributions}. Is the graph symmetric? Skewed? Does it have heavy tails or thin tails? What else can you say?
+   1. Look closely and thoughtfully at the first graph. How would you describe the population distribution? Think back to the different properties of distributions in Chapter \ref{cha:Describing-Data-Distributions}. Is the graph symmetric? Skewed? Does it have heavy tails or thin tails? What else can you say?
+   1. What is the population mean $\mu$ and the population variance $\sigma^{2}$? (Read these from the first graph.)
+   1. The second graph shows (after a few seconds) a relative frequency histogram which closely approximates the distribution of $\Xbar$. Record the values of =mean(xbar)= and =var(xbar)=, where =xbar= denotes the vector that contains the simulated sample means. Use the answers from part (b) to calculate what these estimates /should/ be, based on what you know about the theoretical mean and variance of $\Xbar$. How well do your answers to parts (b) and (c) agree? 
+   1. Click on the histogram to superimpose a red normal curve, which is the theoretical limit of the distribution of $\Xbar$ as $n\to\infty$. How well do the histogram and the normal curve match? Describe the differences between the two distributions. When judging between the two, do not worry so much about the scale (the graphs are being rescaled automatically, anyway). Rather, look at the peak: does the histogram poke through the top of the normal curve? How about on the sides: are there patches of white space between the histogram and line on either side (or both)? How do the curvature of the histogram and the line compare? Check down by the tails: does the red line drop off visibly below the level of the histogram, or do they taper off at the same height? 
+   1. We can increase our sample size from 2 to 11 with the command =clt1(sample.size = 11)=. Return to the command prompt to do this. Answer parts (b) and (c) for this new sample size.
+   1. Go back to =clt1= and increase the =sample.size= from 11 to 31. Answer parts (b) and (c) for this new sample size.
+   1. Comment on whether it appears that the histogram and the red curve are ``noticeably different'' or whether they are ``essentially the same'' for the largest sample size $n=31$. If they are still ``noticeably different'' at $n=31$, how large does $n$ need to be until they are ``essentially the same''? (Experiment with different values of $n$).
 
-\item What is the population mean $\mu$ and the population variance $\sigma^{2}$? (Read these from the first graph.)
+1. Repeat Question 1 for the function =clt2=. In this problem, the population of interest has a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=10)$ distribution. 
 
-\item The second graph shows (after a few seconds) a relative frequency histogram which closely approximates the distribution of $\Xbar$. Record the values of =mean(xbar)= and =var(xbar)=, where =xbar= denotes the vector that contains the simulated sample means. Use the answers from part (b) to calculate what these estimates /should/ be, based on what you know about the theoretical mean and variance of $\Xbar$. How well do your answers to parts (b) and (c) agree? 
+1. Repeat Question 1 for the function =clt3=. In this problem, the population of interest has a $\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{rate}=1/2.37)$ distribution.
 
+1. Summarize what you have learned. In your own words, what is the general trend that is being displayed in these histograms, as the sample size $n$ increases from 2 to 11, on to 31, and onward? 
 
-\item Click on the histogram to superimpose a red normal curve, which is the theoretical limit of the distribution of $\Xbar$ as $n\to\infty$. How well do the histogram and the normal curve match? Describe the differences between the two distributions. When judging between the two, do not worry so much about the scale (the graphs are being rescaled automatically, anyway). Rather, look at the peak: does the histogram poke through the top of the normal curve? How about on the sides: are there patches of white space between the histogram and line on either side (or both)? How do the curvature of the histogram and the line compare? Check down by the tails: does the red line drop off visibly below the level of the histogram, or do they taper off at the same height? 
-
-
-\item We can increase our sample size from 2 to 11 with the command =clt1(sample.size = 11)=. Return to the command prompt to do this. Answer parts (b) and (c) for this new sample size.
-
-\item Go back to =clt1= and increase the =sample.size= from 11 to 31. Answer parts (b) and (c) for this new sample size.
-
-\item Comment on whether it appears that the histogram and the red curve are ``noticeably different'' or whether they are ``essentially the same'' for the largest sample size $n=31$. If they are still ``noticeably different'' at $n=31$, how large does $n$ need to be until they are ``essentially the same''? (Experiment with different values of $n$).
-
-\end{enumerate}
+1. How would you describe the relationship between the /shape/ of the population distribution and the /speed/ at which $\Xbar$'s distribution converges to normal? In particular, consider a population which is highly *skewed*. Will we need a relatively /large/ sample size or a relatively /small/ sample size in order for $\Xbar$'s distribution to be approximately bell shaped?
 
 
-\item Repeat Question 1 for the function =clt2=. In this problem, the population of interest has a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=10)$ distribution. 
-
-\item Repeat Question 1 for the function =clt3=. In this problem, the population of interest has a $\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{rate}=1/2.37)$ distribution.
-
-\item Summarize what you have learned. In your own words, what is the general trend that is being displayed in these histograms, as the sample size $n$ increases from 2 to 11, on to 31, and onward? 
-
-\item How would you describe the relationship between the /shape/ of the population distribution and the /speed/ at which $\Xbar$'s distribution converges to normal? In particular, consider a population which is highly *skewed*. Will we need a relatively /large/ sample size or a relatively /small/ sample size in order for $\Xbar$'s distribution to be approximately bell shaped?
-
-\end{enumerate}
-
-\begin{xca}
+#+latex: \begin{xca}
 Let $X_{1}$,..., $X_{25}$ be a random sample from a $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45)$ distribution, and let $\Xbar$ be the sample mean of these $n=25$ observations. Find the following probabilities. 
+1. How is $\Xbar$ distributed? 
+   $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45/\sqrt{25})$ 
+1. Find $\P(\Xbar>43.1)$.
+   #+begin_src R :exports both :results output pp
+   pnorm(43.1, mean = 37, sd = 9, lower.tail = FALSE)
+   #+end_src
+#+latex: \end{xca}
 
-\begin{enumerate}
-\item How is $\Xbar$ distributed? 
 
-$\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45/\sqrt{25})$ 
-
-\item Find $\P(\Xbar>43.1)$.
-
-#+begin_src R :exports both :results output pp
-pnorm(43.1, mean = 37, sd = 9, lower.tail = FALSE)
-#+end_src
-
-\end{enumerate}
-\end{xca}
 
 
 
@@ -3387,21 +2976,13 @@ pnorm(43.1, mean = 37, sd = 9, lower.tail = FALSE)
 
 We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. We make some assumptions about the underlying population distribution and use what we know from Chapter \ref{cha:Sampling-Distributions} about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
-
 #+latex: \paragraph*{What do I want them to know?}
-
-
 - how to look at a problem, identify a reasonable model, and estimate a parameter associated with the model
-
 - about maximum likelihood, and in particular, how to
-
    - eyeball a likelihood to get a maximum
    - use calculus to find an MLE for one-parameter families
-
 - about properties of the estimators they find, such as bias, minimum variance, MSE
-
 - point versus interval estimation, and how to find and interpret confidence intervals for basic experimental designs
-
 - the concept of margin of error and its relationship to sample size
 
 
@@ -3412,7 +2993,6 @@ The following example is how I was introduced to maximum likelihood.
 
 #+latex: \begin{example}
 \label{exa:how-many-fish}
-
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 
 We will fish from the pond and suppose that we capture $M=7$ fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
@@ -3424,24 +3004,18 @@ Next, we wait a few days for the fish to remix and become accustomed to their ne
 Now let $F$ denote the (unknown) total number of fish in the pond. We know that $F\geq7$, because we tagged that many on the first trip. In fact, if we let $N$ denote the number of untagged fish in the pond, then $F=M+N$. We have sampled $K=4$ times, without replacement, from an urn which has $M=7$ white balls and $N=F-M$ black balls, and we have observed $x=3$ of them to be white. What is the probability of this?
 
 Looking back to Section \ref{sec:other-discrete-distributions}, we see that the random variable $X$ has a $\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)$ distribution. Therefore, for an observed value $X=x$ the probability would be
-
 \[
 \P(X=x)=\frac{{M \choose x}{F-M \choose K-x}}{{F \choose K}}.
 \]
 
-
 First we notice that $F$ must be at least 7. Could $F$ be equal to seven? If $F=7$ then all of the fish would have been tagged on the first run, and there would be no untagged fish in the pond, thus, $\P(\mbox{3 successes in 4 trials})=0$. 
 
-What about $F=8$; what would be the probability of observing $X=3$
-tagged fish?
-
+What about $F=8$; what would be the probability of observing $X=3$ tagged fish?
 \[
 \P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{1 \choose 1}}{{8 \choose 4}}=\frac{35}{70}=0.5.
 \]
 
-
 Similarly, if $F=9$ then the probability of observing $X=3$ tagged fish would be
-
 \[
 \P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
 \]
@@ -3450,7 +3024,8 @@ We can see already that the observed data $X=3$ is more likely when $F=9$ than i
 #+latex: \end{example}
 
 
-%
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
@@ -3476,7 +3051,6 @@ In the last example we were only concerned  with how many fish were in the pond,
 Let $p=\mbox{the proportion of bass}$. Without any other information, it is conceivable for $p$ to be any value in the interval $[0,1]$, but for the sake of argument we will suppose that $p$ falls strictly between 0 and 1. How can we learn about the true value of $p$? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
 
 Suppose we catch $n$ fish. Let
-
 \[
 X_{i}=
 \begin{cases}
@@ -3487,7 +3061,6 @@ X_{i}=
 
 
 Since we are returning the fish to the pond once caught, we may think of this as a sampling scheme with replacement where the proportion of bass $p$ does not change. Given that we allow the fish sufficient time to ``mix'' once returned, it is not completely unreasonable to model our fishing experiment as a sequence of Bernoulli trials, so that the $X_{i}$'s would be i.i.d.~$\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)$. Under those assumptions we would have
-
 \begin{eqnarray*}
 \P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n}) & = & \P(X_{1}=x_{1})\,\P(X_{2}=x_{2})\,\cdots\P(X_{n}=x_{n}),\\
  & = & p^{x_{1}}(1-p)^{x_{1}}\, p^{x_{2}}(1-p)^{x_{2}}\cdots\, p^{x_{n}}(1-p)^{x_{n}},\\
@@ -3495,26 +3068,24 @@ Since we are returning the fish to the pond once caught, we may think of this as
 \end{eqnarray*}
 
 That is, 
-
 \[
 \P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n})=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
 
 This last quantity is a function of $p$, called the /likelihood function/ $L(p)$:
-
 \[
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
 
 A graph of $L$ for values of $\sum x_{i}=3,\ 4$, and 5 when $n=7$ is shown in Figure \ref{fig:fishing-part-two}. 
 
+
+
 <<eval = FALSE>>=
 curve(x^5*(1-x)^2, from = 0, to = 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, from = 0, to = 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
-#+end_src
 
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
@@ -3524,20 +3095,16 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 #+end_src
 \par\end{centering}
 \caption{Assorted likelihood functions for fishing, part two\label{fig:fishing-part-two}}
-
-
 {\small Three graphs are shown of $L$ when $\sum x_{i}$ equals 3, 4, and 5, respectively, from left to right. We pick an $L$ that matches the observed data and then maximize $L$ as a function of $p$. If $\sum x_{i}=4$, then the maximum appears to occur somewhere around $p\approx0.6$.}
 \end{figure}
 
 
 We want the value of $p$ which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate $L$ and set $L'=0$ to find a maximum.
-
 \[
 L'(p)=\left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}}+p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1}(-1).
 \]
 
 The derivative vanishes ($L'=0$) when
-
 \begin{eqnarray*}
 \left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}} & = & p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1},\\
 \sum x_{i}(1-p) & = & \left(n-\sum x_{i}\right)p,\\
@@ -3545,24 +3112,22 @@ The derivative vanishes ($L'=0$) when
 \frac{1}{n}\sum_{i=1}^{n}x_{i} & = & p.
 \end{eqnarray*}
 
-
 This ``best'' $p$, the one which maximizes the likelihood, is called the maximum likelihood estimator (MLE) of $p$ and is denoted $\hat{p}$. That is, 
-
 \begin{equation} 
 \hat{p}=\frac{\sum_{i=1}^{n}x_{i}}{n}=\xbar.
 \end{equation}
 
-
-\begin{rem}
+#+latex: \begin{rem}
 Strictly speaking we have only shown that the derivative equals zero at $\hat{p}$, so it is theoretically possible that the critical value $\hat{p}=\xbar$ is located at a minimum[fn:max] instead of a maximum! We should be thorough and check that $L'>0$ when $p<\xbar$ and $L'<0$ when $p>\xbar$. Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that $\hat{p}=\xbar$ is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
-\end{rem}
+#+latex: \end{rem}
 
 [fn:max] We can tell from the graph that our value of $\hat{p}$ is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.
 
 The result is shown in Figure \ref{fig:species-mle}.
-
 #+latex: \end{example}
-%
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
@@ -3585,95 +3150,73 @@ text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, p
 \end{figure}
 
 
-In general, we have a family of PDFs $f(x|\theta)$ indexed by a parameter $\theta$ in some parameter space $\Theta$. We want to learn about $\theta$. We take a $SRS(n)$:
 
+In general, we have a family of PDFs $f(x|\theta)$ indexed by a parameter $\theta$ in some parameter space $\Theta$. We want to learn about $\theta$. We take a $SRS(n)$:
 \begin{equation}
 X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are i.i.d.\,\mbox{f(x|\ensuremath{\theta})}.}
 \end{equation}
 
-\begin{defn}
+#+latex: \begin{defn}
 Given the observed data $x_{1}$, $x_{2}$, ..., $x_{n}$, the /likelihood function/ $L$ is defined by 
-
 \[ 
 L(\theta)=\prod_{i=1}^{n}f(x_{i}|\theta),\quad\theta\in\Theta.
 \]
-
-\end{defn}
+#+latex: \end{defn}
 
 
 The next step is to maximize $L$. The method we will use in this book is to find the derivative $L'$ and solve the equation $L'(\theta)=0$. Call a solution $\hat{\theta}$. We will check that $L$ is maximized at $\hat{\theta}$ using the First Derivative Test or the Second Derivative Test $\left(L''(\hat{\theta})<0\right)$.
 
-
-\begin{defn}
+#+latex: \begin{defn}
 A value $\theta$ that maximizes $L$ is called a /maximum likelihood estimator/ (MLE) and is denoted $\hat{\theta}$. It is a function of the sample, $\hat{\theta}=\hat{\theta}\left(X_{1},\, X_{2},\,\ldots,X_{n}\right)$, and is called a \emph{point estimator} of $\theta$.
+#+latex: \end{defn}
 
-\end{defn}
-
-
-\begin{rem}
+#+latex: \begin{rem}
 Some comments about maximum likelihood estimators:
-
-
 - Often it is easier to maximize the \emph{log-likelihood} $l(\theta)=\ln L(\theta)$ instead of the likelihood $L$. Since the logarithmic function $y=\ln x$ is a monotone transformation, the solutions to both problems are the same.
-
 - MLEs do not always exist (for instance, sometimes the likelihood has a vertical asymptote), and even when they do exist, they are not always unique (imagine a function with a bunch of humps of equal height). For any given problem, there could be zero, one, or any number of values of $\theta$ for which $L(\theta)$ is a maximum.
-
 - The problems we encounter in this book are all very nice with likelihood functions that have closed form representations and which are optimized by some calculus acrobatics. In practice, however, likelihood functions are sometimes nasty in which case we are obliged to use numerical methods to find maxima (if there are any).
-
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
+#+latex: \end{rem}
 
-
-\end{rem}
 Notice, in Example \ref{exa:bass-bluegill} we had $X_{i}$ i.i.d.~$\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$, and we saw that the MLE was $\hat{p}=\Xbar$. But further
-
 \begin{eqnarray*}
 \E\Xbar & = & \E\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
  & = & \frac{1}{n}\left(\E X_{1}+\E X_{2}+\cdots+\E X_{n}\right),\\
  & = & \frac{1}{n}\left(np\right),\\
  & = & p,
 \end{eqnarray*}
-
 which is exactly the same as the parameter which we estimated. More concisely, $\E\hat{p}=p$, that is, on the average, the estimator is exactly right.
 
-
-\begin{defn}
+#+latex: \begin{defn}
 Let $s(X_{1},X_{2},\ldots,X_{n})$ be a statistic which estimates $\theta$. If 
-
 \[
 \E s(X_{1},X_{2},\ldots,X_{n})=\theta,
 \]
-
 then the statistic $s(X_{1},X_{2},\ldots,X_{n})$ is said to be an /unbiased estimator/ of $\theta$. Otherwise, it is /biased/.
-\end{defn}
+#+latex: \end{defn}
 
 #+latex: \begin{example}
 \label{exa:normal-MLE-both}
 
 Let $X_{1}$, $X_{2}$, ... , $X_{n}$ be an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if $\mbox{\ensuremath{\theta}}=(\mu,\sigma^{2})$ then the MLE of $\theta$ is
-
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
-
 where $\hat{\mu}=\Xbar$ and
-
 \begin{equation}
 \hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\Xbar\right)^{2}=\frac{n-1}{n}S^{2}.
 \end{equation}
 
 We of course know from \ref{pro:mean-sd-xbar} that $\hat{\mu}$ is unbiased. What about $\hat{\sigma^{2}}$? Let us check: 
-
 \begin{eqnarray*}
 \E\,\hat{\sigma^{2}} & = & \E\,\frac{n-1}{n}S^{2}\\
  & = & \E\left(\frac{\sigma^{2}}{n}\frac{(n-1)S^{2}}{\sigma^{2}}\right)\\
  & = & \frac{\sigma^{2}}{n}\E\ \mathsf{chisq}(\mathtt{df}=n-1)\\
  & = & \frac{\sigma^{2}}{n}(n-1),
 \end{eqnarray*}
-
 from which we may conclude two things:
 
 - $\hat{\sigma^{2}}$ is a biased estimator of $\sigma^{2}$, and 
-
 - $S^{2}=n\hat{\sigma^{2}}/(n-1)$ is an unbiased estimator of $\sigma^{2}$.
 
 #+latex: \end{example}
@@ -3688,7 +3231,6 @@ One of the most common questions in an introductory statistics class is, ``Why d
 For one parameter estimation problems we may use the =optimize= function to find MLEs. The arguments are the function to be maximized (the likelihood function), the range over which the optimization is to take place, and optionally any other arguments to be passed to the likelihood if needed.
 
 Let us see how to do Example \ref{exa:bass-bluegill}. Recall that our likelihood function was given by
-
 \begin{equation}
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{equation}
@@ -3705,10 +3247,9 @@ optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 A <- optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 #+end_src
 
-Note that the =optimize= function by default minimizes the function =L=, so we have to set =maximum = TRUE= to get an MLE. The returned value of =$maximum= gives an approximate value of the MLE to be \Sexpr{round(A$maximum, 3)} and =objective= gives =L= evaluated at the MLE which is approximately \Sexpr{round(A$objective, 3)}.
+Note that the =optimize= function by default minimizes the function =L=, so we have to set =maximum = TRUE= to get an MLE. The returned value of =$maximum= gives an approximate value of the MLE to be SRC_R{round(A$maximum, 3)} and =objective= gives =L= evaluated at the MLE which is approximately SRC_R{round(A$objective, 3)}.
 
 We previously remarked that it is usually more numerically convenient to maximize the log-likelihood (or minimize the negative log-likelihood), and we can just as easily do this with \textsf{R}. We just need to calculate the log-likelihood beforehand which (for this example) is
-
 \[
 -l(p)=-\sum x_{i}\ln\, p-\left(n-\sum x_{i}\right)\ln(1-p).
 \]
@@ -3727,7 +3268,7 @@ For multiparameter problems we may use a similar approach by way of the =mle= fu
 
 #+latex: \begin{example}
 
-*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations $X_{1}$, $X_{2}$, ... , $X_{n}$ that are i.i.d.~$\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of $\theta=(\mu,\sigma^{2})$. We claimed in Example \ref{exa:normal-MLE-both} that $\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})$ had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
+*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations $X_{1}$, $X_{2}$, ... , $X_{n}$ that are i.i.d. $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of $\theta=(\mu,\sigma^{2})$. We claimed in Example \ref{exa:normal-MLE-both} that $\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})$ had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
 
 #+begin_src R :exports code
 minuslogL <- function(mu, sigma2){
@@ -3752,32 +3293,27 @@ var(x)*29/30
 sd(x)/sqrt(30)
 #+end_src
 
-The numerical MLEs were very close to the theoretical MLEs. We already
-knew that the standard error of $\hat{\mu}=\Xbar$ is $\sigma/\sqrt{n}$,
-and the numerical estimate of this was very close too.
+The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of $\hat{\mu}=\Xbar$ is $\sigma/\sqrt{n}$, and the numerical estimate of this was very close too.
 
 #+latex: \end{example}
-There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we
-will skip examples of these for the time being.
+
+There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 
 ** Confidence Intervals for Means
 \label{sec:Confidence-Intervals-for-Means}
 
 We are given $X_{1}$, $X_{2}$, ..., $X_{n}$ that are an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, where $\mu$ is unknown. We know that we may estimate $\mu$ with $\Xbar$, and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
-
 \begin{equation} 
 \frac{\Xbar-\mu}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 \end{equation}
 
-For a big probability $1-\alpha$, for instance, 95\%, we can calculate the quantile $z_{\alpha/2}$. Then 
-
+For a big probability $1-\alpha$, for instance, 95%, we can calculate the quantile $z_{\alpha/2}$. Then
 \begin{equation}
 \P\left(-z_{\alpha/2}\leq\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
 \end{equation}
 
 But now consider the following string of equivalent inequalities:
-
 \[
 -z_{\alpha/2}\leq\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2},
 \]
@@ -3796,26 +3332,20 @@ That is,
 \P\left(\Xbar-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\Xbar+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
 \end{equation}
 
-
-
-\begin{defn}
+#+latex: \begin{defn}
 The interval
-
 \begin{equation}
 \left[\Xbar-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\ \Xbar+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
- is a $100(1-\alpha)\%$ /confidence interval for/ $\mu$. The
-quantity $1-\alpha$ is called the /confidence coefficient/.
-\end{defn}
+is a $100(1-\alpha)$% /confidence interval for/ $\mu$. The quantity $1-\alpha$ is called the /confidence coefficient/.
+#+latex: \end{defn}
 
-\begin{rem}
+#+latex: \begin{rem}
 The interval is also sometimes written more compactly as
-
 \begin{equation}
 \Xbar\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.\label{eq:z-interval}
 \end{equation}
-
-\end{rem}
+#+latex: \end{rem}
 
 The interpretation of confidence intervals is tricky and often mistaken by novices. When I am teaching the concept ``live'' during class, I usually ask the students to imagine that my piece of chalk represents the ``unknown'' parameter, and I lay it down on the desk in front of me. Once the chalk has been lain, it is \emph{fixed}; it does not move. Our goal is to estimate the parameter. For the estimator I pick up a sheet of loose paper lying nearby. The estimation procedure is to randomly drop the piece of paper from above, and observe where it lands. If the piece of paper covers the piece of chalk, then we are successful -- our estimator covers the parameter. If it falls off to one side or the other, then we are unsuccessful; our interval fails to cover the parameter.
 
@@ -3825,6 +3355,9 @@ In the demonstration, the parameter corresponds to the chalk, the sheet of paper
 
 See Figure \ref{fig:ci-examp}, which is a graphical display of these ideas.
 
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 6, width = 6>>=
@@ -3833,10 +3366,6 @@ library(TeachingDemos)
 ci.examp()
 \par\end{centering}
 \caption{Simulated confidence intervals\label{fig:ci-examp}}
-
-
-
-
 {\small The graph was generated by the } =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a $\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10)$ distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover $\mu=100$, which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.}
 \end{figure}
 
@@ -3844,27 +3373,24 @@ ci.examp()
 Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, $X_{1}$, $X_{2}$, ...,
 $X_{n}$. The following remarks makes these notions precise. 
 
-\begin{rem}
+#+latex: \begin{rem}
 For a fixed confidence coefficient $1-\alpha$,
 \begin{equation}
 \mbox{if }n\mbox{ increases, then the confidence interval gets /SHORTER/.}
 \end{equation}
+#+latex: \end{rem}
 
-\end{rem}
-
-\begin{rem}
+#+latex: \begin{rem}
 For a fixed sample size $n$,
 \begin{equation}
 \mbox{if }1-\alpha\mbox{ increases, then the confidence interval gets /WIDER/.}
 \end{equation}
-\end{rem}
+#+latex: \end{rem}
 
 
 #+latex: \begin{example}
-*Results from an Experiment on Plant Growth.*
 \label{exa:plant-one-samp-z-int}}
-
-The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is $0.7$~g.
+*Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is $0.7$ g.
 
 The parameter of interest is $\mu$, which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
 
@@ -3886,14 +3412,12 @@ qnorm(0.975)
 #+end_src
 
 We find the sample mean of the data to be $\xbar=5.073$ and $z_{\alpha/2}=z_{0.025}\approx1.96$. Our interval is therefore
-
 \[
 \xbar\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}=5.073\pm1.96\cdot\frac{0.70}{\sqrt{30}},
 \]
-
 which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823~g and 5.323~g, that is, we are 95\% confident that the interval $[4.823,\,5.323]$ covers $\mu$. See Figure BLANK. 
 
-%
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 6.5, width = 6.5>>=
@@ -3901,12 +3425,7 @@ library(TeachingDemos)
 plot(z.test(PlantGrowth$weight, stdev = 0.70), "Conf")
 #+end_src
 \par\end{centering}
-
 \caption{Confidence interval plot for the \texttt{PlantGrowth} data\label{fig:plant-z-int-plot}}
-
-
-~
-
 {\small The shaded portion represents 95% of the total area under the curve, and the upper and lower bounds are the limits of the one-sample 95% confidence interval. The graph is centered at the observed sample mean. It was generated by computing a }\texttt{\small z.test}{\small{} from the }\texttt{\small TeachingDemos}{\small{} package, storing the resulting }\texttt{\small htest}{\small{} object, and plotting it with the }\texttt{\small normal.and.t.dist}{\small{} function from the }\texttt{\small HH}{\small{} package. See the remarks in the ``How to do it with }\textsf{\small R}{\small ''discussion later in this section.}
 \end{figure}
 
@@ -3923,75 +3442,49 @@ conditions of the interval?
 4. Calculate the interval.
 5. Draw the conclusion.\end{enumerate}
 
-
-\begin{rem}
+#+latex: \begin{rem}
 What if $\sigma$ is unknown? We instead use the interval
 \begin{equation}
 \Xbar\pm z_{\alpha/2}\frac{S}{\sqrt{n}},
 \end{equation}
-
 where $S$ is the sample standard deviation.
-
 - If $n$ is large, then $\Xbar$ will have an approximately normal distribution regardless of the underlying population (by the CLT) and $S$ will be very close to the parameter $\sigma$ (by the SLLN); thus the above interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$.
-
-- If $n$ is small, then 
-
-
+- If $n$ is small, then
    - If the underlying population is normal then we may replace $z_{\alpha/2}$ with $t_{\alpha/2}(\mathtt{df}=n-1)$. The resulting $100(1-\alpha)\%$ confidence interval is
-
-\begin{equation}
-\Xbar\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}\label{eq:one-samp-t-int}
-\end{equation}
-
-  - if the underlying population is not normal, but approximately normal, then we may use the $t$ interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$. However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
-
-
-\end{rem}
+   \begin{equation}
+   \Xbar\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}\label{eq:one-samp-t-int}
+   \end{equation}
+   - if the underlying population is not normal, but approximately normal, then we may use the $t$ interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$. However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
+#+latex: \end{rem}
 
 The author learned of a handy acronym from AP Statistics Exam graders that summarizes the important parts of confidence interval estimation, which is PANIC: \emph{P}arameter, \emph{A}ssumptions, \emph{N}ame, \emph{I}nterval, and \emph{C}onclusion.
-
-
-
 - Parameter: :: identify the parameter of interest with the proper symbols. Write down what the parameter means in the context of the problem.
- 
 - Assumptions: :: list any assumptions made in the experiment. If there are any other assumptions needed or that were not checked, state what they are and why they are important.
-
 - Name: :: choose a statistical procedure from your bag of tricks based on the answers to the previous two parts. The assumptions of the procedure you choose should match those of the problem; if they do not match then either pick a different procedure or openly admit that the results may not be reliable. Write down any underlying formulas used.
-
 - Interval: :: calculate the interval from the sample data. This can be done by hand but will more often be done with the aid of a computer. Regardless of the method, all calculations or code should be shown so that the entire process is repeatable by a subsequent reader.
-
 - Conclusion: :: state the final results, using language in the context of the problem. Include the appropriate interpretation of the interval, making reference to the confidence coefficient.
 
-
-\begin{rem}
+#+latex: \begin{rem}
 All of the above intervals for $\mu$ were two-sided, but there are also one-sided intervals for $\mu$. They look like
-
 \begin{equation}
 \left[\Xbar-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \Xbar+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
-
 and satisfy
-
 \begin{equation}
 \P\left(\Xbar-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\P\left(\Xbar+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
 \end{equation}
+#+latex: \end{rem}
 
-\end{rem}
 
 #+latex: \begin{example}
-Small sample, some data with $X_{1}$, $X_{2}$, ..., $X_{n}$
-an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$
-distribution.
-
-
+Small sample, some data with $X_{1}$, $X_{2}$, ..., $X_{n}$ an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution.
 1. PANIC
-
 #+latex: \end{example}
+
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
-
 #+begin_src R :exports both :results output pp
 library(TeachingDemos)
 temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
