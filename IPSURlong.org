@@ -3024,8 +3024,6 @@ We can see already that the observed data $X=3$ is more likely when $F=9$ than i
 #+latex: \end{example}
 
 
-
-
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
@@ -3046,7 +3044,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 
 #+latex: \begin{example}
 \label{exa:bass-bluegill}
-In the last example we were only concerned  with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
+In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 
 Let $p=\mbox{the proportion of bass}$. Without any other information, it is conceivable for $p$ to be any value in the interval $[0,1]$, but for the sake of argument we will suppose that $p$ falls strictly between 0 and 1. How can we learn about the true value of $p$? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
 
@@ -3415,7 +3413,7 @@ We find the sample mean of the data to be $\xbar=5.073$ and $z_{\alpha/2}=z_{0.0
 \[
 \xbar\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}=5.073\pm1.96\cdot\frac{0.70}{\sqrt{30}},
 \]
-which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823~g and 5.323~g, that is, we are 95\% confident that the interval $[4.823,\,5.323]$ covers $\mu$. See Figure BLANK. 
+which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval $[4.823,\,5.323]$ covers $\mu$. See Figure BLANK. 
 
 
 \begin{figure}
@@ -3510,8 +3508,7 @@ Suppose that $\sigma_{X}$ and $\sigma_{Y}$ are known. We would like a confidence
 \Xbar-\Ybar\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}\right).
 \end{equation}
 
-Therefore, a $100(1-\alpha)$\% confidence interval for $\mu_{X}-\mu_{Y}$ is given by
-
+Therefore, a $ 100(1-\alpha)\% $ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
 \begin{equation}
 \left(\Xbar-\Ybar\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.\label{eq:two-samp-mean-CI}
 \end{equation}
@@ -3523,55 +3520,43 @@ Unfortunately, most of the time the values of $\sigma_{X}$ and $\sigma_{Y}$ are 
 - If one or more of the sample sizes is small then we are in trouble, unless
 
     -the underlying populations are both normal and $\sigma_{X}=\sigma_{Y}$. In this case (setting $\sigma=\sigma_{X}=\sigma_{Y}$), 
+    \begin{equation}
+    \Xbar-\Ybar\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}\right).
+    \end{equation}
 
-\begin{equation}
-\Xbar-\Ybar\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}\right).
-\end{equation}
-
-Now let 
-
+Now let
 \begin{equation}
 U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
 \end{equation}
 
 Then by Exercise \ref{xca:sum-indep-chisq} we know that $U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)$ and is not a large leap to believe that $U$ is independent of $\Xbar-\Ybar$; thus
-
 \begin{equation}
 T=\frac{Z}{\sqrt{\left.U\right\slash (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).\end{equation}
 
 But
-
 \begin{align*}
 T & =\frac{\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right\slash (n+m-2)}},\\
  & =\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sqrt{\left(\frac{1}{n}+\frac{1}{m}\right)\left(\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}\right)}},\\
  & \sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{align*}
-
 Therefore a $100(1-\alpha)\%$ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
-
 \begin{equation}
 \left(\Xbar-\Ybar\right)\pm t_{\alpha/2}(\mathtt{df}=n+m-2)\, S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}},
 \end{equation}
-
 where
-
 \begin{equation}
 S_{p}=\sqrt{\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}}
 \end{equation}
-
 is called the ``pooled'' estimator of $\sigma$.
-    - if one of the samples is small, and both underlying populations are normal, but $\sigma_{X}\neq\sigma_{Y}$, then we may use a Welch (or Satterthwaite) approximation to the degrees of freedom. See Welch \cite{Welch1947}, Satterthwaite \cite{Satterthwaite1946}, or Neter \emph{et al} \cite{Neter1996}. The idea is to use an interval of the form 
 
+    - if one of the samples is small, and both underlying populations are normal, but $\sigma_{X}\neq\sigma_{Y}$, then we may use a Welch (or Satterthwaite) approximation to the degrees of freedom. See Welch \cite{Welch1947}, Satterthwaite \cite{Satterthwaite1946}, or Neter /et al/ \cite{Neter1996}. The idea is to use an interval of the form 
 \begin{equation}
 \left(\Xbar-\Ybar\right)\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=r)\,\sqrt{\frac{S_{X}^{2}}{n}+\frac{S_{Y}^{2}}{m}},
 \end{equation}
-
 where the degrees of freedom $r$ is chosen so that the interval has nice statistical properties. It turns out that a good choice for $r$ is given by
-
 \begin{equation}
 r=\frac{\left(S_{X}^{2}/n+S_{Y}^{2}/m\right)^{2}}{\frac{1}{n-1}\left(S_{X}^{2}/n\right)^{2}+\frac{1}{m-1}\left(S_{Y}^{2}/m\right)^{2}},
 \end{equation}
-
 where we understand that $r$ is rounded down to the nearest integer. The resulting interval has approximately $100(1-\alpha)\%$ confidence.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -3586,94 +3571,70 @@ There is not any specific functionality to handle the $z$-interval for small sam
 \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know $p$ which is the ``proportion of successes''. For instance, $p$ could be:
-
-
 - the proportion of U.S.~citizens that support Obama,
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
 We are given an $SRS(n)$ $X_{1}$, $X_{2}$, ..., $X_{n}$ distributed $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$. Recall from Section \ref{sec:binom-dist} that the common mean of these variables is $\E X=p$ and the variance is $\E(X-p)^{2}=p(1-p)$. If we let $Y=\sum X_{i}$, then from Section \ref{sec:binom-dist} we know that $Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ and that 
-
 \[
 \Xbar=\frac{Y}{n}\mbox{ has }\E\Xbar=p\mbox{ and }\mathrm{Var}(\Xbar)=\frac{p(1-p)}{n}.
 \]
 
 Thus if $n$ is large (here is the CLT) then an approximate $100(1-\alpha)\%$ confidence interval for $p$ would be given by
-
 \begin{equation}
 \Xbar\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.\label{eq:ci-p-no-good}
 \end{equation}
-
 OOPS...! Equation \ref{eq:ci-p-no-good} is of no use to us because the \underbar{unknown} parameter $p$ is in the formula! (If we knew what $p$ was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
 
-
 1. Replace $p$ with $\hat{p}=\Xbar$. Then an approximate $100(1-\alpha)\%$ confidence interval for $p$ is given by 
+   \begin{equation}
+   \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
+   \end{equation}
+   This approach is called the /Wald interval/ and is also known as the /asymptotic interval/ because it appeals to the CLT for large sample sizes.
 
-\begin{equation}
-\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
-\end{equation}
-
-This approach is called the /Wald interval/ and is also known as the /asymptotic interval/ because it appeals to the CLT for large sample sizes.
-
-- Go back to first principles. Note that
-
-\[
--z_{\alpha/2}\leq\frac{Y/n-p}{\sqrt{p(1-p)/n}}\leq z_{\alpha/2}
-\]
-
-exactly when the function $f$ defined by
-
-\[
-f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}
-\]
-
-satisfies $f(p)\leq0$. But $f$ is quadratic in $p$ so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca:CI-quad-form}):
-
-\begin{equation}
-\left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right\slash \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
-\end{equation}
-
-This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter \ref{cha:Categorical-Data-Analysis}. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
+2. Go back to first principles. Note that
+   \[
+   -z_{\alpha/2}\leq\frac{Y/n-p}{\sqrt{p(1-p)/n}}\leq z_{\alpha/2}
+   \]
+   exactly when the function $f$ defined by
+   \[
+   f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}
+   \]
+   satisfies $f(p)\leq0$. But $f$ is quadratic in $p$ so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca:CI-quad-form}):
+   \begin{equation}
+   \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right\slash \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
+   \end{equation}
+   This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter \ref{cha:Categorical-Data-Analysis}. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
 
 
 For two proportions $p_{1}$ and $p_{2}$, we may collect independent $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ samples of size $n_{1}$ and $n_{2}$, respectively. Let $Y_{1}$ and $Y_{2}$ denote the number of successes in the respective samples. 
 
 We know that
-
 \[
 \frac{Y_{1}}{n_{1}}\approx\mathsf{norm}\left(\mathtt{mean}=p_{1},\,\mathtt{sd}=\sqrt{\frac{p_{1}(1-p_{1})}{n_{1}}}\right)
 \]
-
 and
-
 \[
 \frac{Y_{2}}{n_{2}}\approx\mathsf{norm}\left(\mathtt{mean}=p_{2},\,\mathtt{sd}=\sqrt{\frac{p_{2}(1-p_{2})}{n_{2}}}\right)
 \]
-
 so it stands to reason that an approximate $100(1-\alpha)\%$ confidence interval for $p_{1}-p_{2}$ is given by
-
 \begin{equation}
 \left(\hat{p}_{1}-\hat{p}_{2}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}_{1}(1-\hat{p}_{1})}{n_{1}}+\frac{\hat{p}_{2}(1-\hat{p}_{2})}{n_{2}}},
 \end{equation}
-
 where $\hat{p}_{1}=Y_{1}/n_{1}$ and $\hat{p}_{2}=Y_{2}/n_{2}$.
 
-\begin{rem}
+#+latex: \begin{rem}
 When estimating a single proportion, one-sided intervals are sometimes needed. They take the form
-
 \begin{equation}
 \left[0,\ \hat{p}+z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\right]
 \end{equation}
-
 or
-
 \begin{equation}
 \left[\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\ 1\right]
 \end{equation}
-
 or in other words, we know in advance that the true proportion is restricted to the interval $[0,1]$, so we can truncate our confidence interval to those values on either side.
+#+latex: \end{rem}
 
-\end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -3683,9 +3644,7 @@ binconf(x = 7, n = 25, method = "asymptotic")
 binconf(x = 7, n = 25, method = "wilson")
 #+end_src
 
-The default value of the =method= argument is =wilson=.
-
-An alternate way is 
+The default value of the =method= argument is =wilson=.  An alternate way is 
 
 #+begin_src R :exports both :results output pp
 tab <- xtabs(~gender, data = RcmdrTestDrive)
@@ -3704,10 +3663,9 @@ B <- with(A, untable(A, Freq))
 
 I am thinking one and two sample problems here.
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-I am thinking about sigma.test in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
+I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
 
 
 ** Fitting Distributions
@@ -3718,17 +3676,15 @@ I am thinking about sigma.test in the =TeachingDemos= package and =var.test= in 
 
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
-
-\section{Sample Size and Margin of Error\label{sec:Sample-Size-and-MOE}}
+** Sample Size and Margin of Error
+\label{sec:Sample-Size-and-MOE}
 
 Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size $n$ and the confidence coefficient $1-\alpha$, and our task was to find a margin of error $E$ so that 
-
 \[
 \hat{\theta}\pm E\mbox{ is a }100(1-\alpha)\%\mbox{ confidence interval for }\theta.
 \]
 
 Some examples we saw were:
-
 - $E=z_{\alpha/2}\sigma/\sqrt{n}$, in the one-sample $z$-interval,
 - $E=t_{\alpha/2}(\mathtt{df}=n+m-2)S_{p}\sqrt{n^{-1}+m^{-1}}$, in the two-sample pooled $t$-interval. 
 
@@ -3737,97 +3693,82 @@ We already know (we can see in the formulas above) that $E$ decreases as $n$ inc
 For the case of a population mean the answer is easy: we set up an equation and solve for $n$.
 
 #+latex: \begin{example}
-Given a situation, given $\sigma$, given $E$, we would like to know how big $n$ has to be to ensure that $\Xbar\pm5$ is a 95\% confidence interval for $\mu$. #+latex: \end{example}
+Given a situation, given $\sigma$, given $E$, we would like to know how big $n$ has to be to ensure that $\Xbar\pm5$ is a 95\% confidence interval for $\mu$. #+latex: 
+#+latex: \end{example}
 
-\begin{rem}
-
-
+#+latex: \begin{rem}
 1. Always round up any decimal values of $n$, no matter how small the decimal is.
 2. Another name for $E$ is the ``maximum error of the estimate''.
-
-\end{rem}
+#+latex: \end{rem}
 
 For proportions, recall that the asymptotic formula to estimate $p$ was
-
 \[
 \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
 \]
-
 Reasoning as above we would want
-
 \begin{align}
 E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.\label{eq:samp-size-prop-ME}
 \end{align}
-
 OOPS! Recall that $\hat{p}=Y/n$, which would put the variable $n$ on both sides of Equation \ref{eq:samp-size-prop-ME}. Again, there are two solutions to the problem.
 
-
 1. If we have a good idea of what $p$ is, say $p^{\ast}$ then we can plug it in to get
-
-\begin{equation}
-n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}.
-\end{equation}
+   \begin{equation}
+   n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}.
+   \end{equation}
 
 2. Even if we have no idea what $p$ is, we do know from calculus that $p(1-p)\leq1/4$ because the function $f(x)=x(1-x)$ is quadratic (so its graph is a parabola which opens downward) with maximum value attained at $x=1/2$. Therefore, regardless of our choice for $p^{\ast}$ the sample size must satisfy
-
-\begin{equation}
-n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}\leq\frac{z_{\alpha/2}^{2}}{4E^{2}}.
-\end{equation}
-
-The quantity $z_{\alpha/2}^{2}/4E^{2}$ is large enough to guarantee $100(1-\alpha)\%$ confidence.
+   \begin{equation}
+   n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}\leq\frac{z_{\alpha/2}^{2}}{4E^{2}}.
+   \end{equation}
+   The quantity $z_{\alpha/2}^{2}/4E^{2}$ is large enough to guarantee $100(1-\alpha)\%$ confidence.
 
 #+latex: \begin{example}
-
-Proportion example
-
+Proportion example.
 #+latex: \end{example}
 
-\begin{rem}
-
+#+latex: \begin{rem}
 For very small populations sometimes the value of $n$ obtained from the formula is too big. In this case we should use the hypergeometric distribution for a sampling model rather than the binomial model. With this modification the formulas change to the following: if $N$ denotes the population size then let
-
 \begin{equation}
 m=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}
 \end{equation}
-
 and the sample size needed to ensure $100(1-\alpha)\%$ confidence is achieved is
-
 \begin{equation}
 n=\frac{m}{1+\frac{m-1}{N}}.
 \end{equation}
+If we do not have a good value for the estimate $p^{\ast}$ then we may use $p^{\ast}=1/2$.
+#+latex: \end{rem}
 
-If we do not have a good value for the estimate $p^{\ast}$ then we may use $p^{\ast}=1/2$. 
-\end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
-
 
 ** Other Topics
 \label{sec:Other-Topics}
 
 Mention =mle= from the =stats4= package.
 
+
 \newpage{}
 
 ** Chapter Exercises
+#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
+#+latex: \setcounter{thm}{0}
 
-\addcontentsline{toc}{section}{Chapter Exercises}
-\setcounter{thm}{0}
-\begin{xca}
+#+latex: \begin{xca}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Find a two-dimensional MLE for $\theta=(\mu,\sigma)$.\label{xca:norm-mu-sig-MLE}
-\end{xca}
+#+latex: \end{xca}
 
-\begin{xca}
-\label{xca:CI-quad-form}Find the upper and lower limits for the confidence interval procedure by finding the roots of $f$ defined by 
+#+latex: \begin{xca}
+\label{xca:CI-quad-form}
+Find the upper and lower limits for the confidence interval procedure by finding the roots of $f$ defined by 
 \[
 f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.
 \]
-
 You are going to need the quadratic formula.
-\end{xca}
+#+latex: \end{xca}
+
+
 
 
 * Hypothesis Testing
@@ -3845,7 +3786,7 @@ You are going to need the quadratic formula.
 ** Introduction
 \label{sec:Introduction-Hypothesis}
 
-I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr.~Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
+I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr. Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
 
 The instructor (with a box of cookies in hand) enters a class of fifteen or more students and produces a brand-new, sealed deck of ordinary playing cards. The instructor asks for a student volunteer to break the seal, and then the instructor prominently shuffles the deck[fn:joker] several times in front of the class, after which time the students are asked to line up in a row. They are going to play a game. Each student will draw a card from the top of the deck, in turn. If the card is black, then the lucky student will get a cookie. If the card is red, then the unlucky student will sit down empty-handed. Let the game begin.
 
@@ -3861,8 +3802,7 @@ The fourth student draws: red. Hmmm... now there are groans instead of outbursts
 
 The fifth student draws red. Now it isn't funny any more. As the remaining students make their way back to their seats an uproar ensues, from an entire classroom demanding cookies.
 
-\bigskip{}
-
+#+latex: \bigskip{}
 
 Keep the preceding experiment in the back of your mind as you read the following sections. When you have finished the entire chapter, come back and read this introduction again. All of the mathematical jargon that follows is connected to the above paragraphs. In the meantime, I will get you started:
 
@@ -3899,14 +3839,12 @@ If
 - $Y=9$, then there is not much evidence that the torque converter helps.
 - $Y=17$, then throw away the torque converter.
 
-Let $p$ denote the proportion of defectives produced by the machine. Before the installation of the torque converter $p$ was $0.10$. Then we installed the torque converter. Did $p$ change? Did it go up or down? We use statistics to decide. Our method is to observe data and construct a 95\% confidence interval for $p$,
-
+Let $p$ denote the proportion of defectives produced by the machine. Before the installation of the torque converter $p$ was $0.10$. Then we installed the torque converter. Did $p$ change? Did it go up or down? We use statistics to decide. Our method is to observe data and construct a 95% confidence interval for $p$,
 \begin{equation}
 \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
 \end{equation}
 
 If the confidence interval is 
-
 - $[0.01,\,0.05]$, then we are 95\% confident that $0.01\leq p\leq0.05$, so there is evidence that the torque converter is helping.
 - $[0.15,\,0.19]$, then we are 95\% confident that $0.15\leq p\leq0.19$, so there is evidence that the torque converter is hurting.
 - $[0.07,\,0.11]$, then there is not enough evidence to conclude that the torque converter is doing anything at all, positive or negative.
@@ -3923,26 +3861,22 @@ The /null hypothesis/ $H_{0}$ is a ``nothing'' hypothesis, whose interpretation 
 
 3. If the confidence interval does not cover $p=0.10$, then we /reject/ $H_{0}$. Otherwise, we /fail to reject/ $H_{0}$.
 
-\begin{rem}
+#+latex: \begin{rem}
 Every time we make a decision it is possible to be wrong, and there are two possible mistakes that we could make. We have committed a 
-
 
 - Type~I~Error :: if we reject $H_{0}$ when in fact $H_{0}$ is true. This would be akin to convicting an innocent person for a crime (s)he did not commit.
 
 - Type~II~Error :: if we fail to reject $H_{0}$ when in fact $H_{1}$ is true. This is analogous to a guilty person escaping conviction.
-
-\end{rem}
+#+latex: \end{rem}
 
 Type I Errors are usually considered worse[fn:error], and we design our statistical procedures to control the probability of making such a mistake. We define the
 
 [fn:error] There is no mathematical difference between the errors, however. The bottom line is that we choose one type of error to control with an iron fist, and we try to minimize the probability of making the other type. That being said, null hypotheses are often by design to correspond to the ``simpler'' model, so it is often easier to analyze (and thereby control) the probabilities associated with Type I Errors.
-
 \begin{equation}
 \mbox{significance level of the test}=\P(\mbox{Type I Error})=\alpha.
 \end{equation}
 
 We want $\alpha$ to be small which conventionally means, say, $\alpha=0.05$, $\alpha=0.01$, or $\alpha=0.005$ (but could mean anything, in principle).
-
 
 - The /rejection region/ (also known as the /critical region/) for the test is the set of sample values which would result in the rejection of $H_{0}$. For Example \ref{exa:widget-machine}, the rejection region would be all possible samples that result in a 95% confidence interval that does not cover $p=0.10$.
 
@@ -3955,29 +3889,24 @@ Table here.
 Don't forget the assumptions.
 
 #+latex: \begin{example}
-
 Find
-
 
 1. The null and alternative hypotheses
 2. Check your assumptions.
 3. Define a critical region with an $\alpha=0.05$ significance level.
 4. Calculate the value of the test statistic and state your conclusion.
-
 #+latex: \end{example}
 
 #+latex: \begin{example}
 \label{exa:prop-test-pvalue-A}
 
-Suppose $p=\mbox{the proportion of students}$ who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40\% acceptance rate for its graduate school. Consider the data stored in the table =UCBAdmissions= from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an $\alpha=0.01$ significance level.
+Suppose $p=\mbox{the proportion of students}$ who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40% acceptance rate for its graduate school. Consider the data stored in the table =UCBAdmissions= from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an $\alpha=0.01$ significance level.
 
 Our null hypothesis in this problem is $H_{0}:\, p=0.4$ and the alternative hypothesis is $H_{1}:\, p<0.4$. We reject the null hypothesis if $\hat{p}$ is too small, that is, if
 \begin{equation} 
 \frac{\hat{p}-0.4}{\sqrt{0.4(1-0.4)/n}}<-z_{\alpha},
 \end{equation}
-
 where $\alpha=0.01$ and $-z_{0.01}$ is 
-
 #+begin_src R :exports both :results output pp
 -qnorm(0.99)
 #+end_src
@@ -3997,7 +3926,7 @@ phat <- 1755/(1755 + 2771)
 (phat - 0.4)/sqrt(0.4 * 0.6/(1755 + 2771)) 
 #+end_src
 
-Our test statistic is not less than $-2.32$, so it does not fall into the critical region. Therefore, we /fail/ to reject the null hypothesis that the true proportion of students admitted to graduate school is less than 40\% and say that the observed data are consistent with the officer's claim at the $\alpha=0.01$ significance level. 
+Our test statistic is not less than $-2.32$, so it does not fall into the critical region. Therefore, we /fail/ to reject the null hypothesis that the true proportion of students admitted to graduate school is less than 40% and say that the observed data are consistent with the officer's claim at the $\alpha=0.01$ significance level. 
 
 #+latex: \end{example}
 
@@ -4011,9 +3940,7 @@ Our null and alternative hypotheses are the same. Our observed test statistic is
 -qnorm(0.95)
 #+end_src
 
-Our test statistic is less than $-1.64$ so it now falls into the critical region! We now /reject/ the null hypothesis and conclude that the 1973 data provide evidence that the true proportion of students admitted to the graduate school of UCB in 1973 was significantly less than 40\%. The data are \emph{not} consistent with the officer's claim at the $\alpha=0.05$ significance level.
-
-
+Our test statistic is less than $-1.64$ so it now falls into the critical region! We now /reject/ the null hypothesis and conclude that the 1973 data provide evidence that the true proportion of students admitted to the graduate school of UCB in 1973 was significantly less than 40\%. The data are /not/ consistent with the officer's claim at the $\alpha=0.05$ significance level.
 
 What is going on, here? If we choose $\alpha=0.05$ then we reject the null hypothesis, but if we choose $\alpha=0.01$ then we fail to reject the null hypothesis. Our final conclusion seems to depend on our selection of the significance level. This is bad; for a particular test, we never know whether our conclusion would have been different if we had chosen a different significance level. 
 
@@ -4021,9 +3948,9 @@ Or do we?
 
 Clearly, for some significance levels we reject, and for some significance levels we do not. Where is the boundary? That is, what is the significance level for which we would \emph{reject} at any significance level /bigger/, and we would /fail to reject/ at any significance level /smaller/? This boundary value has a special name: it is called the /p-value/ of the test.
 
-\begin{defn}
+#+latex: \begin{defn}
 The /p-value/, or /observed significance level/, of a hypothesis test is the probability when the null hypothesis is true of obtaining the observed value of the test statistic (such as $\hat{p}$) or values more extreme -- meaning, in the direction of the alternative hypothesis[fn:pval]. 
-\end{defn}
+#+latex: \end{defn}
 
 [fn:pval] Bickel and Doksum \cite{Bickel2001} state the definition particularly well: the $p$-value is ``the smallest level of significance $\alpha$ at which an experimenter using the test statistic $T$ would reject $H_{0}$ on the basis of the observed sample outcome $x$''.
 
@@ -4031,27 +3958,26 @@ The /p-value/, or /observed significance level/, of a hypothesis test is the pro
 Calculate the $p$-value for the test in Examples \ref{exa:prop-test-pvalue-A} and \ref{exa:prop-test-pvalue-B}.
 
 The $p$-value for this test is the probability of obtaining a $z$-score equal to our observed test statistic (which had $z$-score $\approx-1.680919$) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval $(-\infty,\,-1.680919]$. We can get this easily with
-
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp
 pnorm(-1.680919)
 #+end_src
 
-We see that the $p$-value is strictly between the significance levels $\alpha=0.01$ and $\alpha=0.05$. This makes sense: it has to be bigger than $\alpha=0.01$ (otherwise we would have rejected $H_{0}$ in Example \ref{exa:prop-test-pvalue-A}) and it must also be smaller than $\alpha=0.05$ (otherwise we would not have rejected $H_{0}$ in Example \ref{exa:prop-test-pvalue-B}). Indeed, $p$-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the $p$-value, then (s)he knows immediately whether or not (s)he would have rejected at \emph{any} given significance level.
+We see that the $p$-value is strictly between the significance levels $\alpha=0.01$ and $\alpha=0.05$. This makes sense: it has to be bigger than $\alpha=0.01$ (otherwise we would have rejected $H_{0}$ in Example \ref{exa:prop-test-pvalue-A}) and it must also be smaller than $\alpha=0.05$ (otherwise we would not have rejected $H_{0}$ in Example \ref{exa:prop-test-pvalue-B}). Indeed, $p$-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the $p$-value, then (s)he knows immediately whether or not (s)he would have rejected at /any/ given significance level.
 
 Thus, another way to phrase our significance test procedure is: we will reject $H_{0}$ at the $\alpha$-level of significance if the $p$-value is less than $\alpha$.
 
-\begin{rem}
+#+latex: \begin{rem}
 If we have two populations with proportions $p_{1}$ and $p_{2}$ then we can test the null hypothesis $H_{0}:p_{1}=p_{2}$.
-
-\end{rem}
+#+latex: \end{rem}
 
 Table Here.
 
 #+latex: \begin{example}
 Example.
 #+latex: \end{example}
+
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -4070,7 +3996,7 @@ temp <- prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level =
 plot(temp, 'Hypoth')
 #+end_src
 
-%
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 6, width = 6.5>>=
@@ -4078,13 +4004,9 @@ library(HH)
 plot(prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE), 'Hypoth')
 #+end_src
 \par\end{centering}
-
 \caption{Hypothesis test plot based on \texttt{normal.and.t.dist} from the
 \texttt{HH} package\label{fig:Hypothesis-test-plot-1}}
-
-
 {\small ~}{\small \par}
-
 {\small This plot shows all of the important features of hypothesis  tests in one magnificent display. The (asymptotic) distribution of the test statistic (under the null hypothesis) is standard normal, represented by the bell curve, above. We see the critical region to the left, and the blue shaded area is the significance level, which for this example is $\alpha=0.05$. The area outlined in green is the $p$-value, and the observed test statistic determines the upper bound of this region. We can see clearly that the $p$-value is larger than the significance level, thus, we would not reject the null hypothesis. There are all sorts of tick marks shown below the graph which detail how the different pieces are measured on different scales (the original data scale, the standardized scale, }\emph{\small etc}{\small .). The workhorse behind the plot is the }\texttt{normal.and.t.dist }{\small function from the }\texttt{HH}{\small{} package. See the discussion in ``How to do it with }\textsf{\small R}{\small '' for the exact sequence of commands to generate the plot.} 
 \end{figure}
 
@@ -4108,25 +4030,21 @@ Once your unsummarized data is a column, then you can use the menu \textsf{Stati
 
 Here, $X_{1}$, $X_{2}$, ..., $X_{n}$ are a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. We would like to test $H_{0}:\mu=\mu_{0}$.
 
-\begin{description}
-\item [{Case~A:}] Suppose $\sigma$ is known. Then under $H_{0}$,
-\[
-Z=\frac{\Xbar-\mu_{0}}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
-\]
+- Case A: :: Suppose $\sigma$ is known. Then under $H_{0}$,
+   \[
+   Z=\frac{\Xbar-\mu_{0}}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
+   \]
+   Table here.
+- Case B: :: When $\sigma$ is unknown, under $H_{0}$
+   \[
+   T = \frac{\Xbar-\mu_{0}}{S/\sqrt{n}}\sim\mathsf{t}(\mathtt{df}=n-1).
+   \]
+   Table here.
 
-Table here.
-\item [{Case~B:}] When $\sigma$ is unknown, under $H_{0}$
-\[
-T=\frac{\Xbar-\mu_{0}}{S/\sqrt{n}}\sim\mathsf{t}(\mathtt{df}=n-1).
-\]
 
-Table here.
-
-\end{description}
-
-\begin{rem}
-
-If $\sigma$ is unknown but $n$ is large then we can use the $z$-test.\end{rem}
+#+latex: \begin{rem}
+If $\sigma$ is unknown but $n$ is large then we can use the $z$-test.
+#+latex: \end{rem}
 
 #+latex: \begin{example}
 In this example we
@@ -4138,17 +4056,10 @@ In this example we
 
 #+latex: \end{example}
 
-\begin{rem}
-
-Remarks
-
-
+#+latex: \begin{rem}
 - $p$-values are also known as tail end probabilities. We reject $H_{0}$ when the $p$-value is small.
-
 - $\sigma/\sqrt{n}$ when $\sigma$ is known, is called the standard error of the sample mean. In general, if we have an estimator $\hat{\theta}$ then $\sigma_{\hat{\theta}}$ is called the standard error of $\hat{\theta}$. We usually need to estimate $\sigma_{\hat{\theta}}$ with $\hat{\sigma_{\hat{\theta}}}$.
-
-
-\end{rem}
+#+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -4160,7 +4071,7 @@ library(TeachingDemos)
 z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 #+end_src
 
-%
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 6, width = 6.5>>=
@@ -4168,16 +4079,11 @@ library(HH)
 plot(prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE), 'Hypoth')
 #+end_src
 \par\end{centering}
-
 \caption{Hypothesis test plot based on \texttt{normal.and.t.dist} from the
 \texttt{HH} package\label{fig:Hypothesis-test-plot-2}}
-
-
 {\small ~}{\small \par}
-
 {\small This plot shows the important features of hypothesis tests.}
 \end{figure}
-
 
 The =RcmdrPlugin.IPSUR= package does not have a menu for =z.test= yet. 
 
@@ -4194,7 +4100,6 @@ Your data should be in a single numeric column (a variable) of the Active Data S
 *** Tests for a Variance
 
 Here, $X_{1}$, $X_{2}$, ..., $X_{n}$ are a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. We would like to test $H_{0}:\sigma^{2}=\sigma_{0}$. We know that under $H_{0}$,
-
 \[
 X^{2}=\frac{(n-1)S^{2}}{\sigma^{2}}\sim\mathsf{chisq}(\mathtt{df}=n-1).
 \]
@@ -4202,16 +4107,13 @@ X^{2}=\frac{(n-1)S^{2}}{\sigma^{2}}\sim\mathsf{chisq}(\mathtt{df}=n-1).
 Table here.
 
 #+latex: \begin{example}
-
 Give some data and a hypothesis.
-
 - Give an $\alpha$-level and test the critical region way.
 - Find the $p$-value for the test.
-
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
 
+#+latex: \paragraph*{How to do it with \textsf{R}}
 I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package.
 
 #+begin_src R :exports both :results output pp
@@ -4224,62 +4126,48 @@ sigma.test(women$height, sigma = 8)
 \label{sec:Two-Sample-Tests-for-Means}
 
 The basic idea for this section is the following. We have $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})$ and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})$. distributed independently. We would like to know whether $X$ and $Y$ come from the same population distribution, that is, we would like to know:
-
 \begin{equation}
 \mbox{Does }X\overset{\mathrm{d}}{=}Y?
 \end{equation}
-
 where the symbol $\overset{\mathrm{d}}{=}$ means equality of probability distributions.
 
 Since both $X$ and $Y$ are normal, we may rephrase the question:
-
 \begin{equation}
 \mbox{Does }\mu_{X}=\mu_{Y}\mbox{ and }\sigma_{X}=\sigma_{Y}?
 \end{equation}
 
 Suppose first that we do not know the values of $\sigma_{X}$ and $\sigma_{Y}$, but we know that they are equal, $\sigma_{X}=\sigma_{Y}$. Our test would then simplify to $H_{0}:\mu_{X}=\mu_{Y}$. We collect data $X_{1}$, $X_{2}$, ..., $X_{n}$ and $Y_{1}$, $Y_{2}$, ..., $Y_{m}$, both simple random samples of size $n$ and $m$ from their respective normal distributions. Then under $H_{0}$ (that is, assuming $H_{0}$ is true) we have $\mu_{X}=\mu_{Y}$ or rewriting, $\mu_{X}-\mu_{Y}=0$, so 
-
 \begin{equation}
 T=\frac{\Xbar-\Ybar}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{equation}
 
 
-
 *** Independent Samples
 
-\begin{rem}
+#+latex: \begin{rem}
 If the values of $\sigma_{X}$ and $\sigma_{Y}$ are known, then we can plug them in to our statistic:
-
 \begin{equation} 
 Z=\frac{\Xbar-\Ybar}{\sqrt{\sigma_{X}^{2}/n+\sigma_{Y}^{2}/m}};
 \end{equation}
-
 the result will have a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution when $H_{0}:\mu_{X}=\mu_{Y}$ is true. 
+#+latex: \end{rem}
 
-\end{rem}
-
-\begin{rem}
+#+latex: \begin{rem}
 Even if the values of $\sigma_{X}$ and $\sigma_{Y}$ are not known, if both $n$ and $m$ are large then we can plug in the sample estimates and the result will have approximately a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution when $H_{0}:\mu_{X}=\mu_{Y}$ is true.
-
 \begin{equation} 
 Z=\frac{\Xbar-\Ybar}{\sqrt{S_{X}^{2}/n+S_{Y}^{2}/m}}.
 \end{equation}
+#+latex: \end{rem}
 
-\end{rem}
-
-\begin{rem}
+#+latex: \begin{rem}
 It is usually important to construct side-by-side boxplots and other visual displays in concert with the hypothesis test. This gives a visual comparison of the samples and helps to identify departures from the test's assumptions -- such as outliers.
-\end{rem}
+#+latex: \end{rem}
 
-\begin{rem}
+#+latex: \begin{rem}
 WATCH YOUR ASSUMPTIONS.
-
 - The normality assumption can be relaxed as long as the population distributions are not highly skewed.
-
 - The equal variance assumption can be relaxed as long as both sample sizes $n$ and $m$ are large. However, if one (or both) samples is small, then the test does not perform well; we should instead use the methods of Chapter \ref{cha:resampling-methods}.
-
-
-\end{rem}
+#+latex: \end{rem}
 
 For a nonparametric alternative to the two-sample $F$ test see Chapter \ref{cha:Nonparametric-Statistics}.
 
@@ -4297,9 +4185,7 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 ** Other Hypothesis Tests
 \label{sec:Other-Hypothesis-Tests}
 
-
 *** Kolmogorov-Smirnov Goodness-of-Fit Test\label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}
-
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -4307,10 +4193,8 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 ks.test(randu$x, "punif")
 #+end_src
 
-
 *** Shapiro-Wilk Normality Test
 \label{sub:Shapiro-Wilk-Normality-Test}
-
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -4322,30 +4206,23 @@ shapiro.test(women$height)
 ** Analysis of Variance
 \label{sec:Analysis-of-Variance}
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 I am thinking 
-
 #+begin_src R :exports both :results output pp
 with(chickwts, by(weight, feed, shapiro.test))
 #+end_src
-
 and
-
 #+begin_src R :exports both :results output pp
 temp <- lm(weight ~ feed, data = chickwts)
 #+end_src
-
 and 
-
 #+begin_src R :exports both :results output pp
 anova(temp)
 #+end_src
 
 Plot for the intuition of between versus within group variation.
 
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig = true, height = 4.5, width = 6>>=
@@ -4360,17 +4237,11 @@ curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 #+end_src
 \par\end{centering}
-
 \caption{Between group versus within group variation\label{fig:Between-versus-within}}
-
 \end{figure}
-
-
-
 
 Plots for the hypothesis tests:
 
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig = true, height = 4.5, width = 6>>=
@@ -4384,11 +4255,12 @@ f <- function(x){dnorm(x, mean = 4.3)/3}
 curve(f, add = TRUE, lwd = 2)
 #+end_src
 \par\end{centering}
-
 \caption{Between group versus within group variation\label{fig:Between-versus-within-2}}
-
 \end{figure}
-%
+
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig = true, height = 4.5, width = 6>>=
@@ -4400,9 +4272,7 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 #+end_src
 \par\end{centering}
-
 \caption{Some \emph{F} plots from the \texttt{HH} package\label{fig:Some-F-plots-HH}}
-
 \end{figure}
 
 
@@ -4411,16 +4281,13 @@ par(old.omd)
 \label{sec:Sample-Size-and-Power}
 
 The power function of a test for a parameter $\theta$ is
-
 \[
 \beta(\theta)=\P_{\theta}(\mbox{Reject }H_{0}),\quad-\infty<\theta<\infty.
 \]
 
 Here are some properties of power functions:
-
 1. $\beta(\theta)\leq\alpha$ for any $\theta\in\Theta_{0}$, and $\beta(\theta_{0})=\alpha$. We interpret this by saying that no matter what value $\theta$ takes
 inside the null parameter space, there is never more than a chance of $\alpha$ of rejecting the null hypothesis. We have controlled the Type I error rate to be no greater than $\alpha$.
-
 2.$\lim_{n\to\infty}\beta(\theta)=1$ for any fixed $\theta\in\Theta_{1}$. In other words, as the sample size grows without bound we are able to detect a nonnull value of $\theta$ with increasing accuracy, no matter how close it lies to the null parameter space. This may appear to be a good thing at first glance, but it often turns out to be a curse, because this means that our Type II error rate grows as the sample size increases. 
 
 
@@ -4428,7 +4295,7 @@ inside the null parameter space, there is never more than a chance of $\alpha$ o
 
 I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
 
-%
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 6, width = 6>>=
@@ -4436,22 +4303,18 @@ library(TeachingDemos)
 power.examp()
 #+end_src
 \par\end{centering}
-
 \caption{Plot of significance level and power\label{fig:power-examp}}
-
-
-~
-
 {\small This graph was generated by the }\texttt{\small power.examp}{\small{} function from the }\texttt{\small TeachingDemos}{\small{} package. The plot corresponds to the hypothesis test $H_{0}:\,\mu=\mu_{0}$ versus $H_{1}:\,\mu=\mu_{1}$ (where $\mu_{0}=0$ and $\mu_{1}=1$, by default) based on a single observation $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$. The top graph is of the $H_{0}$ density while the bottom is of the $H_{1}$ density. The significance level is set at $\alpha=0.05$, the sample size is $n=1$, and the standard deviation is $\sigma=1$. The pink area is the significance level, and the critical value $z_{0.05}\approx1.645$ is marked at the left boundary -- this defines the rejection region. When $H_{0}$ is true, the probability of falling in the rejection region is exactly $\alpha=0.05$. The same rejection region is marked on the bottom graph, and the probability of falling in it (when $H_{1}$  is true) is the blue area shown at the top of the display to be approximately $0.26$. This probability represents the }\emph{\small power}{\small{} to detect a non-null mean value of $\mu=1$. With the command the }\texttt{\small run.power.examp()}{\small{} at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size $n$, the standard deviation $\sigma$, the true difference between the means $\mu_{1}-\mu_{0}$, and the significance level $\alpha$. By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the }\texttt{\small tkrplot}{\small{} package for }\texttt{\small run.power.examp}{\small . }
 \end{figure}
 
 
-\newpage{}
+#+latex: \newpage{}
+
 
 ** Chapter Exercises
 
-\addcontentsline{toc}{section}{Chapter Exercises}
-\setcounter{thm}{0}
+#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
+#+latex: \setcounter{thm}{0}
 
 
 
@@ -4462,7 +4325,6 @@ power.examp()
 
 
 #+latex: \paragraph*{What do I want them to know?}
-
 - basic philosophy of SLR and the regression assumptions
 - point and interval estimation of the model parameters, and how to use it to make predictions
 - point and interval estimation of future observations from the model
@@ -4473,22 +4335,19 @@ power.examp()
 ** Basic Philosophy
 \label{sec:Basic-Philosophy}
 
-Here we have two variables $X$ and $Y$. For our purposes, $X$ is
-not random (so we will write $x$), but $Y$ is random. We believe
-that $Y$ depends in \emph{some} way on $x$. Some typical examples
-of $(x,Y)$ pairs are
+Here we have two variables $X$ and $Y$. For our purposes, $X$ is not random (so we will write $x$), but $Y$ is random. We believe that $Y$ depends in \emph{some} way on $x$. Some typical examples of $(x,Y)$ pairs are
 
 - $x=$ study time and $Y=$ score on a test.
 - $x=$ height and $Y=$ weight.
 - $x=$ smoking frequency and $Y=$ age of first heart attack.
 
 Given information about the relationship between $x$ and $Y$, we would like to \emph{predict} future values of $Y$ for particular values of $x$. This turns out to be a difficult problem[fn:predict], so instead we first tackle an easier problem: we estimate $\E Y$. How can we accomplish this? Well, we know that $Y$ depends somehow on $x,$ so it stands to reason that
-
-[fn:predict] Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''
-
 \begin{equation}
 \E Y=\mu(x),\ \mbox{a function of }x.
 \end{equation}
+
+
+[fn:predict] Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''
 
 But we should be able to say more than that. To focus our efforts we impose some structure on the functional form of $\mu$. For instance, 
 
@@ -4502,42 +4361,39 @@ But we should be able to say more than that. To focus our efforts we impose some
 This helps us in the sense that we concentrate on the estimation of just a few parameters, $\beta_{0}$ and $\beta_{1}$, say, rather than some nebulous function. Our \emph{modus operandi} is simply to perform the random experiment $n$ times and observe the $n$ ordered pairs of data $(x_{1},Y_{1}),\ (x_{2},Y_{2}),\ \ldots,(x_{n},Y_{n})$. We use these $n$ data points to estimate the parameters.
 
 More to the point, there are /three simple linear regression/ (SLR) assumptions}\index{regression assumptions} that will form the basis for the rest of this chapter:
-\begin{assumption}
-We assume that $\mu$ is a linear function of $x$, that is, 
 
+#+latex: \begin{assumption}
+We assume that $\mu$ is a linear function of $x$, that is, 
 \begin{equation}
 \mu(x)=\beta_{0}+\beta_{1}x,
 \end{equation}
+where $\beta_{0}$ and $\beta_{1}$ are unknown constants to be estimated.
+#+latex: \end{assumption}
 
-\textup{\emph{where $\beta_{0}$ and $\beta_{1}$ are unknown constants to be estimated}}\textup{.}
-\end{assumption}
-
-\begin{assumption}
+#+latex: \begin{assumption}
 We further assume that $Y_{i}$ is $\mu(x_{i})$ -- the ``signal'' -- plus some ``error'' (represented by the symbol $\epsilon_{i}$):
-
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
-\end{assumption}
+#+latex: \end{assumption}
 
-\begin{assumption}
+#+latex: \begin{assumption}
 We lastly assume that the errors are i.i.d.~normal with mean 0 and variance $\sigma^{2}$:
-
 \begin{equation}
 \epsilon_{1},\epsilon_{2},\ldots,\epsilon_{n}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma).
 \end{equation}
-\end{assumption}
+#+latex: \end{assumption}
 
-\begin{rem}
+#+latex: \begin{rem}
 We assume both the normality of the errors $\epsilon$ and the linearity of the mean function $\mu$. Recall from Proposition \ref{pro:mvnorm-cond-dist} of Chapter \ref{cha:Multivariable-Distributions} that if $(X,Y)\sim\mathsf{mvnorm}$ then the mean of $Y|x$ is a linear function of $x$. This is not a coincidence. In more advanced classes we study the case that both $X$ and $Y$ are random, and in particular, when they are jointly normally distributed.
-\end{rem}
+#+latex: \end{rem}
+
 
 *** What does it all mean?
 
 See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} $\mu$, which in this display has slope $0.5$ and $y$-intercept 2.5, that is, $\mu(x)=2.5+0.5x$. The intuition is that for each given value of $x$, we observe a random value of $Y$ which is normally distributed with a mean equal to the height of the regression line at that $x$ value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of $x$, namely, $x=1$, $x=2.5$, and $x=4$. Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as $x$ increases[fn:constvar].
 
 [fn:constvar] In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as $x$ gets large or small. We say under those circumstances that the data show /heteroscedasticity/. There are methods to address it, but they fall outside the realm of SLR.
-
  
 \begin{quotation}
 %
@@ -4563,18 +4419,15 @@ segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 \par\end{centering}
-
 \caption{Philosophical foundations of SLR\label{fig:philosophy}}
-
 \end{figure}
-
 \end{quotation}
+
 
 #+latex: \begin{example}
 \label{exa:Speed-and-Stopping}
 
 *Speed and stopping distance of cars.* We will use the data frame =cars=\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
-
 #+begin_src R :exports both :results output pp
 head(cars)
 #+end_src
@@ -4582,20 +4435,17 @@ head(cars)
 The =speed= represents how fast the car was going ($x$) in miles per hour and =dist= ($Y$) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the command =plot(dist ~ speed, data = cars)=. 
 
 
+
 \begin{quotation}
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
 plot(dist ~ speed, data = cars)
 #+end_src
 \par\end{centering}
-
 \caption{Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars}
 data\label{fig:Scatter-cars}}
-
 \end{figure}
-
 \end{quotation}
 
 You can see the output in Figure \ref{fig:Scatter-cars}, which was produced by the following code.
@@ -4615,13 +4465,10 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 \label{sub:point-estimate-mle-slr}
 
 Where is $\mu(x)$? In essence, we would like to ``fit'' a line to the points. But how do we determine a ``good'' line? Is there a /best/ line? We will use maximum likelihood\index{maximum likelihood} to find it. We know:
-
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i},\quad i=1,\ldots,n,
 \end{equation}
-
 where the $\epsilon_{i}$'s are i.i.d.~$\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)$. Thus $Y_{i}\sim\mathsf{norm}(\mathtt{mean}=\beta_{0}+\beta_{1}x_{i},\,\mathtt{sd}=\sigma),\ i=1,\ldots,n$. Furthermore, $Y_{1},\ldots,Y_{n}$ are independent -- but not identically distributed. The likelihood function\index{likelihood function} is:
-
 \begin{alignat}{1}
 L(\beta_{0},\beta_{1},\sigma)= & \prod_{i=1}^{n}f_{Y_{i}}(y_{i}),\\
 = & \prod_{i=1}^{n}(2\pi\sigma^{2})^{-1/2}\exp\left\{ \frac{-(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}\right\} ,\\
@@ -4629,83 +4476,65 @@ L(\beta_{0},\beta_{1},\sigma)= & \prod_{i=1}^{n}f_{Y_{i}}(y_{i}),\\
 \end{alignat}
 
 We take the natural logarithm to get
-
 \begin{equation}
 \ln L(\beta_{0},\beta_{1},\sigma)=-\frac{n}{2}\ln(2\pi\sigma^{2})-\frac{\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}.\label{eq:regML-lnL}
 \end{equation}
 
  We would like to maximize this function of $\beta_{0}$ and $\beta_{1}$. See Appendix \ref{sec:Multivariable-Calculus} which tells us that we should find critical points by means of the partial derivatives. Let us start by differentiating with respect to $\beta_{0}$:
-
 \begin{equation}
 \frac{\partial}{\partial\beta_{0}}\ln L=0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-1),
 \end{equation}
-
 and the partial derivative equals zero when $\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})=0$, that is, when
-
 \begin{equation}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i}=\sum_{i=1}^{n}y_{i}.\label{eq:regML-a}
 \end{equation}
 
 Moving on, we next take the partial derivative of $\ln L$ (Equation \ref{eq:regML-lnL}) with respect to $\beta_{1}$ to get
-
 \begin{alignat}{1}
 \frac{\partial}{\partial\beta_{1}}\ln L=\  & 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\
 = & \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}y_{i}-\beta_{0}x_{i}-\beta_{1}x_{i}^{2}\right),
 \end{alignat}
-
 and this equals zero when the last sum equals zero, that is, when
-
 \begin{equation}
 \beta_{0}\sum_{i=1}^{n}x_{i}+\beta_{1}\sum_{i=1}^{n}x_{i}^{2}=\sum_{i=1}^{n}x_{i}y_{i}.\label{eq:regML-b}
 \end{equation}
 
 Solving the system of equations \ref{eq:regML-a} and \ref{eq:regML-b}
-
 \begin{eqnarray}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 \beta_{0}\sum_{i=1}^{n}x_{i}+\beta_{1}\sum_{i=1}^{n}x_{i}^{2} & = & \sum_{i=1}^{n}x_{i}y_{i}
 \end{eqnarray}
-
 for $\beta_{0}$ and $\beta_{1}$ (in Exercise \ref{xca:find-mles-SLR}) gives
-
 \begin{equation}
 \hat{\beta}_{1}=\frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}\label{eq:regline-slope-formula}
 \end{equation}
-
 and
-
 \begin{equation}
 \hat{\beta}_{0}=\ybar-\hat{\beta}_{1}\xbar.
 \end{equation}
 
 The conclusion? To estimate the mean line 
-
 \begin{equation}
 \mu(x)=\beta_{0}+\beta_{1}x,
 \end{equation}
-
 we use the ``line of best fit''
-
 \begin{equation}
 \hat{\mu}(x)=\hat{\beta}_{0}+\hat{\beta}_{1}x,
 \end{equation}
-
 where $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ are given as above. For notation we will usually write $b_{0}=\hat{\beta_{0}}$ and $b_{1}=\hat{\beta_{1}}$ so that $\hat{\mu}(x)=b_{0}+b_{1}x$.
 
-\begin{rem}
+#+latex: \begin{rem}
 The formula for $b_{1}$ in Equation \ref{eq:regline-slope-formula} gets the job done but does not really make any sense. There are many equivalent formulas for $b_{1}$ that are more intuitive, or at the least are easier to remember. One of the author's favorites is
-
 \begin{equation}
 b_{1}=r\frac{s_{y}}{s_{x}},\label{eq:sample-correlation-formula}
 \end{equation}
-
 where $r$, $s_{y}$, and $s_{x}$ are the sample correlation coefficient and the sample standard deviations of the $Y$ and $x$ data, respectively. See Exercise \ref{xca:show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq:sample-correlation-formula} and Equation \ref{eq:population-slope-slr}.
-\end{rem}
+#+latex: \end{rem}
+
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
-
 #+begin_src R :exports both :results output pp
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
@@ -4723,6 +4552,7 @@ The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respect
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm= (see Figure \ref{fig:Scatter-cars-regline}):
 
 
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4.5, width = 6>>=
@@ -4730,11 +4560,8 @@ plot(dist ~ speed, data = cars, pch = 16)
 abline(coef(cars.lm))
 #+end_src
 \par\end{centering}
-
 \caption{Scatterplot with added regression line for the \texttt{cars} data\label{fig:Scatter-cars-regline}}
-
 \end{figure}
-
 
 <<eval = FALSE>>=
 plot(dist ~ speed, data = cars, pch = 16)
@@ -4746,37 +4573,26 @@ To calculate points on the regression line we may simply plug the desired $x$ va
 
 #+latex: \begin{example}
 \label{exa:regline-cars-interpret}
+
 Using the regression line for the =cars= data:
 
-\begin{enumerate}
-\item What is the meaning of $\mu(60)=\beta_{0}+\beta_{1}(8$)? 
+1. What is the meaning of $\mu(60)=\beta_{0}+\beta_{1}(8$)? 
+   This represents the average stopping distance (in feet) for a car going 8 mph. 
 
-This represents the average stopping distance (in feet) for a car
-going 8\,mph. 
+1. Interpret the slope $\beta_{1}$. 
+   The true slope $\beta_{1}$ represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately SRC_R{round(coef(cars.lm)[2],2)} additional feet to stop for each additional mph increase in speed.
 
-\item Interpret the slope $\beta_{1}$. 
-
-
-The true slope $\beta_{1}$ represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately \Sexpr{round(coef(cars.lm)[2],2)} additional feet to stop for each additional mph increase in speed.
-
-\item Interpret the intercept $\beta_{0}$. 
-
-
-This would represent the mean stopping distance for a car traveling 0\,mph (which our regression line estimates to be \Sexpr{round(coef(cars.lm)[1],2)}). Of course, this interpretation does not make any sense for this example, because a car travelling 0\,mph takes 0\,ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4\,mph. Therefore, if we predict what would happen for slower speeds then we would be \emph{extrapolating}, a dangerous practice which often gives nonsensical results.
-
-\end{enumerate}
+1. Interpret the intercept $\beta_{0}$.
+   This would represent the mean stopping distance for a car traveling 0\,mph (which our regression line estimates to be SRC_R{round(coef(cars.lm)[1],2)}). Of course, this interpretation does not make any sense for this example, because a car travelling 0\,mph takes 0\,ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4\,mph. Therefore, if we predict what would happen for slower speeds then we would be \emph{extrapolating}, a dangerous practice which often gives nonsensical results.
 #+latex: \end{example}
+
 
 *** Point Estimates of the Regression Line
 \label{sub:slr-point-est-regline}
 
 We said at the beginning of the chapter that our goal was to estimate $\mu=\E Y$, and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate $\hat{\mu}$ of $\mu$ when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value $x_{0}$, there are two values we would like to estimate:
-
-
-\begin{enumerate}
-\item the mean value of $Y$ at $x_{0}$, and
-\item a future value of $Y$ at $x_{0}$.
-\end{enumerate}
+1. the mean value of $Y$ at $x_{0}$, and
+1. a future value of $Y$ at $x_{0}$.
 
 The first is a number, $\mu(x_{0})$, and the second is a random variable, $Y(x_{0})$, but our point estimate is the same for both: $\hat{\mu}(x_{0})$.
 
@@ -4784,7 +4600,7 @@ The first is a number, $\mu(x_{0})$, and the second is a random variable, $Y(x_{
 #+latex: \begin{example}
 \label{exa:regline-cars-pe-8mph}
 
-We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8\,mph: $\hat{\mu}(15)=b_{0}+8b_{1}\approx$ \Sexpr{round(coef(cars.lm)[1],2)} $+(8)$ (\Sexpr{round(coef(cars.lm)[2],2)})$\approx13.88$. We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8\,mph. 
+We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8\,mph: $\hat{\mu}(15)=b_{0}+8b_{1}\approx$ \Sexpr{round(coef(cars.lm)[1],2)} $+(8)$ ( SRC_R{round(coef(cars.lm)[2],2)} ) $\approx13.88$. We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8\,mph. 
 #+latex: \end{example}
 
 Note that we actually have observed data for a car traveling 8\,mph; its stopping distance was 16\,ft as listed in the fifth row of the =cars= data:
@@ -4793,11 +4609,11 @@ Note that we actually have observed data for a car traveling 8\,mph; its stoppin
 cars[5, ]
 #+end_src
 
-There is a special name for estimates $\hat{\mu}(x_{0})$ when $x_{0}$ matches an observed value $x_{i}$ from the data set. They are called \emph{fitted values}, they are denoted by $\hat{Y}_{1}$, $\hat{Y}_{2}$, ..., $\hat{Y}_{n}$ (ignoring repetition), and they play an important role in the sections that follow. 
+There is a special name for estimates $\hat{\mu}(x_{0})$ when $x_{0}$ matches an observed value $x_{i}$ from the data set. They are called /fitted values/, they are denoted by $\hat{Y}_{1}$, $\hat{Y}_{2}$, ..., $\hat{Y}_{n}$ (ignoring repetition), and they play an important role in the sections that follow. 
 
 In an abuse of notation we will sometimes write $\hat{Y}$ or $\hat{Y}(x_{0})$ to denote a point on the regression line even when $x_{0}$ does not belong to the original data if the context of the statement obviates any danger of confusion.
 
-We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of $x_{0}$ that fall within the range of the original $x$ data, it is reckless to use $\hat{\mu}$ for point estimates at locations outside that range. Such estimates are usually worthless. \emph{Do not extrapolate} unless there are compelling external reasons, and even then, temper it with a good deal of caution.
+We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of $x_{0}$ that fall within the range of the original $x$ data, it is reckless to use $\hat{\mu}$ for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -4820,29 +4636,23 @@ Note that there were no observed cars that traveled 6\,mph or 21\,mph. Also note
 *** Mean Square Error and Standard Error
 
 To find the MLE of $\sigma^{2}$ we consider the partial derivative
-
 \begin{equation}
 \frac{\partial}{\partial\sigma^{2}}\ln L=\frac{n}{2\sigma^{2}}-\frac{1}{2(\sigma^{2})^{2}}\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2},
 \end{equation}
-
 and after plugging in $\hat{\beta}_{0}$ and $\hat{\beta}_{1}$ and setting equal to zero we get
-
 \begin{equation}
 \hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{\beta}_{0}-\hat{\beta}_{1}x_{i})^{2}=\frac{1}{n}\sum_{i=1}^{n}[y_{i}-\hat{\mu}(x_{i})]^{2}.
 \end{equation}
 
 We write $\hat{Yi}=\hat{\mu}(x_{i})$, and we let $E_{i}=Y_{i}-\hat{Y_{i}}$ be the $i^{\mathrm{th}}$ \emph{residual}. We see 
-
 \begin{equation}
 n\hat{\sigma^{2}}=\sum_{i=1}^{n}E_{i}^{2}=SSE=\mbox{ the sum of squared errors.}\end{equation}
 
 For a point estimate of $\sigma^{2}$ we use the /mean square error/ $S^{2}$ defined by 
-
 \begin{equation}
 S^{2}=\frac{SSE}{n-2},
 \end{equation}
-
-and we estimate $\sigma$ with the /standard error/[fn:MSEse] $S=\sqrt{S^{2}}$.
+and we estimate $\sigma$ with the /standard error/ [fn:MSEse] $S=\sqrt{S^{2}}$.
 
 [fn:MSEse] Be careful not to confuse the mean square error $S^{2}$ with the sample variance $S^{2}$ in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase $s^{2}$ or the bulky $MSE$.
 
@@ -4855,84 +4665,64 @@ The residuals for the model may be obtained with the =residuals= function; we on
 residuals(cars.lm)[1:5]
 #+end_src
 
-In the last section, we calculated the fitted value for $x=8$ and found it to be approximately $\hat{\mu}(8)\approx$\Sexpr{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now, it turns out that there was only one recorded observation at $x=8$, and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was $\mathtt{dist}=16$\,ft for a car with $\mathtt{speed}=8$\,mph. Therefore, the residual should be $E=Y-\hat{Y}$ which is $E\approx16-$\Sexpr{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
+In the last section, we calculated the fitted value for $x=8$ and found it to be approximately $\hat{\mu}(8)\approx$ SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now, it turns out that there was only one recorded observation at $x=8$, and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was $\mathtt{dist}=16$\,ft for a car with $\mathtt{speed}=8$\,mph. Therefore, the residual should be $E=Y-\hat{Y}$ which is $E\approx16-$ SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
-
-The estimate $S$ for $\sigma$ is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be $S\approx\,$\Sexpr{round(summary(cars.lm)$sigma, 2)}, or we can access it directly from the =summary= object.
-
+The estimate $S$ for $\sigma$ is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be $S\approx\,$ SRC_R{round(summary(cars.lm)$sigma, 2)}, or we can access it directly from the =summary= object.
 
 #+begin_src R :exports both :results output pp
 carsumry <- summary(cars.lm)
 carsumry$sigma
 #+end_src
 
+
 *** Interval Estimates of the Parameters
 \label{sub:slr-interval-est-params}
 
 We discussed general interval estimation in Chapter \ref{cha:Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, $b_{1}$ and $b_{0}$.
 
-
 To that end, we can see from Equation \ref{eq:regline-slope-formula} (and it is made clear in Chapter \ref{cha:multiple-linear-regression}) that $b_{1}$ is just a linear combination of normally distributed random variables, so $b_{1}$ is normally distributed too. Further, it can be shown that
-
 \begin{equation}
 b_{1}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{1},\,\mathtt{sd}=\sigma_{b_{1}}\right)
 \end{equation}
-
 where
-
 \begin{equation}
 \sigma_{b_{1}}=\frac{\sigma}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}
 \end{equation}
-
 is called /the standard error of/ $b_{1}$ which unfortunately depends on the unknown value of $\sigma$. We do not lose heart, though, because we can estimate $\sigma$ with the standard error $S$ from the last section. This gives us an estimate $S_{b_{1}}$ for $\sigma_{b_{1}}$ defined by
-
 \begin{equation}
 S_{b_{1}}=\frac{S}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.
 \end{equation}
 
 Now, it turns out that $b_{0}$, $b_{1}$, and $S$ are mutually independent (see the footnote in Section \ref{sub:mlr-interval-est-params}). Therefore, the quantity
-
 \begin{equation}
 T=\frac{b_{1}-\beta_{1}}{S_{b_{1}}}
 \end{equation}
-
 has a $\mathsf{t}(\mathtt{df}=n-2)$ distribution. Therefore, a $100(1-\alpha)%$ confidence interval for $\beta_{1}$ is given by 
-
 \begin{equation}
-b_{1}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{1}}
+b_{1}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{1}.}
 \end{equation}
 
-
 It is also sometimes of interest to construct a confidence interval for $\beta_{0}$ in which case we will need the sampling distribution of $b_{0}$. It is shown in Chapter \ref{cha:multiple-linear-regression} that
-
 \begin{equation}
 b_{0}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{0},\,\mathtt{sd}=\sigma_{b_{0}}\right),
 \end{equation}
-
 where $\sigma_{b_{0}}$ is given by
-
 \begin{equation}
 \sigma_{b_{0}}=\sigma\sqrt{\frac{1}{n}+\frac{\xbar^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}},
 \end{equation}
-
 and which we estimate with the $S_{b_{0}}$ defined by
-
 \begin{equation}
 S_{b_{0}}=S\sqrt{\frac{1}{n}+\frac{\xbar^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\end{equation}
 
 Thus the quantity
-
 \begin{equation}
 T=\frac{b_{0}-\beta_{0}}{S_{b_{0}}}
 \end{equation}
-
 has a $\mathsf{t}(\mathtt{df}=n-2)$ distribution and a $100(1-\alpha)\%$
 confidence interval for $\beta_{0}$ is given by
-
 \begin{equation}
-b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}
+b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}.
 \end{equation}
-
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -4948,7 +4738,7 @@ A <- round(summary(cars.lm)$coef, 3)
 B <- round(confint(cars.lm), 3)
 #+end_src
 
-In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec:Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for $\beta_{1}$ we could use $b_{1}=\ $\Sexpr{A[2,1]} and $S_{b_{1}}=\ $\Sexpr{A[2,2]} together with a $\mathsf{t}_{0.025}(\mathtt{df}=23)$ critical value to calculate $b_{1}\pm\mathsf{t}_{0.025}(\mathtt{df}=23)S_{b_{1}}$.  
+In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec:Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for $\beta_{1}$ we could use $b_{1}=\ $ SRC_R{A[2,1]} and $S_{b_{1}}=\ $ SRC_R{A[2,2]} together with a $\mathsf{t}_{0.025}(\mathtt{df}=23)$ critical value to calculate $b_{1}\pm\mathsf{t}_{0.025}(\mathtt{df}=23)S_{b_{1}}$.  
 
 Or, we could use the =confint= function.
 
@@ -4956,8 +4746,7 @@ Or, we could use the =confint= function.
 confint(cars.lm)
 #+end_src
 
-With 95% confidence, the random interval {[}\Sexpr{B[2,1]}, \Sexpr{B[2,2]}{]}
-covers the parameter $\beta_{1}$.
+With 95% confidence, the random interval [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] covers the parameter $\beta_{1}$.
 
 
 *** Interval Estimates of the Regression Line
@@ -4965,36 +4754,31 @@ covers the parameter $\beta_{1}$.
 
 We have seen how to estimate the coefficients of regression line with both point estimates and confidence intervals. We even saw how to estimate a value $\hat{\mu}(x)$ on the regression line for a given value of $x$, such as $x=15$. 
 
-But how good is our estimate $\hat{\mu}(15)$? How much confidence do we have in \emph{this} estimate? Furthermore, suppose we were going to observe another value of $Y$ at $x=15$. What could we say?
+But how good is our estimate $\hat{\mu}(15)$? How much confidence do we have in /this/ estimate? Furthermore, suppose we were going to observe another value of $Y$ at $x=15$. What could we say?
 
-Intuitively, it should be easier to get bounds on the mean (average) value of $Y$ at $x_{0}$ (called a \emph{confidence interval for the mean value of $Y$ at $x_{0}$}) than it is to get bounds on a future observation of $Y$ (called a \emph{prediction interval for $Y$ at $x_{0}$}). As we shall see, the intuition serves us well and confidence intervals are shorter for the mean value, longer for the individual value.
+Intuitively, it should be easier to get bounds on the mean (average) value of $Y$ at $x_{0}$ -- called a /confidence interval for the mean value of/ $Y$ /at/ $x_{0}$ -- than it is to get bounds on a future observation of $Y$ (called a \emph{prediction interval for $Y$ at $x_{0}$}). As we shall see, the intuition serves us well and confidence intervals are shorter for the mean value, longer for the individual value.
 
 Our point estimate of $\mu(x_{0})$ is of course $\hat{Y}=\hat{Y}(x_{0})$, so for a confidence interval we will need to know $\hat{Y}$'s sampling distribution. It turns out (see Section ) that $\hat{Y}=\hat{\mu}(x_{0})$ is distributed
-
 \begin{equation}
 \hat{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu(x_{0}),\:\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}\right).
 \end{equation}
 
 Since $\sigma$ is unknown we estimate it with $S$ (we should expect the appearance of a $\mathsf{t}(\mathtt{df}=n-2)$ distribution in the near future). 
 
-A $100(1-\alpha)\%$ \emph{confidence interval (CI) for} $\mu(x_{0})$ is given by
-
+A $100(1-\alpha)\%$ /confidence interval (CI) for/ $\mu(x_{0})$ is given by
 \begin{equation}
 \hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\xbar^{2})}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\label{eq:SLR-conf-int-formula}\end{equation}
 
 
 It is time for prediction intervals, which are slightly different. In order to find confidence bounds for a new observation of $Y$ (we will denote it $Y_{\mbox{new}}$) we use the fact that
-
 \begin{equation}
 Y_{\mbox{new}}\sim\mathtt{norm}\left(\mathtt{mean}=\mu(x_{0}),\,\mathtt{sd}=\sigma\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}\right).
 \end{equation}
 
 Of course $\sigma$ is unknown and we estimate it with $S$. Thus, a $100(1-\alpha)\%$ prediction interval (PI) for a future value of $Y$ at $x_{0}$ is given by 
-
 \begin{equation}
 \hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\label{eq:SLR-pred-int-formula}
 \end{equation}
-
 We notice that the prediction interval in Equation \ref{eq:SLR-pred-int-formula} is wider than the confidence interval in Equation \ref{eq:SLR-conf-int-formula}, as we expected at the beginning of the section.
 
 
