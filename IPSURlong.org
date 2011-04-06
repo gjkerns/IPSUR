@@ -4547,7 +4547,7 @@ The first part of the input to the =lm= function, =dist~speed=, is a /model form
 coef(cars.lm)
 #+end_src
 
-The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respectively, are shown above. The regression line is thus given by $\hat{\mu}(\mathtt{speed})=$ \Sexpr{round(coef(cars.lm)[1],2)} $+$ \Sexpr{round(coef(cars.lm)[2],2)}$\mathtt{speed}$.
+The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respectively, are shown above. The regression line is thus given by $\hat{\mu}(\mathtt{speed})=$ SRC_R{round(coef(cars.lm)[1],2)} $+$ SRC_R{round(coef(cars.lm)[2],2)}$\mathtt{speed}$.
 
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm= (see Figure \ref{fig:Scatter-cars-regline}):
 
@@ -4820,11 +4820,10 @@ The type of interval is dictated by the =interval= argument (which is =none= by 
 #+latex: \begin{example}
 Using the =cars= data,
 
-1. Report a point estimate of and a 95\% confidence interval for the
+1. Report a point estimate of and a 95% confidence interval for the
 mean stopping distance for a car travelling 5\,mph.
 
-
-The fitted value for $x=5$ is \Sexpr{carsCI[1, 1]}, so a point estimate would be \Sexpr{carsCI[1, 1]}\,ft. The 95\% CI is given by {[}\Sexpr{carsCI[1, 2]}, \Sexpr{carsCI[1, 3]}{]}, so with 95\% confidence the mean stopping distance lies somewhere between \Sexpr{carsCI[1, 2]}\,ft and \Sexpr{carsCI[1, 3]}\,ft.
+The fitted value for $x=5$ is SRC_R{carsCI[1, 1]}, so a point estimate would be \Sexpr{carsCI[1, 1]}\,ft. The 95% CI is given by {[}\Sexpr{carsCI[1, 2]}, \Sexpr{carsCI[1, 3]}{]}, so with 95% confidence the mean stopping distance lies somewhere between \Sexpr{carsCI[1, 2]}\,ft and \Sexpr{carsCI[1, 3]}\,ft.
 
 
 2. Report a point prediction for and a 95\% prediction interval for the stopping distance of a hypothetical car travelling 21\,mph.
