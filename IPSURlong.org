@@ -5545,7 +5545,6 @@ Most of the results are stated without proof or with only a cursory justificatio
 \label{sec:The-MLR-Model}
 
 The first thing to do is get some better notation. We will write 
-
 \begin{equation}
 \mathbf{Y}_{\mathrm{n}\times1}=
 \begin{bmatrix}y_{1}\\
@@ -5562,31 +5561,23 @@ y_{n}
 \end{equation}
 
 The vector $\mathbf{Y}$ is called the /response vector/ \index{response vector} and the matrix $\mathbf{X}$ is called the /model matrix/ \index{model matrix}. As in Chapter \ref{cha:simple-linear-regression}, the most general assumption that relates $\mathbf{Y}$ to $\mathbf{X}$ is
-
 \begin{equation}
 \mathbf{Y}=\mu(\mathbf{X})+\upepsilon,
 \end{equation}
-
 where $\mu$ is some function (the /signal/ ) and $\upepsilon$ is the /noise/ (everything else). We usually impose some structure on $\mu$ and $\upepsilon$. In particular, the standard multiple linear regression model\index{model!multiple linear regression} assumes
-
 \begin{equation}
 \mathbf{Y}=\mathbf{X}\upbeta+\upepsilon,
 \end{equation}
-
 where the parameter vector $\upbeta$ looks like 
-
 \begin{equation}
 \upbeta_{(\mathrm{p}+1)\times1}=\begin{bmatrix}\beta_{0} & \beta_{1} & \cdots & \beta_{p}\end{bmatrix}^{\mathrm{T}},
 \end{equation}
-
 and the random vector $\upepsilon_{\mathrm{n}\times1}=\begin{bmatrix}\epsilon_{1} & \epsilon_{2} & \cdots & \epsilon_{n}\end{bmatrix}^{\mathrm{T}}$ is assumed to be distributed
-
 \begin{equation}
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right).
 \end{equation}
 
 The assumption on $\upepsilon$ is equivalent to the assumption that $\epsilon_{1}$, $\epsilon_{2}$, ..., $\epsilon_{n}$ are i.i.d.~$\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)$. It is a linear model because the quantity $\mu(\mathbf{X})=\mathbf{X}\upbeta$ is linear in the parameters $\beta_{0}$, $\beta_{1}$,..., $\beta_{p}$. It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
-
 \begin{equation} 
 Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
@@ -5607,7 +5598,9 @@ head(trees)
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
 
-%
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
@@ -5615,9 +5608,7 @@ library(lattice)
 print(splom(trees))
 #+end_src
 \par\end{centering}
-
 \caption{Scatterplot matrix of \texttt{trees} data\label{fig:splom-trees}}
-
 \end{figure}
 
 
@@ -5627,13 +5618,10 @@ splom(trees)
 #+end_src
 
 The dependent (response) variable =Volume= is listed in the first row of the scatterplot matrix. Moving from left to right, we see an approximately linear relationship between =Volume= and the independent (explanatory) variables =Height= and =Girth=. A first guess at a model for these data might be
-
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 \end{equation}
-
 in which case the quantity $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$ would represent the mean value of $Y$ at the point $(x_{1},x_{2})$.
-
 #+latex: \end{example}
 
 
@@ -5648,6 +5636,7 @@ One way to do this is with the \textsf{R} Commander in the =Rcmdr= package \cite
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig:3D-scatterplot-trees}.
 
+
 <<eval = FALSE>>=
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
@@ -5655,7 +5644,6 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 s3d$plane3d(fit)
 #+end_src
 
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
@@ -5680,51 +5668,42 @@ Looking at the graph we see that the data points fall close to a plane in three 
 \label{sub:mlr-parameter-estimates}
 
 We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
-
-
 \begin{equation}
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right),
 \end{equation}
-
 which means that $\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon$ has an $\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right)$ distribution. Therefore, the likelihood function\index{likelihood function} is
-
 \begin{equation}
 L(\upbeta,\sigma)=\frac{1}{2\pi^{n/2}\sigma}\exp\left\{ -\frac{1}{2\sigma^{2}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\right\}.
 \end{equation}
 
 To /maximize/ the likelihood\index{maximum likelihood} in $\upbeta$, we need to /minimize/ the quantity $g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)$. We do this by differentiating $g$ with respect to $\upbeta$. (It may be a good idea to brush up on the material in Appendices \ref{sec:Linear-Algebra} and \ref{sec:Multivariable-Calculus}.) First we will rewrite $g$:
-
 \begin{equation}
 g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-\mathbf{Y}^{\mathrm{T}}\mathbf{X}\upbeta-\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
 \end{equation}
-
 which can be further simplified to $g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-2\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta$ since $\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$ is $1\times1$ and thus equal to its transpose. Now we differentiate to get
-
 \begin{equation}
 \frac{\partial g}{\partial\upbeta}=\mathbf{0}-2\mathbf{X}^{\mathrm{T}}\mathbf{Y}+2\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
 \end{equation}
-
 since $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is symmetric. Setting the derivative equal to the zero vector yields the so called ``normal equations''\index{normal equations}
-
 \begin{equation}
 \mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta=\mathbf{X}^{\mathrm{T}}\mathbf{Y}.
 \end{equation}
 
 In the case that $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is invertible[fn:normeq], we may solve the equation for $\upbeta$ to get the maximum likelihood estimator of $\upbeta$ which we denote by $\mathbf{b}$:
-
-[fn:normeq] We can find solutions of the normal equations even when $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is not of full rank, but the topic falls outside the scope of this book. The interested reader can consult an advanced text such as Rao \cite{Rao1999}.
-
 \begin{equation}
 \mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}.\label{eq:b-formula-matrix}
 \end{equation}
 
-\begin{rem}
-The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
-\end{rem}
 
-\begin{rem}
+[fn:normeq] We can find solutions of the normal equations even when $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is not of full rank, but the topic falls outside the scope of this book. The interested reader can consult an advanced text such as Rao \cite{Rao1999}.
+
+#+latex: \begin{rem}
+The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
+#+latex: \end{rem}
+
+#+latex: \begin{rem}
 We have only found a critical value, and have not actually shown that the critical value is a minimum. We omit the details and refer the interested reader to \cite{Rao1999}.
-\end{rem}
+#+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -5736,7 +5715,6 @@ trees.lm
 #+end_src
 
 We see from the output that for the =trees= data our parameter estimates are $\mathbf{b}=\begin{bmatrix}-58.0 & 4.7 & 0.3\end{bmatrix}$, and consequently our estimate of the mean response is $\hat{\mu}$ given by 
-
 \begin{alignat}{1}
 \hat{\mu}(x_{1},x_{2})= & \ b_{0}+b_{1}x_{1}+b_{2}x_{2},\\
 \approx & -58.0+4.7x_{1}+0.3x_{2}.
@@ -5752,27 +5730,22 @@ head(model.matrix(trees.lm))
 \label{sub:mlr-point-est-regsurface}
 
 The parameter estimates $\mathbf{b}$ make it easy to find the fitted values\index{fitted values}, $\hat{\mathbf{Y}}$. We write them individually as $\hat{Y}_{i}$, $i=1,2,\ldots,n$, and recall that they are defined by
-
 \begin{eqnarray}
 \hat{Y}_{i} & = & \hat{\mu}(x_{1i},x_{2i}),\\
  & = & b_{0}+b_{1}x_{1i}+b_{2}x_{2i},\quad i=1,2,\ldots,n.
 \end{eqnarray}
 
 They are expressed more compactly by the matrix equation
-
 \begin{equation}
 \hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
 \end{equation}
 
 From Equation \ref{eq:b-formula-matrix} we know that $\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$, so we can rewrite
-
 \begin{eqnarray}
 \hat{\mathbf{Y}} & = & \mathbf{X}\left[\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\right],\\
  & = & \mathbf{H}\mathbf{Y},
 \end{eqnarray}
-
 where $\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}$ is appropriately named \emph{the hat matrix}\index{hat matrix} because it ``puts the hat on $\mathbf{Y}$''. The hat matrix is very important in later courses. Some facts about $\mathbf{H}$ are
-
 
 - $\mathbf{H}$ is a symmetric square matrix, of dimension $\mathrm{n}\times\mathrm{n}$.
 - The diagonal entries $h_{ii}$ satisfy $0\leq h_{ii}\leq1$ (compare to Equation \ref{eq:slr-leverage-between}).
@@ -5787,20 +5760,16 @@ Now let us write a column vector $\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}$ t
 2. a prediction for $Y(\mathbf{x}_{0})$, the actual value of a future observation at $\mathbf{x}_{0}$.
 
 We can represent $\hat{Y}(\mathbf{x}_{0})$ by the matrix equation
-
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},\label{eq:mlr-single-yhat-matrix}
 \end{equation}
-
 which is just a fancy way to write
-
 \begin{equation}
 \hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
 \end{equation}
  
 #+latex: \begin{example}
 If we wanted to predict the average volume of black cherry trees that have =Girth = 15=\,in and are =Height = 77=\,ft tall then we would use the estimate 
-
 \begin{alignat*}{1}
 \hat{\mu}(15,\,77)= & -58+4.7(15)+0.3(77),\\
 \approx & 35.6\mbox{\,\ ft}^{3}.
@@ -5840,49 +5809,37 @@ predict(trees.lm, newdata = new)
 #+begin_src R :exports none
 treesFIT <- round(predict(trees.lm, newdata = new), 1)
 #+end_src
+
+
 #+latex: \begin{example}
-Using the =trees=
-data,
-\begin{enumerate}
-\item Report a point estimate of the mean =Volume=
-of a tree of =Girth=
-9.1\,in and =Height=
-69\,ft.
+Using the =trees= data,
+1. Report a point estimate of the mean =Volume= of a tree of =Girth= 9.1\,in and =Height= 69\,ft.
 
-
-The fitted value for $x_{1}=9.1$ and $x_{2}=69$ is \Sexpr{treesFIT[1]}, so a point estimate would be \Sexpr{treesFIT[1]} cubic feet. 
+   The fitted value for $x_{1}=9.1$ and $x_{2}=69$ is \Sexpr{treesFIT[1]}, so a point estimate would be \Sexpr{treesFIT[1]} cubic feet. 
 
 2. Report a point prediction for and a 95\% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5\,in and =Height= 87\,ft.
 
-
-The fitted value for $x_{1}=12.5$ and $x_{2}=87$ is \Sexpr{treesFIT[3]}, so a point prediction for the =Volume= is \Sexpr{treesFIT[3]} cubic feet. 
-
-
+   The fitted value for $x_{1}=12.5$ and $x_{2}=87$ is \Sexpr{treesFIT[3]}, so a point prediction for the =Volume= is \Sexpr{treesFIT[3]} cubic feet. 
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
 \label{sub:mlr-mse-se}
 
 The residuals are given by
-
 \begin{equation}
 \mathbf{E}=\mathbf{Y}-\hat{\mathbf{Y}}=\mathbf{Y}-\mathbf{H}\mathbf{Y}=(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
 
 Now we can use Theorem \ref{thm:mvnorm-dist-matrix-prod} to see that the residuals are distributed
-
 \begin{equation}
 \mathbf{E}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\sigma^{2}(\mathbf{I}-\mathbf{H})),
 \end{equation}
-
 since $(\mathbf{I}-\mathbf{H})\mathbf{X}\upbeta=\mathbf{X}\upbeta-\mathbf{X}\upbeta=\mathbf{0}$ and $(\mathbf{I}-\mathbf{H})\,(\sigma^{2}\mathbf{I})\,(\mathbf{I}-\mathbf{H})^{\mathrm{T}}=\sigma^{2}(\mathbf{I}-\mathbf{H})^{2}=\sigma^{2}(\mathbf{I}-\mathbf{H})$. The sum of squared errors $SSE$ is just
-
 \begin{equation}
 SSE=\mathbf{E}^{\mathrm{T}}\mathbf{E}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})(\mathbf{I}-\mathbf{H})\mathbf{Y}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
 
 Recall that in SLR we had two parameters ($\beta_{0}$ and $\beta_{1}$) in our regression model and we estimated $\sigma^{2}$ with $s^{2}=SSE/(n-2)$. In MLR, we have $p+1$ parameters in our regression model and we might guess that to estimate $\sigma^{2}$ we would use the /mean square error/ $S^{2}$ defined by 
-
 \begin{equation}
 S^{2}=\frac{SSE}{n-(p+1)}.
 \end{equation}
@@ -5904,7 +5861,7 @@ treesumry <- summary(trees.lm)
 treesumry$sigma
 #+end_src
 
-For the =trees= data we find $s\approx$ \Sexpr{round(treesumry$sigma, 3)}.
+For the =trees= data we find $s\approx$ SRC_R{round(treesumry$sigma, 3)}.
 
 
 
@@ -5912,33 +5869,25 @@ For the =trees= data we find $s\approx$ \Sexpr{round(treesumry$sigma, 3)}.
 \label{sub:mlr-interval-est-params}
 
 We showed in Section \ref{sub:mlr-parameter-estimates} that $\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$, which is really just a big matrix -- namely $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}$ -- multiplied by $\mathbf{Y}$. It stands to reason that the sampling distribution of $\mathbf{b}$ would be intimately related to the distribution of $\mathbf{Y}$, which we assumed to be
-
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}\right).
 \end{equation}
 
 Now recall Theorem \ref{thm:mvnorm-dist-matrix-prod} that we said we were going to need eventually (the time is now). That proposition guarantees that
-
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right),\label{eq:distn-b-mlr}
 \end{equation}
-
 since
-
 \begin{equation}
 \E\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\mathbf{X}\upbeta)=\upbeta,
 \end{equation}
-
 and
-
 \begin{equation}
 \mbox{Var}(\mathbf{b})=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\sigma^{2}\mathbf{I})\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1},
 \end{equation}
-
 the first equality following because the matrix $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$ is symmetric.
 
 There is a lot that we can glean from Equation \ref{eq:distn-b-mlr}. First, it follows that the estimator $\mathbf{b}$ is unbiased (see Section \ref{sec:Point-Estimation-1}). Second, the variances of $b_{0}$, $b_{1}$, ..., $b_{n}$ are exactly the diagonal elements of $\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$, which is completely known except for that pesky parameter $\sigma^{2}$. Third, we can estimate the standard error of $b_{i}$ (denoted $S_{b_{i}}$) with the mean square error $S$ (defined in the previous section) multiplied by the corresponding diagonal element of $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$. Finally, given estimates of the standard errors we may construct confidence intervals for $\beta_{i}$ with an interval that looks like
-
 \begin{equation}
 b_{i}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)S_{b_{i}}.
 \end{equation}
@@ -5959,7 +5908,7 @@ confint(trees.lm)
 treesPAR <- round(confint(trees.lm), 1)
 #+end_src
 
-For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95\% confident that the parameter $\beta_{1}$ lies somewhere in the interval {[}\Sexpr{treesPAR[2, 1]}, \Sexpr{treesPAR[2, 2]}{]}.
+For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter $\beta_{1}$ lies somewhere in the interval [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ].
 
 
 
@@ -5967,20 +5916,17 @@ For example, using the calculations above we say that for the regression model =
 
 We saw in Section \ref{sub:mlr-point-est-regsurface} how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
 
-In Equation \ref{eq:mlr-single-yhat-matrix} we wrote $\hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},$ and in Equation \ref{eq:distn-b-mlr} we saw that 
-
+In Equation \ref{eq:mlr-single-yhat-matrix} we wrote $\hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},$ and in Equation \ref{eq:distn-b-mlr} we saw that
 \begin{equation}
-\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right),
+\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
 
 The following is therefore immediate from Theorem \ref{thm:mvnorm-dist-matrix-prod}:
-
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{x}_{0}^{\mathrm{T}}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\right).
 \end{equation}
 
 It should be no surprise that confidence intervals for the mean value of a future observation at the location $\mathbf{x}_{0}=\begin{bmatrix}x_{10} & x_{20} & \ldots & x_{p0}\end{bmatrix}^{\mathrm{T}}$ are given by
-
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
 \end{equation}
@@ -5988,7 +5934,6 @@ It should be no surprise that confidence intervals for the mean value of a futur
 Intuitively, $\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}$ measures the distance of $\mathbf{x}_{0}$ from the center of the data. The degrees of freedom in the Student's $t$ critical value are $n-(p+1)$ because we need to estimate $p+1$ parameters.
 
 Prediction intervals for a new observation at $\mathbf{x}_{0}$ are given by
-
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{1+\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
 \end{equation}
@@ -6024,21 +5969,18 @@ predict(trees.lm, newdata = new, interval = "prediction")
 treesPI <- round(predict(trees.lm, newdata = new, interval = "prediction"), 1)
 #+end_src
 
-As before, the interval type is decided by the =interval= argument and the default confidence level is 95\% (which can be changed with the =level= argument).
+As before, the interval type is decided by the =interval= argument and the default confidence level is 95% (which can be changed with the =level= argument).
 
 #+latex: \begin{example}
 Using the =trees= data, 
 
+1. Report a 95% confidence interval for the mean =Volume= of a tree of =Girth= 9.1\,in and =Height= 69\,ft.
 
-1. Report a 95\% confidence interval for the mean =Volume= of a tree of =Girth= 9.1\,in and =Height= 69\,ft.
+   The 95% CI is given by [ SRC_R{treesCI[1, 2]}, SRC_R{treesCI[1, 3]}{]}, so with 95% confidence the mean =Volume= lies somewhere between SRC_R{treesCI[1, 2]} cubic feet and SRC_R{treesCI[1, 3]} cubic feet.
 
+2. Report a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5\,in and =Height= 87\,ft.
 
-The 95\% CI is given by {[}\Sexpr{treesCI[1, 2]}, \Sexpr{treesCI[1, 3]}{]}, so with 95\% confidence the mean =Volume= lies somewhere between \Sexpr{treesCI[1, 2]} cubic feet and \Sexpr{treesCI[1, 3]} cubic feet.
-
-2. Report a 95\% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5\,in and =Height= 87\,ft.
-
-
-The 95\% prediction interval is given by {[}\Sexpr{treesCI[3, 2]}, \Sexpr{treesCI[3, 3]}{]}, so with 95\% confidence we may assert that the hypothetical =Volume= of a tree of =Girth= 12.5\,in and =Height= 87\,ft would lie somewhere between \Sexpr{treesCI[3, 2]} cubic feet and \Sexpr{treesCI[3, 3]} feet.
+   The 95% prediction interval is given by [ SRC_R{treesCI[3, 2]}, SRC_R{treesCI[3, 3]} ], so with 95% confidence we may assert that the hypothetical =Volume= of a tree of =Girth= 12.5\,in and =Height= 87\,ft would lie somewhere between SRC_R{treesCI[3, 2]} cubic feet and SRC_R{treesCI[3, 3]} feet.
 
 #+latex: \end{example}
 
@@ -6051,32 +5993,25 @@ The 95\% prediction interval is given by {[}\Sexpr{treesCI[3, 2]}, \Sexpr{treesC
 *** Multiple Coefficient of Determination
 
 We saw in Section \ref{sub:mlr-mse-se} that the error sum of squares $SSE$ can be conveniently written in MLR as 
-
 \begin{equation}
 SSE=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.\label{eq:mlr-sse-matrix}
 \end{equation}
 
-
 It turns out that there are equally convenient formulas for the total sum of squares $SSTO$ and the regression sum of squares $SSR$. They are:
-
 \begin{alignat}{1}
 SSTO= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{I}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}\label{eq:mlr-ssto-matrix}
 \end{alignat}
-
 and
-
 \begin{alignat}{1}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.\label{eq:mlr-ssr-matrix}
 \end{alignat}
 
 (The matrix $\mathbf{J}$ is defined in Appendix \ref{sec:Linear-Algebra}.) Immediately from Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} we get the /Anova Equality/
-
 \begin{equation} 
 SSTO=SSE+SSR.
 \end{equation}
 
 (See Exercise \ref{xca:anova-equality}.) We define the /multiple coefficient of determination/ by the formula
-
 \begin{equation} 
 R^{2}=1-\frac{SSE}{SSTO}.
 \end{equation}
@@ -6085,7 +6020,6 @@ R^{2}=1-\frac{SSE}{SSTO}.
 We interpret $R^{2}$ as the proportion of total variation that is explained by the multiple regression model. In MLR we must be careful, however, because the value of $R^{2}$ can be artificially inflated by the addition of explanatory variables to the model, regardless of whether or not the added variables are useful with respect to prediction of the response variable. In fact, it can be proved that the addition of a single explanatory variable to a regression model will increase the value of $R^{2}$, \emph{no matter how worthless} the explanatory variable is. We could model the height of the ocean tides, then add a variable for the length of cheetah tongues on the Serengeti plain, and our $R^{2}$ would inevitably increase. 
 
 This is a problem, because as the philosopher, Occam, once said: ``causes should not be multiplied beyond necessity''. We address the problem by penalizing $R^{2}$ when parameters are added to the model. The result is an /adjusted/ $R^{2}$ which we denote by $\overline{R}^{2}$.
-
 \begin{equation}
 \overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).\end{equation}
 
@@ -6108,13 +6042,11 @@ High values of $R^{2}$ and $\overline{R}^{2}$ such as these indicate that the mo
 \label{sub:mlr-Overall-F-Test}}
 
 Another way to assess the model's utility is to to test the hypothesis
-
 \[
 H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one \ensuremath{\beta_{i}\neq0}}.
 \]
 
 The idea is that if all $\beta_{i}$'s were zero, then the explanatory variables $X_{1},\ldots,X_{p}$ would be worthless predictors for the response variable $Y$. We can test the above hypothesis with the overall $F$ statistic, which in MLR is defined by
-
 \begin{equation}
 F=\frac{SSR/p}{SSE/(n-p-1)}.
 \end{equation}
@@ -6136,27 +6068,21 @@ For the =trees= data, we see that $F=$ \Sexpr{treesumry$fstatistic[1]} with a \e
 \label{sub:mlr-Student's-t-Tests}}
 
 We know that
-
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right)
 \end{equation}
-
 and we have seen how to test the hypothesis $H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0$, but let us now consider the test
-
 \begin{equation}
 H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
 \end{equation}
-
 where $\beta_{i}$ is the coefficient for the $i$$^{\textrm{th}}$ independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting $H_{0}$ if the /p-value/ is small. If $H_{0}$ is rejected, then we conclude that there is a significant relationship between $Y$ and $x_{i}$ /in the regression model/ $Y\sim(x_{1},\ldots,x_{p})$. This last part of the sentence is very important because the significance of the variable $x_{i}$ sometimes depends on the presence of other independent variables in the model[fn:multicoll]. 
 
 [fn:multicoll] In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub:Multicollinearity}.
 
 To test the hypothesis we go to find the sampling distribution of $b_{i},$ the estimator of the corresponding parameter $\beta_{i}$, when the null hypothesis is true. We saw in Section \ref{sub:mlr-interval-est-params} that 
-
 \begin{equation}
 T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 \end{equation}
-
 has a Student's $t$ distribution with $n-(p+1)$ degrees of freedom. (Remember, we are estimating $p+1$ parameters.) Consequently, under the null hypothesis $H_{0}:\beta_{i}=0$ the statistic $t_{i}=b_{i}/S_{b_{i}}$ has a $\mathsf{t}(\mathtt{df}=n-p-1)$ distribution.
 
 
@@ -6179,27 +6105,23 @@ We see from the /p-values/ that there is a significant linear relationship betwe
 In each of the previous sections we assumed that $\mu$ was a linear function of the explanatory variables. For example, in SLR we assumed that $\mu(x)=\beta_{0}+\beta_{1}x$, and in our previous MLR examples we assumed $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$. In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified. 
 
 
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
 plot(Volume ~ Girth, data = trees)
-#+end_src
 \par\end{centering}
-
 \caption{Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees}
 data\label{fig:Scatterplot-Volume-Girth-trees}}
-
 \end{figure}
 
 
 For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
-
 \begin{equation}
 \mu(x_{1})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}.
 \end{equation}
 
 The model associated with this choice of $\mu$ is
-
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon.
 \end{equation}
@@ -6214,10 +6136,9 @@ The regression assumptions are the same. Almost everything indeed is the same. I
 
 There are multiple ways to fit a quadratic model to the variables =Volume= and =Girth= using \textsf{R}.
 
-
 1. One way would be to square the values for =Girth= and save them in a vector =Girthsq=. Next, fit the linear model =Volume ~ Girth + Girthsq=. 
 
-2. A second way would be to use the \emph{insulate} function in \textsf{R}, denoted by =I=:
+2. A second way would be to use the /insulate/ function in \textsf{R}, denoted by =I=:
 
 : Volume ~ Girth + I(Girth^2)
 
@@ -6226,7 +6147,6 @@ The second method is shorter than the first but the end result is the same. And 
 3. A third and ``right'' way to do it is with orthogonal polynomials:
 
 :  Volume ~ poly(Girth, degree = 2)
-
 
 See =?poly= and =?cars= for more information. Note that we can recover the approach in 2 with =poly(Girth, degree = 2, raw = TRUE)=.
 
@@ -6244,31 +6164,28 @@ We see that the $F$ statistic indicates the overall model including =Girth= and 
 <<eval = FALSE>>=
 plot(Volume ~ scale(Girth), data = trees)
 lines(fitted(treesquad.lm) ~ scale(Girth), data = trees)
-#+end_src
+
 
 The plot is shown in Figure \ref{cap:Fitting-the-Quadratic}. Pay attention to the scale on the $x$-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
 #+latex: \end{example}
-%
+
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
 plot(Volume ~ scale(Girth), data = trees)
 lines(fitted(treesquad.lm) ~ scale(Girth), data = trees)
-#+end_src
 \par\end{centering}
-
 \caption{A quadratic model for the \texttt{trees} data\label{cap:Fitting-the-Quadratic}}
-
 \end{figure}
 
-\begin{rem}
+#+latex: \begin{rem}
 When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called \emph{parsimony}. More generally, if the researcher decides to include $x^{m}$ as a term in the model, then (s)he should also include all lower order terms $x$, $x^{2}$, ...,$x^{m-1}$ in the model.
- 
-\end{rem}
+#+latex: \end{rem}
 
 We do estimation/prediction the same way that we did in Section \ref{sub:mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
-
 
 #+begin_src R :exports both :results output pp
 new <- data.frame(Girth = c(9.1, 11.6, 12.5))
@@ -6278,9 +6195,8 @@ predict(treesquad.lm, newdata = new, interval = "prediction")
 
 The predictions and intervals are slightly different from what they were previously. Notice that it was not necessary to rescale the =Girth= prediction data before input to the =predict= function; the model did the rescaling for us automatically.
 
-\begin{rem}
+#+latex: \begin{rem}
 We have mentioned on several occasions that it is important to rescale the explanatory variables for polynomial regression. Watch what happens if we ignore this advice:
-
 
 #+begin_src R :exports both :results output pp
 summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
@@ -6290,7 +6206,7 @@ Now nothing is significant in the model except =Girth^2=. We could delete the =I
 
 In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Statistic} we investigate this issue further.
 
-\end{rem}
+#+latex: \end{rem}
 
 
 ** Interaction
@@ -6301,15 +6217,13 @@ In our model for tree volume there have been two independent variables: =Girth= 
 
 #+latex: \begin{example}
 Perhaps the =Girth= and =Height= of the tree interact to influence the its =Volume=; we would like to investigate whether the model (=Girth= = $x_{1}$ and =Height= = $x_{2}$) 
-
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon
 \end{equation}
-
 would be significantly improved by the model
-
 \begin{equation}
-Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\beta_{1:2}x_{1}x_{2}+\epsilon,\end{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\beta_{1:2}x_{1}x_{2}+\epsilon,
+\end{equation}
 where the subscript $1:2$ denotes that $\beta_{1:2}$ is a coefficient
 of an interaction term between $x{}_{1}$ and $x_{2}$. 
 
@@ -6319,7 +6233,6 @@ of an interaction term between $x{}_{1}$ and $x_{2}$.
 #+latex: \paragraph*{What does it mean?}
 
 Consider the mean response $\mu(x_{1},x_{2})$ as a function of $x_{2}$:
-
 \begin{equation}
 \mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+\beta_{2}x_{2}.
 \end{equation}
@@ -6327,7 +6240,6 @@ Consider the mean response $\mu(x_{1},x_{2})$ as a function of $x_{2}$:
 This is a linear function of $x_{2}$ with slope $\beta_{2}$. As $x_{1}$ changes, the $y$-intercept of the mean response in $x_{2}$ changes, but the slope remains the same. Therefore, the mean response in $x_{2}$ is represented by a collection of parallel lines all with common slope $\beta_{2}$.
 
 Now think about what happens when the interaction term $\beta_{1:2}x_{1}x_{2}$ is included. The mean response in $x_{2}$ now looks like
-
 \begin{equation}
 \mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+(\beta_{2}+\beta_{1:2}x_{1})x_{2}.
 \end{equation}
@@ -6353,8 +6265,7 @@ summary(treesint.lm)
 
 We can see from the output that the interaction term is highly significant. Further, the estimate $b_{1:2}$ is positive. This means that the slope of $\mu(x_{2})$ is steeper for bigger values of =Girth=. Keep in mind: the same interpretation holds for $\mu(x_{1})$; that is, the slope of $\mu(x_{1})$ is steeper for bigger values of =Height=.
 
-For the sake of completeness we calculate confidence intervals for
-the parameters and do prediction as before.
+For the sake of completeness we calculate confidence intervals for the parameters and do prediction as before.
 
 #+begin_src R :exports both :results output pp
 confint(treesint.lm)
@@ -6362,10 +6273,9 @@ new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 predict(treesint.lm, newdata = new, interval = "prediction")
 #+end_src
 
-\begin{rem}
+#+latex: \begin{rem}
 There are two other ways to include interaction terms in model formulas. For example, we could have written =Girth * Height= or even =(Girth + Height)^2= and both would be the same as =Girth + Height + Girth:Height=. 
-
-\end{rem}
+#+latex: \end{rem}
 
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
 
@@ -6375,16 +6285,18 @@ These examples can be generalized to more than two independent variables, say th
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a \emph{factor}. Qualitative variables take values in a set of \emph{levels}, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
 
-\begin{note*}
+#+latex: \begin{note*}
 The =trees= data do not have any qualitative explanatory variables, so we will construct one for illustrative purposes[fn:bin]. We will leave the =Girth= variable alone, but we will replace the variable =Height= by a new variable =Tall= which indicates whether or not the cherry tree is taller than a certain threshold (which for the sake of argument will be the sample median height of 76\,ft). That is, =Tall= will be defined by
+\begin{equation}
+\mathtt{Tall}=
+\begin{cases}
+\mathtt{yes}, & \mbox{if }\mathtt{Height}>76,\\
+\mathtt{no}, & \mbox{if }\mathtt{Height}\leq76.
+\end{cases}
+\end{equation}
+
 
 [fn:bin] This procedure of replacing a continuous variable by a discrete/qualitative one is called /binning/, and is almost /never/ the right thing to do. We are in a bind at this point, however, because we have invested this chapter in the =trees= data and I do not want to switch mid-discussion. I am currently searching for a data set with pre-existing qualitative variables that also conveys the same points present in the trees data, and when I find it I will update this chapter accordingly.
-
-\begin{equation}
-\mathtt{Tall}=\begin{cases}
-\mathtt{yes}, & \mbox{if }\mathtt{Height}>76,\\
-\mathtt{no}, & \mbox{if }\mathtt{Height}\leq76.\end{cases}
-\end{equation}
 
 We can construct =Tall= very quickly in \textsf{R} with the =cut= function:
 
@@ -6394,32 +6306,27 @@ trees$Tall[1:5]
 #+end_src
 
 Note that =Tall= is automatically generated to be a factor with the labels in the correct order. See =?cut= for more. 
-
-\end{note*}
-
+#+latex: \end{note*}
 
 Once we have =Tall=, we include it in the regression model just like we would any other variable. It is handled internally in a special way. Define a ``dummy variable'' =Tallyes= that takes values
-
 \begin{equation}
-\mathtt{Tallyes}=\begin{cases}
+\mathtt{Tallyes}=
+\begin{cases}
 1, & \mbox{if }\mathtt{Tall}=\mathtt{yes},\\
-0, & \mbox{otherwise.}\end{cases}
+0, & \mbox{otherwise.}
+\end{cases}
 \end{equation}
 
 That is, =Tallyes= is an /indicator variable/ which indicates when a respective tree is tall. The model may now be written as 
-
 \begin{equation}
 \mathtt{Volume}=\beta_{0}+\beta_{1}\mathtt{Girth}+\beta_{2}\mathtt{Tallyes}+\epsilon.
 \end{equation}
 
 Let us take a look at what this definition does to the mean response. Trees with =Tall = yes= will have the mean response
-
 \begin{equation}
 \mu(\mathtt{Girth})=(\beta_{0}+\beta_{2})+\beta_{1}\mathtt{Girth},
 \end{equation}
-
 while trees with =Tall = no= will have the mean response
-
 \begin{equation} 
 \mu(\mathtt{Girth})=\beta_{0}+\beta_{1}\mathtt{Girth}.
 \end{equation}
@@ -6444,16 +6351,14 @@ summary(treesdummy.lm)
 
 From the output we see that all parameter estimates are statistically significant and we conclude that the mean response differs for trees with =Tall = yes= and trees with =Tall = no=.
 
-\begin{rem}
+#+latex: \begin{rem}
 We were somewhat disingenuous when we defined the dummy variable =Tallyes= because, in truth, \textsf{R} defines =Tallyes= automatically without input from the user[fn:contrast]. Indeed, the author fit the model beforehand and wrote the discussion afterward with the knowledge of what \textsf{R} would do so that the output the reader saw would match what (s)he had previously read. The way that \textsf{R} handles factors internally is part of a much larger topic concerning /contrasts/, which falls outside the scope of this book. The interested reader should see Neter et al \cite{Neter1996} or Fox \cite{Fox1997} for more. 
-\end{rem}
+#+latex: \end{rem}
 
 [fn:contrast] That is, \textsf{R} by default handles contrasts according to its internal settings which may be customized by the user for fine control. Given that we will not investigate contrasts further in this book it does not serve the discussion to delve into those settings, either. The interested reader should check =?contrasts= for details.
 
-
-\begin{rem}
+#+latex: \begin{rem}
 In general, if an explanatory variable =foo= is qualitative with $n$ levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define $n-1$ indicator variables in the following way:
-
 \begin{eqnarray*}
 \mathtt{foobar2} & = & \begin{cases}
 1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\
@@ -6461,10 +6366,8 @@ In general, if an explanatory variable =foo= is qualitative with $n$ levels =bar
 1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\
 0, & \mbox{otherwise.}\end{cases}
 \end{eqnarray*}
-
 The level =bar1= is represented by $\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0$. We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
-
-\end{rem}
+#+latex: \end{rem}
 
 
 
@@ -6483,7 +6386,6 @@ lines(Fit ~ Girth, data = treesTall[["yes"]])
 lines(Fit ~ Girth, data = treesTall[["no"]])
 
 
-%
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
@@ -6497,9 +6399,7 @@ lines(Fit ~ Girth, data = treesTall[["yes"]])
 lines(Fit ~ Girth, data = treesTall[["no"]])
 #+end_src
 \par\end{centering}
-
 \caption{A dummy variable model for the \texttt{trees} data\label{fig:dummy-variable-trees}}
-
 \end{figure}
 
 
@@ -6513,25 +6413,19 @@ There are other -- shorter -- ways to plot regression lines by groups, namely th
 \label{sec:Partial-F-Statistic}
 
 We saw in Section \ref{sub:mlr-Overall-F-Test} how to test $H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0$ with the overall $F$ statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test $H_{0}:\beta_{i}=0$ that a particular coefficient $\beta_{i}$ is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
-
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
 \end{equation}
-
 where $j\geq1$ and $p\geq2$. Now we wish to test the hypothesis
-
 \begin{equation}
 H_{0}:\beta_{j+1}=\beta_{j+2}=\cdots=\beta_{p}=0
 \end{equation}
-
 versus the alternative 
-
 \begin{equation}
 H_{1}:\mbox{at least one of \ensuremath{\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0}}.
 \end{equation}
 
 The interpretation of $H_{0}$ is that none of the variables $x_{j+1}$, ...,$x_{p}$ is significantly related to $Y$ and the interpretation of $H_{1}$ is that at least one of $x_{j+1}$, ...,$x_{p}$ is significantly related to $Y$. In essence, for this hypothesis test there are two competing models under consideration:
-
 \begin{align}
 \mbox{the full model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}+\epsilon,\\
 \mbox{the reduced model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\epsilon,
@@ -6539,8 +6433,7 @@ The interpretation of $H_{0}$ is that none of the variables $x_{j+1}$, ...,$x_{p
 
 Of course, the full model will always explain the data /better/ than the reduced model, but does the full model explain the data /significantly better/ than the reduced model? This question is exactly what the partial $F$ statistic is designed to answer.
 
-We first calculate $SSE_{f}$, the unexplained variation in the full model, and $SSE_{r}$, the unexplained variation in the reduced model. We base our test on the difference $SSE_{r}-SSE_{f}$ which measures the reduction in unexplained variation attributable to the variables $x_{j+1}$, ..., $x_{p}$. In the full model there are $p+1$ parameters and in the reduced model there are $j+1$ parameters, which gives a difference of $p-j$ parameters (hence degrees of freedom). The partial \emph{F} statistic is 
-
+We first calculate $SSE_{f}$, the unexplained variation in the full model, and $SSE_{r}$, the unexplained variation in the reduced model. We base our test on the difference $SSE_{r}-SSE_{f}$ which measures the reduction in unexplained variation attributable to the variables $x_{j+1}$, ..., $x_{p}$. In the full model there are $p+1$ parameters and in the reduced model there are $j+1$ parameters, which gives a difference of $p-j$ parameters (hence degrees of freedom). The partial /F/ statistic is 
 \begin{equation}
 F=\frac{(SSE_{r}-SSE_{f})/(p-j)}{SSE_{f}/(n-p-1)}.
 \end{equation}
@@ -6565,7 +6458,6 @@ summary(treesfull.lm)
 
 
 In this ill-formed model nothing is significant except =Girth= and =Girth^2=. Let us continue down this path and suppose that we would like to try a reduced model which contains nothing but =Girth= and =Girth^2= (not even an =Intercept=). Our two models are now
-
 \begin{align*} 
 \mbox{the full model:} & \quad Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\beta_{3}x_{2}+\beta_{4}x_{2}^{2}+\epsilon,\\
 \mbox{the reduced model:} & \quad Y=\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon,
@@ -6580,20 +6472,18 @@ treesreduced.lm <- lm(Volume ~ -1 + Girth + I(Girth^2), data = trees)
 
 To delete the intercept from the model we used =-1= in the model formula. Next we compare the two models with the =anova= function. The convention is to list the models from smallest to largest.
 
-
 #+begin_src R :exports both :results output pp
 anova(treesreduced.lm, treesfull.lm)
 #+end_src
 
 We see from the output that the complete model is highly significant compared to the model that does not incorporate =Height= or the =Intercept=. We wonder (with our tongue in our cheek) if the =Height^2= term in the full model is causing all of the trouble. We will fit an alternative reduced model that only deletes =Height^2=. 
 
-
 #+begin_src R :exports both :results output pp
 treesreduced2.lm <- lm(Volume ~ Girth + I(Girth^2) + Height, data = trees)
 anova(treesreduced2.lm, treesfull.lm)
 #+end_src
 
-In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial $F$ test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are \emph{exactly} the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
+In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial $F$ test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are /exactly/ the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
 
 #+latex: \end{example}
 
@@ -6604,42 +6494,33 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 
 We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
-\begin{description}
-\item [{Shapiro-Wilk,~Breusch-Pagan,~Durbin-Watson:}] unchanged from
-SLR, but we are now equipped to talk about the Shapiro-Wilk test statistic
-for the residuals. It is defined by the formula 
+- Shapiro-Wilk, Breusch-Pagan, Durbin-Watson: :: unchanged from SLR, but we are now equipped to talk about the Shapiro-Wilk test statistic for the residuals. It is defined by the formula 
+   \begin{equation}
+   W=\frac{\mathbf{a}^{\mathrm{T}}\mathbf{E}^{\ast}}{\mathbf{E}^{\mathrm{T}}\mathbf{E}},
+   \end{equation}
+   where $\mathbf{E}^{\ast}$ is the sorted residuals and $\mathbf{a}_{1\times\mathrm{n}}$ is defined by 
+   \begin{equation}
+   \mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
+   \end{equation}
+   where $\mathbf{m}_{\mathrm{n}\times1}$ and $\mathbf{V}_{\mathrm{n}\times\mathrm{n}}$ are the mean and covariance matrix, respectively, of the order statistics from an $\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)$ distribution. 
 
-\begin{equation}
-W=\frac{\mathbf{a}^{\mathrm{T}}\mathbf{E}^{\ast}}{\mathbf{E}^{\mathrm{T}}\mathbf{E}},
-\end{equation}
+- Leverages: :: are defined to be the diagonal entries of the hat matrix $\mathbf{H}$ (which is why we called them $h_{ii}$ in Section \ref{sub:mlr-point-est-regsurface}). The sum of the leverages is $\mbox{tr}(\mathbf{H})=p+1$. One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is $2(p+1)/n$, and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
 
-where $\mathbf{E}^{\ast}$ is the sorted residuals and $\mathbf{a}_{1\times\mathrm{n}}$ is defined by 
+- Standardized residuals: :: unchanged. Considered extreme if $|R_{i}|>2$. 
 
-\begin{equation}
-\mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
-\end{equation}
+- Studentized residuals: :: compared to a $\mathsf{t}(\mathtt{df}=n-p-2)$ distribution.  
 
-where $\mathbf{m}_{\mathrm{n}\times1}$ and $\mathbf{V}_{\mathrm{n}\times\mathrm{n}}$ are the mean and covariance matrix, respectively, of the order statistics from an $\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)$ distribution. 
+- DFBETAS: :: The formula is generalized to
+   \begin{equation}
+   (DFBETAS)_{j(i)}=\frac{b_{j}-b_{j(i)}}{S_{(i)}\sqrt{c_{jj}}},\quad j=0,\ldots p,\ i=1,\ldots,n,
+   \end{equation}
+   where $c_{jj}$ is the $j^{\mathrm{th}}$ diagonal entry of $(\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}$. Values larger than one for small data sets or $2/\sqrt{n}$ for large data sets should be investigated.
 
-\item [{Leverages:}] are defined to be the diagonal entries of the hat matrix $\mathbf{H}$ (which is why we called them $h_{ii}$ in Section \ref{sub:mlr-point-est-regsurface}). The sum of the leverages is $\mbox{tr}(\mathbf{H})=p+1$. One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is $2(p+1)/n$, and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
+- DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
 
-\item [{Standardized~residuals:}] unchanged. Considered extreme if $|R_{i}|>2$. 
+- Cook's D: :: compared to an $\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)$ distribution. Observations falling higher than the 50$^{\textrm{th}}$ percentile are extreme. 
 
-\item [{Studentized~residuals:}] compared to a $\mathsf{t}(\mathtt{df}=n-p-2)$ distribution.  
 
-\item [{$DFBETAS$:}] The formula is generalized to
-
-\begin{equation}
-(DFBETAS)_{j(i)}=\frac{b_{j}-b_{j(i)}}{S_{(i)}\sqrt{c_{jj}}},\quad j=0,\ldots p,\ i=1,\ldots,n,
-\end{equation}
-
-where $c_{jj}$ is the $j^{\mathrm{th}}$ diagonal entry of $(\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}$. Values larger than one for small data sets or $2/\sqrt{n}$ for large data sets should be investigated.
-
-\item [{$DFFITS$:}] unchanged. Larger than one in absolute value is considered extreme.
-
-\item [{Cook's~$D$:}] compared to an $\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)$ distribution. Observations falling higher than the 50$^{\textrm{th}}$ percentile are extreme. 
-
-\end{description}
 
 Note that plugging the value $p=1$ into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
@@ -6651,25 +6532,19 @@ Note that plugging the value $p=1$ into the formulas will recover all of the one
 *** Nonlinear Regression
 
 We spent the entire chapter talking about the =trees= data, and all of our models looked like =Volume ~ Girth + Height= or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is $V=lwh$ and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
-
 \begin{equation}
 V=\pi r^{2}h\quad\mbox{or}\quad V=4\pi dh,
 \end{equation}
-
 where $r$ and $d$ represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for $\mu$ might be
-
 \begin{equation}
 \mu(x_{1},x_{2})=\beta_{0}x_{1}^{\beta_{1}}x_{2}^{\beta_{2}},\label{eq:trees-nonlin-reg}
 \end{equation}
-
 where $\beta_{1}$ and $\beta_{2}$ are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
 
 How can we fit this model? The model is not linear in the parameters any more, so our linear regression methods will not work... or will they? In the =trees= example we may take the logarithm of both sides of Equation \ref{eq:trees-nonlin-reg} to get
-
 \begin{equation}
 \mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
 \end{equation}
-
 and this new model $\mu^{\ast}$ is linear in the parameters $\beta_{0}^{\ast}=\ln\beta_{0}$, $\beta_{1}^{\ast}=\beta_{1}$ and $\beta_{2}^{\ast}=\beta_{2}$. We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
 
 #+begin_src R :exports both :results output pp
@@ -6699,20 +6574,14 @@ The predictions and intervals are slightly different from those calculated earli
 *** Real Nonlinear Regression
 
 We saw with the =trees= data that a nonlinear model might be more appropriate for the data based on theoretical considerations, and we were lucky because the functional form of $\mu$ allowed us to take logarithms to transform the nonlinear model to a linear one. The same trick will not work in other circumstances, however. We need techniques to fit general models of the form
-
 \begin{equation}
 \mathbf{Y}=\mu(\mathbf{X})+\epsilon,
 \end{equation}
-
 where $\mu$ is some crazy function that does not lend itself to linear transformations.
 
 There are a host of methods to address problems like these which are studied in advanced regression classes. The interested reader should see Neter \emph{et al} \cite{Neter1996} or Tabachnick and Fidell \cite{Tabachnick2006}. 
 
-It turns out that John Fox has posted an Appendix to his book \cite{Fox2002} which discusses some of the methods and issues associated with nonlinear regression; see 
-
-\begin{center}
-\url{http://cran.r-project.org/doc/contrib/Fox-Companion/appendix.html}
-\par\end{center}
+It turns out that John Fox has posted an Appendix to his book \cite{Fox2002} which discusses some of the methods and issues associated with nonlinear regression; see [[http://cran.r-project.org/doc/contrib/Fox-Companion/appendix.html][here]] for more.
 
 Here is an example of how it works, based on a question from R-help.
 
@@ -6731,29 +6600,21 @@ summary(acc.nls)
 *** Multicollinearity
 \label{sub:Multicollinearity}
 
-A multiple regression model exhibits \emph{multicollinearity} when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the $R^{2}$ of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
+A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the $R^{2}$ of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 
 Multicollinearity is a problem because it causes instability in the regression model. The instability is a consequence of redundancy in the explanatory variables: a high $R^{2}$ indicates a strong dependence between the selected independent variable and the others. The redundant information inflates the variance of the parameter estimates which can cause them to be statistically insignificant when they would have been significant otherwise. To wit, multicollinearity is usually measured by what are called /variance inflation factors/.
 
 Once multicollinearity has been diagnosed there are several approaches to remediate it. Here are a couple of important ones. 
 
-\begin{description}
+- Principal Components Analysis. :: This approach casts out two or more of the original explanatory variables and replaces them with new variables, derived from the original ones, that are by design uncorrelated with one another. The redundancy is thus eliminated and we may proceed as usual with the new variables in hand. Principal Components Analysis is important for other reasons, too, not just for fixing multicollinearity problems.
 
-\item [{Principal~Components~Analysis.}] This approach casts out two or more of the original explanatory variables and replaces them with new variables, derived from the original ones, that are by design uncorrelated with one another. The redundancy is thus eliminated and we may proceed as usual with the new variables in hand. Principal Components Analysis is important for other reasons, too, not just for fixing multicollinearity problems.
-
-\item [{Ridge~Regression.}] The idea of this approach is to replace the original parameter estimates with a different type of parameter estimate which is more stable under multicollinearity. The estimators are not found by ordinary least squares but rather a different optimization procedure which incorporates the variance inflation factor information. 
-
-\end{description}
+- Ridge Regression. :: The idea of this approach is to replace the original parameter estimates with a different type of parameter estimate which is more stable under multicollinearity. The estimators are not found by ordinary least squares but rather a different optimization procedure which incorporates the variance inflation factor information. 
 
 We decided to omit a thorough discussion of multicollinearity because we are not equipped to handle the mathematical details. Perhaps the topic will receive more attention in a later edition.
 
-\begin{itemize}
-\item What to do when data are not normal
+- What to do when data are not normal
+   - Bootstrap (see Chapter \ref{cha:resampling-methods}).
 
-\begin{itemize}
-\item Bootstrap (see Chapter \ref{cha:resampling-methods}).
-\end{itemize}
-\end{itemize}
 
 
 *** Akaike's Information Criterion
@@ -6762,20 +6623,22 @@ We decided to omit a thorough discussion of multicollinearity because we are not
 AIC=-2\ln L+2(p+1)
 \]
 
-
-\newpage{}
+#+latex: \newpage{}
 
 ** Chapter Exercises
 
-\addcontentsline{toc}{section}{Chapter Exercises}
-\setcounter{thm}{0}
-\begin{xca}
-\label{xca:anova-equality}Use Equations \ref{eq:mlr-sse-matrix},
-\ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the
-Anova Equality:\[
-SSTO=SSE+SSR.\]
+#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
+#+latex: \setcounter{thm}{0}
 
-\end{xca}
+#+latex: \begin{xca}
+\label{xca:anova-equality}
+Use Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the Anova Equality:
+\[
+SSTO=SSE+SSR.
+\]
+#+latex: \end{xca}
+
+
 
 
 
@@ -6797,48 +6660,37 @@ I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} an
 ** Introduction
 \label{sec:Introduction-Resampling}
 
-\begin{description}
+-  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, \emph{e.g.}, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
-\item [{Classical~question}] Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, \emph{e.g.}, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95\% confidence, the true population mean is greater than zero".
+- Problem :: Unfortunately, in most cases the sampling distribution is /unknown/. Thus, in the past, in efforts to say something useful, statisticians have been obligated to place some restrictive assumptions on the underlying population. For example, if we suppose that the population has a normal distribution, then we can say that the distribution of $\Xbar$ is normal, too, with the same mean (and a smaller standard deviation). It is then easy to draw conclusions, make inferences, and go on about our business. 
 
-\item [{Problem}] Unfortunately, in most cases the sampling distribution is /unknown/. Thus, in the past, in efforts to say something useful, statisticians have been obligated to place some restrictive assumptions on the underlying population. For example, if we suppose that the population has a normal distribution, then we can say that the distribution of $\Xbar$ is normal, too, with the same mean (and a smaller standard deviation). It is then easy to draw conclusions, make inferences, and go on about our business. 
-
-\item [{Alternative}] We don't know what the underlying population distributions is, so let us \emph{estimate} it, just like we would with any other parameter. The statistic we use is the \emph{empirical CDF}, that is, the function that places mass $1/n$ at each of the observed data points $x_{1},\ldots,x_{n}$ (see Section \ref{sec:empirical-distribution}). As the sample size increases, we would expect the approximation to get better and better (with i.i.d.~observations, it does, and there is a wonderful theorem by Glivenko and Cantelli that proves it). And now that we have an (estimated) population distribution, it is easy to find the sampling distribution of any statistic we like: just \textbf{sample} from the empirical CDF many, many times, calculate the statistic each time, and make a histogram. Done! Of course, the number of samples needed to get a representative histogram is prohibitively large... human beings are simply too slow (and clumsy) to do this tedious procedure.\\
+- Alternative :: We don't know what the underlying population distributions is, so let us /estimate/ it, just like we would with any other parameter. The statistic we use is the /empirical CDF/, that is, the function that places mass $1/n$ at each of the observed data points $x_{1},\ldots,x_{n}$ (see Section \ref{sec:empirical-distribution}). As the sample size increases, we would expect the approximation to get better and better (with i.i.d. observations, it does, and there is a wonderful theorem by Glivenko and Cantelli that proves it). And now that we have an (estimated) population distribution, it is easy to find the sampling distribution of any statistic we like: just *sample* from the empirical CDF many, many times, calculate the statistic each time, and make a histogram. Done! Of course, the number of samples needed to get a representative histogram is prohibitively large... human beings are simply too slow (and clumsy) to do this tedious procedure.
 
 Fortunately, computers are very skilled at doing simple, repetitive tasks very quickly and accurately. So we employ them to give us a reasonable idea about the sampling distribution of our statistic, and we use the generated sampling distribution to guide our inferences and draw our conclusions. If we would like to have a better approximation for the sampling distribution (within the confines of the information contained in the original sample), we merely tell the computer to sample more. In this (restricted) sense, we are limited only by our current computational speed and pocket book.
 
 
-\end{description}
-
 In short, here are some of the benefits that the advent of resampling methods has given us:
 
-\begin{description}
-\item [{Fewer~assumptions.}] We are no longer required to assume the population is normal or the sample size is large (though, as before, the larger the sample the better). 
+- Fewer assumptions. :: We are no longer required to assume the population is normal or the sample size is large (though, as before, the larger the sample the better). 
 
-\item [{Greater~accuracy.}] Many classical methods are based on rough upper bounds or Taylor expansions. The bootstrap procedures can be iterated long enough to give results accurate to several decimal places, often beating classical approximations.  
+- Greater accuracy. :: Many classical methods are based on rough upper bounds or Taylor expansions. The bootstrap procedures can be iterated long enough to give results accurate to several decimal places, often beating classical approximations.  
 
-\item [{Generality.}] Resampling methods are easy to understand and apply to a large class of seemingly unrelated procedures. One no longer needs to memorize long complicated formulas and algorithms.\end{description} 
+- Generality. :: Resampling methods are easy to understand and apply to a large class of seemingly unrelated procedures. One no longer needs to memorize long complicated formulas and algorithms.
 
-\begin{rem}
-Due to the special structure of the empirical CDF, to get an i.i.d.~sample we just need to take a random sample of size $n$, with replacement, from the observed data $x_{1},\ldots,x_{n}$. Repeats are expected and acceptable. Since we already sampled to get the original data, the term /resampling/ is used to describe the procedure. 
-\end{rem}
+#+latex: \begin{rem}
+Due to the special structure of the empirical CDF, to get an i.i.d. sample we just need to take a random sample of size $n$, with replacement, from the observed data $x_{1},\ldots,x_{n}$. Repeats are expected and acceptable. Since we already sampled to get the original data, the term /resampling/ is used to describe the procedure.
+#+latex: \end{rem}
 
 
 #+latex: \paragraph*{General bootstrap procedure.}
 
 The above discussion leads us to the following general procedure to approximate the sampling distribution of a statistic $S=S(x_{1},x_{2},\ldots,x_{n})$ based on an observed simple random sample $\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})$ of size $n$: 
 
-\begin{enumerate}
-\item Create many many samples $\mathbf{x}_{1}^{\ast},\ldots,\mathbf{x}_{M}^{\ast}$,
-called \emph{resamples}, by sampling with replacement from the data. 
-\item Calculate the statistic of interest $S(\mathbf{x}_{1}^{\ast}),\ldots,S(\mathbf{x}_{M}^{\ast})$
-for each resample. The distribution of the resample statistics is
-called a \emph{bootstrap distribution}. 
-\item The bootstrap distribution gives information about the sampling distribution
-of the original statistic $S$. In particular, the bootstrap distribution
-gives us some idea about the center, spread, and shape of the sampling
-distribution of $S$.
-\end{enumerate}
+1. Create many many samples $\mathbf{x}_{1}^{\ast},\ldots,\mathbf{x}_{M}^{\ast}$, called /resamples/, by sampling with replacement from the data. 
+
+1. Calculate the statistic of interest $S(\mathbf{x}_{1}^{\ast}),\ldots,S(\mathbf{x}_{M}^{\ast})$ for each resample. The distribution of the resample statistics is called a /bootstrap distribution/.
+ 
+1. The bootstrap distribution gives information about the sampling distribution of the original statistic $S$. In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of $S$.
 
 
 
@@ -6850,8 +6702,7 @@ Since the bootstrap distribution gives us information about a statistic's sampli
 #+latex: \begin{example}
 \label{exa:Bootstrap-se-mean}
 
-*Standard error of the mean.*
-In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$.  
+*Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$.  
 
 Of course, we do not really need a bootstrap distribution here because from Section \ref{sec:sampling-from-normal-dist} we know that $\Xbar\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})$, but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
 
@@ -6863,22 +6714,19 @@ resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
 #+end_src
 
-%
+
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE)
-#+end_src
 \par\end{centering}
-
 \caption{Bootstrapping the standard error of the mean, simulated data\label{fig:Bootstrap-se-mean}}
-
-
 {\small ~}{\small \par}
-
 {\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\xbar$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\Xbar$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
 \end{figure}
+
 
 A histogram of the 1000 values of $\xbar$ is shown in Figure \ref{fig:Bootstrap-se-mean}, and was produced by the following code.
 
@@ -6897,7 +6745,7 @@ mean(xbarstar) - mean(srs)
 
 #+latex: \end{example}
 
-Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called \emph{bootstrap estimate of bias}. Since the estimate is so small we would expect our original statistic ($\Xbar$) to have small bias, but this is no surprise to us because we already knew from Section \ref{sub:simple-random-samples} that $\Xbar$ is an unbiased estimator of the population mean.
+Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called /bootstrap estimate of bias/. Since the estimate is so small we would expect our original statistic ($\Xbar$) to have small bias, but this is no surprise to us because we already knew from Section \ref{sub:simple-random-samples} that $\Xbar$ is an unbiased estimator of the population mean.
 
 Now back to our original problem, we would like to estimate the standard error of $\Xbar$. Looking at the histogram, we see that the spread of the bootstrap distribution is similar to the spread of the sampling distribution. Therefore, it stands to reason that we could estimate the standard error of $\Xbar$ with the sample standard deviation of the resample statistics. Let us try and see.
 
@@ -6907,19 +6755,16 @@ sd(xbarstar)
 
 We know from theory that the true standard error is $1/\sqrt{25}=0.20$. Our bootstrap estimate is not very far from the theoretical value. 
 
-
-\begin{rem}
+#+latex: \begin{rem}
 What would happen if we take more resamples? Instead of 1000 resamples, we could increase to, say, 2000, 3000, or even 4000... would it help? The answer is both yes and no. Keep in mind that with resampling methods there are two sources of randomness: that from the original sample, and that from the subsequent resampling procedure. An increased number of resamples would reduce the variation due to the second part, but would do nothing to reduce the variation due to the first part.
 
 We only took an original sample of size $n=25$, and resampling more and more would never generate more information about the population than was already there. In this sense, the statistician is limited by the information contained in the original sample. 
-
-\end{rem}
+#+latex: \end{rem}
 
 #+latex: \begin{example}
 \label{exa:Bootstrap-se-median}
 
-*Standard error of the median.*
-We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
+*Standard error of the median.* We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
 
 #+begin_src R :exports both :results output pp
 resamps <- replicate(1000, sample(rivers, 141, TRUE), simplify = FALSE)
@@ -6927,22 +6772,18 @@ medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
 #+end_src
 
-%
+
 \begin{figure}
 \begin{centering}
 <<echo = FALSE, fig=true, height = 4, width = 6>>=
 hist(medstar, breaks = 40, prob = TRUE)
-#+end_src
 \par\end{centering}
-
 \caption{Bootstrapping the standard error of the median for the \texttt{rivers}
 data\label{fig:Bootstrapping-se-median}}
-
 \end{figure}
 
 
 The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced by the following code.
-
 
 #+begin_src R :eval never
 hist(medstar, breaks = 40, prob = TRUE)
@@ -6981,23 +6822,17 @@ boot(data = rivers, statistic = median_fun, R = 1000)
 
 We notice that the output from both methods of estimating the standard errors produced similar results. In fact, the =boot= procedure is to be preferred since it invisibly returns much more information (which we will use later) than our naive script and it is much quicker in its computations.
 
-
-\begin{rem}
-
+#+latex: \begin{rem}
 Some things to keep in mind about the bootstrap:
 
+- For many statistics, the bootstrap distribution closely resembles the sampling distribution with respect to spread and shape. However, the bootstrap will not have the same center as the true sampling distribution. While the sampling distribution is centered at the population mean (plus any bias), the bootstrap distribution is centered at the original value of the statistic (plus any bias). The =boot= function gives an empirical estimate of the bias of the statistic as part of its output. 
 
-\begin{itemize}
+- We tried to estimate the standard error, but we could have (in principle) tried to estimate something else. Note from the previous remark, however, that it would be useless to estimate the population mean $\mu$ using the bootstrap since the mean of the bootstrap distribution is the observed $\xbar$.  
 
-\item For many statistics, the bootstrap distribution closely resembles the sampling distribution with respect to spread and shape. However, the bootstrap will not have the same center as the true sampling distribution. While the sampling distribution is centered at the population mean (plus any bias), the bootstrap distribution is centered at the original value of the statistic (plus any bias). The =boot= function gives an empirical estimate of the bias of the statistic as part of its output. 
+- You don't get something from nothing. We have seen that we can take a random sample from a population and use bootstrap methods to get a very good idea about standard errors, bias, and the like. However, one must not get lured into believing that by doing some random resampling somehow one gets more information about the parameters than that which was contained in the original sample. Indeed, there is some uncertainty about the parameter due to the randomness of the original sample, and there is even more uncertainty introduced by resampling. One should think of the bootstrap as just another estimation method, nothing more, nothing less.
 
+#+latex: \end{rem}
 
-\item We tried to estimate the standard error, but we could have (in principle) tried to estimate something else. Note from the previous remark, however, that it would be useless to estimate the population mean $\mu$ using the bootstrap since the mean of the bootstrap distribution is the observed $\xbar$.  
-
-\item You don't get something from nothing. We have seen that we can take a random sample from a population and use bootstrap methods to get a very good idea about standard errors, bias, and the like. However, one must not get lured into believing that by doing some random resampling somehow one gets more information about the parameters than that which was contained in the original sample. Indeed, there is some uncertainty about the parameter due to the randomness of the original sample, and there is even more uncertainty introduced by resampling. One should think of the bootstrap as just another estimation method, nothing more, nothing less.
-
-\end{itemize}
-\end{rem}
 
 
 
@@ -7016,7 +6851,6 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 
 *Percentile interval for the expected value of the median.* We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
 
-
 #+begin_src R :exports both :results output pp
 btsamps <- replicate(2000, sample(stack.loss, 21, TRUE), simplify = FALSE)
 thetast <- sapply(btsamps, median, simplify = TRUE)
@@ -7028,9 +6862,7 @@ quantile(thetast, c(0.025, 0.975))
 #+latex: \end{example}
 
 #+latex: \begin{example}
-*Confidence interval for expected value of the median, second try.* 
-
-Now we will do it the right way with the =boot= function.
+*Confidence interval for expected value of the median, second try.*  Now we will do it the right way with the =boot= function.
 
 #+begin_src R :exports both :results output pp
 library(boot)
@@ -7041,20 +6873,17 @@ boot.ci(med_boot, type = c("perc", "norm", "bca"))
 
 #+latex: \end{example}
 
+
 *** Student's $t$ intervals (``normal intervals'')
 
 The idea is to use confidence intervals that we already know and let the bootstrap help us when we get into trouble. We know that a $100(1-\alpha)\%$ confidence interval for the mean of a $SRS(n)$ from a normal distribution is 
-
 \begin{equation} 
 \Xbar\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}},
 \end{equation} 
-
 where $\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)$ is the appropriate critical value from Student's $t$ distribution, and we remember that an estimate for the standard error of $\Xbar$ is $S/\sqrt{n}$. Of course, the estimate for the standard error will change when the underlying population distribution is not normal, or when we use a statistic more complicated than $\Xbar$. In those situations the bootstrap will give us quite reasonable estimates for the standard error. And as long as the sampling distribution of our statistic is approximately bell-shaped with small bias, the interval 
-
 \begin{equation}
 \mbox{statistic}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)*\mathrm{SE}(\mbox{statistic})
 \end{equation}
-
  will have approximately $100(1-\alpha)\%$ confidence of containing $\E(\mathrm{statistic})$. 
 
 #+latex: \begin{example}
@@ -7063,30 +6892,22 @@ We will use the t-interval method to find the bootstrap CI for the median. We ha
 
 We see that, considering the scale of the data, the confidence intervals compare with each other quite well.
 
-
-\begin{rem}
+#+latex: \begin{rem}
 We have seen two methods for bootstrapping confidence intervals for a statistic. Which method should we use? If the bias of the bootstrap distribution is small and if the distribution is close to normal, then the percentile and $t$-intervals will closely agree. If the intervals are noticeably different, then it should be considered evidence that the normality and bias conditions are not met. In this case, /neither/ interval should be used.
-\end{rem}
+#+latex: \end{rem}
 
-\begin{itemize}
-\item $BC_{a}$: bias-corrected and accelerated
+- $BC_{a}$: bias-corrected and accelerated
+   - transformation invariant
+   - more correct and accurate
+   - not monotone in coverage level?
 
-\begin{itemize}
-\item transformation invariant
-\item more correct and accurate
-\item not monotone in coverage level?
-\end{itemize}
-\item t - intervals
+- t - intervals
+   - more natural
+   - numerically unstable
 
-\begin{itemize}
-\item more natural
-\item numerically unstable
-\end{itemize}
-\item Can do things like transform scales, compute confidence intervals,
-and then transform back.
-\item Studentized bootstrap confidence intervals where is the Studentized
-version of is the  order statistic of the simulation
-\end{itemize}
+- Can do things like transform scales, compute confidence intervals, and then transform back.
+- Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
+
 
 
 ** Resampling in Hypothesis Tests
@@ -7094,22 +6915,18 @@ version of is the  order statistic of the simulation
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 
-\begin{enumerate} 
+1. Go collect some information from the two groups and calculate an associated statistic, for example, $\Xbar_{1}-\Xbar_{2}$. 
 
-\item Go collect some information from the two groups and calculate an associated statistic, for example, $\Xbar_{1}-\Xbar_{2}$. 
+1. Suppose that there is no difference in the groups, and find the distribution of the statistic in 1. 
 
-\item Suppose that there is no difference in the groups, and find the distribution of the statistic in 1. 
-
-\item Locate the observed value of the statistic with respect to the distribution found in 2. A value in the main body of the distribution is not spectacular, it could reasonably have occurred by chance. A value in the tail of the distribution is unlikely, and hence provides evidence /against/ the null hypothesis that the population distributions are the same.  
-
-\end{enumerate}
-
+1. Locate the observed value of the statistic with respect to the distribution found in 2. A value in the main body of the distribution is not spectacular, it could reasonably have occurred by chance. A value in the tail of the distribution is unlikely, and hence provides evidence /against/ the null hypothesis that the population distributions are the same.  
 
 Of course, we usually compute a /p-value/, defined to be the probability of the observed value of the statistic or more extreme when the null hypothesis is true. Small $p$-values are evidence against the null hypothesis. It is not immediately obvious how to use resampling methods here, so we discuss an example.
 
 
 #+latex: \begin{example}
 A study concerned differing dosages of the antiretroviral drug AZT. The common dosage is 300mg daily. Higher doses cause more side affects, but are they significantly higher? We examine for a 600mg dose. The data are as follows: We compare the scores from the two groups by computing the difference in their sample means. The 300mg data were entered in x1 and the 600mg data were entered into x2. The observed difference was
+
 
 \begin{center}
 \begin{tabular}{l|cccccccccc}
@@ -7118,35 +6935,27 @@ A study concerned differing dosages of the antiretroviral drug AZT. The common d
 \end{tabular}
 \par\end{center}
 
+
 The average amounts can be found:
-
 \texttt{> mean(x1)}
-
 \texttt{{[}1{]} 289.4}
-
 \texttt{> mean(x2)}
-
 \texttt{{[}1{]} 300.3}
 
-with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 600 mg measurements seem to have a higher average, and we might be interested in trying to decide if the average amounts are =significantly= different. The null hypothesis should be that there is no difference in the amounts, that is, the groups are more or less the same. If the null hypothesis were true, then the two groups would indeed be the same, or just one big group. In that case, the observed difference in the sample means just reflects the random assignment into the arbitrary =x1= and =x2= categories. It is now clear how we may resample, consistent with the null hypothesis-
+with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 600 mg measurements seem to have a higher average, and we might be interested in trying to decide if the average amounts are =significantly= different. The null hypothesis should be that there is no difference in the amounts, that is, the groups are more or less the same. If the null hypothesis were true, then the two groups would indeed be the same, or just one big group. In that case, the observed difference in the sample means just reflects the random assignment into the arbitrary =x1= and =x2= categories. It is now clear how we may resample, consistent with the null hypothesis.
 
+#+latex: \paragraph*{Procedure:}
 
-\paragraph*{Procedure:}
+1. Randomly resample 10 scores from the combined scores of =x1= and =x2=, and assign then to the =x1= group. The rest will then be in the =x2= group. Calculate the difference in (re)sampled means, and store that value.  
 
-\begin{enumerate}
+1. Repeat this procedure many, many times and draw a histogram of the resampled statistics, called the /permutation distribution/. Locate the observed difference 10.9 on the histogram to get the $p$-value. If the $p$-value is small, then we consider that evidence against the hypothesis that the groups are the same. 
 
-\item Randomly resample 10 scores from the combined scores of \texttt{x1} and \texttt{x2}, and assign then to the ``\texttt{x1}'' group. The rest will then be in the ``\texttt{x2}'' group. Calculate the difference in (re)sampled means, and store that value.  
-
-\item Repeat this procedure many, many times and draw a histogram of the resampled statistics, called the \emph{permutation distribution}. Locate the observed difference 10.9 on the histogram to get the $p$-value. If the $p$-value is small, then we consider that evidence against the hypothesis that the groups are the same. 
-
-
-\end{enumerate}
 
 #+latex: \end{example}
 
-\begin{rem}
+#+latex: \begin{rem}
 In calculating the permutation test /p-value/, the formula is essentially the proportion of resample statistics that are greater than or equal to the observed value. Of course, this is merely an /estimate/ of the true $p$-value. As it turns out, an adjustment of $+1$ to both the numerator and denominator of the proportion improves the performance of the estimated $p$-value, and this adjustment is implemented in the =ts.perm= function.
-\end{rem}
+#+latex: \end{rem}
 
 
 #+begin_src R :exports both :results output pp
@@ -7154,10 +6963,10 @@ library(coin)
 oneway_test(len ~ supp, data = ToothGrowth)
 #+end_src
 
-*** Comparison with the Two Sample \emph{t} test
+
+*** Comparison with the Two Sample /t/ test
 
 We know from Chapter \ref{cha:Hypothesis-Testing} to use the two-sample $t$-test to tell whether there is an improvement as a result of taking the intervention class. Note that the $t$-test assumes normal underlying populations, with unknown variance, and small sample $n=10$. What does the $t$-test say? Below is the output. 
-
 
 #+begin_src R :exports both :results output pp
 t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
@@ -7168,45 +6977,34 @@ A <- show(oneway_test(len ~ supp, data = ToothGrowth))
 B <- t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 #+end_src
 
-The $p$-value for the $t$-test was \Sexpr{round(B$p.value, 3)}, while the permutation test $p$-value was \Sexpr{round(A$p.value, 3)}. Note that there is an underlying normality assumption for the $t$-test, which isn't present in the permutation test. If the normality assumption may be questionable, then the permutation test would be more reasonable. We see what can happen when using a test in a situation where the assumptions are not met: smaller $p$-values. In situations where the normality assumptions are not met, for example, small sample scenarios, the permutation test is to be preferred. In particular, if accuracy is very important then we should use the permutation test. 
+The $p$-value for the $t$-test was SRC_R{round(B$p.value, 3)}, while the permutation test $p$-value was SRC_R{round(A$p.value, 3)}. Note that there is an underlying normality assumption for the $t$-test, which isn't present in the permutation test. If the normality assumption may be questionable, then the permutation test would be more reasonable. We see what can happen when using a test in a situation where the assumptions are not met: smaller $p$-values. In situations where the normality assumptions are not met, for example, small sample scenarios, the permutation test is to be preferred. In particular, if accuracy is very important then we should use the permutation test. 
 
-\begin{rem}
+#+latex: \begin{rem}
 Here are some things about permutation tests to keep in mind.
 
-\begin{itemize}
+- While the permutation test does not require normality of the populations (as contrasted with the $t$-test), nevertheless it still requires that the two groups are exchangeable; see Section \ref{sec:Exchangeable-Random-Variables}. In particular, this means that they must be identically distributed under the null hypothesis. They must have not only the same means, but they must also have the same spread, shape, and everything else. This assumption may or may not be true in a given example, but it will rarely cause the $t$-test to outperform the permutation test, because even if the sample standard deviations are markedly different it does not mean that the population standard deviations are different. In many situations the permutation test will also carry over to the $t$-test. 
 
-\item While the permutation test does not require normality of the populations (as contrasted with the $t$-test), nevertheless it still requires that the two groups are exchangeable; see Section \ref{sec:Exchangeable-Random-Variables}. In particular, this means that they must be identically distributed under the null hypothesis. They must have not only the same means, but they must also have the same spread, shape, and everything else. This assumption may or may not be true in a given example, but it will rarely cause the $t$-test to outperform the permutation test, because even if the sample standard deviations are markedly different it does not mean that the population standard deviations are different. In many situations the permutation test will also carry over to the $t$-test. 
+- If the distribution of the groups is close to normal, then the $t$-test $p$-value and the bootstrap $p$-value will be approximately equal. If they differ markedly, then this should be considered evidence that the normality assumptions do not hold.  
 
+- The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, $\Xbar_{1}/\Xbar_{2}$. Of course, under the null hypothesis this last quantity should be near 1. 
 
-\item If the distribution of the groups is close to normal, then the $t$-test $p$-value and the bootstrap $p$-value will be approximately equal. If they differ markedly, then this should be considered evidence that the normality assumptions do not hold.  
+- Just as with the bootstrap, the answer we get is subject to variability due to the inherent randomness of resampling from the data. We can make the variability as small as we like by taking sufficiently many resamples. How many? If the conclusion is very important (that is, if lots of money is at stake), then take thousands. For point estimation problems typically, $R=1000$ resamples, or so, is enough. In general, if the true $p$-value is $p$ then the standard error of the estimated $p$-value is $\sqrt{p(1-p)/R}$. You can choose $R$ to get whatever accuracy desired.
 
-\item The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, $\Xbar_{1}/\Xbar_{2}$. Of course, under the null hypothesis this last quantity should be near 1. 
-
-
-\item Just as with the bootstrap, the answer we get is subject to variability due to the inherent randomness of resampling from the data. We can make the variability as small as we like by taking sufficiently many resamples. How many? If the conclusion is very important (that is, if lots of money is at stake), then take thousands. For point estimation problems typically, $R=1000$ resamples, or so, is enough. In general, if the true $p$-value is $p$ then the standard error of the estimated $p$-value is $\sqrt{p(1-p)/R}$. You can choose $R$ to get whatever accuracy desired.
+#+latex: \end{rem}
 
 
-\end{itemize}
-\end{rem}
+- Other possible testing designs:
+   - Matched Pairs Designs. 
+   - Relationship between two variables. 
 
 
-\begin{itemize}
-\item Other possible testing designs:
-
-\begin{itemize}
-\item Matched Pairs Designs. 
-\item Relationship between two variables. 
-\end{itemize}
-\end{itemize}
-\newpage{}
-
-
-
+#+latex: \newpage{}
 
 ** Chapter Exercises
+#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
+#+latex: \setcounter{thm}{0}
 
-\addcontentsline{toc}{section}{Chapter Exercises}
-\setcounter{thm}{0}
+
 
 
 * Categorical Data Analysis
@@ -7244,7 +7042,8 @@ library(IPSUR)
 read(IPSUR)
 #+end_src
 
-\appendix
+
+#+latex: \appendix
 
 
 * \textsf{R} Session Information
@@ -7279,453 +7078,165 @@ Foundation, Inc.
 
 ** 0. PREAMBLE
 
-The purpose of this License is to make a manual, textbook, or other
-functional and useful document \textquotedbl{}free\textquotedbl{}
-in the sense of freedom: to assure everyone the effective freedom
-to copy and redistribute it, with or without modifying it, either
-commercially or noncommercially. Secondarily, this License preserves
-for the author and publisher a way to get credit for their work, while
-not being considered responsible for modifications made by others.
+The purpose of this License is to make a manual, textbook, or other functional and useful document free  in the sense of freedom: to assure everyone the effective freedom to copy and redistribute it, with or without modifying it, either commercially or noncommercially. Secondarily, this License preserves for the author and publisher a way to get credit for their work, while not being considered responsible for modifications made by others.
 
-This License is a kind of \textquotedbl{}copyleft\textquotedbl{},
-which means that derivative works of the document must themselves
-be free in the same sense. It complements the GNU General Public License,
-which is a copyleft license designed for free software.
+This License is a kind of copyleft, which means that derivative works of the document must themselves be free in the same sense. It complements the GNU General Public License, which is a copyleft license designed for free software.
 
-We have designed this License in order to use it for manuals for free
-software, because free software needs free documentation: a free program
-should come with manuals providing the same freedoms that the software
-does. But this License is not limited to software manuals; it can
-be used for any textual work, regardless of subject matter or whether
-it is published as a printed book. We recommend this License principally
-for works whose purpose is instruction or reference.
+We have designed this License in order to use it for manuals for free software, because free software needs free documentation: a free program should come with manuals providing the same freedoms that the software does. But this License is not limited to software manuals; it can be used for any textual work, regardless of subject matter or whether it is published as a printed book. We recommend this License principally for works whose purpose is instruction or reference.
 
 ** 1. APPLICABILITY AND DEFINITIONS
 
-This License applies to any manual or other work, in any medium, that
-contains a notice placed by the copyright holder saying it can be
-distributed under the terms of this License. Such a notice grants
-a world-wide, royalty-free license, unlimited in duration, to use
-that work under the conditions stated herein. The \textquotedbl{}Document\textquotedbl{},
-below, refers to any such manual or work. Any member of the public
-is a licensee, and is addressed as \textquotedbl{}you\textquotedbl{}.
-You accept the license if you copy, modify or distribute the work
-in a way requiring permission under copyright law.
+This License applies to any manual or other work, in any medium, that contains a notice placed by the copyright holder saying it can be distributed under the terms of this License. Such a notice grants a world-wide, royalty-free license, unlimited in duration, to use that work under the conditions stated herein. The Document, below, refers to any such manual or work. Any member of the public is a licensee, and is addressed as you. You accept the license if you copy, modify or distribute the work in a way requiring permission under copyright law.
 
-A \textquotedbl{}Modified Version\textquotedbl{} of the Document means
-any work containing the Document or a portion of it, either copied
-verbatim, or with modifications and/or translated into another language.
+A Modified Version of the Document means any work containing the Document or a portion of it, either copied verbatim, or with modifications and/or translated into another language.
 
-A \textquotedbl{}Secondary Section\textquotedbl{} is a named appendix
-or a front-matter section of the Document that deals exclusively with
-the relationship of the publishers or authors of the Document to the
-Document's overall subject (or to related matters) and contains nothing
-that could fall directly within that overall subject. (Thus, if the
-Document is in part a textbook of mathematics, a Secondary Section
-may not explain any mathematics.) The relationship could be a matter
-of historical connection with the subject or with related matters,
-or of legal, commercial, philosophical, ethical or political position
-regarding them.
+A Secondary Section is a named appendix or a front-matter section of the Document that deals exclusively with the relationship of the publishers or authors of the Document to the Document's overall subject (or to related matters) and contains nothing that could fall directly within that overall subject. (Thus, if the Document is in part a textbook of mathematics, a Secondary Section may not explain any mathematics.) The relationship could be a matter of historical connection with the subject or with related matters, or of legal, commercial, philosophical, ethical or political position regarding them.
 
-The \textquotedbl{}Invariant Sections\textquotedbl{} are certain Secondary
-Sections whose titles are designated, as being those of Invariant
-Sections, in the notice that says that the Document is released under
-this License. If a section does not fit the above definition of Secondary
-then it is not allowed to be designated as Invariant. The Document
-may contain zero Invariant Sections. If the Document does not identify
-any Invariant Sections then there are none.
+The Invariant Sections are certain Secondary Sections whose titles are designated, as being those of Invariant Sections, in the notice that says that the Document is released under this License. If a section does not fit the above definition of Secondary then it is not allowed to be designated as Invariant. The Document may contain zero Invariant Sections. If the Document does not identify any Invariant Sections then there are none.
 
-The \textquotedbl{}Cover Texts\textquotedbl{} are certain short passages
-of text that are listed, as Front-Cover Texts or Back-Cover Texts,
-in the notice that says that the Document is released under this License.
-A Front-Cover Text may be at most 5 words, and a Back-Cover Text may
-be at most 25 words.
+The Cover Texts are certain short passages of text that are listed, as Front-Cover Texts or Back-Cover Texts, in the notice that says that the Document is released under this License. A Front-Cover Text may be at most 5 words, and a Back-Cover Text may be at most 25 words.
 
-A \textquotedbl{}Transparent\textquotedbl{} copy of the Document means
-a machine-readable copy, represented in a format whose specification
-is available to the general public, that is suitable for revising
-the document straightforwardly with generic text editors or (for images
-composed of pixels) generic paint programs or (for drawings) some
-widely available drawing editor, and that is suitable for input to
-text formatters or for automatic translation to a variety of formats
-suitable for input to text formatters. A copy made in an otherwise
-Transparent file format whose markup, or absence of markup, has been
-arranged to thwart or discourage subsequent modification by readers
-is not Transparent. An image format is not Transparent if used for
-any substantial amount of text. A copy that is not \textquotedbl{}Transparent\textquotedbl{}
-is called \textquotedbl{}Opaque\textquotedbl{}.
+A Transparent copy of the Document means a machine-readable copy, represented in a format whose specification is available to the general public, that is suitable for revising the document straightforwardly with generic text editors or (for images composed of pixels) generic paint programs or (for drawings) some widely available drawing editor, and that is suitable for input to text formatters or for automatic translation to a variety of formats suitable for input to text formatters. A copy made in an otherwise Transparent file format whose markup, or absence of markup, has been arranged to thwart or discourage subsequent modification by readers is not Transparent. An image format is not Transparent if used for any substantial amount of text. A copy that is not Transparent is called Opaque.
 
-Examples of suitable formats for Transparent copies include plain
-ASCII without markup, Texinfo input format, \LaTeX{} input format,
-SGML or XML using a publicly available DTD, and standard-conforming
-simple HTML, PostScript or PDF designed for human modification. Examples
-of transparent image formats include PNG, XCF and JPG. Opaque formats
-include proprietary formats that can be read and edited only by proprietary
-word processors, SGML or XML for which the DTD and/or processing tools
-are not generally available, and the machine-generated HTML, PostScript
-or PDF produced by some word processors for output purposes only.
+Examples of suitable formats for Transparent copies include plain ASCII without markup, Texinfo input format, \LaTeX{} input format, SGML or XML using a publicly available DTD, and standard-conforming simple HTML, PostScript or PDF designed for human modification. Examples of transparent image formats include PNG, XCF and JPG. Opaque formats include proprietary formats that can be read and edited only by proprietary word processors, SGML or XML for which the DTD and/or processing tools are not generally available, and the machine-generated HTML, PostScript or PDF produced by some word processors for output purposes only.
 
-The \textquotedbl{}Title Page\textquotedbl{} means, for a printed
-book, the title page itself, plus such following pages as are needed
-to hold, legibly, the material this License requires to appear in
-the title page. For works in formats which do not have any title page
-as such, \textquotedbl{}Title Page\textquotedbl{} means the text near
-the most prominent appearance of the work's title, preceding the beginning
-of the body of the text.
+The Title Page means, for a printed book, the title page itself, plus such following pages as are needed to hold, legibly, the material this License requires to appear in the title page. For works in formats which do not have any title page as such, Title Page means the text near the most prominent appearance of the work's title, preceding the beginning of the body of the text.
 
-The \textquotedbl{}publisher\textquotedbl{} means any person or entity
-that distributes copies of the Document to the public.
+The publisher means any person or entity that distributes copies of the Document to the public.  A section Entitled XYZ means a named subunit of the Document whose title either is precisely XYZ or contains XYZ in parentheses following text that translates XYZ in another language. (Here XYZ stands for a specific section name mentioned below, such as Acknowledgements, Dedications, Endorsements, or History.) To Preserve the Title of such a section when you modify the Document means that it remains a section Entitled XYZ according to this definition.
 
-A section \textquotedbl{}Entitled XYZ\textquotedbl{} means a named
-subunit of the Document whose title either is precisely XYZ or contains
-XYZ in parentheses following text that translates XYZ in another language.
-(Here XYZ stands for a specific section name mentioned below, such
-as \textquotedbl{}Acknowledgements\textquotedbl{}, \textquotedbl{}Dedications\textquotedbl{},
-\textquotedbl{}Endorsements\textquotedbl{}, or \textquotedbl{}History\textquotedbl{}.)
-To \textquotedbl{}Preserve the Title\textquotedbl{} of such a section
-when you modify the Document means that it remains a section \textquotedbl{}Entitled
-XYZ\textquotedbl{} according to this definition.
+The Document may include Warranty Disclaimers next to the notice which states that this License applies to the Document. These Warranty Disclaimers are considered to be included by reference in this License, but only as regards disclaiming warranties: any other implication that these Warranty Disclaimers may have is void and has no effect on the meaning of this License.
 
-The Document may include Warranty Disclaimers next to the notice which
-states that this License applies to the Document. These Warranty Disclaimers
-are considered to be included by reference in this License, but only
-as regards disclaiming warranties: any other implication that these
-Warranty Disclaimers may have is void and has no effect on the meaning
-of this License.
 
 ** 2. VERBATIM COPYING
 
-You may copy and distribute the Document in any medium, either commercially
-or noncommercially, provided that this License, the copyright notices,
-and the license notice saying this License applies to the Document
-are reproduced in all copies, and that you add no other conditions
-whatsoever to those of this License. You may not use technical measures
-to obstruct or control the reading or further copying of the copies
-you make or distribute. However, you may accept compensation in exchange
-for copies. If you distribute a large enough number of copies you
-must also follow the conditions in section 3.
+You may copy and distribute the Document in any medium, either commercially or noncommercially, provided that this License, the copyright notices, and the license notice saying this License applies to the Document are reproduced in all copies, and that you add no other conditions whatsoever to those of this License. You may not use technical measures to obstruct or control the reading or further copying of the copies you make or distribute. However, you may accept compensation in exchange for copies. If you distribute a large enough number of copies you must also follow the conditions in section 3.
 
-You may also lend copies, under the same conditions stated above,
-and you may publicly display copies.
+You may also lend copies, under the same conditions stated above, and you may publicly display copies.
 
 ** 3. COPYING IN QUANTITY
 
-If you publish printed copies (or copies in media that commonly have
-printed covers) of the Document, numbering more than 100, and the
-Document's license notice requires Cover Texts, you must enclose the
-copies in covers that carry, clearly and legibly, all these Cover
-Texts: Front-Cover Texts on the front cover, and Back-Cover Texts
-on the back cover. Both covers must also clearly and legibly identify
-you as the publisher of these copies. The front cover must present
-the full title with all words of the title equally prominent and visible.
-You may add other material on the covers in addition. Copying with
-changes limited to the covers, as long as they preserve the title
-of the Document and satisfy these conditions, can be treated as verbatim
-copying in other respects.
+If you publish printed copies (or copies in media that commonly have printed covers) of the Document, numbering more than 100, and the Document's license notice requires Cover Texts, you must enclose the copies in covers that carry, clearly and legibly, all these Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on the back cover. Both covers must also clearly and legibly identify you as the publisher of these copies. The front cover must present the full title with all words of the title equally prominent and visible. You may add other material on the covers in addition. Copying with changes limited to the covers, as long as they preserve the title of the Document and satisfy these conditions, can be treated as verbatim copying in other respects.
 
-If the required texts for either cover are too voluminous to fit legibly,
-you should put the first ones listed (as many as fit reasonably) on
-the actual cover, and continue the rest onto adjacent pages.
+If the required texts for either cover are too voluminous to fit legibly, you should put the first ones listed (as many as fit reasonably) on the actual cover, and continue the rest onto adjacent pages.
 
-If you publish or distribute Opaque copies of the Document numbering
-more than 100, you must either include a machine-readable Transparent
-copy along with each Opaque copy, or state in or with each Opaque
-copy a computer-network location from which the general network-using
-public has access to download using public-standard network protocols
-a complete Transparent copy of the Document, free of added material.
-If you use the latter option, you must take reasonably prudent steps,
-when you begin distribution of Opaque copies in quantity, to ensure
-that this Transparent copy will remain thus accessible at the stated
-location until at least one year after the last time you distribute
-an Opaque copy (directly or through your agents or retailers) of that
-edition to the public.
+If you publish or distribute Opaque copies of the Document numbering more than 100, you must either include a machine-readable Transparent copy along with each Opaque copy, or state in or with each Opaque copy a computer-network location from which the general network-using public has access to download using public-standard network protocols a complete Transparent copy of the Document, free of added material. If you use the latter option, you must take reasonably prudent steps, when you begin distribution of Opaque copies in quantity, to ensure that this Transparent copy will remain thus accessible at the stated location until at least one year after the last time you distribute an Opaque copy (directly or through your agents or retailers) of that edition to the public.
 
-It is requested, but not required, that you contact the authors of
-the Document well before redistributing any large number of copies,
-to give them a chance to provide you with an updated version of the
-Document.
+It is requested, but not required, that you contact the authors of the Document well before redistributing any large number of copies, to give them a chance to provide you with an updated version of the Document.
 
 ** 4. MODIFICATIONS
 
-You may copy and distribute a Modified Version of the Document under
-the conditions of sections 2 and 3 above, provided that you release
-the Modified Version under precisely this License, with the Modified
-Version filling the role of the Document, thus licensing distribution
-and modification of the Modified Version to whoever possesses a copy
-of it. In addition, you must do these things in the Modified Version:
+You may copy and distribute a Modified Version of the Document under the conditions of sections 2 and 3 above, provided that you release the Modified Version under precisely this License, with the Modified Version filling the role of the Document, thus licensing distribution and modification of the Modified Version to whoever possesses a copy of it. In addition, you must do these things in the Modified Version:
 
-A. Use in the Title Page (and on the covers, if any) a title distinct
-from that of the Document, and from those of previous versions (which
-should, if there were any, be listed in the History section of the
-Document). You may use the same title as a previous version if the
-original publisher of that version gives permission. 
+A. Use in the Title Page (and on the covers, if any) a title distinct from that of the Document, and from those of previous versions (which should, if there were any, be listed in the History section of the Document). You may use the same title as a previous version if the original publisher of that version gives permission. 
 
-B. List on the Title Page, as authors, one or more persons or entities
-responsible for authorship of the modifications in the Modified Version,
-together with at least five of the principal authors of the Document
-(all of its principal authors, if it has fewer than five), unless
-they release you from this requirement. 
+B. List on the Title Page, as authors, one or more persons or entities responsible for authorship of the modifications in the Modified Version, together with at least five of the principal authors of the Document (all of its principal authors, if it has fewer than five), unless they release you from this requirement. 
 
-C. State on the Title page the name of the publisher of the Modified
-Version, as the publisher. 
+C. State on the Title page the name of the publisher of the Modified Version, as the publisher. 
 
 D. Preserve all the copyright notices of the Document. 
 
-E. Add an appropriate copyright notice for your modifications adjacent
-to the other copyright notices. 
+E. Add an appropriate copyright notice for your modifications adjacent to the other copyright notices. 
 
-F. Include, immediately after the copyright notices, a license notice
-giving the public permission to use the Modified Version under the
-terms of this License, in the form shown in the Addendum below. 
+F. Include, immediately after the copyright notices, a license notice giving the public permission to use the Modified Version under the terms of this License, in the form shown in the Addendum below.  
 
-G. Preserve in that license notice the full lists of Invariant Sections
-and required Cover Texts given in the Document's license notice. 
+G. Preserve in that license notice the full lists of Invariant Sections and required Cover Texts given in the Document's license notice. 
 
 H. Include an unaltered copy of this License. 
 
-I. Preserve the section Entitled \textquotedbl{}History\textquotedbl{},
-Preserve its Title, and add to it an item stating at least the title,
-year, new authors, and publisher of the Modified Version as given
-on the Title Page. If there is no section Entitled \textquotedbl{}History\textquotedbl{}
-in the Document, create one stating the title, year, authors, and
-publisher of the Document as given on its Title Page, then add an
-item describing the Modified Version as stated in the previous sentence. 
+I. Preserve the section Entitled History, Preserve its Title, and add to it an item stating at least the title, year, new authors, and publisher of the Modified Version as given on the Title Page. If there is no section Entitled History in the Document, create one stating the title, year, authors, and publisher of the Document as given on its Title Page, then add an item describing the Modified Version as stated in the previous sentence. 
 
-J. Preserve the network location, if any, given in the Document for
-public access to a Transparent copy of the Document, and likewise
-the network locations given in the Document for previous versions
-it was based on. These may be placed in the \textquotedbl{}History\textquotedbl{}
-section. You may omit a network location for a work that was published
-at least four years before the Document itself, or if the original
-publisher of the version it refers to gives permission. 
+J. Preserve the network location, if any, given in the Document for public access to a Transparent copy of the Document, and likewise the network locations given in the Document for previous versions it was based on. These may be placed in the History section. You may omit a network location for a work that was published at least four years before the Document itself, or if the original publisher of the version it refers to gives permission. 
 
-K. For any section Entitled \textquotedbl{}Acknowledgements\textquotedbl{}
-or \textquotedbl{}Dedications\textquotedbl{}, Preserve the Title of
-the section, and preserve in the section all the substance and tone
-of each of the contributor acknowledgements and/or dedications given
-therein. 
+K. For any section Entitled Acknowledgements or Dedications, Preserve the Title of the section, and preserve in the section all the substance and tone of each of the contributor acknowledgements and/or dedications given therein. 
 
-L. Preserve all the Invariant Sections of the Document, unaltered
-in their text and in their titles. Section numbers or the equivalent
-are not considered part of the section titles. 
+L. Preserve all the Invariant Sections of the Document, unaltered in their text and in their titles. Section numbers or the equivalent are not considered part of the section titles. 
 
-M. Delete any section Entitled \textquotedbl{}Endorsements\textquotedbl{}.
-Such a section may not be included in the Modified Version. 
+M. Delete any section Entitled Endorsements. Such a section may not be included in the Modified Version. 
 
-N. Do not retitle any existing section to be Entitled \textquotedbl{}Endorsements\textquotedbl{}
-or to conflict in title with any Invariant Section. 
+N. Do not retitle any existing section to be Entitled Endorsements or to conflict in title with any Invariant Section. 
 
 O. Preserve any Warranty Disclaimers.
 
-If the Modified Version includes new front-matter sections or appendices
-that qualify as Secondary Sections and contain no material copied
-from the Document, you may at your option designate some or all of
-these sections as invariant. To do this, add their titles to the list
-of Invariant Sections in the Modified Version's license notice. These
-titles must be distinct from any other section titles.
+If the Modified Version includes new front-matter sections or appendices that qualify as Secondary Sections and contain no material copied from the Document, you may at your option designate some or all of these sections as invariant. To do this, add their titles to the list of Invariant Sections in the Modified Version's license notice. These titles must be distinct from any other section titles.
 
-You may add a section Entitled \textquotedbl{}Endorsements\textquotedbl{},
-provided it contains nothing but endorsements of your Modified Version
-by various parties--for example, statements of peer review or that
-the text has been approved by an organization as the authoritative
-definition of a standard.
+You may add a section Entitled Endorsements, provided it contains nothing but endorsements of your Modified Version by various parties--for example, statements of peer review or that the text has been approved by an organization as the authoritative definition of a standard.
 
-You may add a passage of up to five words as a Front-Cover Text, and
-a passage of up to 25 words as a Back-Cover Text, to the end of the
-list of Cover Texts in the Modified Version. Only one passage of Front-Cover
-Text and one of Back-Cover Text may be added by (or through arrangements
-made by) any one entity. If the Document already includes a cover
-text for the same cover, previously added by you or by arrangement
-made by the same entity you are acting on behalf of, you may not add
-another; but you may replace the old one, on explicit permission from
-the previous publisher that added the old one.
+You may add a passage of up to five words as a Front-Cover Text, and a passage of up to 25 words as a Back-Cover Text, to the end of the list of Cover Texts in the Modified Version. Only one passage of Front-Cover Text and one of Back-Cover Text may be added by (or through arrangements made by) any one entity. If the Document already includes a cover text for the same cover, previously added by you or by arrangement made by the same entity you are acting on behalf of, you may not add another; but you may replace the old one, on explicit permission from the previous publisher that added the old one.
 
-The author(s) and publisher(s) of the Document do not by this License
-give permission to use their names for publicity for or to assert
-or imply endorsement of any Modified Version.
+The author(s) and publisher(s) of the Document do not by this License give permission to use their names for publicity for or to assert or imply endorsement of any Modified Version.
 
 ** 5. COMBINING DOCUMENTS
 
-You may combine the Document with other documents released under this
-License, under the terms defined in section 4 above for modified versions,
-provided that you include in the combination all of the Invariant
-Sections of all of the original documents, unmodified, and list them
-all as Invariant Sections of your combined work in its license notice,
-and that you preserve all their Warranty Disclaimers.
+You may combine the Document with other documents released under this License, under the terms defined in section 4 above for modified versions, provided that you include in the combination all of the Invariant Sections of all of the original documents, unmodified, and list them all as Invariant Sections of your combined work in its license notice, and that you preserve all their Warranty Disclaimers.
 
-The combined work need only contain one copy of this License, and
-multiple identical Invariant Sections may be replaced with a single
-copy. If there are multiple Invariant Sections with the same name
-but different contents, make the title of each such section unique
-by adding at the end of it, in parentheses, the name of the original
-author or publisher of that section if known, or else a unique number.
-Make the same adjustment to the section titles in the list of Invariant
-Sections in the license notice of the combined work.
+The combined work need only contain one copy of this License, and multiple identical Invariant Sections may be replaced with a single copy. If there are multiple Invariant Sections with the same name but different contents, make the title of each such section unique by adding at the end of it, in parentheses, the name of the original author or publisher of that section if known, or else a unique number. Make the same adjustment to the section titles in the list of Invariant Sections in the license notice of the combined work.
 
-In the combination, you must combine any sections Entitled \textquotedbl{}History\textquotedbl{}
-in the various original documents, forming one section Entitled \textquotedbl{}History\textquotedbl{};
-likewise combine any sections Entitled \textquotedbl{}Acknowledgements\textquotedbl{},
-and any sections Entitled \textquotedbl{}Dedications\textquotedbl{}.
-You must delete all sections Entitled \textquotedbl{}Endorsements\textquotedbl{}.
+In the combination, you must combine any sections Entitled History in the various original documents, forming one section Entitled History;
+likewise combine any sections Entitled Acknowledgements, and any sections Entitled Dedications. You must delete all sections Entitled Endorsements.
 
 ** 6. COLLECTIONS OF DOCUMENTS
 
-You may make a collection consisting of the Document and other documents
-released under this License, and replace the individual copies of
-this License in the various documents with a single copy that is included
-in the collection, provided that you follow the rules of this License
-for verbatim copying of each of the documents in all other respects.
+You may make a collection consisting of the Document and other documents released under this License, and replace the individual copies of this License in the various documents with a single copy that is included in the collection, provided that you follow the rules of this License for verbatim copying of each of the documents in all other respects. 
 
-You may extract a single document from such a collection, and distribute
-it individually under this License, provided you insert a copy of
-this License into the extracted document, and follow this License
-in all other respects regarding verbatim copying of that document.
+You may extract a single document from such a collection, and distribute it individually under this License, provided you insert a copy of this License into the extracted document, and follow this License in all other respects regarding verbatim copying of that document.
 
 ** 7. AGGREGATION WITH INDEPENDENT WORKS
 
-A compilation of the Document or its derivatives with other separate
-and independent documents or works, in or on a volume of a storage
-or distribution medium, is called an \textquotedbl{}aggregate\textquotedbl{}
-if the copyright resulting from the compilation is not used to limit
-the legal rights of the compilation's users beyond what the individual
-works permit. When the Document is included in an aggregate, this
-License does not apply to the other works in the aggregate which are
-not themselves derivative works of the Document.
+A compilation of the Document or its derivatives with other separate and independent documents or works, in or on a volume of a storage or distribution medium, is called an aggregate if the copyright resulting from the compilation is not used to limit the legal rights of the compilation's users beyond what the individual works permit. When the Document is included in an aggregate, this License does not apply to the other works in the aggregate which are not themselves derivative works of the Document.
 
-If the Cover Text requirement of section 3 is applicable to these
-copies of the Document, then if the Document is less than one half
-of the entire aggregate, the Document's Cover Texts may be placed
-on covers that bracket the Document within the aggregate, or the electronic
-equivalent of covers if the Document is in electronic form. Otherwise
-they must appear on printed covers that bracket the whole aggregate.
+If the Cover Text requirement of section 3 is applicable to these copies of the Document, then if the Document is less than one half of the entire aggregate, the Document's Cover Texts may be placed on covers that bracket the Document within the aggregate, or the electronic equivalent of covers if the Document is in electronic form. Otherwise they must appear on printed covers that bracket the whole aggregate.
 
 ** 8. TRANSLATION
 
-Translation is considered a kind of modification, so you may distribute
-translations of the Document under the terms of section 4. Replacing
-Invariant Sections with translations requires special permission from
-their copyright holders, but you may include translations of some
-or all Invariant Sections in addition to the original versions of
-these Invariant Sections. You may include a translation of this License,
-and all the license notices in the Document, and any Warranty Disclaimers,
-provided that you also include the original English version of this
-License and the original versions of those notices and disclaimers.
-In case of a disagreement between the translation and the original
-version of this License or a notice or disclaimer, the original version
-will prevail.
+Translation is considered a kind of modification, so you may distribute translations of the Document under the terms of section 4. Replacing Invariant Sections with translations requires special permission from their copyright holders, but you may include translations of some or all Invariant Sections in addition to the original versions of these Invariant Sections. You may include a translation of this License, and all the license notices in the Document, and any Warranty Disclaimers, provided that you also include the original English version of this License and the original versions of those notices and disclaimers. In case of a disagreement between the translation and the original version of this License or a notice or disclaimer, the original version will prevail.
 
-If a section in the Document is Entitled \textquotedbl{}Acknowledgements\textquotedbl{},
-\textquotedbl{}Dedications\textquotedbl{}, or \textquotedbl{}History\textquotedbl{},
-the requirement (section 4) to Preserve its Title (section 1) will
-typically require changing the actual title.
+If a section in the Document is Entitled Acknowledgements, Dedications, or History, the requirement (section 4) to Preserve its Title (section 1) will typically require changing the actual title.
 
 ** 9. TERMINATION
 
-You may not copy, modify, sublicense, or distribute the Document except
-as expressly provided under this License. Any attempt otherwise to
-copy, modify, sublicense, or distribute it is void, and will automatically
-terminate your rights under this License.
+You may not copy, modify, sublicense, or distribute the Document except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense, or distribute it is void, and will automatically terminate your rights under this License.
 
-However, if you cease all violation of this License, then your license
-from a particular copyright holder is reinstated (a) provisionally,
-unless and until the copyright holder explicitly and finally terminates
-your license, and (b) permanently, if the copyright holder fails to
-notify you of the violation by some reasonable means prior to 60 days
-after the cessation.
+However, if you cease all violation of this License, then your license from a particular copyright holder is reinstated (a) provisionally, unless and until the copyright holder explicitly and finally terminates your license, and (b) permanently, if the copyright holder fails to notify you of the violation by some reasonable means prior to 60 days after the cessation.
 
-Moreover, your license from a particular copyright holder is reinstated
-permanently if the copyright holder notifies you of the violation
-by some reasonable means, this is the first time you have received
-notice of violation of this License (for any work) from that copyright
-holder, and you cure the violation prior to 30 days after your receipt
-of the notice.
+Moreover, your license from a particular copyright holder is reinstated permanently if the copyright holder notifies you of the violation by some reasonable means, this is the first time you have received notice of violation of this License (for any work) from that copyright holder, and you cure the violation prior to 30 days after your receipt of the notice. 
 
-Termination of your rights under this section does not terminate the
-licenses of parties who have received copies or rights from you under
-this License. If your rights have been terminated and not permanently
-reinstated, receipt of a copy of some or all of the same material
-does not give you any rights to use it.
+Termination of your rights under this section does not terminate the licenses of parties who have received copies or rights from you under this License. If your rights have been terminated and not permanently reinstated, receipt of a copy of some or all of the same material does not give you any rights to use it.
 
 ** 10. FUTURE REVISIONS OF THIS LICENSE
 
-The Free Software Foundation may publish new, revised versions of
-the GNU Free Documentation License from time to time. Such new versions
-will be similar in spirit to the present version, but may differ in
-detail to address new problems or concerns. See http://www.gnu.org/copyleft/.
+The Free Software Foundation may publish new, revised versions of the GNU Free Documentation License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns. See http://www.gnu.org/copyleft/.
 
-Each version of the License is given a distinguishing version number.
-If the Document specifies that a particular numbered version of this
-License \textquotedbl{}or any later version\textquotedbl{} applies
-to it, you have the option of following the terms and conditions either
-of that specified version or of any later version that has been published
-(not as a draft) by the Free Software Foundation. If the Document
-does not specify a version number of this License, you may choose
-any version ever published (not as a draft) by the Free Software Foundation.
-If the Document specifies that a proxy can decide which future versions
-of this License can be used, that proxy's public statement of acceptance
-of a version permanently authorizes you to choose that version for
-the Document.
+Each version of the License is given a distinguishing version number. If the Document specifies that a particular numbered version of this License or any later version applies to it, you have the option of following the terms and conditions either of that specified version or of any later version that has been published (not as a draft) by the Free Software Foundation. If the Document does not specify a version number of this License, you may choose any version ever published (not as a draft) by the Free Software Foundation. If the Document specifies that a proxy can decide which future versions of this License can be used, that proxy's public statement of acceptance of a version permanently authorizes you to choose that version for the Document.
 
 ** 11. RELICENSING
 
-\textquotedbl{}Massive Multiauthor Collaboration Site\textquotedbl{}
-(or \textquotedbl{}MMC Site\textquotedbl{}) means any World Wide Web
-server that publishes copyrightable works and also provides prominent
-facilities for anybody to edit those works. A public wiki that anybody
-can edit is an example of such a server. A \textquotedbl{}Massive
-Multiauthor Collaboration\textquotedbl{} (or \textquotedbl{}MMC\textquotedbl{})
-contained in the site means any set of copyrightable works thus published
-on the MMC site.
+Massive Multiauthor Collaboration Site (or MMC Site) means any World Wide Web server that publishes copyrightable works and also provides prominent facilities for anybody to edit those works. A public wiki that anybody can edit is an example of such a server. A Massive Multiauthor Collaboration (or MMC) contained in the site means any set of copyrightable works thus published on the MMC site.
 
-\textquotedbl{}CC-BY-SA\textquotedbl{} means the Creative Commons
-Attribution-Share Alike 3.0 license published by Creative Commons
-Corporation, a not-for-profit corporation with a principal place of
-business in San Francisco, California, as well as future copyleft
-versions of that license published by that same organization.
+CC-BY-SA means the Creative Commons Attribution-Share Alike 3.0 license published by Creative Commons Corporation, a not-for-profit corporation with a principal place of business in San Francisco, California, as well as future copyleft versions of that license published by that same organization.
 
-\textquotedbl{}Incorporate\textquotedbl{} means to publish or republish
-a Document, in whole or in part, as part of another Document.
+Incorporate means to publish or republish a Document, in whole or in part, as part of another Document.
 
-An MMC is \textquotedbl{}eligible for relicensing\textquotedbl{} if
-it is licensed under this License, and if all works that were first
-published under this License somewhere other than this MMC, and subsequently
-incorporated in whole or in part into the MMC, (1) had no cover texts
-or invariant sections, and (2) were thus incorporated prior to November
-1, 2008.
+An MMC is eligible for relicensing if it is licensed under this License, and if all works that were first published under this License somewhere other than this MMC, and subsequently incorporated in whole or in part into the MMC, (1) had no cover texts or invariant sections, and (2) were thus incorporated prior to November 1, 2008.
 
-The operator of an MMC Site may republish an MMC contained in the
-site under CC-BY-SA on the same site at any time before August 1,
-2009, provided the MMC is eligible for relicensing.
+The operator of an MMC Site may republish an MMC contained in the site under CC-BY-SA on the same site at any time before August 1, 2009, provided the MMC is eligible for relicensing.
 
 ** ADDENDUM: How to use this License for your documents
 
-To use this License in a document you have written, include a copy
-of the License in the document and put the following copyright and
-license notices just after the title page:
-\begin{quotation}
-\noindent Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
-distribute and/or modify this document under the terms of the GNU
-Free Documentation License, Version 1.3 or any later version published
-by the Free Software Foundation; with no Invariant Sections, no Front-Cover
-Texts, and no Back-Cover Texts. A copy of the license is included
-in the section entitled \textquotedbl{}GNU Free Documentation License\textquotedbl{}.
-\end{quotation}
-If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
-replace the \textquotedbl{}with...Texts.\textquotedbl{} line with
-this:
-\begin{quotation}
-\noindent with the Invariant Sections being LIST THEIR TITLES, with
-the Front-Cover Texts being LIST, and with the Back-Cover Texts being
-LIST.
-\end{quotation}
-If you have Invariant Sections without Cover Texts, or some other
-combination of the three, merge those two alternatives to suit the
-situation.
+To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page: 
 
-If your document contains nontrivial examples of program code, we
-recommend releasing these examples in parallel under your choice of
-free software license, such as the GNU General Public License, to
-permit their use in free software. 
+\begin{quotation}
+\noindent Copyright (c) YEAR YOUR NAME. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
+\end{quotation}
+
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace the with...Texts. line with this:
+
+\begin{quotation}
+\noindent with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+\end{quotation}
+
+If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.
+
+If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software. 
 
 
 * History
@@ -7737,7 +7248,6 @@ permit their use in free software.
 \textbf{Authors:} & G.~Jay Kerns\tabularnewline
 \textbf{Publisher:} & G.~Jay Kerns\tabularnewline
 \end{tabular}
-
 \vfill{}
 
 
@@ -7745,9 +7255,7 @@ permit their use in free software.
 * Data
 \label{cha:data}
 
-This appendix is a reference of sorts regarding some of the data structures
-a statistician is likely to encounter. We discuss their salient features
-and idiosyncrasies.
+This appendix is a reference of sorts regarding some of the data structures a statistician is likely to encounter. We discuss their salient features and idiosyncrasies.
 
 
 ** Data Structures \label{sec:Data-Structures}
@@ -7755,64 +7263,42 @@ and idiosyncrasies.
 
 *** Vectors
 
-See the ``Vectors and Assignment'' section of \emph{An Introduction
-to }\textsf{\emph{R}}. A vector is an ordered sequence of elements,
-such as numbers, characters, or logical values, and there may be =NA='s
-present. We usually make vectors with the assignment operator =<-=.
+See the ``Vectors and Assignment'' section of /An Introduction to/ \textsf{\emph{R}}. A vector is an ordered sequence of elements, such as numbers, characters, or logical values, and there may be =NA='s present. We usually make vectors with the assignment operator =<-=.
 
 #+begin_src R :exports both :results output pp
 x <- c(3, 5, 9)
 #+end_src
 
-Vectors are atomic in the sense that if you try to mix and match elements
-of different modes then all elements will be coerced to the most convenient
-common mode.
+Vectors are atomic in the sense that if you try to mix and match elements of different modes then all elements will be coerced to the most convenient common mode.
 
 #+begin_src R :exports both :results output pp
 y <- c(3, "5", TRUE)
 #+end_src
 
-In the example all elements were coerced to \emph{character} mode.
-We can test whether a given object is a vector with =is.vector=
-and can coerce an object (if possible) to a vector with =as.vector=.
+In the example all elements were coerced to /character/ mode. We can test whether a given object is a vector with =is.vector= and can coerce an object (if possible) to a vector with =as.vector=.
 
 
 *** Matrices and Arrays
 
-See the ``Arrays and Matrices'' section of \emph{An Introduction
-to }\textsf{\emph{R}}. Loosely speaking, a matrix is a vector that
-has been reshaped into rectangular form, and an array is a multidimensional
-matrix. Strictly speaking, it is the other way around: an array is
-a data vector with a dimension attribute (=dim=),
-and a matrix is the special case of an array with only two dimensions.
-We can construct a matrix with the =matrix=
-function. 
+See the ``Arrays and Matrices'' section of /An Introduction to/ \textsf{\emph{R}}. Loosely speaking, a matrix is a vector that has been reshaped into rectangular form, and an array is a multidimensional matrix. Strictly speaking, it is the other way around: an array is a data vector with a dimension attribute (=dim=), and a matrix is the special case of an array with only two dimensions. We can construct a matrix with the =matrix= function. 
 
 #+begin_src R :exports both :results output pp
 matrix(letters[1:6], nrow = 2, ncol = 3)
 #+end_src
 
-Notice the order of the matrix entries, which shows how the matrix
-is populated by default. We can change this with the =byrow=
-argument:
+Notice the order of the matrix entries, which shows how the matrix is populated by default. We can change this with the =byrow= argument:
 
 #+begin_src R :exports both :results output pp
 matrix(letters[1:6], nrow = 2, ncol = 3, byrow = TRUE)
 #+end_src
 
-We can test whether a given object is a matrix with =is.matrix=
-and can coerce an object (if possible) to a matrix with =as.matrix=.
-As a final example watch what happens when we mix and match types
-in the first argument:
+We can test whether a given object is a matrix with =is.matrix= and can coerce an object (if possible) to a matrix with =as.matrix=. As a final example watch what happens when we mix and match types in the first argument:
 
 #+begin_src R :exports both :results output pp
 matrix(c(1,"2",NA, FALSE), nrow = 2, ncol = 3)
 #+end_src
 
-Notice how all of the entries were coerced to character for the final
-result (except =NA=).
-Also notice how the four values were \emph{recycled} to fill up the
-six entries of the matrix.
+Notice how all of the entries were coerced to character for the final result (except =NA=). Also notice how the four values were \emph{recycled} to fill up the six entries of the matrix.
 
 The standard arithmetic operations work element-wise with matrices.
 
@@ -7823,45 +7309,31 @@ A + B
 A * B
 #+end_src
 
-If you want the standard definition of matrix multiplication then
-use the =%*%=
-function. If we were to try =A %*% B=
-we would get an error because the dimensions do not match correctly,
-but for fun, we could transpose =B=
-to get conformable matrices. The transpose function =t=
-only works for matrices (and data frames).
+If you want the standard definition of matrix multiplication then use the =%*%= function. If we were to try =A %*% B= we would get an error because the dimensions do not match correctly, but for fun, we could transpose =B= to get conformable matrices. The transpose function =t= only works for matrices (and data frames).
 
 #+begin_src R :exports both :results output pp
 try(A * B)     # an error
 A %*% t(B)     # this is alright
 #+end_src
 
-To get the ordinary matrix inverse use the =solve=
-function:
+To get the ordinary matrix inverse use the =solve= function: 
 
 #+begin_src R :exports both :results output pp
 solve(A %*% t(B))     # input matrix must be square
 #+end_src
 
-Arrays more general than matrices, and some functions (like transpose)
-do not work for the more general array. Here is what an array looks
-like: 
+Arrays more general than matrices, and some functions (like transpose) do not work for the more general array. Here is what an array looks like: 
 
 #+begin_src R :exports both :results output pp
 array(LETTERS[1:24], dim = c(3,4,2))
 #+end_src
 
-We can test with =is.array=
-and may coerce with =as.array=.
+We can test with =is.array= and may coerce with =as.array=.
 
 
 *** Data Frames
 
-A data frame is a rectangular array of information with a special
-status in \textsf{R}. It is used as the fundamental data structure
-by many of the modeling functions. It is like a matrix in that all
-of the columns must be the same length, but it is more general than
-a matrix in that columns are allowed to have different modes.
+A data frame is a rectangular array of information with a special status in \textsf{R}. It is used as the fundamental data structure by many of the modeling functions. It is like a matrix in that all of the columns must be the same length, but it is more general than a matrix in that columns are allowed to have different modes.
 
 #+begin_src R :exports both :results output pp
 x <- c(1.3, 5.2, 6)
@@ -7871,19 +7343,14 @@ A <- data.frame(x, y, z)
 A
 #+end_src
 
-Notice the =names=
-on the columns of =A=.
-We can change those with the =names=
-function.
+Notice the =names= on the columns of =A=. We can change those with the =names= function.
 
 #+begin_src R :exports both :results output pp
 names(A) <- c("Fred","Mary","Sue")
 A
 #+end_src
 
-Basic command is =data.frame=.
-You can test with =is.data.frame=
-and you can coerce with =as.data.frame=.
+Basic command is =data.frame=. You can test with =is.data.frame= and you can coerce with =as.data.frame=.
 
 
 *** Lists
@@ -7893,37 +7360,20 @@ A list is more general than a data frame.
 
 *** Tables
 
-The word ``table'' has a special meaning in \textsf{R}. More precisely,
-a contingency table is an object of class ``=table=''
-which is an array
+The word ``table'' has a special meaning in \textsf{R}. More precisely, a contingency table is an object of class =table= which is an array.
 
-Suppose you have a contingency table and would like to do descriptive
-or inferential statistics on it. The default form of the table is
-usually inconvenient to use unless we are working with a function
-specially tailored for tables. Here is how to transform your data
-to a more manageable form, namely, the raw data used to make the table.
+Suppose you have a contingency table and would like to do descriptive or inferential statistics on it. The default form of the table is usually inconvenient to use unless we are working with a function specially tailored for tables. Here is how to transform your data to a more manageable form, namely, the raw data used to make the table.
 
-First, we coerce the table to a data frame with : 
+First, we coerce the table to a data frame with: 
 
 #+begin_src R :exports both :results output pp
 A <- as.data.frame(Titanic)
 head(A)
 #+end_src
 
-Note that there are as many preliminary columns of =A=
-as there are dimensions to the table. The rows of =A=
-contain every possible combination of levels from each of the dimensions.
-There is also a =Freq=
-column, which shows how many observations there were at that particular
-combination of levels.
+Note that there are as many preliminary columns of =A= as there are dimensions to the table. The rows of =A= contain every possible combination of levels from each of the dimensions. There is also a =Freq= column, which shows how many observations there were at that particular combination of levels. 
 
-The form of =A=
-is often sufficient for our purposes, but more often we need to do
-more work: we would usually like to repeat each row of =A=
-exactly the number of times shown in the =Freq=
-column. The =reshape=
-package \cite{Wickhamreshape} has the function =untable=
-designed for that very purpose: 
+The form of =A= is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of =A= exactly the number of times shown in the =Freq= column. The =reshape= package \cite{Wickhamreshape} has the function =untable= designed for that very purpose: 
 
 #+begin_src R :exports both :results output pp
 library(reshape)
@@ -7931,20 +7381,11 @@ B <- with(A, untable(A, Freq))
 head(B)
 #+end_src
 
-Now, this is more like it. Note that we slipped in a call to the =with=
-function, which was done to make the call to =untable=
-more pretty; we could just as easily have done
-
-
+Now, this is more like it. Note that we slipped in a call to the =with= function, which was done to make the call to =untable= more pretty; we could just as easily have done
 :  untable(TitanicDF, A$Freq)
 
 
-The only fly in the ointment is the lingering =Freq=
-column which has repeated values that do not have any meaning any
-more. We could just ignore it, but it would be better to get rid of
-the meaningless column so that it does not cause trouble later. While
-we are at it, we could clean up the =rownames=,
-too.
+The only fly in the ointment is the lingering =Freq= column which has repeated values that do not have any meaning any more. We could just ignore it, but it would be better to get rid of the meaningless column so that it does not cause trouble later. While we are at it, we could clean up the =rownames=, too.
 
 #+begin_src R :exports both :results output pp
 C <- B[, -5]
@@ -7957,10 +7398,10 @@ head(C)
 
 Suppose you want to make a table that looks like this:
 
-There are at least two ways to do it.
-\begin{itemize}
-\item Using a matrix:
 
+There are at least two ways to do it.
+
+- Using a matrix:
 
 #+begin_src R :exports both :results output pp
 tab <- matrix(1:6, nrow = 2, ncol = 3)
@@ -7968,14 +7409,10 @@ rownames(tab) <- c('first', 'second')
 colnames(tab) <- c('A', 'B', 'C')
 tab  # Counts
 #+end_src
-\begin{itemize}
-\item note that the columns are filled in consecutively by default. If you
-want to fill the data in by rows then do byrow = TRUE in the matrix
-command.
-\item the object is a matrix
-\end{itemize}
-\item Using a dataframe
 
+   - note that the columns are filled in consecutively by default. If you want to fill the data in by rows then do byrow = TRUE in the matrix command.
+
+- Using a dataframe
 
 #+begin_src R :exports both :results output pp
 p <- c("milk","tea")
@@ -7985,99 +7422,55 @@ cnts <- c(3, 1, 1, 3)
 D <- cbind(catgs, count = cnts)
 xtabs(count ~ poured + guessed, data = D)
 #+end_src
-\begin{itemize}
-\item again, the data are filled in column-wise.
-\item the object is a dataframe
-\item if you want to store it as a table then do A <- xtabs(count \textasciitilde{}
-poured + guessed, data = D)
-\end{itemize}
-\end{itemize}
+
+   - again, the data are filled in column-wise.
+   - the object is a dataframe
+   - if you want to store it as a table then do A <- xtabs(count ~ poured + guessed, data = D)
+
 
 ** Importing Data \label{sec:Importing-A-Data}
 
-Statistics is the study of data, so the statistician's first step
-is usually to obtain data from somewhere or another and read them
-into \textsf{R}. In this section we describe some of the most common
-sources of data and how to get data from those sources into a running
-\textsf{R} session.
+Statistics is the study of data, so the statistician's first step is usually to obtain data from somewhere or another and read them into \textsf{R}. In this section we describe some of the most common sources of data and how to get data from those sources into a running \textsf{R} session.
 
-For more information please refer to the \textsf{R} \emph{Data Import/Export
-Manual}, \cite{rstatenv} and \emph{An Introduction to }\textsf{\emph{R}},
-\cite{Venables2010}.
+For more information please refer to the \textsf{R} \emph{Data Import/Export Manual}, \cite{rstatenv} and \emph{An Introduction to }\textsf{\emph{R}}, \cite{Venables2010}.
 
 
 *** Data in Packages
 
-There are many data sets stored in the =datasets=
-package of base \textsf{R}. To see a list of them all issue the command
-=data(package = "datasets")=.
-The output is omitted here because the list is so long. The names
-of the data sets are listed in the left column. Any data set in that
-list is already on the search path by default, which means that a
-user can use it immediately without any additional work.
+There are many data sets stored in the =datasets= package of base \textsf{R}. To see a list of them all issue the command =data(package = "datasets")=. The output is omitted here because the list is so long. The names of the data sets are listed in the left column. Any data set in that list is already on the search path by default, which means that a user can use it immediately without any additional work. 
 
-There are many other data sets available in the thousands of contributed
-packages. To see the data sets available in those packages that are
-currently loaded into memory issue the single command =data()=.
-If you would like to see all of the data sets that are available in
-all packages that are installed on your computer (but not necessarily
-loaded), issue the command 
-
+There are many other data sets available in the thousands of contributed packages. To see the data sets available in those packages that are currently loaded into memory issue the single command =data()=. If you would like to see all of the data sets that are available in all packages that are installed on your computer (but not necessarily loaded), issue the command 
 
 :  data(package = .packages(all.available = TRUE))
 
 
-To load the data set =foo=
-in the contributed package =bar=
-issue the commands =library(bar)=
-followed by =data(foo)=,
-or just the single command 
+To load the data set =foo= in the contributed package =bar= issue the commands =library(bar)= followed by =data(foo)=, or just the single command  
 
 :  data(foo, package = "bar")
 
 
 *** Text Files
 
-Many sources of data are simple text files. The entries in the file
-are separated by delimeters such as TABS (tab-delimeted), commas (comma
-separated values, or =.csv=,
-for short) or even just white space (no special name). A lot of data
-on the Internet are stored with text files, and even if they are not,
-a person can copy-paste information from a web page to a text file,
-save it on the computer, and read it into \textsf{R}. 
+Many sources of data are simple text files. The entries in the file are separated by delimeters such as TABS (tab-delimeted), commas (comma separated values, or =.csv=, for short) or even just white space (no special name). A lot of data on the Internet are stored with text files, and even if they are not, a person can copy-paste information from a web page to a text file, save it on the computer, and read it into \textsf{R}. 
 
 
 *** Other Software Files
 
-Often the data set of interest is stored in some other, proprietary,
-format by third-party software such as Minitab, SAS, or SPSS. The
-=foreign=
-package supports import/conversion from many of these formats. Please
-note, however, that data sets from other software sometimes have properties
-with no direct analogue in \textsf{R}. In those cases the conversion
-process may lose some information which will need to be reentered
-manually from within \textsf{R}. See the \emph{Data Import/Export
-Manual}.
+Often the data set of interest is stored in some other, proprietary, format by third-party software such as Minitab, SAS, or SPSS. The =foreign= package supports import/conversion from many of these formats. Please note, however, that data sets from other software sometimes have properties with no direct analogue in \textsf{R}. In those cases the conversion process may lose some information which will need to be reentered manually from within \textsf{R}. See the \emph{Data Import/Export Manual}.
 
-As an example, suppose the data are stored in the SPSS file =foo.sav=
-which the user has copied to the working directory; it can be imported
-with the commands
+As an example, suppose the data are stored in the SPSS file =foo.sav= which the user has copied to the working directory; it can be imported with the commands
 
 #+begin_src R :eval never
 library(foreign)
 read.spss("foo.sav")
 #+end_src
 
-See =?read.spss=
-for the available options to customize the file import. Note that
-the \textsf{R} Commander will import many of the common file types
-with a menu driven interface.
+See =?read.spss= for the available options to customize the file import. Note that the \textsf{R} Commander will import many of the common file types with a menu driven interface.
 
 
 *** Importing a Data Frame
 
 The basic command is =read.table=.
-
 
 ** Creating New Data Sets \label{sec:Creating-New-Data}
 
@@ -8102,16 +7495,9 @@ Using the \textsf{R} Commander.
 
 *** Sorting Data
 
-We can sort a vector with the =sort=
-function. Normally we have a data frame of several columns (variables)
-and many, many rows (observations). The goal is to shuffle the rows
-so that they are ordered by the values of one or more columns. This
-is done with the =order=
-function. 
+We can sort a vector with the =sort= function. Normally we have a data frame of several columns (variables) and many, many rows (observations). The goal is to shuffle the rows so that they are ordered by the values of one or more columns. This is done with the =order= function. 
 
-For example, we may sort all of the rows of the =Puromycin=
-data (in ascending order) by the variable =conc=
-with the following: 
+For example, we may sort all of the rows of the =Puromycin= data (in ascending order) by the variable =conc= with the following: 
 
 #+begin_src R :exports both :results output pp
 Tmp <- Puromycin[order(Puromycin$conc), ]
@@ -8124,26 +7510,20 @@ We can accomplish the same thing with the command
 with(Puromycin, Puromycin[order(conc), ])
 #+end_src
 
-We can sort by more than one variable. To sort first by =state=
-and next by =conc=
-do 
+We can sort by more than one variable. To sort first by =state= and next by =conc= do 
 
 #+begin_src R :eval never
 with(Puromycin, Puromycin[order(state, conc), ])
 #+end_src
 
-If we would like to sort a numeric variable in descending order then
-we put a minus sign in front of it. 
+If we would like to sort a numeric variable in descending order then we put a minus sign in front of it. 
 
 #+begin_src R :exports both :results output pp
 Tmp <- with(Puromycin, Puromycin[order(-conc), ])
 head(Tmp)
 #+end_src
 
-If we would like to sort by a character (or factor) in decreasing
-order then we can use the =xtfrm=
-function which produces a numeric vector in the same order as the
-character vector.
+If we would like to sort by a character (or factor) in decreasing order then we can use the =xtfrm= function which produces a numeric vector in the same order as the character vector.
 
 #+begin_src R :exports both :results output pp
 Tmp <- with(Puromycin, Puromycin[order(-xtfrm(state)), ])
@@ -8153,19 +7533,15 @@ head(Tmp)
 
 ** Exporting Data \label{sec:Exporting-a-Data}
 
-The basic function is =write.table=.
-The =MASS=
-package also has a =write.matrix=
-function.
+The basic function is =write.table=. The =MASS= package also has a =write.matrix= function.
 
 
 ** Reshaping Data \label{sec:Reshaping-a-Data}
-\begin{itemize}
-\item Aggregation
-\item Convert Tables to data frames and back
-\end{itemize}
-=rbind=,
-=cbind=
+
+- Aggregation
+- Convert Tables to data frames and back
+
+=rbind=, =cbind=
 
 =ab[order(ab[,1]),]=
 
@@ -8179,32 +7555,18 @@ function.
 * Mathematical Machinery
 \label{cha:Mathematical-Machinery}
 
-This appendix houses many of the standard definitions and theorems
-that are used at some point during the narrative. It is targeted for
-someone reading the book who forgets the precise definition of something
-and would like a quick reminder of an exact statement. No proofs are
-given, and the interested reader should consult a good text on Calculus
-(say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}),
-Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}),
-Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}),
-or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000},
-Resnick \cite{Resnick1999}) for details. 
+This appendix houses many of the standard definitions and theorems that are used at some point during the narrative. It is targeted for someone reading the book who forgets the precise definition of something and would like a quick reminder of an exact statement. No proofs are given, and the interested reader should consult a good text on Calculus (say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}), Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}), Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}), or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000}, Resnick \cite{Resnick1999}) for details. 
 
 
 ** Set Algebra \label{sec:The-Algebra-of}
 
-We denote sets by capital letters, $A$, $B$, $C$, \emph{etc}. The
-letter $S$ is reserved for the sample space, also known as the universe
-or universal set, the set which contains all possible elements. The
-symbol $\emptyset$ represents the empty set, the set with no elements. 
+We denote sets by capital letters, $A$, $B$, $C$, \emph{etc}. The letter $S$ is reserved for the sample space, also known as the universe or universal set, the set which contains all possible elements. The symbol $\emptyset$ represents the empty set, the set with no elements. 
 
 
 *** Set Union, Intersection, and Difference
 
-Given subsets $A$ and $B$, we may manipulate them in an algebraic
-fashion. To this end, we have three set operations at our disposal:
-union, intersection, and difference. Below is a table summarizing
-the pertinent information about these operations.%
+Given subsets $A$ and $B$, we may manipulate them in an algebraic fashion. To this end, we have three set operations at our disposal: union, intersection, and difference. Below is a table summarizing the pertinent information about these operations.
+
 \begin{table}
 \begin{centering}
 \begin{tabular}{|l|c|l|l|}
@@ -8218,9 +7580,7 @@ Complement & $A^{c}$ & in $S$ but not in $A$ & =setdiff(S, A)=\tabularnewline
 \hline
 \end{tabular}
 \par\end{centering}
-
 \caption{Set operations\label{tab:Set-Operations}}
-
 \end{table}
 
 
@@ -8234,67 +7594,70 @@ Complement & $A^{c}$ & in $S$ but not in $A$ & =setdiff(S, A)=\tabularnewline
 \item The Commutative Property: \begin{equation}
 A\cup B=B\cup A,\quad A\cap B=B\cap A\end{equation}
 
-\item The Associative Property: \begin{equation}
-(A\cup B)\cup C=A\cup(B\cup C),\quad(A\cap B)\cap C=A\cap(B\cap C)\end{equation}
+\item The Associative Property: 
+\begin{equation}
+(A\cup B)\cup C=A\cup(B\cup C),\quad(A\cap B)\cap C=A\cap(B\cap C)
+\end{equation}
 
-\item The Distributive Property: \begin{equation}
+\item The Distributive Property: 
+\begin{equation}
 A\cup(B\cap C)=(A\cup B)\cap(A\cup B),\quad A\cap(B\cup C)=(A\cap B)\cup(A\cap B)\end{equation}
 
-\item DeMorgan's Laws\begin{equation}
-(A\cup B)^{c}=A^{c}\cap B^{c}\quad\mbox{and}\quad(A\cap B)^{c}=A^{c}\cup B^{c},\end{equation}
-or more generally,\begin{equation}
-\left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad\mbox{and}\quad\left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}\end{equation}
+\item DeMorgan's Laws
+\begin{equation}
+(A\cup B)^{c}=A^{c}\cap B^{c}\quad\mbox{and}\quad(A\cap B)^{c}=A^{c}\cup B^{c},
+\end{equation}
+or more generally,
+\begin{equation}
+\left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad\mbox{and}\quad\left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}
+\end{equation}
 
 \end{enumerate}
 
 
 ** Differential and Integral Calculus \label{sec:Differential-and-Integral}
 
-A function $f$ of one variable is said to be one-to-one if no two
-distinct $x$ values are mapped to the same $y=f(x)$ value. To show
-that a function is one-to-one we can either use the horizontal line
-test or we may start with the equation $f(x_{1})=f(x_{2})$ and use
-algebra to show that it implies $x_{1}=x_{2}$.
+A function $f$ of one variable is said to be one-to-one if no two distinct $x$ values are mapped to the same $y=f(x)$ value. To show that a function is one-to-one we can either use the horizontal line test or we may start with the equation $f(x_{1})=f(x_{2})$ and use algebra to show that it implies $x_{1}=x_{2}$.
 
 
 *** Limits and Continuity
-\begin{defn}
-Let $f$ be a function defined on some open interval that contains
-the number $a$, except possibly at $a$ itself. Then we say the \emph{limit
-of} $f(x)$ \emph{as} $x$ \emph{approaches} $a$ \emph{is} $L$,
-and we write \begin{equation}
-\lim_{x\to a}f(x)=L,\end{equation}
-if for every $\epsilon>0$ there exists a number $\delta>0$ such
-that $0<|x-a|<\delta$ implies $|f(x)-L|<\epsilon$.
-\end{defn}
 
-\begin{defn}
-A function $f$ is \emph{continuous at a number} $a$ if \begin{equation}
-\lim_{x\to a}f(x)=f(a).\end{equation}
-The function $f$ is \emph{right-continuous at the number} $a$ if
-$\lim_{x\to a^{+}}f(x)=f(a)$, and \emph{left-continuous} at $a$
-if $\lim_{x\to a^{-}}f(x)=f(a)$. Finally, the function $f$ is \emph{continuous
-on an interval} $I$ if it is continuous at every number in the interval. 
-\end{defn}
+#+latex: \begin{defn}
+Let $f$ be a function defined on some open interval that contains the number $a$, except possibly at $a$ itself. Then we say the /limit of/ $f(x)$ /as/ $x$ /approaches/ $a$ /is/ $L$, and we write 
+\begin{equation}
+\lim_{x\to a}f(x)=L,
+\end{equation}
+if for every $\epsilon>0$ there exists a number $\delta>0$ such that $0<|x-a|<\delta$ implies $|f(x)-L|<\epsilon$.
+#+latex: \end{defn}
+
+#+latex: \begin{defn}
+A function $f$ is /continuous at a number/ $a$ if 
+\begin{equation}
+\lim_{x\to a}f(x)=f(a).
+\end{equation}
+The function $f$ is /right-continuous at the number/ $a$ if $\lim_{x\to a^{+}}f(x)=f(a)$, and /left-continuous/ at $a$ if $\lim_{x\to a^{-}}f(x)=f(a)$. Finally, the function $f$ is /continuous on an interval/ $I$ if it is continuous at every number in the interval. 
+#+latex: \end{defn}
 
 *** Differentiation
-\begin{defn}
-The \emph{derivative of a function} $f$ \emph{at a number} $a$,
-denoted by $f'(a)$, is\begin{equation}
-f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h},\end{equation}
+#+latex: \begin{defn}
+The /derivative of a function/ $f$ /at a number/ $a$, denoted by $f'(a)$, is
+\begin{equation}
+f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h},
+\end{equation}
 provided this limit exists.
 
-A function is \emph{differentiable at} $a$ if $f'(a)$ exists. It
-is \emph{differentiable on an open interval} $(a,b)$ if it is differentiable
-at every number in the interval.
-\end{defn}
+A function is /differentiable at/ $a$ if $f'(a)$ exists. It is /differentiable on an open interval/ $(a,b)$ if it is differentiable at every number in the interval.
+#+latex: \end{defn}
+
+
 
 #+latex: \paragraph*{Differentiation Rules}
 
-In the table that follows, $f$ and $g$ are differentiable functions
-and $c$ is a constant.
+In the table that follows, $f$ and $g$ are differentiable functions and $c$ is a constant.
 
-%
+
+
+
 \begin{table}[H]
 \begin{centering}
 \begin{tabular}{|c|c|c|}
@@ -8307,20 +7670,16 @@ $(f\pm g)'=f'\pm g'$ & $(fg)'=f'g+fg'$ & $\left(\frac{f}{g}\right)'=\frac{f'g-fg
 \hline
 \end{tabular}
 \par\end{centering}
-
 \caption{Differentiation rules\textbf{\label{tab:Differentiation-Rules}}}
-
 \end{table}
 
-\begin{thm}
-Chain Rule: If $f$ and $g$ are both differentiable and $F=f\circ g$
-is the composite function defined by $F(x)=f[g(x)]$, then $F$ is
-differentiable and $F'(x)=f'[g(x)]\cdot g'(x)$. 
-\end{thm}
+#+latex: \begin{thm}
+Chain Rule: If $f$ and $g$ are both differentiable and $F=f\circ g$ is the composite function defined by $F(x)=f[g(x)]$, then $F$ is differentiable and $F'(x)=f'[g(x)]\cdot g'(x)$.  
+#+latex: \end{thm}
 
 #+latex: \paragraph*{Useful Derivatives}
 
-%
+
 \begin{table}[H]
 \begin{centering}
 \begin{tabular}{|c|c|c|}
@@ -8333,76 +7692,62 @@ $\frac{\diff}{\diff x}\cos x=-\sin x$ & $\frac{\diff}{\diff x}\tan x=\sec^{2}x$ 
 \hline
 \end{tabular}
 \par\end{centering}
-
 \caption{Some derivatives\textbf{\label{tab:Useful-Derivatives}}}
-
 \end{table}
 
 
 
 *** Optimization
-\begin{defn}
-A \emph{critical number} of the function $f$ is a value $x^{\ast}$
-for which $f'(x^{\ast})=0$ or for which $f'(x^{\ast})$ does not
-exist.\end{defn}
-\begin{thm}
-\label{thm:First-Derivative-Test}First Derivative Test. If $f$ is
-differentiable and if $x^{\ast}$ is a critical number of $f$ and
-if $f'(x)\geq0$ for $x\leq x^{\ast}$ and $f'(x)\leq0$ for $x\geq x^{\ast}$
-, then $x^{\ast}$ is a local maximum of $f$. If $f'(x)\leq0$ for
-$x\leq x^{\ast}$ and $f'(x)\geq0$ for $x\geq x^{\ast}$ , then $x^{\ast}$
-is a local minimum of $f$. 
-\end{thm}
+#+latex: \begin{defn}
+A /critical number/ of the function $f$ is a value $x^{\ast}$ for which $f'(x^{\ast})=0$ or for which $f'(x^{\ast})$ does not exist.
+#+latex: \end{defn}
 
-\begin{thm}
-Second Derivative Test. If $f$ is twice differentiable and if $x^{\ast}$
-is a critical number of $f$, then $x^{\ast}$ is a local maximum
-of $f$ if $f''(x^{\ast})<0$ and $x^{\ast}$ is a local minimum of
-$f$ if $f''(x^{\ast})>0$.
-\end{thm}
+#+latex: \begin{thm}
+\label{thm:First-Derivative-Test}
+First Derivative Test. If $f$ is differentiable and if $x^{\ast}$ is a critical number of $f$ and if $f'(x)\geq0$ for $x\leq x^{\ast}$ and $f'(x)\leq0$ for $x\geq x^{\ast}$, then $x^{\ast}$ is a local maximum of $f$. If $f'(x)\leq0$ for $x\leq x^{\ast}$ and $f'(x)\geq0$ for $x\geq x^{\ast}$ , then $x^{\ast}$ is a local minimum of $f$.
+#+latex: \end{thm}
+
+#+latex: \begin{thm}
+Second Derivative Test. If $f$ is twice differentiable and if $x^{\ast}$ is a critical number of $f$, then $x^{\ast}$ is a local maximum of $f$ if $f''(x^{\ast})<0$ and $x^{\ast}$ is a local minimum of $f$ if $f''(x^{\ast})>0$.
+#+latex: \end{thm}
+
+
 
 *** Integration
 
-As it turns out, there are all sorts of things called ``integrals'',
-each defined in its own idiosyncratic way. There are \emph{Riemann}
-integrals, \emph{Lebesgue} integrals, variants of these called \emph{Stieltjes}
-integrals, \emph{Daniell} integrals, \emph{Ito} integrals, and the
-list continues. Given that this is an introductory book, we will use
-the Riemannian integral with the caveat that the Riemann integral
-is \emph{not} the integral that will be used in more advanced study.
-\begin{defn}
-Let $f$ be defined on $[a,b]$, a closed interval of the real line.
-For each $n$, divide $[a,b]$ into subintervals $[x_{i},x_{i+1}]$,
-$i=0,1,\ldots,n-1$, of length $\Delta x_{i}=(b-a)/n$ where $x_{0}=a$
-and $x_{n}=b$, and let $x_{i}^{\ast}$ be any points chosen from
-the respective subintervals. Then the \emph{definite integral} of
-$f$ from $a$ to $b$ is defined by\begin{equation}
-\int_{a}^{b}f(x)\,\diff x=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_{i}^{\ast})\,\Delta x_{i},\end{equation}
-provided the limit exists, and in that case, we say that $f$ is \emph{integrable}
-from $a$ to $b$. \end{defn}
-\begin{thm}
-The Fundamental Theorem of Calculus. Suppose $f$ is continuous on
-$[a,b]$. Then
-\begin{enumerate}
-\item the function $g$ defined by $g(x)=\int_{a}^{x}f(t)\:\diff t$, $a\leq x\leq b$,
-is continuous on $[a,b]$ and differentiable on $(a,b)$ with $g'(x)=f(x)$.
-\item $\int_{a}^{b}f(x)\,\diff x=F(b)-F(a)$, where $F$ is any \emph{antiderivative}
-of $f$, that is, any function $F$ satisfying $F'=f$.
-\end{enumerate}
-\end{thm}
+As it turns out, there are all sorts of things called ``integrals'', each defined in its own idiosyncratic way. There are /Riemann/ integrals, /Lebesgue/ integrals, variants of these called /Stieltjes/ integrals, /Daniell/ integrals, /Ito/ integrals, and the list continues. Given that this is an introductory book, we will use the Riemannian integral with the caveat that the Riemann integral is /not/ the integral that will be used in more advanced study.
+
+#+latex: \begin{defn}
+Let $f$ be defined on $[a,b]$, a closed interval of the real line. For each $n$, divide $[a,b]$ into subintervals $[x_{i},x_{i+1}]$, $i=0,1,\ldots,n-1$, of length $\Delta x_{i}=(b-a)/n$ where $x_{0}=a$ and $x_{n}=b$, and let $x_{i}^{\ast}$ be any points chosen from the respective subintervals. Then the /definite integral/ of $f$ from $a$ to $b$ is defined by
+\begin{equation}
+\int_{a}^{b}f(x)\,\diff x=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_{i}^{\ast})\,\Delta x_{i},
+\end{equation}
+provided the limit exists, and in that case, we say that $f$ is /integrable/ from $a$ to $b$. 
+#+latex: \end{defn}
+
+#+latex: \begin{thm}
+The Fundamental Theorem of Calculus. Suppose $f$ is continuous on $[a,b]$. Then
+
+1. the function $g$ defined by $g(x)=\int_{a}^{x}f(t)\:\diff t$, $a\leq x\leq b$, is continuous on $[a,b]$ and differentiable on $(a,b)$ with $g'(x)=f(x)$.
+
+1. $\int_{a}^{b}f(x)\,\diff x=F(b)-F(a)$, where $F$ is any /antiderivative/ of $f$, that is, any function $F$ satisfying $F'=f$.
+
+#+latex: \end{thm}
+
 
 #+latex: \paragraph*{Change of Variables}
-\begin{thm}
-If $g$ is a differentiable function whose range is the interval $[a,b]$
-and if both $f$ and $g'$ are continuous on the range of $u=g(x)$,
-then\begin{equation}
-\int_{g(a)}^{g(b)}f(u)\:\diff u=\int_{a}^{b}f[g(x)]\: g'(x)\:\diff x.\end{equation}
+#+latex: \begin{thm}
+If $g$ is a differentiable function whose range is the interval $[a,b]$ and if both $f$ and $g'$ are continuous on the range of $u=g(x)$, then
+\begin{equation}
+\int_{g(a)}^{g(b)}f(u)\:\diff u=\int_{a}^{b}f[g(x)]\: g'(x)\:\diff x.
+\end{equation}
+#+latex: \end{thm}
 
-\end{thm}
+
 
 #+latex: \paragraph*{Useful Integrals}
 
-%
+
 \begin{table}[H]
 \begin{centering}
 \begin{tabular}{|c|c|c|}
@@ -8415,9 +7760,7 @@ $\int\tan x\:\diff x=\ln|\sec x|$ & $\int a^{x}\,\diff x=a^{x}/\ln a$ & $\int(x^
 \hline
 \end{tabular}
 \par\end{centering}
-
 \caption{Some integrals (constants of integration omitted)\textbf{\label{tab:Useful-Integrals}}}
-
 \end{table}
 
 
@@ -8428,18 +7771,17 @@ $\int\tan x\:\diff x=\ln|\sec x|$ & $\int a^{x}\,\diff x=a^{x}/\ln a$ & $\int(x^
 \int u\:\diff v=uv-\int v\:\diff u
 \end{equation}
 
-\begin{thm}
-L'H\^ opital's Rule. Suppose $f$ and $g$ are differentiable and $g'(x)\neq0$ near $a$, except possibly at $a$. Suppose that the limit
+#+latex: \begin{thm}
+L'H\^ opital's Rule. Suppose $f$ and $g$ are differentiable and $g'(x)\neq0$ near $a$, except possibly at $a$. Suppose that the limit 
 \begin{equation}
 \lim_{x\to a}\frac{f(x)}{g(x)}
 \end{equation}
-is an indeterminate form of type $\frac{0}{0}$ or $\infty/\infty$.
-Then
+is an indeterminate form of type $\frac{0}{0}$ or $\infty/\infty$. Then
 \begin{equation}
 \lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)},
 \end{equation}
 provided the limit on the right-hand side exists or is infinite.
-\end{thm}
+#+latex: \end{thm}
 
 #+latex: \paragraph*{Improper Integrals}
 
@@ -8476,11 +7818,9 @@ if for every $\epsilon>0$ there exists an integer $N\geq1$ such that $|a_{k}-L|<
 \sum_{k=1}^{n}k=1+2+\cdots+n=\frac{n(n+1)}{2}\label{eq:gauss-series}
 \end{equation}
 
-
 \begin{equation}
 \sum_{k=1}^{n}k^{2}=1^{2}+2^{2}+\cdots+n^{2}=\frac{n(n+1)(2n+3)}{6}\label{eq:gauss-series-sq}
 \end{equation}
-
 
 
 #+latex: \paragraph*{The Binomial Series}
@@ -8579,14 +7919,11 @@ The /Gamma function/ $\Gamma$ will be defined in this book according to the form
 \Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\me^{-x}\:\diff x,\quad\mbox{for }\alpha>0.
 \end{equation}
 
-\begin{fact}
+#+latex: \begin{fact}
 Properties of the Gamma Function:
-\begin{itemize}
-\item $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$ for any $\alpha>1$,
-and so $\Gamma(n)=(n-1)!$ for any positive integer $n$.
-\item $\Gamma(1/2)=\sqrt{\pi}$.
-\end{itemize}
-\end{fact}
+- $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$ for any $\alpha>1$, and so $\Gamma(n)=(n-1)!$ for any positive integer $n$.
+- $\Gamma(1/2)=\sqrt{\pi}$.
+#+latex: \end{fact}
 
 
 ** Linear Algebra \label{sec:Linear-Algebra}
@@ -8629,7 +7966,7 @@ The /transpose/ of a matrix $\mathbf{A}=\begin{pmatrix}a_{ij}\end{pmatrix}$ is t
 The /trace/ of a square matrix $\mathbf{A}$ is the sum of its diagonal elements: $\mathrm{tr}(\mathbf{A})=\sum_{i}a_{ii}$. 
 
 The /inverse/ of a square matrix $\mathbf{A}_{\mathrm{n}\times\mathrm{n}}$ (when it exists) is the unique matrix denoted $\mathbf{A}^{-1}$ which satisfies $\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}_{\mathrm{n}\times\mathrm{n}}$. If $\mathbf{A}^{-1}$ exists then we say $\mathbf{A}$ is /invertible/, or /nonsingular/. Note that $\left(\mathbf{A}^{\mathrm{T}}\right)^{-1}=\left(\mathbf{A}^{\mathrm{-1}}\right)^{\mathrm{T}}$.
-\begin{fact}
+#+latex: \begin{fact}
 The inverse of the $2\times2$ matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
@@ -8637,28 +7974,27 @@ c & d\end{bmatrix}\quad\mbox{is}\quad\mathbf{A}^{-1}=\frac{1}{ad-bc}\begin{bmatr
 -c & a\end{bmatrix},
 \end{equation}
 provided $ad-bc\neq0$.
-\end{fact}
+#+latex: \end{fact}
 
 *** Determinants
-\begin{defn}
+#+latex: \begin{defn}
 The /determinant/ of a square matrix $\mathbf{A}_{\mathrm{n}\times n}$ is denoted $\mathrm{det}(\mathbf{A})$ or $|\mathbf{A}|$ and is defined recursively by
 \begin{equation}
 \mathrm{det}(\mathbf{A})=\sum_{i=1}^{n}(-1)^{i+j}a_{ij}\,\mathrm{det}(\mathbf{M}_{ij}),
 \end{equation}
 where $\mathbf{M}_{ij}$ is the submatrix formed by deleting the $i^{\mathrm{th}}$ row and $j^{\mathrm{th}}$ column of $\mathbf{A}$. We may choose any fixed $1\leq j\leq n$ we wish to compute the determinant; the final result is independent of the $j$ chosen.
-\end{defn}
-\begin{fact}
+#+latex: \end{defn}
+#+latex: \begin{fact}
 The determinant of the $2\times2$ matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
 c & d\end{bmatrix}\quad\mbox{is}\quad|\mathbf{A}|=ad-bc.
 \end{equation}
+#+latex: \end{fact}
 
-\end{fact}
-
-\begin{fact}
+#+latex: \begin{fact}
 A square matrix $\mathbf{A}$ is nonsingular if and only if $\mathrm{det}(\mathbf{A})\neq0$.
-\end{fact}
+#+latex: \end{fact}
 
 *** Positive (Semi)Definite
 
@@ -8703,16 +8039,15 @@ H=\begin{bmatrix}\frac{\partial^{2}f}{\partial x^{2}} & \frac{\partial^{2}f}{\pa
 \frac{\partial^{2}f}{\partial y\partial x} & \frac{\partial^{2}f}{\partial y^{2}}\end{bmatrix}.
 \end{equation}
 We use the following rules to decide whether $(a,b)$ is an /extremum/ (that is, a local minimum or local maximum) of $f$.
-\begin{itemize}
-\item If $\mbox{det}(H)>0$ and $\frac{\partial^{2}f}{\partial x^{2}}(a,b)>0$,
-then $(a,b)$ is a local minimum of $f$.
-\item If $\mbox{det}(H)>0$ and $\frac{\partial^{2}f}{\partial x^{2}}(a,b)<0$,
-then $(a,b)$ is a local maximum of $f$.
-\item If $\mbox{det}(H)<0$, then $(a,b)$ is a \emph{saddle point} of $f$
-and so is not an extremum of $f$.
-\item If $\mbox{det}(H)=0$, then we do not know the status of $(a,b)$;
-it might be an extremum or it might not be.
-\end{itemize}
+
+- If $\mbox{det}(H)>0$ and $\frac{\partial^{2}f}{\partial x^{2}}(a,b)>0$, then $(a,b)$ is a local minimum of $f$.
+
+- If $\mbox{det}(H)>0$ and $\frac{\partial^{2}f}{\partial x^{2}}(a,b)<0$, then $(a,b)$ is a local maximum of $f$.
+
+- If $\mbox{det}(H)<0$, then $(a,b)$ is a /saddle point/ of $f$ and so is not an extremum of $f$.
+
+- If $\mbox{det}(H)=0$, then we do not know the status of $(a,b)$; it might be an extremum or it might not be.
+
 
 *** Double and Multiple Integrals
 
@@ -8730,7 +8065,6 @@ Suppose we have a transformation[fn:inv] $T$ that maps points $(u,v)$ in a set $
 [fn:inv] For our purposes $T$ is in fact the \emph{inverse} of a one-to-one transformation that we are initially given. We usually start with functions that map $(x,y)\longmapsto(u,v)$, and one of our first tasks is to solve for the inverse transformation that maps $(u,v)\longmapsto(x,y)$. It is this inverse transformation which we are calling $T$.
 
 The /Jacobian/ (pronounced ``yah-KOH-bee-uhn'') of $T$ is denoted by $\partial(x,y)/\partial(u,v)$ and is defined by the determinant of the following matrix of partial derivatives:
-
 \begin{equation}
 \frac{\partial(x,y)}{\partial(u,v)}=\left|\begin{array}{cc}
 \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v}\\
@@ -8738,7 +8072,6 @@ The /Jacobian/ (pronounced ``yah-KOH-bee-uhn'') of $T$ is denoted by $\partial(x
 \end{equation}
 
 If the function $f$ is continuous on $A$ and if the Jacobian of $T$ is nonzero except perhaps on the boundary of $A$, then 
-
 \begin{equation}
 \iint_{B}f(x,y)\,\diff x\,\diff y=\iint_{A}f\left[x(u,v),\, y(u,v)\right]\ \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\diff u\,\diff v.
 \end{equation} 
@@ -8759,62 +8092,39 @@ It is possible to summarize this entire appendix with only one sentence: \emph{t
 
 *** Basic Outline for a Statistical Report
 
-\begin{enumerate}
-\item Executive Summary (a one page description of the study and conclusion) 
-\item Introduction 
+1. Executive Summary (a one page description of the study and conclusion) 
 
-\begin{enumerate}
-\item What is the question, and why is it important?
-\item Is the study observational or experimental?
-\item What are the hypotheses of interest to the researcher?
-\item What are the types of analyses employed? (one sample $t$-test, paired-sample
-$t$-test, ANOVA, chi-square test, regression, ...) 
-\end{enumerate}
-\item Data Collection 
+1. Introduction 
+   1. What is the question, and why is it important?
+   1. Is the study observational or experimental?
+   1. What are the hypotheses of interest to the researcher?
+   1. What are the types of analyses employed? (one sample $t$-test, paired-sample $t$-test, ANOVA, chi-square test, regression, ...) 
 
-\begin{enumerate}
-\item Describe how the data were collected in detail.
-\item Identify all variable types: quantitative, qualitative, ordered or
-nominal (with levels), discrete, continuous.
-\item Discuss any limitations of the data collection procedure. Look carefully
-for any sources of bias.
-\end{enumerate}
-\item Summary Information 
+1. Data Collection 
+   1. Describe how the data were collected in detail.
+   1. Identify all variable types: quantitative, qualitative, ordered or nominal (with levels), discrete, continuous.
+   1. Discuss any limitations of the data collection procedure. Look carefully for any sources of bias.
 
-\begin{enumerate}
-\item Give numeric summaries of all variables of interest.
+1. Summary Information
+   1. Give numeric summaries of all variables of interest.
+      1. Discrete: (relative) frequencies, contingency tables, odds ratios, /etc/. 
+      1. Continuous: measures of center, spread, shape.
+   1. Give visual summaries of all variables of interest.
+      1. Side-by-side boxplots, scatterplots, histograms, \emph{etc}.
+   1. Discuss any unusual features of the data (outliers, clusters, granularity, /etc/.)
+   1. Report any missing data and identify any potential problems or bias.
 
-\begin{enumerate}
-\item Discrete: (relative) frequencies, contingency tables, odds ratios,
-\emph{etc}. 
-\item Continuous: measures of center, spread, shape.
-\end{enumerate}
-\item Give visual summaries of all variables of interest.
+1. Analysis 
+   1. State any hypotheses employed, and check the assumptions. 
+   1. Report test statistics, \emph{p}-values, and confidence intervals. 
+   1. Interpret the results in the context of the study.
+   1. Attach (labeled) tables and/or graphs and make reference to them in the report as needed. 
 
-\begin{enumerate}
-\item Side-by-side boxplots, scatterplots, histograms, \emph{etc}.
-\end{enumerate}
-\item Discuss any unusual features of the data (outliers, clusters, granularity,
-\emph{etc}.)
-\item Report any missing data and identify any potential problems or bias.
-\end{enumerate}
-\item Analysis 
+1. Conclusion
+   1. Summarize the results of the study. What did you learn? 
+   1. Discuss any limitations of the study or inferences.
+   1. Discuss avenues of future research suggested by the study. 
 
-\begin{enumerate}
-\item State any hypotheses employed, and check the assumptions. 
-\item Report test statistics, \emph{p}-values, and confidence intervals. 
-\item Interpret the results in the context of the study.
-\item Attach (labeled) tables and/or graphs and make reference to them in
-the report as needed. 
-\end{enumerate}
-\item Conclusion
-
-\begin{enumerate}
-\item Summarize the results of the study. What did you learn? 
-\item Discuss any limitations of the study or inferences.
-\item Discuss avenues of future research suggested by the study. 
-\end{enumerate}
-\end{enumerate}
 
 ** How to Write It with R \label{sec:How-to-Write}
 
@@ -8833,26 +8143,15 @@ A disadvantage to this approach is that the R input/output needs to be edited ma
 
 Nevertheless, if you are going to write a report with Word there are some steps that you can take to make the report more amenable to the reader. 
 
-\begin{enumerate}
-\item Copy and paste graphs into the document. You can do this by right
-clicking on the graph and selecting \textsf{Copy as bitmap,} or \textsf{Copy
-as metafile}, or one of the other options. Then move the cursor to
-the document where you want the picture, right-click, and select \textsf{Paste}.
-\item Resize (most) pictures so that they take up no more than 1/2 page.
-You may want to put graphs side by side; do this by inserting a table
-and placing the graphs inside the cells.
-\item Copy selected \textsf{R} input and output to the Word document. All
-code should be separated from the rest of the writing, except when
-specifically mentioning a function or object in a sentence.
-\item The font of \textsf{R} input/output should be Courier New, or some
-other monowidth font (not Times New Roman or Calibri); the default
-font size of =12=
-is usually too big for \textsf{R} code and should be reduced to, for
-example, =10pt=.
-\end{enumerate}
-It is also possible to communicate with \textsf{R} through OpenOffice.org,
-which can export to the proprietary (=.doc=)
-format.
+1. Copy and paste graphs into the document. You can do this by right clicking on the graph and selecting \textsf{Copy as bitmap,} or \textsf{Copy as metafile}, or one of the other options. Then move the cursor to the document where you want the picture, right-click, and select \textsf{Paste}.
+
+1. Resize (most) pictures so that they take up no more than 1/2 page. You may want to put graphs side by side; do this by inserting a table and placing the graphs inside the cells.
+
+1. Copy selected \textsf{R} input and output to the Word document. All code should be separated from the rest of the writing, except when specifically mentioning a function or object in a sentence.
+
+1. The font of \textsf{R} input/output should be Courier New, or some other monowidth font (not Times New Roman or Calibri); the default font size of =12= is usually too big for \textsf{R} code and should be reduced to, for example, =10pt=.
+
+It is also possible to communicate with \textsf{R} through OpenOffice.org, which can export to the proprietary (=.doc=) format.
 
 
 *** OpenOffice.org and \texttt{odfWeave}
