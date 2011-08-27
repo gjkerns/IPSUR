@@ -1,9 +1,9 @@
 #+TITLE:     \fontsize{30}{35}\selectfont Introduction to Probability and Statistics Using \textsf{R}
 #+AUTHOR:    \fontsize{24}{28}\selectfont G. Jay Kerns
 #+EMAIL:     gkerns@ysu.edu
-#+DATE:      \fontsize{24}{28}\selectfont \noun{First Edition}
+#+DATE:      \fontsize{24}{28}\selectfont \noun{Second Edition}
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
@@ -15,7 +15,6 @@
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
 #+LaTeX_HEADER: \input{preamble}
 #+LATEX: \input{frontmatter}
-
 #+INCLUDE: "preface.org"
 
 * An Introduction to Probability and Statistics
@@ -562,7 +561,7 @@ We have already encountered skewed distributions: both the discoveries data in F
 
 #+latex: \paragraph*{Kurtosis}
 
-Another component to the shape of a distribution is how ``peaked'' it is. Some distributions tend to have a flat shape with thin tails. These are called /platykurtic/, and an example of a platykurtic distribution is the uniform distribution; see Section \ref{sec:The-Continuous-Uniform}. On the other end of the spectrum are distributions with a steep peak, or spike, accompanied by heavy tails; these are called /leptokurtic/. Examples of leptokurtic distributions are the Laplace distribution and the logistic distribution. See Section \ref{sec:Other-Continuous-Distributions}. In between are distributions (called \emph{mesokurtic}) with a rounded peak and moderately sized tails. The standard example of a mesokurtic distribution is the famous bell-shaped curve, also known as the Gaussian, or normal, distribution, and the binomial distribution can be mesokurtic for specific choices of $p$. See Sections \ref{sec:binom-dist} and \ref{sec:The-Normal-Distribution}.
+Another component to the shape of a distribution is how ``peaked'' it is. Some distributions tend to have a flat shape with thin tails. These are called /platykurtic/, and an example of a platykurtic distribution is the uniform distribution; see Section \ref{sec:The-Continuous-Uniform}. On the other end of the spectrum are distributions with a steep peak, or spike, accompanied by heavy tails; these are called /leptokurtic/. Examples of leptokurtic distributions are the Laplace distribution and the logistic distribution. See Section \ref{sec:Other-Continuous-Distributions}. In between are distributions (called /mesokurtic/) with a rounded peak and moderately sized tails. The standard example of a mesokurtic distribution is the famous bell-shaped curve, also known as the Gaussian, or normal, distribution, and the binomial distribution can be mesokurtic for specific choices of $p$. See Sections \ref{sec:binom-dist} and \ref{sec:The-Normal-Distribution}.
 
 *** Clusters and Gaps
 \label{sub:clusters-and-gaps}
@@ -1634,7 +1633,7 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 ** Sample Spaces
 \label{sec:Sample-Spaces}
 
-For a random experiment $E$, the set of all possible outcomes of $E$ is called the \emph{sample space\index{sample space}} and is denoted by the letter $S$. For a coin-toss experiment, $S$ would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in $S$.
+For a random experiment $E$, the set of all possible outcomes of $E$ is called the /sample space/\index{sample space} and is denoted by the letter $S$. For a coin-toss experiment, $S$ would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in $S$.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -1757,7 +1756,7 @@ In this way, when the =x= argument of =urnsamples= has repeated elements, the re
 ** Events
 \label{sec:Events}
 
-An \emph{event\index{event}} $A$ is merely a collection of outcomes, or in other words, a subset of the sample space[fn:events]. After the performance of a random experiment $E$ we say that the event $A$ /occurred/ if the experiment's outcome belongs to $A$. We say that a bunch of events $A_{1}$, $A_{2}$, $A_{3}$, ... are \emph{mutually exclusive\index{mutually exclusive}} or /disjoint/ if $A_{i}\cap A_{j}=\emptyset$ for any distinct pair $A_{i}\neq A_{j}$. For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec:The-Algebra-of}. 
+An /event/\index{event} $A$ is merely a collection of outcomes, or in other words, a subset of the sample space[fn:events]. After the performance of a random experiment $E$ we say that the event $A$ /occurred/ if the experiment's outcome belongs to $A$. We say that a bunch of events $A_{1}$, $A_{2}$, $A_{3}$, ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if $A_{i}\cap A_{j}=\emptyset$ for any distinct pair $A_{i}\neq A_{j}$. For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec:The-Algebra-of}. 
 
 [fn:events] This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.
 
@@ -1806,7 +1805,7 @@ y %in% x
 
 Notice that the returned value is a vector of length 5 which tests whether each element of =y= is in =x=, in turn.
 
-#+latex: \paragraph*{The \textt{isin} function}
+#+latex: \paragraph*{The \texttt{isin} function}
 
 It is more common to want to know whether the /whole/ vector =y= is in =x=. We can do this with the =isin= function. 
 
@@ -3117,7 +3116,7 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 
 We give special attention to the empirical distribution since it plays such a fundamental role with respect to resampling and Chapter \ref{cha:resampling-methods}; it will also be needed in Section \ref{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test} where we discuss the Kolmogorov-Smirnov test. Following this is a section in which we introduce a catalogue of discrete random variables that can be used to model experiments.
 
-There are some comments on simulation, and we mention transformations of random variables in the discrete case. The interested reader who would like to learn more about any of the assorted discrete distributions mentioned here should take a look at \emph{Univariate Discrete Distributions} by Johnson \emph{et al }\cite{Johnson1993}.
+There are some comments on simulation, and we mention transformations of random variables in the discrete case. The interested reader who would like to learn more about any of the assorted discrete distributions mentioned here should take a look at /Univariate Discrete Distributions/ by Johnson /et al/\cite{Johnson1993}.
 
 
 #+latex: \paragraph*{What do I want them to know?}
@@ -3716,7 +3715,7 @@ We learned in this section that $M^{(r)}(0)=\E X^{r}$. We remember from Calculus
 f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all \ensuremath{|x-a|<R},}
 \end{equation}
 
-where $R$ is called the \emph{radius of convergence} of the series (see Appendix \ref{sec:Sequences-and-Series}). We combine the two to say that if an MGF exists for all $t$ in the interval $(-\epsilon,\epsilon)$, then we can write
+where $R$ is called the /radius of convergence/ of the series (see Appendix \ref{sec:Sequences-and-Series}). We combine the two to say that if an MGF exists for all $t$ in the interval $(-\epsilon,\epsilon)$, then we can write
 \begin{equation}
 M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all \ensuremath{|t|<\epsilon}.}
 \end{equation}
@@ -3997,7 +3996,7 @@ Suppose that we conduct Bernoulli trials repeatedly, noting the successes and fa
 f_{X}(x)=p(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
 
-(Why?) We say that $X$ has a \emph{Geometric distribution} and we write $X\sim\mathsf{geom}(\mathtt{prob}=p)$. The associated \textsf{R} functions are =dgeom(x, prob)=, =pgeom=, =qgeom=, and =rhyper=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
+(Why?) We say that $X$ has a /Geometric distribution/ and we write $X\sim\mathsf{geom}(\mathtt{prob}=p)$. The associated \textsf{R} functions are =dgeom(x, prob)=, =pgeom=, =qgeom=, and =rhyper=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
 Again it is clear that $f(x)\geq0$ and we check that $\sum f(x)=1$ (see Equation \ref{eq:geom-series} in Appendix \ref{sec:Sequences-and-Series}):
 \begin{alignat*}{1}
@@ -4151,7 +4150,7 @@ We use the notation $X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)$. The associate
 
 #+latex: \paragraph*{What are the reasonable conditions?}
 
-Divide $[0,1]$ into subintervals of length $1/n$. A \emph{Poisson process}\index{Poisson process} satisfies the following conditions:
+Divide $[0,1]$ into subintervals of length $1/n$. A /Poisson process/\index{Poisson process} satisfies the following conditions:
 
 - the probability of an event occurring in a particular subinterval is $\approx\lambda/n$.
 
