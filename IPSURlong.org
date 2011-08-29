@@ -1,3 +1,4 @@
+#+STARTUP:   indent
 #+TITLE:     Introduction to Probability and Statistics Using R
 #+AUTHOR:    G. Jay Kerns
 #+EMAIL:     gkerns@ysu.edu
@@ -4262,7 +4263,7 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 #+end_src
 \par\end{centering}
-\caption{Some /F/ plots from the =HH= package\label{fig:Some-F-plots-HH}}
+\caption{Some $F$ plots from the \texttt{HH} package\label{fig:Some-F-plots-HH}}
 \end{figure}
 
 
@@ -4313,14 +4314,12 @@ power.examp()
 * Simple Linear Regression
 \label{cha:simple-linear-regression}
 
-
 #+latex: \paragraph*{What do I want them to know?}
 - basic philosophy of SLR and the regression assumptions
 - point and interval estimation of the model parameters, and how to use it to make predictions
 - point and interval estimation of future observations from the model
 - regression diagnostics, including $R^{2}$ and basic residual analysis
 - the concept of influential versus outlying observations, and how to tell the difference
-
 
 ** Basic Philosophy
 \label{sec:Basic-Philosophy}
@@ -4331,11 +4330,10 @@ Here we have two variables $X$ and $Y$. For our purposes, $X$ is not random (so 
 - $x=$ height and $Y=$ weight.
 - $x=$ smoking frequency and $Y=$ age of first heart attack.
 
-Given information about the relationship between $x$ and $Y$, we would like to /predict/ future values of $Y$ for particular values of $x$. This turns out to be a difficult problem[fn:predict], so instead we first tackle an easier problem: we estimate $\E Y$. How can we accomplish this? Well, we know that $Y$ depends somehow on $x,$ so it stands to reason that
+Given information about the relationship between $x$ and $Y$, we would like to /predict/ future values of $Y$ for particular values of $x$. This turns out to be a difficult problem[fn:predict], so instead we first tackle an easier problem: we estimate $\E Y$. How can we accomplish this? Well, we know that $Y$ depends somehow on $x$, so it stands to reason that
 \begin{equation}
 \E Y=\mu(x),\ \mbox{a function of }x.
 \end{equation}
-
 
 [fn:predict] Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''
 
@@ -4422,21 +4420,20 @@ segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 head(cars)
 #+end_src
 
-The =speed= represents how fast the car was going ($x$) in miles per hour and =dist= ($Y$) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the command =plot(dist ~ speed, data = cars)=. 
+The =speed= represents how fast the car was going ($x$) in miles per hour and =dist= ($Y$) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the =qplot= command in the =ggplot2= package. 
 
 
-
-\begin{quotation}
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
-plot(dist ~ speed, data = cars)
+#+begin_src R :exports code :results graphics :file img/carscatter.pdf
+qplot(speed, dist, data = cars)
 #+end_src
-\par\end{centering}
-\caption{Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars}
-data\label{fig:Scatter-cars}}
-\end{figure}
-\end{quotation}
+
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
+    \caption[Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data]{\small A scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data.  There is clearly an upward trend to the plot which is approximately linear.}
+    \label{fig:Scatter-cars}
+  \end{figure}
+#+end_src
 
 You can see the output in Figure \ref{fig:Scatter-cars}, which was produced by the following code.
 
@@ -4449,7 +4446,6 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 
 ** Estimation
 \label{sec:SLR-Estimation}
-
 
 *** Point Estimates of the Parameters
 \label{sub:point-estimate-mle-slr}
@@ -4521,7 +4517,6 @@ b_{1}=r\frac{s_{y}}{s_{x}},\label{eq:sample-correlation-formula}
 where $r$, $s_{y}$, and $s_{x}$ are the sample correlation coefficient and the sample standard deviations of the $Y$ and $x$ data, respectively. See Exercise \ref{xca:show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq:sample-correlation-formula} and Equation \ref{eq:population-slope-slr}.
 #+latex: \end{rem}
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
@@ -4541,6 +4536,11 @@ The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respect
 
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm= (see Figure \ref{fig:Scatter-cars-regline}):
 
+
+
+ggplot(cars, aes(x=speed, y=dist)) +
+    geom_point(shape=19) +  
+    geom_smooth(method=lm, se = FALSE)
 
 
 \begin{figure}
@@ -4575,7 +4575,6 @@ Using the regression line for the =cars= data:
 1. Interpret the intercept $\beta_{0}$.
    This would represent the mean stopping distance for a car traveling 0\,mph (which our regression line estimates to be SRC_R{round(coef(cars.lm)[1],2)}). Of course, this interpretation does not make any sense for this example, because a car travelling 0\,mph takes 0\,ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4\,mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
 #+latex: \end{example}
-
 
 *** Point Estimates of the Regression Line
 \label{sub:slr-point-est-regline}
@@ -4622,7 +4621,6 @@ predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 
 Note that there were no observed cars that traveled 6\,mph or 21\,mph. Also note that our estimate for a car traveling 8\,mph matches the value we computed by hand in Example \ref{exa:regline-cars-pe-8mph}.
 
-
 *** Mean Square Error and Standard Error
 
 To find the MLE of $\sigma^{2}$ we consider the partial derivative
@@ -4664,7 +4662,6 @@ The estimate $S$ for $\sigma$ is called the =Residual standard error= and for th
 carsumry <- summary(cars.lm)
 carsumry$sigma
 #+end_src
-
 
 *** Interval Estimates of the Parameters
 \label{sub:slr-interval-est-params}
@@ -4738,7 +4735,6 @@ confint(cars.lm)
 #+end_src
 
 With 95% confidence, the random interval [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] covers the parameter $\beta_{1}$.
-
 
 *** Interval Estimates of the Regression Line
 \label{sub:slr-interval-est-regline}
@@ -4853,7 +4849,6 @@ ci.plot(cars.lm)
 #+end_src
 
 Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\xbar)^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
-
 
 ** Model Utility and Inference
 \label{sec:Model-Utility-SLR}
@@ -5011,7 +5006,6 @@ anova(cars.lm)
 Here we see that the $F$ statistic is \Sexpr{round(carsumry$fstatistic, 2)} with a $p$-value very close to zero. The conclusion: there is very strong evidence that $H_{0}:\beta_{1}=0$ is false, that is, there is strong evidence that $\beta_{1}\neq0$. Moreover, we conclude that the regression relationship between =dist= and =speed= is significant.
 
 Note that the value of the $F$ statistic is the same as the Student's $t$ statistic for =speed= squared.
-
 
 ** Residual Analysis
 \label{sec:Residual-Analysis-SLR}
