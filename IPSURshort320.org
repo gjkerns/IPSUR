@@ -90,7 +90,6 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 - methods to describe data (visually/numerically) with respect to the properties, and how the methods differ depending on the data type
 - all of the above in the context of grouped data, and in particular, the concept of a factor
 
-
 ** Types of Data 
 \label{sec:Types-of-Data}
 
@@ -525,7 +524,6 @@ The analogue of =is.na= for rectangular data sets (or data frames) is the =compl
 *** Other Data Types
 \label{sub:other-data-types}
 
-
 ** Features of Data Distributions
 \label{sec:features-of-data}
 
@@ -580,7 +578,6 @@ Extreme observations fall far from the rest of the data. Such observations are t
 
 - *Maybe it indicates a deeper trend or phenomenon.* Many of the most influential scientific discoveries were made when the investigator noticed an unexpected result, a value that was not predicted by the classical theory. Albert Einstein, Louis Pasteur, and others built their careers on exactly this circumstance.
 
-
 ** Descriptive Statistics
 \label{sec:Descriptive-Statistics}
 
@@ -592,10 +589,10 @@ These are used for categorical data. The idea is that there are a number of diff
 *** Measures of Center
 \label{sub:Measures-of-Center}
 
-The /sample mean/ is denoted $\xbar$ (read ``$x$-bar'') and is simply the arithmetic average of the observations:
+The /sample mean/ is denoted $\overline{x}$ (read ``$x$-bar'') and is simply the arithmetic average of the observations:
 
 \begin{equation} 
-\xbar=\frac{x_{1}+x_{2}+\cdots+x_{n}}{n}=\frac{1}{n}\sum_{i=1}^{n}x_{i}.
+\overline{x}=\frac{x_{1}+x_{2}+\cdots+x_{n}}{n}=\frac{1}{n}\sum_{i=1}^{n}x_{i}.
 \end{equation}
 
 - Good: natural, easy to compute, has nice mathematical properties
@@ -610,7 +607,7 @@ The /sample median/ is another popular measure of center and is denoted $\tilde{
 
 One desirable property of the sample median is that it is /resistant/ to extreme observations, in the sense that the value of $\tilde{x}$ depends only on those data values in the middle, and is quite unaffected by the actual values of the outer observations in the ordered list. The same cannot be said for the sample mean. Any significant changes in the magnitude of an observation $x_{k}$ results in a corresponding change in the value of the mean. Consequently, the sample mean is said to be /sensitive/ to extreme observations.
 
-The /trimmed mean/ is a measure designed to address the sensitivity of the sample mean to extreme observations. The idea is to ``trim'' a fraction (less than 1/2) of the observations off each end of the ordered list, and then calculate the sample mean of what remains. We will denote it by $\xbar_{t=0.05}$.
+The /trimmed mean/ is a measure designed to address the sensitivity of the sample mean to extreme observations. The idea is to ``trim'' a fraction (less than 1/2) of the observations off each end of the ordered list, and then calculate the sample mean of what remains. We will denote it by $\overline{x}_{t=0.05}$.
 
 - Good: resistant to extreme values, shares nice statistical properties
 - Bad: need to sort the data
@@ -674,7 +671,7 @@ In =Rcmdr=, we can calculate the sample quantiles for a particular variable with
 The /sample variance/ is denoted $s^{2}$ and is calculated with the formula
 
 \begin{equation}
-s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\xbar)^{2}.
+s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 \end{equation}
 
 The /sample standard deviation/ is $s=\sqrt{s^{2}}$. Intuitively, the sample variance is approximately the average squared distance of the observations from the sample mean. The sample standard deviation is used to scale the estimate back to the measurement units of the original data.
@@ -742,7 +739,7 @@ we can calculate the sample standard deviation with the \textsf{Statistics $\tri
 The /sample skewness/, denoted by $g_{1}$, is defined by the formula
 
 \begin{equation}
-g_{1}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\xbar)^{3}}{s^{3}}.
+g_{1}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{3}}{s^{3}}.
 \end{equation}
 
 The sample skewness can be any value $-\infty<g_{1}<\infty$. The sign of $g_{1}$ indicates the direction of skewness of the distribution. Samples that have $g_{1}>0$ indicate right-skewed distributions (or positively skewed), and samples with $g_{1}<0$ indicate left-skewed distributions (or negatively skewed). Values of $g_{1}$ near zero indicate a symmetric distribution. These are not hard and fast rules, however. The value of $g_{1}$ is subject to sampling variability and thus only provides a suggestion to the skewness of the underlying distribution. 
@@ -754,7 +751,7 @@ We still need to know how big is ``big'', that is, how do we judge whether an ob
 The /sample excess kurtosis/, denoted by $g_{2}$, is given by the formula
 
 \begin{equation}
-g_{2}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\xbar)^{4}}{s^{4}}-3.
+g_{2}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{4}}{s^{4}}-3.
 \end{equation}
 
 The sample excess kurtosis takes values $-2\leq g_{2}<\infty$. The subtraction of 3 may seem mysterious but it is done so that mound shaped samples have values of $g_{2}$ near zero. Samples with $g_{2}>0$ are called /leptokurtic/, and samples with $g_{2}<0$ are called /platykurtic/. Samples with $g_{2}\approx0$ are called /mesokurtic/.
@@ -909,14 +906,13 @@ boxplot.stats(rivers, coef = 3)$out
 It is sometimes useful to compare data sets with each other on a scale that is independent of the measurement units. Given a set of observed data $x_{1}$, $x_{2}$, ..., $x_{n}$ we get $z$ scores, denoted $z_{1}$, $z_{2}$, ..., $z_{n}$, by means of the following formula
 
 \[
-z_{i}=\frac{x_{i}-\xbar}{s},\quad i=1,\,2,\,\ldots,\, n.
+z_{i}=\frac{x_{i}-\overline{x}}{s},\quad i=1,\,2,\,\ldots,\, n.
 \]
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 The =scale= function will rescale a numeric vector (or data frame) by subtracting the sample mean from each value (column) and/or by dividing each observation by the sample standard deviation.
-
 
 ** Multivariate Data and Data Frames
 \label{sec:multivariate-data}
@@ -970,7 +966,7 @@ The *sample Pearson product-moment correlation
 coefficient*:
 
 \[
-r=\frac{\sum_{i=1}^{n}(x_{i}-\xbar)(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)}\sqrt{\sum_{i=1}^{n}(y_{i}-\ybar)}}
+r=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_{i}-\overline{x})}\sqrt{\sum_{i=1}^{n}(y_{i}-\ybar)}}
 \]
 
 - independent of scale
@@ -1016,7 +1012,6 @@ or in \textsf{R} Commander by following \textsf{Statistics} \textsf{$\triangleri
 - 3D Scatterplot. See Figure \pageref{fig:3D-scatterplot-trees}
 - =plot(state.region, state.division)= 
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
-
 
 ** Comparing Populations
 \label{sec:Comparing-Data-Sets}
@@ -3733,14 +3728,14 @@ The mean of the empirical distribution is
 \begin{equation}
 \mu=\sum_{x\in S}xf_{X}(x)=\sum_{i=1}^{n}x_{i}\cdot\frac{1}{n}
 \end{equation}
-and we recognize this last quantity to be the sample mean, $\xbar$. The variance of the empirical distribution is
+and we recognize this last quantity to be the sample mean, $\overline{x}$. The variance of the empirical distribution is
 \begin{equation}
-\sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x)=\sum_{i=1}^{n}(x_{i}-\xbar)^{2}\cdot\frac{1}{n}
+\sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x)=\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\cdot\frac{1}{n}
 \end{equation}
 and this last quantity looks very close to what we already know to be the sample variance.
 
 \begin{equation}
-s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\xbar)^{2}.
+s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 \end{equation}
 
 The /empirical quantile function/ is the inverse of the ECDF. See Section \ref{sub:Normal-Quantiles-QF}.

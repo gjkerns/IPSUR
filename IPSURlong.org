@@ -2487,7 +2487,7 @@ Supposing for the sake of argument that we have collected a random sample, the n
 
 The probability distribution associated with the population (from which we sample) is called the /population distribution/, and the probability distribution associated with our statistic is called its /sampling distribution/; clearly, the two are interrelated. To learn about the population distribution, it is imperative to know everything we can about the sampling distribution. Such is the goal of this chapter.
 
-We begin by introducing the notion of simple random samples and cataloguing some of their more convenient mathematical properties. Next we focus on what happens in the special case of sampling from the normal distribution (which, again, has several convenient mathematical properties), and in particular, we meet the sampling distribution of $\Xbar$ and $S^{2}$. Then we explore what happens to $\Xbar$'s sampling distribution when the population is not normal and prove one of the most remarkable theorems in statistics, the Central Limit Theorem (CLT).
+We begin by introducing the notion of simple random samples and cataloguing some of their more convenient mathematical properties. Next we focus on what happens in the special case of sampling from the normal distribution (which, again, has several convenient mathematical properties), and in particular, we meet the sampling distribution of $\overline{X}$ and $S^{2}$. Then we explore what happens to $\overline{X}$'s sampling distribution when the population is not normal and prove one of the most remarkable theorems in statistics, the Central Limit Theorem (CLT).
 
 With the CLT in hand, we then investigate the sampling distributions of several other popular statistics, taking full advantage of those with a tractable form. We finish the chapter with an exploration of statistics whose sampling distributions are not quite so tractable, and to accomplish this goal we will use simulation methods that are grounded in all of our work in the previous four chapters.
 
@@ -2519,7 +2519,7 @@ If $X_{1}$, $X_{2}$, ..., $X_{n}$ are independent with $X_{i}\sim f$ for $i=1,2,
 
 #+latex: \begin{prop}
 \label{pro:mean-sd-xbar}
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the mean and standard deviation of $\Xbar$ are given by the formulas $\mu_{\Xbar}=\mu$ and $\sigma_{\Xbar}=\sigma/\sqrt{n}$.
+Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the mean and standard deviation of $\overline{X}$ are given by the formulas $\mu_{\overline{X}}=\mu$ and $\sigma_{\overline{X}}=\sigma/\sqrt{n}$.
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
@@ -2530,16 +2530,16 @@ The next fact will be useful to us when it comes time to prove the Central Limit
 
 #+latex: \begin{prop}
 \label{pro:mgf-xbar}
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with MGF $M(t)$. Then the MGF of $\Xbar$ is given by
+Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with MGF $M(t)$. Then the MGF of $\overline{X}$ is given by
 \begin{equation}
-M_{\Xbar}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
+M_{\overline{X}}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
 \end{equation}
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
 Go from the definition:
 \begin{eqnarray*}
-M_{\Xbar}(t) & = & \E\,\me^{t\Xbar},\\
+M_{\overline{X}}(t) & = & \E\,\me^{t\overline{X}},\\
  & = & \E\,\me^{t(X_{1}+\cdots+X_{n})/n},\\
  & = & \E\,\me^{tX_{1}/n}\me^{tX_{2}/n}\cdots\me^{tX_{n}/n}.
 \end{eqnarray*}
@@ -2559,17 +2559,17 @@ The last step is to recognize that each term in last product above is exactly $M
 \label{sub:samp-mean-dist-of}}
 
 #+latex: \begin{prop}
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Then the sample mean $\Xbar$ has a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$ sampling distribution.
+Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Then the sample mean $\overline{X}$ has a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$ sampling distribution.
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
-The mean and standard deviation of $\Xbar$ follow directly from Proposition \ref{pro:mean-sd-xbar}. To address the shape, first remember from Section \ref{sec:The-Normal-Distribution} that the $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ MGF is of the form
+The mean and standard deviation of $\overline{X}$ follow directly from Proposition \ref{pro:mean-sd-xbar}. To address the shape, first remember from Section \ref{sec:The-Normal-Distribution} that the $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ MGF is of the form
 \[
 M(t)=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} .
 \]
 Now use Proposition \ref{pro:mgf-xbar} to find
 \begin{eqnarray*}
-M_{\Xbar}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
+M_{\overline{X}}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
  & = & \left[\exp\left\{ \mu(t/n)+\sigma^{2}(t/n)^{2}/2\right\} \right]^{n},\\
  & = & \exp\left\{ \, n\cdot\left[\mu(t/n)+\sigma^{2}(t/n)^{2}/2\right]\right\} ,\\
  & = & \exp\left\{ \mu t+(\sigma/\sqrt{n})^{2}t^{2}/2\right\},
@@ -2586,15 +2586,15 @@ and we recognize this last quantity as the MGF of a $\mathsf{norm}(\mathtt{mean}
 \label{thm:Xbar-andS}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, and let
 \begin{equation}
-\Xbar=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\Xbar)^{2}.
+\overline{X}=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}.
 \end{equation}
 
 Then
-1. $\Xbar$ and $S^{2}$ are independent, and
+1. $\overline{X}$ and $S^{2}$ are independent, and
 
 2. The rescaled sample variance
     \begin{equation}
-    \frac{(n-1)}{\sigma^{2}}S^{2}=\frac{\sum_{i=1}^{n}(X_{i}-\Xbar)^{2}}{\sigm    a^{2}}
+    \frac{(n-1)}{\sigma^{2}}S^{2}=\frac{\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}}{\sigm    a^{2}}
     \end{equation}
     has a $\mathsf{chisq}(\mathtt{df}=n-1)$ sampling distribution.
 
@@ -2612,7 +2612,7 @@ The proof is beyond the scope of the present book, but the theorem is simply too
 #+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Then the quantity 
 \begin{equation}
-T=\frac{\Xbar-\mu}{S/\sqrt{n}}
+T=\frac{\overline{X}-\mu}{S/\sqrt{n}}
 \end{equation}
 has a $\mathsf{t}(\mathtt{df}=n-1)$ sampling distribution.
 #+latex: \end{prop}
@@ -2620,11 +2620,11 @@ has a $\mathsf{t}(\mathtt{df}=n-1)$ sampling distribution.
 #+latex: \begin{proof}
 Divide the numerator and denominator by $\sigma$ and rewrite
 \[
-T=\frac{\frac{\Xbar-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\Xbar-\mu}{\sigma/\sqrt{n}}}{\sqrt{\left.\frac{(n-1)S^{2}}{\sigma^{2}}\right\slash (n-1)}}.
+T=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{\sqrt{\left.\frac{(n-1)S^{2}}{\sigma^{2}}\right\slash (n-1)}}.
 \]
 Now let 
 \[
-Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\quad\mbox{and}\quad V=\frac{(n-1)S^{2}}{\sigma^{2}},
+Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\quad\mbox{and}\quad V=\frac{(n-1)S^{2}}{\sigma^{2}},
 \]
 so that
 \begin{equation}
@@ -2632,7 +2632,7 @@ T=\frac{Z}{\sqrt{V/r}},
 \end{equation}
 where $r=n-1$.
 
-We know from Section \ref{sub:samp-mean-dist-of} that $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and we know from Section \ref{sub:Samp-Var-Dist} that $V\sim\mathsf{chisq}(\mathtt{df}=n-1)$. Further, since we are sampling from a normal distribution, Theorem \ref{thm:Xbar-andS} gives that $\Xbar$ and $S^{2}$ are independent and by Fact \ref{fac:indep-then-function-indep} so are $Z$ and $V$. In summary, the distribution of $T$ is the same as the distribution of the quantity $Z/\sqrt{V/r}$, where $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and $V\sim\mathsf{chisq}(\mathtt{df}=r)$ are independent. This is in fact the definition of Student's $t$ distribution.
+We know from Section \ref{sub:samp-mean-dist-of} that $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and we know from Section \ref{sub:Samp-Var-Dist} that $V\sim\mathsf{chisq}(\mathtt{df}=n-1)$. Further, since we are sampling from a normal distribution, Theorem \ref{thm:Xbar-andS} gives that $\overline{X}$ and $S^{2}$ are independent and by Fact \ref{fac:indep-then-function-indep} so are $Z$ and $V$. In summary, the distribution of $T$ is the same as the distribution of the quantity $Z/\sqrt{V/r}$, where $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and $V\sim\mathsf{chisq}(\mathtt{df}=r)$ are independent. This is in fact the definition of Student's $t$ distribution.
 #+latex: \end{proof}
 
 This distribution was first published by W. S. Gosset (1900) under the pseudonym Student, and the distribution has consequently come to be known as Student's $t$ distribution. The PDF of $T$ can be derived explicitly using the techniques of Section \ref{sec:Functions-of-Continuous}; it takes the form 
@@ -2689,9 +2689,9 @@ There are a few things to note about the $\mathtt{t}(\mathtt{df}=r)$ distributio
 ** The Central Limit Theorem
 \label{sec:Central-Limit-Theorem}
 
-In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when $X_{1}$, $X_{2}$, ... , $X_{n}$ is a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution then $\Xbar\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$. In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of $Z$ defined by
+In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when $X_{1}$, $X_{2}$, ... , $X_{n}$ is a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution then $\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})$. In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of $Z$ defined by
 \begin{equation}
-Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}
+Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
 \end{equation}
 is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. 
 
@@ -2701,17 +2701,17 @@ However, there are many populations that are /not/ normal ... and the statistici
 \label{thm:central-limit-thrm}
 *The Central Limit Theorem.* Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a population distribution with mean $\mu$ and finite standard deviation $\sigma$. Then the sampling distribution of 
 \begin{equation}
-Z=\frac{\Xbar-\mu}{\sigma/\sqrt{n}}
+Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
 \end{equation}
 approaches a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution as $n\to\infty$.
 #+latex: \end{thm}
 
 #+latex: \begin{rem}
-We suppose that $X_{1}$, $X_{2}$, ... , $X_{n}$ are i.i.d., and we learned in Section \ref{sub:simple-random-samples} that $\Xbar$ has mean $\mu$ and standard deviation $\sigma/\sqrt{n}$, so we already knew that $Z$ has mean 0 and standard deviation 1. The beauty of the CLT is that it addresses the /shape/ of $Z$'s distribution when the sample size is large.
+We suppose that $X_{1}$, $X_{2}$, ... , $X_{n}$ are i.i.d., and we learned in Section \ref{sub:simple-random-samples} that $\overline{X}$ has mean $\mu$ and standard deviation $\sigma/\sqrt{n}$, so we already knew that $Z$ has mean 0 and standard deviation 1. The beauty of the CLT is that it addresses the /shape/ of $Z$'s distribution when the sample size is large.
 #+latex: \end{rem}
 
 #+latex: \begin{rem}
-Notice that the shape of the underlying population's distribution is not mentioned in Theorem \ref{thm:central-limit-thrm}; indeed, the result is true for any population that is well-behaved enough to have a finite standard deviation. In particular, if the population is normally distributed then we know from Section \ref{sub:samp-mean-dist-of} that the distribution of $\Xbar$ (and $Z$ by extension) is /exactly/ normal, for /every/ $n$.
+Notice that the shape of the underlying population's distribution is not mentioned in Theorem \ref{thm:central-limit-thrm}; indeed, the result is true for any population that is well-behaved enough to have a finite standard deviation. In particular, if the population is normally distributed then we know from Section \ref{sub:samp-mean-dist-of} that the distribution of $\overline{X}$ (and $Z$ by extension) is /exactly/ normal, for /every/ $n$.
 #+latex: \end{rem}
 
 #+latex: \begin{rem}
@@ -2731,9 +2731,9 @@ library(distrTeach)
 example(illustrateCLT)
 #+end_src
 
-The =IPSUR=  package has the functions =clt1=, =clt2=, and =clt3= (see Exercise \ref{xca:clt123} at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of $\Xbar$ when the population distribution is mound shaped, finite support, and skewed, namely $\mathsf{t}(\mathtt{df}=3)$, $\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)$ and $\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)$, respectively. 
+The =IPSUR=  package has the functions =clt1=, =clt2=, and =clt3= (see Exercise \ref{xca:clt123} at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of $\overline{X}$ when the population distribution is mound shaped, finite support, and skewed, namely $\mathsf{t}(\mathtt{df}=3)$, $\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)$ and $\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)$, respectively. 
 
-For example, when the command =clt1()=  is issued a plot window opens to show a graph of the PDF of a $\mathsf{t}(\mathtt{df}=3)$ distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size =sample.size = 2= from the =population = "rt"= distribution a total of =N.iter = 100000= times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of $\Xbar$, see Section \ref{sec:Simulated-Sampling-Distributions}. Also shown are the sample mean and sample variance of all of the simulated  $\Xbar$s. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated $\Xbar$s is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
+For example, when the command =clt1()=  is issued a plot window opens to show a graph of the PDF of a $\mathsf{t}(\mathtt{df}=3)$ distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size =sample.size = 2= from the =population = "rt"= distribution a total of =N.iter = 100000= times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of $\overline{X}$, see Section \ref{sec:Simulated-Sampling-Distributions}. Also shown are the sample mean and sample variance of all of the simulated  $\overline{X}$s. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated $\overline{X}$s is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
@@ -2747,12 +2747,12 @@ There are often two populations under consideration, and it sometimes of interes
 #+latex: \begin{prop}
 Let $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ be an $SRS(n_{1})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})$ distribution and let $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ be an $SRS(n_{2})$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})$ distribution. Suppose that $X_{1}$, $X_{2}$, ... , $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ... , $Y_{n_{2}}$ are independent samples. Then the quantity
 \begin{equation}
-\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
-has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution. Equivalently, $\Xbar-\Ybar$ has a $\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}})$ sampling distribution.
+\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
+has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution. Equivalently, $\overline{X}-\overline{Y}$ has a $\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}})$ sampling distribution.
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
-We know that $\Xbar$ is $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X}/\sqrt{n_{1}})$ and we also know that $\Ybar$ is $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}/\sqrt{n_{2}})$. And since the samples $X_{1}$, $X_{2}$, ..., $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ..., $Y_{n_{2}}$ are independent, so too are $\Xbar$ and $\Ybar$. The distribution of their difference is thus normal as well, and the mean and standard deviation are given by Proposition \ref{pro:mean-sd-lin-comb-two}.
+We know that $\overline{X}$ is $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X}/\sqrt{n_{1}})$ and we also know that $\overline{Y}$ is $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}/\sqrt{n_{2}})$. And since the samples $X_{1}$, $X_{2}$, ..., $X_{n_{1}}$ and $Y_{1}$, $Y_{2}$, ..., $Y_{n_{2}}$ are independent, so too are $\overline{X}$ and $\overline{Y}$. The distribution of their difference is thus normal as well, and the mean and standard deviation are given by Proposition \ref{pro:mean-sd-lin-comb-two}.
 #+latex: \end{proof}
 
 #+latex: \begin{rem}
@@ -2761,9 +2761,9 @@ Even if the distribution of one or both of the samples is not normal, the quanti
 
 #+latex: \begin{rem}
 For the special case of $\mu_{X}=\mu_{Y}$ we have shown that 
-\begin{equation} \frac{\Xbar-\Ybar}{\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}}}
+\begin{equation} \frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}}}
 \end{equation}
-has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution, or in other words, $\Xbar-\Ybar$ has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})$ sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec:Conf-Interv-for-Diff-Means}.
+has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ sampling distribution, or in other words, $\overline{X}-\overline{Y}$ has a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})$ sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec:Conf-Interv-for-Diff-Means}.
 #+latex: \end{rem}
 
 
@@ -2880,20 +2880,19 @@ sd(mads)
 Now let's take a look at a plot of the simulated values
 
 
-
-
-
-\begin{figure}[H]
-\begin{centering}
-<<echo = FALSE, fig=TRUE, height = 4, width = 6>>=
+#+begin_src R :exports results :results graphics :file img/simulated-MAD.pdf
 hist(mads, breaks = 20)
-\par\end{centering}
-\caption{Plot of simulated MADs\label{fig:simulated-MAD}}
-\end{figure}
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/simulated-MAD.pdf}
+    \caption[Plot of simulated MADs]{\small Plot of simulated MADs.}
+    \label{fig:simulated-MAD}
+  \end{figure}
+#+end_src
 
-
-\newpage{}
+#+latex: \newpage{}
 
 ** Chapter Exercises
 
@@ -2907,17 +2906,17 @@ mu = round(rnorm(10, mean = 20))
 #+end_src
 
 #+latex: \begin{xca}
-Suppose that we observe a random sample $X_{1}$, $X_{2}$, ... , $X_{n}$ of size $SRS(n=$\Sexpr{n[k]}) from a $\mathsf{norm}(\mathtt{mean}=$\Sexpr{mu[k]}) distribution. 
-1. What is the mean of $\Xbar$?
-1. What is the standard deviation of $\Xbar$?
-1. What is the distribution of $\Xbar$? (approximately)
-1. Find $\P(a<\Xbar\leq b)$
-1. Find $\P(\Xbar>c)$.\end{enumerate}
+Suppose that we observe a random sample $X_{1}$, $X_{2}$, ... , $X_{n}$ of size $SRS(n=$ SRC_R{n[k]} ) from a $\mathsf{norm}(\mathtt{mean}=$ SRC_R{mu[k]}) distribution. 
+1. What is the mean of $\overline{X}$?
+1. What is the standard deviation of $\overline{X}$?
+1. What is the distribution of $\overline{X}$? (approximately)
+1. Find $\P(a< \overline{X} \leq b)$
+1. Find $\P(\overline{X} > c)$.
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 \label{xca:clt123}
-In this exercise we will investigate how the shape of the population distribution affects the time until the distribution of $\Xbar$ is acceptably normal.
+In this exercise we will investigate how the shape of the population distribution affects the time until the distribution of $\overline{X}$ is acceptably normal.
 #+latex: \end{xca}
 
 Answer the questions and write a report about what you have learned. Use plots and histograms to support your conclusions. See Appendix \ref{cha:Writing-Reports-with} for instructions about writing reports with \textsf{R}. For these problems, the discussion/interpretation parts are the most important, so be sure to ANSWER THE WHOLE QUESTION.
@@ -2925,14 +2924,14 @@ Answer the questions and write a report about what you have learned. Use plots a
 
 *** The Central Limit Theorem
 
-For Questions 1-3, we assume that we have observed random variables $X_{1}$, $X_{2}$, ... ,$X_{n}$ that are an $SRS(n)$ from a given population (depending on the problem) and we want to investigate the distribution of $\Xbar$ as the sample size $n$ increases. 
+For Questions 1-3, we assume that we have observed random variables $X_{1}$, $X_{2}$, ... ,$X_{n}$ that are an $SRS(n)$ from a given population (depending on the problem) and we want to investigate the distribution of $\overline{X}$ as the sample size $n$ increases. 
 
 1. The population of interest in this problem has a Student's $t$ distribution with $r=3$ degrees of freedom. We begin our investigation with a sample size of $n=2$. Open an \textsf{R} session, make sure to type =library(IPSUR)= and then follow that with =clt1()=. 
 
    1. Look closely and thoughtfully at the first graph. How would you describe the population distribution? Think back to the different properties of distributions in Chapter \ref{cha:Describing-Data-Distributions}. Is the graph symmetric? Skewed? Does it have heavy tails or thin tails? What else can you say?
    1. What is the population mean $\mu$ and the population variance $\sigma^{2}$? (Read these from the first graph.)
-   1. The second graph shows (after a few seconds) a relative frequency histogram which closely approximates the distribution of $\Xbar$. Record the values of =mean(xbar)= and =var(xbar)=, where =xbar= denotes the vector that contains the simulated sample means. Use the answers from part (b) to calculate what these estimates /should/ be, based on what you know about the theoretical mean and variance of $\Xbar$. How well do your answers to parts (b) and (c) agree? 
-   1. Click on the histogram to superimpose a red normal curve, which is the theoretical limit of the distribution of $\Xbar$ as $n\to\infty$. How well do the histogram and the normal curve match? Describe the differences between the two distributions. When judging between the two, do not worry so much about the scale (the graphs are being rescaled automatically, anyway). Rather, look at the peak: does the histogram poke through the top of the normal curve? How about on the sides: are there patches of white space between the histogram and line on either side (or both)? How do the curvature of the histogram and the line compare? Check down by the tails: does the red line drop off visibly below the level of the histogram, or do they taper off at the same height? 
+   1. The second graph shows (after a few seconds) a relative frequency histogram which closely approximates the distribution of $\overline{X}$. Record the values of =mean(xbar)= and =var(xbar)=, where =xbar= denotes the vector that contains the simulated sample means. Use the answers from part (b) to calculate what these estimates /should/ be, based on what you know about the theoretical mean and variance of $\overline{X}$. How well do your answers to parts (b) and (c) agree? 
+   1. Click on the histogram to superimpose a red normal curve, which is the theoretical limit of the distribution of $\overline{X}$ as $n\to\infty$. How well do the histogram and the normal curve match? Describe the differences between the two distributions. When judging between the two, do not worry so much about the scale (the graphs are being rescaled automatically, anyway). Rather, look at the peak: does the histogram poke through the top of the normal curve? How about on the sides: are there patches of white space between the histogram and line on either side (or both)? How do the curvature of the histogram and the line compare? Check down by the tails: does the red line drop off visibly below the level of the histogram, or do they taper off at the same height? 
    1. We can increase our sample size from 2 to 11 with the command =clt1(sample.size = 11)=. Return to the command prompt to do this. Answer parts (b) and (c) for this new sample size.
    1. Go back to =clt1= and increase the =sample.size= from 11 to 31. Answer parts (b) and (c) for this new sample size.
    1. Comment on whether it appears that the histogram and the red curve are ``noticeably different'' or whether they are ``essentially the same'' for the largest sample size $n=31$. If they are still ``noticeably different'' at $n=31$, how large does $n$ need to be until they are ``essentially the same''? (Experiment with different values of $n$).
@@ -2943,14 +2942,14 @@ For Questions 1-3, we assume that we have observed random variables $X_{1}$, $X_
 
 1. Summarize what you have learned. In your own words, what is the general trend that is being displayed in these histograms, as the sample size $n$ increases from 2 to 11, on to 31, and onward? 
 
-1. How would you describe the relationship between the /shape/ of the population distribution and the /speed/ at which $\Xbar$'s distribution converges to normal? In particular, consider a population which is highly *skewed*. Will we need a relatively /large/ sample size or a relatively /small/ sample size in order for $\Xbar$'s distribution to be approximately bell shaped?
+1. How would you describe the relationship between the /shape/ of the population distribution and the /speed/ at which $\overline{X}$'s distribution converges to normal? In particular, consider a population which is highly *skewed*. Will we need a relatively /large/ sample size or a relatively /small/ sample size in order for $\overline{X}$'s distribution to be approximately bell shaped?
 
 
 #+latex: \begin{xca}
-Let $X_{1}$,..., $X_{25}$ be a random sample from a $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45)$ distribution, and let $\Xbar$ be the sample mean of these $n=25$ observations. Find the following probabilities. 
-1. How is $\Xbar$ distributed? 
+Let $X_{1}$,..., $X_{25}$ be a random sample from a $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45)$ distribution, and let $\overline{X}$ be the sample mean of these $n=25$ observations. Find the following probabilities. 
+1. How is $\overline{X}$ distributed? 
    $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45/\sqrt{25})$ 
-1. Find $\P(\Xbar>43.1)$.
+1. Find $\P(\overline{X}>43.1)$.
    #+begin_src R :exports both :results output pp
    pnorm(43.1, mean = 37, sd = 9, lower.tail = FALSE)
    #+end_src
@@ -3167,9 +3166,9 @@ Some comments about maximum likelihood estimators:
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
 #+latex: \end{rem}
 
-Notice, in Example \ref{exa:bass-bluegill} we had $X_{i}$ i.i.d.~$\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$, and we saw that the MLE was $\hat{p}=\Xbar$. But further
+Notice, in Example \ref{exa:bass-bluegill} we had $X_{i}$ i.i.d.~$\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$, and we saw that the MLE was $\hat{p}=\overline{X}$. But further
 \begin{eqnarray*}
-\E\Xbar & = & \E\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
+\E\overline{X} & = & \E\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
  & = & \frac{1}{n}\left(\E X_{1}+\E X_{2}+\cdots+\E X_{n}\right),\\
  & = & \frac{1}{n}\left(np\right),\\
  & = & p,
@@ -3191,9 +3190,9 @@ Let $X_{1}$, $X_{2}$, ... , $X_{n}$ be an $SRS(n)$ from a $\mathsf{norm}(\mathtt
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
-where $\hat{\mu}=\Xbar$ and
+where $\hat{\mu}=\overline{X}$ and
 \begin{equation}
-\hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\Xbar\right)^{2}=\frac{n-1}{n}S^{2}.
+\hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}\right)^{2}=\frac{n-1}{n}S^{2}.
 \end{equation}
 
 We of course know from \ref{pro:mean-sd-xbar} that $\hat{\mu}$ is unbiased. What about $\hat{\sigma^{2}}$? Let us check: 
@@ -3282,7 +3281,7 @@ var(x)*29/30
 sd(x)/sqrt(30)
 #+end_src
 
-The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of $\hat{\mu}=\Xbar$ is $\sigma/\sqrt{n}$, and the numerical estimate of this was very close too.
+The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of $\hat{\mu}=\overline{X}$ is $\sigma/\sqrt{n}$, and the numerical estimate of this was very close too.
 
 #+latex: \end{example}
 
@@ -3292,39 +3291,39 @@ There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to cal
 ** Confidence Intervals for Means
 \label{sec:Confidence-Intervals-for-Means}
 
-We are given $X_{1}$, $X_{2}$, ..., $X_{n}$ that are an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, where $\mu$ is unknown. We know that we may estimate $\mu$ with $\Xbar$, and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
+We are given $X_{1}$, $X_{2}$, ..., $X_{n}$ that are an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, where $\mu$ is unknown. We know that we may estimate $\mu$ with $\overline{X}$, and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
-\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
+\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 \end{equation}
 
 For a big probability $1-\alpha$, for instance, 95%, we can calculate the quantile $z_{\alpha/2}$. Then
 \begin{equation}
-\P\left(-z_{\alpha/2}\leq\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
+\P\left(-z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
 \end{equation}
 
 But now consider the following string of equivalent inequalities:
 \[
--z_{\alpha/2}\leq\frac{\Xbar-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2},
+-z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2},
 \]
 \[
--z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\Xbar-\mu\leq z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
+-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\overline{X}-\mu\leq z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
 \]
 \[
--\Xbar-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq-\mu\leq-\Xbar+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
+-\overline{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq-\mu\leq-\overline{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
 \]
 \[
-\Xbar-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\mu\leq\Xbar+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right).
+\overline{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\mu\leq\overline{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right).
 \]
 
 That is, 
 \begin{equation}
-\P\left(\Xbar-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\Xbar+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
+\P\left(\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
 \end{equation}
 
 #+latex: \begin{defn}
 The interval
 \begin{equation}
-\left[\Xbar-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\ \Xbar+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
+\left[\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\ \overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
 is a $100(1-\alpha)$% /confidence interval for/ $\mu$. The quantity $1-\alpha$ is called the /confidence coefficient/.
 #+latex: \end{defn}
@@ -3332,7 +3331,7 @@ is a $100(1-\alpha)$% /confidence interval for/ $\mu$. The quantity $1-\alpha$ i
 #+latex: \begin{rem}
 The interval is also sometimes written more compactly as
 \begin{equation}
-\Xbar\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.\label{eq:z-interval}
+\overline{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.\label{eq:z-interval}
 \end{equation}
 #+latex: \end{rem}
 
@@ -3434,14 +3433,14 @@ conditions of the interval?
 #+latex: \begin{rem}
 What if $\sigma$ is unknown? We instead use the interval
 \begin{equation}
-\Xbar\pm z_{\alpha/2}\frac{S}{\sqrt{n}},
+\overline{X}\pm z_{\alpha/2}\frac{S}{\sqrt{n}},
 \end{equation}
 where $S$ is the sample standard deviation.
-- If $n$ is large, then $\Xbar$ will have an approximately normal distribution regardless of the underlying population (by the CLT) and $S$ will be very close to the parameter $\sigma$ (by the SLLN); thus the above interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$.
+- If $n$ is large, then $\overline{X}$ will have an approximately normal distribution regardless of the underlying population (by the CLT) and $S$ will be very close to the parameter $\sigma$ (by the SLLN); thus the above interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$.
 - If $n$ is small, then
    - If the underlying population is normal then we may replace $z_{\alpha/2}$ with $t_{\alpha/2}(\mathtt{df}=n-1)$. The resulting $100(1-\alpha)\%$ confidence interval is
    \begin{equation}
-   \Xbar\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}\label{eq:one-samp-t-int}
+   \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}\label{eq:one-samp-t-int}
    \end{equation}
    - if the underlying population is not normal, but approximately normal, then we may use the $t$ interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$. However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
 #+latex: \end{rem}
@@ -3456,11 +3455,11 @@ The author learned of a handy acronym from AP Statistics Exam graders that summa
 #+latex: \begin{rem}
 All of the above intervals for $\mu$ were two-sided, but there are also one-sided intervals for $\mu$. They look like
 \begin{equation}
-\left[\Xbar-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \Xbar+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
+\left[\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
 and satisfy
 \begin{equation}
-\P\left(\Xbar-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\P\left(\Xbar+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
+\P\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\P\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
 \end{equation}
 #+latex: \end{rem}
 
@@ -3496,12 +3495,12 @@ Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{m
 Suppose that $\sigma_{X}$ and $\sigma_{Y}$ are known. We would like a confidence interval for $\mu_{X}-\mu_{Y}$. We know that 
 
 \begin{equation}
-\Xbar-\Ybar\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}\right).
+\overline{X}-\overline{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}\right).
 \end{equation}
 
 Therefore, a $ 100(1-\alpha)\% $ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
 \begin{equation}
-\left(\Xbar-\Ybar\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.\label{eq:two-samp-mean-CI}
+\left(\overline{X}-\overline{Y}\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.\label{eq:two-samp-mean-CI}
 \end{equation}
 
 Unfortunately, most of the time the values of $\sigma_{X}$ and $\sigma_{Y}$ are unknown. This leads us to the following:
@@ -3512,7 +3511,7 @@ Unfortunately, most of the time the values of $\sigma_{X}$ and $\sigma_{Y}$ are 
 
     -the underlying populations are both normal and $\sigma_{X}=\sigma_{Y}$. In this case (setting $\sigma=\sigma_{X}=\sigma_{Y}$), 
     \begin{equation}
-    \Xbar-\Ybar\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}\right).
+    \overline{X}-\overline{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}\right).
     \end{equation}
 
 Now let
@@ -3520,19 +3519,19 @@ Now let
 U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
 \end{equation}
 
-Then by Exercise \ref{xca:sum-indep-chisq} we know that $U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)$ and is not a large leap to believe that $U$ is independent of $\Xbar-\Ybar$; thus
+Then by Exercise \ref{xca:sum-indep-chisq} we know that $U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)$ and is not a large leap to believe that $U$ is independent of $\overline{X}-\overline{Y}$; thus
 \begin{equation}
 T=\frac{Z}{\sqrt{\left.U\right\slash (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).\end{equation}
 
 But
 \begin{align*}
-T & =\frac{\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right\slash (n+m-2)}},\\
- & =\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{\sqrt{\left(\frac{1}{n}+\frac{1}{m}\right)\left(\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}\right)}},\\
+T & =\frac{\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right\slash (n+m-2)}},\\
+ & =\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left(\frac{1}{n}+\frac{1}{m}\right)\left(\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}\right)}},\\
  & \sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{align*}
 Therefore a $100(1-\alpha)\%$ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
 \begin{equation}
-\left(\Xbar-\Ybar\right)\pm t_{\alpha/2}(\mathtt{df}=n+m-2)\, S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}},
+\left(\overline{X}-\overline{Y}\right)\pm t_{\alpha/2}(\mathtt{df}=n+m-2)\, S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}},
 \end{equation}
 where
 \begin{equation}
@@ -3542,7 +3541,7 @@ is called the ``pooled'' estimator of $\sigma$.
 
     - if one of the samples is small, and both underlying populations are normal, but $\sigma_{X}\neq\sigma_{Y}$, then we may use a Welch (or Satterthwaite) approximation to the degrees of freedom. See Welch \cite{Welch1947}, Satterthwaite \cite{Satterthwaite1946}, or Neter /et al/ \cite{Neter1996}. The idea is to use an interval of the form 
 \begin{equation}
-\left(\Xbar-\Ybar\right)\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=r)\,\sqrt{\frac{S_{X}^{2}}{n}+\frac{S_{Y}^{2}}{m}},
+\left(\overline{X}-\overline{Y}\right)\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=r)\,\sqrt{\frac{S_{X}^{2}}{n}+\frac{S_{Y}^{2}}{m}},
 \end{equation}
 where the degrees of freedom $r$ is chosen so that the interval has nice statistical properties. It turns out that a good choice for $r$ is given by
 \begin{equation}
@@ -3568,16 +3567,16 @@ We would like to know $p$ which is the ``proportion of successes''. For instance
 
 We are given an $SRS(n)$ $X_{1}$, $X_{2}$, ..., $X_{n}$ distributed $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$. Recall from Section \ref{sec:binom-dist} that the common mean of these variables is $\E X=p$ and the variance is $\E(X-p)^{2}=p(1-p)$. If we let $Y=\sum X_{i}$, then from Section \ref{sec:binom-dist} we know that $Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ and that 
 \[
-\Xbar=\frac{Y}{n}\mbox{ has }\E\Xbar=p\mbox{ and }\mathrm{Var}(\Xbar)=\frac{p(1-p)}{n}.
+\overline{X}=\frac{Y}{n}\mbox{ has }\E\overline{X}=p\mbox{ and }\mathrm{Var}(\overline{X})=\frac{p(1-p)}{n}.
 \]
 
 Thus if $n$ is large (here is the CLT) then an approximate $100(1-\alpha)\%$ confidence interval for $p$ would be given by
 \begin{equation}
-\Xbar\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.\label{eq:ci-p-no-good}
+\overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.\label{eq:ci-p-no-good}
 \end{equation}
 OOPS...! Equation \ref{eq:ci-p-no-good} is of no use to us because the \underbar{unknown} parameter $p$ is in the formula! (If we knew what $p$ was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
 
-1. Replace $p$ with $\hat{p}=\Xbar$. Then an approximate $100(1-\alpha)\%$ confidence interval for $p$ is given by 
+1. Replace $p$ with $\hat{p}=\overline{X}$. Then an approximate $100(1-\alpha)\%$ confidence interval for $p$ is given by 
    \begin{equation}
    \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
    \end{equation}
@@ -3684,7 +3683,7 @@ We already know (we can see in the formulas above) that $E$ decreases as $n$ inc
 For the case of a population mean the answer is easy: we set up an equation and solve for $n$.
 
 #+latex: \begin{example}
-Given a situation, given $\sigma$, given $E$, we would like to know how big $n$ has to be to ensure that $\Xbar\pm5$ is a 95\% confidence interval for $\mu$. #+latex: 
+Given a situation, given $\sigma$, given $E$, we would like to know how big $n$ has to be to ensure that $\overline{X}\pm5$ is a 95\% confidence interval for $\mu$. #+latex: 
 #+latex: \end{example}
 
 #+latex: \begin{rem}
@@ -4023,12 +4022,12 @@ Here, $X_{1}$, $X_{2}$, ..., $X_{n}$ are a $SRS(n)$ from a $\mathsf{norm}(\matht
 
 - Case A: :: Suppose $\sigma$ is known. Then under $H_{0}$,
    \[
-   Z=\frac{\Xbar-\mu_{0}}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
+   Z=\frac{\overline{X}-\mu_{0}}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
    \]
    Table here.
 - Case B: :: When $\sigma$ is unknown, under $H_{0}$
    \[
-   T = \frac{\Xbar-\mu_{0}}{S/\sqrt{n}}\sim\mathsf{t}(\mathtt{df}=n-1).
+   T = \frac{\overline{X}-\mu_{0}}{S/\sqrt{n}}\sim\mathsf{t}(\mathtt{df}=n-1).
    \]
    Table here.
 
@@ -4129,7 +4128,7 @@ Since both $X$ and $Y$ are normal, we may rephrase the question:
 
 Suppose first that we do not know the values of $\sigma_{X}$ and $\sigma_{Y}$, but we know that they are equal, $\sigma_{X}=\sigma_{Y}$. Our test would then simplify to $H_{0}:\mu_{X}=\mu_{Y}$. We collect data $X_{1}$, $X_{2}$, ..., $X_{n}$ and $Y_{1}$, $Y_{2}$, ..., $Y_{m}$, both simple random samples of size $n$ and $m$ from their respective normal distributions. Then under $H_{0}$ (that is, assuming $H_{0}$ is true) we have $\mu_{X}=\mu_{Y}$ or rewriting, $\mu_{X}-\mu_{Y}=0$, so 
 \begin{equation}
-T=\frac{\Xbar-\Ybar}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\Xbar-\Ybar-(\mu_{X}-\mu_{Y})}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
+T=\frac{\overline{X}-\overline{Y}}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{equation}
 
 
@@ -4138,7 +4137,7 @@ T=\frac{\Xbar-\Ybar}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\Xbar-\Ybar-(\mu
 #+latex: \begin{rem}
 If the values of $\sigma_{X}$ and $\sigma_{Y}$ are known, then we can plug them in to our statistic:
 \begin{equation} 
-Z=\frac{\Xbar-\Ybar}{\sqrt{\sigma_{X}^{2}/n+\sigma_{Y}^{2}/m}};
+Z=\frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n+\sigma_{Y}^{2}/m}};
 \end{equation}
 the result will have a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution when $H_{0}:\mu_{X}=\mu_{Y}$ is true. 
 #+latex: \end{rem}
@@ -4146,7 +4145,7 @@ the result will have a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribu
 #+latex: \begin{rem}
 Even if the values of $\sigma_{X}$ and $\sigma_{Y}$ are not known, if both $n$ and $m$ are large then we can plug in the sample estimates and the result will have approximately a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution when $H_{0}:\mu_{X}=\mu_{Y}$ is true.
 \begin{equation} 
-Z=\frac{\Xbar-\Ybar}{\sqrt{S_{X}^{2}/n+S_{Y}^{2}/m}}.
+Z=\frac{\overline{X}-\overline{Y}}{\sqrt{S_{X}^{2}/n+S_{Y}^{2}/m}}.
 \end{equation}
 #+latex: \end{rem}
 
@@ -4536,30 +4535,20 @@ The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respect
 
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm= (see Figure \ref{fig:Scatter-cars-regline}):
 
-
-
-ggplot(cars, aes(x=speed, y=dist)) +
-    geom_point(shape=19) +  
+#+begin_src R :exports code :results graphics :file img/carline.pdf
+ggplot(cars, aes(x=speed, y=dist)) + geom_point(shape=19) +  
     geom_smooth(method=lm, se = FALSE)
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
-plot(dist ~ speed, data = cars, pch = 16)
-abline(coef(cars.lm))
 #+end_src
-\par\end{centering}
-\caption{Scatterplot with added regression line for the \texttt{cars} data\label{fig:Scatter-cars-regline}}
-\end{figure}
 
-<<eval = FALSE>>=
-plot(dist ~ speed, data = cars, pch = 16)
-abline(coef(cars))
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/carline.pdf}
+    \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with added regression line for the \texttt{cars} data}
+    \label{fig:Scatter-cars-regline}
+  \end{figure}
 #+end_src
 
 To calculate points on the regression line we may simply plug the desired $x$ value(s) into $\hat{\mu}$, either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired $x$ value(s) represented by a data frame. See the example below.
-
 
 #+latex: \begin{example}
 \label{exa:regline-cars-interpret}
@@ -4585,14 +4574,13 @@ We said at the beginning of the chapter that our goal was to estimate $\mu=\E Y$
 
 The first is a number, $\mu(x_{0})$, and the second is a random variable, $Y(x_{0})$, but our point estimate is the same for both: $\hat{\mu}(x_{0})$.
 
-
 #+latex: \begin{example}
 \label{exa:regline-cars-pe-8mph}
 
-We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8\,mph: $\hat{\mu}(15)=b_{0}+8b_{1}\approx$ \Sexpr{round(coef(cars.lm)[1],2)} $+(8)$ ( SRC_R{round(coef(cars.lm)[2],2)} ) $\approx13.88$. We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8\,mph. 
+We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8\,mph: $\hat{\mu}(15)=b_{0}+8b_{1}\approx$ SRC_R{round(coef(cars.lm)[ 1 ], 2)} $ + (8) $ ( SRC_R{round(coef(cars.lm)[ 2 ], 2)} ) $\approx 13.88$. We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
-Note that we actually have observed data for a car traveling 8\,mph; its stopping distance was 16\,ft as listed in the fifth row of the =cars= data:
+Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16\,ft as listed in the fifth row of the =cars= data:
 
 #+begin_src R :exports both :results output pp
 cars[5, ]
@@ -4810,14 +4798,13 @@ Using the =cars= data,
 1. Report a point estimate of and a 95% confidence interval for the
 mean stopping distance for a car travelling 5\,mph.
 
-The fitted value for $x=5$ is SRC_R{carsCI[1, 1]}, so a point estimate would be \Sexpr{carsCI[1, 1]}\,ft. The 95% CI is given by {[}\Sexpr{carsCI[1, 2]}, \Sexpr{carsCI[1, 3]}{]}, so with 95% confidence the mean stopping distance lies somewhere between \Sexpr{carsCI[1, 2]}\,ft and \Sexpr{carsCI[1, 3]}\,ft.
+The fitted value for $x=5$ is SRC_R{carsCI[1, 1]}, so a point estimate would be SRC_R{carsCI[1, 1]} ft. The 95% CI is given by [ SRC_R{carsCI[1, 2]}, SRC_R{carsCI[1, 3]} ], so with 95% confidence the mean stopping distance lies somewhere between SRC_R{carsCI[1, 2]} ft and SRC_R{carsCI[1, 3]} ft.
 
 
-2. Report a point prediction for and a 95\% prediction interval for the stopping distance of a hypothetical car travelling 21\,mph.
+2. Report a point prediction for and a 95% prediction interval for the stopping distance of a hypothetical car travelling 21 mph.
 
 
-The fitted value for $x=21$ is \Sexpr{carsPI[3, 1]}, so a point prediction for the stopping distance is \Sexpr{carsPI[3, 1]}\,ft. The 95\% PI is given by {[}\Sexpr{carsPI[3, 2]}, \Sexpr{carsPI[3, 3]}{]}, so with 95\% confidence we may assert that the hypothetical stopping distance for a car travelling 21\,mph would lie somewhere between \Sexpr{carsPI[3, 2]}\,ft and \Sexpr{carsPI[3, 3]}\,ft.
-
+The fitted value for $x=21$ is SRC_R{carsPI[3, 1]}, so a point prediction for the stopping distance is SRC_R{carsPI[3, 1]} ft. The 95% PI is given by [ SRC_R{carsPI[3, 2]}, SRC_R{carsPI[3, 3]} ], so with 95% confidence we may assert that the hypothetical stopping distance for a car travelling 21 mph would lie somewhere between SRC_R{carsPI[3, 2]} ft and SRC_R{carsPI[3, 3]} ft.
 
 #+latex: \end{example}
 
@@ -4827,26 +4814,24 @@ We earlier guessed that a bound on the value of a single new observation would b
 
 We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure \ref{fig:Scatter-cars-CIPI}.
 
-
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
-library(HH)
-print(ci.plot(cars.lm))
-#+end_src
-\par\end{centering}
-
-\caption{Scatterplot with confidence/prediction bands for the \texttt{cars}
-data\label{fig:Scatter-cars-CIPI}}
-
-\end{figure}
-
-
-<<eval = FALSE>>=
+#+begin_src R :eval never
 library(HH)
 ci.plot(cars.lm)
 #+end_src
+
+#+begin_src R :exports results :results graphics :file img/carscipi.pdf
+library(HH)
+print(ci.plot(cars.lm))
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/carscipi.pdf}
+    \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
+    \label{fig:Scatter-cars-CIPI}
+  \end{figure}
+#+end_src
+
 
 Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\xbar)^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 
@@ -4890,10 +4875,10 @@ In the =Coefficients= section we find the $t$ statistics and the $p$-values asso
 
 It would be nice to have a single number that indicates how well our linear regression model is doing, and the /simple coefficient of determination/ is designed for that purpose. In what follows, we observe the values $Y_{1}$, $Y_{2}$, ...,$Y_{n}$, and the goal is to estimate $\mu(x_{0})$, the mean value of $Y$ at the location $x_{0}$. 
 
-If we disregard the dependence of $Y$ and $x$ and base our estimate only on the $Y$ values then a reasonable choice for an estimator is just the MLE of $\mu$, which is $\Ybar$. Then the errors incurred by the estimate are just $Y_{i}-\Ybar$ and the variation about the estimate as measured by the sample variance is proportional to
+If we disregard the dependence of $Y$ and $x$ and base our estimate only on the $Y$ values then a reasonable choice for an estimator is just the MLE of $\mu$, which is $\overline{Y}$. Then the errors incurred by the estimate are just $Y_{i}-\overline{Y}$ and the variation about the estimate as measured by the sample variance is proportional to
 
 \begin{equation}
-SSTO=\sum_{i=1}^{n}(Y_{i}-\Ybar)^{2}.
+SSTO=\sum_{i=1}^{n}(Y_{i}-\overline{Y})^{2}.
 \end{equation}
 
 Here, $SSTO$ is an acronym for the /total sum of squares/.
@@ -4907,19 +4892,19 @@ SSE=\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})^{2}.
 We have seen the $SSE$ before, which stands for the /sum of squared errors/ or /error sum of squares/. Of course, we would expect the error to be less in the latter case, since we have used more information. The improvement in our estimation as a result of the linear regression model can be measured with the difference
 
 \[
-(Y_{i}-\Ybar)-(Y_{i}-\hat{Y_{i}})=\hat{Y_{i}}-\Ybar,
+(Y_{i}-\overline{Y})-(Y_{i}-\hat{Y_{i}})=\hat{Y_{i}}-\overline{Y},
 \]
 
 and we measure the variation in these errors with
 
 \begin{equation}
-SSR=\sum_{i=1}^{n}(\hat{Y_{i}}-\Ybar)^{2},
+SSR=\sum_{i=1}^{n}(\hat{Y_{i}}-\overline{Y})^{2},
 \end{equation}
 
 also known as the /regression sum of squares/. It is not obvious, but some algebra proved a famous result known as the *ANOVA Equality*:
 
 \begin{equation}
-\sum_{i=1}^{n}(Y_{i}-\Ybar)^{2}=\sum_{i=1}^{n}(\hat{Y_{i}}-\Ybar)^{2}+\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})^{2}\label{eq:anovaeq}
+\sum_{i=1}^{n}(Y_{i}-\overline{Y})^{2}=\sum_{i=1}^{n}(\hat{Y_{i}}-\overline{Y})^{2}+\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})^{2}\label{eq:anovaeq}
 \end{equation}
 
 or in other words,
@@ -5003,7 +4988,7 @@ The overall $F$ statistic and $p$-value are displayed in the bottom line of the 
 anova(cars.lm)
 #+end_src
 
-Here we see that the $F$ statistic is \Sexpr{round(carsumry$fstatistic, 2)} with a $p$-value very close to zero. The conclusion: there is very strong evidence that $H_{0}:\beta_{1}=0$ is false, that is, there is strong evidence that $\beta_{1}\neq0$. Moreover, we conclude that the regression relationship between =dist= and =speed= is significant.
+Here we see that the $F$ statistic is SRC_R{round(carsumry$fstatistic, 2)} with a $p$-value very close to zero. The conclusion: there is very strong evidence that $H_{0}:\beta_{1}=0$ is false, that is, there is strong evidence that $\beta_{1}\neq0$. Moreover, we conclude that the regression relationship between =dist= and =speed= is significant.
 
 Note that the value of the $F$ statistic is the same as the Student's $t$ statistic for =speed= squared.
 
@@ -5479,8 +5464,10 @@ The graph with the identified points is omitted (but the plain plot is shown in 
 \setcounter{thm}{0}
 \begin{xca}
 Prove the ANOVA equality, Equation \ref{eq:anovaeq}. /Hint/:
-show that\[
-\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\Ybar)=0.\]
+show that
+\[
+\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
+\]
 
 \end{xca}
 
@@ -5559,14 +5546,14 @@ and the random vector $\upepsilon_{\mathrm{n}\times1}=\begin{bmatrix}\epsilon_{1
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right).
 \end{equation}
 
-The assumption on $\upepsilon$ is equivalent to the assumption that $\epsilon_{1}$, $\epsilon_{2}$, ..., $\epsilon_{n}$ are i.i.d.~$\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)$. It is a linear model because the quantity $\mu(\mathbf{X})=\mathbf{X}\upbeta$ is linear in the parameters $\beta_{0}$, $\beta_{1}$,..., $\beta_{p}$. It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
+The assumption on $\upepsilon$ is equivalent to the assumption that $\epsilon_{1}$, $\epsilon_{2}$, ..., $\epsilon_{n}$ are i.i.d.~$\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)$. It is a linear model because the quantity $\mu(\mathbf{X})=\mathbf{X}\upbeta$ is linear in the parameters $\beta_{0}$, $\beta_{1}$, ..., $\beta_{p}$. It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
 \begin{equation} 
 Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
 
 #+latex: \begin{example}
 *Girth, Height, and Volume for Black Cherry trees.* \index{Data sets!trees@\texttt{trees}}
-Measurements were made of the girth, height, and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4\,ft 6\,in above the ground. The variables are
+Measurements were made of the girth, height, and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground. The variables are
 
 1. =Girth=: tree diameter in inches (denoted $x_{1}$)
 2. =Height=: tree height in feet ($x_{2}$).
@@ -5580,19 +5567,18 @@ head(trees)
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
 
-
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
+#+begin_src R :exports results :results graphics :file img/splom-trees.pdf
 library(lattice)
-print(splom(trees))
+splom(trees)
 #+end_src
-\par\end{centering}
-\caption{Scatterplot matrix of \texttt{trees} data\label{fig:splom-trees}}
-\end{figure}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/splom-trees.pdf}
+    \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
+    \label{fig:splom-trees}
+  \end{figure}
+#+end_src
 
 #+begin_src R :eval never
 library(lattice)
@@ -5618,28 +5604,25 @@ One way to do this is with the \textsf{R} Commander in the =Rcmdr= package \cite
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig:3D-scatterplot-trees}.
 
-
-<<eval = FALSE>>=
+#+begin_src R :eval never
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
-s3d$plane3d(fit)
 #+end_src
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
+#+begin_src R :exports results :results graphics :file img/3D-scatterplot-trees.pdf
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
-s3d$plane3d(fit)
 #+end_src
-\par\end{centering}
 
-\caption{3D scatterplot with regression plane for the \texttt{trees} data\label{fig:3D-scatterplot-trees}}
-
-\end{figure}
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.pdf}
+    \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
+    \label{fig:3D-scatterplot-trees}
+  \end{figure}
+#+end_src
 
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
@@ -5751,13 +5734,13 @@ which is just a fancy way to write
 \end{equation}
  
 #+latex: \begin{example}
-If we wanted to predict the average volume of black cherry trees that have =Girth = 15=\,in and are =Height = 77=\,ft tall then we would use the estimate 
+If we wanted to predict the average volume of black cherry trees that have =Girth = 15= in and are =Height = 77= ft tall then we would use the estimate 
 \begin{alignat*}{1}
 \hat{\mu}(15,\,77)= & -58+4.7(15)+0.3(77),\\
 \approx & 35.6\mbox{\,\ ft}^{3}.
 \end{alignat*}
 
-We would use the same estimate $\hat{Y}=35.6$ to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15=\,in and is =Height = 77=\,ft tall.
+We would use the same estimate $\hat{Y}=35.6$ to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -5792,16 +5775,15 @@ predict(trees.lm, newdata = new)
 treesFIT <- round(predict(trees.lm, newdata = new), 1)
 #+end_src
 
-
 #+latex: \begin{example}
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth= 9.1\,in and =Height= 69\,ft.
 
-   The fitted value for $x_{1}=9.1$ and $x_{2}=69$ is \Sexpr{treesFIT[1]}, so a point estimate would be \Sexpr{treesFIT[1]} cubic feet. 
+   The fitted value for $x_{1}=9.1$ and $x_{2}=69$ is SRC_R{treesFIT[ 1 ]}, so a point estimate would be SRC_R{treesFIT[ 1 ]} cubic feet. 
 
-2. Report a point prediction for and a 95\% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5\,in and =Height= 87\,ft.
+2. Report a point prediction for and a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
 
-   The fitted value for $x_{1}=12.5$ and $x_{2}=87$ is \Sexpr{treesFIT[3]}, so a point prediction for the =Volume= is \Sexpr{treesFIT[3]} cubic feet. 
+   The fitted value for $x_{1} = 12.5$ and $x_{2} = 87$ is SRC_R{treesFIT[ 3 ]}, so a point prediction for the =Volume= is SRC_R{treesFIT[ 3 ]} cubic feet. 
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
@@ -5967,7 +5949,6 @@ Using the =trees= data,
 #+latex: \end{example}
 
 
-
 ** Model Utility and Inference
 \label{sec:Model-Utility-and-MLR}
 
@@ -6044,7 +6025,7 @@ The overall $F$ statistic and its associated /p/-value is listed at the bottom o
 treesumry$fstatistic
 #+end_src
 
-For the =trees= data, we see that $F=$ \Sexpr{treesumry$fstatistic[1]} with a /p/-value =< 2.2e-16=. Consequently we reject $H_{0}$, that is, the data provide strong evidence that not all $\beta_{i}$'s are zero.
+For the =trees= data, we see that $F=$ SRC_R{treesumry$fstatistic[ 1 ]} with a /p/-value =< 2.2e-16=. Consequently we reject $H_{0}$, that is, the data provide strong evidence that not all $\beta_{i}$'s are zero.
 
 *** Student's /t/ Tests
 \label{sub:mlr-Student's-t-Tests}}
@@ -6088,15 +6069,17 @@ In each of the previous sections we assumed that $\mu$ was a linear function of 
 
 
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
-plot(Volume ~ Girth, data = trees)
-\par\end{centering}
-\caption{Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees}
-data\label{fig:Scatterplot-Volume-Girth-trees}}
-\end{figure}
+#+begin_src R :exports both :results graphics :file img/Scatterplot-Volume-Girth-trees.pdf
+qplot(Girth, Volume, data = trees)
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.pdf}
+    \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
+    \label{fig:Scatterplot-Volume-Girth-trees}
+  \end{figure}
+#+end_src
 
 For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
 \begin{equation}
@@ -6143,25 +6126,24 @@ summary(treesquad.lm)
 
 We see that the $F$ statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
-<<eval = FALSE>>=
-plot(Volume ~ scale(Girth), data = trees)
-lines(fitted(treesquad.lm) ~ scale(Girth), data = trees)
 
+#+begin_src R :exports both :results graphics :file img/Fitting-the-Quadratic.pdf
+a <- ggplot(trees, aes(scale(Girth), Volume))
+a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
+#+end_src
 
-The plot is shown in Figure \ref{cap:Fitting-the-Quadratic}. Pay attention to the scale on the $x$-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
+    \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
+    \label{fig:Fitting-the-Quadratic}
+  \end{figure}
+#+end_src
+
+The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the $x$-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
 #+latex: \end{example}
 
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
-plot(Volume ~ scale(Girth), data = trees)
-lines(fitted(treesquad.lm) ~ scale(Girth), data = trees)
-\par\end{centering}
-\caption{A quadratic model for the \texttt{trees} data\label{cap:Fitting-the-Quadratic}}
-\end{figure}
 
 #+latex: \begin{rem}
 When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include $x^{m}$ as a term in the model, then (s)he should also include all lower order terms $x$, $x^{2}$, ...,$x^{m-1}$ in the model.
@@ -6173,7 +6155,6 @@ We do estimation/prediction the same way that we did in Section \ref{sub:mlr-poi
 new <- data.frame(Girth = c(9.1, 11.6, 12.5))
 predict(treesquad.lm, newdata = new, interval = "prediction")
 #+end_src
-
 
 The predictions and intervals are slightly different from what they were previously. Notice that it was not necessary to rescale the =Girth= prediction data before input to the =predict= function; the model did the rescaling for us automatically.
 
@@ -6210,7 +6191,6 @@ where the subscript $1:2$ denotes that $\beta_{1:2}$ is a coefficient
 of an interaction term between $x{}_{1}$ and $x_{2}$. 
 
 #+latex: \end{example}
-
 
 #+latex: \paragraph*{What does it mean?}
 
@@ -6389,8 +6369,6 @@ It may look intimidating but there is reason to the madness. First we =split= th
 
 There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
 
-
-
 ** Partial /F/ Statistic
 \label{sec:Partial-F-Statistic}
 
@@ -6427,7 +6405,6 @@ It can be shown when the regression assumptions hold under $H_{0}$ that the part
 
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 
-
 #+latex: \begin{example}
 \label{exa:mlr-trees-poly-no-rescale}
 
@@ -6438,13 +6415,11 @@ treesfull.lm <- lm(Volume ~ Girth + I(Girth^2) + Height + I(Height^2), data = tr
 summary(treesfull.lm)
 #+end_src
 
-
 In this ill-formed model nothing is significant except =Girth= and =Girth^2=. Let us continue down this path and suppose that we would like to try a reduced model which contains nothing but =Girth= and =Girth^2= (not even an =Intercept=). Our two models are now
 \begin{align*} 
 \mbox{the full model:} & \quad Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\beta_{3}x_{2}+\beta_{4}x_{2}^{2}+\epsilon,\\
 \mbox{the reduced model:} & \quad Y=\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon,
 \end{align*}
-
 
 We fit the reduced model with =lm= and store the results:
 
@@ -6468,7 +6443,6 @@ anova(treesreduced2.lm, treesfull.lm)
 In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial $F$ test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are /exactly/ the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
 
 #+latex: \end{example}
-
 
 
 ** Residual Analysis and Diagnostic Tools
@@ -6501,8 +6475,6 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 - DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
 
 - Cook's D: :: compared to an $\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)$ distribution. Observations falling higher than the 50$^{\textrm{th}}$ percentile are extreme. 
-
-
 
 Note that plugging the value $p=1$ into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
@@ -6550,8 +6522,6 @@ exp(predict(treesNonlin.lm, newdata = new, interval = "confidence"))
 #+end_src
 
 The predictions and intervals are slightly different from those calculated earlier, but they are close. Note that we did not need to transform the =Girth= and =Height= arguments in the dataframe =new=. All transformations are done for us automatically.
-
-
 
 *** Real Nonlinear Regression
 
@@ -6621,9 +6591,6 @@ SSTO=SSE+SSR.
 #+latex: \end{xca}
 
 
-
-
-
 * Resampling Methods
 \label{cha:resampling-methods}
 
@@ -6644,7 +6611,7 @@ I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} an
 
 -  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, /e.g./, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
-- Problem :: Unfortunately, in most cases the sampling distribution is /unknown/. Thus, in the past, in efforts to say something useful, statisticians have been obligated to place some restrictive assumptions on the underlying population. For example, if we suppose that the population has a normal distribution, then we can say that the distribution of $\Xbar$ is normal, too, with the same mean (and a smaller standard deviation). It is then easy to draw conclusions, make inferences, and go on about our business. 
+- Problem :: Unfortunately, in most cases the sampling distribution is /unknown/. Thus, in the past, in efforts to say something useful, statisticians have been obligated to place some restrictive assumptions on the underlying population. For example, if we suppose that the population has a normal distribution, then we can say that the distribution of $\overline{X}$ is normal, too, with the same mean (and a smaller standard deviation). It is then easy to draw conclusions, make inferences, and go on about our business. 
 
 - Alternative :: We don't know what the underlying population distributions is, so let us /estimate/ it, just like we would with any other parameter. The statistic we use is the /empirical CDF/, that is, the function that places mass $1/n$ at each of the observed data points $x_{1},\ldots,x_{n}$ (see Section \ref{sec:empirical-distribution}). As the sample size increases, we would expect the approximation to get better and better (with i.i.d. observations, it does, and there is a wonderful theorem by Glivenko and Cantelli that proves it). And now that we have an (estimated) population distribution, it is easy to find the sampling distribution of any statistic we like: just *sample* from the empirical CDF many, many times, calculate the statistic each time, and make a histogram. Done! Of course, the number of samples needed to get a representative histogram is prohibitively large... human beings are simply too slow (and clumsy) to do this tedious procedure.
 
@@ -6674,8 +6641,6 @@ The above discussion leads us to the following general procedure to approximate 
  
 1. The bootstrap distribution gives information about the sampling distribution of the original statistic $S$. In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of $S$.
 
-
-
 ** Bootstrap Standard Errors
 \label{sec:Bootstrap-Standard-Errors}
 
@@ -6686,7 +6651,7 @@ Since the bootstrap distribution gives us information about a statistic's sampli
 
 *Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$.  
 
-Of course, we do not really need a bootstrap distribution here because from Section \ref{sec:sampling-from-normal-dist} we know that $\Xbar\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})$, but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
+Of course, we do not really need a bootstrap distribution here because from Section \ref{sec:sampling-from-normal-dist} we know that $\overline{X}\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})$, but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
 
 We will take a random sample of size $n=25$ from the population. Then we will /resample/ the data 1000 times to get 1000 resamples of size 25. We will calculate the sample mean of each of the resamples, and will study the data distribution of the 1000 values of $\xbar$.
 
@@ -6706,7 +6671,7 @@ curve(dnorm(x, 3, 0.2), add = TRUE)
 \par\end{centering}
 \caption{Bootstrapping the standard error of the mean, simulated data\label{fig:Bootstrap-se-mean}}
 {\small ~}{\small \par}
-{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\xbar$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\Xbar$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
+{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\xbar$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\overline{X}$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
 \end{figure}
 
 
@@ -6717,7 +6682,7 @@ hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE)  # overlay true normal density
 #+end_src
 
-We have overlain what we know to be the true sampling distribution of $\Xbar$, namely, a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})$ distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
+We have overlain what we know to be the true sampling distribution of $\overline{X}$, namely, a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})$ distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
 
 #+begin_src R :exports both :results output pp
 mean(xbarstar)
@@ -6727,9 +6692,9 @@ mean(xbarstar) - mean(srs)
 
 #+latex: \end{example}
 
-Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called /bootstrap estimate of bias/. Since the estimate is so small we would expect our original statistic ($\Xbar$) to have small bias, but this is no surprise to us because we already knew from Section \ref{sub:simple-random-samples} that $\Xbar$ is an unbiased estimator of the population mean.
+Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called /bootstrap estimate of bias/. Since the estimate is so small we would expect our original statistic ($\overline{X}$) to have small bias, but this is no surprise to us because we already knew from Section \ref{sub:simple-random-samples} that $\overline{X}$ is an unbiased estimator of the population mean.
 
-Now back to our original problem, we would like to estimate the standard error of $\Xbar$. Looking at the histogram, we see that the spread of the bootstrap distribution is similar to the spread of the sampling distribution. Therefore, it stands to reason that we could estimate the standard error of $\Xbar$ with the sample standard deviation of the resample statistics. Let us try and see.
+Now back to our original problem, we would like to estimate the standard error of $\overline{X}$. Looking at the histogram, we see that the spread of the bootstrap distribution is similar to the spread of the sampling distribution. Therefore, it stands to reason that we could estimate the standard error of $\overline{X}$ with the sample standard deviation of the resample statistics. Let us try and see.
 
 #+begin_src R :exports both :results output pp
 sd(xbarstar)
@@ -6860,9 +6825,9 @@ boot.ci(med_boot, type = c("perc", "norm", "bca"))
 
 The idea is to use confidence intervals that we already know and let the bootstrap help us when we get into trouble. We know that a $100(1-\alpha)\%$ confidence interval for the mean of a $SRS(n)$ from a normal distribution is 
 \begin{equation} 
-\Xbar\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}},
+\overline{X}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}},
 \end{equation} 
-where $\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)$ is the appropriate critical value from Student's $t$ distribution, and we remember that an estimate for the standard error of $\Xbar$ is $S/\sqrt{n}$. Of course, the estimate for the standard error will change when the underlying population distribution is not normal, or when we use a statistic more complicated than $\Xbar$. In those situations the bootstrap will give us quite reasonable estimates for the standard error. And as long as the sampling distribution of our statistic is approximately bell-shaped with small bias, the interval 
+where $\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)$ is the appropriate critical value from Student's $t$ distribution, and we remember that an estimate for the standard error of $\overline{X}$ is $S/\sqrt{n}$. Of course, the estimate for the standard error will change when the underlying population distribution is not normal, or when we use a statistic more complicated than $\overline{X}$. In those situations the bootstrap will give us quite reasonable estimates for the standard error. And as long as the sampling distribution of our statistic is approximately bell-shaped with small bias, the interval 
 \begin{equation}
 \mbox{statistic}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)*\mathrm{SE}(\mbox{statistic})
 \end{equation}
@@ -6897,7 +6862,7 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 
-1. Go collect some information from the two groups and calculate an associated statistic, for example, $\Xbar_{1}-\Xbar_{2}$. 
+1. Go collect some information from the two groups and calculate an associated statistic, for example, $\overline{X}_{1}-\overline{X}_{2}$. 
 
 1. Suppose that there is no difference in the groups, and find the distribution of the statistic in 1. 
 
@@ -6962,7 +6927,7 @@ Here are some things about permutation tests to keep in mind.
 
 - If the distribution of the groups is close to normal, then the $t$-test $p$-value and the bootstrap $p$-value will be approximately equal. If they differ markedly, then this should be considered evidence that the normality assumptions do not hold.  
 
-- The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, $\Xbar_{1}/\Xbar_{2}$. Of course, under the null hypothesis this last quantity should be near 1. 
+- The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, $\overline{X}_{1}/\overline{X}_{2}$. Of course, under the null hypothesis this last quantity should be near 1. 
 
 - Just as with the bootstrap, the answer we get is subject to variability due to the inherent randomness of resampling from the data. We can make the variability as small as we like by taking sufficiently many resamples. How many? If the conclusion is very important (that is, if lots of money is at stake), then take thousands. For point estimation problems typically, $R=1000$ resamples, or so, is enough. In general, if the true $p$-value is $p$ then the standard error of the estimated $p$-value is $\sqrt{p(1-p)/R}$. You can choose $R$ to get whatever accuracy desired.
 
@@ -8210,32 +8175,25 @@ options(digits = 16)
 runif(1)
 #+end_src
 
-Now choose \Sexpr{set.seed(095259); options(digits = 16); runif(1)*10^16} as your secret seed... write it down in a safe place and do not share it with anyone. Next generate the book with your seed using \LyX{}-Sweave or Sweave-\LaTeX{}. You may wish to also generate Student and Instructor Solution Manuals. Guidance regarding this is given below in the How to Use This Document section.
+Now choose SRC_R{set.seed(095259); options(digits = 16); runif(1)*10^16} as your secret seed... write it down in a safe place and do not share it with anyone. Next generate the book with your seed using \LyX{}-Sweave or Sweave-\LaTeX{}. You may wish to also generate Student and Instructor Solution Manuals. Guidance regarding this is given below in the How to Use This Document section.
 
 
 ** Generating This Document \label{sec:Generating-This-Document}
 
-You will need three (3) things to generate this document for yourself, in addition to a current \textsf{R} distribution which at the time of this writing is \texttt{\Sexpr{version$version.string}:} 
+You will need three (3) things to generate this document for yourself, in addition to a current \textsf{R} distribution which at the time of this writing is \texttt{ SRC_R{version$version.string} } :
 
-\begin{enumerate} 
-
-\item a \LaTeX{} distribution,
-\item Sweave (which comes with \textsf{R} automatically), and 
-\item \LyX{} (optional, but recommended).
-
-\end{enumerate}
+1. a LaTeX distribution,
+2. Sweave (which comes with \textsf{R} automatically), and 
+3. \LyX (optional, but recommended).
 
 We will discuss each of these in turn.
 
-\begin{description}
+- LaTeX: ::  The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable LaTeX distributions depending on your operating system, one such alternative being MikTeX (\url{http://miktex.org/}) for Microsoft Windows. 
 
-\item [{\LaTeX{}:}] The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable \LaTeX{} distributions depending on your operating system, one such alternative being Mik\TeX{} (\url{http://miktex.org/}) for Microsoft Windows. 
+- Sweave: :: If you have \textsf{R} installed, then the required Sweave files are already on your system... somewhere. The only problems that you may have are likely associated with making sure that your LaTeX distribution knows where to find the =Sweave.sty= file. See the Sweave Homepage (\url{http://www.statistik.lmu.de/~leisch/Sweave/}) for guidance on how to get it working on your particular operating system.
 
-\item [{Sweave:}] If you have \textsf{R} installed, then the required Sweave files are already on your system... somewhere. The only problems that you may have are likely associated with making sure that your \LaTeX{} distribution knows where to find the =Sweave.sty= file. See the Sweave Homepage (\url{http://www.statistik.lmu.de/~leisch/Sweave/}) for guidance on how to get it working on your particular operating system.
+- LyX: :: Strictly speaking, LyX is not needed to generate this document. But this document was written stem to stern with LyX, taking full advantage of all of the bells and whistles that LyX has to offer over plain \LaTeX{} editors. And it's free. See the LyX homepage (\url{http://www.lyx.org/}) for additional information. If you decide to give LyX a try, then you will need to complete some extra steps to coordinate Sweave and LyX with each other. Luckily, Gregor Gorjanc has a website and an \textsf{R} News article \cite{Gorjanc2008} to help you do exactly that. See the LyX-Sweave homepage (\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}) for details.
 
-\item [{\LyX{}:}] Strictly speaking, \LyX{} is not needed to generate this document. But this document was written stem to stern with \LyX{}, taking full advantage of all of the bells and whistles that \LyX{} has to offer over plain \LaTeX{} editors. And it's free. See the \LyX{} homepage (\url{http://www.lyx.org/}) for additional information.\\ If you decide to give \LyX{} a try, then you will need to complete some extra steps to coordinate Sweave and \LyX{} with each other. Luckily, Gregor Gorjanc has a website and an \textsf{R} News article \cite{Gorjanc2008} to help you do exactly that. See the \LyX{}-Sweave homepage (\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}) for details.
-
-\end{description}
 
 An attempt was made to not be extravagant with fonts or packages so that a person would not need the entire =CTAN= (or =CRAN=) installed on their personal computer to generate the book. Nevertheless, there are a few extra packages required. These packages are listed in the =preamble= of =IPSUR.Rnw=, =IPSUR.tex=, and =IPSUR.lyx=.
 
@@ -8304,7 +8262,7 @@ The most colorful of those I received was written by Jeffery Cornfield, submitte
 \noindent This file is not for the faint of heart, dear reader, because it is filled with horrible images that will haunt your nightmares. If you are weak of stomach, have irritable bowel syndrome, or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your own risk.
 \end{quotation}
 
-One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been \Sexpr{dim(RcmdrTestDrive)[1]-2} murders in the past \Sexpr{round((dim(RcmdrTestDrive)[1]-2)/24)} days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
+One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} murders in the past SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
 
 Professor Twee T.~Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
 
@@ -8325,13 +8283,13 @@ Professor Twee T.~Bird, a world-renowned forensics specialist and a Czechoslovak
 
 Once our two heroes returned to the beautiful Acme-Looney University, and once Dr.~Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
 
-“First off,” Dr.~Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a \textbf{salary} between \$\Sexpr{round(min(RcmdrTestDrive$salary))} and \$\Sexpr{round(max(RcmdrTestDrive$salary))} when they retired.” 
+“First off,” Dr.~Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a \textbf{salary} between $ SRC_R{round(min(RcmdrTestDrive$salary))} and $ SRC_R{round(max(RcmdrTestDrive$salary))} when they retired.” 
 
 “That’s not really a lot to live off of,” explained Professor Bird. 
 
-“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by ‘\textbf{reduction}’. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr.~D.~Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr.~Fudd-Einstein. 
+“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by =reduction=. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr.~D.~Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr.~Fudd-Einstein. 
 
-“This coming Monday. But if there were all of these killings, how in the world could one person do it? It just doesn’t seem to be possible; stay up \Sexpr{round((dim(RcmdrTestDrive)[1]-2)/24)} days straight and be able to kill all of these people and have the energy to continue on,” Professor Bird exclaimed, doubting the guilt of only one person. 
+“This coming Monday. But if there were all of these killings, how in the world could one person do it? It just doesn’t seem to be possible; stay up SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} days straight and be able to kill all of these people and have the energy to continue on,” Professor Bird exclaimed, doubting the guilt of only one person. 
 
 “Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr.~Fudd-Einstein said as he began feeding the numbers into the massive server. 
 
@@ -8376,7 +8334,7 @@ Dr.~Fudd-Einstein and Professor Bird looked on in silence. They could not believ
 
 “Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr.~Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
 
-“Granny is the most beloved alumnus of Acme-Looney University. She was in the first graduating class and gives graciously each year to the university. Without her continued financial support, we wouldn’t have the jobs we do. She worked as a parking attendant at the University lots... wait a minute, take a look at this,” Professor Bird said as he scrolled down in the police information. “Granny’s signature is on each of these faculty members’ \textbf{parking} tickets. Kind of odd, considering the Chief-of-Parking signed each personally. The deceased had from as few as \Sexpr{min(RcmdrTestDrive$parking)} ticket to as many as \Sexpr{max(RcmdrTestDrive$parking)}. All tickets were unpaid.
+“Granny is the most beloved alumnus of Acme-Looney University. She was in the first graduating class and gives graciously each year to the university. Without her continued financial support, we wouldn’t have the jobs we do. She worked as a parking attendant at the University lots... wait a minute, take a look at this,” Professor Bird said as he scrolled down in the police information. “Granny’s signature is on each of these faculty members’ \textbf{parking} tickets. Kind of odd, considering the Chief-of-Parking signed each personally. The deceased had from as few as SRC_R{min(RcmdrTestDrive$parking)} ticket to as many as SRC_R{max(RcmdrTestDrive$parking)}. All tickets were unpaid.
 
 “And look at this, Granny married Old Man Acme after graduation. He was a resident of Chicago and rumored to be a consigliere to one of the most prominent crime families in Chicago, the Chuck Jones/Warner Crime Family,” Professor Bird read from the screen as a cold feeling of terror rose from the pit of his stomach. 
 
@@ -8388,17 +8346,17 @@ Dr.~Fudd-Einstein and Professor Bird looked on in silence. They could not believ
 
 “What do you mean?” inquired Professor Bird.
 
-“Well, look here. The data file from the Chief's email shows \Sexpr{dim(RcmdrTestDrive)[1]} murders, but there have only been \Sexpr{dim(RcmdrTestDrive)[1]-2}. This doesn’t make any sense. I’ll have to straighten it out. Hey, wait a minute. Look at this, Person \#\Sexpr{dim(RcmdrTestDrive)[1]-1} and Person \#\Sexpr{dim(RcmdrTestDrive)[1]} seem to match our stats. But how can that be?”
+“Well, look here. The data file from the Chief's email shows SRC_R{dim(RcmdrTestDrive)[ 1 ]} murders, but there have only been SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2}. This doesn’t make any sense. I’ll have to straighten it out. Hey, wait a minute. Look at this, Person # SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} and Person # SRC_R{dim(RcmdrTestDrive)[ 1 ]} seem to match our stats. But how can that be?”
 
 It was at this moment that our two heroes were shot from behind and fell over the computer, dead. The killer hit \textsf{Delete} on the computer and walked out slowly (considering they had arthritis) and cackling loudly in the now quiet computer lab.  
 
-And so, I guess my question to you the reader is, did Granny murder \Sexpr{dim(RcmdrTestDrive)[1]} people, or did the murderer slip through the cracks of justice? You be the statistician and come to your own conclusion. 
+And so, I guess my question to you the reader is, did Granny murder SRC_R{dim(RcmdrTestDrive)[ 1 ]} people, or did the murderer slip through the cracks of justice? You be the statistician and come to your own conclusion. 
 
 Detective Pyork E.~Pig 
 
 {*}{*}{*}End File{*}{*}{*}
 
-\vfill{}
+#+latex: \vfill{}
 
 
 %\bibliographystyle{plainurl}
@@ -8407,14 +8365,11 @@ Detective Pyork E.~Pig
 \addcontentsline{toc}{chapter}{\bibname}
 %\nocite{*} 
 %\bibliography{IPSUR}
-
 \bibliographystyle{plainurl}
 \nocite{*}
 \bibliography{IPSUR}
 
-
 \vfill{}
-
 
 \cleardoublepage
 \phantomsection
