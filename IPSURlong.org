@@ -64,7 +64,7 @@ Steps 3 and 4 are not required but save you the trouble of navigating to the =R-
 
 There are /base/ packages (which come with \textsf{R} automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \textsf{R} being used for this document the default base packages loaded at startup are 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 getOption("defaultPackages")
 #+end_src
 
@@ -154,7 +154,7 @@ Below are some of the most basic operations that can be done with \textsf{R}. Al
 *** Arithmetic
 \label{sub:Arithmetic}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 2 + 3       # add
 4 * 5 / 6   # multiply and divide
 7^8         # 7 to the 8th power
@@ -162,7 +162,7 @@ Below are some of the most basic operations that can be done with \textsf{R}. Al
 
 Notice the comment character =#=\index{#@\texttt{\#}}. Anything typed after a =#= symbol is ignored by \textsf{R}. We know that $20/6$ is a repeating decimal, but the above example shows only 7 digits. We can change the number of digits displayed with =options=\index{options@\texttt{options}}:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 options(digits = 16)
 10/3                 # see more digits
 sqrt(2)              # square root
@@ -180,7 +180,7 @@ Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22,
 It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The === symbol works too, but it is recommended by the \textsf{R} masters to reserve === for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- 7*41/pi   # don't see the calculated value
 x              # take a look
 #+end_src
@@ -196,7 +196,7 @@ Objects can be of many /types/, /modes/, and /classes/. At this level, it is not
 
 You can determine an object's type with the =typeof=\index{typeof@\texttt{typeof}} function. In addition to the above, there is the =complex=\index{complex@\texttt{complex}}\index{as.complex@\texttt{as.complex}} data type:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sqrt(-1)              # isn't defined
 sqrt(-1+0i)           # is defined
 sqrt(as.complex(-1))  # same thing
@@ -217,7 +217,7 @@ All of this time we have been manipulating vectors of length 1. Now let us move 
 
 1.  =c=\index{c@\texttt{c}}: If you would like to enter the data =74,31,95,61,76,34,23,54,96= into \textsf{R}, you may create a data vector with the =c= function (which is short for /concatenate/).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- c(74, 31, 95, 61, 76, 34, 23, 54, 96)
 x
 #+end_src
@@ -229,14 +229,14 @@ The elements of a vector are usually coerced by \textsf{R} to the the most gener
 3. repeated data; regular patterns: the =seq=\index{seq@\texttt{seq}} function will generate all sorts of sequences of numbers. It has the arguments =from=, =to=, =by=, and =length.out= which can be set in concert with one another. We will do a couple of examples to show you how it works.
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 seq(from = 1, to = 5)
 seq(from = 2, by = -0.1, length.out = 4)
 #+end_src
 
 Note that we can get the first line much quicker with the colon operator =:=
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 1:5
 #+end_src
 
@@ -248,7 +248,7 @@ The vector =LETTERS=\index{LETTERS@\texttt{LETTERS}} has the 26 letters of the E
 
 Sometimes we do not want the whole vector, but just a piece of it. We can access the intermediate parts with the =[]=\index{[]@\texttt{{[}{]}}} operator. Observe (with =x= defined above)
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x[1]
 x[2:4]
 x[c(1,3,4,8)]
@@ -257,7 +257,7 @@ x[-c(1,3,4,8)]
 
 Notice that we used the minus sign to specify those elements that we do /not/ want. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 LETTERS[1:5]
 letters[-(6:24)]
 
@@ -269,7 +269,7 @@ letters[-(6:24)]
 
 A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- 1:5
 sum(x)
 length(x)
@@ -284,33 +284,33 @@ It will not be long before the user starts to wonder how a particular function i
 1. Type the name of the function without any parentheses or arguments. If you are lucky then the code for the entire function will be printed, right there looking at you. For instance, suppose that we would like to see how the =intersect=\index{intersect@\texttt{intersect}} function works:
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 intersect
 #+end_src
 
 2. If instead it shows =UseMethod("=\emph{something}=")=\index{UseMethod@\texttt{UseMethod}} then you will need to choose the /class/ of the object to be inputted and next look at the /method/ that will be /dispatched/ to the object. For instance, typing =rev=\index{rev@\texttt{rev}} says 
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 rev
 #+end_src
 
 The output is telling us that there are multiple methods associated with the =rev= function. To see what these are, type
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 methods(rev)
 #+end_src
 
 Now we learn that there are two different =rev(x)= functions, only one of which being chosen at each call depending on what =x= is. There is one for =dendrogram= objects and a =default= method for everything else. Simply type the name to see what each method does. For example, the =default= method can be viewed with
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 rev.default
 #+end_src
 
 3. Some functions are hidden by a /namespace/ (see An Introduction to \textsf{R} \cite{Venables2010}), and are not visible on the first try. For example, if we try to look at the code for =wilcox.test=\index{wilcox.test@\texttt{wilcox.test}} (see Chapter \ref{cha:Nonparametric-Statistics}) we get the following:
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 wilcox.test
 methods(wilcox.test)
 #+end_src
@@ -320,7 +320,7 @@ If we were to try =wilcox.test.default=  we would get a ``not found'' error, bec
 4. If it shows =.Internal(=\emph{something}=)=\index{.Internal@\texttt{.Internal}} or =.Primitive("=\emph{something}=")=\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \textsf{R} (which is /not/ a binary version with an =.exe= extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is =exp=:
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 exp
 #+end_src
 
@@ -635,7 +635,7 @@ There exist utilities to calculate probabilities and expectations for general co
 #+latex: \begin{example}
 Let $X$ have PDF $f(x)=3x^{2}$, $0<x<1$ and find $\P(0.14\leq X\leq0.71)$. (We will ignore that $X$ is a beta random variable for the sake of argument.)
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
@@ -647,7 +647,7 @@ Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could i
 #+latex: \begin{example}
 Let $X$ have PDF $f(x)=3/x^{4}$, $x>1$. We may integrate the function $xf(x)=$ =3/x^3= from zero to infinity to get the mean of $X$.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 g <- function(x) 3/x^3
 integrate(g, lower = 1, upper = Inf)
 #+end_src
@@ -659,7 +659,7 @@ Compare this to the answer we got in Example \ref{exa:cont-pdf-3x4}. Use =-Inf= 
 #+latex: \begin{example}
 Let us redo Example \ref{exa:cont-pdf3x2} with the =distr= package. The method is similar to that encountered in Section \ref{sub:disc-rv-how-r} in Chapter \ref{cha:Discrete-Distributions}. We define an absolutely continuous random variable:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(distr)
 f <- function(x) 3*x^2
 X <- AbscontDistribution(d = f, low1 = 0, up1 = 1)
@@ -668,7 +668,7 @@ p(X)(0.71) - p(X)(0.14)
 
 Compare this answers we found earlier. Now let us try expectation with the =distrEx= package \cite{Ruckdescheldistr}:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(distrEx)
 E(X)
 var(X)
@@ -782,7 +782,7 @@ M_{Y}(t)=\me^{ta}M_{X}(bt).
 The 68-95-99.7 Rule. We saw in Section \ref{sub:Measures-of-Spread} that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from -- and obtain more precise proportions -- with the following:
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 pnorm(1:3)-pnorm(-(1:3))
 #+end_src
 
@@ -807,12 +807,12 @@ Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible
 /Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value $x$ such that $F(x)=\P(X\leq x)$ satisfies $F(x)=0.99$, or yet another way to say it is that we would like to solve the equation $F(x)-0.99=0$. For the sake of argument, let us see how to do this the long way. We define the function $g(x)=F(x)-0.99$, and then look for the root of $g$ with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of $x$ values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 g <- function(x) pnorm(x, mean = 100, sd = 15) - 0.99
 uniroot(g, interval = c(130, 145))
 #+end_src
 
-#+begin_src R :exports none :results output pp
+#+begin_src R :exports none
 temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 #+end_src
 
@@ -864,7 +864,7 @@ Quantile functions are defined for all of the base distributions with the =q= pr
 #+latex: \begin{example}
 Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for $Q_{X}(0.99)$, where $X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)$. It could not be easier to do with \textsf{R}. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 qnorm(0.99, mean = 100, sd = 15)
 #+end_src
 
@@ -877,7 +877,7 @@ Find the values $z_{0.025}$, $z_{0.01}$, and $z_{0.005}$ (these will play an imp
 
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 qnorm(c(0.025, 0.01, 0.005), lower.tail = FALSE)
 #+end_src
 
@@ -1049,7 +1049,7 @@ This is what we will later call a /chi-square distribution with 1 degree of free
 
 The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example \ref{exa:lin-trans-norm} quite nicely:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(distr)
 X <- Norm(mean = 0, sd = 1)
 Y <- 4 - 3*X
@@ -1058,7 +1058,7 @@ Y
 
 So =distr= ``knows'' that a linear transformation of a normal random variable is again normal, and it even knows what the correct =mean= and =sd= should be. But it is impossible for =distr= to know everything, and it is not long before we venture outside of the transformations that =distr= recognizes. Let us try Example \ref{exa:lnorm-transformation}:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 Y <- exp(X)
 Y
 #+end_src
@@ -1073,14 +1073,14 @@ The result is an object of class =AbscontDistribution=, which is one of the clas
 
 As long as the transformation is sufficiently nice, such as a linear transformation, the exponential, absolute value, /etc./, the \texttt{d-p-q} functions are calculated analytically based on the d-p-q functions associated with $X$. But if we try a crazy transformation then we are greeted by a warning:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 W <- sin(exp(X) + 27)
 W
 #+end_src
 
 The warning confirms that the \texttt{d-p-q} functions are not calculated analytically, but are instead based on the randomly simulated values of $Y$. /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute $\P(W\leq0.5)$ using the $W$ above, then define $W$ again, and compute the (supposedly) same $\P(W\leq0.5)$ a few moments later.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 p(W)(0.5)
 W <- sin(exp(X) + 27)
 p(W)(0.5)
@@ -1303,14 +1303,14 @@ Calculate the first four raw moments for $X\sim\mathsf{gamma}(\mathtt{shape}=13,
 We load the =actuar= package and use the functions =mgamma= and =mgfgamma=:
 
 #+latex: \end{example}
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(actuar)
 mgamma(1:4, shape = 13, rate = 1)
 #+end_src
 
 For the plot we can use the function in the following form:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 #+end_src
 
@@ -1363,17 +1363,17 @@ For the following random experiments, decide what the distribution of $X$ should
 If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find 
 
 1. $\P(Z>2.64)$
-   #+begin_src R :exports both :results output pp
+   #+begin_src R  
    pnorm(2.64, lower.tail = FALSE)
    #+end_src
 
 1. $\P(0\leq Z<0.87)$
-   #+begin_src R :exports both :results output pp
+   #+begin_src R  
    pnorm(0.87) - 1/2
    #+end_src
 
 1. $\P(|Z|>1.39)$ (Hint: draw a picture!)
-   #+begin_src R :exports both :results output pp
+   #+begin_src R  
    2 * pnorm(-1.39)
    #+end_src
 
@@ -1649,7 +1649,7 @@ for $0<y<1$. In this example the joint support set was a rectangle $[0,1]\times[
 
 We will show how to do Example \ref{exa:max-sum-two-dice} using \textsf{R}; it is much simpler to do it with \textsf{R} than without. First we set up the sample space with the =rolldie= function. Next, we add random variables $U$ and $V$ with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 S <- rolldie(2, makespace = TRUE)
 S <- addrv(S, FUN = max, invars = c("X1","X2"), name = "U")
 S <- addrv(S, FUN = sum, invars = c("X1","X2"), name = "V")
@@ -1658,27 +1658,27 @@ head(S)
 
 Yes, the $U$ and $V$ columns have been added to the data frame and have been computed correctly. This result would be fine as it is, but the data frame has too many rows: there are repeated pairs $(u,v)$ which show up as repeated rows in the data frame. The goal is to aggregate the rows of $S$ such that the result has exactly one row for each unique pair $(u,v)$ with positive probability. This sort of thing is exactly the task for which the =marginal= function was designed. We may take a look at the joint distribution of $U$ and $V$ (we only show the first few rows of the data frame, but the complete one has 11 rows).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 UV <- marginal(S, vars = c("U", "V"))
 head(UV)
 #+end_src
 
 The data frame is difficult to understand. It would be better to have a tabular display like Table \ref{tab:max-sum-joint-pmf}. We can do that with the =xtabs= function. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 xtabs(round(probs,3) ~ U + V, data = UV)
 #+end_src
 
 Compare these values to the ones shown in Table \ref{tab:max-sum-joint-pmf}. We can repeat the process with =marginal= to get the univariate marginal distributions of $U$ and $V$ separately.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 marginal(UV, vars = "U")
 head(marginal(UV, vars = "V"))
 #+end_src
 
 Another way to do the same thing is with the =rowSums= and =colSums= of the =xtabs= object. Compare
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 temp <- xtabs(probs ~ U + V, data = UV)
 rowSums(temp)
 colSums(temp)
@@ -1784,7 +1784,7 @@ which is 13/50. Therefore the covariance of $(X,Y)$ is
 
 There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of $(U,V)$ from Example \ref{exa:max-sum-dice-covariance}.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 Eu <- sum(S$U*S$probs)
 Ev <- sum(S$V*S$probs)
 Euv <- sum(S$U*S$V*S$probs)
@@ -2418,7 +2418,7 @@ Here are some facts about the multinomial distribution.
 
 There is support for the multinomial distribution in base \textsf{R}, namely in the =stats= package. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(combinat)
 tmp <- t(xsimplex(3, 6))
 p <- apply(tmp, MARGIN = 1, FUN = dmultinom, prob = c(36,27,37))
@@ -2670,7 +2670,7 @@ Similar to that done for the normal we may define $\mathsf{t}_{\alpha}(\mathtt{d
 Find $\mathsf{t}{}_{0.01}(\mathtt{df}=23)$ with the quantile function.
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 qt(0.01, df = 23, lower.tail = FALSE)
 #+end_src
 
@@ -2831,16 +2831,16 @@ As it turns out, we do not need to know the exact analytical form of the samplin
 
 *** The Interquartile Range
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 iqrs <- replicate(100, IQR(rnorm(100)))
 #+end_src
 
 We can look at the mean of the simulated values
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 mean(iqrs)    # close to 1
 #+end_src
 and we can see the standard deviation
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sd(iqrs)
 #+end_src
 
@@ -2861,26 +2861,26 @@ hist(iqrs, breaks = 20)
 
 *** The Median Absolute Deviation
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 mads <- replicate(100, mad(rnorm(100)))
 #+end_src
 
 We can look at the mean of the simulated values
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 mean(mads)    # close to 1.349
 #+end_src
 
 and we can see the standard deviation
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sd(mads)
 #+end_src
 
 Now let's take a look at a plot of the simulated values
 
 
-#+begin_src R :exports results :results graphics :file img/simulated-MAD.pdf
+#+begin_src R :exports code :results graphics :file img/simulated-MAD.pdf
 hist(mads, breaks = 20)
 #+end_src
 
@@ -2950,7 +2950,7 @@ Let $X_{1}$,..., $X_{25}$ be a random sample from a $\mathsf{norm}(\mathtt{mean}
 1. How is $\overline{X}$ distributed? 
    $\mathsf{norm}(\mathtt{mean}=37,\,\mathtt{sd}=45/\sqrt{25})$ 
 1. Find $\P(\overline{X}>43.1)$.
-   #+begin_src R :exports both :results output pp
+   #+begin_src R  
    pnorm(43.1, mean = 37, sd = 9, lower.tail = FALSE)
    #+end_src
 #+latex: \end{xca}
@@ -3225,7 +3225,7 @@ L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 
 Notice that the likelihood is just a product of $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ PMFs. We first give some sample data (in the vector =datavals=), next we define the likelihood function =L=, and finally we =optimize= =L= over the range =c(0,1)=.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- mtcars$am
 L <- function(p,x) prod(dbinom(x, size = 1, prob = p))
 optimize(L, interval = c(0,1), x = x, maximum = TRUE)
@@ -3244,7 +3244,7 @@ We previously remarked that it is usually more numerically convenient to maximiz
 
 It is done in \textsf{R} with
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 minuslogL <- function(p,x) -sum(dbinom(x, size = 1, prob = p, log = TRUE))
 optimize(minuslogL, interval = c(0,1), x = x)
 #+end_src
@@ -3266,7 +3266,7 @@ minuslogL <- function(mu, sigma2){
 
 Note that we omitted the data as an argument to the log-likelihood function; the only arguments were the parameters over which the maximization is to take place. Now we will simulate some data and find the MLE. The optimization algorithm requires starting values (intelligent guesses) for the parameters. We choose values close to the sample mean and variance (which turn out to be approximately 5 and 0.5, respectively) to illustrate the procedure.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- PlantGrowth$weight
 library(stats4)
 MaxLikeEst <- mle(minuslogL, start = list(mu = 5, sigma2 = 0.5))
@@ -3275,7 +3275,7 @@ summary(MaxLikeEst)
 
 The outputted MLEs are shown above, and =mle= even gives us estimates for the standard errors of $\hat{\mu}$ and $\hat{\sigma}^{2}$ (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix \ref{sec:Multivariable-Calculus}). Let us check how close the numerical MLEs came to the theoretical MLEs:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 mean(x)
 var(x)*29/30
 sd(x)/sqrt(30)
@@ -3384,7 +3384,7 @@ The parameter of interest is $\mu$, which represents the true mean weight of the
 
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(aplpack)
 with(PlantGrowth, stem.leaf(weight))
 #+end_src
@@ -3393,7 +3393,7 @@ The data appear to be approximately normal with no extreme values. The data come
 
 [fn:srs] Actually we will see later that there is reason to believe that the observations are simple random samples from three distinct populations. See Section \ref{sec:Analysis-of-Variance}.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 dim(PlantGrowth)   # sample size is first entry
 with(PlantGrowth, mean(weight))
 qnorm(0.975)
@@ -3473,7 +3473,7 @@ Small sample, some data with $X_{1}$, $X_{2}$, ..., $X_{n}$ an $SRS(n)$ from a $
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(TeachingDemos)
 temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
 temp
@@ -3628,7 +3628,7 @@ or in other words, we know in advance that the true proportion is restricted to 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(Hmisc)
 binconf(x = 7, n = 25, method = "asymptotic")
 binconf(x = 7, n = 25, method = "wilson")
@@ -3636,12 +3636,12 @@ binconf(x = 7, n = 25, method = "wilson")
 
 The default value of the =method= argument is =wilson=.  An alternate way is 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 tab <- xtabs(~gender, data = RcmdrTestDrive)
 prop.test(rbind(tab), conf.level = 0.95, correct = FALSE)
 #+end_src
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 A <- as.data.frame(Titanic)
 library(reshape)
 B <- with(A, untable(A, Freq))
@@ -3802,7 +3802,7 @@ Keep the preceding experiment in the back of your mind as you read the following
 
 If it were truly an ordinary, well-shuffled deck of cards, the probability of observing zero blacks out of a sample of size five (without replacement) from a deck with 26 black cards and 26 red cards would be
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 dhyper(0, m = 26, n = 26, k = 5)
 #+end_src
 
@@ -3897,13 +3897,13 @@ Our null hypothesis in this problem is $H_{0}:\, p=0.4$ and the alternative hypo
 \frac{\hat{p}-0.4}{\sqrt{0.4(1-0.4)/n}}<-z_{\alpha},
 \end{equation}
 where $\alpha=0.01$ and $-z_{0.01}$ is 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 -qnorm(0.99)
 #+end_src
 
 Our only remaining task is to find the value of the test statistic and see where it falls relative to the critical value. We can find the number of people admitted and not admitted to the UCB graduate school with the following. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 A <- as.data.frame(UCBAdmissions)
 head(A)
 xtabs(Freq ~ Admit, data = A)
@@ -3911,7 +3911,7 @@ xtabs(Freq ~ Admit, data = A)
 
 Now we calculate the value of the test statistic.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 phat <- 1755/(1755 + 2771)
 (phat - 0.4)/sqrt(0.4 * 0.6/(1755 + 2771)) 
 #+end_src
@@ -3926,7 +3926,7 @@ We are going to do Example \ref{exa:prop-test-pvalue-A} all over again. Everythi
 
 Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately $-1.68$. But notice that our critical value has changed: $\alpha=0.05$ and $-z_{0.05}$ is 
 #+latex: \end{example}
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 -qnorm(0.95)
 #+end_src
 
@@ -3950,7 +3950,7 @@ Calculate the $p$-value for the test in Examples \ref{exa:prop-test-pvalue-A} an
 The $p$-value for this test is the probability of obtaining a $z$-score equal to our observed test statistic (which had $z$-score $\approx-1.680919$) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval $(-\infty,\,-1.680919]$. We can get this easily with
 #+latex: \end{example}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 pnorm(-1.680919)
 #+end_src
 
@@ -3973,7 +3973,7 @@ Example.
 
 The following does the test.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE)
 #+end_src
 
@@ -4055,7 +4055,7 @@ In this example we
 
 I am thinking =z.test=\index{z.test@\texttt{z.test}} in =TeachingDemos=, =t.test=\index{t.test@\texttt{t.test}} in base \textsf{\small R}.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- rnorm(37, mean = 2, sd = 3)
 library(TeachingDemos)
 z.test(x, mu = 1, sd = 3, conf.level = 0.90)
@@ -4077,7 +4077,7 @@ plot(prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.
 
 The =RcmdrPlugin.IPSUR= package does not have a menu for =z.test= yet. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- rnorm(13, mean = 2, sd = 3)
 t.test(x, mu = 0, conf.level = 0.90, alternative = "greater")
 #+end_src
@@ -4106,7 +4106,7 @@ Give some data and a hypothesis.
 #+latex: \paragraph*{How to do it with \textsf{R}}
 I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(TeachingDemos)
 sigma.test(women$height, sigma = 8)
 #+end_src
@@ -4167,7 +4167,7 @@ For a nonparametric alternative to the two-sample $F$ test see Chapter \ref{cha:
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 t.test(extra ~ group, data = sleep, paired = TRUE)
 #+end_src
 
@@ -4179,7 +4179,7 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 ks.test(randu$x, "punif")
 #+end_src
 
@@ -4188,7 +4188,7 @@ ks.test(randu$x, "punif")
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 shapiro.test(women$height)
 #+end_src
 
@@ -4199,15 +4199,15 @@ shapiro.test(women$height)
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 I am thinking 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 with(chickwts, by(weight, feed, shapiro.test))
 #+end_src
 and
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 temp <- lm(weight ~ feed, data = chickwts)
 #+end_src
 and 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 anova(temp)
 #+end_src
 
@@ -4415,7 +4415,7 @@ segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 \label{exa:Speed-and-Stopping}
 
 *Speed and stopping distance of cars.* We will use the data frame =cars=\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 head(cars)
 #+end_src
 
@@ -4519,7 +4519,7 @@ where $r$, $s_{y}$, and $s_{x}$ are the sample correlation coefficient and the s
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
 
@@ -4527,7 +4527,7 @@ The first part of the input to the =lm= function, =dist~speed=, is a /model form
 
 [fn:seesame] Alternatively, we could just type =cars.lm= to see the same thing.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 coef(cars.lm)
 #+end_src
 
@@ -4582,7 +4582,7 @@ We may use the regression line to obtain a point estimate of the mean stopping d
 
 Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16\,ft as listed in the fifth row of the =cars= data:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 cars[5, ]
 #+end_src
 
@@ -4597,13 +4597,13 @@ We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen
 
 The fitted values are automatically computed as a byproduct of the model fitting procedure and are already stored as a component of the =cars.lm= object. We may access them with the =fitted= function (we only show the first five entries):
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 fitted(cars.lm)[1:5]
 #+end_src
 
 Predictions at $x$ values that are not necessarily part of the original data are done with the =predict= function. The first argument is the original =cars.lm= object and the second argument =newdata= accepts a dataframe (in the same form that was used to fit =cars.lm=) that contains the locations at which we are seeking predictions. Let us predict the average stopping distances of cars traveling 6\,mph, 8\,mph, and 21\,mph:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 #+end_src
 
@@ -4638,7 +4638,7 @@ and we estimate $\sigma$ with the /standard error/ [fn:MSEse] $S=\sqrt{S^{2}}$.
 
 The residuals for the model may be obtained with the =residuals= function; we only show the first few entries in the interest of space:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 residuals(cars.lm)[1:5]
 #+end_src
 
@@ -4646,7 +4646,7 @@ In the last section, we calculated the fitted value for $x=8$ and found it to be
 
 The estimate $S$ for $\sigma$ is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be $S\approx\,$ SRC_R{round(summary(cars.lm)$sigma, 2)}, or we can access it directly from the =summary= object.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 carsumry <- summary(cars.lm)
 carsumry$sigma
 #+end_src
@@ -4705,7 +4705,7 @@ b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}.
 
 Let us take a look at the output from =summary(cars.lm)=:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 summary(cars.lm)
 #+end_src
 
@@ -4718,7 +4718,7 @@ In the =Coefficients= section we find the parameter estimates and their respecti
 
 Or, we could use the =confint= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 confint(cars.lm)
 #+end_src
 
@@ -4764,13 +4764,13 @@ Confidence and prediction intervals are calculated in \textsf{R} with the =predi
 #+latex: \begin{example}
 We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21\,mph (note from the graph that there are no collected data for these speeds). We have computed =cars.lm= earlier, and we will use this for input to the =predict= function. Also, we need to tell \textsf{R} the values of $x_{0}$ at which we want the predictions made, and store the $x_{0}$ values in a data frame whose variable is labeled with the correct name. /This is important/. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new <- data.frame(speed = c(5, 6, 21))
 #+end_src
 
 Next we instruct \textsf{R} to calculate the intervals. Confidence intervals are given by 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(cars.lm, newdata = new, interval = "confidence")
 #+end_src
 
@@ -4780,7 +4780,7 @@ carsCI <- round(predict(cars.lm, newdata = new, interval = "confidence"), 2)
 
 Prediction intervals are given by
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(cars.lm, newdata = new, interval = "prediction")
 #+end_src
 
@@ -4819,7 +4819,7 @@ library(HH)
 ci.plot(cars.lm)
 #+end_src
 
-#+begin_src R :exports results :results graphics :file img/carscipi.pdf
+#+begin_src R :exports none :results graphics :file img/carscipi.pdf
 library(HH)
 print(ci.plot(cars.lm))
 #+end_src
@@ -4859,7 +4859,7 @@ Similarly, we may test the hypothesis $H_{0}:\beta_{0}=0$ versus the alternative
 
 Let us take another look at the output from =summary(cars.lm)=:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 summary(cars.lm)
 #+end_src
 
@@ -4934,7 +4934,7 @@ Related to the simple coefficient of determination is the sample correlation coe
 
 The primary method to display partitioned sums of squared errors is with an /ANOVA table/. The command in \textsf{R} to produce such a table is =anova=. The input to =anova= is the result of an =lm= call which for the =cars= data is =cars.lm=.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 anova(cars.lm)
 #+end_src
 
@@ -4948,13 +4948,13 @@ The interpretation should be: ``The linear regression line accounts for approxim
 
 The value of $r^{2}$ is stored in the =r.squared= component of =summary(cars.lm)=, which we called =carsumry=.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 carsumry$r.squared
 #+end_src
 
 We already knew this. We saw it in the next to the last line of the =summary(cars.lm)= output where it was called ``=Multiple R-squared=''. Listed right beside it is the =Adjusted R-squared= which we will discuss in Chapter \ref{cha:multiple-linear-regression}.  For the =cars= data, we find $r$ to be
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sqrt(carsumry$r.squared)
 #+end_src
 
@@ -4984,7 +4984,7 @@ So why bother to define the $F$ statistic? Why not just square the $t$ statistic
 
 The overall $F$ statistic and $p$-value are displayed in the bottom line of the =summary(cars.lm)= output. It is also shown in the final columns of =anova(cars.lm)=:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 anova(cars.lm)
 #+end_src
 
@@ -5049,7 +5049,7 @@ H_{1}:\mbox{ the residuals are not normally distributed.}
 
 The results from \textsf{R} are
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 shapiro.test(residuals(cars.lm))
 #+end_src
 
@@ -5111,7 +5111,7 @@ We reject the null hypothesis if $BP$ is too large, which happens when the expla
 
 We do it in \textsf{R} with the =bptest= function from the =lmtest= package \cite{Zeileislmtest}. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(lmtest)
 bptest(cars.lm)
 #+end_src
@@ -5155,7 +5155,7 @@ D=\frac{\sum_{i=2}^{n}(E_{i}-E_{i-1})^{2}}{\sum_{j=1}^{n}E_{j}^{2}}.
 
 Exact critical values are difficult to obtain, but \textsf{R} will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(lmtest)
 dwtest(cars.lm, alternative = "two.sided")
 #+end_src
@@ -5275,14 +5275,14 @@ The folklore in regression classes is that a test based on the statistic in Equa
 
 We can calculate the standardized residuals with the =rstandard= function. The input is the =lm= object, which is =cars.lm=.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sres <- rstandard(cars.lm)
 sres[1:5]
 #+end_src
 
 We can find out which observations have studentized residuals larger than two with the command
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sres[which(abs(sres) > 2)]
 #+end_src
 
@@ -5290,21 +5290,21 @@ In this case, we see that observations 23, 35, and 49 are potential outliers wit
 
 We can compute the studentized deleted residuals with =rstudent=:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sdelres <- rstudent(cars.lm)
 sdelres[1:5]
 #+end_src
 
 We should compare these values with critical values from a $\mathsf{t}(\mathtt{df}=n-3)$ distribution, which in this case is $\mathsf{t}(\mathtt{df}=50-3=47)$. We can calculate a 0.005 quantile and check with 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 t0.005 <- qt(0.005, df = 47, lower.tail = FALSE)
 sdelres[which(abs(sdelres) > t0.005)]
 #+end_src
 
 This means that observations 23 and 49 have a large studentized deleted residual. The leverages can be found with the =hatvalues= function:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 leverage <- hatvalues(cars.lm)
 leverage[1:5]
 leverage[which(leverage > 4/50)]
@@ -5336,7 +5336,7 @@ See Section \ref{sec:Residual-Analysis-MLR} for a better way to write these. The
 
 We can calculate the $DFBETAS$ with the =dfbetas= function (some output has been omitted):
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 dfb <- dfbetas(cars.lm)
 head(dfb)
 #+end_src
@@ -5351,7 +5351,7 @@ We can measure the influence that an observation has on its fitted value with $D
 
 The value represents the number of standard deviations of $\hat{Y_{i}}$ that the fitted value $\hat{Y_{i}}$ increases or decreases with the inclusion of the $i$$^{\textrm{th}}$ observation. We can compute them with the =dffits= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 dff <- dffits(cars.lm)
 dff[1:5]
 #+end_src
@@ -5378,7 +5378,7 @@ To assess the significance of $D$, we compare to quantiles of an $\mathsf{f}(\ma
 
 We can calculate the Cook's Distances with the =cooks.distance= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 cooksD <- cooks.distance(cars.lm)
 cooksD[1:5]
 #+end_src
@@ -5402,7 +5402,7 @@ Values with large Cook's distance merit further investigation.}
 
 Observations with the largest Cook's D values are labeled, hence we see that observations 23, 39, and 49 are suspicious. However, we need to compare to the quantiles of an $\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=48)$ distribution:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 F0.50 <- qf(0.5, df1 = 2, df2 = 48)
 cooksD[which(cooksD > F0.50)]
 #+end_src
@@ -5561,13 +5561,13 @@ Measurements were made of the girth, height, and volume of timber in 31 felled b
 
 The data are in the =datasets= package and are already on the search path; they can be viewed with
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 head(trees)
 #+end_src
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
 
-#+begin_src R :exports results :results graphics :file img/splom-trees.pdf
+#+begin_src R :exports code :results graphics :file img/splom-trees.pdf
 library(lattice)
 splom(trees)
 #+end_src
@@ -5610,7 +5610,7 @@ s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d =
 fit <- lm(Volume ~ Girth + Height, data = trees)
 #+end_src
 
-#+begin_src R :exports results :results graphics :file img/3D-scatterplot-trees.pdf
+#+begin_src R :exports none :results graphics :file img/3D-scatterplot-trees.pdf
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
@@ -5674,7 +5674,7 @@ We have only found a critical value, and have not actually shown that the critic
 
 We do all of the above just as we would in simple linear regression. The powerhouse is the =lm=\index{lm@\texttt{lm}} function. Everything else is based on it. We separate explanatory variables in the model formula by a plus sign.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 trees.lm <- lm(Volume ~ Girth + Height, data = trees)
 trees.lm
 #+end_src
@@ -5687,7 +5687,7 @@ We see from the output that for the =trees= data our parameter estimates are $\m
 
 We could see the entire model matrix $\mathbf{X}$ with the =model.matrix=\index{model.matrix@\texttt{model.matrix}} function, but in the interest of brevity we only show the first few rows. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 head(model.matrix(trees.lm))
 #+end_src
 
@@ -5747,7 +5747,7 @@ We would use the same estimate $\hat{Y}=35.6$ to predict the measured =Volume= o
 
 The fitted values are stored inside =trees.lm= and may be accessed with the =fitted= function. We only show the first five fitted values.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 fitted(trees.lm)[1:5]
 #+end_src
 
@@ -5755,19 +5755,19 @@ The syntax for general prediction does not change much from simple linear regres
 
 The only difference from SLR is in the way we tell \textsf{R} the values of the explanatory variables for which we want predictions. In SLR we had only one independent variable but in MLR we have many (for the =trees= data we have two). We will store values for the independent variables in the data frame =new=, which has two columns (one for each independent variable) and three rows (we shall make predictions at three different locations).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 #+end_src
 
 We can view the locations at which we will predict:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new
 #+end_src
 
 We continue just like we would have done in SLR.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(trees.lm, newdata = new)
 #+end_src
 
@@ -5814,13 +5814,13 @@ That would be a good guess. The /residual standard error/ is $S=\sqrt{S^{2}}$.
 
 The residuals are also stored with =trees.lm= and may be accessed with the =residuals= function. We only show the first five residuals.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 residuals(trees.lm)[1:5]
 #+end_src
 
 The =summary= function output (shown later) lists the =Residual Standard Error= which is just $S=\sqrt{S^{2}}$. It is stored in the =sigma= component of the =summary= object.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesumry <- summary(trees.lm)
 treesumry$sigma
 #+end_src
@@ -5864,7 +5864,7 @@ The degrees of freedom for the Student's $t$ distribution[fn:tdist] are the same
 
 To get confidence intervals for the parameters we need only use =confint=\index{confint@\texttt{confint}}:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 confint(trees.lm)
 #+end_src
 
@@ -5909,13 +5909,13 @@ The prediction intervals are wider than the confidence intervals, just as in Sec
 
 The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section \ref{sub:slr-interval-est-regline} (which we repeat here for illustration).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 #+end_src
 
 Confidence intervals are given by
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(trees.lm, newdata = new, interval = "confidence")
 #+end_src
 
@@ -5925,7 +5925,7 @@ treesCI <- round(predict(trees.lm, newdata = new, interval = "confidence"), 1)
 
 Prediction intervals are given by
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 predict(trees.lm, newdata = new, interval = "prediction")
 #+end_src
 
@@ -5993,7 +5993,7 @@ It is good practice for the statistician to weigh both $R^{2}$ and $\overline{R}
 
 For the =trees= data, we can get $R^{2}$ and $\overline{R}^{2}$ from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesumry$r.squared
 treesumry$adj.r.squared
 #+end_src
@@ -6021,7 +6021,7 @@ When the regression assumptions hold and under $H_{0}$, it can be shown that $F\
 
 The overall $F$ statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesumry$fstatistic
 #+end_src
 
@@ -6053,7 +6053,7 @@ has a Student's $t$ distribution with $n-(p+1)$ degrees of freedom. (Remember, w
 
 The Student's $t$ tests for significance of the individual explanatory variables are shown in the =summary= output.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesumry
 #+end_src
 
@@ -6069,7 +6069,7 @@ In each of the previous sections we assumed that $\mu$ was a linear function of 
 
 
 
-#+begin_src R :exports both :results graphics :file img/Scatterplot-Volume-Girth-trees.pdf
+#+begin_src R :exports code :results graphics :file img/Scatterplot-Volume-Girth-trees.pdf
 qplot(Girth, Volume, data = trees)
 #+end_src
 
@@ -6119,7 +6119,7 @@ See =?poly= and =?cars= for more information. Note that we can recover the appro
 #+latex: \begin{example}
 We will fit the quadratic model to the =trees= data and display the results with =summary=, being careful to rescale the data before fitting the model. We may rescale the =Girth= variable to have zero mean and unit variance on-the-fly with the =scale= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
 summary(treesquad.lm)
 #+end_src
@@ -6127,12 +6127,12 @@ summary(treesquad.lm)
 We see that the $F$ statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
 
-#+begin_src R :exports both :results graphics :file img/Fitting-the-Quadratic.pdf
+#+begin_src R :exports code :results graphics :file img/Fitting-the-Quadratic.pdf
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 #+end_src
 
-#+begin_src latex 
+#+begin_src latex
   \begin{figure}[ht!]
     \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
     \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
@@ -6151,7 +6151,7 @@ When a model includes a quadratic term for an independent variable, it is custom
 
 We do estimation/prediction the same way that we did in Section \ref{sub:mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new <- data.frame(Girth = c(9.1, 11.6, 12.5))
 predict(treesquad.lm, newdata = new, interval = "prediction")
 #+end_src
@@ -6161,7 +6161,7 @@ The predictions and intervals are slightly different from what they were previou
 #+latex: \begin{rem}
 We have mentioned on several occasions that it is important to rescale the explanatory variables for polynomial regression. Watch what happens if we ignore this advice:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
 #+end_src
 
@@ -6220,7 +6220,7 @@ There are several ways to introduce an interaction term into the model.
 
 For the =trees= data, we fit the model with the interaction using method two and see if it is significant:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesint.lm <- lm(Volume ~ Girth + Height + Girth:Height, data = trees)
 summary(treesint.lm)
 #+end_src
@@ -6229,7 +6229,7 @@ We can see from the output that the interaction term is highly significant. Furt
 
 For the sake of completeness we calculate confidence intervals for the parameters and do prediction as before.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 confint(treesint.lm)
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 predict(treesint.lm, newdata = new, interval = "prediction")
@@ -6262,7 +6262,7 @@ The =trees= data do not have any qualitative explanatory variables, so we will c
 
 We can construct =Tall= very quickly in \textsf{R} with the =cut= function:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 trees$Tall <- cut(trees$Height, breaks = c(-Inf, 76, Inf), labels = c("no","yes"))
 trees$Tall[1:5]
 #+end_src
@@ -6300,13 +6300,13 @@ In essence, we are fitting two regression lines: one for tall trees, and one for
 
 The important thing is to double check that the qualitative variable in question is stored as a factor. The way to check is with the =class= command. For example,
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 class(trees$Tall)
 #+end_src
 
 If the qualitative variable is not yet stored as a factor then we may convert it to one with the =factor= command. See Section \ref{sub:Qualitative-Data}. Other than this we perform MLR as we normally would.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesdummy.lm <- lm(Volume ~ Girth + Tall, data = trees)
 summary(treesdummy.lm)
 #+end_src
@@ -6410,7 +6410,7 @@ The key ingredient above is that the two competing models are /nested/ in the se
 
 For the =trees= data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesfull.lm <- lm(Volume ~ Girth + I(Girth^2) + Height + I(Height^2), data = trees)
 summary(treesfull.lm)
 #+end_src
@@ -6423,19 +6423,19 @@ In this ill-formed model nothing is significant except =Girth= and =Girth^2=. Le
 
 We fit the reduced model with =lm= and store the results:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesreduced.lm <- lm(Volume ~ -1 + Girth + I(Girth^2), data = trees)
 #+end_src
 
 To delete the intercept from the model we used =-1= in the model formula. Next we compare the two models with the =anova= function. The convention is to list the models from smallest to largest.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 anova(treesreduced.lm, treesfull.lm)
 #+end_src
 
 We see from the output that the complete model is highly significant compared to the model that does not incorporate =Height= or the =Intercept=. We wonder (with our tongue in our cheek) if the =Height^2= term in the full model is causing all of the trouble. We will fit an alternative reduced model that only deletes =Height^2=. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesreduced2.lm <- lm(Volume ~ Girth + I(Girth^2) + Height, data = trees)
 anova(treesreduced2.lm, treesfull.lm)
 #+end_src
@@ -6501,7 +6501,7 @@ How can we fit this model? The model is not linear in the parameters any more, s
 \end{equation}
 and this new model $\mu^{\ast}$ is linear in the parameters $\beta_{0}^{\ast}=\ln\beta_{0}$, $\beta_{1}^{\ast}=\beta_{1}$ and $\beta_{2}^{\ast}=\beta_{2}$. We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height), data = trees)
 summary(treesNonlin.lm)
 #+end_src
@@ -6510,13 +6510,13 @@ This is our best model yet (judging by $R^{2}$ and $\overline{R}^{2}$), all of t
 
 We may get confidence intervals for the parameters, but remember that it is usually better to transform back to the original scale for interpretation purposes :
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 exp(confint(treesNonlin.lm))
 #+end_src
 
 (Note that we did not update the row labels of the matrix to show that we exponentiated and so they are misleading as written.) We do predictions just as before. Remember to transform the response variable back to the original scale after prediction. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 exp(predict(treesNonlin.lm, newdata = new, interval = "confidence"))
 #+end_src
@@ -6537,7 +6537,7 @@ It turns out that John Fox has posted an Appendix to his book \cite{Fox2002} whi
 
 Here is an example of how it works, based on a question from R-help.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 # fake data 
 set.seed(1) 
 x <- seq(from = 0, to = 1000, length.out = 200) 
@@ -6655,7 +6655,7 @@ Of course, we do not really need a bootstrap distribution here because from Sect
 
 We will take a random sample of size $n=25$ from the population. Then we will /resample/ the data 1000 times to get 1000 resamples of size 25. We will calculate the sample mean of each of the resamples, and will study the data distribution of the 1000 values of $\xbar$.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 srs <- rnorm(25, mean = 3)
 resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
@@ -6684,7 +6684,7 @@ curve(dnorm(x, 3, 0.2), add = TRUE)  # overlay true normal density
 
 We have overlain what we know to be the true sampling distribution of $\overline{X}$, namely, a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})$ distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 mean(xbarstar)
 mean(srs)
 mean(xbarstar) - mean(srs)
@@ -6696,7 +6696,7 @@ Notice how close the two values are. The difference between them is an estimate 
 
 Now back to our original problem, we would like to estimate the standard error of $\overline{X}$. Looking at the histogram, we see that the spread of the bootstrap distribution is similar to the spread of the sampling distribution. Therefore, it stands to reason that we could estimate the standard error of $\overline{X}$ with the sample standard deviation of the resample statistics. Let us try and see.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sd(xbarstar)
 #+end_src
 
@@ -6713,7 +6713,7 @@ We only took an original sample of size $n=25$, and resampling more and more wou
 
 *Standard error of the median.* We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 resamps <- replicate(1000, sample(rivers, 141, TRUE), simplify = FALSE)
 medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
@@ -6736,7 +6736,7 @@ The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced
 hist(medstar, breaks = 40, prob = TRUE)
 #+end_src
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 median(rivers)
 mean(medstar)
 mean(medstar) - median(rivers)
@@ -6754,7 +6754,7 @@ mean(medstar) - median(rivers)
 
 For the standard error of the mean (Example \ref{exa:Bootstrap-se-mean}):
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(boot)
 mean_fun <- function(x, indices) mean(x[indices])
 boot(data = srs, statistic = mean_fun, R = 1000)
@@ -6762,7 +6762,7 @@ boot(data = srs, statistic = mean_fun, R = 1000)
 
 For the standard error of the median (Example \ref{exa:Bootstrap-se-median}):
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 median_fun <- function(x, indices) median(x[indices])
 boot(data = rivers, statistic = median_fun, R = 1000)
 #+end_src
@@ -6798,7 +6798,7 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 
 *Percentile interval for the expected value of the median.* We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 btsamps <- replicate(2000, sample(stack.loss, 21, TRUE), simplify = FALSE)
 thetast <- sapply(btsamps, median, simplify = TRUE)
 mean(thetast)
@@ -6811,7 +6811,7 @@ quantile(thetast, c(0.025, 0.975))
 #+latex: \begin{example}
 *Confidence interval for expected value of the median, second try.*  Now we will do it the right way with the =boot= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(boot)
 med_fun <- function(x, ind) median(x[ind])
 med_boot <- boot(stack.loss, med_fun, R = 2000)
@@ -6899,7 +6899,7 @@ In calculating the permutation test /p-value/, the formula is essentially the pr
 #+latex: \end{rem}
 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(coin)
 oneway_test(len ~ supp, data = ToothGrowth)
 #+end_src
@@ -6909,7 +6909,7 @@ oneway_test(len ~ supp, data = ToothGrowth)
 
 We know from Chapter \ref{cha:Hypothesis-Testing} to use the two-sample $t$-test to tell whether there is an improvement as a result of taking the intervention class. Note that the $t$-test assumes normal underlying populations, with unknown variance, and small sample $n=10$. What does the $t$-test say? Below is the output. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 #+end_src
 
@@ -6992,7 +6992,7 @@ read(IPSUR)
 
 If you ever write the \textsf{R} help mailing list with a question, then you should include your session information in the email; it makes the reader's job easier and is requested by the Posting Guide. Here is how to do that, and below is what the output looks like.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 sessionInfo()
 #+end_src
 
@@ -7205,13 +7205,13 @@ This appendix is a reference of sorts regarding some of the data structures a st
 
 See the ``Vectors and Assignment'' section of /An Introduction to/ \textsf{R}. A vector is an ordered sequence of elements, such as numbers, characters, or logical values, and there may be =NA='s present. We usually make vectors with the assignment operator =<-=.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- c(3, 5, 9)
 #+end_src
 
 Vectors are atomic in the sense that if you try to mix and match elements of different modes then all elements will be coerced to the most convenient common mode.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 y <- c(3, "5", TRUE)
 #+end_src
 
@@ -7222,19 +7222,19 @@ In the example all elements were coerced to /character/ mode. We can test whethe
 
 See the ``Arrays and Matrices'' section of /An Introduction to/ \textsf{R}. Loosely speaking, a matrix is a vector that has been reshaped into rectangular form, and an array is a multidimensional matrix. Strictly speaking, it is the other way around: an array is a data vector with a dimension attribute (=dim=), and a matrix is the special case of an array with only two dimensions. We can construct a matrix with the =matrix= function. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 matrix(letters[1:6], nrow = 2, ncol = 3)
 #+end_src
 
 Notice the order of the matrix entries, which shows how the matrix is populated by default. We can change this with the =byrow= argument:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 matrix(letters[1:6], nrow = 2, ncol = 3, byrow = TRUE)
 #+end_src
 
 We can test whether a given object is a matrix with =is.matrix= and can coerce an object (if possible) to a matrix with =as.matrix=. As a final example watch what happens when we mix and match types in the first argument:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 matrix(c(1,"2",NA, FALSE), nrow = 2, ncol = 3)
 #+end_src
 
@@ -7242,7 +7242,7 @@ Notice how all of the entries were coerced to character for the final result (ex
 
 The standard arithmetic operations work element-wise with matrices.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 A <- matrix(1:6, 2, 3)
 B <- matrix(2:7, 2, 3)
 A + B
@@ -7251,20 +7251,20 @@ A * B
 
 If you want the standard definition of matrix multiplication then use the =%*%= function. If we were to try =A %*% B= we would get an error because the dimensions do not match correctly, but for fun, we could transpose =B= to get conformable matrices. The transpose function =t= only works for matrices (and data frames).
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 try(A * B)     # an error
 A %*% t(B)     # this is alright
 #+end_src
 
 To get the ordinary matrix inverse use the =solve= function: 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 solve(A %*% t(B))     # input matrix must be square
 #+end_src
 
 Arrays more general than matrices, and some functions (like transpose) do not work for the more general array. Here is what an array looks like: 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 array(LETTERS[1:24], dim = c(3,4,2))
 #+end_src
 
@@ -7275,7 +7275,7 @@ We can test with =is.array= and may coerce with =as.array=.
 
 A data frame is a rectangular array of information with a special status in \textsf{R}. It is used as the fundamental data structure by many of the modeling functions. It is like a matrix in that all of the columns must be the same length, but it is more general than a matrix in that columns are allowed to have different modes.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 x <- c(1.3, 5.2, 6)
 y <- letters[1:3]
 z <- c(TRUE, FALSE, TRUE)
@@ -7285,7 +7285,7 @@ A
 
 Notice the =names= on the columns of =A=. We can change those with the =names= function.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 names(A) <- c("Fred","Mary","Sue")
 A
 #+end_src
@@ -7306,7 +7306,7 @@ Suppose you have a contingency table and would like to do descriptive or inferen
 
 First, we coerce the table to a data frame with: 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 A <- as.data.frame(Titanic)
 head(A)
 #+end_src
@@ -7315,7 +7315,7 @@ Note that there are as many preliminary columns of =A= as there are dimensions t
 
 The form of =A= is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of =A= exactly the number of times shown in the =Freq= column. The =reshape= package \cite{Wickhamreshape} has the function =untable= designed for that very purpose: 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(reshape)
 B <- with(A, untable(A, Freq))
 head(B)
@@ -7327,7 +7327,7 @@ Now, this is more like it. Note that we slipped in a call to the =with= function
 
 The only fly in the ointment is the lingering =Freq= column which has repeated values that do not have any meaning any more. We could just ignore it, but it would be better to get rid of the meaningless column so that it does not cause trouble later. While we are at it, we could clean up the =rownames=, too.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 C <- B[, -5]
 rownames(C) <- 1:dim(C)[1]
 head(C)
@@ -7343,7 +7343,7 @@ There are at least two ways to do it.
 
 - Using a matrix:
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 tab <- matrix(1:6, nrow = 2, ncol = 3)
 rownames(tab) <- c('first', 'second')
 colnames(tab) <- c('A', 'B', 'C')
@@ -7354,7 +7354,7 @@ tab  # Counts
 
 - Using a dataframe
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 p <- c("milk","tea")
 g <- c("milk","tea")
 catgs <- expand.grid(poured = p, guessed = g)
@@ -7439,7 +7439,7 @@ We can sort a vector with the =sort= function. Normally we have a data frame of 
 
 For example, we may sort all of the rows of the =Puromycin= data (in ascending order) by the variable =conc= with the following: 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 Tmp <- Puromycin[order(Puromycin$conc), ]
 head(Tmp)
 #+end_src
@@ -7458,14 +7458,14 @@ with(Puromycin, Puromycin[order(state, conc), ])
 
 If we would like to sort a numeric variable in descending order then we put a minus sign in front of it. 
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 Tmp <- with(Puromycin, Puromycin[order(-conc), ])
 head(Tmp)
 #+end_src
 
 If we would like to sort by a character (or factor) in decreasing order then we can use the =xtfrm= function which produces a numeric vector in the same order as the character vector.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 Tmp <- with(Puromycin, Puromycin[order(-xtfrm(state)), ])
 head(Tmp)
 #+end_src
@@ -7982,7 +7982,7 @@ If the function $f$ is continuous on $A$ and if the Jacobian of $T$ is nonzero e
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation $T$ maps points $(u_{1},u_{2},\ldots,u_{n})$ to points $(x_{1},x_{2},\ldots,x_{n})$, the Jacobian is the determinant of the $\mathrm{n}\times\mathrm{n}$ matrix of first-order partial derivatives of $T$ (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets $A$ and $B$.
 
 
-* Writing Reports with R
+* Writing Reports with \textsf{R}
 \label{cha:Writing-Reports-with}
 
 Perhaps the most important part of a statistician's job once the analysis is complete is to communicate the results to others. This is usually done with some type of report that is delivered to the client, manager, or administrator. Other situations that call for reports include term papers, final projects, thesis work, /etc/. This chapter is designed to pass along some tips about writing reports once the work is completed with \textsf{R}.
@@ -8133,7 +8133,7 @@ The prettyR package
 
 the Hmisc package
 
-#+begin_src R :exports both :results output pp
+#+begin_src R  
 library(Hmisc)
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 #+end_src
@@ -8170,7 +8170,7 @@ The book that you are reading was created with a random seed which was set at th
 
 [fn:seed] In fact, this is essentially the method used by \textsf{R} to select an initial random seed, see =?set.seed=. However, the instructor should set the seed manually so that the book can be regenerated at a later time, if necessary.
 
-#+begin_src R :exports both :results output pp
+#+begin_src R
 options(digits = 16)
 runif(1)
 #+end_src
