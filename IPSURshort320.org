@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: answ soln
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports both :results output pp :cache yes
+#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -46,6 +46,31 @@ options(useFancyQuotes = FALSE)
 #+end_src
 
 #+results[1904540257c7ba07ed2c9b3ee4b2e17be891234a]:
+
+#+begin_src R :exports none
+library(actuar)
+library(aplpack)
+library(boot)
+library(coin)
+library(combinat)
+library(distrEx)
+library(e1071)
+library(ggplot2)
+library(HH)
+library(Hmisc)
+library(lattice)
+library(lmtest)
+library(mvtnorm)
+library(prob)
+library(qcc)
+library(RcmdrPlugin.IPSUR)
+library(reshape)
+library(scatterplot3d)
+library(stats4)
+library(TeachingDemos)
+#+end_src
+
+
 
 \noindent This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say -- and so many people have already said it so much better than I could. When I get something I like I will release it here.
 
@@ -114,7 +139,7 @@ Note that the distinction between discrete and continuous data is not always cle
 #+latex: \begin{example}
 *Annual Precipitation in US Cities.* The vector =precip=\index{Data sets!precip@\texttt{precip}} contains average amount of rainfall (in inches) for each of 70 cities in the United States and Puerto Rico. Let us take a look at the data:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 str(precip)
 #+end_src
 
@@ -122,7 +147,7 @@ str(precip)
 :  Named num [1:70] 67 54.7 7 48.5 14 17.2 20.7 13 43.4 40.2 ...
 :  - attr(*, "names")= chr [1:70] "Mobile" "Juneau" "Phoenix" "Little Rock" ...
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 precip[1:4]
 #+end_src
 
@@ -137,7 +162,7 @@ The output shows that =precip= is a numeric vector which has been /named/, that 
 #+latex: \begin{example}
 *Lengths of Major North American Rivers.* The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector =rivers=\index{Data sets!rivers@\texttt{rivers}} in the =datasets= package (which ships with base \textsf{R}). See =?rivers=. Let us take a look at the data with the =str=\index{str@\texttt{str}} function.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 str(rivers)
 #+end_src
 
@@ -151,7 +176,7 @@ The output says that =rivers= is a numeric vector of length 141, and the first f
 #+latex: \begin{example}
 *Yearly Numbers of Important Discoveries.* The vector =discoveries=\index{Data sets!discoveries@\texttt{discoveries}} contains numbers of “great” inventions/discoveries in each year from 1860 to 1959, as reported by the 1975 World Almanac. Let us take a look at the data:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 str(discoveries)
 #+end_src
 
@@ -180,7 +205,7 @@ These can be used for discrete or continuous data, and usually look best when th
 
 See Figure \ref{fig:stripcharts}, which was produced by the following code.
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
 stripchart(discoveries, method="stack", xlab="number")
@@ -220,7 +245,7 @@ These are one of the most common summary displays, and they are often misidentif
 
 There are many ways to plot histograms in \textsf{R}, and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure \ref{fig:histograms}.
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 hist(precip, main = "")
 hist(precip, freq = FALSE, main = "")
 #+end_src
@@ -272,7 +297,7 @@ Please mind the biggest weakness of histograms: the graph obtained strongly depe
 Recall that the strip chart in Figure \ref{fig:Various-stripchart-methods} suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure \ref{fig:histograms-bins} which was produced by the following code.
 
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 #+end_src
@@ -310,7 +335,7 @@ Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the dat
 =UKDriverDeaths=\index{Data sets!UKDriverDeaths@\texttt{UKDriverDeaths}} is a time series that contains the total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984. See =?UKDriverDeaths=. Compulsory seat belt use was introduced on January 31, 1983. We construct a stem and leaf diagram in \textsf{R} with the =stem.leaf=\index{stem.leaf@\texttt{stem.leaf}} function from the =aplpack=\index{R packages@\textsf{R} packages!aplpack@\texttt{aplpack}} package\cite{aplpack}.
 #+latex: \end{example}
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(aplpack)
 stem.leaf(UKDriverDeaths, depth = FALSE)
 #+end_src
@@ -353,7 +378,7 @@ Done with the =plot=\index{plot@\texttt{plot}} function. These are good for plot
 #+latex: \begin{example}
 *Level of Lake Huron 1875-1972.* Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875--1972. The data are stored in the time series =LakeHuron=\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See =?LakeHuron=. Figure \ref{fig:indpl-lakehuron} was produced with the following code:
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 plot(LakeHuron, type = "h")
 plot(LakeHuron, type = "p")
 #+end_src
@@ -403,7 +428,7 @@ Factors have special status in \textsf{R}. They are represented internally by nu
 The =state.abb=\index{Data sets!state.abb@\texttt{state.abb}}
 vector gives the two letter postal abbreviations for all 50 states.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 str(state.abb)
 #+end_src
 
@@ -416,7 +441,7 @@ These would be ID data. The =state.name=\index{Data sets!state.name@\texttt{stat
 #+latex: \begin{example}
 *U.S. State Facts and Features.* The U.S. Department of Commerce of the U.S. Census Bureau releases all sorts of information in the /Statistical Abstract of the United States/, and the =state.region=\index{Data sets!state.region@\texttt{state.region}} data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See =?state.region=.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 str(state.region)
 state.region[1:5]
 #+end_src
@@ -437,13 +462,13 @@ The =str=\index{str@\texttt{str}} output shows that =state.region= is already st
 
 One of the best ways to summarize qualitative data is with a table of the data values. We may count frequencies with the =table= function or list proportions with the =prop.table=\index{prop.table@\texttt{prop.table}} function (whose input is a frequency table). In the \textsf{R} Commander you can do it with \textsf{Statistics} \textsf{$\triangleright$} \textsf{Frequency Distribution}... Alternatively, to look at tables for all factors in the =Active data set=\index{Active data set@\texttt{Active data set}} you can do \textsf{Statistics} \textsf{$\triangleright$} \textsf{Summaries} \textsf{$\triangleright$} \textsf{Active Dataset}.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 Tbl <- table(state.division)
 #+end_src
 
 #+results[a98aa6194878549c0300d80e5a1ed47e7a60b76f]:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 Tbl
 #+end_src
 
@@ -456,7 +481,7 @@ Tbl
 : West North Central           Mountain            Pacific 
 :                  7                  8                  5
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 Tbl/sum(Tbl)      # relative frequencies
 #+end_src
 
@@ -469,7 +494,7 @@ Tbl/sum(Tbl)      # relative frequencies
 : West North Central           Mountain            Pacific 
 :               0.14               0.16               0.10
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prop.table(Tbl)   # same thing
 #+end_src
 
@@ -492,7 +517,7 @@ A bar graph is the analogue of a histogram for categorical data. A bar is displa
 *U.S. State Facts and Features.* The =state.region= data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See =?state.region=. It is already stored internally as a factor. We make a bar graph with the =barplot=\index{barplot@\texttt{barplot}} function: 
 
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 #+end_src
@@ -590,7 +615,7 @@ We are not going to do any examples of a pie graph and discourage their use else
 
 There is another type of information recognized by \textsf{R} which does not fall into the above categories. The value is either =TRUE= or =FALSE= (note that equivalently you can use =1 = TRUE=, =0 = FALSE=). Here is an example of a logical vector:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- 5:9
 y <- (x < 7.3)
 y
@@ -603,7 +628,7 @@ Many functions in \textsf{R} have options that the user may or may not want to a
 
 We can swap =TRUE= with =FALSE= with the exclamation point =!=.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 !y
 #+end_src
 
@@ -617,7 +642,7 @@ Missing data are a persistent and prevalent problem in many statistical analyses
 
 Ordinary arithmetic with =NA= values give =NA='s (addition, subtraction, /etc/.) and applying a function to a vector that has an =NA= in it will usually give an =NA=.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- c(3, 7, NA, 4, 7)
 y <- c(5, NA, 1, 2, 2)
 x + y
@@ -628,7 +653,7 @@ x + y
 
 Some functions have a =na.rm= argument which when =TRUE= will ignore missing data as if they were not there (such as =mean=, =var=, =sd=, =IQR=, =mad=, ...). 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 sum(x)
 sum(x, na.rm = TRUE)
 #+end_src
@@ -639,7 +664,7 @@ sum(x, na.rm = TRUE)
 
 Other functions do not have a =na.rm= argument and will return =NA= or an error if the argument has \texttt{NA}s. In those cases we can find the locations of any \texttt{NA}s with the =is.na= function and remove those cases with the =[]= operator.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 is.na(x)
 z <- x[!is.na(x)]
 sum(z)
@@ -662,7 +687,7 @@ Given that the data have been appropriately displayed, the next step is to try t
 *** Center
 \label{sub:Center}
 
-One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure \ref{fig:histograms-bins}, a measure of center would be about SRC_R[:exports results :results value raw]{round(mean(precip))} 35. 
+One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure \ref{fig:histograms-bins}, a measure of center would be about SRC_R{round(mean(precip))} 35. 
 
 *** Spread
 \label{sub:Spread}
@@ -687,39 +712,41 @@ Another component to the shape of a distribution is how ``peaked'' it is. Some d
 
 *** Clusters and Gaps
 \label{sub:clusters-and-gaps}
-
-Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. (Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis} ).
 \label{exa:stemleaf-multiple-lines-stem}
 
-#+begin_src R
+Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis}.
+
+#+begin_src R :exports code :eval never
 library(aplpack)
 with(faithful, stem.leaf(eruptions))
 #+end_src
 
-#+results[3ecb16cbe6c84fb3eff9e7f8fc967912e8dc5547]:
-#+begin_example
-1 | 2: represents 1.2
- leaf unit: 0.1
-            n: 272
-   12     s | 667777777777
-   51    1. | 888888888888888888888888888899999999999
-   71    2* | 00000000000011111111
-   87     t | 2222222222333333
-   92     f | 44444
-   94     s | 66
-   97    2. | 889
-   98    3* | 0
-  102     t | 3333
-  108     f | 445555
-  118     s | 6666677777
-  (16)   3. | 8888888889999999
-  138    4* | 0000000000000000111111111111111
-  107     t | 22222222222233333333333333333
-   78     f | 44444444444445555555555555555555555
-   43     s | 6666666666677777777777
-   21    4. | 88888888888899999
-    4    5* | 0001
-#+end_example
+#+begin_latex
+\texttt{
+1 \vert{} 2: represents 1.2 \\
+leaf unit: 0.1 \\
+            n: 272 \\
+   12     s \vert{} 667777777777 \\
+   51    1. \vert{} 888888888888888888888888888899999999999 \\
+   71    2* \vert{} 00000000000011111111 \\
+   87     t \vert{} 2222222222333333 \\
+   92     f \vert{} 44444 \\
+   94     s \vert{} 66 \\
+   97    2. \vert{} 889 \\
+   98    3* \vert{} 0 \\
+  102     t \vert{} 3333 \\
+  108     f \vert{} 445555 \\
+  118     s \vert{} 6666677777 \\
+  (16)   3. \vert{} 8888888889999999 \\
+  138    4* \vert{} 0000000000000000111111111111111 \\
+  107     t \vert{} 22222222222233333333333333333 \\
+   78     f \vert{} 44444444444445555555555555555555555 \\
+   43     s \vert{} 6666666666677777777777 \\
+   21    4. \vert{} 88888888888899999 \\
+    4    5* \vert{} 0001 \\
+}
+#+end_latex
+
 
 There are definitely two clusters of data here; an upper cluster and a lower cluster. 
 
@@ -924,7 +951,7 @@ The =e1071= package \cite{Dimitriadoue1071} has the =skewness= function for the 
 We said earlier that the =discoveries= data looked positively skewed; let's see what the statistics say:
 #+latex: \end{example}
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(e1071)
 skewness(discoveries)
 2*sqrt(6/length(discoveries))
@@ -943,7 +970,7 @@ skewness(discoveries)
 
 The data are definitely skewed to the right. Let us check the sample excess kurtosis of the =UKDriverDeaths= data:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 kurtosis(UKDriverDeaths)
 4*sqrt(6/length(UKDriverDeaths))
 #+end_src
@@ -983,7 +1010,7 @@ WARNING: Sometimes when making a stem plot the result will not be what you expec
 
 Let us take a look at the =rivers= data set\label{ite:stemplot-rivers}.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 stem.leaf(rivers)
 #+end_src
 
@@ -1012,7 +1039,7 @@ The stemplot shows a right-skewed shape to the =rivers= data distribution. Notic
 
 Next let us see what the =precip= data look like.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 stem.leaf(precip)
 #+end_src
 
@@ -1100,7 +1127,7 @@ The quickest way to visually identify outliers is with a boxplot, described abov
 #+latex: \begin{example}
 The =rivers= data. We will look for potential outliers in the =rivers= data.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 boxplot.stats(rivers)$out
 #+end_src
 
@@ -1109,7 +1136,7 @@ boxplot.stats(rivers)$out
 
 We may change the =coef= argument to 3 (it is 1.5 by default) to identify suspected outliers.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 boxplot.stats(rivers, coef = 3)$out
 #+end_src
 
@@ -1157,7 +1184,7 @@ Notice that =x= and =y= are the same length. This is /necessary/. Also notice th
 
 Indexing of data frames is similar to indexing of vectors. To get the entry in row $i$ and column $j$ do =A[i,j]=. We can get entire rows and columns by omitting the other index. 
 
-#+begin_src R
+#+begin_src R :exports both :results output pp
 A[3,]
 A[1, ]
 A[ ,2]
@@ -1175,7 +1202,7 @@ There are several things happening above. Notice that =A[3,]= gave a data frame 
 
 Data frames have a =names= attribute and the names may be extracted with the =names= function. Once we have the names we may extract given columns by way of the dollar sign.
 
-#+begin_src R
+#+begin_src R :exports both :results output pp
 names(A)
 A$v1
 #+end_src
@@ -1290,7 +1317,7 @@ I am thinking here about the \textsf{Statistics} \textsf{$\triangleright$} \text
 
 - Scatterplots
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 library(lattice)
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 #+end_src
@@ -1359,7 +1386,7 @@ It is sometimes nice to set =lattice.options(default.theme = "col.whitebg")=
 
 #+latex: \paragraph*{Side by side boxplots}
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 library(lattice)
 bwplot(~weight | feed, data = chickwts)
 #+end_src
@@ -1383,7 +1410,7 @@ print(bwplot(~weight | feed, data = chickwts))
 
 #+latex: \paragraph*{Histograms}
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 histogram(~age | education, data = infert)
 #+end_src
 
@@ -1407,7 +1434,7 @@ print(histogram(~age | education, data = infert))
 
 #+latex: \paragraph*{Scatterplots}
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 #+end_src
 
@@ -1429,7 +1456,7 @@ print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 
 #+latex: \paragraph*{Coplots}
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
 #+end_src
 
@@ -1487,7 +1514,7 @@ Alternatively, you can do this in the =Rcmdr= with the sequence \textsf{Statisti
 
 #+latex: \paragraph*{Answer:}
 
-#+begin_src R
+#+begin_src R :exports both :results output pp
 summary(RcmdrTestDrive)
 #+end_src
 
@@ -1525,7 +1552,7 @@ Make a table of the =race= variable. Do this with \textsf{Statistics} \textsf{$\
 
 First we will make a table of the =race= variable with the =table= function.
 
-#+begin_src R
+#+begin_src R :exports both :results output pp
 table(race)
 #+end_src
 
@@ -1534,9 +1561,9 @@ table(race)
 : AfricanAmer       Asian   Caucasian    Hispanic       Other 
 :          46          13          73          34           2
 
-1. For these data, SRC_R[:exports results :results value raw]{names(table(race))[which(table(race)==max(table(race)))]} Caucasian has the highest frequency.
+1. For these data, SRC_R{names(table(race))[which(table(race)==max(table(race)))]} Caucasian has the highest frequency.
 
-1. For these data, SRC_R[:exports results :results value raw]{names(table(race))[which(table(race)==min(table(race)))]} Other has the lowest frequency.
+1. For these data, SRC_R{names(table(race))[which(table(race)==min(table(race)))]} Other has the lowest frequency.
 
 1. The graph is shown below.
 
@@ -1583,7 +1610,7 @@ How does the boxplot compare to your answers to (1) and (3)?
 
 We can generate a table listing the average salaries by gender with two methods. The first uses =tapply=:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- tapply(salary, list(gender = gender), mean)
 x
 #+end_src
@@ -1595,7 +1622,7 @@ x
 
 The second method uses the =by= function:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 by(salary, gender, mean, na.rm = TRUE)
 #+end_src
 
@@ -1611,7 +1638,7 @@ Now to answer the questions:
 
 1. Which gender has the highest mean salary? 
 
-We can answer this by looking above. For these data, the gender with the highest mean salary is SRC_R[:exports results :results value raw]{ names(x)[ which( x==max(x) ) ] } Male.
+We can answer this by looking above. For these data, the gender with the highest mean salary is SRC_R{ names(x)[ which( x==max(x) ) ] } Male.
 
 1. Report the highest mean salary.
 
@@ -1621,7 +1648,7 @@ Depending on our answer above, we would do something like
 
 for example. For these data, the highest mean salary is
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x[which(x==max(x))]
 #+end_src
 
@@ -1631,7 +1658,7 @@ x[which(x==max(x))]
 
 1. Compare the spreads for the genders by calculating the standard deviation of =salary= by =gender=. Which gender has the biggest standard deviation?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 y <- tapply(salary, list(gender = gender), sd)
 y
 #+end_src
@@ -1641,7 +1668,7 @@ y
 :   Female     Male 
 : 130.7053 158.5423
 
-For these data, the the largest standard deviation is approximately SRC_R[:exports results :results value raw]{round(y[which(y==max(y))],2)} 158.54 which was attained by the SRC_R[:exports results :results value raw]{names(y)[which(y==max(y))]} Male gender.
+For these data, the the largest standard deviation is approximately SRC_R{round(y[which(y==max(y))],2)} 158.54 which was attained by the SRC_R{names(y)[which(y==max(y))]} Male gender.
 
 1. Make boxplots of =salary= by =gender=. How does the boxplot compare to your answers to (1) and (3)?
 
@@ -1664,7 +1691,7 @@ boxplot(salary ~ gender, xlab = "salary", ylab = "gender",
   \end{figure}
 #+end_src
 
-Answers will vary. There should be some remarks that the center of the box is farther to the right for the SRC_R[:exports results :results value raw]{names(x)[which(x==max(x))]} Male gender, and some recognition that the box is wider for the SRC_R[:exports results :results value raw]{names(y)[which(y==max(y))]} Male gender.
+Answers will vary. There should be some remarks that the center of the box is farther to the right for the SRC_R{names(x)[which(x==max(x))]} Male gender, and some recognition that the box is wider for the SRC_R{names(y)[which(y==max(y))]} Male gender.
 
 
 #+latex: \begin{xca}
@@ -1684,13 +1711,13 @@ For this problem we will study the variable =reduction=.
 
 #+latex: \paragraph*{Answer:}
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- sort(reduction)
 #+end_src
 
 #+results[91b09e5eef04e8a3e8a0552e9fd44c4fee21b8f2]:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x[137]
 IQR(x)
 fivenum(x)
@@ -1706,7 +1733,7 @@ fivenum(x)[4] - fivenum(x)[2]
 #+latex: \noindent 
 Compare your answers (3) and (5). Are they the same? If not, are they close?
 
-Yes, they are close, within SRC_R[:exports results :results value raw]{ abs(IQR(x)-(fivenum(x)[4] - fivenum(x)[2])) } 0.75 of each other.
+Yes, they are close, within SRC_R{ abs(IQR(x)-(fivenum(x)[4] - fivenum(x)[2])) } 0.75 of each other.
 
 #+latex: \noindent 
 The boxplot of =reduction= is below.
@@ -1728,7 +1755,7 @@ boxplot(reduction, xlab = "reduction", main = "", notch = FALSE,
 #+end_src
 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 temp <- fivenum(x)
 inF <- 1.5 * (temp[4] - temp[2]) + temp[4]
 outF <- 3 * (temp[4] - temp[2]) + temp[4]
@@ -1740,11 +1767,11 @@ which(x > outF)
 : [1] 166 167 168
 : [1] 168
 
-Observations SRC_R[:exports results :results value raw]{which(x > inF)}
+Observations SRC_R{which(x > inF)}
 | 166 |
 | 167 |
 | 168 |
- would be considered potential outliers, while observation(s) SRC_R[:exports results :results value raw]{which(x > outF)} 168 would be considered a suspected outlier.
+ would be considered potential outliers, while observation(s) SRC_R{which(x > outF)} 168 would be considered a suspected outlier.
 
 #+latex: \begin{xca}
 In this problem we will compare the variables =before= and =after=. Don't forget =library(e1071)=.
@@ -1763,7 +1790,7 @@ In this problem we will compare the variables =before= and =after=. Don't forget
 
 We may take a look at the =summary(RcmdrTestDrive)= output from Exercise \ref{xca:summary-RcmdrTestDrive}. Here we will repeat the relevant summary statistics.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 c(mean(before), median(before))
 c(mean(after), median(after))
 #+end_src
@@ -1820,7 +1847,7 @@ The same remarks apply to the =after= variable. The =after=  variable has been d
 
 Since =before= has a symmetric, mound shaped distribution, an excellent measure of center would be the sample standard deviation.  And since =after= is left-skewed, we should use the median absolute deviation. It is also acceptable to use the IQR, but we should rescale it appropriately, namely, by dividing by 1.349. The exact values are shown below.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 sd(before)
 mad(after)
 IQR(after)/1.349
@@ -1837,7 +1864,7 @@ Judging from the values above, we would decide which variable has the higher spr
 
 The values of these descriptive measures are shown below.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(e1071)
 skewness(before)
 kurtosis(before)
@@ -1847,16 +1874,16 @@ kurtosis(before)
 : [1] -0.03510369
 : [1] -0.7972288
 
-We should take the sample skewness value and compare it to $2\sqrt{6/n}\approx$ SRC_R[:exports results :results value raw]{ round( 2*sqrt(6 / length(before)), 3 ) } 0.378 in absolute value to see if it is substantially different from zero. The direction of skewness is decided by the sign (positive or negative) of the skewness value. 
+We should take the sample skewness value and compare it to $2\sqrt{6/n}\approx$ SRC_R{ round( 2*sqrt(6 / length(before)), 3 ) } 0.378 in absolute value to see if it is substantially different from zero. The direction of skewness is decided by the sign (positive or negative) of the skewness value. 
 
 
-We should take the sample kurtosis value and compare it to $2\cdot\sqrt{24/168}\approx$ SRC_R[:exports results :results value raw]{round(4*sqrt(6/length(before)),3)} 0.756, in absolute value to see if the excess kurtosis is substantially different from zero. And take a look at the sign to see whether the distribution is platykurtic or leptokurtic.
+We should take the sample kurtosis value and compare it to $2\cdot\sqrt{24/168}\approx$ SRC_R{round(4*sqrt(6/length(before)),3)} 0.756, in absolute value to see if the excess kurtosis is substantially different from zero. And take a look at the sign to see whether the distribution is platykurtic or leptokurtic.
 
 1. Calculate and report the skewness and kurtosis for =after=. Based on these values, how would you describe the shape of =after=?
 
 The values of these descriptive measures are shown below.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 skewness(after)
 kurtosis(after)
 #+end_src
@@ -1865,7 +1892,7 @@ kurtosis(after)
 : [1] -1.164056
 : [1] 1.322198
 
-We should do for this one just like we did previously. We would again compare the sample skewness and kurtosis values (in absolute value) to SRC_R[:exports results :results value raw]{round(2*sqrt(6/length(after)),3)} 0.378 and SRC_R[:exports results :results value raw]{round(4*sqrt(6/length(after)),3)} 0.756, respectively.
+We should do for this one just like we did previously. We would again compare the sample skewness and kurtosis values (in absolute value) to SRC_R{round(2*sqrt(6/length(after)),3)} 0.378 and SRC_R{round(4*sqrt(6/length(after)),3)} 0.756, respectively.
 
 1. Plot histograms of =before= and =after= and compare them to your answers to (4) and (5).
 
@@ -1915,7 +1942,6 @@ Describe the following data sets just as if you were communicating with an alien
 1. State abbreviations stored in =state.abb=.
 
 #+latex: \end{xca}
-
 
 * Probability 
 \label{cha:Probability}
@@ -1976,7 +2002,7 @@ Most of the probability work in this book is done with the =prob= package \cite{
 #+latex: \begin{example}
 Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 S <- data.frame(lands = c("down","up","side"))
 S
 #+end_src
@@ -1997,7 +2023,7 @@ Some sample spaces are so common that convenience wrappers were written to set t
 [fn:countwrap] The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.
 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(prob)
 tosscoin(1)
 #+end_src
@@ -2010,7 +2036,7 @@ tosscoin(1)
 
 The number =1= tells =tosscoin= that we only want to toss the coin once. We could toss it three times: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 tosscoin(3)
 #+end_src
 
@@ -2028,7 +2054,7 @@ tosscoin(3)
 
 Alternatively we could roll a fair die: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 rolldie(1) 
 #+end_src
 
@@ -2046,7 +2072,7 @@ The =rolldie= function defaults to a 6-sided die, but we can specify others with
 
 Perhaps we would like to draw one card from a standard set of playing cards (it is a long data frame):
 
-#+begin_src R
+#+begin_src R :exports both :results output pp
 head(cards()) 
 #+end_src
 
@@ -2084,7 +2110,7 @@ Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We ar
 
 If sampling is with replacement, then we can get any outcome 1, 2, or 3 on any draw. Further, by ``ordered'' we mean that we shall keep track of the order of the draws that we observe. We can accomplish this in \textsf{R} with
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
 #+end_src
 
@@ -2110,7 +2136,7 @@ Notice that rows 2 and 4 are identical, save for the order in which the numbers 
 
 Here sampling is without replacement, so we may not observe the same number twice in any row. Order is still important, however, so we expect to see the outcomes =1,2= and =2,1= somewhere in our data frame. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 urnsamples(1:3, size = 2, replace = FALSE, ordered = TRUE)
 #+end_src 
 
@@ -2129,7 +2155,7 @@ This is just as we expected. Notice that there are less rows in this answer due 
 
 Again, we may not observe the same outcome twice, but in this case, we will only retain those outcomes which (when jumbled) would not duplicate earlier ones. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 urnsamples(1:3, size = 2, replace = FALSE, ordered = FALSE) 
 #+end_src 
 
@@ -2145,7 +2171,7 @@ This experiment is equivalent to reaching in the urn, picking a pair, and lookin
 
 The last possibility is perhaps the most interesting. We replace the balls after every draw, but we do not remember the order in which the draws came. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE) 
 #+end_src 
 
@@ -2177,7 +2203,7 @@ An /event/\index{event} $A$ is merely a collection of outcomes, or in other word
 
 Given a data frame sample/probability space =S=, we may extract rows using the =[]= operator: 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 S <- tosscoin(2, makespace = TRUE) 
 S[1:3, ] 
 #+end_src
@@ -2188,7 +2214,7 @@ S[1:3, ]
 : 2     T     H  0.25
 : 3     H     T  0.25
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 S[c(2,4), ] 
 #+end_src
 
@@ -2205,7 +2231,7 @@ S <- cards()
 
 #+results[16c7bc5f4ce6873c0fdb04d8adc8d1466784673a]:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 subset(S, suit == "Heart") 
 #+end_src 
 
@@ -2227,7 +2253,7 @@ subset(S, suit == "Heart")
 39    A Heart
 #+end_example
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 subset(S, rank %in% 7:9)
 #+end_src
 
@@ -2250,7 +2276,7 @@ subset(S, rank %in% 7:9)
 
 We could continue indefinitely. Also note that mathematical expressions are allowed: 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 subset(rolldie(3), X1+X2+X3 > 16) 
 #+end_src
 
@@ -2269,7 +2295,7 @@ It does not take long before the subsets of interest become complicated to speci
 
 The function =%in%= helps to learn whether each value of one vector lies somewhere inside another vector. 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- 1:10 
 y <- 8:12 
 y %in% x
@@ -2284,7 +2310,7 @@ Notice that the returned value is a vector of length 5 which tests whether each 
 
 It is more common to want to know whether the /whole/ vector =y= is in =x=. We can do this with the =isin= function. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 isin(x,y) 
 #+end_src
 
@@ -2300,7 +2326,7 @@ y <- c(3,3,7)
 
 #+results[7924569f0a3bf447f4de20aff60ba717292190d8]:
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 all(y %in% x)
 isin(x,y) 
 #+end_src 
@@ -2311,7 +2337,7 @@ isin(x,y)
 
 The reason for the above is of course that =x= contains the value 3, but =x= does not have /two/ 3's. The difference is important when rolling multiple dice, playing cards, /etc/. Note that there is an optional argument =ordered= which tests whether the elements of =y= appear in =x= in the order in which they are appear in =y=. The consequences are 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 isin(x, c(3,4,5), ordered = TRUE) 
 isin(x, c(3,5,4), ordered = TRUE) 
 #+end_src 
@@ -2322,7 +2348,7 @@ isin(x, c(3,5,4), ordered = TRUE)
 
 The connection to probability is that have a data frame sample space and we would like to find a subset of that space. A =data.frame= method was written for =isin= that simply applies the function to each row of the data frame. We can see the method in action with the following: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 S <- rolldie(4) 
 subset(S, isin(S, c(2,2,6), ordered = TRUE)) 
 #+end_src
@@ -2380,7 +2406,7 @@ B <- subset(S, rank %in% 7:9)
 
 We can now do some set algebra: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 union(A,B)
 #+end_src 
 
@@ -2411,7 +2437,7 @@ union(A,B)
 47    9   Spade
 #+end_example
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 intersect(A,B)
 #+end_src 
 
@@ -2421,7 +2447,7 @@ intersect(A,B)
 : 33    8 Heart
 : 34    9 Heart
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 setdiff(A,B)
 #+end_src
 
@@ -2440,7 +2466,7 @@ setdiff(A,B)
 39    A Heart
 #+end_example
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 setdiff(B,A) 
 #+end_src 
 
@@ -2536,7 +2562,7 @@ To accomplish this in \textsf{R}, we may use the =probspace= function. The gener
 #+latex: \begin{example}
 The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has $n$ outcomes, then =probs= would be a vector of length $n$ with identical entries $1/n$. The quickest way to generate =probs= is with the =rep= function. We will start with the experiment of rolling a die, so that $n=6$. We will construct the sample space, generate the =probs= vector, and put them together with =probspace=. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 outcomes <- rolldie(1) 
 p <- rep(1/6, times = 6) 
 probspace(outcomes, probs = p) 
@@ -2553,7 +2579,7 @@ probspace(outcomes, probs = p)
 
 The =probspace= function is designed to save us some time in many of the most common situations. For example, due to the especial simplicity of the sample space in this case, we could have achieved the same result with only (note the name change for the first column) 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 probspace(1:6, probs = p) 
 #+end_src 
 
@@ -2568,7 +2594,7 @@ probspace(1:6, probs = p)
 
 Further, since the equally likely model plays such a fundamental role in the study of probability the =probspace= function will assume that the equally model is desired if no =probs= are specified. Thus, we get the same answer with only 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 probspace(1:6) 
 #+end_src 
 
@@ -2583,7 +2609,7 @@ probspace(1:6)
 
 And finally, since rolling dice is such a common experiment in probability classes, the =rolldie= function has an additional logical argument =makespace= that will add a column of equally likely =probs= to the generated sample space: 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 rolldie(1, makespace = TRUE)
 #+end_src 
 
@@ -2605,7 +2631,7 @@ One sample space function that does NOT have a =makespace= option is the =urnsam
 #+latex: \begin{example}
 \label{exa:unbalanced-coin}\textbf{An unbalanced coin.} While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the ``$H$'' side is somewhat heavier such that the chances of a $H$ appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 probspace(tosscoin(1), probs = c(0.70, 0.30)) 
 #+end_src 
 
@@ -2819,7 +2845,7 @@ B <- subset(S, rank %in% 7:9)
 
 Now it is easy to calculate 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prob(A) 
 #+end_src 
 
@@ -2828,7 +2854,7 @@ prob(A)
 
 Note that we can get the same answer with 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prob(S, suit == "Heart") 
 #+end_src 
 
@@ -2961,7 +2987,7 @@ We will compute the number of outcomes for each of the four =urnsamples= example
 #+latex: \end{example}
 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 nsamp(n=3, k=2, replace = TRUE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = FALSE) 
@@ -3002,7 +3028,7 @@ x <- nsamp(n, k, rep = r, ord = TRUE)
 
 (Notice that =ordered= is always =TRUE=; =nsamp= will recycle =ordered= and =replace= to the appropriate length.) By the Multiplication Principle, the number of ways to complete the experiment is the product of the entries of =x=: 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prod(x) 
 #+end_src 
 
@@ -3011,7 +3037,7 @@ prod(x)
 
 Compare this with the some other ways to compute the same thing: 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 (11*10*9)*(7*6*5*4)*313 
 #+end_src
 
@@ -3020,7 +3046,7 @@ Compare this with the some other ways to compute the same thing:
 
 or alternatively 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prod(9:11)*prod(4:7)*313 
 #+end_src 
 
@@ -3029,7 +3055,7 @@ prod(9:11)*prod(4:7)*313
 
 or even 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prod(factorial(c(11,7))/factorial(c(8,3)))*313 
 #+end_src 
 
@@ -3092,7 +3118,7 @@ remove(g)
 
 We can make the plot in Figure \ref{fig:The-Birthday-Problem} with the following sequence of commands.
 
-#+begin_src R :eval never
+#+begin_src R :exports code :eval never
 g <- Vectorize(pbirthday.ipsur)
 plot(1:50, g(1:50), xlab = "Number of people in room", 
   ylab = "Prob(at least one match)" )
@@ -3176,7 +3202,7 @@ Again, we see that given the knowledge that $B$ occurred (the 15 outcomes in the
 
 Continuing with Example \ref{exa:Toss-a-six-sided-die-twice}, the first thing to do is set up the probability space with the =rolldie= function.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(prob)
 S <- rolldie(2, makespace = TRUE)  # assumes ELM
 head(S)                            #  first few rows
@@ -3202,7 +3228,7 @@ B <- subset(S, X1 + X2 >= 8)
 
 And now we are ready to calculate probabilities. To do conditional probability, we use the =given= argument of the =prob= function:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(A, given = B)
 prob(B, given = A)
 #+end_src
@@ -3213,7 +3239,7 @@ prob(B, given = A)
 
 Note that we do not actually need to define the events $A$ and $B$ separately as long as we reference the original probability space $S$ as the first argument of the =prob= calculation:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(S, X1==X2, given = (X1 + X2 >= 8) )
 prob(S, X1+X2 >= 8, given = (X1==X2) )
 #+end_src
@@ -3282,7 +3308,7 @@ But do not be intimidated. The object =N= is nothing more than a list with two e
 
 Putting all of this together we do 
 
-#+begin_src R  :exports code
+#+begin_src R :exports code
 library(prob)
 L <- cards()
 M <- urnsamples(L, size = 2)
@@ -3293,7 +3319,7 @@ N <- probspace(M)
 
 Now that we have the probability space =N= we are ready to do some probability. We use the =prob= function, just like before. The only trick is to specify the event of interest correctly, and recall that we were interested in $\P(\mbox{both Aces})$. But if the cards are both Aces then the =rank= of both cards should be =A=, which sounds like a job for the =all= function:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(N, all(rank == "A"))
 #+end_src
 
@@ -3319,7 +3345,7 @@ Example \ref{exa:urn-7-red-3-green} is similar to Example \ref{exa:two-cards-bot
 
 It is easier for us this time because our urn is a vector instead of a =cards()= data frame. Before there were two dimensions of information associated with the outcomes (rank and suit) but presently we have only one dimension (color).
 
-#+begin_src R  :exports code
+#+begin_src R :exports code
 library(prob)
 L <- rep(c("red","green"), times = c(7,3))
 M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
@@ -3330,7 +3356,7 @@ N <- probspace(M)
 
 Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\} \). Rows of =N= that satisfy this condition have \texttt{X1=="red" \& X2=="red" \& X3=="red"}, but there must be an easier way. Indeed, there is. The =isrep= function (short for ``is repeated'') in the =prob= package was written for this purpose. The command =isrep(N,"red",3)= will test each row of =N= to see whether the value \texttt{"red"} appears =3= times. The result is exactly what we need to define an event with the =prob= function. Observe
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 3))
 #+end_src
 
@@ -3339,7 +3365,7 @@ prob(N, isrep(N, "red", 3))
 
 Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-green}. Now let us try some other probability questions. What is the probability of getting two ="red"=s?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 2))
 #+end_src
 
@@ -3349,7 +3375,7 @@ prob(N, isrep(N, "red", 2))
 
 Note that the exact value is $21/40$; we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+end_src
 
@@ -3358,7 +3384,7 @@ prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 
 Note that the exact value is $7/20$ (do it with the Multiplication Rule). What is the probability of observing \texttt{"red"}, \texttt{"green"}, and \texttt{"red"}, in no particular order?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red")))
 #+end_src
 
@@ -3389,7 +3415,7 @@ and notice that $A\cap B$ and $A^{c}\cap B$ are disjoint. Therefore
 #+latex: \begin{example}
 We saw the =RcmdrTestDrive= data set in Chapter \ref{cha:introduction-to-R} in which a two-way table of the smoking status versus the gender was 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 .Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
 addmargins(.Table) # Table with Marginal Distributions
 #+end_src
@@ -3511,7 +3537,7 @@ which is approximately $0.9990234$.
 #+latex: \begin{example}
 Toss ten coins. What is the probability of observing at least one Head?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 S <- tosscoin(10, makespace = TRUE)
 A <- subset(S, isrep(S, vals = "T", nrep = 10))
 1 - prob(A)
@@ -3535,7 +3561,7 @@ The =iidspace= function was designed specifically for this situation. It has thr
 
 We may represent tossing our unbalanced coin three times with the following: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3)) 
 #+end_src 
 
@@ -3674,7 +3700,7 @@ There are not any special functions for Bayes' Rule in the =prob= package, but p
 #+latex: \begin{example}
 *Misfiling assistants* (continued from Example \ref{exa:misfiling-assistants}). We store the prior probabilities and the likelihoods in vectors and go to town.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 prior <- c(0.6, 0.3, 0.1)
 like <- c(0.003, 0.007, 0.010)
 post <- prior * like
@@ -3693,7 +3719,7 @@ Compare these answers with what we got in Example \ref{exa:misfiling-assistants}
 #+latex: \begin{example}
 Let us incorporate the posterior probability (=post=) information from the last example and suppose that the assistants misfile seven more documents. Using Bayes' Rule, what would the new posterior probabilities be?
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 newprior <- post
 post <- newprior * like^7
 post / sum(post)
@@ -3709,7 +3735,7 @@ There are two important points. First, we did not divide =post= by the sum of it
 
 Second, the reader might be wondering what the boss would get if (s)he skipped the intermediate step of calculating the posterior after only one misfiled document. What if she started from the /original/ prior, then observed eight misfiled documents, and calculated the posterior? What would she get? It must be the same answer, of course.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 fastpost <- prior * like^8
 fastpost / sum(fastpost)
 #+end_src
@@ -3773,7 +3799,7 @@ S <- addrv(S, U = X1-X2+X3)
 
 Now let's take a look at the values of $U$. In the interest of space, we will only reproduce the first few rows of $S$ (there are $4^{3}=64$ rows in total). 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 head(S)
 #+end_src 
 
@@ -3788,7 +3814,7 @@ head(S)
 
 We see from the $U$ column it is operating just like it should. We can now answer questions like
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 prob(S, U > 6) 
 #+end_src 
 
@@ -3799,7 +3825,7 @@ prob(S, U > 6)
 
 Sometimes we have a function laying around that we would like to apply to some of the outcome variables, but it is unfortunately tedious to write out the formula defining what the new variable would be. The =addrv= function has an argument =FUN= specifically for this case. Its value should be a legitimate function from \textsf{R}, such as =sum=, =mean=, =median=, and so forth. Or, you can define your own function. Continuing the previous example, let's define $V=\max(X1,X2,X3)$ and $W=X1+X2+X3$. 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V") 
 S <- addrv(S, FUN = sum, invars = c("X1","X2","X3"), name = "W") 
 head(S) 
@@ -3820,7 +3846,7 @@ Notice that =addrv= has an =invars= argument to specify exactly to which columns
 
 As we can see above, often after adding a random variable $V$ to a probability space one will find that $V$ has values that are repeated, so that it becomes difficult to understand what the ultimate behavior of $V$ actually is. We can use the =marginal= function to aggregate the rows of the sample space by values of $V$, all the while accumulating the probability associated with $V$'s distinct values. Continuing our example from above, suppose we would like to focus entirely on the values and probabilities of $V=\max(X1,X2,X3)$. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 marginal(S, vars = "V") 
 #+end_src 
 
@@ -3833,7 +3859,7 @@ marginal(S, vars = "V")
 
 We could save the probability space of $V$ in a data frame and study it further, if we wish. As a final remark, we can calculate the marginal distributions of multiple variables desired using the =vars= argument. For example, suppose we would like to examine the joint distribution of $V$ and $W$. 
 
-#+begin_src R   
+#+begin_src R :exports both :results output pp   
 marginal(S, vars = c("V", "W")) 
 #+end_src 
 
@@ -3995,7 +4021,7 @@ We say that $X$ has the distribution $F_{X}$ and we write $X\sim F_{X}$. In an a
 
 The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of $X$, and a vector =f= to contain the values of $f_{X}$ at the respective outcomes in =x=:
 
-#+begin_src R  :exports code
+#+begin_src R :exports code
 x <- c(0,1,2,3)
 f <- c(1/8, 3/8, 3/8, 1/8)
 #+end_src
@@ -4004,7 +4030,7 @@ f <- c(1/8, 3/8, 3/8, 1/8)
 
 To calculate the mean $\mu$, we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \textsf{R} since operations on vectors are performed /element-wise/ (see Section \ref{sub:Functions-and-Expressions}): 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 mu <- sum(x * f)
 mu
 #+end_src
@@ -4014,7 +4040,7 @@ mu
 
 To compute the variance $\sigma^{2}$, we subtract the value of =mu= from each entry in =x=, square the answers, multiply by =f=,and =sum=. The standard deviation $\sigma$ is simply the square root of $\sigma^{2}$.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 sigma2 <- sum((x-mu)^2 * f)
 sigma2
 sigma <- sqrt(sigma2)
@@ -4027,7 +4053,7 @@ sigma
 
 Finally, we may find the values of the CDF $F_{X}$ on the support by accumulating the probabilities in $f_{X}$ with the =cumsum= function. 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 F = cumsum(f)
 F
 #+end_src
@@ -4037,7 +4063,7 @@ F
 
 As easy as this is, it is even easier to do with the =distrEx= package \cite{Ruckdescheldistr}. We define a random variable =X= as an object, then compute things from the object such as mean, variance, and standard deviation with the functions =E=, =var=, and =sd=:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(distrEx)
 X <- DiscreteDistribution(supp = 0:3, prob = c(1,3,3,1)/8)
 E(X); var(X); sd(X)
@@ -4212,7 +4238,7 @@ Roll 12 dice simultaneously, and let $X$ denote the number of 6's that appear. W
 
 Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that $\P(7\leq X\leq9)=\P(X\leq9)-\P(X\leq6)=F_{X}(9)-F_{X}(6)$, so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
 diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+end_src
@@ -4271,7 +4297,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 #+latex: \begin{example}
 Another way to do Example \ref{exa:toss-coin-3-withR} is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 library(distr)
 X <- Binom(size = 3, prob = 1/2)
 X
@@ -4284,7 +4310,7 @@ X
 
 The analogue of the =dbinom= function for =X= is the =d(X)= function, and the analogue of the =pbinom= function is the =p(X)= function. Compare the following:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 d(X)(1)   # pmf of X evaluated at x = 1
 p(X)(2)   # cdf of X evaluated at x = 2
 #+end_src
@@ -4531,7 +4557,7 @@ M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all \ensurem
 
 The =distrEx= package provides an expectation operator =E= which can be used on random variables that have been defined in the ordinary =distr= sense:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 X <- Binom(size = 3, prob = 0.45)
 library(distrEx)
 E(X)
@@ -4546,7 +4572,7 @@ For discrete random variables with finite support, the expectation is simply com
 
 There are methods for other population parameters:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 var(X)
 sd(X)
 #+end_src
@@ -4594,7 +4620,7 @@ The /empirical quantile function/ is the inverse of the ECDF. See Section \ref{s
 
 The empirical distribution is not directly available as a distribution in the same way that the other base probability distributions are, but there are plenty of resources available for the determined investigator.  Given a data vector of observed values =x=, we can see the empirical CDF with the =ecdf=\index{ecdf@\texttt{ecdf}} function:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- c(4, 7, 9, 11, 12)
 ecdf(x)
 #+end_src
@@ -4626,7 +4652,7 @@ See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function 
 
 The empirical PDF is not usually of particular interest in itself, but if we really wanted we could define a function to serve as the empirical PDF:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 epdf <- function(x) function(t){sum(x %in% t)/length(x)}
 x <- c(0,0,1)
 epdf(x)(0)       # should be 2/3
@@ -4637,7 +4663,7 @@ epdf(x)(0)       # should be 2/3
 
 To simulate from the empirical distribution supported on the vector =x=, we use the =sample=\index{sample@\texttt{sample}} function.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 x <- c(0,0,1)
 sample(x, size = 7, replace = TRUE)
 #+end_src
@@ -4700,7 +4726,7 @@ f_{X}(3)=\frac{{17 \choose 3}{233 \choose 2}}{{250 \choose 5}}.
 
 To calculate it in \textsf{R} we just type 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 dhyper(3, m = 17, n = 233, k = 5)
 #+end_src
 
@@ -4709,7 +4735,7 @@ dhyper(3, m = 17, n = 233, k = 5)
 
 To find it with the \textsf{R} Commander we go \textsf{Probability} $\triangleright$ \textsf{Discrete Distributions} $\triangleright$ \textsf{Hypergeometric distribution} $\triangleright$ \textsf{Hypergeometric probabilities}... . We fill in the parameters $m=17$, $n=233$, and $k=5$. Click \textsf{OK}, and the following table is shown in the window.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 A <- data.frame(Pr=dhyper(0:4, m = 17, n = 233, k = 5))
 rownames(A) <- 0:4 
 A
@@ -4727,7 +4753,7 @@ We wanted $\P(X=3)$, and this is found from the table to be approximately 0.0024
 
 We know from our above discussion that the sample space should be $x=0,1,2,3,4,5$, yet, in the table the probabilities are only displayed for $x=1,2,3$, and 4. What is happening? As it turns out, the \textsf{R} Commander will only display probabilities that are 0.00005 or greater. Since $x=5$ is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the =dhyper= function:
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 dhyper(5, m = 17, n = 233, k = 5)
 #+end_src
 
@@ -4740,7 +4766,7 @@ In other words, $\P(X=5)\approx0.0000007916049$, a small number indeed.
 
 /Solution:/ Since $\P(X\leq2)=\P(X=0,1,2)$, one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives $0.7011+0.2602+0.0362=0.9975$. Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters $m$, $n$, and $k$ as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 phyper(2, m = 17, n = 233, k = 5)
 #+end_src
 
@@ -4753,7 +4779,7 @@ And thus $\P(X\leq2)\approx 0.9975771$. We have confirmed that the above answer 
 
 The table did not give us the explicit probability $\P(X=5)$, so we can not use the table to give us this probability. We need to use another method. Since $\P(X>1)=1-\P(X\leq1)=1-F_{X}(1)$, we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 phyper(1, m = 17, n = 233, k = 5, lower.tail = FALSE)
 #+end_src
 
@@ -4790,7 +4816,7 @@ with $\sigma=\sqrt{\sigma^{2}}\approx0.5583811944$. Our estimate was pretty clos
 
 From the console we can generate random hypergeometric variates with the =rhyper= function, as demonstrated below.
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 rhyper(10, m = 17, n = 233, k = 5)
 #+end_src
 
@@ -4862,7 +4888,7 @@ The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his attempted fie
 
 /Solution/: If $X=$ the number of missed goals until Jeff's first success, then $X\sim\mathsf{geom}(\mathtt{prob}=0.812)$ and we want $\P(X\geq5)=\P(X>4)$. We can find this in \textsf{R} with
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 pgeom(4, prob = 0.812, lower.tail = FALSE)
 #+end_src
 
@@ -4914,7 +4940,7 @@ We flip a coin repeatedly and let $X$ count the number of Tails until we get sev
 
 and we can get this in \textsf{R} with
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 dnbinom(5, size = 7, prob = 0.5)
 #+end_src
 
@@ -5036,7 +5062,7 @@ Suppose the car wash above is in operation from 8AM to 6PM, and we let $Y$ be th
 
 /Solution/: We want $\P(48\leq Y\leq50)=\P(X\leq50)-\P(X\leq47)$. 
 
-#+begin_src R  
+#+begin_src R :exports both :results output pp  
 diff(ppois(c(47, 50), lambda = 50))
 #+end_src
 
@@ -5159,7 +5185,7 @@ A recent national study showed that approximately 44.7% of college students have
    #+end_src
 
 1. Find the probability that $X$ is equal to 17.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    dbinom(17, size = 31, prob = 0.447)
    #+end_src
 
@@ -5167,7 +5193,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 0.07532248
 
 1. Find the probability that $X$ is at most 13.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    pbinom(13, size = 31, prob = 0.447)
    #+end_src
 
@@ -5175,7 +5201,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 0.451357
 
 1. Find the probability that $X$ is bigger than 11.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
    #+end_src
 
@@ -5183,7 +5209,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 0.8020339
 
 1. Find the probability that $X$ is at least 15.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
    #+end_src
 
@@ -5191,7 +5217,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 0.406024
 
 1. Find the probability that $X$ is between 16 and 19, inclusive.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    sum(dbinom(16:19, size = 31, prob = 0.447))
    diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
    #+end_src
@@ -5201,7 +5227,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 0.2544758
 
 1. Give the mean of $X$, denoted $\E X$.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    library(distrEx)
    X <- Binom(size = 31, prob = 0.447)
    E(X)
@@ -5211,7 +5237,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 13.857
 
 1. Give the variance of $X$.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    var(X)
    #+end_src
 
@@ -5219,7 +5245,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 7.662921
 
 1. Give the standard deviation of $X$.
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    sd(X)
    #+end_src
 
@@ -5227,7 +5253,7 @@ A recent national study showed that approximately 44.7% of college students have
    : [1] 2.768198
 
 1. Find $\E(4X+51.324)$
-   #+begin_src R  
+   #+begin_src R :exports both :results output pp  
    E(4*X + 51.324)
    #+end_src
 
