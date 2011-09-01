@@ -41,7 +41,7 @@
 #+begin_src R :exports none
 seed <- 42
 set.seed(seed)
-options(width = 75)
+options(width = 60)
 options(useFancyQuotes = FALSE)
 #+end_src
 
@@ -217,14 +217,14 @@ The leftmost graph is a strip chart of the =precip= data. The graph shows tightl
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
-stripchart(discoveries, method="stack", xlab="number")
+stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
 #+results[f80175835182c752a7b590952c7bd0cbbe0ce0ad]:
 [[file:img/stripcharts.png]]
 
-#+begin_src latex 
+#+begin_src latex
   \begin{figure}[ht!]
     \includegraphics[width=5in, height=4in]{img/stripcharts.png}
     \caption[Strip charts of \texttt{precip}, \texttt{rivers}, and \texttt{discoveries}]{\small Three stripcharts of three data sets.  The first graph uses the \texttt{overplot} method, the second the \texttt{jitter} method, and the third the \texttt{stack} method.}
@@ -712,41 +712,38 @@ Another component to the shape of a distribution is how ``peaked'' it is. Some d
 
 *** Clusters and Gaps
 \label{sub:clusters-and-gaps}
-\label{exa:stemleaf-multiple-lines-stem}
 
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis}.
 
-#+begin_src R :exports code :eval never
+#+begin_src R :exports both :results output pp
 library(aplpack)
 with(faithful, stem.leaf(eruptions))
 #+end_src
 
-#+begin_latex
-\texttt{
-1 \vert{} 2: represents 1.2 \\
-leaf unit: 0.1 \\
-            n: 272 \\
-   12     s \vert{} 667777777777 \\
-   51    1. \vert{} 888888888888888888888888888899999999999 \\
-   71    2* \vert{} 00000000000011111111 \\
-   87     t \vert{} 2222222222333333 \\
-   92     f \vert{} 44444 \\
-   94     s \vert{} 66 \\
-   97    2. \vert{} 889 \\
-   98    3* \vert{} 0 \\
-  102     t \vert{} 3333 \\
-  108     f \vert{} 445555 \\
-  118     s \vert{} 6666677777 \\
-  (16)   3. \vert{} 8888888889999999 \\
-  138    4* \vert{} 0000000000000000111111111111111 \\
-  107     t \vert{} 22222222222233333333333333333 \\
-   78     f \vert{} 44444444444445555555555555555555555 \\
-   43     s \vert{} 6666666666677777777777 \\
-   21    4. \vert{} 88888888888899999 \\
-    4    5* \vert{} 0001 \\
-}
-#+end_latex
-
+#+results[baa29c772676c13bc84d072e55e11e4bee50e4ac]:
+#+begin_example
+1 | 2: represents 1.2
+ leaf unit: 0.1
+            n: 272
+   12     s | 667777777777
+   51    1. | 888888888888888888888888888899999999999
+   71    2* | 00000000000011111111
+   87     t | 2222222222333333
+   92     f | 44444
+   94     s | 66
+   97    2. | 889
+   98    3* | 0
+  102     t | 3333
+  108     f | 445555
+  118     s | 6666677777
+  (16)   3. | 8888888889999999
+  138    4* | 0000000000000000111111111111111
+  107     t | 22222222222233333333333333333
+   78     f | 44444444444445555555555555555555555
+   43     s | 6666666666677777777777
+   21    4. | 88888888888899999
+    4    5* | 0001
+#+end_example
 
 There are definitely two clusters of data here; an upper cluster and a lower cluster. 
 
@@ -1674,10 +1671,15 @@ For these data, the the largest standard deviation is approximately SRC_R{round(
 
 The graph is shown below.
 
-#+begin_src R :exports code :results graphics :file img/boxplotRTDsalgen.png
+#+begin_src R :exports code :eval never
 boxplot(salary ~ gender, xlab = "salary", ylab = "gender", 
   main = "", notch = FALSE, varwidth = TRUE, horizontal = TRUE, 
   data = RcmdrTestDrive)
+#+end_src
+
+#+begin_src R :exports code :results graphics :file img/boxplotRTDsalgen.png
+qplot(gender, salary, data = RcmdrTestDrive, geom="boxplot") + 
+     coord_flip()
 #+end_src
 
 #+results[4930c7de23cc0aaaf025b8c9e124c664d0c9605e]:
@@ -1715,7 +1717,7 @@ For this problem we will study the variable =reduction=.
 x <- sort(reduction)
 #+end_src
 
-#+results[91b09e5eef04e8a3e8a0552e9fd44c4fee21b8f2]:
+#+results[230b33b21e6e2368226f14c4e98c5f1be3f1b76e]:
 
 #+begin_src R :exports both :results output pp  
 x[137]
@@ -1724,11 +1726,11 @@ fivenum(x)
 fivenum(x)[4] - fivenum(x)[2]
 #+end_src
 
-#+results[bf0504a5e7e5a63aa33823e1270ee049d07dc772]:
-: [1] 419
-: [1] 256.75
-: [1]    3.0   78.5  139.5  336.0 1632.0
-: [1] 257.5
+#+results[6fee33e82d2a6f7753c3219289b98212756832c8]:
+: [1] NA
+: [1] 1.325807
+: [1] -2.78656813 -0.57813031  0.07028297  0.76914214  3.19669773
+: [1] 1.347272
 
 #+latex: \noindent 
 Compare your answers (3) and (5). Are they the same? If not, are they close?
@@ -1736,11 +1738,13 @@ Compare your answers (3) and (5). Are they the same? If not, are they close?
 Yes, they are close, within SRC_R{ abs(IQR(x)-(fivenum(x)[4] - fivenum(x)[2])) } 0.75 of each other.
 
 #+latex: \noindent 
+
 The boxplot of =reduction= is below.
 
 #+begin_src R :exports code :results graphics :file img/boxplotRTDreduc.png
-boxplot(reduction, xlab = "reduction", main = "", notch = FALSE, 
-  horizontal = TRUE, data = RcmdrTestDrive)
+qplot(factor(0), reduction, data = RcmdrTestDrive, 
+     geom = "boxplot", xlab = "") + coord_flip() + 
+     scale_x_discrete(breaks = NA)
 #+end_src
 
 #+results[b273df876ad2bbfa6c6dc115bb912b5af71bfdd5]:
@@ -1749,7 +1753,7 @@ boxplot(reduction, xlab = "reduction", main = "", notch = FALSE,
 #+begin_src latex 
   \begin{figure}[ht!]
     \includegraphics[width=5in, height=4in]{img/boxplotRTDreduc.png}
-    \caption[A \texttt{boxplot} of \texttt{reduction}]{A \texttt{boxplot} of \texttt{reduction} in the \texttt{RcmdrTestDrive} data}
+    \caption[A boxplot of reduction]{A boxplot of reduction in the RcmdrTestDrive data}
     \label{fig:boxplotRTDreduc}
   \end{figure}
 #+end_src
@@ -1763,15 +1767,11 @@ which(x > inF)
 which(x > outF)
 #+end_src
 
-#+results[6f8b3d58680d625fb6c46079c1f7402dc9bfd8ad]:
-: [1] 166 167 168
-: [1] 168
+#+results[c433f41b61de1135106a76b6a35fc68008cbe945]:
+: [1]  99 100
+: integer(0)
 
-Observations SRC_R{which(x > inF)}
-| 166 |
-| 167 |
-| 168 |
- would be considered potential outliers, while observation(s) SRC_R{which(x > outF)} 168 would be considered a suspected outlier.
+Observations SRC_R[:results value raw]{paste(which(x > inF), collapse = ", ")} 99, 100 would be considered potential outliers, while observation(s) SRC_R{which(x > outF)} 168 would be considered a suspected outlier.
 
 #+latex: \begin{xca}
 In this problem we will compare the variables =before= and =after=. Don't forget =library(e1071)=.
@@ -1806,8 +1806,9 @@ The idea is to look at the two measures and compare them to make a decision. In 
 The boxplot of =before= is shown below.
 
 #+begin_src R :exports code :results graphics :file img/boxplotRTDbefore.png
-boxplot(before, xlab = "before", main = "", notch = FALSE, 
-  horizontal = TRUE, data = RcmdrTestDrive)
+qplot(factor(0), before, data = RcmdrTestDrive, 
+     geom = "boxplot", xlab = "") + coord_flip() + 
+     scale_x_discrete(breaks = NA)
 #+end_src
 
 #+results[c89b06aea56d3c5338be24dadffdfa3172c0ff61]:
@@ -1825,9 +1826,15 @@ We want to watch out for extreme values (shown as circles separated from the box
 
 A boxplot of =after= is shown next.
 
-#+begin_src R :exports code :results graphics :file img/boxplotRTDafter.png
+#+begin_src R :exports code :eval never
 boxplot(after, xlab = "after", main = "", notch = FALSE, 
   horizontal = TRUE, data = RcmdrTestDrive)
+#+end_src
+
+
+#+begin_src R :exports code :results graphics :file img/boxplotRTDafter.png
+qplot(factor(0), after, data = RcmdrTestDrive, geom = "boxplot", 
+      xlab = "") + coord_flip() + scale_x_discrete(breaks=NA) 
 #+end_src
 
 #+results[e57d685e389d1f9186d7187dc19aebe1d96d3dbe]:
@@ -1835,7 +1842,7 @@ boxplot(after, xlab = "after", main = "", notch = FALSE,
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/boxplotRTDbefore.png}
+    \includegraphics[width=5in, height=4in]{img/boxplotRTDafter.png}
     \caption[A \texttt{boxplot} of \texttt{after}]{A \texttt{boxplot} of \texttt{after} in the \texttt{RcmdrTestDrive} data}
     \label{fig:boxplotRTDafter}
   \end{figure}
@@ -1862,91 +1869,73 @@ Judging from the values above, we would decide which variable has the higher spr
 
 1. Calculate and report the skewness and kurtosis for =before=. Based on these values, how would you describe the shape of =before=? 
 
-The values of these descriptive measures are shown below.
-
-#+begin_src R :exports both :results output pp  
-library(e1071)
-skewness(before)
-kurtosis(before)
-#+end_src
-
-#+results[35d273c6b63e2fc5186e66678a9ccefea44bcc27]:
-: [1] -0.03510369
-: [1] -0.7972288
-
-We should take the sample skewness value and compare it to $2\sqrt{6/n}\approx$ SRC_R{ round( 2*sqrt(6 / length(before)), 3 ) } 0.378 in absolute value to see if it is substantially different from zero. The direction of skewness is decided by the sign (positive or negative) of the skewness value. 
-
-
-We should take the sample kurtosis value and compare it to $2\cdot\sqrt{24/168}\approx$ SRC_R{round(4*sqrt(6/length(before)),3)} 0.756, in absolute value to see if the excess kurtosis is substantially different from zero. And take a look at the sign to see whether the distribution is platykurtic or leptokurtic.
+   The values of these descriptive measures are shown below.
+   #+begin_src R :exports both :results output pp  
+   library(e1071)
+   skewness(before)
+   kurtosis(before)
+   #+end_src
+   #+results[35d273c6b63e2fc5186e66678a9ccefea44bcc27]:
+   : [1] -0.03510369
+   : [1] -0.7972288
+   We should take the sample skewness value and compare it to $2\sqrt{6/n}\approx$ SRC_R{ round( 2*sqrt(6 / length(before)), 3 ) } 0.378 in absolute value to see if it is substantially different from zero. The direction of skewness is decided by the sign (positive or negative) of the skewness value. 
+   We should take the sample kurtosis value and compare it to $2\cdot\sqrt{24/168}\approx$ SRC_R{round(4*sqrt(6/length(before)),3)} 0.756, in absolute value to see if the excess kurtosis is substantially different from zero. And take a look at the sign to see whether the distribution is platykurtic or leptokurtic.
 
 1. Calculate and report the skewness and kurtosis for =after=. Based on these values, how would you describe the shape of =after=?
 
-The values of these descriptive measures are shown below.
-
-#+begin_src R :exports both :results output pp  
-skewness(after)
-kurtosis(after)
-#+end_src
-
-#+results[f8cf1e7a70ad9de6aadf85899ff872efa041e4e8]:
-: [1] -1.164056
-: [1] 1.322198
-
-We should do for this one just like we did previously. We would again compare the sample skewness and kurtosis values (in absolute value) to SRC_R{round(2*sqrt(6/length(after)),3)} 0.378 and SRC_R{round(4*sqrt(6/length(after)),3)} 0.756, respectively.
+   The values of these descriptive measures are shown below.
+   #+begin_src R :exports both :results output pp  
+   skewness(after)
+   kurtosis(after)
+   #+end_src
+   #+results[f8cf1e7a70ad9de6aadf85899ff872efa041e4e8]:
+   : [1] -1.164056
+   : [1] 1.322198
+   We should do for this one just like we did previously. We would again compare the sample skewness and kurtosis values (in absolute value) to SRC_R{round(2*sqrt(6/length(after)),3)} 0.378 and SRC_R{round(4*sqrt(6/length(after)),3)} 0.756, respectively.
 
 1. Plot histograms of =before= and =after= and compare them to your answers to (4) and (5).
+   The graphs are shown below.
+   #+begin_src R :exports code :results graphics :file img/histRTDbefore.png
+   hist(before, xlab = "before", data = RcmdrTestDrive)
+   #+end_src
 
-
-The graphs are shown below.
-
-
-
-#+begin_src R :exports code :results graphics :file img/histRTDbefore.png
-hist(before, xlab = "before", data = RcmdrTestDrive)
-#+end_src
-
-#+results[1a97ad308c3da22d39ad2bb5037ef8fbee16435c]:
+   #+results[1a97ad308c3da22d39ad2bb5037ef8fbee16435c]:
 [[file:img/histRTDbefore.png]]
 
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/histRTDbefore.png}
-    \caption[A histogram of \texttt{before}]{A histogram of \texttt{before} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:histRTDbefore}
-  \end{figure}
-#+end_src
+   #+begin_src latex 
+     \begin{figure}[ht!]
+       \includegraphics[width=5in, height=4in]{img/histRTDbefore.png}
+       \caption[A histogram of \texttt{before}]{A histogram of \texttt{before} in the \texttt{RcmdrTestDrive} data}
+       \label{fig:histRTDbefore}
+     \end{figure}
+   #+end_src
+   #+begin_src R :exports code :results graphics :file img/histRTDafter.png
+   hist(after, xlab = "after", data = RcmdrTestDrive)
+   #+end_src
 
-
-#+begin_src R :exports code :results graphics :file img/histRTDafter.png
-hist(after, xlab = "after", data = RcmdrTestDrive)
-#+end_src
-
-#+results[91139ce9c13e21f40721595c781a10051dc69bc8]:
+   #+results[91139ce9c13e21f40721595c781a10051dc69bc8]:
 [[file:img/histRTDafter.png]]
+   #+begin_src latex 
+     \begin{figure}[ht!]
+       \includegraphics[width=5in, height=4in]{img/histRTDafter.png}
+       \caption[A histogram of \texttt{after}]{A histogram of \texttt{after} in the \texttt{RcmdrTestDrive} data}
+       \label{fig:histRTDafter}
+     \end{figure}
+   #+end_src
 
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/histRTDafter.png}
-    \caption[A histogram of \texttt{after}]{A histogram of \texttt{after} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:histRTDafter}
-  \end{figure}
-#+end_src
-
-Answers will vary. We are looking for visual consistency in the histograms
-to our statements above.
+   Answers will vary. We are looking for visual consistency in the histograms to our statements above.
 
 #+latex: \begin{xca}
 Describe the following data sets just as if you were communicating with an alien, but one who has had a statistics class. Mention the salient features (data type, important properties, anything special). Support your answers with the appropriate visual displays and descriptive statistics.
-
 1. Conversion rates of Euro currencies stored in =euro=.
 1. State abbreviations stored in =state.abb=.
-
 #+latex: \end{xca}
 
 * Probability 
 \label{cha:Probability}
 
-\noindent In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
+#+latex: \noindent 
+In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
 
 In this book we distinguish between two types of experiments: /deterministic/ and /random/. A /deterministic/ experiment is one whose outcome may be predicted with certainty beforehand, such as combining Hydrogen and Oxygen, or adding two numbers such as $2+3$. A /random/ experiment is one whose outcome is determined by chance. We posit that the outcome of a random experiment may not be predicted with certainty beforehand, even in principle. Examples of random experiments include tossing a coin, rolling a die, and throwing a dart on a board, how many red lights you encounter on the drive home, how many ants traverse a certain patch of sidewalk over a short period, /etc/.
 
@@ -4118,11 +4107,9 @@ One can choose an integer at random with the =sample= function. The general synt
 The argument =x= identifies the numbers from which to randomly sample. If =x= is a number, then sampling is done from 1 to =x=. The argument =size= tells how big the sample size should be, and =replace= tells whether or not numbers should be replaced in the urn after having been sampled. The default option is =replace = FALSE= but for discrete uniforms the sampled values should be replaced. Some examples follow.
 
 #+latex: \paragraph*{Examples}
-\begin{itemize}
-\item To roll a fair die 3000 times, do =sample(6, size = 3000, replace = TRUE)=.
-\item To choose 27 random numbers from 30 to 70, do =sample(30:70, size = 27, replace = TRUE)=.
-\item To flip a fair coin 1000 times, do =sample(c("H","T"), size = 1000, replace = TRUE)=.
-\end{itemize}
+- To roll a fair die 3000 times, do =sample(6, size = 3000, replace = TRUE).
+- To choose 27 random numbers from 30 to 70, do =sample(30:70, size = 27, replace = TRUE)=.
+- To flip a fair coin 1000 times, do =sample(c("H","T"), size = 1000, replace = TRUE)=.
 
 #+latex: \paragraph*{With the \textsf{R} Commander:}
 

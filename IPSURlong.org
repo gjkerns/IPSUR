@@ -191,7 +191,7 @@ options(digits = 7)  # back to default
 : [1] 2.718281828459045
 : [1] 3.141592653589793
 
-Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of $\me$, Euler's number.
+Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of $\mathrm{e}$, Euler's number.
 
 
 *** Assignment, Object names, and Data types
@@ -559,8 +559,8 @@ Every continuous random variable $X$ has a /probability density function/ (PDF) 
 
 [fn:nodens] Not true. There are pathological random variables with no density function. (This is one of the crazy things that can happen in the world of measure theory). But in this book we will not get even close to these anomalous beasts, and regardless it can be proved that the CDF always exists.
 1. $f_{X}(x)>0$ for $x\in S_{X}$,
-2. $\int_{x\in S_{X}}f_{X}(x)\,\diff x=1$, and
-3. $\P(X\in A)=\int_{x\in A}f_{X}(x)\:\diff x$, for an event $A\subset S_{X}$.
+2. $\int_{x\in S_{X}}f_{X}(x)\,\mathrm{d} x=1$, and
+3. $\P(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x$, for an event $A\subset S_{X}$.
 \label{enu: contrvcond3}
 
 #+latex: \begin{rem}
@@ -568,7 +568,7 @@ We can say the following about continuous random variables:
 
 - Usually, the set $A$ in \ref{enu: contrvcond3} takes the form of an interval, for example, $A=[c,d]$, in which case
   \begin{equation}
-  \P(X\in A)=\int_{c}^{d}f_{X}(x)\:\diff x.
+  \P(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
   \end{equation}
 
 - It follows that the probability that $X$ falls in a given interval is simply the /area under the curve/ of $f_{X}$ over the interval.
@@ -585,7 +585,7 @@ We can say the following about continuous random variables:
 
 We met the cumulative distribution function, $F_{X}$, in Chapter \ref{cha:Discrete-Distributions}. Recall that it is defined by $F_{X}(t)=\P(X\leq t)$, for $-\infty<t<\infty$. While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
 \begin{equation}
-F_{X}(t)=\P(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\diff x,\quad-\infty<t<\infty.
+F_{X}(t)=\P(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
 \end{equation}
 
 #+latex: \begin{rem}
@@ -599,7 +599,7 @@ For any continuous CDF $F_{X}$ the following are true.
 
 There is a handy relationship between the CDF and PDF in the continuous case. Consider the derivative of $F_{X}$:
 \begin{equation}
-F'_{X}(t)=\frac{\diff}{\diff t}F_{X}(t)=\frac{\diff}{\diff t}\,\int_{-\infty}^{t}f_{X}(x)\,\diff x=f_{X}(t),
+F'_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t}F_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t}\,\int_{-\infty}^{t}f_{X}(x)\,\mathrm{d} x=f_{X}(t),
 \end{equation}
 the last equality being true by the Fundamental Theorem of Calculus, part (2) (see Appendix \ref{sec:Differential-and-Integral}). In short, $(F_{X})'=f_{X}$ in the continuous case[fn:discCDF]. 
 
@@ -610,19 +610,19 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 
 For a continuous random variable $X$ the expected value of $g(X)$ is
 \begin{equation}
-\E g(X)=\int_{x\in S}g(x)f_{X}(x)\:\diff x,
+\E g(X)=\int_{x\in S}g(x)f_{X}(x)\:\mathrm{d} x,
 \end{equation}
-provided the (potentially improper) integral $\int_{S}|g(x)|\, f(x)\diff x$ is convergent. One important example is the mean $\mu$, also known as $\E X$:
+provided the (potentially improper) integral $\int_{S}|g(x)|\, f(x)\mathrm{d} x$ is convergent. One important example is the mean $\mu$, also known as $\E X$:
 \begin{equation}
-\mu=\E X=\int_{x\in S}xf_{X}(x)\:\diff x,
+\mu=\E X=\int_{x\in S}xf_{X}(x)\:\mathrm{d} x,
 \end{equation}
-provided $\int_{S}|x|f(x)\diff x$ is finite. Also there is the variance
+provided $\int_{S}|x|f(x)\mathrm{d} x$ is finite. Also there is the variance
 \begin{equation}
-\sigma^{2}=\E(X-\mu)^{2}=\int_{x\in S}(x-\mu)^{2}f_{X}(x)\,\diff x,
+\sigma^{2}=\E(X-\mu)^{2}=\int_{x\in S}(x-\mu)^{2}f_{X}(x)\,\mathrm{d} x,
 \end{equation}
 which can be computed with the alternate formula $\sigma^{2}=\E X^{2}-(\E X)^{2}$. In addition, there is the standard deviation $\sigma=\sqrt{\sigma^{2}}$. The moment generating function is given by
 \begin{equation}
-M_{X}(t)=\E\:\me^{tX}=\int_{-\infty}^{\infty}\me^{tx}f_{X}(x)\:\diff x,
+M_{X}(t)=\E\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}(x)\:\mathrm{d} x,
 \end{equation}
 provided the integral exists (is finite) for all $t$ in a neighborhood of $t=0$.
 
@@ -633,10 +633,10 @@ Let the continuous random variable $X$ have PDF
 \[
 f_{X}(x)=3x^{2},\quad0\leq x\leq 1.
 \]
-We will see later that $f_{X}$ belongs to the /Beta/ family of distributions. It is easy to see that $\int_{-\infty}^{\infty}f(x)\diff x=1$.
+We will see later that $f_{X}$ belongs to the /Beta/ family of distributions. It is easy to see that $\int_{-\infty}^{\infty}f(x)\mathrm{d} x=1$.
 
 \begin{align*}
-\int_{-\infty}^{\infty}f_{X}(x)\diff x & =\int_{0}^{1}3x^{2}\:\diff x\\
+\int_{-\infty}^{\infty}f_{X}(x)\mathrm{d} x & =\int_{0}^{1}3x^{2}\:\mathrm{d} x\\
  & =\left.x^{3}\right|_{x=0}^{1}\\
  & =1^{3}-0^{3}\\
  & =1.
@@ -645,7 +645,7 @@ We will see later that $f_{X}$ belongs to the /Beta/ family of distributions. It
 This being said, we may find $\P(0.14\leq X<0.71)$.
 
 \begin{align*}
-\P(0.14\leq X<0.71) & =\int_{0.14}^{0.71}3x^{2}\diff x,\\
+\P(0.14\leq X<0.71) & =\int_{0.14}^{0.71}3x^{2}\mathrm{d} x,\\
  & =\left.x^{3}\right|_{x=0.14}^{0.71}\\
  & =0.71^{3}-0.14^{3}\\
  & \approx0.355167.
@@ -654,7 +654,7 @@ This being said, we may find $\P(0.14\leq X<0.71)$.
 We can find the mean and variance in an identical manner.
 
 \begin{align*}
-\mu=\int_{-\infty}^{\infty}xf_{X}(x)\diff x & =\int_{0}^{1}x\cdot3x^{2}\:\diff x,\\
+\mu=\int_{-\infty}^{\infty}xf_{X}(x)\mathrm{d} x & =\int_{0}^{1}x\cdot3x^{2}\:\mathrm{d} x,\\
  & =\frac{3}{4}x^{4}|_{x=0}^{1},\\
  & =\frac{3}{4}.
 \end{align*}
@@ -664,7 +664,7 @@ It would perhaps be best to calculate the variance with the shortcut formula $\s
 #+latex: \end{example}
 
 \begin{align*}
-\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\diff x & =\int_{0}^{1}x^{2}\cdot3x^{2}\:\diff x\\
+\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{0}^{1}x^{2}\cdot3x^{2}\:\mathrm{d} x\\
  & =\left.\frac{3}{5}x^{5}\right|_{x=0}^{1}\\
  & =3/5.
 \end{align*}
@@ -679,11 +679,11 @@ We will try one with unbounded support to brush up on improper integration. Let 
 f_{X}(x)=\frac{3}{x^{4}},\quad x>1.
 \]
 
-We can show that $\int_{-\infty}^{\infty}f(x)\diff x=1$:
+We can show that $\int_{-\infty}^{\infty}f(x)\mathrm{d} x=1$:
 
 \begin{align*}
-\int_{-\infty}^{\infty}f_{X}(x)\diff x & =\int_{1}^{\infty}\frac{3}{x^{4}}\:\diff x\\
- & =\lim_{t\to\infty}\int_{1}^{t}\frac{3}{x^{4}}\:\diff x\\
+\int_{-\infty}^{\infty}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}\frac{3}{x^{4}}\:\mathrm{d} x\\
+ & =\lim_{t\to\infty}\int_{1}^{t}\frac{3}{x^{4}}\:\mathrm{d} x\\
  & =\lim_{t\to\infty}\ \left.3\,\frac{1}{-3}x^{-3}\right|_{x=1}^{t}\\
  & =-\left(\lim_{t\to\infty}\frac{1}{t^{3}}-1\right)\\
  & =1.
@@ -692,7 +692,7 @@ We can show that $\int_{-\infty}^{\infty}f(x)\diff x=1$:
 We calculate $\P(3.4\leq X<7.1)$:
 
 \begin{align*}
-\P(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\diff x\\
+\P(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\mathrm{d} x\\
  & =\left.3\,\frac{1}{-3}x^{-3}\right|_{x=3.4}^{7.1}\\
  & =-1(7.1^{-3}-3.4^{-3})\\
  & \approx0.0226487123.
@@ -701,7 +701,7 @@ We calculate $\P(3.4\leq X<7.1)$:
 We locate the mean and variance just like before.
 
 \begin{align*}
-\mu=\int_{-\infty}^{\infty}xf_{X}(x)\diff x & =\int_{1}^{\infty}x\cdot\frac{3}{x^{4}}\:\diff x\\
+\mu=\int_{-\infty}^{\infty}xf_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
  & =\left.3\,\frac{1}{-2}x^{-2}\right|_{x=1}^{\infty}\\
  & =-\frac{3}{2}\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
  & =\frac{3}{2}.
@@ -710,7 +710,7 @@ We locate the mean and variance just like before.
 Again we use the shortcut $\sigma^{2}=\E X^{2}-\mu^{2}$:
 
 \begin{align*}
-\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\diff x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\diff x\\
+\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
  & =\left.3\:\frac{1}{-1}x^{-1}\right|_{x=1}^{\infty}\\
  & =-3\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
  & =3,
@@ -824,8 +824,8 @@ Choose a number in \( [0,1] \) at random, and let $X$ be the number chosen. Then
 
 The mean of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$ is relatively simple to calculate:
 \begin{align*}
-\mu=\E X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\diff x,\\
- & =\int_{a}^{b}x\ \frac{1}{b-a}\ \diff x,\\
+\mu=\E X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\mathrm{d} x,\\
+ & =\int_{a}^{b}x\ \frac{1}{b-a}\ \mathrm{d} x,\\
  & =\left.\frac{1}{b-a}\ \frac{x^{2}}{2}\ \right|_{x=a}^{b},\\
  & =\frac{1}{b-a}\ \frac{b^{2}-a^{2}}{2},\\
  & =\frac{b+a}{2},
@@ -847,7 +847,7 @@ The familiar bell-shaped curve, the normal distribution is also known as the /Ga
 
 When $\mu=0$ and $\sigma=1$ we say that the random variable has a /standard normal/ distribution and we typically write $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$. The lowercase Greek letter phi ($\phi$) is used to denote the standard normal PDF and the capital Greek letter phi $\Phi$ is used to denote the standard normal CDF: for $-\infty<z<\infty$,
 \begin{equation}
-\phi(z)=\frac{1}{\sqrt{2\pi}}\,\me^{-z^{2}/2}\mbox{ and }\Phi(t)=\int_{-\infty}^{t}\phi(z)\,\diff z.
+\phi(z)=\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-z^{2}/2}\mbox{ and }\Phi(t)=\int_{-\infty}^{t}\phi(z)\,\mathrm{d} z.
 \end{equation}
 
 #+latex: \begin{prop}
@@ -860,13 +860,13 @@ Z=\frac{X-\mu}{\sigma}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 The MGF of $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ is relatively easy to derive:
 
 \begin{eqnarray*}
-M_{Z}(t) & = & \int_{-\infty}^{\infty}\me^{tz}\frac{1}{\sqrt{2\pi}}\me^{-z^{2}/2}\diff z,\\
- & = & \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\exp \{ -\frac{1}{2}\left(z^{2}+2tz+t^{2}\right)+\frac{t^{2}}{2} \} \diff z,\\
- & = & \me^{t^{2}/2}\left(\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\me^{-[z-(-t)]^{2}/2}\diff z\right),
+M_{Z}(t) & = & \int_{-\infty}^{\infty}\mathrm{e}^{tz}\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-z^{2}/2}\mathrm{d} z,\\
+ & = & \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\exp \{ -\frac{1}{2}\left(z^{2}+2tz+t^{2}\right)+\frac{t^{2}}{2} \} \mathrm{d} z,\\
+ & = & \mathrm{e}^{t^{2}/2}\left(\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-[z-(-t)]^{2}/2}\mathrm{d} z\right),
 \end{eqnarray*}
 and the quantity in the parentheses is the total area under a $\mathsf{norm}(\mathtt{mean}=-t,\,\mathtt{sd}=1)$ density, which is one. Therefore,
 \begin{equation}
-M_{Z}(t)=\me^{-t^{2}/2},\quad-\infty<t<\infty.
+M_{Z}(t)=\mathrm{e}^{-t^{2}/2},\quad-\infty<t<\infty.
 \end{equation}
 
 #+latex: \begin{example}
@@ -877,11 +877,11 @@ Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 
 Therefore
 \[
-M_{X}(t)=\E\me^{tX}=\E\me^{t(\sigma Z+\mu)}=\E\me^{\sigma tX}\me^{\mu}=\me^{t\mu}M_{Z}(\sigma t),
+M_{X}(t)=\E\mathrm{e}^{tX}=\E\mathrm{e}^{t(\sigma Z+\mu)}=\E\mathrm{e}^{\sigma tX}\mathrm{e}^{\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
 \]
-and we know that $M_{Z}(t)=\me^{t^{2}/2}$, thus substituting we get
+and we know that $M_{Z}(t)=\mathrm{e}^{t^{2}/2}$, thus substituting we get
 \[
-M_{X}(t)=\me^{t\mu}\me^{(\sigma t)^{2}/2}=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} ,
+M_{X}(t)=\mathrm{e}^{t\mu}\mathrm{e}^{(\sigma t)^{2}/2}=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} ,
 \]
 for $-\infty<t<\infty$.
 #+latex: \end{example}
@@ -889,7 +889,7 @@ for $-\infty<t<\infty$.
 #+latex: \begin{fact}
 The same argument above shows that if $X$ has MGF $M_{X}(t)$ then the MGF of $Y=a+bX$ is
 \begin{equation}
-M_{Y}(t)=\me^{ta}M_{X}(bt).
+M_{Y}(t)=\mathrm{e}^{ta}M_{X}(bt).
 \end{equation}
 #+latex: \end{fact}
 
@@ -1040,23 +1040,23 @@ The goal of this section is to determine the distribution of $U=g(X)$ based on t
 
 Let $X$ have PDF $f_{X}$ and let $g$ be a function which is one-to-one with a differentiable inverse $g^{-1}$. Then the PDF of $U=g(X)$ is given by
 \begin{equation}
-f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\diff}{\diff u}g^{-1}(u)\right|.\label{eq:univ-trans-pdf-long}
+f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.\label{eq:univ-trans-pdf-long}
 \end{equation}
 #+latex: \end{prop}
 
 #+latex: \begin{rem}
 The formula in Equation \ref{eq:univ-trans-pdf-long} is nice, but does not really make any sense. It is better to write in the intuitive form
 \begin{equation}
-f_{U}(u)=f_{X}(x)\left|\frac{\diff x}{\diff u}\right|.\label{eq:univ-trans-pdf-short}
+f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq:univ-trans-pdf-short}
 \end{equation}
 #+latex: \end{rem}
 
 
 #+latex: \begin{example}
 \label{exa:lnorm-transformation}
-Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and let $Y=\me^{X}$. What is the PDF of $Y$? 
+Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and let $Y=\mathrm{e}^{X}$. What is the PDF of $Y$? 
 
-*Solution:* Notice first that $\me^{x}>0$ for any $x$, so the support of $Y$ is $(0,\infty)$. Since the transformation is monotone, we can solve $y=\me^{x}$ for $x$ to get $x=\ln\, y$, giving $\diff x/\diff y=1/y$. Therefore, for any $y>0$,
+*Solution:* Notice first that $\mathrm{e}^{x}>0$ for any $x$, so the support of $Y$ is $(0,\infty)$. Since the transformation is monotone, we can solve $y=\mathrm{e}^{x}$ for $x$ to get $x=\ln\, y$, giving $\mathrm{d} x/\mathrm{d} y=1/y$. Therefore, for any $y>0$,
 \[
 f_{Y}(y)=f_{X}(\ln y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{ \frac{(\ln y-\mu)^{2}}{2\sigma^{2}}\right\} \cdot\frac{1}{y},
 \]
@@ -1068,14 +1068,14 @@ where we have dropped the absolute value bars since $y>0$. The random variable $
 Suppose $X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and let $Y=4-3X$. What is the PDF of $Y$?
 #+latex: \end{example}
 
-The support of $X$ is $(-\infty,\infty)$, and as $x$ goes from $-\infty$ to $\infty$, the quantity $y=4-3x$ also traverses $(-\infty,\infty)$. Solving for $x$ in the equation $y=4-3x$ yields $x=-(y-4)/3$ giving $\diff x/\diff y=-1/3$. And since
+The support of $X$ is $(-\infty,\infty)$, and as $x$ goes from $-\infty$ to $\infty$, the quantity $y=4-3x$ also traverses $(-\infty,\infty)$. Solving for $x$ in the equation $y=4-3x$ yields $x=-(y-4)/3$ giving $\mathrm{d} x/\mathrm{d} y=-1/3$. And since
 \[
-f_{X}(x)=\frac{1}{\sqrt{2\pi}}\me^{-x^{2}/2},\quad-\infty<x<\infty,
+f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2},\quad-\infty<x<\infty,
 \]
 we have
 \begin{eqnarray*}
 f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\quad-\infty<y<\infty,\\
- & = & \frac{1}{3\sqrt{2\pi}}\me^{-(y-4)^{2}/2\cdot3^{2}},\quad-\infty<y<\infty.
+ & = & \frac{1}{3\sqrt{2\pi}}\mathrm{e}^{-(y-4)^{2}/2\cdot3^{2}},\quad-\infty<y<\infty.
 \end{eqnarray*}
 
 We recognize the PDF of $Y$ to be that of a $\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)$ distribution. Indeed, we may use an identical argument as the above to prove the following fact:
@@ -1086,17 +1086,17 @@ We recognize the PDF of $Y$ to be that of a $\mathsf{norm}(\mathtt{mean}=4,\,\ma
 
 Note that it is sometimes easier to /postpone/ solving for the inverse transformation $x=x(u)$. Instead, leave the transformation in the form $u=u(x)$ and calculate the derivative of the /original/ transformation
 \begin{equation}
-\diff u/\diff x=g'(x).
+\mathrm{d} u/\mathrm{d} x=g'(x).
 \end{equation}
 
 Once this is known, we can get the PDF of $U$ with
 \begin{equation}
-f_{U}(u)=f_{X}(x)\left|\frac{1}{\diff u/\diff x}\right|.
+f_{U}(u)=f_{X}(x)\left|\frac{1}{\mathrm{d} u/\mathrm{d} x}\right|.
 \end{equation}
 
 In many cases there are cancellations and the work is shorter. Of course, it is not always true that
 \begin{equation}
-\frac{\diff x}{\diff u}=\frac{1}{\diff u/\diff x},\label{eq:univ-jacob-recip}
+\frac{\mathrm{d} x}{\mathrm{d} u}=\frac{1}{\mathrm{d} u/\mathrm{d} x},\label{eq:univ-jacob-recip}
 \end{equation}
 but for the well-behaved examples in this book the trick works just fine.
 
@@ -1116,23 +1116,23 @@ suppose that we let $Y=-\ln\, X$. What is the PDF of $Y$?
 
 The support set of $X$ is $(0,1),$ and $y$ traverses $(0,\infty)$ as $x$ ranges from $0$ to $1$, so the support set of $Y$ is $S_{Y}=(0,\infty)$. For any $y>0$, we consider
 \[
-F_{Y}(y)=\P(Y\leq y)=\P(-\ln\, X\leq y)=\P(X\geq\me^{-y})=1-\P(X<\me^{-y}),
+F_{Y}(y)=\P(Y\leq y)=\P(-\ln\, X\leq y)=\P(X\geq\mathrm{e}^{-y})=1-\P(X<\mathrm{e}^{-y}),
 \]
-where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since $X$ is continuous the two probabilities $\P(X<\me^{-y})$ and $\P(X\leq\me^{-y})$ are equal; thus
+where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since $X$ is continuous the two probabilities $\P(X<\mathrm{e}^{-y})$ and $\P(X\leq\mathrm{e}^{-y})$ are equal; thus
 \[
-1-\P(X<\me^{-y})=1-\P(X\leq\me^{-y})=1-F_{X}(\me^{-y}).
+1-\P(X<\mathrm{e}^{-y})=1-\P(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \]
 
 Now recalling that the CDF of a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$ random variable satisfies $F(u)=u$ (see Equation \ref{eq:unif-cdf}), we can say
 \[
-F_{Y}(y)=1-F_{X}(\me^{-y})=1-\me^{-y},\quad\mbox{for }y>0.
+F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad\mbox{for }y>0.
 \]
 
 We have consequently found the formula for the CDF of $Y$; to obtain the PDF $f_{Y}$ we need only differentiate $F_{Y}$:
 \[
-f_{Y}(y)=\frac{\diff}{\diff y}\left(1-\me^{-y}\right)=0-\me^{-y}(-1),
+f_{Y}(y)=\frac{\mathrm{d}}{\mathrm{d} y}\left(1-\mathrm{e}^{-y}\right)=0-\mathrm{e}^{-y}(-1),
 \]
-or $f_{Y}(y)=\me^{-y}$ for $y>0$. This turns out to be a member of the exponential family of distributions, see Section \ref{sec:Other-Continuous-Distributions}. 
+or $f_{Y}(y)=\mathrm{e}^{-y}$ for $y>0$. This turns out to be a member of the exponential family of distributions, see Section \ref{sec:Other-Continuous-Distributions}. 
 #+latex: \end{example}
 
 #+latex: \begin{example}
@@ -1179,7 +1179,7 @@ f_{U}(u)=\left(2\Phi(\sqrt{u})-1\right)'=2\phi(\sqrt{u})\cdot\frac{1}{2\sqrt{u}}
 
 Substituting,
 \[
-f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\me^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\me^{-u},\quad u>0.
+f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u},\quad u>0.
 \]
 This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section \ref{sec:Other-Continuous-Distributions}.
 #+latex: \end{example}
@@ -1275,13 +1275,13 @@ In some experiments, the random variable being measured is the time until a cert
 
 We say that $X$ has an /exponential distribution/ and write $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. 
 \begin{equation}
-f_{X}(x)=\lambda\me^{-\lambda x},\quad x>0
+f_{X}(x)=\lambda\mathrm{e}^{-\lambda x},\quad x>0
 \end{equation}
 The associated \textsf{R} functions are =dexp(x, rate = 1)=, =pexp=, =qexp=, and =rexp=, which give the PDF, CDF, quantile function, and simulate random variates, respectively.
 
 The parameter $\lambda$ measures the rate of arrivals (to be described later) and must be positive. The CDF is given by the formula
 \begin{equation}
-F_{X}(t)=1-\me^{-\lambda t},\quad t>0.
+F_{X}(t)=1-\mathrm{e}^{-\lambda t},\quad t>0.
 \end{equation}
 The mean is $\mu=1/\lambda$ and the variance is $\sigma^{2}=1/\lambda^{2}$. 
 
@@ -1290,9 +1290,9 @@ The exponential distribution is closely related to the Poisson distribution. If 
 \P(X>t) & =\P(\mbox{first arrival after time \emph{t}}),\\
  & =\P(\mbox{no events in [0,\emph{t})}),\\
  & =\P(Y=0),\\
- & =\me^{-\lambda t},
+ & =\mathrm{e}^{-\lambda t},
 \end{align*}
-where the last line is the PMF of $Y$ evaluated at $y=0$. In other words, $\P(X\leq t)=1-\me^{-\lambda t}$, which is exactly the CDF of an $\mathsf{exp}(\mathtt{rate}=\lambda)$ distribution. 
+where the last line is the PMF of $Y$ evaluated at $y=0$. In other words, $\P(X\leq t)=1-\mathrm{e}^{-\lambda t}$, which is exactly the CDF of an $\mathsf{exp}(\mathtt{rate}=\lambda)$ distribution. 
 
 
 The exponential distribution is said to be /memoryless/ because exponential random variables "forget" how old they are at every instant. That is, the probability that we must wait an additional five hours for a customer to arrive, given that we have already waited seven hours, is exactly the probability that we needed to wait five hours for a customer in the first place. In mathematical symbols, for any $s,\, t>0$,
@@ -1307,7 +1307,7 @@ See Exercise \ref{xca:prove-the-memoryless}.
 
 This is a generalization of the exponential distribution. We say that $X$ has a gamma distribution and write $X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)$. It has PDF
 \begin{equation}
-f_{X}(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}\: x^{\alpha-1}\me^{-\lambda x},\quad x>0.
+f_{X}(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}\: x^{\alpha-1}\mathrm{e}^{-\lambda x},\quad x>0.
 \end{equation}
 
 The associated \textsf{R} functions are =dgamma(x, shape, rate = 1)=, =pgamma=, =qgamma=, and =rgamma=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. If $\alpha=1$ then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. The mean is $\mu=\alpha/\lambda$ and the variance is $\sigma^{2}=\alpha/\lambda^{2}$.
@@ -1327,29 +1327,25 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 
 A random variable $X$ with PDF
 \begin{equation}
-f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\me^{-x/2},\quad x>0,
+f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\mathrm{e}^{-x/2},\quad x>0,
 \end{equation}
 is said to have a /chi-square distribution/ with $p$ /degrees of freedom/. We write $X\sim\mathsf{chisq}(\mathtt{df}=p)$. The associated \textsf{R} functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure \ref{fig:chisq-dist-vary-df}. In an obvious notation we may define $\chi_{\alpha}^{2}(p)$ as the number on the $x$-axis such that there is exactly $\alpha$ area under the $\mathsf{chisq}(\mathtt{df}=p)$ curve to its right.
 
 The code to produce Figure \ref{fig:chisq-dist-vary-df} is
 
-
-<<eval = FALSE>>=
-curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
-ind <- c(4, 5, 10, 15)
-for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/chisq-dist-vary-df.png
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 #+end_src
-\par\end{centering}
-\caption{Chi square distribution for various degrees of freedom\label{fig:chisq-dist-vary-df}}
-\end{figure}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/chisq-dist-vary-df.pdf}
+    \caption[Chi square distribution for various degrees of freedom]{\small The chi square distribution for various degrees of freedom.}
+    \label{fig:chisq-dist-vary-df}
+  \end{figure}
+#+end_src
 
 #+latex: \begin{rem}
 Here are some useful things to know about the chi-square distribution.
@@ -1444,7 +1440,7 @@ We write $X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)$. T
 #+latex: \paragraph*{The Lognormal Distribution}
 \label{sub:The-Lognormal-Distribution}
 
-This is a distribution derived from the normal distribution (hence the name). If $U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, then $X=\me^{U}$has PDF
+This is a distribution derived from the normal distribution (hence the name). If $U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, then $X=\mathrm{e}^{U}$has PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^{2}}\right],\quad0<x<\infty.
 \end{equation}
@@ -1489,21 +1485,19 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
 
 #+results[122747ed04bf3831be435728c2f52ea2c230976f]:
 
-
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/gamma-mgf.png
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
-\par\end{centering}
-\caption{Plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF \label{fig:gamma-mgf}}
-\end{figure}
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/gamma-mgf.png}
+    \caption[Plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF]{\small A plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF.}
+    \label{fig:gamma-mgf}
+  \end{figure}
+#+end_src
 
-
-
-\newpage{}
+#+latex: \newpage{}
 
 ** Chapter Exercises
 
@@ -1514,8 +1508,8 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
 Find the constant $c$ so that the given function is a valid PDF of a random variable $X$.
 
 1. $f(x)=Cx^{n},\quad0<x<1$.
-1. $f(x)=Cx\me^{-x},\quad0<x<\infty$.
-1. $f(x)=\me^{-(x-C)},\quad7<x<\infty.$
+1. $f(x)=Cx\mathrm{e}^{-x},\quad0<x<\infty$.
+1. $f(x)=\mathrm{e}^{-(x-C)},\quad7<x<\infty.$
 1. $f(x)=Cx^{3}(1-x)^{2},\quad0<x<1.$
 1. ${\displaystyle f(x)=C(1+x^{2}/4)^{-1}},\quad-\infty<x<\infty.$
 
@@ -1630,7 +1624,7 @@ and
 \sum_{(x,y)\in S_{X,Y}}f_{X,Y}(x,y)=1.
 \end{equation}
 
-It is customary to extend the function $f_{X,Y}$ to be defined on all of $\R^{2}$ by setting $f_{X,Y}(x,y)=0$ for $(x,y)\not\in S_{X,Y}$. 
+It is customary to extend the function $f_{X,Y}$ to be defined on all of $\mathbb{R}^{2}$ by setting $f_{X,Y}(x,y)=0$ for $(x,y)\not\in S_{X,Y}$. 
 
 In the context of this chapter, the PMFs $f_{X}$ and $f_{Y}$ are called the /marginal PMFs/ of $X$ and $Y$, respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq:theorem-total-probability}): observe
 \begin{eqnarray}
@@ -1651,7 +1645,7 @@ Given the joint PMF we may recover the marginal PMFs, but the converse is not tr
 
 Associated with the joint PMF is the /joint cumulative distribution function/ $F_{X,Y}$ defined by
 \[
-F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\R^{2}.
+F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
 \]
 
 The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation \ref{eq:joint-pmf}. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
@@ -1785,7 +1779,7 @@ f_{X,Y}(x,y)\geq0\mbox{ for all }(x,y)\in S_{X,Y},
 \end{equation}
 and
 \begin{equation}
-\iintop_{S_{X,Y}}f_{X,Y}(x,y)\,\diff x\,\diff y=1.
+\iintop_{S_{X,Y}}f_{X,Y}(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
 \end{equation}
 
 
@@ -1793,15 +1787,15 @@ and
 
 In the continuous case there is not such a simple interpretation for the joint PDF; however, we do have one for the joint CDF, namely,
 \[
-F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\diff v\,\diff u,
+F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\mathrm{d} v\,\mathrm{d} u,
 \]
-for $(x,y)\in\R^{2}$. If $X$ and $Y$ have the joint PDF $f_{X,Y}$, then the marginal density of $X$ may be recovered by
+for $(x,y)\in\mathbb{R}^{2}$. If $X$ and $Y$ have the joint PDF $f_{X,Y}$, then the marginal density of $X$ may be recovered by
 \begin{equation}
-f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\diff y,\quad x\in S_{X}
+f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\mathrm{d} y,\quad x\in S_{X}
 \end{equation}
 and the marginal PDF of $Y$ may be found with
 \begin{equation}
-f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\diff x,\quad y\in S_{Y}.
+f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x,\quad y\in S_{Y}.
 \end{equation}
 
 
@@ -1815,13 +1809,13 @@ f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad0<x<1,\ 0<y<1.
 
 The marginal PDF of $X$ is
 \begin{eqnarray*}
-f_{X}(x) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\diff y,\\
+f_{X}(x) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} y,\\
  & = & \left.\frac{6}{5}\left(xy+\frac{y^{3}}{3}\right)\right|_{y=0}^{1},\\
  & = & \frac{6}{5}\left(x+\frac{1}{3}\right),
 \end{eqnarray*}
 for $0<x<1$, and the marginal PDF of $Y$ is
 \begin{eqnarray*}
-f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\diff x,\\
+f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
  & = & \left.\frac{6}{5}\left(\frac{x^{2}}{2}+xy^{2}\right)\right|_{x=0}^{1},\\
  & = & \frac{6}{5}\left(\frac{1}{2}+y^{2}\right),
 \end{eqnarray*}
@@ -1937,7 +1931,7 @@ You should check that the answers that we have obtained exactly match the same (
 
 Given a function $g$ with arguments $(x,y)$ we would like to know the long-run average behavior of $g(X,Y)$ and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
 \begin{equation}
-\E\, g(X,Y)=\iintop_{S_{X,Y}}g(x,y)\, f_{X,Y}(x,y)\,\diff x\,\diff y,
+\E\, g(X,Y)=\iintop_{S_{X,Y}}g(x,y)\, f_{X,Y}(x,y)\,\mathrm{d} x\,\mathrm{d} y,
 \end{equation}
 or in the discrete case,
 \begin{equation}
@@ -2004,18 +1998,18 @@ We will do a continuous example so that you can see how it works.
 
 Let us find the covariance of the variables $(X,Y)$ from Example \ref{exa:joint-pdf}. The expected value of $X$ is
 \[
-\E X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\diff x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
+\E X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\mathrm{d} x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
 \]
 and the expected value of $Y$ is
 \[
-\E Y=\int_{0}^{1}y\cdot\frac{6}{5}\left(\frac{1}{2}+y^{2}\right)\diff x=\left.\frac{3}{10}y^{2}+\frac{3}{20}y^{4}\right|_{y=0}^{1}=\frac{9}{20}.
+\E Y=\int_{0}^{1}y\cdot\frac{6}{5}\left(\frac{1}{2}+y^{2}\right)\mathrm{d} x=\left.\frac{3}{10}y^{2}+\frac{3}{20}y^{4}\right|_{y=0}^{1}=\frac{9}{20}.
 \]
 
 Finally, the expected value of $XY$ is
 \begin{eqnarray*}
-\E XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\diff x\,\diff y,\\
- & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\diff y,\\
- & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\diff y,\\
+\E XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\mathrm{d} x\,\mathrm{d} y,\\
+ & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
+ & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\mathrm{d} y,\\
  & = & \frac{1}{5}+\frac{3}{50},
 \end{eqnarray*}
 which is 13/50. Therefore the covariance of $(X,Y)$ is
@@ -2071,7 +2065,7 @@ Conditional distributions play a fundamental role in Bayesian probability and st
 
 Our initial beliefs about $\theta$ are represented by a probability distribution, called the /prior distribution/, denoted by $\pi$. The PDF $f_{X|\theta}$ is called the /likelihood function/, also called the /likelihood of/ $X$ /conditional on/ $\theta$. Given an observation $X=x$, we would like to update our beliefs $\pi$ to a new distribution, called the /posterior distribution of/ $\theta$ /given the observation/ $X=x$, denoted $\pi_{\theta|x}$. It may seem a mystery how to obtain $\pi_{\theta|x}$ based only on the information provided by $\pi$ and $f_{X|\theta}$, but it should not be. We have already studied this in Section \ref{sec:Bayes'-Rule} where it was called Bayes' Rule:
 \begin{equation} 
-\pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\diff u}.
+\pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
 
 Compare the above expression to Equation \ref{eq:bayes-rule}.
@@ -2096,7 +2090,7 @@ Based on the observation $X=x$, we will update the prior distribution to the pos
 \end{eqnarray*}
 where the constant of proportionality is given by
 \[
-\int3\, u^{x}(1-u)^{3-x}\diff u=\int3\, u^{(1+x)-1}(1-u)^{(4-x)-1}\diff u=3\,\frac{\Gamma(1+x)\Gamma(4-x)}{\Gamma[(1+x)+(4-x)]},
+\int3\, u^{x}(1-u)^{3-x}\mathrm{d} u=\int3\, u^{(1+x)-1}(1-u)^{(4-x)-1}\mathrm{d} u=3\,\frac{\Gamma(1+x)\Gamma(4-x)}{\Gamma[(1+x)+(4-x)]},
 \]
 the integral being calculated by inspection of the formula for a $\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x)$ distribution. That is to say, our posterior distribution is precisely
 \[
@@ -2113,7 +2107,7 @@ We usually do not restrict ourselves to the observation of only one $X$ conditio
 \[
 \pi(\theta|x_{1},x_{2},\ldots,x_{n})\propto\pi(\theta)\, f(x_{1},x_{2},\ldots,x_{n}|\theta),
 \]
-where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\diff u$. Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
+where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\mathrm{d} u$. Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
 #+latex: \end{rem}
 
 
@@ -2176,9 +2170,9 @@ If $X$ and $Y$ are independent, then for any functions $u$ and $v$,
 #+latex: \begin{proof}
 This is straightforward from the definition.
 \begin{eqnarray*}
-\E\left(u(X)v(Y)\right) & = & \iint\, u(x)v(y)\, f_{X,Y}(x,y)\,\diff x\diff y\\
- & = & \iint\, u(x)v(y)\, f_{X}(x)\, f_{Y}(y)\,\diff x\diff y\\
- & = & \int u(x)\, f_{X}(x)\,\diff x\ \int v(y)\, f_{Y}(y)\,\diff y
+\E\left(u(X)v(Y)\right) & = & \iint\, u(x)v(y)\, f_{X,Y}(x,y)\,\mathrm{d} x\mathrm{d} y\\
+ & = & \iint\, u(x)v(y)\, f_{X}(x)\, f_{Y}(y)\,\mathrm{d} x\mathrm{d} y\\
+ & = & \int u(x)\, f_{X}(x)\,\mathrm{d} x\ \int v(y)\, f_{Y}(y)\,\mathrm{d} y
 \end{eqnarray*}
 and this last quantity is exactly $\left(\E u(X)\right)\left(\E v(Y)\right)$. 
 #+latex: \end{proof}
@@ -2219,7 +2213,7 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 #+latex: \end{cor}
 
 #+latex: \begin{proof}
-Choose $u(x)=\me^{x}$ and $v(y)=\me^{y}$ in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity $\me^{t(x+y)}=\me^{tx}\,\me^{ty}$.
+Choose $u(x)=\mathrm{e}^{x}$ and $v(y)=\mathrm{e}^{y}$ in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity $\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}$.
 #+latex: \end{proof}
 
 Let us take a look at some examples of the corollary in action.
@@ -2227,7 +2221,7 @@ Let us take a look at some examples of the corollary in action.
 #+latex: \begin{example}
 Let $X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)$ and $Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)$ be independent. Then $X+Y$ has MGF
 \[
-M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\me^{t}\right)^{n_{1}}\left(q+p\me^{t}\right)^{n_{2}}=\left(q+p\me^{t}\right)^{n_{1}+n_{2}},
+M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\mathrm{e}^{t}\right)^{n_{1}}\left(q+p\mathrm{e}^{t}\right)^{n_{2}}=\left(q+p\mathrm{e}^{t}\right)^{n_{1}+n_{2}},
 \]
 which is the MGF of a $\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$ distribution. Therefore, $X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$.
 #+latex: \end{example}
@@ -2275,7 +2269,7 @@ But notice that the expression in the parentheses is exactly $\left(a_{1}\mu_{1}
 
 Two random variables $X$ and $Y$ are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
-F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\R^{2}.
+F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\mathbb{R}^{2}.
 \end{equation} 
 
 When the joint density $f$ exists, we may equivalently say that $X$ and $Y$ are exchangeable if $f(x,y)=f(y,x)$ for all $(x,y)$.
@@ -2285,7 +2279,7 @@ Exchangeable random variables exhibit symmetry in the sense that a person may ex
 #+latex: \begin{example}
 Let $X$ and $Y$ have joint PDF
 \begin{multline}
-f_{X,Y}(x,y)=(1+\alpha)\lambda^{2}\me^{-\lambda(x+y)}+\alpha(2\lambda)^{2}\me^{-2\lambda(x+y)}-2\alpha\lambda^{2}\left(\me^{-\lambda(2x+y)}+\me^{-\lambda(x+2y)}\right).
+f_{X,Y}(x,y)=(1+\alpha)\lambda^{2}\mathrm{e}^{-\lambda(x+y)}+\alpha(2\lambda)^{2}\mathrm{e}^{-2\lambda(x+y)}-2\alpha\lambda^{2}\left(\mathrm{e}^{-\lambda(2x+y)}+\mathrm{e}^{-\lambda(x+2y)}\right).
 \end{multline}
 It is straightforward and tedious to check that $\iint f=1$. We may see immediately that $f_{X,Y}(x,y)=f_{X,Y}(y,x)$ for all $(x,y)$, which confirms that $X$ and $Y$ are exchangeable. Here, $\alpha$ is said to be an association parameter. This particular example is one from the Farlie-Gumbel-Morgenstern family of distributions; see \cite{Kotz2000}.
 #+latex: \end{example}
@@ -2318,7 +2312,7 @@ The bivariate normal PDF is given by the unwieldy formula
 f_{X,Y}(x,y)=\frac{1}{2\pi\,\sigma_{X}\sigma_{Y}\sqrt{1-\rho^{2}}}\exp\left\{ -\frac{1}{2(1-\rho^{2})}\left[\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)^{2}+\cdots\right.\right.\\
 \left.\left.\cdots+2\rho\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)+\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)^{2}\right]\right\} ,
 \end{multline}
-for $(x,y)\in\R^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$, where
+for $(x,y)\in\mathbb{R}^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$, where
 \begin{equation}
 \upmu=(\mu_{X},\,\mu_{Y})^{T},\quad\sum=\left(
 \begin{array}{cc}
@@ -2395,24 +2389,21 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 We chose the standard bivariate normal, $\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I})$, to display.
 
-
-
-
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 8, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/mvnorm-pdf.png
 library(mvtnorm)
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
 persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_src
-\par\end{centering}
-\caption{Graph of a bivariate normal PDF\label{fig:mvnorm-pdf}}
-\end{figure}
 
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/mvnorm-pdf.png}
+    \caption[Graph of a bivariate normal PDF]{\small A graph of a bivariate normal PDF.}
+    \label{fig:mvnorm-pdf}
+  \end{figure}
+#+end_src
 
 ** Bivariate Transformations of Random Variables
 \label{sec:Transformations-Multivariate}
@@ -2474,13 +2465,13 @@ in which case the Jacobian of the inverse transformation is
 \end{vmatrix}
 = 3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
 \]
-As $(x,y)$ traverses $\R^{2}$, so too does $(u,v)$. Since the joint PDF of $(X,Y)$ is
+As $(x,y)$ traverses $\mathbb{R}^{2}$, so too does $(u,v)$. Since the joint PDF of $(X,Y)$ is
 \[
-f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad(x,y)\in\R^{2},
+f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad(x,y)\in\mathbb{R}^{2},
 \]
 we get that the joint PDF of $(U,V)$ is
 \begin{equation}
-f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad(u,v)\in\R^{2}.\label{eq:biv-norm-hidden}
+f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad(u,v)\in\mathbb{R}^{2}.\label{eq:biv-norm-hidden}
 \end{equation}
 #+latex: \end{example}
 
@@ -2506,15 +2497,15 @@ f_{\mathbf{X}}(\mathbf{x})>0,\quad\mbox{for }\mathbf{x}\in S_{\mathbf{X}},
 \end{equation}
 and
 \begin{equation}
-\int\!\!\!\int\cdots\int f_{\mathbf{X}}(\mathbf{x})\,\diff x_{1}\diff x_{2}\cdots\diff x_{n}=1,
+\int\!\!\!\int\cdots\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d} x_{1}\mathrm{d} x_{2}\cdots\mathrm{d} x_{n}=1,
 \end{equation}
-or even shorter: $\int f_{\mathbf{X}}(\mathbf{x})\,\diff\mathbf{x}=1$. The joint CDF $F_{\mathbf{X}}$ is defined by 
+or even shorter: $\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}=1$. The joint CDF $F_{\mathbf{X}}$ is defined by 
 \begin{equation}
 F_{\mathbf{X}}(\mathbf{x})=\P(X_{1}\leq x_{1},\, X_{2}\leq x_{2},\ldots,\, X_{n}\leq x_{n}),
 \end{equation}
-for $\mathbf{x}\in\R^{n}$. The expectation of a function $g(\mathbf{X})$ is defined just as we would imagine:
+for $\mathbf{x}\in\mathbb{R}^{n}$. The expectation of a function $g(\mathbf{X})$ is defined just as we would imagine:
 \begin{equation}
-\E g(\mathbf{X})=\int g(\mathbf{x})\, f_{\mathbf{X}}(\mathbf{x})\,\diff\mathbf{x}.
+\E g(\mathbf{X})=\int g(\mathbf{x})\, f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}.
 \end{equation}
 provided the integral exists and is finite. And the moment generating function in the multivariate case is defined by
 \begin{eqnarray} 
@@ -2570,7 +2561,7 @@ Bruno de Finetti was a strong proponent of the subjective approach to probabilit
 #+latex: \begin{thm}
 *De Finetti's Theorem.* Let $X_{1}$, $X_{2}$, ... be a sequence of $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ random variables such that $(X_{1},\ldots,X_{k})$ are exchangeable for every $k$. Then there exists a random variable $\Theta$ with support $[0,1]$ and PDF $f_{\Theta}(\theta)$ such that
 \begin{equation}
-\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\diff\theta,\label{eq:definetti-binary}
+\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,\label{eq:definetti-binary}
 \end{equation}
 for all $x_{i}=0,\,1$, $i=1,\,2,\ldots,k$.
 #+latex: \end{thm}
@@ -2704,20 +2695,20 @@ Here is another way to do it \footnote{Another way to do the plot is with the =s
 : scatterplot3d(A, type = "h", lwd = 3, box = FALSE)
 The =scatterplot3d= graph looks better in this example, but the code is more difficult to understand. And with =cloud= one can easily do conditional plots of the form =cloud(z ~ x + y|f)=, where =f= is a factor.}.
 
-
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/multinom-pmf2.png
 library(lattice)
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
-\par\end{centering}
-\caption{Plot of a multinomial PMF\label{fig:multinom-pmf2}}
-\end{figure}
-\newpage{}
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/multinom-pmf2.png}
+    \caption[Plot of a multinomial PMF.]{\small A plot of a multinomial PMF.}
+    \label{fig:multinom-pmf2}
+  \end{figure}
+#+end_src
 
+#+latex: \newpage{}
 
 ** Chapter Exercises
 
@@ -2804,13 +2795,13 @@ M_{\overline{X}}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
 #+latex: \begin{proof}
 Go from the definition:
 \begin{eqnarray*}
-M_{\overline{X}}(t) & = & \E\,\me^{t\overline{X}},\\
- & = & \E\,\me^{t(X_{1}+\cdots+X_{n})/n},\\
- & = & \E\,\me^{tX_{1}/n}\me^{tX_{2}/n}\cdots\me^{tX_{n}/n}.
+M_{\overline{X}}(t) & = & \E\,\mathrm{e}^{t\overline{X}},\\
+ & = & \E\,\mathrm{e}^{t(X_{1}+\cdots+X_{n})/n},\\
+ & = & \E\,\mathrm{e}^{tX_{1}/n}\mathrm{e}^{tX_{2}/n}\cdots\mathrm{e}^{tX_{n}/n}.
 \end{eqnarray*}
 And because $X_{1}$, $X_{2}$, ..., $X_{n}$ are independent, Proposition \ref{pro:indep-implies-prodexpect} allows us to distribute the expectation among each term in the product, which is
 \[
-\E\me^{tX_{1}/n}\,\E\me^{tX_{2}/n}\cdots\E\me^{tX_{n}/n}.
+\E\mathrm{e}^{tX_{1}/n}\,\E\mathrm{e}^{tX_{2}/n}\cdots\E\mathrm{e}^{tX_{n}/n}.
 \]
 The last step is to recognize that each term in last product above is exactly $M(t/n)$.
 #+latex: \end{proof}
@@ -2909,24 +2900,19 @@ Any random variable $X$ with the preceding PDF is said to have Student's $t$ dis
 
 
 The code to produce Figure \ref{fig:Student's-t-dist-vary-df} is
-#+begin_src R :exports code :eval never
+#+begin_src R :exports code :results graphics :file img/Student's-t-dist-vary-df.png
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
 for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 #+end_src
 
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
-curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
-ind <- c(1, 2, 3, 5, 10)
-for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Student's-t-dist-vary-df.png}
+    \caption[Student's $t$ distribution for various degrees of freedom]{\small A plot of Student's $t$ distribution for various degrees of freedom.}
+    \label{fig:Student's-t-dist-vary-df}
+  \end{figure}
 #+end_src
-\par\end{centering}
-\caption{Student's $t$ distribution for various degrees of freedom\label{fig:Student's-t-dist-vary-df}}
-\end{figure}
-
 
 Similar to that done for the normal we may define $\mathsf{t}_{\alpha}(\mathtt{df}=n-1)$ as the number on the $x$-axis such that there is exactly $\alpha$ area under the $\mathsf{t}(\mathtt{df}=n-1)$ curve to its right.
 
@@ -3122,18 +3108,17 @@ sd(iqrs)
 
 Now let's take a look at a plot of the simulated values
 
-
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/simulated-IQR.png
 hist(iqrs, breaks = 20)
 #+end_src
-\par\end{centering}
-\caption{Plot of simulated IQRs\label{fig:simulated-IQR}}
-\end{figure}
 
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/simulated-IQR.png}
+    \caption[Plot of simulated IQRs]{\small A plot of simulated IQRs.}
+    \label{fig:simulated-IQR}
+  \end{figure}
+#+end_src
 
 *** The Median Absolute Deviation
 
@@ -3164,7 +3149,7 @@ sd(mads)
 Now let's take a look at a plot of the simulated values
 
 
-#+begin_src R :exports code :results graphics :file img/simulated-MAD.pdf
+#+begin_src R :exports code :results graphics :file img/simulated-MAD.png
 hist(mads, breaks = 20)
 #+end_src
 
@@ -3173,8 +3158,8 @@ hist(mads, breaks = 20)
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/simulated-MAD.pdf}
-    \caption[Plot of simulated MADs]{\small Plot of simulated MADs.}
+    \includegraphics[width=5in, height=4in]{img/simulated-MAD.png}
+    \caption[Plot of simulated MADs]{\small A plot of simulated MADs.}
     \label{fig:simulated-MAD}
   \end{figure}
 #+end_src
@@ -3307,9 +3292,7 @@ We can see already that the observed data $X=3$ is more likely when $F=9$ than i
 #+latex: \end{example}
 
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports none :results graphics :file img/capture-recapture.png
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -3317,13 +3300,16 @@ abline(h = 0)
 lines(6:15, heights[6:15], type = "h", lwd = 2, lty = 3)
 text(9, heights[9]/6, bquote(hat(F)==.(9)), cex = 2, pos = 4)
 lines(9, heights[9], type = "h", lwd = 2)
-points(9, 0, pch = 4, lwd = 3, cex = 2) 
+points(9, 0, pch = 4, lwd = 3, cex = 2)
 #+end_src
-\par\end{centering}
-\caption{Capture-recapture experiment\label{fig:capture-recapture}}
-\end{figure}
 
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/capture-recapture.png}
+    \caption[Capture-recapture experiment]{\small A plot of maximum likelihood for the capture-recapture experiment.}
+    \label{fig:capture-recapture}
+  \end{figure}
+#+end_src
 
 #+latex: \begin{example}
 \label{exa:bass-bluegill}
@@ -3360,25 +3346,19 @@ L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 
 A graph of $L$ for values of $\sum x_{i}=3,\ 4$, and 5 when $n=7$ is shown in Figure \ref{fig:fishing-part-two}. 
 
-
-
-<<eval = FALSE>>=
-curve(x^5*(1-x)^2, from = 0, to = 1, xlab = "p", ylab = "L(p)")
-curve(x^4*(1-x)^3, from = 0, to = 1, add = TRUE)
-curve(x^3*(1-x)^4, 0, 1, add = TRUE)
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/fishing-part-two.png
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 #+end_src
-\par\end{centering}
-\caption{Assorted likelihood functions for fishing, part two\label{fig:fishing-part-two}}
-{\small Three graphs are shown of $L$ when $\sum x_{i}$ equals 3, 4, and 5, respectively, from left to right. We pick an $L$ that matches the observed data and then maximize $L$ as a function of $p$. If $\sum x_{i}=4$, then the maximum appears to occur somewhere around $p\approx0.6$.}
-\end{figure}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/fishing-part-two.png}
+    \caption[Assorted likelihood functions for fishing, part two]{\small Assorted likelihood functions for fishing, part two.   Three graphs are shown of $L$ when $\sum x_{i}$ equals 3, 4, and 5, respectively, from left to right. We pick an $L$ that matches the observed data and then maximize $L$ as a function of $p$. If $\sum x_{i}=4$, then the maximum appears to occur somewhere around $p \approx 0.6$.}
+    \label{fig:fishing-part-two}
+  \end{figure}
+#+end_src
 
 We want the value of $p$ which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate $L$ and set $L'=0$ to find a maximum.
 \[
@@ -3395,11 +3375,11 @@ The derivative vanishes ($L'=0$) when
 
 This ``best'' $p$, the one which maximizes the likelihood, is called the maximum likelihood estimator (MLE) of $p$ and is denoted $\hat{p}$. That is, 
 \begin{equation} 
-\hat{p}=\frac{\sum_{i=1}^{n}x_{i}}{n}=\xbar.
+\hat{p}=\frac{\sum_{i=1}^{n}x_{i}}{n}=\overline{x}.
 \end{equation}
 
 #+latex: \begin{rem}
-Strictly speaking we have only shown that the derivative equals zero at $\hat{p}$, so it is theoretically possible that the critical value $\hat{p}=\xbar$ is located at a minimum[fn:max] instead of a maximum! We should be thorough and check that $L'>0$ when $p<\xbar$ and $L'<0$ when $p>\xbar$. Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that $\hat{p}=\xbar$ is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
+Strictly speaking we have only shown that the derivative equals zero at $\hat{p}$, so it is theoretically possible that the critical value $\hat{p}=\overline{x}$ is located at a minimum[fn:max] instead of a maximum! We should be thorough and check that $L'>0$ when $p<\overline{x}$ and $L'<0$ when $p>\overline{x}$. Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that $\hat{p}=\overline{x}$ is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
 #+latex: \end{rem}
 
 [fn:max] We can tell from the graph that our value of $\hat{p}$ is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.
@@ -3408,10 +3388,7 @@ The result is shown in Figure \ref{fig:species-mle}.
 #+latex: \end{example}
 
 
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports none :results graphics :file img/species-mle.png
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -3426,11 +3403,14 @@ lines(mle, mleobj, type = "h", lwd = 2, lty = 3, col = "red")
 points(mle, 0, pch = 4, lwd = 2, cex = 2, col = "red")
 text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, pos = 4)
 #+end_src
-\par\end{centering}
-\caption{Species maximum likelihood\label{fig:species-mle}}
-\end{figure}
 
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/species-mle.png}
+    \caption[Species maximum likelihood]{\small Species maximum likelihood.}
+    \label{fig:species-mle}
+  \end{figure}
+#+end_src
 
 In general, we have a family of PDFs $f(x|\theta)$ indexed by a parameter $\theta$ in some parameter space $\Theta$. We want to learn about $\theta$. We take a $SRS(n)$:
 \begin{equation}
@@ -3678,19 +3658,18 @@ In the demonstration, the parameter corresponds to the chalk, the sheet of paper
 See Figure \ref{fig:ci-examp}, which is a graphical display of these ideas.
 
 
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 6, width = 6>>=
-set.seed(seed + 1)
+#+begin_src R :exports code :results graphics :file img/carscatter.png
 library(TeachingDemos)
 ci.examp()
-\par\end{centering}
-\caption{Simulated confidence intervals\label{fig:ci-examp}}
-{\small The graph was generated by the } =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a $\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10)$ distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover $\mu=100$, which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.}
-\end{figure}
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/carscatter.png}
+    \caption[Simulated confidence intervals]{\small The graph was generated by the } =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a $\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10)$ distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover $\mu=100$, which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.}
+    \label{fig:Scatter-cars}
+  \end{figure}
+#+end_src
 
 Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, $X_{1}$, $X_{2}$, ...,
 $X_{n}$. The following remarks makes these notions precise. 
@@ -3762,25 +3741,11 @@ qnorm(0.975)
 : [1] 5.073
 : [1] 1.959964
 
-We find the sample mean of the data to be $\xbar=5.073$ and $z_{\alpha/2}=z_{0.025}\approx1.96$. Our interval is therefore
+We find the sample mean of the data to be $\overline{x}=5.073$ and $z_{\alpha/2}=z_{0.025}\approx1.96$. Our interval is therefore
 \[
-\xbar\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}=5.073\pm1.96\cdot\frac{0.70}{\sqrt{30}},
+\overline{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}=5.073\pm1.96\cdot\frac{0.70}{\sqrt{30}},
 \]
-which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval $[4.823,\,5.323]$ covers $\mu$. See Figure BLANK. 
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 6.5, width = 6.5>>=
-library(TeachingDemos)
-plot(z.test(PlantGrowth$weight, stdev = 0.70), "Conf")
-#+end_src
-\par\end{centering}
-\caption{Confidence interval plot for the \texttt{PlantGrowth} data\label{fig:plant-z-int-plot}}
-{\small The shaded portion represents 95% of the total area under the curve, and the upper and lower bounds are the limits of the one-sample 95% confidence interval. The graph is centered at the observed sample mean. It was generated by computing a }\texttt{\small z.test}{\small{} from the }\texttt{\small TeachingDemos}{\small{} package, storing the resulting }\texttt{\small htest}{\small{} object, and plotting it with the }\texttt{\small normal.and.t.dist}{\small{} function from the }\texttt{\small HH}{\small{} package. See the remarks in the ``How to do it with }\textsf{\small R}{\small ''discussion later in this section.}
-\end{figure}
-
-
+which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval $[4.823,\,5.323]$ covers $\mu$.
 
 #+latex: \begin{example}
 Give some data with $X_{1}$, $X_{2}$, ..., $X_{n}$ an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Maybe small sample?
@@ -4387,27 +4352,6 @@ prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, c
 
 Do the following to make the plot.
 
-#+begin_src R :exports code :eval never
-library(IPSUR)
-library(HH)
-temp <- prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE)
-plot(temp, 'Hypoth')
-#+end_src
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 6, width = 6.5>>=
-library(HH)
-plot(prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE), 'Hypoth')
-#+end_src
-\par\end{centering}
-\caption{Hypothesis test plot based on \texttt{normal.and.t.dist} from the
-\texttt{HH} package\label{fig:Hypothesis-test-plot-1}}
-{\small ~}{\small \par}
-{\small This plot shows all of the important features of hypothesis  tests in one magnificent display. The (asymptotic) distribution of the test statistic (under the null hypothesis) is standard normal, represented by the bell curve, above. We see the critical region to the left, and the blue shaded area is the significance level, which for this example is $\alpha=0.05$. The area outlined in green is the $p$-value, and the observed test statistic determines the upper bound of this region. We can see clearly that the $p$-value is larger than the significance level, thus, we would not reject the null hypothesis. There are all sorts of tick marks shown below the graph which detail how the different pieces are measured on different scales (the original data scale, the standardized scale,  /etc/.). The workhorse behind the plot is the =normal.and.t.dist= function from the =HH= package. See the discussion in ``How to do it with \textsf{R}'' for the exact sequence of commands to generate the plot.} 
-\end{figure}
-
 
 Use Yates' continuity correction when the expected frequency of successes is less than 10. You can use it all of the time, but you will have a decrease in power. For large samples the correction does not matter. 
 
@@ -4469,27 +4413,12 @@ library(TeachingDemos)
 z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 #+end_src
 
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 6, width = 6.5>>=
-library(HH)
-plot(prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE), 'Hypoth')
-#+end_src
-\par\end{centering}
-\caption{Hypothesis test plot based on \texttt{normal.and.t.dist} from the
-\texttt{HH} package\label{fig:Hypothesis-test-plot-2}}
-{\small ~}{\small \par}
-{\small This plot shows the important features of hypothesis tests.}
-\end{figure}
-
 The =RcmdrPlugin.IPSUR= package does not have a menu for =z.test= yet. 
 
 #+begin_src R :exports both :results output pp 
 x <- rnorm(13, mean = 2, sd = 3)
 t.test(x, mu = 0, conf.level = 0.90, alternative = "greater")
 #+end_src
-
 
 #+latex: \paragraph*{With the \textsf{R} Commander}
 
@@ -4621,9 +4550,8 @@ anova(temp)
 
 Plot for the intuition of between versus within group variation.
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig = true, height = 4.5, width = 6>>=
+
+#+begin_src R :exports none :results graphics :file img/Between-versus-within.png
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
 f <- function(x){dnorm(x, mean = 2)}
@@ -4634,34 +4562,17 @@ f <- function(x){dnorm(x, mean = 22)}
 curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 #+end_src
-\par\end{centering}
-\caption{Between group versus within group variation\label{fig:Between-versus-within}}
-\end{figure}
 
-Plots for the hypothesis tests:
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig = true, height = 4.5, width = 6>>=
-y2 <- rnorm(300, mean = c(4,4.1,4.3))
-hist(y2, 30, prob = TRUE)
-f <- function(x){dnorm(x, mean = 4)/3}
-curve(f, add = TRUE, lwd = 2)
-f <- function(x){dnorm(x, mean = 4.1)/3}
-curve(f, add = TRUE, lwd = 2)
-f <- function(x){dnorm(x, mean = 4.3)/3}
-curve(f, add = TRUE, lwd = 2)
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Between-versus-within.png}
+    \caption[Between group versus within group variation]{A plot of between group versus within group variation.}
+    \label{fig:Between-versus-within}
+  \end{figure}
 #+end_src
-\par\end{centering}
-\caption{Between group versus within group variation\label{fig:Between-versus-within-2}}
-\end{figure}
 
 
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig = true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/Some-F-plots-HH.png
 library(HH)
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
@@ -4669,11 +4580,14 @@ F.curve(df1 = 5, df2 = 30, col='blue')
 F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 #+end_src
-\par\end{centering}
-\caption{Some $F$ plots from the \texttt{HH} package\label{fig:Some-F-plots-HH}}
-\end{figure}
 
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Some-F-plots-HH.png}
+    \caption[Some $F$ plots from the \texttt{HH} package]{\small Some $F$ plots from the \texttt{HH} package.}
+    \label{fig:Some-F-plots-HH}
+  \end{figure}
+#+end_src
 
 ** Sample Size and Power
 \label{sec:Sample-Size-and-Power}
@@ -4694,17 +4608,18 @@ inside the null parameter space, there is never more than a chance of $\alpha$ o
 I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
 
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 6, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/power-examp.png
 library(TeachingDemos)
 power.examp()
 #+end_src
-\par\end{centering}
-\caption{Plot of significance level and power\label{fig:power-examp}}
-{\small This graph was generated by the }\texttt{\small power.examp}{\small{} function from the }\texttt{\small TeachingDemos}{\small{} package. The plot corresponds to the hypothesis test $H_{0}:\,\mu=\mu_{0}$ versus $H_{1}:\,\mu=\mu_{1}$ (where $\mu_{0}=0$ and $\mu_{1}=1$, by default) based on a single observation $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$. The top graph is of the $H_{0}$ density while the bottom is of the $H_{1}$ density. The significance level is set at $\alpha=0.05$, the sample size is $n=1$, and the standard deviation is $\sigma=1$. The pink area is the significance level, and the critical value $z_{0.05}\approx1.645$ is marked at the left boundary -- this defines the rejection region. When $H_{0}$ is true, the probability of falling in the rejection region is exactly $\alpha=0.05$. The same rejection region is marked on the bottom graph, and the probability of falling in it (when $H_{1}$  is true) is the blue area shown at the top of the display to be approximately $0.26$. This probability represents the /power/ to detect a non-null mean value of $\mu=1$. With the command the =run.power.examp()= at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size $n$, the standard deviation $\sigma$, the true difference between the means $\mu_{1}-\mu_{0}$, and the significance level $\alpha$. By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the =tkrplot= package for =run.power.examp=. }
-\end{figure}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/power-examp.png}
+    \caption[Plot of significance level and power]{\small This graph was generated by the }\texttt{\small power.examp}{\small{} function from the }\texttt{\small TeachingDemos}{\small{} package. The plot corresponds to the hypothesis test $H_{0}:\,\mu=\mu_{0}$ versus $H_{1}:\,\mu=\mu_{1}$ (where $\mu_{0}=0$ and $\mu_{1}=1$, by default) based on a single observation $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$. The top graph is of the $H_{0}$ density while the bottom is of the $H_{1}$ density. The significance level is set at $\alpha=0.05$, the sample size is $n=1$, and the standard deviation is $\sigma=1$. The pink area is the significance level, and the critical value $z_{0.05}\approx1.645$ is marked at the left boundary -- this defines the rejection region. When $H_{0}$ is true, the probability of falling in the rejection region is exactly $\alpha=0.05$. The same rejection region is marked on the bottom graph, and the probability of falling in it (when $H_{1}$  is true) is the blue area shown at the top of the display to be approximately $0.26$. This probability represents the /power/ to detect a non-null mean value of $\mu=1$. With the command the =run.power.examp()= at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size $n$, the standard deviation $\sigma$, the true difference between the means $\mu_{1}-\mu_{0}$, and the significance level $\alpha$. By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the =tkrplot= package for =run.power.examp=.}
+    \label{fig:power-examp}
+  \end{figure}
+#+end_src
 
 #+latex: \newpage{}
 
@@ -4750,7 +4665,7 @@ But we should be able to say more than that. To focus our efforts we impose some
 
 - if $\mu(x)=\beta_{0}+\beta_{1}x+\beta_{2}x^{2}$ , we try to estimate $\beta_{0}$, $\beta_{1}$, and $\beta_{2}$.
 
-- if $\mu(x)=\beta_{0}\me^{\beta_{1}x}$, we try to estimate $\beta_{0}$ and $\beta_{1}$.
+- if $\mu(x)=\beta_{0}\mathrm{e}^{\beta_{1}x}$, we try to estimate $\beta_{0}$ and $\beta_{1}$.
 
 
 This helps us in the sense that we concentrate on the estimation of just a few parameters, $\beta_{0}$ and $\beta_{1}$, say, rather than some nebulous function. Our /modus operandi/ is simply to perform the random experiment $n$ times and observe the $n$ ordered pairs of data $(x_{1},Y_{1}),\ (x_{2},Y_{2}),\ \ldots,(x_{n},Y_{n})$. We use these $n$ data points to estimate the parameters.
@@ -4790,12 +4705,10 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
 
 [fn:constvar] In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as $x$ gets large or small. We say under those circumstances that the data show /heteroscedasticity/. There are methods to address it, but they fall outside the realm of SLR.
  
-\begin{quotation}
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 5, width = 6>>=
- # open window
+
+
+#+begin_src R :exports none :results graphics :file img/philosophy.png
+# open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 ## the x- and y-axes
 abline(h=0, v=0, col = "gray60")
@@ -4812,12 +4725,16 @@ abline(v = c(1, 2.5, 4), lty = 2, col = "grey")
 segments(1,3, 1+dnorm(0,0,0.5),3, lty = 2, col = "gray")
 segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
+qplot(speed, dist, data = cars)
 #+end_src
-\par\end{centering}
-\caption{Philosophical foundations of SLR\label{fig:philosophy}}
-\end{figure}
-\end{quotation}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/philosophy.png}
+    \caption[Philosophical foundations of SLR]{\small Philosophical foundations of SLR.}
+    \label{fig:philosophy}
+  \end{figure}
+#+end_src
 
 #+latex: \begin{example}
 \label{exa:Speed-and-Stopping}
@@ -4903,7 +4820,7 @@ for $\beta_{0}$ and $\beta_{1}$ (in Exercise \ref{xca:find-mles-SLR}) gives
 \end{equation}
 and
 \begin{equation}
-\hat{\beta}_{0}=\ybar-\hat{\beta}_{1}\xbar.
+\hat{\beta}_{0}=\overline{y}-\hat{\beta}_{1}\overline{x}.
 \end{equation}
 
 The conclusion? To estimate the mean line 
@@ -5070,11 +4987,11 @@ b_{1}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{1},\,\mathtt{sd}=\sigma_{b_{1}}
 \end{equation}
 where
 \begin{equation}
-\sigma_{b_{1}}=\frac{\sigma}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}
+\sigma_{b_{1}}=\frac{\sigma}{\sqrt{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}
 \end{equation}
 is called /the standard error of/ $b_{1}$ which unfortunately depends on the unknown value of $\sigma$. We do not lose heart, though, because we can estimate $\sigma$ with the standard error $S$ from the last section. This gives us an estimate $S_{b_{1}}$ for $\sigma_{b_{1}}$ defined by
 \begin{equation}
-S_{b_{1}}=\frac{S}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.
+S_{b_{1}}=\frac{S}{\sqrt{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
 
 Now, it turns out that $b_{0}$, $b_{1}$, and $S$ are mutually independent (see the footnote in Section \ref{sub:mlr-interval-est-params}). Therefore, the quantity
@@ -5092,11 +5009,11 @@ b_{0}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{0},\,\mathtt{sd}=\sigma_{b_{0}}
 \end{equation}
 where $\sigma_{b_{0}}$ is given by
 \begin{equation}
-\sigma_{b_{0}}=\sigma\sqrt{\frac{1}{n}+\frac{\xbar^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}},
+\sigma_{b_{0}}=\sigma\sqrt{\frac{1}{n}+\frac{\overline{x}^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}},
 \end{equation}
 and which we estimate with the $S_{b_{0}}$ defined by
 \begin{equation}
-S_{b_{0}}=S\sqrt{\frac{1}{n}+\frac{\xbar^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\end{equation}
+S_{b_{0}}=S\sqrt{\frac{1}{n}+\frac{\overline{x}^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\end{equation}
 
 Thus the quantity
 \begin{equation}
@@ -5143,24 +5060,24 @@ Intuitively, it should be easier to get bounds on the mean (average) value of $Y
 
 Our point estimate of $\mu(x_{0})$ is of course $\hat{Y}=\hat{Y}(x_{0})$, so for a confidence interval we will need to know $\hat{Y}$'s sampling distribution. It turns out (see Section ) that $\hat{Y}=\hat{\mu}(x_{0})$ is distributed
 \begin{equation}
-\hat{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu(x_{0}),\:\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}\right).
+\hat{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu(x_{0}),\:\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}\right).
 \end{equation}
 
 Since $\sigma$ is unknown we estimate it with $S$ (we should expect the appearance of a $\mathsf{t}(\mathtt{df}=n-2)$ distribution in the near future). 
 
 A $100(1-\alpha)\%$ /confidence interval (CI) for/ $\mu(x_{0})$ is given by
 \begin{equation}
-\hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\xbar^{2})}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\label{eq:SLR-conf-int-formula}\end{equation}
+\hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{x}^{2})}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\label{eq:SLR-conf-int-formula}\end{equation}
 
 
 It is time for prediction intervals, which are slightly different. In order to find confidence bounds for a new observation of $Y$ (we will denote it $Y_{\mbox{new}}$) we use the fact that
 \begin{equation}
-Y_{\mbox{new}}\sim\mathtt{norm}\left(\mathtt{mean}=\mu(x_{0}),\,\mathtt{sd}=\sigma\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}\right).
+Y_{\mbox{new}}\sim\mathtt{norm}\left(\mathtt{mean}=\mu(x_{0}),\,\mathtt{sd}=\sigma\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}\right).
 \end{equation}
 
 Of course $\sigma$ is unknown and we estimate it with $S$. Thus, a $100(1-\alpha)\%$ prediction interval (PI) for a future value of $Y$ at $x_{0}$ is given by 
 \begin{equation}
-\hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\xbar)^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}.\label{eq:SLR-pred-int-formula}
+\hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\label{eq:SLR-pred-int-formula}
 \end{equation}
 We notice that the prediction interval in Equation \ref{eq:SLR-pred-int-formula} is wider than the confidence interval in Equation \ref{eq:SLR-conf-int-formula}, as we expected at the beginning of the section.
 
@@ -5241,7 +5158,7 @@ print(ci.plot(cars.lm))
 #+end_src
 
 
-Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\xbar)^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
+Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\overline{x})^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 
 ** Model Utility and Inference
 \label{sec:Model-Utility-SLR}
@@ -5585,7 +5502,7 @@ would be appropriate. Alternatively, we could have a function of the
 form
 
 \[
-\mu(x)=\beta_{0}\me^{\beta_{1}x}.
+\mu(x)=\beta_{0}\mathrm{e}^{\beta_{1}x}.
 \]
 
 Models like these are studied in nonlinear regression courses.
@@ -5634,10 +5551,10 @@ There are three ways that an observation $(x_{i},y_{i})$ may be an  outlier: it 
 Leverage statistics are designed to identify observations which have $x$ values that are far away from the rest of the data. In the simple linear regression model the leverage of $x_{i}$ is denoted by $h_{ii}$ and defined by 
 
 \begin{equation}
-h_{ii}=\frac{1}{n}+\frac{(x_{i}-\xbar)^{2}}{\sum_{k=1}^{n}(x_{k}-\xbar)^{2}},\quad i=1,2,\ldots,n.
+h_{ii}=\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}},\quad i=1,2,\ldots,n.
 \end{equation}
 
-The formula has a nice interpretation in the SLR model: if the distance from $x_{i}$ to $\xbar$ is large relative to the other $x$'s then $h_{ii}$ will be close to 1. 
+The formula has a nice interpretation in the SLR model: if the distance from $x_{i}$ to $\overline{x}$ is large relative to the other $x$'s then $h_{ii}$ will be close to 1. 
 
 Leverages have nice mathematical properties; for example, they satisfy
 
@@ -5648,8 +5565,8 @@ Leverages have nice mathematical properties; for example, they satisfy
 and their sum is
 
 \begin{eqnarray}
-\sum_{i=1}^{n}h_{ii} & = & \sum_{i=1}^{n}\left[\frac{1}{n}+\frac{(x_{i}-\xbar)^{2}}{\sum_{k=1}^{n}(x_{k}-\xbar)^{2}}\right],\\
- & = & \frac{n}{n}+\frac{\sum_{i}(x_{i}-\xbar)^{2}}{\sum_{k}(x_{k}-\xbar)^{2}},\\
+\sum_{i=1}^{n}h_{ii} & = & \sum_{i=1}^{n}\left[\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}}\right],\\
+ & = & \frac{n}{n}+\frac{\sum_{i}(x_{i}-\overline{x})^{2}}{\sum_{k}(x_{k}-\overline{x})^{2}},\\
  & = & 2.\label{eq:slr-average-leverage}
 \end{eqnarray}
 
@@ -5731,13 +5648,13 @@ Any time we do a statistical analysis, we are confronted with the variability of
 We measure the change in the parameter estimates as a result of deleting an observation with $DFBETAS$. The $DFBETAS$ for the intercept $b_{0}$ are given by
 
 \begin{equation}
-(DFBETAS)_{0(i)}=\frac{b_{0}-b_{0(i)}}{S_{(i)}\sqrt{\frac{1}{n}+\frac{\xbar^{2}}{\sum_{i=1}^{n}(x_{i}-\xbar)^{2}}}},\quad i=1,2,\ldots,n.
+(DFBETAS)_{0(i)}=\frac{b_{0}-b_{0(i)}}{S_{(i)}\sqrt{\frac{1}{n}+\frac{\overline{x}^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}},\quad i=1,2,\ldots,n.
 \end{equation}
 
 and the $DFBETAS$ for the slope $b_{1}$ are given by
 
 \begin{equation}
-(DFBETAS)_{1(i)}=\frac{b_{1}-b_{1(i)}}{S_{(i)}\left[\sum_{i=1}^{n}(x_{i}-\xbar)^{2}\right]^{-1/2}},\quad i=1,2,\ldots,n.
+(DFBETAS)_{1(i)}=\frac{b_{1}-b_{1(i)}}{S_{(i)}\left[\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\right]^{-1/2}},\quad i=1,2,\ldots,n.
 \end{equation}
 
 See Section \ref{sec:Residual-Analysis-MLR} for a better way to write these. The signs of the $DFBETAS$ indicate whether the coefficients would increase or decrease as a result of including the observation. If the $DFBETAS$ are large, then the observation has a large impact on those regression coefficients. We label observations as suspicious if their $DFBETAS$ have magnitude greater 1 for small data or $2/\sqrt{n}$ for large data sets.
@@ -6501,7 +6418,7 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon.
 
 The regression assumptions are the same. Almost everything indeed is the same. In fact, it is still called a ``linear regression model'', since the mean response $\mu$ is linear /in the parameters/ $\beta_{0}$, $\beta_{1}$, and $\beta_{2}$. 
 
-*However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the $x_{i}$'s with $x_{i}-\xbar$ (or $(x_{i}-\xbar)/s$) before fitting the model[fn:orthopoly].
+*However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the $x_{i}$'s with $x_{i}-\overline{x}$ (or $(x_{i}-\overline{x})/s$) before fitting the model[fn:orthopoly].
 
 [fn:orthopoly] Rescaling the data gets the job done but a better way to avoid the multicollinearity introduced by the higher order terms is with /orthogonal polynomials/, whose coefficients are chosen just right so that the polynomials are not correlated with each other. This is beginning to linger outside the scope of this book, however, so we will content ourselves with a brief mention and then stick with the rescaling approach in the discussion that follows. A nice example of orthogonal polynomials in action can be run with =example(cars)=.
 
@@ -7061,7 +6978,7 @@ Since the bootstrap distribution gives us information about a statistic's sampli
 
 Of course, we do not really need a bootstrap distribution here because from Section \ref{sec:sampling-from-normal-dist} we know that $\overline{X}\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})$, but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
 
-We will take a random sample of size $n=25$ from the population. Then we will /resample/ the data 1000 times to get 1000 resamples of size 25. We will calculate the sample mean of each of the resamples, and will study the data distribution of the 1000 values of $\xbar$.
+We will take a random sample of size $n=25$ from the population. Then we will /resample/ the data 1000 times to get 1000 resamples of size 25. We will calculate the sample mean of each of the resamples, and will study the data distribution of the 1000 values of $\overline{x}$.
 
 #+begin_src R :exports both :results output pp 
 srs <- rnorm(25, mean = 3)
@@ -7079,11 +6996,11 @@ curve(dnorm(x, 3, 0.2), add = TRUE)
 \par\end{centering}
 \caption{Bootstrapping the standard error of the mean, simulated data\label{fig:Bootstrap-se-mean}}
 {\small ~}{\small \par}
-{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\xbar$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\overline{X}$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
+{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\overline{x}$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\overline{X}$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
 \end{figure}
 
 
-A histogram of the 1000 values of $\xbar$ is shown in Figure \ref{fig:Bootstrap-se-mean}, and was produced by the following code.
+A histogram of the 1000 values of $\overline{x}$ is shown in Figure \ref{fig:Bootstrap-se-mean}, and was produced by the following code.
 
 #+begin_src R :exports code :eval never
 hist(xbarstar, breaks = 40, prob = TRUE)
@@ -7182,7 +7099,7 @@ Some things to keep in mind about the bootstrap:
 
 - For many statistics, the bootstrap distribution closely resembles the sampling distribution with respect to spread and shape. However, the bootstrap will not have the same center as the true sampling distribution. While the sampling distribution is centered at the population mean (plus any bias), the bootstrap distribution is centered at the original value of the statistic (plus any bias). The =boot= function gives an empirical estimate of the bias of the statistic as part of its output. 
 
-- We tried to estimate the standard error, but we could have (in principle) tried to estimate something else. Note from the previous remark, however, that it would be useless to estimate the population mean $\mu$ using the bootstrap since the mean of the bootstrap distribution is the observed $\xbar$.  
+- We tried to estimate the standard error, but we could have (in principle) tried to estimate something else. Note from the previous remark, however, that it would be useless to estimate the population mean $\mu$ using the bootstrap since the mean of the bootstrap distribution is the observed $\overline{x}$.  
 
 - You don't get something from nothing. We have seen that we can take a random sample from a population and use bootstrap methods to get a very good idea about standard errors, bias, and the like. However, one must not get lured into believing that by doing some random resampling somehow one gets more information about the parameters than that which was contained in the original sample. Indeed, there is some uncertainty about the parameter due to the randomness of the original sample, and there is even more uncertainty introduced by resampling. One should think of the bootstrap as just another estimation method, nothing more, nothing less.
 
@@ -7995,7 +7912,7 @@ A function is /differentiable at/ $a$ if $f'(a)$ exists. It is /differentiable o
 In the table that follows, $f$ and $g$ are differentiable functions and $c$ is a constant.
 
 
-| $\frac{\diff}{\diff x}c=0$ | $\frac{\diff}{\diff x}x^{n}=nx^{n-1}$ | $(cf)'=cf'$                                       |
+| $\frac{\mathrm{d}}{\mathrm{d} x}c=0$ | $\frac{\mathrm{d}}{\mathrm{d} x}x^{n}=nx^{n-1}$ | $(cf)'=cf'$                                       |
 | $(f\pm g)'=f'\pm g'$       | $(fg)'=f'g+fg'$                       | $\left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^{2}}$ |
 \caption{Differentiation rules\textbf{\label{tab:Differentiation-Rules}}}
 
@@ -8007,8 +7924,8 @@ Chain Rule: If $f$ and $g$ are both differentiable and $F=f\circ g$ is the compo
 #+latex: \paragraph*{Useful Derivatives}
 
 
-| $\frac{\diff}{\diff x}\me^{x}=\me^{x}$ | $\frac{\diff}{\diff x}\ln x=x^{-1}$     | $\frac{\diff}{\diff x}\sin x=\cos x$             |
-| $\frac{\diff}{\diff x}\cos x=-\sin x$  | $\frac{\diff}{\diff x}\tan x=\sec^{2}x$ | $\frac{\diff}{\diff x}\tan^{-1}x=(1+x^{2})^{-1}$ |
+| $\frac{\mathrm{d}}{\mathrm{d} x}\mathrm{e}^{x}=\mathrm{e}^{x}$ | $\frac{\mathrm{d}}{\mathrm{d} x}\ln x=x^{-1}$     | $\frac{\mathrm{d}}{\mathrm{d} x}\sin x=\cos x$             |
+| $\frac{\mathrm{d}}{\mathrm{d} x}\cos x=-\sin x$  | $\frac{\mathrm{d}}{\mathrm{d} x}\tan x=\sec^{2}x$ | $\frac{\mathrm{d}}{\mathrm{d} x}\tan^{-1}x=(1+x^{2})^{-1}$ |
 |                                        |                                         |                                                  |
 \caption{Some derivatives\label{tab:Useful-Derivatives}}
 
@@ -8038,15 +7955,15 @@ As it turns out, there are all sorts of things called ``integrals'', each define
 #+latex: \begin{defn}
 Let $f$ be defined on $[a,b]$, a closed interval of the real line. For each $n$, divide $[a,b]$ into subintervals $[x_{i},x_{i+1}]$, $i=0,1,\ldots,n-1$, of length $\Delta x_{i}=(b-a)/n$ where $x_{0}=a$ and $x_{n}=b$, and let $x_{i}^{\ast}$ be any points chosen from the respective subintervals. Then the /definite integral/ of $f$ from $a$ to $b$ is defined by
 \begin{equation}
-\int_{a}^{b}f(x)\,\diff x=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_{i}^{\ast})\,\Delta x_{i},
+\int_{a}^{b}f(x)\,\mathrm{d} x=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_{i}^{\ast})\,\Delta x_{i},
 \end{equation}
 provided the limit exists, and in that case, we say that $f$ is /integrable/ from $a$ to $b$. 
 #+latex: \end{defn}
 
 #+latex: \begin{thm}
 The Fundamental Theorem of Calculus. Suppose $f$ is continuous on $[a,b]$. Then
-1. the function $g$ defined by $g(x)=\int_{a}^{x}f(t)\:\diff t$, $a\leq x\leq b$, is continuous on $[a,b]$ and differentiable on $(a,b)$ with $g'(x)=f(x)$.
-1. $\int_{a}^{b}f(x)\,\diff x=F(b)-F(a)$, where $F$ is any /antiderivative/ of $f$, that is, any function $F$ satisfying $F'=f$.
+1. the function $g$ defined by $g(x)=\int_{a}^{x}f(t)\:\mathrm{d} t$, $a\leq x\leq b$, is continuous on $[a,b]$ and differentiable on $(a,b)$ with $g'(x)=f(x)$.
+1. $\int_{a}^{b}f(x)\,\mathrm{d} x=F(b)-F(a)$, where $F$ is any /antiderivative/ of $f$, that is, any function $F$ satisfying $F'=f$.
 #+latex: \end{thm}
 
 
@@ -8054,7 +7971,7 @@ The Fundamental Theorem of Calculus. Suppose $f$ is continuous on $[a,b]$. Then
 #+latex: \begin{thm}
 If $g$ is a differentiable function whose range is the interval $[a,b]$ and if both $f$ and $g'$ are continuous on the range of $u = g(x)$, then
 \begin{equation}
-\int_{g(a)}^{g(b)}f(u)\:\diff u=\int_{a}^{b}f[g(x)]\: g'(x)\:\diff x.
+\int_{g(a)}^{g(b)}f(u)\:\mathrm{d} u=\int_{a}^{b}f[g(x)]\: g'(x)\:\mathrm{d} x.
 \end{equation}
 #+latex: \end{thm}
 
@@ -8062,8 +7979,8 @@ If $g$ is a differentiable function whose range is the interval $[a,b]$ and if b
 
 #+latex: \paragraph*{Useful Integrals}
 
-|$\int x^{n}\,\diff x=x^{n+1}/(n+1),\ n\neq-1$ | $\int\me^{x}\,\diff x=\me^{x}$ | $\int x^{-1}\,\diff x=\ln  |x|$ |
-|$\int\tan x\:\diff x=\ln|\sec x|$ | $\int a^{x}\,\diff x=a^{x}/\ln a$ | $\int(x^{2}+1)^{-1}\,\diff x=\tan^{-1}x$ |
+|$\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1$ | $\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}$ | $\int x^{-1}\,\mathrm{d} x=\ln  |x|$ |
+|$\int\tan x\:\mathrm{d} x=\ln|\sec x|$ | $\int a^{x}\,\mathrm{d} x=a^{x}/\ln a$ | $\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x$ |
 \caption{Some integrals (constants of integration omitted)\label{tab:Useful-Integrals}}
 
 
@@ -8072,7 +7989,7 @@ If $g$ is a differentiable function whose range is the interval $[a,b]$ and if b
 #+latex: \paragraph*{Integration by Parts}
 
 \begin{equation}
-\int u\:\diff v=uv-\int v\:\diff u
+\int u\:\mathrm{d} v=uv-\int v\:\mathrm{d} u
 \end{equation}
 
 #+latex: \begin{thm}
@@ -8089,23 +8006,23 @@ provided the limit on the right-hand side exists or is infinite.
 
 #+latex: \paragraph*{Improper Integrals}
 
-If $\int_{a}^{t}f(x)\diff x$ exists for every number $t\geq a$, then we define 
+If $\int_{a}^{t}f(x)\mathrm{d} x$ exists for every number $t\geq a$, then we define 
 \begin{equation}
-\int_{a}^{\infty}f(x)\,\diff x=\lim_{t\to\infty}\int_{a}^{t}f(x)\,\diff x,
+\int_{a}^{\infty}f(x)\,\mathrm{d} x=\lim_{t\to\infty}\int_{a}^{t}f(x)\,\mathrm{d} x,
 \end{equation}
-provided this limit exists as a finite number, and in that case we say that $\int_{a}^{\infty}f(x)\,\diff x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
+provided this limit exists as a finite number, and in that case we say that $\int_{a}^{\infty}f(x)\,\mathrm{d} x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
 
-If $\int_{t}^{b}f(x)\,\diff x$ exists for every number $t\leq b$, then we define
+If $\int_{t}^{b}f(x)\,\mathrm{d} x$ exists for every number $t\leq b$, then we define
 \begin{equation}
-\int_{-\infty}^{b}f(x)\,\diff x=\lim_{t\to-\infty}\int_{t}^{b}f(x)\,\diff x,
+\int_{-\infty}^{b}f(x)\,\mathrm{d} x=\lim_{t\to-\infty}\int_{t}^{b}f(x)\,\mathrm{d} x,
 \end{equation}
-provided this limit exists as a finite number, and in that case we say that $\int_{-\infty}^{b}f(x)\,\diff x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
+provided this limit exists as a finite number, and in that case we say that $\int_{-\infty}^{b}f(x)\,\mathrm{d} x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
 
-If both $\int_{a}^{\infty}f(x)\,\diff x$ and $\int_{-\infty}^{a}f(x)\,\diff x$ are convergent, then we define
+If both $\int_{a}^{\infty}f(x)\,\mathrm{d} x$ and $\int_{-\infty}^{a}f(x)\,\mathrm{d} x$ are convergent, then we define
 \begin{equation}
-\int_{-\infty}^{\infty}f(x)\,\diff x=\int_{-\infty}^{a}f(x)\,\diff x+\int_{a}^{\infty}f(x)\diff x,
+\int_{-\infty}^{\infty}f(x)\,\mathrm{d} x=\int_{-\infty}^{a}f(x)\,\mathrm{d} x+\int_{a}^{\infty}f(x)\mathrm{d} x,
 \end{equation}
-and we say that $\int_{-\infty}^{\infty}f(x)\,\diff x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
+and we say that $\int_{-\infty}^{\infty}f(x)\,\mathrm{d} x$ is /convergent/. Otherwise, we say that the improper integral is /divergent/.
 
 
 ** Sequences and Series \label{sec:Sequences-and-Series}
@@ -8173,7 +8090,7 @@ In both of the above the series on the left is convergent if the series on the r
 
 #+latex: \paragraph*{The Exponential Series}
 \begin{equation}
-\sum_{k=0}^{\infty}\frac{x^{k}}{k!} = \me^{x},\quad -\infty < x < \infty. \label{eq:exp-series}
+\sum_{k=0}^{\infty}\frac{x^{k}}{k!} = \mathrm{e}^{x},\quad -\infty < x < \infty. \label{eq:exp-series}
 \end{equation}
 
 
@@ -8211,7 +8128,7 @@ Furthermore, the function $f$ is differentiable on the open interval $(a-R,\, a+
 f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad|x-a|<R,
 \end{equation}
 \begin{equation}
-\int f(x)\,\diff x=C+\sum_{k=0}^{\infty}c_{k}\frac{(x-a)^{k+1}}{k+1},\quad|x-a|<R,
+\int f(x)\,\mathrm{d} x=C+\sum_{k=0}^{\infty}c_{k}\frac{(x-a)^{k+1}}{k+1},\quad|x-a|<R,
 \end{equation}
 in which case both of the above series have radius of convergence $R$.
 
@@ -8221,7 +8138,7 @@ in which case both of the above series have radius of convergence $R$.
 The /Gamma function/ $\Gamma$ will be defined in this book according to the formula
 
 \begin{equation}
-\Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\me^{-x}\:\diff x,\quad\mbox{for }\alpha > 0.
+\Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\mathrm{e}^{-x}\:\mathrm{d} x,\quad\mbox{for }\alpha > 0.
 \end{equation}
 
 #+latex: \begin{fact}
@@ -8361,7 +8278,7 @@ We use the following rules to decide whether $(a,b)$ is an /extremum/ (that is, 
 
 Let $f$ be defined on a rectangle $R=[a,b]\times[c,d]$, and for each $m$ and $n$ divide $[a,b]$ (respectively $[c,d]$) into subintervals $[x_{j},x_{j+1}]$, $i=0,1,\ldots,m-1$ (respectively $[y_{i},y_{i+1}]$) of length $\Delta x_{j}=(b-a)/m$ (respectively $\Delta y_{i}=(d-c)/n$) where $x_{0}=a$ and $x_{m}=b$ (and $y_{0}=c$ and $y_{n}=d$ ), and let $x_{j}^{\ast}$ ($y_{i}^{\ast}$) be any points chosen from their respective subintervals. Then the /double integral/ of $f$ over the rectangle $R$ is
 \begin{equation}
-\iintop_{R}f(x,y)\,\diff A=\intop_{c}^{d}\!\!\!\intop_{a}^{b}f(x,y)\,\diff x\diff y=\lim_{m,n\to\infty}\sum_{i=1}^{n}\sum_{j=1}^{m}f(x_{j}^{\ast},y_{i}^{\ast})\Delta x_{j}\Delta y_{i},
+\iintop_{R}f(x,y)\,\mathrm{d} A=\intop_{c}^{d}\!\!\!\intop_{a}^{b}f(x,y)\,\mathrm{d} x\mathrm{d} y=\lim_{m,n\to\infty}\sum_{i=1}^{n}\sum_{j=1}^{m}f(x_{j}^{\ast},y_{i}^{\ast})\Delta x_{j}\Delta y_{i},
 \end{equation}
 provided this limit exists. Multiple integrals are defined in the same way just with more letters and sums.
 
@@ -8384,7 +8301,7 @@ The /Jacobian/ (pronounced ``yah-KOH-bee-uhn'') of $T$ is denoted by $\partial(x
 
 If the function $f$ is continuous on $A$ and if the Jacobian of $T$ is nonzero except perhaps on the boundary of $A$, then 
 \begin{equation}
-\iint_{B}f(x,y)\,\diff x\,\diff y=\iint_{A}f\left[x(u,v),\, y(u,v)\right]\ \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\diff u\,\diff v.
+\iint_{B}f(x,y)\,\mathrm{d} x\,\mathrm{d} y=\iint_{A}f\left[x(u,v),\, y(u,v)\right]\ \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\mathrm{d} u\,\mathrm{d} v.
 \end{equation} 
 
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation $T$ maps points $(u_{1},u_{2},\ldots,u_{n})$ to points $(x_{1},x_{2},\ldots,x_{n})$, the Jacobian is the determinant of the $\mathrm{n}\times\mathrm{n}$ matrix of first-order partial derivatives of $T$ (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets $A$ and $B$.
