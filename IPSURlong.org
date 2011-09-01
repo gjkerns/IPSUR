@@ -5330,22 +5330,19 @@ In every case, we will begin by looking at residual plots -- that is, scatterplo
 
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
-
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/Normal-q-q-plot-cars.png
 plot(cars.lm, which = 2)
 #+end_src
-\par\end{centering}
 
-\caption{Normal q-q plot of the residuals for the \texttt{cars} data\label{fig:Normal-q-q-plot-cars}}
- {\small Used for checking the normality assumption. Look out for
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.png}
+    \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
 any curvature or substantial departures from the straight line; hopefully
 the dots hug the line closely.}
-\end{figure}
-
-
+    \label{fig:Normal-q-q-plot-cars}
+  \end{figure}
+#+end_src
 
 #+latex: \paragraph*{Testing the Normality Assumption}
 
@@ -5401,22 +5398,17 @@ For the constant variance assumption we do not need the sign of the residual so 
 
 In this case, we plot the standardized residuals versus the fitted values. The graph may be seen in Figure \ref{fig:std-resids-fitted-cars}. For these data there does appear to be somewhat of a slight fanning-out of the residuals.
 
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/std-resids-fitted-cars.png
 plot(cars.lm, which = 3)
 #+end_src
-\par\end{centering}
 
-\caption{Plot of standardized residuals against the fitted values for the \texttt{cars}
-data\label{fig:std-resids-fitted-cars}}
- {\small Used for checking the constant variance assumption. Watch
-out for any fanning out (or in) of the dots; hopefully they fall in
-a constant band.}
-\end{figure}
-
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.png}
+    \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
+    \label{fig:std-resids-fitted-cars}
+  \end{figure}
+#+end_src
 
 #+latex: \paragraph*{Testing the Constant Variance Assumption}
 
@@ -5453,22 +5445,18 @@ Positive correlation is displayed by positive residuals followed by positive res
 
 On the other hand, negative correlation implies positive residuals followed by negative residuals, which are then followed by positive residuals, /etc/. Consequently, negatively correlated residuals are often associated with an alternating pattern in the residual plots. We examine the residual plot in Figure \ref{fig:resids-fitted-cars}. There is no obvious cyclical wave pattern or structure to the residual plot. 
 
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/resids-fitted-cars.png
 plot(cars.lm, which = 1)
 #+end_src
-\par\end{centering}
 
-\caption{Plot of the residuals versus the fitted values for the \texttt{cars}
-data\label{fig:resids-fitted-cars}}
-
-
-{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
-\end{figure}
-
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.png}
+    \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
+data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
+    \label{fig:resids-fitted-cars}
+  \end{figure}
+#+end_src
 
 #+latex: \paragraph*{Testing the Independence Assumption}
 
@@ -5710,20 +5698,18 @@ cooksD[1:5]
 
 We can look at a plot of the Cook's distances with the command =plot(cars.lm, which = 4)=.
 
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4.5, width = 6>>=
+
+#+begin_src R :exports code :results graphics :file img/Cooks-distance-cars.png
 plot(cars.lm, which = 4)
 #+end_src
-\par\end{centering}
 
-\caption{Cook's distances for the \texttt{cars} data\label{fig:Cooks-distance-cars}}
-
-{\small Used for checking for influential and/our outlying observations.
-Values with large Cook's distance merit further investigation.}
-\end{figure}
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.png}
+    \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
+    \label{fig:Cooks-distance-cars}
+  \end{figure}
+#+end_src
 
 Observations with the largest Cook's D values are labeled, hence we see that observations 23, 39, and 49 are suspicious. However, we need to compare to the quantiles of an $\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=48)$ distribution:
 
@@ -5733,7 +5719,6 @@ cooksD[which(cooksD > F0.50)]
 #+end_src
 
 We see that with this data set there are no observations with extreme Cook's distance, after all.
-
 
 *** All Influence Measures Simultaneously
 
@@ -5755,20 +5740,19 @@ par(mfrow = c(1,1))
 
 The =par= command is used so that $2\times2=4$ plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure \ref{fig:Diagnostic-plots-cars}:
 
-%
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true>>=
+#+begin_src R :exports code :results graphics :file img/Diagnostic-plots-cars.png
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
 #+end_src
-\par\end{centering}
 
-\caption{Diagnostic plots for the \texttt{cars} data\label{fig:Diagnostic-plots-cars}}
-
-\end{figure}
-
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.png}
+    \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
+    \label{fig:Diagnostic-plots-cars}
+  \end{figure}
+#+end_src
 
 We have discussed all of the plots except the last, which is possibly the most interesting. It shows Residuals vs. Leverage, which will identify outlying $y$ values versus outlying $x$ values. Here we see that observation 23 has a high residual, but low leverage, and it turns out that observations 1 and 2 have relatively high leverage but low/moderate leverage (they are on the right side of the plot, just above the horizontal line). Observation 49 has a large residual with a comparatively large leverage. 
 
@@ -6662,20 +6646,10 @@ The level =bar1= is represented by $\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0$.
 
 We can see a plot of the two regression lines with the following mouthful of code.
 
-<<eval = FALSE>>=
-treesTall <- split(trees, trees$Tall)
-treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
-treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
-plot(Volume ~ Girth, data = trees, type = "n")
-points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
-points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
-lines(Fit ~ Girth, data = treesTall[["yes"]])
-lines(Fit ~ Girth, data = treesTall[["no"]])
 
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
+
+#+begin_src R :exports code :results graphics :file img/dummy-variable-trees.png
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
@@ -6685,10 +6659,14 @@ points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
 lines(Fit ~ Girth, data = treesTall[["yes"]])
 lines(Fit ~ Girth, data = treesTall[["no"]])
 #+end_src
-\par\end{centering}
-\caption{A dummy variable model for the \texttt{trees} data\label{fig:dummy-variable-trees}}
-\end{figure}
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/dummy-variable-trees.png}
+    \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
+    \label{fig:dummy-variable-trees}
+  \end{figure}
+#+end_src
 
 It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the \texttt{Fit}ted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
 
@@ -6986,25 +6964,19 @@ resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
 #+end_src
 
-
-
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
-hist(xbarstar, breaks = 40, prob = TRUE)
-curve(dnorm(x, 3, 0.2), add = TRUE)
-\par\end{centering}
-\caption{Bootstrapping the standard error of the mean, simulated data\label{fig:Bootstrap-se-mean}}
-{\small ~}{\small \par}
-{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\overline{x}$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\overline{X}$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
-\end{figure}
-
-
 A histogram of the 1000 values of $\overline{x}$ is shown in Figure \ref{fig:Bootstrap-se-mean}, and was produced by the following code.
 
-#+begin_src R :exports code :eval never
+#+begin_src R :exports code :results graphics :file img/Bootstrap-se-mean.png
 hist(xbarstar, breaks = 40, prob = TRUE)
-curve(dnorm(x, 3, 0.2), add = TRUE)  # overlay true normal density
+curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Bootstrap-se-mean.png}
+    \caption[Bootstrapping the standard error of the mean, simulated data]{\small The original data were 25 observations generated from a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)$ distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of $\overline{x}$ is shown above. Also shown (with a solid line) is the true sampling distribution of $\overline{X}$, which is a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)$ distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of $\mu=3$. The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
+    \label{fig:Bootstrap-se-mean}
+  \end{figure}
 #+end_src
 
 We have overlain what we know to be the true sampling distribution of $\overline{X}$, namely, a $\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})$ distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
@@ -7045,15 +7017,19 @@ sd(medstar)
 #+end_src
 
 
-\begin{figure}
-\begin{centering}
-<<echo = FALSE, fig=true, height = 4, width = 6>>=
+#+begin_src R :exports code :results graphics :file img/Bootstrapping-se-median.png
 hist(medstar, breaks = 40, prob = TRUE)
-\par\end{centering}
-\caption{Bootstrapping the standard error of the median for the \texttt{rivers}
-data\label{fig:Bootstrapping-se-median}}
-\end{figure}
+#+end_src
 
+#+begin_src latex 
+  \begin{figure}[ht!]
+    \includegraphics[width=5in, height=4in]{img/Bootstrapping-se-median.png}
+    \caption[Bootstrapping the standard error of the median for the \texttt{rivers}
+data]{\small Bootstrapping the standard error of the median for the \texttt{rivers}
+data.}
+    \label{fig:Bootstrapping-se-median}
+  \end{figure}
+#+end_src
 
 The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced by the following code.
 
