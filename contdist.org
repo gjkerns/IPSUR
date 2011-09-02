@@ -282,15 +282,12 @@ Compare this to the answer we got in Example \ref{exa:cont-pdf-3x4}. Use =-Inf= 
 
 #+latex: \begin{example}
 Let us redo Example \ref{exa:cont-pdf3x2} with the =distr= package. The method is similar to that encountered in Section \ref{sub:disc-rv-how-r} in Chapter \ref{cha:Discrete-Distributions}. We define an absolutely continuous random variable:
-
-
 #+begin_src R :exports none
 library(distr)
 library(distrEx)
 #+end_src
 
 #+results[2502226456aba77effa18e00e03c4600eb550f62]:
-
 
 #+begin_src R :exports both :results output pp
 library(distr)
@@ -303,7 +300,6 @@ p(X)(0.71) - p(X)(0.14)
 : [1] 0.355167
 
 Compare this answers we found earlier. Now let us try expectation with the =distrEx= package \cite{Ruckdescheldistr}:
-
 #+begin_src R :exports both :results output pp 
 library(distrEx)
 E(X)
@@ -317,7 +313,6 @@ var(X)
 : [1] 0.0375
 
 Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why are they different? Because the =distrEx= package resorts to numerical methods when it encounters a model it does not recognize. This means that the answers we get for calculations may not exactly match the theoretical values. Be careful.
-
 #+latex: \end{example}
 
 
@@ -345,7 +340,6 @@ The continuous uniform distribution is the continuous analogue of the discrete u
 
 #+latex: \begin{example}
 Choose a number in \( [0,1] \) at random, and let $X$ be the number chosen. Then $X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$.
-
 #+latex: \end{example}
 
 The mean of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$ is relatively simple to calculate:
@@ -400,7 +394,6 @@ The MGF of $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ is then 
 \[
 Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
-
 Therefore
 \[
 M_{X}(t)=\E\mathrm{e}^{tX}=\E\mathrm{e}^{t(\sigma Z+\mu)}=\E\mathrm{e}^{\sigma tX}\mathrm{e}^{\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
@@ -433,7 +426,6 @@ pnorm(1:3)-pnorm(-(1:3))
 
 #+latex: \begin{example}
 \label{exa:iq-model}
-
 Let the random experiment consist of a person taking an IQ test, and let $X$ be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is $\P(85\leq X\leq115)$?
 
 /Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
@@ -447,29 +439,11 @@ Until now we have been given two values and our task has been to find the area u
 #+latex: \begin{example}
 \label{exa:iq-quantile-state-problem}
 Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
-
 /Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value $x$ such that $F(x)=\P(X\leq x)$ satisfies $F(x)=0.99$, or yet another way to say it is that we would like to solve the equation $F(x)-0.99=0$. For the sake of argument, let us see how to do this the long way. We define the function $g(x)=F(x)-0.99$, and then look for the root of $g$ with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of $x$ values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
-#+latex: \end{example}
-
 #+begin_src R :exports both :results output pp 
 g <- function(x) pnorm(x, mean = 100, sd = 15) - 0.99
 uniroot(g, interval = c(130, 145))
 #+end_src
-
-#+results[3ac1bcf3e75f29ed6d161268c4f038234f7da817]:
-#+begin_example
-$root
-[1] 134.8952
-
-$f.root
-[1] -4.873083e-09
-
-$iter
-[1] 6
-
-$estim.prec
-[1] 6.103516e-05
-#+end_example
 
 #+begin_src R :exports none
 temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
@@ -478,7 +452,7 @@ temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 #+results[cc37409c17df4f12ffadbae459236e6f8f179b8b]:
 
 The answer is shown in =$root= which is approximately SRC_R{temp} 134.8952, that is, a person with this IQ score or higher falls in the top 1% of all IQ scores.
-
+#+latex: \end{example}
 
 The discussion in example \ref{exa:iq-quantile-state-problem} was centered on the search for a value $x$ that solved an equation $F(x)=p$, for some given probability $p$, or in mathematical parlance, the search for $F^{-1}$, the inverse of the CDF of $X$, evaluated at $p$. This is so important that it merits a definition all its own.
 
@@ -521,10 +495,8 @@ There are a few other very important special cases which we will encounter in la
 
 Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the $ Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) $ function. 
 
-
 #+latex: \begin{example}
 Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for $Q_{X}(0.99)$, where $X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)$. It could not be easier to do with \textsf{R}. 
-
 #+begin_src R :exports both :results output pp 
 qnorm(0.99, mean = 100, sd = 15)
 #+end_src
@@ -533,12 +505,10 @@ qnorm(0.99, mean = 100, sd = 15)
 : [1] 134.8952
 
 Compare this answer to the one obtained earlier with =uniroot=.
-
 #+latex: \end{example}
 
 #+latex: \begin{example}
 Find the values $z_{0.025}$, $z_{0.01}$, and $z_{0.005}$ (these will play an important role from Chapter \ref{cha:Estimation} onward).
-
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp 
@@ -581,7 +551,6 @@ f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq:univ-t
 #+latex: \begin{example}
 \label{exa:lnorm-transformation}
 Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, and let $Y=\mathrm{e}^{X}$. What is the PDF of $Y$? 
-
 *Solution:* Notice first that $\mathrm{e}^{x}>0$ for any $x$, so the support of $Y$ is $(0,\infty)$. Since the transformation is monotone, we can solve $y=\mathrm{e}^{x}$ for $x$ to get $x=\ln\, y$, giving $\mathrm{d} x/\mathrm{d} y=1/y$. Therefore, for any $y>0$,
 \[
 f_{Y}(y)=f_{X}(\ln y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{ \frac{(\ln y-\mu)^{2}}{2\sigma^{2}}\right\} \cdot\frac{1}{y},
@@ -646,7 +615,7 @@ F_{Y}(y)=\P(Y\leq y)=\P(-\ln\, X\leq y)=\P(X\geq\mathrm{e}^{-y})=1-\P(X<\mathrm{
 \]
 where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since $X$ is continuous the two probabilities $\P(X<\mathrm{e}^{-y})$ and $\P(X\leq\mathrm{e}^{-y})$ are equal; thus
 \[
-1-\P(X<\mathrm{e}^{-y})=1-\P(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
+1-\P(X < \mathrm{e}^{-y})=1-\P(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \]
 
 Now recalling that the CDF of a $\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)$ random variable satisfies $F(u)=u$ (see Equation \ref{eq:unif-cdf}), we can say
@@ -685,15 +654,12 @@ The Probability Integral Transform is true for all continuous random variables w
 
 #+latex: \begin{example}
 \label{exa:distn-of-z-squared}
-
 Let $Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$ and let $U=Z^{2}$. What is the PDF of $U$? 
 
 Notice first that $Z^{2}\geq0$, and thus the support of $U$ is $[0,\infty)$. And for any $u\geq0$, 
 \[
 F_{U}(u)=\P(U\leq u)=\P(Z^{2}\leq u).
 \]
-
-
 But $Z^{2}\leq u$ occurs if and only if $-\sqrt{u}\leq Z\leq\sqrt{u}$. The last probability above is simply the area under the standard normal PDF from $-\sqrt{u}$ to $\sqrt{u}$, and since $\phi$ is symmetric about 0, we have
 \[
 \P(Z^{2}\leq u)=2\P(0\leq Z\leq\sqrt{u})=2\left[F_{Z}(\sqrt{u})-F_{Z}(0)\right]=2\Phi(\sqrt{u})-1,
@@ -702,7 +668,6 @@ because $\Phi(0)=1/2$. To find the PDF of $U$ we differentiate the CDF recalling
 \[
 f_{U}(u)=\left(2\Phi(\sqrt{u})-1\right)'=2\phi(\sqrt{u})\cdot\frac{1}{2\sqrt{u}}=u^{-1/2}\phi(\sqrt{u}).
 \]
-
 Substituting,
 \[
 f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u},\quad u>0.
@@ -811,7 +776,7 @@ F_{X}(t)=1-\mathrm{e}^{-\lambda t},\quad t>0.
 \end{equation}
 The mean is $\mu=1/\lambda$ and the variance is $\sigma^{2}=1/\lambda^{2}$. 
 
-The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate $\lambda$ and if $Y$ counts the number of customers that arrive in the time interval $[0,t)$, then we saw in Section \ref{sec:other-discrete-distributions} that $Y\sim\mathsf{pois}(\mathtt{lambda}=\lambda t).$ Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let $X$ be the length of this random time interval. Then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. Observe the following string of equalities:
+The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate $\lambda$ and if $Y$ counts the number of customers that arrive in the time interval $[0,t)$, then we saw in Section \ref{sec:other-discrete-distributions} that \( Y \sim \mathsf{pois}(\mathtt{lambda}=\lambda t). \) Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let $X$ be the length of this random time interval. Then $X\sim\mathsf{exp}(\mathtt{rate}=\lambda)$. Observe the following string of equalities:
 \begin{align*}
 \P(X>t) & =\P(\mbox{first arrival after time \emph{t}}),\\
  & =\P(\mbox{no events in [0,\emph{t})}),\\
@@ -867,7 +832,7 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/chisq-dist-vary-df.pdf}
+    \includegraphics[width=5in, height=4in]{img/chisq-dist-vary-df.png}
     \caption[Chi square distribution for various degrees of freedom]{\small The chi square distribution for various degrees of freedom.}
     \label{fig:chisq-dist-vary-df}
   \end{figure}
@@ -966,7 +931,7 @@ We write $X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)$. T
 #+latex: \paragraph*{The Lognormal Distribution}
 \label{sub:The-Lognormal-Distribution}
 
-This is a distribution derived from the normal distribution (hence the name). If $U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, then $X=\mathrm{e}^{U}$has PDF
+This is a distribution derived from the normal distribution (hence the name). If $U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$, then \( X = \mathrm{e}^{U} \) has PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^{2}}\right],\quad0<x<\infty.
 \end{equation}
@@ -993,8 +958,6 @@ There is some support of moments and moment generating functions for some contin
 Calculate the first four raw moments for $X\sim\mathsf{gamma}(\mathtt{shape}=13,\,\mathtt{rate}=1)$ and plot the moment generating function.
 
 We load the =actuar= package and use the functions =mgamma= and =mgfgamma=:
-
-#+latex: \end{example}
 #+begin_src R :exports both :results output pp 
 library(actuar)
 mgamma(1:4, shape = 13, rate = 1)
@@ -1004,12 +967,6 @@ mgamma(1:4, shape = 13, rate = 1)
 : [1]    13   182  2730 43680
 
 For the plot we can use the function in the following form:
-
-#+begin_src R :exports both :results output pp 
-plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
-#+end_src
-
-#+results[122747ed04bf3831be435728c2f52ea2c230976f]:
 
 #+begin_src R :exports code :results graphics :file img/gamma-mgf.png
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
@@ -1023,6 +980,7 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
   \end{figure}
 #+end_src
 
+#+latex: \end{example}
 #+latex: \newpage{}
 
 ** Chapter Exercises
@@ -1041,20 +999,14 @@ Find the constant $c$ so that the given function is a valid PDF of a random vari
 
 #+latex: \begin{xca}
 For the following random experiments, decide what the distribution of $X$ should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not strictly hold in practice).
-
 1. We throw a dart at a dart board. Let $X$ denote the squared linear distance from the bulls-eye to the where the dart landed.
-
 1. We randomly choose a textbook from the shelf at the bookstore and let $P$ denote the proportion of the total pages of the book devoted to exercises. 
-
 1. We measure the time it takes for the water to completely drain out of the kitchen sink.
-
 1. We randomly sample strangers at the grocery store and ask them how long it will take them to drive home. 
-
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find 
-
 1. $\P(Z>2.64)$
    #+begin_src R :exports both :results output pp 
    pnorm(2.64, lower.tail = FALSE)
@@ -1062,7 +1014,6 @@ If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find
 
    #+results[a2669fc0dab861ef435345030600f6ccb6f7c47f]:
    : [1] 0.004145301
-
 1. $\P(0\leq Z<0.87)$
    #+begin_src R :exports both :results output pp 
    pnorm(0.87) - 1/2
@@ -1070,7 +1021,6 @@ If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find
 
    #+results[70b221279d11046cfc59afc0c699835fd26b3e1b]:
    : [1] 0.3078498
-
 1. $\P(|Z|>1.39)$ (Hint: draw a picture!)
    #+begin_src R :exports both :results output pp 
    2 * pnorm(-1.39)
@@ -1078,14 +1028,11 @@ If $Z$ is $\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)$, find
 
    #+results[954bb27d354a796b482ceda492c709494df98a2c]:
    : [1] 0.1645289
-
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 \label{xca:variance-dunif}
-
 Calculate the variance of $X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)$. /Hint:/ First calculate $\E X^{2}$.
-
 #+latex: \end{xca}
 
 #+latex: \begin{xca}

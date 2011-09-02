@@ -9,7 +9,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: answ soln
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle no
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -60,12 +60,10 @@ Here we have two variables $X$ and $Y$. For our purposes, $X$ is not random (so 
 - $x=$ height and $Y=$ weight.
 - $x=$ smoking frequency and $Y=$ age of first heart attack.
 
-Given information about the relationship between $x$ and $Y$, we would like to /predict/ future values of $Y$ for particular values of $x$. This turns out to be a difficult problem[fn:predict], so instead we first tackle an easier problem: we estimate $\E Y$. How can we accomplish this? Well, we know that $Y$ depends somehow on $x$, so it stands to reason that
+Given information about the relationship between $x$ and $Y$, we would like to /predict/ future values of $Y$ for particular values of $x$. This turns out to be a difficult problem\footnote{Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''}, so instead we first tackle an easier problem: we estimate $\E Y$. How can we accomplish this? Well, we know that $Y$ depends somehow on $x$, so it stands to reason that
 \begin{equation}
 \E Y=\mu(x),\ \mbox{a function of }x.
 \end{equation}
-
-[fn:predict] Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''
 
 But we should be able to say more than that. To focus our efforts we impose some structure on the functional form of $\mu$. For instance, 
 
@@ -78,7 +76,7 @@ But we should be able to say more than that. To focus our efforts we impose some
 
 This helps us in the sense that we concentrate on the estimation of just a few parameters, $\beta_{0}$ and $\beta_{1}$, say, rather than some nebulous function. Our /modus operandi/ is simply to perform the random experiment $n$ times and observe the $n$ ordered pairs of data $(x_{1},Y_{1}),\ (x_{2},Y_{2}),\ \ldots,(x_{n},Y_{n})$. We use these $n$ data points to estimate the parameters.
 
-More to the point, there are /three simple linear regression/ (SLR) assumptions}\index{regression assumptions} that will form the basis for the rest of this chapter:
+More to the point, there are /three simple linear regression/ (SLR) assumptions\index{regression assumptions} that will form the basis for the rest of this chapter:
 
 #+latex: \begin{assumption}
 We assume that $\mu$ is a linear function of $x$, that is, 
@@ -89,14 +87,14 @@ where $\beta_{0}$ and $\beta_{1}$ are unknown constants to be estimated.
 #+latex: \end{assumption}
 
 #+latex: \begin{assumption}
-We further assume that $Y_{i}$ is $\mu(x_{i})$ -- the ``signal'' -- plus some ``error'' (represented by the symbol $\epsilon_{i}$):
+We further assume that $Y_{i}$ is $\mu(x_{i})$, a ``signal'', plus some ``error'' (represented by the symbol $\epsilon_{i}$):
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
 #+latex: \end{assumption}
 
 #+latex: \begin{assumption}
-We lastly assume that the errors are i.i.d.~normal with mean 0 and variance $\sigma^{2}$:
+We lastly assume that the errors are IID normal with mean 0 and variance $\sigma^{2}$:
 \begin{equation}
 \epsilon_{1},\epsilon_{2},\ldots,\epsilon_{n}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma).
 \end{equation}
@@ -109,12 +107,8 @@ We assume both the normality of the errors $\epsilon$ and the linearity of the m
 
 *** What does it all mean?
 
-See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} $\mu$, which in this display has slope $0.5$ and $y$-intercept 2.5, that is, $\mu(x)=2.5+0.5x$. The intuition is that for each given value of $x$, we observe a random value of $Y$ which is normally distributed with a mean equal to the height of the regression line at that $x$ value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of $x$, namely, $x=1$, $x=2.5$, and $x=4$. Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as $x$ increases[fn:constvar].
-
-[fn:constvar] In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as $x$ gets large or small. We say under those circumstances that the data show /heteroscedasticity/. There are methods to address it, but they fall outside the realm of SLR.
+See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} $\mu$, which in this display has slope $0.5$ and $y$-intercept 2.5, that is, $\mu(x)=2.5+0.5x$. The intuition is that for each given value of $x$, we observe a random value of $Y$ which is normally distributed with a mean equal to the height of the regression line at that $x$ value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of $x$, namely, $x=1$, $x=2.5$, and $x=4$. Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as $x$ increases \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as $x$ gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
  
-
-
 #+begin_src R :exports none :results graphics :file img/philosophy.png
 # open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
@@ -133,7 +127,6 @@ abline(v = c(1, 2.5, 4), lty = 2, col = "grey")
 segments(1,3, 1+dnorm(0,0,0.5),3, lty = 2, col = "gray")
 segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
-qplot(speed, dist, data = cars)
 #+end_src
 
 #+begin_src latex 
@@ -154,14 +147,13 @@ head(cars)
 
 The =speed= represents how fast the car was going ($x$) in miles per hour and =dist= ($Y$) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the =qplot= command in the =ggplot2= package. 
 
-
-#+begin_src R :exports code :results graphics :file img/carscatter.pdf
+#+begin_src R :exports code :results graphics :file img/carscatter.png
 qplot(speed, dist, data = cars)
 #+end_src
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
+    \includegraphics[width=5in, height=4in]{img/carscatter.png}
     \caption[Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data]{\small A scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data.  There is clearly an upward trend to the plot which is approximately linear.}
     \label{fig:Scatter-cars}
   \end{figure}
@@ -169,12 +161,13 @@ qplot(speed, dist, data = cars)
 
 You can see the output in Figure \ref{fig:Scatter-cars}, which was produced by the following code.
 
-#+latex: \end{example}
 #+begin_src R :exports code :eval never
 plot(dist ~ speed, data = cars)
 #+end_src
 
 There is a pronounced upward trend to the data points, and the pattern looks approximately linear. There does not appear to be substantial fanning out of the points or extreme values.  
+
+#+latex: \end{example}
 
 ** Estimation
 \label{sec:SLR-Estimation}
@@ -192,12 +185,10 @@ L(\beta_{0},\beta_{1},\sigma)= & \prod_{i=1}^{n}f_{Y_{i}}(y_{i}),\\
 = & \prod_{i=1}^{n}(2\pi\sigma^{2})^{-1/2}\exp\left\{ \frac{-(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}\right\} ,\\
 = & (2\pi\sigma^{2})^{-n/2}\exp\left\{ \frac{-\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}\right\} .
 \end{alignat}
-
 We take the natural logarithm to get
 \begin{equation}
 \ln L(\beta_{0},\beta_{1},\sigma)=-\frac{n}{2}\ln(2\pi\sigma^{2})-\frac{\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}.\label{eq:regML-lnL}
 \end{equation}
-
  We would like to maximize this function of $\beta_{0}$ and $\beta_{1}$. See Appendix \ref{sec:Multivariable-Calculus} which tells us that we should find critical points by means of the partial derivatives. Let us start by differentiating with respect to $\beta_{0}$:
 \begin{equation}
 \frac{\partial}{\partial\beta_{0}}\ln L=0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-1),
@@ -206,7 +197,6 @@ and the partial derivative equals zero when $\sum_{i=1}^{n}(y_{i}-\beta_{0}-\bet
 \begin{equation}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i}=\sum_{i=1}^{n}y_{i}.\label{eq:regML-a}
 \end{equation}
-
 Moving on, we next take the partial derivative of $\ln L$ (Equation \ref{eq:regML-lnL}) with respect to $\beta_{1}$ to get
 \begin{alignat}{1}
 \frac{\partial}{\partial\beta_{1}}\ln L=\  & 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\
@@ -216,7 +206,6 @@ and this equals zero when the last sum equals zero, that is, when
 \begin{equation}
 \beta_{0}\sum_{i=1}^{n}x_{i}+\beta_{1}\sum_{i=1}^{n}x_{i}^{2}=\sum_{i=1}^{n}x_{i}y_{i}.\label{eq:regML-b}
 \end{equation}
-
 Solving the system of equations \ref{eq:regML-a} and \ref{eq:regML-b}
 \begin{eqnarray}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
@@ -252,50 +241,49 @@ where $r$, $s_{y}$, and $s_{x}$ are the sample correlation coefficient and the s
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
-#+begin_src R :exports both :results output pp 
+
+#+begin_src R :exports code
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
 
-The first part of the input to the =lm= function, =dist~speed=, is a /model formula/, read as `` =dist= is described by =speed=''. The =data = cars= argument tells \textsf{R} where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function[fn:seesame]:
-
-[fn:seesame] Alternatively, we could just type =cars.lm= to see the same thing.
+The first part of the input to the =lm= function, =dist ~ speed=, is a /model formula/, read as ``\texttt{dist} is described by \texttt{speed}''. The =data = cars= argument tells \textsf{R} where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function (alternatively, we could just type =cars.lm= to see the same thing):
 
 #+begin_src R :exports both :results output pp 
 coef(cars.lm)
 #+end_src
 
-The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respectively, are shown above. The regression line is thus given by $\hat{\mu}(\mathtt{speed})=$ SRC_R{round(coef(cars.lm)[1],2)} $+$ SRC_R{round(coef(cars.lm)[2],2)}$\mathtt{speed}$.
+The parameter estimates $b_{0}$ and $b_{1}$ for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{round(coef(cars.lm)[1], 2)} + SRC_R{round(coef(cars.lm)[2], 2)} \cdot \mathtt{speed} \).
 
-It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm= (see Figure \ref{fig:Scatter-cars-regline}):
+It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure \ref{fig:Scatter-cars-regline}.
 
-#+begin_src R :exports code :results graphics :file img/carline.pdf
-ggplot(cars, aes(x=speed, y=dist)) + geom_point(shape=19) +  
-    geom_smooth(method=lm, se = FALSE)
+#+begin_latex
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/carline.png}
+  \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with an added regression line for the \texttt{cars} data.}
+  \label{fig:Scatter-cars-regline}
+\end{figure}
+#+end_latex
+
+#+begin_src R :exports code :results output graphics :file img/carline.png
+ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
+       geom_smooth(method = lm)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/carline.pdf}
-    \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with added regression line for the \texttt{cars} data}
-    \label{fig:Scatter-cars-regline}
-  \end{figure}
-#+end_src
-
-To calculate points on the regression line we may simply plug the desired $x$ value(s) into $\hat{\mu}$, either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired $x$ value(s) represented by a data frame. See the example below.
+To calculate points on the regression line we may simply plug the desired $x$ value(s) into \(\hat{\mu}\), either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired $x$ value(s) represented by a data frame. See the example below.
 
 #+latex: \begin{example}
 \label{exa:regline-cars-interpret}
 
 Using the regression line for the =cars= data:
 
-1. What is the meaning of $\mu(60)=\beta_{0}+\beta_{1}(8$)? 
+1. What is the meaning of \( \mu(60) = \beta_{0} + \beta_{1}(8) \)? 
    This represents the average stopping distance (in feet) for a car going 8 mph. 
 
-1. Interpret the slope $\beta_{1}$. 
-   The true slope $\beta_{1}$ represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately SRC_R{round(coef(cars.lm)[2],2)} additional feet to stop for each additional mph increase in speed.
+1. Interpret the slope \(\beta_{1}\). 
+   The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately SRC_R{round(coef(cars.lm)[2], 2)} additional feet to stop for each additional mph increase in speed.
 
 1. Interpret the intercept $\beta_{0}$.
-   This would represent the mean stopping distance for a car traveling 0\,mph (which our regression line estimates to be SRC_R{round(coef(cars.lm)[1],2)}). Of course, this interpretation does not make any sense for this example, because a car travelling 0\,mph takes 0\,ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4\,mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
+   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be SRC_R{round(coef(cars.lm)[1],2)}). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
@@ -310,10 +298,10 @@ The first is a number, $\mu(x_{0})$, and the second is a random variable, $Y(x_{
 #+latex: \begin{example}
 \label{exa:regline-cars-pe-8mph}
 
-We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8\,mph: $\hat{\mu}(15)=b_{0}+8b_{1}\approx$ SRC_R{round(coef(cars.lm)[ 1 ], 2)} $ + (8) $ ( SRC_R{round(coef(cars.lm)[ 2 ], 2)} ) $\approx 13.88$. We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
+We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + 8 \cdot b_{1} \approx SRC_R{round(coef(cars.lm)[1], 2)} + (8) ( SRC_R{round(coef(cars.lm)[2], 2)} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
-Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16\,ft as listed in the fifth row of the =cars= data:
+Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data:
 
 #+begin_src R :exports both :results output pp 
 cars[5, ]
@@ -362,10 +350,7 @@ For a point estimate of $\sigma^{2}$ we use the /mean square error/ $S^{2}$ defi
 \begin{equation}
 S^{2}=\frac{SSE}{n-2},
 \end{equation}
-and we estimate $\sigma$ with the /standard error/ [fn:MSEse] $S=\sqrt{S^{2}}$.
-
-[fn:MSEse] Be careful not to confuse the mean square error $S^{2}$ with the sample variance $S^{2}$ in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase $s^{2}$ or the bulky $MSE$.
-
+and we estimate $\sigma$ with the /standard error/\footnote{Be careful not to confuse the mean square error $S^{2}$ with the sample variance $S^{2}$ in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase $s^{2}$ or the bulky $MSE$.} $S=\sqrt{S^{2}}$.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -375,14 +360,15 @@ The residuals for the model may be obtained with the =residuals= function; we on
 residuals(cars.lm)[1:5]
 #+end_src
 
-In the last section, we calculated the fitted value for $x=8$ and found it to be approximately $\hat{\mu}(8)\approx$ SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now, it turns out that there was only one recorded observation at $x=8$, and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was $\mathtt{dist}=16$\,ft for a car with $\mathtt{speed}=8$\,mph. Therefore, the residual should be $E=Y-\hat{Y}$ which is $E\approx16-$ SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
+In the last section, we calculated the fitted value for $x=8$ and found it to be approximately $\hat{\mu}(8)\approx$ SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)}. Now, it turns out that there was only one recorded observation at $x=8$, and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was \(\mathtt{dist}=16\) ft for a car with \( \mathtt{speed}=8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{round(predict(cars.lm, newdata = data.frame(speed = 8)), 2)} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
-The estimate $S$ for $\sigma$ is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be $S\approx\,$ SRC_R{round(summary(cars.lm)$sigma, 2)}, or we can access it directly from the =summary= object.
+The estimate $S$ for $\sigma$ is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{round(summary(cars.lm)$sigma, 2)} \), or we can access it directly from the =summary= object.
 
-#+begin_src R :exports both :results output pp 
+#+begin_src R :exports none
 carsumry <- summary(cars.lm)
-carsumry$sigma
 #+end_src
+
+
 
 *** Interval Estimates of the Parameters
 \label{sub:slr-interval-est-params}
@@ -406,7 +392,7 @@ Now, it turns out that $b_{0}$, $b_{1}$, and $S$ are mutually independent (see t
 \begin{equation}
 T=\frac{b_{1}-\beta_{1}}{S_{b_{1}}}
 \end{equation}
-has a $\mathsf{t}(\mathtt{df}=n-2)$ distribution. Therefore, a $100(1-\alpha)%$ confidence interval for $\beta_{1}$ is given by 
+has a $\mathsf{t}(\mathtt{df}=n-2)$ distribution. Therefore, a \(100(1 - \alpha)\% \) confidence interval for $\beta_{1}$ is given by 
 \begin{equation}
 b_{1}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{1}.}
 \end{equation}
@@ -421,7 +407,8 @@ where $\sigma_{b_{0}}$ is given by
 \end{equation}
 and which we estimate with the $S_{b_{0}}$ defined by
 \begin{equation}
-S_{b_{0}}=S\sqrt{\frac{1}{n}+\frac{\overline{x}^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\end{equation}
+S_{b_{0}}=S\sqrt{\frac{1}{n}+\frac{\overline{x}^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
+\end{equation}
 
 Thus the quantity
 \begin{equation}
@@ -447,9 +434,7 @@ A <- round(summary(cars.lm)$coef, 3)
 B <- round(confint(cars.lm), 3)
 #+end_src
 
-In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec:Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for $\beta_{1}$ we could use $b_{1}=\ $ SRC_R{A[2,1]} and $S_{b_{1}}=\ $ SRC_R{A[2,2]} together with a $\mathsf{t}_{0.025}(\mathtt{df}=23)$ critical value to calculate $b_{1}\pm\mathsf{t}_{0.025}(\mathtt{df}=23)S_{b_{1}}$.  
-
-Or, we could use the =confint= function.
+In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec:Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for $\beta_{1}$ we could use \( b_{1} = SRC_R{A[2,1]} \) and \( S_{b_{1}} = SRC_R{A[2,2]} \) together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \) critical value to calculate \( b_{1} \pm \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could use the =confint= function.
 
 #+begin_src R :exports both :results output pp 
 confint(cars.lm)
@@ -475,7 +460,8 @@ Since $\sigma$ is unknown we estimate it with $S$ (we should expect the appearan
 
 A $100(1-\alpha)\%$ /confidence interval (CI) for/ $\mu(x_{0})$ is given by
 \begin{equation}
-\hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{x}^{2})}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\label{eq:SLR-conf-int-formula}\end{equation}
+\hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{x}^{2})}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\label{eq:SLR-conf-int-formula}
+\end{equation}
 
 
 It is time for prediction intervals, which are slightly different. In order to find confidence bounds for a new observation of $Y$ (we will denote it $Y_{\mbox{new}}$) we use the fact that
@@ -547,26 +533,27 @@ We earlier guessed that a bound on the value of a single new observation would b
 
 We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure \ref{fig:Scatter-cars-CIPI}.
 
+#+begin_latex
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/carscipi.png}
+  \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
+  \label{fig:Scatter-cars-CIPI}
+\end{figure}
+#+end_latex
+
 #+begin_src R :exports code :eval never
 library(HH)
 ci.plot(cars.lm)
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/carscipi.pdf
+
+Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\overline{x})^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
+
+#+begin_src R :exports none :results graphics :file img/carscipi.png
 library(HH)
 print(ci.plot(cars.lm))
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/carscipi.pdf}
-    \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
-    \label{fig:Scatter-cars-CIPI}
-  \end{figure}
-#+end_src
-
-
-Notice that the bands curve outward away from the regression line as the $x$ values move away from the center. This is expected once we notice the $(x_{0}-\overline{x})^{2}$ term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 
 ** Model Utility and Inference
 \label{sec:Model-Utility-SLR}
@@ -743,13 +730,13 @@ plot(cars.lm, which = 2)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.png}
-    \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.png}
+  \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
 any curvature or substantial departures from the straight line; hopefully
 the dots hug the line closely.}
-    \label{fig:Normal-q-q-plot-cars}
-  \end{figure}
+  \label{fig:Normal-q-q-plot-cars}
+\end{figure}
 #+end_src
 
 #+latex: \paragraph*{Testing the Normality Assumption}
@@ -811,11 +798,11 @@ plot(cars.lm, which = 3)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.png}
-    \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
-    \label{fig:std-resids-fitted-cars}
-  \end{figure}
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.png}
+  \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
+  \label{fig:std-resids-fitted-cars}
+\end{figure}
 #+end_src
 
 #+latex: \paragraph*{Testing the Constant Variance Assumption}
@@ -858,12 +845,12 @@ plot(cars.lm, which = 1)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.png}
-    \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.png}
+  \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
 data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
-    \label{fig:resids-fitted-cars}
-  \end{figure}
+  \label{fig:resids-fitted-cars}
+\end{figure}
 #+end_src
 
 #+latex: \paragraph*{Testing the Independence Assumption}
@@ -888,41 +875,29 @@ In this case we do not reject the null hypothesis at the $\alpha=0.05$ significa
 
 We often find problems with our model that suggest that at least one of the three regression assumptions is violated. What do we do then? There are many measures at the statistician's disposal, and we mention specific steps one can take to improve the model under certain types of violation.
 
-
-\begin{description}
-\item [{Mean~response~is~not~linear.}] We can directly modify the model
-to better approximate the mean response. In particular, perhaps a
-polynomial regression function of the form \[
-\mu(x)=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}\]
-would be appropriate. Alternatively, we could have a function of the
-form
-
-\[
-\mu(x)=\beta_{0}\mathrm{e}^{\beta_{1}x}.
-\]
-
-Models like these are studied in nonlinear regression courses.
-
-- Error~variance~is~not~constant. :: Sometimes a transformation of the dependent variable will take care of the problem. There is a large class of them called /Box-Cox transformations/. They take the form 
-
-\begin{equation}
-Y^{\ast}=Y^{\lambda},
-\end{equation}
-
-where $\lambda$ is a constant. (The method proposed by Box and Cox will determine a suitable value of $\lambda$ automatically by maximum likelihood). The class contains the transformations 
-
-\begin{alignat*}{1}
-\lambda=2,\quad & Y^{\ast}=Y^{2}\\
-\lambda=0.5,\quad & Y^{\ast}=\sqrt{Y}\\
-\lambda=0,\quad & Y^{\ast}=\ln\: Y\\
-\lambda=-1,\quad & Y^{\ast}=1/Y
-\end{alignat*}
-
-Alternatively, we can use the method of /weighted least squares/. This is studied in more detail in later classes. 
-
-- Error~distribution~is~not~normal. :: The same transformations for stabilizing the variance are equally appropriate for smoothing the residuals to a more Gaussian form. In fact, often we will kill two birds with one stone.
-
-- Errors~are~not~independent. :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
+- Mean response is not linear :: We can directly modify the model to better approximate the mean response. In particular, perhaps a polynomial regression function of the form 
+  \[
+  \mu(x) = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{1}^{2}
+  \]
+  would be appropriate. Alternatively, we could have a function of the form
+  \[
+  \mu(x)=\beta_{0}\mathrm{e}^{\beta_{1}x}.
+  \]
+  Models like these are studied in nonlinear regression courses.
+- Error variance is not constant :: Sometimes a transformation of the dependent variable will take care of the problem. There is a large class of them called /Box-Cox transformations/. They take the form 
+  \begin{equation}
+  Y^{\ast}=Y^{\lambda},
+  \end{equation}
+  where $\lambda$ is a constant. (The method proposed by Box and Cox will determine a suitable value of $\lambda$ automatically by maximum likelihood). The class contains the transformations 
+  \begin{alignat*}{1}
+  \lambda=2,\quad & Y^{\ast}=Y^{2}\\
+  \lambda=0.5,\quad & Y^{\ast}=\sqrt{Y}\\
+  \lambda=0,\quad & Y^{\ast}=\ln\: Y\\
+  \lambda=-1,\quad & Y^{\ast}=1/Y
+  \end{alignat*}
+  Alternatively, we can use the method of /weighted least squares/. This is studied in more detail in later classes. 
+- Error distribution is not normal :: The same transformations for stabilizing the variance are equally appropriate for smoothing the residuals to a more Gaussian form. In fact, often we will kill two birds with one stone.
+- Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 
 ** Other Diagnostic Tools
 \label{sec:Other-Diagnostic-Tools-SLR}
@@ -935,31 +910,21 @@ There are two types of observations with which we must be especially careful:
 
 
 We will discuss outliers first because the notation builds sequentially in that order.
-
-
 *** Outliers
-
 There are three ways that an observation $(x_{i},y_{i})$ may be an  outlier: it can have an $x_{i}$ value which falls far from the other  $x$ values, it can have a $y_{i}$ value which falls far from the other $y$ values, or it can have both its $x_{i}$ and $y_{i}$ values falling far from the other $x$ and $y$ values.
 
-
 *** Leverage
-
 Leverage statistics are designed to identify observations which have $x$ values that are far away from the rest of the data. In the simple linear regression model the leverage of $x_{i}$ is denoted by $h_{ii}$ and defined by 
-
 \begin{equation}
 h_{ii}=\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}},\quad i=1,2,\ldots,n.
 \end{equation}
-
 The formula has a nice interpretation in the SLR model: if the distance from $x_{i}$ to $\overline{x}$ is large relative to the other $x$'s then $h_{ii}$ will be close to 1. 
 
 Leverages have nice mathematical properties; for example, they satisfy
-
 \begin{equation}
 0\leq h_{ii}\leq1,\label{eq:slr-leverage-between}
 \end{equation}
-
 and their sum is
-
 \begin{eqnarray}
 \sum_{i=1}^{n}h_{ii} & = & \sum_{i=1}^{n}\left[\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}}\right],\\
  & = & \frac{n}{n}+\frac{\sum_{i}(x_{i}-\overline{x})^{2}}{\sum_{k}(x_{k}-\overline{x})^{2}},\\
@@ -972,11 +937,9 @@ A rule of thumb is to consider leverage values to be large if they are more than
 *** Standardized and Studentized Deleted Residuals
 
 We have already encountered the /standardized residuals/ $r_{i}$ in Section \ref{sub:Constant-Variance-Assumption}; they are merely residuals that have been divided by their respective standard deviations: 
-
 \begin{equation}
 R_{i}=\frac{E_{i}}{S\sqrt{1-h_{ii}}},\quad i=1,2,\ldots,n.
 \end{equation}
-
 Values of $|R_{i}| > 2$ are extreme and suggest that the observation has an outlying $y$-value. 
 
 Now delete the $i^{\mathrm{th}}$ case and fit the regression function to the remaining $n - 1$ cases, producing a fitted value $\hat{Y}_{(i)}$ with /deleted residual/ $D_{i}=Y_{i}-\hat{Y}_{(i)}$. It is shown in later classes that 
@@ -1007,9 +970,7 @@ We can find out which observations have studentized residuals larger than two wi
 sres[which(abs(sres) > 2)]
 #+end_src
 
-In this case, we see that observations 23, 35, and 49 are potential outliers with respect to their $y$-value.
-
-We can compute the studentized deleted residuals with =rstudent=:
+In this case, we see that observations 23, 35, and 49 are potential outliers with respect to their $y$-value.  We can compute the studentized deleted residuals with =rstudent=:
 
 #+begin_src R :exports both :results output pp 
 sdelres <- rstudent(cars.lm)
@@ -1027,7 +988,6 @@ This means that observations 23 and 49 have a large studentized deleted residual
 
 #+begin_src R :exports both :results output pp 
 leverage <- hatvalues(cars.lm)
-leverage[1:5]
 leverage[which(leverage > 4/50)]
 #+end_src
 
@@ -1036,9 +996,7 @@ Here we see that observations 1, 2, and 50 have leverages bigger than double the
 
 *** Influential Observations
 
-
 #+latex: \paragraph*{$DFBETAS$ and $DFFITS$}
-
 Any time we do a statistical analysis, we are confronted with the variability of data. It is always a concern when an observation plays too large a role in our regression model, and we would not like or procedures to be overly influenced by the value of a single observation. Hence, it becomes desirable to check to see how much our estimates and predictions would change if one of the observations were not included in the analysis. If an observation changes the estimates/predictions a large amount, then the observation is influential and should be subjected to a higher level of scrutiny.
 
 We measure the change in the parameter estimates as a result of deleting an observation with $DFBETAS$. The $DFBETAS$ for the intercept $b_{0}$ are given by
@@ -1065,12 +1023,10 @@ head(dfb)
 We see that the inclusion of the first observation slightly increases the =Intercept= and slightly decreases the coefficient on =speed=.
 
 We can measure the influence that an observation has on its fitted value with $DFFITS$. These are calculated by deleting an observation, refitting the model, recalculating the fit, then standardizing. The formula is 
-
 \begin{equation}
 (DFFITS)_{i}=\frac{\hat{Y_{i}}-\hat{Y}_{(i)}}{S_{(i)}\sqrt{h_{ii}}},\quad i=1,2,\ldots,n.
 \end{equation}
-
-The value represents the number of standard deviations of $\hat{Y_{i}}$ that the fitted value $\hat{Y_{i}}$ increases or decreases with the inclusion of the $i$$^{\textrm{th}}$ observation. We can compute them with the =dffits= function.
+The value represents the number of standard deviations of $\hat{Y_{i}}$ that the fitted value $\hat{Y_{i}}$ increases or decreases with the inclusion of the \(i^{\textrm{th}}\) observation. We can compute them with the =dffits= function.
 
 #+begin_src R :exports both :results output pp
 dff <- dffits(cars.lm)
@@ -1079,17 +1035,12 @@ dff[1:5]
 
 A rule of thumb is to flag observations whose $DFFIT$ exceeds one in absolute value, but there are none of those in this data set.
 
-
 #+latex: \paragraph*{Cook's Distance}
 
-The $DFFITS$ are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated[fn:cook] by the formula
-
-[fn:cook] Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.
-
+The $DFFITS$ are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated\footnote{Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.} by the formula
 \begin{equation}
 D_{i}=\frac{E_{i}^{2}}{(p+1)S^{2}}\cdot\frac{h_{ii}}{(1-h_{ii})^{2}},\quad i=1,2,\ldots,n.\label{eq:slr-cooks-distance}
 \end{equation}
-
 It shows that Cook's distance depends both on the residual $E_{i}$ and the leverage $h_{ii}$ and in this way $D_{i}$ contains information about outlying $x$ and $y$ values.
 
 To assess the significance of $D$, we compare to quantiles of an $\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=n-2)$ distribution. A rule of thumb is to classify observations falling higher than the 50$^{\textrm{th}}$ percentile as being extreme. 
@@ -1101,7 +1052,7 @@ We can calculate the Cook's Distances with the =cooks.distance= function.
 
 #+begin_src R :exports both :results output pp 
 cooksD <- cooks.distance(cars.lm)
-cooksD[1:5]
+cooksD[1:4]
 #+end_src
 
 We can look at a plot of the Cook's distances with the command =plot(cars.lm, which = 4)=.
@@ -1112,14 +1063,14 @@ plot(cars.lm, which = 4)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.png}
-    \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
-    \label{fig:Cooks-distance-cars}
-  \end{figure}
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.png}
+  \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
+  \label{fig:Cooks-distance-cars}
+\end{figure}
 #+end_src
 
-Observations with the largest Cook's D values are labeled, hence we see that observations 23, 39, and 49 are suspicious. However, we need to compare to the quantiles of an $\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=48)$ distribution:
+Observations with the largest Cook's D values are labeled, hence we see that observations 23, 39, and 49 are suspicious. However, we need to compare to the quantiles of an \( \mathsf{f}(\mathtt{df1} = 2, \, \mathtt{df2} = 48) \) distribution:
 
 #+begin_src R :exports both :results output pp 
 F0.50 <- qf(0.5, df1 = 2, df2 = 48)
@@ -1146,20 +1097,20 @@ plot(cars.lm)
 par(mfrow = c(1,1))
 #+end_src
 
-The =par= command is used so that $2\times2=4$ plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure \ref{fig:Diagnostic-plots-cars}:
+The =par= command is used so that $2\times 2 = 4$ plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure \ref{fig:Diagnostic-plots-cars}:
 
-#+begin_src R :exports code :results graphics :file img/Diagnostic-plots-cars.png
+#+begin_src R :exports none :results graphics :file img/Diagnostic-plots-cars.png
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.png}
-    \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
-    \label{fig:Diagnostic-plots-cars}
-  \end{figure}
+\begin{figure}[ht!]
+  \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.png}
+  \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
+  \label{fig:Diagnostic-plots-cars}
+\end{figure}
 #+end_src
 
 We have discussed all of the plots except the last, which is possibly the most interesting. It shows Residuals vs. Leverage, which will identify outlying $y$ values versus outlying $x$ values. Here we see that observation 23 has a high residual, but low leverage, and it turns out that observations 1 and 2 have relatively high leverage but low/moderate leverage (they are on the right side of the plot, just above the horizontal line). Observation 49 has a large residual with a comparatively large leverage. 
@@ -1173,35 +1124,35 @@ identify(leverage, sres, n = 4)   # identify 4 points
 
 The graph with the identified points is omitted (but the plain plot is shown in the bottom right corner of Figure \ref{fig:Diagnostic-plots-cars}). Observations 1 and 2 fall on the far right side of the plot, near the horizontal axis.
 
-\newpage{}
+#+latex: \newpage{}
 
 ** Chapter Exercises
 
 \addcontentsline{toc}{section}{Chapter Exercises}
 \setcounter{thm}{0}
-\begin{xca}
+
+#+latex: \begin{xca}
 Prove the ANOVA equality, Equation \ref{eq:anovaeq}. /Hint/:
 show that
 \[
 \sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
 \]
+#+latex: \end{xca}
 
-\end{xca}
-
-\begin{xca}
-\label{xca:find-mles-SLR}Solve the following system of equations for $\beta_{1}$ and $\beta_{0}$ to find the MLEs for slope and intercept in the simple linear regression model.
+#+latex: \begin{xca}
+\label{xca:find-mles-SLR}
+Solve the following system of equations for $\beta_{1}$ and $\beta_{0}$ to find the MLEs for slope and intercept in the simple linear regression model.
 \begin{eqnarray*}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 \beta_{0}\sum_{i=1}^{n}x_{i}+\beta_{1}\sum_{i=1}^{n}x_{i}^{2} & = & \sum_{i=1}^{n}x_{i}y_{i}
 \end{eqnarray*}
+#+latex: \end{xca}
 
-\end{xca}
-
-\begin{xca}
-\label{xca:show-alternate-slope-formula}Show that the formula given
-in Equation \ref{eq:sample-correlation-formula} is equivalent to
+#+latex: \begin{xca}
+\label{xca:show-alternate-slope-formula}
+Show that the formula given in Equation \ref{eq:sample-correlation-formula} is equivalent to
 \[
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.
 \]
-\end{xca}
+#+latex: \end{xca}
 

@@ -118,14 +118,14 @@ head(trees)
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
 
-#+begin_src R :exports code :results graphics :file img/splom-trees.pdf
+#+begin_src R :exports code :results graphics :file img/splom-trees.png
 library(lattice)
 splom(trees)
 #+end_src
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/splom-trees.pdf}
+    \includegraphics[width=5in, height=4in]{img/splom-trees.png}
     \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
     \label{fig:splom-trees}
   \end{figure}
@@ -161,7 +161,7 @@ s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d =
 fit <- lm(Volume ~ Girth + Height, data = trees)
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/3D-scatterplot-trees.pdf
+#+begin_src R :exports none :results graphics :file img/3D-scatterplot-trees.png
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
@@ -169,7 +169,7 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.pdf}
+    \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.png}
     \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
     \label{fig:3D-scatterplot-trees}
   \end{figure}
@@ -431,7 +431,7 @@ For example, using the calculations above we say that for the regression model =
 
 We saw in Section \ref{sub:mlr-point-est-regsurface} how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
 
-In Equation \ref{eq:mlr-single-yhat-matrix} we wrote $\hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},$ and in Equation \ref{eq:distn-b-mlr} we saw that
+In Equation \ref{eq:mlr-single-yhat-matrix} we wrote \( \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and in Equation \ref{eq:distn-b-mlr} we saw that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
@@ -535,25 +535,27 @@ We interpret $R^{2}$ as the proportion of total variation that is explained by t
 
 This is a problem, because as the philosopher, Occam, once said: ``causes should not be multiplied beyond necessity''. We address the problem by penalizing $R^{2}$ when parameters are added to the model. The result is an /adjusted/ $R^{2}$ which we denote by $\overline{R}^{2}$.
 \begin{equation}
-\overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).\end{equation}
+\overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).
+\end{equation}
 
 It is good practice for the statistician to weigh both $R^{2}$ and $\overline{R}^{2}$ during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
-
 For the =trees= data, we can get $R^{2}$ and $\overline{R}^{2}$ from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
 
 #+begin_src R :exports both :results output pp 
 treesumry$r.squared
+#+end_src
+
+#+begin_src R :exports both :results output pp 
 treesumry$adj.r.squared
 #+end_src
 
-High values of $R^{2}$ and $\overline{R}^{2}$ such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
+High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 
 
 *** Overall /F/-Test
-\label{sub:mlr-Overall-F-Test}}
+\label{sub:mlr-Overall-F-Test}
 
 Another way to assess the model's utility is to to test the hypothesis
 \[
@@ -579,7 +581,7 @@ treesumry$fstatistic
 For the =trees= data, we see that $F=$ SRC_R{treesumry$fstatistic[ 1 ]} with a /p/-value =< 2.2e-16=. Consequently we reject $H_{0}$, that is, the data provide strong evidence that not all $\beta_{i}$'s are zero.
 
 *** Student's /t/ Tests
-\label{sub:mlr-Student's-t-Tests}}
+\label{sub:mlr-Student's-t-Tests}
 
 We know that
 \begin{equation}
@@ -589,7 +591,7 @@ and we have seen how to test the hypothesis $H_{0}:\beta_{1}=\beta_{2}=\cdots=\b
 \begin{equation}
 H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
 \end{equation}
-where $\beta_{i}$ is the coefficient for the $i$$^{\textrm{th}}$ independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting $H_{0}$ if the /p-value/ is small. If $H_{0}$ is rejected, then we conclude that there is a significant relationship between $Y$ and $x_{i}$ /in the regression model/ $Y\sim(x_{1},\ldots,x_{p})$. This last part of the sentence is very important because the significance of the variable $x_{i}$ sometimes depends on the presence of other independent variables in the model[fn:multicoll]. 
+where $\beta_{i}$ is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting $H_{0}$ if the /p-value/ is small. If $H_{0}$ is rejected, then we conclude that there is a significant relationship between $Y$ and $x_{i}$ /in the regression model/ $Y\sim(x_{1},\ldots,x_{p})$. This last part of the sentence is very important because the significance of the variable $x_{i}$ sometimes depends on the presence of other independent variables in the model[fn:multicoll]. 
 
 [fn:multicoll] In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub:Multicollinearity}.
 
@@ -616,17 +618,15 @@ We see from the /p-values/ that there is a significant linear relationship betwe
 
 *** Quadratic Regression Model
 
-In each of the previous sections we assumed that $\mu$ was a linear function of the explanatory variables. For example, in SLR we assumed that $\mu(x)=\beta_{0}+\beta_{1}x$, and in our previous MLR examples we assumed $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$. In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified. 
+In each of the previous sections we assumed that $\mu$ was a linear function of the explanatory variables. For example, in SLR we assumed that $\mu(x)=\beta_{0}+\beta_{1}x$, and in our previous MLR examples we assumed $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$. In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
 
-
-
-#+begin_src R :exports code :results graphics :file img/Scatterplot-Volume-Girth-trees.pdf
+#+begin_src R :exports code :results graphics :file img/Scatterplot-Volume-Girth-trees.png
 qplot(Girth, Volume, data = trees)
 #+end_src
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.pdf}
+    \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.png}
     \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
     \label{fig:Scatterplot-Volume-Girth-trees}
   \end{figure}
@@ -678,14 +678,14 @@ summary(treesquad.lm)
 We see that the $F$ statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
 
-#+begin_src R :exports code :results graphics :file img/Fitting-the-Quadratic.pdf
+#+begin_src R :exports code :results graphics :file img/Fitting-the-Quadratic.png
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 #+end_src
 
 #+begin_src latex
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
+    \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.png}
     \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
     \label{fig:Fitting-the-Quadratic}
   \end{figure}
@@ -888,9 +888,6 @@ The level =bar1= is represented by $\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0$.
 
 We can see a plot of the two regression lines with the following mouthful of code.
 
-
-
-
 #+begin_src R :exports code :results graphics :file img/dummy-variable-trees.png
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
@@ -1087,7 +1084,7 @@ Here is an example of how it works, based on a question from R-help.
 set.seed(1) 
 x <- seq(from = 0, to = 1000, length.out = 200) 
 y <- 1 + 2*(sin((2*pi*x/360) - 3))^2 + rnorm(200, sd = 2)
-plot(x, y)
+# plot(x, y)
 acc.nls <- nls(y ~ a + b*(sin((2*pi*x/360) - c))^2, start = list(a = 0.9, b = 2.3, c = 2.9))
 summary(acc.nls)
 #plot(x, fitted(acc.nls))
