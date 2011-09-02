@@ -524,6 +524,8 @@ pareto.chart(table(state.division), ylab="Frequency")
 
 These are a lot like a bar graph that has been turned on its side with the bars replaced by dots on horizontal lines. They do not convey any more (or less) information than the associated bar graph, but the strength lies in the economy of the display. Dot charts are so compact that it is easy to graph very complicated multi-variable interactions together in one graph. See Section \ref{sec:Comparing-Data-Sets}. We will give an example here using the same data as above for comparison. The graph was produced by the following code.
 
+#+latex: \begin{example}
+
 #+begin_src R :exports code :results graphics :file img/dot-charts.png
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
@@ -1010,7 +1012,7 @@ Given a data set $x_{1}$, $x_{2}$, ..., $x_{n}$, the hinges are found by the fol
 
 - Find the order statistics $x_{(1)}$, $x_{(2)}$, ..., $x_{(n)}$. 
 
-- The /lower hinge/ $h_{L}$ is in position $L=\left\lfloor (n+3)/2\right\rfloor /2$, where the symbol $\left\lfloor x\right\rfloor $ denotes the largest integer less than or equal to $x$. If the position $L$ is not an integer, then the hinge $h_{L}$ is the average of the adjacent order statistics. 
+- The /lower hinge/ $h_{L}$ is in position $L=\left\lfloor (n+3)/2\right\rfloor /2$, where the symbol \( \left\lfloor x\right\rfloor \) denotes the largest integer less than or equal to $x$. If the position $L$ is not an integer, then the hinge $h_{L}$ is the average of the adjacent order statistics. 
 
 - The /upper hinge/ $h_{U}$ is in position $n+1-L$.
 
@@ -1449,31 +1451,6 @@ Perform a summary of all variables in =RcmdrTestDrive=. You can do this with the
 
 Alternatively, you can do this in the =Rcmdr= with the sequence \textsf{Statistics} \textsf{$\triangleright$ Summaries} \textsf{$\triangleright$ Active Data Set}. Report the values of the summary statistics for each variable.
 
-
-#+latex: \paragraph*{Answer:}
-
-#+begin_src R :exports both :results output pp
-summary(RcmdrTestDrive)
-#+end_src
-
-#+results[c2d291067d141cdb4d1e0957bdbb4f80b0aae972]:
-#+begin_example
-     order             smoking       gender            race        before     
- Min.   :  1.00   Nonsmoker:136   Female:70   AfricanAmer:46   Min.   :71.30  
- 1st Qu.: 42.75   Smoker   : 32   Male  :98   Asian      :13   1st Qu.:73.10  
- Median : 84.50                               Caucasian  :73   Median :73.90  
- Mean   : 84.50                               Hispanic   :34   Mean   :73.97  
- 3rd Qu.:126.25                               Other      : 2   3rd Qu.:74.80  
- Max.   :168.00                                                Max.   :76.30  
-     after           salary         reduction          parking     
- Min.   :66.60   Min.   : 377.2   Min.   :   3.00   Min.   :1.000  
- 1st Qu.:72.50   1st Qu.: 621.1   1st Qu.:  78.75   1st Qu.:1.000  
- Median :73.70   Median : 710.1   Median : 139.50   Median :1.000  
- Mean   :73.27   Mean   : 724.5   Mean   : 223.63   Mean   :1.952  
- 3rd Qu.:74.60   3rd Qu.: 808.6   3rd Qu.: 335.50   3rd Qu.:2.000  
- Max.   :76.40   Max.   :1156.2   Max.   :1632.00   Max.   :8.000
-#+end_example
-
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
@@ -1485,161 +1462,23 @@ Make a table of the =race= variable. Do this with \textsf{Statistics} \textsf{$\
 
 #+latex: \end{xca}
 
-
-#+latex: \paragraph*{Solution:}
-
-First we will make a table of the =race= variable with the =table= function.
-
-#+begin_src R :exports both :results output pp
-table(race)
-#+end_src
-
-#+results[76125e59fcd5385cbfbc0c72901bfa7294ebc4ca]:
-: race
-: AfricanAmer       Asian   Caucasian    Hispanic       Other 
-:          46          13          73          34           2
-
-1. For these data, SRC_R{names(table(race))[which(table(race)==max(table(race)))]} Caucasian has the highest frequency.
-
-1. For these data, SRC_R{names(table(race))[which(table(race)==min(table(race)))]} Other has the lowest frequency.
-
-1. The graph is shown below.
-
-
-#+begin_src R :exports code :results graphics :file img/barplotRTDrace.png
-barplot(table(RcmdrTestDrive$race), main = "", xlab = "race", 
-  ylab = "Frequency", legend.text = FALSE, col = NULL)
-#+end_src
-
-#+results[5585c2a08fd46b5c74e9a068f283dfccd6283833]:
-[[file:img/barplotRTDrace.png]]
-
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/barplotRTDrace.png}
-    \caption[A \texttt{barplot} of \texttt{race}]{A \texttt{barplot} of \texttt{race} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:barplotRTDrace}
-  \end{figure}
-#+end_src
-
-
 #+latex: \begin{xca}
 Calculate the average =salary= by the factor =gender=. Do this with \textsf{Statistics} \textsf{$\triangleright$ Summaries} \textsf{$\triangleright$ Table of Statistics}... 
-
 1. Which =gender= has the highest mean =salary=? 
 1. Report the highest mean =salary=.
 1. Compare the spreads for the genders by calculating the standard deviation of =salary= by =gender=. Which =gender= has the biggest standard deviation?
 1. Make boxplots of =salary= by =gender= with the following method:
-
-#+latex: \begin{quote}
-On the =Rcmdr=, click \textsf{Graphs} \textsf{$\triangleright$} \textsf{IPSUR - Boxplot}...\\ 
-In the \textsf{Variable} box, select =salary=.\\ 
-Click the \textsf{Plot by groups}... box and select =gender=. Click \textsf{OK}.\\ 
-Click \textsf{OK} to graph the boxplot.
-#+latex: \end{quote}
-
-How does the boxplot compare to your answers to (1) and (3)?
-
+   #+latex: \begin{quote}
+   On the =Rcmdr=, click \textsf{Graphs} \textsf{$\triangleright$} \textsf{IPSUR - Boxplot}...\\ 
+   In the \textsf{Variable} box, select =salary=.\\ 
+   Click the \textsf{Plot by groups}... box and select =gender=. Click \textsf{OK}.\\ 
+   Click \textsf{OK} to graph the boxplot.
+   #+latex: \end{quote}
+   How does the boxplot compare to your answers to (1) and (3)?
 #+latex: \end{xca}
-
-
-
-#+latex: \paragraph*{Solution:}
-
-We can generate a table listing the average salaries by gender with two methods. The first uses =tapply=:
-
-#+begin_src R :exports both :results output pp  
-x <- tapply(salary, list(gender = gender), mean)
-x
-#+end_src
-
-#+results[53b6820fa6274a43adc1a7fc447bd6251a9deaf2]:
-: gender
-:   Female     Male 
-: 698.0911 743.3915
-
-The second method uses the =by= function:
-
-#+begin_src R :exports both :results output pp  
-by(salary, gender, mean, na.rm = TRUE)
-#+end_src
-
-#+results[b1f9ca30f81dbdc48a12a3a64b7bad9734a76562]:
-: gender: Female
-: [1] 698.0911
-: ------------------------------------------------------------ 
-: gender: Male
-: [1] 743.3915
-
-Now to answer the questions:
-
-
-1. Which gender has the highest mean salary? 
-
-We can answer this by looking above. For these data, the gender with the highest mean salary is SRC_R{ names(x)[ which( x==max(x) ) ] } Male.
-
-1. Report the highest mean salary.
-
-Depending on our answer above, we would do something like 
-
-: mean(salary[gender == Male])
-
-for example. For these data, the highest mean salary is
-
-#+begin_src R :exports both :results output pp  
-x[which(x==max(x))]
-#+end_src
-
-#+results[703fa3e8fd83885daac81ab86eac3c4541baf172]:
-:     Male 
-: 743.3915
-
-1. Compare the spreads for the genders by calculating the standard deviation of =salary= by =gender=. Which gender has the biggest standard deviation?
-
-#+begin_src R :exports both :results output pp  
-y <- tapply(salary, list(gender = gender), sd)
-y
-#+end_src
-
-#+results[accfa597b90bd305196ef4fdc978f5548fa795cc]:
-: gender
-:   Female     Male 
-: 130.7053 158.5423
-
-For these data, the the largest standard deviation is approximately SRC_R{round(y[which(y==max(y))],2)} 158.54 which was attained by the SRC_R{names(y)[which(y==max(y))]} Male gender.
-
-1. Make boxplots of =salary= by =gender=. How does the boxplot compare to your answers to (1) and (3)?
-
-The graph is shown below.
-
-#+begin_src R :exports code :eval never
-boxplot(salary ~ gender, xlab = "salary", ylab = "gender", 
-  main = "", notch = FALSE, varwidth = TRUE, horizontal = TRUE, 
-  data = RcmdrTestDrive)
-#+end_src
-
-#+begin_src R :exports code :results graphics :file img/boxplotRTDsalgen.png
-qplot(gender, salary, data = RcmdrTestDrive, geom="boxplot") + 
-     coord_flip()
-#+end_src
-
-#+results[4930c7de23cc0aaaf025b8c9e124c664d0c9605e]:
-[[file:img/boxplotRTDsalgen.png]]
-
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/boxplotRTDsalgen.png}
-    \caption[Side-by-side \texttt{boxplot}s of \texttt{salary} by \texttt{gender}]{Side-by-side \texttt{boxplot}s of \texttt{salary} by \texttt{gender} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:boxplotRTDsalgen}
-  \end{figure}
-#+end_src
-
-Answers will vary. There should be some remarks that the center of the box is farther to the right for the SRC_R{names(x)[which(x==max(x))]} Male gender, and some recognition that the box is wider for the SRC_R{names(y)[which(y==max(y))]} Male gender.
-
 
 #+latex: \begin{xca}
 For this problem we will study the variable =reduction=.
-
 1. Find the order statistics and store them in a vector =x=. /Hint:/ =x <- sort(reduction)=
 1. Find $x_{(137)}$, the 137$^{\mathrm{th}}$ order statistic.
 1. Find the IQR.
@@ -1649,70 +1488,7 @@ For this problem we will study the variable =reduction=.
 1. Make a boxplot of =reduction=, and include the boxplot in your report. You can do this with the =boxplot= function, or in =Rcmdr= with \textsf{Graphs} \textsf{$\triangleright$} \textsf{IPSUR - Boxplot}...
 1. Are there any potential/suspected outliers? If so, list their values. /Hint:/ use your answer to (a).
 1. Using the rules discussed in the text, classify answers to (8), if any, as /potential/ or /suspected/ outliers.
-
 #+latex: \end{xca}
-
-#+latex: \paragraph*{Answer:}
-
-#+begin_src R :exports both :results output pp  
-x <- sort(reduction)
-#+end_src
-
-#+results[230b33b21e6e2368226f14c4e98c5f1be3f1b76e]:
-
-#+begin_src R :exports both :results output pp  
-x[137]
-IQR(x)
-fivenum(x)
-fivenum(x)[4] - fivenum(x)[2]
-#+end_src
-
-#+results[6fee33e82d2a6f7753c3219289b98212756832c8]:
-: [1] NA
-: [1] 1.325807
-: [1] -2.78656813 -0.57813031  0.07028297  0.76914214  3.19669773
-: [1] 1.347272
-
-#+latex: \noindent 
-Compare your answers (3) and (5). Are they the same? If not, are they close?
-
-Yes, they are close, within SRC_R{ abs(IQR(x)-(fivenum(x)[4] - fivenum(x)[2])) } 0.75 of each other.
-
-#+latex: \noindent 
-
-The boxplot of =reduction= is below.
-
-#+begin_src R :exports code :results graphics :file img/boxplotRTDreduc.png
-qplot(factor(0), reduction, data = RcmdrTestDrive, 
-     geom = "boxplot", xlab = "") + coord_flip() + 
-     scale_x_discrete(breaks = NA)
-#+end_src
-
-#+results[b273df876ad2bbfa6c6dc115bb912b5af71bfdd5]:
-[[file:img/boxplotRTDreduc.png]]
-
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/boxplotRTDreduc.png}
-    \caption[A boxplot of reduction]{A boxplot of reduction in the RcmdrTestDrive data}
-    \label{fig:boxplotRTDreduc}
-  \end{figure}
-#+end_src
-
-
-#+begin_src R :exports both :results output pp  
-temp <- fivenum(x)
-inF <- 1.5 * (temp[4] - temp[2]) + temp[4]
-outF <- 3 * (temp[4] - temp[2]) + temp[4]
-which(x > inF)
-which(x > outF)
-#+end_src
-
-#+results[c433f41b61de1135106a76b6a35fc68008cbe945]:
-: [1]  99 100
-: integer(0)
-
-Observations SRC_R[:results value raw]{paste(which(x > inF), collapse = ", ")} 99, 100 would be considered potential outliers, while observation(s) SRC_R{which(x > outF)} 168 would be considered a suspected outlier.
 
 #+latex: \begin{xca}
 In this problem we will compare the variables =before= and =after=. Don't forget =library(e1071)=.
@@ -1722,149 +1498,7 @@ In this problem we will compare the variables =before= and =after=. Don't forget
 1. Calculate and report the skewness and kurtosis for =before=. Based on these values, how would you describe the shape of =before=?
 1. Calculate and report the skewness and kurtosis for =after=. Based on these values, how would you describe the shape of =after=?
 1. Plot histograms of =before= and =after= and compare them to your answers to (4) and (5).
-
 #+latex: \end{xca}
-
-#+latex: \paragraph*{Solution:}
-
-1. Examine the two measures of center for both variables that you found in problem 1. Judging from these measures, which variable has a higher center?
-
-We may take a look at the =summary(RcmdrTestDrive)= output from Exercise \ref{xca:summary-RcmdrTestDrive}. Here we will repeat the relevant summary statistics.
-
-#+begin_src R :exports both :results output pp  
-c(mean(before), median(before))
-c(mean(after), median(after))
-#+end_src
-
-#+results[de5616b000da49563f5a9d9af2e1ff7b4e8d5f51]:
-: [1] 73.96607 73.90000
-: [1] 73.26726 73.70000
-
-The idea is to look at the two measures and compare them to make a decision. In a nice world, both the mean and median of one variable will be larger than the other which sends a nice message. If We get a mixed message, then we should look for other information, such as extreme values in one of the variables, which is one of the reasons for the next part of the problem.
-
-1. Which measure of center is more appropriate for =before=? (You may want to look at a boxplot.) Which measure of center is more appropriate for =after=?
-
-The boxplot of =before= is shown below.
-
-#+begin_src R :exports code :results graphics :file img/boxplotRTDbefore.png
-qplot(factor(0), before, data = RcmdrTestDrive, 
-     geom = "boxplot", xlab = "") + coord_flip() + 
-     scale_x_discrete(breaks = NA)
-#+end_src
-
-#+results[c89b06aea56d3c5338be24dadffdfa3172c0ff61]:
-[[file:img/boxplotRTDbefore.png]]
-
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/boxplotRTDbefore.png}
-    \caption[A \texttt{boxplot} of \texttt{before}]{A \texttt{boxplot} of \texttt{before} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:boxplotRTDbefore}
-  \end{figure}
-#+end_src
-
-We want to watch out for extreme values (shown as circles separated from the box) or large departures from symmetry. If the distribution is fairly symmetric then the mean and median should be approximately the same. But if the distribution is highly skewed with extreme values then we should be skeptical of the sample mean, and fall back to the median which is resistant to extremes. By design, the before variable is set up to have a fairly symmetric distribution.
-
-A boxplot of =after= is shown next.
-
-#+begin_src R :exports code :eval never
-boxplot(after, xlab = "after", main = "", notch = FALSE, 
-  horizontal = TRUE, data = RcmdrTestDrive)
-#+end_src
-
-
-#+begin_src R :exports code :results graphics :file img/boxplotRTDafter.png
-qplot(factor(0), after, data = RcmdrTestDrive, geom = "boxplot", 
-      xlab = "") + coord_flip() + scale_x_discrete(breaks=NA) 
-#+end_src
-
-#+results[e57d685e389d1f9186d7187dc19aebe1d96d3dbe]:
-[[file:img/boxplotRTDafter.png]]
-
-#+begin_src latex 
-  \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/boxplotRTDafter.png}
-    \caption[A \texttt{boxplot} of \texttt{after}]{A \texttt{boxplot} of \texttt{after} in the \texttt{RcmdrTestDrive} data}
-    \label{fig:boxplotRTDafter}
-  \end{figure}
-#+end_src
-
-The same remarks apply to the =after= variable. The =after=  variable has been designed to be left-skewed... thus, the median would likely be a good choice for this variable.
-
-1. Based on your answer to (2), choose an appropriate measure of spread for each variable, calculate it, and report its value. Which variable has the biggest spread? (Note that you need to make sure that your measures are on the same scale.) 
-
-Since =before= has a symmetric, mound shaped distribution, an excellent measure of center would be the sample standard deviation.  And since =after= is left-skewed, we should use the median absolute deviation. It is also acceptable to use the IQR, but we should rescale it appropriately, namely, by dividing by 1.349. The exact values are shown below.
-
-#+begin_src R :exports both :results output pp  
-sd(before)
-mad(after)
-IQR(after)/1.349
-#+end_src
-
-#+results[4bbf04e0b132c8d44a5b11bfae2f726311d6ccf8]:
-: [1] 1.076412
-: [1] 1.55673
-: [1] 1.556709
-
-Judging from the values above, we would decide which variable has the higher spread. Look at how close the =mad= and the =IQR= (after suitable rescaling) are; it goes to show why the rescaling is important.
-
-1. Calculate and report the skewness and kurtosis for =before=. Based on these values, how would you describe the shape of =before=? 
-
-   The values of these descriptive measures are shown below.
-   #+begin_src R :exports both :results output pp  
-   library(e1071)
-   skewness(before)
-   kurtosis(before)
-   #+end_src
-   #+results[35d273c6b63e2fc5186e66678a9ccefea44bcc27]:
-   : [1] -0.03510369
-   : [1] -0.7972288
-   We should take the sample skewness value and compare it to $2\sqrt{6/n}\approx$ SRC_R{ round( 2*sqrt(6 / length(before)), 3 ) } 0.378 in absolute value to see if it is substantially different from zero. The direction of skewness is decided by the sign (positive or negative) of the skewness value. 
-   We should take the sample kurtosis value and compare it to $2\cdot\sqrt{24/168}\approx$ SRC_R{round(4*sqrt(6/length(before)),3)} 0.756, in absolute value to see if the excess kurtosis is substantially different from zero. And take a look at the sign to see whether the distribution is platykurtic or leptokurtic.
-
-1. Calculate and report the skewness and kurtosis for =after=. Based on these values, how would you describe the shape of =after=?
-
-   The values of these descriptive measures are shown below.
-   #+begin_src R :exports both :results output pp  
-   skewness(after)
-   kurtosis(after)
-   #+end_src
-   #+results[f8cf1e7a70ad9de6aadf85899ff872efa041e4e8]:
-   : [1] -1.164056
-   : [1] 1.322198
-   We should do for this one just like we did previously. We would again compare the sample skewness and kurtosis values (in absolute value) to SRC_R{round(2*sqrt(6/length(after)),3)} 0.378 and SRC_R{round(4*sqrt(6/length(after)),3)} 0.756, respectively.
-
-1. Plot histograms of =before= and =after= and compare them to your answers to (4) and (5).
-   The graphs are shown below.
-   #+begin_src R :exports code :results graphics :file img/histRTDbefore.png
-   hist(before, xlab = "before", data = RcmdrTestDrive)
-   #+end_src
-
-   #+results[1a97ad308c3da22d39ad2bb5037ef8fbee16435c]:
-[[file:img/histRTDbefore.png]]
-
-   #+begin_src latex 
-     \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/histRTDbefore.png}
-       \caption[A histogram of \texttt{before}]{A histogram of \texttt{before} in the \texttt{RcmdrTestDrive} data}
-       \label{fig:histRTDbefore}
-     \end{figure}
-   #+end_src
-   #+begin_src R :exports code :results graphics :file img/histRTDafter.png
-   hist(after, xlab = "after", data = RcmdrTestDrive)
-   #+end_src
-
-   #+results[91139ce9c13e21f40721595c781a10051dc69bc8]:
-[[file:img/histRTDafter.png]]
-   #+begin_src latex 
-     \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/histRTDafter.png}
-       \caption[A histogram of \texttt{after}]{A histogram of \texttt{after} in the \texttt{RcmdrTestDrive} data}
-       \label{fig:histRTDafter}
-     \end{figure}
-   #+end_src
-
-   Answers will vary. We are looking for visual consistency in the histograms to our statements above.
 
 #+latex: \begin{xca}
 Describe the following data sets just as if you were communicating with an alien, but one who has had a statistics class. Mention the salient features (data type, important properties, anything special). Support your answers with the appropriate visual displays and descriptive statistics.
