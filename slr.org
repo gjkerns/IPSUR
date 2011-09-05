@@ -9,7 +9,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: answ soln
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache no :tangle no
+#+BABEL: :session *R* :exports results :results value raw replace :cache no :tangle no
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -17,7 +17,7 @@
 
 * Simple Linear Regression
 \label{cha:simple-linear-regression}
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 seed <- 42
 set.seed(seed)
 options(width = 60)
@@ -61,7 +61,9 @@ Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not rando
 - \( x = \) height and \( Y = \) weight.
 - \( x = \) smoking frequency and \( Y = \) age of first heart attack.
 
-Given information about the relationship between \(x\) and \(Y\), we would like to /predict/ future values of \(Y\) for particular values of \(x\). This turns out to be a difficult problem\footnote{Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''}, so instead we first tackle an easier problem: we estimate \( \E Y \). How can we accomplish this? Well, we know that \(Y\) depends somehow on \(x\), so it stands to reason that
+Given information about the relationship between \(x\) and \(Y\), we would like to /predict/ future values of \(Y\) for particular values of \(x\). This turns out to be a difficult problem \!\!
+#+latex: \footnote{Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''}
+, so instead we first tackle an easier problem: we estimate \( \E Y \). How can we accomplish this? Well, we know that \(Y\) depends somehow on \(x\), so it stands to reason that
 \begin{equation}
 \E Y = \mu(x),\ \mbox{a function of }x.
 \end{equation}
@@ -102,7 +104,8 @@ We assume both the normality of the errors \(\epsilon\) and the linearity of the
 #+latex: \end{rem}
 
 *** What does it all mean?
-See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and /y/-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as \(x\) gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
+See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and /y/-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases
+#+latex: \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as \(x\) gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
 
 #+begin_latex
 \begin{figure}[ht!]
@@ -229,9 +232,13 @@ where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
+#+begin_src R :exports none :results silent
+tmpcoef <- round(as.numeric(coef(lm(dist ~ speed, cars))), 2)
+#+end_src
+
 Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
 
@@ -241,7 +248,7 @@ The first part of the input to the =lm= function, =dist ~ speed=, is a /model fo
 coef(cars.lm)
 #+end_src
 
-The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{round(summary(cars.lm)$coef[1], 2)} + SRC_R{round(summary(cars.lm)$coef[2], 2)} \cdot \mathtt{speed} \).
+The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{tmpcoef[1]} + SRC_R{tmpcoef[2]} \cdot \mathtt{speed} \).
 
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure \ref{fig:Scatter-cars-regline}.
 
@@ -268,9 +275,9 @@ Using the regression line for the =cars= data:
 1. What is the meaning of \( \mu(60) = \beta_{0} + \beta_{1}(8) \)? 
    This represents the average stopping distance (in feet) for a car going 8 mph. 
 1. Interpret the slope \(\beta_{1}\). 
-   The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately SRC_R{round(summary(cars.lm)$coef[2], 2)} additional feet to stop for each additional mph increase in speed.
+   The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately \( SRC_R{tmpcoef[2]} \) additional feet to stop for each additional mph increase in speed.
 1. Interpret the intercept \( \beta_{0} \).
-   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \( SRC_R{round(summary(cars.lm)$coef[1], 2)} \)). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
+   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \( SRC_R{tmpcoef[1]} \)). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
@@ -283,7 +290,7 @@ The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(
 
 #+latex: \begin{example}
 \label{exa:regline-cars-pe-8mph}
-We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{round(summary(cars.lm)$coef[1], 2)} + (8) ( SRC_R{round(summary(cars.lm)$coef[2], 2)} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
+We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
 Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data (which we saw in Example \ref{exa:Speed-and-Stopping}).
@@ -333,7 +340,9 @@ For a point estimate of \(\sigma^{2}\) we use the /mean square error/ \(S^{2}\) 
 \begin{equation}
 S^{2}=\frac{SSE}{n-2},
 \end{equation}
-and we estimate \(\sigma\) with the /standard error/\footnote{Be careful not to confuse the mean square error \(S^{2}\) with the sample variance \(S^{2}\) in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase \(s^{2}\) or the bulky \(MSE\).} \(S=\sqrt{S^{2}}\).
+and we estimate \(\sigma\) with the /standard error/
+#+latex: \footnote{Be careful not to confuse the mean square error \(S^{2}\) with the sample variance \(S^{2}\) in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase \(s^{2}\) or the bulky \(MSE\).}
+\(S=\sqrt{S^{2}}\).
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -343,13 +352,14 @@ The residuals for the model may be obtained with the =residuals= function; we on
 residuals(cars.lm)[1:5]
 #+end_src
 
-#+begin_src R :exports none 
-tmp <- round(as.numeric(predict(cars.lm, newdata = data.frame(speed = 8))), 2)
+#+begin_src R :exports none :results silent
+tmpred <- round(as.numeric(predict(cars.lm, newdata = data.frame(speed = 8))), 2)
+tmps <- round(summary(cars.lm)$sigma, 2)
 #+end_src
 
-In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmp} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmp} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
+In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
-The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{round(summary(cars.lm)$sigma, 2)} \), or we can access it directly from the =summary= object.
+The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
 
 #+begin_src R :exports both :results output pp
 carsumry <- summary(cars.lm)
@@ -407,15 +417,15 @@ b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
+#+begin_src R :exports none :results silent
+A <- matrix(as.numeric(round(carsumry$coef, 3)), nrow = 2)
+B <- round(confint(cars.lm), 3)
+#+end_src
+
 Let us take a look at the output from =summary(cars.lm)=:
 
 #+begin_src R :exports both :results output pp 
 summary(cars.lm)
-#+end_src
-
-#+begin_src R :exports none
-A <- round(carsumry$coef, 3)
-B <- round(confint(cars.lm), 3)
 #+end_src
 
 In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec:Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use \( b_{1} = SRC_R{A[2,1]} \) and \( S_{b_{1}} = SRC_R{A[2,2]} \) together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \) critical value to calculate \( b_{1} \pm \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could use the =confint= function.
@@ -484,7 +494,7 @@ Prediction intervals are given by
 predict(cars.lm, newdata = new, interval = "prediction")
 #+end_src
 
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 carsPI <- round(predict(cars.lm, newdata = new, interval = "prediction"), 2)
 #+end_src
 
@@ -526,7 +536,6 @@ library(HH)
 print(ci.plot(cars.lm))
 #+end_src
 
-
 ** Model Utility and Inference
 \label{sec:Model-Utility-SLR}
 
@@ -551,11 +560,6 @@ Let us take another look at the output from =summary(cars.lm)=:
 
 #+begin_src R :exports both :results output pp 
 summary(cars.lm)
-#+end_src
-
-#+begin_src R :exports none
-A <- round(summary(cars.lm)$coef, 3)
-B <- round(confint(cars.lm), 3)
 #+end_src
 
 In the =Coefficients= section we find the \(t\) statistics and the \(p\)-values associated with the tests that the respective parameters are zero in the fourth and fifth columns. Since the \(p\)-values are (much) less than 0.05, we conclude that there is strong evidence that the parameters \(\beta_{1}\neq0\) and \(\beta_{0}\neq0\), and as such, we say that there is a statistically significant linear relationship between =dist= and =speed=. 
@@ -615,7 +619,7 @@ The output gives
 r^{2}=1-\frac{SSE}{SSR+SSE}=1-\frac{11353.5}{21185.5+11353.5}\approx0.65.
 \]
 
-The interpretation should be: ``The linear regression line accounts for approximately 65\% of the variation of =dist= as explained by =speed=''.
+The interpretation should be: ``The linear regression line accounts for approximately 65% of the variation of =dist= as explained by =speed=''.
 
 The value of \(r^{2}\) is stored in the =r.squared= component of =summary(cars.lm)=, which we called =carsumry=.
 
@@ -659,7 +663,11 @@ The overall \(F\) statistic and \(p\)-value are displayed in the bottom line of 
 anova(cars.lm)
 #+end_src
 
-Here we see that the \(F\) statistic is \( SRC_R{round(as.numeric(carsumry$fstatistic[1]), 2)} \) with a \(p\)-value very close to zero. The conclusion: there is very strong evidence that \(H_{0}:\beta_{1} = 0 \) is false, that is, there is strong evidence that \( \beta_{1} \neq 0 \). Moreover, we conclude that the regression relationship between =dist= and =speed= is significant.
+#+begin_src R :exports none :results silent
+tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
+#+end_src
+
+Here we see that the \(F\) statistic is \( SRC_R{tmpf} \) with a \(p\)-value very close to zero. The conclusion: there is very strong evidence that \(H_{0}:\beta_{1} = 0 \) is false, that is, there is strong evidence that \( \beta_{1} \neq 0 \). Moreover, we conclude that the regression relationship between =dist= and =speed= is significant.
 
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for =speed= squared.
 
@@ -959,7 +967,7 @@ A rule of thumb is to flag observations whose \(DFFIT\) exceeds one in absolute 
 
 #+latex: \paragraph*{Cook's Distance}
 
-The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated\footnote{Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.} by the formula
+The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated[fn:coodefine Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.] by the formula
 \begin{equation}
 D_{i}=\frac{E_{i}^{2}}{(p+1)S^{2}}\cdot\frac{h_{ii}}{(1-h_{ii})^{2}},\quad i=1,2,\ldots,n.\label{eq:slr-cooks-distance}
 \end{equation}
@@ -1075,4 +1083,5 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.
 \]
 #+latex: \end{xca}
+
 
