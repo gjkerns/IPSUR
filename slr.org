@@ -109,13 +109,13 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/philosophy.png}
+  \includegraphics[width=5in, height=4in]{img/philosophy.pdf}
   \caption[Philosophical foundations of SLR]{\small Philosophical foundations of SLR.}
   \label{fig:philosophy}
 \end{figure}
 #+end_latex
  
-#+begin_src R :exports none :results graphics silent :file img/philosophy.png
+#+begin_src R :exports none :results graphics silent :file img/philosophy.pdf
 # open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h=0, v=0, col = "gray60")
@@ -142,19 +142,19 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/carscatter.png}
+  \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
   \caption[Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data]{\small A scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data.  There is clearly an upward trend to the plot which is approximately linear.}
   \label{fig:Scatter-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/carscatter.png
+#+begin_src R :exports code :results graphics silent :file img/carscatter.pdf
 qplot(speed, dist, data = cars)
 #+end_src
 
 You can see the output in Figure \ref{fig:Scatter-cars}, which was produced by the following code.
 
-#+begin_src R :exports code :eval never
+#+begin_src R :exports code :eval never :results silent
 plot(dist ~ speed, data = cars)
 #+end_src
 
@@ -254,13 +254,13 @@ It is good practice to visually inspect the data with the regression line added 
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/carline.png}
+  \includegraphics[width=5in, height=4in]{img/carline.pdf}
   \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with an added regression line for the \texttt{cars} data.}
   \label{fig:Scatter-cars-regline}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results output graphics silent :file img/carline.png
+#+begin_src R :exports code :results output graphics silent :file img/carline.pdf
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
        geom_smooth(method = lm)
 #+end_src
@@ -277,7 +277,7 @@ Using the regression line for the =cars= data:
 1. Interpret the slope \(\beta_{1}\). 
    The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately \( SRC_R{tmpcoef[2]} \) additional feet to stop for each additional mph increase in speed.
 1. Interpret the intercept \( \beta_{0} \).
-   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \( SRC_R{tmpcoef[1]} \)). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
+   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \( SRC_R{tmpcoef[1]} \) ). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be /extrapolating/, a dangerous practice which often gives nonsensical results.
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
@@ -518,7 +518,7 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/carscipi.png}
+  \includegraphics[width=5in, height=4in]{img/carscipi.pdf}
   \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
   \label{fig:Scatter-cars-CIPI}
 \end{figure}
@@ -531,7 +531,7 @@ ci.plot(cars.lm)
 
 Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 
-#+begin_src R :exports none :results graphics silent :file img/carscipi.png
+#+begin_src R :exports none :results graphics silent :file img/carscipi.pdf
 library(HH)
 print(ci.plot(cars.lm))
 #+end_src
@@ -686,7 +686,7 @@ We can assess the normality of the residuals with graphical methods and hypothes
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.png}
+  \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.pdf}
   \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
 any curvature or substantial departures from the straight line; hopefully
 the dots hug the line closely.}
@@ -694,7 +694,7 @@ the dots hug the line closely.}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/Normal-q-q-plot-cars.png
+#+begin_src R :exports code :results graphics silent :file img/Normal-q-q-plot-cars.pdf
 plot(cars.lm, which = 2)
 #+end_src
 
@@ -743,13 +743,13 @@ In this case, we plot the standardized residuals versus the fitted values. The g
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.png}
+  \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.pdf}
   \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
   \label{fig:std-resids-fitted-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/std-resids-fitted-cars.png
+#+begin_src R :exports code :results graphics silent :file img/std-resids-fitted-cars.pdf
 plot(cars.lm, which = 3)
 #+end_src
 
@@ -784,14 +784,14 @@ On the other hand, negative correlation implies positive residuals followed by n
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.png}
+  \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.pdf}
   \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
 data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
   \label{fig:resids-fitted-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/resids-fitted-cars.png
+#+begin_src R :exports code :results graphics silent :file img/resids-fitted-cars.pdf
 plot(cars.lm, which = 1)
 #+end_src
 
@@ -988,13 +988,13 @@ We can look at a plot of the Cook's distances with the command =plot(cars.lm, wh
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.png}
+  \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.pdf}
   \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
   \label{fig:Cooks-distance-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/Cooks-distance-cars.png
+#+begin_src R :exports code :results graphics silent :file img/Cooks-distance-cars.pdf
 plot(cars.lm, which = 4)
 #+end_src
 
@@ -1029,13 +1029,13 @@ The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the s
 
 #+begin_latex
 \begin{figure}[ht!]
-  \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.png}
+  \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.pdf}
   \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
   \label{fig:Diagnostic-plots-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports none :results graphics silent :file img/Diagnostic-plots-cars.png
+#+begin_src R :exports none :results graphics silent :file img/Diagnostic-plots-cars.pdf
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
