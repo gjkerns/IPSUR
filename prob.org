@@ -9,7 +9,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: answ soln
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
+#+BABEL: :session *R* :exports results :results value raw replace :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -18,6 +18,7 @@
 * Probability
 \label{cha:Probability}
 #+begin_src R :exports none
+rm(list = ls())
 seed <- 42
 set.seed(seed)
 options(width = 60)
@@ -47,7 +48,7 @@ library(TeachingDemos)
 #+latex: \noindent 
 In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
 
-In this book we distinguish between two types of experiments: /deterministic/ and /random/. A /deterministic/ experiment is one whose outcome may be predicted with certainty beforehand, such as combining Hydrogen and Oxygen, or adding two numbers such as $2+3$. A /random/ experiment is one whose outcome is determined by chance. We posit that the outcome of a random experiment may not be predicted with certainty beforehand, even in principle. Examples of random experiments include tossing a coin, rolling a die, and throwing a dart on a board, how many red lights you encounter on the drive home, how many ants traverse a certain patch of sidewalk over a short period, /etc/.
+In this book we distinguish between two types of experiments: /deterministic/ and /random/. A /deterministic/ experiment is one whose outcome may be predicted with certainty beforehand, such as combining Hydrogen and Oxygen, or adding two numbers such as \(2+3\). A /random/ experiment is one whose outcome is determined by chance. We posit that the outcome of a random experiment may not be predicted with certainty beforehand, even in principle. Examples of random experiments include tossing a coin, rolling a die, and throwing a dart on a board, how many red lights you encounter on the drive home, how many ants traverse a certain patch of sidewalk over a short period, /etc/.
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -59,7 +60,7 @@ In this book we distinguish between two types of experiments: /deterministic/ an
 - what we mean by 'random variables', and where they come from
 
 
-#+begin_src R :exports none :results graphics :file img/diagram.png
+#+begin_src R :exports none :results graphics silent :file img/diagram.pdf
 require(diagram)
 par(mex = 0.2, cex = 0.5)
 openplotmat(frame.plot=TRUE)
@@ -78,11 +79,11 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 #+end_src
 
 #+results[5e9c57d9e4ae8cd0be3dec799e9ec65282c838d6]:
-[[file:img/diagram.png]]
+[[file:img/diagram.pdf]]
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/diagram.png}
+    \includegraphics[width=5in, height=4in]{img/diagram.pdf}
     \caption[Two types of experiments]{Two types of experiments}
     \label{fig:diagram}
   \end{figure}
@@ -92,7 +93,7 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 ** Sample Spaces
 \label{sec:Sample-Spaces}
 
-For a random experiment $E$, the set of all possible outcomes of $E$ is called the /sample space/\index{sample space} and is denoted by the letter $S$. For a coin-toss experiment, $S$ would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in $S$.
+For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the /sample space/\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -117,10 +118,9 @@ The sample space =S= contains the column =lands= which stores the outcomes =down
 
 #+latex: \end{example}
 
-Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the =expand.grid= function in the =base= package, =combn= in the =combinat= package \cite{combinat}, and =permsn= in the =prob= package[fn:countwrap]. Consider the random experiment of tossing a coin. The outcomes are $H$ and $T$. We can set up the sample space quickly with the =tosscoin= function:
-
-[fn:countwrap] The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.
-
+Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the =expand.grid= function in the =base= package, =combn= in the =combinat= package \cite{combinat}, and =permsn= in the =prob= package
+#+latex: \footnote{The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
+Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the =tosscoin= function:
 
 #+begin_src R :exports both :results output pp  
 library(prob)
@@ -196,7 +196,7 @@ But there are all sorts of variations on this theme. Maybe we would like to grab
 
 There is more. Suppose we do not actually keep track of which ball came first. All we observe are the two balls, and we have no idea about the order in which they were selected. We call this /unordered sampling/ (in contrast to /ordered/) because the order of the selections does not matter with respect to what we observe. We might as well have selected the balls and put them in a bag before looking.
 
-Note that this one general class of random experiments contains as a special case all of the common elementary random experiments. Tossing a coin twice is equivalent to selecting two balls labeled $H$ and $T$ from an urn, with replacement. The die-roll experiment is equivalent to selecting a ball from an urn with six elements, labeled 1 through 6.
+Note that this one general class of random experiments contains as a special case all of the common elementary random experiments. Tossing a coin twice is equivalent to selecting two balls labeled \(H\) and \(T\) from an urn, with replacement. The die-roll experiment is equivalent to selecting a ball from an urn with six elements, labeled 1 through 6.
 
 #+latex: \paragraph*{How to do it with \textsf{R}} 
 
@@ -294,9 +294,9 @@ In this way, when the =x= argument of =urnsamples= has repeated elements, the re
 ** Events
 \label{sec:Events}
 
-An /event/\index{event} $A$ is merely a collection of outcomes, or in other words, a subset of the sample space[fn:events]. After the performance of a random experiment $E$ we say that the event $A$ /occurred/ if the experiment's outcome belongs to $A$. We say that a bunch of events $A_{1}$, $A_{2}$, $A_{3}$, ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if $A_{i}\cap A_{j}=\emptyset$ for any distinct pair $A_{i}\neq A_{j}$. For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec:The-Algebra-of}. 
-
-[fn:events] This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.
+An /event/\index{event} \(A\) is merely a collection of outcomes, or in other words, a subset of the sample space
+#+latex: \footnote{This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.}.
+After the performance of a random experiment \(E\) we say that the event \(A\) /occurred/ if the experiment's outcome belongs to \(A\). We say that a bunch of events \(A_{1}\), \(A_{2}\), \(A_{3}\), ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if \(A_{i}\cap A_{j}=\emptyset\) for any distinct pair \(A_{i}\neq A_{j}\). For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec:The-Algebra-of}.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -324,7 +324,7 @@ S[c(2,4), ]
 
 and so forth. We may also extract rows that satisfy a logical expression using the =subset= function, for instance 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 S <- cards() 
 #+end_src 
 
@@ -418,7 +418,7 @@ isin(x,y)
 
 Of course, one may ask why we did not try something like =all(y %in% x)=, which would give a single result, =TRUE=. The reason is that the answers are different in the case that =y= has repeated values. Compare: 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 x <- 1:10 
 y <- c(3,3,7) 
 #+end_src 
@@ -482,20 +482,20 @@ There are a few other functions written to find useful subsets, namely, =countre
 
 *** Set Union, Intersection, and Difference
 
-Given subsets $A$ and $B$, it is often useful to manipulate them in an algebraic fashion. To this end, we have three set operations at our disposal: union, intersection, and difference. Below is a table that summarizes the pertinent information about these operations.
+Given subsets \(A\) and \(B\), it is often useful to manipulate them in an algebraic fashion. To this end, we have three set operations at our disposal: union, intersection, and difference. Below is a table that summarizes the pertinent information about these operations.
 
 |--------------+---------------------+-----------------------+------------------|
 | Name         | Denoted             | Defined by elements   | Code             |
 |--------------+---------------------+-----------------------+------------------|
-| Union        | $A\cup B$           | in $A$ or $B$ or both | =union(A,B)=     |
-| Intersection | $A\cap B$           | in both $A$ and $B$   | =intersect(A,B)= |
-| Difference   | $A\textbackslash B$ | in $A$ but not in $B$ | =setdiff(A,B)=   |
+| Union        | \(A\cup B\)           | in \(A\) or \(B\) or both | =union(A,B)=     |
+| Intersection | \(A\cap B\)           | in both \(A\) and \(B\)   | =intersect(A,B)= |
+| Difference   | \(A\textbackslash B\) | in \(A\) but not in \(B\) | =setdiff(A,B)=   |
 |--------------+---------------------+-----------------------+------------------|
 
 
 Some examples follow. 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 S <- cards() 
 A <- subset(S, suit == "Heart") 
 B <- subset(S, rank %in% 7:9)
@@ -583,7 +583,7 @@ setdiff(B,A)
 47    9   Spade
 #+end_example
 
-Notice that =setdiff= is not symmetric. Further, note that we can calculate the /complement/ of a set $A$, denoted $A^{c}$ and defined to be the elements of $S$ that are not in $A$ simply with =setdiff(S,A)=. There have been methods written for =intersect=, =setdiff=, =subset=, and =union= in the case that the input objects are of class =ps=. See Section \ref{sub:howto-ps-objects}.
+Notice that =setdiff= is not symmetric. Further, note that we can calculate the /complement/ of a set \(A\), denoted \(A^{c}\) and defined to be the elements of \(S\) that are not in \(A\) simply with =setdiff(S,A)=. There have been methods written for =intersect=, =setdiff=, =subset=, and =union= in the case that the input objects are of class =ps=. See Section \ref{sub:howto-ps-objects}.
 
 #+latex: \begin{note}
 
@@ -594,37 +594,37 @@ When the =prob= package loads you will notice a message: ``\texttt{The following
 ** Model Assignment
 \label{sec:Interpreting-Probabilities}
 
-Let us take a look at the coin-toss experiment more closely. What do we mean when we say ``the probability of Heads'' or write \(\P(\mbox{Heads})\)? Given a coin and an itchy thumb, how do we go about finding what $\P(\mbox{Heads})$ should be?
+Let us take a look at the coin-toss experiment more closely. What do we mean when we say ``the probability of Heads'' or write \(\P(\mbox{Heads})\)? Given a coin and an itchy thumb, how do we go about finding what \(\P(\mbox{Heads})\) should be?
 
 *** The Measure Theory Approach
 
-This approach states that the way to handle $\P(\mbox{Heads})$ is to define a mathematical function, called a /probability measure/, on the sample space. Probability measures satisfy certain axioms (to be introduced later) and have special mathematical properties, so not just any mathematical function will do. But in any given physical circumstance there are typically all sorts of probability measures from which to choose, and it is left to the experimenter to make a reasonable choice -- one usually based on considerations of objectivity. For the tossing coin example, a valid probability measure assigns probability $p$ to the event \( \{ \mbox{Heads} \} \), where $p$ is some number $0\leq p\leq1$. An experimenter that wishes to incorporate the symmetry of the coin would choose $p=1/2$ to balance the likelihood of \( \{\mbox{Heads} \} \) and \( \{ \mbox{Tails} \} \).
+This approach states that the way to handle \(\P(\mbox{Heads})\) is to define a mathematical function, called a /probability measure/, on the sample space. Probability measures satisfy certain axioms (to be introduced later) and have special mathematical properties, so not just any mathematical function will do. But in any given physical circumstance there are typically all sorts of probability measures from which to choose, and it is left to the experimenter to make a reasonable choice -- one usually based on considerations of objectivity. For the tossing coin example, a valid probability measure assigns probability \(p\) to the event \( \{ \mbox{Heads} \} \), where \(p\) is some number \(0\leq p\leq1\). An experimenter that wishes to incorporate the symmetry of the coin would choose \(p=1/2\) to balance the likelihood of \( \{\mbox{Heads} \} \) and \( \{ \mbox{Tails} \} \).
 
-Once the probability measure is chosen (or determined), there is not much left to do. All assignments of probability are made by the probability function, and the experimenter needs only to plug the event \(\{ \mbox{Heads} \}\) into to the probability function to find $\P(\mbox{Heads})$. In this way, the probability of an event is simply a calculated value, nothing more, nothing less. Of course this is not the whole story; there are many theorems and consequences associated with this approach that will keep us occupied for the remainder of this book. The approach is called /measure theory/ because the measure (probability) of a set (event) is associated with how big it is (how likely it is to occur).
+Once the probability measure is chosen (or determined), there is not much left to do. All assignments of probability are made by the probability function, and the experimenter needs only to plug the event \(\{ \mbox{Heads} \}\) into to the probability function to find \(\P(\mbox{Heads})\). In this way, the probability of an event is simply a calculated value, nothing more, nothing less. Of course this is not the whole story; there are many theorems and consequences associated with this approach that will keep us occupied for the remainder of this book. The approach is called /measure theory/ because the measure (probability) of a set (event) is associated with how big it is (how likely it is to occur).
 
 The measure theory approach is well suited for situations where there is symmetry to the experiment, such as flipping a balanced coin or spinning an arrow around a circle with well-defined pie slices. It is also handy because of its mathematical simplicity, elegance, and flexibility. There are literally volumes of information that one can prove about probability measures, and the cold rules of mathematics allow us to analyze intricate probabilistic problems with vigor. 
 
-The large degree of flexibility is also a disadvantage, however. When symmetry fails it is not always obvious what an ``objective'' choice of probability measure should be; for instance, what probability should we assign to \( \{ \mbox{Heads} \} \) if we spin the coin rather than flip it? (It is not $1/2$.) Furthermore, the mathematical rules are restrictive when we wish to incorporate subjective knowledge into the model, knowledge which changes over time and depends on the experimenter, such as personal knowledge about the properties of the specific coin being flipped, or of the person doing the flipping.
+The large degree of flexibility is also a disadvantage, however. When symmetry fails it is not always obvious what an ``objective'' choice of probability measure should be; for instance, what probability should we assign to \( \{ \mbox{Heads} \} \) if we spin the coin rather than flip it? (It is not \(1/2\).) Furthermore, the mathematical rules are restrictive when we wish to incorporate subjective knowledge into the model, knowledge which changes over time and depends on the experimenter, such as personal knowledge about the properties of the specific coin being flipped, or of the person doing the flipping.
 
 The mathematician who revolutionized this way to do probability theory was Andrey Kolmogorov, who published a landmark monograph in 1933. See [[http://www-history.mcs.st-andrews.ac.uk/Mathematicians/Kolmogorov.html][here]] for more information.
 
 *** Relative Frequency Approach
 
-This approach states that the way to determine $\P(\mbox{Heads})$ is to flip the coin repeatedly, in exactly the same way each time. Keep a tally of the number of flips and the number of Heads observed. Then a good approximation to $\P(\mbox{Heads})$ will be
+This approach states that the way to determine \(\P(\mbox{Heads})\) is to flip the coin repeatedly, in exactly the same way each time. Keep a tally of the number of flips and the number of Heads observed. Then a good approximation to \(\P(\mbox{Heads})\) will be
 
 \begin{equation} 
 \P(\mbox{Heads})\approx\frac{\mbox{number of observed Heads}}{\mbox{total number of flips}}.
 \end{equation}
 
 
-The mathematical underpinning of this approach is the celebrated *Law of Large Numbers* which may be loosely described as follows. Let $E$ be a random experiment in which the event $A$ either does or does not occur. Perform the experiment repeatedly, in an identical manner, in such a way that the successive experiments do not influence each other. After each experiment, keep a running tally of whether or not the event $A$ occurred. Let $S_{n}$ count the number of times that $A$ occurred in the $n$ experiments. Then the law of large numbers says that 
+The mathematical underpinning of this approach is the celebrated *Law of Large Numbers* which may be loosely described as follows. Let \(E\) be a random experiment in which the event \(A\) either does or does not occur. Perform the experiment repeatedly, in an identical manner, in such a way that the successive experiments do not influence each other. After each experiment, keep a running tally of whether or not the event \(A\) occurred. Let \(S_{n}\) count the number of times that \(A\) occurred in the \(n\) experiments. Then the law of large numbers says that 
 
 \begin{equation}
 \frac{S_{n}}{n}\to\P(A)\mbox{ as }n\to\infty.
 \end{equation}
 
 
-As the reasoning goes, to learn about the probability of an event $A$ we need only repeat the random experiment to get a reasonable estimate of the probability's value, and if we are not satisfied with our estimate then we may simply repeat the experiment more times all the while confident that with more and more experiments our estimate will stabilize to the true value. 
+As the reasoning goes, to learn about the probability of an event \(A\) we need only repeat the random experiment to get a reasonable estimate of the probability's value, and if we are not satisfied with our estimate then we may simply repeat the experiment more times all the while confident that with more and more experiments our estimate will stabilize to the true value. 
 
 The frequentist approach is good because it is relatively light on assumptions and does not worry about symmetry or claims of objectivity like the measure-theoretic approach does. It is perfect for the spinning coin experiment. One drawback to the method is that one can never know the exact value of a probability, only a long-run approximation. It also does not work well with experiments that can not be repeated indefinitely, say, the probability that it will rain today, the chances that you get will get an A in your Statistics class, or the probability that the world is destroyed by nuclear war.
 
@@ -634,7 +634,7 @@ This approach was espoused by Richard von Mises in the early twentieth century, 
 
 The subjective approach interprets probability as the experimenter's /degree of belief/ that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section \ref{sec:Bayes'-Rule}. 
 
-So for the coin toss example, a person may have $\P(\mbox{Heads})=1/2$ in the absence of additional information. But perhaps the observer knows additional information about the coin or the thrower that would shift the probability in a certain direction. For instance, parlor magicians may be trained to be quite skilled at tossing coins, and some are so skilled that they may toss a fair coin and get nothing but Heads, indefinitely. I have /seen/ this. It was similarly claimed in /Bringing Down the House/ \cite{Mezrich2003} that MIT students were accomplished enough with cards to be able to cut a deck to the same location, every single time. In such cases, one clearly should use the additional information to assign $\P(\mbox{Heads})$ away from the symmetry value of $1/2$.
+So for the coin toss example, a person may have \(\P(\mbox{Heads})=1/2\) in the absence of additional information. But perhaps the observer knows additional information about the coin or the thrower that would shift the probability in a certain direction. For instance, parlor magicians may be trained to be quite skilled at tossing coins, and some are so skilled that they may toss a fair coin and get nothing but Heads, indefinitely. I have /seen/ this. It was similarly claimed in /Bringing Down the House/ \cite{Mezrich2003} that MIT students were accomplished enough with cards to be able to cut a deck to the same location, every single time. In such cases, one clearly should use the additional information to assign \(\P(\mbox{Heads})\) away from the symmetry value of \(1/2\).
 
 This approach works well in situations that cannot be repeated indefinitely, for example, to assign your probability that you will get an A in this class, the chances of a devastating nuclear war, or the likelihood that a cure for the common cold will be discovered.
 
@@ -648,7 +648,7 @@ The ELM appears in the measure theory approach when the experiment boasts symmet
 
 The ELM appears in the subjective approach when the experimenter resorts to indifference or ignorance with respect to his/her knowledge of the outcome of the experiment. If the experimenter has no prior knowledge to suggest that (s)he prefer Heads over Tails, then it is reasonable for the him/her to assign equal subjective probability to both possible outcomes.
 
-The ELM appears in the relative frequency approach as a fascinating fact of Nature: when we flip balanced coins over and over again, we observe that the proportion of times that the coin comes up Heads tends to $1/2$. Of course if we assume that the measure theory applies then we can prove that the sample proportion must tend to 1/2 as expected, but that is putting the cart before the horse, in a manner of speaking.
+The ELM appears in the relative frequency approach as a fascinating fact of Nature: when we flip balanced coins over and over again, we observe that the proportion of times that the coin comes up Heads tends to \(1/2\). Of course if we assume that the measure theory applies then we can prove that the sample proportion must tend to 1/2 as expected, but that is putting the cart before the horse, in a manner of speaking.
 
 The ELM is only available when there are finitely many elements in the sample space.
 
@@ -659,7 +659,7 @@ In the =prob= package, a probability space is an object of outcomes =S= and a ve
 To accomplish this in \textsf{R}, we may use the =probspace= function. The general syntax is =probspace(x, probs)=, where =x= is a sample space of outcomes and =probs= is a vector (of the same length as the number of outcomes in =x=). The specific choice of =probs= depends on the context of the problem, and some examples follow to demonstrate some of the more common choices. 
 
 #+latex: \begin{example}
-The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has $n$ outcomes, then =probs= would be a vector of length $n$ with identical entries $1/n$. The quickest way to generate =probs= is with the =rep= function. We will start with the experiment of rolling a die, so that $n=6$. We will construct the sample space, generate the =probs= vector, and put them together with =probspace=. 
+The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has \(n\) outcomes, then =probs= would be a vector of length \(n\) with identical entries \(1/n\). The quickest way to generate =probs= is with the =rep= function. We will start with the experiment of rolling a die, so that \(n=6\). We will construct the sample space, generate the =probs= vector, and put them together with =probspace=. 
 
 #+begin_src R :exports both :results output pp   
 outcomes <- rolldie(1) 
@@ -728,7 +728,7 @@ rolldie(1, makespace = TRUE)
 One sample space function that does NOT have a =makespace= option is the =urnsamples= function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use =probspace= to assign the model.
 
 #+latex: \begin{example}
-\label{exa:unbalanced-coin}\textbf{An unbalanced coin.} While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the ``$H$'' side is somewhat heavier such that the chances of a $H$ appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
+\label{exa:unbalanced-coin}\textbf{An unbalanced coin.} While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the ``\(H\)'' side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 #+begin_src R :exports both :results output pp   
 probspace(tosscoin(1), probs = c(0.70, 0.30)) 
@@ -756,19 +756,19 @@ that holds asymptotically. User beware.
 *** Probability Functions
 \label{sub:Probability-Functions}
 
-A /probability function/ is a rule that associates with each event $A$ of the sample space a unique number $\P(A)=p$, called the /probability of/ $A$. Any probability function $\P$ satisfies the following three Kolmogorov Axioms: 
+A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\P(A)=p\), called the /probability of/ \(A\). Any probability function \(\P\) satisfies the following three Kolmogorov Axioms: 
 
 \begin{ax}
-\label{ax:prob-nonnegative}$\P(A)\geq0$ for any event $A\subset S$.
+\label{ax:prob-nonnegative}\(\P(A)\geq0\) for any event \(A\subset S\).
 \end{ax}
 
 \begin{ax}
-\label{ax:total-mass-one}$\P(S)=1$.
+\label{ax:total-mass-one}\(\P(S)=1\).
 \end{ax}
 
 \begin{ax}
-\label{ax:countable-additivity}If the events $A_{1}$, $A_{2}$,
-$A_{3}$... are disjoint then
+\label{ax:countable-additivity}If the events \(A_{1}\), \(A_{2}\),
+\(A_{3}\)... are disjoint then
 
 \begin{equation}
 \P\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\P(A_{i})\mbox{ for every }n,
@@ -786,37 +786,37 @@ The intuition behind the axioms goes like this: first, the probability of an eve
 
 *** Properties
 
-For any events $A$ and $B$,
+For any events \(A\) and \(B\),
 
-1. $\P(A^{c})=1-\P(A)$.\label{enu:prop-prob-complement} 
+1. \(\P(A^{c})=1-\P(A)\).\label{enu:prop-prob-complement} 
 
   \begin{proof}
-  Since $A\cup A^{c}=S$ and $A\cap A^{c}=\emptyset$, we have
+  Since \(A\cup A^{c}=S\) and \(A\cap A^{c}=\emptyset\), we have
   \[
   1=\P(S)=\P(A\cup A^{c})=\P(A)+\P(A^{c}).
   \]
   \end{proof}
 
-1. $\P(\emptyset)=0$.
+1. \(\P(\emptyset)=0\).
 
   \begin{proof}
-  Note that $\emptyset=S^{c}$, and use Property 1.
+  Note that \(\emptyset=S^{c}\), and use Property 1.
   \end{proof}
 
-1. If $A\subset B$ , then $\P(A)\leq\P(B)$.
+1. If \(A\subset B\) , then \(\P(A)\leq\P(B)\).
 
   \begin{proof}
-  Write $B=A\cup\left(B\cap A^{c}\right)$, and notice that $A\cap\left(B\cap A^{c}\right)=\emptyset$; thus
+  Write \(B=A\cup\left(B\cap A^{c}\right)\), and notice that \(A\cap\left(B\cap A^{c}\right)=\emptyset\); thus
   \[
   \P(B)=\P(A\cup\left(B\cap A^{c}\right))=\P(A)+\P\left(B\cap A^{c}\right)\geq\P(A),
   \]
-  since $\P\left(B\cap A^{c}\right)\ge0$. 
+  since \(\P\left(B\cap A^{c}\right)\ge0\). 
   \end{proof}
 
-1. $0\leq\P(A)\leq1$.
+1. \(0\leq\P(A)\leq1\).
 
   \begin{proof}
-  The left inequality is immediate from Axiom \ref{ax:prob-nonnegative}, and the second inequality follows from Property 3 since $A\subset S$.
+  The left inequality is immediate from Axiom \ref{ax:prob-nonnegative}, and the second inequality follows from Property 3 since \(A\subset S\).
   \end{proof}
 
 1. *The General Addition Rule.*
@@ -824,7 +824,7 @@ For any events $A$ and $B$,
   \begin{equation}
   \P(A\cup B)=\P(A)+\P(B)-\P(A\cap B).\label{eq:general-addition-rule-1}
   \end{equation}
-  More generally, for events $A_{1}$, $A_{2}$, $A_{3}$,..., $A_{n}$,
+  More generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),..., \(A_{n}\),
 
   \begin{equation}
   \P\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\P(A_{i})-\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\P(A_{i}\cap A_{j})+\cdots+(-1)^{n-1}\P\left(\bigcap_{i=1}^{n}A_{i}\right)
@@ -832,47 +832,42 @@ For any events $A$ and $B$,
 
 1. *The Theorem of Total Probability.* 
 
-  Let $B_{1}$, $B_{2}$, ..., $B_{n}$ be mutually exclusive and exhaustive. Then
+  Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive. Then
   \begin{equation}
   \P(A)=\P(A\cap B_{1})+\P(A\cap B_{2})+\cdots+\P(A\cap B_{n}).\label{eq:theorem-total-probability}
   \end{equation}
 
 *** Assigning Probabilities
 
-A model of particular interest is the /equally likely model/. The idea is to divide the sample space $S$ into a finite collection of elementary events \( \{ a_{1},\ a_{2}, \ldots, a_{N} \} \) that are equally likely in the sense that each $a_{i}$ has equal chances of occurring. The probability function associated with this model must satisfy $\P(S)=1$, by Axiom 2. On the other hand, it must also satisfy
-
+A model of particular interest is the /equally likely model/. The idea is to divide the sample space \(S\) into a finite collection of elementary events \( \{ a_{1},\ a_{2}, \ldots, a_{N} \} \) that are equally likely in the sense that each \(a_{i}\) has equal chances of occurring. The probability function associated with this model must satisfy \(\P(S)=1\), by Axiom 2. On the other hand, it must also satisfy
 \[
 \P(S)=\P( \{ a_{1},\ a_{2},\ldots,a_{N} \} )=\P(a_{1}\cup a_{2}\cup\cdots\cup a_{N})=\sum_{i=1}^{N}\P(a_{i}),
 \]
+by Axiom 3. Since \(\P(a_{i})\) is the same for all \(i\), each one necessarily equals \(1/N\). 
 
-by Axiom 3. Since $\P(a_{i})$ is the same for all $i$, each one necessarily equals $1/N$. 
-
-For an event $A\subset S$, we write $A$ as a collection of elementary outcomes: if \( A = \{ a_{i_{1}}, a_{i_{2}}, \ldots, a_{i_{k}} \} \) then $A$ has $k$ elements and 
-
+For an event \(A\subset S\), we write \(A\) as a collection of elementary outcomes: if \( A = \{ a_{i_{1}}, a_{i_{2}}, \ldots, a_{i_{k}} \} \) then \(A\) has \(k\) elements and 
 \begin{align*}
 \P(A) & =\P(a_{i_{1}})+\P(a_{i_{2}})+\cdots+\P(a_{i_{k}}),\\
  & =\frac{1}{N}+\frac{1}{N}+\cdots+\frac{1}{N},\\
  & =\frac{k}{N}=\frac{\#(A)}{\#(S)}.
 \end{align*}
-
-
-In other words, under the equally likely model, the probability of an event $A$ is determined by the number of elementary events that $A$ contains. 
+In other words, under the equally likely model, the probability of an event \(A\) is determined by the number of elementary events that \(A\) contains. 
 
 #+latex: \begin{example}
-Consider the random experiment $E$ of tossing a coin. Then the sample space is $S=\{H,T\}$, and under the equally likely model, these two outcomes have $\P(H)=\P(T)=1/2$. This model is taken when it is reasonable to assume that the coin is fair.
+Consider the random experiment \(E\) of tossing a coin. Then the sample space is \(S=\{H,T\}\), and under the equally likely model, these two outcomes have \(\P(H)=\P(T)=1/2\). This model is taken when it is reasonable to assume that the coin is fair.
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Suppose the experiment $E$ consists of tossing a fair coin twice. The sample space may be represented by $S=\{HH,\, HT,\, TH,\, TT\}$. Given that the coin is fair and that the coin is tossed in an independent and identical manner, it is reasonable to apply the equally likely model. 
+Suppose the experiment \(E\) consists of tossing a fair coin twice. The sample space may be represented by \(S=\{HH,\, HT,\, TH,\, TT\}\). Given that the coin is fair and that the coin is tossed in an independent and identical manner, it is reasonable to apply the equally likely model. 
 
-What is $\P(\mbox{at least 1 Head})$? Looking at the sample space we see the elements $HH$, $HT$, and $TH$ have at least one Head; thus, $\P(\mbox{at least 1 Head})=3/4$. 
+What is \(\P(\mbox{at least 1 Head})\)? Looking at the sample space we see the elements \(HH\), \(HT\), and \(TH\) have at least one Head; thus, \(\P(\mbox{at least 1 Head})=3/4\). 
 
-What is $\P(\mbox{no Heads})$? Notice that the event \(\{ \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by Property \ref{enu:prop-prob-complement} means $\P(\mbox{no Heads})=1-\P(\mbox{at least one head})=1-3/4=1/4$. It is obvious in this simple example that the only outcome with no Heads is $TT$, however, this complementation trick can be handy in more complicated problems.
+What is \(\P(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by Property \ref{enu:prop-prob-complement} means \(\P(\mbox{no Heads})=1-\P(\mbox{at least one head})=1-3/4=1/4\). It is obvious in this simple example that the only outcome with no Heads is \(TT\), however, this complementation trick can be handy in more complicated problems.
 #+latex: \end{example}
 
 #+latex: \begin{example}
 \label{exa:three-child-family}
-Imagine a three child family, each child being either Boy ($B$) or Girl ($G$). An example sequence of siblings would be $BGB$. The sample space may be written
+Imagine a three child family, each child being either Boy (\(B\)) or Girl (\(G\)). An example sequence of siblings would be \(BGB\). The sample space may be written
 
 \[
 S=\left\{ 
@@ -883,11 +878,11 @@ BBG, & BGG, & GBG, & GGG
 \right\}.
 \]
 
-Note that for many reasons (for instance, it turns out that girls are slightly more likely to be born than boys), this sample space is /not/ equally likely. For the sake of argument, however, we will assume that the elementary outcomes each have probability $1/8$.
+Note that for many reasons (for instance, it turns out that girls are slightly more likely to be born than boys), this sample space is /not/ equally likely. For the sake of argument, however, we will assume that the elementary outcomes each have probability \(1/8\).
 
-What is $\P(\mbox{exactly 2 Boys})$? Inspecting the sample space reveals three outcomes with exactly two boys: \( \{ BBG,\, BGB,\, GBB \} \).  Therefore $\P(\mbox{exactly 2 Boys})=3/8$. 
+What is \(\P(\mbox{exactly 2 Boys})\)? Inspecting the sample space reveals three outcomes with exactly two boys: \( \{ BBG,\, BGB,\, GBB \} \).  Therefore \(\P(\mbox{exactly 2 Boys})=3/8\). 
 
-What is $\P(\mbox{at most 2 Boys})$? One way to solve the problem would be to count the outcomes that have 2 or less Boys, but a quicker way would be to recognize that the only way that the event \(\{ \mbox{at most 2 Boys} \}\) does /not/ occur is the event \(\{ \mbox{all Girls} \}\).
+What is \(\P(\mbox{at most 2 Boys})\)? One way to solve the problem would be to count the outcomes that have 2 or less Boys, but a quicker way would be to recognize that the only way that the event \(\{ \mbox{at most 2 Boys} \}\) does /not/ occur is the event \(\{ \mbox{all Girls} \}\).
 
 Thus
 \[
@@ -903,13 +898,13 @@ Consider the experiment of rolling a six-sided die, and let the outcome be the f
 #+latex: \begin{example}
 Consider a standard deck of 52 cards. These are usually labeled with the four /suits/: Clubs, Diamonds, Hearts, and Spades, and the 13 /ranks/: 2, 3, 4, ..., 10, Jack (J), Queen (Q), King (K), and Ace (A). Depending on the game played, the Ace may be ranked below 2 or above King. 
 
-Let the random experiment $E$ consist of drawing exactly one card from a well-shuffled deck, and let the outcome be the face of the card. Define the events \( A = \{ \mbox{draw an Ace} \} \) and \( B = \{ \mbox{draw a Club} \} \). Bear in mind: we are only drawing one card.
+Let the random experiment \(E\) consist of drawing exactly one card from a well-shuffled deck, and let the outcome be the face of the card. Define the events \( A = \{ \mbox{draw an Ace} \} \) and \( B = \{ \mbox{draw a Club} \} \). Bear in mind: we are only drawing one card.
 
-Immediately we have $\P(A)=4/52$ since there are four Aces in the deck; similarly, there are $13$ Clubs which implies $\P(B)=13/52$.
+Immediately we have \(\P(A)=4/52\) since there are four Aces in the deck; similarly, there are \(13\) Clubs which implies \(\P(B)=13/52\).
 
-What is $\P(A\cap B)$? We realize that there is only one card of the 52 which is an Ace and a Club at the same time, namely, the Ace of Clubs. Therefore $\P(A\cap B)=1/52$.
+What is \(\P(A\cap B)\)? We realize that there is only one card of the 52 which is an Ace and a Club at the same time, namely, the Ace of Clubs. Therefore \(\P(A\cap B)=1/52\).
 
-To find $\P(A\cup B)$ we may use the above with the General Addition Rule to get
+To find \(\P(A\cup B)\) we may use the above with the General Addition Rule to get
 
 \begin{eqnarray*}
 \P(A\cup B) & = & \P(A)+\P(B)-\P(A\cap B),\\
@@ -920,11 +915,11 @@ To find $\P(A\cup B)$ we may use the above with the General Addition Rule to get
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Staying with the deck of cards, let another random experiment be the selection of a five card stud poker hand, where ``five card stud'' means that we draw exactly five cards from the deck without replacement, no more, and no less. It turns out that the sample space $S$ is so large and complicated that we will be obliged to settle for the trivial description \( S = \{ \mbox{all possible 5 card hands} \} \) for the time being. We will have a more precise description later.
+Staying with the deck of cards, let another random experiment be the selection of a five card stud poker hand, where ``five card stud'' means that we draw exactly five cards from the deck without replacement, no more, and no less. It turns out that the sample space \(S\) is so large and complicated that we will be obliged to settle for the trivial description \( S = \{ \mbox{all possible 5 card hands} \} \) for the time being. We will have a more precise description later.
 
-What is $\P(\mbox{Royal Flush})$, or in other words, $\P(\mbox{A, K, Q, J, 10 all in the same suit})$? 
+What is \(\P(\mbox{Royal Flush})\), or in other words, \(\P(\mbox{A, K, Q, J, 10 all in the same suit})\)? 
 
-It should be clear that there are only four possible royal flushes. Thus, if we could only count the number of outcomes in $S$ then we could simply divide four by that number and we would have our answer under the equally likely model. This is the subject of Section \ref{sec:Methods-of-Counting}.
+It should be clear that there are only four possible royal flushes. Thus, if we could only count the number of outcomes in \(S\) then we could simply divide four by that number and we would have our answer under the equally likely model. This is the subject of Section \ref{sec:Methods-of-Counting}.
 
 #+latex: \end{example}
 
@@ -934,7 +929,7 @@ Probabilities are calculated in the =prob= package with the =prob= function.
 
 Consider the experiment of drawing a card from a standard deck of playing cards. Let's denote the probability space associated with the experiment as =S=, and let the subsets =A= and =B= be defined by the following: 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 S <- cards(makespace = TRUE) 
 A <- subset(S, suit == "Heart") 
 B <- subset(S, rank %in% 7:9)
@@ -973,12 +968,12 @@ Consequently, =x= should be the entire probability space in the case that =event
 ** Counting Methods
 \label{sec:Methods-of-Counting}
 
-The equally-likely model is a convenient and popular way to analyze random experiments. And when the equally likely model applies, finding the probability of an event $A$ amounts to nothing more than counting the number of outcomes that $A$ contains (together with the number of events in $S$). Hence, to be a master of probability one must be skilled at counting outcomes in events of all kinds.
+The equally-likely model is a convenient and popular way to analyze random experiments. And when the equally likely model applies, finding the probability of an event \(A\) amounts to nothing more than counting the number of outcomes that \(A\) contains (together with the number of events in \(S\)). Hence, to be a master of probability one must be skilled at counting outcomes in events of all kinds.
 
 #+latex: \begin{prop}
-The Multiplication Principle. Suppose that an experiment is composed of two successive steps. Further suppose that the first step may be performed in $n_{1}$ distinct ways while the second step may be performed in $n_{2}$ distinct ways. Then the experiment may be performed in $n_{1}n_{2}$ distinct ways.
+The Multiplication Principle. Suppose that an experiment is composed of two successive steps. Further suppose that the first step may be performed in \(n_{1}\) distinct ways while the second step may be performed in \(n_{2}\) distinct ways. Then the experiment may be performed in \(n_{1}n_{2}\) distinct ways.
 
-More generally, if the experiment is composed of $k$ successive steps which may be performed in $n_{1}$, $n_{2}$, ..., $n_{k}$ distinct ways, respectively, then the experiment may be performed in $n_{1}n_{2}\cdots n_{k}$ distinct ways.
+More generally, if the experiment is composed of \(k\) successive steps which may be performed in \(n_{1}\), \(n_{2}\), ..., \(n_{k}\) distinct ways, respectively, then the experiment may be performed in \(n_{1}n_{2}\cdots n_{k}\) distinct ways.
 #+latex: \end{prop}
 
 #+latex: \begin{example}
@@ -990,25 +985,25 @@ How many distinct pizzas are possible?
 
 There are many ways to approach the problem, but the quickest avenue employs the Multiplication Principle directly. We will separate the action of ordering the pizza into a series of stages. At the first stage, we will decide whether or not to include pepperoni on the pizza (two possibilities). At the next stage, we will decide whether or not to include sausage on the pizza (again, two possibilities). We will continue in this fashion until at last we will decide whether or not to include green peppers on the pizza.
 
-At each stage we will have had two options, or ways, to select a pizza to be made. The Multiplication Principle says that we should multiply the 2's to find the total number of possible pizzas: $2\cdot2\cdot2\cdot2\cdot2=2^{5}=32$.
+At each stage we will have had two options, or ways, to select a pizza to be made. The Multiplication Principle says that we should multiply the 2's to find the total number of possible pizzas: \(2\cdot2\cdot2\cdot2\cdot2=2^{5}=32\).
 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? *Answer:* $2\cdot3\cdot4\cdot4\cdot10=960$
+We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? *Answer:* \(2\cdot3\cdot4\cdot4\cdot10=960\)
 #+latex: \end{example}
 
 
 
 *** Ordered Samples
 
-Imagine a bag with $n$ distinguishable balls inside. Now shake up the bag and select $k$ balls at random. How many possible sequences might we observe?
+Imagine a bag with \(n\) distinguishable balls inside. Now shake up the bag and select \(k\) balls at random. How many possible sequences might we observe?
 
 #+latex: \begin{prop}
-The number of ways in which one may select an ordered sample of $k$ subjects from a population that has $n$ distinguishable members is
+The number of ways in which one may select an ordered sample of \(k\) subjects from a population that has \(n\) distinguishable members is
 
-- $n^{k}$ if sampling is done with replacement,
-- $n(n-1)(n-2)\cdots(n-k+1)$ if sampling is done without replacement.
+- \(n^{k}\) if sampling is done with replacement,
+- \(n(n-1)(n-2)\cdots(n-k+1)\) if sampling is done without replacement.
 
 #+latex: \end{prop}
 
@@ -1023,19 +1018,19 @@ n! & = & n(n-1)(n-2)\cdots3\cdot2\cdot1.
 \end{eqnarray*}
 
 #+latex: \begin{fact}
-The number of permutations of $n$ elements is $n!$.
+The number of permutations of \(n\) elements is \(n!\).
 #+latex: \end{fact}
 
 #+latex: \begin{example}
-Take a coin and flip it 7 times. How many sequences of Heads and Tails are possible? *Answer:* $2^{7}=128$.
+Take a coin and flip it 7 times. How many sequences of Heads and Tails are possible? *Answer:* \(2^{7}=128\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-In a class of 20 students, we randomly select a class president, a class vice-president, and a treasurer. How many ways can this be done? *Answer:* $20\cdot19\cdot18=6840$.
+In a class of 20 students, we randomly select a class president, a class vice-president, and a treasurer. How many ways can this be done? *Answer:* \(20\cdot19\cdot18=6840\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-We rent five movies to watch over the span of two nights. We wish to watch 3 movies on the first night. How many distinct sequences of 3 movies could we possibly watch? *Answer:* $5\cdot4\cdot3=60$.
+We rent five movies to watch over the span of two nights. We wish to watch 3 movies on the first night. How many distinct sequences of 3 movies could we possibly watch? *Answer:* \(5\cdot4\cdot3=60\).
 #+latex: \end{example}
 
 
@@ -1043,36 +1038,36 @@ We rent five movies to watch over the span of two nights. We wish to watch 3 mov
 *** Unordered Samples
 
 #+latex: \begin{prop}
-The number of ways in which one may select an unordered sample of $k$ subjects from a population that has $n$ distinguishable members is
-- $(n-1+k)!/[(n-1)!k!]$ if sampling is done with replacement,
-- $n!/[k!(n-k)!]$ if sampling is done without replacement.
+The number of ways in which one may select an unordered sample of \(k\) subjects from a population that has \(n\) distinguishable members is
+- \((n-1+k)!/[(n-1)!k!]\) if sampling is done with replacement,
+- \(n!/[k!(n-k)!]\) if sampling is done without replacement.
 #+latex: \end{prop}
 
-The quantity $n!/[k!(n-k)!]$ is called a /binomial coefficient/ and plays a special role in mathematics; it is denoted
+The quantity \(n!/[k!(n-k)!]\) is called a /binomial coefficient/ and plays a special role in mathematics; it is denoted
 \begin{equation}
 {n \choose k}=\frac{n!}{k!(n-k)!}\label{eq:binomial-coefficient}
 \end{equation}
-and is read ``$n$ choose $k$''.
+and is read ``\(n\) choose \(k\)''.
 
 #+latex: \begin{example}
-You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? \textbf{Answer:} ${5 \choose 2}=10$.
+You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? \textbf{Answer:} \({5 \choose 2}=10\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? \textbf{Answer:} $(6-1+3)!/[(6-1)!3!]={8 \choose 5}=56$. 
+Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? \textbf{Answer:} \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
 #+latex: \end{example}
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-The factorial $n!$ is computed with the command =factorial(n)= and the binomial coefficient ${n \choose k}$ with the command =choose(n,k)=.
+The factorial \(n!\) is computed with the command =factorial(n)= and the binomial coefficient \({n \choose k}\) with the command =choose(n,k)=.
 
 The sample spaces we have computed so far have been relatively small, and we can visually study them without much trouble. However, it is /very/ easy to generate sample spaces that are prohibitively large. And while \textsf{R} is wonderful and powerful and does almost everything except wash windows, even \textsf{R} has limits of which we should be mindful.
 
 But we often do not need to actually generate the sample space; it suffices to count the number of outcomes. The =nsamp= function will calculate the number of rows in a sample space made by =urnsamples= without actually devoting the memory resources necessary to generate the space. The arguments are =n=, the number of (distinguishable) objects in the urn, =k=, the sample size, and =replace=, =ordered=, as above.
 
 
-#+CAPTION: Sampling $k$ from $n$ objects with \texttt{urnsamples}
+#+CAPTION: Sampling \(k\) from \(n\) objects with \texttt{urnsamples}
 #+LABEL: tab:Sampling-k-from-n
 |                   | =ordered = TRUE=    | =ordered = FALSE=           |
 |-------------------+---------------------+-----------------------------|
@@ -1111,7 +1106,7 @@ There are 11 artists who each submit a portfolio containing 7 paintings for comp
 
 *Answer:* The judges will pick 3 (ranked) winners out of 11 (with =rep = FALSE=, =ord = TRUE=). Each artist will select 4 of his/her paintings from 7 for display in a row (=rep = FALSE=, =ord = TRUE=), and lastly, each of the 3 walls has 31 lighting possibilities (=rep = TRUE=, =ord = TRUE=). These three numbers can be calculated quickly with 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 n <- c(11,7,31) 
 k <- c(3,4,3) 
 r <- c(FALSE,FALSE,TRUE) 
@@ -1119,7 +1114,7 @@ r <- c(FALSE,FALSE,TRUE)
 
 #+results[dae9fea992cf373411bbc2ec72deb07ef27f71f2]:
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 x <- nsamp(n, k, rep = r, ord = TRUE) 
 #+end_src 
 
@@ -1166,30 +1161,34 @@ prod(factorial(c(11,7))/factorial(c(8,3)))*313
 As one can guess, in many of the standard counting problems there aren't substantial savings in the amount of typing; it is about the same using =nsamp= versus =factorial= and =choose=. But the virtue of =nsamp= lies in its collecting the relevant counting formulas in a one-stop shop. Ultimately, it is up to the user to choose the method that works best for him/herself. 
 
 #+latex: \begin{example}
-*The Birthday Problem.* Suppose that there are $n$ people together in a room. Each person announces the date of his/her birthday in turn. The question is: what is the probability of at least one match? If we let the event $A$ represent \(\{ \mbox{there is at least one match} \}\), then would like to know $\P(A)$, but as we will see, it is more convenient to calculate $\P(A^{c})$.
+*The Birthday Problem.* Suppose that there are \(n\) people together in a room. Each person announces the date of his/her birthday in turn. The question is: what is the probability of at least one match? If we let the event \(A\) represent 
+\[
+\{ \mbox{there is at least one match}, \}
+\]
+then would like to know \(\P(A)\), but as we will see, it is more convenient to calculate \(\P(A^{c})\).
 
 For starters we will ignore leap years and assume that there are only 365 days in a year. Second, we will assume that births are equally distributed over the course of a year (which is not true due to all sorts of complications such as hospital delivery schedules). See [[http://en.wikipedia.org/wiki/Birthday_problem][here]] for more.
 
-Let us next think about the sample space. There are 365 possibilities for the first person's birthday, 365 possibilities for the second, and so forth. The total number of possible birthday sequences is therefore $\#(S)=365^{n}$.
+Let us next think about the sample space. There are 365 possibilities for the first person's birthday, 365 possibilities for the second, and so forth. The total number of possible birthday sequences is therefore \(\#(S)=365^{n}\).
 
-Now we will use the complementation trick we saw in Example \ref{exa:three-child-family}. We realize that the only situation in which $A$ does /not/ occur is if there are /no/ matches among all people in the room, that is, only when everybody's birthday is different, so
+Now we will use the complementation trick we saw in Example \ref{exa:three-child-family}. We realize that the only situation in which \(A\) does /not/ occur is if there are /no/ matches among all people in the room, that is, only when everybody's birthday is different, so
 \[
 \P(A)=1-\P(A^{c})=1-\frac{\#(A^{c})}{\#(S)},
 \]
-since the outcomes are equally likely. Let us then suppose that there are no matches. The first person has one of 365 possible birthdays. The second person must not match the first, thus, the second person has only 364 available birthdays from which to choose. Similarly, the third person has only 363 possible birthdays, and so forth, until we reach the $n^{\mathrm{th}}$ person, who has only $365-n+1$ remaining possible days for a birthday. By the Multiplication Principle, we have $\#(A^{c})=365\cdot364\cdots(365-n+1)$, and
+since the outcomes are equally likely. Let us then suppose that there are no matches. The first person has one of 365 possible birthdays. The second person must not match the first, thus, the second person has only 364 available birthdays from which to choose. Similarly, the third person has only 363 possible birthdays, and so forth, until we reach the \(n^{\mathrm{th}}\) person, who has only \(365-n+1\) remaining possible days for a birthday. By the Multiplication Principle, we have \(\#(A^{c})=365\cdot364\cdots(365-n+1)\), and
 
 \begin{equation}
 \P(A)=1-\frac{365\cdot364\cdots(365-n+1)}{365^{n}}=1-\frac{364}{365}\cdot\frac{363}{365}\cdots\frac{(365-n+1)}{365}.
 \end{equation}
 
-As a surprising consequence, consider this: how many people does it take to be in the room so that the probability of at least one match is at least 0.50? Clearly, if there is only $n=1$ person in the room then the probability of a match is zero, and when there are $n=366$ people in the room there is a 100% chance of a match (recall that we are ignoring leap years). So how many people does it take so that there is an equal chance of a match and no match?
+As a surprising consequence, consider this: how many people does it take to be in the room so that the probability of at least one match is at least 0.50? Clearly, if there is only \(n=1\) person in the room then the probability of a match is zero, and when there are \(n=366\) people in the room there is a 100% chance of a match (recall that we are ignoring leap years). So how many people does it take so that there is an equal chance of a match and no match?
 
-When I have asked this question to students, the usual response is ``somewhere around $n=180$ people'' in the room. The reasoning seems to be that in order to get a 50\% chance of a match, there should be 50% of the available days to be occupied. The number of students in a typical classroom is 25, so as a companion question I ask students to estimate the probability of a match when there are $n=25$ students in the room. Common estimates are a 1%, or 0.5%, or even 0.1% chance of a match. After they have given their estimates, we go around the room and each student announces their birthday. More often than not, we observe a match in the class, to the students' disbelief.
+When I have asked this question to students, the usual response is ``somewhere around \(n=180\) people'' in the room. The reasoning seems to be that in order to get a 50% chance of a match, there should be 50% of the available days to be occupied. The number of students in a typical classroom is 25, so as a companion question I ask students to estimate the probability of a match when there are \(n=25\) students in the room. Common estimates are a 1%, or 0.5%, or even 0.1% chance of a match. After they have given their estimates, we go around the room and each student announces their birthday. More often than not, we observe a match in the class, to the students' disbelief.
 
-Students are usually surprised to hear that, using the formula above, one needs only $n=23$ students to have a greater than 50\% chance of at least one match. Figure \ref{fig:birthday} shows a graph of the birthday probabilities:
+Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure \ref{fig:birthday} shows a graph of the birthday probabilities:
 #+latex: \end{example}
 
-#+begin_src R :exports none :results graphics :file img/birthday.png
+#+begin_src R :exports none :results graphics silent :file img/birthday.pdf
 g <- Vectorize(pbirthday.ipsur)
 x <- 1:50; y <- g(1:50)
 qplot(x, y) + geom_hline(yintercept=0.5) +
@@ -1202,12 +1201,12 @@ remove(g)
 #+end_src
 
 #+results[b450d3f59d7dce73a0d1d5a5e6be356add27101f]:
-[[file:img/birthday.png]]
+[[file:img/birthday.pdf]]
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/birthday.png}
-    \caption[The birthday problem]{The birthday problem. {\small The horizontal line is at $p=0.50$ and the vertical line is at $n=23$.}}
+    \includegraphics[width=5in, height=4in]{img/birthday.pdf}
+    \caption[The birthday problem]{The birthday problem. {\small The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}}
     \label{fig:birthday}
   \end{figure}
 #+end_src
@@ -1232,24 +1231,22 @@ There is a \textsf{Birthday problem} item in the \textsf{Probability} menu of =R
 ** Conditional Probability
 \label{sec:Conditional-Probability}
 
-Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \P(A) = 4/52 \). Suppose we look at the first card. What now is the probability of $B$? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
+Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \P(A) = 4/52 \). Suppose we look at the first card. What now is the probability of \(B\)? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
 \[
 \P(B|A)=3/51,\quad\P(B|A^{c})=4/51.
 \]
 
 #+latex: \begin{defn}
-The conditional probability of $B$ given $A$, denoted $\P(B|A)$, is defined by
+The conditional probability of \(B\) given \(A\), denoted \(\P(B|A)\), is defined by
 \begin{equation}
 \P(B|A)=\frac{\P(A\cap B)}{\P(A)},\quad\mbox{if }\P(A)>0.
 \end{equation}
-We will not be discussing a conditional probability of $B$ given $A$ when $\P(A)=0$, even though this theory exists, is well developed, and forms the foundation for the study of stochastic processes[fn:condexp]. 
+We will not be discussing a conditional probability of \(B\) given \(A\) when \(\P(A)=0\), even though this theory exists, is well developed, and forms the foundation for the study of stochastic processes
+#+latex: \footnote{Conditional probability in this case is defined by means of \emph{conditional expectation}, a topic that is well beyond the scope of this text. The interested reader should consult an advanced text on probability theory, such as Billingsley, Resnick, or Ash Dooleans-Dade.}.
 #+latex: \end{defn}
 
-[fn:condexp] Conditional probability in this case is defined by means of /conditional expectation/, a topic that is well beyond the scope of this text. The interested reader should consult an advanced text on probability theory, such as Billingsley, Resnick, or Ash Dooleans-Dade.
-
-
 #+latex: \begin{example}
-Toss a coin twice. The sample space is given by $S=\{ HH,\ HT,\ TH,\ TT \} $. Let $A= \{ \mbox{a head occurs} \} $ and $B= \{ \mbox{a head and tail occur} \} $. It should be clear that $\P(A)=3/4$, $\P(B)=2/4$, and $\P(A\cap B)=2/4$. What now are the probabilities $\P(A|B)$ and $\P(B|A)$?
+Toss a coin twice. The sample space is given by \(S=\{ HH,\ HT,\ TH,\ TT \} \). Let \(A= \{ \mbox{a head occurs} \} \) and \(B= \{ \mbox{a head and tail occur} \} \). It should be clear that \(\P(A)=3/4\), \(\P(B)=2/4\), and \(\P(A\cap B)=2/4\). What now are the probabilities \(\P(A|B)\) and \(\P(B|A)\)?
 \[
 \P(A|B)=\frac{\P(A\cap B)}{\P(B)}=\frac{2/4}{2/4}=1,
 \]
@@ -1257,12 +1254,12 @@ in other words, once we know that a Head and Tail occur, we may be certain that 
 \[
 \P(B|A)=\frac{\P(A\cap B)}{\P(A)}=\frac{2/4}{3/4}=\frac{2}{3},
 \]
-which means that given the information that a Head has occurred, we no longer need to account for the outcome $TT$, and the remaining three outcomes are equally likely with exactly two outcomes lying in the set $B$. 
+which means that given the information that a Head has occurred, we no longer need to account for the outcome \(TT\), and the remaining three outcomes are equally likely with exactly two outcomes lying in the set \(B\). 
 #+latex: \end{example}
 
 #+latex: \begin{example}
 \label{exa:Toss-a-six-sided-die-twice}
-Toss a six-sided die twice. The sample space consists of all ordered pairs $(i,j)$ of the numbers $1,2,\ldots,6$, that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section \ref{sec:Methods-of-Counting} that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
+Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section \ref{sec:Methods-of-Counting} that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
 #+begin_latex
 \begin{table}
@@ -1275,12 +1272,12 @@ First Roll
 \multicolumn{1}{c}{} & \multicolumn{6}{c}{Second Roll}\tabularnewline
 \multicolumn{1}{c}{} & 1 & 2 & 3 & 4 & 5 & \multicolumn{1}{c}{6}\tabularnewline
 \cline{2-7} 
-1 & $\varprod$ &  &  &  &  & \tabularnewline
-2 &  & $\varprod$ &  &  &  & {\Large $\bigcirc$}\tabularnewline
-3 &  &  & $\varprod$ &  & {\Large $\bigcirc$} & {\Large $\bigcirc$}\tabularnewline
-4 &  &  &  & {\huge $\otimes$} & {\Large $\bigcirc$} & {\Large $\bigcirc$}\tabularnewline
-5 &  &  & {\Large $\bigcirc$} & {\Large $\bigcirc$} & {\huge $\otimes$} & {\Large $\bigcirc$}\tabularnewline
-6 &  & {\Large $\bigcirc$} & {\Large $\bigcirc$} & {\Large $\bigcirc$} & {\Large $\bigcirc$} & {\huge $\otimes$}\tabularnewline
+1 & \(\varprod\) &  &  &  &  & \tabularnewline
+2 &  & \(\varprod\) &  &  &  & {\Large \(\bigcirc\)}\tabularnewline
+3 &  &  & \(\varprod\) &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)}\tabularnewline
+4 &  &  &  & {\huge \(\otimes\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)}\tabularnewline
+5 &  &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\huge \(\otimes\)} & {\Large \(\bigcirc\)}\tabularnewline
+6 &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\huge \(\otimes\)}\tabularnewline
 \cline{2-7} 
 \end{tabular}
 \caption{Rolling two dice\label{tab:Rolling-two-dice}}
@@ -1288,13 +1285,11 @@ First Roll
 \end{table}
 #+end_latex
 
-The outcomes lying in the event $A$ are marked with the symbol ``$\varprod$'', the outcomes falling in $B$ are marked with ``$\bigcirc$'', and those in both $A$ and $B$ are marked ``$\otimes$''. Now it is clear that $\P(A)=6/36$, $\P(B)=15/36$, and $\P(A\cap B)=3/36$.  Finally, 
-
+The outcomes lying in the event \(A\) are marked with the symbol ``\(\varprod\)'', the outcomes falling in \(B\) are marked with ``\(\bigcirc\)'', and those in both \(A\) and \(B\) are marked ``\(\otimes\)''. Now it is clear that \(\P(A)=6/36\), \(\P(B)=15/36\), and \(\P(A\cap B)=3/36\).  Finally, 
 \[
 \P(A|B)=\frac{3/36}{15/36}=\frac{1}{5},\quad\P(B|A)=\frac{3/36}{6/36}=\frac{1}{2}.
 \]
-
-Again, we see that given the knowledge that $B$ occurred (the 15 outcomes in the lower right triangle), there are 3 of the 15 that fall into the set $A$, thus the probability is $3/15$. Similarly, given that $A$ occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in $B$, thus, the probability of $B$ given $A$ is 1/2. 
+Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the lower right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -1318,7 +1313,7 @@ head(S)                            #  first few rows
 
 Next we define the events
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 A <- subset(S, X1 == X2)
 B <- subset(S, X1 + X2 >= 8)
 #+end_src
@@ -1336,7 +1331,7 @@ prob(B, given = A)
 : [1] 0.2
 : [1] 0.5
 
-Note that we do not actually need to define the events $A$ and $B$ separately as long as we reference the original probability space $S$ as the first argument of the =prob= calculation:
+Note that we do not actually need to define the events \(A\) and \(B\) separately as long as we reference the original probability space \(S\) as the first argument of the =prob= calculation:
 
 #+begin_src R :exports both :results output pp  
 prob(S, X1==X2, given = (X1 + X2 >= 8) )
@@ -1352,41 +1347,36 @@ prob(S, X1+X2 >= 8, given = (X1==X2) )
 The following theorem establishes that conditional probabilities behave just like regular probabilities when the conditioned event is fixed. 
 
 #+latex: \begin{thm}
-For any fixed event $A$ with $\P(A)>0$,
-
+For any fixed event \(A\) with \(\P(A)>0\),
 1. \( \P (B|A)\geq 0 \), for all events \( B \subset S\),
 1. \( \P (S|A) = 1 \), and
-1. If $B_{1}$, $B_{2}$, $B_{3}$,... are disjoint events, then
+1. If \(B_{1}\), \(B_{2}\), \(B_{3}\),... are disjoint events, then
   \begin{equation}
   \P\left(\left.\bigcup_{k=1}^{\infty}B_{k}\:\right|A\right)=\sum_{k=1}^{\infty}\P(B_{k}|A).
   \end{equation}
-
 #+latex: \end{thm}
-
-In other words, $\P(\cdot|A)$ is a legitimate probability function. With this fact in mind, the following properties are immediate:
+In other words, \(\P(\cdot|A)\) is a legitimate probability function. With this fact in mind, the following properties are immediate:
 
 #+latex: \begin{prop}
-For any events $A$, $B$, and $C$ with $\P(A)>0$,
+For any events \(A\), \(B\), and \(C\) with \(\P(A)>0\),
 
 1. \( \P ( B^{c} | A ) = 1 - \P (B|A).\)
-1. If $B\subset C$ then $\P(B|A)\leq\P(C|A)$.
+1. If \(B\subset C\) then \(\P(B|A)\leq\P(C|A)\).
 1. \( \P [ ( B\cup C ) | A ] = \P (B|A) + \P(C|A) - \P [ (B \cap C|A) ].\)
-1. *The Multiplication Rule.* For any two events $A$ and $B$,
+1. *The Multiplication Rule.* For any two events \(A\) and \(B\),
   \begin{equation}
   \P(A\cap B)=\P(A)\P(B|A).\label{eq:multiplication-rule-short}
   \end{equation}
-  And more generally, for events $A_{1}$, $A_{2}$, $A_{3}$,..., $A_{n}$,
+  And more generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),..., \(A_{n}\),
   \begin{equation}
   \P(A_{1}\cap A_{2}\cap\cdots\cap A_{n})=\P(A_{1})\P(A_{2}|A_{1})\cdots\P(A_{n}|A_{1}\cap A_{2}\cap\cdots\cap A_{n-1}).\label{eq:multiplication-rule-long}
   \end{equation}
-
 #+latex: \end{prop}
-
 The Multiplication Rule is very important because it allows us to find probabilities in random experiments that have a sequential structure, as the next example shows. 
 
 #+latex: \begin{example}
 \label{exa:two-cards-both-aces}
-At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is $\P(\mbox{both Aces})$?
+At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is \(\P(\mbox{both Aces})\)?
 
 \[
 \P(\mbox{both Aces})=\P(A\cap B)=\P(A)\P(B|A)=\frac{4}{52}\cdot\frac{3}{51}\approx0.00452.
@@ -1407,7 +1397,7 @@ But do not be intimidated. The object =N= is nothing more than a list with two e
 
 Putting all of this together we do 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 library(prob)
 L <- cards()
 M <- urnsamples(L, size = 2)
@@ -1416,7 +1406,7 @@ N <- probspace(M)
 
 #+results[4d40786d9b2d3b5ecfc61b6b5f6205c893cfd1ba]:
 
-Now that we have the probability space =N= we are ready to do some probability. We use the =prob= function, just like before. The only trick is to specify the event of interest correctly, and recall that we were interested in $\P(\mbox{both Aces})$. But if the cards are both Aces then the =rank= of both cards should be =A=, which sounds like a job for the =all= function:
+Now that we have the probability space =N= we are ready to do some probability. We use the =prob= function, just like before. The only trick is to specify the event of interest correctly, and recall that we were interested in \(\P(\mbox{both Aces})\). But if the cards are both Aces then the =rank= of both cards should be =A=, which sounds like a job for the =all= function:
 
 #+begin_src R :exports both :results output pp  
 prob(N, all(rank == "A"))
@@ -1444,7 +1434,7 @@ Example \ref{exa:urn-7-red-3-green} is similar to Example \ref{exa:two-cards-bot
 
 It is easier for us this time because our urn is a vector instead of a =cards()= data frame. Before there were two dimensions of information associated with the outcomes (rank and suit) but presently we have only one dimension (color).
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 library(prob)
 L <- rep(c("red","green"), times = c(7,3))
 M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
@@ -1472,7 +1462,7 @@ prob(N, isrep(N, "red", 2))
 : [1] 0.525
 
 
-Note that the exact value is $21/40$; we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
+Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red"), ordered = TRUE))
@@ -1481,7 +1471,7 @@ prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+results[d94392e6f8dc00cfd48f47e46f4d449c324d43b8]:
 : [1] 0.175
 
-Note that the exact value is $7/20$ (do it with the Multiplication Rule). What is the probability of observing \texttt{"red"}, \texttt{"green"}, and \texttt{"red"}, in no particular order?
+Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What is the probability of observing \texttt{"red"}, \texttt{"green"}, and \texttt{"red"}, in no particular order?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red")))
@@ -1500,7 +1490,7 @@ B & =S\cap B\\
  & =(A\cup A^{c})\cap B\\
  & =(A\cap B)\cup(A^{c}\cap B)
 \end{align*}
-and notice that $A\cap B$ and $A^{c}\cap B$ are disjoint. Therefore
+and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 \begin{align*}
 \P(B) & =\P(A\cap B)+\P(A^{c}\cap B)\\
  & =\P(A)\P(B|A)+\P(A^{c})\P(B|A^{c})\\
@@ -1526,13 +1516,13 @@ addmargins(.Table) # Table with Marginal Distributions
 :   Smoker         9   23  32
 :   Sum           70   98 168
 
-If one person were selected at random from the data set, then we see from the two-way table that $\P(\mbox{Female})=70/168$ and $\P(\mbox{Smoker})=32/168$. Now suppose that one of the subjects quits smoking, but we do not know the person's gender. If we select one subject at random, what now is $\P(\mbox{Female})$? Let \( A = \{ \mbox{the quitter is a female} \} \) and \( B = \{ \mbox{selected person is a female} \} \). Write
+If one person were selected at random from the data set, then we see from the two-way table that \(\P(\mbox{Female})=70/168\) and \(\P(\mbox{Smoker})=32/168\). Now suppose that one of the subjects quits smoking, but we do not know the person's gender. If we select one subject at random, what now is \(\P(\mbox{Female})\)? Let \( A = \{ \mbox{the quitter is a female} \} \) and \( B = \{ \mbox{selected person is a female} \} \). Write
 \begin{align*}
 B & =S\cap B\\
  & =(A\cup A^{c})\cap B\\
  & =(A\cap B)\cup(A^{c}\cap B)
 \end{align*}
-and notice that $A\cap B$ and $A^{c}\cap B$ are disjoint. Therefore
+and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 \begin{align*}
 \P(B) & =\P(A\cap B)+\P(A^{c}\cap B),\\
  & =\P(A)\P(B|A)+\P(A^{c})\P(B|A^{c}),\\
@@ -1551,49 +1541,43 @@ Using the same reasoning, we can return to the example from the beginning of the
 ** Independent Events
 \label{sec:Independent-Events}
 
-Toss a coin twice. The sample space is $S= \{ HH,\ HT,\ TH,\ TT \} $. We know that $\P(1^{\mathrm{st}}\mbox{ toss is }H)=2/4$, $\P(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4$, and $\P(\mbox{both }H)=1/4$. Then
+Toss a coin twice. The sample space is \(S= \{ HH,\ HT,\ TH,\ TT \} \). We know that \(\P(1^{\mathrm{st}}\mbox{ toss is }H)=2/4\), \(\P(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4\), and \(\P(\mbox{both }H)=1/4\). Then
 \begin{align*} \P(2^{\mathrm{nd}}\mbox{ toss is }H\ |\ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\P(\mbox{both }H)}{\P(1^{\mathrm{st}}\mbox{ toss is }H)},\\
  & =\frac{1/4}{2/4},\\
  & =\P(2^{\mathrm{nd}}\mbox{ toss is }H).
 \end{align*}
-
-Intuitively, this means that the information that the first toss is $H$ has no bearing on the probability that the second toss is $H$. The coin does not remember the result of the first toss. 
+Intuitively, this means that the information that the first toss is \(H\) has no bearing on the probability that the second toss is \(H\). The coin does not remember the result of the first toss. 
 
 #+latex: \begin{defn}
-Events $A$ and $B$ are said to be /independent/ if 
+Events \(A\) and \(B\) are said to be /independent/ if 
 \begin{equation}
 \P(A\cap B)=\P(A)\P(B).
 \end{equation}
 Otherwise, the events are said to be /dependent/. 
 #+latex: \end{defn}
 
-The connection with the above example stems from the following. We know from Section \ref{sec:Conditional-Probability} that when $\P(B)>0$ we may write
-
+The connection with the above example stems from the following. We know from Section \ref{sec:Conditional-Probability} that when \(\P(B)>0\) we may write
 \begin{equation}
 \P(A|B)=\frac{\P(A\cap B)}{\P(B)}.
 \end{equation}
-
-In the case that $A$ and $B$ are independent, the numerator of the fraction factors so that $\P(B)$ cancels with the result:
-
+In the case that \(A\) and \(B\) are independent, the numerator of the fraction factors so that \(\P(B)\) cancels with the result:
 \begin{equation}
 \P(A|B)=\P(A)\mbox{ when \mbox{\emph{A},\emph{ B}} are independent.}
 \end{equation}
-
-The interpretation in the case of independence is that the information that the event $B$ occurred does not influence the probability of the event $A$ occurring. Similarly, $\P(B|A)=\P(B)$, and so the occurrence of the event $A$ likewise does not affect the probability of event $B$. It may seem more natural to define $A$ and $B$ to be independent when $\P(A|B)=\P(A)$; however, the conditional probability $\P(A|B)$ is only defined when $\P(B)>0$. Our definition is not limited by this restriction. It can be shown that when $\P(A),\ \P(B)>0$ the two notions of independence are equivalent.
+The interpretation in the case of independence is that the information that the event \(B\) occurred does not influence the probability of the event \(A\) occurring. Similarly, \(\P(B|A)=\P(B)\), and so the occurrence of the event \(A\) likewise does not affect the probability of event \(B\). It may seem more natural to define \(A\) and \(B\) to be independent when \(\P(A|B)=\P(A)\); however, the conditional probability \(\P(A|B)\) is only defined when \(\P(B)>0\). Our definition is not limited by this restriction. It can be shown that when \(\P(A),\ \P(B)>0\) the two notions of independence are equivalent.
 
 #+latex: \begin{prop}
-If the events $A$ and $B$ are independent then
-- $A$ and $B^{c}$ are independent,
-- $A^{c}$ and $B$ are independent,
-- $A^{c}$ and $B^{c}$ are independent.
+If the events \(A\) and \(B\) are independent then
+- \(A\) and \(B^{c}\) are independent,
+- \(A^{c}\) and \(B\) are independent,
+- \(A^{c}\) and \(B^{c}\) are independent.
 #+latex: \end{prop}
 
 #+latex: \begin{proof}
-Suppose that $A$ and $B$ are independent. We will show the second one; the others are similar. We need to show that
+Suppose that \(A\) and \(B\) are independent. We will show the second one; the others are similar. We need to show that
 \[
 \P(A^{c}\cap B)=\P(A^{c})\P(B).
 \]
-
 To this end, note that the Multiplication Rule, Equation \ref{eq:multiplication-rule-short} implies 
 \begin{eqnarray*}
 \P(A^{c}\cap B) & = & \P(B)\P(A^{c}|B),\\
@@ -1603,7 +1587,7 @@ To this end, note that the Multiplication Rule, Equation \ref{eq:multiplication-
 #+latex: \end{proof}
 
 #+latex: \begin{defn}
-The events $A$, $B$, and $C$ are /mutually independent/ if the following four conditions are met: 
+The events \(A\), \(B\), and \(C\) are /mutually independent/ if the following four conditions are met: 
 \begin{eqnarray*}
 \P(A\cap B) & = & \P(A)\P(B),\\
 \P(A\cap C) & = & \P(A)\P(C),\\
@@ -1613,21 +1597,21 @@ and
 \[
 \P(A\cap B\cap C)=\P(A)\P(B)\P(C).
 \]
-If only the first three conditions hold then $A$, $B$, and $C$ are said to be independent /pairwise/. Note that pairwise independence is not the same as mutual independence when the number of events is larger than two.
+If only the first three conditions hold then \(A\), \(B\), and \(C\) are said to be independent /pairwise/. Note that pairwise independence is not the same as mutual independence when the number of events is larger than two.
 #+latex: \end{defn}
 
-We can now deduce the pattern for $n$ events, $n>3$. The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all $n$ events at once. For $n$ events, there will be $2^{n}-n-1$ equations that must be satisfied (see Exercise \ref{xca:numb-cond-indep}). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
+We can now deduce the pattern for \(n\) events, \(n>3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise \ref{xca:numb-cond-indep}). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
 
 #+latex: \begin{example}
 \label{exa:toss-ten-coins}
-Toss ten coins. What is the probability of observing at least one Head? Answer: Let $A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10$. Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the $A_{i}$ may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
+Toss ten coins. What is the probability of observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10\). Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the \(A_{i}\) may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
 \begin{align*}
 \P(\mbox{at least one }H) & =1-\P(\mbox{all }T),\\
  & =1-\P(A_{1}^{c}\cap A_{2}^{c}\cap\cdots\cap A_{10}^{c}),\\
  & =1-\P(A_{1}^{c})\P(A_{2}^{c})\cdots\P(A_{10}^{c}),\\
  & =1-\left(\frac{1}{2}\right)^{10},
 \end{align*}
-which is approximately $0.9990234$.
+which is approximately \(0.9990234\).
 
 #+latex: \end{example}
 
@@ -1656,7 +1640,7 @@ Generalizing from above it is common to repeat a certain experiment multiple tim
 The =iidspace= function was designed specifically for this situation. It has three arguments: =x=, which is a vector of outcomes, =ntrials=, which is an integer telling how many times to repeat the experiment, and =probs= to specify the probabilities of the outcomes of =x= in a single trial. 
 
 #+latex: \begin{example}
-\textbf{An unbalanced coin} (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome $HHH$ should not have the same probability as $TTT$, which should again not have the same probability as $HTH$. At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
+\textbf{An unbalanced coin} (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
 
 We may represent tossing our unbalanced coin three times with the following: 
 
@@ -1675,7 +1659,7 @@ iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3))
 : 7  H  T  T 0.063
 : 8  T  T  T 0.027
 
-As expected, the outcome $HHH$ has the largest probability, while $TTT$ has the smallest. (Since the trials are independent, $\P(HHH)=0.7^{3}$ and $\P(TTT)=0.3^{3}$, \textit{etc}.) Note that the result of the function call is a probability space, not a sample space (which we could construct already with the =tosscoin= or =urnsamples= functions). The same procedure could be used to model an unbalanced die or any other experiment that may be represented with a vector of possible outcomes.
+As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has the smallest. (Since the trials are independent, \(\P(HHH)=0.7^{3}\) and \(\P(TTT)=0.3^{3}\), \textit{etc}.) Note that the result of the function call is a probability space, not a sample space (which we could construct already with the =tosscoin= or =urnsamples= functions). The same procedure could be used to model an unbalanced die or any other experiment that may be represented with a vector of possible outcomes.
 
 #+latex: \end{example}
 
@@ -1687,43 +1671,40 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
 #+latex: \begin{thm}
-\textbf{\emph{(Bayes' Rule).}} Let $B_{1}$, $B_{2}$, ..., $B_{n}$ be mutually exclusive and exhaustive and let $A$ be an event with $\P(A)>0$. Then 
+\textbf{\emph{(Bayes' Rule).}} Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\P(A)>0\). Then 
 \begin{equation}
 \P(B_{k}|A)=\frac{\P(B_{k})\P(A|B_{k})}{\sum_{i=1}^{n}\P(B_{i})\P(A|B_{i})},\quad k=1,2,\ldots,n.\label{eq:bayes-rule}
 \end{equation}
 #+latex: \end{thm}
 
 #+latex: \begin{proof}
-The proof follows from looking at $\P(B_{k}\cap A)$ in two different ways. For simplicity, suppose that $P(B_{k})>0$ for all $k$. Then
+The proof follows from looking at \(\P(B_{k}\cap A)\) in two different ways. For simplicity, suppose that \(P(B_{k})>0\) for all \(k\). Then
 \[
 \P(A)\P(B_{k}|A)=\P(B_{k}\cap A)=\P(B_{k})\P(A|B_{k}).
 \]
-Since $\P(A)>0$ we may divide through to obtain 
+Since \(\P(A)>0\) we may divide through to obtain 
 \[
 \P(B_{k}|A)=\frac{\P(B_{k})\P(A|B_{k})}{\P(A)}.
 \]
-
 Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation \ref{eq:theorem-total-probability}) gives the denominator of the last expression to be
 \[
 \P(A)=\sum_{k=1}^{n}\P(B_{k}\cap A)=\sum_{k=1}^{n}\P(B_{k})\P(A|B_{k}).
 \]
 #+latex: \end{proof}
 
-What does it mean? Usually in applications we are given (or know) /a priori/ probabilities $\P(B_{k})$. We go out and collect some data, which we represent by the event $A$. We want to know: how do we *update* $\P(B_{k})$ to $\P(B_{k}|A)$? The answer: Bayes' Rule.
+What does it mean? Usually in applications we are given (or know) /a priori/ probabilities \(\P(B_{k})\). We go out and collect some data, which we represent by the event \(A\). We want to know: how do we *update* \(\P(B_{k})\) to \(\P(B_{k}|A)\)? The answer: Bayes' Rule.
 
 #+latex: \begin{example}
 \label{exa:misfiling-assistants}
 *Misfiling Assistants.* In this problem, there are three assistants working at a company: Moe, Larry, and Curly. Their primary job duty is to file paperwork in the filing cabinet when papers become available. The three assistants have different work schedules:
-
 |          | Moe | Larry | Curly |
 |----------+-----+-------+-------|
 | Workload | 60% |   30% |   10% |
-
-That is, Moe works 60% of the time, Larry works 30% of the time, and Curly does the remaining 10%, and they file documents at approximately the same speed. Suppose a person were to select one of the documents from the cabinet at random. Let $M$ be the event
+That is, Moe works 60% of the time, Larry works 30% of the time, and Curly does the remaining 10%, and they file documents at approximately the same speed. Suppose a person were to select one of the documents from the cabinet at random. Let \(M\) be the event
 \[
 M= \{ \mbox{Moe filed the document} \}
 \]
-and let $L$ and $C$ be the events that Larry and Curly, respectively, filed the document. What are these events' respective probabilities? In the absence of additional information, reasonable prior probabilities would just be
+and let \(L\) and \(C\) be the events that Larry and Curly, respectively, filed the document. What are these events' respective probabilities? In the absence of additional information, reasonable prior probabilities would just be
 
 |                   | Moe | Larry | Curly |
 |-------------------+-----+-------+-------|
@@ -1743,17 +1724,15 @@ And, as it turns out, the boss has information about Moe, Larry, and Curly's fil
 
 In other words, on the average, Moe misfiles 0.3% of the documents he is supposed to file. Notice that Moe was correct: he is the most accurate filer, followed by Larry, and lastly Curly. If the boss were to make a decision based only on the worker's overall accuracy, then *Curly* should get the axe. But Curly hears this and interjects that he only works a short period during the day, and consequently makes mistakes only very rarely; there is only the tiniest chance that he misfiled this particular document.
 
-The boss would like to use this updated information to update the probabilities for the three assistants, that is, (s)he wants to use the additional likelihood that the document was misfiled to update his/her beliefs about the likely culprit. Let $A$ be the event that a document is misfiled. What the boss would like to know are the three probabilities
+The boss would like to use this updated information to update the probabilities for the three assistants, that is, (s)he wants to use the additional likelihood that the document was misfiled to update his/her beliefs about the likely culprit. Let \(A\) be the event that a document is misfiled. What the boss would like to know are the three probabilities
 \[
 \P(M|A),\mbox{ }\P(L|A),\mbox{ and }\P(C|A).
 \]
-
-We will show the calculation for $\P(M|A)$, the other two cases being similar. We use Bayes' Rule in the form
+We will show the calculation for \(\P(M|A)\), the other two cases being similar. We use Bayes' Rule in the form
 \[
 \P(M|A)=\frac{\P(M\cap A)}{\P(A)}.
 \]
-
-Let's try to find $\P(M\cap A)$, which is just $\P(M)\cdot\P(A|M)$ by the Multiplication Rule. We already know $\P(M)=0.6$ and $\P(A|M)$ is nothing more than Moe's misfile rate, given above to be $\P(A|M)=0.003$. Thus, we compute
+Let's try to find \(\P(M\cap A)\), which is just \(\P(M)\cdot\P(A|M)\) by the Multiplication Rule. We already know \(\P(M)=0.6\) and \(\P(A|M)\) is nothing more than Moe's misfile rate, given above to be \(\P(A|M)=0.003\). Thus, we compute
 \[
 \P(M\cap A)=(0.6)(0.003)=0.0018.
 \]
@@ -1762,11 +1741,10 @@ Using the same procedure we may calculate
 \P(L|A)=0.0021\mbox{ and }\P(C|A)=0.0010.
 \]
 
-Now let's find the denominator, $\P(A)$. The key here is the notion that if a file is misplaced, then either Moe or Larry or Curly must have filed it; there is no one else around to do the misfiling. Further, these possibilities are mutually exclusive. We may use the Theorem of Total Probability \ref{eq:theorem-total-probability} to write
+Now let's find the denominator, \(\P(A)\). The key here is the notion that if a file is misplaced, then either Moe or Larry or Curly must have filed it; there is no one else around to do the misfiling. Further, these possibilities are mutually exclusive. We may use the Theorem of Total Probability \ref{eq:theorem-total-probability} to write
 \[ 
 \P(A)=\P(A\cap M)+\P(A\cap L)+\P(A\cap C).
 \]
-
 Luckily, we have computed these above. Thus
 \[
 \P(A)=0.0018+0.0021+0.0010=0.0049.
@@ -1775,13 +1753,10 @@ Therefore, Bayes' Rule yields
 \[
 \P(M|A)=\frac{0.0018}{0.0049}\approx0.37.
 \]
-
 This last quantity is called the posterior probability that Moe misfiled the document, since it incorporates the observed data that a randomly selected file was misplaced (which is governed by the misfile rate). We can use the same argument to calculate
-
 |                       | Moe           | Larry         | Curly         |
 |-----------------------+---------------+---------------+---------------|
-| Posterior Probability | $\approx0.37$ | $\approx0.43$ | $\approx0.20$ |
-
+| Posterior Probability | \(\approx0.37\) | \(\approx0.43\) | \(\approx0.20\) |
 The conclusion: *Larry* gets the axe. What is happening is an intricate interplay between the time on the job and the misfile rate. It is not obvious who the winner (or in this case, loser) will be, and the statistician needs to consult Bayes' Rule to determine the best course of action.
 #+latex: \end{example}
 
@@ -1849,37 +1824,37 @@ Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 ** Random Variables
 \label{sec:Random-Variables}
 
-We already know about experiments, sample spaces, and events. In this section, we are interested in a /number/ that is associated with the experiment. We conduct a random experiment $E$ and after learning the outcome $\omega$ in $S$ we calculate a number $X$. That is, to each outcome $\omega$ in the sample space we associate a number $X(\omega)=x$. 
+We already know about experiments, sample spaces, and events. In this section, we are interested in a /number/ that is associated with the experiment. We conduct a random experiment \(E\) and after learning the outcome \(\omega\) in \(S\) we calculate a number \(X\). That is, to each outcome \(\omega\) in the sample space we associate a number \(X(\omega)=x\). 
 
 #+latex: \begin{defn}
-A /random variable/ $X$ is a function $X:S\to\R$ that associates to each outcome $\omega\in S$ exactly one number $X(\omega)=x$. 
+A /random variable/ \(X\) is a function \(X:S\to\R\) that associates to each outcome \(\omega\in S\) exactly one number \(X(\omega)=x\). 
 #+latex: \end{defn}
 
-We usually denote random variables by uppercase letters such as $X$, $Y$, and $Z$, and we denote their observed values by lowercase letters $x$, $y$, and $z$. Just as $S$ is the set of all possible outcomes of $E$, we call the set of all possible values of $X$ the /support/ of $X$ and denote it by $S_{X}$.
+We usually denote random variables by uppercase letters such as \(X\), \(Y\), and \(Z\), and we denote their observed values by lowercase letters \(x\), \(y\), and \(z\). Just as \(S\) is the set of all possible outcomes of \(E\), we call the set of all possible values of \(X\) the /support/ of \(X\) and denote it by \(S_{X}\).
 
 #+latex: \begin{example}
-Let $E$ be the experiment of flipping a coin twice. We have seen that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define the random variable $X = \mbox{the number of heads}$. That is, for example, $X(HH)=2$, while $X(HT)=1$. We may make a table of the possibilities:
+Let \(E\) be the experiment of flipping a coin twice. We have seen that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define the random variable \(X = \mbox{the number of heads}\). That is, for example, \(X(HH)=2\), while \(X(HT)=1\). We may make a table of the possibilities:
 
-| $\omega\in S$ | $HH$ | $HT$ | $TH$ | $TT$ |
+| \(\omega\in S\) | \(HH\) | \(HT\) | \(TH\) | \(TT\) |
 |---------------+------+------+------+------|
-| $X(\omega)=x$ | 2    | 1    | 1    | 0    |
+| \(X(\omega)=x\) | 2    | 1    | 1    | 0    |
 
-Taking a look at the second row of the table, we see that the support of $X$ -- the set of all numbers that $X$ assumes -- would be \( S_{X}= \{ 0,1,2 \} \).
+Taking a look at the second row of the table, we see that the support of \(X\) -- the set of all numbers that \(X\) assumes -- would be \( S_{X}= \{ 0,1,2 \} \).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let $E$ be the experiment of flipping a coin repeatedly until observing a Head. The sample space would be $S= \{ H,\ TH,\ TTH,\ TTTH,\ \ldots \} $. Now define the random variable $Y=\mbox{the number of Tails before the first head}$. Then the support of $Y$ would be \( S_{Y}= \{ 0,1,2,\ldots \} \).
+Let \(E\) be the experiment of flipping a coin repeatedly until observing a Head. The sample space would be \(S= \{ H,\ TH,\ TTH,\ TTTH,\ \ldots \} \). Now define the random variable \(Y=\mbox{the number of Tails before the first head}\). Then the support of \(Y\) would be \( S_{Y}= \{ 0,1,2,\ldots \} \).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let $E$ be the experiment of tossing a coin in the air, and define the random variable \( Z = \mbox{the time (in seconds) until the coin hits the ground} \). In this case, the sample space is inconvenient to describe. Yet the support of $Z$ would be $(0,\infty)$. Of course, it is reasonable to suppose that the coin will return to Earth in a short amount of time; in practice, the set $(0,\infty)$ is admittedly too large. However, we will find that in many circumstances it is mathematically convenient to study the extended set rather than a restricted one. 
+Let \(E\) be the experiment of tossing a coin in the air, and define the random variable \( Z = \mbox{the time (in seconds) until the coin hits the ground} \). In this case, the sample space is inconvenient to describe. Yet the support of \(Z\) would be \((0,\infty)\). Of course, it is reasonable to suppose that the coin will return to Earth in a short amount of time; in practice, the set \((0,\infty)\) is admittedly too large. However, we will find that in many circumstances it is mathematically convenient to study the extended set rather than a restricted one. 
 #+latex: \end{example}
 
-There are important differences between the supports of $X$, $Y$, and $Z$. The support of $X$ is a finite collection of elements that can be inspected all at once. And while the support of $Y$ cannot be exhaustively written down, its elements can nevertheless be listed in a naturally ordered sequence. Random variables with supports similar to those of $X$ and $Y$ are called /discrete random variables/. We study these in Chapter \ref{cha:Discrete-Distributions}.
+There are important differences between the supports of \(X\), \(Y\), and \(Z\). The support of \(X\) is a finite collection of elements that can be inspected all at once. And while the support of \(Y\) cannot be exhaustively written down, its elements can nevertheless be listed in a naturally ordered sequence. Random variables with supports similar to those of \(X\) and \(Y\) are called /discrete random variables/. We study these in Chapter \ref{cha:Discrete-Distributions}.
 
-In contrast, the support of $Z$ is a continuous interval, containing all rational and irrational positive real numbers. For this reason[fn:contrv], random variables with supports like $Z$ are called /continuous random variables/, to be studied in Chapter \ref{cha:Continuous-Distributions}.
-
-[fn:contrv] This isn't really the reason, but it serves as an effective litmus test at the introductory level. See Billingsley or Resnick.
+In contrast, the support of \(Z\) is a continuous interval, containing all rational and irrational positive real numbers. For this reason
+#+latex: \footnote{This isn't really the reason, but it serves as an effective litmus test at the introductory level. See Billingsley or Resnick.},
+random variables with supports like \(Z\) are called /continuous random variables/, to be studied in Chapter \ref{cha:Continuous-Distributions}.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -1887,16 +1862,16 @@ The primary vessel for this task is the =addrv= function. There are two ways to 
 
 #+latex: \paragraph*{Supply a Defining Formula}
 
-The first method is based on the =transform= function. See =?transform=. The idea is to write a formula defining the random variable inside the function, and it will be added as a column to the data frame. As an example, let us roll a 4-sided die three times, and let us define the random variable $U=X1-X2+X3$. 
+The first method is based on the =transform= function. See =?transform=. The idea is to write a formula defining the random variable inside the function, and it will be added as a column to the data frame. As an example, let us roll a 4-sided die three times, and let us define the random variable \(U=X1-X2+X3\). 
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 S <- rolldie(3, nsides = 4, makespace = TRUE) 
 S <- addrv(S, U = X1-X2+X3) 
 #+end_src 
 
 #+results[90c222ed47f13a3a6d917c95306cd57b38fded94]:
 
-Now let's take a look at the values of $U$. In the interest of space, we will only reproduce the first few rows of $S$ (there are $4^{3}=64$ rows in total). 
+Now let's take a look at the values of \(U\). In the interest of space, we will only reproduce the first few rows of \(S\) (there are \(4^{3}=64\) rows in total). 
 
 #+begin_src R :exports both :results output pp   
 head(S)
@@ -1911,7 +1886,7 @@ head(S)
 : 5  1  2  1 0 0.015625
 : 6  2  2  1 1 0.015625
 
-We see from the $U$ column it is operating just like it should. We can now answer questions like
+We see from the \(U\) column it is operating just like it should. We can now answer questions like
 
 #+begin_src R :exports both :results output pp   
 prob(S, U > 6) 
@@ -1922,7 +1897,7 @@ prob(S, U > 6)
 
 #+latex: \paragraph*{Supply a Function}
 
-Sometimes we have a function laying around that we would like to apply to some of the outcome variables, but it is unfortunately tedious to write out the formula defining what the new variable would be. The =addrv= function has an argument =FUN= specifically for this case. Its value should be a legitimate function from \textsf{R}, such as =sum=, =mean=, =median=, and so forth. Or, you can define your own function. Continuing the previous example, let's define $V=\max(X1,X2,X3)$ and $W=X1+X2+X3$. 
+Sometimes we have a function laying around that we would like to apply to some of the outcome variables, but it is unfortunately tedious to write out the formula defining what the new variable would be. The =addrv= function has an argument =FUN= specifically for this case. Its value should be a legitimate function from \textsf{R}, such as =sum=, =mean=, =median=, and so forth. Or, you can define your own function. Continuing the previous example, let's define \(V=\max(X1,X2,X3)\) and \(W=X1+X2+X3\). 
 
 #+begin_src R :exports both :results output pp  
 S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V") 
@@ -1943,7 +1918,7 @@ Notice that =addrv= has an =invars= argument to specify exactly to which columns
 
 #+latex: \paragraph*{Marginal Distributions}
 
-As we can see above, often after adding a random variable $V$ to a probability space one will find that $V$ has values that are repeated, so that it becomes difficult to understand what the ultimate behavior of $V$ actually is. We can use the =marginal= function to aggregate the rows of the sample space by values of $V$, all the while accumulating the probability associated with $V$'s distinct values. Continuing our example from above, suppose we would like to focus entirely on the values and probabilities of $V=\max(X1,X2,X3)$. 
+As we can see above, often after adding a random variable \(V\) to a probability space one will find that \(V\) has values that are repeated, so that it becomes difficult to understand what the ultimate behavior of \(V\) actually is. We can use the =marginal= function to aggregate the rows of the sample space by values of \(V\), all the while accumulating the probability associated with \(V\)'s distinct values. Continuing our example from above, suppose we would like to focus entirely on the values and probabilities of \(V=\max(X1,X2,X3)\). 
 
 #+begin_src R :exports both :results output pp   
 marginal(S, vars = "V") 
@@ -1956,7 +1931,7 @@ marginal(S, vars = "V")
 : 3 3 0.296875
 : 4 4 0.578125
 
-We could save the probability space of $V$ in a data frame and study it further, if we wish. As a final remark, we can calculate the marginal distributions of multiple variables desired using the =vars= argument. For example, suppose we would like to examine the joint distribution of $V$ and $W$. 
+We could save the probability space of \(V\) in a data frame and study it further, if we wish. As a final remark, we can calculate the marginal distributions of multiple variables desired using the =vars= argument. For example, suppose we would like to examine the joint distribution of \(V\) and \(W\). 
 
 #+begin_src R :exports both :results output pp   
 marginal(S, vars = c("V", "W")) 
@@ -1994,15 +1969,15 @@ Note that the default value of =vars= is the names of all columns except =probs=
 
 \begin{xca}
 \label{xca:numb-cond-indep}
-Prove the assertion given in the text: the number of conditions that the events $A_{1}$, $A_{2}$, ..., $A_{n}$ must satisfy in order to be mutually independent is $2^{n}-n-1$. (/Hint/: think about Pascal's triangle.)
+Prove the assertion given in the text: the number of conditions that the events \(A_{1}\), \(A_{2}\), ..., \(A_{n}\) must satisfy in order to be mutually independent is \(2^{n}-n-1\). (/Hint/: think about Pascal's triangle.)
 \end{xca}
 
 #+latex: \paragraph*{Answer:}
 
-The events must satisfy the product equalities two at a time, of which there are ${n \choose 2}$, then they must satisfy an additional ${n \choose 3}$ conditions three at a time, and so on, until they satisfy the ${n \choose n}=1$ condition including all $n$ events. In total, there are 
+The events must satisfy the product equalities two at a time, of which there are \({n \choose 2}\), then they must satisfy an additional \({n \choose 3}\) conditions three at a time, and so on, until they satisfy the \({n \choose n}=1\) condition including all \(n\) events. In total, there are 
 
 \[
 {n \choose 2}+{n \choose 3}+\cdots+{n \choose n}=\sum_{k=0}^{n}{n \choose k}-\left[{n \choose 0}+{n \choose 1}\right]
 \]
 
-conditions to be satisfied, but the binomial series in the expression on the right is the sum of the entries of the $n^{\mathrm{th}}$ row of Pascal's triangle, which is $2^{n}$.
+conditions to be satisfied, but the binomial series in the expression on the right is the sum of the entries of the \(n^{\mathrm{th}}\) row of Pascal's triangle, which is \(2^{n}\).
