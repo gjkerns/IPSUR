@@ -1,4 +1,7 @@
 
+# clear everything to start
+rm(list = ls())
+
 # initial customizations
 seed <- 42
 set.seed(seed)

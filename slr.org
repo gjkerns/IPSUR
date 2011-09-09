@@ -18,6 +18,7 @@
 * Simple Linear Regression
 \label{cha:simple-linear-regression}
 #+begin_src R :exports none :results silent
+rm(list = ls())
 seed <- 42
 set.seed(seed)
 options(width = 60)
@@ -474,7 +475,7 @@ Confidence and prediction intervals are calculated in \textsf{R} with the =predi
 #+latex: \begin{example}
 We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed =cars.lm= earlier, and we will use this for input to the =predict= function. Also, we need to tell \textsf{R} the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. /This is important/. 
 
-#+begin_src R :exports both :results output pp 
+#+begin_src R :exports code :results silent
 new <- data.frame(speed = c(5, 6, 21))
 #+end_src
 
@@ -967,7 +968,9 @@ A rule of thumb is to flag observations whose \(DFFIT\) exceeds one in absolute 
 
 #+latex: \paragraph*{Cook's Distance}
 
-The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated[fn:coodefine Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.] by the formula
+The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated
+#+latex: \footnote{Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.}
+by the formula
 \begin{equation}
 D_{i}=\frac{E_{i}^{2}}{(p+1)S^{2}}\cdot\frac{h_{ii}}{(1-h_{ii})^{2}},\quad i=1,2,\ldots,n.\label{eq:slr-cooks-distance}
 \end{equation}
