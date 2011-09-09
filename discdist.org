@@ -9,7 +9,7 @@
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: answ soln
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
+#+BABEL: :session *R* :exports results :results value raw replace :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -18,6 +18,7 @@
 * Discrete Distributions
 \label{cha:Discrete-Distributions}
 #+begin_src R :exports none
+rm(list = ls())
 seed <- 42
 set.seed(seed)
 options(width = 60)
@@ -70,17 +71,14 @@ Discrete random variables are characterized by their supports which take the for
 \begin{equation}
 S_{X}=\{u_{1},u_{2},\ldots,u_{k}\}\mbox{ or }S_{X}=\{u_{1},u_{2},u_{3}\ldots\}.
 \end{equation}
-
-Every discrete random variable $X$ has associated with it a probability mass function (PMF) $f_{X}:S_{X}\to[0,1]$ defined by
+Every discrete random variable \(X\) has associated with it a probability mass function (PMF) \(f_{X}:S_{X}\to[0,1]\) defined by
 \begin{equation}
 f_{X}(x)=\P(X=x),\quad x\in S_{X}.
 \end{equation}
-
 Since values of the PMF represent probabilities, we know from Chapter \ref{cha:Probability} that PMFs enjoy certain properties. In particular, all PMFs satisfy
-
-1. $f_{X}(x)>0$ for $x\in S$,
-2. $\sum_{x\in S}f_{X}(x)=1$, and
-3. $\P(X\in A)=\sum_{x\in A}f_{X}(x)$, for any event $A\subset S$.
+1. \(f_{X}(x)>0\) for \(x\in S\),
+2. \(\sum_{x\in S}f_{X}(x)=1\), and
+3. \(\P(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event \(A\subset S\).
 
 #+latex: \begin{example}
 \label{exa:Toss-a-coin}
@@ -90,15 +88,15 @@ Toss a coin 3 times. The sample space would be
 S=\{ HHH,\ HTH,\ THH,\ TTH,\ HHT,\ HTT,\ THT,\ TTT\}.
 \]
 
-Now let $X$ be the number of Heads observed. Then $X$ has support $S_{X}=\{ 0,1,2,3\} $. Assuming that the coin is fair and was tossed in exactly the same way each time, it is not unreasonable to suppose that the outcomes in the sample space are all equally likely. 
+Now let \(X\) be the number of Heads observed. Then \(X\) has support \(S_{X}=\{ 0,1,2,3\} \). Assuming that the coin is fair and was tossed in exactly the same way each time, it is not unreasonable to suppose that the outcomes in the sample space are all equally likely. 
 
-What is the PMF of $X$? Notice that $X$ is zero exactly when the outcome $TTT$ occurs, and this event has probability $1/8$. Therefore, $f_{X}(0)=1/8$, and the same reasoning shows that $f_{X}(3)=1/8$. Exactly three outcomes result in $X=1$, thus, $f_{X}(1)=3/8$ and $f_{X}(3)$ holds the remaining $3/8$ probability (the total is 1). We can represent the PMF with a table:
+What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(TTT\) occurs, and this event has probability \(1/8\). Therefore, \(f_{X}(0)=1/8\), and the same reasoning shows that \(f_{X}(3)=1/8\). Exactly three outcomes result in \(X=1\), thus, \(f_{X}(1)=3/8\) and \(f_{X}(3)\) holds the remaining \(3/8\) probability (the total is 1). We can represent the PMF with a table:
 
 \begin{table}[H]
 \begin{tabular}{c|cccc|c}
-$x\in S_{X}$ & 0 & 1 & 2 & 3 & Total\tabularnewline
+\(x\in S_{X}\) & 0 & 1 & 2 & 3 & Total\tabularnewline
 \hline
-$f_{X}(x)=\P(X=x)$ & 1/8 & 3/8 & 3/8 & 1/8 & 1\tabularnewline
+\(f_{X}(x)=\P(X=x)\) & 1/8 & 3/8 & 3/8 & 1/8 & 1\tabularnewline
 \end{tabular}
 \end{table}
 
@@ -107,61 +105,52 @@ $f_{X}(x)=\P(X=x)$ & 1/8 & 3/8 & 3/8 & 1/8 & 1\tabularnewline
 *** Mean, Variance, and Standard Deviation
 \label{sub:mean-variance-sd}
 
-There are numbers associated with PMFs. One important example is the mean $\mu$, also known as $\E X$ (which we will discuss later):
+There are numbers associated with PMFs. One important example is the mean \(\mu\), also known as \(\E X\) (which we will discuss later):
 \begin{equation}
 \mu=\E X=\sum_{x\in S}xf_{X}(x),
 \end{equation}
-provided the (potentially infinite) series $\sum|x|f_{X}(x)$ is convergent. Another important number is the variance:
+provided the (potentially infinite) series \(\sum|x|f_{X}(x)\) is convergent. Another important number is the variance:
 \begin{equation}
 \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x),
 \end{equation}
-which can be computed (see Exercise \ref{xca:variance-shortcut}) with the alternate formula $\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}$. Directly defined from the variance is the standard deviation $\sigma=\sqrt{\sigma^{2}}$.
+which can be computed (see Exercise \ref{xca:variance-shortcut}) with the alternate formula \(\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
  
 #+latex: \begin{example}
 \label{exa:disc-pmf-mean}
-We will calculate the mean of $X$ in Example \ref{exa:Toss-a-coin}.
+We will calculate the mean of \(X\) in Example \ref{exa:Toss-a-coin}.
 \[
 \mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=3.5.
 \]
-
-We interpret $\mu=3.5$ by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable $X$, and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of $X$ (another form of the Law of Large Numbers; see Section \ref{sec:Interpreting-Probabilities}). Another way it is commonly stated is that $X$ is 3.5 ``on the average'' or ``in the long run''.
-
+We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable \(X\), and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of \(X\) (another form of the Law of Large Numbers; see Section \ref{sec:Interpreting-Probabilities}). Another way it is commonly stated is that \(X\) is 3.5 ``on the average'' or ``in the long run''.
 #+latex: \end{example}
 
 \begin{rem}
-Note that although we say $X$ is 3.5 on the average, we must keep in mind that our $X$ never actually equals 3.5 (in fact, it is impossible for $X$ to equal 3.5).
+Note that although we say \(X\) is 3.5 on the average, we must keep in mind that our \(X\) never actually equals 3.5 (in fact, it is impossible for \(X\) to equal 3.5).
 \end{rem}
 
-Related to the probability mass function $f_{X}(x)=\P(X=x)$ is another important function called the cumulative distribution function (CDF), $F_{X}$. It is defined by the formula
+Related to the probability mass function \(f_{X}(x)=\P(X=x)\) is another important function called the /cumulative distribution function/ (CDF), \(F_{X}\). It is defined by the formula
 \begin{equation}
 F_{X}(t)=\P(X\leq t),\quad-\infty<t<\infty.
 \end{equation}
-
-
-We know that all PMFs satisfy certain properties, and a similar statement may be made for CDFs. In particular, any CDF $F_{X}$ satisfies
-
-- $F_{X}$ is nondecreasing ($t_{1}\leq t_{2}$ implies $F_{X}(t_{1})\leq F_{X}(t_{2})$).
-
-- $F_{X}$ is right-continuous ($\lim_{t\to a^{+}}F_{X}(t)=F_{X}(a)$ for all $a\in\R$).
-
-- $\lim_{t\to-\infty}F_{X}(t)=0$ and $\lim_{t\to\infty}F_{X}(t)=1$.
-
-
-We say that $X$ has the distribution $F_{X}$ and we write $X\sim F_{X}$. In an abuse of notation we will also write $X\sim f_{X}$ and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
+We know that all PMFs satisfy certain properties, and a similar statement may be made for CDFs. In particular, any CDF \(F_{X}\) satisfies
+- \(F_{X}\) is nondecreasing (\(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\)).
+- \(F_{X}\) is right-continuous (\(\lim_{t\to a^{+}}F_{X}(t)=F_{X}(a)\) for all \(a\in\R\)).
+- \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
+We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). In an abuse of notation we will also write \(X\sim f_{X}\) and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 \label{sub:disc-rv-how-r}
 
-The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of $X$, and a vector =f= to contain the values of $f_{X}$ at the respective outcomes in =x=:
+The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 x <- c(0,1,2,3)
 f <- c(1/8, 3/8, 3/8, 1/8)
 #+end_src
 
 #+results[0897ba84059a071cc7b58406b703921d99b6039e]:
 
-To calculate the mean $\mu$, we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \textsf{R} since operations on vectors are performed /element-wise/ (see Section \ref{sub:Functions-and-Expressions}): 
+To calculate the mean \(\mu\), we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \textsf{R} since operations on vectors are performed /element-wise/ (see Section \ref{sub:Functions-and-Expressions}): 
 
 #+begin_src R :exports both :results output pp  
 mu <- sum(x * f)
@@ -171,7 +160,7 @@ mu
 #+results[3cc4b72bd4e364e3591feb0f1c02979e4f234515]:
 : [1] 1.5
 
-To compute the variance $\sigma^{2}$, we subtract the value of =mu= from each entry in =x=, square the answers, multiply by =f=,and =sum=. The standard deviation $\sigma$ is simply the square root of $\sigma^{2}$.
+To compute the variance \(\sigma^{2}\), we subtract the value of =mu= from each entry in =x=, square the answers, multiply by =f=,and =sum=. The standard deviation \(\sigma\) is simply the square root of \(\sigma^{2}\).
 
 #+begin_src R :exports both :results output pp  
 sigma2 <- sum((x-mu)^2 * f)
@@ -184,10 +173,10 @@ sigma
 : [1] 0.75
 : [1] 0.8660254
 
-Finally, we may find the values of the CDF $F_{X}$ on the support by accumulating the probabilities in $f_{X}$ with the =cumsum= function. 
+Finally, we may find the values of the CDF \(F_{X}\) on the support by accumulating the probabilities in \(f_{X}\) with the =cumsum= function. 
 
 #+begin_src R :exports both :results output pp  
-F = cumsum(f)
+F <- cumsum(f)
 F
 #+end_src
 
@@ -213,21 +202,19 @@ E(X); var(X); sd(X)
 
 We have seen the basic building blocks of discrete distributions and we now study particular models that statisticians often encounter in the field. Perhaps the most fundamental of all is the /discrete uniform/ distribution.
 
-A random variable $X$ with the discrete uniform distribution on the integers $1,2,\ldots,m$ has PMF
+A random variable \(X\) with the discrete uniform distribution on the integers \(1,2,\ldots,m\) has PMF
 \begin{equation}
 f_{X}(x)=\frac{1}{m},\quad x=1,2,\ldots,m.
 \end{equation}
-
-We write $X\sim\mathsf{disunif}(m)$. A random experiment where this distribution occurs is the choice of an integer at random between 1 and 100, inclusive. Let $X$ be the number chosen. Then $X\sim\mathsf{disunif}(m=100)$ and
+We write \(X\sim\mathsf{disunif}(m)\). A random experiment where this distribution occurs is the choice of an integer at random between 1 and 100, inclusive. Let \(X\) be the number chosen. Then \(X\sim\mathsf{disunif}(m=100)\) and
 \[
 \P(X=x)=\frac{1}{100},\quad x=1,\ldots,100.
 \]
-
-We find a direct formula for the mean of $X\sim\mathsf{disunif}(m)$:
+We find a direct formula for the mean of \(X\sim\mathsf{disunif}(m)\):
 \begin{equation}
 \mu=\sum_{x=1}^{m}xf_{X}(x)=\sum_{x=1}^{m}x\cdot\frac{1}{m}=\frac{1}{m}(1+2+\cdots+m)=\frac{m+1}{2},
 \end{equation}
-where we have used the famous identity $1+2+\cdots+m=m(m+1)/2$. That is, if we repeatedly choose integers at random from 1 to $m$ then, on the average, we expect to get $(m+1)/2$. To get the variance we first calculate
+where we have used the famous identity \(1+2+\cdots+m=m(m+1)/2\). That is, if we repeatedly choose integers at random from 1 to \(m\) then, on the average, we expect to get \((m+1)/2\). To get the variance we first calculate
 \[
 \sum_{x=1}^{m}x^{2}f_{X}(x)=\frac{1}{m}\sum_{x=1}^{m}x^{2}=\frac{1}{m}\frac{m(m+1)(2m+1)}{6}=\frac{(m+1)(2m+1)}{6},
 \]
@@ -237,27 +224,24 @@ and finally,
 \end{equation}
 
 #+latex: \begin{example}
-Roll a die and let $X$ be the upward face showing. Then $m=6$, $\mu=7/2=3.5$, and $\sigma^{2}=(6^{2}-1)/12=35/12$.
+Roll a die and let \(X\) be the upward face showing. Then \(m=6\), \(\mu=7/2=3.5\), and \(\sigma^{2}=(6^{2}-1)/12=35/12\).
 #+latex: \end{example}
-
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-
 #+latex: \paragraph*{From the console:}
-
 One can choose an integer at random with the =sample= function. The general syntax to simulate a discrete uniform random variable is =sample(x, size, replace = TRUE)=.
 
 The argument =x= identifies the numbers from which to randomly sample. If =x= is a number, then sampling is done from 1 to =x=. The argument =size= tells how big the sample size should be, and =replace= tells whether or not numbers should be replaced in the urn after having been sampled. The default option is =replace = FALSE= but for discrete uniforms the sampled values should be replaced. Some examples follow.
 
 #+latex: \paragraph*{Examples}
-- To roll a fair die 3000 times, do =sample(6, size = 3000, replace = TRUE).
+- To roll a fair die 3000 times, do =sample(6, size = 3000, replace = TRUE)=.
 - To choose 27 random numbers from 30 to 70, do =sample(30:70, size = 27, replace = TRUE)=.
 - To flip a fair coin 1000 times, do =sample(c("H","T"), size = 1000, replace = TRUE)=.
 
 #+latex: \paragraph*{With the \textsf{R} Commander:}
 
-Follow the sequence \textsf{Probability $\triangleright$ Discrete Distributions $\triangleright$ Discrete Uniform distribution $\triangleright$ Simulate Discrete uniform variates.}...
+Follow the sequence \textsf{Probability \(\triangleright\) Discrete Distributions \(\triangleright\) Discrete Uniform distribution \(\triangleright\) Simulate Discrete uniform variates.}...
 
 Suppose we would like to roll a fair die 3000 times. In the =Number of samples= field we enter =1=. Next, we describe what interval of integers to be sampled. Since there are six faces numbered 1 through 6, we set =from = 1=, we set =to = 6=, and set =by = 1= (to indicate that we travel from 1 to 6 in increments of 1 unit). We will generate a list of 3000 numbers selected from among 1, 2, ..., 6, and we store the results of the simulation. For the time being, we select =New Data set=. Click \textsf{OK}.
 
@@ -271,7 +255,7 @@ The default name for the variable is =disunif.sim1=.
 ** The Binomial Distribution
 \label{sec:binom-dist}
 
-The binomial distribution is based on a /Bernoulli trial/, which is a random experiment in which there are only two possible outcomes: success ($S$) and failure ($F$). We conduct the Bernoulli trial and let 
+The binomial distribution is based on a /Bernoulli trial/, which is a random experiment in which there are only two possible outcomes: success (\(S\)) and failure (\(F\)). We conduct the Bernoulli trial and let 
 \begin{equation}
 X=
 \begin{cases}
@@ -280,35 +264,30 @@ X=
 \end{cases}
 \end{equation}
 
-If the probability of success is $p$ then the probability of failure must be $1-p=q$ and the PMF of $X$ is
+If the probability of success is \(p\) then the probability of failure must be \(1-p=q\) and the PMF of \(X\) is
 
 \begin{equation}
 f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 \end{equation}
 
-It is easy to calculate $\mu=\E X=p$ and $\E X^{2}=p$ so that $\sigma^{2}=p-p^{2}=p(1-p)$.
+It is easy to calculate \(\mu=\E X=p\) and \(\E X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
 
 
 *** The Binomial Model
 \label{sub:The-Binomial-Model}
 
 The Binomial model has three defining properties:
-
-- Bernoulli trials are conducted $n$ times,
+- Bernoulli trials are conducted \(n\) times,
 - the trials are independent,
-- the probability of success $p$ does not change between trials.
-
-If $X$ counts the number of successes in the $n$ independent trials, then the PMF of $X$ is 
+- the probability of success \(p\) does not change between trials.
+If \(X\) counts the number of successes in the \(n\) independent trials, then the PMF of \(X\) is 
 \begin{equation}
 f_{X}(x)={n \choose x}p^{x}(1-p)^{n-x},\quad x=0,1,2,\ldots,n.
 \end{equation}
-
-We say that $X$ has a /binomial distribution/ and we write $X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$. It is clear that $f_{X}(x)\geq0$ for all $x$ in the support because the value is the product of nonnegative numbers. We next check that $\sum f(x)=1$:
-
+We say that \(X\) has a /binomial distribution/ and we write \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). It is clear that \(f_{X}(x)\geq0\) for all \(x\) in the support because the value is the product of nonnegative numbers. We next check that \(\sum f(x)=1\):
 \[
 \sum_{x=0}^{n}{n \choose x}p^{x}(1-p)^{n-x}=[p+(1-p)]^{n}=1^{n}=1.
 \]
-
 We next find the mean:
 \begin{alignat*}{1}
 \mu= & \sum_{x=0}^{n}x\,{n \choose x}p^{x}(1-p)^{n-x},\\
@@ -317,8 +296,7 @@ We next find the mean:
 = & np\,\sum_{x-1=0}^{n-1}{n-1 \choose x-1}p^{(x-1)}(1-p)^{(n-1)-(x-1)},\\
 = & np.
 \end{alignat*}
-
-A similar argument shows that $\E X(X-1)=n(n-1)p^{2}$ (see Exercise \ref{xca:binom-factorial-expectation}). Therefore
+A similar argument shows that \(\E X(X-1)=n(n-1)p^{2}\) (see Exercise \ref{xca:binom-factorial-expectation}). Therefore
 \begin{alignat*}{1}
 \sigma^{2}= & \E X(X-1)+\E X-[\E X]^{2},\\
 = & n(n-1)p^{2}+np-(np)^{2},\\
@@ -327,12 +305,11 @@ A similar argument shows that $\E X(X-1)=n(n-1)p^{2}$ (see Exercise \ref{xca:bin
 \end{alignat*}
 
 #+latex: \begin{example}
-A four-child family. Each child may be either a boy ($B$) or a girl ($G$). For simplicity we suppose that $\P(B)=\P(G)=1/2$ and that the genders of the children are determined independently. If we let $X$ count the number of $B$'s, then $X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)$. Further, $\P(X=2)$ is
+A four-child family. Each child may be either a boy (\(B\)) or a girl (\(G\)). For simplicity we suppose that \(\P(B)=\P(G)=1/2\) and that the genders of the children are determined independently. If we let \(X\) count the number of \(B\)'s, then \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\). Further, \(\P(X=2)\) is
 \[
 f_{X}(2)={4 \choose 2}(1/2)^{2}(1/2)^{2}=\frac{6}{2^{4}}.
 \]
-
-The mean number of boys is $4(1/2)=2$ and the variance of $X$ is $4(1/2)(1/2)=1$.
+The mean number of boys is \(4(1/2)=2\) and the variance of \(X\) is \(4(1/2)(1/2)=1\).
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -342,7 +319,7 @@ The corresponding \textsf{R} function for the PMF and CDF are =dbinom= and =pbin
 #+latex: \begin{example}
 We can calculate it in \textsf{R} Commander under the \textsf{Binomial Distribution} menu with the \textsf{Binomial probabilities} menu item.
 
-#+begin_src R :exports results
+#+begin_src R :exports results :results output pp
 A <- data.frame(Pr=dbinom(0:4, size = 4, prob = 0.5))
 rownames(A) <- 0:4 
 A
@@ -358,16 +335,16 @@ A
 
 #+latex: \end{example}
 
-We know that the $\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)$ distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be $\P(X=2)=0.3750$.
+We know that the \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be \(\P(X=2)=0.3750\).
 
 
 #+latex: \begin{example}
-Roll 12 dice simultaneously, and let $X$ denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let $S=\{ \mbox{get a 6 on one roll} \} $, then $\P(S)=1/6$ and the rolls constitute Bernoulli trials; thus $X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)$ and our task is to find $\P(7\leq X\leq9)$. This is just
+Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let \(S=\{ \mbox{get a 6 on one roll} \} \), then \(\P(S)=1/6\) and the rolls constitute Bernoulli trials; thus \(X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)\) and our task is to find \(\P(7\leq X\leq9)\). This is just
 \[ 
 \P(7\leq X\leq9)=\sum_{x=7}^{9}{12 \choose x}(1/6)^{x}(5/6)^{12-x}.
 \]
 
-Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that $\P(7\leq X\leq9)=\P(X\leq9)-\P(X\leq6)=F_{X}(9)-F_{X}(6)$, so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
+Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that \(\P(7\leq X\leq9)=\P(X\leq9)-\P(X\leq6)=F_{X}(9)-F_{X}(6)\), so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
 
 #+begin_src R :exports both :results output pp  
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
@@ -382,19 +359,19 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 
 #+latex: \begin{example}
 \label{exa:toss-coin-3-withR}
-Toss a coin three times and let $X$ be the number of Heads observed. We know from before that $X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)$ which implies the following PMF:
+Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
 
 
 \begin{table}[H]
 \begin{tabular}{c|cccc}
-$x=\mbox{\#of Heads}$ & 0 & 1 & 2 & 3\tabularnewline
+\(x=\mbox{\#of Heads}\) & 0 & 1 & 2 & 3\tabularnewline
 \hline
-$f(x)=\P(X=x)$ & 1/8 & 3/8 & 3/8 & 1/8\tabularnewline
+\(f(x)=\P(X=x)\) & 1/8 & 3/8 & 3/8 & 1/8\tabularnewline
 \end{tabular}
 \end{table}
 
 
-Our next goal is to write down the CDF of $X$ explicitly. The first case is easy: it is impossible for $X$ to be negative, so if $x<0$ then we should have $\P(X\leq x)=0$. Now choose a value $x$ satisfying $0\leq x<1$, say, $x=0.3$. The only way that $X\leq x$ could happen would be if $X=0$, therefore, $\P(X\leq x)$ should equal $\P(X=0)$, and the same is true for any $0\leq x<1$. Similarly, for any $1\leq x<2$, say, $x=1.73$, the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, $\P(X\leq x)$ should equal $\P(X=0\mbox{ or }X=1)=\P(X=0)+\P(X=1)$. Continuing in this fashion, we may figure out the values of $F_{X}(x)$ for all possible inputs $-\infty<x<\infty$, and we may summarize our observations with the following piecewise defined function:
+Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\P(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\P(X\leq x)\) should equal \(\P(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\P(X\leq x)\) should equal \(\P(X=0\mbox{ or }X=1)=\P(X=0)+\P(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
 \[
 F_{X}(x)=\P(X\leq x)=
 \begin{cases}
@@ -407,7 +384,7 @@ F_{X}(x)=\P(X\leq x)=
 \]
 
 
-In particular, the CDF of $X$ is defined for the entire real line, $\R$. The CDF is right continuous and nondecreasing. A graph of the $\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)$ CDF is shown in Figure \ref{fig:binom-cdf-base}.
+In particular, the CDF of \(X\) is defined for the entire real line, \(\R\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure \ref{fig:binom-cdf-base}.
 
 #+latex: \end{example}
 
@@ -420,7 +397,7 @@ lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p 
 points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
 points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
-\caption{Graph of the $\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)$ CDF\label{fig:binom-cdf-base}}
+\caption{Graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF\label{fig:binom-cdf-base}}
 
 \end{figure}
 
@@ -455,16 +432,16 @@ p(X)(2)   # cdf of X evaluated at x = 2
 Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section \ref{sub:Normal-Quantiles-QF}). See Figure \ref{fig:binom-plot-distr} for an example.
 
 
-#+begin_src R :exports code :results graphics :file img/binom-plot-distr.png
+#+begin_src R :exports code :results graphics silent :file img/binom-plot-distr.pdf
 plot(X, cex = 0.2)
 #+end_src
 
 #+results[514be6e493d17900ebcf3d9af9c820aabbc8679c]:
-[[file:img/binom-plot-distr.png]]
+[[file:img/binom-plot-distr.pdf]]
 
 #+begin_src latex 
   \begin{figure}[H]
-    \includegraphics[width=5in, height=4in]{img/binom-plot-distr.png}
+    \includegraphics[width=5in, height=4in]{img/binom-plot-distr.pdf}
     \caption[The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package]{\small The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package.}
     \label{fig:binom-plot-distr}
   \end{figure}
@@ -473,16 +450,16 @@ plot(X, cex = 0.2)
 
 \begin{table}
 \begin{tabular}{lllll}
-\multicolumn{5}{l}{Given $X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)$.}\tabularnewline
+\multicolumn{5}{l}{Given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).}\tabularnewline
  &  &  &  & \tabularnewline
-How to do: &  & with $\mathtt{stats}$ (default)  &  & with $\mathtt{distr}$\tabularnewline
+How to do: &  & with \(\mathtt{stats}\) (default)  &  & with \(\mathtt{distr}\)\tabularnewline
 \hline
-PMF: $\P(X=x)$ &  & $\mathtt{dbinom(x,size=n,prob=p)}$ &  & $\mathtt{d(X)(x)}$\tabularnewline
-CDF: $\P(X\leq x)$ &  & $\mathtt{pbinom(x,size=n,prob=p)}$ &  & $\mathtt{p(X)(x)}$\tabularnewline
-Simulate $k$ variates &  & $\mathtt{rbinom(k,size=n,prob=p)}$ &  & $\mathtt{r(X)(k)}$\tabularnewline
+PMF: \(\P(X=x)\) &  & \(\mathtt{dbinom(x,size=n,prob=p)}\) &  & \(\mathtt{d(X)(x)}\)\tabularnewline
+CDF: \(\P(X\leq x)\) &  & \(\mathtt{pbinom(x,size=n,prob=p)}\) &  & \(\mathtt{p(X)(x)}\)\tabularnewline
+Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt{r(X)(k)}\)\tabularnewline
 \hline
  &  &  &  & \tabularnewline
-\multicolumn{5}{r}{For $\mathtt{distr}$ need \texttt{X <-} $\mathtt{Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}$}\tabularnewline
+\multicolumn{5}{r}{For \(\mathtt{distr}\) need \texttt{X <-} \(\mathtt{Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\)}\tabularnewline
 \end{tabular}
 
 \caption{Correspondence between \texttt{stats} and \texttt{distr}}
@@ -498,42 +475,40 @@ Simulate $k$ variates &  & $\mathtt{rbinom(k,size=n,prob=p)}$ &  & $\mathtt{r(X)
 *** The Expectation Operator
 \label{sub:expectation-operator}
 
-We next generalize some of the concepts from Section \ref{sub:mean-variance-sd}. There we saw that every[fn:expexists] PMF has two important numbers associated with it:
+We next generalize some of the concepts from Section \ref{sub:mean-variance-sd}. There we saw that every
+#+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
+PMF has two important numbers associated with it:
 \begin{equation}
 \mu=\sum_{x\in S}xf_{X}(x),\quad\sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x).
 \end{equation}
-
-[fn:expexists] Not every, only those PMFs for which the (potentially infinite) series converges.
-
-Intuitively, for repeated observations of $X$ we would expect the sample mean to closely approximate $\mu$ as the sample size increases without bound. For this reason we call $\mu$ the /expected value/ of $X$ and we write $\mu=\E X$, where $\E$ is an /expectation operator/.
-
+Intuitively, for repeated observations of \(X\) we would expect the sample mean to closely approximate \(\mu\) as the sample size increases without bound. For this reason we call \(\mu\) the /expected value/ of \(X\) and we write \(\mu=\E X\), where \(\E\) is an /expectation operator/.
 
 \begin{defn}
-More generally, given a function $g$ we define the /expected value of/ $g(X)$ by
+More generally, given a function \(g\) we define the /expected value of/ \(g(X)\) by
 \begin{equation}
 \E\, g(X)=\sum_{x\in S}g(x)f_{X}(x),
 \end{equation}
-provided the (potentially infinite) series $\sum_{x}|g(x)|f(x)$ is convergent. We say that $\E g(X)$ /exists/.
+provided the (potentially infinite) series \(\sum_{x}|g(x)|f(x)\) is convergent. We say that \(\E g(X)\) /exists/.
 \end{defn}
 
 
-In this notation the variance is $\sigma^{2}=\E(X-\mu)^{2}$ and we prove the identity
+In this notation the variance is \(\sigma^{2}=\E(X-\mu)^{2}\) and we prove the identity
 \begin{equation}
 \E(X-\mu)^{2}=\E X^{2}-(\E X)^{2}
 \end{equation}
-in Exercise \ref{xca:variance-shortcut}. Intuitively, for repeated observations of $X$ we would expect the sample mean of the $g(X)$ values to closely approximate $\E\, g(X)$ as the sample size increases without bound.
+in Exercise \ref{xca:variance-shortcut}. Intuitively, for repeated observations of \(X\) we would expect the sample mean of the \(g(X)\) values to closely approximate \(\E\, g(X)\) as the sample size increases without bound.
 
-Let us take the analogy further. If we expect $g(X)$ to be close to $\E g(X)$ on the average, where would we expect $3g(X)$ to be on the average? It could only be $3\E g(X)$. The following theorem makes this idea precise.
+Let us take the analogy further. If we expect \(g(X)\) to be close to \(\E g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\E g(X)\). The following theorem makes this idea precise.
 
 \begin{prop}
 \label{pro:expectation-properties}
-For any functions $g$ and $h$, any random variable $X$, and any constant $c$: 
+For any functions \(g\) and \(h\), any random variable \(X\), and any constant \(c\): 
 
-1. $\E\: c=c$,
-2. $\E[c\cdot g(X)]=c\E g(X)$
-3. $\E[g(X)+h(X)]=\E g(X)+\E h(X)$,
+1. \(\E\: c=c\),
+2. \(\E[c\cdot g(X)]=c\E g(X)\)
+3. \(\E[g(X)+h(X)]=\E g(X)+\E h(X)\),
 
-provided $\E g(X)$ and $\E h(X)$ exist.
+provided \(\E g(X)\) and \(\E h(X)\) exist.
 
 \end{prop}
 
@@ -550,15 +525,15 @@ Go directly from the definition. For example,
 \label{sub:MGFs}
 
 \begin{defn}
-Given a random variable $X$, its /moment generating function/ (abbreviated MGF) is defined by the formula
+Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
 \begin{equation}
 M_{X}(t)=\E\me^{tX}=\sum_{x\in S}\me^{tx}f_{X}(x),
 \end{equation}
-provided the (potentially infinite) series is convergent for all $t$ in a neighborhood of zero (that is, for all $-\epsilon<t<\epsilon$, for some $\epsilon>0$). 
+provided the (potentially infinite) series is convergent for all \(t\) in a neighborhood of zero (that is, for all \(-\epsilon<t<\epsilon\), for some \(\epsilon>0\)). 
 \end{defn}
 
 
-Note that for any MGF $M_{X}$,
+Note that for any MGF \(M_{X}\),
 \begin{equation}
 M_{X}(0)=\E\me^{0\cdot X}=\E1=1.
 \end{equation}
@@ -566,9 +541,9 @@ M_{X}(0)=\E\me^{0\cdot X}=\E1=1.
 We will calculate the MGF for the two distributions introduced above.
 
 #+latex: \begin{example}
-Find the MGF for $X\sim\mathsf{disunif}(m)$. 
+Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
 
-Since $f(x)=1/m$, the MGF takes the form
+Since \(f(x)=1/m\), the MGF takes the form
 \[
 M(t)=\sum_{x=1}^{m}\me^{tx}\frac{1}{m}=\frac{1}{m}(\me^{t}+\me^{2t}+\cdots+\me^{mt}),\quad\mbox{for any \ensuremath{t}.}
 \]
@@ -576,7 +551,7 @@ M(t)=\sum_{x=1}^{m}\me^{tx}\frac{1}{m}=\frac{1}{m}(\me^{t}+\me^{2t}+\cdots+\me^{
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Find the MGF for $X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$.
+Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
 #+latex: \end{example}
 
 \begin{alignat*}{1}
@@ -608,7 +583,7 @@ Suppose we encounter a random variable which has MGF
 M_{X}(t)=(0.3+0.7\me^{t})^{13}.
 \]
 
-Then $X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)$.
+Then \(X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)\).
 #+latex: \end{example}
 
 
@@ -621,30 +596,29 @@ This brings us to the second powerful application of MGFs. Many of the models we
 M(t)= & \sum_{x\in S}\me^{tx}f(x).
 \end{alignat*}
 
-Take the derivative with respect to $t$ to get
+Take the derivative with respect to \(t\) to get
 \begin{equation}
 M'(t)=\frac{\diff}{\diff t}\left(\sum_{x\in S}\me^{tx}f(x)\right)=\sum_{x\in S}\ \frac{\diff}{\diff t}\left(\me^{tx}f(x)\right)=\sum_{x\in S}x\me^{tx}f(x),
 \end{equation}
-and so if we plug in zero for $t$ we see
+and so if we plug in zero for \(t\) we see
 \begin{equation}
 M'(0)=\sum_{x\in S}x\me^{0}f(x)=\sum_{x\in S}xf(x)=\mu=\E X.
 \end{equation}
 
-Similarly, $M''(t)=\sum x^{2}\me^{tx}f(x)$ so that $M''(0)=\E X^{2}$. And in general, we can see[fn:exchdiffint] that
+Similarly, \(M''(t)=\sum x^{2}\me^{tx}f(x)\) so that \(M''(0)=\E X^{2}\). And in general, we can see
+#+latex: \footnote{We are glossing over some significant mathematical details in our derivation. Suffice it to say that when the MGF exists in a neighborhood of \(t=0\), the exchange of differentiation and summation is valid in that neighborhood, and our remarks hold true.}
+that
 \begin{equation}
 M_{X}^{(r)}(0)=\E X^{r}=\mbox{\ensuremath{r^{\mathrm{th}}} moment of \ensuremath{X} about the origin.}
 \end{equation}
 
-[fn:exchdiffint] We are glossing over some significant mathematical details in our derivation. Suffice it to say that when the MGF exists in a neighborhood of $t=0$, the exchange of differentiation and summation is valid in that neighborhood, and our remarks hold true.
-
-
-These are also known as /raw moments/ and are sometimes denoted $\mu_{r}'$. In addition to these are the so called /central moments/ $\mu_{r}$ defined by
+These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In addition to these are the so called /central moments/ \(\mu_{r}\) defined by
 \begin{equation}
 \mu_{r}=\E(X-\mu)^{r},\quad r=1,2,\ldots
 \end{equation}
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=(q+p\me^{t})^{n}}}$.
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=(q+p\me^{t})^{n}}}\).
 
 We calculated the mean and variance of a binomial random variable in Section \ref{sec:binom-dist} by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
 \begin{alignat*}{1}
@@ -672,12 +646,12 @@ See how much easier that was?
 
 
 \begin{rem}
-We learned in this section that $M^{(r)}(0)=\E X^{r}$. We remember from Calculus II that certain functions $f$ can be represented by a Taylor series expansion about a point $a$, which takes the form
+We learned in this section that \(M^{(r)}(0)=\E X^{r}\). We remember from Calculus II that certain functions \(f\) can be represented by a Taylor series expansion about a point \(a\), which takes the form
 \begin{equation}
 f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all \ensuremath{|x-a|<R},}
 \end{equation}
 
-where $R$ is called the /radius of convergence/ of the series (see Appendix \ref{sec:Sequences-and-Series}). We combine the two to say that if an MGF exists for all $t$ in the interval $(-\epsilon,\epsilon)$, then we can write
+where \(R\) is called the /radius of convergence/ of the series (see Appendix \ref{sec:Sequences-and-Series}). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
 \begin{equation}
 M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all \ensuremath{|t|<\epsilon}.}
 \end{equation}
@@ -718,15 +692,15 @@ There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 ** The Empirical Distribution
 \label{sec:empirical-distribution}
 
-Do an experiment $n$ times and observe $n$ values $x_{1}$, $x_{2}$, ..., $x_{n}$ of a random variable $X$. For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
+Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
 \begin{defn}
-The /empirical cumulative distribution function/ $F_{n}$ (written ECDF)\index{Empirical distribution} is the probability distribution that places probability mass $1/n$ on each of the values $x_{1}$, $x_{2}$, ..., $x_{n}$. The empirical PMF takes the form
+The /empirical cumulative distribution function/ \(F_{n}\) (written ECDF)\index{Empirical distribution} is the probability distribution that places probability mass \(1/n\) on each of the values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\). The empirical PMF takes the form
 \begin{equation} 
 f_{X}(x)=\frac{1}{n},\quad x\in \{ x_{1},x_{2},...,x_{n} \}.
 \end{equation}
 
-If the value $x_{i}$ is repeated $k$ times, the mass at $x_{i}$ is accumulated to $k/n$.
+If the value \(x_{i}\) is repeated \(k\) times, the mass at \(x_{i}\) is accumulated to \(k/n\).
 \end{defn}
 
 
@@ -734,7 +708,7 @@ The mean of the empirical distribution is
 \begin{equation}
 \mu=\sum_{x\in S}xf_{X}(x)=\sum_{i=1}^{n}x_{i}\cdot\frac{1}{n}
 \end{equation}
-and we recognize this last quantity to be the sample mean, $\overline{x}$. The variance of the empirical distribution is
+and we recognize this last quantity to be the sample mean, \(\overline{x}\). The variance of the empirical distribution is
 \begin{equation}
 \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x)=\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\cdot\frac{1}{n}
 \end{equation}
@@ -764,22 +738,22 @@ ecdf(x)
 The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form, by itself. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter \ref{cha:Hypothesis-Testing}) or resampling (see Chapter \ref{cha:resampling-methods}). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
 
 
-#+begin_src R :exports code :results graphics :file img/empirical-CDF.png
+#+begin_src R :exports code :results graphics silent :file img/empirical-CDF.pdf
 plot(ecdf(x))
 #+end_src
 
 #+results[170335a3c50335bc946bc7c8a2de56426c836e3f]:
-[[file:img/empirical-CDF.png]]
+[[file:img/empirical-CDF.pdf]]
 
 #+begin_src latex 
   \begin{figure}[H]
-    \includegraphics[width=5in, height=4in]{img/empirical-CDF.png}
+    \includegraphics[width=5in, height=4in]{img/empirical-CDF.pdf}
     \caption[The empirical CDF]{\small The empirical CDF.}
     \label{fig:empirical-CDF}
   \end{figure}
 #+end_src
 
-See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to $1/5=0.2$.
+See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
 
 The empirical PDF is not usually of particular interest in itself, but if we really wanted we could define a function to serve as the empirical PDF:
 
@@ -824,15 +798,15 @@ Consider an urn with 7 white balls and 5 black balls. Let our random experiment 
 \P(3W,1B)=\frac{{7 \choose 3}{5 \choose 1}}{{12 \choose 4}}.
 \end{equation}
 
-More generally, we sample without replacement $K$ times from an urn with $M$ white balls and $N$ black balls. Let $X$ be the number of white balls in the sample. The PMF of $X$ is
+More generally, we sample without replacement \(K\) times from an urn with \(M\) white balls and \(N\) black balls. Let \(X\) be the number of white balls in the sample. The PMF of \(X\) is
 
 \begin{equation}
 f_{X}(x)=\frac{{M \choose x}{N \choose K-x}}{{M+N \choose K}}.
 \end{equation}
 
-We say that $X$ has a /hypergeometric distribution/ and write $X\sim\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=N,\,\mathtt{k}=K)$.
+We say that \(X\) has a /hypergeometric distribution/ and write \(X\sim\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=N,\,\mathtt{k}=K)\).
 
-The support set for the hypergeometric distribution is a little bit tricky. It is tempting to say that $x$ should go from 0 (no white balls in the sample) to $K$ (no black balls in the sample), but that does not work if $K>M$, because it is impossible to have more white balls in the sample than there were white balls originally in the urn. We have the same trouble if $K>N$. The good news is that the majority of examples we study have $K\leq M$ and $K\leq N$ and we will happily take the support to be $x=0,\ 1,\ \ldots,\ K$. 
+The support set for the hypergeometric distribution is a little bit tricky. It is tempting to say that \(x\) should go from 0 (no white balls in the sample) to \(K\) (no black balls in the sample), but that does not work if \(K>M\), because it is impossible to have more white balls in the sample than there were white balls originally in the urn. We have the same trouble if \(K>N\). The good news is that the majority of examples we study have \(K\leq M\) and \(K\leq N\) and we will happily take the support to be \(x=0,\ 1,\ \ldots,\ K\). 
 
 It is shown in Exercise \ref{xca:hyper-mean-variance} that
 \begin{equation}
@@ -842,15 +816,15 @@ It is shown in Exercise \ref{xca:hyper-mean-variance} that
 The associated \textsf{R} functions for the PMF and CDF are =dhyper(x, m, n, k)= and =phyper=, respectively. There are two more functions: =qhyper=, which we will discuss in Section \ref{sub:Normal-Quantiles-QF}, and =rhyper=, discussed below.
 
 #+latex: \begin{example}
-Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let $X$ denote the number of defectives in the sample.
+Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
 
 #+latex: \end{example}
 
 \begin{enumerate}
 \item Find the probability of exactly 3 defectives in the sample, that is,
-find $\P(X=3)$. 
+find \(\P(X=3)\). 
 
-/Solution:/ We know that $X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)$. So the required probability is just
+/Solution:/ We know that \(X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)\). So the required probability is just
 \[
 f_{X}(3)=\frac{{17 \choose 3}{233 \choose 2}}{{250 \choose 5}}.
 \]
@@ -864,7 +838,7 @@ dhyper(3, m = 17, n = 233, k = 5)
 #+results[124729d4b811c9d2ca2e3491589a2a6e65223945]:
 : [1] 0.002351153
 
-To find it with the \textsf{R} Commander we go \textsf{Probability} $\triangleright$ \textsf{Discrete Distributions} $\triangleright$ \textsf{Hypergeometric distribution} $\triangleright$ \textsf{Hypergeometric probabilities}... . We fill in the parameters $m=17$, $n=233$, and $k=5$. Click \textsf{OK}, and the following table is shown in the window.
+To find it with the \textsf{R} Commander we go \textsf{Probability} \(\triangleright\) \textsf{Discrete Distributions} \(\triangleright\) \textsf{Hypergeometric distribution} \(\triangleright\) \textsf{Hypergeometric probabilities}... . We fill in the parameters \(m=17\), \(n=233\), and \(k=5\). Click \textsf{OK}, and the following table is shown in the window.
 
 #+begin_src R :exports both :results output pp  
 A <- data.frame(Pr=dhyper(0:4, m = 17, n = 233, k = 5))
@@ -880,9 +854,9 @@ A
 : 3 2.351153e-03
 : 4 7.093997e-05
 
-We wanted $\P(X=3)$, and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
+We wanted \(\P(X=3)\), and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
 
-We know from our above discussion that the sample space should be $x=0,1,2,3,4,5$, yet, in the table the probabilities are only displayed for $x=1,2,3$, and 4. What is happening? As it turns out, the \textsf{R} Commander will only display probabilities that are 0.00005 or greater. Since $x=5$ is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the =dhyper= function:
+We know from our above discussion that the sample space should be \(x=0,1,2,3,4,5\), yet, in the table the probabilities are only displayed for \(x=1,2,3\), and 4. What is happening? As it turns out, the \textsf{R} Commander will only display probabilities that are 0.00005 or greater. Since \(x=5\) is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the =dhyper= function:
 
 #+begin_src R :exports both :results output pp  
 dhyper(5, m = 17, n = 233, k = 5)
@@ -891,11 +865,11 @@ dhyper(5, m = 17, n = 233, k = 5)
 #+results[61a0961ab6a6f79e5d370ccbdcd5f4ffa7e3d818]:
 : [1] 7.916049e-07
 
-In other words, $\P(X=5)\approx0.0000007916049$, a small number indeed.
+In other words, \(\P(X=5)\approx0.0000007916049\), a small number indeed.
 
-\item Find the probability that there are at most 2 defectives in the sample, that is, compute $\P(X\leq2)$.
+\item Find the probability that there are at most 2 defectives in the sample, that is, compute \(\P(X\leq2)\).
 
-/Solution:/ Since $\P(X\leq2)=\P(X=0,1,2)$, one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives $0.7011+0.2602+0.0362=0.9975$. Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters $m$, $n$, and $k$ as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
+/Solution:/ Since \(\P(X\leq2)=\P(X=0,1,2)\), one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives \(0.7011+0.2602+0.0362=0.9975\). Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters \(m\), \(n\), and \(k\) as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
 
 #+begin_src R :exports both :results output pp  
 phyper(2, m = 17, n = 233, k = 5)
@@ -904,11 +878,11 @@ phyper(2, m = 17, n = 233, k = 5)
 #+results[d676d8b6d7445075d2c2371d4dd54cc43a4fd67b]:
 : [1] 0.9975771
 
-And thus $\P(X\leq2)\approx 0.9975771$. We have confirmed that the above answer was correct up to four decimal places.
+And thus \(\P(X\leq2)\approx 0.9975771\). We have confirmed that the above answer was correct up to four decimal places.
 
-\item Find $\P(X>1)$. 
+\item Find \(\P(X>1)\). 
 
-The table did not give us the explicit probability $\P(X=5)$, so we can not use the table to give us this probability. We need to use another method. Since $\P(X>1)=1-\P(X\leq1)=1-F_{X}(1)$, we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
+The table did not give us the explicit probability \(\P(X=5)\), so we can not use the table to give us this probability. We need to use another method. Since \(\P(X>1)=1-\P(X\leq1)=1-F_{X}(1)\), we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
 
 #+begin_src R :exports both :results output pp  
 phyper(1, m = 17, n = 233, k = 5, lower.tail = FALSE)
@@ -917,12 +891,12 @@ phyper(1, m = 17, n = 233, k = 5, lower.tail = FALSE)
 #+results[a9884a360ca67accdb76f7aec39b3dcd75adcf54]:
 : [1] 0.03863065
 
-In general, the =Upper tail= option of a tail probabilities dialog computes $\P(X>x)$ for all given \textsf{Variable Value(s)} $x$.
+In general, the =Upper tail= option of a tail probabilities dialog computes \(\P(X>x)\) for all given \textsf{Variable Value(s)} \(x\).
 
-\item Generate $100,000$ observations of the random variable $X$.
+\item Generate \(100,000\) observations of the random variable \(X\).
 
 
-We can randomly simulate as many observations of $X$ as we want in \textsf{R} Commander. Simply choose \textsf{Simulate hypergeometric variates}... in the \textsf{Hypergeometric distribution} dialog. 
+We can randomly simulate as many observations of \(X\) as we want in \textsf{R} Commander. Simply choose \textsf{Simulate hypergeometric variates}... in the \textsf{Hypergeometric distribution} dialog. 
 
 In the \textsf{Number of samples} dialog, type 1. Enter the parameters as above. Under the \textsf{Store Values} section, make sure \textsf{New Data set} is selected. Click \textsf{OK}. 
 
@@ -930,7 +904,7 @@ A new dialog should open, with the default name =Simset1=.  We could change this
 
 In the Console Window, \textsf{R} Commander should issue an alert that \texttt{Simset1} has been initialized, and in a few seconds, it should also state that 100,000 hypergeometric variates were stored in =hyper.sim1=. We can view the sample by clicking the \textsf{View Data Set} button on the \textsf{R} Commander interface.
 
-We know from our formulas that $\mu=K\cdot M/(M+N)=5*17/250=0.34$. We can check our formulas using the fact that with repeated observations of $X$ we would expect about 0.34 defectives on the average. To see how our sample reflects the true mean, we can compute the sample mean
+We know from our formulas that \(\mu=K\cdot M/(M+N)=5*17/250=0.34\). We can check our formulas using the fact that with repeated observations of \(X\) we would expect about 0.34 defectives on the average. To see how our sample reflects the true mean, we can compute the sample mean
 
 :  Rcmdr> mean(Simset2$hyper.sim1, na.rm=TRUE)
 :  [1] 0.340344
@@ -939,11 +913,11 @@ We know from our formulas that $\mu=K\cdot M/(M+N)=5*17/250=0.34$. We can check 
 :  [1] 0.5584982
 :  ...
 
-We see that when given many independent observations of $X$, the sample mean is very close to the true mean $\mu$. We can repeat the same idea and use the sample standard deviation to estimate the true standard deviation of $X$. From the output above our estimate is 0.5584982, and from our formulas we get
+We see that when given many independent observations of \(X\), the sample mean is very close to the true mean \(\mu\). We can repeat the same idea and use the sample standard deviation to estimate the true standard deviation of \(X\). From the output above our estimate is 0.5584982, and from our formulas we get
 \[
 \sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}\approx0.3117896,
 \]
-with $\sigma=\sqrt{\sigma^{2}}\approx0.5583811944$. Our estimate was pretty close.
+with \(\sigma=\sqrt{\sigma^{2}}\approx0.5583811944\). Our estimate was pretty close.
 
 From the console we can generate random hypergeometric variates with the =rhyper= function, as demonstrated below.
 
@@ -959,10 +933,10 @@ rhyper(10, m = 17, n = 233, k = 5)
 #+latex: \paragraph*{Sampling With and Without Replacement}
 \label{sub:Sampling-With-and}
 
-Suppose that we have a large urn with, say, $M$ white balls and $N$ black balls. We take a sample of size $n$ from the urn, and let $X$ count the number of white balls in the sample. If we sample
+Suppose that we have a large urn with, say, \(M\) white balls and \(N\) black balls. We take a sample of size \(n\) from the urn, and let \(X\) count the number of white balls in the sample. If we sample
 
 \begin{description}
-\item [{without~replacement,}] then $X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)$ and has mean and variance
+\item [{without~replacement,}] then \(X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)\) and has mean and variance
 
 \begin{alignat*}{1}
 \mu= & n\frac{M}{M+N},\\
@@ -971,7 +945,7 @@ Suppose that we have a large urn with, say, $M$ white balls and $N$ black balls.
 \end{alignat*}
 
 On the other hand, if we sample
-\item [{with~replacement,}] then $X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=M/(M+N))$ with mean and variance
+\item [{with~replacement,}] then \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=M/(M+N))\) with mean and variance
 
 \begin{alignat*}{1}
 \mu= & n\frac{M}{M+N},\\
@@ -984,7 +958,7 @@ We see that both sampling procedures have the same mean, and the method with the
 \begin{equation}
 \frac{M+N-n}{M+N-1},
 \end{equation}
-is called a /finite population correction/. For a fixed sample size $n$, as $M,N\to\infty$ it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
+is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 
 
 *** Waiting Time Distributions
@@ -996,14 +970,14 @@ Another important class of problems is associated with the amount of time it tak
 #+latex: \paragraph*{The Geometric Distribution}
 \label{sub:The-Geometric-Distribution}
 
-Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let $X$ be the number of failures before a success. If $\P(S)=p$ then $X$ has PMF
+Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\P(S)=p\) then \(X\) has PMF
 \begin{equation}
 f_{X}(x)=p(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
 
-(Why?) We say that $X$ has a /Geometric distribution/ and we write $X\sim\mathsf{geom}(\mathtt{prob}=p)$. The associated \textsf{R} functions are =dgeom(x, prob)=, =pgeom=, =qgeom=, and =rhyper=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
+(Why?) We say that \(X\) has a /Geometric distribution/ and we write \(X\sim\mathsf{geom}(\mathtt{prob}=p)\). The associated \textsf{R} functions are =dgeom(x, prob)=, =pgeom=, =qgeom=, and =rhyper=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
-Again it is clear that $f(x)\geq0$ and we check that $\sum f(x)=1$ (see Equation \ref{eq:geom-series} in Appendix \ref{sec:Sequences-and-Series}):
+Again it is clear that \(f(x)\geq0\) and we check that \(\sum f(x)=1\) (see Equation \ref{eq:geom-series} in Appendix \ref{sec:Sequences-and-Series}):
 \begin{alignat*}{1}
 \sum_{x=0}^{\infty}p(1-p)^{x}= & p\sum_{x=0}^{\infty}q^{x}=p\,\frac{1}{1-q}=1.
 \end{alignat*}
@@ -1017,7 +991,7 @@ We will find in the next section that the mean and variance are
 #+latex: \begin{example}
 The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his attempted field goals in his career up to 2006. Assuming that his successive field goal attempts are approximately Bernoulli trials, find the probability that Jeff misses at least 5 field goals before his first successful goal.
 
-/Solution/: If $X=$ the number of missed goals until Jeff's first success, then $X\sim\mathsf{geom}(\mathtt{prob}=0.812)$ and we want $\P(X\geq5)=\P(X>4)$. We can find this in \textsf{R} with
+/Solution/: If \(X=\) the number of missed goals until Jeff's first success, then \(X\sim\mathsf{geom}(\mathtt{prob}=0.812)\) and we want \(\P(X\geq5)=\P(X>4)\). We can find this in \textsf{R} with
 
 #+begin_src R :exports both :results output pp  
 pgeom(4, prob = 0.812, lower.tail = FALSE)
@@ -1030,25 +1004,25 @@ pgeom(4, prob = 0.812, lower.tail = FALSE)
 
 
 \begin{note}
-Some books use a slightly different definition of the geometric distribution. They consider Bernoulli trials and let $Y$ count instead the number of trials until a success, so that $Y$ has PMF
+Some books use a slightly different definition of the geometric distribution. They consider Bernoulli trials and let \(Y\) count instead the number of trials until a success, so that \(Y\) has PMF
 \begin{equation}
 f_{Y}(y)=p(1-p)^{y-1},\quad y=1,2,3,\ldots
 \end{equation}
 
-When they say ``geometric distribution'', this is what they mean. It is not hard to see that the two definitions are related. In fact, if $X$ denotes our geometric and $Y$ theirs, then $Y=X+1$. Consequently, they have $\mu_{Y}=\mu_{X}+1$ and $\sigma_{Y}^{2}=\sigma_{X}^{2}$.
+When they say ``geometric distribution'', this is what they mean. It is not hard to see that the two definitions are related. In fact, if \(X\) denotes our geometric and \(Y\) theirs, then \(Y=X+1\). Consequently, they have \(\mu_{Y}=\mu_{X}+1\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
 \end{note}
 
 #+latex: \paragraph*{The Negative Binomial Distribution}
 \label{sub:The-Negative-Binomial}
 
-We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let $X$ count the number of failures before $r$ successes. If $\P(S)=p$ then $X$ has PMF
+We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\P(S)=p\) then \(X\) has PMF
 \begin{equation}
 f_{X}(x)={r+x-1 \choose r-1}\, p^{r}(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
 
-We say that $X$ has a /Negative Binomial distribution/ and write $X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)$. The associated \textsf{R} functions are =dnbinom(x, size, prob)=, =pnbinom=, =qnbinom=, and =rnbinom=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
+We say that \(X\) has a /Negative Binomial distribution/ and write \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). The associated \textsf{R} functions are =dnbinom(x, size, prob)=, =pnbinom=, =qnbinom=, and =rnbinom=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
-As usual it should be clear that $f_{X}(x)\geq 0$ and the fact that $\sum f_{X}(x)=1$ follows from a generalization of the geometric series by means of a Maclaurin's series expansion:
+As usual it should be clear that \(f_{X}(x)\geq 0\) and the fact that \(\sum f_{X}(x)=1\) follows from a generalization of the geometric series by means of a Maclaurin's series expansion:
 
 \begin{alignat}{1}
 \frac{1}{1-t}= & \sum_{k=0}^{\infty}t^{k},\quad\mbox{for \ensuremath{-1<t<1}},\mbox{ and}\\
@@ -1059,12 +1033,12 @@ Therefore
 \begin{equation}
 \sum_{x=0}^{\infty}f_{X}(x)=p^{r}\sum_{x=0}^{\infty}{r+x-1 \choose r-1}\, q^{x}=p^{r}(1-q)^{-r}=1,
 \end{equation}
-since $|q|=|1-p|<1$. 
+since \(|q|=|1-p|<1\). 
 
 #+latex: \begin{example}
-We flip a coin repeatedly and let $X$ count the number of Tails until we get seven Heads. What is $\P(X=5)?$
+We flip a coin repeatedly and let \(X\) count the number of Tails until we get seven Heads. What is \(\P(X=5)?\)
 
-/Solution/: We know that $X\sim\mathsf{nbinom}(\mathtt{size}=7,\,\mathtt{prob}=1/2)$.
+/Solution/: We know that \(X\sim\mathsf{nbinom}(\mathtt{size}=7,\,\mathtt{prob}=1/2)\).
 \[
 \P(X=5)=f_{X}(5)={7+5-1 \choose 7-1}(1/2)^{7}(1/2)^{5}={11 \choose 6}2^{-12}
 \]
@@ -1078,7 +1052,7 @@ dnbinom(5, size = 7, prob = 0.5)
 #+results[40f21fdc5d42f24e28fb61be125cff21ec0a908d]:
 : [1] 0.112793
 
-Let us next compute the MGF of $X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)$.
+Let us next compute the MGF of \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\).
 
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{\infty}\me^{tx}\ {r+x-1 \choose r-1}p^{r}q^{x}\\
@@ -1092,9 +1066,9 @@ and so
 M_{X}(t)=\left(\frac{p}{1-q\me^{t}}\right)^{r},\quad\mbox{for \ensuremath{q\me^{t}<1}}.
 \end{equation}
 
-We see that $q\me^{t}<1$ when $t<-\ln(1-p)$.
+We see that \(q\me^{t}<1\) when \(t<-\ln(1-p)\).
 
-Let $X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=p^{r}(1-q\me^{t})^{-r}}}$. We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=p^{r}(1-q\me^{t})^{-r}}}\). We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
 
 \begin{alignat*}{1}
 M'(t)= & p^{r}(-r)(1-q\me^{t})^{-r-1}(-q\me^{t}),\\
@@ -1104,7 +1078,7 @@ M'(0)= & \frac{rq}{1-q}\cdot1=\frac{rq}{p}.
 \end{alignat*}
 
 
-Thus $\mu=rq/p$. We next find $\E X^{2}$.
+Thus \(\mu=rq/p\). We next find \(\E X^{2}\).
 
 \begin{alignat*}{1}
 M''(0)= & \left.\frac{rq\me^{t}(1-q\me^{t})-rq\me^{t}(-q\me^{t})}{(1-q\me^{t})^{2}}M(t)+\frac{rq\me^{t}}{1-q\me^{t}}M'(t)\right|_{t=0},\\
@@ -1122,18 +1096,18 @@ A random variable has MGF
 M_{X}(t)=\left(\frac{0.19}{1-0.81\me^{t}}\right)^{31}.
 \]
 
-Then $X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)$.
+Then \(X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)\).
 
 #+latex: \end{example}
 
 \begin{note}
-As with the Geometric distribution, some books use a slightly different definition of the Negative Binomial distribution. They consider Bernoulli trials and let $Y$ be the number of trials until $r$ successes, so that $Y$ has PMF
+As with the Geometric distribution, some books use a slightly different definition of the Negative Binomial distribution. They consider Bernoulli trials and let \(Y\) be the number of trials until \(r\) successes, so that \(Y\) has PMF
 
 \begin{equation}
 f_{Y}(y)={y-1 \choose r-1}p^{r}(1-p)^{y-r},\quad y=r,r+1,r+2,\ldots
 \end{equation}
 
-It is again not hard to see that if $X$ denotes our Negative Binomial and $Y$ theirs, then $Y=X+r$. Consequently, they have $\mu_{Y}=\mu_{X}+r$ and $\sigma_{Y}^{2}=\sigma_{X}^{2}$.
+It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\) theirs, then \(Y=X+r\). Consequently, they have \(\mu_{Y}=\mu_{X}+r\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
 
 \end{note}
 
@@ -1150,36 +1124,36 @@ This is a distribution associated with ``rare events'', for reasons which will b
 - customers arriving in a bank.
 
 
-Let $\lambda$ be the average number of events in the time interval $[0,1]$. Let the random variable $X$ count the number of events occurring in the interval. Then under certain reasonable conditions it can be shown that
+Let \(\lambda\) be the average number of events in the time interval \([0,1]\). Let the random variable \(X\) count the number of events occurring in the interval. Then under certain reasonable conditions it can be shown that
 
 \begin{equation}
 f_{X}(x)=\P(X=x)=\me^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
 \end{equation}
 
-We use the notation $X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)$. The associated \textsf{R} functions are =dpois(x, lambda)=, =ppois=, =qpois=, and =rpois=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
+We use the notation \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)\). The associated \textsf{R} functions are =dpois(x, lambda)=, =ppois=, =qpois=, and =rpois=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
 
 #+latex: \paragraph*{What are the reasonable conditions?}
 
-Divide $[0,1]$ into subintervals of length $1/n$. A /Poisson process/\index{Poisson process} satisfies the following conditions:
+Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{Poisson process} satisfies the following conditions:
 
-- the probability of an event occurring in a particular subinterval is $\approx\lambda/n$.
+- the probability of an event occurring in a particular subinterval is \(\approx\lambda/n\).
 
-- the probability of two or more events occurring in any subinterval is $\approx 0$.
+- the probability of two or more events occurring in any subinterval is \(\approx 0\).
 
 - occurrences in disjoint subintervals are independent.
 
 \begin{rem}
 \label{rem:poisson-process}
 
-If $X$ counts the number of events in the interval $[0,t]$ and $\lambda$ is the average number that occur in unit time, then $X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)$, that is,
+If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) is the average number that occur in unit time, then \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)\), that is,
 \begin{equation}
 \P(X=x)=\me^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
 \end{equation}
 \end{rem}
 
 #+latex: \begin{example}
-On the average, five cars arrive at a particular car wash every hour. Let $X$ count the number of cars that arrive from 10AM to 11AM. Then $X\sim\mathsf{pois}(\mathtt{lambda}=5)$. Also, $\mu=\sigma^{2}=5$. What is the probability that no car arrives during this period? 
+On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
 
 /Solution/: The probability that no car arrives is
 \[
@@ -1189,9 +1163,9 @@ On the average, five cars arrive at a particular car wash every hour. Let $X$ co
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Suppose the car wash above is in operation from 8AM to 6PM, and we let $Y$ be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark \ref{rem:poisson-process} we get that $Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)$. What is the probability that there are between 48 and 50 customers, inclusive? 
+Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark \ref{rem:poisson-process} we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
 
-/Solution/: We want $\P(48\leq Y\leq50)=\P(X\leq50)-\P(X\leq47)$. 
+/Solution/: We want \(\P(48\leq Y\leq50)=\P(X\leq50)-\P(X\leq47)\). 
 
 #+begin_src R :exports both :results output pp  
 diff(ppois(c(47, 50), lambda = 50))
@@ -1205,11 +1179,11 @@ diff(ppois(c(47, 50), lambda = 50))
 ** Functions of Discrete Random Variables
 \label{sec:functions-discrete-rvs}
 
-We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable $X$ and a given function $h$, we may consider $Y=h(X)$. Since the values of $X$ are determined by chance, so are the values of $Y$. The question is, what is the PMF of the random variable $Y$? The answer, of course, depends on $h$. In the case that $h$ is one-to-one (see Appendix \ref{sec:Differential-and-Integral}), the solution can be found by simple substitution.
+We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix \ref{sec:Differential-and-Integral}), the solution can be found by simple substitution.
 
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)$. We saw in \ref{sec:other-discrete-distributions} that $X$ represents the number of failures until $r$ successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the $r^{\mathrm{th}}$ success occurs, which we will denote by $Y$. In a given performance of the experiment, the number of failures ($X$) and the number of successes ($r$) together will comprise the total number of trials ($Y$), or in other words, $X+r=Y$. We may let $h$ be defined by $h(x)=x+r$ so that $Y=h(X)$, and we notice that $h$ is linear and hence one-to-one. Finally, $X$ takes values $0,\ 1,\ 2,\ldots$ implying that the support of $Y$ would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for $X$ we get $X=Y-r$. Examining the PMF of $X$
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We saw in \ref{sec:other-discrete-distributions} that \(X\) represents the number of failures until \(r\) successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the \(r^{\mathrm{th}}\) success occurs, which we will denote by \(Y\). In a given performance of the experiment, the number of failures (\(X\)) and the number of successes (\(r\)) together will comprise the total number of trials (\(Y\)), or in other words, \(X+r=Y\). We may let \(h\) be defined by \(h(x)=x+r\) so that \(Y=h(X)\), and we notice that \(h\) is linear and hence one-to-one. Finally, \(X\) takes values \(0,\ 1,\ 2,\ldots\) implying that the support of \(Y\) would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for \(X\) we get \(X=Y-r\). Examining the PMF of \(X\)
 
 \begin{equation}
 f_{X}(x)={r+x-1 \choose r-1}\, p^{r}(1-p)^{x},
@@ -1226,37 +1200,37 @@ f_{Y}(y) & = & f_{X}(y-r),\\
 #+latex: \end{example}
 
 
-Even when the function $h$ is not one-to-one, we may still find the PMF of $Y$ simply by accumulating, for each $y$, the probability of all the $x$'s that are mapped to that $y$.
+Even when the function \(h\) is not one-to-one, we may still find the PMF of \(Y\) simply by accumulating, for each \(y\), the probability of all the \(x\)'s that are mapped to that \(y\).
 
 \begin{prop}
-Let $X$ be a discrete random variable with PMF $f_{X}$ supported on the set $S_{X}$. Let $Y=h(X)$ for some function $h$. Then $Y$ has PMF $f_{Y}$ defined by
+Let \(X\) be a discrete random variable with PMF \(f_{X}\) supported on the set \(S_{X}\). Let \(Y=h(X)\) for some function \(h\). Then \(Y\) has PMF \(f_{Y}\) defined by
 \begin{equation}
 f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 \end{equation}
 \end{prop}
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)$, and let $Y=(X-1)^{2}$. Consider the following table:
+Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
 
 | x             |    0 |   1 |    2 |   3 |    4 |
 |---------------+------+-----+------+-----+------|
-| $f_{X}(x)$    | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
+| \(f_{X}(x)\)    | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
 |---------------+------+-----+------+-----+------|
-| $y=(x-2)^{2}$ | 1    | 0   | 1    | 4   |  9   |
+| \(y=(x-2)^{2}\) | 1    | 0   | 1    | 4   |  9   |
 
-From this we see that $Y$ has support $S_{Y}=\{0,1,4,9\}$. We also see that $h(x)=(x-1)^{2}$ is not one-to-one on the support of $X$, because both $x=0$ and $x=2$ are mapped by $h$ to $y=1$. Nevertheless, we see that $Y=0$ only when $X=1$, which has probability $1/4$; therefore, $f_{Y}(0)$ should equal $1/4$. A similar approach works for $y=4$ and $y=9$. And $Y=1$ exactly when $X=0$ or $X=2$, which has total probability $7/16$. In summary, the PMF of $Y$ may be written:
+From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that \(h(x)=(x-1)^{2}\) is not one-to-one on the support of \(X\), because both \(x=0\) and \(x=2\) are mapped by \(h\) to \(y=1\). Nevertheless, we see that \(Y=0\) only when \(X=1\), which has probability \(1/4\); therefore, \(f_{Y}(0)\) should equal \(1/4\). A similar approach works for \(y=4\) and \(y=9\). And \(Y=1\) exactly when \(X=0\) or \(X=2\), which has total probability \(7/16\). In summary, the PMF of \(Y\) may be written:
 
 | y          |   0 |    1 |   4 |    9 |
 |------------+-----+------+-----+------|
-| $f_{Y}(y)$ | 1/4 | 7/16 | 1/4 | 1/16 |
+| \(f_{Y}(y)\) | 1/4 | 7/16 | 1/4 | 1/16 |
 
-There is not a special name for the distribution of $Y$, it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
+There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
 
 #+latex: \end{example}
 
 
 \begin{prop}
-If $X$ is a random variable with $\E X=\mu$ and $\mbox{Var}(X)=\sigma^{2}$, then the mean and variance of $Y=mX+b$ is
+If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\), then the mean and variance of \(Y=mX+b\) is
 \begin{equation}
 \mu_{Y}=m\mu+b,\quad\sigma_{Y}^{2}=m^{2}\sigma^{2},\quad\sigma_{Y}=|m|\sigma.
 \end{equation}
@@ -1270,27 +1244,27 @@ If $X$ is a random variable with $\E X=\mu$ and $\mbox{Var}(X)=\sigma^{2}$, then
 #+latex: \setcounter{thm}{0}
 
 #+latex: \begin{xca}
-A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let $X$ equal the number of students in a random sample of size $n=31$ who have used Wikipedia as a source. 
+A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
 
-1. How is $X$ distributed? 
+1. How is \(X\) distributed? 
    \[
    X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
    \]
 
 1. Sketch the probability mass function (roughly).
 
-   #+begin_src R :exports code :results graphics :file img/binomdxca.png
+   #+begin_src R :exports code :results graphics :file img/binomdxca.pdf
    library(distr)
    X <- Binom(size = 31, prob = 0.447)
    plot(X, to.draw.arg = "d")
    #+end_src
 
    #+results[0da63a7dad77141431e0d0314c1714af0e38ac7f]:
-   [[file:img/binomdxca.png]]
+   [[file:img/binomdxca.pdf]]
    
    #+begin_src latex 
      \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/binomdxca.png}
+       \includegraphics[width=5in, height=4in]{img/binomdxca.pdf}
        \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
        \label{fig:binomdxca}
      \end{figure}
@@ -1298,109 +1272,80 @@ A recent national study showed that approximately 44.7% of college students have
 
 1. Sketch the cumulative distribution function (roughly).
 
-   #+begin_src R :exports code :results graphics :file img/binompxca.png
+   #+begin_src R :exports code :results graphics silent :file img/binompxca.pdf
    library(distr)
    X <- Binom(size = 31, prob = 0.447)
    plot(X, to.draw.arg = "p")
    #+end_src
 
    #+results[68d8675f90c4484912ab897da41d66cb202fd7d6]:
-   [[file:img/binompxca.png]]
+   [[file:img/binompxca.pdf]]
 
    #+begin_src latex 
      \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/binompxca.png}
+       \includegraphics[width=5in, height=4in]{img/binompxca.pdf}
        \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
        \label{fig:binompxca}
      \end{figure}
    #+end_src
 
-1. Find the probability that $X$ is equal to 17.
+1. Find the probability that \(X\) is equal to 17.
    #+begin_src R :exports both :results output pp  
    dbinom(17, size = 31, prob = 0.447)
    #+end_src
 
-   #+results[1a068576dda7d9f9a46b38763f3710ab98c284d1]:
-   : [1] 0.07532248
-
-1. Find the probability that $X$ is at most 13.
+1. Find the probability that \(X\) is at most 13.
    #+begin_src R :exports both :results output pp  
    pbinom(13, size = 31, prob = 0.447)
    #+end_src
 
-   #+results[e10ab062292ea2b9086a37ca57ebb01ab132866c]:
-   : [1] 0.451357
-
-1. Find the probability that $X$ is bigger than 11.
+1. Find the probability that \(X\) is bigger than 11.
    #+begin_src R :exports both :results output pp  
    pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
    #+end_src
 
-   #+results[6195f54200de7d11985fbda910501d74d3e2160d]:
-   : [1] 0.8020339
-
-1. Find the probability that $X$ is at least 15.
+1. Find the probability that \(X\) is at least 15.
    #+begin_src R :exports both :results output pp  
    pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
    #+end_src
 
-   #+results[58b3e85da5fb4a5258360410b3ffd087c1768329]:
-   : [1] 0.406024
-
-1. Find the probability that $X$ is between 16 and 19, inclusive.
+1. Find the probability that \(X\) is between 16 and 19, inclusive.
    #+begin_src R :exports both :results output pp  
    sum(dbinom(16:19, size = 31, prob = 0.447))
    diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
    #+end_src
 
-   #+results[37424f1d7da6d285fc3dd1096ca5df8b65f4ec9a]:
-   : [1] 0.2544758
-   : [1] 0.2544758
-
-1. Give the mean of $X$, denoted $\E X$.
+1. Give the mean of \(X\), denoted \(\E X\).
    #+begin_src R :exports both :results output pp  
    library(distrEx)
    X <- Binom(size = 31, prob = 0.447)
    E(X)
    #+end_src
 
-   #+results[b7fe66989bb9b1d82fdc554f221154e8ed8dffb9]:
-   : [1] 13.857
-
-1. Give the variance of $X$.
+1. Give the variance of \(X\).
    #+begin_src R :exports both :results output pp  
    var(X)
    #+end_src
 
-   #+results[f4b34c9c0dcf0fdc208080a2243d3d6777e90ca6]:
-   : [1] 7.662921
-
-1. Give the standard deviation of $X$.
+1. Give the standard deviation of \(X\).
    #+begin_src R :exports both :results output pp  
    sd(X)
    #+end_src
 
-   #+results[ce7ce9129f9347ae9373b59f3108b2e32c1bb324]:
-   : [1] 2.768198
-
-1. Find $\E(4X+51.324)$
+1. Find \(\E(4X+51.324)\)
    #+begin_src R :exports both :results output pp  
    E(4*X + 51.324)
    #+end_src
-
-   #+results[c05ca6823a43a6f4ec565e1e2b6f8f1d623cbc50]:
-   : [1] 106.752
-
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
-For the following situations, decide what the distribution of $X$ should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not hold in practice.)
-  - We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let $X$ denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
-  - In a local lottery in which a three digit number is selected randomly, let $X$ be the number selected.
-  - We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let $X$ be the number of times the cup lands perfectly right side up.
-  - We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let $X$ denote the number of missed shots.
-  - Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let $X$ count the number of containers that illegally contain contraband.
-  - At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let $X$ denote the number of birds in the bush. 
+For the following situations, decide what the distribution of \(X\) should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not hold in practice.)
+  - We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let \(X\) denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
+  - In a local lottery in which a three digit number is selected randomly, let \(X\) be the number selected.
+  - We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let \(X\) be the number of times the cup lands perfectly right side up.
+  - We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let \(X\) denote the number of missed shots.
+  - Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let \(X\) count the number of containers that illegally contain contraband.
+  - At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let \(X\) denote the number of birds in the bush. 
   - We count the number of rain drops that fall in a circular area on a sidewalk during a ten minute period of a thunder storm.
   - We count the number of moth eggs on our window screen.
   - We count the number of blades of grass in a one square foot patch of land.
@@ -1409,12 +1354,12 @@ For the following situations, decide what the distribution of $X$ should be. In 
 
 #+latex: \begin{xca}
 #+latex: \label{xca:variance-shortcut}
-Show that $\E(X-\mu)^{2}=\E X^{2}-\mu^{2}$. /Hint/: expand the quantity $(X-\mu)^{2}$ and distribute the expectation over the resulting terms.
+Show that \(\E(X-\mu)^{2}=\E X^{2}-\mu^{2}\). /Hint/: expand the quantity \((X-\mu)^{2}\) and distribute the expectation over the resulting terms.
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 #+latex: \label{xca:binom-factorial-expectation}
-If $X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ show that $\E X(X-1)=n(n-1)p^{2}$.
+If \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) show that \(\E X(X-1)=n(n-1)p^{2}\).
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
