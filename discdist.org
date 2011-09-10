@@ -141,8 +141,6 @@ x <- c(0,1,2,3)
 f <- c(1/8, 3/8, 3/8, 1/8)
 #+end_src
 
-#+results[0897ba84059a071cc7b58406b703921d99b6039e]:
-
 To calculate the mean \(\mu\), we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \textsf{R} since operations on vectors are performed /element-wise/ (see Section \ref{sub:Functions-and-Expressions}): 
 
 #+begin_src R :exports both :results output pp  
@@ -295,12 +293,12 @@ The corresponding \textsf{R} function for the PMF and CDF are =dbinom= and =pbin
 
 #+latex: \begin{example}
 We can calculate it in \textsf{R} Commander under the \textsf{Binomial Distribution} menu with the \textsf{Binomial probabilities} menu item.
+  #+begin_src R :exports results :results output pp
+  A <- data.frame(Pr=dbinom(0:4, size = 4, prob = 0.5))
+  rownames(A) <- 0:4 
+  A
+  #+end_src
 
-#+begin_src R :exports results :results output pp
-A <- data.frame(Pr=dbinom(0:4, size = 4, prob = 0.5))
-rownames(A) <- 0:4 
-A
-#+end_src
 #+latex: \end{example}
 
 We know that the \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be \(\P(X=2)=0.3750\).
@@ -317,10 +315,6 @@ Again, one method to solve this problem would be to generate a probability mass 
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
 diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+end_src
-
-#+results[08cb264b20e8d349cbaf43de410b2d45ad6c7df5]:
-: [1] 0.001291758
-: [1] 0.001291758
 
 #+latex: \end{example}
 
@@ -369,21 +363,12 @@ X <- Binom(size = 3, prob = 1/2)
 X
 #+end_src
 
-#+results[56f8b124d986ff55ff2973f4089733cdaa54a910]:
-:  Distribution Object of Class: Binom
-:  size: 3
-:  prob: 0.5
-
 The analogue of the =dbinom= function for =X= is the =d(X)= function, and the analogue of the =pbinom= function is the =p(X)= function. Compare the following:
 
 #+begin_src R :exports both :results output pp  
 d(X)(1)   # pmf of X evaluated at x = 1
 p(X)(2)   # cdf of X evaluated at x = 2
 #+end_src
-
-#+results[34e9d47187e3ebe8c68ed8400660a66c0dac5226]:
-: [1] 0.375
-: [1] 0.875
 
 #+latex: \end{example}
 
@@ -394,9 +379,6 @@ Random variables defined via the =distr= package may be /plotted/, which will re
 plot(X, cex = 0.2)
 #+end_src
 
-#+results[514be6e493d17900ebcf3d9af9c820aabbc8679c]:
-[[file:img/binom-plot-distr.pdf]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/binom-plot-distr.pdf}
@@ -405,7 +387,7 @@ plot(X, cex = 0.2)
   \end{figure}
 #+end_src
 
-
+#+begin_latex
 \begin{table}
 \begin{tabular}{lllll}
 \multicolumn{5}{l}{Given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).}\tabularnewline
@@ -419,16 +401,12 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
  &  &  &  & \tabularnewline
 \multicolumn{5}{r}{For \(\mathtt{distr}\) need \texttt{X <-} \(\mathtt{Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\)}\tabularnewline
 \end{tabular}
-
 \caption{Correspondence between \texttt{stats} and \texttt{distr}}
-
 \end{table}
-
-
+#+end_latex
 
 ** Expectation and Moment Generating Functions
 \label{sec:expectation-and-mgfs}
-
 
 *** The Expectation Operator
 \label{sub:expectation-operator}
@@ -441,13 +419,13 @@ PMF has two important numbers associated with it:
 \end{equation}
 Intuitively, for repeated observations of \(X\) we would expect the sample mean to closely approximate \(\mu\) as the sample size increases without bound. For this reason we call \(\mu\) the /expected value/ of \(X\) and we write \(\mu=\E X\), where \(\E\) is an /expectation operator/.
 
-\begin{defn}
-More generally, given a function \(g\) we define the /expected value of/ \(g(X)\) by
+#+latex: \begin{defn}
+More generally, given a function \(g\) we define the \emph{expected value of} \(g(X)\) by
 \begin{equation}
 \E\, g(X)=\sum_{x\in S}g(x)f_{X}(x),
 \end{equation}
-provided the (potentially infinite) series \(\sum_{x}|g(x)|f(x)\) is convergent. We say that \(\E g(X)\) /exists/.
-\end{defn}
+provided the (potentially infinite) series \(\sum_{x}|g(x)|f(x)\) is convergent. We say that \(\E g(X)\) \emph{exists}.
+#+latex: \end{defn}
 
 
 In this notation the variance is \(\sigma^{2}=\E(X-\mu)^{2}\) and we prove the identity
@@ -458,52 +436,44 @@ in Exercise \ref{xca:variance-shortcut}. Intuitively, for repeated observations 
 
 Let us take the analogy further. If we expect \(g(X)\) to be close to \(\E g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\E g(X)\). The following theorem makes this idea precise.
 
-\begin{prop}
+#+latex: \begin{prop}
 \label{pro:expectation-properties}
 For any functions \(g\) and \(h\), any random variable \(X\), and any constant \(c\): 
-
 1. \(\E\: c=c\),
 2. \(\E[c\cdot g(X)]=c\E g(X)\)
 3. \(\E[g(X)+h(X)]=\E g(X)+\E h(X)\),
-
 provided \(\E g(X)\) and \(\E h(X)\) exist.
+#+latex: \end{prop}
 
-\end{prop}
-
-\begin{proof}
+#+latex: \begin{proof}
 Go directly from the definition. For example,
-
 \[
 \E[c\cdot g(X)]=\sum_{x\in S}c\cdot g(x)f_{X}(x)=c\cdot\sum_{x\in S}g(x)f_{X}(x)=c\E g(X).
 \]
-
-\end{proof}
+#+latex: \end{proof}
 
 *** Moment Generating Functions
 \label{sub:MGFs}
 
-\begin{defn}
+#+latex: \begin{defn}
 Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
 \begin{equation}
-M_{X}(t)=\E\me^{tX}=\sum_{x\in S}\me^{tx}f_{X}(x),
+M_{X}(t)=\E\mathrm{e}^{tX}=\sum_{x\in S}\mathrm{e}^{tx}f_{X}(x),
 \end{equation}
-provided the (potentially infinite) series is convergent for all \(t\) in a neighborhood of zero (that is, for all \(-\epsilon<t<\epsilon\), for some \(\epsilon>0\)). 
-\end{defn}
-
+provided the (potentially infinite) series is convergent for all \(t\) in a neighborhood of zero (that is, for all \(-\epsilon<t<\epsilon\), for some \(\epsilon>0\)).
+#+latex: \end{defn}
 
 Note that for any MGF \(M_{X}\),
 \begin{equation}
-M_{X}(0)=\E\me^{0\cdot X}=\E1=1.
+M_{X}(0)=\E\mathrm{e}^{0\cdot X}=\E1=1.
 \end{equation}
-
 We will calculate the MGF for the two distributions introduced above.
 
 #+latex: \begin{example}
 Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
-
 Since \(f(x)=1/m\), the MGF takes the form
 \[
-M(t)=\sum_{x=1}^{m}\me^{tx}\frac{1}{m}=\frac{1}{m}(\me^{t}+\me^{2t}+\cdots+\me^{mt}),\quad\mbox{for any \ensuremath{t}.}
+M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad\mbox{for any \ensuremath{t}.}
 \]
 
 #+latex: \end{example}
@@ -513,9 +483,9 @@ Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
 #+latex: \end{example}
 
 \begin{alignat*}{1}
-M_{X}(t)= & \sum_{x=0}^{n}\me^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
-= & \sum_{x=0}^{n}{n \choose x}\,(p\me^{t})^{x}q^{n-x},\\
-= & (p\me^{t}+q)^{n},\quad\mbox{for any \ensuremath{t}.}
+M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
+= & \sum_{x=0}^{n}{n \choose x}\,(p\mathrm{e}^{t})^{x}q^{n-x},\\
+= & (p\mathrm{e}^{t}+q)^{n},\quad\mbox{for any \ensuremath{t}.}
 \end{alignat*}
 
 
@@ -538,7 +508,7 @@ We will see an example of Theorem \ref{thm:mgf-unique} in action.
 #+latex: \begin{example}
 Suppose we encounter a random variable which has MGF
 \[
-M_{X}(t)=(0.3+0.7\me^{t})^{13}.
+M_{X}(t)=(0.3+0.7\mathrm{e}^{t})^{13}.
 \]
 Then \(X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)\).
 #+latex: \end{example}
@@ -549,17 +519,17 @@ An MGF is also known as a ``Laplace Transform'' and is manipulated in that conte
 
 This brings us to the second powerful application of MGFs. Many of the models we study have a simple MGF, indeed, which permits us to determine the mean, variance, and even higher moments very quickly. Let us see why. We already know that 
 \begin{alignat*}{1}
-M(t)= & \sum_{x\in S}\me^{tx}f(x).
+M(t)= & \sum_{x\in S}\mathrm{e}^{tx}f(x).
 \end{alignat*}
 Take the derivative with respect to \(t\) to get
 \begin{equation}
-M'(t)=\frac{\diff}{\diff t}\left(\sum_{x\in S}\me^{tx}f(x)\right)=\sum_{x\in S}\ \frac{\diff}{\diff t}\left(\me^{tx}f(x)\right)=\sum_{x\in S}x\me^{tx}f(x),
+M'(t)=\frac{\diff}{\diff t}\left(\sum_{x\in S}\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}\ \frac{\diff}{\diff t}\left(\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}x\mathrm{e}^{tx}f(x),
 \end{equation}
 and so if we plug in zero for \(t\) we see
 \begin{equation}
-M'(0)=\sum_{x\in S}x\me^{0}f(x)=\sum_{x\in S}xf(x)=\mu=\E X.
+M'(0)=\sum_{x\in S}x\mathrm{e}^{0}f(x)=\sum_{x\in S}xf(x)=\mu=\E X.
 \end{equation}
-Similarly, \(M''(t)=\sum x^{2}\me^{tx}f(x)\) so that \(M''(0)=\E X^{2}\). And in general, we can see
+Similarly, \(M''(t)=\sum x^{2}\mathrm{e}^{tx}f(x)\) so that \(M''(0)=\E X^{2}\). And in general, we can see
 #+latex: \footnote{We are glossing over some significant mathematical details in our derivation. Suffice it to say that when the MGF exists in a neighborhood of \(t=0\), the exchange of differentiation and summation is valid in that neighborhood, and our remarks hold true.}
 that
 \begin{equation}
@@ -572,29 +542,25 @@ These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In
 \end{equation}
 
 #+latex: \begin{example}
-Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=(q+p\me^{t})^{n}}}\).
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=(q+p\mathrm{e}^{t})^{n}}}\).
 
 We calculated the mean and variance of a binomial random variable in Section \ref{sec:binom-dist} by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
 \begin{alignat*}{1}
-M'(t)= & n(q+p\me^{t})^{n-1}p\me^{t}\left|_{t=0}\right.,\\
+M'(t)= & n(q+p\mathrm{e}^{t})^{n-1}p\mathrm{e}^{t}\left|_{t=0}\right.,\\
 = & n\cdot1^{n-1}p,\\
 = & np.
 \end{alignat*}
-
 And
 \begin{alignat*}{1}
-M''(0)= & n(n-1)[q+p\me^{t}]^{n-2}(p\me^{t})^{2}+n[q+p\me^{t}]^{n-1}p\me^{t}\left|_{t=0}\right.,\\
+M''(0)= & n(n-1)[q+p\mathrm{e}^{t}]^{n-2}(p\mathrm{e}^{t})^{2}+n[q+p\mathrm{e}^{t}]^{n-1}p\mathrm{e}^{t}\left|_{t=0}\right.,\\
 \E X^{2}= & n(n-1)p^{2}+np.
 \end{alignat*}
-
 Therefore
-
 \begin{alignat*}{1}
 \sigma^{2}= & \E X^{2}-(\E X)^{2},\\
 = & n(n-1)p^{2}+np-n^{2}p^{2},\\
 = & np-np^{2}=npq.
 \end{alignat*}
-
 See how much easier that was?
 #+latex: \end{example}
 
@@ -620,10 +586,6 @@ E(X)
 E(3*X + 4)
 #+end_src
 
-#+results[8765d2b9ed3c3508b97ecf7c791d72708ebc909c]:
-: [1] 1.35
-: [1] 8.05
-
 For discrete random variables with finite support, the expectation is simply computed with direct summation. In the case that the random variable has infinite support and the function is crazy, then the expectation is not computed directly, rather, it is estimated by first generating a random sample from the underlying model and next computing a sample mean of the function of interest. 
 
 There are methods for other population parameters:
@@ -633,10 +595,6 @@ var(X)
 sd(X)
 #+end_src
 
-#+results[22f4d1b625e9dc33935cb9b8e09901abf3c06aea]:
-: [1] 0.7425
-: [1] 0.8616844
-
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
 
@@ -645,14 +603,13 @@ There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
 Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
-\begin{defn}
+#+latex: \begin{defn}
 The /empirical cumulative distribution function/ \(F_{n}\) (written ECDF)\index{Empirical distribution} is the probability distribution that places probability mass \(1/n\) on each of the values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\). The empirical PMF takes the form
 \begin{equation} 
 f_{X}(x)=\frac{1}{n},\quad x\in \{ x_{1},x_{2},...,x_{n} \}.
 \end{equation}
-
 If the value \(x_{i}\) is repeated \(k\) times, the mass at \(x_{i}\) is accumulated to \(k/n\).
-\end{defn}
+#+latex: \end{defn}
 
 
 The mean of the empirical distribution is
@@ -664,11 +621,9 @@ and we recognize this last quantity to be the sample mean, \(\overline{x}\). The
 \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x)=\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\cdot\frac{1}{n}
 \end{equation}
 and this last quantity looks very close to what we already know to be the sample variance.
-
 \begin{equation}
 s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 \end{equation}
-
 The /empirical quantile function/ is the inverse of the ECDF. See Section \ref{sub:Normal-Quantiles-QF}.
 
 
@@ -681,20 +636,12 @@ x <- c(4, 7, 9, 11, 12)
 ecdf(x)
 #+end_src
 
-#+results[95b9bf7a26cf4b3691f33977bb2352961a1d5785]:
-: Empirical CDF 
-: Call: ecdf(x)
-:  x[1:5] =      4,      7,      9,     11,     12
-
-The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form, by itself. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter \ref{cha:Hypothesis-Testing}) or resampling (see Chapter \ref{cha:resampling-methods}). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
+The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter \ref{cha:Hypothesis-Testing}) or resampling (see Chapter \ref{cha:resampling-methods}). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
 
 
 #+begin_src R :exports code :results graphics silent :file img/empirical-CDF.pdf
 plot(ecdf(x))
 #+end_src
-
-#+results[170335a3c50335bc946bc7c8a2de56426c836e3f]:
-[[file:img/empirical-CDF.pdf]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -714,18 +661,12 @@ x <- c(0,0,1)
 epdf(x)(0)       # should be 2/3
 #+end_src
 
-#+results[dac4462ad6a8a01a3e31bc3a2ea815b412f5d504]:
-: [1] 0.6666667
-
 To simulate from the empirical distribution supported on the vector =x=, we use the =sample=\index{sample@\texttt{sample}} function.
 
 #+begin_src R :exports both :results output pp  
 x <- c(0,0,1)
 sample(x, size = 7, replace = TRUE)
 #+end_src
-
-#+results[275ab13537d0a46283e5431935ac0226498d945b]:
-: [1] 0 0 1 1 1 0 1
 
 We can get the empirical quantile function in \textsf{R} with =quantile(x, probs = p, type = 1)=; see Section \ref{sub:Normal-Quantiles-QF}.
 
@@ -764,46 +705,49 @@ The associated \textsf{R} functions for the PMF and CDF are =dhyper(x, m, n, k)=
 
 #+latex: \begin{example}
 Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
-#+latex: \end{example}
 
-1. Find the probability of exactly 3 defectives in the sample, that is, find \(\P(X=3)\). 
+Find the probability of exactly 3 defectives in the sample, that is, find \(\P(X=3)\). 
    /Solution:/ We know that \(X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)\). So the required probability is just
    \[
    f_{X}(3)=\frac{{17 \choose 3}{233 \choose 2}}{{250 \choose 5}}.
    \]
    To calculate it in \textsf{R} we just type 
+
    #+begin_src R :exports both :results output pp  
    dhyper(3, m = 17, n = 233, k = 5)
    #+end_src
 
    To find it with the \textsf{R} Commander we go \textsf{Probability} \(\triangleright\) \textsf{Discrete Distributions} \(\triangleright\) \textsf{Hypergeometric distribution} \(\triangleright\) \textsf{Hypergeometric probabilities}... . We fill in the parameters \(m=17\), \(n=233\), and \(k=5\). Click \textsf{OK}, and the following table is shown in the window.
+
    #+begin_src R :exports both :results output pp  
    A <- data.frame(Pr=dhyper(0:4, m = 17, n = 233, k = 5))
    rownames(A) <- 0:4 
    A
    #+end_src
-   
+
    We wanted \(\P(X=3)\), and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
    We know from our above discussion that the sample space should be \(x=0,1,2,3,4,5\), yet, in the table the probabilities are only displayed for \(x = 1,2,3,\) and 4. What is happening? As it turns out, the \textsf{R} Commander will only display probabilities that are 0.00005 or greater. Since \(x=5\) is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the =dhyper= function:
    #+begin_src R :exports both :results output pp  
    dhyper(5, m = 17, n = 233, k = 5)
    #+end_src
-
    In other words, \(\P(X=5)\approx0.0000007916049\), a small number indeed.
-1. Find the probability that there are at most 2 defectives in the sample, that is, compute \(\P(X\leq2)\).
+Find the probability that there are at most 2 defectives in the sample, that is, compute \(\P(X\leq2)\).
    /Solution:/ Since \(\P(X\leq2)=\P(X=0,1,2)\), one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives \(0.7011+0.2602+0.0362=0.9975\). Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters \(m\), \(n\), and \(k\) as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
 
    #+begin_src R :exports both :results output pp  
    phyper(2, m = 17, n = 233, k = 5)
    #+end_src
+
    And thus \(\P(X\leq2)\approx 0.9975771\). We have confirmed that the above answer was correct up to four decimal places.
-1. Find \(\P(X>1)\). 
+Find \(\P(X>1)\). 
    The table did not give us the explicit probability \(\P(X=5)\), so we can not use the table to give us this probability. We need to use another method. Since \(\P(X>1)=1-\P(X\leq1)=1-F_{X}(1)\), we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
+
    #+begin_src R :exports both :results output pp  
    phyper(1, m = 17, n = 233, k = 5, lower.tail = FALSE)
    #+end_src
+
    In general, the =Upper tail= option of a tail probabilities dialog computes \(\P(X>x)\) for all given \textsf{Variable Value(s)} \(x\).
-1. Generate \(100,000\) observations of the random variable \(X\).
+Generate \(100,000\) observations of the random variable \(X\).
    We can randomly simulate as many observations of \(X\) as we want in \textsf{R} Commander. Simply choose \textsf{Simulate hypergeometric variates}... in the \textsf{Hypergeometric distribution} dialog. 
    In the \textsf{Number of samples} dialog, type 1. Enter the parameters as above. Under the \textsf{Store Values} section, make sure \textsf{New Data set} is selected. Click \textsf{OK}. 
    A new dialog should open, with the default name =Simset1=.  We could change this if we like, according to the rules for \textsf{R} object names. In the sample size box, enter 100000. Click \textsf{OK}. 
@@ -815,23 +759,23 @@ Suppose in a certain shipment of 250 Pentium processors there are 17 defective p
    :  Rcmdr> sd(Simset2$hyper.sim1, na.rm=TRUE)
    :  [1] 0.5584982
    :  ...
-   
    We see that when given many independent observations of \(X\), the sample mean is very close to the true mean \(\mu\). We can repeat the same idea and use the sample standard deviation to estimate the true standard deviation of \(X\). From the output above our estimate is 0.5584982, and from our formulas we get
    \[
    \sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}\approx0.3117896,
    \]
    with \(\sigma=\sqrt{\sigma^{2}}\approx0.5583811944\). Our estimate was pretty close.
    From the console we can generate random hypergeometric variates with the =rhyper= function, as demonstrated below.
+
    #+begin_src R :exports both :results output pp  
    rhyper(10, m = 17, n = 233, k = 5)
    #+end_src
 
+#+latex: \end{example}
 
 #+latex: \paragraph*{Sampling With and Without Replacement}
 \label{sub:Sampling-With-and}
 
 Suppose that we have a large urn with, say, \(M\) white balls and \(N\) black balls. We take a sample of size \(n\) from the urn, and let \(X\) count the number of white balls in the sample. If we sample
-
 - without replacement, :: then \(X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)\) and has mean and variance
      \begin{alignat*}{1}
      \mu= & n\frac{M}{M+N},\\
@@ -929,26 +873,26 @@ dnbinom(5, size = 7, prob = 0.5)
 
 Let us next compute the MGF of \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\).
 \begin{alignat*}{1}
-M_{X}(t)= & \sum_{x=0}^{\infty}\me^{tx}\ {r+x-1 \choose r-1}p^{r}q^{x}\\
-= & p^{r}\sum_{x=0}^{\infty}{r+x-1 \choose r-1}[q\me^{t}]^{x}\\
-= & p^{r}(1-qe^{t})^{-r},\quad\mbox{provided \ensuremath{|q\me^{t}|<1,}}
+M_{X}(t)= & \sum_{x=0}^{\infty}\mathrm{e}^{tx}\ {r+x-1 \choose r-1}p^{r}q^{x}\\
+= & p^{r}\sum_{x=0}^{\infty}{r+x-1 \choose r-1}[q\mathrm{e}^{t}]^{x}\\
+= & p^{r}(1-qe^{t})^{-r},\quad\mbox{provided \ensuremath{|q\mathrm{e}^{t}|<1,}}
 \end{alignat*}
 and so
 \begin{equation}
-M_{X}(t)=\left(\frac{p}{1-q\me^{t}}\right)^{r},\quad\mbox{for \ensuremath{q\me^{t}<1}}.
+M_{X}(t)=\left(\frac{p}{1-q\mathrm{e}^{t}}\right)^{r},\quad\mbox{for \ensuremath{q\mathrm{e}^{t}<1}}.
 \end{equation}
-We see that \(q\me^{t}<1\) when \(t<-\ln(1-p)\).
+We see that \(q\mathrm{e}^{t}<1\) when \(t<-\ln(1-p)\).
 
-Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=p^{r}(1-q\me^{t})^{-r}}}\). We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=p^{r}(1-q\mathrm{e}^{t})^{-r}}}\). We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
 \begin{alignat*}{1}
-M'(t)= & p^{r}(-r)(1-q\me^{t})^{-r-1}(-q\me^{t}),\\
-= & rq\me^{t}p^{r}(1-q\me^{t})^{-r-1},\\
-= & \frac{rq\me^{t}}{1-q\me^{t}}M(t),\mbox{ and so }\\
+M'(t)= & p^{r}(-r)(1-q\mathrm{e}^{t})^{-r-1}(-q\mathrm{e}^{t}),\\
+= & rq\mathrm{e}^{t}p^{r}(1-q\mathrm{e}^{t})^{-r-1},\\
+= & \frac{rq\mathrm{e}^{t}}{1-q\mathrm{e}^{t}}M(t),\mbox{ and so }\\
 M'(0)= & \frac{rq}{1-q}\cdot1=\frac{rq}{p}.
 \end{alignat*}
 Thus \(\mu=rq/p\). We next find \(\E X^{2}\).
 \begin{alignat*}{1}
-M''(0)= & \left.\frac{rq\me^{t}(1-q\me^{t})-rq\me^{t}(-q\me^{t})}{(1-q\me^{t})^{2}}M(t)+\frac{rq\me^{t}}{1-q\me^{t}}M'(t)\right|_{t=0},\\
+M''(0)= & \left.\frac{rq\mathrm{e}^{t}(1-q\mathrm{e}^{t})-rq\mathrm{e}^{t}(-q\mathrm{e}^{t})}{(1-q\mathrm{e}^{t})^{2}}M(t)+\frac{rq\mathrm{e}^{t}}{1-q\mathrm{e}^{t}}M'(t)\right|_{t=0},\\
 = & \frac{rqp+rq^{2}}{p^{2}}\cdot1+\frac{rq}{p}\left(\frac{rq}{p}\right),\\
 = & \frac{rq}{p^{2}}+\left(\frac{rq}{p}\right)^{2}.
 \end{alignat*}
@@ -958,7 +902,7 @@ Finally we may say \( \sigma^{2} = M''(0) - [M'(0)]^{2} = rq/p^{2}. \)
 #+latex: \begin{example}
 A random variable has MGF
 \[
-M_{X}(t)=\left(\frac{0.19}{1-0.81\me^{t}}\right)^{31}.
+M_{X}(t)=\left(\frac{0.19}{1-0.81\mathrm{e}^{t}}\right)^{31}.
 \]
 Then \(X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)\).
 #+latex: \end{example}
@@ -985,7 +929,7 @@ This is a distribution associated with ``rare events'', for reasons which will b
 
 Let \(\lambda\) be the average number of events in the time interval \([0,1]\). Let the random variable \(X\) count the number of events occurring in the interval. Then under certain reasonable conditions it can be shown that
 \begin{equation}
-f_{X}(x)=\P(X=x)=\me^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
+f_{X}(x)=\P(X=x)=\mathrm{e}^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
 \end{equation}
 We use the notation \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)\). The associated \textsf{R} functions are =dpois(x, lambda)=, =ppois=, =qpois=, and =rpois=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
@@ -1001,7 +945,7 @@ Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{
 
 If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) is the average number that occur in unit time, then \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)\), that is,
 \begin{equation}
-\P(X=x)=\me^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
+\P(X=x)=\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
 \end{equation}
 #+latex: \end{rem}
 
@@ -1009,13 +953,14 @@ If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) i
 On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
 /Solution/: The probability that no car arrives is
 \[
-\P(X=0)=\me^{-5}\frac{5^{0}}{0!}=\me^{-5}\approx0.0067.
+\P(X=0)=\mathrm{e}^{-5}\frac{5^{0}}{0!}=\mathrm{e}^{-5}\approx0.0067.
 \]
 #+latex: \end{example}
 
 #+latex: \begin{example}
 Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark \ref{rem:poisson-process} we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
 /Solution/: We want \(\P(48\leq Y\leq50)=\P(X\leq50)-\P(X\leq47)\). 
+
 #+begin_src R :exports both :results output pp  
 diff(ppois(c(47, 50), lambda = 50))
 #+end_src
@@ -1079,79 +1024,75 @@ If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\)
 
 #+latex: \begin{xca}
 A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
-1. How is \(X\) distributed? 
-   \[
-   X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
-   \]
-1. Sketch the probability mass function (roughly).
-   #+begin_src R :exports code :results graphics silent :file img/binomdxca.pdf
-   library(distr)
-   X <- Binom(size = 31, prob = 0.447)
-   plot(X, to.draw.arg = "d")
-   #+end_src
-
-   #+begin_src latex 
-     \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/binomdxca.pdf}
-       \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
-       \label{fig:binomdxca}
-     \end{figure}
-   #+end_src
-
-1. Sketch the cumulative distribution function (roughly).
-   #+begin_src R :exports code :results graphics silent :file img/binompxca.pdf
-   library(distr)
-   X <- Binom(size = 31, prob = 0.447)
-   plot(X, to.draw.arg = "p")
-   #+end_src
-
-   #+begin_src latex 
-     \begin{figure}[ht!]
-       \includegraphics[width=5in, height=4in]{img/binompxca.pdf}
-       \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
-       \label{fig:binompxca}
-     \end{figure}
-   #+end_src
-
-1. Find the probability that \(X\) is equal to 17.
-   #+begin_src R :exports both :results output pp  
-   dbinom(17, size = 31, prob = 0.447)
-   #+end_src
-1. Find the probability that \(X\) is at most 13.
-   #+begin_src R :exports both :results output pp  
-   pbinom(13, size = 31, prob = 0.447)
-   #+end_src
-1. Find the probability that \(X\) is bigger than 11.
-   #+begin_src R :exports both :results output pp  
-   pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
-   #+end_src
-1. Find the probability that \(X\) is at least 15.
-   #+begin_src R :exports both :results output pp  
-   pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
-   #+end_src
-1. Find the probability that \(X\) is between 16 and 19, inclusive.
-   #+begin_src R :exports both :results output pp  
-   sum(dbinom(16:19, size = 31, prob = 0.447))
-   diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
-   #+end_src
-1. Give the mean of \(X\), denoted \(\E X\).
-   #+begin_src R :exports both :results output pp  
-   library(distrEx)
-   X <- Binom(size = 31, prob = 0.447)
-   E(X)
-   #+end_src
-1. Give the variance of \(X\).
-   #+begin_src R :exports both :results output pp  
-   var(X)
-   #+end_src
-1. Give the standard deviation of \(X\).
-   #+begin_src R :exports both :results output pp  
-   sd(X)
-   #+end_src
-1. Find \(\E(4X+51.324)\)
-   #+begin_src R :exports both :results output pp  
-   E(4*X + 51.324)
-   #+end_src
+  -  How is \(X\) distributed? 
+     \[
+     X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
+     \]
+  -  Sketch the probability mass function (roughly).
+     #+begin_src R :exports code :results graphics silent :file img/binomdxca.pdf
+     library(distr)
+     X <- Binom(size = 31, prob = 0.447)
+     plot(X, to.draw.arg = "d")
+     #+end_src
+     #+begin_src latex 
+       \begin{figure}[ht!]
+         \includegraphics[width=5in, height=4in]{img/binomdxca.pdf}
+         \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
+         \label{fig:binomdxca}
+       \end{figure}
+     #+end_src
+  -  Sketch the cumulative distribution function (roughly).
+     #+begin_src R :exports code :results graphics silent :file img/binompxca.pdf
+     library(distr)
+     X <- Binom(size = 31, prob = 0.447)
+     plot(X, to.draw.arg = "p")
+     #+end_src
+     #+begin_src latex 
+       \begin{figure}[ht!]
+         \includegraphics[width=5in, height=4in]{img/binompxca.pdf}
+         \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
+         \label{fig:binompxca}
+       \end{figure}
+     #+end_src
+  -  Find the probability that \(X\) is equal to 17.
+     #+begin_src R :exports both :results output pp  
+     dbinom(17, size = 31, prob = 0.447)
+     #+end_src
+  -  Find the probability that \(X\) is at most 13.
+     #+begin_src R :exports both :results output pp  
+     pbinom(13, size = 31, prob = 0.447)
+     #+end_src
+  -  Find the probability that \(X\) is bigger than 11.
+     #+begin_src R :exports both :results output pp  
+     pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
+     #+end_src
+  -  Find the probability that \(X\) is at least 15.
+     #+begin_src R :exports both :results output pp  
+     pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
+     #+end_src
+  -  Find the probability that \(X\) is between 16 and 19, inclusive.
+     #+begin_src R :exports both :results output pp  
+     sum(dbinom(16:19, size = 31, prob = 0.447))
+     diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
+     #+end_src
+  -  Give the mean of \(X\), denoted \(\E X\).
+     #+begin_src R :exports both :results output pp  
+     library(distrEx)
+     X <- Binom(size = 31, prob = 0.447)
+     E(X)
+     #+end_src
+  -  Give the variance of \(X\).
+     #+begin_src R :exports both :results output pp  
+     var(X)
+     #+end_src
+  -  Give the standard deviation of \(X\).
+     #+begin_src R :exports both :results output pp  
+     sd(X)
+     #+end_src
+  -  Find \(\E(4X+51.324)\)
+     #+begin_src R :exports both :results output pp  
+     E(4*X + 51.324)
+     #+end_src
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
