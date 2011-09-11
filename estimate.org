@@ -1,48 +1,7 @@
 #+STARTUP:   indent
-#+TITLE:     Estimation
-#+AUTHOR:    G. Jay Kerns
-#+EMAIL:     gkerns@ysu.edu
-#+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:nil *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: answ soln
-#+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
-#+LaTeX_CLASS: scrbook
-#+LaTeX_CLASS_OPTIONS: [captions=tableheading]
-#+LaTeX_CLASS_OPTIONS: [10pt,english]
-#+LaTeX_HEADER: \input{preamble}
 
 * Estimation
 \label{cha:Estimation}
-#+begin_src R :exports none
-seed <- 42
-set.seed(seed)
-options(width = 60)
-options(useFancyQuotes = FALSE)
-library(actuar)
-library(aplpack)
-library(boot)
-library(coin)
-library(combinat)
-library(distrEx)
-library(e1071)
-library(ggplot2)
-library(HH)
-library(Hmisc)
-library(lattice)
-library(lmtest)
-library(mvtnorm)
-library(prob)
-library(qcc)
-library(RcmdrPlugin.IPSUR)
-library(reshape)
-library(scatterplot3d)
-library(stats4)
-library(TeachingDemos)
-#+end_src
 
 \noindent We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
 
@@ -67,36 +26,31 @@ The following example is how I was introduced to maximum likelihood.
 \label{exa:how-many-fish}
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 
-We will fish from the pond and suppose that we capture $M=7$ fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
+We will fish from the pond and suppose that we capture \(M=7\) fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
 
-Next, we wait a few days for the fish to remix and become accustomed to their new tag. Then we go fishing again. On the second trip some of the fish we catch may be tagged; some may not be. Let $X$ denote the number of caught fish which are tagged[fn:fish], and suppose for the sake of argument that we catch $K=4$ fish and we find that 3 of them are tagged.
+Next, we wait a few days for the fish to remix and become accustomed to their new tag. Then we go fishing again. On the second trip some of the fish we catch may be tagged; some may not be. Let \(X\) denote the number of caught fish which are tagged
+#+latex: \footnote{It is theoretically possible that we could catch the same tagged fish more than once, which would inflate our count of tagged fish. To avoid this difficulty, suppose that on the second trip we use a tank on the boat to hold the caught fish until data collection is completed.},
+and suppose for the sake of argument that we catch \(K=4\) fish and we find that 3 of them are tagged.
 
-[fn:fish] It is theoretically possible that we could catch the same tagged fish more than once, which would inflate our count of tagged fish. To avoid this difficulty, suppose that on the second trip we use a tank on the boat to hold the caught fish until data collection is completed.
+Now let \(F\) denote the (unknown) total number of fish in the pond. We know that \(F\geq7\), because we tagged that many on the first trip. In fact, if we let \(N\) denote the number of untagged fish in the pond, then \(F=M+N\). We have sampled \(K=4\) times, without replacement, from an urn which has \(M=7\) white balls and \(N=F-M\) black balls, and we have observed \(x=3\) of them to be white. What is the probability of this?
 
-Now let $F$ denote the (unknown) total number of fish in the pond. We know that $F\geq7$, because we tagged that many on the first trip. In fact, if we let $N$ denote the number of untagged fish in the pond, then $F=M+N$. We have sampled $K=4$ times, without replacement, from an urn which has $M=7$ white balls and $N=F-M$ black balls, and we have observed $x=3$ of them to be white. What is the probability of this?
-
-Looking back to Section \ref{sec:other-discrete-distributions}, we see that the random variable $X$ has a $\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)$ distribution. Therefore, for an observed value $X=x$ the probability would be
+Looking back to Section \ref{sec:other-discrete-distributions}, we see that the random variable \(X\) has a \(\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)\) distribution. Therefore, for an observed value \(X=x\) the probability would be
 \[
 \P(X=x)=\frac{{M \choose x}{F-M \choose K-x}}{{F \choose K}}.
 \]
-
-First we notice that $F$ must be at least 7. Could $F$ be equal to seven? If $F=7$ then all of the fish would have been tagged on the first run, and there would be no untagged fish in the pond, thus, $\P(\mbox{3 successes in 4 trials})=0$. 
-
-What about $F=8$; what would be the probability of observing $X=3$ tagged fish?
+First we notice that \(F\) must be at least 7. Could \(F\) be equal to seven? If \(F=7\) then all of the fish would have been tagged on the first run, and there would be no untagged fish in the pond, thus, \(\P(\mbox{3 successes in 4 trials})=0\). 
+What about \(F=8\); what would be the probability of observing \(X=3\) tagged fish?
 \[
 \P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{1 \choose 1}}{{8 \choose 4}}=\frac{35}{70}=0.5.
 \]
-
-Similarly, if $F=9$ then the probability of observing $X=3$ tagged fish would be
+Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish would be
 \[
 \P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
 \]
-
-We can see already that the observed data $X=3$ is more likely when $F=9$ than it is when $F=8$. And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of $F$ which has the highest likelihood?'' In other words, for all of the different possible values of $F$, which one makes the above probability the biggest? We can answer this question with a plot of $\P(X=x)$ versus $F$. See Figure \ref{fig:capture-recapture}.
+We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\P(X=x)\) versus \(F\). See Figure \ref{fig:capture-recapture}.
 #+latex: \end{example}
 
-
-#+begin_src R :exports none :results graphics :file img/capture-recapture.png
+#+begin_src R :exports none :results graphics silent :file img/capture-recapture.pdf
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -109,7 +63,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/capture-recapture.png}
+    \includegraphics[width=5in, height=4in]{img/capture-recapture.pdf}
     \caption[Capture-recapture experiment]{\small A plot of maximum likelihood for the capture-recapture experiment.}
     \label{fig:capture-recapture}
   \end{figure}
@@ -119,9 +73,9 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 \label{exa:bass-bluegill}
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 
-Let $p=\mbox{the proportion of bass}$. Without any other information, it is conceivable for $p$ to be any value in the interval $[0,1]$, but for the sake of argument we will suppose that $p$ falls strictly between 0 and 1. How can we learn about the true value of $p$? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
+Let \(p=\mbox{the proportion of bass}\). Without any other information, it is conceivable for \(p\) to be any value in the interval \([0,1]\), but for the sake of argument we will suppose that \(p\) falls strictly between zero and one. How can we learn about the true value of \(p\)? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
 
-Suppose we catch $n$ fish. Let
+Suppose we catch \(n\) fish. Let
 \[
 X_{i}=
 \begin{cases}
@@ -129,28 +83,23 @@ X_{i}=
 0, & \mbox{if the \mbox{i}\mbox{th} fish is a bluegill.}
 \end{cases}
 \]
-
-
-Since we are returning the fish to the pond once caught, we may think of this as a sampling scheme with replacement where the proportion of bass $p$ does not change. Given that we allow the fish sufficient time to ``mix'' once returned, it is not completely unreasonable to model our fishing experiment as a sequence of Bernoulli trials, so that the $X_{i}$'s would be i.i.d.~$\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)$. Under those assumptions we would have
+Since we are returning the fish to the pond once caught, we may think of this as a sampling scheme with replacement where the proportion of bass \(p\) does not change. Given that we allow the fish sufficient time to ``mix'' once returned, it is not completely unreasonable to model our fishing experiment as a sequence of Bernoulli trials, so that the \(X_{i}\)'s would be IID \(\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)\). Under those assumptions we would have
 \begin{eqnarray*}
 \P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n}) & = & \P(X_{1}=x_{1})\,\P(X_{2}=x_{2})\,\cdots\P(X_{n}=x_{n}),\\
  & = & p^{x_{1}}(1-p)^{x_{1}}\, p^{x_{2}}(1-p)^{x_{2}}\cdots\, p^{x_{n}}(1-p)^{x_{n}},\\
  & = & p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{eqnarray*}
-
 That is, 
 \[
 \P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n})=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
-
-This last quantity is a function of $p$, called the /likelihood function/ $L(p)$:
+This last quantity is a function of \(p\), called the /likelihood function/ \(L(p)\):
 \[
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
+A graph of \(L\) for values of \(\sum x_{i}=3,\ 4\), and 5 when \(n=7\) is shown in Figure \ref{fig:fishing-part-two}. 
 
-A graph of $L$ for values of $\sum x_{i}=3,\ 4$, and 5 when $n=7$ is shown in Figure \ref{fig:fishing-part-two}. 
-
-#+begin_src R :exports code :results graphics :file img/fishing-part-two.png
+#+begin_src R :exports code :results graphics silent :file img/fishing-part-two.pdf
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
@@ -158,41 +107,39 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/fishing-part-two.png}
-    \caption[Assorted likelihood functions for fishing, part two]{\small Assorted likelihood functions for fishing, part two.   Three graphs are shown of $L$ when $\sum x_{i}$ equals 3, 4, and 5, respectively, from left to right. We pick an $L$ that matches the observed data and then maximize $L$ as a function of $p$. If $\sum x_{i}=4$, then the maximum appears to occur somewhere around $p \approx 0.6$.}
+    \includegraphics[width=5in, height=4in]{img/fishing-part-two.pdf}
+    \caption[Assorted likelihood functions for fishing, part two]{\small Assorted likelihood functions for fishing, part two.   Three graphs are shown of \(L\) when \(\sum x_{i}\) equals 3, 4, and 5, respectively, from left to right. We pick an \(L\) that matches the observed data and then maximize \(L\) as a function of \(p\). If \(\sum x_{i}=4\), then the maximum appears to occur somewhere around \(p \approx 0.6\).}
     \label{fig:fishing-part-two}
   \end{figure}
 #+end_src
 
-We want the value of $p$ which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate $L$ and set $L'=0$ to find a maximum.
+We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate \(L\) and set \(L'=0\) to find a maximum.
 \[
 L'(p)=\left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}}+p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1}(-1).
 \]
-
-The derivative vanishes ($L'=0$) when
+The derivative vanishes (\(L'=0\)) when
 \begin{eqnarray*}
 \left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}} & = & p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1},\\
 \sum x_{i}(1-p) & = & \left(n-\sum x_{i}\right)p,\\
 \sum x_{i}-p\sum x_{i} & = & np-p\sum x_{i},\\
 \frac{1}{n}\sum_{i=1}^{n}x_{i} & = & p.
 \end{eqnarray*}
-
-This ``best'' $p$, the one which maximizes the likelihood, is called the maximum likelihood estimator (MLE) of $p$ and is denoted $\hat{p}$. That is, 
+This ``best'' \(p\), the one which maximizes the likelihood, is called the maximum likelihood estimator (MLE) of \(p\) and is denoted \(\hat{p}\). That is, 
 \begin{equation} 
 \hat{p}=\frac{\sum_{i=1}^{n}x_{i}}{n}=\overline{x}.
 \end{equation}
 
 #+latex: \begin{rem}
-Strictly speaking we have only shown that the derivative equals zero at $\hat{p}$, so it is theoretically possible that the critical value $\hat{p}=\overline{x}$ is located at a minimum[fn:max] instead of a maximum! We should be thorough and check that $L'>0$ when $p<\overline{x}$ and $L'<0$ when $p>\overline{x}$. Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that $\hat{p}=\overline{x}$ is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
+Strictly speaking we have only shown that the derivative equals zero at \(\hat{p}\), so it is theoretically possible that the critical value \(\hat{p}=\overline{x}\) is located at a minimum
+#+latex: \footnote{We can tell from the graph that our value of \(\hat{p}\) is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.}
+instead of a maximum! We should be thorough and check that \(L'>0\) when \(p<\overline{x}\) and \(L'<0\) when \(p>\overline{x}\). Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that \(\hat{p}=\overline{x}\) is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
 #+latex: \end{rem}
-
-[fn:max] We can tell from the graph that our value of $\hat{p}$ is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.
 
 The result is shown in Figure \ref{fig:species-mle}.
 #+latex: \end{example}
 
 
-#+begin_src R :exports none :results graphics :file img/species-mle.png
+#+begin_src R :exports none :results graphics silent :file img/species-mle.pdf
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -210,69 +157,67 @@ text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, p
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/species-mle.png}
+    \includegraphics[width=5in, height=4in]{img/species-mle.pdf}
     \caption[Species maximum likelihood]{\small Species maximum likelihood.}
     \label{fig:species-mle}
   \end{figure}
 #+end_src
 
-In general, we have a family of PDFs $f(x|\theta)$ indexed by a parameter $\theta$ in some parameter space $\Theta$. We want to learn about $\theta$. We take a $SRS(n)$:
+In general, we have a family of PDFs \(f(x|\theta)\) indexed by a parameter \(\theta\) in some parameter space \(\Theta\). We want to learn about \(\theta\). We take a \(SRS(n)\):
 \begin{equation}
-X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are i.i.d.\,\mbox{f(x|\ensuremath{\theta})}.}
+X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are IID \( f(x| \theta ) \).}
 \end{equation}
 
 #+latex: \begin{defn}
-Given the observed data $x_{1}$, $x_{2}$, ..., $x_{n}$, the /likelihood function/ $L$ is defined by 
+Given the observed data \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the /likelihood function/ \(L\) is defined by 
 \[ 
 L(\theta)=\prod_{i=1}^{n}f(x_{i}|\theta),\quad\theta\in\Theta.
 \]
 #+latex: \end{defn}
 
-
-The next step is to maximize $L$. The method we will use in this book is to find the derivative $L'$ and solve the equation $L'(\theta)=0$. Call a solution $\hat{\theta}$. We will check that $L$ is maximized at $\hat{\theta}$ using the First Derivative Test or the Second Derivative Test $\left(L''(\hat{\theta})<0\right)$.
+The next step is to maximize \(L\). The method we will use in this book is to find the derivative \(L'\) and solve the equation \(L'(\theta)=0\). Call a solution \(\hat{\theta}\). We will check that \(L\) is maximized at \(\hat{\theta}\) using the First Derivative Test or the Second Derivative Test \(\left(L''(\hat{\theta})<0\right)\).
 
 #+latex: \begin{defn}
-A value $\theta$ that maximizes $L$ is called a /maximum likelihood estimator/ (MLE) and is denoted $\hat{\theta}$. It is a function of the sample, $\hat{\theta}=\hat{\theta}\left(X_{1},\, X_{2},\,\ldots,X_{n}\right)$, and is called a /point estimator/ of $\theta$.
+A value \(\theta\) that maximizes \(L\) is called a /maximum likelihood estimator/ (MLE) and is denoted \(\hat{\theta}\). It is a function of the sample, \(\hat{\theta}=\hat{\theta}\left(X_{1},\, X_{2},\,\ldots,X_{n}\right)\), and is called a /point estimator/ of \(\theta\).
 #+latex: \end{defn}
 
 #+latex: \begin{rem}
 Some comments about maximum likelihood estimators:
-- Often it is easier to maximize the /log-likelihood/ $l(\theta)=\ln L(\theta)$ instead of the likelihood $L$. Since the logarithmic function $y=\ln x$ is a monotone transformation, the solutions to both problems are the same.
-- MLEs do not always exist (for instance, sometimes the likelihood has a vertical asymptote), and even when they do exist, they are not always unique (imagine a function with a bunch of humps of equal height). For any given problem, there could be zero, one, or any number of values of $\theta$ for which $L(\theta)$ is a maximum.
+- Often it is easier to maximize the /log-likelihood/ \(l(\theta)=\ln L(\theta)\) instead of the likelihood \(L\). Since the logarithmic function \(y=\ln x\) is a monotone transformation, the solutions to both problems are the same.
+- MLEs do not always exist (for instance, sometimes the likelihood has a vertical asymptote), and even when they do exist, they are not always unique (imagine a function with a bunch of humps of equal height). For any given problem, there could be zero, one, or any number of values of \(\theta\) for which \(L(\theta)\) is a maximum.
 - The problems we encounter in this book are all very nice with likelihood functions that have closed form representations and which are optimized by some calculus acrobatics. In practice, however, likelihood functions are sometimes nasty in which case we are obliged to use numerical methods to find maxima (if there are any).
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
 #+latex: \end{rem}
 
-Notice, in Example \ref{exa:bass-bluegill} we had $X_{i}$ i.i.d.~$\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$, and we saw that the MLE was $\hat{p}=\overline{X}$. But further
+Notice, in Example \ref{exa:bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
 \E\overline{X} & = & \E\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
  & = & \frac{1}{n}\left(\E X_{1}+\E X_{2}+\cdots+\E X_{n}\right),\\
  & = & \frac{1}{n}\left(np\right),\\
  & = & p,
 \end{eqnarray*}
-which is exactly the same as the parameter which we estimated. More concisely, $\E\hat{p}=p$, that is, on the average, the estimator is exactly right.
+which is exactly the same as the parameter which we estimated. More concisely, \(\E\hat{p}=p\), that is, on the average, the estimator is exactly right.
 
 #+latex: \begin{defn}
-Let $s(X_{1},X_{2},\ldots,X_{n})$ be a statistic which estimates $\theta$. If 
+Let \(s(X_{1},X_{2},\ldots,X_{n})\) be a statistic which estimates \(\theta\). If 
 \[
 \E s(X_{1},X_{2},\ldots,X_{n})=\theta,
 \]
-then the statistic $s(X_{1},X_{2},\ldots,X_{n})$ is said to be an /unbiased estimator/ of $\theta$. Otherwise, it is /biased/.
+then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased estimator/ of \(\theta\). Otherwise, it is /biased/.
 #+latex: \end{defn}
 
 #+latex: \begin{example}
 \label{exa:normal-MLE-both}
 
-Let $X_{1}$, $X_{2}$, ... , $X_{n}$ be an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if $\mbox{\ensuremath{\theta}}=(\mu,\sigma^{2})$ then the MLE of $\theta$ is
+Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if \(\mbox{\ensuremath{\theta}}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
-where $\hat{\mu}=\overline{X}$ and
+where \(\hat{\mu}=\overline{X}\) and
 \begin{equation}
 \hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}\right)^{2}=\frac{n-1}{n}S^{2}.
 \end{equation}
-
-We of course know from \ref{pro:mean-sd-xbar} that $\hat{\mu}$ is unbiased. What about $\hat{\sigma^{2}}$? Let us check: 
+We of course know from \ref{pro:mean-sd-xbar} that \(\hat{\mu}\) is unbiased. What about \(\hat{\sigma^{2}}\)? Let us check: 
 \begin{eqnarray*}
 \E\,\hat{\sigma^{2}} & = & \E\,\frac{n-1}{n}S^{2}\\
  & = & \E\left(\frac{\sigma^{2}}{n}\frac{(n-1)S^{2}}{\sigma^{2}}\right)\\
@@ -280,13 +225,12 @@ We of course know from \ref{pro:mean-sd-xbar} that $\hat{\mu}$ is unbiased. What
  & = & \frac{\sigma^{2}}{n}(n-1),
 \end{eqnarray*}
 from which we may conclude two things:
-
-- $\hat{\sigma^{2}}$ is a biased estimator of $\sigma^{2}$, and 
-- $S^{2}=n\hat{\sigma^{2}}/(n-1)$ is an unbiased estimator of $\sigma^{2}$.
+- \(\hat{\sigma^{2}}\) is a biased estimator of \(\sigma^{2}\), and 
+- \(S^{2}=n\hat{\sigma^{2}}/(n-1)\) is an unbiased estimator of \(\sigma^{2}\).
 
 #+latex: \end{example}
 
-One of the most common questions in an introductory statistics class is, ``Why do we divide by $n-1$ when we compute the sample variance? Why do we not divide by $n$?'' We see now that division by $n$ amounts to the use of a /biased/ estimator for $\sigma^{2}$, that is, if we divided by $n$ then on the average we would /underestimate/ the true value of $\sigma^{2}$. We use $n-1$ so that, on the average, our estimator of $\sigma^{2}$ will be exactly right. 
+One of the most common questions in an introductory statistics class is, ``Why do we divide by \(n-1\) when we compute the sample variance? Why do we not divide by \(n\)?'' We see now that division by \(n\) amounts to the use of a /biased/ estimator for \(\sigma^{2}\), that is, if we divided by \(n\) then on the average we would /underestimate/ the true value of \(\sigma^{2}\). We use \(n-1\) so that, on the average, our estimator of \(\sigma^{2}\) will be exactly right. 
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -299,8 +243,7 @@ Let us see how to do Example \ref{exa:bass-bluegill}. Recall that our likelihood
 \begin{equation}
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{equation}
-
-Notice that the likelihood is just a product of $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ PMFs. We first give some sample data (in the vector =datavals=), next we define the likelihood function =L=, and finally we =optimize= =L= over the range =c(0,1)=.
+Notice that the likelihood is just a product of \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) PMFs. We first give some sample data (in the vector =datavals=), next we define the likelihood function =L=, and finally we =optimize= =L= over the range =c(0,1)=.
 
 #+begin_src R :exports both :results output pp 
 x <- mtcars$am
@@ -308,20 +251,11 @@ L <- function(p,x) prod(dbinom(x, size = 1, prob = p))
 optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 #+end_src
 
-#+results[3cb939f09b5eeb14716709f80410d83382f26ada]:
-:  $maximum
-: [1] 0.4062458
-: 
-: $objective
-: [1] 4.099989e-10
-
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 A <- optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 #+end_src
 
-#+results[297fca9e0655673becdd0e0339a9ecba2cb19a90]:
-
-Note that the =optimize= function by default minimizes the function =L=, so we have to set =maximum = TRUE= to get an MLE. The returned value of =$maximum= gives an approximate value of the MLE to be SRC_R{round(A$maximum, 3)} and =objective= gives =L= evaluated at the MLE which is approximately SRC_R{round(A$objective, 3)}.
+Note that the =optimize= function by default minimizes the function =L=, so we have to set =maximum = TRUE= to get an MLE. The returned value of =$maximum= gives an approximate value of the MLE to be \( SRC_R{round(A$maximum, 3)} \) and =objective= gives =L= evaluated at the MLE which is approximately \( SRC_R{round(A$objective, 3)} \).
 
 We previously remarked that it is usually more numerically convenient to maximize the log-likelihood (or minimize the negative log-likelihood), and we can just as easily do this with \textsf{R}. We just need to calculate the log-likelihood beforehand which (for this example) is
 \[
@@ -331,33 +265,25 @@ We previously remarked that it is usually more numerically convenient to maximiz
 It is done in \textsf{R} with
 
 #+begin_src R :exports both :results output pp 
-minuslogL <- function(p,x) -sum(dbinom(x, size = 1, prob = p, log = TRUE))
+minuslogL <- function(p,x){
+                -sum(dbinom(x, size = 1, prob = p, log = TRUE))
+             }
 optimize(minuslogL, interval = c(0,1), x = x)
 #+end_src
-
-#+results[fba5ef2146e8537d0d963200b085e8a1f74eca26]:
-: $minimum
-: [1] 0.4062525
-: 
-: $objective
-: [1] 21.61487
 
 Note that we did not need =maximum = TRUE= because we minimized the negative log-likelihood. The answer for the MLE is essentially the same as before, but the =$objective= value was different, of course.
 
 For multiparameter problems we may use a similar approach by way of the =mle= function in the =stats4= package. 
 
-
 #+latex: \begin{example}
 
-*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations $X_{1}$, $X_{2}$, ... , $X_{n}$ that are i.i.d. $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of $\theta=(\mu,\sigma^{2})$. We claimed in Example \ref{exa:normal-MLE-both} that $\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})$ had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
+*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in Example \ref{exa:normal-MLE-both} that \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
 
-#+begin_src R :exports code
+#+begin_src R :exports code :results silent
 minuslogL <- function(mu, sigma2){
   -sum(dnorm(x, mean = mu, sd = sqrt(sigma2), log = TRUE))
 }
 #+end_src
-
-#+results[aa2bd5ea2895ec4cb817804b3bb908bcc51b2701]:
 
 Note that we omitted the data as an argument to the log-likelihood function; the only arguments were the parameters over which the maximization is to take place. Now we will simulate some data and find the MLE. The optimization algorithm requires starting values (intelligent guesses) for the parameters. We choose values close to the sample mean and variance (which turn out to be approximately 5 and 0.5, respectively) to illustrate the procedure.
 
@@ -368,57 +294,29 @@ MaxLikeEst <- mle(minuslogL, start = list(mu = 5, sigma2 = 0.5))
 summary(MaxLikeEst)
 #+end_src
 
-#+results[4317a169c58c660acb40a30d671614ca74b4e96d]:
-#+begin_example
- Warning messages:
-1: In sqrt(sigma2) : NaNs produced
-2: In sqrt(sigma2) : NaNs produced
-Maximum likelihood estimation
-
-Call:
-mle(minuslogl = minuslogL, start = list(mu = 5, sigma2 = 0.5))
-
-Coefficients:
-        Estimate Std. Error
-mu     5.0729848  0.1258666
-sigma2 0.4752721  0.1227108
-
--2 log L: 62.82084
-#+end_example
-
-The outputted MLEs are shown above, and =mle= even gives us estimates for the standard errors of $\hat{\mu}$ and $\hat{\sigma}^{2}$ (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix \ref{sec:Multivariable-Calculus}). Let us check how close the numerical MLEs came to the theoretical MLEs:
+The outputted MLEs are shown above, and =mle= even gives us estimates for the standard errors of \(\hat{\mu}\) and \(\hat{\sigma}^{2}\) (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix \ref{sec:Multivariable-Calculus}). Let us check how close the numerical MLEs came to the theoretical MLEs:
 
 #+begin_src R :exports both :results output pp 
-mean(x)
-var(x)*29/30
-sd(x)/sqrt(30)
+mean(x); var(x)*29/30; sd(x)/sqrt(30)
 #+end_src
 
-#+results[4cab45fbdd3ac94269882b3a6ae02e63e3ff6f96]:
-: [1] 5.073
-: [1] 0.475281
-: [1] 0.1280195
-
-The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of $\hat{\mu}=\overline{X}$ is $\sigma/\sqrt{n}$, and the numerical estimate of this was very close too.
+The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of \(\hat{\mu}=\overline{X}\) is \(\sigma/\sqrt{n}\), and the numerical estimate of this was very close too.
 
 #+latex: \end{example}
 
 There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
-
 ** Confidence Intervals for Means
 \label{sec:Confidence-Intervals-for-Means}
 
-We are given $X_{1}$, $X_{2}$, ..., $X_{n}$ that are an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution, where $\mu$ is unknown. We know that we may estimate $\mu$ with $\overline{X}$, and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
+We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, where \(\mu\) is unknown. We know that we may estimate \(\mu\) with \(\overline{X}\), and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
 \frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 \end{equation}
-
-For a big probability $1-\alpha$, for instance, 95%, we can calculate the quantile $z_{\alpha/2}$. Then
+For a big probability \(1-\alpha\), for instance, 95%, we can calculate the quantile \(z_{\alpha/2}\). Then
 \begin{equation}
 \P\left(-z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
 \end{equation}
-
 But now consider the following string of equivalent inequalities:
 \[
 -z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2},
@@ -432,7 +330,6 @@ But now consider the following string of equivalent inequalities:
 \[
 \overline{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\mu\leq\overline{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right).
 \]
-
 That is, 
 \begin{equation}
 \P\left(\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
@@ -443,7 +340,7 @@ The interval
 \begin{equation}
 \left[\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\ \overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
-is a $100(1-\alpha)$% /confidence interval for/ $\mu$. The quantity $1-\alpha$ is called the /confidence coefficient/.
+is a \(100(1-\alpha)\%\) /confidence interval for/ \(\mu\). The quantity \(1-\alpha\) is called the /confidence coefficient/.
 #+latex: \end{defn}
 
 #+latex: \begin{rem}
@@ -457,47 +354,47 @@ The interpretation of confidence intervals is tricky and often mistaken by novic
 
 Then I ask them: suppose we were to repeat this procedure hundreds, thousands, millions of times. Suppose we kept track of how many times we covered and how many times we did not. What percentage of the time would we be successful?
 
-In the demonstration, the parameter corresponds to the chalk, the sheet of paper corresponds to the confidence interval, and the random experiment corresponds to dropping the sheet of paper. The percentage of the time that we are successful /exactly/ corresponds to the /confidence coefficient/. That is, if we use a 95\% confidence interval, then we can say that, in the long run, approximately 95\% of our intervals will cover the true parameter (which is fixed, but unknown). 
+In the demonstration, the parameter corresponds to the chalk, the sheet of paper corresponds to the confidence interval, and the random experiment corresponds to dropping the sheet of paper. The percentage of the time that we are successful /exactly/ corresponds to the /confidence coefficient/. That is, if we use a 95% confidence interval, then we can say that, in the long run, approximately 95% of our intervals will cover the true parameter (which is fixed, but unknown). 
 
 See Figure \ref{fig:ci-examp}, which is a graphical display of these ideas.
 
 
-#+begin_src R :exports code :results graphics :file img/carscatter.png
+#+begin_src R :exports code :results graphics silent :file img/carscatter.pdf
 library(TeachingDemos)
 ci.examp()
 #+end_src
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/carscatter.png}
-    \caption[Simulated confidence intervals]{\small The graph was generated by the } =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a $\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10)$ distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover $\mu=100$, which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.}
+    \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
+    \caption[Simulated confidence intervals]{\small The graph was generated by the \texttt{ci.examp} function from the \texttt{TeachingDemos} package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95\%.}
     \label{fig:Scatter-cars}
   \end{figure}
 #+end_src
 
-Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, $X_{1}$, $X_{2}$, ...,
-$X_{n}$. The following remarks makes these notions precise. 
+Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, \(X_{1}\), \(X_{2}\), ...,
+\(X_{n}\). The following remarks makes these notions precise. 
 
 #+latex: \begin{rem}
-For a fixed confidence coefficient $1-\alpha$,
+For a fixed confidence coefficient \(1-\alpha\),
 \begin{equation}
-\mbox{if }n\mbox{ increases, then the confidence interval gets /SHORTER/.}
+\mbox{if }n\mbox{ increases, then the confidence interval gets \emph{SHORTER}.}
 \end{equation}
 #+latex: \end{rem}
 
 #+latex: \begin{rem}
-For a fixed sample size $n$,
+For a fixed sample size \(n\),
 \begin{equation}
-\mbox{if }1-\alpha\mbox{ increases, then the confidence interval gets /WIDER/.}
+\mbox{if }1-\alpha\mbox{ increases, then the confidence interval gets \emph{WIDER}.}
 \end{equation}
 #+latex: \end{rem}
 
 
 #+latex: \begin{example}
 \label{exa:plant-one-samp-z-int}
-*Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is $0.7$ g.
+*Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 
-The parameter of interest is $\mu$, which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
+The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
 
 #+latex: \end{example}
 
@@ -506,75 +403,51 @@ library(aplpack)
 with(PlantGrowth, stem.leaf(weight))
 #+end_src
 
-#+results[118b61adc6b01078ed77f4a4c375c3a589ec56c0]:
-#+begin_example
-Loading required package: tcltk
-Loading Tcl/Tk interface ... done
-1 | 2: represents 1.2
- leaf unit: 0.1
-            n: 30
-   1     f | 5
-         s | 
-   2    3. | 8
-   4    4* | 11
-   5     t | 3
-   8     f | 455
-  10     s | 66
-  13    4. | 889
-  (4)   5* | 1111
-  13     t | 2233
-   9     f | 555
-         s | 
-   6    5. | 88
-   4    6* | 011
-   1     t | 3
-#+end_example
-
-The data appear to be approximately normal with no extreme values. The data come from a designed experiment, so it is reasonable to suppose that the observations constitute a simple random sample of weights[fn:srs]. We know the population standard deviation $\sigma=0.70$ from prior research. We are going to use the one-sample $z$-interval.
-
-[fn:srs] Actually we will see later that there is reason to believe that the observations are simple random samples from three distinct populations. See Section \ref{sec:Analysis-of-Variance}.
+The data appear to be approximately normal with no extreme values. The data come from a designed experiment, so it is reasonable to suppose that the observations constitute a simple random sample of weights
+#+latex: \footnote{Actually we will see later that there is reason to believe that the observations are simple random samples from three distinct populations. See Section \ref{sec:Analysis-of-Variance}.}. 
+We know the population standard deviation \(\sigma=0.70\) from prior research. We are going to use the one-sample \(z\)-interval.
 
 #+begin_src R :exports both :results output pp 
 dim(PlantGrowth)   # sample size is first entry
+#+end_src
+
+#+begin_src R :exports both :results output pp 
 with(PlantGrowth, mean(weight))
+#+end_src
+
+#+begin_src R :exports both :results output pp 
 qnorm(0.975)
 #+end_src
 
-#+results[9c453e3890518bed9dfc397847639aff2e7db580]:
-: [1] 30  2
-: [1] 5.073
-: [1] 1.959964
-
-We find the sample mean of the data to be $\overline{x}=5.073$ and $z_{\alpha/2}=z_{0.025}\approx1.96$. Our interval is therefore
+We find the sample mean of the data to be \(\overline{x}=5.073\) and \(z_{\alpha/2}=z_{0.025}\approx1.96\). Our interval is therefore
 \[
 \overline{x}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}=5.073\pm1.96\cdot\frac{0.70}{\sqrt{30}},
 \]
-which comes out to approximately $[4.823,\,5.323]$. In conclusion, we are 95% confident that the true mean weight $\mu$ of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval $[4.823,\,5.323]$ covers $\mu$.
+which comes out to approximately \([4.823,\,5.323]\). In conclusion, we are 95% confident that the true mean weight \(\mu\) of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval \([4.823,\,5.323]\) covers \(\mu\).
 
 #+latex: \begin{example}
-Give some data with $X_{1}$, $X_{2}$, ..., $X_{n}$ an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Maybe small sample?
+Give some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Maybe small sample?
 #+latex: \end{example}
 
 1. What is the parameter of interest? in the context of the problem.
-2. Give a point estimate for $\mu$.
-3. What are the assumptions being made in the problem? Do they meet the
-conditions of the interval?
+2. Give a point estimate for \(\mu\).
+3. What are the assumptions being made in the problem? Do they meet the conditions of the interval?
 4. Calculate the interval.
 5. Draw the conclusion.
 
 #+latex: \begin{rem}
-What if $\sigma$ is unknown? We instead use the interval
+What if \(\sigma\) is unknown? We instead use the interval
 \begin{equation}
 \overline{X}\pm z_{\alpha/2}\frac{S}{\sqrt{n}},
 \end{equation}
-where $S$ is the sample standard deviation.
-- If $n$ is large, then $\overline{X}$ will have an approximately normal distribution regardless of the underlying population (by the CLT) and $S$ will be very close to the parameter $\sigma$ (by the SLLN); thus the above interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$.
-- If $n$ is small, then
-   - If the underlying population is normal then we may replace $z_{\alpha/2}$ with $t_{\alpha/2}(\mathtt{df}=n-1)$. The resulting $100(1-\alpha)\%$ confidence interval is
-   \begin{equation}
-   \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}\label{eq:one-samp-t-int}
-   \end{equation}
-   - if the underlying population is not normal, but approximately normal, then we may use the $t$ interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately $100(1-\alpha)\%$ confidence of covering $\mu$. However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
+where \(S\) is the sample standard deviation.
+- If \(n\) is large, then \(\overline{X}\) will have an approximately normal distribution regardless of the underlying population (by the CLT) and \(S\) will be very close to the parameter \(\sigma\) (by the SLLN); thus the above interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\).
+- If \(n\) is small, then
+   - If the underlying population is normal then we may replace \(z_{\alpha/2}\) with \(t_{\alpha/2}(\mathtt{df}=n-1)\). The resulting \(100(1-\alpha)\%\) confidence interval is
+     \begin{equation}
+     \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}.\label{eq:one-samp-t-int}
+     \end{equation}
+   - if the underlying population is not normal, but approximately normal, then we may use the \(t\) interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
 #+latex: \end{rem}
 
 The author learned of a handy acronym from AP Statistics Exam graders that summarizes the important parts of confidence interval estimation, which is PANIC: \emph{P}arameter, \emph{A}ssumptions, \emph{N}ame, \emph{I}nterval, and \emph{C}onclusion.
@@ -585,7 +458,7 @@ The author learned of a handy acronym from AP Statistics Exam graders that summa
 - Conclusion: :: state the final results, using language in the context of the problem. Include the appropriate interpretation of the interval, making reference to the confidence coefficient.
 
 #+latex: \begin{rem}
-All of the above intervals for $\mu$ were two-sided, but there are also one-sided intervals for $\mu$. They look like
+All of the above intervals for \(\mu\) were two-sided, but there are also one-sided intervals for \(\mu\). They look like
 \begin{equation}
 \left[\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
@@ -597,41 +470,20 @@ and satisfy
 
 
 #+latex: \begin{example}
-Small sample, some data with $X_{1}$, $X_{2}$, ..., $X_{n}$ an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution.
-1. PANIC
+Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution.  PANIC
 #+latex: \end{example}
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
-
 We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 library(TeachingDemos)
 #+end_src
-
-#+results[fc8d3c47605299c8d0421f4c3c57d1b953f58311]:
 
 #+begin_src R :exports both :results output pp 
 library(TeachingDemos)
 temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
 temp
 #+end_src
-
-#+results[715be8530ff4d90ffcb880334a7525ee9fdd13c0]:
-#+begin_example
- 
-	One Sample z-test
-
-data:  weight 
-z = 39.6942, n = 30.000, Std. Dev. = 0.700, Std. Dev. of the sample
-mean = 0.128, p-value < 2.2e-16
-alternative hypothesis: true mean is not equal to 0 
-95 percent confidence interval:
- 4.822513 5.323487 
-sample estimates:
-mean of weight 
-         5.073
-#+end_example
 
 The confidence interval bounds are shown in the sixth line down of the output (please disregard all of the additional output information for now -- we will use it in Chapter \ref{cha:Hypothesis-Testing}). We can make the plot for Figure \ref{fig:plant-z-int-plot} with
 
@@ -640,50 +492,41 @@ library(IPSUR)
 plot(temp, "Conf")
 #+end_src
 
-
 ** Confidence Intervals for Differences of Means
 \label{sec:Conf-Interv-for-Diff-Means}
 
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be a $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})$ distribution and let $Y_{1}$, $Y_{2}$, ..., $Y_{m}$ be a $SRS(m)$ from a $\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})$ distribution. Further, assume that the $X_{1}$, $X_{2}$, ..., $X_{n}$ sample is independent of the $Y_{1}$, $Y_{2}$, ..., $Y_{m}$ sample.
+Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) be a \(SRS(m)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Further, assume that the \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) sample is independent of the \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) sample.
 
-Suppose that $\sigma_{X}$ and $\sigma_{Y}$ are known. We would like a confidence interval for $\mu_{X}-\mu_{Y}$. We know that 
-
+Suppose that \(\sigma_{X}\) and \(\sigma_{Y}\) are known. We would like a confidence interval for \(\mu_{X}-\mu_{Y}\). We know that 
 \begin{equation}
 \overline{X}-\overline{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}\right).
 \end{equation}
-
-Therefore, a $ 100(1-\alpha)\% $ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
+Therefore, a \( 100(1-\alpha)\% \) confidence interval for \(\mu_{X}-\mu_{Y}\) is given by
 \begin{equation}
 \left(\overline{X}-\overline{Y}\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.\label{eq:two-samp-mean-CI}
 \end{equation}
-
-Unfortunately, most of the time the values of $\sigma_{X}$ and $\sigma_{Y}$ are unknown. This leads us to the following:
-
-- If both sample sizes are large, then we may appeal to the CLT/SLLN (see \ref{sec:Central-Limit-Theorem}) and substitute $S_{X}^{2}$ and $S_{Y}^{2}$ for $\sigma_{X}^{2}$ and $\sigma_{Y}^{2}$ in the interval \ref{eq:two-samp-mean-CI}. The resulting confidence interval will have approximately $100(1-\alpha)\%$ confidence.
-
+Unfortunately, most of the time the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are unknown. This leads us to the following:
+- If both sample sizes are large, then we may appeal to the CLT/SLLN (see \ref{sec:Central-Limit-Theorem}) and substitute \(S_{X}^{2}\) and \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the interval \ref{eq:two-samp-mean-CI}. The resulting confidence interval will have approximately \(100(1-\alpha)\%\) confidence.
 - If one or more of the sample sizes is small then we are in trouble, unless
-
-    -the underlying populations are both normal and $\sigma_{X}=\sigma_{Y}$. In this case (setting $\sigma=\sigma_{X}=\sigma_{Y}$), 
+    -the underlying populations are both normal and \(\sigma_{X}=\sigma_{Y}\). In this case (setting \(\sigma=\sigma_{X}=\sigma_{Y}\)), 
     \begin{equation}
     \overline{X}-\overline{Y}\sim\mathsf{norm}\left(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}\right).
     \end{equation}
-
 Now let
 \begin{equation}
 U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
 \end{equation}
-
-Then by Exercise \ref{xca:sum-indep-chisq} we know that $U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)$ and is not a large leap to believe that $U$ is independent of $\overline{X}-\overline{Y}$; thus
+Then by Exercise \ref{xca:sum-indep-chisq} we know that \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and is not a large leap to believe that \(U\) is independent of \(\overline{X}-\overline{Y}\); thus
 \begin{equation}
-T=\frac{Z}{\sqrt{\left.U\right\slash (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).\end{equation}
-
+T=\frac{Z}{\sqrt{\left.U\right\slash (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
+\end{equation}
 But
 \begin{align*}
 T & =\frac{\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right\slash (n+m-2)}},\\
  & =\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left(\frac{1}{n}+\frac{1}{m}\right)\left(\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}\right)}},\\
  & \sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{align*}
-Therefore a $100(1-\alpha)\%$ confidence interval for $\mu_{X}-\mu_{Y}$ is given by
+Therefore a \(100(1-\alpha)\%\) confidence interval for \(\mu_{X}-\mu_{Y}\) is given by
 \begin{equation}
 \left(\overline{X}-\overline{Y}\right)\pm t_{\alpha/2}(\mathtt{df}=n+m-2)\, S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}},
 \end{equation}
@@ -691,68 +534,63 @@ where
 \begin{equation}
 S_{p}=\sqrt{\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}}
 \end{equation}
-is called the ``pooled'' estimator of $\sigma$.
-
-    - if one of the samples is small, and both underlying populations are normal, but $\sigma_{X}\neq\sigma_{Y}$, then we may use a Welch (or Satterthwaite) approximation to the degrees of freedom. See Welch \cite{Welch1947}, Satterthwaite \cite{Satterthwaite1946}, or Neter /et al/ \cite{Neter1996}. The idea is to use an interval of the form 
+is called the ``pooled'' estimator of \(\sigma\).
+    - If one of the samples is small, and both underlying populations are normal, but \(\sigma_{X}\neq\sigma_{Y}\), then we may use a Welch (or Satterthwaite) approximation to the degrees of freedom. See Welch \cite{Welch1947}, Satterthwaite \cite{Satterthwaite1946}, or Neter /et al/ \cite{Neter1996}. The idea is to use an interval of the form 
 \begin{equation}
 \left(\overline{X}-\overline{Y}\right)\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=r)\,\sqrt{\frac{S_{X}^{2}}{n}+\frac{S_{Y}^{2}}{m}},
 \end{equation}
-where the degrees of freedom $r$ is chosen so that the interval has nice statistical properties. It turns out that a good choice for $r$ is given by
+where the degrees of freedom \(r\) is chosen so that the interval has nice statistical properties. It turns out that a good choice for \(r\) is given by
 \begin{equation}
 r=\frac{\left(S_{X}^{2}/n+S_{Y}^{2}/m\right)^{2}}{\frac{1}{n-1}\left(S_{X}^{2}/n\right)^{2}+\frac{1}{m-1}\left(S_{Y}^{2}/m\right)^{2}},
 \end{equation}
-where we understand that $r$ is rounded down to the nearest integer. The resulting interval has approximately $100(1-\alpha)\%$ confidence.
+where we understand that \(r\) is rounded down to the nearest integer. The resulting interval has approximately \(100(1-\alpha)\%\) confidence.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 The basic function is =t.test= which has a =var.equal= argument that may be set to =TRUE= or =FALSE=. The confidence interval is shown as part of the output, although there is a lot of additional information that is not needed until Chapter
 \ref{cha:Hypothesis-Testing}.
 
-There is not any specific functionality to handle the $z$-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
+There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
 
 ** Confidence Intervals for Proportions
 \label{sec:Confidence-Intervals-Proportions}
 
-We would like to know $p$ which is the ``proportion of successes''. For instance, $p$ could be:
+We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 - the proportion of U.S.~citizens that support Obama,
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
-We are given an $SRS(n)$ $X_{1}$, $X_{2}$, ..., $X_{n}$ distributed $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$. Recall from Section \ref{sec:binom-dist} that the common mean of these variables is $\E X=p$ and the variance is $\E(X-p)^{2}=p(1-p)$. If we let $Y=\sum X_{i}$, then from Section \ref{sec:binom-dist} we know that $Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ and that 
+We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) distributed \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\). Recall from Section \ref{sec:binom-dist} that the common mean of these variables is \(\E X=p\) and the variance is \(\E(X-p)^{2}=p(1-p)\). If we let \(Y=\sum X_{i}\), then from Section \ref{sec:binom-dist} we know that \(Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) and that 
 \[
 \overline{X}=\frac{Y}{n}\mbox{ has }\E\overline{X}=p\mbox{ and }\mathrm{Var}(\overline{X})=\frac{p(1-p)}{n}.
 \]
-
-Thus if $n$ is large (here is the CLT) then an approximate $100(1-\alpha)\%$ confidence interval for $p$ would be given by
+Thus if \(n\) is large (here is the CLT) then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) would be given by
 \begin{equation}
 \overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.\label{eq:ci-p-no-good}
 \end{equation}
-OOPS...! Equation \ref{eq:ci-p-no-good} is of no use to us because the \underbar{unknown} parameter $p$ is in the formula! (If we knew what $p$ was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
-
-1. Replace $p$ with $\hat{p}=\overline{X}$. Then an approximate $100(1-\alpha)\%$ confidence interval for $p$ is given by 
+OOPS...! Equation \ref{eq:ci-p-no-good} is of no use to us because the \underbar{unknown} parameter \(p\) is in the formula! (If we knew what \(p\) was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
+1. Replace \(p\) with \(\hat{p}=\overline{X}\). Then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) is given by 
    \begin{equation}
    \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
    \end{equation}
    This approach is called the /Wald interval/ and is also known as the /asymptotic interval/ because it appeals to the CLT for large sample sizes.
-
 2. Go back to first principles. Note that
    \[
    -z_{\alpha/2}\leq\frac{Y/n-p}{\sqrt{p(1-p)/n}}\leq z_{\alpha/2}
    \]
-   exactly when the function $f$ defined by
+   exactly when the function \(f\) defined by
    \[
    f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}
    \]
-   satisfies $f(p)\leq0$. But $f$ is quadratic in $p$ so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca:CI-quad-form}):
+   satisfies \(f(p)\leq0\). But \(f\) is quadratic in \(p\) so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca:CI-quad-form}):
    \begin{equation}
    \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right\slash \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
    \end{equation}
    This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter \ref{cha:Categorical-Data-Analysis}. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
 
 
-For two proportions $p_{1}$ and $p_{2}$, we may collect independent $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ samples of size $n_{1}$ and $n_{2}$, respectively. Let $Y_{1}$ and $Y_{2}$ denote the number of successes in the respective samples. 
-
+For two proportions \(p_{1}\) and \(p_{2}\), we may collect independent \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) samples of size \(n_{1}\) and \(n_{2}\), respectively. Let \(Y_{1}\) and \(Y_{2}\) denote the number of successes in the respective samples. 
 We know that
 \[
 \frac{Y_{1}}{n_{1}}\approx\mathsf{norm}\left(\mathtt{mean}=p_{1},\,\mathtt{sd}=\sqrt{\frac{p_{1}(1-p_{1})}{n_{1}}}\right)
@@ -761,11 +599,11 @@ and
 \[
 \frac{Y_{2}}{n_{2}}\approx\mathsf{norm}\left(\mathtt{mean}=p_{2},\,\mathtt{sd}=\sqrt{\frac{p_{2}(1-p_{2})}{n_{2}}}\right)
 \]
-so it stands to reason that an approximate $100(1-\alpha)\%$ confidence interval for $p_{1}-p_{2}$ is given by
+so it stands to reason that an approximate \(100(1-\alpha)\%\) confidence interval for \(p_{1}-p_{2}\) is given by
 \begin{equation}
 \left(\hat{p}_{1}-\hat{p}_{2}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}_{1}(1-\hat{p}_{1})}{n_{1}}+\frac{\hat{p}_{2}(1-\hat{p}_{2})}{n_{2}}},
 \end{equation}
-where $\hat{p}_{1}=Y_{1}/n_{1}$ and $\hat{p}_{2}=Y_{2}/n_{2}$.
+where \(\hat{p}_{1}=Y_{1}/n_{1}\) and \(\hat{p}_{2}=Y_{2}/n_{2}\).
 
 #+latex: \begin{rem}
 When estimating a single proportion, one-sided intervals are sometimes needed. They take the form
@@ -776,49 +614,33 @@ or
 \begin{equation}
 \left[\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\ 1\right]
 \end{equation}
-or in other words, we know in advance that the true proportion is restricted to the interval $[0,1]$, so we can truncate our confidence interval to those values on either side.
+or in other words, we know in advance that the true proportion is restricted to the interval \([0,1]\), so we can truncate our confidence interval to those values on either side.
 #+latex: \end{rem}
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-#+begin_src R :exports none
-library(Hmisc)
-#+end_src
-
-#+results[8b00a94fe7b51c0da388e8bc9aa886429d416f3b]:
-
 #+begin_src R :exports both :results output pp 
 library(Hmisc)
 binconf(x = 7, n = 25, method = "asymptotic")
+#+end_src
+
+#+begin_src R :exports both :results output pp 
 binconf(x = 7, n = 25, method = "wilson")
 #+end_src
 
-#+results[62a05dcb56149e7ce73388b3e2118cd7bcae5bbf]:
-:  PointEst     Lower     Upper
-:      0.28 0.1039957 0.4560043
-:  PointEst     Lower     Upper
-:      0.28 0.1428385 0.4757661
-
 The default value of the =method= argument is =wilson=.  An alternate way is 
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 library(RcmdrPlugin.IPSUR)
 data(RcmdrTestDrive)
 #+end_src
-
-#+results[664d9ed8355bc332c4b5ab27713c9ce6a8c2f706]:
 
 #+begin_src R :exports both :results output pp 
 tab <- xtabs(~gender, data = RcmdrTestDrive)
 prop.test(rbind(tab), conf.level = 0.95, correct = FALSE)
 #+end_src
 
-#+results[6a8a2c0b850f553c145e63d8dc564c9f2349cbe9]:
-: Error in terms.formula(formula, data = data) : 
-:   object 'RcmdrTestDrive' not found
-: Error in rbind(tab) : object 'tab' not found
-
-#+begin_src R :exports both :results output pp 
+#+begin_src R :exports code :results silent
 A <- as.data.frame(Titanic)
 library(reshape)
 B <- with(A, untable(A, Freq))
@@ -846,29 +668,28 @@ I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 ** Sample Size and Margin of Error
 \label{sec:Sample-Size-and-MOE}
 
-Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size $n$ and the confidence coefficient $1-\alpha$, and our task was to find a margin of error $E$ so that 
+Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
 \hat{\theta}\pm E\mbox{ is a }100(1-\alpha)\%\mbox{ confidence interval for }\theta.
 \]
 
 Some examples we saw were:
-- $E=z_{\alpha/2}\sigma/\sqrt{n}$, in the one-sample $z$-interval,
-- $E=t_{\alpha/2}(\mathtt{df}=n+m-2)S_{p}\sqrt{n^{-1}+m^{-1}}$, in the two-sample pooled $t$-interval. 
+- \(E=z_{\alpha/2}\sigma/\sqrt{n}\), in the one-sample \(z\)-interval,
+- \(E=t_{\alpha/2}(\mathtt{df}=n+m-2)S_{p}\sqrt{n^{-1}+m^{-1}}\), in the two-sample pooled \(t\)-interval. 
 
-We already know (we can see in the formulas above) that $E$ decreases as $n$ increases. Now we would like to use this information to our advantage: suppose that we have a fixed margin of error $E,$ say $E=3$, and we want a $100(1-\alpha)\%$ confidence interval for $\mu$. The question is: how big does $n$ have to be?
+We already know (we can see in the formulas above) that \(E\) decreases as \(n\) increases. Now we would like to use this information to our advantage: suppose that we have a fixed margin of error \(E,\) say \(E=3\), and we want a \(100(1-\alpha)\%\) confidence interval for \(\mu\). The question is: how big does \(n\) have to be?
 
-For the case of a population mean the answer is easy: we set up an equation and solve for $n$.
+For the case of a population mean the answer is easy: we set up an equation and solve for \(n\).
 
 #+latex: \begin{example}
-Given a situation, given $\sigma$, given $E$, we would like to know how big $n$ has to be to ensure that $\overline{X}\pm5$ is a 95\% confidence interval for $\mu$. #+latex: 
+Given a situation, given \(\sigma\), given \(E\), we would like to know how big \(n\) has to be to ensure that \(\overline{X}\pm5\) is a 95% confidence interval for \(\mu\).
 #+latex: \end{example}
 
 #+latex: \begin{rem}
-1. Always round up any decimal values of $n$, no matter how small the decimal is.
-2. Another name for $E$ is the ``maximum error of the estimate''.
+Always round up any decimal values of \(n\), no matter how small the decimal is. Another name for \(E\) is the ``maximum error of the estimate''.
 #+latex: \end{rem}
 
-For proportions, recall that the asymptotic formula to estimate $p$ was
+For proportions, recall that the asymptotic formula to estimate \(p\) was
 \[
 \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
 \]
@@ -877,33 +698,32 @@ Reasoning as above we would want
 E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.\label{eq:samp-size-prop-ME}
 \end{align}
-OOPS! Recall that $\hat{p}=Y/n$, which would put the variable $n$ on both sides of Equation \ref{eq:samp-size-prop-ME}. Again, there are two solutions to the problem.
+OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both sides of Equation \ref{eq:samp-size-prop-ME}. Again, there are two solutions to the problem.
 
-1. If we have a good idea of what $p$ is, say $p^{\ast}$ then we can plug it in to get
+1. If we have a good idea of what \(p\) is, say \(p^{\ast}\) then we can plug it in to get
    \begin{equation}
    n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}.
    \end{equation}
-
-2. Even if we have no idea what $p$ is, we do know from calculus that $p(1-p)\leq1/4$ because the function $f(x)=x(1-x)$ is quadratic (so its graph is a parabola which opens downward) with maximum value attained at $x=1/2$. Therefore, regardless of our choice for $p^{\ast}$ the sample size must satisfy
+2. Even if we have no idea what \(p\) is, we do know from calculus that \(p(1-p)\leq1/4\) because the function \(f(x)=x(1-x)\) is quadratic (so its graph is a parabola which opens downward) with maximum value attained at \(x=1/2\). Therefore, regardless of our choice for \(p^{\ast}\) the sample size must satisfy
    \begin{equation}
    n=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}\leq\frac{z_{\alpha/2}^{2}}{4E^{2}}.
    \end{equation}
-   The quantity $z_{\alpha/2}^{2}/4E^{2}$ is large enough to guarantee $100(1-\alpha)\%$ confidence.
+   The quantity \(z_{\alpha/2}^{2}/4E^{2}\) is large enough to guarantee \(100(1-\alpha)\%\) confidence.
 
 #+latex: \begin{example}
 Proportion example.
 #+latex: \end{example}
 
 #+latex: \begin{rem}
-For very small populations sometimes the value of $n$ obtained from the formula is too big. In this case we should use the hypergeometric distribution for a sampling model rather than the binomial model. With this modification the formulas change to the following: if $N$ denotes the population size then let
+For very small populations sometimes the value of \(n\) obtained from the formula is too big. In this case we should use the hypergeometric distribution for a sampling model rather than the binomial model. With this modification the formulas change to the following: if \(N\) denotes the population size then let
 \begin{equation}
 m=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}
 \end{equation}
-and the sample size needed to ensure $100(1-\alpha)\%$ confidence is achieved is
+and the sample size needed to ensure \(100(1-\alpha)\%\) confidence is achieved is
 \begin{equation}
 n=\frac{m}{1+\frac{m-1}{N}}.
 \end{equation}
-If we do not have a good value for the estimate $p^{\ast}$ then we may use $p^{\ast}=1/2$.
+If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p^{\ast}=1/2\).
 #+latex: \end{rem}
 
 
@@ -916,19 +736,19 @@ I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I
 Mention =mle= from the =stats4= package.
 
 
-\newpage{}
+#+latex: \newpage{}
 
-** Chapter Exercises
-#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
+** Exercises
 #+latex: \setcounter{thm}{0}
 
 #+latex: \begin{xca}
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be an $SRS(n)$ from a $\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)$ distribution. Find a two-dimensional MLE for $\theta=(\mu,\sigma)$.\label{xca:norm-mu-sig-MLE}
+Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Find a two-dimensional MLE for \(\theta=(\mu,\sigma)\).
+\label{xca:norm-mu-sig-MLE}
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 \label{xca:CI-quad-form}
-Find the upper and lower limits for the confidence interval procedure by finding the roots of $f$ defined by 
+Find the upper and lower limits for the confidence interval procedure by finding the roots of \(f\) defined by 
 \[
 f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.
 \]

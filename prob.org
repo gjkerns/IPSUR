@@ -1,3 +1,4 @@
+#+STARTUP: indent
 
 * Probability
 \label{cha:Probability}
@@ -1879,14 +1880,7 @@ As we can see above, often after adding a random variable \(V\) to a probability
 
 #+begin_src R :exports both :results output pp   
 marginal(S, vars = "V") 
-#+end_src 
-
-#+results[aa5e69775577c513d6312b8f883c91a96dfc733b]:
-:   V    probs
-: 1 1 0.015625
-: 2 2 0.109375
-: 3 3 0.296875
-: 4 4 0.578125
+#+end_src
 
 We could save the probability space of \(V\) in a data frame and study it further, if we wish. As a final remark, we can calculate the marginal distributions of multiple variables desired using the =vars= argument. For example, suppose we would like to examine the joint distribution of \(V\) and \(W\). 
 
@@ -1894,47 +1888,23 @@ We could save the probability space of \(V\) in a data frame and study it furthe
 marginal(S, vars = c("V", "W")) 
 #+end_src 
 
-#+results[a0c89cfee0b49c3cf465c6efd249ad3fd6769903]:
-#+begin_example
-   V  W    probs
-1  1  3 0.015625
-2  2  4 0.046875
-3  2  5 0.046875
-4  3  5 0.046875
-5  2  6 0.015625
-6  3  6 0.093750
-7  4  6 0.046875
-8  3  7 0.093750
-9  4  7 0.093750
-10 3  8 0.046875
-11 4  8 0.140625
-12 3  9 0.015625
-13 4  9 0.140625
-14 4 10 0.093750
-15 4 11 0.046875
-16 4 12 0.015625
-#+end_example
-
 Note that the default value of =vars= is the names of all columns except =probs=. This can be useful if there are duplicated rows in the probability space.
 
 #+latex: \newpage{}
 
-** Chapter Exercises
+** Exercises
 
-#+latex: \addcontentsline{toc}{section}{Chapter Exercises}
 #+latex: \setcounter{thm}{0}
 
-\begin{xca}
+#+latex: \begin{xca}
 \label{xca:numb-cond-indep}
 Prove the assertion given in the text: the number of conditions that the events \(A_{1}\), \(A_{2}\), ..., \(A_{n}\) must satisfy in order to be mutually independent is \(2^{n}-n-1\). (/Hint/: think about Pascal's triangle.)
-\end{xca}
+#+latex: \end{xca}
 
 #+latex: \paragraph*{Answer:}
 
 The events must satisfy the product equalities two at a time, of which there are \({n \choose 2}\), then they must satisfy an additional \({n \choose 3}\) conditions three at a time, and so on, until they satisfy the \({n \choose n}=1\) condition including all \(n\) events. In total, there are 
-
 \[
 {n \choose 2}+{n \choose 3}+\cdots+{n \choose n}=\sum_{k=0}^{n}{n \choose k}-\left[{n \choose 0}+{n \choose 1}\right]
 \]
-
 conditions to be satisfied, but the binomial series in the expression on the right is the sum of the entries of the \(n^{\mathrm{th}}\) row of Pascal's triangle, which is \(2^{n}\).

@@ -1,48 +1,7 @@
-#+STARTUP:   indent
-#+TITLE:     Multivariate Distributions
-#+AUTHOR:    G. Jay Kerns
-#+EMAIL:     gkerns@ysu.edu
-#+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:nil *:t <:t
-#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
-#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: answ soln
-#+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
-#+LaTeX_CLASS: scrbook
-#+LaTeX_CLASS_OPTIONS: [captions=tableheading]
-#+LaTeX_CLASS_OPTIONS: [10pt,english]
-#+LaTeX_HEADER: \input{preamble}
+#+STARTUP: indent
 
 * Multivariate Distributions
 \label{cha:Multivariable-Distributions}
-#+begin_src R :exports none
-seed <- 42
-set.seed(seed)
-options(width = 60)
-options(useFancyQuotes = FALSE)
-library(actuar)
-library(aplpack)
-library(boot)
-library(coin)
-library(combinat)
-library(distrEx)
-library(e1071)
-library(ggplot2)
-library(HH)
-library(Hmisc)
-library(lattice)
-library(lmtest)
-library(mvtnorm)
-library(prob)
-library(qcc)
-library(RcmdrPlugin.IPSUR)
-library(reshape)
-library(scatterplot3d)
-library(stats4)
-library(TeachingDemos)
-#+end_src
 
 \noindent We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
 
@@ -74,7 +33,7 @@ The interested reader who would like to learn more about any of the below mentio
 ** Joint and Marginal Probability Distributions
 \label{sec:Joint-Probability-Distributions}
 
-Consider two discrete random variables $X$ and $Y$ with PMFs $f_{X}$ and $f_{Y}$ that are supported on the sample spaces $S_{X}$ and $S_{Y}$, respectively. Let $S_{X,Y}$ denote the set of all possible observed /pairs/ $(x,y)$, called the /joint support set/ of $X$ and $Y$. Then the /joint probability mass function/ of $X$ and $Y$ is the function $f_{X,Y}$ defined by
+Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
 f_{X,Y}(x,y)=\P(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq:joint-pmf}
 \end{equation}
@@ -88,31 +47,25 @@ and
 \begin{equation}
 \sum_{(x,y)\in S_{X,Y}}f_{X,Y}(x,y)=1.
 \end{equation}
+It is customary to extend the function \(f_{X,Y}\) to be defined on all of \(\mathbb{R}^{2}\) by setting \(f_{X,Y}(x,y)=0\) for \((x,y)\not\in S_{X,Y}\). 
 
-It is customary to extend the function $f_{X,Y}$ to be defined on all of $\mathbb{R}^{2}$ by setting $f_{X,Y}(x,y)=0$ for $(x,y)\not\in S_{X,Y}$. 
-
-In the context of this chapter, the PMFs $f_{X}$ and $f_{Y}$ are called the /marginal PMFs/ of $X$ and $Y$, respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq:theorem-total-probability}): observe
+In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq:theorem-total-probability}): observe
 \begin{eqnarray}
 f_{X}(x) & = & \P(X=x),\\
  & = & \sum_{y\in S_{Y}}\P(X=x,\, Y=y),\\
  & = & \sum_{y\in S_{Y}}f_{X,Y}(x,y).
 \end{eqnarray}
-
-By interchanging the roles of $X$ and $Y$ it is clear that 
+By interchanging the roles of \(X\) and \(Y\) it is clear that 
 \begin{equation}
 f_{Y}(y)=\sum_{x\in S_{Y}}f_{X,Y}(x,y).\label{eq:marginal-pmf}
 \end{equation}
+Given the joint PMF we may recover the marginal PMFs, but the converse is not true. Even if we have /both/ marginal distributions they are not sufficient to determine the joint PMF; more information is needed
+#+latex: \footnote{We are not at a total loss, however. There are Frechet bounds which pose limits on how large (and small) the joint distribution must be at each point.}.
 
-
-Given the joint PMF we may recover the marginal PMFs, but the converse is not true. Even if we have /both/ marginal distributions they are not sufficient to determine the joint PMF; more information is needed[fn:frechet]. 
-
-[fn:frechet] We are not at a total loss, however. There are Frechet bounds which pose limits on how large (and small) the joint distribution must be at each point.
-
-Associated with the joint PMF is the /joint cumulative distribution function/ $F_{X,Y}$ defined by
+Associated with the joint PMF is the /joint cumulative distribution function/ \(F_{X,Y}\) defined by
 \[
 F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
 \]
-
 The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation \ref{eq:joint-pmf}. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
 
 We now introduce some examples of bivariate discrete distributions. The first we have seen before, and the second is based on the first.
@@ -120,50 +73,45 @@ We now introduce some examples of bivariate discrete distributions. The first we
 #+latex: \begin{example}
 \label{exa:toss-two-dice-joint-pmf}
 
-Roll a fair die twice. Let $X$ be the face shown on the first roll, and let $Y$ be the face shown on the second roll. We have already seen this example in Chapter \ref{cha:Probability}, Example \ref{exa:Toss-a-six-sided-die-twice}. For this example, it suffices to define
+Roll a fair die twice. Let \(X\) be the face shown on the first roll, and let \(Y\) be the face shown on the second roll. We have already seen this example in Chapter \ref{cha:Probability}, Example \ref{exa:Toss-a-six-sided-die-twice}. For this example, it suffices to define
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6.
 \]
-
-The marginal PMFs are given by $f_{X}(x)=1/6$, $x=1,2,\ldots,6$, and $f_{Y}(y)=1/6$, $y=1,2,\ldots,6$, since
+The marginal PMFs are given by \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and \(f_{Y}(y)=1/6\), \(y=1,2,\ldots,6\), since
 \[
 f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6,
 \]
-and the same computation with the letters switched works for $Y$. 
+and the same computation with the letters switched works for \(Y\). 
 #+latex: \end{example}
 
 
-In the previous example, and in many other ones, the joint support can be written as a product set of the support of $X$ ``times'' the support of $Y$, that is, it may be represented as a cartesian product set, or rectangle, $S_{X,Y}=S_{X}\times S_{Y}$, where $S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} $. As we shall see presently in Section \ref{sec:Independent-Random-Variables}, this form is a necessary condition for $X$ and $Y$ to be /independent/ (or alternatively /exchangeable/ when $S_{X}=S_{Y}$). But please note that in general it is not required for $S_{X,Y}$ to be of rectangle form. We next investigate just such an example.
+In the previous example, and in many other ones, the joint support can be written as a product set of the support of \(X\) ``times'' the support of \(Y\), that is, it may be represented as a cartesian product set, or rectangle, \(S_{X,Y}=S_{X}\times S_{Y}\), where \(S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} \). As we shall see presently in Section \ref{sec:Independent-Random-Variables}, this form is a necessary condition for \(X\) and \(Y\) to be /independent/ (or alternatively /exchangeable/ when \(S_{X}=S_{Y}\)). But please note that in general it is not required for \(S_{X,Y}\) to be of rectangle form. We next investigate just such an example.
 
 
 #+latex: \begin{example}
 \label{exa:max-sum-two-dice}
 
-Let the random experiment again be to roll a fair die twice, except now let us define the random variables $U$ and $V$ by
+Let the random experiment again be to roll a fair die twice, except now let us define the random variables \(U\) and \(V\) by
 \begin{eqnarray*}
 U & = & \mbox{the maximum of the two rolls, and }\\
 V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
+We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table \ref{tab:max-and-sum-two-dice}. 
 
-We see that the support of $U$ is $S_{U}= \{ 1,2,\ldots,6 \} $ and the support of $V$ is $S_{V}= \{ 2,3,\ldots,12 \} $. We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that $U$ assumes. The result is in the left half of Table \ref{tab:max-and-sum-two-dice}. 
-
-We can use the table to calculate the marginal PMF of $U$, because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability $1/36$ associated with it. For instance, there is only one outcome in the matrix with $U=1$, namely, the top left corner. This single entry has probability $1/36$, therefore, it must be that $f_{U}(1)=\P(U=1)=1/36$. Similarly we see that there are three entries in the matrix with $U=2$, thus $f_{U}(2)=3/36$. Continuing in this fashion we will find the marginal distribution of $U$ may be written
+We can use the table to calculate the marginal PMF of \(U\), because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\P(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
-
-We may do a similar thing for $V$; see the right half of Table \ref{tab:max-and-sum-two-dice}. Collecting all of the probability we will find that the marginal PMF of $V$ is
+We may do a similar thing for \(V\); see the right half of Table \ref{tab:max-and-sum-two-dice}. Collecting all of the probability we will find that the marginal PMF of \(V\) is
 \begin{equation}
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
 
-
-
-%
+#+begin_latex
 \begin{table}
-\hfill{}\subfloat[$U=\max(X,Y)$]{\begin{centering}
+\hfill{}\subfloat[\(U=\max(X,Y)\)]{\begin{centering}
 \begin{tabular}{c|cccccc}
-$U$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
+\(U\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 \hline
 1 & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 2 & 2 & 2 & 3 & 4 & 5 & 6\tabularnewline
@@ -173,9 +121,9 @@ $U$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 6 & 6 & 6 & 6 & 6 & 6 & 6\tabularnewline
 \end{tabular}
 \par\end{centering}
-}\hfill{}\subfloat[$V=X+Y$]{\begin{centering}
+}\hfill{}\subfloat[\(V=X+Y\)]{\begin{centering}
 \begin{tabular}{c|cccccc}
-$V$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
+\(V\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 \hline
 1 & 2 & 3 & 4 & 5 & 6 & 7\tabularnewline
 2 & 3 & 4 & 5 & 6 & 7 & 8\tabularnewline
@@ -186,17 +134,17 @@ $V$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 \end{tabular}
 \par\end{centering}
 }\hfill{}
-\caption{Maximum $U$ and sum $V$ of a pair of dice rolls $(X,Y)$\label{tab:max-and-sum-two-dice}}
+\caption{Maximum \(U\) and sum \(V\) of a pair of dice rolls \((X,Y)\)\label{tab:max-and-sum-two-dice}}
 \end{table}
+#+end_latex
 
+We may collapse the two matrices from Table \ref{tab:max-and-sum-two-dice} into one, big matrix of pairs of values \((u,v)\). The result is shown in Table \ref{tab:-max-sum-two-dice-joint}. 
 
-We may collapse the two matrices from Table \ref{tab:max-and-sum-two-dice} into one, big matrix of pairs of values $(u,v)$. The result is shown in Table \ref{tab:-max-sum-two-dice-joint}. 
-
-
+#+begin_latex
 \begin{table}
 \begin{centering}
 \begin{tabular}{c|cccccc}
-$(U,V)$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
+\((U,V)\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 \hline
 1 & (1,2) & (2,3) & (3,4) & (4,5) & (5,6) & (6,7)\tabularnewline
 2 & (2,3) & (2,4) & (3,5) & (4,6) & (5,7) & (6,8)\tabularnewline
@@ -206,39 +154,41 @@ $(U,V)$ & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
 6 & (6,7) & (6,8) & (6,9) & (6,10) & (6,11) & (6,12)\tabularnewline
 \end{tabular}
 \par\end{centering}
-\caption{Joint values of $U=\max(X,Y)$ and $V=X+Y$\label{tab:-max-sum-two-dice-joint}}
+\caption{Joint values of \(U=\max(X,Y)\) and \(V=X+Y\)\label{tab:-max-sum-two-dice-joint}}
 \end{table}
+#+end_latex
 
+Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example \ref{exa:toss-two-dice-joint-pmf}. See Table \ref{tab:max-sum-joint-pmf}.
 
-Again, each of these pairs has probability $1/36$ associated with it and we are looking at the joint PDF of $(U,V)$ albeit in an unusual form. Many of the pairs are repeated, but some of them are not: $(1,2)$ appears twice, but $(2,3)$ appears only once. We can make more sense out of this by writing a new table with $U$ on one side and $V$ along the top. We will accumulate the probability just like we did in Example \ref{exa:toss-two-dice-joint-pmf}. See Table \ref{tab:max-sum-joint-pmf}.
-
-
+#+begin_latex
 \begin{table}
 \begin{centering}
 \begin{tabular}{|c|ccccccccccc|c|}
 \hline 
  & {\small 2} & {\small 3} & {\small 4} & {\small 5} & {\small 6} & {\small 7} & {\small 8} & {\small 9} & {\small 10} & {\small 11} & {\small 12} & {\small Total}\tabularnewline
 \hline
-{\small 1} & {\small $1/36$} &  &  &  &  &  &  &  &  &  &  & {\small $1/36$}\tabularnewline
-{\small 2} &  & {\small $2/36$} & {\small $1/36$} &  &  &  &  &  &  &  &  & {\small $3/36$}\tabularnewline
-{\small 3} &  &  & {\small $2/36$} & {\small $2/36$} & {\small $1/36$} &  &  &  &  &  &  & {\small $5/36$}\tabularnewline
-{\small 4} &  &  &  & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $1/36$} &  &  &  &  & {\small $7/36$}\tabularnewline
-{\small 5} &  &  &  &  & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $1/36$} &  &  & {\small $9/36$}\tabularnewline
-{\small 6} &  &  &  &  &  & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $2/36$} & {\small $1/36$} & {\small $11/36$}\tabularnewline
+{\small 1} & {\small \(1/36\)} &  &  &  &  &  &  &  &  &  &  & {\small \(1/36\)}\tabularnewline
+{\small 2} &  & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  &  &  &  &  & {\small \(3/36\)}\tabularnewline
+{\small 3} &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  &  &  & {\small \(5/36\)}\tabularnewline
+{\small 4} &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  & {\small \(7/36\)}\tabularnewline
+{\small 5} &  &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  & {\small \(9/36\)}\tabularnewline
+{\small 6} &  &  &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} & {\small \(11/36\)}\tabularnewline
 \hline 
-{\small Total} & {\small $1/36$} & {\small $2/36$} & {\small $3/36$} & {\small $4/36$} & {\small $5/36$} & {\small $6/36$} & {\small $5/36$} & {\small $4/36$} & {\small $3/36$} & {\small $2/36$} & {\small $1/36$} & {\small 1}\tabularnewline
+{\small Total} & {\small \(1/36\)} & {\small \(2/36\)} & {\small \(3/36\)} & {\small \(4/36\)} & {\small \(5/36\)} & {\small \(6/36\)} & {\small \(5/36\)} & {\small \(4/36\)} & {\small \(3/36\)} & {\small \(2/36\)} & {\small \(1/36\)} & {\small 1}\tabularnewline
 \hline
 \end{tabular}
 \par\end{centering}
-\caption{The joint PMF of $(U,V)$\label{tab:max-sum-joint-pmf} }
-{\small The outcomes of $U$ are along the left and the outcomes of $V$ are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of $U$ and $V$, respectively. }
+\caption{The joint PMF of \((U,V)\)\label{tab:max-sum-joint-pmf} }
+{\small The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively. }
 \end{table}
+#+end_latex
 
-
-The joint support of $(U,V)$ is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation \ref{eq:marginal-pmf}, so that the marginal distribution of $U$ is the list of totals in the right ``margin'' of the Table \ref{tab:max-sum-joint-pmf}, and the marginal distribution of $V$  is the list of totals in the bottom ``margin''. 
+The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation \ref{eq:marginal-pmf}, so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table \ref{tab:max-sum-joint-pmf}, and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
 #+latex: \end{example}
 
-Continuing the reasoning for the discrete case, given two continuous random variables $X$ and $Y$ there similarly exists[fn:jointPDFexist] a function $f_{X,Y}(x,y)$ associated with $X$ and $Y$ called the /joint probability density function/ of $X$ and $Y$. Every joint PDF satisfies
+Continuing the reasoning for the discrete case, given two continuous random variables \(X\) and \(Y\) there similarly exists
+#+latex: \footnote{Strictly speaking, the joint density function does not necessarily exist. But the joint CDF always exists.}
+a function \(f_{X,Y}(x,y)\) associated with \(X\) and \(Y\) called the /joint probability density function/ of \(X\) and \(Y\). Every joint PDF satisfies
 \begin{equation}
 f_{X,Y}(x,y)\geq0\mbox{ for all }(x,y)\in S_{X,Y},
 \end{equation}
@@ -246,19 +196,15 @@ and
 \begin{equation}
 \iintop_{S_{X,Y}}f_{X,Y}(x,y)\,\mathrm{d} x\,\mathrm{d} y=1.
 \end{equation}
-
-
-[fn:jointPDFexist] Strictly speaking, the joint density function does not necessarily exist. But the joint CDF always exists.
-
 In the continuous case there is not such a simple interpretation for the joint PDF; however, we do have one for the joint CDF, namely,
 \[
 F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\mathrm{d} v\,\mathrm{d} u,
 \]
-for $(x,y)\in\mathbb{R}^{2}$. If $X$ and $Y$ have the joint PDF $f_{X,Y}$, then the marginal density of $X$ may be recovered by
+for \((x,y)\in\mathbb{R}^{2}\). If \(X\) and \(Y\) have the joint PDF \(f_{X,Y}\), then the marginal density of \(X\) may be recovered by
 \begin{equation}
 f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\mathrm{d} y,\quad x\in S_{X}
 \end{equation}
-and the marginal PDF of $Y$ may be found with
+and the marginal PDF of \(Y\) may be found with
 \begin{equation}
 f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x,\quad y\in S_{Y}.
 \end{equation}
@@ -267,38 +213,35 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x,\quad y\in S_{Y}.
 #+latex: \begin{example}
 \label{exa:joint-pdf}
 
-Let the joint PDF of $(X,Y)$ be given by
+Let the joint PDF of \((X,Y)\) be given by
 \[
 f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad0<x<1,\ 0<y<1.
 \]
-
-The marginal PDF of $X$ is
+The marginal PDF of \(X\) is
 \begin{eqnarray*}
 f_{X}(x) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} y,\\
  & = & \left.\frac{6}{5}\left(xy+\frac{y^{3}}{3}\right)\right|_{y=0}^{1},\\
  & = & \frac{6}{5}\left(x+\frac{1}{3}\right),
 \end{eqnarray*}
-for $0<x<1$, and the marginal PDF of $Y$ is
+for \(0<x<1\), and the marginal PDF of \(Y\) is
 \begin{eqnarray*}
 f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
  & = & \left.\frac{6}{5}\left(\frac{x^{2}}{2}+xy^{2}\right)\right|_{x=0}^{1},\\
  & = & \frac{6}{5}\left(\frac{1}{2}+y^{2}\right),
 \end{eqnarray*}
-for $0<y<1$. In this example the joint support set was a rectangle $[0,1]\times[0,1]$, but it turns out that $X$ and $Y$ are not independent. See Section \ref{sec:Independent-Random-Variables}.
+for \(0<y<1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section \ref{sec:Independent-Random-Variables}.
 #+latex: \end{example}
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-We will show how to do Example \ref{exa:max-sum-two-dice} using \textsf{R}; it is much simpler to do it with \textsf{R} than without. First we set up the sample space with the =rolldie= function. Next, we add random variables $U$ and $V$ with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
+We will show how to do Example \ref{exa:max-sum-two-dice} using \textsf{R}; it is much simpler to do it with \textsf{R} than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
 
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 library(prob)
 #+end_src
 
-#+results[4d0116454199b16f29ae07f546f04ebe6b18f214]:
-
-#+begin_src R
+#+begin_src R :exports both :results output pp
 library(prob)  
 S <- rolldie(2, makespace = TRUE)
 S <- addrv(S, FUN = max, invars = c("X1","X2"), name = "U")
@@ -306,30 +249,12 @@ S <- addrv(S, FUN = sum, invars = c("X1","X2"), name = "V")
 head(S)
 #+end_src
 
-#+results[39cd82fd2c4beeb9a363be03b37a7bdd68ddc7b2]:
-:   X1 X2 U V      probs
-: 1  1  1 1 2 0.02777778
-: 2  2  1 2 3 0.02777778
-: 3  3  1 3 4 0.02777778
-: 4  4  1 4 5 0.02777778
-: 5  5  1 5 6 0.02777778
-: 6  6  1 6 7 0.02777778
-
-Yes, the $U$ and $V$ columns have been added to the data frame and have been computed correctly. This result would be fine as it is, but the data frame has too many rows: there are repeated pairs $(u,v)$ which show up as repeated rows in the data frame. The goal is to aggregate the rows of $S$ such that the result has exactly one row for each unique pair $(u,v)$ with positive probability. This sort of thing is exactly the task for which the =marginal= function was designed. We may take a look at the joint distribution of $U$ and $V$ (we only show the first few rows of the data frame, but the complete one has 11 rows).
+Yes, the \(U\) and \(V\) columns have been added to the data frame and have been computed correctly. This result would be fine as it is, but the data frame has too many rows: there are repeated pairs \((u,v)\) which show up as repeated rows in the data frame. The goal is to aggregate the rows of \(S\) such that the result has exactly one row for each unique pair \((u,v)\) with positive probability. This sort of thing is exactly the task for which the =marginal= function was designed. We may take a look at the joint distribution of \(U\) and \(V\) (we only show the first few rows of the data frame, but the complete one has 11 rows).
 
 #+begin_src R :exports both :results output pp 
 UV <- marginal(S, vars = c("U", "V"))
 head(UV)
 #+end_src
-
-#+results[760f0e97f2c8389b032b4542ef34d27f6a762603]:
-:   U V      probs
-: 1 1 2 0.02777778
-: 2 2 3 0.05555556
-: 3 2 4 0.02777778
-: 4 3 4 0.05555556
-: 5 3 5 0.05555556
-: 6 4 5 0.05555556
 
 The data frame is difficult to understand. It would be better to have a tabular display like Table \ref{tab:max-sum-joint-pmf}. We can do that with the =xtabs= function. 
 
@@ -337,40 +262,12 @@ The data frame is difficult to understand. It would be better to have a tabular 
 xtabs(round(probs,3) ~ U + V, data = UV)
 #+end_src
 
-#+results[a890443fbe0c1f7be1b7a166c88e5efbe6f9aa6b]:
-:    V
-: U       2     3     4     5     6     7     8     9    10    11    12
-:   1 0.028 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
-:   2 0.000 0.056 0.028 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000
-:   3 0.000 0.000 0.056 0.056 0.028 0.000 0.000 0.000 0.000 0.000 0.000
-:   4 0.000 0.000 0.000 0.056 0.056 0.056 0.028 0.000 0.000 0.000 0.000
-:   5 0.000 0.000 0.000 0.000 0.056 0.056 0.056 0.056 0.028 0.000 0.000
-:   6 0.000 0.000 0.000 0.000 0.000 0.056 0.056 0.056 0.056 0.056 0.028
-
-Compare these values to the ones shown in Table \ref{tab:max-sum-joint-pmf}. We can repeat the process with =marginal= to get the univariate marginal distributions of $U$ and $V$ separately.
+Compare these values to the ones shown in Table \ref{tab:max-sum-joint-pmf}. We can repeat the process with =marginal= to get the univariate marginal distributions of \(U\) and \(V\) separately.
 
 #+begin_src R :exports both :results output pp 
 marginal(UV, vars = "U")
 head(marginal(UV, vars = "V"))
 #+end_src
-
-#+results[ffbe153cb477a9bc4c6567a9f7b352e5c8095964]:
-#+begin_example
-  U      probs
-1 1 0.02777778
-2 2 0.08333333
-3 3 0.13888889
-4 4 0.19444444
-5 5 0.25000000
-6 6 0.30555556
-  V      probs
-1 2 0.02777778
-2 3 0.05555556
-3 4 0.08333333
-4 5 0.11111111
-5 6 0.13888889
-6 7 0.16666667
-#+end_example
 
 Another way to do the same thing is with the =rowSums= and =colSums= of the =xtabs= object. Compare
 
@@ -380,21 +277,12 @@ rowSums(temp)
 colSums(temp)
 #+end_src
 
-#+results[62274d3304d7db9ea21ff1e9e8101410fc5b900c]:
-:          1          2          3          4          5          6 
-: 0.02777778 0.08333333 0.13888889 0.19444444 0.25000000 0.30555556
-:          2          3          4          5          6          7          8 
-: 0.02777778 0.05555556 0.08333333 0.11111111 0.13888889 0.16666667 0.13888889 
-:          9         10         11         12 
-: 0.11111111 0.08333333 0.05555556 0.02777778
-
 You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
-
 
 ** Joint and Marginal Expectation
 \label{sec:Joint-and-Marginal-Expectation}
 
-Given a function $g$ with arguments $(x,y)$ we would like to know the long-run average behavior of $g(X,Y)$ and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
+Given a function \(g\) with arguments \((x,y)\) we would like to know the long-run average behavior of \(g(X,Y)\) and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
 \begin{equation}
 \E\, g(X,Y)=\iintop_{S_{X,Y}}g(x,y)\, f_{X,Y}(x,y)\,\mathrm{d} x\,\mathrm{d} y,
 \end{equation}
@@ -404,13 +292,12 @@ or in the discrete case,
 \end{equation}
 
 
-
 *** Covariance and Correlation
 
-There are two very special cases of joint expectation: the /covariance/ and the /correlation/. These are measures which help us quantify the dependence between $X$ and $Y$. 
+There are two very special cases of joint expectation: the /covariance/ and the /correlation/. These are measures which help us quantify the dependence between \(X\) and \(Y\). 
 
 #+latex: \begin{defn}
-The /covariance/ of $X$ and $Y$ is
+The /covariance/ of \(X\) and \(Y\) is
 \begin{equation}
 \mbox{Cov}(X,Y)=\E(X-\E X)(Y-\E Y).
 \end{equation}
@@ -422,71 +309,66 @@ By the way, there is a shortcut formula for covariance which is almost as handy 
 \end{equation}
 The proof is left to Exercise \ref{xca:Prove-cov-shortcut}.
 
-The Pearson product moment correlation between $X$ and $Y$ is the covariance between $X$ and $Y$ rescaled to fall in the interval $[-1,1]$. It is formally defined by 
+The Pearson product moment correlation between \(X\) and \(Y\) is the covariance between \(X\) and \(Y\) rescaled to fall in the interval \([-1,1]\). It is formally defined by 
 \begin{equation}
 \mbox{Corr}(X,Y)=\frac{\mbox{Cov}(X,Y)}{\sigma_{X}\sigma_{Y}}.
 \end{equation}
 
-The correlation is usually denoted by $\rho_{X,Y}$ or simply $\rho$ if the random variables are clear from context. There are some importantfacts about the correlation coefficient: 
-1. The range of correlation is $-1\leq\rho_{X,Y}\leq1$.
-1. Equality holds above ($\rho_{X,Y}=\pm1$) if and only if $Y$ is a linear function of $X$ with probability one.
+The correlation is usually denoted by \(\rho_{X,Y}\) or simply \(\rho\) if the random variables are clear from context. There are some important facts about the correlation coefficient: 
+1. The range of correlation is \(-1\leq\rho_{X,Y}\leq1\).
+1. Equality holds above (\(\rho_{X,Y}=\pm1\)) if and only if \(Y\) is a linear function of \(X\) with probability one.
 
 
 #+latex: \begin{example}
 \label{exa:max-sum-dice-covariance}
 
-We will compute the covariance for the discrete distribution in Example \ref{exa:max-sum-two-dice}. The expected value of $U$ is
+We will compute the covariance for the discrete distribution in Example \ref{exa:max-sum-two-dice}. The expected value of \(U\) is
 \[
 \E U=\sum_{u=1}^{6}u\, f_{U}(u)=\sum_{u=1}^{6}u\,\frac{2u-1}{36}=1\left(\frac{1}{36}\right)+2\left(\frac{3}{36}\right)+\cdots+6\left(\frac{11}{36}\right)=\frac{161}{36},
 \]
-and the expected value of $V$ is
+and the expected value of \(V\) is
 \[
 \E V=\sum_{v=2}^{12}v\,\frac{6-|7-v|}{36}=2\left(\frac{1}{36}\right)+3\left(\frac{2}{36}\right)+\cdots+12\left(\frac{1}{36}\right)=7,
 \]
-and the expected value of $UV$ is
+and the expected value of \(UV\) is
 \[
 \E UV=\sum_{u=1}^{6}\sum_{v=2}^{12}uv\, f_{U,V}(u,v)=1\cdot2\left(\frac{1}{36}\right)+2\cdot3\left(\frac{2}{36}\right)+\cdots+6\cdot12\left(\frac{1}{36}\right)=\frac{308}{9}.
 \]
-
-Therefore the covariance of $(U,V)$ is
+Therefore the covariance of \((U,V)\) is
 \[
 \mbox{Cov}(U,V)=\E UV-\left(\E U\right)\left(\E V\right)=\frac{308}{9}-\frac{161}{36}\cdot7=\frac{35}{12}.
 \]
-
-All we need now are the standard deviations of $U$ and $V$ to calculate the correlation coefficient (omitted).
-
+All we need now are the standard deviations of \(U\) and \(V\) to calculate the correlation coefficient (omitted).
 #+latex: \end{example}
 
 We will do a continuous example so that you can see how it works.
 
 #+latex: \begin{example}
 
-Let us find the covariance of the variables $(X,Y)$ from Example \ref{exa:joint-pdf}. The expected value of $X$ is
+Let us find the covariance of the variables \((X,Y)\) from Example \ref{exa:joint-pdf}. The expected value of \(X\) is
 \[
 \E X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\mathrm{d} x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
 \]
-and the expected value of $Y$ is
+and the expected value of \(Y\) is
 \[
 \E Y=\int_{0}^{1}y\cdot\frac{6}{5}\left(\frac{1}{2}+y^{2}\right)\mathrm{d} x=\left.\frac{3}{10}y^{2}+\frac{3}{20}y^{4}\right|_{y=0}^{1}=\frac{9}{20}.
 \]
-
-Finally, the expected value of $XY$ is
+Finally, the expected value of \(XY\) is
 \begin{eqnarray*}
 \E XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\mathrm{d} x\,\mathrm{d} y,\\
  & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
  & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\mathrm{d} y,\\
  & = & \frac{1}{5}+\frac{3}{50},
 \end{eqnarray*}
-which is 13/50. Therefore the covariance of $(X,Y)$ is
+which is 13/50. Therefore the covariance of \((X,Y)\) is
 \[
 \mbox{Cov}(X,Y)=\frac{13}{50}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=-\frac{1}{100}.
 \]
-
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of $(U,V)$ from Example \ref{exa:max-sum-dice-covariance}.
+There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example \ref{exa:max-sum-dice-covariance}.
 
 #+begin_src R :exports both :results output pp 
 Eu <- sum(S$U*S$probs)
@@ -494,9 +376,6 @@ Ev <- sum(S$V*S$probs)
 Euv <- sum(S$U*S$V*S$probs)
 Euv - Eu * Ev
 #+end_src
-
-#+results[47d500a5848a098bb579c72aed0a49c106ef468e]:
-: [1] 2.916667
 
 Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 
@@ -506,48 +385,43 @@ To do the continuous case we could use the computer algebra utilities of =Yacas=
 ** Conditional Distributions
 \label{sec:Conditional-Distributions}
 
-If $x\in S_{X}$ is such that $f_{X}(x)>0$, then we define the /conditional density/ of $Y|\, X=x$, denoted $f_{Y|x}$, by 
+If \(x\in S_{X}\) is such that \(f_{X}(x)>0\), then we define the /conditional density/ of \(Y|\, X=x\), denoted \(f_{Y|x}\), by 
 \begin{equation}
 f_{Y|x}(y|x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)},\quad y\in S_{Y}.
 \end{equation}
-
-We define $f_{X|y}$ in a similar fashion.
+We define \(f_{X|y}\) in a similar fashion.
 
 #+latex: \begin{example}
-Let the joint PMF of $X$ and $Y$ be given by
+Let the joint PMF of \(X\) and \(Y\) be given by
 \[
 f_{X,Y}(x,y)=
 \]
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let the joint PDF of $X$ and $Y$ be given by
+Let the joint PDF of \(X\) and \(Y\) be given by
 #+latex: \end{example}
 
 *** Bayesian Connection
 
-Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter $\theta$ which is of primary interest, and about which we would like to learn. But rather than observing $\theta$ directly, we instead observe a random variable $X$ whose probability distribution depends on $\theta$. Using the information we provided by $X,$ we would like to update the information that we have about $\theta$.
+Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter \(\theta\) which is of primary interest, and about which we would like to learn. But rather than observing \(\theta\) directly, we instead observe a random variable \(X\) whose probability distribution depends on \(\theta\). Using the information we provided by \(X,\) we would like to update the information that we have about \(\theta\).
 
-Our initial beliefs about $\theta$ are represented by a probability distribution, called the /prior distribution/, denoted by $\pi$. The PDF $f_{X|\theta}$ is called the /likelihood function/, also called the /likelihood of/ $X$ /conditional on/ $\theta$. Given an observation $X=x$, we would like to update our beliefs $\pi$ to a new distribution, called the /posterior distribution of/ $\theta$ /given the observation/ $X=x$, denoted $\pi_{\theta|x}$. It may seem a mystery how to obtain $\pi_{\theta|x}$ based only on the information provided by $\pi$ and $f_{X|\theta}$, but it should not be. We have already studied this in Section \ref{sec:Bayes'-Rule} where it was called Bayes' Rule:
+Our initial beliefs about \(\theta\) are represented by a probability distribution, called the /prior distribution/, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the /likelihood function/, also called the /likelihood of/ \(X\) /conditional on/ \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the /posterior distribution of/ \(\theta\) /given the observation/ \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section \ref{sec:Bayes'-Rule} where it was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
-
 Compare the above expression to Equation \ref{eq:bayes-rule}.
 
 #+latex: \begin{example}
-Suppose the parameter $\theta$ is the $\P(\mbox{Heads})$ for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about $\theta$ with a $\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)$ prior distribution, that is, we assume 
+Suppose the parameter \(\theta\) is the \(\P(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
 \[
 \theta\sim\pi(\theta)=3(1-\theta)^{2},\quad0<\theta<1.
 \]
-
-To learn more about $\theta$, we will do what is natural: flip the coin. We will observe a random variable $X$ which takes the value $1$ if the coin shows Heads, and 0 if the coin shows Tails. Under these circumstances, $X$ will have a Bernoulli distribution, and in particular, $X|\theta\sim\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=\theta)$:
+To learn more about \(\theta\), we will do what is natural: flip the coin. We will observe a random variable \(X\) which takes the value \(1\) if the coin shows Heads, and 0 if the coin shows Tails. Under these circumstances, \(X\) will have a Bernoulli distribution, and in particular, \(X|\theta\sim\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=\theta)\):
 \[ 
 f_{X|\theta}(x|\theta)=\theta^{x}(1-\theta)^{1-x},\quad x=0,1.
 \]
-
-
-Based on the observation $X=x$, we will update the prior distribution to the posterior distribution, and we will do so with Bayes' Rule: it says
+Based on the observation \(X=x\), we will update the prior distribution to the posterior distribution, and we will do so with Bayes' Rule: it says
 \begin{eqnarray*}
 \pi(\theta|x) & \propto & \pi(\theta)\, f(x|\theta),\\
  & = & \theta^{x}(1-\theta)^{1-x}\cdot3(1-\theta)^{2},\\
@@ -557,22 +431,20 @@ where the constant of proportionality is given by
 \[
 \int3\, u^{x}(1-u)^{3-x}\mathrm{d} u=\int3\, u^{(1+x)-1}(1-u)^{(4-x)-1}\mathrm{d} u=3\,\frac{\Gamma(1+x)\Gamma(4-x)}{\Gamma[(1+x)+(4-x)]},
 \]
-the integral being calculated by inspection of the formula for a $\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x)$ distribution. That is to say, our posterior distribution is precisely
+the integral being calculated by inspection of the formula for a \(\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x)\) distribution. That is to say, our posterior distribution is precisely
 \[
 \theta|x\sim\mathsf{beta}(\mathtt{shape1}=1+x,\,\mathtt{shape2}=4-x).
 \]
-
-
-The Bayesian statistician uses the posterior distribution for all matters concerning inference about $\theta$.
+The Bayesian statistician uses the posterior distribution for all matters concerning inference about \(\theta\).
 
 #+latex: \end{example}
 
 #+latex: \begin{rem}
-We usually do not restrict ourselves to the observation of only one $X$ conditional on $\theta$. In fact, it is common to observe an entire sample $X_{1}$, $X_{2}$,...,$X_{n}$ conditional on $\theta$ (which itself is often multidimensional). Do not be frightened, however, because the intuition is the same. There is a prior distribution $\pi(\theta)$, a likelihood $f(x_{1},x_{2},\ldots,x_{n}|\theta)$, and a posterior distribution $\pi(\theta|x_{1},x_{2},\ldots,x_{n})$. Bayes' Rule states that the relationship between the three is
+We usually do not restrict ourselves to the observation of only one \(X\) conditional on \(\theta\). In fact, it is common to observe an entire sample \(X_{1}\), \(X_{2}\),...,\(X_{n}\) conditional on \(\theta\) (which itself is often multidimensional). Do not be frightened, however, because the intuition is the same. There is a prior distribution \(\pi(\theta)\), a likelihood \(f(x_{1},x_{2},\ldots,x_{n}|\theta)\), and a posterior distribution \(\pi(\theta|x_{1},x_{2},\ldots,x_{n})\). Bayes' Rule states that the relationship between the three is
 \[
 \pi(\theta|x_{1},x_{2},\ldots,x_{n})\propto\pi(\theta)\, f(x_{1},x_{2},\ldots,x_{n}|\theta),
 \]
-where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\mathrm{d} u$. Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
+where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\mathrm{d} u\). Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
 #+latex: \end{rem}
 
 
@@ -583,50 +455,46 @@ where the constant of proportionality is $\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n
 *** Independent Random Variables
 \label{sub:Independent-Random-Variables}
 
-We recall from Chapter \ref{cha:Probability} that the events $A$ and $B$ are said to be independent when
+We recall from Chapter \ref{cha:Probability} that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
 \P(A\cap B)=\P(A)\P(B).
 \end{equation}
-
 If it happens that
 \begin{equation}
 \P(X=x,Y=y)=\P(X=x)\P(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
-then we say that $X$ and $Y$ are /independent random variables/. Otherwise, we say that $X$ and $Y$ are /dependent/. Using the PMF notation from above, we see that independent discrete random variables satisfy
+then we say that \(X\) and \(Y\) are /independent random variables/. Otherwise, we say that \(X\) and \(Y\) are /dependent/. Using the PMF notation from above, we see that independent discrete random variables satisfy
 \begin{equation}
 f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y}.
 \end{equation}
-
-Continuing the reasoning, given two continuous random variables $X$ and $Y$ with joint PDF $f_{X,Y}$ and respective marginal PDFs $f_{X}$ and $f_{Y}$ that are supported on the sets $S_{X}$ and $S_{Y}$, if it happens that
+Continuing the reasoning, given two continuous random variables \(X\) and \(Y\) with joint PDF \(f_{X,Y}\) and respective marginal PDFs \(f_{X}\) and \(f_{Y}\) that are supported on the sets \(S_{X}\) and \(S_{Y}\), if it happens that
 \begin{equation}
 f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
-then we say that $X$ and $Y$ are independent.
+then we say that \(X\) and \(Y\) are independent.
 
 #+latex: \begin{example}
 In Example \ref{exa:toss-two-dice-joint-pmf} we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6,
 \]
-and we found the marginal PMFs $f_{X}(x)=1/6$, $x=1,2,\ldots,6$, and $f_{Y}(y)=1/6$, $y=1,2,\ldots,6$. Therefore in this experiment $X$ and $Y$ are independent since for every $x$ and $y$ in the joint support the joint PMF satisfies
+and we found the marginal PMFs \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and \(f_{Y}(y)=1/6\), \(y=1,2,\ldots,6\). Therefore in this experiment \(X\) and \(Y\) are independent since for every \(x\) and \(y\) in the joint support the joint PMF satisfies
 \[
 f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}(x)\, f_{Y}(y).
 \]
-
 #+latex: \end{example}
 
 #+latex: \begin{example}
-In Example \ref{exa:max-sum-two-dice} we considered the same experiment but different random variables $U$ and $V$. We can prove that $U$ and $V$ are not independent if we can find a single pair $(u,v)$ where the independence equality does not hold. There are many such pairs. One of them is $(6,12)$:
+In Example \ref{exa:max-sum-two-dice} we considered the same experiment but different random variables \(U\) and \(V\). We can prove that \(U\) and \(V\) are not independent if we can find a single pair \((u,v)\) where the independence equality does not hold. There are many such pairs. One of them is \((6,12)\):
 \[
 f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).
 \]
-
 #+latex: \end{example}
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
 #+latex: \begin{prop}
 \label{pro:indep-implies-prodexpect}
-If $X$ and $Y$ are independent, then for any functions $u$ and $v$, 
+If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
 \begin{equation}
 \E\left(u(X)v(Y)\right)=\left(\E u(X)\right)\left(\E v(Y)\right).
 \end{equation}
@@ -639,18 +507,18 @@ This is straightforward from the definition.
  & = & \iint\, u(x)v(y)\, f_{X}(x)\, f_{Y}(y)\,\mathrm{d} x\mathrm{d} y\\
  & = & \int u(x)\, f_{X}(x)\,\mathrm{d} x\ \int v(y)\, f_{Y}(y)\,\mathrm{d} y
 \end{eqnarray*}
-and this last quantity is exactly $\left(\E u(X)\right)\left(\E v(Y)\right)$. 
+and this last quantity is exactly \(\left(\E u(X)\right)\left(\E v(Y)\right)\). 
 #+latex: \end{proof}
 
 Now that we have Proposition \ref{pro:indep-implies-prodexpect} we mention a corollary that will help us later to quickly identify those random variables which are /not/ independent.
 
 #+latex: \begin{cor}
-If $X$ and $Y$ are independent, then $\mbox{Cov}(X,Y)=0$, and consequently,
-$\mbox{Corr}(X,Y)=0$.\label{cor:indep-implies-uncorr}
+If \(X\) and \(Y\) are independent, then \(\mbox{Cov}(X,Y)=0\), and consequently,
+\(\mbox{Corr}(X,Y)=0\).\label{cor:indep-implies-uncorr}
 #+latex: \end{cor}
 
 #+latex: \begin{proof}
-When $X$ and $Y$ are independent then $\E XY=\E X\,\E Y$. And when the covariance is zero the numerator of the correlation is 0.
+When \(X\) and \(Y\) are independent then \(\E XY=\E X\,\E Y\). And when the covariance is zero the numerator of the correlation is 0.
 #+latex: \end{proof}
 
 #+latex: \begin{rem}
@@ -662,7 +530,7 @@ Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will recei
 
 #+latex: \begin{fact}
 \label{fac:indep-then-function-indep}
-If $X$ and $Y$ are independent, then $u(X)$ and $v(Y)$ are independent for any functions $u$ and $v$.
+If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent for any functions \(u\) and \(v\).
 #+latex: \end{fact}
 
 *** Combining Independent Random Variables
@@ -671,39 +539,39 @@ If $X$ and $Y$ are independent, then $u(X)$ and $v(Y)$ are independent for any f
 Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
 
 #+latex: \begin{cor}
-If $X$ and $Y$ are independent, then the moment generating function of $X+Y$ is 
+If \(X\) and \(Y\) are independent, then the moment generating function of \(X+Y\) is 
 \begin{equation}
 M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 \end{equation}
 #+latex: \end{cor}
 
 #+latex: \begin{proof}
-Choose $u(x)=\mathrm{e}^{x}$ and $v(y)=\mathrm{e}^{y}$ in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity $\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}$.
+Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
 #+latex: \end{proof}
 
 Let us take a look at some examples of the corollary in action.
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)$ and $Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)$ be independent. Then $X+Y$ has MGF
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)\) and \(Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)\) be independent. Then \(X+Y\) has MGF
 \[
 M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\mathrm{e}^{t}\right)^{n_{1}}\left(q+p\mathrm{e}^{t}\right)^{n_{2}}=\left(q+p\mathrm{e}^{t}\right)^{n_{1}+n_{2}},
 \]
-which is the MGF of a $\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$ distribution. Therefore, $X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)$.
+which is the MGF of a \(\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\) distribution. Therefore, \(X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})$ and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})$ be independent. Then $X+Y$ has MGF
+Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\) be independent. Then \(X+Y\) has MGF
 \[
 M_{X}(t)\, M_{Y}(t)=\exp\left\{ \mu_{1}t+t^{2}\sigma_{1}^{2}/2\right\} \exp\left\{ \mu_{2}t+t^{2}\sigma_{2}^{2}/2\right\} =\exp\left\{ \left(\mu_{1}+\mu_{2}\right)t+t^{2}\left(\sigma_{1}^{2}+\sigma_{2}^{2}\right)/2\right\} ,
 \]
-which is the MGF of a $\mathsf{norm}(\mathtt{mean}=\mu_{1}+\mu_{2},\,\mathtt{sd}=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}})$ distribution. 
+which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\mathtt{sd}=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}}\right)\) distribution. 
 #+latex: \end{example}
 
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
 #+latex: \begin{prop}
 \label{pro:mean-sd-lin-comb-two}
-Let $X_{1}$ and $X_{2}$ be independent with respective population means $\mu_{1}$ and $\mu_{2}$ and population standard deviations $\sigma_{1}$ and $\sigma_{2}$. For given constants $a_{1}$ and $a_{2}$, define $Y=a_{1}X_{1}+a_{2}X_{2}$. Then the mean and standard deviation of $Y$ are given by the formulas
+Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
 \end{equation}
@@ -714,17 +582,16 @@ We use Proposition \ref{pro:expectation-properties}:
 \[
 \E Y=\E\left(a_{1}X_{1}+a_{2}X_{2}\right)=a_{1}\E X_{1}+a_{2}\E X_{2}=a_{1}\mu_{1}+a_{2}\mu_{2}.
 \]
-
-For the standard deviation, we will find the variance and take the square root at the end. And to calculate the variance we will first compute $\E Y^{2}$ with an eye toward using the identity $\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}$ as a final step. 
+For the standard deviation, we will find the variance and take the square root at the end. And to calculate the variance we will first compute \(\E Y^{2}\) with an eye toward using the identity \(\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}\) as a final step. 
 \[
 \E Y^{2}=\E\left(a_{1}X_{1}+a_{2}X_{2}\right)^{2}=\E\left(a_{1}^{2}X_{1}^{2}+a_{2}^{2}X_{2}^{2}+2a_{1}a_{2}X_{1}X_{2}\right).
 \]
-Using linearity of expectation the $\E$ distributes through the sum. Now $\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}$, for $i=1$ and 2 and $\E X_{1}X_{2}=\E X_{1}\E X_{2}=\mu_{1}\mu_{2}$ because of independence. Thus
+Using linearity of expectation the \(\E\) distributes through the sum. Now \(\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}\), for \(i=1\) and 2 and \(\E X_{1}X_{2}=\E X_{1}\E X_{2}=\mu_{1}\mu_{2}\) because of independence. Thus
 \begin{eqnarray*}
 \E Y^{2} & = & a_{1}^{2}(\sigma_{1}^{2}+\mu_{1}^{2})+a_{2}^{2}(\sigma_{2}^{2}+\mu_{2}^{2})+2a_{1}a_{2}\mu_{1}\mu_{2},\\
  & = & a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}+\left(a_{1}^{2}\mu_{1}^{2}+a_{2}^{2}\mu_{2}^{2}+2a_{1}a_{2}\mu_{1}\mu_{2}\right).
 \end{eqnarray*}
-But notice that the expression in the parentheses is exactly $\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\E Y\right)^{2}$, so the proof is complete.. 
+But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\E Y\right)^{2}\), so the proof is complete.. 
 #+latex: \end{proof}
 
 
@@ -732,42 +599,40 @@ But notice that the expression in the parentheses is exactly $\left(a_{1}\mu_{1}
 ** Exchangeable Random Variables
 \label{sec:Exchangeable-Random-Variables}
 
-Two random variables $X$ and $Y$ are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
+Two random variables \(X\) and \(Y\) are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
 F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\mathbb{R}^{2}.
 \end{equation} 
-
-When the joint density $f$ exists, we may equivalently say that $X$ and $Y$ are exchangeable if $f(x,y)=f(y,x)$ for all $(x,y)$.
+When the joint density \(f\) exists, we may equivalently say that \(X\) and \(Y\) are exchangeable if \(f(x,y)=f(y,x)\) for all \((x,y)\).
 
 Exchangeable random variables exhibit symmetry in the sense that a person may exchange one variable for the other with no substantive changes to their joint random behavior. While independence speaks to a /lack of influence/ between the two variables, exchangeability aims to capture the /symmetry/ between them.
 
 #+latex: \begin{example}
-Let $X$ and $Y$ have joint PDF
+Let \(X\) and \(Y\) have joint PDF
 \begin{multline}
 f_{X,Y}(x,y)=(1+\alpha)\lambda^{2}\mathrm{e}^{-\lambda(x+y)}+\alpha(2\lambda)^{2}\mathrm{e}^{-2\lambda(x+y)}-2\alpha\lambda^{2}\left(\mathrm{e}^{-\lambda(2x+y)}+\mathrm{e}^{-\lambda(x+2y)}\right).
 \end{multline}
-It is straightforward and tedious to check that $\iint f=1$. We may see immediately that $f_{X,Y}(x,y)=f_{X,Y}(y,x)$ for all $(x,y)$, which confirms that $X$ and $Y$ are exchangeable. Here, $\alpha$ is said to be an association parameter. This particular example is one from the Farlie-Gumbel-Morgenstern family of distributions; see \cite{Kotz2000}.
+It is straightforward and tedious to check that \(\iint f=1\). We may see immediately that \(f_{X,Y}(x,y)=f_{X,Y}(y,x)\) for all \((x,y)\), which confirms that \(X\) and \(Y\) are exchangeable. Here, \(\alpha\) is said to be an association parameter. This particular example is one from the Farlie-Gumbel-Morgenstern family of distributions; see \cite{Kotz2000}.
 #+latex: \end{example}
 
 #+latex: \begin{example}
 \label{exa:binom-exchangeable}
-Suppose $X$ and $Y$ are i.i.d.~$\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$. Then their joint PMF is
+Suppose \(X\) and \(Y\) are IID \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). Then their joint PMF is
 \begin{eqnarray*}
 f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
  & = & {n \choose x}\, p^{x}(1-p)^{n-x}\,{n \choose y}\, p^{y}(1-p)^{n-y},\\
  & = & {n \choose x}{n \choose y}\, p^{x+y}(1-p)^{2n-(x+y)},
 \end{eqnarray*}
-and the value is the same if we exchange $x$ and $y$. Therefore $(X,Y)$ are exchangeable.
-
+and the value is the same if we exchange \(x\) and \(y\). Therefore \((X,Y)\) are exchangeable.
 #+latex: \end{example}
 
-Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that $(X,Y)$ are exchangeable has nothing to do with the $\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
+Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 
 #+latex: \begin{prop}
-If $X$ and $Y$ are i.i.d.~(with common marginal distribution $F$) then $X$ and $Y$ are exchangeable. 
+If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) and \(Y\) are exchangeable. 
 #+latex: \end{prop}
 
-Exchangeability thus contains i.i.d. as a special case. 
+Exchangeability thus contains IID as a special case. 
 
 ** The Bivariate Normal Distribution
 \label{sec:The-Bivariate-Normal}
@@ -777,7 +642,7 @@ The bivariate normal PDF is given by the unwieldy formula
 f_{X,Y}(x,y)=\frac{1}{2\pi\,\sigma_{X}\sigma_{Y}\sqrt{1-\rho^{2}}}\exp\left\{ -\frac{1}{2(1-\rho^{2})}\left[\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)^{2}+\cdots\right.\right.\\
 \left.\left.\cdots+2\rho\left(\frac{x-\mu_{X}}{\sigma_{X}}\right)\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)+\left(\frac{y-\mu_{Y}}{\sigma_{Y}}\right)^{2}\right]\right\} ,
 \end{multline}
-for $(x,y)\in\mathbb{R}^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$, where
+for \((x,y)\in\mathbb{R}^{2}\). We write \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\), where
 \begin{equation}
 \upmu=(\mu_{X},\,\mu_{Y})^{T},\quad\sum=\left(
 \begin{array}{cc}
@@ -786,52 +651,50 @@ for $(x,y)\in\mathbb{R}^{2}$. We write $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\
 \end{array}
 \right).
 \end{equation}
-
 See Appendix \ref{cha:Mathematical-Machinery}. The vector notation allows for a more compact rendering of the joint PDF:
 \begin{equation}
 f_{X,Y}(\mathbf{x})=\frac{1}{2\pi\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}{2}\left(\mathbf{x}-\upmu\right)^{\top}\Sigma^{-1}\left(\mathbf{x}-\upmu\right)\right\} ,
 \end{equation}
-where in an abuse of notation we have written $\mathbf{x}$ for $(x,y)$. Note that the formula only holds when $\rho\neq\pm1$.
+where in an abuse of notation we have written \(\mathbf{x}\) for \((x,y)\). Note that the formula only holds when \(\rho\neq\pm1\).
 
 #+latex: \begin{rem}
-In Remark \ref{rem:cov0-not-imply-indep} we noted that just because random variables are uncorrelated it does not necessarily mean that they are independent. However, there is an important exception to this rule: the bivariate normal distribution. Indeed, $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ are independent if and only if $\rho=0$. 
+In Remark \ref{rem:cov0-not-imply-indep} we noted that just because random variables are uncorrelated it does not necessarily mean that they are independent. However, there is an important exception to this rule: the bivariate normal distribution. Indeed, \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) are independent if and only if \(\rho=0\). 
 #+latex: \end{rem}
 
 #+latex: \begin{rem}
-Inspection of the joint PDF shows that if $\mu_{X}=\mu_{Y}$ and $\sigma_{X}=\sigma_{Y}$ then $X$ and $Y$ are exchangeable.
+Inspection of the joint PDF shows that if \(\mu_{X}=\mu_{Y}\) and \(\sigma_{X}=\sigma_{Y}\) then \(X\) and \(Y\) are exchangeable.
 #+latex: \end{rem}
 
 The bivariate normal MGF is
 \begin{equation}
 M_{X,Y}(\mathbf{t})=\exp\left(\upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right),
 \end{equation}
-where $\mathbf{t}=(t_{1},t_{2})$.
+where \(\mathbf{t}=(t_{1},t_{2})\).
 
 The bivariate normal distribution may be intimidating at first but it turns out to be very tractable compared to other multivariate distributions. An example of this is the following fact about the marginals. 
 
 #+latex: \begin{fact}
-If $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ then
+If \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) then
 \begin{equation}
 X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}).
 \end{equation}
 #+latex: \end{fact}
 
-From this we immediately get that $\E X=\mu_{X}$ and $\mbox{Var}(X)=\sigma_{X}^{2}$ (and the same is true for $Y$ with the letters switched). And it should be no surprise that the correlation between $X$ and $Y$ is exactly $\mbox{Corr}(X,Y)=\rho$.
+From this we immediately get that \(\E X=\mu_{X}\) and \(\mbox{Var}(X)=\sigma_{X}^{2}\) (and the same is true for \(Y\) with the letters switched). And it should be no surprise that the correlation between \(X\) and \(Y\) is exactly \(\mbox{Corr}(X,Y)=\rho\).
 
 #+latex: \begin{prop}
 \label{pro:mvnorm-cond-dist}
-The conditional distribution of $Y|\, X=x$ is $\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})$, where
+The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})\), where
 \begin{equation}
 \mu_{Y|x}=\mu_{Y}+\rho\frac{\sigma_{Y}}{\sigma_{X}}\left(x-\mu_{X}\right),\mbox{ and }\sigma_{Y|x}=\sigma_{Y}\sqrt{1-\rho^{2}}.
 \end{equation}
 #+latex: \end{prop}
 
-There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} which will be important in Chapter \ref{cha:simple-linear-regression}. First, the conditional mean of $Y|x$ is linear in $x$, with slope
+There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} which will be important in Chapter \ref{cha:simple-linear-regression}. First, the conditional mean of \(Y|x\) is linear in \(x\), with slope
 \begin{equation}
 \rho\,\frac{\sigma_{Y}}{\sigma_{X}}.\label{eq:population-slope-slr}
 \end{equation}
-Second, the conditional variance of $Y|x$ is independent of $x$. 
-
+Second, the conditional variance of \(Y|x\) is independent of \(x\). 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -854,9 +717,9 @@ z <- outer(x, y, FUN = f)
 persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_src
 
-We chose the standard bivariate normal, $\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I})$, to display.
+We chose the standard bivariate normal, \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I})\), to display.
 
-#+begin_src R :exports code :results graphics :file img/mvnorm-pdf.png
+#+begin_src R :exports code :results graphics silent :file img/mvnorm-pdf.pdf
 library(mvtnorm)
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
@@ -866,7 +729,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/mvnorm-pdf.png}
+    \includegraphics[width=5in, height=4in]{img/mvnorm-pdf.pdf}
     \caption[Graph of a bivariate normal PDF]{\small A graph of a bivariate normal PDF.}
     \label{fig:mvnorm-pdf}
   \end{figure}
@@ -875,13 +738,13 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 ** Bivariate Transformations of Random Variables
 \label{sec:Transformations-Multivariate}
 
-We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of $Y=g(X)$ given the PDF of $X$. But now we have two random variables $X$ and Y, with joint PDF $f_{X,Y}$, and we would like to consider the joint PDF of two new random variables
+We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
 U=g(X,Y)\quad\mbox{and}\quad V=h(X,Y),
 \end{equation}
-where $g$ and $h$ are two given functions, typically ``nice'' in the sense of Appendix \ref{sec:Multivariable-Calculus}. 
+where \(g\) and \(h\) are two given functions, typically ``nice'' in the sense of Appendix \ref{sec:Multivariable-Calculus}. 
 
-Suppose that the transformation $(x,y)\longmapsto(u,v)$ is one-to-one. Then an inverse transformation $x=x(u,v)$ and $y=y(u,v)$ exists, so let $\partial(x,y)/\partial(u,v)$ denote the Jacobian of the inverse transformation. Then the joint PDF of $(U,V)$ is given by 
+Suppose that the transformation \((x,y)\longmapsto(u,v)\) is one-to-one. Then an inverse transformation \(x=x(u,v)\) and \(y=y(u,v)\) exists, so let \(\partial(x,y)/\partial(u,v)\) denote the Jacobian of the inverse transformation. Then the joint PDF of \((U,V)\) is given by 
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}\left[x(u,v),\, y(u,v)\right]\left|\frac{\partial(x,y)}{\partial(u,v)}\right|,
 \end{equation}
@@ -889,21 +752,19 @@ or we can rewrite more shortly as
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.\label{eq:biv-trans-pdf-short}
 \end{equation}
-
 Take a moment and compare Equation \ref{eq:biv-trans-pdf-short} to Equation \ref{eq:univ-trans-pdf-short}. Do you see the connection? 
 
 #+latex: \begin{rem}
-It is sometimes easier to /postpone/ solving for the inverse transformation $x=x(u,v)$ and $y=y(u,v)$. Instead, leave the transformation in the form $u=u(x,y)$ and $v=v(x,y)$ and calculate the Jacobian of the /original/ transformation
+It is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u,v)\) and \(y=y(u,v)\). Instead, leave the transformation in the form \(u=u(x,y)\) and \(v=v(x,y)\) and calculate the Jacobian of the /original/ transformation
 \begin{equation}
 \frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{array}{cc}
 \frac{\partial u}{\partial x} & \frac{\partial u}{\partial y}\\
 \frac{\partial v}{\partial x} & \frac{\partial v}{\partial y}\end{array}\right|=\frac{\partial u}{\partial x}\frac{\partial v}{\partial y}-\frac{\partial u}{\partial y}\frac{\partial v}{\partial x}.
 \end{equation}
-Once this is known, we can get the PDF of $(U,V)$ by
+Once this is known, we can get the PDF of \((U,V)\) by
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}}\right|.
 \end{equation}
-
 In some cases there will be a cancellation and the work will be lot shorter. Of course, it is not always true that
 \begin{equation}
 \frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}},\label{eq:biv-jacob-recip}
@@ -913,12 +774,11 @@ but for the well-behaved examples that we will see in this book it works just fi
 
 
 #+latex: \begin{example}
-Let $(X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})$ and consider the transformation
+Let \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})\) and consider the transformation
 \begin{align*}
 U= & \ 3X+4Y,\\
 V= & \ 5X+6Y.
 \end{align*}
-
 We can solve the system of equations to find the inverse transformations; they are
 \begin{align*}
 X= & -3U+2V,\\
@@ -932,11 +792,11 @@ in which case the Jacobian of the inverse transformation is
 \end{vmatrix}
 = 3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
 \]
-As $(x,y)$ traverses $\mathbb{R}^{2}$, so too does $(u,v)$. Since the joint PDF of $(X,Y)$ is
+As \((x,y)\) traverses \(\mathbb{R}^{2}\), so too does \((u,v)\). Since the joint PDF of \((X,Y)\) is
 \[
 f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad(x,y)\in\mathbb{R}^{2},
 \]
-we get that the joint PDF of $(U,V)$ is
+we get that the joint PDF of \((U,V)\) is
 \begin{equation}
 f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad(u,v)\in\mathbb{R}^{2}.\label{eq:biv-norm-hidden}
 \end{equation}
@@ -944,7 +804,7 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 
 
 #+latex: \begin{rem}
-It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a $\mathsf{mvnorm}$ distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
+It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
 #+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -958,7 +818,7 @@ There are not yet any examples of Yacas in this book, but there are online mater
 ** Remarks for the Multivariate Case
 \label{sec:Remarks-for-the-Multivariate}
 
-There is nothing spooky about $n\geq3$ random variables. We just have a whole bunch of them: $X_{1}$, $X_{2}$,..., $X_{n}$, which we can shorten to $\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}$ to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For $\mathbf{X}$ supported on the set $S_{\mathbf{X}}$, the joint PDF $f_{\mathbf{X}}$ (if it exists) satisfies
+There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})>0,\quad\mbox{for }\mathbf{x}\in S_{\mathbf{X}},
 \end{equation}
@@ -966,11 +826,11 @@ and
 \begin{equation}
 \int\!\!\!\int\cdots\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d} x_{1}\mathrm{d} x_{2}\cdots\mathrm{d} x_{n}=1,
 \end{equation}
-or even shorter: $\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}=1$. The joint CDF $F_{\mathbf{X}}$ is defined by 
+or even shorter: \(\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}=1\). The joint CDF \(F_{\mathbf{X}}\) is defined by 
 \begin{equation}
 F_{\mathbf{X}}(\mathbf{x})=\P(X_{1}\leq x_{1},\, X_{2}\leq x_{2},\ldots,\, X_{n}\leq x_{n}),
 \end{equation}
-for $\mathbf{x}\in\mathbb{R}^{n}$. The expectation of a function $g(\mathbf{X})$ is defined just as we would imagine:
+for \(\mathbf{x}\in\mathbb{R}^{n}\). The expectation of a function \(g(\mathbf{X})\) is defined just as we would imagine:
 \begin{equation}
 \E g(\mathbf{X})=\int g(\mathbf{x})\, f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}.
 \end{equation}
@@ -978,23 +838,23 @@ provided the integral exists and is finite. And the moment generating function i
 \begin{eqnarray} 
 M_{\mathbf{X}}(\mathbf{t}) & = & \E\exp\left\{ \mathbf{t}^{\mathrm{T}}\mathbf{X}\right\},
 \end{eqnarray}
-whenever the integral exists and is finite for all $\mathbf{t}$ in a neighborhood of $\mathbf{0}_{\mathrm{n}\times1}$ (note that $\mathbf{t}^{\mathrm{T}}\mathbf{X}$ is shorthand for $t_{1}X_{1}+t_{2}X_{2}+\cdots+t_{n}X_{n}$). The only difference in any of the above for the discrete case is that integrals are replaced by sums. 
+whenever the integral exists and is finite for all \(\mathbf{t}\) in a neighborhood of \(\mathbf{0}_{\mathrm{n}\times1}\) (note that \(\mathbf{t}^{\mathrm{T}}\mathbf{X}\) is shorthand for \(t_{1}X_{1}+t_{2}X_{2}+\cdots+t_{n}X_{n}\)). The only difference in any of the above for the discrete case is that integrals are replaced by sums. 
 
 Marginal distributions are obtained by integrating out remaining variables from the joint distribution. And even if we are given all of the univariate marginals it is not enough to determine the joint distribution uniquely.
 
-We say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are /mutually independent/ if their joint PDF factors into the product of the marginals
+We say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /mutually independent/ if their joint PDF factors into the product of the marginals
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})=f_{X_{1}}(x_{1})\, f_{X_{2}}(x_{2})\,\cdots\, f_{X_{n}}(x_{n}),
 \end{equation}
-for every $\mathbf{x}$ in their joint support $S_{\mathbf{X}}$, and we say that $X_{1}$, $X_{2}$, ..., $X_{n}$ are /exchangeable/ if their joint PDF (or CDF) is a symmetric function of its $n$ arguments, that is, if 
+for every \(\mathbf{x}\) in their joint support \(S_{\mathbf{X}}\), and we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /exchangeable/ if their joint PDF (or CDF) is a symmetric function of its \(n\) arguments, that is, if 
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
-for any reordering $\mathbf{x^{\ast}}$ of the elements of $\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})$ in the joint support.
+for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
 #+latex: \begin{prop}
 \label{pro:mean-sd-lin-comb}
-Let $X_{1}$, $X_{2}$, ..., $X_{n}$ be independent with respective population means $\mu_{1}$, $\mu_{2}$, ..., $\mu_{n}$ and standard deviations $\sigma_{1}$, $\sigma_{2}$, ..., $\sigma_{n}$. For given constants $a_{1}$, $a_{2}$, ...,$a_{n}$ define $Y=\sum_{i=1}^{n}a_{i}X_{i}$. Then the mean and standard deviation of $Y$ are given by the formulas
+Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
 \end{equation}
@@ -1005,49 +865,47 @@ The mean is easy:
 \[
 \E Y=\E\left(\sum_{i=1}^{n}a_{i}X_{i}\right)=\sum_{i=1}^{n}a_{i}\E X_{i}=\sum_{i=1}^{n}a_{i}\mu_{i}.
 \]
-The variance is not too difficult to compute either. As an intermediate step, we calculate $\E Y^{2}$. 
+The variance is not too difficult to compute either. As an intermediate step, we calculate \(\E Y^{2}\). 
 \[
 \E Y^{2}=\E\left(\sum_{i=1}^{n}a_{i}X_{i}\right)^{2}=\E\left(\sum_{i=1}^{n}a_{i}^{2}X_{i}^{2}+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}X_{i}X_{j}\right).
 \]
-Using linearity of expectation the $\E$ distributes through the sums. Now $\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}$ and $\E X_{i}X_{j}=\E X_{i}\E X_{j}=\mu_{i}\mu_{j}$ when $i\neq j$ because of independence. Thus
+Using linearity of expectation the \(\E\) distributes through the sums. Now \(\E X_{i}^{2}=\sigma_{i}^{2}+\mu_{i}^{2}\) and \(\E X_{i}X_{j}=\E X_{i}\E X_{j}=\mu_{i}\mu_{j}\) when \(i\neq j\) because of independence. Thus
 \begin{eqnarray*}
 \E Y^{2} & = & \sum_{i=1}^{n}a_{i}^{2}(\sigma_{i}^{2}+\mu_{i}^{2})+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}\mu_{i}\mu_{j}\\
  & = & \sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}+\left(\sum_{i=1}^{n}a_{i}^{2}\mu_{i}^{2}+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}\mu_{i}\mu_{j}\right)
 \end{eqnarray*}
-To complete the proof, note that the expression in the parentheses is exactly $\left(\E Y\right)^{2}$, and recall the identity $\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}$.  
+To complete the proof, note that the expression in the parentheses is exactly \(\left(\E Y\right)^{2}\), and recall the identity \(\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}\).  
 #+latex: \end{proof}
 
 There is a corresponding statement of Fact \ref{fac:indep-then-function-indep} for the multivariate case. The proof is also omitted here. 
 
 #+latex: \begin{fact}
-If $\mathbf{X}$ and $\mathbf{Y}$ are mutually independent random vectors, then $u(\mathbf{X})$ and $v(\mathbf{Y})$ are independent for any functions $u$ and $v$.
+If \(\mathbf{X}\) and \(\mathbf{Y}\) are mutually independent random vectors, then \(u(\mathbf{X})\) and \(v(\mathbf{Y})\) are independent for any functions \(u\) and \(v\).
 #+latex: \end{fact}
 
 Bruno de Finetti was a strong proponent of the subjective approach to probability. He proved an important theorem in 1931 which illuminates the link between exchangeable random variables and independent random variables. Here it is in one of its simplest forms. 
 
 #+latex: \begin{thm}
-*De Finetti's Theorem.* Let $X_{1}$, $X_{2}$, ... be a sequence of $\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)$ random variables such that $(X_{1},\ldots,X_{k})$ are exchangeable for every $k$. Then there exists a random variable $\Theta$ with support $[0,1]$ and PDF $f_{\Theta}(\theta)$ such that
+*De Finetti's Theorem.* Let \(X_{1}\), \(X_{2}\), ... be a sequence of \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) random variables such that \((X_{1},\ldots,X_{k})\) are exchangeable for every \(k\). Then there exists a random variable \(\Theta\) with support \([0,1]\) and PDF \(f_{\Theta}(\theta)\) such that
 \begin{equation}
 \P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,\label{eq:definetti-binary}
 \end{equation}
-for all $x_{i}=0,\,1$, $i=1,\,2,\ldots,k$.
+for all \(x_{i}=0,\,1\), \(i=1,\,2,\ldots,k\).
 #+latex: \end{thm}
 
+To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of \(\theta=\P(\mbox{Heads})\). We reach into our pocket and select a coin at random according to some probability -- say, \(f_{\Theta}(\theta)\). We take the randomly selected coin and flip it \(k\) times. 
 
-To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of $\theta=\P(\mbox{Heads})$. We reach into our pocket and select a coin at random according to some probability -- say, $f_{\Theta}(\theta)$. We take the randomly selected coin and flip it $k$ times. 
-
-Think carefully: the conditional probability of observing a sequence  $X_{1}=x_{1},\ldots,\, X_{k}=x_{k}$, given a specific coin $\theta$ would just be $\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}$, because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the /unconditional/ probability $\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})$ by adding up terms that look like
+Think carefully: the conditional probability of observing a sequence  \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\), given a specific coin \(\theta\) would just be \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\), because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the /unconditional/ probability \(\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})\) by adding up terms that look like
 \begin{equation}
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}
 where we sum over all possible coins. The right-hand side of Equation \ref{eq:definetti-binary} is a sophisticated way to denote this process.
 
-Of course, the integral's value does not change if we jumble the $x_{i}$'s, so $(X_{1},\ldots,X_{k})$ are clearly exchangeable. The power of de Finetti's Theorem is that /every/ infinite binary exchangeable sequence can be written in the above form.
+Of course, the integral's value does not change if we jumble the \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The power of de Finetti's Theorem is that /every/ infinite binary exchangeable sequence can be written in the above form.
 
-The connection to subjective probability: our prior information about $\theta$ corresponds to $f_{\Theta}(\theta)$ and the likelihood of the sequence $X_{1}=x_{1},\ldots,\, X_{k}=x_{k}$ (conditional on $\theta$) corresponds to $\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}$. Compare Equation \ref{eq:definetti-binary} to Section \ref{sec:Bayes'-Rule} and Section \ref{sec:Conditional-Distributions}.
+The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation \ref{eq:definetti-binary} to Section \ref{sec:Bayes'-Rule} and Section \ref{sec:Conditional-Distributions}.
 
-The multivariate normal distribution immediately generalizes from the bivariate case. If the matrix $\Sigma$ is nonsingular then the joint PDF of $\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ is
-
+The multivariate normal distribution immediately generalizes from the bivariate case. If the matrix \(\Sigma\) is nonsingular then the joint PDF of \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) is
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})=\frac{1}{(2\pi)^{n/2}\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}{2}\left(\mathbf{x}-\upmu\right)^{\top}\Sigma^{-1}\left(\mathbf{x}-\upmu\right)\right\},
 \end{equation}
@@ -1055,11 +913,10 @@ and the MGF is
 \begin{equation}
 M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right\}.
 \end{equation}
-
 We will need the following in Chapter \ref{cha:multiple-linear-regression}.
 #+latex: \begin{thm}
 \label{thm:mvnorm-dist-matrix-prod}
-If $\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)$ and $\mathbf{A}$ is any matrix, then the random vector $\mathbf{Y}=\mathbf{AX}$
+If \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) and \(\mathbf{A}\) is any matrix, then the random vector \(\mathbf{Y}=\mathbf{AX}\)
 is distributed
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}).
@@ -1067,68 +924,62 @@ is distributed
 #+latex: \end{thm}
 
 #+latex: \begin{proof}
-Look at the MGF of $\mathbf{Y}$:
+Look at the MGF of \(\mathbf{Y}\):
 \begin{eqnarray*}
 M_{\mathbf{Y}}(\mathbf{t}) & = & \E\,\exp\left\{ \mathbf{t}^{\mathrm{T}}(\mathbf{AX})\right\} ,\\
  & = & \E\,\exp\left\{ (\mathbf{A}^{\mathrm{T}}\mathbf{t})^{\mathrm{T}}\mathbf{X}\right\} ,\\
  & = & \exp\left\{ \upmu^{\mathrm{T}}(\mathbf{A}^{\top}\mathbf{t})+\frac{1}{2}(\mathbf{A}^{\mathrm{T}}\mathbf{t})^{\mathrm{T}}\Sigma(\mathbf{A}^{\mathrm{T}}\mathbf{t})\right\} ,\\
  & = & \exp\left\{ \left(\mathbf{A}\upmu\right)^{\mathrm{T}}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\mathrm{T}}\left(\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}\right)\mathbf{t}\right\},
 \end{eqnarray*}
-and the last expression is the MGF of an $\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}})$ distribution.
+and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}})\) distribution.
 #+latex: \end{proof}
 
 
 ** The Multinomial Distribution
 \label{sec:Multinomial}
 
-We sample $n$ times, with replacement, from an urn that contains balls of $k$ different types. Let $X_{1}$ denote the number of balls in our sample of type 1, let $X_{2}$ denote the number of balls of type 2, ..., and let $X_{k}$ denote the number of balls of type $k$. Suppose the urn has proportion $p_{1}$ of balls of type 1, proportion $p_{2}$ of balls of type 2, ..., and proportion $p_{k}$ of balls of type $k$. Then the joint PMF of $(X_{1},\ldots,X_{k})$ is
+We sample \(n\) times, with replacement, from an urn that contains balls of \(k\) different types. Let \(X_{1}\) denote the number of balls in our sample of type 1, let \(X_{2}\) denote the number of balls of type 2, ..., and let \(X_{k}\) denote the number of balls of type \(k\). Suppose the urn has proportion \(p_{1}\) of balls of type 1, proportion \(p_{2}\) of balls of type 2, ..., and proportion \(p_{k}\) of balls of type \(k\). Then the joint PMF of \((X_{1},\ldots,X_{k})\) is
 \begin{eqnarray}
 f_{X_{1},\ldots,X_{k}}(x_{1},\ldots,x_{k}) & = & {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}\, p_{1}^{x_{1}}p_{2}^{x_{2}}\cdots p_{k}^{x_{k}},
 \end{eqnarray}
-for $(x_{1},\ldots,x_{k})$ in the joint support $S_{X_{1},\ldots X_{K}}$. We write
+for \((x_{1},\ldots,x_{k})\) in the joint support \(S_{X_{1},\ldots X_{K}}\). We write
 \begin{equation}
 (X_{1},\ldots,X_{k})\sim\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{\mathrm{k}\times1}).
 \end{equation}
-
-Several comments are in order. First, the joint support set $S_{X_{1},\ldots X_{K}}$ contains all nonnegative integer $k$-tuples $(x_{1},\ldots,x_{k})$ such that $x_{1}+x_{2}+\cdots+x_{k}=n$. A support set like this is called a /simplex/. Second, the proportions $p_{1}$, $p_{2}$, ..., $p_{k}$ satisfy $p_{i}\geq0$ for all $i$ and $p_{1}+p_{2}+\cdots+p_{k}=1$. Finally, the symbol
+Several comments are in order. First, the joint support set \(S_{X_{1},\ldots X_{K}}\) contains all nonnegative integer \(k\)-tuples \((x_{1},\ldots,x_{k})\) such that \(x_{1}+x_{2}+\cdots+x_{k}=n\). A support set like this is called a /simplex/. Second, the proportions \(p_{1}\), \(p_{2}\), ..., \(p_{k}\) satisfy \(p_{i}\geq0\) for all \(i\) and \(p_{1}+p_{2}+\cdots+p_{k}=1\). Finally, the symbol
 \begin{equation}
 {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}=\frac{n!}{x_{1}!\, x_{2}!\,\cdots x_{k}!}
 \end{equation}
 is called a /multinomial coefficient/ which generalizes the notion of a binomial coefficient we saw in Equation \ref{eq:binomial-coefficient}. 
 
-The form and notation we have just described matches the \textsf{R} usage but is not standard among other texts. Most other books use the above for a $k-1$ dimension multinomial distribution, because the linear constraint $x_{1}+x_{2}+\cdots+x_{k}=n$ means that once the values of $X_{1}$, $X_{2}$, ..., $X_{k-1}$ are known the final value $X_{k}$ is determined, not random. Another term used for this is a /singular/ distribution. 
+The form and notation we have just described matches the \textsf{R} usage but is not standard among other texts. Most other books use the above for a \(k-1\) dimension multinomial distribution, because the linear constraint \(x_{1}+x_{2}+\cdots+x_{k}=n\) means that once the values of \(X_{1}\), \(X_{2}\), ..., \(X_{k-1}\) are known the final value \(X_{k}\) is determined, not random. Another term used for this is a /singular/ distribution. 
 
 For the most part we will ignore these difficulties, but the careful reader should keep them in mind. There is not much of a difference in practice, except that below we will use a two-dimensional support set for a three-dimension multinomial distribution. See Figure \ref{fig:multinom-pmf2}.
 
-When $k=2$, we have $x_{1}=x$ and $x_{2}=n-x$, we have $p_{1}=p$ and $p_{2}=1-p$, and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the $\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})$ distribution is the same as a $\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)$ distribution.
-
+When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
 #+latex: \begin{example}
-*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have dinner \url{http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans} 36 democrat, 27 republican , 37 independent.
+*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36 democrat, 27 republican, and 37 independent.
 #+latex: \end{example}
 
 #+latex: \begin{rem}
 Here are some facts about the multinomial distribution.
-
-1. The expected value of $(X_{1},\, X_{2},\,\ldots,\, X_{k})$ is $n\mathbf{p}_{k\times1}$.
-1. The variance-covariance matrix $\Sigma$ is symmetric with diagonal entries $\sigma_{i}^{2}=np_{i}(1-p_{i})$, $i=1,\,2,\,\ldots,\, k$ and off-diagonal entries $\mbox{Cov}(X_{i},\, X_{j})=-np_{i}p_{j}$, for $i\neq j$. The correlation between $X_{i}$ and $X_{j}$ is therefore $\mbox{Corr}(X_{i},\, X_{j})=-\sqrt{p_{i}p_{j}/(1-p_{i})(1-p_{j})}$. 
-1. The marginal distribution of $(X_{1},\, X_{2},\,\ldots,\, X_{k-1})$ is $\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{(k-1)\times1})$ with
+1. The expected value of \((X_{1},\, X_{2},\,\ldots,\, X_{k})\) is \(n\mathbf{p}_{k\times1}\).
+1. The variance-covariance matrix \(\Sigma\) is symmetric with diagonal entries \(\sigma_{i}^{2}=np_{i}(1-p_{i})\), \(i=1,\,2,\,\ldots,\, k\) and off-diagonal entries \(\mbox{Cov}(X_{i},\, X_{j})=-np_{i}p_{j}\), for \(i\neq j\). The correlation between \(X_{i}\) and \(X_{j}\) is therefore \(\mbox{Corr}(X_{i},\, X_{j})=-\sqrt{p_{i}p_{j}/(1-p_{i})(1-p_{j})}\). 
+1. The marginal distribution of \((X_{1},\, X_{2},\,\ldots,\, X_{k-1})\) is \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{(k-1)\times1})\) with
    \begin{equation}
    \mathbf{p}_{(k-1)\times1}=\left(p_{1},\, p_{2},\,\ldots,\, p_{k-2},\, p_{k-1}+p_{k}\right),
    \end{equation}
-   and in particular, $X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})$.
-
+   and in particular, \(X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})\).
 #+latex: \end{rem}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 There is support for the multinomial distribution in base \textsf{R}, namely in the =stats= package. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
 
-#+begin_src R :exports none
+#+begin_src R :exports none :results hide
 library(combinat)
 #+end_src
-
-#+results[9165e7f9776e210dd2fe8a84ba95370eef68ca98]:
 
 #+begin_src R :exports both :results output pp 
 library(combinat)
@@ -1139,17 +990,6 @@ S <- probspace(tmp, probs = p)
 ProbTable <- xtabs(probs ~ X1 + X2, data = S)
 round(ProbTable, 3)
 #+end_src
-
-#+results[ff0cc0c4f5d616fc29846e11ac0cc65c077074b1]:
-:    X2
-: X1      0     1     2     3     4     5     6
-:   0 0.003 0.011 0.020 0.020 0.011 0.003 0.000
-:   1 0.015 0.055 0.080 0.058 0.021 0.003 0.000
-:   2 0.036 0.106 0.116 0.057 0.010 0.000 0.000
-:   3 0.047 0.103 0.076 0.018 0.000 0.000 0.000
-:   4 0.034 0.050 0.018 0.000 0.000 0.000 0.000
-:   5 0.013 0.010 0.000 0.000 0.000 0.000 0.000
-:   6 0.002 0.000 0.000 0.000 0.000 0.000 0.000
 
 Do some examples of =rmultinom=.
 
@@ -1162,14 +1002,15 @@ Another way to do the plot is with the =scatterplot3d= function in the =scatterp
 : scatterplot3d(A, type = "h", lwd = 3, box = FALSE)
 The =scatterplot3d= graph looks better in this example, but the code is more difficult to understand. And with =cloud= one can easily do conditional plots of the form =cloud(z ~ x + y | f)=, where =f= is a factor.
 
-#+begin_src R :exports code :results graphics :file img/multinom-pmf2.png
+#+begin_src R :exports code :results graphics silent :file img/multinom-pmf2.pdf
 library(lattice)
-print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
+print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
+            pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 #+end_src
 
 #+begin_src latex 
   \begin{figure}[ht!]
-    \includegraphics[width=5in, height=4in]{img/multinom-pmf2.png}
+    \includegraphics[width=5in, height=4in]{img/multinom-pmf2.pdf}
     \caption[Plot of a multinomial PMF.]{\small A plot of a multinomial PMF.}
     \label{fig:multinom-pmf2}
   \end{figure}
@@ -1179,8 +1020,7 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, pch = 16, cex
 
 ** Chapter Exercises
 
-\addcontentsline{toc}{section}{Chapter Exercises}
-\setcounter{thm}{0}
+#+latex: \setcounter{thm}{0}
 
 #+latex: \begin{xca}
 Prove that \( \mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y). \) \label{xca:Prove-cov-shortcut}
@@ -1188,15 +1028,10 @@ Prove that \( \mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y). \) \label{xca:Prove-cov-short
 
 #+latex: \begin{xca}
 \label{xca:sum-indep-chisq}
-Suppose $X\sim\mathsf{chisq}(\mathtt{df}=p_{1})$ and $Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})$ are independent. Find the distribution of $X+Y$ (you may want to refer to Equation \ref{eq:mgf-chisq}).
+Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the distribution of \(X+Y\) (you may want to refer to Equation \ref{eq:mgf-chisq}).
 #+latex: \end{xca}
 
 #+latex: \begin{xca}
 \label{xca:diff-indep-norm}
-Show that when $X$ and $Y$ are independent the MGF of $X-Y$ is $M_{X}(t)M_{Y}(-t)$. Use this to find the distribution of $X-Y$ when $X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})$ and $Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})$ are independent. 
+Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M_{Y}(-t)\). Use this to find the distribution of \(X-Y\) when \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\)  are independent. 
 #+latex: \end{xca}
-
-
-
-
-
