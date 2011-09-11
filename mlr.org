@@ -3,7 +3,7 @@
 * Multiple Linear Regression
 \label{cha:multiple-linear-regression}
 
-\noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have $p$ explanatory variables, where $p>1$.
+\noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
 
 The language is phrased in matrix terms -- for two reasons. First, it is quicker to write and (arguably) more pleasant to read. Second, the matrix approach will be required for later study of the subject; the reader might as well be introduced to it now.
 
@@ -38,24 +38,24 @@ y_{n}
 1 & x_{1n} & x_{2n} & \cdots & x_{pn}
 \end{bmatrix}.
 \end{equation}
-The vector $\mathbf{Y}$ is called the /response vector/ \index{response vector} and the matrix $\mathbf{X}$ is called the /model matrix/ \index{model matrix}. As in Chapter \ref{cha:simple-linear-regression}, the most general assumption that relates $\mathbf{Y}$ to $\mathbf{X}$ is
+The vector \(\mathbf{Y}\) is called the /response vector/ \index{response vector} and the matrix \(\mathbf{X}\) is called the /model matrix/ \index{model matrix}. As in Chapter \ref{cha:simple-linear-regression}, the most general assumption that relates \(\mathbf{Y}\) to \(\mathbf{X}\) is
 \begin{equation}
 \mathbf{Y}=\mu(\mathbf{X})+\upepsilon,
 \end{equation}
-where $\mu$ is some function (the /signal/) and $\upepsilon$ is the /noise/ (everything else). We usually impose some structure on $\mu$ and $\upepsilon$. In particular, the standard multiple linear regression model\index{model!multiple linear regression} assumes
+where \(\mu\) is some function (the /signal/) and \(\upepsilon\) is the /noise/ (everything else). We usually impose some structure on \(\mu\) and \(\upepsilon\). In particular, the standard multiple linear regression model\index{model!multiple linear regression} assumes
 \begin{equation}
 \mathbf{Y}=\mathbf{X}\upbeta+\upepsilon,
 \end{equation}
-where the parameter vector $\upbeta$ looks like 
+where the parameter vector \(\upbeta\) looks like 
 \begin{equation}
 \upbeta_{(\mathrm{p}+1)\times1}=\begin{bmatrix}\beta_{0} & \beta_{1} & \cdots & \beta_{p}\end{bmatrix}^{\mathrm{T}},
 \end{equation}
-and the random vector $\upepsilon_{\mathrm{n}\times1}=\begin{bmatrix}\epsilon_{1} & \epsilon_{2} & \cdots & \epsilon_{n}\end{bmatrix}^{\mathrm{T}}$ is assumed to be distributed
+and the random vector \(\upepsilon_{\mathrm{n}\times1}=\begin{bmatrix}\epsilon_{1} & \epsilon_{2} & \cdots & \epsilon_{n}\end{bmatrix}^{\mathrm{T}}\) is assumed to be distributed
 \begin{equation}
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right).
 \end{equation}
 
-The assumption on $\upepsilon$ is equivalent to the assumption that $\epsilon_{1}$, $\epsilon_{2}$, ..., $\epsilon_{n}$ are i.i.d.~$\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)$. It is a linear model because the quantity $\mu(\mathbf{X})=\mathbf{X}\upbeta$ is linear in the parameters $\beta_{0}$, $\beta_{1}$, ..., $\beta_{p}$. It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
+The assumption on \(\upepsilon\) is equivalent to the assumption that \(\epsilon_{1}\), \(\epsilon_{2}\), ..., \(\epsilon_{n}\) are IID \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). It is a linear model because the quantity \(\mu(\mathbf{X})=\mathbf{X}\upbeta\) is linear in the parameters \(\beta_{0}\), \(\beta_{1}\), ..., \(\beta_{p}\). It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
 \begin{equation} 
 Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
@@ -64,9 +64,9 @@ Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_
 *Girth, Height, and Volume for Black Cherry trees.* \index{Data sets!trees@\texttt{trees}}
 Measurements were made of the girth, height, and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground. The variables are
 
-1. =Girth=: tree diameter in inches (denoted $x_{1}$)
-2. =Height=: tree height in feet ($x_{2}$).
-3. =Volume=: volume of the tree in cubic feet. ($y$)
+1. =Girth=: tree diameter in inches (denoted \(x_{1}\))
+2. =Height=: tree height in feet (\(x_{2}\)).
+3. =Volume=: volume of the tree in cubic feet. (\(y\))
 
 The data are in the =datasets= package and are already on the search path; they can be viewed with
 
@@ -82,7 +82,7 @@ splom(trees)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
+  \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/splom-trees.pdf}
     \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
     \label{fig:splom-trees}
@@ -93,13 +93,13 @@ The dependent (response) variable =Volume= is listed in the first row of the sca
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 \end{equation}
-in which case the quantity $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$ would represent the mean value of $Y$ at the point $(x_{1},x_{2})$.
+in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
 #+latex: \end{example}
 
 
 *** What does it mean?
 
-The interpretation is simple. The intercept $\beta_{0}$ represents the mean =Volume= when all other independent variables are zero. The parameter $\beta_{i}$ represents the change in mean =Volume= when there is a unit increase in $x_{i}$, while the other independent variable is held constant. For the =trees= data, $\beta_{1}$ represents the change in average =Volume= as =Girth= increases by one unit when the =Height= is held constant, and $\beta_{2}$ represents the change in average =Volume= as =Height= increases by one unit when the =Girth= is held constant. 
+The interpretation is simple. The intercept \(\beta_{0}\) represents the mean =Volume= when all other independent variables are zero. The parameter \(\beta_{i}\) represents the change in mean =Volume= when there is a unit increase in \(x_{i}\), while the other independent variable is held constant. For the =trees= data, \(\beta_{1}\) represents the change in average =Volume= as =Girth= increases by one unit when the =Height= is held constant, and \(\beta_{2}\) represents the change in average =Volume= as =Height= increases by one unit when the =Girth= is held constant. 
 
 
 In simple linear regression, we had one independent variable and our linear regression surface was 1D, simply a line. In multiple regression there are many independent variables and so our linear regression surface will be many-D... in general, a hyperplane. But when there are only two explanatory variables the hyperplane is just an ordinary plane and we can look at it with a 3D scatterplot. 
@@ -117,7 +117,7 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
+  \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.pdf}
     \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
     \label{fig:3D-scatterplot-trees}
@@ -136,27 +136,27 @@ We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
 \begin{equation}
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right),
 \end{equation}
-which means that $\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon$ has an $\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right)$ distribution. Therefore, the likelihood function\index{likelihood function} is
+which means that \(\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon\) has an \(\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right)\) distribution. Therefore, the likelihood function\index{likelihood function} is
 \begin{equation}
 L(\upbeta,\sigma)=\frac{1}{2\pi^{n/2}\sigma}\exp\left\{ -\frac{1}{2\sigma^{2}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\right\}.
 \end{equation}
 
-To /maximize/ the likelihood\index{maximum likelihood} in $\upbeta$, we need to /minimize/ the quantity $g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)$. We do this by differentiating $g$ with respect to $\upbeta$. (It may be a good idea to brush up on the material in Appendices \ref{sec:Linear-Algebra} and \ref{sec:Multivariable-Calculus}.) First we will rewrite $g$:
+To /maximize/ the likelihood\index{maximum likelihood} in \(\upbeta\), we need to /minimize/ the quantity \(g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\). We do this by differentiating \(g\) with respect to \(\upbeta\). (It may be a good idea to brush up on the material in Appendices \ref{sec:Linear-Algebra} and \ref{sec:Multivariable-Calculus}.) First we will rewrite \(g\):
 \begin{equation}
 g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-\mathbf{Y}^{\mathrm{T}}\mathbf{X}\upbeta-\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
 \end{equation}
-which can be further simplified to $g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-2\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta$ since $\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$ is $1\times1$ and thus equal to its transpose. Now we differentiate to get
+which can be further simplified to \(g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-2\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta\) since \(\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\) is \(1\times1\) and thus equal to its transpose. Now we differentiate to get
 \begin{equation}
 \frac{\partial g}{\partial\upbeta}=\mathbf{0}-2\mathbf{X}^{\mathrm{T}}\mathbf{Y}+2\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
 \end{equation}
-since $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is symmetric. Setting the derivative equal to the zero vector yields the so called ``normal equations''\index{normal equations}
+since \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is symmetric. Setting the derivative equal to the zero vector yields the so called ``normal equations''\index{normal equations}
 \begin{equation}
 \mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta=\mathbf{X}^{\mathrm{T}}\mathbf{Y}.
 \end{equation}
 
-In the case that $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is invertible
-#+latex: \footnote{We can find solutions of the normal equations even when $\mathbf{X}^{\mathrm{T}}\mathbf{X}$ is not of full rank, but the topic falls outside the scope of this book. The interested reader can consult an advanced text such as Rao \cite{Rao1999}.},
-we may solve the equation for $\upbeta$ to get the maximum likelihood estimator of $\upbeta$ which we denote by $\mathbf{b}$:
+In the case that \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is invertible
+#+latex: \footnote{We can find solutions of the normal equations even when \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is not of full rank, but the topic falls outside the scope of this book. The interested reader can consult an advanced text such as Rao \cite{Rao1999}.},
+we may solve the equation for \(\upbeta\) to get the maximum likelihood estimator of \(\upbeta\) which we denote by \(\mathbf{b}\):
 \begin{equation}
 \mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}.\label{eq:b-formula-matrix}
 \end{equation}
@@ -182,12 +182,12 @@ We see from the output that for the =trees= data our parameter estimates are
 \[
 \mathbf{b}=\begin{bmatrix}-58.0 & 4.7 & 0.3\end{bmatrix},
 \] 
-and consequently our estimate of the mean response is $\hat{\mu}$ given by 
+and consequently our estimate of the mean response is \(\hat{\mu}\) given by 
 \begin{alignat}{1}
 \hat{\mu}(x_{1},x_{2})= & \ b_{0}+b_{1}x_{1}+b_{2}x_{2},\\
 \approx & -58.0+4.7x_{1}+0.3x_{2}.
 \end{alignat}
-We could see the entire model matrix $\mathbf{X}$ with the =model.matrix=\index{model.matrix@\texttt{model.matrix}} function, but in the interest of brevity we only show the first few rows. 
+We could see the entire model matrix \(\mathbf{X}\) with the =model.matrix=\index{model.matrix@\texttt{model.matrix}} function, but in the interest of brevity we only show the first few rows. 
 
 #+begin_src R :exports both :results output pp 
 head(model.matrix(trees.lm))
@@ -196,7 +196,7 @@ head(model.matrix(trees.lm))
 *** Point Estimates of the Regression Surface
 \label{sub:mlr-point-est-regsurface}
 
-The parameter estimates $\mathbf{b}$ make it easy to find the fitted values\index{fitted values}, $\hat{\mathbf{Y}}$. We write them individually as $\hat{Y}_{i}$, $i=1,2,\ldots,n$, and recall that they are defined by
+The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
 \begin{eqnarray}
 \hat{Y}_{i} & = & \hat{\mu}(x_{1i},x_{2i}),\\
  & = & b_{0}+b_{1}x_{1i}+b_{2}x_{2i},\quad i=1,2,\ldots,n.
@@ -205,24 +205,24 @@ They are expressed more compactly by the matrix equation
 \begin{equation}
 \hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
 \end{equation}
-From Equation \ref{eq:b-formula-matrix} we know that $\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$, so we can rewrite
+From Equation \ref{eq:b-formula-matrix} we know that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), so we can rewrite
 \begin{eqnarray}
 \hat{\mathbf{Y}} & = & \mathbf{X}\left[\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\right],\\
  & = & \mathbf{H}\mathbf{Y},
 \end{eqnarray}
-where $\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}$ is appropriately named /the hat matrix/\index{hat matrix} because it ``puts the hat on $\mathbf{Y}$''. The hat matrix is very important in later courses. Some facts about $\mathbf{H}$ are
-- $\mathbf{H}$ is a symmetric square matrix, of dimension $\mathrm{n}\times\mathrm{n}$.
-- The diagonal entries $h_{ii}$ satisfy $0\leq h_{ii}\leq1$ (compare to Equation \ref{eq:slr-leverage-between}).
-- The trace is $\mathrm{tr}(\mathbf{H})=p$.
-- $\mathbf{H}$ is /idempotent/ (also known as a /projection matrix/) which means that $\mathbf{H}^{2}=\mathbf{H}$. The same is true of $\mathbf{I}-\mathbf{H}$.
+where \(\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) is appropriately named /the hat matrix/\index{hat matrix} because it ``puts the hat on \(\mathbf{Y}\)''. The hat matrix is very important in later courses. Some facts about \(\mathbf{H}\) are
+- \(\mathbf{H}\) is a symmetric square matrix, of dimension \(\mathrm{n}\times\mathrm{n}\).
+- The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\) (compare to Equation \ref{eq:slr-leverage-between}).
+- The trace is \(\mathrm{tr}(\mathbf{H})=p\).
+- \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/) which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of \(\mathbf{I}-\mathbf{H}\).
 
-Now let us write a column vector $\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}$ to denote given values of the explanatory variables =Girth == $x_{10}$ and =Height == $x_{20}$. These values may match those of the collected data, or they may be completely new values not observed in the original data set. We may use the parameter estimates to find $\hat{Y}(\mathbf{x}_{0})$, which will give us
+Now let us write a column vector \(\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}\) to denote given values of the explanatory variables =Girth == \(x_{10}\) and =Height == \(x_{20}\). These values may match those of the collected data, or they may be completely new values not observed in the original data set. We may use the parameter estimates to find \(\hat{Y}(\mathbf{x}_{0})\), which will give us
 
-1. an estimate of $\mu(\mathbf{x}_{0})$, the mean value of a future observation at $\mathbf{x}_{0}$, and
+1. an estimate of \(\mu(\mathbf{x}_{0})\), the mean value of a future observation at \(\mathbf{x}_{0}\), and
 
-2. a prediction for $Y(\mathbf{x}_{0})$, the actual value of a future observation at $\mathbf{x}_{0}$.
+2. a prediction for \(Y(\mathbf{x}_{0})\), the actual value of a future observation at \(\mathbf{x}_{0}\).
 
-We can represent $\hat{Y}(\mathbf{x}_{0})$ by the matrix equation
+We can represent \(\hat{Y}(\mathbf{x}_{0})\) by the matrix equation
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},\label{eq:mlr-single-yhat-matrix}
 \end{equation}
@@ -238,7 +238,7 @@ If we wanted to predict the average volume of black cherry trees that have =Girt
 \approx & 35.6\mbox{\,\ ft}^{3}.
 \end{alignat*}
 
-We would use the same estimate $\hat{Y}=35.6$ to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
+We would use the same estimate \(\hat{Y}=35.6\) to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -277,11 +277,11 @@ treesFIT <- round(predict(trees.lm, newdata = new), 1)
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth= 9.1 in and =Height= 69 ft.
 
-   The fitted value for $x_{1}=9.1$ and $x_{2}=69$ is SRC_R{treesFIT[ 1 ]}, so a point estimate would be SRC_R{treesFIT[ 1 ]} cubic feet. 
+   The fitted value for \(x_{1}=9.1\) and \(x_{2}=69\) is \( SRC_R{treesFIT[ 1 ]} \), so a point estimate would be \( SRC_R{treesFIT[ 1 ]} \) cubic feet. 
 
 2. Report a point prediction for and a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
 
-   The fitted value for $x_{1} = 12.5$ and $x_{2} = 87$ is SRC_R{treesFIT[ 3 ]}, so a point prediction for the =Volume= is SRC_R{treesFIT[ 3 ]} cubic feet. 
+   The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \( SRC_R{treesFIT[ 3 ]} \), so a point prediction for the =Volume= is \( SRC_R{treesFIT[ 3 ]} \) cubic feet. 
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
@@ -295,15 +295,15 @@ Now we can use Theorem \ref{thm:mvnorm-dist-matrix-prod} to see that the residua
 \begin{equation}
 \mathbf{E}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\sigma^{2}(\mathbf{I}-\mathbf{H})),
 \end{equation}
-since $(\mathbf{I}-\mathbf{H})\mathbf{X}\upbeta=\mathbf{X}\upbeta-\mathbf{X}\upbeta=\mathbf{0}$ and $(\mathbf{I}-\mathbf{H})\,(\sigma^{2}\mathbf{I})\,(\mathbf{I}-\mathbf{H})^{\mathrm{T}}=\sigma^{2}(\mathbf{I}-\mathbf{H})^{2}=\sigma^{2}(\mathbf{I}-\mathbf{H})$. The sum of squared errors $SSE$ is just
+since \((\mathbf{I}-\mathbf{H})\mathbf{X}\upbeta=\mathbf{X}\upbeta-\mathbf{X}\upbeta=\mathbf{0}\) and \((\mathbf{I}-\mathbf{H})\,(\sigma^{2}\mathbf{I})\,(\mathbf{I}-\mathbf{H})^{\mathrm{T}}=\sigma^{2}(\mathbf{I}-\mathbf{H})^{2}=\sigma^{2}(\mathbf{I}-\mathbf{H})\). The sum of squared errors \(SSE\) is just
 \begin{equation}
 SSE=\mathbf{E}^{\mathrm{T}}\mathbf{E}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})(\mathbf{I}-\mathbf{H})\mathbf{Y}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
-Recall that in SLR we had two parameters ($\beta_{0}$ and $\beta_{1}$) in our regression model and we estimated $\sigma^{2}$ with $s^{2}=SSE/(n-2)$. In MLR, we have $p+1$ parameters in our regression model and we might guess that to estimate $\sigma^{2}$ we would use the /mean square error/ $S^{2}$ defined by 
+Recall that in SLR we had two parameters (\(\beta_{0}\) and \(\beta_{1}\)) in our regression model and we estimated \(\sigma^{2}\) with \(s^{2}=SSE/(n-2)\). In MLR, we have \(p+1\) parameters in our regression model and we might guess that to estimate \(\sigma^{2}\) we would use the /mean square error/ \(S^{2}\) defined by 
 \begin{equation}
 S^{2}=\frac{SSE}{n-(p+1)}.
 \end{equation}
-That would be a good guess. The /residual standard error/ is $S=\sqrt{S^{2}}$.
+That would be a good guess. The /residual standard error/ is \(S=\sqrt{S^{2}}\).
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -313,21 +313,21 @@ The residuals are also stored with =trees.lm= and may be accessed with the =resi
 residuals(trees.lm)[1:5]
 #+end_src
 
-The =summary= function output (shown later) lists the =Residual Standard Error= which is just $S=\sqrt{S^{2}}$. It is stored in the =sigma= component of the =summary= object.
+The =summary= function output (shown later) lists the =Residual Standard Error= which is just \(S=\sqrt{S^{2}}\). It is stored in the =sigma= component of the =summary= object.
 
 #+begin_src R :exports both :results output pp 
 treesumry <- summary(trees.lm)
 treesumry$sigma
 #+end_src
 
-For the =trees= data we find $s\approx$ SRC_R{round(treesumry$sigma, 3)}.
+For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
 
 
 *** Interval Estimates of the Parameters
 \label{sub:mlr-interval-est-params}
 
-We showed in Section \ref{sub:mlr-parameter-estimates} that $\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}$, which is really just a big matrix -- namely $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}$ -- multiplied by $\mathbf{Y}$. It stands to reason that the sampling distribution of $\mathbf{b}$ would be intimately related to the distribution of $\mathbf{Y}$, which we assumed to be
+We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}\right).
 \end{equation}
@@ -343,15 +343,15 @@ and
 \begin{equation}
 \mbox{Var}(\mathbf{b})=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\sigma^{2}\mathbf{I})\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1},
 \end{equation}
-the first equality following because the matrix $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$ is symmetric.
+the first equality following because the matrix \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\) is symmetric.
 
-There is a lot that we can glean from Equation \ref{eq:distn-b-mlr}. First, it follows that the estimator $\mathbf{b}$ is unbiased (see Section \ref{sec:Point-Estimation-1}). Second, the variances of $b_{0}$, $b_{1}$, ..., $b_{n}$ are exactly the diagonal elements of $\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$, which is completely known except for that pesky parameter $\sigma^{2}$. Third, we can estimate the standard error of $b_{i}$ (denoted $S_{b_{i}}$) with the mean square error $S$ (defined in the previous section) multiplied by the corresponding diagonal element of $\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}$. Finally, given estimates of the standard errors we may construct confidence intervals for $\beta_{i}$ with an interval that looks like
+There is a lot that we can glean from Equation \ref{eq:distn-b-mlr}. First, it follows that the estimator \(\mathbf{b}\) is unbiased (see Section \ref{sec:Point-Estimation-1}). Second, the variances of \(b_{0}\), \(b_{1}\), ..., \(b_{n}\) are exactly the diagonal elements of \(\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\), which is completely known except for that pesky parameter \(\sigma^{2}\). Third, we can estimate the standard error of \(b_{i}\) (denoted \(S_{b_{i}}\)) with the mean square error \(S\) (defined in the previous section) multiplied by the corresponding diagonal element of \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\). Finally, given estimates of the standard errors we may construct confidence intervals for \(\beta_{i}\) with an interval that looks like
 \begin{equation}
 b_{i}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)S_{b_{i}}.
 \end{equation}
-The degrees of freedom for the Student's $t$ distribution
-#+latex: \footnote{We are taking great leaps over the mathematical details. In particular, we have yet to show that $s^{2}$ has a chi-square distribution and we have not even come close to showing that $b_{i}$ and $s_{b_{i}}$ are independent. But these are entirely outside the scope of the present book and the reader may rest assured that the proofs await in later classes. See C.R. Rao for more.}
-are the same as the denominator of $S^{2}$. 
+The degrees of freedom for the Student's \(t\) distribution
+#+latex: \footnote{We are taking great leaps over the mathematical details. In particular, we have yet to show that \(s^{2}\) has a chi-square distribution and we have not even come close to showing that \(b_{i}\) and \(s_{b_{i}}\) are independent. But these are entirely outside the scope of the present book and the reader may rest assured that the proofs await in later classes. See C.R. Rao for more.}
+are the same as the denominator of \(S^{2}\). 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -365,7 +365,7 @@ confint(trees.lm)
 treesPAR <- round(confint(trees.lm), 1)
 #+end_src
 
-For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter $\beta_{1}$ lies somewhere in the interval [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ].
+For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter \(\beta_{1}\) lies somewhere in the interval \( [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ] \).
 
 
 
@@ -381,13 +381,13 @@ The following is therefore immediate from Theorem \ref{thm:mvnorm-dist-matrix-pr
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{x}_{0}^{\mathrm{T}}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\right).
 \end{equation}
-It should be no surprise that confidence intervals for the mean value of a future observation at the location $\mathbf{x}_{0}=\begin{bmatrix}x_{10} & x_{20} & \ldots & x_{p0}\end{bmatrix}^{\mathrm{T}}$ are given by
+It should be no surprise that confidence intervals for the mean value of a future observation at the location \(\mathbf{x}_{0}=\begin{bmatrix}x_{10} & x_{20} & \ldots & x_{p0}\end{bmatrix}^{\mathrm{T}}\) are given by
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
 \end{equation}
-Intuitively, $\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}$ measures the distance of $\mathbf{x}_{0}$ from the center of the data. The degrees of freedom in the Student's $t$ critical value are $n-(p+1)$ because we need to estimate $p+1$ parameters.
+Intuitively, \(\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\) measures the distance of \(\mathbf{x}_{0}\) from the center of the data. The degrees of freedom in the Student's \(t\) critical value are \(n-(p+1)\) because we need to estimate \(p+1\) parameters.
 
-Prediction intervals for a new observation at $\mathbf{x}_{0}$ are given by
+Prediction intervals for a new observation at \(\mathbf{x}_{0}\) are given by
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{1+\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
 \end{equation}
@@ -433,7 +433,7 @@ Using the =trees= data,
 
 2. Report a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
 
-   The 95% prediction interval is given by [ SRC_R{treesCI[3, 2]}, SRC_R{treesCI[3, 3]} ], so with 95% confidence we may assert that the hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height= 87 ft would lie somewhere between SRC_R{treesCI[3, 2]} cubic feet and SRC_R{treesCI[3, 3]} feet.
+   The 95% prediction interval is given by \( [ SRC_R{treesCI[3, 2]}, SRC_R{treesCI[3, 3]} ] \), so with 95% confidence we may assert that the hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height= 87 ft would lie somewhere between \( SRC_R{treesCI[3, 2]} \) cubic feet and \( SRC_R{treesCI[3, 3]} \) feet.
 
 #+latex: \end{example}
 
@@ -441,14 +441,13 @@ Using the =trees= data,
 ** Model Utility and Inference
 \label{sec:Model-Utility-and-MLR}
 
-
 *** Multiple Coefficient of Determination
 
-We saw in Section \ref{sub:mlr-mse-se} that the error sum of squares $SSE$ can be conveniently written in MLR as 
+We saw in Section \ref{sub:mlr-mse-se} that the error sum of squares \(SSE\) can be conveniently written in MLR as 
 \begin{equation}
 SSE=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.\label{eq:mlr-sse-matrix}
 \end{equation}
-It turns out that there are equally convenient formulas for the total sum of squares $SSTO$ and the regression sum of squares $SSR$. They are:
+It turns out that there are equally convenient formulas for the total sum of squares \(SSTO\) and the regression sum of squares \(SSR\). They are:
 \begin{alignat}{1}
 SSTO= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{I}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}\label{eq:mlr-ssto-matrix}
 \end{alignat}
@@ -456,7 +455,7 @@ and
 \begin{alignat}{1}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.\label{eq:mlr-ssr-matrix}
 \end{alignat}
-(The matrix $\mathbf{J}$ is defined in Appendix \ref{sec:Linear-Algebra}.) Immediately from Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} we get the /Anova Equality/
+(The matrix \(\mathbf{J}\) is defined in Appendix \ref{sec:Linear-Algebra}.) Immediately from Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} we get the /Anova Equality/
 \begin{equation} 
 SSTO=SSE+SSR.
 \end{equation}
@@ -465,16 +464,16 @@ SSTO=SSE+SSR.
 R^{2}=1-\frac{SSE}{SSTO}.
 \end{equation}
 
-We interpret $R^{2}$ as the proportion of total variation that is explained by the multiple regression model. In MLR we must be careful, however, because the value of $R^{2}$ can be artificially inflated by the addition of explanatory variables to the model, regardless of whether or not the added variables are useful with respect to prediction of the response variable. In fact, it can be proved that the addition of a single explanatory variable to a regression model will increase the value of $R^{2}$, /no matter how worthless/ the explanatory variable is. We could model the height of the ocean tides, then add a variable for the length of cheetah tongues on the Serengeti plain, and our $R^{2}$ would inevitably increase. 
+We interpret \(R^{2}\) as the proportion of total variation that is explained by the multiple regression model. In MLR we must be careful, however, because the value of \(R^{2}\) can be artificially inflated by the addition of explanatory variables to the model, regardless of whether or not the added variables are useful with respect to prediction of the response variable. In fact, it can be proved that the addition of a single explanatory variable to a regression model will increase the value of \(R^{2}\), /no matter how worthless/ the explanatory variable is. We could model the height of the ocean tides, then add a variable for the length of cheetah tongues on the Serengeti plain, and our \(R^{2}\) would inevitably increase. 
 
-This is a problem, because as the philosopher, Occam, once said: ``causes should not be multiplied beyond necessity''. We address the problem by penalizing $R^{2}$ when parameters are added to the model. The result is an /adjusted/ $R^{2}$ which we denote by $\overline{R}^{2}$.
+This is a problem, because as the philosopher, Occam, once said: ``causes should not be multiplied beyond necessity''. We address the problem by penalizing \(R^{2}\) when parameters are added to the model. The result is an /adjusted/ \(R^{2}\) which we denote by \(\overline{R}^{2}\).
 \begin{equation}
 \overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).
 \end{equation}
-It is good practice for the statistician to weigh both $R^{2}$ and $\overline{R}^{2}$ during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
+It is good practice for the statistician to weigh both \(R^{2}\) and \(\overline{R}^{2}\) during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-For the =trees= data, we can get $R^{2}$ and $\overline{R}^{2}$ from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
+For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\) from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
 
 #+begin_src R :exports both :results output pp 
 treesumry$r.squared
@@ -494,21 +493,21 @@ Another way to assess the model's utility is to to test the hypothesis
 \[
 H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one \ensuremath{\beta_{i}\neq0}}.
 \]
-The idea is that if all $\beta_{i}$'s were zero, then the explanatory variables $X_{1},\ldots,X_{p}$ would be worthless predictors for the response variable $Y$. We can test the above hypothesis with the overall $F$ statistic, which in MLR is defined by
+The idea is that if all \(\beta_{i}\)'s were zero, then the explanatory variables \(X_{1},\ldots,X_{p}\) would be worthless predictors for the response variable \(Y\). We can test the above hypothesis with the overall \(F\) statistic, which in MLR is defined by
 \begin{equation}
 F=\frac{SSR/p}{SSE/(n-p-1)}.
 \end{equation}
-When the regression assumptions hold and under $H_{0}$, it can be shown that $F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)$. We reject $H_{0}$ when $F$ is large, that is, when the explained variation is large relative to the unexplained variation.
+When the regression assumptions hold and under \(H_{0}\), it can be shown that \(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject \(H_{0}\) when \(F\) is large, that is, when the explained variation is large relative to the unexplained variation.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-The overall $F$ statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
+The overall \(F\) statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
 
 #+begin_src R :exports both :results output pp 
 treesumry$fstatistic
 #+end_src
 
-For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject $H_{0}$, that is, the data provide strong evidence that not all $\beta_{i}$'s are zero.
+For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
 \label{sub:mlr-Student's-t-Tests}
@@ -517,23 +516,23 @@ We know that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right)
 \end{equation}
-and we have seen how to test the hypothesis $H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0$, but let us now consider the test
+and we have seen how to test the hypothesis \(H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\), but let us now consider the test
 \begin{equation}
 H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
 \end{equation}
-where $\beta_{i}$ is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting $H_{0}$ if the /p-value/ is small. If $H_{0}$ is rejected, then we conclude that there is a significant relationship between $Y$ and $x_{i}$ /in the regression model/ $Y\sim(x_{1},\ldots,x_{p})$. This last part of the sentence is very important because the significance of the variable $x_{i}$ sometimes depends on the presence of other independent variables in the model
+where \(\beta_{i}\) is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting \(H_{0}\) if the /p-value/ is small. If \(H_{0}\) is rejected, then we conclude that there is a significant relationship between \(Y\) and \(x_{i}\) /in the regression model/ \(Y\sim(x_{1},\ldots,x_{p})\). This last part of the sentence is very important because the significance of the variable \(x_{i}\) sometimes depends on the presence of other independent variables in the model
 #+latex: \footnote{In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub:Multicollinearity}.}.
 
 To test the hypothesis we go to find the sampling distribution of \( b_{i} \), the estimator of the corresponding parameter \( \beta_{i} \), when the null hypothesis is true. We saw in Section \ref{sub:mlr-interval-est-params} that 
 \begin{equation}
 T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 \end{equation}
-has a Student's $t$ distribution with $n-(p+1)$ degrees of freedom. (Remember, we are estimating $p+1$ parameters.) Consequently, under the null hypothesis $H_{0}:\beta_{i}=0$ the statistic $t_{i}=b_{i}/S_{b_{i}}$ has a $\mathsf{t}(\mathtt{df}=n-p-1)$ distribution.
+has a Student's \(t\) distribution with \(n-(p+1)\) degrees of freedom. (Remember, we are estimating \(p+1\) parameters.) Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a \(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-The Student's $t$ tests for significance of the individual explanatory variables are shown in the =summary= output.
+The Student's \(t\) tests for significance of the individual explanatory variables are shown in the =summary= output.
 
 #+begin_src R :exports both :results output pp 
 treesumry
@@ -547,14 +546,14 @@ We see from the /p-values/ that there is a significant linear relationship betwe
 
 *** Quadratic Regression Model
 
-In each of the previous sections we assumed that $\mu$ was a linear function of the explanatory variables. For example, in SLR we assumed that $\mu(x)=\beta_{0}+\beta_{1}x$, and in our previous MLR examples we assumed $\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}$. In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
+In each of the previous sections we assumed that \(\mu\) was a linear function of the explanatory variables. For example, in SLR we assumed that \(\mu(x)=\beta_{0}+\beta_{1}x\), and in our previous MLR examples we assumed \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\). In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
 
 #+begin_src R :exports code :results graphics silent :file img/Scatterplot-Volume-Girth-trees.pdf
 qplot(Girth, Volume, data = trees)
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
+  \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.pdf}
     \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
     \label{fig:Scatterplot-Volume-Girth-trees}
@@ -565,13 +564,13 @@ For example, let us examine a scatterplot of =Volume= versus =Girth= a little mo
 \begin{equation}
 \mu(x_{1})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}.
 \end{equation}
-The model associated with this choice of $\mu$ is
+The model associated with this choice of \(\mu\) is
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon.
 \end{equation}
-The regression assumptions are the same. Almost everything indeed is the same. In fact, it is still called a ``linear regression model'', since the mean response $\mu$ is linear /in the parameters/ $\beta_{0}$, $\beta_{1}$, and $\beta_{2}$. 
+The regression assumptions are the same. Almost everything indeed is the same. In fact, it is still called a ``linear regression model'', since the mean response \(\mu\) is linear /in the parameters/ \(\beta_{0}\), \(\beta_{1}\), and \(\beta_{2}\). 
 
-*However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the $x_{i}$'s with $x_{i}-\overline{x}$ (or $(x_{i}-\overline{x})/s$) before fitting the model
+*However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the \(x_{i}\)'s with \(x_{i}-\overline{x}\) (or \((x_{i}-\overline{x})/s\)) before fitting the model
 #+latex: \footnote{Rescaling the data gets the job done but a better way to avoid the multicollinearity introduced by the higher order terms is with /orthogonal polynomials/, whose coefficients are chosen just right so that the polynomials are not correlated with each other. This is beginning to linger outside the scope of this book, however, so we will content ourselves with a brief mention and then stick with the rescaling approach in the discussion that follows. A nice example of orthogonal polynomials in action can be run with \texttt{example(cars)}.}.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -593,7 +592,7 @@ treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                   
 summary(treesquad.lm)
 #+end_src
 
-We see that the $F$ statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
+We see that the \(F\) statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
 
 #+begin_src R :exports code :results graphics silent :file img/Fitting-the-Quadratic.pdf
@@ -602,20 +601,20 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 #+end_src
 
 #+begin_src latex
-  \begin{figure}[ht!]
+  \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
     \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
     \label{fig:Fitting-the-Quadratic}
   \end{figure}
 #+end_src
 
-The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the $x$-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
+The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
 #+latex: \end{example}
 
 
 #+latex: \begin{rem}
-When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include $x^{m}$ as a term in the model, then (s)he should also include all lower order terms $x$, $x^{2}$, ...,$x^{m-1}$ in the model.
+When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include \(x^{m}\) as a term in the model, then (s)he should also include all lower order terms \(x\), \(x^{2}\), ...,\(x^{m-1}\) in the model.
 #+latex: \end{rem}
 
 We do estimation/prediction the same way that we did in Section \ref{sub:mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
@@ -648,7 +647,7 @@ In our model for tree volume there have been two independent variables: =Girth= 
 
 
 #+latex: \begin{example}
-Perhaps the =Girth= and =Height= of the tree interact to influence the its =Volume=; we would like to investigate whether the model (=Girth= = $x_{1}$ and =Height= = $x_{2}$) 
+Perhaps the =Girth= and =Height= of the tree interact to influence the its =Volume=; we would like to investigate whether the model (=Girth= = \(x_{1}\) and =Height= = \(x_{2}\)) 
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon
 \end{equation}
@@ -656,24 +655,24 @@ would be significantly improved by the model
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\beta_{1:2}x_{1}x_{2}+\epsilon,
 \end{equation}
-where the subscript $1:2$ denotes that $\beta_{1:2}$ is a coefficient
-of an interaction term between $x{}_{1}$ and $x_{2}$. 
+where the subscript \(1:2\) denotes that \(\beta_{1:2}\) is a coefficient
+of an interaction term between \(x{}_{1}\) and \(x_{2}\). 
 
 #+latex: \end{example}
 
 #+latex: \paragraph*{What does it mean?}
 
-Consider the mean response $\mu(x_{1},x_{2})$ as a function of $x_{2}$:
+Consider the mean response \(\mu(x_{1},x_{2})\) as a function of \(x_{2}\):
 \begin{equation}
 \mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+\beta_{2}x_{2}.
 \end{equation}
-This is a linear function of $x_{2}$ with slope $\beta_{2}$. As $x_{1}$ changes, the $y$-intercept of the mean response in $x_{2}$ changes, but the slope remains the same. Therefore, the mean response in $x_{2}$ is represented by a collection of parallel lines all with common slope $\beta_{2}$.
+This is a linear function of \(x_{2}\) with slope \(\beta_{2}\). As \(x_{1}\) changes, the \(y\)-intercept of the mean response in \(x_{2}\) changes, but the slope remains the same. Therefore, the mean response in \(x_{2}\) is represented by a collection of parallel lines all with common slope \(\beta_{2}\).
 
-Now think about what happens when the interaction term $\beta_{1:2}x_{1}x_{2}$ is included. The mean response in $x_{2}$ now looks like
+Now think about what happens when the interaction term \(\beta_{1:2}x_{1}x_{2}\) is included. The mean response in \(x_{2}\) now looks like
 \begin{equation}
 \mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+(\beta_{2}+\beta_{1:2}x_{1})x_{2}.
 \end{equation}
-In this case we see that not only the $y$-intercept changes when $x_{1}$ varies, but the slope also changes in $x_{1}$. Thus, the interaction term allows the slope of the mean response in $x_{2}$ to increase and decrease as $x_{1}$ varies. 
+In this case we see that not only the \(y\)-intercept changes when \(x_{1}\) varies, but the slope also changes in \(x_{1}\). Thus, the interaction term allows the slope of the mean response in \(x_{2}\) to increase and decrease as \(x_{1}\) varies. 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -689,7 +688,7 @@ treesint.lm <- lm(Volume ~ Girth + Height + Girth:Height, data = trees)
 summary(treesint.lm)
 #+end_src
 
-We can see from the output that the interaction term is highly significant. Further, the estimate $b_{1:2}$ is positive. This means that the slope of $\mu(x_{2})$ is steeper for bigger values of =Girth=. Keep in mind: the same interpretation holds for $\mu(x_{1})$; that is, the slope of $\mu(x_{1})$ is steeper for bigger values of =Height=.
+We can see from the output that the interaction term is highly significant. Further, the estimate \(b_{1:2}\) is positive. This means that the slope of \(\mu(x_{2})\) is steeper for bigger values of =Girth=. Keep in mind: the same interpretation holds for \(\mu(x_{1})\); that is, the slope of \(\mu(x_{1})\) is steeper for bigger values of =Height=.
 
 For the sake of completeness we calculate confidence intervals for the parameters and do prediction as before.
 
@@ -757,7 +756,7 @@ while trees with =Tall = no= will have the mean response
 \begin{equation} 
 \mu(\mathtt{Girth})=\beta_{0}+\beta_{1}\mathtt{Girth}.
 \end{equation}
-In essence, we are fitting two regression lines: one for tall trees, and one for short trees. The regression lines have the same slope but they have different $y$ intercepts (which are exactly $|\beta_{2}|$ far apart).
+In essence, we are fitting two regression lines: one for tall trees, and one for short trees. The regression lines have the same slope but they have different \(y\) intercepts (which are exactly \(|\beta_{2}|\) far apart).
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -783,7 +782,7 @@ Indeed, the author fit the model beforehand and wrote the discussion afterward w
 #+latex: \end{rem}
 
 #+latex: \begin{rem}
-In general, if an explanatory variable =foo= is qualitative with $n$ levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define $n-1$ indicator variables in the following way:
+In general, if an explanatory variable =foo= is qualitative with \(n\) levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define \(n-1\) indicator variables in the following way:
 \begin{eqnarray*}
 \mathtt{foobar2} & = & \begin{cases}
 1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\
@@ -791,7 +790,7 @@ In general, if an explanatory variable =foo= is qualitative with $n$ levels =bar
 1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\
 0, & \mbox{otherwise.}\end{cases}
 \end{eqnarray*}
-The level =bar1= is represented by $\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0$. We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
+The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
 #+latex: \end{rem}
 
 
@@ -812,7 +811,7 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 #+end_src
 
 #+begin_src latex 
-  \begin{figure}[ht!]
+  \begin{figure}[th]
     \includegraphics[width=5in, height=4in]{img/dummy-variable-trees.pdf}
     \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
     \label{fig:dummy-variable-trees}
@@ -826,11 +825,11 @@ There are other -- shorter -- ways to plot regression lines by groups, namely th
 ** Partial /F/ Statistic
 \label{sec:Partial-F-Statistic}
 
-We saw in Section \ref{sub:mlr-Overall-F-Test} how to test $H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0$ with the overall $F$ statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test $H_{0}:\beta_{i}=0$ that a particular coefficient $\beta_{i}$ is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
+We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
 \end{equation}
-where $j\geq1$ and $p\geq2$. Now we wish to test the hypothesis
+where \(j\geq1\) and \(p\geq2\). Now we wish to test the hypothesis
 \begin{equation}
 H_{0}:\beta_{j+1}=\beta_{j+2}=\cdots=\beta_{p}=0
 \end{equation}
@@ -839,19 +838,19 @@ versus the alternative
 H_{1}:\mbox{at least one of \ensuremath{\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0}}.
 \end{equation}
 
-The interpretation of $H_{0}$ is that none of the variables $x_{j+1}$, ...,$x_{p}$ is significantly related to $Y$ and the interpretation of $H_{1}$ is that at least one of $x_{j+1}$, ...,$x_{p}$ is significantly related to $Y$. In essence, for this hypothesis test there are two competing models under consideration:
+The interpretation of \(H_{0}\) is that none of the variables \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\) and the interpretation of \(H_{1}\) is that at least one of \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\). In essence, for this hypothesis test there are two competing models under consideration:
 \begin{align}
 \mbox{the full model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}+\epsilon,\\
 \mbox{the reduced model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\epsilon,
 \end{align}
 
-Of course, the full model will always explain the data /better/ than the reduced model, but does the full model explain the data /significantly better/ than the reduced model? This question is exactly what the partial $F$ statistic is designed to answer.
+Of course, the full model will always explain the data /better/ than the reduced model, but does the full model explain the data /significantly better/ than the reduced model? This question is exactly what the partial \(F\) statistic is designed to answer.
 
-We first calculate $SSE_{f}$, the unexplained variation in the full model, and $SSE_{r}$, the unexplained variation in the reduced model. We base our test on the difference $SSE_{r}-SSE_{f}$ which measures the reduction in unexplained variation attributable to the variables $x_{j+1}$, ..., $x_{p}$. In the full model there are $p+1$ parameters and in the reduced model there are $j+1$ parameters, which gives a difference of $p-j$ parameters (hence degrees of freedom). The partial /F/ statistic is 
+We first calculate \(SSE_{f}\), the unexplained variation in the full model, and \(SSE_{r}\), the unexplained variation in the reduced model. We base our test on the difference \(SSE_{r}-SSE_{f}\) which measures the reduction in unexplained variation attributable to the variables \(x_{j+1}\), ..., \(x_{p}\). In the full model there are \(p+1\) parameters and in the reduced model there are \(j+1\) parameters, which gives a difference of \(p-j\) parameters (hence degrees of freedom). The partial /F/ statistic is 
 \begin{equation}
 F=\frac{(SSE_{r}-SSE_{f})/(p-j)}{SSE_{f}/(n-p-1)}.
 \end{equation}
-It can be shown when the regression assumptions hold under $H_{0}$ that the partial $F$ statistic has an $\mathsf{f}(\mathtt{df1}=p-j,\,\mathtt{df2}=n-p-1)$ distribution. We calculate the $p$-value of the observed partial $F$ statistic and reject $H_{0}$ if the $p$-value is small. 
+It can be shown when the regression assumptions hold under \(H_{0}\) that the partial \(F\) statistic has an \(\mathsf{f}(\mathtt{df1}=p-j,\,\mathtt{df2}=n-p-1)\) distribution. We calculate the \(p\)-value of the observed partial \(F\) statistic and reject \(H_{0}\) if the \(p\)-value is small. 
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -894,7 +893,7 @@ treesreduced2.lm <- lm(Volume ~ Girth + I(Girth^2) + Height,
 anova(treesreduced2.lm, treesfull.lm)
 #+end_src
 
-In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial $F$ test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are /exactly/ the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
+In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial \(F\) test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are /exactly/ the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
 
 #+latex: \end{example}
 
@@ -908,22 +907,22 @@ We encountered many, many diagnostic measures for simple linear regression in Se
    \begin{equation}
    W=\frac{\mathbf{a}^{\mathrm{T}}\mathbf{E}^{\ast}}{\mathbf{E}^{\mathrm{T}}\mathbf{E}},
    \end{equation}
-   where $\mathbf{E}^{\ast}$ is the sorted residuals and $\mathbf{a}_{1\times\mathrm{n}}$ is defined by 
+   where \(\mathbf{E}^{\ast}\) is the sorted residuals and \(\mathbf{a}_{1\times\mathrm{n}}\) is defined by 
    \begin{equation}
    \mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
    \end{equation}
-   where $\mathbf{m}_{\mathrm{n}\times1}$ and $\mathbf{V}_{\mathrm{n}\times\mathrm{n}}$ are the mean and covariance matrix, respectively, of the order statistics from an $\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)$ distribution. 
-- Leverages: :: are defined to be the diagonal entries of the hat matrix $\mathbf{H}$ (which is why we called them $h_{ii}$ in Section \ref{sub:mlr-point-est-regsurface}). The sum of the leverages is $\mbox{tr}(\mathbf{H})=p+1$. One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is $2(p+1)/n$, and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
-- Standardized residuals: :: unchanged. Considered extreme if $|R_{i}|>2$. 
-- Studentized residuals: :: compared to a $\mathsf{t}(\mathtt{df}=n-p-2)$ distribution.  
+   where \(\mathbf{m}_{\mathrm{n}\times1}\) and \(\mathbf{V}_{\mathrm{n}\times\mathrm{n}}\) are the mean and covariance matrix, respectively, of the order statistics from an \(\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)\) distribution. 
+- Leverages: :: are defined to be the diagonal entries of the hat matrix \(\mathbf{H}\) (which is why we called them \(h_{ii}\) in Section \ref{sub:mlr-point-est-regsurface}). The sum of the leverages is \(\mbox{tr}(\mathbf{H})=p+1\). One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is \(2(p+1)/n\), and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
+- Standardized residuals: :: unchanged. Considered extreme if \(|R_{i}|>2\). 
+- Studentized residuals: :: compared to a \(\mathsf{t}(\mathtt{df}=n-p-2)\) distribution.  
 - DFBETAS: :: The formula is generalized to
    \begin{equation}
    (DFBETAS)_{j(i)}=\frac{b_{j}-b_{j(i)}}{S_{(i)}\sqrt{c_{jj}}},\quad j=0,\ldots p,\ i=1,\ldots,n,
    \end{equation}
-   where $c_{jj}$ is the $j^{\mathrm{th}}$ diagonal entry of $(\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}$. Values larger than one for small data sets or $2/\sqrt{n}$ for large data sets should be investigated.
+   where \(c_{jj}\) is the \(j^{\mathrm{th}}\) diagonal entry of \((\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}\). Values larger than one for small data sets or \(2/\sqrt{n}\) for large data sets should be investigated.
 - DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
-- Cook's D: :: compared to an $\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)$ distribution. Observations falling higher than the 50$^{\textrm{th}}$ percentile are extreme. 
-Note that plugging the value $p=1$ into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
+- Cook's D: :: compared to an \(\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)\) distribution. Observations falling higher than the 50\(^{\textrm{th}}\) percentile are extreme. 
+Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
 
 
@@ -932,21 +931,21 @@ Note that plugging the value $p=1$ into the formulas will recover all of the one
 
 *** Nonlinear Regression
 
-We spent the entire chapter talking about the =trees= data, and all of our models looked like =Volume ~ Girth + Height= or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is $V=lwh$ and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
+We spent the entire chapter talking about the =trees= data, and all of our models looked like =Volume ~ Girth + Height= or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is \(V=lwh\) and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
 \begin{equation}
 V=\pi r^{2}h\quad\mbox{or}\quad V=4\pi dh,
 \end{equation}
-where $r$ and $d$ represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for $\mu$ might be
+where \(r\) and \(d\) represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for \(\mu\) might be
 \begin{equation}
 \mu(x_{1},x_{2})=\beta_{0}x_{1}^{\beta_{1}}x_{2}^{\beta_{2}},\label{eq:trees-nonlin-reg}
 \end{equation}
-where $\beta_{1}$ and $\beta_{2}$ are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
+where \(\beta_{1}\) and \(\beta_{2}\) are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
 
 How can we fit this model? The model is not linear in the parameters any more, so our linear regression methods will not work... or will they? In the =trees= example we may take the logarithm of both sides of Equation \ref{eq:trees-nonlin-reg} to get
 \begin{equation}
 \mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
 \end{equation}
-and this new model $\mu^{\ast}$ is linear in the parameters $\beta_{0}^{\ast}=\ln\beta_{0}$, $\beta_{1}^{\ast}=\beta_{1}$ and $\beta_{2}^{\ast}=\beta_{2}$. We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
+and this new model \(\mu^{\ast}\) is linear in the parameters \(\beta_{0}^{\ast}=\ln\beta_{0}\), \(\beta_{1}^{\ast}=\beta_{1}\) and \(\beta_{2}^{\ast}=\beta_{2}\). We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
 
 #+begin_src R :exports both :results output pp 
 treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height), 
@@ -954,7 +953,7 @@ treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height),
 summary(treesNonlin.lm)
 #+end_src
 
-This is our best model yet (judging by $R^{2}$ and $\overline{R}^{2}$), all of the parameters are significant, it is simpler than the quadratic or interaction models, and it even makes theoretical sense. It rarely gets any better than that.
+This is our best model yet (judging by \(R^{2}\) and \(\overline{R}^{2}\)), all of the parameters are significant, it is simpler than the quadratic or interaction models, and it even makes theoretical sense. It rarely gets any better than that.
 
 We may get confidence intervals for the parameters, but remember that it is usually better to transform back to the original scale for interpretation purposes :
 
@@ -973,17 +972,17 @@ The predictions and intervals are slightly different from those calculated earli
 
 *** Real Nonlinear Regression
 
-We saw with the =trees= data that a nonlinear model might be more appropriate for the data based on theoretical considerations, and we were lucky because the functional form of $\mu$ allowed us to take logarithms to transform the nonlinear model to a linear one. The same trick will not work in other circumstances, however. We need techniques to fit general models of the form
+We saw with the =trees= data that a nonlinear model might be more appropriate for the data based on theoretical considerations, and we were lucky because the functional form of \(\mu\) allowed us to take logarithms to transform the nonlinear model to a linear one. The same trick will not work in other circumstances, however. We need techniques to fit general models of the form
 \begin{equation}
 \mathbf{Y}=\mu(\mathbf{X})+\epsilon,
 \end{equation}
-where $\mu$ is some crazy function that does not lend itself to linear transformations.
+where \(\mu\) is some crazy function that does not lend itself to linear transformations.
 
 There are a host of methods to address problems like these which are studied in advanced regression classes. The interested reader should see Neter /et al/ \cite{Neter1996} or Tabachnick and Fidell \cite{Tabachnick2006}. 
 
 It turns out that John Fox has posted an Appendix to his book \cite{Fox2002} which discusses some of the methods and issues associated with nonlinear regression; see [[http://cran.r-project.org/doc/contrib/Fox-Companion/appendix.html][here]] for more.  Here is an example of how it works, based on a question from R-help.
 
-#+begin_src R :exports both :results output pp 
+#+begin_src R :exports both :results output pp
 # fake data 
 set.seed(1) 
 x <- seq(from = 0, to = 1000, length.out = 200) 
@@ -999,14 +998,12 @@ summary(acc.nls)
 *** Multicollinearity
 \label{sub:Multicollinearity}
 
-A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the $R^{2}$ of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
+A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 
-Multicollinearity is a problem because it causes instability in the regression model. The instability is a consequence of redundancy in the explanatory variables: a high $R^{2}$ indicates a strong dependence between the selected independent variable and the others. The redundant information inflates the variance of the parameter estimates which can cause them to be statistically insignificant when they would have been significant otherwise. To wit, multicollinearity is usually measured by what are called /variance inflation factors/.
+Multicollinearity is a problem because it causes instability in the regression model. The instability is a consequence of redundancy in the explanatory variables: a high \(R^{2}\) indicates a strong dependence between the selected independent variable and the others. The redundant information inflates the variance of the parameter estimates which can cause them to be statistically insignificant when they would have been significant otherwise. To wit, multicollinearity is usually measured by what are called /variance inflation factors/.
 
 Once multicollinearity has been diagnosed there are several approaches to remediate it. Here are a couple of important ones. 
-
 - Principal Components Analysis. :: This approach casts out two or more of the original explanatory variables and replaces them with new variables, derived from the original ones, that are by design uncorrelated with one another. The redundancy is thus eliminated and we may proceed as usual with the new variables in hand. Principal Components Analysis is important for other reasons, too, not just for fixing multicollinearity problems.
-
 - Ridge Regression. :: The idea of this approach is to replace the original parameter estimates with a different type of parameter estimate which is more stable under multicollinearity. The estimators are not found by ordinary least squares but rather a different optimization procedure which incorporates the variance inflation factor information. 
 
 We decided to omit a thorough discussion of multicollinearity because we are not equipped to handle the mathematical details. Perhaps the topic will receive more attention in a later edition.
@@ -1021,6 +1018,7 @@ We decided to omit a thorough discussion of multicollinearity because we are not
 \[
 AIC=-2\ln L+2(p+1)
 \]
+
 
 #+latex: \newpage{}
 

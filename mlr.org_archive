@@ -1,0 +1,103 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/jay/Desktop/git/IPSUR/mlr.org
+
+
+* Point Estimates of the Regression Surface
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2011-09-11 Sun 09:30
+  :ARCHIVE_FILE: ~/Desktop/git/IPSUR/mlr.org
+  :ARCHIVE_OLPATH: Multiple Linear Regression/Estimation and Prediction
+  :ARCHIVE_CATEGORY: mlr
+  :END:
+\label{sub:mlr-point-est-regsurface}
+
+The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
+\begin{eqnarray}
+\hat{Y}_{i} & = & \hat{\mu}(x_{1i},x_{2i}),\\
+ & = & b_{0}+b_{1}x_{1i}+b_{2}x_{2i},\quad i=1,2,\ldots,n.
+\end{eqnarray}
+They are expressed more compactly by the matrix equation
+\begin{equation}
+\hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
+\end{equation}
+From Equation \ref{eq:b-formula-matrix} we know that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), so we can rewrite
+\begin{eqnarray}
+\hat{\mathbf{Y}} & = & \mathbf{X}\left[\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\right],\\
+ & = & \mathbf{H}\mathbf{Y},
+\end{eqnarray}
+where \(\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) is appropriately named /the hat matrix/\index{hat matrix} because it ``puts the hat on \(\mathbf{Y}\)''. The hat matrix is very important in later courses. Some facts about \(\mathbf{H}\) are
+- \(\mathbf{H}\) is a symmetric square matrix, of dimension \(\mathrm{n}\times\mathrm{n}\).
+- The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\) (compare to Equation \ref{eq:slr-leverage-between}).
+- The trace is \(\mathrm{tr}(\mathbf{H})=p\).
+- \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/) which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of \(\mathbf{I}-\mathbf{H}\).
+
+Now let us write a column vector \(\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}\) to denote given values of the explanatory variables =Girth == \(x_{10}\) and =Height == \(x_{20}\). These values may match those of the collected data, or they may be completely new values not observed in the original data set. We may use the parameter estimates to find \(\hat{Y}(\mathbf{x}_{0})\), which will give us
+
+1. an estimate of \(\mu(\mathbf{x}_{0})\), the mean value of a future observation at \(\mathbf{x}_{0}\), and
+
+2. a prediction for \(Y(\mathbf{x}_{0})\), the actual value of a future observation at \(\mathbf{x}_{0}\).
+
+We can represent \(\hat{Y}(\mathbf{x}_{0})\) by the matrix equation
+\begin{equation}
+\hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},\label{eq:mlr-single-yhat-matrix}
+\end{equation}
+which is just a fancy way to write
+\begin{equation}
+\hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
+\end{equation}
+ 
+#+latex: \begin{example}
+If we wanted to predict the average volume of black cherry trees that have =Girth = 15= in and are =Height = 77= ft tall then we would use the estimate 
+\begin{alignat*}{1}
+\hat{\mu}(15,\,77)= & -58+4.7(15)+0.3(77),\\
+\approx & 35.6\mbox{\,\ ft}^{3}.
+\end{alignat*}
+
+We would use the same estimate \(\hat{Y}=35.6\) to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
+#+latex: \end{example}
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The fitted values are stored inside =trees.lm= and may be accessed with the =fitted= function. We only show the first five fitted values.
+
+#+begin_src R :exports both :results output pp 
+fitted(trees.lm)[1:5]
+#+end_src
+
+The syntax for general prediction does not change much from simple linear regression. The computations are done with the =predict= function as described below. 
+
+The only difference from SLR is in the way we tell \textsf{R} the values of the explanatory variables for which we want predictions. In SLR we had only one independent variable but in MLR we have many (for the =trees= data we have two). We will store values for the independent variables in the data frame =new=, which has two columns (one for each independent variable) and three rows (we shall make predictions at three different locations).
+
+#+begin_src R :exports code :results silent 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
+#+end_src
+
+We can view the locations at which we will predict:
+
+#+begin_src R :exports both :results output pp 
+new
+#+end_src
+
+We continue just like we would have done in SLR.
+
+#+begin_src R :exports both :results output pp 
+predict(trees.lm, newdata = new)
+#+end_src
+
+#+begin_src R :exports none :results silent
+treesFIT <- round(predict(trees.lm, newdata = new), 1)
+#+end_src
+
+#+latex: \begin{example}
+Using the =trees= data,
+1. Report a point estimate of the mean =Volume= of a tree of =Girth= 9.1 in and =Height= 69 ft.
+
+   The fitted value for \(x_{1}=9.1\) and \(x_{2}=69\) is \( SRC_R{treesFIT[ 1 ]} \), so a point estimate would be \( SRC_R{treesFIT[ 1 ]} \) cubic feet. 
+
+2. Report a point prediction for and a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
+
+   The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \( SRC_R{treesFIT[ 3 ]} \), so a point prediction for the =Volume= is \( SRC_R{treesFIT[ 3 ]} \) cubic feet. 
+#+latex: \end{example}
+

@@ -67,7 +67,7 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
 #+latex: \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as \(x\) gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/philosophy.pdf}
   \caption[Philosophical foundations of SLR]{\small Philosophical foundations of SLR.}
   \label{fig:philosophy}
@@ -100,7 +100,7 @@ head(cars)
 The =speed= represents how fast the car was going (\(x\)) in miles per hour and =dist= (\(Y\)) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the =qplot= command in the =ggplot2= package. 
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
   \caption[Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data]{\small A scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data.  There is clearly an upward trend to the plot which is approximately linear.}
   \label{fig:Scatter-cars}
@@ -212,7 +212,7 @@ The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope,
 It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure \ref{fig:Scatter-cars-regline}.
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/carline.pdf}
   \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with an added regression line for the \texttt{cars} data.}
   \label{fig:Scatter-cars-regline}
@@ -476,7 +476,7 @@ We earlier guessed that a bound on the value of a single new observation would b
 We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure \ref{fig:Scatter-cars-CIPI}.
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/carscipi.pdf}
   \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
   \label{fig:Scatter-cars-CIPI}
@@ -644,7 +644,7 @@ In every case, we will begin by looking at residual plots -- that is, scatterplo
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.pdf}
   \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
 any curvature or substantial departures from the straight line; hopefully
@@ -701,7 +701,7 @@ For the constant variance assumption we do not need the sign of the residual so 
 In this case, we plot the standardized residuals versus the fitted values. The graph may be seen in Figure \ref{fig:std-resids-fitted-cars}. For these data there does appear to be somewhat of a slight fanning-out of the residuals.
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.pdf}
   \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
   \label{fig:std-resids-fitted-cars}
@@ -742,7 +742,7 @@ Positive correlation is displayed by positive residuals followed by positive res
 On the other hand, negative correlation implies positive residuals followed by negative residuals, which are then followed by positive residuals, /etc/. Consequently, negatively correlated residuals are often associated with an alternating pattern in the residual plots. We examine the residual plot in Figure \ref{fig:resids-fitted-cars}. There is no obvious cyclical wave pattern or structure to the residual plot. 
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.pdf}
   \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
 data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
@@ -948,7 +948,7 @@ cooksD[1:4]
 We can look at a plot of the Cook's distances with the command =plot(cars.lm, which = 4)=.
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.pdf}
   \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
   \label{fig:Cooks-distance-cars}
@@ -989,7 +989,7 @@ par(mfrow = c(1,1))
 The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure \ref{fig:Diagnostic-plots-cars}:
 
 #+begin_latex
-\begin{figure}[ht!]
+\begin{figure}[th]
   \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.pdf}
   \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
   \label{fig:Diagnostic-plots-cars}
@@ -1015,8 +1015,7 @@ The graph with the identified points is omitted (but the plain plot is shown in 
 
 #+latex: \newpage{}
 
-** Chapter Exercises
-
+** Exercises
 #+latex: \setcounter{thm}{0}
 
 #+latex: \begin{xca}
