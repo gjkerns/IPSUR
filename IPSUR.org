@@ -10,7 +10,7 @@
 #+EXPORT_SELECT_TAGS: 
 #+EXPORT_EXCLUDE_TAGS: 
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
-#+BABEL: :session *R* :exports results :results value raw :cache yes :tangle yes
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -20,7 +20,7 @@
 #+INCLUDE: "prelim.R" src R :exports none :results hide
 
 * An Introduction to Probability and Statistics                     :introps:
-\pagenumbering{arabic} 
+#+latex: \pagenumbering{arabic} 
 
 \noindent This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say -- and so many people have already said it so much better than I could. When I get something I like I will release it here.
 
@@ -50,10 +50,10 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 #+latex: \setcounter{thm}{0}
 
 * An Introduction to \textsf{R}                                      :introR:
-\label{cha:introduction-to-R}
+#+latex: \label{cha:introduction-to-R}
 
 ** Downloading and Installing \textsf{R} 
-\label{sec:download-install-R}
+#+latex: \label{sec:download-install-R}
 
 The instructions for obtaining \textsf{R} largely depend on the user's hardware and operating system. The \textsf{R} Project has written an \textsf{R} Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
 
@@ -79,7 +79,7 @@ With this option you can use \textsf{R} portably and without administrative priv
 Steps 3 and 4 are not required but save you the trouble of navigating to the =R-x.y.z/bin= directory to double-click =Rgui.exe= every time you want to run the program. It is useless to create your own shortcut to =Rgui.exe=. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some /other/ machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 
 *** Installing and Loading Add-on Packages
-\label{sub:installing-loading-packages}
+#+latex: \label{sub:installing-loading-packages}
 
 There are /base/ packages (which come with \textsf{R} automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \textsf{R} being used for this document the default base packages loaded at startup are 
 
@@ -101,8 +101,7 @@ packages in your library.
 For complete, precise information regarding installation of \textsf{R} and add-on packages, see the [[http://cran.r-project.org/manuals.html][\textsf{R} Installation and Administration manual]].
 
 ** Communicating with \textsf{R}
-\label{sec:Communicating-with-R}
-
+#+latex: \label{sec:Communicating-with-R}
 
 #+latex: \paragraph*{One line at a time}
 
@@ -134,14 +133,14 @@ By the word ``GUI'' I mean an interface in which the user communicates with \tex
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
 
 ** Basic \textsf{R} Operations and Concepts
-\label{sec:Basic-R-Operations}
+#+latex: \label{sec:Basic-R-Operations}
 
 The \textsf{R} developers have written an introductory document entitled ``An Introduction to \textsf{R}''. There is a sample session included which shows what basic interaction with \textsf{R} looks like. I recommend that all new users of \textsf{R} read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
 
 Below are some of the most basic operations that can be done with \textsf{R}. Almost every book about \textsf{R} begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
 
 *** Arithmetic
-\label{sub:Arithmetic}
+#+latex: \label{sub:Arithmetic}
 
 #+begin_src R :exports both :results output pp  
 2 + 3       # add
@@ -160,17 +159,11 @@ pi
 options(digits = 7)  # back to default
 #+end_src
 
-#+results[6f6d7c9b7a0784d99109913def5c02796093d448]:
-: [1] 3.333333333333333
-: [1] 1.414213562373095
-: [1] 2.718281828459045
-: [1] 3.141592653589793
-
 Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
 
 
 *** Assignment, Object names, and Data types
-\label{sub:Assignment-Object-names}
+#+latex: \label{sub:Assignment-Object-names}
 
 It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The === symbol works too, but it is recommended by the \textsf{R} masters to reserve === for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
@@ -201,7 +194,7 @@ typeof((0 + 1i)^2)
 Note that you can just type =(1i)^2= to get the same answer. The =NaN=\index{NaN@\texttt{NaN}} stands for ``not a number''; it is represented internally as =double=\index{double}. 
 
 *** Vectors
-\label{sub:Vectors}
+#+latex: \label{sub:Vectors}
 
 All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
 
@@ -253,7 +246,7 @@ letters[-(6:24)]
 #+end_src
 
 *** Functions and Expressions
-\label{sub:Functions-and-Expressions}
+#+latex: \label{sub:Functions-and-Expressions}
 
 A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
 
@@ -310,7 +303,7 @@ exp
 Be warned that most of the =.Internal= functions are written in other computer languages which the beginner may not understand, at least initially.
 
 ** Getting Help
-\label{sec:Getting-Help}
+#+latex: \label{sec:Getting-Help}
 
 When you are using \textsf{R}, it will not take long before you find yourself needing help. Fortunately, \textsf{R} has extensive help resources and you should immediately become familiar with them. Begin by clicking \textsf{Help} on \textsf{Rgui}. The following options are available. 
 - Console: :: gives useful shortcuts, for instance, \textsf{Ctrl+L}, to clear the \textsf{R} console screen. 
@@ -365,7 +358,7 @@ It is unnecessary to retype commands repeatedly, since \textsf{R} remembers what
 #+latex: \setcounter{thm}{0}
 
 * Data Description                                                 :datadesc:
-\label{cha:Describing-Data-Distributions}
+#+latex: \label{cha:Describing-Data-Distributions}
 
 \noindent In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
 
@@ -378,7 +371,7 @@ It is unnecessary to retype commands repeatedly, since \textsf{R} remembers what
 - all of the above in the context of grouped data, and in particular, the concept of a factor
 
 ** Types of Data 
-\label{sec:Types-of-Data}
+#+latex: \label{sec:Types-of-Data}
 
 Loosely speaking, a datum is any piece of collected information, and a data set is a collection of data related to each other in some way. We will categorize data into five types and describe each in turn:
 
@@ -391,7 +384,7 @@ Loosely speaking, a datum is any piece of collected information, and a data set 
 In each subsection we look at some examples of the type in question and introduce methods to display them.
 
 *** Quantitative data
-\label{sub:Quantitative-Data}
+#+latex: \label{sub:Quantitative-Data}
 
 Quantitative data are any data that measure or are associated with a measurement of the quantity of something. They invariably assume numerical values. Quantitative data can be further subdivided into two categories. 
 
@@ -407,17 +400,9 @@ Note that the distinction between discrete and continuous data is not always cle
 str(precip)
 #+end_src
 
-#+results[59417f66776682ca0fd549a3d227403c621e8900]:
-:  Named num [1:70] 67 54.7 7 48.5 14 17.2 20.7 13 43.4 40.2 ...
-:  - attr(*, "names")= chr [1:70] "Mobile" "Juneau" "Phoenix" "Little Rock" ...
-
 #+begin_src R :exports both :results output pp  
 precip[1:4]
 #+end_src
-
-#+results[945e9eb65b8eb763561202f9fb29becdf9c511a5]:
-:      Mobile      Juneau     Phoenix Little Rock 
-:        67.0        54.7         7.0        48.5
 
 The output shows that =precip= is a numeric vector which has been /named/, that is, each value has a name associated with it (which can be set with the =names=\index{names@\texttt{names}} function). These are quantitative continuous data.
 
@@ -430,10 +415,6 @@ The output shows that =precip= is a numeric vector which has been /named/, that 
 str(rivers)
 #+end_src
 
-#+results[5673ec978725012d16945a734c8db0c362fd2c9f]:
-:  num [1:141] 735 320 325 392 524 ...
-
-
 The output says that =rivers= is a numeric vector of length 141, and the first few values are 735, 320, 325, /etc/. These data are definitely quantitative and it appears that the measurements have been rounded to the nearest mile. Thus, strictly speaking, these are discrete data. But we will find it convenient later to take data like these to be continuous for some of our statistical procedures. 
 #+latex: \end{example}
 
@@ -444,20 +425,17 @@ The output says that =rivers= is a numeric vector of length 141, and the first f
 str(discoveries)
 #+end_src
 
-#+results[7130801ffad165f9d041d36fd5be21c9396642fa]:
-:  Time-Series [1:100] from 1860 to 1959: 5 3 0 2 0 3 2 3 6 1 ...
-
 #+latex: \end{example}
 
 The output is telling us that =discoveries= is a /time series/ (see Section \ref{sub:other-data-types} for more) of length 100. The entries are integers, and since they represent counts this is a good example of discrete quantitative data. We will take a closer look in the following sections.
 
 *** Displaying Quantitative Data
-\label{sub:Displaying-Quantitative-Data}
+#+latex: \label{sub:Displaying-Quantitative-Data}
 
 One of the first things to do when confronted by quantitative data (or any data, for that matter) is to make some sort of visual display to gain some insight into the data's structure. There are almost as many display types from which to choose as there are data sets to plot. We describe some of the more popular alternatives. 
 
 #+latex: \paragraph*{Strip charts\index{strip chart} (also known as Dot plots)\index{dot plot| see\{strip chart\}}}
-\label{par:Strip-charts}
+#+latex: \label{par:Strip-charts}
 
 These can be used for discrete or continuous data, and usually look best when the data set is not too large. Along the horizontal axis is a numerical scale above which the data values are plotted. We can do it in \textsf{R} with a call to the =stripchart=\index{stripchart@\texttt{stripchart}} function. There are three available methods.
 
@@ -484,9 +462,6 @@ stripchart(rivers, method="jitter", xlab="length")
 stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 #+end_src
-
-#+results[f80175835182c752a7b590952c7bd0cbbe0ce0ad]:
-[[file:img/stripcharts.ps]]
 
 #+begin_src latex
   \begin{figure}[th]
@@ -522,7 +497,7 @@ m + geom_histogram()
 m + geom_histogram(binwidth = 5)
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/histograms.ps
+#+begin_src R :exports none :results graphics silent :file img/histograms.ps
 library(ggplot2)
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 a <- m + geom_histogram()
@@ -534,9 +509,6 @@ viewport(layout.pos.row = x, layout.pos.col = y)
 print(a, vp = vplayout(1, 1))
 print(b, vp = vplayout(2, 1))
 #+end_src
-
-#+results[f2acfc576c4a083aa588d6953fd8b104c4258e00]:
-[[file:img/histograms.ps]]
 
 #+begin_src R :eval never :exports code
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
@@ -566,15 +538,12 @@ hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/histograms-bins.ps
+#+begin_src R :exports none :results graphics silent :file img/histograms-bins.ps
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
 hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 par(mfrow = c(1,1)) # back to normal
 #+end_src
-
-#+results[17c980b0bcce07aecaa846e3a5651ec4f4e2903b]:
-[[file:img/histograms-bins.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -595,7 +564,7 @@ The rightmost graph in Figure \ref{fig:histograms-bins} shows what happens when 
 Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the data values is taken to be a /leaf/, and the leading digit(s) is (are) taken to be /stems/. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
 
 #+latex: \begin{example}
-\label{exa:-ukdriverdeaths-first}
+#+latex: \label{exa:-ukdriverdeaths-first}
 =UKDriverDeaths=\index{Data sets!UKDriverDeaths@\texttt{UKDriverDeaths}} is a time series that contains the total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984. See =?UKDriverDeaths=. Compulsory seat belt use was introduced on January 31, 1983. We construct a stem and leaf diagram in \textsf{R} with the =stem.leaf=\index{stem.leaf@\texttt{stem.leaf}} function from the =aplpack=\index{R packages@\textsf{R} packages!aplpack@\texttt{aplpack}} package\cite{aplpack}.
 #+latex: \end{example}
 
@@ -603,29 +572,6 @@ Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the dat
 library(aplpack)
 stem.leaf(UKDriverDeaths, depth = FALSE)
 #+end_src
-
-#+results[63ef428674d285ab1c8b83ccc23b9e93310fa4b6]:
-#+begin_example
-1 | 2: represents 120
- leaf unit: 10
-            n: 192
-   10 | 57
-   11 | 136678
-   12 | 123889
-   13 | 0255666888899
-   14 | 00001222344444555556667788889
-   15 | 0000111112222223444455555566677779
-   16 | 01222333444445555555678888889
-   17 | 11233344566667799
-   18 | 00011235568
-   19 | 01234455667799
-   20 | 0000113557788899
-   21 | 145599
-   22 | 013467
-   23 | 9
-   24 | 7
-HI: 2654
-#+end_example
 
 The display shows a more or less balanced mound-shaped distribution, with one or maybe two humps, a big one and a smaller one just to its right. Note that the data have been rounded to the tens place so that each datum gets only one leaf to the right of the dividing line.
 
@@ -656,9 +602,6 @@ plot(LakeHuron, type = "p")
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[85411ce8e94cbc3d77ccee44ce80bc87f8c5c945]:
-[[file:img/indpl-lakehuron.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/indpl-lakehuron.ps}
@@ -674,7 +617,7 @@ par(mfrow = c(1,1)) # back to normal
 Coming soon.
 
 *** Qualitative Data, Categorical Data, and Factors
-\label{sub:Qualitative-Data}
+#+latex: \label{sub:Qualitative-Data}
 
 Qualitative data are simply any type of data that are not numerical, or do not represent numerical quantities. Examples of qualitative variables include a subject's name, gender, race/ethnicity, political party, socioeconomic status, class rank, driver's license number, and social security number (SSN).
 
@@ -696,9 +639,6 @@ vector gives the two letter postal abbreviations for all 50 states.
 str(state.abb)
 #+end_src
 
-#+results[14854e1deedb43ee143352a6e410f241da4533d5]:
-:  chr [1:50] "AL" "AK" "AZ" "AR" "CA" "CO" "CT" "DE" ...
-
 These would be ID data. The =state.name=\index{Data sets!state.name@\texttt{state.name}} vector lists all of the complete names and those data would also be ID.
 #+latex: \end{example}
 
@@ -710,19 +650,14 @@ str(state.region)
 state.region[1:5]
 #+end_src
 
-#+results[47cf099f4ab0bb71b0479200f59bd81364c0d7b7]:
-:  Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2 2 ...
-: [1] South West  West  South West 
-: Levels: Northeast South North Central West
-
 The =str=\index{str@\texttt{str}} output shows that =state.region= is already stored internally as a factor and it lists a couple of the factor levels. To see all of the levels we printed the first five entries of the vector in the second line.
 #+latex: \end{example}
 
 *** Displaying Qualitative Data
-\label{sub:Displaying-Qualitative-Data}
+#+latex: \label{sub:Displaying-Qualitative-Data}
 
 #+latex: \paragraph*{Tables}
-\label{par:Tables}
+#+latex: \label{par:Tables}
 
 One of the best ways to summarize qualitative data is with a table of the data values. We may count frequencies with the =table= function or list proportions with the =prop.table=\index{prop.table@\texttt{prop.table}} function (whose input is a frequency table). In the \textsf{R} Commander you can do it with \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Frequency Distribution}... Alternatively, to look at tables for all factors in the =Active data set=\index{Active data set@\texttt{Active data set}} you can do \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Summaries} \textsf{\(\triangleright\)} \textsf{Active Dataset}.
 
@@ -730,50 +665,21 @@ One of the best ways to summarize qualitative data is with a table of the data v
 Tbl <- table(state.division)
 #+end_src
 
-#+results[a98aa6194878549c0300d80e5a1ed47e7a60b76f]:
-
 #+begin_src R :exports both :results output pp  
 Tbl
 #+end_src
-
-#+results[9056cf47e352efbd01273afd8ab0d257531ebe19]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:                  6                  3                  8 
-: East South Central West South Central East North Central 
-:                  4                  4                  5 
-: West North Central           Mountain            Pacific 
-:                  7                  8                  5
 
 #+begin_src R :exports both :results output pp  
 Tbl/sum(Tbl)      # relative frequencies
 #+end_src
 
-#+results[46cf9d8ff87027d6b83305ce7768b61ba41ff27d]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:               0.12               0.06               0.16 
-: East South Central West South Central East North Central 
-:               0.08               0.08               0.10 
-: West North Central           Mountain            Pacific 
-:               0.14               0.16               0.10
-
 #+begin_src R :exports both :results output pp  
 prop.table(Tbl)   # same thing
 #+end_src
 
-#+results[934d224e9b7749900e929380472b355f12371710]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:               0.12               0.06               0.16 
-: East South Central West South Central East North Central 
-:               0.08               0.08               0.10 
-: West North Central           Mountain            Pacific 
-:               0.14               0.16               0.10
-
 
 #+latex: \paragraph*{Bar Graphs}
-\label{par:Bar-Graphs}
+#+latex: \label{par:Bar-Graphs}
 
 A bar graph is the analogue of a histogram for categorical data. A bar is displayed for each level of a factor, with the heights of the bars proportional to the frequencies of observations falling in the respective categories. A disadvantage of bar graphs is that the levels are ordered alphabetically (by default), which may sometimes obscure patterns in the display. 
 
@@ -798,9 +704,6 @@ barplot(prop.table(table(state.region)), cex.names = 0.50)
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[65df95d84fd5b4b1e9f378a3257d724ebac10119]:
-[[file:img/bar-gr-stateregion.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/bar-gr-stateregion.ps}
@@ -812,9 +715,8 @@ par(mfrow = c(1,1)) # back to normal
 #+latex: \end{example}
 
 
-
 #+latex: \paragraph*{Pareto Diagrams}
-\label{par:Pareto-Diagrams}
+#+latex: \label{par:Pareto-Diagrams}
 
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease -- this is much more difficult when the bars are jumbled. 
 
@@ -826,9 +728,6 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
 library(qcc)
 pareto.chart(table(state.division), ylab="Frequency")
 #+end_src
-
-#+results[34150ba44e68c70938dcf09f5808504463bbac80]:
-[[file:img/Pareto-chart.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -843,7 +742,7 @@ pareto.chart(table(state.division), ylab="Frequency")
 
 
 #+latex: \paragraph*{Dot Charts}
-\label{par:Dotcharts}
+#+latex: \label{par:Dotcharts}
 
 These are a lot like a bar graph that has been turned on its side with the bars replaced by dots on horizontal lines. They do not convey any more (or less) information than the associated bar graph, but the strength lies in the economy of the display. Dot charts are so compact that it is easy to graph very complicated multi-variable interactions together in one graph. See Section \ref{sec:Comparing-Data-Sets}. We will give an example here using the same data as above for comparison. The graph was produced by the following code.
 
@@ -853,9 +752,6 @@ These are a lot like a bar graph that has been turned on its side with the bars 
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
 #+end_src
-
-#+results[2cc7b4080c1c2730270b001b36010a2f4f7c8f3a]:
-[[file:img/dot-charts.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -870,14 +766,14 @@ See Figure \ref{fig:dot-charts}. Compare it to Figure \ref{fig:bar-gr-stateregio
 #+latex: \end{example}
 
 #+latex: \paragraph*{Pie Graphs}
-\label{par:Pie-Graphs}
+#+latex: \label{par:Pie-Graphs}
 
 These can be done with \textsf{R} and the \textsf{R} Commander, but they fallen out of favor in recent years because researchers have determined that while the human eye is good at judging linear measures, it is notoriously bad at judging relative areas (such as those displayed by a pie graph). Pie charts are consequently a very bad way of displaying information. A bar chart or dot chart is a preferable way of displaying qualitative data. See =?pie=\index{pie@\texttt{pie}} for more information.
 
 We are not going to do any examples of a pie graph and discourage their use elsewhere. 
 
 *** Logical Data
-\label{sub:Logical-Data}
+#+latex: \label{sub:Logical-Data}
 
 There is another type of information recognized by \textsf{R} which does not fall into the above categories. The value is either =TRUE= or =FALSE= (note that equivalently you can use =1 = TRUE=, =0 = FALSE=). Here is an example of a logical vector:
 
@@ -887,9 +783,6 @@ y <- (x < 7.3)
 y
 #+end_src
 
-#+results[6b3f05548e94def99a1699ecf3048015f9928dfc]:
-: [1]  TRUE  TRUE  TRUE FALSE FALSE
-
 Many functions in \textsf{R} have options that the user may or may not want to activate in the function call. For example, the =stem.leaf= function has the =depths= argument which is =TRUE= by default. We saw in Section \ref{sub:Quantitative-Data} how to turn the option off, simply enter =stem.leaf(x, depths = FALSE)= and they will not be shown on the display.
 
 We can swap =TRUE= with =FALSE= with the exclamation point =!=.
@@ -898,11 +791,8 @@ We can swap =TRUE= with =FALSE= with the exclamation point =!=.
 !y
 #+end_src
 
-#+results[5278ebd59af802f7101f1732623757a0f3a56845]:
-: [1] FALSE FALSE FALSE  TRUE  TRUE
-
 *** Missing Data
-\label{sub:Missing-Data}
+#+latex: \label{sub:Missing-Data}
 
 Missing data are a persistent and prevalent problem in many statistical analyses, especially those associated with the social sciences. \textsf{R} reserves the special symbol =NA= to representing missing data.
 
@@ -914,19 +804,12 @@ y <- c(5, NA, 1, 2, 2)
 x + y
 #+end_src
 
-#+results[034e716f8ce96dfb6e1fa68c6535c9e479c566e9]:
-: [1]  8 NA NA  6  9
-
 Some functions have a =na.rm= argument which when =TRUE= will ignore missing data as if they were not there (such as =mean=, =var=, =sd=, =IQR=, =mad=, ...). 
 
 #+begin_src R :exports both :results output pp  
 sum(x)
 sum(x, na.rm = TRUE)
 #+end_src
-
-#+results[13e952e320eda92d50173bd0fc19ea4ed02ae31d]:
-: [1] NA
-: [1] 21
 
 Other functions do not have a =na.rm= argument and will return =NA= or an error if the argument has \texttt{NA}s. In those cases we can find the locations of any \texttt{NA}s with the =is.na= function and remove those cases with the =[]= operator.
 
@@ -936,32 +819,28 @@ z <- x[!is.na(x)]
 sum(z)
 #+end_src
 
-#+results[d310be10fa39f7d8ffab7e351af9fc47cceb53bf]:
-: [1] FALSE FALSE  TRUE FALSE FALSE
-: [1] 21
-
 The analogue of =is.na= for rectangular data sets (or data frames) is the =complete.cases= function. See Appendix \ref{sec:Editing-Data-Sets}.
 
 *** Other Data Types
-\label{sub:other-data-types}
+#+latex: \label{sub:other-data-types}
 
 ** Features of Data Distributions
-\label{sec:features-of-data}
+#+latex: \label{sec:features-of-data}
 
 Given that the data have been appropriately displayed, the next step is to try to identify salient features represented in the graph. The acronym to remember is \emph{C}enter, \emph{U}nusual features, \emph{S}pread, and \emph{S}hape. (CUSS).
 
 *** Center
-\label{sub:Center}
+#+latex: \label{sub:Center}
 
 One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure \ref{fig:histograms-bins}, a measure of center would be about \( SRC_R{round(mean(precip))} \). 
 
 *** Spread
-\label{sub:Spread}
+#+latex: \label{sub:Spread}
 
 The spread of a data set is associated with its variability; data sets with a large spread tend to cover a large interval of values, while data sets with small spread tend to cluster tightly around a central value. 
 
 *** Shape
-\label{sub:Shape}
+#+latex: \label{sub:Shape}
 
 When we speak of the /shape/ of a data set, we are usually referring to the shape exhibited by an associated graphical display, such as a histogram. The shape can tell us a lot about any underlying structure to the data, and can help us decide which statistical procedure we should use to analyze them.
 
@@ -977,7 +856,7 @@ We have already encountered skewed distributions: both the discoveries data in F
 Another component to the shape of a distribution is how ``peaked'' it is. Some distributions tend to have a flat shape with thin tails. These are called /platykurtic/, and an example of a platykurtic distribution is the uniform distribution; see Section \ref{sec:The-Continuous-Uniform}. On the other end of the spectrum are distributions with a steep peak, or spike, accompanied by heavy tails; these are called /leptokurtic/. Examples of leptokurtic distributions are the Laplace distribution and the logistic distribution. See Section \ref{sec:Other-Continuous-Distributions}. In between are distributions (called /mesokurtic/) with a rounded peak and moderately sized tails. The standard example of a mesokurtic distribution is the famous bell-shaped curve, also known as the Gaussian, or normal, distribution, and the binomial distribution can be mesokurtic for specific choices of \(p\). See Sections \ref{sec:binom-dist} and \ref{sec:The-Normal-Distribution}.
 
 *** Clusters and Gaps
-\label{sub:clusters-and-gaps}
+#+latex: \label{sub:clusters-and-gaps}
 
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis}.
 
@@ -986,35 +865,10 @@ library(aplpack)
 with(faithful, stem.leaf(eruptions))
 #+end_src
 
-#+results[baa29c772676c13bc84d072e55e11e4bee50e4ac]:
-#+begin_example
-1 | 2: represents 1.2
- leaf unit: 0.1
-            n: 272
-   12     s | 667777777777
-   51    1. | 888888888888888888888888888899999999999
-   71    2* | 00000000000011111111
-   87     t | 2222222222333333
-   92     f | 44444
-   94     s | 66
-   97    2. | 889
-   98    3* | 0
-  102     t | 3333
-  108     f | 445555
-  118     s | 6666677777
-  (16)   3. | 8888888889999999
-  138    4* | 0000000000000000111111111111111
-  107     t | 22222222222233333333333333333
-   78     f | 44444444444445555555555555555555555
-   43     s | 6666666666677777777777
-   21    4. | 88888888888899999
-    4    5* | 0001
-#+end_example
-
 There are definitely two clusters of data here; an upper cluster and a lower cluster. 
 
 *** Extreme Observations and other Unusual Features
-\label{sub:Extreme-Observations-and}
+#+latex: \label{sub:Extreme-Observations-and}
 
 Extreme observations fall far from the rest of the data. Such observations are troublesome to many statistical procedures; they cause exaggerated estimates and instability. It is important to identify extreme observations and examine the source of the data more closely. There are many possible reasons underlying an extreme observation:
 
@@ -1025,15 +879,15 @@ Extreme observations fall far from the rest of the data. Such observations are t
 - *Maybe it indicates a deeper trend or phenomenon.* Many of the most influential scientific discoveries were made when the investigator noticed an unexpected result, a value that was not predicted by the classical theory. Albert Einstein, Louis Pasteur, and others built their careers on exactly this circumstance.
 
 ** Descriptive Statistics
-\label{sec:Descriptive-Statistics}
+#+latex: \label{sec:Descriptive-Statistics}
 
 *** Frequencies and Relative Frequencies
-\label{sub:Frequencies-and-Relative}
+#+latex: \label{sub:Frequencies-and-Relative}
 
 These are used for categorical data. The idea is that there are a number of different categories, and we would like to get some idea about how the categories are represented in the population. 
 
 *** Measures of Center
-\label{sub:Measures-of-Center}
+#+latex: \label{sub:Measures-of-Center}
 
 The /sample mean/ is denoted \(\overline{x}\) (read ``\(x\)-bar'') and is simply the arithmetic average of the observations:
 
@@ -1066,7 +920,7 @@ The /trimmed mean/ is a measure designed to address the sensitivity of the sampl
 - You can calculate the sample median of =x= with the command =median(x)=. \item You can calculate the trimmed mean with the =trim= argument; =mean(x, trim = 0.05)=.
 
 *** Order Statistics and the Sample Quantiles
-\label{sub:Order-Statistics-and}
+#+latex: \label{sub:Order-Statistics-and}
 
 A common first step in an analysis of a data set is to sort the values. Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), we may sort the values to obtain an increasing sequence
 
@@ -1110,7 +964,7 @@ In =Rcmdr=, we can calculate the sample quantiles for a particular variable with
 
 
 *** Measures of Spread
-\label{sub:Measures-of-Spread}
+#+latex: \label{sub:Measures-of-Spread}
 
 #+latex: \paragraph*{Sample Variance and Standard Deviation}
 
@@ -1136,9 +990,8 @@ Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1
 Chebychev's Rule applies to any data distribution, /any/ list of numbers, no matter where it came from or what the histogram looks like. The price for such generality is that the bounds are not very tight; if we know more about how the data are shaped then we can say more about how much of the data can fall a given distance from the mean.
 
 #+latex: \begin{fact}
-\label{fac:Empirical-Rule}Empirical Rule: If data follow a bell-shaped
-curve, then approximately 68\%, 95\%, and 99.7\% of the data are within
-1, 2, and 3 standard deviations of the mean, respectively. 
+#+latex: \label{fac:Empirical-Rule}
+Empirical Rule: If data follow a bell-shaped curve, then approximately 68%, 95%, and 99.7% of the data are within 1, 2, and 3 standard deviations of the mean, respectively. 
 #+latex: \end{fact}
 
 
@@ -1178,7 +1031,8 @@ we may compute the sample range with =range(x)= and the sample variance with =va
 #+latex: \subparagraph*{With the \textsf{R} Commander}
 we can calculate the sample standard deviation with the \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Numerical Summaries}... combination. \textsf{R} Commander does not calculate the \(IQR\) or \(MAD\) in any of the menu selections, by default.
 
-*** Measures of Shape \label{sub:Measures-of-Shape}
+*** Measures of Shape 
+#+latex: \label{sub:Measures-of-Shape}
 
 #+latex: \paragraph*{Sample Skewness}
 
@@ -1220,17 +1074,6 @@ skewness(discoveries)
 2*sqrt(6/length(discoveries))
 #+end_src
 
-#+results[b50b205bb9abc25e7e8f6264a7501c0e2231e526]:
-: Loading required package: class
-: 
-: Attaching package: 'class'
-: 
-: The following object(s) are masked from 'package:reshape':
-: 
-:     condense
-: [1] 1.2076
-: [1] 0.4898979
-
 The data are definitely skewed to the right. Let us check the sample excess kurtosis of the =UKDriverDeaths= data:
 
 #+begin_src R :exports both :results output pp  
@@ -1238,14 +1081,10 @@ kurtosis(UKDriverDeaths)
 4*sqrt(6/length(UKDriverDeaths))
 #+end_src
 
-#+results[065a2e0e51f36ca7f5651d2fbf8648642ae8f71f]:
-: [1] 0.07133848
-: [1] 0.7071068
-
 so that the =UKDriverDeaths= data appear to be mesokurtic, or at least not substantially leptokurtic.
 
 ** Exploratory Data Analysis
-\label{sec:Exploratory-Data-Analysis}
+#+latex: \label{sec:Exploratory-Data-Analysis}
 
 This field was founded (mostly) by John Tukey (1915-2000). Its tools are useful when not much is known regarding the underlying causes associated with the data set, and are often used for checking assumptions. For example, suppose we perform an experiment and collect some data... now what? We look at the data using exploratory visual tools.
 
@@ -1266,37 +1105,15 @@ The basic command is =stem(x)= or a more sophisticated version written by Peter 
 
 
 WARNING: Sometimes when making a stem plot the result will not be what you expected. There are several reasons for this: 
-
 - Stemplots by default will trim extreme observations (defined in Section \ref{sub:Outliers}) from the display. This in some cases will result in stemplots that are not as wide as expected.
-
 - The leafs digit is chosen automatically by =stem.leaf= according to an algorithm that the computer believes will represent the data well. Depending on the choice of the digit, =stem.leaf= may drop digits from the data or round the values in unexpected ways.
 
-Let us take a look at the =rivers= data set\label{ite:stemplot-rivers}.
+Let us take a look at the =rivers= data set
+#+latex: \label{ite:stemplot-rivers}.
 
 #+begin_src R :exports both :results output pp  
 stem.leaf(rivers)
 #+end_src
-
-#+results[7ae2adc2e8f1db071cae7f6d0ae8664d41a548df]:
-#+begin_example
-1 | 2: represents 120
- leaf unit: 10
-            n: 141
-    1     1 | 3
-   29     2 | 0111133334555556666778888899
-   64     3 | 00000111122223333455555666677888999
-  (18)    4 | 011222233344566679
-   59     5 | 000222234467
-   47     6 | 0000112235789
-   34     7 | 12233368
-   26     8 | 04579
-   21     9 | 0008
-   17    10 | 035
-   14    11 | 07
-   12    12 | 047
-    9    13 | 0
-HI: 1450 1459 1770 1885 2315 2348 2533 3710
-#+end_example
 
 The stemplot shows a right-skewed shape to the =rivers= data distribution. Notice that the last digit of each of the data values were dropped from the display. Notice also that there were eight extreme observations identified by the computer, and their exact values are listed at the bottom of the stemplot. Look at the scale on the left of the stemplot and try to imagine how ridiculous the graph would have looked had we tried to include enough stems to include these other eight observations; the stemplot would have stretched over several pages. Notice finally that we can use the depths to approximate the sample median for these data. The median lies in the row identified by =(18)=, which means that the median is the average of the ninth and tenth observation on that row. Those two values correspond to =43= and =43=, so a good guess for the median would be 430. (For the record, the sample median is \(\widetilde{x}=425\). Recall that stemplots round the data to the nearest stem-leaf pair.) 
 
@@ -1306,30 +1123,11 @@ Next let us see what the =precip= data look like.
 stem.leaf(precip)
 #+end_src
 
-#+results[c1d6287ed234eaea8891b237850262487caf789a]:
-#+begin_example
-1 | 2: represents 12
- leaf unit: 1
-            n: 70
-LO: 7 7.2 7.8 7.8
-    8    1* | 1344
-   13    1. | 55677
-   16    2* | 024
-   18    2. | 59
-   28    3* | 0000111234
-  (15)   3. | 555566677788899
-   27    4* | 0000122222334
-   14    4. | 56688899
-    6    5* | 44
-    4    5. | 699
-HI: 67
-#+end_example
-
 Here is an example of split stems, with two lines per stem. The final digit of each datum has been dropped for the display. The data appear to be left skewed with four extreme values to the left and one extreme value to the right. The sample median is approximately 37 (it turns out to be 36.6).
 
 
 *** Hinges and the Five Number Summary
-\label{sub:hinges-and-5NS}
+#+latex: \label{sub:hinges-and-5NS}
 
 Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the hinges are found by the following method:  
 - Find the order statistics \(x_{(1)}\), \(x_{(2)}\), ..., \(x_{(n)}\). 
@@ -1346,7 +1144,7 @@ An advantage of the \(5NS\) is that it reduces a potentially large data set to a
 If the data are stored in a vector =x=, then you can compute the \(5NS\) with the =fivenum= function.
 
 *** Boxplots
-\label{sub:boxplots}
+#+latex: \label{sub:boxplots}
 
 A boxplot is essentially a graphical representation of the \(5NS\). It can be a handy alternative to a stripchart when the sample size is large.
 
@@ -1367,7 +1165,7 @@ Boxplots are also good because one can visually assess multiple features of the 
 
 
 *** Outliers
-\label{sub:Outliers}
+#+latex: \label{sub:Outliers}
 
 A /potential outlier/ is any observation that falls beyond 1.5 times the width of the box on either side, that is, any observation less than \(h_{L}-1.5(h_{U}-h_{L})\) or greater than \(h_{U}+1.5(h_{U}-h_{L})\). A /suspected outlier/ is any observation that falls beyond 3 times the width of the box on either side. In \textsf{R}, both potential and suspected outliers (if present) are denoted by open circles; there is no distinction between the two. 
 
@@ -1386,17 +1184,11 @@ The =rivers= data. We will look for potential outliers in the =rivers= data.
 boxplot.stats(rivers)$out
 #+end_src
 
-#+results[0e9364cea62f7b6644a80f35c074b6e9e420675d]:
-:  [1] 1459 1450 1243 2348 3710 2315 2533 1306 1270 1885 1770
-
 We may change the =coef= argument to 3 (it is 1.5 by default) to identify suspected outliers.
 
 #+begin_src R :exports both :results output pp  
 boxplot.stats(rivers, coef = 3)$out
 #+end_src
-
-#+results[fdebe1645f73bf7a654e96e25027d00ea3fbd625]:
-: [1] 2348 3710 2315 2533 1885
 
 #+latex: \end{example}
 
@@ -1414,7 +1206,7 @@ z_{i}=\frac{x_{i}-\overline{x}}{s},\quad i=1,\,2,\,\ldots,\, n.
 The =scale= function will rescale a numeric vector (or data frame) by subtracting the sample mean from each value (column) and/or by dividing each observation by the sample standard deviation.
 
 ** Multivariate Data and Data Frames
-\label{sec:multivariate-data}
+#+latex: \label{sec:multivariate-data}
 
 We have had experience with vectors of data, which are long lists of numbers. Typically, each entry in the vector is a single measurement on a subject or experimental unit in the study. We saw in Section \ref{sub:Vectors} how to form vectors with the =c= function or the =scan= function. 
 
@@ -1431,8 +1223,6 @@ y <- letters[3:6]
 A <- data.frame(v1 = x, v2 = y)
 #+end_src
 
-#+results[4ced63757421d10dde393e453e0f58eac1434a75]:
-
 #+latex: \end{example}
 
 Notice that =x= and =y= are the same length. This is /necessary/. Also notice that =x= is a numeric vector and =y= is a character vector. We may choose numeric and character vectors (or even factors) for the columns of the data frame, but each column must be of exactly one type. That is, we can have a column for =height= and a column for =gender=, but we will get an error if we try to mix function =height= (numeric) and =gender= (character or factor) information in the same column.
@@ -1440,18 +1230,10 @@ Notice that =x= and =y= are the same length. This is /necessary/. Also notice th
 Indexing of data frames is similar to indexing of vectors. To get the entry in row \(i\) and column \(j\) do =A[i,j]=. We can get entire rows and columns by omitting the other index. 
 
 #+begin_src R :exports both :results output pp
-A[3,]
+A[3, ]
 A[1, ]
-A[ ,2]
+A[ , 2]
 #+end_src
-
-#+results[b903147f4703bfb2594d5e5a79e1a57a647fa287]:
-:   v1 v2
-: 3  7  e
-:   v1 v2
-: 1  5  c
-: [1] c d e f
-: Levels: c d e f
 
 There are several things happening above. Notice that =A[3,]= gave a data frame (with the same entries as the third row of =A=) yet =A[1, ]= is a numeric vector. =A[ ,2]= is a factor vector because the default setting for =data.frame= is =stringsAsFactors = TRUE=.
 
@@ -1462,14 +1244,10 @@ names(A)
 A$v1
 #+end_src
 
-#+results[59cf901eab890434185cfde36eeb31ef334d1aa2]:
-: [1] "v1" "v2"
-: [1] 5 6 7 8
-
 The above is identical to =A[ ,1]=. 
 
 *** Bivariate Data
-\label{sub:Bivariate-Data}
+#+latex: \label{sub:Bivariate-Data}
 
 - Stacked bar charts
 - odds ratio and relative risk
@@ -1515,7 +1293,7 @@ r=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_
 
 
 *** Multivariate Data
-\label{sub:Multivariate-Data}
+#+latex: \label{sub:Multivariate-Data}
 
 Multivariate Data Display
 
@@ -1527,7 +1305,7 @@ or in \textsf{R} Commander by following \textsf{Statistics} \textsf{\(\triangler
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
 
 ** Comparing Populations
-\label{sec:Comparing-Data-Sets}
+#+latex: \label{sec:Comparing-Data-Sets}
 
 Sometimes we have data from two or more groups (or populations) and we would like to compare them and draw conclusions. Some issues that we would like to address:
 
@@ -1582,9 +1360,6 @@ library(lattice)
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+end_src
 
-#+results[8355e9e5854f856f05f9cc3dee57fabbae65cf4f]:
-[[file:img/xyplot-group.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/xyplot-group.ps}
@@ -1632,7 +1407,7 @@ It is clear that if \(x_{(k)}=y_{(k)}\) for all \(k=1,2,\ldots,n\), then we will
 - If the slope of the line is greater (less) than one, then the spread of the \(Y\) data is greater (less) than the spread of the \(X\) data.
 
 *** Lattice Graphics
-\label{sub:Lattice-Graphics}
+#+latex: \label{sub:Lattice-Graphics}
 
 The following types of plots are useful when there is one variable of interest and there is a factor in the data set by which the variable is categorized. 
 
@@ -1650,9 +1425,6 @@ bwplot(~weight | feed, data = chickwts)
 library(lattice)
 print(bwplot(~weight | feed, data = chickwts))
 #+end_src
-
-#+results[3bc148f7251076a7599a3e3eaf3e3c8a28a817a0]:
-[[file:img/bwplot.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -1674,9 +1446,6 @@ library(lattice)
 print(histogram(~age | education, data = infert))
 #+end_src
 
-#+results[c52243f6e1f51b56099fe0d301a722427411da47]:
-[[file:img/histograms-lattice.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/histograms-lattice.ps}
@@ -1697,9 +1466,6 @@ xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 #+end_src
 
-#+results[9c2464a38b63e4be8a05d7256438bddc1c9d5035]:
-[[file:img/xyplot.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/xyplot.ps}
@@ -1718,9 +1484,6 @@ coplot(conc ~ uptake | Type * Treatment, data = CO2)
 #+begin_src R :exports none :results graphics silent :file img/coplot.ps
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 #+end_src
-
-#+results[6f8b2609dd854db993b345476cb5c38cbc731639]:
-[[file:img/coplot.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -1747,7 +1510,7 @@ names(RcmdrTestDrive)
 To load the data in the \textsf{R} Commander (=Rcmdr=), click the \textsf{Data Set} button, and select =RcmdrTestDrive= as the active data set. To learn more about the data set and where it comes from, type =?RcmdrTestDrive= at the command line.
 
 #+latex: \begin{xca}
-\label{xca:summary-RcmdrTestDrive}
+#+latex: \label{xca:summary-RcmdrTestDrive}
 
 Perform a summary of all variables in =RcmdrTestDrive=. You can do this with the command =summary(RcmdrTestDrive)=.
 
@@ -1809,7 +1572,7 @@ Describe the following data sets just as if you were communicating with an alien
 #+latex: \end{xca}
 
 * Probability                                                          :prob:
-\label{cha:Probability}
+#+latex: \label{cha:Probability}
 
 
 #+latex: \noindent 
@@ -1845,9 +1608,6 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
   cex = 2 )
 #+end_src
 
-#+results[5e9c57d9e4ae8cd0be3dec799e9ec65282c838d6]:
-[[file:img/diagram.ps]]
-
 #+begin_src latex 
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/diagram.ps}
@@ -1858,7 +1618,7 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 
 
 ** Sample Spaces
-\label{sec:Sample-Spaces}
+#+latex: \label{sec:Sample-Spaces}
 
 For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the /sample space/\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
 
@@ -1874,13 +1634,6 @@ S <- data.frame(lands = c("down","up","side"))
 S
 #+end_src
 
-#+results[f0fed454d1cb899b4e64684c68cdba5aeed563b8]:
-:   lands
-: 1  down
-: 2    up
-: 3  side
-
-
 The sample space =S= contains the column =lands= which stores the outcomes =down=, =up=, and =side=. 
 
 #+latex: \end{example}
@@ -1894,45 +1647,17 @@ library(prob)
 tosscoin(1)
 #+end_src
 
-#+results[616ed8822afe5464ba40bf4373809277c9d07e17]:
-:   toss1
-: 1     H
-: 2     T
-
-
 The number =1= tells =tosscoin= that we only want to toss the coin once. We could toss it three times: 
 
 #+begin_src R :exports both :results output pp  
 tosscoin(3)
 #+end_src
 
-#+results[c9cf40591aec3a9c8b8ed9ffd834b58fb8dbb241]:
-:   toss1 toss2 toss3
-: 1     H     H     H
-: 2     T     H     H
-: 3     H     T     H
-: 4     T     T     H
-: 5     H     H     T
-: 6     T     H     T
-: 7     H     T     T
-: 8     T     T     T
-
-
 Alternatively we could roll a fair die: 
 
 #+begin_src R :exports both :results output pp  
 rolldie(1) 
 #+end_src
-
-#+results[c64756d383996117209e861ad1da0fc18030337f]:
-:   X1
-: 1  1
-: 2  2
-: 3  3
-: 4  4
-: 5  5
-: 6  6
-
 
 The =rolldie= function defaults to a 6-sided die, but we can specify others with the =nsides= argument. The command =rolldie(3, nsides = 4)= would be used to roll a 4-sided die three times.
 
@@ -1942,20 +1667,10 @@ Perhaps we would like to draw one card from a standard set of playing cards (it 
 head(cards()) 
 #+end_src
 
-#+results[fb1bbd5eac32f4a8277824ccc8122a50ea2896da]:
-:   rank suit
-: 1    2 Club
-: 2    3 Club
-: 3    4 Club
-: 4    5 Club
-: 5    6 Club
-: 6    7 Club
-
-
 The =cards= function that we just used has optional arguments =jokers= (if you would like Jokers to be in the deck) and =makespace= which we will discuss later. There is also a =roulette= function which returns the sample space associated with one spin on a roulette wheel. There are EU and USA versions available. Interested readers may contribute any other game or sample spaces that may be of general interest.
 
 *** Sampling from Urns
-\label{sub:sampling-from-urns}
+#+latex: \label{sub:sampling-from-urns}
 
 This is perhaps the most fundamental type of random experiment. We have an urn that contains a bunch of distinguishable objects (balls) inside. We shake up the urn, reach inside, grab a ball, and take a look. That's all.
 
@@ -1978,23 +1693,7 @@ If sampling is with replacement, then we can get any outcome 1, 2, or 3 on any d
 
 #+begin_src R :exports both :results output pp  
 urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
-#+end_src
-
-#+results[d607c4093ba224a80a91bf8a118dc90c81f79889]:
-#+begin_example
-  X1 X2
-1  1  1
-2  2  1
-3  3  1
-4  1  2
-5  2  2
-6  3  2
-7  1  3
-8  2  3
-9  3  3
-#+end_example
-
- 
+#+end_src 
 
 Notice that rows 2 and 4 are identical, save for the order in which the numbers are shown. Further, note that every possible pair of the numbers 1 through 3 are listed. This experiment is equivalent to rolling a 3-sided die twice, which we could have accomplished with =rolldie(2, nsides = 3)=.
 
@@ -2004,16 +1703,7 @@ Here sampling is without replacement, so we may not observe the same number twic
 
 #+begin_src R :exports both :results output pp   
 urnsamples(1:3, size = 2, replace = FALSE, ordered = TRUE)
-#+end_src 
-
-#+results[99c47070fe8eae648996315942541d468a02a2cf]:
-:   X1 X2
-: 1  1  2
-: 2  2  1
-: 3  1  3
-: 4  3  1
-: 5  2  3
-: 6  3  2
+#+end_src
 
 This is just as we expected. Notice that there are less rows in this answer due to the more restrictive sampling procedure. If the numbers 1, 2, and 3 represented ``Fred'', ``Mary'', and ``Sue'', respectively, then this experiment would be equivalent to selecting two people of the three to serve as president and vice-president of a company, respectively, and the sample space shown above lists all possible ways that this could be done.
 
@@ -2025,12 +1715,6 @@ Again, we may not observe the same outcome twice, but in this case, we will only
 urnsamples(1:3, size = 2, replace = FALSE, ordered = FALSE) 
 #+end_src 
 
-#+results[790897ef02e65b348e3ed87f03af2e7f43eca25f]:
-:   X1 X2
-: 1  1  2
-: 2  1  3
-: 3  2  3
-
 This experiment is equivalent to reaching in the urn, picking a pair, and looking to see what they are. This is the default setting of =urnsamples=, so we would have received the same output by simply typing =urnsamples(1:3, 2)=.
 
 #+latex: \paragraph*{Unordered, With Replacement}
@@ -2039,16 +1723,7 @@ The last possibility is perhaps the most interesting. We replace the balls after
 
 #+begin_src R :exports both :results output pp   
 urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE) 
-#+end_src 
-
-#+results[1765de47fbf1efc588c33260b308483c1db2f605]:
-:   X1 X2
-: 1  1  1
-: 2  1  2
-: 3  1  3
-: 4  2  2
-: 5  2  3
-: 6  3  3
+#+end_src
 
 We may interpret this experiment in a number of alternative ways. One way is to consider this as simply putting two 3-sided dice in a cup, shaking the cup, and looking inside -- as in a game of /Liar's Dice/, for instance. Each row of the sample space is a potential pair we could observe. Another way is to view each outcome as a separate method to distribute two identical golf balls into three boxes labeled 1, 2, and 3. Regardless of the interpretation, =urnsamples= lists every possible way that the experiment can conclude.
 
@@ -2059,7 +1734,7 @@ surface.
 In this way, when the =x= argument of =urnsamples= has repeated elements, the resulting sample space may appear to be =ordered = TRUE= even when, in fact, the call to the function was =urnsamples(..., ordered = FALSE)=. Similar remarks apply for the =replace= argument. 
 
 ** Events
-\label{sec:Events}
+#+latex: \label{sec:Events}
 
 An /event/\index{event} \(A\) is merely a collection of outcomes, or in other words, a subset of the sample space
 #+latex: \footnote{This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.}.
@@ -2074,20 +1749,9 @@ S <- tosscoin(2, makespace = TRUE)
 S[1:3, ] 
 #+end_src
 
-#+results[ee3b251efa5d56afd8cca49501ca92406e6a01c3]:
-:   toss1 toss2 probs
-: 1     H     H  0.25
-: 2     T     H  0.25
-: 3     H     T  0.25
-
 #+begin_src R :exports both :results output pp   
 S[c(2,4), ] 
 #+end_src
-
-#+results[b2b7901e850d71680bee1c70b804fd039560be0a]:
-:   toss1 toss2 probs
-: 2     T     H  0.25
-: 4     T     T  0.25
 
 and so forth. We may also extract rows that satisfy a logical expression using the =subset= function, for instance 
 
@@ -2095,63 +1759,19 @@ and so forth. We may also extract rows that satisfy a logical expression using t
 S <- cards() 
 #+end_src 
 
-#+results[16c7bc5f4ce6873c0fdb04d8adc8d1466784673a]:
-
 #+begin_src R :exports both :results output pp  
 subset(S, suit == "Heart") 
-#+end_src 
-
-#+results[a78808d9f1213a58933adbbfab0e792bd6bf9bc9]:
-#+begin_example
-   rank  suit
-27    2 Heart
-28    3 Heart
-29    4 Heart
-30    5 Heart
-31    6 Heart
-32    7 Heart
-33    8 Heart
-34    9 Heart
-35   10 Heart
-36    J Heart
-37    Q Heart
-38    K Heart
-39    A Heart
-#+end_example
+#+end_src
 
 #+begin_src R :exports both :results output pp  
 subset(S, rank %in% 7:9)
 #+end_src
-
-#+results[995c22530ca8f4c5a441b37272cd8958485a2980]:
-#+begin_example
-   rank    suit
-6     7    Club
-7     8    Club
-8     9    Club
-19    7 Diamond
-20    8 Diamond
-21    9 Diamond
-32    7   Heart
-33    8   Heart
-34    9   Heart
-45    7   Spade
-46    8   Spade
-47    9   Spade
-#+end_example
 
 We could continue indefinitely. Also note that mathematical expressions are allowed: 
 
 #+begin_src R :exports both :results output pp   
 subset(rolldie(3), X1+X2+X3 > 16) 
 #+end_src
-
-#+results[30a2bbb6156c5bb50c0d91d236885c0232bbeff5]:
-:     X1 X2 X3
-: 180  6  6  5
-: 210  6  5  6
-: 215  5  6  6
-: 216  6  6  6
 
 *** Functions for Finding Subsets
 
@@ -2165,10 +1785,7 @@ The function =%in%= helps to learn whether each value of one vector lies somewhe
 x <- 1:10 
 y <- 8:12 
 y %in% x
-#+end_src 
-
-#+results[49ae324719beb301b44590f607fa2cccc50c09fe]:
-: [1]  TRUE  TRUE  TRUE FALSE FALSE
+#+end_src
 
 Notice that the returned value is a vector of length 5 which tests whether each element of =y= is in =x=, in turn.
 
@@ -2180,9 +1797,6 @@ It is more common to want to know whether the /whole/ vector =y= is in =x=. We c
 isin(x,y) 
 #+end_src
 
-#+results[38ea9c9cf5ab50f736fd57a1ab73c2dcd611e83c]:
-: [1] FALSE
-
 Of course, one may ask why we did not try something like =all(y %in% x)=, which would give a single result, =TRUE=. The reason is that the answers are different in the case that =y= has repeated values. Compare: 
 
 #+begin_src R :exports code :results silent
@@ -2190,16 +1804,10 @@ x <- 1:10
 y <- c(3,3,7) 
 #+end_src 
 
-#+results[7924569f0a3bf447f4de20aff60ba717292190d8]:
-
 #+begin_src R :exports both :results output pp   
 all(y %in% x)
 isin(x,y) 
 #+end_src 
-
-#+results[f4f4a1d5dcc7c94f5195f12cbff742f7f0090a4b]:
-: [1] TRUE
-: [1] FALSE
 
 The reason for the above is of course that =x= contains the value 3, but =x= does not have /two/ 3's. The difference is important when rolling multiple dice, playing cards, /etc/. Note that there is an optional argument =ordered= which tests whether the elements of =y= appear in =x= in the order in which they are appear in =y=. The consequences are 
 
@@ -2208,42 +1816,12 @@ isin(x, c(3,4,5), ordered = TRUE)
 isin(x, c(3,5,4), ordered = TRUE) 
 #+end_src 
 
-#+results[e4a7ecf45d3b03cb3d7690db06d6a9fd9cd96b19]:
-: [1] TRUE
-: [1] FALSE
-
 The connection to probability is that have a data frame sample space and we would like to find a subset of that space. A =data.frame= method was written for =isin= that simply applies the function to each row of the data frame. We can see the method in action with the following: 
 
 #+begin_src R :exports both :results output pp  
 S <- rolldie(4) 
 subset(S, isin(S, c(2,2,6), ordered = TRUE)) 
 #+end_src
-
-#+results[a949d3d0b9e7061ec47d49d23984263b390300e1]:
-#+begin_example
-     X1 X2 X3 X4
-188   2  2  6  1
-404   2  2  6  2
-620   2  2  6  3
-836   2  2  6  4
-1052  2  2  6  5
-1088  2  2  1  6
-1118  2  1  2  6
-1123  1  2  2  6
-1124  2  2  2  6
-1125  3  2  2  6
-1126  4  2  2  6
-1127  5  2  2  6
-1128  6  2  2  6
-1130  2  3  2  6
-1136  2  4  2  6
-1142  2  5  2  6
-1148  2  6  2  6
-1160  2  2  3  6
-1196  2  2  4  6
-1232  2  2  5  6
-1268  2  2  6  6
-#+end_example
 
 There are a few other functions written to find useful subsets, namely, =countrep= and =isrep=. Essentially these were written to test for (or count) a specific number of designated values in outcomes. See the documentation for details.
 
@@ -2268,87 +1846,23 @@ A <- subset(S, suit == "Heart")
 B <- subset(S, rank %in% 7:9)
 #+end_src 
 
-#+results[9d5b7b5abc4225788be787d33d0326c328971e0d]:
-
 We can now do some set algebra: 
 
 #+begin_src R :exports both :results output pp  
 union(A,B)
-#+end_src 
-
-#+results[41f280575364335cf42718ea7fe730125545dbb3]:
-#+begin_example
-   rank    suit
-6     7    Club
-7     8    Club
-8     9    Club
-19    7 Diamond
-20    8 Diamond
-21    9 Diamond
-27    2   Heart
-28    3   Heart
-29    4   Heart
-30    5   Heart
-31    6   Heart
-32    7   Heart
-33    8   Heart
-34    9   Heart
-35   10   Heart
-36    J   Heart
-37    Q   Heart
-38    K   Heart
-39    A   Heart
-45    7   Spade
-46    8   Spade
-47    9   Spade
-#+end_example
+#+end_src
 
 #+begin_src R :exports both :results output pp  
 intersect(A,B)
 #+end_src 
 
-#+results[971fcf32342228b51443f2531b9b98322ccb677a]:
-:    rank  suit
-: 32    7 Heart
-: 33    8 Heart
-: 34    9 Heart
-
 #+begin_src R :exports both :results output pp  
 setdiff(A,B)
 #+end_src
 
-#+results[090704364a3fe745f2d5a3176107d1c19b6ab120]:
-#+begin_example
-   rank  suit
-27    2 Heart
-28    3 Heart
-29    4 Heart
-30    5 Heart
-31    6 Heart
-35   10 Heart
-36    J Heart
-37    Q Heart
-38    K Heart
-39    A Heart
-#+end_example
-
 #+begin_src R :exports both :results output pp  
 setdiff(B,A) 
 #+end_src 
-
-#+results[716ff8703aa84731894ed2a9fc66a6861c945484]:
-#+begin_example
-   rank    suit
-6     7    Club
-7     8    Club
-8     9    Club
-19    7 Diamond
-20    8 Diamond
-21    9 Diamond
-45    7   Spade
-46    8   Spade
-47    9   Spade
-#+end_example
 
 Notice that =setdiff= is not symmetric. Further, note that we can calculate the /complement/ of a set \(A\), denoted \(A^{c}\) and defined to be the elements of \(S\) that are not in \(A\) simply with =setdiff(S,A)=. There have been methods written for =intersect=, =setdiff=, =subset=, and =union= in the case that the input objects are of class =ps=. See Section \ref{sub:howto-ps-objects}.
 
@@ -2359,7 +1873,7 @@ When the =prob= package loads you will notice a message: ``\texttt{The following
 #+latex: \end{note}
 
 ** Model Assignment
-\label{sec:Interpreting-Probabilities}
+#+latex: \label{sec:Interpreting-Probabilities}
 
 Let us take a look at the coin-toss experiment more closely. What do we mean when we say ``the probability of Heads'' or write \(\P(\mbox{Heads})\)? Given a coin and an itchy thumb, how do we go about finding what \(\P(\mbox{Heads})\) should be?
 
@@ -2432,16 +1946,7 @@ The Equally Likely Model asserts that every outcome of the sample space has the 
 outcomes <- rolldie(1) 
 p <- rep(1/6, times = 6) 
 probspace(outcomes, probs = p) 
-#+end_src 
-
-#+results[79b5ec80c3d23fea1bee7d0f345e6b9c45e06625]:
-:   X1     probs
-: 1  1 0.1666667
-: 2  2 0.1666667
-: 3  3 0.1666667
-: 4  4 0.1666667
-: 5  5 0.1666667
-: 6  6 0.1666667
+#+end_src
 
 The =probspace= function is designed to save us some time in many of the most common situations. For example, due to the especial simplicity of the sample space in this case, we could have achieved the same result with only (note the name change for the first column) 
 
@@ -2449,44 +1954,17 @@ The =probspace= function is designed to save us some time in many of the most co
 probspace(1:6, probs = p) 
 #+end_src 
 
-#+results[87c2154e3def1ca174d199609eafdeb7619e2f5c]:
-:   x     probs
-: 1 1 0.1666667
-: 2 2 0.1666667
-: 3 3 0.1666667
-: 4 4 0.1666667
-: 5 5 0.1666667
-: 6 6 0.1666667
-
 Further, since the equally likely model plays such a fundamental role in the study of probability the =probspace= function will assume that the equally model is desired if no =probs= are specified. Thus, we get the same answer with only 
 
 #+begin_src R :exports both :results output pp   
 probspace(1:6) 
 #+end_src 
 
-#+results[08539aee4d095be019a2c8a120a77c956a56dfb9]:
-:   x     probs
-: 1 1 0.1666667
-: 2 2 0.1666667
-: 3 3 0.1666667
-: 4 4 0.1666667
-: 5 5 0.1666667
-: 6 6 0.1666667
-
 And finally, since rolling dice is such a common experiment in probability classes, the =rolldie= function has an additional logical argument =makespace= that will add a column of equally likely =probs= to the generated sample space: 
 
 #+begin_src R :exports both :results output pp   
 rolldie(1, makespace = TRUE)
-#+end_src 
-
-#+results[c6d093b907edb3ae1c83d6a31533672e26371535]:
-:   X1     probs
-: 1  1 0.1666667
-: 2  2 0.1666667
-: 3  3 0.1666667
-: 4  4 0.1666667
-: 5  5 0.1666667
-: 6  6 0.1666667
+#+end_src
 
 \noindent or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=, =cards=, =roulette=, \textit{etc}.) have similar =makespace= arguments. Check the documentation for details.
 
@@ -2495,18 +1973,15 @@ rolldie(1, makespace = TRUE)
 One sample space function that does NOT have a =makespace= option is the =urnsamples= function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use =probspace= to assign the model.
 
 #+latex: \begin{example}
-\label{exa:unbalanced-coin}\textbf{An unbalanced coin.} While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the ``\(H\)'' side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
+\label{exa:unbalanced-coin}
+*An unbalanced coin.* While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 #+begin_src R :exports both :results output pp   
 probspace(tosscoin(1), probs = c(0.70, 0.30)) 
 #+end_src 
 
-#+results[1e3082836de96b1a961e235dad364bc636f1eefd]:
-:   toss1 probs
-: 1     H   0.7
-: 2     T   0.3
 
-The same procedure can be used to represent an unbalanced die, roulette wheel, \textit{etc}.
+The same procedure can be used to represent an unbalanced die, roulette wheel, /etc/.
 
 #+latex: \end{example}
 
@@ -2518,36 +1993,34 @@ Alas, even if there were enough RAM to barely hold the sample space (and there w
 that holds asymptotically. User beware.
 
 ** Properties of Probability
-\label{sec:Properties-of-Probability}
+#+latex: \label{sec:Properties-of-Probability}
 
 *** Probability Functions
-\label{sub:Probability-Functions}
+#+latex: \label{sub:Probability-Functions}
 
 A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\P(A)=p\), called the /probability of/ \(A\). Any probability function \(\P\) satisfies the following three Kolmogorov Axioms: 
 
-\begin{ax}
-\label{ax:prob-nonnegative}\(\P(A)\geq0\) for any event \(A\subset S\).
-\end{ax}
+#+latex: \begin{ax}
+#+latex: \label{ax:prob-nonnegative}
+\(\P(A)\geq0\) for any event \(A\subset S\).
+#+latex: \end{ax}
 
-\begin{ax}
-\label{ax:total-mass-one}\(\P(S)=1\).
-\end{ax}
+#+latex: \begin{ax}
+#+latex: \label{ax:total-mass-one}
+\(\P(S)=1\).
+#+latex: \end{ax}
 
-\begin{ax}
-\label{ax:countable-additivity}If the events \(A_{1}\), \(A_{2}\),
-\(A_{3}\)... are disjoint then
-
+#+latex: \begin{ax}
+#+latex: \label{ax:countable-additivity}
+If the events \(A_{1}\), \(A_{2}\), \(A_{3}\)... are disjoint then
 \begin{equation}
 \P\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\P(A_{i})\mbox{ for every }n,
 \end{equation}
-
 and furthermore,
-
 \begin{equation}
 \P\left(\bigcup_{i=1}^{\infty}A_{i}\right)=\sum_{i=1}^{\infty}\P(A_{i}).
 \end{equation}
-
-\end{ax}
+#+latex: \end{ax}
 
 The intuition behind the axioms goes like this: first, the probability of an event should never be negative. Second, since the sample space contains all possible outcomes, its probability should be one, or 100%. The last axiom may look intimidating but it simply means that in a sequence of disjoint events (in other words, sets that do not overlap), the total probability (measure) should equal the sum of its parts. For example, the chance of rolling a 1 or a 2 on a die should be the chance of rolling a 1 plus the chance of rolling a 2.
 
@@ -2702,25 +2175,17 @@ A <- subset(S, suit == "Heart")
 B <- subset(S, rank %in% 7:9)
 #+end_src 
 
-#+results[416575d0e476743d73e997c0e69fcf132c1c1d0d]:
-
 Now it is easy to calculate 
 
 #+begin_src R :exports both :results output pp   
 prob(A) 
 #+end_src 
 
-#+results[8d58e2c194722b59ddb9703f5bd4da7170333162]:
-: [1] 0.25
-
 Note that we can get the same answer with 
 
 #+begin_src R :exports both :results output pp   
 prob(S, suit == "Heart") 
 #+end_src 
-
-#+results[c461c2aab560b34e057c4d34ce9f89c621174855]:
-: [1] 0.25
 
 We also find =prob(B) = 0.23= (listed here approximately, but 12/52 actually) and =prob(S) = 1=. Internally, the =prob= function operates by summing the =probs= column of its argument. It will find subsets on-the-fly if desired.
 
@@ -2847,19 +2312,12 @@ But we often do not need to actually generate the sample space; it suffices to c
 We will compute the number of outcomes for each of the four =urnsamples= examples that we saw in Example \ref{exa:sample-urn-two-from-three}. Recall that we took a sample of size two from an urn with three distinguishable elements.
 #+latex: \end{example}
 
-
 #+begin_src R :exports both :results output pp   
 nsamp(n=3, k=2, replace = TRUE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = FALSE) 
 nsamp(n=3, k=2, replace = TRUE, ordered = FALSE) 
 #+end_src 
-
-#+results[092fc1deeaef0d1c7f6b0ab7babcef30035cd8b9]:
-: [1] 9
-: [1] 6
-: [1] 3
-: [1] 6
 
 Compare these answers with the length of the data frames generated above.
 
@@ -2879,13 +2337,9 @@ k <- c(3,4,3)
 r <- c(FALSE,FALSE,TRUE) 
 #+end_src 
 
-#+results[dae9fea992cf373411bbc2ec72deb07ef27f71f2]:
-
 #+begin_src R :exports code :results silent
 x <- nsamp(n, k, rep = r, ord = TRUE) 
 #+end_src 
-
-#+results[659176619365a176558a579e6becb319fd60c679]:
 
 (Notice that =ordered= is always =TRUE=; =nsamp= will recycle =ordered= and =replace= to the appropriate length.) By the Multiplication Principle, the number of ways to complete the experiment is the product of the entries of =x=: 
 
@@ -2893,17 +2347,11 @@ x <- nsamp(n, k, rep = r, ord = TRUE)
 prod(x) 
 #+end_src 
 
-#+results[38a6267bcc5d69f2d0e6a2ea0be717b968bb9081]:
-: [1] 24774195600
-
 Compare this with the some other ways to compute the same thing: 
 
 #+begin_src R :exports both :results output pp   
 (11*10*9)*(7*6*5*4)*313 
 #+end_src
-
-#+results[ec9c10e2efde8ae1fd4926fd55efd1fe2135deea]:
-: [1] 260290800
 
 or alternatively 
 
@@ -2911,17 +2359,11 @@ or alternatively
 prod(9:11)*prod(4:7)*313 
 #+end_src 
 
-#+results[9f66f65b77c56c2e2de82b4103b3ef7ff8949a1a]:
-: [1] 260290800
-
 or even 
 
 #+begin_src R :exports both :results output pp   
 prod(factorial(c(11,7))/factorial(c(8,3)))*313 
 #+end_src 
-
-#+results[0c2f6cbebad7c8555e132f35cfb3f6c92eebec78]:
-: [1] 260290800
 
 #+latex: \end{example}
 
@@ -2966,9 +2408,6 @@ qplot(x, y) + geom_hline(yintercept=0.5) +
   ylab = "Prob(at least one match)" )
 remove(g)
 #+end_src
-
-#+results[b450d3f59d7dce73a0d1d5a5e6be356add27101f]:
-[[file:img/birthday.ps]]
 
 #+begin_src latex 
   \begin{figure}[th]
@@ -3069,23 +2508,12 @@ S <- rolldie(2, makespace = TRUE)  # assumes ELM
 head(S)                            #  first few rows
 #+end_src
 
-#+results[edc18f34684cfc40dc062f54f194ed3572a944bc]:
-:   X1 X2      probs
-: 1  1  1 0.02777778
-: 2  2  1 0.02777778
-: 3  3  1 0.02777778
-: 4  4  1 0.02777778
-: 5  5  1 0.02777778
-: 6  6  1 0.02777778
-
 Next we define the events
 
 #+begin_src R :exports code :results silent
 A <- subset(S, X1 == X2)
 B <- subset(S, X1 + X2 >= 8)
 #+end_src
-
-#+results[c033f099534a515f498fb28dbc59ea5ee79eb228]:
 
 And now we are ready to calculate probabilities. To do conditional probability, we use the =given= argument of the =prob= function:
 
@@ -3094,20 +2522,12 @@ prob(A, given = B)
 prob(B, given = A)
 #+end_src
 
-#+results[7275a30c6b03431dbed1854e3be7d4a72b4af2c1]:
-: [1] 0.2
-: [1] 0.5
-
 Note that we do not actually need to define the events \(A\) and \(B\) separately as long as we reference the original probability space \(S\) as the first argument of the =prob= calculation:
 
 #+begin_src R :exports both :results output pp  
 prob(S, X1==X2, given = (X1 + X2 >= 8) )
 prob(S, X1+X2 >= 8, given = (X1==X2) )
 #+end_src
-
-#+results[ffad80e193a1ea3cd3599aad1a89407ec5760632]:
-: [1] 0.2
-: [1] 0.5
 
 *** Properties and Rules
 
@@ -3171,16 +2591,11 @@ M <- urnsamples(L, size = 2)
 N <- probspace(M)
 #+end_src
 
-#+results[4d40786d9b2d3b5ecfc61b6b5f6205c893cfd1ba]:
-
 Now that we have the probability space =N= we are ready to do some probability. We use the =prob= function, just like before. The only trick is to specify the event of interest correctly, and recall that we were interested in \(\P(\mbox{both Aces})\). But if the cards are both Aces then the =rank= of both cards should be =A=, which sounds like a job for the =all= function:
 
 #+begin_src R :exports both :results output pp  
 prob(N, all(rank == "A"))
 #+end_src
-
-#+results[6303e6b725e35c6ac855597e37a4b5d811725e31]:
-: [1] 0.004524887
 
 Note that this value matches what we found in Example \ref{exa:two-cards-both-aces}, above. We could calculate all sorts of probabilities at this point; we are limited only by the complexity of the event's computer representation. 
 
@@ -3208,16 +2623,11 @@ M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
 N <- probspace(M)
 #+end_src
 
-#+results[c0f7e43ad4c3783fa8c2df205d3be0836c75f8f1]:
-
 Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\} \). Rows of =N= that satisfy this condition have \texttt{X1=="red" \& X2=="red" \& X3=="red"}, but there must be an easier way. Indeed, there is. The =isrep= function (short for ``is repeated'') in the =prob= package was written for this purpose. The command =isrep(N,"red",3)= will test each row of =N= to see whether the value \texttt{"red"} appears =3= times. The result is exactly what we need to define an event with the =prob= function. Observe
 
 #+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 3))
 #+end_src
-
-#+results[5df857fcc19de3676bf05343b15995aad66d71fb]:
-: [1] 0.2916667
 
 Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-green}. Now let us try some other probability questions. What is the probability of getting two ="red"=s?
 
@@ -3225,27 +2635,17 @@ Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-gree
 prob(N, isrep(N, "red", 2))
 #+end_src
 
-#+results[1b173d77b5813306c1c74b7140e1e546377a2f81]:
-: [1] 0.525
-
-
 Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+end_src
 
-#+results[d94392e6f8dc00cfd48f47e46f4d449c324d43b8]:
-: [1] 0.175
-
 Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What is the probability of observing \texttt{"red"}, \texttt{"green"}, and \texttt{"red"}, in no particular order?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red")))
 #+end_src
-
-#+results[d8c35f827921a700531aeba932ad756a4b372ca9]:
-: [1] 0.525
 
 We already knew this. It is the probability of observing two ="red"=s, above.
 
@@ -3275,13 +2675,6 @@ We saw the =RcmdrTestDrive= data set in Chapter \ref{cha:introduction-to-R} in w
 .Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
 addmargins(.Table) # Table with Marginal Distributions
 #+end_src
-
-#+results[1799a61fbcdb8c38b5187b5990005276651c6b4c]:
-:            gender
-: smoking     Female Male Sum
-:   Nonsmoker     61   75 136
-:   Smoker         9   23  32
-:   Sum           70   98 168
 
 If one person were selected at random from the data set, then we see from the two-way table that \(\P(\mbox{Female})=70/168\) and \(\P(\mbox{Smoker})=32/168\). Now suppose that one of the subjects quits smoking, but we do not know the person's gender. If we select one subject at random, what now is \(\P(\mbox{Female})\)? Let \( A = \{ \mbox{the quitter is a female} \} \) and \( B = \{ \mbox{selected person is a female} \} \). Write
 \begin{align*}
@@ -3393,9 +2786,6 @@ A <- subset(S, isrep(S, vals = "T", nrep = 10))
 1 - prob(A)
 #+end_src
 
-#+results[181285e48d58c04d85c736e1b181a3cf578fd203]:
-: [1] 0.9990234
-
 Compare this answer to what we got in Example \ref{exa:toss-ten-coins}.
 
 #+latex: \end{example}
@@ -3414,17 +2804,6 @@ We may represent tossing our unbalanced coin three times with the following:
 #+begin_src R :exports both :results output pp  
 iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3)) 
 #+end_src 
-
-#+results[d6bc3e0a160801c096461e64db85e49d794a40ba]:
-:   X1 X2 X3 probs
-: 1  H  H  H 0.343
-: 2  T  H  H 0.147
-: 3  H  T  H 0.147
-: 4  T  T  H 0.063
-: 5  H  H  T 0.147
-: 6  T  H  T 0.063
-: 7  H  T  T 0.063
-: 8  T  T  T 0.027
 
 As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has the smallest. (Since the trials are independent, \(\P(HHH)=0.7^{3}\) and \(\P(TTT)=0.3^{3}\), \textit{etc}.) Note that the result of the function call is a probability space, not a sample space (which we could construct already with the =tosscoin= or =urnsamples= functions). The same procedure could be used to model an unbalanced die or any other experiment that may be represented with a vector of possible outcomes.
 
@@ -3548,9 +2927,6 @@ post <- prior * like
 post / sum(post)
 #+end_src
 
-#+results[318eb511e17e55a5459907ce6c9ea42d9f066de9]:
-: [1] 0.3673469 0.4285714 0.2040816
-
 #+latex: \end{example}
 
 
@@ -3566,9 +2942,6 @@ post <- newprior * like^7
 post / sum(post)
 #+end_src
 
-#+results[6b76aecb4ea612d637fa58289f12b1fbcae05af3]:
-: [1] 0.0003355044 0.1473949328 0.8522695627
-
 We see that the individual with the highest probability of having misfiled all eight documents given the observed data is no longer Larry, but Curly. 
 #+latex: \end{example}
 
@@ -3580,9 +2953,6 @@ Second, the reader might be wondering what the boss would get if (s)he skipped t
 fastpost <- prior * like^8
 fastpost / sum(fastpost)
 #+end_src
-
-#+results[67b15534bb39e69ee8425de9d724598a428754d1]:
-: [1] 0.0003355044 0.1473949328 0.8522695627
 
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 
@@ -3636,31 +3006,17 @@ S <- rolldie(3, nsides = 4, makespace = TRUE)
 S <- addrv(S, U = X1-X2+X3) 
 #+end_src 
 
-#+results[90c222ed47f13a3a6d917c95306cd57b38fded94]:
-
 Now let's take a look at the values of \(U\). In the interest of space, we will only reproduce the first few rows of \(S\) (there are \(4^{3}=64\) rows in total). 
 
 #+begin_src R :exports both :results output pp   
 head(S)
 #+end_src 
 
-#+results[c734383d3600ccf742150597f8eed9d4781beb2b]:
-:   X1 X2 X3 U    probs
-: 1  1  1  1 1 0.015625
-: 2  2  1  1 2 0.015625
-: 3  3  1  1 3 0.015625
-: 4  4  1  1 4 0.015625
-: 5  1  2  1 0 0.015625
-: 6  2  2  1 1 0.015625
-
 We see from the \(U\) column it is operating just like it should. We can now answer questions like
 
 #+begin_src R :exports both :results output pp   
 prob(S, U > 6) 
 #+end_src 
-
-#+results[71bc5285a0dbfb8497c1358a775fd7bb0e22836c]:
-: [1] 0.015625
 
 #+latex: \paragraph*{Supply a Function}
 
@@ -3671,15 +3027,6 @@ S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V")
 S <- addrv(S, FUN = sum, invars = c("X1","X2","X3"), name = "W") 
 head(S) 
 #+end_src 
-
-#+results[a74356eeff9f062210b419118a4bf8030e952a2c]:
-:   X1 X2 X3 U V W    probs
-: 1  1  1  1 1 1 3 0.015625
-: 2  2  1  1 2 2 4 0.015625
-: 3  3  1  1 3 3 5 0.015625
-: 4  4  1  1 4 4 6 0.015625
-: 5  1  2  1 0 2 4 0.015625
-: 6  2  2  1 1 2 5 0.015625
 
 Notice that =addrv= has an =invars= argument to specify exactly to which columns one would like to apply the function =FUN=. If no input variables are specified, then =addrv= will apply =FUN= to all non-=probs= columns. Further, =addrv= has an optional argument =name= to give the new variable; this can be useful when adding several random variables to a probability space (as above). If not specified, the default name is =X=.
 
@@ -4996,9 +4343,6 @@ f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
 
-#+results[ff04b010bf2bff9ce770336ec39edd4fd4d531e1]:
-: 0.355167 with absolute error < 3.9e-15
-
 Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\E X^{2}-\left(\E X\right)^{2}\) for the variance. 
 
 #+latex: \end{example}
@@ -5010,9 +4354,6 @@ Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x>1\). We may integrate the function \(xf
 g <- function(x) 3/x^3
 integrate(g, lower = 1, upper = Inf)
 #+end_src
-
-#+results[e48698e6f52151a31bca9666dd8b87b4832c5a3c]:
-: 1.5 with absolute error < 1.7e-14
 
 Compare this to the answer we got in Example \ref{exa:cont-pdf-3x4}. Use =-Inf= for \(-\infty\).
 
@@ -9379,7 +8720,1036 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 * Multiple Linear Regression                                            :mlr:
 \label{cha:multiple-linear-regression}
 
-#+INCLUDE: "mlr.org" :lines "5-"
+\noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
+
+The language is phrased in matrix terms -- for two reasons. First, it is quicker to write and (arguably) more pleasant to read. Second, the matrix approach will be required for later study of the subject; the reader might as well be introduced to it now.
+
+Most of the results are stated without proof or with only a cursory justification. Those yearning for more should consult an advanced text in linear regression for details, such as /Applied Linear Regression Models/ \cite{Neter1996} or /Linear Models: Least Squares and Alternatives/ \cite{Rao1999}.
+
+
+#+latex: \paragraph*{What do I want them to know?}
+
+- the basic MLR model, and how it relates to the SLR
+- how to estimate the parameters and use those estimates to make predictions
+- basic strategies to determine whether or not the model is doing a good job
+- a few thoughts about selected applications of the MLR, such as polynomial, interaction, and dummy variable models
+- some of the uses of residuals to diagnose problems
+- hints about what will be coming later
+
+
+** The Multiple Linear Regression Model
+\label{sec:The-MLR-Model}
+
+The first thing to do is get some better notation. We will write 
+\begin{equation}
+\mathbf{Y}_{\mathrm{n}\times1}=
+\begin{bmatrix}y_{1}\\
+y_{2}\\
+\vdots\\
+y_{n}
+\end{bmatrix},
+\quad\mbox{and}\quad\mathbf{X}_{\mathrm{n}\times(\mathrm{p}+1)}=
+\begin{bmatrix}1 & x_{11} & x_{21} & \cdots & x_{p1}\\
+1 & x_{12} & x_{22} & \cdots & x_{p2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+1 & x_{1n} & x_{2n} & \cdots & x_{pn}
+\end{bmatrix}.
+\end{equation}
+The vector \(\mathbf{Y}\) is called the /response vector/ \index{response vector} and the matrix \(\mathbf{X}\) is called the /model matrix/ \index{model matrix}. As in Chapter \ref{cha:simple-linear-regression}, the most general assumption that relates \(\mathbf{Y}\) to \(\mathbf{X}\) is
+\begin{equation}
+\mathbf{Y}=\mu(\mathbf{X})+\upepsilon,
+\end{equation}
+where \(\mu\) is some function (the /signal/) and \(\upepsilon\) is the /noise/ (everything else). We usually impose some structure on \(\mu\) and \(\upepsilon\). In particular, the standard multiple linear regression model\index{model!multiple linear regression} assumes
+\begin{equation}
+\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon,
+\end{equation}
+where the parameter vector \(\upbeta\) looks like 
+\begin{equation}
+\upbeta_{(\mathrm{p}+1)\times1}=\begin{bmatrix}\beta_{0} & \beta_{1} & \cdots & \beta_{p}\end{bmatrix}^{\mathrm{T}},
+\end{equation}
+and the random vector \(\upepsilon_{\mathrm{n}\times1}=\begin{bmatrix}\epsilon_{1} & \epsilon_{2} & \cdots & \epsilon_{n}\end{bmatrix}^{\mathrm{T}}\) is assumed to be distributed
+\begin{equation}
+\upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right).
+\end{equation}
+
+The assumption on \(\upepsilon\) is equivalent to the assumption that \(\epsilon_{1}\), \(\epsilon_{2}\), ..., \(\epsilon_{n}\) are IID \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). It is a linear model because the quantity \(\mu(\mathbf{X})=\mathbf{X}\upbeta\) is linear in the parameters \(\beta_{0}\), \(\beta_{1}\), ..., \(\beta_{p}\). It may be helpful to see the model in expanded form; the above matrix formulation is equivalent to the more lengthy
+\begin{equation} 
+Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
+\end{equation}
+
+#+latex: \begin{example}
+*Girth, Height, and Volume for Black Cherry trees.* \index{Data sets!trees@\texttt{trees}}
+Measurements were made of the girth, height, and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground. The variables are
+
+1. =Girth=: tree diameter in inches (denoted \(x_{1}\))
+2. =Height=: tree height in feet (\(x_{2}\)).
+3. =Volume=: volume of the tree in cubic feet. (\(y\))
+
+The data are in the =datasets= package and are already on the search path; they can be viewed with
+
+#+begin_src R :exports both :results output pp 
+head(trees)
+#+end_src
+
+Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
+
+#+begin_src R :exports code :results graphics silent :file img/splom-trees.ps
+library(lattice)
+splom(trees)
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{img/splom-trees.ps}
+    \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
+    \label{fig:splom-trees}
+  \end{figure}
+#+end_src
+
+The dependent (response) variable =Volume= is listed in the first row of the scatterplot matrix. Moving from left to right, we see an approximately linear relationship between =Volume= and the independent (explanatory) variables =Height= and =Girth=. A first guess at a model for these data might be
+\begin{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
+\end{equation}
+in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
+#+latex: \end{example}
+
+
+*** What does it mean?
+
+The interpretation is simple. The intercept \(\beta_{0}\) represents the mean =Volume= when all other independent variables are zero. The parameter \(\beta_{i}\) represents the change in mean =Volume= when there is a unit increase in \(x_{i}\), while the other independent variable is held constant. For the =trees= data, \(\beta_{1}\) represents the change in average =Volume= as =Girth= increases by one unit when the =Height= is held constant, and \(\beta_{2}\) represents the change in average =Volume= as =Height= increases by one unit when the =Girth= is held constant. 
+
+
+In simple linear regression, we had one independent variable and our linear regression surface was 1D, simply a line. In multiple regression there are many independent variables and so our linear regression surface will be many-D... in general, a hyperplane. But when there are only two explanatory variables the hyperplane is just an ordinary plane and we can look at it with a 3D scatterplot. 
+
+One way to do this is with the \textsf{R} Commander in the =Rcmdr= package \cite{Foxrcmdr}. It has a 3D scatterplot option under the \textsf{Graphs} menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
+
+Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig:3D-scatterplot-trees}.
+
+#+begin_src R :exports code :results graphics silent :file img/3D-scatterplot-trees.ps
+library(scatterplot3d)
+s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
+                                 pch = 16, highlight.3d = TRUE, 
+                                 angle = 60))
+fit <- lm(Volume ~ Girth + Height, data = trees)
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{img/3D-scatterplot-trees.ps}
+    \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
+    \label{fig:3D-scatterplot-trees}
+  \end{figure}
+#+end_src
+
+Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
+
+** Estimation and Prediction
+\label{sec:Estimation-and-Prediction-MLR}
+
+*** Parameter estimates
+\label{sub:mlr-parameter-estimates}
+
+We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
+\begin{equation}
+\upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right),
+\end{equation}
+which means that \(\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon\) has an \(\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right)\) distribution. Therefore, the likelihood function\index{likelihood function} is
+\begin{equation}
+L(\upbeta,\sigma)=\frac{1}{2\pi^{n/2}\sigma}\exp\left\{ -\frac{1}{2\sigma^{2}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\right\}.
+\end{equation}
+
+To /maximize/ the likelihood\index{maximum likelihood} in \(\upbeta\), we need to /minimize/ the quantity \(g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\). We do this by differentiating \(g\) with respect to \(\upbeta\). (It may be a good idea to brush up on the material in Appendices \ref{sec:Linear-Algebra} and \ref{sec:Multivariable-Calculus}.) First we will rewrite \(g\):
+\begin{equation}
+g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-\mathbf{Y}^{\mathrm{T}}\mathbf{X}\upbeta-\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
+\end{equation}
+which can be further simplified to \(g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-2\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta\) since \(\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\) is \(1\times1\) and thus equal to its transpose. Now we differentiate to get
+\begin{equation}
+\frac{\partial g}{\partial\upbeta}=\mathbf{0}-2\mathbf{X}^{\mathrm{T}}\mathbf{Y}+2\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
+\end{equation}
+since \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is symmetric. Setting the derivative equal to the zero vector yields the so called ``normal equations''\index{normal equations}
+\begin{equation}
+\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta=\mathbf{X}^{\mathrm{T}}\mathbf{Y}.
+\end{equation}
+
+In the case that \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is invertible
+#+latex: \footnote{We can find solutions of the normal equations even when \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is not of full rank, but the topic falls outside the scope of this book. The interested reader can consult an advanced text such as Rao \cite{Rao1999}.},
+we may solve the equation for \(\upbeta\) to get the maximum likelihood estimator of \(\upbeta\) which we denote by \(\mathbf{b}\):
+\begin{equation}
+\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}.\label{eq:b-formula-matrix}
+\end{equation}
+
+#+latex: \begin{rem}
+The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
+#+latex: \end{rem}
+
+#+latex: \begin{rem}
+We have only found a critical value, and have not actually shown that the critical value is a minimum. We omit the details and refer the interested reader to \cite{Rao1999}.
+#+latex: \end{rem}
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+We do all of the above just as we would in simple linear regression. The powerhouse is the =lm=\index{lm@\texttt{lm}} function. Everything else is based on it. We separate explanatory variables in the model formula by a plus sign.
+
+#+begin_src R :exports both :results output pp 
+trees.lm <- lm(Volume ~ Girth + Height, data = trees)
+trees.lm
+#+end_src
+
+We see from the output that for the =trees= data our parameter estimates are 
+\[
+\mathbf{b}=\begin{bmatrix}-58.0 & 4.7 & 0.3\end{bmatrix},
+\] 
+and consequently our estimate of the mean response is \(\hat{\mu}\) given by 
+\begin{alignat}{1}
+\hat{\mu}(x_{1},x_{2})= & \ b_{0}+b_{1}x_{1}+b_{2}x_{2},\\
+\approx & -58.0+4.7x_{1}+0.3x_{2}.
+\end{alignat}
+We could see the entire model matrix \(\mathbf{X}\) with the =model.matrix=\index{model.matrix@\texttt{model.matrix}} function, but in the interest of brevity we only show the first few rows. 
+
+#+begin_src R :exports both :results output pp 
+head(model.matrix(trees.lm))
+#+end_src
+
+*** Point Estimates of the Regression Surface
+\label{sub:mlr-point-est-regsurface}
+
+The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
+\begin{eqnarray}
+\hat{Y}_{i} & = & \hat{\mu}(x_{1i},x_{2i}),\\
+ & = & b_{0}+b_{1}x_{1i}+b_{2}x_{2i},\quad i=1,2,\ldots,n.
+\end{eqnarray}
+They are expressed more compactly by the matrix equation
+\begin{equation}
+\hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
+\end{equation}
+From Equation \ref{eq:b-formula-matrix} we know that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), so we can rewrite
+\begin{eqnarray}
+\hat{\mathbf{Y}} & = & \mathbf{X}\left[\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\right],\\
+ & = & \mathbf{H}\mathbf{Y},
+\end{eqnarray}
+where \(\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) is appropriately named /the hat matrix/\index{hat matrix} because it ``puts the hat on \(\mathbf{Y}\)''. The hat matrix is very important in later courses. Some facts about \(\mathbf{H}\) are
+- \(\mathbf{H}\) is a symmetric square matrix, of dimension \(\mathrm{n}\times\mathrm{n}\).
+- The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\) (compare to Equation \ref{eq:slr-leverage-between}).
+- The trace is \(\mathrm{tr}(\mathbf{H})=p\).
+- \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/) which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of \(\mathbf{I}-\mathbf{H}\).
+
+Now let us write a column vector \(\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}\) to denote given values of the explanatory variables =Girth == \(x_{10}\) and =Height == \(x_{20}\). These values may match those of the collected data, or they may be completely new values not observed in the original data set. We may use the parameter estimates to find \(\hat{Y}(\mathbf{x}_{0})\), which will give us
+
+1. an estimate of \(\mu(\mathbf{x}_{0})\), the mean value of a future observation at \(\mathbf{x}_{0}\), and
+
+2. a prediction for \(Y(\mathbf{x}_{0})\), the actual value of a future observation at \(\mathbf{x}_{0}\).
+
+We can represent \(\hat{Y}(\mathbf{x}_{0})\) by the matrix equation
+\begin{equation}
+\hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},\label{eq:mlr-single-yhat-matrix}
+\end{equation}
+which is just a fancy way to write
+\begin{equation}
+\hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
+\end{equation}
+ 
+#+latex: \begin{example}
+If we wanted to predict the average volume of black cherry trees that have =Girth = 15= in and are =Height = 77= ft tall then we would use the estimate 
+\begin{alignat*}{1}
+\hat{\mu}(15,\,77)= & -58+4.7(15)+0.3(77),\\
+\approx & 35.6\mbox{\,\ ft}^{3}.
+\end{alignat*}
+
+We would use the same estimate \(\hat{Y}=35.6\) to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
+#+latex: \end{example}
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The fitted values are stored inside =trees.lm= and may be accessed with the =fitted= function. We only show the first five fitted values.
+
+#+begin_src R :exports both :results output pp 
+fitted(trees.lm)[1:5]
+#+end_src
+
+The syntax for general prediction does not change much from simple linear regression. The computations are done with the =predict= function as described below. 
+
+The only difference from SLR is in the way we tell \textsf{R} the values of the explanatory variables for which we want predictions. In SLR we had only one independent variable but in MLR we have many (for the =trees= data we have two). We will store values for the independent variables in the data frame =new=, which has two columns (one for each independent variable) and three rows (we shall make predictions at three different locations).
+
+#+begin_src R :exports code :results silent 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
+#+end_src
+
+We can view the locations at which we will predict:
+
+#+begin_src R :exports both :results output pp 
+new
+#+end_src
+
+We continue just like we would have done in SLR.
+
+#+begin_src R :exports both :results output pp 
+predict(trees.lm, newdata = new)
+#+end_src
+
+#+begin_src R :exports none :results silent
+treesFIT <- round(predict(trees.lm, newdata = new), 1)
+#+end_src
+
+#+latex: \begin{example}
+Using the =trees= data,
+1. Report a point estimate of the mean =Volume= of a tree of =Girth= 9.1 in and =Height= 69 ft.
+
+   The fitted value for \(x_{1}=9.1\) and \(x_{2}=69\) is \( SRC_R{treesFIT[ 1 ]} \), so a point estimate would be \( SRC_R{treesFIT[ 1 ]} \) cubic feet. 
+
+2. Report a point prediction for and a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
+
+   The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \( SRC_R{treesFIT[ 3 ]} \), so a point prediction for the =Volume= is \( SRC_R{treesFIT[ 3 ]} \) cubic feet. 
+#+latex: \end{example}
+
+*** Mean Square Error and Standard Error
+\label{sub:mlr-mse-se}
+
+The residuals are given by
+\begin{equation}
+\mathbf{E}=\mathbf{Y}-\hat{\mathbf{Y}}=\mathbf{Y}-\mathbf{H}\mathbf{Y}=(\mathbf{I}-\mathbf{H})\mathbf{Y}.
+\end{equation}
+Now we can use Theorem \ref{thm:mvnorm-dist-matrix-prod} to see that the residuals are distributed
+\begin{equation}
+\mathbf{E}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\sigma^{2}(\mathbf{I}-\mathbf{H})),
+\end{equation}
+since \((\mathbf{I}-\mathbf{H})\mathbf{X}\upbeta=\mathbf{X}\upbeta-\mathbf{X}\upbeta=\mathbf{0}\) and \((\mathbf{I}-\mathbf{H})\,(\sigma^{2}\mathbf{I})\,(\mathbf{I}-\mathbf{H})^{\mathrm{T}}=\sigma^{2}(\mathbf{I}-\mathbf{H})^{2}=\sigma^{2}(\mathbf{I}-\mathbf{H})\). The sum of squared errors \(SSE\) is just
+\begin{equation}
+SSE=\mathbf{E}^{\mathrm{T}}\mathbf{E}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})(\mathbf{I}-\mathbf{H})\mathbf{Y}=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.
+\end{equation}
+Recall that in SLR we had two parameters (\(\beta_{0}\) and \(\beta_{1}\)) in our regression model and we estimated \(\sigma^{2}\) with \(s^{2}=SSE/(n-2)\). In MLR, we have \(p+1\) parameters in our regression model and we might guess that to estimate \(\sigma^{2}\) we would use the /mean square error/ \(S^{2}\) defined by 
+\begin{equation}
+S^{2}=\frac{SSE}{n-(p+1)}.
+\end{equation}
+That would be a good guess. The /residual standard error/ is \(S=\sqrt{S^{2}}\).
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The residuals are also stored with =trees.lm= and may be accessed with the =residuals= function. We only show the first five residuals.
+
+#+begin_src R :exports both :results output pp 
+residuals(trees.lm)[1:5]
+#+end_src
+
+The =summary= function output (shown later) lists the =Residual Standard Error= which is just \(S=\sqrt{S^{2}}\). It is stored in the =sigma= component of the =summary= object.
+
+#+begin_src R :exports both :results output pp 
+treesumry <- summary(trees.lm)
+treesumry$sigma
+#+end_src
+
+For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
+
+
+
+*** Interval Estimates of the Parameters
+\label{sub:mlr-interval-est-params}
+
+We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
+\begin{equation}
+\mathbf{Y}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}\right).
+\end{equation}
+Now recall Theorem \ref{thm:mvnorm-dist-matrix-prod} that we said we were going to need eventually (the time is now). That proposition guarantees that
+\begin{equation}
+\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right),\label{eq:distn-b-mlr}
+\end{equation}
+since
+\begin{equation}
+\E\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\mathbf{X}\upbeta)=\upbeta,
+\end{equation}
+and
+\begin{equation}
+\mbox{Var}(\mathbf{b})=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\sigma^{2}\mathbf{I})\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1},
+\end{equation}
+the first equality following because the matrix \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\) is symmetric.
+
+There is a lot that we can glean from Equation \ref{eq:distn-b-mlr}. First, it follows that the estimator \(\mathbf{b}\) is unbiased (see Section \ref{sec:Point-Estimation-1}). Second, the variances of \(b_{0}\), \(b_{1}\), ..., \(b_{n}\) are exactly the diagonal elements of \(\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\), which is completely known except for that pesky parameter \(\sigma^{2}\). Third, we can estimate the standard error of \(b_{i}\) (denoted \(S_{b_{i}}\)) with the mean square error \(S\) (defined in the previous section) multiplied by the corresponding diagonal element of \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\). Finally, given estimates of the standard errors we may construct confidence intervals for \(\beta_{i}\) with an interval that looks like
+\begin{equation}
+b_{i}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)S_{b_{i}}.
+\end{equation}
+The degrees of freedom for the Student's \(t\) distribution
+#+latex: \footnote{We are taking great leaps over the mathematical details. In particular, we have yet to show that \(s^{2}\) has a chi-square distribution and we have not even come close to showing that \(b_{i}\) and \(s_{b_{i}}\) are independent. But these are entirely outside the scope of the present book and the reader may rest assured that the proofs await in later classes. See C.R. Rao for more.}
+are the same as the denominator of \(S^{2}\). 
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+To get confidence intervals for the parameters we need only use =confint=\index{confint@\texttt{confint}}:
+
+#+begin_src R :exports both :results output pp 
+confint(trees.lm)
+#+end_src
+
+#+begin_src R :exports none :results silent
+treesPAR <- round(confint(trees.lm), 1)
+#+end_src
+
+For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter \(\beta_{1}\) lies somewhere in the interval \( [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ] \).
+
+
+
+*** Confidence and Prediction Intervals
+
+We saw in Section \ref{sub:mlr-point-est-regsurface} how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
+
+In Equation \ref{eq:mlr-single-yhat-matrix} we wrote \( \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and in Equation \ref{eq:distn-b-mlr} we saw that
+\begin{equation}
+\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
+\end{equation}
+The following is therefore immediate from Theorem \ref{thm:mvnorm-dist-matrix-prod}:
+\begin{equation}
+\hat{Y}(\mathbf{x}_{0})\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{x}_{0}^{\mathrm{T}}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\right).
+\end{equation}
+It should be no surprise that confidence intervals for the mean value of a future observation at the location \(\mathbf{x}_{0}=\begin{bmatrix}x_{10} & x_{20} & \ldots & x_{p0}\end{bmatrix}^{\mathrm{T}}\) are given by
+\begin{equation}
+\hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
+\end{equation}
+Intuitively, \(\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\) measures the distance of \(\mathbf{x}_{0}\) from the center of the data. The degrees of freedom in the Student's \(t\) critical value are \(n-(p+1)\) because we need to estimate \(p+1\) parameters.
+
+Prediction intervals for a new observation at \(\mathbf{x}_{0}\) are given by
+\begin{equation}
+\hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{1+\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
+\end{equation}
+The prediction intervals are wider than the confidence intervals, just as in Section \ref{sub:slr-interval-est-regline}.
+
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section \ref{sub:slr-interval-est-regline} (which we repeat here for illustration).
+
+#+begin_src R :exports code :results silent 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
+#+end_src
+
+Confidence intervals are given by
+
+#+begin_src R :exports both :results output pp 
+predict(trees.lm, newdata = new, interval = "confidence")
+#+end_src
+
+#+begin_src R :exports none :results silent
+treesCI <- round(predict(trees.lm, newdata = new, interval = "confidence"), 1)
+#+end_src
+
+Prediction intervals are given by
+
+#+begin_src R :exports both :results output pp 
+predict(trees.lm, newdata = new, interval = "prediction")
+#+end_src
+
+#+begin_src R :exports none :results silent
+treesPI <- round(predict(trees.lm, newdata = new, interval = "prediction"), 1)
+#+end_src
+
+As before, the interval type is decided by the =interval= argument and the default confidence level is 95% (which can be changed with the =level= argument).
+
+#+latex: \begin{example}
+Using the =trees= data, 
+
+1. Report a 95% confidence interval for the mean =Volume= of a tree of =Girth= 9.1 in and =Height= 69 ft.
+
+   The 95% CI is given by \( [ SRC_R{treesCI[1, 2]}, SRC_R{treesCI[1, 3]} ] \), so with 95% confidence the mean =Volume= lies somewhere between \( SRC_R{treesCI[1, 2]} \) cubic feet and \( SRC_R{treesCI[1, 3]} \) cubic feet.
+
+2. Report a 95% prediction interval for the =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87 ft.
+
+   The 95% prediction interval is given by \( [ SRC_R{treesCI[3, 2]}, SRC_R{treesCI[3, 3]} ] \), so with 95% confidence we may assert that the hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height= 87 ft would lie somewhere between \( SRC_R{treesCI[3, 2]} \) cubic feet and \( SRC_R{treesCI[3, 3]} \) feet.
+
+#+latex: \end{example}
+
+
+** Model Utility and Inference
+\label{sec:Model-Utility-and-MLR}
+
+*** Multiple Coefficient of Determination
+
+We saw in Section \ref{sub:mlr-mse-se} that the error sum of squares \(SSE\) can be conveniently written in MLR as 
+\begin{equation}
+SSE=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.\label{eq:mlr-sse-matrix}
+\end{equation}
+It turns out that there are equally convenient formulas for the total sum of squares \(SSTO\) and the regression sum of squares \(SSR\). They are:
+\begin{alignat}{1}
+SSTO= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{I}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}\label{eq:mlr-ssto-matrix}
+\end{alignat}
+and
+\begin{alignat}{1}
+SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.\label{eq:mlr-ssr-matrix}
+\end{alignat}
+(The matrix \(\mathbf{J}\) is defined in Appendix \ref{sec:Linear-Algebra}.) Immediately from Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} we get the /Anova Equality/
+\begin{equation} 
+SSTO=SSE+SSR.
+\end{equation}
+(See Exercise \ref{xca:anova-equality}.) We define the /multiple coefficient of determination/ by the formula
+\begin{equation} 
+R^{2}=1-\frac{SSE}{SSTO}.
+\end{equation}
+
+We interpret \(R^{2}\) as the proportion of total variation that is explained by the multiple regression model. In MLR we must be careful, however, because the value of \(R^{2}\) can be artificially inflated by the addition of explanatory variables to the model, regardless of whether or not the added variables are useful with respect to prediction of the response variable. In fact, it can be proved that the addition of a single explanatory variable to a regression model will increase the value of \(R^{2}\), /no matter how worthless/ the explanatory variable is. We could model the height of the ocean tides, then add a variable for the length of cheetah tongues on the Serengeti plain, and our \(R^{2}\) would inevitably increase. 
+
+This is a problem, because as the philosopher, Occam, once said: ``causes should not be multiplied beyond necessity''. We address the problem by penalizing \(R^{2}\) when parameters are added to the model. The result is an /adjusted/ \(R^{2}\) which we denote by \(\overline{R}^{2}\).
+\begin{equation}
+\overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).
+\end{equation}
+It is good practice for the statistician to weigh both \(R^{2}\) and \(\overline{R}^{2}\) during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\) from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
+
+#+begin_src R :exports both :results output pp 
+treesumry$r.squared
+#+end_src
+
+#+begin_src R :exports both :results output pp 
+treesumry$adj.r.squared
+#+end_src
+
+High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
+
+
+*** Overall /F/-Test
+\label{sub:mlr-Overall-F-Test}
+
+Another way to assess the model's utility is to to test the hypothesis
+\[
+H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one \ensuremath{\beta_{i}\neq0}}.
+\]
+The idea is that if all \(\beta_{i}\)'s were zero, then the explanatory variables \(X_{1},\ldots,X_{p}\) would be worthless predictors for the response variable \(Y\). We can test the above hypothesis with the overall \(F\) statistic, which in MLR is defined by
+\begin{equation}
+F=\frac{SSR/p}{SSE/(n-p-1)}.
+\end{equation}
+When the regression assumptions hold and under \(H_{0}\), it can be shown that \(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject \(H_{0}\) when \(F\) is large, that is, when the explained variation is large relative to the unexplained variation.
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The overall \(F\) statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
+
+#+begin_src R :exports both :results output pp 
+treesumry$fstatistic
+#+end_src
+
+For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
+
+*** Student's /t/ Tests
+\label{sub:mlr-Student's-t-Tests}
+
+We know that
+\begin{equation}
+\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right)
+\end{equation}
+and we have seen how to test the hypothesis \(H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\), but let us now consider the test
+\begin{equation}
+H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
+\end{equation}
+where \(\beta_{i}\) is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting \(H_{0}\) if the /p-value/ is small. If \(H_{0}\) is rejected, then we conclude that there is a significant relationship between \(Y\) and \(x_{i}\) /in the regression model/ \(Y\sim(x_{1},\ldots,x_{p})\). This last part of the sentence is very important because the significance of the variable \(x_{i}\) sometimes depends on the presence of other independent variables in the model
+#+latex: \footnote{In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub:Multicollinearity}.}.
+
+To test the hypothesis we go to find the sampling distribution of \( b_{i} \), the estimator of the corresponding parameter \( \beta_{i} \), when the null hypothesis is true. We saw in Section \ref{sub:mlr-interval-est-params} that 
+\begin{equation}
+T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
+\end{equation}
+has a Student's \(t\) distribution with \(n-(p+1)\) degrees of freedom. (Remember, we are estimating \(p+1\) parameters.) Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a \(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
+
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The Student's \(t\) tests for significance of the individual explanatory variables are shown in the =summary= output.
+
+#+begin_src R :exports both :results output pp 
+treesumry
+#+end_src
+
+We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
+
+
+** Polynomial Regression
+\label{sec:Polynomial-Regression}
+
+*** Quadratic Regression Model
+
+In each of the previous sections we assumed that \(\mu\) was a linear function of the explanatory variables. For example, in SLR we assumed that \(\mu(x)=\beta_{0}+\beta_{1}x\), and in our previous MLR examples we assumed \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\). In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
+
+#+begin_src R :exports code :results graphics silent :file img/Scatterplot-Volume-Girth-trees.ps
+qplot(Girth, Volume, data = trees)
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{img/Scatterplot-Volume-Girth-trees.ps}
+    \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
+    \label{fig:Scatterplot-Volume-Girth-trees}
+  \end{figure}
+#+end_src
+
+For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
+\begin{equation}
+\mu(x_{1})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}.
+\end{equation}
+The model associated with this choice of \(\mu\) is
+\begin{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon.
+\end{equation}
+The regression assumptions are the same. Almost everything indeed is the same. In fact, it is still called a ``linear regression model'', since the mean response \(\mu\) is linear /in the parameters/ \(\beta_{0}\), \(\beta_{1}\), and \(\beta_{2}\). 
+
+*However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the \(x_{i}\)'s with \(x_{i}-\overline{x}\) (or \((x_{i}-\overline{x})/s\)) before fitting the model
+#+latex: \footnote{Rescaling the data gets the job done but a better way to avoid the multicollinearity introduced by the higher order terms is with /orthogonal polynomials/, whose coefficients are chosen just right so that the polynomials are not correlated with each other. This is beginning to linger outside the scope of this book, however, so we will content ourselves with a brief mention and then stick with the rescaling approach in the discussion that follows. A nice example of orthogonal polynomials in action can be run with \texttt{example(cars)}.}.
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+There are multiple ways to fit a quadratic model to the variables =Volume= and =Girth= using \textsf{R}.
+1. One way would be to square the values for =Girth= and save them in a vector =Girthsq=. Next, fit the linear model =Volume ~ Girth + Girthsq=. 
+2. A second way would be to use the /insulate/ function in \textsf{R}, denoted by =I=:
+   : Volume ~ Girth + I(Girth^2)
+The second method is shorter than the first but the end result is the same. And once we calculate and store the fitted model (in, say, =treesquad.lm=) all of the previous comments regarding \textsf{R} apply.  
+3. A third and ``right'' way to do it is with orthogonal polynomials:
+   :  Volume ~ poly(Girth, degree = 2)
+   See =?poly= and =?cars= for more information. Note that we can recover the approach in 2 with =poly(Girth, degree = 2, raw = TRUE)=.
+
+#+latex: \begin{example}
+We will fit the quadratic model to the =trees= data and display the results with =summary=, being careful to rescale the data before fitting the model. We may rescale the =Girth= variable to have zero mean and unit variance on-the-fly with the =scale= function.
+
+#+begin_src R :exports both :results output pp 
+treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                    data = trees)
+summary(treesquad.lm)
+#+end_src
+
+We see that the \(F\) statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
+
+
+#+begin_src R :exports code :results graphics silent :file img/Fitting-the-Quadratic.ps
+a <- ggplot(trees, aes(scale(Girth), Volume))
+a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
+#+end_src
+
+#+begin_src latex
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{img/Fitting-the-Quadratic.ps}
+    \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
+    \label{fig:Fitting-the-Quadratic}
+  \end{figure}
+#+end_src
+
+The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
+
+#+latex: \end{example}
+
+
+#+latex: \begin{rem}
+When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include \(x^{m}\) as a term in the model, then (s)he should also include all lower order terms \(x\), \(x^{2}\), ...,\(x^{m-1}\) in the model.
+#+latex: \end{rem}
+
+We do estimation/prediction the same way that we did in Section \ref{sub:mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
+
+#+begin_src R :exports both :results output pp 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5))
+predict(treesquad.lm, newdata = new, interval = "prediction")
+#+end_src
+
+The predictions and intervals are slightly different from what they were previously. Notice that it was not necessary to rescale the =Girth= prediction data before input to the =predict= function; the model did the rescaling for us automatically.
+
+#+latex: \begin{rem}
+We have mentioned on several occasions that it is important to rescale the explanatory variables for polynomial regression. Watch what happens if we ignore this advice:
+
+#+begin_src R :exports both :results output pp 
+summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
+#+end_src
+
+Now nothing is significant in the model except =Girth^2=. We could delete the =Intercept= and =Girth= from the model, but the model would no longer be /parsimonious/. A novice may see the output and be confused about how to proceed, while the seasoned statistician recognizes immediately that =Girth= and =Girth^2= are highly correlated (see Section \ref{sub:Multicollinearity}). The only remedy to this ailment is to rescale =Girth=, which we should have done in the first place.
+
+In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Statistic} we investigate this issue further.
+
+#+latex: \end{rem}
+
+
+** Interaction
+\label{sec:Interaction}
+
+In our model for tree volume there have been two independent variables: =Girth= and =Height=. We may suspect that the independent variables are related, that is, values of one variable may tend to influence values of the other. It may be desirable to include an additional term in our model to try and capture the dependence between the variables. Interaction terms are formed by multiplying one (or more) explanatory variable(s) by another. 
+
+
+#+latex: \begin{example}
+Perhaps the =Girth= and =Height= of the tree interact to influence the its =Volume=; we would like to investigate whether the model (=Girth= = \(x_{1}\) and =Height= = \(x_{2}\)) 
+\begin{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon
+\end{equation}
+would be significantly improved by the model
+\begin{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\beta_{1:2}x_{1}x_{2}+\epsilon,
+\end{equation}
+where the subscript \(1:2\) denotes that \(\beta_{1:2}\) is a coefficient
+of an interaction term between \(x{}_{1}\) and \(x_{2}\). 
+
+#+latex: \end{example}
+
+#+latex: \paragraph*{What does it mean?}
+
+Consider the mean response \(\mu(x_{1},x_{2})\) as a function of \(x_{2}\):
+\begin{equation}
+\mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+\beta_{2}x_{2}.
+\end{equation}
+This is a linear function of \(x_{2}\) with slope \(\beta_{2}\). As \(x_{1}\) changes, the \(y\)-intercept of the mean response in \(x_{2}\) changes, but the slope remains the same. Therefore, the mean response in \(x_{2}\) is represented by a collection of parallel lines all with common slope \(\beta_{2}\).
+
+Now think about what happens when the interaction term \(\beta_{1:2}x_{1}x_{2}\) is included. The mean response in \(x_{2}\) now looks like
+\begin{equation}
+\mu(x_{2})=(\beta_{0}+\beta_{1}x_{1})+(\beta_{2}+\beta_{1:2}x_{1})x_{2}.
+\end{equation}
+In this case we see that not only the \(y\)-intercept changes when \(x_{1}\) varies, but the slope also changes in \(x_{1}\). Thus, the interaction term allows the slope of the mean response in \(x_{2}\) to increase and decrease as \(x_{1}\) varies. 
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+There are several ways to introduce an interaction term into the model.
+1. Make a new variable =prod <- Girth * Height=, then include =prod= in the model formula =Volume ~ Girth + Height + prod=. This method is perhaps the most transparent, but it also reserves memory space unnecessarily.
+2. Once can construct an interaction term directly in \textsf{R} with a colon ``=:=''. For this example, the model formula would look like 
+   : Volume ~ Girth + Height + Girth:Height 
+
+For the =trees= data, we fit the model with the interaction using method two and see if it is significant:
+
+#+begin_src R :exports both :results output pp 
+treesint.lm <- lm(Volume ~ Girth + Height + Girth:Height, data = trees)
+summary(treesint.lm)
+#+end_src
+
+We can see from the output that the interaction term is highly significant. Further, the estimate \(b_{1:2}\) is positive. This means that the slope of \(\mu(x_{2})\) is steeper for bigger values of =Girth=. Keep in mind: the same interpretation holds for \(\mu(x_{1})\); that is, the slope of \(\mu(x_{1})\) is steeper for bigger values of =Height=.
+
+For the sake of completeness we calculate confidence intervals for the parameters and do prediction as before.
+
+#+begin_src R :exports both :results output pp 
+confint(treesint.lm)
+#+end_src
+
+#+begin_src R :exports both :results output pp 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
+predict(treesint.lm, newdata = new, interval = "prediction")
+#+end_src
+
+#+latex: \begin{rem}
+There are two other ways to include interaction terms in model formulas. For example, we could have written =Girth * Height= or even =(Girth + Height)^2= and both would be the same as =Girth + Height + Girth:Height=. 
+#+latex: \end{rem}
+
+These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
+
+
+** Qualitative Explanatory Variables
+\label{sec:Qualitative-Explanatory-Variables}
+
+We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
+
+#+latex: \begin{note*}
+The =trees= data do not have any qualitative explanatory variables, so we will construct one for illustrative purposes
+#+latex: \footnote{This procedure of replacing a continuous variable by a discrete/qualitative one is called \emph{binning}, and is almost \emph{never} the right thing to do. We are in a bind at this point, however, because we have invested this chapter in the \texttt{trees} data and I do not want to switch mid-discussion. I am currently searching for a data set with pre-existing qualitative variables that also conveys the same points present in the trees data, and when I find it I will update this chapter accordingly.}.
+We will leave the =Girth= variable alone, but we will replace the variable =Height= by a new variable =Tall= which indicates whether or not the cherry tree is taller than a certain threshold (which for the sake of argument will be the sample median height of 76 ft). That is, =Tall= will be defined by
+\begin{equation}
+\mathtt{Tall}=
+\begin{cases}
+\mathtt{yes}, & \mbox{if }\mathtt{Height}>76,\\
+\mathtt{no}, & \mbox{if }\mathtt{Height}\leq76.
+\end{cases}
+\end{equation}
+
+We can construct =Tall= very quickly in \textsf{R} with the =cut= function:
+
+#+begin_src R :exports both :results output pp 
+trees$Tall <- cut(trees$Height, breaks = c(-Inf, 76, Inf), 
+                  labels = c("no","yes"))
+trees$Tall[1:5]
+#+end_src
+
+Note that =Tall= is automatically generated to be a factor with the labels in the correct order. See =?cut= for more. 
+#+latex: \end{note*}
+
+Once we have =Tall=, we include it in the regression model just like we would any other variable. It is handled internally in a special way. Define a ``dummy variable'' =Tallyes= that takes values
+\begin{equation}
+\mathtt{Tallyes}=
+\begin{cases}
+1, & \mbox{if }\mathtt{Tall}=\mathtt{yes},\\
+0, & \mbox{otherwise.}
+\end{cases}
+\end{equation}
+That is, =Tallyes= is an /indicator variable/ which indicates when a respective tree is tall. The model may now be written as 
+\begin{equation}
+\mathtt{Volume}=\beta_{0}+\beta_{1}\mathtt{Girth}+\beta_{2}\mathtt{Tallyes}+\epsilon.
+\end{equation}
+Let us take a look at what this definition does to the mean response. Trees with =Tall = yes= will have the mean response
+\begin{equation}
+\mu(\mathtt{Girth})=(\beta_{0}+\beta_{2})+\beta_{1}\mathtt{Girth},
+\end{equation}
+while trees with =Tall = no= will have the mean response
+\begin{equation} 
+\mu(\mathtt{Girth})=\beta_{0}+\beta_{1}\mathtt{Girth}.
+\end{equation}
+In essence, we are fitting two regression lines: one for tall trees, and one for short trees. The regression lines have the same slope but they have different \(y\) intercepts (which are exactly \(|\beta_{2}|\) far apart).
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The important thing is to double check that the qualitative variable in question is stored as a factor. The way to check is with the =class= command. For example,
+
+#+begin_src R :exports both :results output pp 
+class(trees$Tall)
+#+end_src
+
+If the qualitative variable is not yet stored as a factor then we may convert it to one with the =factor= command. See Section \ref{sub:Qualitative-Data}. Other than this we perform MLR as we normally would.
+
+#+begin_src R :exports both :results output pp 
+treesdummy.lm <- lm(Volume ~ Girth + Tall, data = trees)
+summary(treesdummy.lm)
+#+end_src
+
+From the output we see that all parameter estimates are statistically significant and we conclude that the mean response differs for trees with =Tall = yes= and trees with =Tall = no=.
+
+#+latex: \begin{rem}
+We were somewhat disingenuous when we defined the dummy variable =Tallyes= because, in truth, \textsf{R} defines =Tallyes= automatically without input from the user
+#+latex: \footnote{That is, \textsf{R} by default handles contrasts according to its internal settings which may be customized by the user for fine control. Given that we will not investigate contrasts further in this book it does not serve the discussion to delve into those settings, either. The interested reader should check \texttt{?contrasts} for details.}. 
+Indeed, the author fit the model beforehand and wrote the discussion afterward with the knowledge of what \textsf{R} would do so that the output the reader saw would match what (s)he had previously read. The way that \textsf{R} handles factors internally is part of a much larger topic concerning /contrasts/, which falls outside the scope of this book. The interested reader should see Neter et al \cite{Neter1996} or Fox \cite{Fox1997} for more. 
+#+latex: \end{rem}
+
+#+latex: \begin{rem}
+In general, if an explanatory variable =foo= is qualitative with \(n\) levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define \(n-1\) indicator variables in the following way:
+\begin{eqnarray*}
+\mathtt{foobar2} & = & \begin{cases}
+1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\
+0, & \mbox{otherwise.}\end{cases},\,\ldots,\,\mathtt{foobarn}=\begin{cases}
+1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\
+0, & \mbox{otherwise.}\end{cases}
+\end{eqnarray*}
+The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
+#+latex: \end{rem}
+
+
+
+*** Graphing the Regression Lines
+
+We can see a plot of the two regression lines with the following mouthful of code.
+
+#+begin_src R :exports code :results graphics silent :file img/dummy-variable-trees.ps
+treesTall <- split(trees, trees$Tall)
+treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
+treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
+plot(Volume ~ Girth, data = trees, type = "n")
+points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
+points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
+lines(Fit ~ Girth, data = treesTall[["yes"]])
+lines(Fit ~ Girth, data = treesTall[["no"]])
+#+end_src
+
+#+begin_src latex 
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{img/dummy-variable-trees.ps}
+    \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
+    \label{fig:dummy-variable-trees}
+  \end{figure}
+#+end_src
+
+It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the \texttt{Fit}ted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
+
+There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
+
+** Partial /F/ Statistic
+\label{sec:Partial-F-Statistic}
+
+We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
+\begin{equation}
+Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
+\end{equation}
+where \(j\geq1\) and \(p\geq2\). Now we wish to test the hypothesis
+\begin{equation}
+H_{0}:\beta_{j+1}=\beta_{j+2}=\cdots=\beta_{p}=0
+\end{equation}
+versus the alternative 
+\begin{equation}
+H_{1}:\mbox{at least one of \ensuremath{\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0}}.
+\end{equation}
+
+The interpretation of \(H_{0}\) is that none of the variables \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\) and the interpretation of \(H_{1}\) is that at least one of \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\). In essence, for this hypothesis test there are two competing models under consideration:
+\begin{align}
+\mbox{the full model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{p}x_{p}+\epsilon,\\
+\mbox{the reduced model:} & \quad y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\epsilon,
+\end{align}
+
+Of course, the full model will always explain the data /better/ than the reduced model, but does the full model explain the data /significantly better/ than the reduced model? This question is exactly what the partial \(F\) statistic is designed to answer.
+
+We first calculate \(SSE_{f}\), the unexplained variation in the full model, and \(SSE_{r}\), the unexplained variation in the reduced model. We base our test on the difference \(SSE_{r}-SSE_{f}\) which measures the reduction in unexplained variation attributable to the variables \(x_{j+1}\), ..., \(x_{p}\). In the full model there are \(p+1\) parameters and in the reduced model there are \(j+1\) parameters, which gives a difference of \(p-j\) parameters (hence degrees of freedom). The partial /F/ statistic is 
+\begin{equation}
+F=\frac{(SSE_{r}-SSE_{f})/(p-j)}{SSE_{f}/(n-p-1)}.
+\end{equation}
+It can be shown when the regression assumptions hold under \(H_{0}\) that the partial \(F\) statistic has an \(\mathsf{f}(\mathtt{df1}=p-j,\,\mathtt{df2}=n-p-1)\) distribution. We calculate the \(p\)-value of the observed partial \(F\) statistic and reject \(H_{0}\) if the \(p\)-value is small. 
+
+
+#+latex: \paragraph*{How to do it with \textsf{R}}
+
+The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
+
+#+latex: \begin{example}
+\label{exa:mlr-trees-poly-no-rescale}
+
+For the =trees= data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
+
+#+begin_src R :exports both :results output pp 
+treesfull.lm <- lm(Volume ~ Girth + I(Girth^2) + Height + 
+                   I(Height^2), data = trees)
+summary(treesfull.lm)
+#+end_src
+
+In this ill-formed model nothing is significant except =Girth= and =Girth^2=. Let us continue down this path and suppose that we would like to try a reduced model which contains nothing but =Girth= and =Girth^2= (not even an =Intercept=). Our two models are now
+\begin{align*} 
+\mbox{the full model:} & \quad Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\beta_{3}x_{2}+\beta_{4}x_{2}^{2}+\epsilon,\\
+\mbox{the reduced model:} & \quad Y=\beta_{1}x_{1}+\beta_{2}x_{1}^{2}+\epsilon,
+\end{align*}
+We fit the reduced model with =lm= and store the results:
+
+#+begin_src R :exports code :results silent
+treesreduced.lm <- lm(Volume ~ -1 + Girth + I(Girth^2), data = trees)
+#+end_src
+
+To delete the intercept from the model we used =-1= in the model formula. Next we compare the two models with the =anova= function. The convention is to list the models from smallest to largest.
+
+#+begin_src R :exports both :results output pp 
+anova(treesreduced.lm, treesfull.lm)
+#+end_src
+
+We see from the output that the complete model is highly significant compared to the model that does not incorporate =Height= or the =Intercept=. We wonder (with our tongue in our cheek) if the =Height^2= term in the full model is causing all of the trouble. We will fit an alternative reduced model that only deletes =Height^2=. 
+
+#+begin_src R :exports both :results output pp 
+treesreduced2.lm <- lm(Volume ~ Girth + I(Girth^2) + Height, 
+                       data = trees)
+anova(treesreduced2.lm, treesfull.lm)
+#+end_src
+
+In this case, the improvement to the reduced model that is attributable to =Height^2= is not significant, so we can delete =Height^2= from the model with a clear conscience. We notice that the /p-value/ for this latest partial \(F\) test is 0.8865, which seems to be remarkably close to the /p-value/ we saw for the univariate /t/ test of =Height^2= at the beginning of this example. In fact, the /p-values/ are /exactly/ the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
+
+#+latex: \end{example}
+
+
+** Residual Analysis and Diagnostic Tools
+\label{sec:Residual-Analysis-MLR}
+
+We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
+
+- Shapiro-Wilk, Breusch-Pagan, Durbin-Watson: :: unchanged from SLR, but we are now equipped to talk about the Shapiro-Wilk test statistic for the residuals. It is defined by the formula 
+   \begin{equation}
+   W=\frac{\mathbf{a}^{\mathrm{T}}\mathbf{E}^{\ast}}{\mathbf{E}^{\mathrm{T}}\mathbf{E}},
+   \end{equation}
+   where \(\mathbf{E}^{\ast}\) is the sorted residuals and \(\mathbf{a}_{1\times\mathrm{n}}\) is defined by 
+   \begin{equation}
+   \mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
+   \end{equation}
+   where \(\mathbf{m}_{\mathrm{n}\times1}\) and \(\mathbf{V}_{\mathrm{n}\times\mathrm{n}}\) are the mean and covariance matrix, respectively, of the order statistics from an \(\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)\) distribution. 
+- Leverages: :: are defined to be the diagonal entries of the hat matrix \(\mathbf{H}\) (which is why we called them \(h_{ii}\) in Section \ref{sub:mlr-point-est-regsurface}). The sum of the leverages is \(\mbox{tr}(\mathbf{H})=p+1\). One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is \(2(p+1)/n\), and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
+- Standardized residuals: :: unchanged. Considered extreme if \(|R_{i}|>2\). 
+- Studentized residuals: :: compared to a \(\mathsf{t}(\mathtt{df}=n-p-2)\) distribution.  
+- DFBETAS: :: The formula is generalized to
+   \begin{equation}
+   (DFBETAS)_{j(i)}=\frac{b_{j}-b_{j(i)}}{S_{(i)}\sqrt{c_{jj}}},\quad j=0,\ldots p,\ i=1,\ldots,n,
+   \end{equation}
+   where \(c_{jj}\) is the \(j^{\mathrm{th}}\) diagonal entry of \((\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}\). Values larger than one for small data sets or \(2/\sqrt{n}\) for large data sets should be investigated.
+- DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
+- Cook's D: :: compared to an \(\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)\) distribution. Observations falling higher than the 50\(^{\textrm{th}}\) percentile are extreme. 
+Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
+
+
+
+** Additional Topics
+\label{sec:Additional-Topics-MLR}
+
+*** Nonlinear Regression
+
+We spent the entire chapter talking about the =trees= data, and all of our models looked like =Volume ~ Girth + Height= or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is \(V=lwh\) and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
+\begin{equation}
+V=\pi r^{2}h\quad\mbox{or}\quad V=4\pi dh,
+\end{equation}
+where \(r\) and \(d\) represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for \(\mu\) might be
+\begin{equation}
+\mu(x_{1},x_{2})=\beta_{0}x_{1}^{\beta_{1}}x_{2}^{\beta_{2}},\label{eq:trees-nonlin-reg}
+\end{equation}
+where \(\beta_{1}\) and \(\beta_{2}\) are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
+
+How can we fit this model? The model is not linear in the parameters any more, so our linear regression methods will not work... or will they? In the =trees= example we may take the logarithm of both sides of Equation \ref{eq:trees-nonlin-reg} to get
+\begin{equation}
+\mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
+\end{equation}
+and this new model \(\mu^{\ast}\) is linear in the parameters \(\beta_{0}^{\ast}=\ln\beta_{0}\), \(\beta_{1}^{\ast}=\beta_{1}\) and \(\beta_{2}^{\ast}=\beta_{2}\). We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
+
+#+begin_src R :exports both :results output pp 
+treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height), 
+                     data = trees)
+summary(treesNonlin.lm)
+#+end_src
+
+This is our best model yet (judging by \(R^{2}\) and \(\overline{R}^{2}\)), all of the parameters are significant, it is simpler than the quadratic or interaction models, and it even makes theoretical sense. It rarely gets any better than that.
+
+We may get confidence intervals for the parameters, but remember that it is usually better to transform back to the original scale for interpretation purposes :
+
+#+begin_src R :exports both :results output pp 
+exp(confint(treesNonlin.lm))
+#+end_src
+
+(Note that we did not update the row labels of the matrix to show that we exponentiated and so they are misleading as written.) We do predictions just as before. Remember to transform the response variable back to the original scale after prediction. 
+
+#+begin_src R :exports both :results output pp 
+new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
+exp(predict(treesNonlin.lm, newdata = new, interval = "confidence"))
+#+end_src
+
+The predictions and intervals are slightly different from those calculated earlier, but they are close. Note that we did not need to transform the =Girth= and =Height= arguments in the dataframe =new=. All transformations are done for us automatically.
+
+*** Real Nonlinear Regression
+
+We saw with the =trees= data that a nonlinear model might be more appropriate for the data based on theoretical considerations, and we were lucky because the functional form of \(\mu\) allowed us to take logarithms to transform the nonlinear model to a linear one. The same trick will not work in other circumstances, however. We need techniques to fit general models of the form
+\begin{equation}
+\mathbf{Y}=\mu(\mathbf{X})+\epsilon,
+\end{equation}
+where \(\mu\) is some crazy function that does not lend itself to linear transformations.
+
+There are a host of methods to address problems like these which are studied in advanced regression classes. The interested reader should see Neter /et al/ \cite{Neter1996} or Tabachnick and Fidell \cite{Tabachnick2006}. 
+
+It turns out that John Fox has posted an Appendix to his book \cite{Fox2002} which discusses some of the methods and issues associated with nonlinear regression; see [[http://cran.r-project.org/doc/contrib/Fox-Companion/appendix.html][here]] for more.  Here is an example of how it works, based on a question from R-help.
+
+#+begin_src R :exports both :results output pp
+# fake data 
+set.seed(1) 
+x <- seq(from = 0, to = 1000, length.out = 200) 
+y <- 1 + 2*(sin((2*pi*x/360) - 3))^2 + rnorm(200, sd = 2)
+# plot(x, y)
+acc.nls <- nls(y ~ a + b*(sin((2*pi*x/360) - c))^2, 
+               start = list(a = 0.9, b = 2.3, c = 2.9))
+summary(acc.nls)
+#plot(x, fitted(acc.nls))
+#+end_src
+
+
+*** Multicollinearity
+\label{sub:Multicollinearity}
+
+A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
+
+Multicollinearity is a problem because it causes instability in the regression model. The instability is a consequence of redundancy in the explanatory variables: a high \(R^{2}\) indicates a strong dependence between the selected independent variable and the others. The redundant information inflates the variance of the parameter estimates which can cause them to be statistically insignificant when they would have been significant otherwise. To wit, multicollinearity is usually measured by what are called /variance inflation factors/.
+
+Once multicollinearity has been diagnosed there are several approaches to remediate it. Here are a couple of important ones. 
+- Principal Components Analysis. :: This approach casts out two or more of the original explanatory variables and replaces them with new variables, derived from the original ones, that are by design uncorrelated with one another. The redundancy is thus eliminated and we may proceed as usual with the new variables in hand. Principal Components Analysis is important for other reasons, too, not just for fixing multicollinearity problems.
+- Ridge Regression. :: The idea of this approach is to replace the original parameter estimates with a different type of parameter estimate which is more stable under multicollinearity. The estimators are not found by ordinary least squares but rather a different optimization procedure which incorporates the variance inflation factor information. 
+
+We decided to omit a thorough discussion of multicollinearity because we are not equipped to handle the mathematical details. Perhaps the topic will receive more attention in a later edition.
+
+- What to do when data are not normal
+   - Bootstrap (see Chapter \ref{cha:resampling-methods}).
+
+
+
+*** Akaike's Information Criterion
+
+\[
+AIC=-2\ln L+2(p+1)
+\]
+
+
+#+latex: \newpage{}
+
+** Chapter Exercises
+
+#+latex: \setcounter{thm}{0}
+
+#+latex: \begin{xca}
+\label{xca:anova-equality}
+Use Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the Anova Equality:
+\[
+SSTO=SSE+SSR.
+\]
+#+latex: \end{xca}
 
 * Resampling Methods                                                 :resamp:
 \label{cha:resampling-methods}
@@ -10361,8 +10731,8 @@ If \(g\) is a differentiable function whose range is the interval \([a,b]\) and 
 
 #+CAPTION: [Some integrals (constants of integration omitted)]{Some integrals (constants of integration omitted).}
 #+LABEL: tab:Useful-Integrals
-| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \abs(x) \)      |
-| \(\int\tan x\:\mathrm{d} x=\ln \abs(\sec x)\)        | \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)            | \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\) |
+| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \mathrm{abs}(x) \) |
+| \(\int\tan x\:\mathrm{d} x=\ln \mathrm{abs}(\sec x)\) | \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)            | \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\) |
 
 #+latex: \paragraph*{Integration by Parts}
 
@@ -10685,7 +11055,8 @@ It is possible to summarize this entire appendix with only one sentence: /the st
    1. Discuss any limitations of the study or inferences.
    1. Discuss avenues of future research suggested by the study. 
 
-** How to Write It with R \label{sec:How-to-Write}
+** How to Write It with R 
+#+latex: \label{sec:How-to-Write}
 Once the decision has been made what to write, the next task is to typeset the information to be shared. To do this the author will need to select software to use to write the documents. There are many options available, and choosing one over another is sometimes a matter of taste. But not all software were created equal, and \textsf{R} plays better with some applications than it does with others. 
 In short, \textsf{R} does great with \LaTeX{} and there are many resources available to make writing a document with \textsf{R} and \LaTeX{} easier. But \LaTeX{} is not for the beginner, and there are other word processors which may be acceptable depending on the circumstances.
 
@@ -10748,14 +11119,14 @@ There are programs to make the process easier: AUC\TeX{}.
 
 dev.copy2eps, also dev.copy2pdf
 
-\url{http://www.stat.uni-muenchen.de/~leisch/Sweave/}
+[[http://www.stat.uni-muenchen.de/~leisch/Sweave/]]
 
 
 *** Sweave and \protect\LyX{}
 This approach is nice because it works for all operating  systems. It gives you everything from the last section and makes it easier to use \LaTeX{}. That being said, it is better to know \LaTeX{} already when migrating to \LyX{}, because you understand all of the machinery going on under the hood.
 
 Program Listings and the \textsf{R} language
-\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}
+[[http://gregor.gorjanc.googlepages.com/lyx-sweave]]
 
 
 ** Formatting Tables \label{sec:Formatting-Tables}
@@ -10769,24 +11140,10 @@ library(Hmisc)
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 #+end_src
 
-#+results[0b0ddb8f7dfbc5175a5aff3c39c7105f5d778950]:
-#+begin_example
-cbind(Sepal.Length, Sepal.Width)    N=150
--------+----------+---+------------+-----------+
-|       |          |N  |Sepal.Length|Sepal.Width|
--------+----------+---+------------+-----------+
-|Species|setosa    | 50|5.006000    |3.428000   |
-|       |versicolor| 50|5.936000    |2.770000   |
-|       |virginica | 50|6.588000    |2.974000   |
--------+----------+---+------------+-----------+
-|Overall|          |150|5.843333    |3.057333   |
--------+----------+---+------------+-----------+
-#+end_example
+There is a =method= argument to =summary=, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: =reverse= and =cross=. See =?summary.formula= or the [[http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport][following document]] from Frank Harrell for more details.
 
-There is a =method= argument to =summary=, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: =reverse= and =cross=. See =?summary.formula= or the following document from Frank Harrell for more details \url{http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport}.
-
-
-** Other Formats \label{sec:Other-Formats}
+** Other Formats 
+#+latex: \label{sec:Other-Formats}
 
 HTML and prettyR
 R2HTML
@@ -10796,11 +11153,10 @@ R2HTML
 
 \noun{WARNING: this appendix is not applicable until the exercises
 have been written.} 
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 set.seed(095259)
 #+end_src
 
-#+results[ce382389430c46506972e5b1bdefa6fe10c4820a]:
 
 Probably this /book/ could more accurately be described as /software/. The reason is that the document is one big random variable, one observation realized out of millions. It is electronically distributed under the GNU FDL, and ``free'' in both senses: speech and beer.  
 
@@ -10830,7 +11186,7 @@ You will need three (3) things to generate this document for yourself, in additi
 
 We will discuss each of these in turn.
 
-- LaTeX: ::  The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable LaTeX distributions depending on your operating system, one such alternative being MikTeX (\url{http://miktex.org/}) for Microsoft Windows. 
+- LaTeX: ::  The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable LaTeX distributions depending on your operating system, one such alternative being [[http://miktex.org/][MikTeX]] for Microsoft Windows. 
 - Sweave: :: If you have \textsf{R} installed, then the required Sweave files are already on your system... somewhere. The only problems that you may have are likely associated with making sure that your LaTeX distribution knows where to find the =Sweave.sty= file. See the Sweave Homepage (\url{http://www.statistik.lmu.de/~leisch/Sweave/}) for guidance on how to get it working on your particular operating system.
 - LyX: :: Strictly speaking, LyX is not needed to generate this document. But this document was written stem to stern with LyX, taking full advantage of all of the bells and whistles that LyX has to offer over plain \LaTeX{} editors. And it's free. See the LyX homepage (\url{http://www.lyx.org/}) for additional information. If you decide to give LyX a try, then you will need to complete some extra steps to coordinate Sweave and LyX with each other. Luckily, Gregor Gorjanc has a website and an \textsf{R} News article \cite{Gorjanc2008} to help you do exactly that. See the LyX-Sweave homepage (\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}) for details.
 

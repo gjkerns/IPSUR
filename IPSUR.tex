@@ -1,4 +1,4 @@
-% Created 2011-09-11 Sun 19:29
+% Created 2011-09-12 Mon 00:18
 \documentclass[captions=tableheading]{scrbook}
 
 
@@ -236,7 +236,6 @@ For complete, precise information regarding installation of \textsf{R} and add-o
 \label{sec-2-2}
 
 \label{sec:Communicating-with-R}
-
 
 \paragraph*{One line at a time}
 
@@ -511,6 +510,7 @@ methods(rev)
 
 \begin{verbatim}
  [1] rev.default     rev.dendrogram* rev.zoo        
+ [4] rev.zooreg*    
  
     Non-visible functions are asterisked
 \end{verbatim}
@@ -714,7 +714,6 @@ str(rivers)
   num [1:141] 735 320 325 392 524 ...
 \end{verbatim}
 
-
 The output says that \texttt{rivers} is a numeric vector of length 141, and the first few values are 735, 320, 325, \emph{etc}. These data are definitely quantitative and it appears that the measurements have been rounded to the nearest mile. Thus, strictly speaking, these are discrete data. But we will find it convenient later to take data like these to be continuous for some of our statistical procedures. 
 \end{example}
 
@@ -872,6 +871,8 @@ stem.leaf(UKDriverDeaths, depth = FALSE)
 
 
 \begin{verbatim}
+null device 
+          1
 1 | 2: represents 120
  leaf unit: 10
             n: 192
@@ -960,6 +961,8 @@ str(state.abb)
 \end{verbatim}
 
 \begin{verbatim}
+ null device 
+           1
   chr [1:50] "AL" "AK" "AZ" "AR" "CA" "CO" ...
 \end{verbatim}
 
@@ -1004,7 +1007,7 @@ Tbl
 \end{verbatim}
 
 \begin{verbatim}
- state.division
+  state.division
         New England    Middle Atlantic     South Atlantic 
                   6                  3                  8 
  East South Central West South Central East North Central 
@@ -1075,7 +1078,6 @@ Notice the \texttt{cex.names}\index{cex.names@\texttt{cex.names}} argument that 
   \end{figure}
 
 \end{example}
-
 
 
 \paragraph*{Pareto Diagrams}
@@ -1151,6 +1153,8 @@ y
 \end{verbatim}
 
 \begin{verbatim}
+ null device 
+           1
  [1]  TRUE  TRUE  TRUE FALSE FALSE
 \end{verbatim}
 
@@ -1268,6 +1272,7 @@ with(faithful, stem.leaf(eruptions))
 
 
 \begin{verbatim}
+[1] 35
 1 | 2: represents 1.2
  leaf unit: 0.1
             n: 272
@@ -1432,9 +1437,8 @@ Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1
 Chebychev's Rule applies to any data distribution, \emph{any} list of numbers, no matter where it came from or what the histogram looks like. The price for such generality is that the bounds are not very tight; if we know more about how the data are shaped then we can say more about how much of the data can fall a given distance from the mean.
 
 \begin{fact}
-\label{fac:Empirical-Rule}Empirical Rule: If data follow a bell-shaped
-curve, then approximately 68\%, 95\%, and 99.7\% of the data are within
-1, 2, and 3 standard deviations of the mean, respectively. 
+\label{fac:Empirical-Rule}
+Empirical Rule: If data follow a bell-shaped curve, then approximately 68\%, 95\%, and 99.7\% of the data are within 1, 2, and 3 standard deviations of the mean, respectively. 
 \end{fact}
 
 
@@ -1477,9 +1481,10 @@ we may compute the sample range with \texttt{range(x)} and the sample variance w
 
 \subparagraph*{With the \textsf{R} Commander}
 we can calculate the sample standard deviation with the \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Numerical Summaries}... combination. \textsf{R} Commander does not calculate the \(IQR\) or \(MAD\) in any of the menu selections, by default.
-\subsection{Measures of Shape \label{sub:Measures-of-Shape}}
+\subsection{Measures of Shape}
 \label{sec-3-3-5}
 
+\label{sub:Measures-of-Shape}
 
 \paragraph*{Sample Skewness}
 
@@ -1566,13 +1571,13 @@ The basic command is \texttt{stem(x)} or a more sophisticated version written by
 
 
 WARNING: Sometimes when making a stem plot the result will not be what you expected. There are several reasons for this: 
-
 \begin{itemize}
 \item Stemplots by default will trim extreme observations (defined in Section \ref{sub:Outliers}) from the display. This in some cases will result in stemplots that are not as wide as expected.
 \item The leafs digit is chosen automatically by \texttt{stem.leaf} according to an algorithm that the computer believes will represent the data well. Depending on the choice of the digit, \texttt{stem.leaf} may drop digits from the data or round the values in unexpected ways.
 \end{itemize}
 
-Let us take a look at the \texttt{rivers} data set\label{ite:stemplot-rivers}.
+Let us take a look at the \texttt{rivers} data set
+\label{ite:stemplot-rivers}.
 
 
 \begin{verbatim}
@@ -1750,9 +1755,9 @@ Indexing of data frames is similar to indexing of vectors. To get the entry in r
 
 
 \begin{verbatim}
-A[3,]
+A[3, ]
 A[1, ]
-A[ ,2]
+A[ , 2]
 \end{verbatim}
 
 \begin{verbatim}
@@ -2192,12 +2197,13 @@ S
 \end{verbatim}
 
 \begin{verbatim}
+ null device 
+           1
    lands
  1  down
  2    up
  3  side
 \end{verbatim}
-
 
 The sample space \texttt{S} contains the column \texttt{lands} which stores the outcomes \texttt{down}, \texttt{up}, and \texttt{side}. 
 
@@ -2219,7 +2225,6 @@ tosscoin(1)
  2     T
 \end{verbatim}
 
-
 The number \texttt{1} tells \texttt{tosscoin} that we only want to toss the coin once. We could toss it three times: 
 
 
@@ -2239,7 +2244,6 @@ tosscoin(3)
  8     T     T     T
 \end{verbatim}
 
-
 Alternatively we could roll a fair die: 
 
 
@@ -2256,7 +2260,6 @@ rolldie(1)
  5  5
  6  6
 \end{verbatim}
-
 
 The \texttt{rolldie} function defaults to a 6-sided die, but we can specify others with the \texttt{nsides} argument. The command \texttt{rolldie(3, nsides = 4)} would be used to roll a 4-sided die three times.
 
@@ -2276,7 +2279,6 @@ head(cards())
  5    6 Club
  6    7 Club
 \end{verbatim}
-
 
 The \texttt{cards} function that we just used has optional arguments \texttt{jokers} (if you would like Jokers to be in the deck) and \texttt{makespace} which we will discuss later. There is also a \texttt{roulette} function which returns the sample space associated with one spin on a roulette wheel. There are EU and USA versions available. Interested readers may contribute any other game or sample spaces that may be of general interest.
 \subsection{Sampling from Urns}
@@ -2321,8 +2323,6 @@ urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
 8  2  3
 9  3  3
 \end{verbatim}
-
- 
 
 Notice that rows 2 and 4 are identical, save for the order in which the numbers are shown. Further, note that every possible pair of the numbers 1 through 3 are listed. This experiment is equivalent to rolling a 3-sided die twice, which we could have accomplished with \texttt{rolldie(2, nsides = 3)}.
 
@@ -2871,7 +2871,8 @@ rolldie(1, makespace = TRUE)
 One sample space function that does NOT have a \texttt{makespace} option is the \texttt{urnsamples} function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use \texttt{probspace} to assign the model.
 
 \begin{example}
-\label{exa:unbalanced-coin}\textbf{An unbalanced coin.} While the \texttt{makespace} argument to \texttt{tosscoin} is useful to represent the tossing of a \emph{fair} coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the ``\(H\)'' side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
+\label{exa:unbalanced-coin}
+\textbf{An unbalanced coin.} While the \texttt{makespace} argument to \texttt{tosscoin} is useful to represent the tossing of a \emph{fair} coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 
 \begin{verbatim}
@@ -2884,7 +2885,8 @@ probspace(tosscoin(1), probs = c(0.70, 0.30))
  2     T   0.3
 \end{verbatim}
 
-The same procedure can be used to represent an unbalanced die, roulette wheel, \textit{etc}.
+
+The same procedure can be used to represent an unbalanced die, roulette wheel, \emph{etc}.
 
 \end{example}
 \subsection{Words of Warning}
@@ -2907,27 +2909,25 @@ that holds asymptotically. User beware.
 A \emph{probability function} is a rule that associates with each event \(A\) of the sample space a unique number \(\P(A)=p\), called the \emph{probability of} \(A\). Any probability function \(\P\) satisfies the following three Kolmogorov Axioms: 
 
 \begin{ax}
-\label{ax:prob-nonnegative}\(\P(A)\geq0\) for any event \(A\subset S\).
+\label{ax:prob-nonnegative}
+\(\P(A)\geq0\) for any event \(A\subset S\).
 \end{ax}
 
 \begin{ax}
-\label{ax:total-mass-one}\(\P(S)=1\).
+\label{ax:total-mass-one}
+\(\P(S)=1\).
 \end{ax}
 
 \begin{ax}
-\label{ax:countable-additivity}If the events \(A_{1}\), \(A_{2}\),
-\(A_{3}\)... are disjoint then
-
+\label{ax:countable-additivity}
+If the events \(A_{1}\), \(A_{2}\), \(A_{3}\)\ldots{} are disjoint then
 \begin{equation}
 \P\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\P(A_{i})\mbox{ for every }n,
 \end{equation}
-
 and furthermore,
-
 \begin{equation}
 \P\left(\bigcup_{i=1}^{\infty}A_{i}\right)=\sum_{i=1}^{\infty}\P(A_{i}).
 \end{equation}
-
 \end{ax}
 
 The intuition behind the axioms goes like this: first, the probability of an event should never be negative. Second, since the sample space contains all possible outcomes, its probability should be one, or 100\%. The last axiom may look intimidating but it simply means that in a sequence of disjoint events (in other words, sets that do not overlap), the total probability (measure) should equal the sum of its parts. For example, the chance of rolling a 1 or a 2 on a die should be the chance of rolling a 1 plus the chance of rolling a 2.
@@ -3239,7 +3239,6 @@ But we often do not need to actually generate the sample space; it suffices to c
 \begin{example}
 We will compute the number of outcomes for each of the four \texttt{urnsamples} examples that we saw in Example \ref{exa:sample-urn-two-from-three}. Recall that we took a sample of size two from an urn with three distinguishable elements.
 \end{example}
-
 
 
 \begin{verbatim}
@@ -3630,7 +3629,6 @@ prob(N, isrep(N, "red", 2))
 \begin{verbatim}
  [1] 0.525
 \end{verbatim}
-
 
 Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
 
@@ -11425,7 +11423,6 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 
 \label{cha:multiple-linear-regression}
 
-
 \noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
 
 The language is phrased in matrix terms -- for two reasons. First, it is quicker to write and (arguably) more pleasant to read. Second, the matrix approach will be required for later study of the subject; the reader might as well be introduced to it now.
@@ -11525,7 +11522,7 @@ splom(trees)
 
 
 \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/splom-trees.pdf}
+    \includegraphics[angle=270, totalheight=4in]{img/splom-trees.ps}
     \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
     \label{fig:splom-trees}
   \end{figure}
@@ -11561,7 +11558,7 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 
 
 \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.pdf}
+    \includegraphics[angle=270, totalheight=4in]{img/3D-scatterplot-trees.ps}
     \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
     \label{fig:3D-scatterplot-trees}
   \end{figure}
@@ -12143,7 +12140,7 @@ qplot(Girth, Volume, data = trees)
 
 
 \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.pdf}
+    \includegraphics[angle=270, totalheight=4in]{img/Scatterplot-Volume-Girth-trees.ps}
     \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
     \label{fig:Scatterplot-Volume-Girth-trees}
   \end{figure}
@@ -12226,7 +12223,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 
 
 \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
+    \includegraphics[angle=270, totalheight=4in]{img/Fitting-the-Quadratic.ps}
     \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
     \label{fig:Fitting-the-Quadratic}
   \end{figure}
@@ -12551,7 +12548,7 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 
 
 \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/dummy-variable-trees.pdf}
+    \includegraphics[angle=270, totalheight=4in]{img/dummy-variable-trees.ps}
     \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
     \label{fig:dummy-variable-trees}
   \end{figure}
@@ -13426,7 +13423,7 @@ sessionInfo()
 [1] 0.03
 [1] 0.061
  R version 2.13.1 (2011-07-08)
-Platform: i486-pc-linux-gnu (32-bit)
+Platform: i686-pc-linux-gnu (32-bit)
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -13445,20 +13442,20 @@ other attached packages:
  [1] diagram_1.5.2           shape_1.3.4            
  [3] TeachingDemos_2.7       scatterplot3d_0.3-33   
  [5] RcmdrPlugin.IPSUR_0.1-7 Rcmdr_1.7-0            
- [7] car_2.0-10              nnet_7.3-1             
- [9] MASS_7.3-14             qcc_2.0.1              
+ [7] car_2.0-11              nnet_7.3-1             
+ [9] MASS_7.3-13             qcc_2.0.1              
 [11] prob_0.9-2              lmtest_0.9-28          
-[13] zoo_1.6-5               Hmisc_3.8-3            
+[13] zoo_1.7-4               Hmisc_3.8-3            
 [15] HH_2.1-32               leaps_2.9              
-[17] multcomp_1.2-6          lattice_0.19-33        
+[17] multcomp_1.2-7          lattice_0.19-33        
 [19] ggplot2_0.8.9           proto_0.3-9.2          
-[21] reshape_0.8.4           plyr_1.5.2             
-[23] e1071_1.5-26            class_7.3-3            
+[21] reshape_0.8.4           plyr_1.6               
+[23] e1071_1.5-27            class_7.3-3            
 [25] distrEx_2.3             evd_2.2-4              
 [27] distr_2.3.2             SweaveListingUtils_0.5 
 [29] sfsmisc_1.0-16          startupmsg_0.7.1       
-[31] combinat_0.0-8          coin_1.0-18            
-[33] modeltools_0.2-17       mvtnorm_0.9-9991       
+[31] combinat_0.0-8          coin_1.0-19            
+[33] modeltools_0.2-18       mvtnorm_0.9-9991       
 [35] survival_2.36-9         boot_1.3-2             
 [37] aplpack_1.2.3           actuar_1.1-2           
 
@@ -14317,8 +14314,8 @@ If \(g\) is a differentiable function whose range is the interval \([a,b]\) and 
 \caption[Some integrals (constants of integration omitted)]{Some integrals (constants of integration omitted).} \label{tab:Useful-Integrals}
 \begin{center}
 \begin{tabular}{lll}
- \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\)  &  \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\)  &  \(\int x^{-1}\,\mathrm{d} x=\ln \abs(x) \)       \\
- \(\int\tan x\:\mathrm{d} x=\ln \abs(\sec x)\)         &  \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)             &  \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\)  \\
+ \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\)  &  \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\)  &  \(\int x^{-1}\,\mathrm{d} x=\ln \mathrm{abs}(x) \)       \\
+ \(\int\tan x\:\mathrm{d} x=\ln \mathrm{abs}(\sec x)\)         &  \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)             &  \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\)  \\
 \end{tabular}
 \end{center}
 \end{table}
@@ -14673,9 +14670,10 @@ It is possible to summarize this entire appendix with only one sentence: \emph{t
 \item Discuss avenues of future research suggested by the study.
 \end{enumerate}
 \end{enumerate}
-\section{How to Write It with R \label{sec:How-to-Write}}
+\section{How to Write It with R}
 \label{sec-22-2}
 
+\label{sec:How-to-Write}
 Once the decision has been made what to write, the next task is to typeset the information to be shared. To do this the author will need to select software to use to write the documents. There are many options available, and choosing one over another is sometimes a matter of taste. But not all software were created equal, and \textsf{R} plays better with some applications than it does with others. 
 In short, \textsf{R} does great with \LaTeX{} and there are many resources available to make writing a document with \textsf{R} and \LaTeX{} easier. But \LaTeX{} is not for the beginner, and there are other word processors which may be acceptable depending on the circumstances.
 \subsection{Microsoft\(\circledR\) Word}
@@ -14746,14 +14744,14 @@ There are programs to make the process easier: AUC\TeX{}.
 
 dev.copy2eps, also dev.copy2pdf
 
-\url{[[http://www.stat.uni-muenchen.de/~leisch/Sweave/][http://www.stat.uni-muenchen.de/~leisch/Sweave/]]}
+\href{http://www.stat.uni-muenchen.de/~leisch/Sweave/}{http://www.stat.uni-muenchen.de/\~leisch/Sweave/}
 \subsection{Sweave and \protect\LyX{}}
 \label{sec-22-2-4}
 
 This approach is nice because it works for all operating  systems. It gives you everything from the last section and makes it easier to use \LaTeX{}. That being said, it is better to know \LaTeX{} already when migrating to \LyX{}, because you understand all of the machinery going on under the hood.
 
 Program Listings and the \textsf{R} language
-\url{[[http://gregor.gorjanc.googlepages.com/lyx-sweave][http://gregor.gorjanc.googlepages.com/lyx-sweave]]}
+\href{http://gregor.gorjanc.googlepages.com/lyx-sweave}{http://gregor.gorjanc.googlepages.com/lyx-sweave}
 \section{Formatting Tables \label{sec:Formatting-Tables}}
 \label{sec-22-3}
 
@@ -14782,10 +14780,11 @@ cbind(Sepal.Length, Sepal.Width)    N=150
 -------+----------+---+------------+-----------+
 \end{verbatim}
 
-There is a \texttt{method} argument to \texttt{summary}, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: \texttt{reverse} and \texttt{cross}. See \texttt{?summary.formula} or the following document from Frank Harrell for more details \url{[[http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport][http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport]]}.
-\section{Other Formats \label{sec:Other-Formats}}
+There is a \texttt{method} argument to \texttt{summary}, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: \texttt{reverse} and \texttt{cross}. See \texttt{?summary.formula} or the \href{http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport}{following document} from Frank Harrell for more details.
+\section{Other Formats}
 \label{sec-22-4}
 
+\label{sec:Other-Formats}
 
 HTML and prettyR
 R2HTML
@@ -14796,6 +14795,7 @@ R2HTML
 
 \noun{WARNING: this appendix is not applicable until the exercises
 have been written.} 
+
 
 
 Probably this \emph{book} could more accurately be described as \emph{software}. The reason is that the document is one big random variable, one observation realized out of millions. It is electronically distributed under the GNU FDL, and ``free'' in both senses: speech and beer.  
@@ -14829,7 +14829,7 @@ You will need three (3) things to generate this document for yourself, in additi
 We will discuss each of these in turn.
 
 \begin{description}
-\item[\LaTeX{}:] The distribution used by the present author was \TeX{} Live (\url{[[http://www.tug.org/texlive/][http://www.tug.org/texlive/]]}). There are plenty of other perfectly suitable \LaTeX{} distributions depending on your operating system, one such alternative being MikTeX (\url{http://miktex.org/}) for Microsoft Windows.
+\item[\LaTeX{}:] The distribution used by the present author was \TeX{} Live (\url{[[http://www.tug.org/texlive/][http://www.tug.org/texlive/]]}). There are plenty of other perfectly suitable \LaTeX{} distributions depending on your operating system, one such alternative being \href{http://miktex.org/}{MikTeX} for Microsoft Windows.
 \item[Sweave:] If you have \textsf{R} installed, then the required Sweave files are already on your system\ldots{} somewhere. The only problems that you may have are likely associated with making sure that your \LaTeX{} distribution knows where to find the \texttt{Sweave.sty} file. See the Sweave Homepage (\url{[[http://www.statistik.lmu.de/~leisch/Sweave/][http://www.statistik.lmu.de/~leisch/Sweave/]]}) for guidance on how to get it working on your particular operating system.
 \item[LyX:] Strictly speaking, LyX is not needed to generate this document. But this document was written stem to stern with LyX, taking full advantage of all of the bells and whistles that LyX has to offer over plain \LaTeX{} editors. And it's free. See the LyX homepage (\url{[[http://www.lyx.org/][http://www.lyx.org/]]}) for additional information. If you decide to give LyX a try, then you will need to complete some extra steps to coordinate Sweave and LyX with each other. Luckily, Gregor Gorjanc has a website and an \textsf{R} News article \cite{Gorjanc2008} to help you do exactly that. See the LyX-Sweave homepage (\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}) for details.
 \end{description}
