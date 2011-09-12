@@ -7,7 +7,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:nil
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: 
+#+EXPORT_SELECT_TAGS: introps datadesc prob
 #+EXPORT_EXCLUDE_TAGS: 
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
@@ -455,7 +455,8 @@ stripchart(discoveries, method="stack", xlab="number")
 
 The leftmost graph is a strip chart of the =precip= data. The graph shows tightly clustered values in the middle with some others falling balanced on either side, with perhaps slightly more falling to the left. Later we will call this a symmetric distribution, see Section \ref{sub:Shape}. The middle graph is of the =rivers= data, a vector of length 141. There are several repeated values in the rivers data, and if we were to use the overplot method we would lose some of them in the display. This plot shows a what we will later call a right-skewed shape with perhaps some extreme values on the far right of the display. The third graph strip charts =discoveries= data which are literally a textbook example of a right skewed distribution.
 
-#+begin_src R :exports code :results graphics silent :file img/stripcharts.ps
+
+#+begin_src R :exports none :results graphics silent :file img/stripcharts.svg
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
@@ -463,13 +464,28 @@ stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+begin_src latex
+#+begin_src R :exports none :results graphics silent :file img/stripcharts.ps
+par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
+stripchart(precip, xlab="rainfall")
+stripchart(rivers, method="jitter", xlab="length")
+stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
+par(mfrow = c(1,1)) # back to normal
+#+end_src
+
+#+begin_latex
   \begin{figure}[th]
     \includegraphics[angle=270, totalheight=4in]{img/stripcharts.ps}
     \caption[Strip charts of \texttt{precip}, \texttt{rivers}, and \texttt{discoveries}]{\small Three stripcharts of three data sets.  The first graph uses the \texttt{overplot} method, the second the \texttt{jitter} method, and the third the \texttt{stack} method.}
     \label{fig:stripcharts}
   \end{figure}
-#+end_src
+#+end_latex
+
+#+begin_html
+  <div id="fig-stripcharts" class="figure">
+    <p><img src="img/stripcharts.svg" width=500 alt="img/stripcharts.svg" /></p>
+    <p>Three stripcharts of three data sets.  The first graph uses the <code>overplot</code> method, the second the <code>jitter</code> method, and the third the <code>stack</code> method.</p>
+  </div>
+#+end_html
 
 The =DOTplot=\index{DOTplot@\texttt{DOTplot}} function in the =UsingR=\index{R packages!UsingR@\texttt{UsingR}} package \cite{usingr} is another alternative.
 
@@ -2533,7 +2549,7 @@ prob(S, X1+X2 >= 8, given = (X1==X2) )
 
 The following theorem establishes that conditional probabilities behave just like regular probabilities when the conditioned event is fixed. 
 
-#+latex: \begin{thm}
+#+begin_thm
 For any fixed event \(A\) with \(\P(A)>0\),
 1. \( \P (B|A)\geq 0 \), for all events \( B \subset S\),
 1. \( \P (S|A) = 1 \), and
@@ -2541,7 +2557,7 @@ For any fixed event \(A\) with \(\P(A)>0\),
   \begin{equation}
   \P\left(\left.\bigcup_{k=1}^{\infty}B_{k}\:\right|A\right)=\sum_{k=1}^{\infty}\P(B_{k}|A).
   \end{equation}
-#+latex: \end{thm}
+#+end_thm
 In other words, \(\P(\cdot|A)\) is a legitimate probability function. With this fact in mind, the following properties are immediate:
 
 #+latex: \begin{prop}
@@ -2816,12 +2832,12 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
-#+latex: \begin{thm}
+#+begin_thm
 \textbf{\emph{(Bayes' Rule).}} Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\P(A)>0\). Then 
 \begin{equation}
 \P(B_{k}|A)=\frac{\P(B_{k})\P(A|B_{k})}{\sum_{i=1}^{n}\P(B_{i})\P(A|B_{i})},\quad k=1,2,\ldots,n.\label{eq:bayes-rule}
 \end{equation}
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \begin{proof}
 The proof follows from looking at \(\P(B_{k}\cap A)\) in two different ways. For simplicity, suppose that \(P(B_{k})>0\) for all \(k\). Then
@@ -3516,10 +3532,10 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 
 We will discuss three applications of moment generating functions in this book. The first is the fact that an MGF may be used to accurately identify the probability distribution that generated it, which rests on the following:
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:mgf-unique}
 The moment generating function, if it exists in a neighborhood of zero, determines a probability distribution /uniquely/. 
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \begin{proof}
 Unfortunately, the proof of such a theorem is beyond the scope of a text like this one. Interested readers could consult Billingsley \cite{Billingsley1995}.
@@ -6134,7 +6150,7 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 *** The Distribution of the Sample Variance
 \label{sub:Samp-Var-Dist}
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:Xbar-andS}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, and let
 \begin{equation}
@@ -6147,7 +6163,7 @@ Then
     \frac{(n-1)}{\sigma^{2}}S^{2}=\frac{\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}}{\sigma^{2}}
     \end{equation}
     has a \(\mathsf{chisq}(\mathtt{df}=n-1)\) sampling distribution.
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \begin{proof}
 The proof is beyond the scope of the present book, but the theorem is simply too important to be omitted. The interested reader could consult Casella and Berger \cite{Casella2002}, or Hogg /et al/ \cite{Hogg2005}. 
@@ -6232,14 +6248,14 @@ is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\).
 
 However, there are many populations that are /not/ normal ... and the statistician often finds herself sampling from such populations. What can be said in this case? The surprising answer is contained in the following theorem.
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:central-limit-thrm}
 *The Central Limit Theorem.* Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the sampling distribution of 
 \begin{equation}
 Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
 \end{equation}
 approaches a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution as \(n\to\infty\).
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \begin{rem}
 We suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) are IID, and we learned in Section \ref{sub:simple-random-samples} that \(\overline{X}\) has mean \(\mu\) and standard deviation \(\sigma/\sqrt{n}\), so we already knew that \(Z\) has mean zero and standard deviation one. The beauty of the CLT is that it addresses the /shape/ of \(Z\)'s distribution when the sample size is large.
@@ -10673,9 +10689,9 @@ In the table that follows, \(f\) and \(g\) are differentiable functions and \(c\
 | \(\frac{\mathrm{d}}{\mathrm{d} x}c=0\) | \(\frac{\mathrm{d}}{\mathrm{d} x}x^{n}=nx^{n-1}\) | \((cf)'=cf'\)                                       |
 | \((f\pm g)'=f'\pm g'\)       | \((fg)'=f'g+fg'\)                       | \(\left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^{2}}\) |
 
-#+latex: \begin{thm}
+#+begin_thm
 Chain Rule: If \(f\) and \(g\) are both differentiable and \(F=f\circ g\) is the composite function defined by \(F(x)=f[g(x)]\), then \(F\) is differentiable and \(F'(x) = f'[ g(x) ] \cdot g'(x)\).  
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Useful Derivatives}
 
@@ -10691,14 +10707,14 @@ Chain Rule: If \(f\) and \(g\) are both differentiable and \(F=f\circ g\) is the
 A /critical number/ of the function \(f\) is a value \(x^{\ast}\) for which \(f'(x^{\ast})=0\) or for which \(f'(x^{\ast})\) does not exist.
 #+latex: \end{defn}
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:First-Derivative-Test}
 First Derivative Test. If \(f\) is differentiable and if \(x^{\ast}\) is a critical number of \(f\) and if \(f'(x)\geq0\) for \(x\leq x^{\ast}\) and \(f'(x)\leq0\) for \(x\geq x^{\ast}\), then \(x^{\ast}\) is a local maximum of \(f\). If \(f'(x)\leq0\) for \(x\leq x^{\ast}\) and \(f'(x)\geq0\) for \(x\geq x^{\ast}\) , then \(x^{\ast}\) is a local minimum of \(f\).
-#+latex: \end{thm}
+#+end_thm
 
-#+latex: \begin{thm}
+#+begin_thm
 Second Derivative Test. If \(f\) is twice differentiable and if \(x^{\ast}\) is a critical number of \(f\), then \(x^{\ast}\) is a local maximum of \(f\) if \(f''(x^{\ast})<0\) and \(x^{\ast}\) is a local minimum of \(f\) if \(f''(x^{\ast})>0\).
-#+latex: \end{thm}
+#+end_thm
 
 *** Integration
 As it turns out, there are all sorts of things called ``integrals'', each defined in its own idiosyncratic way. There are /Riemann/ integrals, /Lebesgue/ integrals, variants of these called /Stieltjes/ integrals, /Daniell/ integrals, /Ito/ integrals, and the list continues. Given that this is an introductory book, we will use the Riemannian integral with the caveat that the Riemann integral is /not/ the integral that will be used in more advanced study.
@@ -10711,20 +10727,20 @@ Let \(f\) be defined on \([a,b]\), a closed interval of the real line. For each 
 provided the limit exists, and in that case, we say that \(f\) is /integrable/ from \(a\) to \(b\). 
 #+latex: \end{defn}
 
-#+latex: \begin{thm}
+#+begin_thm
 The Fundamental Theorem of Calculus. Suppose \(f\) is continuous on \([a,b]\). Then
 1. the function \(g\) defined by \(g(x)=\int_{a}^{x}f(t)\:\mathrm{d} t\), \(a\leq x\leq b\), is continuous on \([a,b]\) and differentiable on \((a,b)\) with \(g'(x)=f(x)\).
 1. \(\int_{a}^{b}f(x)\,\mathrm{d} x=F(b)-F(a)\), where \(F\) is any /antiderivative/ of \(f\), that is, any function \(F\) satisfying \(F'=f\).
-#+latex: \end{thm}
+#+end_thm
 
 
 #+latex: \paragraph*{Change of Variables}
-#+latex: \begin{thm}
+#+begin_thm
 If \(g\) is a differentiable function whose range is the interval \([a,b]\) and if both \(f\) and \(g'\) are continuous on the range of \(u = g(x)\), then
 \begin{equation}
 \int_{g(a)}^{g(b)}f(u)\:\mathrm{d} u=\int_{a}^{b}f[g(x)]\: g'(x)\:\mathrm{d} x.
 \end{equation}
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Useful Integrals}
 
@@ -10739,7 +10755,7 @@ If \(g\) is a differentiable function whose range is the interval \([a,b]\) and 
 \begin{equation}
 \int u\:\mathrm{d} v=uv-\int v\:\mathrm{d} u
 \end{equation}
-#+latex: \begin{thm}
+#+begin_thm
 L'H\^ opital's Rule. Suppose \(f\) and \(g\) are differentiable and \(g'(x)\neq0\) near \(a\), except possibly at \(a\). Suppose that the limit 
 \begin{equation}
 \lim_{x\to a}\frac{f(x)}{g(x)}
@@ -10749,7 +10765,7 @@ is an indeterminate form of type \(\frac{0}{0}\) or \(\infty/\infty\). Then
 \lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)},
 \end{equation}
 provided the limit on the right-hand side exists or is infinite.
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Improper Integrals}
 
