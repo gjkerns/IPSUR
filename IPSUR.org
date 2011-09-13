@@ -20,6 +20,9 @@
 #+INCLUDE: "prelim.R" src R :exports none :results hide
 
 * An Introduction to Probability and Statistics                     :introps:
+:PROPERTIES:
+:tangle: R/introps.R
+:END:
 #+latex: \pagenumbering{arabic} 
 
 \noindent This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say -- and so many people have already said it so much better than I could. When I get something I like I will release it here.
@@ -50,6 +53,9 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 #+latex: \setcounter{thm}{0}
 
 * An Introduction to \textsf{R}                                      :introR:
+:PROPERTIES:
+:tangle: R/introR.R
+:END:
 #+latex: \label{cha:introduction-to-R}
 
 ** Downloading and Installing \textsf{R} 
@@ -358,6 +364,9 @@ It is unnecessary to retype commands repeatedly, since \textsf{R} remembers what
 #+latex: \setcounter{thm}{0}
 
 * Data Description                                                 :datadesc:
+:PROPERTIES:
+:tangle: R/datadesc.R
+:END:
 #+latex: \label{cha:Describing-Data-Distributions}
 
 \noindent In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
@@ -550,6 +559,14 @@ par(mfrow = c(1,1)) # back to normal
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-histograms" class="figure">
+  <p><img src="svg/histograms.svg" width=500 alt="svg/histograms.svg" /></p>
+  <p>(Relative) frequency histograms of the <code>precip</code> data.</p>
+</div>
+#+end_html
+
+
 #+latex: \end{example}
 
 Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
@@ -586,6 +603,13 @@ par(mfrow = c(1,1)) # back to normal
   \label{fig:histograms-bins}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-histograms-bins" class="figure">
+  <p><img src="svg/histograms-bins.svg" width=500 alt="svg/histograms-bins.svg" /></p>
+  <p>More histograms of the <code>precip</code> data.</p>
+</div>
+#+end_html
 
 The leftmost graph (with =breaks = 10=) shows that the distribution is not balanced at all. There are two humps: a big one in the middle and a smaller one to the left. Graphs like this often indicate some underlying group structure to the data; we could now investigate whether the cities for which rainfall was measured were similar in some way, with respect to geographic region, for example.
 
@@ -652,6 +676,13 @@ par(mfrow = c(1,1)) # back to normal
   \label{fig:indpl-lakehuron}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-indpl-lakehuron" class="figure">
+  <p><img src="svg/indpl-lakehuron.svg" width=500 alt="svg/indpl-lakehuron.svg" /></p>
+  <p>Index plots of the <code>LakeHuron</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
@@ -763,8 +794,14 @@ par(mfrow = c(1,1)) # back to normal
 \end{figure}
 #+end_latex
 
-#+latex: \end{example}
+#+begin_html
+<div id="fig-bar-gr-stateregion" class="figure">
+  <p><img src="svg/bar-gr-stateregion.svg" width=500 alt="svg/bar-gr-stateregion.svg" /></p>
+  <p>The left graph is a frequency barplot made with <code>table</code> and the right is a relative frequency barplot made with <code>prop.table</code>.</p>
+</div>
+#+end_html
 
+#+latex: \end{example}
 
 #+latex: \paragraph*{Pareto Diagrams}
 #+latex: \label{par:Pareto-Diagrams}
@@ -795,6 +832,13 @@ pareto.chart(table(state.division), ylab="Frequency")
   \label{fig:Pareto-chart}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Pareto-chart" class="figure">
+  <p><img src="svg/Pareto-chart.svg" width=500 alt="svg/Pareto-chart.svg" /></p>
+  <p>Pareto chart of the <code>state.division</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
@@ -828,6 +872,13 @@ dotchart(as.vector(x), labels = names(x))
   \label{fig:dot-charts}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-dot-charts" class="figure">
+  <p><img src="svg/dot-charts.svg" width=500 alt="svg/dot-charts.svg" /></p>
+  <p>Dot chart of the <code>state.region</code> data.</p>
+</div>
+#+end_html
 
 See Figure \ref{fig:dot-charts}. Compare it to Figure \ref{fig:bar-gr-stateregion}.
 
@@ -1425,6 +1476,13 @@ print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-xyplot-group" class="figure">
+  <p><img src="svg/xyplot-group.svg" width=500 alt="svg/xyplot-group.svg" /></p>
+  <p>Thre  <code>overplot</code> method.</p>
+</div>
+#+end_html
+
 - Scatterplot matrices
   - splom( ~ cbind(GNP.deflator,GNP,Unemployed,Armed.Forces,Population,Year,Employed),  data = longley) 
   - splom( ~ cbind(pop15,pop75,dpi), data = LifeCycleSavings)
@@ -1661,6 +1719,9 @@ Describe the following data sets just as if you were communicating with an alien
 #+end_xca
 
 * Probability                                                          :prob:
+:PROPERTIES:
+:tangle: R/prob.R
+:END:
 #+latex: \label{cha:Probability}
 
 
@@ -3141,6 +3202,9 @@ The events must satisfy the product equalities two at a time, of which there are
 conditions to be satisfied, but the binomial series in the expression on the right is the sum of the entries of the \(n^{\mathrm{th}}\) row of Pascal's triangle, which is \(2^{n}\).
 
 * Discrete Distributions                                           :discdist:
+:PROPERTIES:
+:tangle: R/discdist.R
+:END:
 \label{cha:Discrete-Distributions}
 
 \noindent In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
@@ -4269,6 +4333,9 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 #+end_xca
 
 * Continuous Distributions                                         :contdist:
+:PROPERTIES:
+:tangle: R/contdist.R
+:END:
 \label{cha:Continuous-Distributions}
 
 \noindent The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
@@ -5138,6 +5205,9 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 #+end_xca
 
 * Multivariate Distributions                                       :multdist:
+:PROPERTIES:
+:tangle: R/multdist.R
+:END:
 \label{cha:Multivariable-Distributions}
 
 \noindent We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
@@ -6086,7 +6156,7 @@ For the most part we will ignore these difficulties, but the careful reader shou
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
 #+latex: \begin{example}
-*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36 democrat, 27 republican, and 37 independent.
+*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S. population as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36 democrat, 27 republican, and 37 independent.
 #+latex: \end{example}
 
 #+begin_rem
@@ -6174,6 +6244,9 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 #+end_xca
 
 * Sampling Distributions                                           :sampdist:
+:PROPERTIES:
+:tangle: R/sampdist.R
+:END:
 \label{cha:Sampling-Distributions}
 
 \noindent This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
@@ -6620,6 +6693,9 @@ And that's all she wrote.
 #+end_xca
 
 * Estimation                                                       :estimate:
+:PROPERTIES:
+:tangle: R/estimate.R
+:END:
 \label{cha:Estimation}
 
 \noindent We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
@@ -7208,7 +7284,7 @@ There is not any specific functionality to handle the \(z\)-interval for small s
 \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
-- the proportion of U.S.~citizens that support Obama,
+- the proportion of U.S. citizens that support Obama,
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
@@ -7404,6 +7480,9 @@ You are going to need the quadratic formula.
 #+end_xca
 
 * Hypothesis Testing                                                 :hypoth:
+:PROPERTIES:
+:tangle: R/hypoth.R
+:END:
 \label{cha:Hypothesis-Testing}
 
 #+latex: \paragraph*{What do I want them to know?}
@@ -7894,6 +7973,9 @@ power.examp()
 #+latex: \setcounter{thm}{0}
 
 * Simple Linear Regression                                              :slr:
+:PROPERTIES:
+:tangle: R/slr.R
+:END:
 \label{cha:simple-linear-regression}
 
 
@@ -9018,6 +9100,9 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 #+end_xca
 
 * Multiple Linear Regression                                            :mlr:
+:PROPERTIES:
+:tangle: R/mlr.R
+:END:
 \label{cha:multiple-linear-regression}
 
 \noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -10093,6 +10178,9 @@ SSTO=SSE+SSR.
 #+end_xca
 
 * Resampling Methods                                                 :resamp:
+:PROPERTIES:
+:tangle: R/resamp.R
+:END:
 \label{cha:resampling-methods}
 
 
@@ -10437,6 +10525,9 @@ Here are some things about permutation tests to keep in mind.
 #+latex: \setcounter{thm}{0}
 
 * Nonparametric Statistics                                         :nonparam:
+:PROPERTIES:
+:tangle: R/nonparam.R
+:END:
 \label{cha:Nonparametric-Statistics}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
@@ -10448,6 +10539,9 @@ read(IPSUR)
 #+end_src
 
 * Categorical Data Analysis                                           :categ:
+:PROPERTIES:
+:tangle: R/categ.R
+:END:
 \label{cha:Categorical-Data-Analysis}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
@@ -10459,6 +10553,9 @@ read(IPSUR)
 #+end_src
 
 * Time Series                                                    :timeseries:
+:PROPERTIES:
+:tangle: R/timeseries.R
+:END:
 \label{cha:Time-Series}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
@@ -10667,12 +10764,17 @@ If your document contains nontrivial examples of program code, we recommend rele
 * History                                                          :appendix:
 \label{cha:History}
 
-| Title:     | Introduction to Probability and Statistics Using \textsf{R} |
-| Year:      | 2011                                                        |
-| Authors:   | G. Jay Kerns                                                |
-| Publisher: | G. Jay Kerns                                                |
+| Title:     | Introduction to Probability and Statistics Using \textsf{R}, Second Edition |
+| Year:      | 2011                                                                        |
+| Authors:   | G. Jay Kerns                                                                |
+| Publisher: | G. Jay Kerns                                                                |
 
 #+latex: \vfill{}
+
+| Title:     | Introduction to Probability and Statistics Using \textsf{R}, First Edition |
+| Year:      | 2010                                                                       |
+| Authors:   | G. Jay Kerns                                                               |
+| Publisher: | G. Jay Kerns                                                               |
 
 * Data                                                             :appendix:
 \label{cha:data}
@@ -11380,7 +11482,7 @@ Perhaps the most important part of a statistician's job once the analysis is com
 
 
 ** What to Write \label{sec:What-to-Write}
-It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr.~G.~Andy Chang.
+It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr. G. Andy Chang.
 
 *** Basic Outline for a Statistical Report
 1. Executive Summary (a one page description of the study and conclusion) 
@@ -11596,82 +11698,82 @@ The most colorful of those I received was written by Jeffery Cornfield, submitte
 
 One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been \( SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} \) murders in the past \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} \) days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
 
-Professor Twee T.~Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
+Professor Twee T. Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
 
 “Yes, Chief Runner, please give me the details of the case,” Professor Bird declared with a heavy native accent, (though, for the sake of the case file, reader, I have decided to leave out the accent due to the fact that it would obviously drive you -- if you will forgive the pun -- looney!) 
 
 “All prints are wiped clean and there are no identifiable marks on the bodies of the victims. All we are able to come up with is the possibility that perhaps there is some kind of alternative method of which we are unaware. We have sent a secure e-mail with a listing of all of the victims’ =races=, =genders=, locations of the bodies, and the sequential =order= in which they were killed. We have also included other information that might be helpful,” said Chief Runner.
 
-“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr.~Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
+“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr. Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
 
 “Good luck trying to find him, Professor. Last I heard, he had a bottle of scotch and was in the Hundred Acre Woods hunting rabbits,” Chief Runner declared in a manner that questioned the beloved doctor’s credibility. 
 
 “Perhaps I will take a drive to find him. The fresh air will do me good.”
 
 #+begin_quote
-\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr.~Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr.~Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
+\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr. Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr. Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
 #+end_quote
 
-Once our two heroes returned to the beautiful Acme-Looney University, and once Dr.~Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
+Once our two heroes returned to the beautiful Acme-Looney University, and once Dr. Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
 
-“First off,” Dr.~Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a =salary= between \( SRC_R{round(min(RcmdrTestDrive$salary))} \) and \( SRC_R{round(max(RcmdrTestDrive$salary))} \) when they retired.” 
+“First off,” Dr. Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a =salary= between \( SRC_R{round(min(RcmdrTestDrive$salary))} \) and \( SRC_R{round(max(RcmdrTestDrive$salary))} \) when they retired.” 
 
 “That’s not really a lot to live off of,” explained Professor Bird. 
 
-“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by =reduction=. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr.~D.~Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr.~Fudd-Einstein. 
+“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by =reduction=. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr. D. Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr. Fudd-Einstein. 
 
 “This coming Monday. But if there were all of these killings, how in the world could one person do it? It just doesn’t seem to be possible; stay up \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} \) days straight and be able to kill all of these people and have the energy to continue on,” Professor Bird exclaimed, doubting the guilt of only one person. 
 
-“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr.~Fudd-Einstein said as he began feeding the numbers into the massive server. 
+“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr. Fudd-Einstein said as he began feeding the numbers into the massive server. 
 
 “Hey, look at this,” Professor Bird exclaimed, “What’s with this =before= and =after= information?” 
 
-“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either =smokers= or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr.~Fudd-Einstein declared matter-of-factly. 
+“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either =smokers= or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr. Fudd-Einstein declared matter-of-factly. 
 
 “Well, would race or gender have something to do with it, Elmer?” inquired Professor Bird.
 
-“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr.~Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
+“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr. Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
 
-Dr.~Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life... and when I say roared, I mean it literally /roared/. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
+Dr. Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life... and when I say roared, I mean it literally /roared/. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
 
 Once it was completed, the computer listed 4 names:
 
 #+begin_example
 ****************************SUSPECTS****************************
 - Yosemite Sam (“Looney” Insane Asylum) 
-- Wile~E.~Coyote (deceased) 
-- Foghorn~Leghorn (whereabouts unknown) 
+- Wile E. Coyote (deceased) 
+- Foghorn Leghorn (whereabouts unknown) 
 - Granny (1313 Mockingbird Lane, Toon Town USA)
 #+end_example
 
-Dr.~Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
+Dr. Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
 
 “There seems to be a mistake. Perhaps something is off,” Professor Bird asked, still unable to believe the results.
 
-“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben & Jerry’s files to identify possible links, creating the most powerful computer in the world... with a tweak of Toon fanaticism,” Dr.~Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
+“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben & Jerry’s files to identify possible links, creating the most powerful computer in the world... with a tweak of Toon fanaticism,” Dr. Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
 
 “Wait a minute, Ben & Jerry? What would eating ice cream have to do with anything?” Professor Bird inquired.
 
-“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr.~Fudd-Einstein declared.
+“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr. Fudd-Einstein declared.
 
 “I’ve heard about this. My forensics graduate students are trying to identify car thieves with either rocky road or mint chocolate chip… so far, the pattern is showing a clear trend with chocolate chip,” Professor Bird declared. 
-“Well, what do we know about these suspects, Twee?” Dr.~Fudd-Einstein asked.
+“Well, what do we know about these suspects, Twee?” Dr. Fudd-Einstein asked.
 
 “Yosemite Sam was locked up after trying to rob that bank in the West Borough. Apparently his guns were switched and he was sent the Acme Kids Joke Gun and they blew up in his face. The containers of peroxide they contained turned all of his facial hair red. Some little child is running around Toon Town with a pair of .38’s to this day. 
 
-“Wile E.~Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
+“Wile E. Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
 
-“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr.~Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
+“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr. Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
 
 “Granny is the most beloved alumnus of Acme-Looney University. She was in the first graduating class and gives graciously each year to the university. Without her continued financial support, we wouldn’t have the jobs we do. She worked as a parking attendant at the University lots... wait a minute, take a look at this,” Professor Bird said as he scrolled down in the police information. “Granny’s signature is on each of these faculty members’ =parking= tickets. Kind of odd, considering the Chief-of-Parking signed each personally. The deceased had from as few as \( SRC_R{min(RcmdrTestDrive$parking)} \) ticket to as many as \( SRC_R{max(RcmdrTestDrive$parking)} \). All tickets were unpaid.
 
 “And look at this, Granny married Old Man Acme after graduation. He was a resident of Chicago and rumored to be a consigliere to one of the most prominent crime families in Chicago, the Chuck Jones/Warner Crime Family,” Professor Bird read from the screen as a cold feeling of terror rose from the pit of his stomach. 
 
-“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr.~Fudd-Einstein said in awe and sarcasm.
+“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr. Fudd-Einstein said in awe and sarcasm.
 
 “I would never have suspected her, but I guess it makes sense. She is older, so she doesn’t need near the amount of sleep as a younger person. She has access to all of the vehicles so she can copy license plate numbers and follow them to their houses. She has the finances to pay for this kind of massive campaign on behalf of the Mob, and she hates anyone that even remotely smells like smoke,” Professor Bird explained, wishing to have his hit of nicotine at this time.
 
-“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr.~Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
+“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr. Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
 
 “What do you mean?” inquired Professor Bird.
 
