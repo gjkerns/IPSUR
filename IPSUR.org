@@ -1553,10 +1553,17 @@ print(bwplot(~weight | feed, data = chickwts))
 #+begin_latex
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/bwplot.ps}
-  \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data}
+  \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data.}
   \label{fig:bwplot}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-bwplot" class="figure">
+  <p><img src="svg/bwplot.svg" width=500 alt="svg/bwplot.svg" /></p>
+  <p>Boxplots of <code>weight</code> by <code>feed</code> type in the <code>chickwts</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \paragraph*{Histograms}
 
@@ -1586,6 +1593,13 @@ print(histogram(~age | education, data = infert))
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-histograms-lattice" class="figure">
+  <p><img src="svg/histograms-lattice.svg" width=500 alt="svg/histograms-lattice.svg" /></p>
+  <p>Histograms of <code>age</code> by <code>education</code> level from the <code>infert</code> data.</p>
+</div>
+#+end_html
+
 #+latex: \paragraph*{Scatterplots}
 
 #+begin_src R :exports code :eval never
@@ -1613,6 +1627,13 @@ print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-xyplot" class="figure">
+  <p><img src="svg/xyplot.svg" width=500 alt="svg/xyplot.svg" /></p>
+  <p>An <code>xyplot</code> of <code>Petal.Length</code> versus <code>Petal.Width</code> by <code>Species</code> in the <code>iris</code> data.</p>
+</div>
+#+end_html
+
 #+latex: \paragraph*{Coplots}
 
 #+begin_src R :exports code :eval never
@@ -1639,6 +1660,14 @@ print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
   \label{fig:coplot}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-coplot" class="figure">
+  <p><img src="svg/coplot.svg" width=500 alt="svg/coplot.svg" /></p>
+  <p>A <code>coplot</code> of <code>conc</code> versus <code>uptake</code> by <code>Type</code> and <code>Treatment</code> in the <code>CO2</code> data.</p>
+</div>
+#+end_html
+
 
 #+latex: \newpage{}
 
@@ -1774,7 +1803,14 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 \end{figure}
 #+end_latex
 
-** Sample Spaces
+#+begin_html
+<div id="fig-diagram" class="figure">
+  <p><img src="svg/diagram.svg" width=500 alt="svg/diagram.svg" /></p>
+  <p>Two types of experiments.</p>
+</div>
+#+end_html
+
+* Sample Spaces
 #+latex: \label{sec:Sample-Spaces}
 
 For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the /sample space/\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
@@ -2552,10 +2588,17 @@ remove(g)
 #+begin_latex
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/birthday.ps}
-  \caption[The birthday problem]{The birthday problem. {\small The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}}
+  \caption[The birthday problem]{\small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}
   \label{fig:birthday}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-birthday" class="figure">
+  <p><img src="svg/birthday.svg" width=500 alt="svg/birthday.svg" /></p>
+  <p>The birthday problem. The horizontal line is at <code>p = 0.50</code> and the vertical line is at <code>n = 23</code>.</p>
+</div>
+#+end_html
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -3524,6 +3567,13 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-binom-cdf-base" class="figure">
+  <p><img src="svg/binom-cdf-base.svg" width=500 alt="svg/binom-cdf-base.svg" /></p>
+  <p> A graph of the <code>binom(size = 3, prob = 1/2)</code> CDF.</p>
+</div>
+#+end_html
+
 #+latex: \begin{example}
 Another way to do Example \ref{exa:toss-coin-3-withR} is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
 
@@ -3564,6 +3614,13 @@ plot(X, cex = 0.2)
   \label{fig:binom-plot-distr}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-binom-plot-distr" class="figure">
+  <p><img src="svg/binom-plot-distr.svg" width=500 alt="svg/binom-plot-distr.svg" /></p>
+  <p>The <code>binom(size = 3, prob = 0.5)</code> distribution from the <code>distr</code> package.</p>
+</div>
+#+end_html
 
 #+begin_latex
 \begin{table}
@@ -3834,6 +3891,13 @@ plot(ecdf(x))
   \label{fig:empirical-CDF}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-empirical-CDF" class="figure">
+  <p><img src="svg/empirical-CDF.svg" width=500 alt="svg/empirical-CDF.svg" /></p>
+  <p>The empirical CDF.</p>
+</div>
+#+end_html
 
 See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
 
@@ -4206,37 +4270,42 @@ If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\)
 
 #+begin_xca
 A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
-  -  How is \(X\) distributed? 
-     \[
-     X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
-     \]
-  -  Sketch the probability mass function (roughly).
+- How is \(X\) distributed? 
+  \[
+  X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
+  \]
+- Sketch the probability mass function (roughly).
+#+srcname: binomdxca
+#+begin_src R :exports code :results silent
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "d")
+#+end_src
 
-     #+srcname: binomdxca
-     #+begin_src R :exports code :results silent
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "d")
-     #+end_src
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binomdxca.ps
+  <<binomdxca>>
+#+end_src
 
-     #+begin_src R :exports none :results graphics silent :noweb yes :file ps/binomdxca.ps
-       <<binomdxca>>
-     #+end_src
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binomdxca.svg
+  <<binomdxca>>
+#+end_src
 
-     #+begin_src R :exports none :results graphics silent :noweb yes :file svg/binomdxca.svg
-       <<binomdxca>>
-     #+end_src
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
+  \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
+  \label{fig:binomdxca}
+\end{figure}
+#+end_latex
 
-     #+begin_latex
-     \begin{figure}[th]
-       \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
-       \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
-       \label{fig:binomdxca}
-     \end{figure}
-     #+end_latex
-
-  -  Sketch the cumulative distribution function (roughly).
-     
+#+begin_html
+<div id="fig-binomdxca" class="figure">
+  <p><img src="svg/binomdxca.svg" width=500 alt="svg/binomdxca.svg" /></p>
+  <p>Plot of a binomial PMF.</p>
+</div>
+#+end_html
+- Sketch the cumulative distribution function (roughly).
+   
 #+srcname: binompxca
 #+begin_src R :exports code :results silent
 library(distr)
@@ -4259,59 +4328,68 @@ plot(X, to.draw.arg = "p")
     \label{fig:binompxca}
   \end{figure}
 #+end_latex
-  -  Find the probability that \(X\) is equal to 17.
-     #+begin_src R :exports both :results output pp  
-     dbinom(17, size = 31, prob = 0.447)
-     #+end_src
-  -  Find the probability that \(X\) is at most 13.
-     #+begin_src R :exports both :results output pp  
-     pbinom(13, size = 31, prob = 0.447)
-     #+end_src
-  -  Find the probability that \(X\) is bigger than 11.
-     #+begin_src R :exports both :results output pp  
-     pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
-     #+end_src
-  -  Find the probability that \(X\) is at least 15.
-     #+begin_src R :exports both :results output pp  
-     pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
-     #+end_src
-  -  Find the probability that \(X\) is between 16 and 19, inclusive.
-     #+begin_src R :exports both :results output pp  
-     sum(dbinom(16:19, size = 31, prob = 0.447))
-     diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
-     #+end_src
-  -  Give the mean of \(X\), denoted \(\E X\).
-     #+begin_src R :exports both :results output pp  
-     library(distrEx)
-     X <- Binom(size = 31, prob = 0.447)
-     E(X)
-     #+end_src
-  -  Give the variance of \(X\).
-     #+begin_src R :exports both :results output pp  
-     var(X)
-     #+end_src
-  -  Give the standard deviation of \(X\).
-     #+begin_src R :exports both :results output pp  
-     sd(X)
-     #+end_src
-  -  Find \(\E(4X+51.324)\)
-     #+begin_src R :exports both :results output pp  
-     E(4*X + 51.324)
-     #+end_src
+
+#+begin_html
+<div id="fig-binompxca" class="figure">
+  <p><img src="svg/binompxca.svg" width=500 alt="svg/binompxca.svg" /></p>
+  <p>Plot of a binomial CDF.</p>
+</div>
+#+end_html
+
+- Find the probability that \(X\) is equal to 17.
+#+begin_src R :exports both :results output pp  
+dbinom(17, size = 31, prob = 0.447)
+#+end_src
+- Find the probability that \(X\) is at most 13.
+#+begin_src R :exports both :results output pp  
+pbinom(13, size = 31, prob = 0.447)
+#+end_src
+- Find the probability that \(X\) is bigger than 11.
+#+begin_src R :exports both :results output pp  
+pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
+#+end_src
+- Find the probability that \(X\) is at least 15.
+#+begin_src R :exports both :results output pp  
+pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
+#+end_src
+- Find the probability that \(X\) is between 16 and 19, inclusive.
+#+begin_src R :exports both :results output pp  
+sum(dbinom(16:19, size = 31, prob = 0.447))
+diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
+#+end_src
+- Give the mean of \(X\), denoted \(\E X\).
+#+begin_src R :exports both :results output pp  
+library(distrEx)
+X <- Binom(size = 31, prob = 0.447)
+E(X)
+#+end_src
+- Give the variance of \(X\).
+#+begin_src R :exports both :results output pp  
+var(X)
+#+end_src
+- Give the standard deviation of \(X\).
+#+begin_src R :exports both :results output pp  
+sd(X)
+#+end_src
+- Find \(\E(4X+51.324)\)
+#+begin_src R :exports both :results output pp  
+E(4*X + 51.324)
+#+end_src
+
 #+end_xca
 
 #+begin_xca
 For the following situations, decide what the distribution of \(X\) should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not hold in practice.)
-  - We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let \(X\) denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
-  - In a local lottery in which a three digit number is selected randomly, let \(X\) be the number selected.
-  - We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let \(X\) be the number of times the cup lands perfectly right side up.
-  - We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let \(X\) denote the number of missed shots.
-  - Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let \(X\) count the number of containers that illegally contain contraband.
-  - At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let \(X\) denote the number of birds in the bush. 
-  - We count the number of rain drops that fall in a circular area on a sidewalk during a ten minute period of a thunder storm.
-  - We count the number of moth eggs on our window screen.
-  - We count the number of blades of grass in a one square foot patch of land.
-  - We count the number of pats on a baby's back until (s)he burps.
+- We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let \(X\) denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
+- In a local lottery in which a three digit number is selected randomly, let \(X\) be the number selected.
+- We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let \(X\) be the number of times the cup lands perfectly right side up.
+- We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let \(X\) denote the number of missed shots.
+- Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let \(X\) count the number of containers that illegally contain contraband.
+- At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let \(X\) denote the number of birds in the bush. 
+- We count the number of rain drops that fall in a circular area on a sidewalk during a ten minute period of a thunder storm.
+- We count the number of moth eggs on our window screen.
+- We count the number of blades of grass in a one square foot patch of land.
+- We count the number of pats on a baby's back until (s)he burps.
 #+end_xca
 
 #+begin_xca
@@ -5021,6 +5099,13 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-chisq-dist-vary-df" class="figure">
+  <p><img src="svg/chisq-dist-vary-df.svg" width=500 alt="svg/chisq-dist-vary-df.svg" /></p>
+  <p>The chi square distribution for various degrees of freedom.</p>
+</div>
+#+end_html
+
 #+begin_rem
 Here are some useful things to know about the chi-square distribution.
 1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example \ref{exa:distn-of-z-squared}, and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem \ref{thm:Xbar-andS} in Section \ref{sub:Samp-Var-Dist}.
@@ -5147,6 +5232,13 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
   \label{fig:gamma-mgf}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-gamma-mgf" class="figure">
+  <p><img src="svg/gamma-mgf.svg" width=500 alt="svg/gamma-mgf.svg" /></p>
+  <p>A plot of the <code>gamma(shape = 13, rate = 1)</code> MGF.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
@@ -5934,6 +6026,13 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-mvnorm-pdf" class="figure">
+  <p><img src="svg/mvnorm-pdf.svg" width=500 alt="svg/mvnorm-pdf.svg" /></p>
+  <p>A graph of a bivariate normal PDF.</p>
+</div>
+#+end_html
+
 ** Bivariate Transformations of Random Variables
 \label{sec:Transformations-Multivariate}
 
@@ -6222,6 +6321,12 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-multinom-pmf2" class="figure">
+  <p><img src="svg/multinom-pmf2.svg" width=500 alt="svg/multinom-pmf2.svg" /></p>
+  <p>A plot of a multinomial PMF.</p>
+</div>
+#+end_html
 
 #+latex: \newpage{}
 
@@ -6419,6 +6524,13 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
   \label{fig:Student's-t-dist-vary-df}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Student's-t-dist-vary-df" class="figure">
+  <p><img src="svg/Student's-t-dist-vary-df.svg" width=500 alt="svg/Student's-t-dist-vary-df.svg" /></p>
+  <p>A plot of Student's t distribution for various degrees of freedom.</p>
+</div>
+#+end_html
 
 Similar to that done for the normal we may define \(\mathsf{t}_{\alpha}(\mathtt{df}=n-1)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{t}(\mathtt{df}=n-1)\) curve to its right.
 
@@ -6618,6 +6730,13 @@ hist(iqrs, breaks = 20)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-simulated-IQR" class="figure">
+  <p><img src="svg/simulated-IQR.svg" width=500 alt="svg/simulated-IQR.svg" /></p>
+  <p>A plot of simulated IQRs.</p>
+</div>
+#+end_html
+
 *** The Median Absolute Deviation
 
 #+begin_src R :exports code :results silent
@@ -6658,6 +6777,13 @@ hist(mads, breaks = 20)
   \label{fig:simulated-MAD}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-simulated-MAD" class="figure">
+  <p><img src="svg/simulated-MAD.svg" width=500 alt="svg/simulated-MAD.svg" /></p>
+  <p>A plot of simulated MADs.</p>
+</div>
+#+end_html
 
 #+latex: \newpage{}
 
@@ -6772,6 +6898,13 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-capture-recapture" class="figure">
+  <p><img src="svg/capture-recapture.svg" width=500 alt="svg/capture-recapture.svg" /></p>
+  <p>A plot of maximum likelihood for the capture-recapture experiment.</p>
+</div>
+#+end_html
+
 #+latex: \begin{example}
 \label{exa:bass-bluegill}
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
@@ -6824,6 +6957,13 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
   \label{fig:fishing-part-two}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-fishing-part-two" class="figure">
+  <p><img src="svg/fishing-part-two.svg" width=500 alt="svg/fishing-part-two.svg" /></p>
+  <p>Assorted likelihood functions for fishing, part two.</p>
+</div>
+#+end_html
 
 We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate \(L\) and set \(L'=0\) to find a maximum.
 \[
@@ -6882,6 +7022,13 @@ text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, p
   \label{fig:species-mle}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-species-mle" class="figure">
+  <p><img src="svg/species-mle.svg" width=500 alt="svg/species-mle.svg" /></p>
+  <p>Species maximum likelihood.</p>
+</div>
+#+end_html
 
 In general, we have a family of PDFs \(f(x|\theta)\) indexed by a parameter \(\theta\) in some parameter space \(\Theta\). We want to learn about \(\theta\). We take a \(SRS(n)\):
 \begin{equation}
@@ -7078,27 +7225,34 @@ In the demonstration, the parameter corresponds to the chalk, the sheet of paper
 
 See Figure \ref{fig:ci-examp}, which is a graphical display of these ideas.
 
-#+srcname: carscatter
+#+srcname: ci-examp
 #+begin_src R :exports code :results silent
 library(TeachingDemos)
 ci.examp()
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/carscatter.ps
-  <<carscatter>>
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/ci-examp.ps
+  <<ci-examp>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/carscatter.svg
-  <<carscatter>>
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/ci-examp.svg
+  <<ci-examp>>
 #+end_src
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/carscatter.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/ci-examp.ps}
   \caption[Simulated confidence intervals]{\small The graph was generated by the \texttt{ci.examp} function from the \texttt{TeachingDemos} package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95\%.}
-  \label{fig:Scatter-cars}
+  \label{fig:ci-examp}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-ci-examp" class="figure">
+  <p><img src="svg/ci-examp.svg" width=500 alt="svg/ci-examp.svg" /></p>
+  <p>Simulated confidence intervals.</p>
+</div>
+#+end_html
 
 Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, \(X_{1}\), \(X_{2}\), ...,
 \(X_{n}\). The following remarks makes these notions precise. 
@@ -7873,7 +8027,6 @@ anova(temp)
 
 Plot for the intuition of between versus within group variation.
 
-
 #+srcname: Between-versus-within
 #+begin_src R :exports none :results silent
 y1 <- rnorm(300, mean = c(2,8,22))
@@ -7903,6 +8056,13 @@ rug(y1)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Between-versus-within" class="figure">
+  <p><img src="svg/Between-versus-within.svg" width=500 alt="svg/Between-versus-within.svg" /></p>
+  <p>A plot of between group versus within group variation.</p>
+</div>
+#+end_html
+
 #+srcname: Some-F-plots-HH
 #+begin_src R :exports code :results silent
 library(HH)
@@ -7928,6 +8088,13 @@ par(old.omd)
   \label{fig:Some-F-plots-HH}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Some-F-plots-HH" class="figure">
+  <p><img src="svg/Some-F-plots-HH.svg" width=500 alt="svg/Some-F-plots-HH.svg" /></p>
+  <p>Some \(F\) plots from the <code>HH</code> package.</p>
+</div>
+#+end_html
 
 ** Sample Size and Power
 \label{sec:Sample-Size-and-Power}
@@ -7966,6 +8133,13 @@ power.examp()
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-power-examp" class="figure">
+  <p><img src="svg/power-examp.svg" width=500 alt="svg/power-examp.svg" /></p>
+  <p>A plot of significance level and power.</p>
+</div>
+#+end_html
+
 #+latex: \newpage{}
 
 ** Exercises
@@ -7977,7 +8151,6 @@ power.examp()
 :tangle: R/slr.R
 :END:
 \label{cha:simple-linear-regression}
-
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -8050,6 +8223,13 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-philosophy" class="figure">
+  <p><img src="svg/philosophy.svg" width=500 alt="svg/philosophy.svg" /></p>
+  <p>Philosophical foundations of SLR.</p>
+</div>
+#+end_html
+
 #+srcname: philosophy
 #+begin_src R :exports none :results silent
 # open window
@@ -8091,6 +8271,13 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
   \label{fig:Scatter-cars}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Scatter-cars" class="figure">
+  <p><img src="svg/Scatter-cars.svg" width=500 alt="svg/Scatter-cars.svg" /></p>
+  <p>Scatterplot of <code>dist</code> versus <code>speed</code> for the <code>cars</code> data.</p>
+</div>
+#+end_html
 
 #+srcname: carscatter
 #+begin_src R :exports code :results silent
@@ -8212,6 +8399,13 @@ It is good practice to visually inspect the data with the regression line added 
   \label{fig:Scatter-cars-regline}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Scatter-cars-regline" class="figure">
+  <p><img src="svg/carline.svg" width=500 alt="svg/carline.svg" /></p>
+  <p>Thre  <code>overplot</code> method in the <code>CO2</code> data.</p>
+</div>
+#+end_html
 
 #+srcname: carline
 #+begin_src R :exports code :results silent
@@ -8486,6 +8680,13 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Scatter-cars-CIPI" class="figure">
+  <p><img src="svg/carscipi.svg" width=500 alt="svg/carscipi.svg" /></p>
+  <p>A scatterplot with confidence/prediction bands for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
 #+begin_src R :exports code :eval never
 library(HH)
 ci.plot(cars.lm)
@@ -8665,6 +8866,13 @@ the dots hug the line closely.}
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Normal-q-q-plot-cars" class="figure">
+  <p><img src="svg/Normal-q-q-plot-cars.svg" width=500 alt="svg/Normal-q-q-plot-cars.svg" /></p>
+  <p>Normal q-q plot of the residuals for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
 #+srcname: Normal-q-q-plot-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 2)
@@ -8681,7 +8889,6 @@ plot(cars.lm, which = 2)
 #+latex: \paragraph*{Testing the Normality Assumption}
 
 Even though we may be concerned about the plots, we can use tests to determine if the evidence present is statistically significant, or if it could have happened merely by chance. There are many statistical tests of normality. We will use the Shapiro-Wilk test, since it is known to be a good test and to be quite powerful. However, there are many other fine tests of normality including the Anderson-Darling test and the Lillefors test, just to mention two of them.  
-
 
 The Shapiro-Wilk test is based on the statistic
 \begin{equation}
@@ -8727,6 +8934,13 @@ In this case, we plot the standardized residuals versus the fitted values. The g
   \label{fig:std-resids-fitted-cars}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-std-resids-fitted-cars" class="figure">
+  <p><img src="svg/std-resids-fitted-cars.svg" width=500 alt="svg/std-resids-fitted-cars.svg" /></p>
+  <p>Plot of standardized residuals against the fitted values for the <code>cars</code> data.</p>
+</div>
+#+end_html
 
 #+srcname: std-resids-fitted-cars
 #+begin_src R :exports code :results silent
@@ -8778,6 +8992,14 @@ data]{\small Used for checking the independence assumption. Watch out for any pa
   \label{fig:resids-fitted-cars}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-resids-fitted-cars" class="figure">
+  <p><img src="svg/resids-fitted-cars.svg" width=500 alt="svg/resids-fitted-cars.svg" /></p>
+  <p>A plot of the residuals versus the fitted values for the <code>cars</code>
+ data.</p>
+</div>
+#+end_html
 
 #+srcname: resids-fitted-cars
 #+begin_src R :exports code :results silent
@@ -8993,6 +9215,13 @@ We can look at a plot of the Cook's distances with the command =plot(cars.lm, wh
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Cooks-distance-cars" class="figure">
+  <p><img src="svg/Cooks-distance-cars.svg" width=500 alt="svg/Cooks-distance-cars.svg" /></p>
+  <p>Cook's distances for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
 #+srcname: Cooks-distance-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 4)
@@ -9042,6 +9271,13 @@ The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the s
   \label{fig:Diagnostic-plots-cars}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Diagnostic-plots-cars" class="figure">
+  <p><img src="svg/Diagnostic-plots-cars.svg" width=500 alt="svg/Diagnostic-plots-cars.svg" /></p>
+  <p>Diagnostic plots for the <code>cars</code> data.</p>
+</div>
+#+end_html
 
 #+srcname: Diagnostic-plots-cars
 #+begin_src R :exports none :results silent
@@ -9200,6 +9436,13 @@ splom(trees)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-splom-trees" class="figure">
+  <p><img src="svg/splom-trees.svg" width=500 alt="svg/splom-trees.svg" /></p>
+  <p>A scatterplot matrix of the <code>trees</code> data.</p>
+</div>
+#+end_html
+
 The dependent (response) variable =Volume= is listed in the first row of the scatterplot matrix. Moving from left to right, we see an approximately linear relationship between =Volume= and the independent (explanatory) variables =Height= and =Girth=. A first guess at a model for these data might be
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
@@ -9243,6 +9486,13 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
   \label{fig:3D-scatterplot-trees}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-3D-scatterplot-trees" class="figure">
+  <p><img src="svg/3D-scatterplot-trees.svg" width=500 alt="svg/3D-scatterplot-trees.svg" /></p>
+  <p> A 3D scatterplot with regression plane for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
@@ -9688,6 +9938,13 @@ qplot(Girth, Volume, data = trees)
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Scatterplot-Volume-Girth-trees" class="figure">
+  <p><img src="svg/Scatterplot-Volume-Girth-trees.svg" width=500 alt="svg/Scatterplot-Volume-Girth-trees.svg" /></p>
+  <p>A scatterplot of <code>Volume</code> versus <code>Girth</code> for the <code>trees</code> data.</p>
+</div>
+#+end_html
+
 For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
 \begin{equation}
 \mu(x_{1})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}.
@@ -9743,6 +10000,13 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
   \label{fig:Fitting-the-Quadratic}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Fitting-the-Quadratic" class="figure">
+  <p><img src="svg/Fitting-the-Quadratic.svg" width=500 alt="svg/Fitting-the-Quadratic.svg" /></p>
+  <p>A quadratic model for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
@@ -9962,6 +10226,13 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
   \label{fig:dummy-variable-trees}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-dummy-variable-trees" class="figure">
+  <p><img src="svg/dummy-variable-trees.svg" width=500 alt="svg/dummy-variable-trees.svg" /></p>
+  <p>A dummy variable model for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the \texttt{Fit}ted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
 
@@ -10269,6 +10540,13 @@ curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 \end{figure}
 #+end_latex
 
+#+begin_html
+<div id="fig-Bootstrap-se-mean" class="figure">
+  <p><img src="svg/Bootstrap-se-mean.svg" width=500 alt="svg/Bootstrap-se-mean.svg" /></p>
+  <p>Bootstrapping the standard error of the mean, simulated data.</p>
+</div>
+#+end_html
+
 We have overlain what we know to be the true sampling distribution of \(\overline{X}\), namely, a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})\) distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
 
 #+begin_src R :exports both :results output pp 
@@ -10326,6 +10604,13 @@ hist(medstar, breaks = 40, prob = TRUE)
   \label{fig:Bootstrapping-se-median}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Bootstrapping-se-median" class="figure">
+  <p><img src="svg/Bootstrapping-se-median.svg" width=500 alt="svg/Bootstrapping-se-median.svg" /></p>
+  <p>Bootstrapping the standard error of the median for the <code>rivers</code> data.</p>
+</div>
+#+end_html
 
 The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced by the following code.
 
