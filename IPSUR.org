@@ -7,7 +7,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:nil
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: introps datadesc
+#+EXPORT_SELECT_TAGS:
 #+EXPORT_EXCLUDE_TAGS: 
 #+DRAWERS: HIDDEN PROPERTIES STATE PREFACE
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
@@ -4147,18 +4147,22 @@ A recent national study showed that approximately 44.7% of college students have
      X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
      \]
   -  Sketch the probability mass function (roughly).
+
      #+srcname: binomdxca
      #+begin_src R :exports code :results silent
      library(distr)
      X <- Binom(size = 31, prob = 0.447)
      plot(X, to.draw.arg = "d")
      #+end_src
+
      #+begin_src R :exports none :results graphics silent :noweb yes :file ps/binomdxca.ps
        <<binomdxca>>
      #+end_src
+
      #+begin_src R :exports none :results graphics silent :noweb yes :file svg/binomdxca.svg
        <<binomdxca>>
      #+end_src
+
      #+begin_latex
      \begin{figure}[th]
        \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
@@ -4166,26 +4170,31 @@ A recent national study showed that approximately 44.7% of college students have
        \label{fig:binomdxca}
      \end{figure}
      #+end_latex
+
   -  Sketch the cumulative distribution function (roughly).
-     #+srcname: binompxca
-     #+begin_src R :exports code :results silent
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "p")
-     #+end_src
-     #+begin_src R :exports none :results graphics silent :noweb yes :file ps/binompxca.ps
-     <<binompxca>>
-     #+end_src
-     #+begin_src R :exports none :results graphics silent :noweb yes :file svg/binompxca.svg
-     <<binompxca>>
-     #+end_src
-     #+begin_latex
-     \begin{figure}[th]
-       \includegraphics[angle=270, totalheight=4in]{ps/binompxca.ps}
-       \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
-       \label{fig:binompxca}
-     \end{figure}
-     #+end_latex
+     
+#+srcname: binompxca
+#+begin_src R :exports code :results silent
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "p")
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binompxca.ps
+  <<binompxca>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binompxca.svg
+  <<binompxca>>
+#+end_src
+
+#+begin_latex
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{ps/binompxca.ps}
+    \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
+    \label{fig:binompxca}
+  \end{figure}
+#+end_latex
   -  Find the probability that \(X\) is equal to 17.
      #+begin_src R :exports both :results output pp  
      dbinom(17, size = 31, prob = 0.447)
@@ -4679,7 +4688,7 @@ The goal of this section is to determine the distribution of \(U=g(X)\) based on
 
 *** The PDF Method
 
-#begin_prop
+#+begin_prop
 \label{pro:func-cont-rvs-pdf-formula}
 
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
@@ -5605,7 +5614,7 @@ f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right
 
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
-#begin_prop
+#+begin_prop
 \label{pro:indep-implies-prodexpect}
 If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
 \begin{equation}
@@ -5682,7 +5691,7 @@ which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\math
 
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
-#begin_prop
+#+begin_prop
 \label{pro:mean-sd-lin-comb-two}
 Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
@@ -5739,7 +5748,7 @@ and the value is the same if we exchange \(x\) and \(y\). Therefore \((X,Y)\) ar
 
 Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 
-#begin_prop
+#+begin_prop
 If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) and \(Y\) are exchangeable. 
 #+end_prop
 
@@ -5793,7 +5802,7 @@ X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\
 
 From this we immediately get that \(\E X=\mu_{X}\) and \(\mbox{Var}(X)=\sigma_{X}^{2}\) (and the same is true for \(Y\) with the letters switched). And it should be no surprise that the correlation between \(X\) and \(Y\) is exactly \(\mbox{Corr}(X,Y)=\rho\).
 
-#begin_prop
+#+begin_prop
 \label{pro:mvnorm-cond-dist}
 The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})\), where
 \begin{equation}
@@ -5970,7 +5979,7 @@ f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
 for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
-#begin_prop
+#+begin_prop
 \label{pro:mean-sd-lin-comb}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
@@ -6197,7 +6206,7 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 If \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent with \(X_{i}\sim f\) for \(i=1,2,\ldots,n\), then we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /independent and identically distributed/ (IID) from the population \(f\) or alternatively we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a /simple random sample of size/ \(n\), denoted \(SRS(n)\), from the population \(f\). 
 #+end_defn
 
-#begin_prop
+#+begin_prop
 \label{pro:mean-sd-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the mean and standard deviation of \(\overline{X}\) are given by the formulas \(\mu_{\overline{X}}=\mu\) and \(\sigma_{\overline{X}}=\sigma/\sqrt{n}\).
 #+end_prop
@@ -6208,7 +6217,7 @@ Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition \ref{pro:mean-sd-lin-com
 
 The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section \ref{sec:Central-Limit-Theorem}.
 
-#begin_prop
+#+begin_prop
 \label{pro:mgf-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with MGF \(M(t)\). Then the MGF of \(\overline{X}\) is given by
 \begin{equation}
@@ -6236,7 +6245,7 @@ The last step is to recognize that each term in last product above is exactly \(
 *** The Distribution of the Sample Mean
 \label{sub:samp-mean-dist-of}
 
-#begin_prop
+#+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the sample mean \(\overline{X}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) sampling distribution.
 #+end_prop
 
@@ -6280,7 +6289,7 @@ The proof is beyond the scope of the present book, but the theorem is simply too
 *** The Distribution of Student's \(T\) Statistic
 \label{sub:Student's-t-Distribution}
 
-#begin_prop
+#+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the quantity 
 \begin{equation}
 T=\frac{\overline{X}-\mu}{S/\sqrt{n}}
@@ -6413,7 +6422,7 @@ There are often two populations under consideration, and it sometimes of interes
 
 *** Difference of Independent Sample Means
 
-#begin_prop
+#+begin_prop
 Let \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) are independent samples. Then the quantity
 \begin{equation}
 \frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
@@ -6438,7 +6447,7 @@ has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, 
 
 *** Difference of Independent Sample Proportions
 
-#begin_prop
+#+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{1})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{2})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) are independent samples. Define 
 \begin{equation}
 \hat{p}_{1}=\frac{1}{n_{1}}\sum_{i=1}^{n_{1}}X_{i}\quad\mbox{and}\quad\hat{p}_{2}=\frac{1}{n_{2}}\sum_{j=1}^{n_{2}}Y_{j}.
@@ -6462,7 +6471,7 @@ The expressions for the mean and standard deviation follow immediately from Prop
 
 *** Ratio of Independent Sample Variances
 
-#begin_prop
+#+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) are independent samples. Then the ratio
 \begin{equation}
 F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}
