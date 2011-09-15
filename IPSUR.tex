@@ -1,4 +1,4 @@
-% Created 2011-09-12 Mon 23:27
+% Created 2011-09-14 Wed 23:17
 \documentclass[captions=tableheading]{scrbook}
 
 
@@ -822,6 +822,8 @@ par(mfrow = c(1,1)) # back to normal
   \label{fig:histograms}
 \end{figure}
 
+
+
 \end{example}
 
 Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
@@ -847,6 +849,7 @@ hist(precip, breaks = 200, main = "")
   \caption{More histograms of the \texttt{precip} data}
   \label{fig:histograms-bins}
 \end{figure}
+
 
 The leftmost graph (with \texttt{breaks = 10}) shows that the distribution is not balanced at all. There are two humps: a big one in the middle and a smaller one to the left. Graphs like this often indicate some underlying group structure to the data; we could now investigate whether the cities for which rainfall was measured were similar in some way, with respect to geographic region, for example.
 
@@ -930,6 +933,7 @@ The plots show an overall decreasing trend to the observations, and there appear
   \caption{Index plots of the \texttt{LakeHuron} data}
   \label{fig:indpl-lakehuron}
 \end{figure}
+
 
 \end{example}
 
@@ -1080,8 +1084,8 @@ Notice the \texttt{cex.names}\index{cex.names@\texttt{cex.names}} argument that 
   \label{fig:bar-gr-stateregion}
 \end{figure}
 
-\end{example}
 
+\end{example}
 
 \paragraph*{Pareto Diagrams}
 \label{par:Pareto-Diagrams}
@@ -1106,6 +1110,7 @@ pareto.chart(table(state.division), ylab="Frequency")
   \caption{Pareto chart of the \texttt{state.division} data}
   \label{fig:Pareto-chart}
 \end{figure}
+
 
 \end{example}
 
@@ -1133,6 +1138,7 @@ dotchart(as.vector(x), labels = names(x))
   \caption{Dot chart of the \texttt{state.region} data}
   \label{fig:dot-charts}
 \end{figure}
+
 
 See Figure \ref{fig:dot-charts}. Compare it to Figure \ref{fig:bar-gr-stateregion}.
 
@@ -1917,6 +1923,7 @@ xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
   \label{fig:xyplot-group}
 \end{figure}
 
+
 \begin{itemize}
 \item Scatterplot matrices
 \begin{itemize}
@@ -1987,9 +1994,10 @@ bwplot(~weight | feed, data = chickwts)
 
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/bwplot.ps}
-  \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data}
+  \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data.}
   \label{fig:bwplot}
 \end{figure}
+
 
 \paragraph*{Histograms}
 
@@ -2010,6 +2018,7 @@ histogram(~age | education, data = infert)
   \label{fig:histograms-lattice}
 \end{figure}
 
+
 \paragraph*{Scatterplots}
 
 
@@ -2029,6 +2038,7 @@ xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
   \label{fig:xyplot}
 \end{figure}
 
+
 \paragraph*{Coplots}
 
 
@@ -2047,6 +2057,8 @@ coplot(conc ~ uptake | Type * Treatment, data = CO2)
   \caption[A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment}]{A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment} in the \texttt{CO2} data}
   \label{fig:coplot}
 \end{figure}
+
+
 
 \newpage{}
 \section{Exercises}
@@ -2141,146 +2153,8 @@ Describe the following data sets just as if you were communicating with an alien
 \end{enumerate}
 
 \end{xca}
-\chapter{Probability}
-\label{sec-4}
-
-\label{cha:Probability}
-
-
-\noindent 
-In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
-
-In this book we distinguish between two types of experiments: \emph{deterministic} and \emph{random}. A \emph{deterministic} experiment is one whose outcome may be predicted with certainty beforehand, such as combining Hydrogen and Oxygen, or adding two numbers such as \(2+3\). A \emph{random} experiment is one whose outcome is determined by chance. We posit that the outcome of a random experiment may not be predicted with certainty beforehand, even in principle. Examples of random experiments include tossing a coin, rolling a die, and throwing a dart on a board, how many red lights you encounter on the drive home, how many ants traverse a certain patch of sidewalk over a short period, \emph{etc}.
-
-\paragraph*{What do I want them to know?}
-
-\begin{itemize}
-\item that there are multiple interpretations of probability, and the methods used depend somewhat on the philosophy chosen
-\item nuts and bolts of basic probability jargon: sample spaces, events, probability functions, \emph{etc}.
-\item how to count
-\item conditional probability and its relationship with independence
-\item Bayes' Rule and how it relates to the subjective view of probability
-\item what we mean by `random variables', and where they come from
-\end{itemize}
-
-
-
-
-
-
-
-\begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/diagram.ps}
-  \caption[Two types of experiments]{Two types of experiments}
-  \label{fig:diagram}
-\end{figure}
-\section{Sample Spaces}
-\label{sec-4-1}
-
-\label{sec:Sample-Spaces}
-
-For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the \emph{sample space}\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
-
-\paragraph*{How to do it with \textsf{R}}
-
-Most of the probability work in this book is done with the \texttt{prob} package \cite{Kernsprob}. A sample space is (usually) represented by a \emph{data frame}, that is, a rectangular collection of variables (see Section \ref{sub:Multivariate-Data}). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \textsf{R} Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general \emph{list} data structure. See Section \ref{sub:howto-ps-objects} for details.
-
-\begin{example}
-Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
-
-
-\begin{verbatim}
-S <- data.frame(lands = c("down","up","side"))
-S
-\end{verbatim}
-
-\begin{verbatim}
- X11cairo 
-        2
-   lands
- 1  down
- 2    up
- 3  side
-\end{verbatim}
-
-The sample space \texttt{S} contains the column \texttt{lands} which stores the outcomes \texttt{down}, \texttt{up}, and \texttt{side}. 
-
-\end{example}
-
-Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the \texttt{expand.grid} function in the \texttt{base} package, \texttt{combn} in the \texttt{combinat} package \cite{combinat}, and \texttt{permsn} in the \texttt{prob} package
-\footnote{The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
-Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the \texttt{tosscoin} function:
-
-
-\begin{verbatim}
-library(prob)
-tosscoin(1)
-\end{verbatim}
-
-\begin{verbatim}
-   toss1
- 1     H
- 2     T
-\end{verbatim}
-
-The number \texttt{1} tells \texttt{tosscoin} that we only want to toss the coin once. We could toss it three times: 
-
-
-\begin{verbatim}
-tosscoin(3)
-\end{verbatim}
-
-\begin{verbatim}
-   toss1 toss2 toss3
- 1     H     H     H
- 2     T     H     H
- 3     H     T     H
- 4     T     T     H
- 5     H     H     T
- 6     T     H     T
- 7     H     T     T
- 8     T     T     T
-\end{verbatim}
-
-Alternatively we could roll a fair die: 
-
-
-\begin{verbatim}
-rolldie(1)
-\end{verbatim}
-
-\begin{verbatim}
-   X1
- 1  1
- 2  2
- 3  3
- 4  4
- 5  5
- 6  6
-\end{verbatim}
-
-The \texttt{rolldie} function defaults to a 6-sided die, but we can specify others with the \texttt{nsides} argument. The command \texttt{rolldie(3, nsides = 4)} would be used to roll a 4-sided die three times.
-
-Perhaps we would like to draw one card from a standard set of playing cards (it is a long data frame):
-
-
-\begin{verbatim}
-head(cards())
-\end{verbatim}
-
-\begin{verbatim}
-   rank suit
- 1    2 Club
- 2    3 Club
- 3    4 Club
- 4    5 Club
- 5    6 Club
- 6    7 Club
-\end{verbatim}
-
-The \texttt{cards} function that we just used has optional arguments \texttt{jokers} (if you would like Jokers to be in the deck) and \texttt{makespace} which we will discuss later. There is also a \texttt{roulette} function which returns the sample space associated with one spin on a roulette wheel. There are EU and USA versions available. Interested readers may contribute any other game or sample spaces that may be of general interest.
 \subsection{Sampling from Urns}
-\label{sec-4-1-1}
+\label{sec-5-1}
 
 \label{sub:sampling-from-urns}
 
@@ -2390,8 +2264,146 @@ Note that the urn does not need to contain numbers; we could have just as easily
 surface.
 
 In this way, when the \texttt{x} argument of \texttt{urnsamples} has repeated elements, the resulting sample space may appear to be \texttt{ordered = TRUE} even when, in fact, the call to the function was \texttt{urnsamples(..., ordered = FALSE)}. Similar remarks apply for the \texttt{replace} argument. 
+\chapter{Probability}
+\label{sec-4}
+
+\label{cha:Probability}
+
+
+\noindent 
+In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
+
+In this book we distinguish between two types of experiments: \emph{deterministic} and \emph{random}. A \emph{deterministic} experiment is one whose outcome may be predicted with certainty beforehand, such as combining Hydrogen and Oxygen, or adding two numbers such as \(2+3\). A \emph{random} experiment is one whose outcome is determined by chance. We posit that the outcome of a random experiment may not be predicted with certainty beforehand, even in principle. Examples of random experiments include tossing a coin, rolling a die, and throwing a dart on a board, how many red lights you encounter on the drive home, how many ants traverse a certain patch of sidewalk over a short period, \emph{etc}.
+
+\paragraph*{What do I want them to know?}
+
+\begin{itemize}
+\item that there are multiple interpretations of probability, and the methods used depend somewhat on the philosophy chosen
+\item nuts and bolts of basic probability jargon: sample spaces, events, probability functions, \emph{etc}.
+\item how to count
+\item conditional probability and its relationship with independence
+\item Bayes' Rule and how it relates to the subjective view of probability
+\item what we mean by `random variables', and where they come from
+\end{itemize}
+
+
+
+
+
+
+
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/diagram.ps}
+  \caption[Two types of experiments]{Two types of experiments}
+  \label{fig:diagram}
+\end{figure}
+\chapter{Sample Spaces}
+\label{sec-5}
+
+\label{sec:Sample-Spaces}
+
+For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the \emph{sample space}\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
+
+\paragraph*{How to do it with \textsf{R}}
+
+Most of the probability work in this book is done with the \texttt{prob} package \cite{Kernsprob}. A sample space is (usually) represented by a \emph{data frame}, that is, a rectangular collection of variables (see Section \ref{sub:Multivariate-Data}). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \textsf{R} Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general \emph{list} data structure. See Section \ref{sub:howto-ps-objects} for details.
+
+\begin{example}
+Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
+
+
+\begin{verbatim}
+S <- data.frame(lands = c("down","up","side"))
+S
+\end{verbatim}
+
+\begin{verbatim}
+ X11cairo 
+        2
+   lands
+ 1  down
+ 2    up
+ 3  side
+\end{verbatim}
+
+The sample space \texttt{S} contains the column \texttt{lands} which stores the outcomes \texttt{down}, \texttt{up}, and \texttt{side}. 
+
+\end{example}
+
+Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the \texttt{expand.grid} function in the \texttt{base} package, \texttt{combn} in the \texttt{combinat} package \cite{combinat}, and \texttt{permsn} in the \texttt{prob} package
+\footnote{The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
+Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the \texttt{tosscoin} function:
+
+
+\begin{verbatim}
+library(prob)
+tosscoin(1)
+\end{verbatim}
+
+\begin{verbatim}
+   toss1
+ 1     H
+ 2     T
+\end{verbatim}
+
+The number \texttt{1} tells \texttt{tosscoin} that we only want to toss the coin once. We could toss it three times: 
+
+
+\begin{verbatim}
+tosscoin(3)
+\end{verbatim}
+
+\begin{verbatim}
+   toss1 toss2 toss3
+ 1     H     H     H
+ 2     T     H     H
+ 3     H     T     H
+ 4     T     T     H
+ 5     H     H     T
+ 6     T     H     T
+ 7     H     T     T
+ 8     T     T     T
+\end{verbatim}
+
+Alternatively we could roll a fair die: 
+
+
+\begin{verbatim}
+rolldie(1)
+\end{verbatim}
+
+\begin{verbatim}
+   X1
+ 1  1
+ 2  2
+ 3  3
+ 4  4
+ 5  5
+ 6  6
+\end{verbatim}
+
+The \texttt{rolldie} function defaults to a 6-sided die, but we can specify others with the \texttt{nsides} argument. The command \texttt{rolldie(3, nsides = 4)} would be used to roll a 4-sided die three times.
+
+Perhaps we would like to draw one card from a standard set of playing cards (it is a long data frame):
+
+
+\begin{verbatim}
+head(cards())
+\end{verbatim}
+
+\begin{verbatim}
+   rank suit
+ 1    2 Club
+ 2    3 Club
+ 3    4 Club
+ 4    5 Club
+ 5    6 Club
+ 6    7 Club
+\end{verbatim}
+
+The \texttt{cards} function that we just used has optional arguments \texttt{jokers} (if you would like Jokers to be in the deck) and \texttt{makespace} which we will discuss later. There is also a \texttt{roulette} function which returns the sample space associated with one spin on a roulette wheel. There are EU and USA versions available. Interested readers may contribute any other game or sample spaces that may be of general interest.
 \section{Events}
-\label{sec-4-2}
+\label{sec-5-1}
 
 \label{sec:Events}
 
@@ -2494,7 +2506,7 @@ subset(rolldie(3), X1+X2+X3 > 16)
  216  6  6  6
 \end{verbatim}
 \subsection{Functions for Finding Subsets}
-\label{sec-4-2-1}
+\label{sec-5-1-1}
 
 
 It does not take long before the subsets of interest become complicated to specify. Yet the main idea remains: we have a particular logical condition to apply to each row. If the row satisfies the condition, then it should be in the subset. It should not be in the subset otherwise. The ease with which the condition may be coded depends of course on the question being asked. Here are a few functions to get started.
@@ -2597,7 +2609,7 @@ subset(S, isin(S, c(2,2,6), ordered = TRUE))
 
 There are a few other functions written to find useful subsets, namely, \texttt{countrep} and \texttt{isrep}. Essentially these were written to test for (or count) a specific number of designated values in outcomes. See the documentation for details.
 \subsection{Set Union, Intersection, and Difference}
-\label{sec-4-2-2}
+\label{sec-5-1-2}
 
 
 Given subsets \(A\) and \(B\), it is often useful to manipulate them in an algebraic fashion. To this end, we have three set operations at our disposal: union, intersection, and difference. Below is a table that summarizes the pertinent information about these operations.
@@ -2720,13 +2732,13 @@ When the \texttt{prob} package loads you will notice a message: ``\texttt{The fo
 
 \end{note}
 \section{Model Assignment}
-\label{sec-4-3}
+\label{sec-5-2}
 
 \label{sec:Interpreting-Probabilities}
 
 Let us take a look at the coin-toss experiment more closely. What do we mean when we say ``the probability of Heads'' or write \(\P(\mbox{Heads})\)? Given a coin and an itchy thumb, how do we go about finding what \(\P(\mbox{Heads})\) should be?
 \subsection{The Measure Theory Approach}
-\label{sec-4-3-1}
+\label{sec-5-2-1}
 
 
 This approach states that the way to handle \(\P(\mbox{Heads})\) is to define a mathematical function, called a \emph{probability measure}, on the sample space. Probability measures satisfy certain axioms (to be introduced later) and have special mathematical properties, so not just any mathematical function will do. But in any given physical circumstance there are typically all sorts of probability measures from which to choose, and it is left to the experimenter to make a reasonable choice -- one usually based on considerations of objectivity. For the tossing coin example, a valid probability measure assigns probability \(p\) to the event \( \{ \mbox{Heads} \} \), where \(p\) is some number \(0\leq p\leq1\). An experimenter that wishes to incorporate the symmetry of the coin would choose \(p=1/2\) to balance the likelihood of \( \{\mbox{Heads} \} \) and \( \{ \mbox{Tails} \} \).
@@ -2739,7 +2751,7 @@ The large degree of flexibility is also a disadvantage, however. When symmetry f
 
 The mathematician who revolutionized this way to do probability theory was Andrey Kolmogorov, who published a landmark monograph in 1933. See \href{http://www-history.mcs.st-andrews.ac.uk/Mathematicians/Kolmogorov.html}{here} for more information.
 \subsection{Relative Frequency Approach}
-\label{sec-4-3-2}
+\label{sec-5-2-2}
 
 
 This approach states that the way to determine \(\P(\mbox{Heads})\) is to flip the coin repeatedly, in exactly the same way each time. Keep a tally of the number of flips and the number of Heads observed. Then a good approximation to \(\P(\mbox{Heads})\) will be
@@ -2756,7 +2768,7 @@ The frequentist approach is good because it is relatively light on assumptions a
 
 This approach was espoused by Richard von Mises in the early twentieth century, and some of his main ideas were incorporated into the measure theory approach. See \href{http://www-history.mcs.st-andrews.ac.uk/Biographies/Mises.html}{here} for more.
 \subsection{The Subjective Approach}
-\label{sec-4-3-3}
+\label{sec-5-2-3}
 
 
 The subjective approach interprets probability as the experimenter's \emph{degree of belief} that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section \ref{sec:Bayes'-Rule}. 
@@ -2767,7 +2779,7 @@ This approach works well in situations that cannot be repeated indefinitely, for
 
 The roots of subjective probability reach back a long time. See \href{http://en.wikipedia.org/wiki/Subjective_probability}{here} for a short discussion and links to references about the subjective approach.
 \subsection{Equally Likely Model (ELM)}
-\label{sec-4-3-4}
+\label{sec-5-2-4}
 
 
 We have seen several approaches to the assignment of a probability model to a given random experiment and they are very different in their underlying interpretation. But they all cross paths when it comes to the equally likely model which assigns equal probability to all elementary outcomes of the experiment.
@@ -2882,7 +2894,7 @@ The same procedure can be used to represent an unbalanced die, roulette wheel, \
 
 \end{example}
 \subsection{Words of Warning}
-\label{sec-4-3-5}
+\label{sec-5-2-5}
 
 
 It should be mentioned that while the splendour of \textsf{R} is uncontested,  it, like everything else, has limits both with respect to the sample/probability spaces it can manage and with respect to the finite accuracy of the representation of most numbers (see the \textsf{R} FAQ 7.31). When playing around with probability, one may be tempted to set up a probability space for tossing 100 coins or rolling 50 dice in an attempt to answer some scintillating question. (Bear in mind: rolling a die just 9 times has a sample space with over \emph{10 million} outcomes.)
@@ -2890,11 +2902,11 @@ It should be mentioned that while the splendour of \textsf{R} is uncontested,  i
 Alas, even if there were enough RAM to barely hold the sample space (and there were enough time to wait for it to be generated), the infinitesimal probabilities that are associated with \emph{so many} outcomes make it difficult for the underlying machinery to handle reliably. In some cases, special algorithms need to be called just to give something
 that holds asymptotically. User beware.
 \section{Properties of Probability}
-\label{sec-4-4}
+\label{sec-5-3}
 
 \label{sec:Properties-of-Probability}
 \subsection{Probability Functions}
-\label{sec-4-4-1}
+\label{sec-5-3-1}
 
 \label{sub:Probability-Functions}
 
@@ -2924,7 +2936,7 @@ and furthermore,
 
 The intuition behind the axioms goes like this: first, the probability of an event should never be negative. Second, since the sample space contains all possible outcomes, its probability should be one, or 100\%. The last axiom may look intimidating but it simply means that in a sequence of disjoint events (in other words, sets that do not overlap), the total probability (measure) should equal the sum of its parts. For example, the chance of rolling a 1 or a 2 on a die should be the chance of rolling a 1 plus the chance of rolling a 2.
 \subsection{Properties}
-\label{sec-4-4-2}
+\label{sec-5-3-2}
 
 
 For any events \(A\) and \(B\),
@@ -2977,7 +2989,7 @@ For any events \(A\) and \(B\),
   \end{equation}
 \end{enumerate}
 \subsection{Assigning Probabilities}
-\label{sec-4-4-3}
+\label{sec-5-3-3}
 
 
 A model of particular interest is the \emph{equally likely model}. The idea is to divide the sample space \(S\) into a finite collection of elementary events \( \{ a_{1},\ a_{2}, \ldots, a_{N} \} \) that are equally likely in the sense that each \(a_{i}\) has equal chances of occurring. The probability function associated with this model must satisfy \(\P(S)=1\), by Axiom 2. On the other hand, it must also satisfy
@@ -3107,7 +3119,7 @@ We have as yet glossed over the details. More specifically, \texttt{prob} has th
 
 Consequently, \texttt{x} should be the entire probability space in the case that \texttt{event} is non-null.
 \section{Counting Methods}
-\label{sec-4-5}
+\label{sec-5-4}
 
 \label{sec:Methods-of-Counting}
 
@@ -3136,7 +3148,7 @@ At each stage we will have had two options, or ways, to select a pizza to be mad
 We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? \textbf{Answer:} \(2\cdot3\cdot4\cdot4\cdot10=960\)
 \end{example}
 \subsection{Ordered Samples}
-\label{sec-4-5-1}
+\label{sec-5-4-1}
 
 
 Imagine a bag with \(n\) distinguishable balls inside. Now shake up the bag and select \(k\) balls at random. How many possible sequences might we observe?
@@ -3175,7 +3187,7 @@ In a class of 20 students, we randomly select a class president, a class vice-pr
 We rent five movies to watch over the span of two nights. We wish to watch 3 movies on the first night. How many distinct sequences of 3 movies could we possibly watch? \textbf{Answer:} \(5\cdot4\cdot3=60\).
 \end{example}
 \subsection{Unordered Samples}
-\label{sec-4-5-2}
+\label{sec-5-4-2}
 
 
 \begin{prop}
@@ -3351,9 +3363,10 @@ Students are usually surprised to hear that, using the formula above, one needs 
 
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/birthday.ps}
-  \caption[The birthday problem]{The birthday problem. {\small The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}}
+  \caption[The birthday problem]{\small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}
   \label{fig:birthday}
 \end{figure}
+
 
 \paragraph*{How to do it with \textsf{R}}
 
@@ -3371,7 +3384,7 @@ remove(g)
 
 There is a \textsf{Birthday problem} item in the \textsf{Probability} menu of \texttt{RcmdrPlugin.IPSUR}. In the base \textsf{R} version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
 \section{Conditional Probability}
-\label{sec-4-6}
+\label{sec-5-5}
 
 \label{sec:Conditional-Probability}
 
@@ -3491,7 +3504,7 @@ prob(S, X1+X2 >= 8, given = (X1==X2) )
  [1] 0.5
 \end{verbatim}
 \subsection{Properties and Rules}
-\label{sec-4-6-1}
+\label{sec-5-5-1}
 
 
 The following theorem establishes that conditional probabilities behave just like regular probabilities when the conditioned event is fixed. 
@@ -3700,7 +3713,7 @@ Using the same reasoning, we can return to the example from the beginning of the
 \]
  
 \section{Independent Events}
-\label{sec-4-7}
+\label{sec-5-6}
 
 \label{sec:Independent-Events}
 
@@ -3801,7 +3814,7 @@ Compare this answer to what we got in Example \ref{exa:toss-ten-coins}.
 
 \end{example}
 \subsection{Independent, Repeated Experiments}
-\label{sec-4-7-1}
+\label{sec-5-6-1}
 
 
 Generalizing from above it is common to repeat a certain experiment multiple times under identical conditions and in an independent manner. We have seen many examples of this already: tossing a coin repeatedly, rolling a die or dice, \emph{etc}.
@@ -3836,7 +3849,7 @@ As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has 
 
 Note that \texttt{iidspace} will assume \texttt{x} has equally likely outcomes if no \texttt{probs} argument is specified. Also note that the argument \texttt{x} is a \emph{vector}, not a data frame. Something like \texttt{iidspace(tosscoin(1),...)} would give an error.
 \section{Bayes' Rule}
-\label{sec-4-8}
+\label{sec-5-7}
 
 \label{sec:Bayes'-Rule}
 
@@ -4025,7 +4038,7 @@ fastpost / sum(fastpost)
 
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 \section{Random Variables}
-\label{sec-4-9}
+\label{sec-5-8}
 
 \label{sec:Random-Variables}
 
@@ -4182,7 +4195,7 @@ Note that the default value of \texttt{vars} is the names of all columns except 
 
 \newpage{}
 \section{Exercises}
-\label{sec-4-10}
+\label{sec-5-9}
 
 
 \setcounter{thm}{0}
@@ -4200,7 +4213,7 @@ The events must satisfy the product equalities two at a time, of which there are
 \]
 conditions to be satisfied, but the binomial series in the expression on the right is the sum of the entries of the \(n^{\mathrm{th}}\) row of Pascal's triangle, which is \(2^{n}\).
 \chapter{Discrete Distributions}
-\label{sec-5}
+\label{sec-6}
 
 \label{cha:Discrete-Distributions}
 
@@ -4221,11 +4234,11 @@ There are some comments on simulation, and we mention transformations of random 
 \item how to make new discrete random variables from old ones
 \end{itemize}
 \section{Discrete Random Variables}
-\label{sec-5-1}
+\label{sec-6-1}
 
 \label{sec:discrete-random-variables}
 \subsection{Probability Mass Functions}
-\label{sec-5-1-1}
+\label{sec-6-1-1}
 
 \label{sub:probability-mass-functions}
 
@@ -4266,7 +4279,7 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 
 \end{example}
 \subsection{Mean, Variance, and Standard Deviation}
-\label{sec-5-1-2}
+\label{sec-6-1-2}
 
 \label{sub:mean-variance-sd}
 
@@ -4377,7 +4390,7 @@ E(X); var(X); sd(X)
  [1] 0.8660254
 \end{verbatim}
 \section{The Discrete Uniform Distribution}
-\label{sec-5-2}
+\label{sec-6-2}
 
 \label{sec:disc-uniform-dist}
 
@@ -4434,7 +4447,7 @@ In the \textsf{R} Console window, the \textsf{R} Commander should tell you that 
 
 The default name for the variable is \texttt{disunif.sim1}.
 \section{The Binomial Distribution}
-\label{sec-5-3}
+\label{sec-6-3}
 
 \label{sec:binom-dist}
 
@@ -4452,7 +4465,7 @@ f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 \end{equation}
 It is easy to calculate \(\mu=\E X=p\) and \(\E X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
 \subsection{The Binomial Model}
-\label{sec-5-3-1}
+\label{sec-6-3-1}
 
 \label{sub:The-Binomial-Model}
 
@@ -4574,6 +4587,7 @@ In particular, the CDF of \(X\) is defined for the entire real line, \(\R\). The
   \label{fig:binom-cdf-base}
 \end{figure}
 
+
 \begin{example}
 Another way to do Example \ref{exa:toss-coin-3-withR} is with the \texttt{distr} family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object \texttt{X}, and then questions about the random variable translate to functions on and involving \texttt{X}. Random variables with distributions from the \texttt{base} package are specified by capitalizing the name of the distribution.
 
@@ -4624,6 +4638,7 @@ plot(X, cex = 0.2)
   \label{fig:binom-plot-distr}
 \end{figure}
 
+
 \begin{table}
 \begin{tabular}{lllll}
 \multicolumn{5}{l}{Given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).}\tabularnewline
@@ -4640,11 +4655,11 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
 \caption{Correspondence between \texttt{stats} and \texttt{distr}}
 \end{table}
 \section{Expectation and Moment Generating Functions}
-\label{sec-5-4}
+\label{sec-6-4}
 
 \label{sec:expectation-and-mgfs}
 \subsection{The Expectation Operator}
-\label{sec-5-4-1}
+\label{sec-6-4-1}
 
 \label{sub:expectation-operator}
 
@@ -4690,7 +4705,7 @@ Go directly from the definition. For example,
 \]
 \end{proof}
 \subsection{Moment Generating Functions}
-\label{sec-5-4-2}
+\label{sec-6-4-2}
 
 \label{sub:MGFs}
 
@@ -4850,7 +4865,7 @@ sd(X)
 
 There are even methods for \texttt{IQR}, \texttt{mad}, \texttt{skewness}, and \texttt{kurtosis}.
 \section{The Empirical Distribution}
-\label{sec-5-5}
+\label{sec-6-5}
 
 \label{sec:empirical-distribution}
 
@@ -4912,6 +4927,7 @@ plot(ecdf(x))
   \label{fig:empirical-CDF}
 \end{figure}
 
+
 See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in \texttt{x}. There are no repeated values in \texttt{x} so all of the jumps are equal to \(1/5=0.2\).
 
 The empirical PDF is not usually of particular interest in itself, but if we really wanted we could define a function to serve as the empirical PDF:
@@ -4945,13 +4961,13 @@ We can get the empirical quantile function in \textsf{R} with \texttt{quantile(x
 
 As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter \ref{cha:resampling-methods}.
 \section{Other Discrete Distributions}
-\label{sec-5-6}
+\label{sec-6-6}
 
 \label{sec:other-discrete-distributions}
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
 \subsection{Dependent Bernoulli Trials}
-\label{sec-5-6-1}
+\label{sec-6-6-1}
 
 \label{sec:non-bernoulli-trials}
 
@@ -5112,7 +5128,7 @@ We see that both sampling procedures have the same mean, and the method with the
 \end{equation}
 is called a \emph{finite population correction}. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 \subsection{Waiting Time Distributions}
-\label{sec-5-6-2}
+\label{sec-6-6-2}
 
 \label{sec:Waiting-Time-Distributions}
 
@@ -5243,7 +5259,7 @@ f_{Y}(y)={y-1 \choose r-1}p^{r}(1-p)^{y-r},\quad y=r,r+1,r+2,\ldots
 It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\) theirs, then \(Y=X+r\). Consequently, they have \(\mu_{Y}=\mu_{X}+r\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
 \end{note}
 \subsection{Arrival Processes}
-\label{sec-5-6-3}
+\label{sec-6-6-3}
 
 \label{sec:Arrival-Processes}
 
@@ -5305,7 +5321,7 @@ diff(ppois(c(47, 50), lambda = 50))
 
 \end{example}
 \section{Functions of Discrete Random Variables}
-\label{sec-5-7}
+\label{sec-6-7}
 
 \label{sec:functions-discrete-rvs}
 
@@ -5370,7 +5386,7 @@ If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\)
 
 \newpage{}
 \section{Exercises}
-\label{sec-5-8}
+\label{sec-6-8}
 
 \setcounter{thm}{0}
 
@@ -5378,118 +5394,129 @@ If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\)
 A recent national study showed that approximately 44.7\% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
 \begin{itemize}
 \item How is \(X\) distributed? 
-     \[
-     X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
-     \]
+  \[
+  X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
+  \]
 \item Sketch the probability mass function (roughly).
-
-\begin{verbatim}
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "d")
-\end{verbatim}
 \end{itemize}
 
 \begin{verbatim}
-       <<binomdxca>>
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "d")
 \end{verbatim}
 
+
 \begin{verbatim}
-       <<binomdxca>>
+  <<binomdxca>>
 \end{verbatim}
-     \begin{figure}[th]
-       \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
-       \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
-       \label{fig:binomdxca}
-     \end{figure}
+
+
+\begin{verbatim}
+  <<binomdxca>>
+\end{verbatim}
+
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
+  \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
+  \label{fig:binomdxca}
+\end{figure}
+
 \begin{itemize}
 \item Sketch the cumulative distribution function (roughly).
-
-\begin{verbatim}
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "p")
-\end{verbatim}
 \end{itemize}
+   
 
 \begin{verbatim}
-     <<binompxca>>
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "p")
 \end{verbatim}
 
+
 \begin{verbatim}
-     <<binompxca>>
+  <<binompxca>>
 \end{verbatim}
-     \begin{figure}[th]
-       \includegraphics[angle=270, totalheight=4in]{ps/binompxca.ps}
-       \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
-       \label{fig:binompxca}
-     \end{figure}
+
+
+\begin{verbatim}
+  <<binompxca>>
+\end{verbatim}
+
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{ps/binompxca.ps}
+    \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
+    \label{fig:binompxca}
+  \end{figure}
+
+
 \begin{itemize}
 \item Find the probability that \(X\) is equal to 17.
+\end{itemize}
 
 \begin{verbatim}
-     dbinom(17, size = 31, prob = 0.447)
+dbinom(17, size = 31, prob = 0.447)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Find the probability that \(X\) is at most 13.
+\end{itemize}
 
 \begin{verbatim}
-     pbinom(13, size = 31, prob = 0.447)
+pbinom(13, size = 31, prob = 0.447)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Find the probability that \(X\) is bigger than 11.
+\end{itemize}
 
 \begin{verbatim}
-     pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
+pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Find the probability that \(X\) is at least 15.
+\end{itemize}
 
 \begin{verbatim}
-     pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
+pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Find the probability that \(X\) is between 16 and 19, inclusive.
+\end{itemize}
 
 \begin{verbatim}
-     sum(dbinom(16:19, size = 31, prob = 0.447))
-     diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
+sum(dbinom(16:19, size = 31, prob = 0.447))
+diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Give the mean of \(X\), denoted \(\E X\).
+\end{itemize}
 
 \begin{verbatim}
-     library(distrEx)
-     X <- Binom(size = 31, prob = 0.447)
-     E(X)
+library(distrEx)
+X <- Binom(size = 31, prob = 0.447)
+E(X)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Give the variance of \(X\).
+\end{itemize}
 
 \begin{verbatim}
-     var(X)
+var(X)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Give the standard deviation of \(X\).
+\end{itemize}
 
 \begin{verbatim}
-     sd(X)
+sd(X)
 \end{verbatim}
-\end{itemize}
 \begin{itemize}
 \item Find \(\E(4X+51.324)\)
+\end{itemize}
 
 \begin{verbatim}
-     E(4*X + 51.324)
+E(4*X + 51.324)
 \end{verbatim}
-\end{itemize}
+
 \end{xca}
 
 \begin{xca}
@@ -5527,7 +5554,7 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 \end{equation}
 \end{xca}
 \chapter{Continuous Distributions}
-\label{sec-6}
+\label{sec-7}
 
 \label{cha:Continuous-Distributions}
 
@@ -5548,11 +5575,11 @@ The interested reader who would like to learn more about any of the assorted dis
 \item how to make new continuous random variables from old ones
 \end{itemize}
 \section{Continuous Random Variables}
-\label{sec-6-1}
+\label{sec-7-1}
 
 \label{sec:continuous-random-variables}
 \subsection{Probability Density Functions}
-\label{sec-6-1-1}
+\label{sec-7-1-1}
 
 \label{sub:probability-density-functions}
 
@@ -5617,7 +5644,7 @@ F'_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t}F_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t
 the last equality being true by the Fundamental Theorem of Calculus, part (2) (see Appendix \ref{sec:Differential-and-Integral}). In short, \((F_{X})'=f_{X}\) in the continuous case
 \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 \subsection{Expectation of Continuous Random Variables}
-\label{sec-6-1-2}
+\label{sec-7-1-2}
 
 \label{sub:Expectation-of-Continuous}
 
@@ -5784,7 +5811,7 @@ E(X); var(X); 3/80
 Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why are they different? Because the \texttt{distrEx} package resorts to numerical methods when it encounters a model it does not recognize. This means that the answers we get for calculations may not exactly match the theoretical values. Be careful.
 \end{example}
 \section{The Continuous Uniform Distribution}
-\label{sec-6-2}
+\label{sec-7-2}
 
 \label{sec:The-Continuous-Uniform}
 
@@ -5818,7 +5845,7 @@ The mean of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\) is relativel
 using the popular formula for the difference of squares. The variance is left to Exercise \ref{xca:variance-dunif}.
 \end{example}
 \section{The Normal Distribution}
-\label{sec-6-3}
+\label{sec-7-3}
 
 \label{sec:The-Normal-Distribution}
 
@@ -5896,7 +5923,7 @@ Let the random experiment consist of a person taking an IQ test, and let \(X\) b
 \emph{Solution}: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68\%.
 \end{example}
 \subsection{Normal Quantiles and the Quantile Function}
-\label{sec-6-3-1}
+\label{sec-7-3-1}
 
 \label{sub:Normal-Quantiles-QF}
 
@@ -6005,17 +6032,18 @@ Note the \texttt{lower.tail} argument. We would get the same answer with
  qnorm(c(0.975, 0.99, 0.995))
 \end{verbatim}
 \section{Functions of Continuous Random Variables}
-\label{sec-6-4}
+\label{sec-7-4}
 
 \label{sec:Functions-of-Continuous}
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 \subsection{The PDF Method}
-\label{sec-6-4-1}
+\label{sec-7-4-1}
 
 
-\label{pro:func-cont-rvs-pdf-formula}
 \begin{prop}
+\label{pro:func-cont-rvs-pdf-formula}
+
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
 f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.\label{eq:univ-trans-pdf-long}
@@ -6078,7 +6106,7 @@ but for the well-behaved examples in this book the trick works just fine.
 In the case that \(g\) is not monotone we cannot apply Proposition \ref{pro:func-cont-rvs-pdf-formula} directly. However, hope is not lost. Rather, we break the support of \(X\) into pieces such that \(g\) is monotone on each one. We apply Proposition \ref{pro:func-cont-rvs-pdf-formula} on each piece, and finish up by adding the results together.
 \end{rem}
 \subsection{The CDF method}
-\label{sec-6-4-2}
+\label{sec-7-4-2}
 
 
 We know from Section \ref{sec:continuous-random-variables} that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\P(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\P[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
@@ -6214,11 +6242,11 @@ The answers are not the same! Furthermore, if we were to repeat the process we w
 
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that \texttt{distr} provides) that we should be careful to remember that complicated transformations computed by \textsf{R} are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 \section{Other Continuous Distributions}
-\label{sec-6-5}
+\label{sec-7-5}
 
 \label{sec:Other-Continuous-Distributions}
 \subsection{Waiting Time Distributions}
-\label{sec-6-5-1}
+\label{sec-7-5-1}
 
 \label{sub:Waiting-Time-Distributions}
 
@@ -6254,7 +6282,7 @@ The exponential distribution is said to be \emph{memoryless} because exponential
 \end{equation}
 See Exercise \ref{xca:prove-the-memoryless}.
 \subsection{The Gamma Distribution}
-\label{sec-6-5-2}
+\label{sec-7-5-2}
 
 \label{sub:The-Gamma-Distribution}
 
@@ -6271,7 +6299,7 @@ To motivate the gamma distribution recall that if \(X\) measures the length of t
 At a car wash, two customers arrive per hour on the average. We decide to measure how long it takes until the third customer arrives. If \(Y\) denotes this random time then \(Y\sim\mathsf{gamma}(\mathtt{shape}=3,\,\mathtt{rate}=1/2)\).
 \end{example}
 \subsection{The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions}
-\label{sec-6-5-3}
+\label{sec-7-5-3}
 
 \label{sub:The-Chi-Square-t-F}
 
@@ -6303,6 +6331,7 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
   \label{fig:chisq-dist-vary-df}
 \end{figure}
 
+
 \begin{rem}
 Here are some useful things to know about the chi-square distribution.
 \begin{enumerate}
@@ -6317,7 +6346,7 @@ Here are some useful things to know about the chi-square distribution.
 
 \end{rem}
 \subsection{Student's \(t\) distribution}
-\label{sec-6-5-4}
+\label{sec-7-5-4}
 
 \label{sub:Student's-t-distribution}
 
@@ -6327,7 +6356,7 @@ f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\fra
 \end{equation}
 is said to have \emph{Student's} \(t\) distribution with \(r\) \emph{degrees of freedom}, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \textsf{R} functions are \texttt{dt},=pt=, \texttt{qt}, and \texttt{rt}, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 \subsection{Snedecor's \(F\) distribution}
-\label{sec-6-5-5}
+\label{sec-7-5-5}
 
 \label{sub:snedecor-F-distribution}
 
@@ -6346,7 +6375,7 @@ Here are some notes about the \(F\) distribution.
 
 \end{rem}
 \subsection{Other Popular Distributions}
-\label{sec-6-5-6}
+\label{sec-7-5-6}
 
 \label{sub:Other-Popular-Distributions}
 
@@ -6440,11 +6469,12 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
   \label{fig:gamma-mgf}
 \end{figure}
 
+
 \end{example}
 
 \newpage{}
 \section{Exercises}
-\label{sec-6-6}
+\label{sec-7-6}
 
 \setcounter{thm}{0}
 
@@ -6512,7 +6542,7 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 \]
 \end{xca}
 \chapter{Multivariate Distributions}
-\label{sec-7}
+\label{sec-8}
 
 \label{cha:Multivariable-Distributions}
 
@@ -6537,7 +6567,7 @@ The interested reader who would like to learn more about any of the below mentio
 \item what it looks like when there are more than two random variables present
 \end{itemize}
 \section{Joint and Marginal Probability Distributions}
-\label{sec-7-1}
+\label{sec-8-1}
 
 \label{sec:Joint-Probability-Distributions}
 
@@ -6854,7 +6884,7 @@ colSums(temp)
 
 You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
 \section{Joint and Marginal Expectation}
-\label{sec-7-2}
+\label{sec-8-2}
 
 \label{sec:Joint-and-Marginal-Expectation}
 
@@ -6867,7 +6897,7 @@ or in the discrete case,
 \E\, g(X,Y)=\mathop{\sum\sum}\limits _{(x,y)\in S_{X,Y}}g(x,y)\, f_{X,Y}(x,y).
 \end{equation}
 \subsection{Covariance and Correlation}
-\label{sec-7-2-1}
+\label{sec-8-2-1}
 
 
 There are two very special cases of joint expectation: the \emph{covariance} and the \emph{correlation}. These are measures which help us quantify the dependence between \(X\) and \(Y\). 
@@ -6963,7 +6993,7 @@ Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 
 To do the continuous case we could use the computer algebra utilities of \texttt{Yacas} and the associated \textsf{R} package \texttt{Ryacas} \cite{ryacas}. See Section \ref{sub:bivariate-transf-R} for another example where the \texttt{Ryacas} package appears.
 \section{Conditional Distributions}
-\label{sec-7-3}
+\label{sec-8-3}
 
 \label{sec:Conditional-Distributions}
 
@@ -6984,7 +7014,7 @@ f_{X,Y}(x,y)=
 Let the joint PDF of \(X\) and \(Y\) be given by
 \end{example}
 \subsection{Bayesian Connection}
-\label{sec-7-3-1}
+\label{sec-8-3-1}
 
 
 Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter \(\theta\) which is of primary interest, and about which we would like to learn. But rather than observing \(\theta\) directly, we instead observe a random variable \(X\) whose probability distribution depends on \(\theta\). Using the information we provided by \(X,\) we would like to update the information that we have about \(\theta\).
@@ -7030,11 +7060,11 @@ We usually do not restrict ourselves to the observation of only one \(X\) condit
 where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\mathrm{d} u\). Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
 \end{rem}
 \section{Independent Random Variables}
-\label{sec-7-4}
+\label{sec-8-4}
 
 \label{sec:Independent-Random-Variables}
 \subsection{Independent Random Variables}
-\label{sec-7-4-1}
+\label{sec-8-4-1}
 
 \label{sub:Independent-Random-Variables}
 
@@ -7075,6 +7105,7 @@ f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right
 \end{example}
 
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
+
 \begin{prop}
 \label{pro:indep-implies-prodexpect}
 If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
@@ -7116,7 +7147,7 @@ Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will recei
 If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent for any functions \(u\) and \(v\).
 \end{fact}
 \subsection{Combining Independent Random Variables}
-\label{sec-7-4-2}
+\label{sec-8-4-2}
 
 \label{sub:Combining-Independent-Random}
 
@@ -7178,7 +7209,7 @@ Using linearity of expectation the \(\E\) distributes through the sum. Now \(\E 
 But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\E Y\right)^{2}\), so the proof is complete.. 
 \end{proof}
 \section{Exchangeable Random Variables}
-\label{sec-7-5}
+\label{sec-8-5}
 
 \label{sec:Exchangeable-Random-Variables}
 
@@ -7217,7 +7248,7 @@ If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) 
 
 Exchangeability thus contains IID as a special case. 
 \section{The Bivariate Normal Distribution}
-\label{sec-7-6}
+\label{sec-8-6}
 
 \label{sec:The-Bivariate-Normal}
 
@@ -7325,7 +7356,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
   \label{fig:mvnorm-pdf}
 \end{figure}
 \section{Bivariate Transformations of Random Variables}
-\label{sec-7-7}
+\label{sec-8-7}
 
 \label{sec:Transformations-Multivariate}
 
@@ -7404,7 +7435,7 @@ It is possible to do the computations above in \textsf{R} with the \texttt{Ryaca
 
 There are not yet any examples of Yacas in this book, but there are online materials to help the interested reader: see \href{http://code.google.com/p/ryacas/}{here} to get started.
 \section{Remarks for the Multivariate Case}
-\label{sec-7-8}
+\label{sec-8-8}
 
 \label{sec:Remarks-for-the-Multivariate}
 
@@ -7525,7 +7556,7 @@ M_{\mathbf{Y}}(\mathbf{t}) & = & \E\,\exp\left\{ \mathbf{t}^{\mathrm{T}}(\mathbf
 and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}})\) distribution.
 \end{proof}
 \section{The Multinomial Distribution}
-\label{sec-7-9}
+\label{sec-8-9}
 
 \label{sec:Multinomial}
 
@@ -7550,7 +7581,7 @@ For the most part we will ignore these difficulties, but the careful reader shou
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
 \begin{example}
-\textbf{Dinner with Barack Obama.} During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.\~{}population as a whole, Suppose Barack Obama wants to have \href{http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans}{dinner} with 36 democrat, 27 republican, and 37 independent.
+\textbf{Dinner with Barack Obama.} During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S. population as a whole, Suppose Barack Obama wants to have \href{http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans}{dinner} with 36 democrat, 27 republican, and 37 independent.
 \end{example}
 
 \begin{rem}
@@ -7632,7 +7663,7 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 
 \newpage{}
 \section{Exercises}
-\label{sec-7-10}
+\label{sec-8-10}
 
 
 \setcounter{thm}{0}
@@ -7651,7 +7682,7 @@ Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\ma
 Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M_{Y}(-t)\). Use this to find the distribution of \(X-Y\) when \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\)  are independent. 
 \end{xca}
 \chapter{Sampling Distributions}
-\label{sec-8}
+\label{sec-9}
 
 \label{cha:Sampling-Distributions}
 
@@ -7677,11 +7708,11 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 \item some basic concepts related to sampling distribution utility, such as bias and variance
 \end{itemize}
 \section{Simple Random Samples}
-\label{sec-8-1}
+\label{sec-9-1}
 
 \label{sec:simple-random-samples}
 \subsection{Simple Random Samples}
-\label{sec-8-1-1}
+\label{sec-9-1-1}
 
 \label{sub:simple-random-samples}
 
@@ -7722,15 +7753,15 @@ And because \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n}\) are independent, Propositi
 The last step is to recognize that each term in last product above is exactly \(M(t/n)\).
 \end{proof}
 \section{Sampling from a Normal Distribution}
-\label{sec-8-2}
+\label{sec-9-2}
 
 \label{sec:sampling-from-normal-dist}
 \subsection{The Distribution of the Sample Mean}
-\label{sec-8-2-1}
+\label{sec-9-2-1}
 
-\begin{prop}
 \label{sub:samp-mean-dist-of}
 
+\begin{prop}
 Let \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the sample mean \(\overline{X}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) sampling distribution.
 \end{prop}
 
@@ -7749,7 +7780,7 @@ M_{\overline{X}}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
 and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) distribution.
 \end{proof}
 \subsection{The Distribution of the Sample Variance}
-\label{sec-8-2-2}
+\label{sec-9-2-2}
 
 \label{sub:Samp-Var-Dist}
 
@@ -7775,7 +7806,7 @@ Then
 The proof is beyond the scope of the present book, but the theorem is simply too important to be omitted. The interested reader could consult Casella and Berger \cite{Casella2002}, or Hogg \emph{et al} \cite{Hogg2005}. 
 \end{proof}
 \subsection{The Distribution of Student's \(T\) Statistic}
-\label{sec-8-2-3}
+\label{sec-9-2-3}
 
 \label{sub:Student's-t-Distribution}
 
@@ -7831,6 +7862,7 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
   \label{fig:Student's-t-dist-vary-df}
 \end{figure}
 
+
 Similar to that done for the normal we may define \(\mathsf{t}_{\alpha}(\mathtt{df}=n-1)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{t}(\mathtt{df}=n-1)\) curve to its right.
 
 \begin{example}
@@ -7858,7 +7890,7 @@ There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribut
 
 \end{rem}
 \section{The Central Limit Theorem}
-\label{sec-8-3}
+\label{sec-9-3}
 
 \label{sec:Central-Limit-Theorem}
 
@@ -7912,13 +7944,14 @@ For example, when the command \texttt{clt1()}  is issued a plot window opens to 
 
 The three separate \texttt{clt1}, \texttt{clt2}, and \texttt{clt3} functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, \texttt{clt} which covers all three cases (and more). 
 \section{Sampling Distributions of Two-Sample Statistics}
-\label{sec-8-4}
+\label{sec-9-4}
 
 \label{sec:Samp-Dist-Two-Samp}
 
 There are often two populations under consideration, and it sometimes of interest to compare properties between groups. To do so we take independent samples from each population and calculate respective sample statistics for comparison. In some simple cases the sampling distribution of the comparison is known and easy to derive; such cases are the subject of the present section.
 \subsection{Difference of Independent Sample Means}
-\label{sec-8-4-1}
+\label{sec-9-4-1}
+
 
 \begin{prop}
 Let \(X_{1}\), \(X_{2}\), \ldots{} , \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), \ldots{} , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), \ldots{} , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), \ldots{} , \(Y_{n_{2}}\) are independent samples. Then the quantity
@@ -7942,7 +7975,8 @@ For the special case of \(\mu_{X}=\mu_{Y}\) we have shown that
 has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, or in other words, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})\) sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec:Conf-Interv-for-Diff-Means}.
 \end{rem}
 \subsection{Difference of Independent Sample Proportions}
-\label{sec-8-4-2}
+\label{sec-9-4-2}
+
 
 \begin{prop}
 Let \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{1})\) distribution and let \(Y_{1}\), \(Y_{2}\), \ldots{}, \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{2})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), \ldots{} , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), \ldots{} , \(Y_{n_{2}}\) are independent samples. Define 
@@ -7966,7 +8000,8 @@ We know that \(\hat{p}_{1}\) is approximately normal for \(n_{1}\) sufficiently 
 The expressions for the mean and standard deviation follow immediately from Proposition \ref{pro:mean-sd-lin-comb-two} combined with the formulas for the \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) distribution from Chapter \ref{cha:Discrete-Distributions}.
 \end{proof}
 \subsection{Ratio of Independent Sample Variances}
-\label{sec-8-4-3}
+\label{sec-9-4-3}
+
 
 \begin{prop}
 Let \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), \ldots{} , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), \ldots{} , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), \ldots{} , \(Y_{n_{2}}\) are independent samples. Then the ratio
@@ -7996,7 +8031,7 @@ F=\frac{S_{X}^{2}}{S_{Y}^{2}}
 has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling distribution. This will be important in Chapters \ref{cha:Estimation} onward.
 \end{rem}
 \section{Simulated Sampling Distributions}
-\label{sec-8-5}
+\label{sec-9-5}
 
 \label{sec:Simulated-Sampling-Distributions}
 
@@ -8004,7 +8039,7 @@ Some comparisons are meaningful, but their sampling distribution is not quite so
 
 As it turns out, we do not need to know the exact analytical form of the sampling distribution; sometimes it is enough to approximate it with a simulated distribution. In this section we will show you how. Note that \textsf{R} is particularly well suited to compute simulated sampling distributions, much more so than, say, SPSS or SAS.
 \subsection{The Interquartile Range}
-\label{sec-8-5-1}
+\label{sec-9-5-1}
 
 
 
@@ -8049,7 +8084,7 @@ hist(iqrs, breaks = 20)
   \label{fig:simulated-IQR}
 \end{figure}
 \subsection{The Median Absolute Deviation}
-\label{sec-8-5-2}
+\label{sec-9-5-2}
 
 
 
@@ -8098,9 +8133,10 @@ hist(mads, breaks = 20)
   \label{fig:simulated-MAD}
 \end{figure}
 
+
 \newpage{}
 \section{Exercises}
-\label{sec-8-6}
+\label{sec-9-6}
 
 \setcounter{thm}{0}
 
@@ -8133,7 +8169,7 @@ Let \(X_{1}\),\ldots{}, \(X_{25}\) be a random sample from a \(\mathsf{norm}(\ma
 And that's all she wrote.
 \end{xca}
 \chapter{Estimation}
-\label{sec-9}
+\label{sec-10}
 
 \label{cha:Estimation}
 
@@ -8154,7 +8190,7 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 \item the concept of margin of error and its relationship to sample size
 \end{itemize}
 \section{Point Estimation}
-\label{sec-9-1}
+\label{sec-10-1}
 
 \label{sec:Point-Estimation-1}
 
@@ -8199,6 +8235,7 @@ We can see already that the observed data \(X=3\) is more likely when \(F=9\) th
   \caption[Capture-recapture experiment]{\small A plot of maximum likelihood for the capture-recapture experiment.}
   \label{fig:capture-recapture}
 \end{figure}
+
 
 \begin{example}
 \label{exa:bass-bluegill}
@@ -8247,6 +8284,7 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
   \label{fig:fishing-part-two}
 \end{figure}
 
+
 We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate \(L\) and set \(L'=0\) to find a maximum.
 \[
 L'(p)=\left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}}+p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1}(-1).
@@ -8283,6 +8321,7 @@ The result is shown in Figure \ref{fig:species-mle}.
   \caption[Species maximum likelihood]{\small Species maximum likelihood.}
   \label{fig:species-mle}
 \end{figure}
+
 
 In general, we have a family of PDFs \(f(x|\theta)\) indexed by a parameter \(\theta\) in some parameter space \(\Theta\). We want to learn about \(\theta\). We take a \(SRS(n)\):
 \begin{equation}
@@ -8476,7 +8515,7 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 
 There is functionality in the \texttt{distrTest} package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 \section{Confidence Intervals for Means}
-\label{sec-9-2}
+\label{sec-10-2}
 
 \label{sec:Confidence-Intervals-for-Means}
 
@@ -8540,10 +8579,11 @@ ci.examp()
 
 
 \begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/carscatter.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/ci-examp.ps}
   \caption[Simulated confidence intervals]{\small The graph was generated by the \texttt{ci.examp} function from the \texttt{TeachingDemos} package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95\%.}
-  \label{fig:Scatter-cars}
+  \label{fig:ci-examp}
 \end{figure}
+
 
 Under the above framework, we can reason that an ``interval'' with a \emph{larger} confidence coefficient corresponds to a \emph{wider} sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be \emph{somehow} related to the amount of information contained in the random sample, \(X_{1}\), \(X_{2}\), \ldots{},
 \(X_{n}\). The following remarks makes these notions precise. 
@@ -8730,7 +8770,7 @@ library(IPSUR)
 plot(temp, "Conf")
 \end{verbatim}
 \section{Confidence Intervals for Differences of Means}
-\label{sec-9-3}
+\label{sec-10-3}
 
 \label{sec:Conf-Interv-for-Diff-Means}
 
@@ -8795,13 +8835,13 @@ The basic function is \texttt{t.test} which has a \texttt{var.equal} argument th
 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then \texttt{t.test} with \texttt{var.equal = FALSE} will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 \section{Confidence Intervals for Proportions}
-\label{sec-9-4}
+\label{sec-10-4}
 
 \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 \begin{itemize}
-\item the proportion of U.S.\~{}citizens that support Obama,
+\item the proportion of U.S. citizens that support Obama,
 \item the proportion of smokers among adults age 18 or over,
 \item the proportion of people worldwide infected by the H1N1 virus.
 \end{itemize}
@@ -8920,7 +8960,7 @@ library(reshape)
 B <- with(A, untable(A, Freq))
 \end{verbatim}
 \section{Confidence Intervals for Variances}
-\label{sec-9-5}
+\label{sec-10-5}
 
 \label{sec:Confidence-Intervals-for-Variances}
 
@@ -8930,7 +8970,7 @@ I am thinking one and two sample problems here.
 
 I am thinking about \texttt{sigma.test} in the \texttt{TeachingDemos} package and \texttt{var.test} in base \textsf{R} here.
 \section{Fitting Distributions}
-\label{sec-9-6}
+\label{sec-10-6}
 
 \label{sec:Fitting-Distributions}
 
@@ -8939,7 +8979,7 @@ I am thinking about \texttt{sigma.test} in the \texttt{TeachingDemos} package an
 
 I am thinking about \texttt{fitdistr} from the \texttt{MASS} package \cite{Venables2002}.
 \section{Sample Size and Margin of Error}
-\label{sec-9-7}
+\label{sec-10-7}
 
 \label{sec:Sample-Size-and-MOE}
 
@@ -9009,7 +9049,7 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 \paragraph*{How to do it with \textsf{R}}
 I am thinking about \texttt{power.t.test}, \texttt{power.prop.test}, \texttt{power.anova.test}, and I am also thinking about \texttt{replicate}.
 \section{Other Topics}
-\label{sec-9-8}
+\label{sec-10-8}
 
 \label{sec:Other-Topics}
 
@@ -9017,7 +9057,7 @@ Mention \texttt{mle} from the \texttt{stats4} package.
 
 \newpage{}
 \section{Exercises}
-\label{sec-9-9}
+\label{sec-10-9}
 
 \setcounter{thm}{0}
 
@@ -9035,7 +9075,7 @@ f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.
 You are going to need the quadratic formula.
 \end{xca}
 \chapter{Hypothesis Testing}
-\label{sec-10}
+\label{sec-11}
 
 \label{cha:Hypothesis-Testing}
 
@@ -9048,7 +9088,7 @@ You are going to need the quadratic formula.
 \item the concept of statistical power and its relation to sample size
 \end{itemize}
 \section{Introduction}
-\label{sec-10-1}
+\label{sec-11-1}
 
 \label{sec:Introduction-Hypothesis}
 
@@ -9129,7 +9169,7 @@ If the confidence interval is
 
 \end{example}
 \subsection{Terminology}
-\label{sec-10-1-1}
+\label{sec-11-1-1}
 
 
 The \emph{null hypothesis} \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, \emph{etc}. In Example \ref{exa:widget-machine} the null hypothesis would be \(H_{0}:\, p=0.10.\) The \emph{alternative hypothesis} \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically \emph{test} the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
@@ -9329,11 +9369,11 @@ Otherwise, your data -- the raw successes and failures -- should be in a column 
 
 Once your unsummarized data is a column, then you can use the menu \textsf{Statistics \(\triangleright\) Proportions \(\triangleright\) Single-sample proportion test}...
 \section{One Sample Tests for Means and Variances}
-\label{sec-10-2}
+\label{sec-11-2}
 
 \label{sec:One-Sample-Tests}
 \subsection{For Means}
-\label{sec-10-2-1}
+\label{sec-11-2-1}
 
 
 Here, \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. We would like to test \(H_{0}:\mu=\mu_{0}\).
@@ -9389,14 +9429,14 @@ z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 	One Sample z-test
 
 data:  x 
-z = 0.6998, n = 37.000, Std. Dev. = 3.000, Std. Dev.
-of the sample mean = 0.493, p-value = 0.484
+z = 1.7293, n = 37.000, Std. Dev. = 3.000, Std. Dev.
+of the sample mean = 0.493, p-value = 0.08375
 alternative hypothesis: true mean is not equal to 1 
 90 percent confidence interval:
- 0.5339233 2.1563970 
+ 1.041660 2.664134 
 sample estimates:
 mean of x 
-  1.34516
+ 1.852897
 \end{verbatim}
 
 The \texttt{RcmdrPlugin.IPSUR} package does not have a menu for \texttt{z.test} yet. 
@@ -9413,20 +9453,20 @@ t.test(x, mu = 0, conf.level = 0.90, alternative = "greater")
 	One Sample t-test
 
 data:  x 
-t = 2.1886, df = 12, p-value = 0.02456
+t = 1.4025, df = 12, p-value = 0.09305
 alternative hypothesis: true mean is greater than 0 
 90 percent confidence interval:
- 0.7945413       Inf 
+ 0.045305      Inf 
 sample estimates:
 mean of x 
- 2.089056
+ 1.372172
 \end{verbatim}
 
 \paragraph*{With the \textsf{R} Commander}
 
 Your data should be in a single numeric column (a variable) of the Active Data Set. Use the menu \textsf{Statistics \(\triangleright\) Means \(\triangleright\) Single-sample t-test...} 
 \subsection{Tests for a Variance}
-\label{sec-10-2-2}
+\label{sec-11-2-2}
 
 
 Here, \(X_{1}\), \(X_{2}\), \ldots{}, \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. We would like to test \(H_{0}:\sigma^{2}=\sigma_{0}\). We know that under \(H_{0}\),
@@ -9468,7 +9508,7 @@ var of women$height
                  20
 \end{verbatim}
 \section{Two-Sample Tests for Means and Variances}
-\label{sec-10-3}
+\label{sec-11-3}
 
 \label{sec:Two-Sample-Tests-for-Means}
 
@@ -9486,7 +9526,7 @@ Suppose first that we do not know the values of \(\sigma_{X}\) and \(\sigma_{Y}\
 T=\frac{\overline{X}-\overline{Y}}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{equation}
 \subsection{Independent Samples}
-\label{sec-10-3-1}
+\label{sec-11-3-1}
 
 
 \begin{rem}
@@ -9519,7 +9559,7 @@ WATCH YOUR ASSUMPTIONS.
 
 For a nonparametric alternative to the two-sample \(F\) test see Chapter \ref{cha:Nonparametric-Statistics}.
 \subsection{Paired Samples}
-\label{sec-10-3-2}
+\label{sec-11-3-2}
 
 
 \paragraph*{How to do it with \textsf{R}}
@@ -9544,11 +9584,11 @@ mean of the differences
                   -1.58
 \end{verbatim}
 \section{Other Hypothesis Tests}
-\label{sec-10-4}
+\label{sec-11-4}
 
 \label{sec:Other-Hypothesis-Tests}
 \subsection{Kolmogorov-Smirnov Goodness-of-Fit Test\label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}}
-\label{sec-10-4-1}
+\label{sec-11-4-1}
 
 
 \paragraph*{How to do it with \textsf{R}}
@@ -9567,7 +9607,7 @@ ks.test(randu$x, "punif")
  alternative hypothesis: two-sided
 \end{verbatim}
 \subsection{Shapiro-Wilk Normality Test}
-\label{sec-10-4-2}
+\label{sec-11-4-2}
 
 \label{sub:Shapiro-Wilk-Normality-Test}
 
@@ -9586,7 +9626,7 @@ shapiro.test(women$height)
  W = 0.9636, p-value = 0.7545
 \end{verbatim}
 \section{Analysis of Variance}
-\label{sec-10-5}
+\label{sec-11-5}
 
 \label{sec:Analysis-of-Variance}
 
@@ -9678,12 +9718,12 @@ Plot for the intuition of between versus within group variation.
 
 
 
-
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/Between-versus-within.ps}
   \caption[Between group versus within group variation]{A plot of between group versus within group variation.}
   \label{fig:Between-versus-within}
 \end{figure}
+
 
 
 \begin{verbatim}
@@ -9705,7 +9745,7 @@ par(old.omd)
   \label{fig:Some-F-plots-HH}
 \end{figure}
 \section{Sample Size and Power}
-\label{sec-10-6}
+\label{sec-11-6}
 
 \label{sec:Sample-Size-and-Power}
 
@@ -9739,17 +9779,17 @@ power.examp()
   \label{fig:power-examp}
 \end{figure}
 
+
 \newpage{}
 \section{Exercises}
-\label{sec-10-7}
+\label{sec-11-7}
 
 
 \setcounter{thm}{0}
 \chapter{Simple Linear Regression}
-\label{sec-11}
+\label{sec-12}
 
 \label{cha:simple-linear-regression}
-
 
 \paragraph*{What do I want them to know?}
 
@@ -9761,7 +9801,7 @@ power.examp()
 \item the concept of influential versus outlying observations, and how to tell the difference
 \end{itemize}
 \section{Basic Philosophy}
-\label{sec-11-1}
+\label{sec-12-1}
 
 \label{sec:Basic-Philosophy}
 
@@ -9817,7 +9857,7 @@ We lastly assume that the errors are IID normal with mean 0 and variance \( \sig
 We assume both the normality of the errors \(\epsilon\) and the linearity of the mean function \( \mu \). Recall from Proposition \ref{pro:mvnorm-cond-dist} of Chapter \ref{cha:Multivariable-Distributions} that if \( (X,Y)\sim\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear function of \(x\). This is not a coincidence. In more advanced classes we study the case that both \(X\) and \(Y\) are random, and in particular, when they are jointly normally distributed.
 \end{rem}
 \subsection{What does it all mean?}
-\label{sec-11-1-1}
+\label{sec-12-1-1}
 
 See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and \emph{y}-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases
 \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as \(x\) gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
@@ -9827,6 +9867,7 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
   \caption[Philosophical foundations of SLR]{\small Philosophical foundations of SLR.}
   \label{fig:philosophy}
 \end{figure}
+
 
 
 
@@ -9863,6 +9904,7 @@ The \texttt{speed} represents how fast the car was going (\(x\)) in miles per ho
 \end{figure}
 
 
+
 \begin{verbatim}
 qplot(speed, dist, data = cars)
 \end{verbatim}
@@ -9881,11 +9923,11 @@ plot(dist ~ speed, data = cars)
 There is a pronounced upward trend to the data points, and the pattern looks approximately linear. There does not appear to be substantial fanning out of the points or extreme values. 
 \end{example}
 \section{Estimation}
-\label{sec-11-2}
+\label{sec-12-2}
 
 \label{sec:SLR-Estimation}
 \subsection{Point Estimates of the Parameters}
-\label{sec-11-2-1}
+\label{sec-12-2-1}
 
 \label{sub:point-estimate-mle-slr}
 
@@ -9988,6 +10030,7 @@ It is good practice to visually inspect the data with the regression line added 
 \end{figure}
 
 
+
 \begin{verbatim}
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
        geom_smooth(method = lm)
@@ -10014,7 +10057,7 @@ Using the regression line for the \texttt{cars} data:
 \end{enumerate}
 \end{example}
 \subsection{Point Estimates of the Regression Line}
-\label{sec-11-2-2}
+\label{sec-12-2-2}
 
 \label{sub:slr-point-est-regline}
 
@@ -10083,7 +10126,7 @@ predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 
 Note that there were no observed cars that traveled 6 mph or 21 mph. Also note that our estimate for a car traveling 8 mph matches the value we computed by hand in Example \ref{exa:regline-cars-pe-8mph}.
 \subsection{Mean Square Error and Standard Error}
-\label{sec-11-2-3}
+\label{sec-12-2-3}
 
 
 To find the MLE of \(\sigma^{2}\) we consider the partial derivative
@@ -10139,7 +10182,7 @@ carsumry$sigma
  [1] 15.37959
 \end{verbatim}
 \subsection{Interval Estimates of the Parameters}
-\label{sec-11-2-4}
+\label{sec-12-2-4}
 
 \label{sub:slr-interval-est-params}
 
@@ -10238,7 +10281,7 @@ confint(cars.lm)
 
 With 95\% confidence, the random interval \( [  3.097,  4.768 ] \) covers the parameter \(\beta_{1}\).
 \subsection{Interval Estimates of the Regression Line}
-\label{sec-11-2-5}
+\label{sec-12-2-5}
 
 \label{sub:slr-interval-est-regline}
 
@@ -10330,7 +10373,7 @@ Using the \texttt{cars} data,
 \end{enumerate}
 \end{example}
 \subsection{Graphing the Confidence and Prediction Bands}
-\label{sec-11-2-6}
+\label{sec-12-2-6}
 
 
 We earlier guessed that a bound on the value of a single new observation would be inherently less certain than a bound for an average (mean) value; therefore, we expect the CIs for the mean to be tighter than the PIs for a new observation. A close look at the standard deviations in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula} confirms our guess, but we would like to see a picture to drive the point home.
@@ -10344,6 +10387,7 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 \end{figure}
 
 
+
 \begin{verbatim}
 library(HH)
 ci.plot(cars.lm)
@@ -10351,11 +10395,11 @@ ci.plot(cars.lm)
 
 Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 \section{Model Utility and Inference}
-\label{sec-11-3}
+\label{sec-12-3}
 
 \label{sec:Model-Utility-SLR}
 \subsection{Hypothesis Tests for the Parameters}
-\label{sec-11-3-1}
+\label{sec-12-3-1}
 
 \label{sub:slr-hypoth-test-params}
 
@@ -10406,7 +10450,7 @@ F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12
 
 In the \texttt{Coefficients} section we find the \(t\) statistics and the \(p\)-values associated with the tests that the respective parameters are zero in the fourth and fifth columns. Since the \(p\)-values are (much) less than 0.05, we conclude that there is strong evidence that the parameters \(\beta_{1}\neq0\) and \(\beta_{0}\neq0\), and as such, we say that there is a statistically significant linear relationship between \texttt{dist} and \texttt{speed}. 
 \subsection{Simple Coefficient of Determination}
-\label{sec-11-3-2}
+\label{sec-12-3-2}
 
 
 It would be nice to have a single number that indicates how well our linear regression model is doing, and the \emph{simple coefficient of determination} is designed for that purpose. In what follows, we observe the values \(Y_{1}\), \(Y_{2}\), \ldots{},\(Y_{n}\), and the goal is to estimate \(\mu(x_{0})\), the mean value of \(Y\) at the location \(x_{0}\). 
@@ -10499,7 +10543,7 @@ sqrt(carsumry$r.squared)
 
 We choose the principal square root because the slope of the regression line is positive.
 \subsection{Overall \emph{F} statistic}
-\label{sec-11-3-3}
+\label{sec-12-3-3}
 
 \label{sub:slr-overall-F-statistic}
 
@@ -10545,7 +10589,7 @@ Here we see that the \(F\) statistic is \(  89.57 \) with a \(p\)-value very clo
 
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for \texttt{speed} squared.
 \section{Residual Analysis}
-\label{sec-11-4}
+\label{sec-12-4}
 
 \label{sec:Residual-Analysis-SLR}
 
@@ -10553,7 +10597,7 @@ We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 \subsection{Normality Assumption}
-\label{sec-11-4-1}
+\label{sec-12-4-1}
 
 \label{sub:Normality-Assumption}
 
@@ -10568,6 +10612,7 @@ the dots hug the line closely.}
 \end{figure}
 
 
+
 \begin{verbatim}
 plot(cars.lm, which = 2)
 \end{verbatim}
@@ -10579,7 +10624,6 @@ plot(cars.lm, which = 2)
 \paragraph*{Testing the Normality Assumption}
 
 Even though we may be concerned about the plots, we can use tests to determine if the evidence present is statistically significant, or if it could have happened merely by chance. There are many statistical tests of normality. We will use the Shapiro-Wilk test, since it is known to be a good test and to be quite powerful. However, there are many other fine tests of normality including the Anderson-Darling test and the Lillefors test, just to mention two of them.  
-
 
 The Shapiro-Wilk test is based on the statistic
 \begin{equation}
@@ -10613,7 +10657,7 @@ shapiro.test(residuals(cars.lm))
 
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 \subsection{Constant Variance Assumption}
-\label{sec-11-4-2}
+\label{sec-12-4-2}
 
 \label{sub:Constant-Variance-Assumption}
 
@@ -10634,6 +10678,7 @@ In this case, we plot the standardized residuals versus the fitted values. The g
   \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
   \label{fig:std-resids-fitted-cars}
 \end{figure}
+
 
 
 \begin{verbatim}
@@ -10675,7 +10720,7 @@ bptest(cars.lm)
 
 For these data we would not reject the null hypothesis at the \(\alpha=0.05\) level. There is relatively weak evidence against the assumption of constant variance. 
 \subsection{Independence Assumption}
-\label{sec-11-4-3}
+\label{sec-12-4-3}
 
 \label{sub:Independence-Assumption}
 
@@ -10691,6 +10736,7 @@ On the other hand, negative correlation implies positive residuals followed by n
 data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
   \label{fig:resids-fitted-cars}
 \end{figure}
+
 
 
 \begin{verbatim}
@@ -10728,7 +10774,7 @@ dwtest(cars.lm, alternative = "two.sided")
 
 In this case we do not reject the null hypothesis at the \(\alpha=0.05\) significance level; there is very little evidence of nonzero autocorrelation in the residuals.
 \subsection{Remedial Measures}
-\label{sec-11-4-4}
+\label{sec-12-4-4}
 
 
 We often find problems with our model that suggest that at least one of the three regression assumptions is violated. What do we do then? There are many measures at the statistician's disposal, and we mention specific steps one can take to improve the model under certain types of violation.
@@ -10759,7 +10805,7 @@ We often find problems with our model that suggest that at least one of the thre
 \item[Errors are not independent] There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 \end{description}
 \section{Other Diagnostic Tools}
-\label{sec-11-5}
+\label{sec-12-5}
 
 \label{sec:Other-Diagnostic-Tools-SLR}
 
@@ -10771,11 +10817,11 @@ There are two types of observations with which we must be especially careful:
 
 We will discuss outliers first because the notation builds sequentially in that order.
 \subsection{Outliers}
-\label{sec-11-5-1}
+\label{sec-12-5-1}
 
 There are three ways that an observation \((x_{i},y_{i})\) might be identified as an  outlier: it can have an \(x_{i}\) value which falls far from the other  \(x\) values, it can have a \(y_{i}\) value which falls far from the other \(y\) values, or it can have both its \(x_{i}\) and \(y_{i}\) values falling far from the other \(x\) and \(y\) values.
 \subsection{Leverage}
-\label{sec-11-5-2}
+\label{sec-12-5-2}
 
 Leverage statistics are designed to identify observations which have \(x\) values that are far away from the rest of the data. In the simple linear regression model the leverage of \(x_{i}\) is denoted by \(h_{ii}\) and defined by 
 \begin{equation}
@@ -10796,7 +10842,7 @@ and their sum is
 
 A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation \ref{eq:slr-average-leverage}). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
 \subsection{Standardized and Studentized Deleted Residuals}
-\label{sec-11-5-3}
+\label{sec-12-5-3}
 
 
 We have already encountered the \emph{standardized residuals} \(r_{i}\) in Section \ref{sub:Constant-Variance-Assumption}; they are merely residuals that have been divided by their respective standard deviations: 
@@ -10886,7 +10932,7 @@ leverage[which(leverage > 4/50)]
 
 Here we see that observations 1, 2, and 50 have leverages bigger than double their mean value. These observations would be considered outlying with respect to their \(x\) value (although they may or may not be influential).
 \subsection{Influential Observations}
-\label{sec-11-5-4}
+\label{sec-12-5-4}
 
 
 \paragraph*{\(DFBETAS\) and \(DFFITS\)}
@@ -10977,6 +11023,7 @@ We can look at a plot of the Cook's distances with the command \texttt{plot(cars
 \end{figure}
 
 
+
 \begin{verbatim}
 plot(cars.lm, which = 4)
 \end{verbatim}
@@ -11001,7 +11048,7 @@ any(cooksD > F0.50)
 
 We see that with this data set there are no observations with extreme Cook's distance, after all.
 \subsection{All Influence Measures Simultaneously}
-\label{sec-11-5-5}
+\label{sec-12-5-5}
 
 
 We can display the result of diagnostic checking all at once in one table, with potentially influential points displayed. We do it with the command \texttt{influence.measures(cars.lm)}:
@@ -11036,6 +11083,7 @@ The \texttt{par} command is used so that \(2\times 2 = 4\) plots will be shown o
 
 
 
+
 We have discussed all of the plots except the last, which is possibly the most interesting. It shows Residuals vs. Leverage, which will identify outlying \(y\) values versus outlying \(x\) values. Here we see that observation 23 has a high residual, but low leverage, and it turns out that observations 1 and 2 have relatively high leverage but low/moderate leverage (they are on the right side of the plot, just above the horizontal line). Observation 49 has a large residual with a comparatively large leverage. 
 
 We can identify the observations with the \texttt{identify} command; it allows us to display the observation number of dots on the plot. First, we plot the graph, then we call \texttt{identify}:
@@ -11050,7 +11098,7 @@ The graph with the identified points is omitted (but the plain plot is shown in 
 
 \newpage{}
 \section{Exercises}
-\label{sec-11-6}
+\label{sec-12-6}
 
 \setcounter{thm}{0}
 
@@ -11079,7 +11127,7 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 \]
 \end{xca}
 \chapter{Multiple Linear Regression}
-\label{sec-12}
+\label{sec-13}
 
 \label{cha:multiple-linear-regression}
 
@@ -11101,7 +11149,7 @@ Most of the results are stated without proof or with only a cursory justificatio
 \item hints about what will be coming later
 \end{itemize}
 \section{The Multiple Linear Regression Model}
-\label{sec-12-1}
+\label{sec-13-1}
 
 \label{sec:The-MLR-Model}
 
@@ -11189,6 +11237,7 @@ splom(trees)
   \label{fig:splom-trees}
 \end{figure}
 
+
 The dependent (response) variable \texttt{Volume} is listed in the first row of the scatterplot matrix. Moving from left to right, we see an approximately linear relationship between \texttt{Volume} and the independent (explanatory) variables \texttt{Height} and \texttt{Girth}. A first guess at a model for these data might be
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
@@ -11196,7 +11245,7 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
 \end{example}
 \subsection{What does it mean?}
-\label{sec-12-1-1}
+\label{sec-13-1-1}
 
 
 The interpretation is simple. The intercept \(\beta_{0}\) represents the mean \texttt{Volume} when all other independent variables are zero. The parameter \(\beta_{i}\) represents the change in mean \texttt{Volume} when there is a unit increase in \(x_{i}\), while the other independent variable is held constant. For the \texttt{trees} data, \(\beta_{1}\) represents the change in average \texttt{Volume} as \texttt{Girth} increases by one unit when the \texttt{Height} is held constant, and \(\beta_{2}\) represents the change in average \texttt{Volume} as \texttt{Height} increases by one unit when the \texttt{Girth} is held constant. 
@@ -11227,13 +11276,14 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
   \label{fig:3D-scatterplot-trees}
 \end{figure}
 
+
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 \section{Estimation and Prediction}
-\label{sec-12-2}
+\label{sec-13-2}
 
 \label{sec:Estimation-and-Prediction-MLR}
 \subsection{Parameter estimates}
-\label{sec-12-2-1}
+\label{sec-13-2-1}
 
 \label{sub:mlr-parameter-estimates}
 
@@ -11322,7 +11372,7 @@ head(model.matrix(trees.lm))
  6           1  10.8     83
 \end{verbatim}
 \subsection{Point Estimates of the Regression Surface}
-\label{sec-12-2-2}
+\label{sec-13-2-2}
 
 \label{sub:mlr-point-est-regsurface}
 
@@ -11437,7 +11487,7 @@ Using the \texttt{trees} data,
 \end{enumerate}
 \end{example}
 \subsection{Mean Square Error and Standard Error}
-\label{sec-12-2-3}
+\label{sec-13-2-3}
 
 \label{sub:mlr-mse-se}
 
@@ -11496,7 +11546,7 @@ treesumry$sigma
 
 For the \texttt{trees} data we find \(s\approx  3.882 \).
 \subsection{Interval Estimates of the Parameters}
-\label{sec-12-2-4}
+\label{sec-13-2-4}
 
 \label{sub:mlr-interval-est-params}
 
@@ -11547,7 +11597,7 @@ confint(trees.lm)
 
 For example, using the calculations above we say that for the regression model \texttt{Volume \textasciitilde{} Girth + Height} we are 95\% confident that the parameter \(\beta_{1}\) lies somewhere in the interval \( [  4.2,  5.2 ] \).
 \subsection{Confidence and Prediction Intervals}
-\label{sec-12-2-5}
+\label{sec-13-2-5}
 
 
 We saw in Section \ref{sub:mlr-point-est-regsurface} how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
@@ -11632,11 +11682,11 @@ Using the \texttt{trees} data,
 
 \end{example}
 \section{Model Utility and Inference}
-\label{sec-12-3}
+\label{sec-13-3}
 
 \label{sec:Model-Utility-and-MLR}
 \subsection{Multiple Coefficient of Determination}
-\label{sec-12-3-1}
+\label{sec-13-3-1}
 
 
 We saw in Section \ref{sub:mlr-mse-se} that the error sum of squares \(SSE\) can be conveniently written in MLR as 
@@ -11699,7 +11749,7 @@ treesumry$adj.r.squared
 
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 \subsection{Overall \emph{F}-Test}
-\label{sec-12-3-2}
+\label{sec-13-3-2}
 
 \label{sub:mlr-Overall-F-Test}
 
@@ -11729,7 +11779,7 @@ treesumry$fstatistic
 
 For the \texttt{trees} data, we see that \( F =  254.972337410669 \) with a \emph{p}-value \texttt{< 2.2e-16}. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 \subsection{Student's \emph{t} Tests}
-\label{sec-12-3-3}
+\label{sec-13-3-3}
 
 \label{sub:mlr-Student's-t-Tests}
 
@@ -11787,11 +11837,11 @@ F-statistic:   255 on 2 and 28 DF,  p-value: < 2.2e-16
 
 We see from the \emph{p-values} that there is a significant linear relationship between \texttt{Volume} and \texttt{Girth} and between \texttt{Volume} and \texttt{Height} in the regression model \texttt{Volume \textasciitilde{} Girth + Height}. Further, it appears that the \texttt{Intercept} is significant in the aforementioned model.
 \section{Polynomial Regression}
-\label{sec-12-4}
+\label{sec-13-4}
 
 \label{sec:Polynomial-Regression}
 \subsection{Quadratic Regression Model}
-\label{sec-12-4-1}
+\label{sec-13-4-1}
 
 
 In each of the previous sections we assumed that \(\mu\) was a linear function of the explanatory variables. For example, in SLR we assumed that \(\mu(x)=\beta_{0}+\beta_{1}x\), and in our previous MLR examples we assumed \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\). In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
@@ -11810,6 +11860,7 @@ qplot(Girth, Volume, data = trees)
   \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
   \label{fig:Scatterplot-Volume-Girth-trees}
 \end{figure}
+
 
 For example, let us examine a scatterplot of \texttt{Volume} versus \texttt{Girth} a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
 \begin{equation}
@@ -11895,6 +11946,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
   \label{fig:Fitting-the-Quadratic}
 \end{figure}
 
+
 The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed \texttt{Girth} data and not on the original scale.
 
 \end{example}
@@ -11937,7 +11989,7 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 
 \end{rem}
 \section{Interaction}
-\label{sec-12-5}
+\label{sec-13-5}
 
 \label{sec:Interaction}
 
@@ -12051,7 +12103,7 @@ There are two other ways to include interaction terms in model formulas. For exa
 
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like \texttt{y \textasciitilde{} (x1 + x2 + x3 + x4)\textasciicircum{}2}.  
 \section{Qualitative Explanatory Variables}
-\label{sec-12-6}
+\label{sec-13-6}
 
 \label{sec:Qualitative-Explanatory-Variables}
 
@@ -12172,7 +12224,7 @@ In general, if an explanatory variable \texttt{foo} is qualitative with \(n\) le
 The level \texttt{bar1} is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that \texttt{foo} is stored as a factor and \textsf{R} will take care of the rest. 
 \end{rem}
 \subsection{Graphing the Regression Lines}
-\label{sec-12-6-1}
+\label{sec-13-6-1}
 
 
 We can see a plot of the two regression lines with the following mouthful of code.
@@ -12189,11 +12241,12 @@ We can see a plot of the two regression lines with the following mouthful of cod
   \label{fig:dummy-variable-trees}
 \end{figure}
 
+
 It may look intimidating but there is reason to the madness. First we \texttt{split} the \texttt{trees} data into two pieces, with groups determined by the \texttt{Tall} variable. Next we add the \texttt{Fit}ted values to each piece via \texttt{predict}. Then we set up a \texttt{plot} for the variables \texttt{Volume} versus \texttt{Girth}, but we do not plot anything yet (\texttt{type = n}) because we want to use different symbols for the two groups. Next we add \texttt{points} to the plot for the \texttt{Tall = yes} trees and use an open circle for a plot character (\texttt{pch = 1}), followed by \texttt{points} for the \texttt{Tall = no} trees with a triangle character (\texttt{pch = 2}). Finally, we add regression \texttt{lines} to the plot, one for each group.
 
 There are other -- shorter -- ways to plot regression lines by groups, namely the \texttt{scatterplot} function in the \texttt{car} \cite{car} package and the \texttt{xyplot} function in the \texttt{lattice} package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
 \section{Partial \emph{F} Statistic}
-\label{sec-12-7}
+\label{sec-13-7}
 
 \label{sec:Partial-F-Statistic}
 
@@ -12323,7 +12376,7 @@ In this case, the improvement to the reduced model that is attributable to \text
 
 \end{example}
 \section{Residual Analysis and Diagnostic Tools}
-\label{sec-12-8}
+\label{sec-13-8}
 
 \label{sec:Residual-Analysis-MLR}
 
@@ -12352,11 +12405,11 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 \end{description}
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 \section{Additional Topics}
-\label{sec-12-9}
+\label{sec-13-9}
 
 \label{sec:Additional-Topics-MLR}
 \subsection{Nonlinear Regression}
-\label{sec-12-9-1}
+\label{sec-13-9-1}
 
 
 We spent the entire chapter talking about the \texttt{trees} data, and all of our models looked like \texttt{Volume \textasciitilde{} Girth + Height} or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is \(V=lwh\) and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
@@ -12438,7 +12491,7 @@ exp(predict(treesNonlin.lm, newdata = new, interval = "confidence"))
 
 The predictions and intervals are slightly different from those calculated earlier, but they are close. Note that we did not need to transform the \texttt{Girth} and \texttt{Height} arguments in the dataframe \texttt{new}. All transformations are done for us automatically.
 \subsection{Real Nonlinear Regression}
-\label{sec-12-9-2}
+\label{sec-13-9-2}
 
 
 We saw with the \texttt{trees} data that a nonlinear model might be more appropriate for the data based on theoretical considerations, and we were lucky because the functional form of \(\mu\) allowed us to take logarithms to transform the nonlinear model to a linear one. The same trick will not work in other circumstances, however. We need techniques to fit general models of the form
@@ -12483,7 +12536,7 @@ Number of iterations to convergence: 3
 Achieved convergence tolerance: 6.546e-08
 \end{verbatim}
 \subsection{Multicollinearity}
-\label{sec-12-9-3}
+\label{sec-13-9-3}
 
 \label{sub:Multicollinearity}
 
@@ -12506,7 +12559,7 @@ We decided to omit a thorough discussion of multicollinearity because we are not
 \end{itemize}
 \end{itemize}
 \subsection{Akaike's Information Criterion}
-\label{sec-12-9-4}
+\label{sec-13-9-4}
 
 
 \[
@@ -12516,7 +12569,7 @@ AIC=-2\ln L+2(p+1)
 
 \newpage{}
 \section{Chapter Exercises}
-\label{sec-12-10}
+\label{sec-13-10}
 
 
 \setcounter{thm}{0}
@@ -12529,7 +12582,7 @@ SSTO=SSE+SSR.
 \]
 \end{xca}
 \chapter{Resampling Methods}
-\label{sec-13}
+\label{sec-14}
 
 \label{cha:resampling-methods}
 
@@ -12546,7 +12599,7 @@ I have seen \emph{Statistical Computing with \textsf{R}} by Rizzo \cite{Rizzo200
 \item resampling for hypothesis tests (permutation tests)
 \end{itemize}
 \section{Introduction}
-\label{sec-13-1}
+\label{sec-14-1}
 
 \label{sec:Introduction-Resampling}
 
@@ -12580,7 +12633,7 @@ The above discussion leads us to the following general procedure to approximate 
 \item The bootstrap distribution gives information about the sampling distribution of the original statistic \(S\). In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of \(S\).
 \end{enumerate}
 \section{Bootstrap Standard Errors}
-\label{sec-13-2}
+\label{sec-14-2}
 
 \label{sec:Bootstrap-Standard-Errors}
 
@@ -12619,6 +12672,7 @@ curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
   \caption[Bootstrapping the standard error of the mean, simulated data]{\small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
   \label{fig:Bootstrap-se-mean}
 \end{figure}
+
 
 We have overlain what we know to be the true sampling distribution of \(\overline{X}\), namely, a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})\) distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread\ldots{} but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
 
@@ -12690,6 +12744,7 @@ hist(medstar, breaks = 40, prob = TRUE)
   \caption[Bootstrapping the standard error of the median for the \texttt{rivers} data]{\small Bootstrapping the standard error of the median for the \texttt{rivers} data.}
   \label{fig:Bootstrapping-se-median}
 \end{figure}
+
 
 The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced by the following code.
 
@@ -12785,11 +12840,11 @@ Some things to keep in mind about the bootstrap:
 
 \end{rem}
 \section{Bootstrap Confidence Intervals}
-\label{sec-13-3}
+\label{sec-14-3}
 
 \label{sec:Bootstrap-Confidence-Intervals}
 \subsection{Percentile Confidence Intervals}
-\label{sec-13-3-1}
+\label{sec-14-3-1}
 
 
 As a first try, we want to obtain a 95\% confidence interval for a parameter. Typically the statistic we use to estimate the parameter is centered at (or at least close by) the parameter; in such cases a 95\% confidence interval for the parameter is nothing more than a 95\% confidence interval for the statistic. And to find a 95\% confidence interval for the statistic we need only go to its sampling distribution to find an interval that contains 95\% of the area. (The most popular choice is the equal-tailed interval with 2.5\% in each tail.)
@@ -12847,7 +12902,7 @@ Calculations and Intervals on Original Scale
 
 \end{example}
 \subsection{Student's \(t\) intervals (``normal intervals'')}
-\label{sec-13-3-2}
+\label{sec-14-3-2}
 
 
 The idea is to use confidence intervals that we already know and let the bootstrap help us when we get into trouble. We know that a \(100(1-\alpha)\%\) confidence interval for the mean of a \(SRS(n)\) from a normal distribution is 
@@ -12886,7 +12941,7 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 \item Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
 \end{itemize}
 \section{Resampling in Hypothesis Tests}
-\label{sec-13-4}
+\label{sec-14-4}
 
 \label{sec:Resampling-in-Hypothesis}
 
@@ -12950,7 +13005,7 @@ oneway_test(len ~ supp, data = ToothGrowth)
  alternative hypothesis: true mu is not equal to 0
 \end{verbatim}
 \subsection{Comparison with the Two Sample \emph{t} test}
-\label{sec-13-4-1}
+\label{sec-14-4-1}
 
 
 We know from Chapter \ref{cha:Hypothesis-Testing} to use the two-sample \(t\)-test to tell whether there is an improvement as a result of taking the intervention class. Note that the \(t\)-test assumes normal underlying populations, with unknown variance, and small sample \(n=10\). What does the \(t\)-test say? Below is the output. 
@@ -13001,11 +13056,11 @@ Here are some things about permutation tests to keep in mind.
 
 \newpage{}
 \section{Exercises}
-\label{sec-13-5}
+\label{sec-14-5}
 
 \setcounter{thm}{0}
 \chapter{Nonparametric Statistics}
-\label{sec-14}
+\label{sec-15}
 
 \label{cha:Nonparametric-Statistics}
 
@@ -13018,7 +13073,7 @@ library(IPSUR)
 read(IPSUR)
 \end{verbatim}
 \chapter{Categorical Data Analysis}
-\label{sec-15}
+\label{sec-16}
 
 \label{cha:Categorical-Data-Analysis}
 
@@ -13031,7 +13086,7 @@ library(IPSUR)
 read(IPSUR)
 \end{verbatim}
 \chapter{Time Series}
-\label{sec-16}
+\label{sec-17}
 
 \label{cha:Time-Series}
 
@@ -13046,7 +13101,7 @@ read(IPSUR)
 
 \appendix
 \chapter{\textsf{R} Session Information}
-\label{sec-17}
+\label{sec-18}
 
 \label{cha:R-Session-Information}
 
@@ -13104,7 +13159,7 @@ loaded via a namespace (and not attached):
 
 \vfill{}
 \chapter{GNU Free Documentation License}
-\label{sec-18}
+\label{sec-19}
 
 \label{cha:GNU-Free-Documentation}
 
@@ -13122,7 +13177,7 @@ Foundation, Inc.
 
 \noindent Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
 \section{0. PREAMBLE}
-\label{sec-18-1}
+\label{sec-19-1}
 
 
 The purpose of this License is to make a manual, textbook, or other functional and useful document free  in the sense of freedom: to assure everyone the effective freedom to copy and redistribute it, with or without modifying it, either commercially or noncommercially. Secondarily, this License preserves for the author and publisher a way to get credit for their work, while not being considered responsible for modifications made by others.
@@ -13131,7 +13186,7 @@ This License is a kind of copyleft, which means that derivative works of the doc
 
 We have designed this License in order to use it for manuals for free software, because free software needs free documentation: a free program should come with manuals providing the same freedoms that the software does. But this License is not limited to software manuals; it can be used for any textual work, regardless of subject matter or whether it is published as a printed book. We recommend this License principally for works whose purpose is instruction or reference.
 \section{1. APPLICABILITY AND DEFINITIONS}
-\label{sec-18-2}
+\label{sec-19-2}
 
 
 This License applies to any manual or other work, in any medium, that contains a notice placed by the copyright holder saying it can be distributed under the terms of this License. Such a notice grants a world-wide, royalty-free license, unlimited in duration, to use that work under the conditions stated herein. The Document, below, refers to any such manual or work. Any member of the public is a licensee, and is addressed as you. You accept the license if you copy, modify or distribute the work in a way requiring permission under copyright law.
@@ -13154,14 +13209,14 @@ The publisher means any person or entity that distributes copies of the Document
 
 The Document may include Warranty Disclaimers next to the notice which states that this License applies to the Document. These Warranty Disclaimers are considered to be included by reference in this License, but only as regards disclaiming warranties: any other implication that these Warranty Disclaimers may have is void and has no effect on the meaning of this License.
 \section{2. VERBATIM COPYING}
-\label{sec-18-3}
+\label{sec-19-3}
 
 
 You may copy and distribute the Document in any medium, either commercially or noncommercially, provided that this License, the copyright notices, and the license notice saying this License applies to the Document are reproduced in all copies, and that you add no other conditions whatsoever to those of this License. You may not use technical measures to obstruct or control the reading or further copying of the copies you make or distribute. However, you may accept compensation in exchange for copies. If you distribute a large enough number of copies you must also follow the conditions in section 3.
 
 You may also lend copies, under the same conditions stated above, and you may publicly display copies.
 \section{3. COPYING IN QUANTITY}
-\label{sec-18-4}
+\label{sec-19-4}
 
 
 If you publish printed copies (or copies in media that commonly have printed covers) of the Document, numbering more than 100, and the Document's license notice requires Cover Texts, you must enclose the copies in covers that carry, clearly and legibly, all these Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on the back cover. Both covers must also clearly and legibly identify you as the publisher of these copies. The front cover must present the full title with all words of the title equally prominent and visible. You may add other material on the covers in addition. Copying with changes limited to the covers, as long as they preserve the title of the Document and satisfy these conditions, can be treated as verbatim copying in other respects.
@@ -13172,7 +13227,7 @@ If you publish or distribute Opaque copies of the Document numbering more than 1
 
 It is requested, but not required, that you contact the authors of the Document well before redistributing any large number of copies, to give them a chance to provide you with an updated version of the Document.
 \section{4. MODIFICATIONS}
-\label{sec-18-5}
+\label{sec-19-5}
 
 
 You may copy and distribute a Modified Version of the Document under the conditions of sections 2 and 3 above, provided that you release the Modified Version under precisely this License, with the Modified Version filling the role of the Document, thus licensing distribution and modification of the Modified Version to whoever possesses a copy of it. In addition, you must do these things in the Modified Version:
@@ -13214,7 +13269,7 @@ You may add a passage of up to five words as a Front-Cover Text, and a passage o
 
 The author(s) and publisher(s) of the Document do not by this License give permission to use their names for publicity for or to assert or imply endorsement of any Modified Version.
 \section{5. COMBINING DOCUMENTS}
-\label{sec-18-6}
+\label{sec-19-6}
 
 
 You may combine the Document with other documents released under this License, under the terms defined in section 4 above for modified versions, provided that you include in the combination all of the Invariant Sections of all of the original documents, unmodified, and list them all as Invariant Sections of your combined work in its license notice, and that you preserve all their Warranty Disclaimers.
@@ -13224,28 +13279,28 @@ The combined work need only contain one copy of this License, and multiple ident
 In the combination, you must combine any sections Entitled History in the various original documents, forming one section Entitled History;
 likewise combine any sections Entitled Acknowledgements, and any sections Entitled Dedications. You must delete all sections Entitled Endorsements.
 \section{6. COLLECTIONS OF DOCUMENTS}
-\label{sec-18-7}
+\label{sec-19-7}
 
 
 You may make a collection consisting of the Document and other documents released under this License, and replace the individual copies of this License in the various documents with a single copy that is included in the collection, provided that you follow the rules of this License for verbatim copying of each of the documents in all other respects. 
 
 You may extract a single document from such a collection, and distribute it individually under this License, provided you insert a copy of this License into the extracted document, and follow this License in all other respects regarding verbatim copying of that document.
 \section{7. AGGREGATION WITH INDEPENDENT WORKS}
-\label{sec-18-8}
+\label{sec-19-8}
 
 
 A compilation of the Document or its derivatives with other separate and independent documents or works, in or on a volume of a storage or distribution medium, is called an aggregate if the copyright resulting from the compilation is not used to limit the legal rights of the compilation's users beyond what the individual works permit. When the Document is included in an aggregate, this License does not apply to the other works in the aggregate which are not themselves derivative works of the Document.
 
 If the Cover Text requirement of section 3 is applicable to these copies of the Document, then if the Document is less than one half of the entire aggregate, the Document's Cover Texts may be placed on covers that bracket the Document within the aggregate, or the electronic equivalent of covers if the Document is in electronic form. Otherwise they must appear on printed covers that bracket the whole aggregate.
 \section{8. TRANSLATION}
-\label{sec-18-9}
+\label{sec-19-9}
 
 
 Translation is considered a kind of modification, so you may distribute translations of the Document under the terms of section 4. Replacing Invariant Sections with translations requires special permission from their copyright holders, but you may include translations of some or all Invariant Sections in addition to the original versions of these Invariant Sections. You may include a translation of this License, and all the license notices in the Document, and any Warranty Disclaimers, provided that you also include the original English version of this License and the original versions of those notices and disclaimers. In case of a disagreement between the translation and the original version of this License or a notice or disclaimer, the original version will prevail.
 
 If a section in the Document is Entitled Acknowledgements, Dedications, or History, the requirement (section 4) to Preserve its Title (section 1) will typically require changing the actual title.
 \section{9. TERMINATION}
-\label{sec-18-10}
+\label{sec-19-10}
 
 
 You may not copy, modify, sublicense, or distribute the Document except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense, or distribute it is void, and will automatically terminate your rights under this License.
@@ -13256,14 +13311,14 @@ Moreover, your license from a particular copyright holder is reinstated permanen
 
 Termination of your rights under this section does not terminate the licenses of parties who have received copies or rights from you under this License. If your rights have been terminated and not permanently reinstated, receipt of a copy of some or all of the same material does not give you any rights to use it.
 \section{10. FUTURE REVISIONS OF THIS LICENSE}
-\label{sec-18-11}
+\label{sec-19-11}
 
 
 The Free Software Foundation may publish new, revised versions of the GNU Free Documentation License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns. See \href{http://www.gnu.org/copyleft/}{http://www.gnu.org/copyleft/}.
 
 Each version of the License is given a distinguishing version number. If the Document specifies that a particular numbered version of this License or any later version applies to it, you have the option of following the terms and conditions either of that specified version or of any later version that has been published (not as a draft) by the Free Software Foundation. If the Document does not specify a version number of this License, you may choose any version ever published (not as a draft) by the Free Software Foundation. If the Document specifies that a proxy can decide which future versions of this License can be used, that proxy's public statement of acceptance of a version permanently authorizes you to choose that version for the Document.
 \section{11. RELICENSING}
-\label{sec-18-12}
+\label{sec-19-12}
 
 
 Massive Multiauthor Collaboration Site (or MMC Site) means any World Wide Web server that publishes copyrightable works and also provides prominent facilities for anybody to edit those works. A public wiki that anybody can edit is an example of such a server. A Massive Multiauthor Collaboration (or MMC) contained in the site means any set of copyrightable works thus published on the MMC site.
@@ -13276,7 +13331,7 @@ An MMC is eligible for relicensing if it is licensed under this License, and if 
 
 The operator of an MMC Site may republish an MMC contained in the site under CC-BY-SA on the same site at any time before August 1, 2009, provided the MMC is eligible for relicensing.
 \section{ADDENDUM: How to use this License for your documents}
-\label{sec-18-13}
+\label{sec-19-13}
 
 
 To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page: 
@@ -13295,33 +13350,43 @@ If you have Invariant Sections without Cover Texts, or some other combination of
 
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software. 
 \chapter{History}
-\label{sec-19}
+\label{sec-20}
 
 \label{cha:History}
 
 
 \begin{center}
 \begin{tabular}{ll}
- Title:      &  Introduction to Probability and Statistics Using \textsf{R}  \\
- Year:       &  2011                                                         \\
- Authors:    &  G. Jay Kerns                                                 \\
- Publisher:  &  G. Jay Kerns                                                 \\
+ Title:      &  Introduction to Probability and Statistics Using \textsf{R}, Second Edition  \\
+ Year:       &  2011                                                                         \\
+ Authors:    &  G. Jay Kerns                                                                 \\
+ Publisher:  &  G. Jay Kerns                                                                 \\
 \end{tabular}
 \end{center}
 
 
 
 \vfill{}
+
+
+\begin{center}
+\begin{tabular}{ll}
+ Title:      &  Introduction to Probability and Statistics Using \textsf{R}, First Edition  \\
+ Year:       &  2010                                                                        \\
+ Authors:    &  G. Jay Kerns                                                                \\
+ Publisher:  &  G. Jay Kerns                                                                \\
+\end{tabular}
+\end{center}
 \chapter{Data}
-\label{sec-20}
+\label{sec-21}
 
 \label{cha:data}
 
 This appendix is a reference of sorts regarding some of the data structures a statistician is likely to encounter. We discuss their salient features and idiosyncrasies.
 \section{Data Structures \label{sec:Data-Structures}}
-\label{sec-20-1}
+\label{sec-21-1}
 \subsection{Vectors}
-\label{sec-20-1-1}
+\label{sec-21-1-1}
 
 
 See the ``Vectors and Assignment'' section of \emph{An Introduction to} \textsf{R}. A vector is an ordered sequence of elements, such as numbers, characters, or logical values, and there may be \texttt{NA}'s present. We usually make vectors with the assignment operator \texttt{<-}.
@@ -13342,7 +13407,7 @@ y <- c(3, "5", TRUE)
 
 In the example all elements were coerced to \emph{character} mode. We can test whether a given object is a vector with \texttt{is.vector} and can coerce an object (if possible) to a vector with \texttt{as.vector}.
 \subsection{Matrices and Arrays}
-\label{sec-20-1-2}
+\label{sec-21-1-2}
 
 
 See the ``Arrays and Matrices'' section of \emph{An Introduction to} \textsf{R}. Loosely speaking, a matrix is a vector that has been reshaped into rectangular form, and an array is a multidimensional matrix. Strictly speaking, it is the other way around: an array is a data vector with a dimension attribute (\texttt{dim}), and a matrix is the special case of an array with only two dimensions. We can construct a matrix with the \texttt{matrix} function. 
@@ -13461,7 +13526,7 @@ array(LETTERS[1:24], dim = c(3,4,2))
 
 We can test with \texttt{is.array} and may coerce with \texttt{as.array}.
 \subsection{Data Frames}
-\label{sec-20-1-3}
+\label{sec-21-1-3}
 
 
 A data frame is a rectangular array of information with a special status in \textsf{R}. It is used as the fundamental data structure by many of the modeling functions. It is like a matrix in that all of the columns must be the same length, but it is more general than a matrix in that columns are allowed to have different modes.
@@ -13499,11 +13564,11 @@ A
 
 Basic command is \texttt{data.frame}. You can test with \texttt{is.data.frame} and you can coerce with \texttt{as.data.frame}.
 \subsection{Lists}
-\label{sec-20-1-4}
+\label{sec-21-1-4}
 
 A list is more general than a data frame.
 \subsection{Tables}
-\label{sec-20-1-5}
+\label{sec-21-1-5}
 
 The word ``table'' has a special meaning in \textsf{R}. More precisely, a contingency table is an object of class \texttt{table} which is an array.
 
@@ -13573,7 +13638,7 @@ head(C)
  6   3rd Male Child       No
 \end{verbatim}
 \subsection{More about Tables}
-\label{sec-20-1-6}
+\label{sec-21-1-6}
 
 Suppose you want to make a table that looks like this:
 
@@ -13623,14 +13688,14 @@ There are at least two ways to do it.
 \item if you want to store it as a table then do \texttt{A <- xtabs(count \textasciitilde{} poured + guessed, data = D)}
 \end{itemize}
 \section{Importing Data \label{sec:Importing-A-Data}}
-\label{sec-20-2}
+\label{sec-21-2}
 
 
 Statistics is the study of data, so the statistician's first step is usually to obtain data from somewhere or another and read them into \textsf{R}. In this section we describe some of the most common sources of data and how to get data from those sources into a running \textsf{R} session.
 
 For more information please refer to the \textsf{R} \emph{Data Import/Export Manual}, \cite{rstatenv} and \emph{An Introduction to} \textsf{R}, \cite{Venables2010}.
 \subsection{Data in Packages}
-\label{sec-20-2-1}
+\label{sec-21-2-1}
 
 
 There are many data sets stored in the \texttt{datasets} package of base \textsf{R}. To see a list of them all issue the command \texttt{data(package = "datasets")}. The output is omitted here because the list is so long. The names of the data sets are listed in the left column. Any data set in that list is already on the search path by default, which means that a user can use it immediately without any additional work. 
@@ -13647,11 +13712,11 @@ To load the data set \texttt{foo} in the contributed package \texttt{bar} issue 
   data(foo, package = "bar")
 \end{verbatim}
 \subsection{Text Files}
-\label{sec-20-2-2}
+\label{sec-21-2-2}
 
 Many sources of data are simple text files. The entries in the file are separated by delimeters such as TABS (tab-delimeted), commas (comma separated values, or \texttt{.csv}, for short) or even just white space (no special name). A lot of data on the Internet are stored with text files, and even if they are not, a person can copy-paste information from a web page to a text file, save it on the computer, and read it into \textsf{R}. 
 \subsection{Other Software Files}
-\label{sec-20-2-3}
+\label{sec-21-2-3}
 
 Often the data set of interest is stored in some other, proprietary, format by third-party software such as Minitab, SAS, or SPSS. The \texttt{foreign} package supports import/conversion from many of these formats. Please note, however, that data sets from other software sometimes have properties with no direct analogue in \textsf{R}. In those cases the conversion process may lose some information which will need to be reentered manually from within \textsf{R}. See the \emph{Data Import/Export Manual}.
 
@@ -13665,26 +13730,26 @@ read.spss("foo.sav")
 
 See \texttt{?read.spss} for the available options to customize the file import. Note that the \textsf{R} Commander will import many of the common file types with a menu driven interface.
 \subsection{Importing a Data Frame}
-\label{sec-20-2-4}
+\label{sec-21-2-4}
 
 
 The basic command is \texttt{read.table}.
 \section{Creating New Data Sets \label{sec:Creating-New-Data}}
-\label{sec-20-3}
+\label{sec-21-3}
 
 Using \texttt{c}
 Using \texttt{scan}
 Using the \textsf{R} Commander.
 \section{Editing Data \label{sec:Editing-Data-Sets}}
-\label{sec-20-4}
+\label{sec-21-4}
 \subsection{Editing Data Values}
-\label{sec-20-4-1}
+\label{sec-21-4-1}
 \subsection{Inserting Rows and Columns}
-\label{sec-20-4-2}
+\label{sec-21-4-2}
 \subsection{Deleting Rows and Columns}
-\label{sec-20-4-3}
+\label{sec-21-4-3}
 \subsection{Sorting Data}
-\label{sec-20-4-4}
+\label{sec-21-4-4}
 
 
 We can sort a vector with the \texttt{sort} function. Normally we have a data frame of several columns (variables) and many, many rows (observations). The goal is to shuffle the rows so that they are ordered by the values of one or more columns. This is done with the \texttt{order} function. 
@@ -13757,12 +13822,12 @@ head(Tmp)
  18 0.11  115 untreated
 \end{verbatim}
 \section{Exporting Data \label{sec:Exporting-a-Data}}
-\label{sec-20-5}
+\label{sec-21-5}
 
 
 The basic function is \texttt{write.table}. The \texttt{MASS} package also has a \texttt{write.matrix} function.
 \section{Reshaping Data \label{sec:Reshaping-a-Data}}
-\label{sec-20-6}
+\label{sec-21-6}
 
 \begin{itemize}
 \item Aggregation
@@ -13775,18 +13840,18 @@ The basic function is \texttt{write.table}. The \texttt{MASS} package also has a
 \texttt{aggregate}
 \texttt{stack}
 \chapter{Mathematical Machinery}
-\label{sec-21}
+\label{sec-22}
 
 \label{cha:Mathematical-Machinery}
 
 This appendix houses many of the standard definitions and theorems that are used at some point during the narrative. It is targeted for someone reading the book who forgets the precise definition of something and would like a quick reminder of an exact statement. No proofs are given, and the interested reader should consult a good text on Calculus (say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}), Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}), Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}), or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000}, Resnick \cite{Resnick1999}) for details. 
 \section{Set Algebra \label{sec:The-Algebra-of}}
-\label{sec-21-1}
+\label{sec-22-1}
 
 
 We denote sets by capital letters, \(A\), \(B\), \(C\), \emph{etc}. The letter \(S\) is reserved for the sample space, also known as the universe or universal set, the set which contains all possible elements. The symbol \(\emptyset\) represents the empty set, the set with no elements. 
 \subsection{Set Union, Intersection, and Difference}
-\label{sec-21-1-1}
+\label{sec-22-1-1}
 
 
 Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. To this end, we have three set operations at our disposal: union, intersection, and difference. Below is a table summarizing the pertinent information about these operations.
@@ -13805,7 +13870,7 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
 \end{center}
 \end{table}
 \subsection{Identities and Properties}
-\label{sec-21-1-2}
+\label{sec-22-1-2}
 
 
 \begin{enumerate}
@@ -13835,12 +13900,12 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
    \end{equation}
 \end{enumerate}
 \section{Differential and Integral Calculus \label{sec:Differential-and-Integral}}
-\label{sec-21-2}
+\label{sec-22-2}
 
 
 A function \(f\) of one variable is said to be one-to-one if no two distinct \(x\) values are mapped to the same \(y=f(x)\) value. To show that a function is one-to-one we can either use the horizontal line test or we may start with the equation \(f(x_{1}) = f(x_{2})\) and use algebra to show that it implies \(x_{1} = x_{2}\).
 \subsection{Limits and Continuity}
-\label{sec-21-2-1}
+\label{sec-22-2-1}
 
 \begin{defn}
 Let \(f\) be a function defined on some open interval that contains the number \(a\), except possibly at \(a\) itself. Then we say the \emph{limit of} \(f(x)\) \emph{as} \(x\) \emph{approaches} \(a\) \emph{is} \(L\), and we write 
@@ -13858,7 +13923,7 @@ A function \(f\) is \emph{continuous at a number} \(a\) if
 The function \(f\) is \emph{right-continuous at the number} \(a\) if \(\lim_{x\to a^{+}}f(x)=f(a)\), and \emph{left-continuous} at \(a\) if \(\lim_{x\to a^{-}}f(x)=f(a)\). Finally, the function \(f\) is \emph{continuous on an interval} \(I\) if it is continuous at every number in the interval. 
 \end{defn}
 \subsection{Differentiation}
-\label{sec-21-2-2}
+\label{sec-22-2-2}
 
 \begin{defn}
 The \emph{derivative of a function} \(f\) \emph{at a number} \(a\), denoted by \(f'(a)\), is
@@ -13902,7 +13967,7 @@ Chain Rule: If \(f\) and \(g\) are both differentiable and \(F=f\circ g\) is the
 \end{center}
 \end{table}
 \subsection{Optimization}
-\label{sec-21-2-3}
+\label{sec-22-2-3}
 
 \begin{defn}
 A \emph{critical number} of the function \(f\) is a value \(x^{\ast}\) for which \(f'(x^{\ast})=0\) or for which \(f'(x^{\ast})\) does not exist.
@@ -13917,7 +13982,7 @@ First Derivative Test. If \(f\) is differentiable and if \(x^{\ast}\) is a criti
 Second Derivative Test. If \(f\) is twice differentiable and if \(x^{\ast}\) is a critical number of \(f\), then \(x^{\ast}\) is a local maximum of \(f\) if \(f''(x^{\ast})<0\) and \(x^{\ast}\) is a local minimum of \(f\) if \(f''(x^{\ast})>0\).
 \end{thm}
 \subsection{Integration}
-\label{sec-21-2-4}
+\label{sec-22-2-4}
 
 As it turns out, there are all sorts of things called ``integrals'', each defined in its own idiosyncratic way. There are \emph{Riemann} integrals, \emph{Lebesgue} integrals, variants of these called \emph{Stieltjes} integrals, \emph{Daniell} integrals, \emph{Ito} integrals, and the list continues. Given that this is an introductory book, we will use the Riemannian integral with the caveat that the Riemann integral is \emph{not} the integral that will be used in more advanced study.
 
@@ -13998,7 +14063,7 @@ If both \(\int_{a}^{\infty}f(x)\,\mathrm{d} x\) and \(\int_{-\infty}^{a}f(x)\,\m
 \end{equation}
 and we say that \(\int_{-\infty}^{\infty}f(x)\,\mathrm{d} x\) is \emph{convergent}. Otherwise, we say that the improper integral is \emph{divergent}.
 \section{Sequences and Series \label{sec:Sequences-and-Series}}
-\label{sec-21-3}
+\label{sec-22-3}
 
 
 A \emph{sequence} is an ordered list of numbers, \(a_{1}\), \(a_{2}\), \(a_{3}\), \ldots{}, \(a_{n} =\left(a_{k}\right)_{k=1}^{n}\). A sequence may be finite or infinite. In the latter case we write \(a_{1}\), \(a_{2}\), \(a_{3}\), \ldots{} \( =\left(a_{k}\right)_{k=1}^{\infty}\). We say that \emph{the infinite sequence} \(\left(a_{k}\right)_{k=1}^{\infty}\) \emph{converges to the finite limit} L, and we write
@@ -14007,7 +14072,7 @@ A \emph{sequence} is an ordered list of numbers, \(a_{1}\), \(a_{2}\), \(a_{3}\)
 \end{equation}
 if for every \(\epsilon > 0\) there exists an integer \(N \geq 1\) such that \(|a_{k} - L| < \epsilon\) for all \(k \geq N\). We say that \emph{the infinite sequence} \(\left(a_{k}\right)_{k=1}^{\infty}\) \emph{diverges to} \(+\infty\) (or \( -\infty\)) if for every \(M\geq0\) there exists an integer \(N\geq1\) such that \(a_{k} \geq M\) for all \(k \geq N\) (or \(a_{k} \leq - M\) for all \(k \geq N\)).
 \subsection{Finite Series}
-\label{sec-21-3-1}
+\label{sec-22-3-1}
 
 
 \begin{equation}
@@ -14023,7 +14088,7 @@ if for every \(\epsilon > 0\) there exists an integer \(N \geq 1\) such that \(|
 \sum_{k=0}^{n}{n \choose k}\, a^{n-k}b^{k}=(a+b)^{n}\label{eq:binom-series}
 \end{equation}
 \subsection{Infinite Series}
-\label{sec-21-3-2}
+\label{sec-22-3-2}
 
 
 Given an infinite sequence of numbers \(a_{1}\), \(a_{2}\), \(a_{3}\), \ldots{}\(=\left(a_{k}\right)_{k=1}^{\infty}\), let \(s_{n}\) denote the \emph{partial sum} of the first \(n\) terms:
@@ -14036,7 +14101,7 @@ If the sequence \(\left(s_{n}\right)_{n=1}^{\infty}\) converges to a finite numb
 \end{equation}
 Otherwise we say the infinite series is \emph{divergent}.
 \subsection{Rules for Series}
-\label{sec-21-3-3}
+\label{sec-22-3-3}
 
 
 Let \(\left(a_{k}\right)_{k=1}^{\infty}\) and \(\left(b_{k}\right)_{k=1}^{\infty}\) be infinite sequences and let \(c\) be a constant.
@@ -14071,7 +14136,7 @@ Other Series
 \sum_{k=0}^{\infty}{n \choose k}x^{k}=(1+x)^{n},\quad|x|<1.\label{eq:binom-series-infinite}
 \end{equation}
 \subsection{Taylor Series}
-\label{sec-21-3-4}
+\label{sec-22-3-4}
 
 
 If the function \(f\) has a \emph{power series} representation at the point \(a\) with radius of convergence \(R>0\), that is, if
@@ -14091,7 +14156,7 @@ f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad|x-a|<R,
 \end{equation}
 in which case both of the above series have radius of convergence \(R\).
 \section{The Gamma Function \label{sec:The-Gamma-Function}}
-\label{sec-21-4}
+\label{sec-22-4}
 
 
 The \emph{Gamma function} \(\Gamma\) will be defined in this book according to the formula
@@ -14108,9 +14173,9 @@ Properties of the Gamma Function:
 
 \end{fact}
 \section{Linear Algebra \label{sec:Linear-Algebra}}
-\label{sec-21-5}
+\label{sec-22-5}
 \subsection{Matrices}
-\label{sec-21-5-1}
+\label{sec-22-5-1}
 
 A \emph{matrix} is an ordered array of numbers or expressions; typically we write \(\mathbf{A}=\begin{pmatrix}a_{ij}\end{pmatrix}\) or \(\mathbf{A}=\begin{bmatrix}a_{ij}\end{bmatrix}\). If \(\mathbf{A}\) has \(m\) rows and \(n\) columns then we write
 \begin{equation}
@@ -14155,7 +14220,7 @@ c & d\end{bmatrix}\quad\mbox{is}\quad\mathbf{A}^{-1}=\frac{1}{ad-bc}\begin{bmatr
 provided \(ad-bc\neq0\).
 \end{fact}
 \subsection{Determinants}
-\label{sec-21-5-2}
+\label{sec-22-5-2}
 
 \begin{defn}
 The \emph{determinant} of a square matrix \(\mathbf{A}_{\mathrm{n}\times n}\) is denoted \(\mathrm{det}(\mathbf{A})\) or \(|\mathbf{A}|\) and is defined recursively by
@@ -14176,13 +14241,13 @@ c & d\end{bmatrix}\quad\mbox{is}\quad|\mathbf{A}|=ad-bc.
 A square matrix \(\mathbf{A}\) is nonsingular if and only if \(\mathrm{det}(\mathbf{A})\neq0\).
 \end{fact}
 \subsection{Positive (Semi)Definite}
-\label{sec-21-5-3}
+\label{sec-22-5-3}
 
 If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is \emph{positive semidefinite}. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is \emph{positive definite}. The connection to statistics is that covariance matrices (see Chapter \ref{cha:Multivariable-Distributions}) are always positive semidefinite, and many of them are even positive definite.
 \section{Multivariable Calculus \label{sec:Multivariable-Calculus}}
-\label{sec-21-6}
+\label{sec-22-6}
 \subsection{Partial Derivatives}
-\label{sec-21-6-1}
+\label{sec-22-6-1}
 
 If \(f\) is a function of two variables, its \emph{first-order partial derivatives} are defined by
 \begin{equation}
@@ -14201,7 +14266,7 @@ In many cases (and for all cases in this book) it is true that
 \frac{\partial^{2}f}{\partial x\partial y}=\frac{\partial^{2}f}{\partial y\partial x}.
 \end{equation}
 \subsection{Optimization}
-\label{sec-21-6-2}
+\label{sec-22-6-2}
 
 An function \(f\) of two variables has a \emph{local maximum} at \((a,b)\) if \(f(x,y)\geq f(a,b)\) for all points \((x,y)\) near \((a,b)\), that is, for all points in an open disk centered at \((a,b)\). The number \(f(a,b)\) is then called a \emph{local maximum value} of \(f\). The function \(f\) has a \emph{local minimum} if the same thing happens with the inequality reversed.
 
@@ -14225,7 +14290,7 @@ We use the following rules to decide whether \((a,b)\) is an \emph{extremum} (th
 \item If \(\mbox{det}(H)=0\), then we do not know the status of \((a,b)\); it might be an extremum or it might not be.
 \end{itemize}
 \subsection{Double and Multiple Integrals}
-\label{sec-21-6-3}
+\label{sec-22-6-3}
 
 Let \(f\) be defined on a rectangle \(R=[a,b]\times[c,d]\), and for each \(m\) and \(n\) divide \([a,b]\) (respectively \([c,d]\)) into subintervals \([x_{j},x_{j+1}]\), \(i=0,1,\ldots,m-1\) (respectively \([y_{i},y_{i+1}]\)) of length \(\Delta x_{j}=(b-a)/m\) (respectively \(\Delta y_{i}=(d-c)/n\)) where \(x_{0}=a\) and \(x_{m}=b\) (and \(y_{0}=c\) and \(y_{n}=d\) ), and let \(x_{j}^{\ast}\) (\(y_{i}^{\ast}\)) be any points chosen from their respective subintervals. Then the \emph{double integral} of \(f\) over the rectangle \(R\) is
 \begin{equation}
@@ -14233,7 +14298,7 @@ Let \(f\) be defined on a rectangle \(R=[a,b]\times[c,d]\), and for each \(m\) a
 \end{equation}
 provided this limit exists. Multiple integrals are defined in the same way just with more letters and sums.
 \subsection{Bivariate and Multivariate Change of Variables}
-\label{sec-21-6-4}
+\label{sec-22-6-4}
 
 Suppose we have a transformation
 \footnote{For our purposes \(T\) is in fact the /inverse/ of a one-to-one transformation that we are initially given. We usually start with functions that map \((x,y) \longmapsto (u,v)\), and one of our first tasks is to solve for the inverse transformation that maps \((u,v)\longmapsto(x,y)\). It is this inverse transformation which we are calling \(T\).}
@@ -14256,17 +14321,17 @@ If the function \(f\) is continuous on \(A\) and if the Jacobian of \(T\) is non
 
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation \(T\) maps points \((u_{1},u_{2},\ldots,u_{n})\) to points \((x_{1},x_{2},\ldots,x_{n})\), the Jacobian is the determinant of the \(\mathrm{n}\times\mathrm{n}\) matrix of first-order partial derivatives of \(T\) (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets \(A\) and \(B\).
 \chapter{Writing Reports with \textsf{R}}
-\label{sec-22}
+\label{sec-23}
 
 \label{cha:Writing-Reports-with}
 
 Perhaps the most important part of a statistician's job once the analysis is complete is to communicate the results to others. This is usually done with some type of report that is delivered to the client, manager, or administrator. Other situations that call for reports include term papers, final projects, thesis work, \emph{etc}. This chapter is designed to pass along some tips about writing reports once the work is completed with \textsf{R}.
 \section{What to Write \label{sec:What-to-Write}}
-\label{sec-22-1}
+\label{sec-23-1}
 
-It is possible to summarize this entire appendix with only one sentence: \emph{the statistician's goal is to communicate with others}. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr.\~{}G.\~{}Andy Chang.
+It is possible to summarize this entire appendix with only one sentence: \emph{the statistician's goal is to communicate with others}. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr. G. Andy Chang.
 \subsection{Basic Outline for a Statistical Report}
-\label{sec-22-1-1}
+\label{sec-23-1-1}
 
 \begin{enumerate}
 \item Executive Summary (a one page description of the study and conclusion)
@@ -14312,13 +14377,13 @@ It is possible to summarize this entire appendix with only one sentence: \emph{t
 \end{enumerate}
 \end{enumerate}
 \section{How to Write It with R}
-\label{sec-22-2}
+\label{sec-23-2}
 
 \label{sec:How-to-Write}
 Once the decision has been made what to write, the next task is to typeset the information to be shared. To do this the author will need to select software to use to write the documents. There are many options available, and choosing one over another is sometimes a matter of taste. But not all software were created equal, and \textsf{R} plays better with some applications than it does with others. 
 In short, \textsf{R} does great with \LaTeX{} and there are many resources available to make writing a document with \textsf{R} and \LaTeX{} easier. But \LaTeX{} is not for the beginner, and there are other word processors which may be acceptable depending on the circumstances.
 \subsection{Microsoft\(\circledR\) Word}
-\label{sec-22-2-1}
+\label{sec-23-2-1}
 
 It is a fact of life that Microsoft\(\circledR\) Windows is currently the most prevalent desktop operating system on the planet. Those who own Windows also typically own some version of Microsoft Office, thus Microsoft Word is the default word processor for many, many people.  
 
@@ -14337,7 +14402,7 @@ Nevertheless, if you are going to write a report with Word there are some steps 
 
 It is also possible to communicate with \textsf{R} through OpenOffice.org, which can export to the proprietary (\texttt{.doc}) format.
 \subsection{OpenOffice.org and \texttt{odfWeave}}
-\label{sec-22-2-2}
+\label{sec-23-2-2}
 
 OpenOffice.org (OO.o) is an open source desktop productivity suite which mirrors Microsoft\(\circledR\) Office. It is especially nice because it works on all operating systems. OO.o can read most document formats, and in particular, it will read \texttt{.doc} files. The standard OO.o file extension for documents is \texttt{.odt}, which stands for ``open document text''.
 
@@ -14370,7 +14435,7 @@ Here are the basic steps to typeset a statistical report with OO.o.
 
 There are all sorts of extra things that you can do. For example, the \textsf{R} commands can be suppressed with the tag \texttt{<\textcompwordmark{}<echo = FALSE>\textcompwordmark{}>=}, and the \textsf{R} output may be hidden with \texttt{<\textcompwordmark{}<results = hide>\textcompwordmark{}>=}. See the \texttt{odfWeave} package documentation for details.
 \subsection{Sweave and \protect\LaTeX{}}
-\label{sec-22-2-3}
+\label{sec-23-2-3}
 
 
 This approach is nice because it works for all operating systems. One can quite literally typeset \emph{anything} with \LaTeX{}. All of this power comes at a price, however. The writer must learn the \LaTeX{} language which is a nontrivial enterprise. Even given the language, if there is a single syntax error, or a single delimeter missing in the entire document, then the whole thing breaks.
@@ -14387,14 +14452,14 @@ dev.copy2eps, also dev.copy2pdf
 
 \href{http://www.stat.uni-muenchen.de/~leisch/Sweave/}{http://www.stat.uni-muenchen.de/\~leisch/Sweave/}
 \subsection{Sweave and \protect\LyX{}}
-\label{sec-22-2-4}
+\label{sec-23-2-4}
 
 This approach is nice because it works for all operating  systems. It gives you everything from the last section and makes it easier to use \LaTeX{}. That being said, it is better to know \LaTeX{} already when migrating to \LyX{}, because you understand all of the machinery going on under the hood.
 
 Program Listings and the \textsf{R} language
 \href{http://gregor.gorjanc.googlepages.com/lyx-sweave}{http://gregor.gorjanc.googlepages.com/lyx-sweave}
 \section{Formatting Tables \label{sec:Formatting-Tables}}
-\label{sec-22-3}
+\label{sec-23-3}
 
 
 The prettyR package 
@@ -14423,14 +14488,14 @@ cbind(Sepal.Length, Sepal.Width)    N=150
 
 There is a \texttt{method} argument to \texttt{summary}, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: \texttt{reverse} and \texttt{cross}. See \texttt{?summary.formula} or the \href{http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport}{following document} from Frank Harrell for more details.
 \section{Other Formats}
-\label{sec-22-4}
+\label{sec-23-4}
 
 \label{sec:Other-Formats}
 
 HTML and prettyR
 R2HTML
 \chapter{Instructions for Instructors}
-\label{sec-23}
+\label{sec-24}
 
 \label{cha:Instructions-for-Instructors}
 
@@ -14457,7 +14522,7 @@ This method already provides for over 43,000 books, without taking military time
 
 Now choose \(  2170129411388188.0 \)as your secret seed\ldots{} write it down in a safe place and do not share it with anyone. Next generate the book with your seed using \LyX{}-Sweave or Sweave-\LaTeX{}. You may wish to also generate Student and Instructor Solution Manuals. Guidance regarding this is given below in the How to Use This Document section.
 \section{Generating This Document \label{sec:Generating-This-Document}}
-\label{sec-23-1}
+\label{sec-24-1}
 
 
 You will need three (3) things to generate this document for yourself, in addition to a current \textsf{R} distribution which at the time of this writing is \texttt{  R version 2.13.1 (2011-07-08) } :
@@ -14477,7 +14542,7 @@ We will discuss each of these in turn.
 
 An attempt was made to not be extravagant with fonts or packages so that a person would not need the entire \texttt{CTAN} (or \texttt{CRAN}) installed on their personal computer to generate the book. Nevertheless, there are a few extra packages required. These packages are listed in the \texttt{preamble} of \texttt{IPSUR.Rnw}, \texttt{IPSUR.tex}, and \texttt{IPSUR.lyx}.
 \section{How to Use This Document \label{sec:How-to-Use-Document}}
-\label{sec-23-2}
+\label{sec-24-2}
 
 
 The easiest way to use this document is to install the \texttt{IPSUR} package from \texttt{CRAN} and be all done. This way would be acceptable if there is another, primary, text being used for the course and \IPSUR\textbackslash{} is only meant to play a supplementary role.
@@ -14498,11 +14563,11 @@ To make it easier for those people who do not want to use \LyX{} (or for whateve
 \item You can copy-paste selected exercises from the text, put them together, and you have a quiz. Since the numbers are randomly generated you do not need to worry about different semesters. And you will have answer keys already for all of your QUIZZES and EXAMS, too.
 \end{itemize}
 \section{Ancillary Materials \label{sec:Ancillary-Materials}}
-\label{sec-23-3}
+\label{sec-24-3}
 
 In addition to the main text, student manual, and instructor manual, there are two other ancillaries. IPSUR.R, and IPSUR.RData.
 \section{Modifying This Document \label{sec:Modifying-This-Document}}
-\label{sec-23-4}
+\label{sec-24-4}
 
 Since this document is released under the GNU-FDL, you are free to modify this document however you wish (in accordance with the license -- see Appendix \ref{cha:GNU-Free-Documentation}). The immediate benefit of this is that you can generate the book, with brand new problem sets, and distribute it to your students simply as a PDF (in an email, for instance). As long as you distribute less than 100 such \emph{Opaque} copies, you are not even required by the GNU-FDL to share your \emph{Transparent} copy (the source code with the secret key) that you used to generate them. Next semester, choose a new key and generate a new copy to be distributed to the new class. 
 
@@ -14512,7 +14577,7 @@ But more generally, if you are not keen on the way I explained (or failed to exp
 
 Some individuals will argue that the nature of a statistics textbook like this one, many of the exercises being randomly generated \emph{by design}, does a disservice to the students because the exercises do not use real-world data. That is a valid criticism\ldots{} but in my case the benefits outweighed the detriments and I moved forward to incorporate static data sets whenever it was feasible and effective. Frankly, and most humbly, the only response I have for those individuals is: ``Please refer to the preceding paragraph.''
 \chapter{\texttt{RcmdrTestDrive} Story}
-\label{sec-24}
+\label{sec-25}
 
 \label{cha:RcmdrTestDrive-Story}
 
@@ -14522,7 +14587,7 @@ In the Summer of 2006 I gave a version of the raw data and variable names to my 
 
 The most colorful of those I received was written by Jeffery Cornfield, submitted July 12, 2006, and is included below with his permission. It was edited slightly by the present author and updated to respond dynamically to the random generation of \texttt{RcmdrTestDrive}; otherwise, the story has been unchanged. 
 \section{Case File: ALU-179 ``Murder Madness in Toon Town”}
-\label{sec-24-1}
+\label{sec-25-1}
 
 \begin{quote}
 \noindent \begin{center}
@@ -14533,43 +14598,43 @@ The most colorful of those I received was written by Jeffery Cornfield, submitte
 
 One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been \(  166 \) murders in the past \(  7 \) days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
 
-Professor Twee T.\~{}Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
+Professor Twee T. Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
 
 “Yes, Chief Runner, please give me the details of the case,” Professor Bird declared with a heavy native accent, (though, for the sake of the case file, reader, I have decided to leave out the accent due to the fact that it would obviously drive you -- if you will forgive the pun -- looney!) 
 
 “All prints are wiped clean and there are no identifiable marks on the bodies of the victims. All we are able to come up with is the possibility that perhaps there is some kind of alternative method of which we are unaware. We have sent a secure e-mail with a listing of all of the victims’ \texttt{races}, \texttt{genders}, locations of the bodies, and the sequential \texttt{order} in which they were killed. We have also included other information that might be helpful,” said Chief Runner.
 
-“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr.\~{}Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
+“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr. Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
 
 “Good luck trying to find him, Professor. Last I heard, he had a bottle of scotch and was in the Hundred Acre Woods hunting rabbits,” Chief Runner declared in a manner that questioned the beloved doctor’s credibility. 
 
 “Perhaps I will take a drive to find him. The fresh air will do me good.”
 
 \begin{quote}
-\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr.\~{}Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr.\~{}Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
+\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr. Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr. Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
 \end{quote}
 
-Once our two heroes returned to the beautiful Acme-Looney University, and once Dr.\~{}Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
+Once our two heroes returned to the beautiful Acme-Looney University, and once Dr. Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
 
-“First off,” Dr.\~{}Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a \texttt{salary} between \(  377 \) and \(  1156 \) when they retired.” 
+“First off,” Dr. Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a \texttt{salary} between \(  377 \) and \(  1156 \) when they retired.” 
 
 “That’s not really a lot to live off of,” explained Professor Bird. 
 
-“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by \texttt{reduction}. Some of them dropped quite substantially when the University had to fix that little \emph{faux pas} in the Chemistry Department. You remember: when Dr.\~{}D.\~{}Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr.\~{}Fudd-Einstein. 
+“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by \texttt{reduction}. Some of them dropped quite substantially when the University had to fix that little \emph{faux pas} in the Chemistry Department. You remember: when Dr. D. Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr. Fudd-Einstein. 
 
 “This coming Monday. But if there were all of these killings, how in the world could one person do it? It just doesn’t seem to be possible; stay up \(  7 \) days straight and be able to kill all of these people and have the energy to continue on,” Professor Bird exclaimed, doubting the guilt of only one person. 
 
-“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr.\~{}Fudd-Einstein said as he began feeding the numbers into the massive server. 
+“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr. Fudd-Einstein said as he began feeding the numbers into the massive server. 
 
 “Hey, look at this,” Professor Bird exclaimed, “What’s with this \texttt{before} and \texttt{after} information?” 
 
-“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either \texttt{smokers} or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr.\~{}Fudd-Einstein declared matter-of-factly. 
+“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either \texttt{smokers} or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr. Fudd-Einstein declared matter-of-factly. 
 
 “Well, would race or gender have something to do with it, Elmer?” inquired Professor Bird.
 
-“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr.\~{}Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
+“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr. Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
 
-Dr.\~{}Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life\ldots{} and when I say roared, I mean it literally \emph{roared}. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
+Dr. Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life\ldots{} and when I say roared, I mean it literally \emph{roared}. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
 
 Once it was completed, the computer listed 4 names:
 
@@ -14577,39 +14642,39 @@ Once it was completed, the computer listed 4 names:
 \begin{verbatim}
 ****************************SUSPECTS****************************
 - Yosemite Sam (“Looney” Insane Asylum) 
-- Wile~E.~Coyote (deceased) 
-- Foghorn~Leghorn (whereabouts unknown) 
+- Wile E. Coyote (deceased) 
+- Foghorn Leghorn (whereabouts unknown) 
 - Granny (1313 Mockingbird Lane, Toon Town USA)
 \end{verbatim}
 
-Dr.\~{}Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
+Dr. Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
 
 “There seems to be a mistake. Perhaps something is off,” Professor Bird asked, still unable to believe the results.
 
-“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben \& Jerry’s files to identify possible links, creating the most powerful computer in the world\ldots{} with a tweak of Toon fanaticism,” Dr.\~{}Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
+“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben \& Jerry’s files to identify possible links, creating the most powerful computer in the world\ldots{} with a tweak of Toon fanaticism,” Dr. Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
 
 “Wait a minute, Ben \& Jerry? What would eating ice cream have to do with anything?” Professor Bird inquired.
 
-“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr.\~{}Fudd-Einstein declared.
+“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr. Fudd-Einstein declared.
 
 “I’ve heard about this. My forensics graduate students are trying to identify car thieves with either rocky road or mint chocolate chip… so far, the pattern is showing a clear trend with chocolate chip,” Professor Bird declared. 
-“Well, what do we know about these suspects, Twee?” Dr.\~{}Fudd-Einstein asked.
+“Well, what do we know about these suspects, Twee?” Dr. Fudd-Einstein asked.
 
 “Yosemite Sam was locked up after trying to rob that bank in the West Borough. Apparently his guns were switched and he was sent the Acme Kids Joke Gun and they blew up in his face. The containers of peroxide they contained turned all of his facial hair red. Some little child is running around Toon Town with a pair of .38’s to this day. 
 
-“Wile E.\~{}Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
+“Wile E. Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
 
-“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr.\~{}Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
+“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr. Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
 
 “Granny is the most beloved alumnus of Acme-Looney University. She was in the first graduating class and gives graciously each year to the university. Without her continued financial support, we wouldn’t have the jobs we do. She worked as a parking attendant at the University lots\ldots{} wait a minute, take a look at this,” Professor Bird said as he scrolled down in the police information. “Granny’s signature is on each of these faculty members’ \texttt{parking} tickets. Kind of odd, considering the Chief-of-Parking signed each personally. The deceased had from as few as \(  1 \) ticket to as many as \(  8 \). All tickets were unpaid.
 
 “And look at this, Granny married Old Man Acme after graduation. He was a resident of Chicago and rumored to be a consigliere to one of the most prominent crime families in Chicago, the Chuck Jones/Warner Crime Family,” Professor Bird read from the screen as a cold feeling of terror rose from the pit of his stomach. 
 
-“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr.\~{}Fudd-Einstein said in awe and sarcasm.
+“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr. Fudd-Einstein said in awe and sarcasm.
 
 “I would never have suspected her, but I guess it makes sense. She is older, so she doesn’t need near the amount of sleep as a younger person. She has access to all of the vehicles so she can copy license plate numbers and follow them to their houses. She has the finances to pay for this kind of massive campaign on behalf of the Mob, and she hates anyone that even remotely smells like smoke,” Professor Bird explained, wishing to have his hit of nicotine at this time.
 
-“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr.\~{}Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
+“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr. Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
 
 “What do you mean?” inquired Professor Bird.
 
