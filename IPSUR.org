@@ -1870,7 +1870,7 @@ Note that this one general class of random experiments contains as a special cas
 The =prob= package accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 
 #+latex: \begin{example}
-\label{exa:sample-urn-two-from-three}
+#+latex: \label{exa:sample-urn-two-from-three}
 Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We are going to take a sample of size 2 from the urn. 
 
 #+latex: \paragraph*{Ordered, With Replacement}
@@ -2154,7 +2154,7 @@ or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=
 One sample space function that does NOT have a =makespace= option is the =urnsamples= function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use =probspace= to assign the model.
 
 #+latex: \begin{example}
-\label{exa:unbalanced-coin}
+#+latex: \label{exa:unbalanced-coin}
 *An unbalanced coin.* While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 #+begin_src R :exports both :results output pp   
@@ -2181,17 +2181,17 @@ that holds asymptotically. User beware.
 A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\Pr(A)=p\), called the /probability of/ \(A\). Any probability function \(\Pr\) satisfies the following three Kolmogorov Axioms: 
 
 #+begin_ax
-\label{ax:prob-nonnegative}
+#+latex: \label{ax:prob-nonnegative}
 \(\Pr(A)\geq0\) for any event \(A\subset S\).
 #+end_ax
 
 #+begin_ax
-\label{ax:total-mass-one}
+#+latex: \label{ax:total-mass-one}
 \(\Pr(S)=1\).
 #+end_ax
 
 #+begin_ax
-\label{ax:countable-additivity}
+#+latex: \label{ax:countable-additivity}
 If the events \(A_{1}\), \(A_{2}\), \(A_{3}\)... are disjoint then
 \begin{equation}
 \Pr\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\Pr(A_{i})\mbox{ for every }n,
@@ -2276,7 +2276,7 @@ What is \(\Pr(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:three-child-family}
+#+latex: \label{exa:three-child-family}
 Imagine a three child family, each child being either Boy (\(B\)) or Girl (\(G\)). An example sequence of siblings would be \(BGB\). The sample space may be written
 \[
 S=\left\{ 
@@ -2365,7 +2365,7 @@ We have as yet glossed over the details. More specifically, =prob= has three arg
 Consequently, =x= should be the entire probability space in the case that =event= is non-null.
 
 ** Counting Methods
-\label{sec:Methods-of-Counting}
+#+latex: \label{sec:Methods-of-Counting}
 
 The equally-likely model is a convenient and popular way to analyze random experiments. And when the equally likely model applies, finding the probability of an event \(A\) amounts to nothing more than counting the number of outcomes that \(A\) contains (together with the number of events in \(S\)). Hence, to be a master of probability one must be skilled at counting outcomes in events of all kinds.
 
@@ -2607,7 +2607,7 @@ remove(g)
 There is a \textsf{Birthday problem} item in the \textsf{Probability} menu of =RcmdrPlugin.IPSUR=. In the base \textsf{R} version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
 
 ** Conditional Probability
-\label{sec:Conditional-Probability}
+#+latex: \label{sec:Conditional-Probability}
 
 Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \Pr(A) = 4/52 \). Suppose we look at the first card. What now is the probability of \(B\)? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
 \[
@@ -2636,7 +2636,7 @@ which means that given the information that a Head has occurred, we no longer ne
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:Toss-a-six-sided-die-twice}
+#+latex: \label{exa:Toss-a-six-sided-die-twice}
 Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section \ref{sec:Methods-of-Counting} that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
 #+begin_latex
@@ -2733,7 +2733,7 @@ For any events \(A\), \(B\), and \(C\) with \(\Pr(A)>0\),
 The Multiplication Rule is very important because it allows us to find probabilities in random experiments that have a sequential structure, as the next example shows. 
 
 #+latex: \begin{example}
-\label{exa:two-cards-both-aces}
+#+latex: \label{exa:two-cards-both-aces}
 At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is \(\Pr(\mbox{both Aces})\)?
 
 \[
@@ -2743,7 +2743,7 @@ At the beginning of the section we drew two cards from a standard playing deck. 
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-\label{sub:howto-ps-objects}
+#+latex: \label{sub:howto-ps-objects}
 
 Continuing Example \ref{exa:two-cards-both-aces}, we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
 
@@ -2772,7 +2772,7 @@ Note that this value matches what we found in Example \ref{exa:two-cards-both-ac
 
 
 #+latex: \begin{example}
-\label{exa:urn-7-red-3-green}
+#+latex: \label{exa:urn-7-red-3-green}
 Consider an urn with 10 balls inside, 7 of which are red and 3 of which are green. Select 3 balls successively from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \), \( B = \{ 2^{\mathrm{nd}} \mbox{ ball is red} \} \), and \( C = \{ 3^{\mathrm{rd}} \mbox{ ball is red} \} \). Then
 \[
 \Pr(\mbox{all 3 balls are red})=\Pr(A\cap B\cap C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.
@@ -2867,7 +2867,7 @@ Using the same reasoning, we can return to the example from the beginning of the
 \]
  
 ** Independent Events
-\label{sec:Independent-Events}
+#+latex: \label{sec:Independent-Events}
 
 Toss a coin twice. The sample space is \(S= \{ HH,\ HT,\ TH,\ TT \} \). We know that \(\Pr(1^{\mathrm{st}}\mbox{ toss is }H)=2/4\), \(\Pr(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4\), and \(\Pr(\mbox{both }H)=1/4\). Then
 \begin{align*} \Pr(2^{\mathrm{nd}}\mbox{ toss is }H\ |\ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\Pr(\mbox{both }H)}{\Pr(1^{\mathrm{st}}\mbox{ toss is }H)},\\
@@ -2931,7 +2931,7 @@ If only the first three conditions hold then \(A\), \(B\), and \(C\) are said to
 We can now deduce the pattern for \(n\) events, \(n>3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise \ref{xca:numb-cond-indep}). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
 
 #+latex: \begin{example}
-\label{exa:toss-ten-coins}
+#+latex: \label{exa:toss-ten-coins}
 Toss ten coins. What is the probability of observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10\). Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the \(A_{i}\) may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
 \begin{align*}
 \Pr(\mbox{at least one }H) & =1-\Pr(\mbox{all }T),\\
@@ -2980,7 +2980,7 @@ As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has 
 Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= argument is specified. Also note that the argument =x= is a /vector/, not a data frame. Something like =iidspace(tosscoin(1),...)= would give an error.
 
 ** Bayes' Rule
-\label{sec:Bayes'-Rule}
+#+latex: \label{sec:Bayes'-Rule}
 
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
@@ -3009,7 +3009,7 @@ Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probab
 What does it mean? Usually in applications we are given (or know) /a priori/ probabilities \(\Pr(B_{k})\). We go out and collect some data, which we represent by the event \(A\). We want to know: how do we *update* \(\Pr(B_{k})\) to \(\Pr(B_{k}|A)\)? The answer: Bayes' Rule.
 
 #+latex: \begin{example}
-\label{exa:misfiling-assistants}
+#+latex: \label{exa:misfiling-assistants}
 *Misfiling Assistants.* In this problem, there are three assistants working at a company: Moe, Larry, and Curly. Their primary job duty is to file paperwork in the filing cabinet when papers become available. The three assistants have different work schedules:
 |          | Moe | Larry | Curly |
 |----------+-----+-------+-------|
@@ -3075,7 +3075,7 @@ The conclusion: *Larry* gets the axe. What is happening is an intricate interpla
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:misfiling-assistants-multiple}
+#+latex: \label{exa:misfiling-assistants-multiple}
 Suppose the boss gets a change of heart and does not fire anybody. But the next day (s)he randomly selects another file and again finds it to be misplaced. To decide whom to fire now, the boss would use the same procedure, with one small change. (S)he would not use the prior probabilities 60%, 30%, and 10%; those are old news. Instead, she would replace the prior probabilities with the posterior probabilities just calculated. After the math she will have new posterior probabilities, updated even more from the day before.
 
 In this way, probabilities found by Bayes' rule are always on the cutting edge, always updated with respect to the best information available at the time.
@@ -3125,7 +3125,7 @@ fastpost / sum(fastpost)
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 
 ** Random Variables
-\label{sec:Random-Variables}
+#+latex: \label{sec:Random-Variables}
 
 We already know about experiments, sample spaces, and events. In this section, we are interested in a /number/ that is associated with the experiment. We conduct a random experiment \(E\) and after learning the outcome \(\omega\) in \(S\) we calculate a number \(X\). That is, to each outcome \(\omega\) in the sample space we associate a number \(X(\omega)=x\). 
 
@@ -3219,7 +3219,7 @@ Note that the default value of =vars= is the names of all columns except =probs=
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-\label{xca:numb-cond-indep}
+#+latex: \label{xca:numb-cond-indep}
 Prove the assertion given in the text: the number of conditions that the events \(A_{1}\), \(A_{2}\), ..., \(A_{n}\) must satisfy in order to be mutually independent is \(2^{n}-n-1\). (/Hint/: think about Pascal's triangle.)
 #+end_xca
 
@@ -3235,7 +3235,7 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 :PROPERTIES:
 :tangle: R/discdist.R
 :END:
-\label{cha:Discrete-Distributions}
+#+latex: \label{cha:Discrete-Distributions}
 
 #+latex: \noindent 
 In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
@@ -3254,10 +3254,10 @@ There are some comments on simulation, and we mention transformations of random 
 - how to make new discrete random variables from old ones
 
 ** Discrete Random Variables
-\label{sec:discrete-random-variables}
+#+latex: \label{sec:discrete-random-variables}
 
 *** Probability Mass Functions
-\label{sub:probability-mass-functions}
+#+latex: \label{sub:probability-mass-functions}
 
 Discrete random variables are characterized by their supports which take the form
 \begin{equation}
@@ -3273,7 +3273,7 @@ Since values of the PMF represent probabilities, we know from Chapter \ref{cha:P
 3. \(\Pr(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event \(A\subset S\).
 
 #+latex: \begin{example}
-\label{exa:Toss-a-coin}
+#+latex: \label{exa:Toss-a-coin}
 
 Toss a coin 3 times. The sample space would be
 \[
@@ -3288,7 +3288,7 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
-\label{sub:mean-variance-sd}
+#+latex: \label{sub:mean-variance-sd}
 
 There are numbers associated with PMFs. One important example is the mean \(\mu\), also known as \(\E X\) (which we will discuss later):
 \begin{equation}
@@ -3301,7 +3301,7 @@ provided the (potentially infinite) series \(\sum|x|f_{X}(x)\) is convergent. An
 which can be computed (see Exercise \ref{xca:variance-shortcut}) with the alternate formula \(\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
  
 #+latex: \begin{example}
-\label{exa:disc-pmf-mean}
+#+latex: \label{exa:disc-pmf-mean}
 We will calculate the mean of \(X\) in Example \ref{exa:Toss-a-coin}.
 \[
 \mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=3.5.
@@ -3324,7 +3324,7 @@ We know that all PMFs satisfy certain properties, and a similar statement may be
 We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). In an abuse of notation we will also write \(X\sim f_{X}\) and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-\label{sub:disc-rv-how-r}
+#+latex: \label{sub:disc-rv-how-r}
 
 The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
 
@@ -3368,7 +3368,7 @@ E(X); var(X); sd(X)
 #+end_src
 
 ** The Discrete Uniform Distribution
-\label{sec:disc-uniform-dist}
+#+latex: \label{sec:disc-uniform-dist}
 
 We have seen the basic building blocks of discrete distributions and we now study particular models that statisticians often encounter in the field. Perhaps the most fundamental of all is the /discrete uniform/ distribution.
 
@@ -3422,14 +3422,14 @@ In the \textsf{R} Console window, the \textsf{R} Commander should tell you that 
 The default name for the variable is =disunif.sim1=.
 
 ** The Binomial Distribution
-\label{sec:binom-dist}
+#+latex: \label{sec:binom-dist}
 
 The binomial distribution is based on a /Bernoulli trial/, which is a random experiment in which there are only two possible outcomes: success (\(S\)) and failure (\(F\)). We conduct the Bernoulli trial and let 
 \begin{equation}
 X=
 \begin{cases}
-1 & \mbox{if the outcome is \ensuremath{S}},\\
-0 & \mbox{if the outcome is \ensuremath{F}}.
+1 & \mbox{if the outcome is $S$},\\
+0 & \mbox{if the outcome is $F$}.
 \end{cases}
 \end{equation}
 If the probability of success is \(p\) then the probability of failure must be \(1-p=q\) and the PMF of \(X\) is
@@ -3439,7 +3439,7 @@ f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 It is easy to calculate \(\mu=\E X=p\) and \(\E X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
 
 *** The Binomial Model
-\label{sub:The-Binomial-Model}
+#+latex: \label{sub:The-Binomial-Model}
 
 The Binomial model has three defining properties:
 - Bernoulli trials are conducted \(n\) times,
@@ -3508,7 +3508,7 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:toss-coin-3-withR}
+#+latex: \label{exa:toss-coin-3-withR}
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
 | \(x=\mbox{\#of Heads}\) |   0 |   1 |   2 |   3 | Total |
 |-------------------------+-----+-----+-----+-----+-------|
@@ -3626,10 +3626,10 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
 #+end_latex
 
 ** Expectation and Moment Generating Functions
-\label{sec:expectation-and-mgfs}
+#+latex: \label{sec:expectation-and-mgfs}
 
 *** The Expectation Operator
-\label{sub:expectation-operator}
+#+latex: \label{sub:expectation-operator}
 
 We next generalize some of the concepts from Section \ref{sub:mean-variance-sd}. There we saw that every
 #+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
@@ -3656,7 +3656,7 @@ in Exercise \ref{xca:variance-shortcut}. Intuitively, for repeated observations 
 Let us take the analogy further. If we expect \(g(X)\) to be close to \(\E g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\E g(X)\). The following theorem makes this idea precise.
 
 #+begin_prop
-\label{pro:expectation-properties}
+#+latex: \label{pro:expectation-properties}
 For any functions \(g\) and \(h\), any random variable \(X\), and any constant \(c\): 
 1. \(\E\: c=c\),
 2. \(\E[c\cdot g(X)]=c\E g(X)\)
@@ -3672,7 +3672,7 @@ Go directly from the definition. For example,
 #+end_proof
 
 *** Moment Generating Functions
-\label{sub:MGFs}
+#+latex: \label{sub:MGFs}
 
 #+begin_defn
 Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
@@ -3692,7 +3692,7 @@ We will calculate the MGF for the two distributions introduced above.
 Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
 Since \(f(x)=1/m\), the MGF takes the form
 \[
-M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad\mbox{for any \ensuremath{t}.}
+M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad\mbox{for any $t$.}
 \]
 
 #+latex: \end{example}
@@ -3704,7 +3704,7 @@ Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 = & \sum_{x=0}^{n}{n \choose x}\,(p\mathrm{e}^{t})^{x}q^{n-x},\\
-= & (p\mathrm{e}^{t}+q)^{n},\quad\mbox{for any \ensuremath{t}.}
+= & (p\mathrm{e}^{t}+q)^{n},\quad\mbox{for any $t$.}
 \end{alignat*}
 
 
@@ -3713,7 +3713,7 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 We will discuss three applications of moment generating functions in this book. The first is the fact that an MGF may be used to accurately identify the probability distribution that generated it, which rests on the following:
 
 #+begin_thm
-\label{thm:mgf-unique}
+#+latex: \label{thm:mgf-unique}
 The moment generating function, if it exists in a neighborhood of zero, determines a probability distribution /uniquely/. 
 #+end_thm
 
@@ -3752,7 +3752,7 @@ Similarly, \(M''(t)=\sum x^{2}\mathrm{e}^{tx}f(x)\) so that \(M''(0)=\E X^{2}\).
 #+latex: \footnote{We are glossing over some significant mathematical details in our derivation. Suffice it to say that when the MGF exists in a neighborhood of \(t=0\), the exchange of differentiation and summation is valid in that neighborhood, and our remarks hold true.}
 that
 \begin{equation}
-M_{X}^{(r)}(0)=\E X^{r}=\mbox{\ensuremath{r^{\mathrm{th}}} moment of \ensuremath{X} about the origin.}
+M_{X}^{(r)}(0)=\E X^{r}=\mbox{$r^{\mathrm{th}$} moment of $X$ about the origin.}
 \end{equation}
 
 These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In addition to these are the so called /central moments/ \(\mu_{r}\) defined by
@@ -3761,7 +3761,7 @@ These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In
 \end{equation}
 
 #+latex: \begin{example}
-Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=(q+p\mathrm{e}^{t})^{n}}}\).
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with $M(t)=(q+p\mathrm{e}^{t})^{n}$}\).
 
 We calculated the mean and variance of a binomial random variable in Section \ref{sec:binom-dist} by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
 \begin{alignat*}{1}
@@ -3786,11 +3786,11 @@ See how much easier that was?
 #+begin_rem
 We learned in this section that \(M^{(r)}(0)=\E X^{r}\). We remember from Calculus II that certain functions \(f\) can be represented by a Taylor series expansion about a point \(a\), which takes the form
 \begin{equation}
-f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all \ensuremath{|x-a|<R},}
+f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all $|x-a|<R$,}
 \end{equation}
 where \(R\) is called the /radius of convergence/ of the series (see Appendix \ref{sec:Sequences-and-Series}). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
 \begin{equation}
-M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all \ensuremath{|t|<\epsilon}.}
+M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all $|t|<\epsilon$.}
 \end{equation}
 #+end_rem
 
@@ -3817,7 +3817,7 @@ sd(X)
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
 ** The Empirical Distribution
-\label{sec:empirical-distribution}
+#+latex: \label{sec:empirical-distribution}
 
 Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
@@ -3905,15 +3905,15 @@ We can get the empirical quantile function in \textsf{R} with =quantile(x, probs
 As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter \ref{cha:resampling-methods}.
 
 ** Other Discrete Distributions
-\label{sec:other-discrete-distributions}
+#+latex: \label{sec:other-discrete-distributions}
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
 
 *** Dependent Bernoulli Trials
-\label{sec:non-bernoulli-trials}
+#+latex: \label{sec:non-bernoulli-trials}
 
 #+latex: \paragraph*{The Hypergeometric Distribution}
-\label{sub:hypergeometric-dist}
+#+latex: \label{sub:hypergeometric-dist}
 
 Consider an urn with 7 white balls and 5 black balls. Let our random experiment be to randomly select 4 balls, without replacement, from the urn. Then the probability of observing 3 white balls (and thus 1 black ball) would be
 \begin{equation}
@@ -4004,7 +4004,7 @@ Generate \(100,000\) observations of the random variable \(X\).
 #+latex: \end{example}
 
 #+latex: \paragraph*{Sampling With and Without Replacement}
-\label{sub:Sampling-With-and}
+#+latex: \label{sub:Sampling-With-and}
 
 Suppose that we have a large urn with, say, \(M\) white balls and \(N\) black balls. We take a sample of size \(n\) from the urn, and let \(X\) count the number of white balls in the sample. If we sample
 - without replacement, :: then \(X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)\) and has mean and variance
@@ -4026,12 +4026,12 @@ We see that both sampling procedures have the same mean, and the method with the
 is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 
 *** Waiting Time Distributions
-\label{sec:Waiting-Time-Distributions}
+#+latex: \label{sec:Waiting-Time-Distributions}
 
 Another important class of problems is associated with the amount of time it takes for a specified event of interest to occur. For example, we could flip a coin repeatedly until we observe Heads. We could toss a piece of paper repeatedly until we make it in the trash can.
 
 #+latex: \paragraph*{The Geometric Distribution}
-\label{sub:The-Geometric-Distribution}
+#+latex: \label{sub:The-Geometric-Distribution}
 
 Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -4069,7 +4069,7 @@ When they say ``geometric distribution'', this is what they mean. It is not hard
 #+end_note
 
 #+latex: \paragraph*{The Negative Binomial Distribution}
-\label{sub:The-Negative-Binomial}
+#+latex: \label{sub:The-Negative-Binomial}
 
 We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -4080,8 +4080,8 @@ We say that \(X\) has a /Negative Binomial distribution/ and write \(X\sim\maths
 
 As usual it should be clear that \(f_{X}(x)\geq 0\) and the fact that \(\sum f_{X}(x)=1\) follows from a generalization of the geometric series by means of a Maclaurin's series expansion:
 \begin{alignat}{1}
-\frac{1}{1-t}= & \sum_{k=0}^{\infty}t^{k},\quad\mbox{for \ensuremath{-1<t<1}},\mbox{ and}\\
-\frac{1}{(1-t)^{r}}= & \sum_{k=0}^{\infty}{r+k-1 \choose r-1}\, t^{k},\quad\mbox{for \ensuremath{-1<t<1}}.
+\frac{1}{1-t}= & \sum_{k=0}^{\infty}t^{k},\quad\mbox{for $-1<t<1$},\mbox{ and}\\
+\frac{1}{(1-t)^{r}}= & \sum_{k=0}^{\infty}{r+k-1 \choose r-1}\, t^{k},\quad\mbox{for $-1<t<1$}.
 \end{alignat}
 Therefore
 \begin{equation}
@@ -4105,15 +4105,15 @@ Let us next compute the MGF of \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{\infty}\mathrm{e}^{tx}\ {r+x-1 \choose r-1}p^{r}q^{x}\\
 = & p^{r}\sum_{x=0}^{\infty}{r+x-1 \choose r-1}[q\mathrm{e}^{t}]^{x}\\
-= & p^{r}(1-qe^{t})^{-r},\quad\mbox{provided \ensuremath{|q\mathrm{e}^{t}|<1,}}
+= & p^{r}(1-qe^{t})^{-r},\quad\mbox{provided $|q\mathrm{e}^{t}|<1$,}
 \end{alignat*}
 and so
 \begin{equation}
-M_{X}(t)=\left(\frac{p}{1-q\mathrm{e}^{t}}\right)^{r},\quad\mbox{for \ensuremath{q\mathrm{e}^{t}<1}}.
+M_{X}(t)=\left(\frac{p}{1-q\mathrm{e}^{t}}\right)^{r},\quad\mbox{for $q\mathrm{e}^{t}<1$}.
 \end{equation}
 We see that \(q\mathrm{e}^{t}<1\) when \(t<-\ln(1-p)\).
 
-Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with \ensuremath{M(t)=p^{r}(1-q\mathrm{e}^{t})^{-r}}}\). We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\mathtt{prob}=p)\mbox{ with $M(t)=p^{r}(1-q\mathrm{e}^{t})^{-r}$}\). We proclaimed above the values of the mean and variance. Now we are equipped with the tools to find these directly.
 \begin{alignat*}{1}
 M'(t)= & p^{r}(-r)(1-q\mathrm{e}^{t})^{-r-1}(-q\mathrm{e}^{t}),\\
 = & rq\mathrm{e}^{t}p^{r}(1-q\mathrm{e}^{t})^{-r-1},\\
@@ -4146,10 +4146,10 @@ It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\
 #+end_note
 
 *** Arrival Processes
-\label{sec:Arrival-Processes}
+#+latex: \label{sec:Arrival-Processes}
 
 #+latex: \paragraph*{The Poisson Distribution}
-\label{sub:The-Poisson-Distribution}
+#+latex: \label{sub:The-Poisson-Distribution}
 
 This is a distribution associated with ``rare events'', for reasons which will become clear in a moment. The events might be:
 - traffic accidents,
@@ -4171,7 +4171,7 @@ Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{
 - occurrences in disjoint subintervals are independent.
 
 #+begin_rem
-\label{rem:poisson-process}
+#+latex: \label{rem:poisson-process}
 
 If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) is the average number that occur in unit time, then \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)\), that is,
 \begin{equation}
@@ -4198,7 +4198,7 @@ diff(ppois(c(47, 50), lambda = 50))
 #+latex: \end{example}
 
 ** Functions of Discrete Random Variables
-\label{sec:functions-discrete-rvs}
+#+latex: \label{sec:functions-discrete-rvs}
 
 We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix \ref{sec:Differential-and-Integral}), the solution can be found by simple substitution.
 
@@ -4375,17 +4375,17 @@ For the following situations, decide what the distribution of \(X\) should be. I
 #+end_xca
 
 #+begin_xca
-\label{xca:variance-shortcut}
+#+latex: \label{xca:variance-shortcut}
 Show that \(\E(X-\mu)^{2}=\E X^{2}-\mu^{2}\). /Hint/: expand the quantity \((X-\mu)^{2}\) and distribute the expectation over the resulting terms.
 #+end_xca
 
 #+begin_xca
-\label{xca:binom-factorial-expectation}
+#+latex: \label{xca:binom-factorial-expectation}
 If \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) show that \(\E X(X-1)=n(n-1)p^{2}\).
 #+end_xca
 
 #+begin_xca
-\label{xca:hyper-mean-variance}
+#+latex: \label{xca:hyper-mean-variance}
 Calculate the mean and variance of the hypergeometric distribution. Show that 
 \begin{equation}
 \mu=K\frac{M}{M+N},\quad\sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
@@ -4396,7 +4396,7 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 :PROPERTIES:
 :tangle: R/contdist.R
 :END:
-\label{cha:Continuous-Distributions}
+#+latex: \label{cha:Continuous-Distributions}
 
 #+latex: \noindent 
 The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
@@ -4419,10 +4419,10 @@ The interested reader who would like to learn more about any of the assorted dis
 - how to make new continuous random variables from old ones
 
 ** Continuous Random Variables
-\label{sec:continuous-random-variables}
+#+latex: \label{sec:continuous-random-variables}
 
 *** Probability Density Functions
-\label{sub:probability-density-functions}
+#+latex: \label{sub:probability-density-functions}
 
 Continuous random variables have supports that look like
 \begin{equation}
@@ -4440,7 +4440,7 @@ that satisfies three basic properties:
 1. \(f_{X}(x)>0\) for \(x\in S_{X}\),
 2. \(\int_{x\in S_{X}}f_{X}(x)\,\mathrm{d} x=1\), and
 3. \(\Pr(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
-\label{enu: contrvcond3}
+#+latex: \label{enu: contrvcond3}
 
 #+begin_rem
 We can say the following about continuous random variables:
@@ -4478,7 +4478,7 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 #+latex: \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 
 *** Expectation of Continuous Random Variables
-\label{sub:Expectation-of-Continuous}
+#+latex: \label{sub:Expectation-of-Continuous}
 
 For a continuous random variable \(X\) the expected value of \(g(X)\) is
 \begin{equation}
@@ -4499,7 +4499,7 @@ M_{X}(t)=\E\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}(x)\:\ma
 provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=0\).
 
 #+latex: \begin{example}
-\label{exa:cont-pdf3x2}
+#+latex: \label{exa:cont-pdf3x2}
 
 Let the continuous random variable \(X\) have PDF
 \[
@@ -4535,7 +4535,7 @@ which gives \(\sigma^{2}=3/5-(3/4)^{2}=3/80\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:cont-pdf-3x4}
+#+latex: \label{exa:cont-pdf-3x4}
 
 We will try one with unbounded support to brush up on improper integration. Let the random variable \(X\) have PDF
 \[
@@ -4625,7 +4625,7 @@ Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why
 #+latex: \end{example}
 
 ** The Continuous Uniform Distribution
-\label{sec:The-Continuous-Uniform}
+#+latex: \label{sec:The-Continuous-Uniform}
 
 A random variable \(X\) with the continuous uniform distribution on the interval \((a,b)\) has PDF
 \begin{equation}
@@ -4658,7 +4658,7 @@ using the popular formula for the difference of squares. The variance is left to
 #+latex: \end{example}
 
 ** The Normal Distribution
-\label{sec:The-Normal-Distribution}
+#+latex: \label{sec:The-Normal-Distribution}
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
@@ -4723,19 +4723,19 @@ pnorm(1:3) - pnorm(-(1:3))
 #+end_src
 
 #+latex: \begin{example}
-\label{exa:iq-model}
+#+latex: \label{exa:iq-model}
 Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\Pr(85\leq X\leq115)\)?
 
 /Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
 #+latex: \end{example}
 
 *** Normal Quantiles and the Quantile Function
-\label{sub:Normal-Quantiles-QF}
+#+latex: \label{sub:Normal-Quantiles-QF}
 
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 
 #+latex: \begin{example}
-\label{exa:iq-quantile-state-problem}
+#+latex: \label{exa:iq-quantile-state-problem}
 Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
 /Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\Pr(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+begin_src R :exports both :results output pp 
@@ -4809,14 +4809,14 @@ Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
 ** Functions of Continuous Random Variables
-\label{sec:Functions-of-Continuous}
+#+latex: \label{sec:Functions-of-Continuous}
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 
 *** The PDF Method
 
 #+begin_prop
-\label{pro:func-cont-rvs-pdf-formula}
+#+latex: \label{pro:func-cont-rvs-pdf-formula}
 
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
@@ -4831,9 +4831,8 @@ f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq:univ-t
 \end{equation}
 #+end_rem
 
-
 #+latex: \begin{example}
-\label{exa:lnorm-transformation}
+#+latex: \label{exa:lnorm-transformation}
 Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and let \(Y=\mathrm{e}^{X}\). What is the PDF of \(Y\)? 
 *Solution:* Notice first that \(\mathrm{e}^{x}>0\) for any \(x\), so the support of \(Y\) is \((0,\infty)\). Since the transformation is monotone, we can solve \(y=\mathrm{e}^{x}\) for \(x\) to get \(x=\ln\, y\), giving \(\mathrm{d} x/\mathrm{d} y=1/y\). Therefore, for any \(y>0\),
 \[
@@ -4843,7 +4842,7 @@ where we have dropped the absolute value bars since \(y>0\). The random variable
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:lin-trans-norm}
+#+latex: \label{exa:lin-trans-norm}
 Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X\). What is the PDF of \(Y\)?
 #+latex: \end{example}
 
@@ -4859,7 +4858,8 @@ f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\qu
 We recognize the PDF of \(Y\) to be that of a \(\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)\) distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
 #+begin_fact
-\label{fac:lin-trans-norm-is-norm}If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
+#+latex: \label{fac:lin-trans-norm-is-norm}
+If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
 #+end_fact
 
 Note that it is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u)\). Instead, leave the transformation in the form \(u=u(x)\) and calculate the derivative of the /original/ transformation
@@ -4928,7 +4928,7 @@ The Probability Integral Transform is true for all continuous random variables w
 #+end_fact
 
 #+latex: \begin{example}
-\label{exa:distn-of-z-squared}
+#+latex: \label{exa:distn-of-z-squared}
 Let \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(U=Z^{2}\). What is the PDF of \(U\)? 
 Notice first that \(Z^{2}\geq0\), and thus the support of \(U\) is \([0,\infty)\). And for any \(u\geq0\), 
 \[
@@ -4991,15 +4991,15 @@ The answers are not the same! Furthermore, if we were to repeat the process we w
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \textsf{R} are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
 ** Other Continuous Distributions
-\label{sec:Other-Continuous-Distributions}
+#+latex: \label{sec:Other-Continuous-Distributions}
 
 *** Waiting Time Distributions
-\label{sub:Waiting-Time-Distributions}
+#+latex: \label{sub:Waiting-Time-Distributions}
 
 In some experiments, the random variable being measured is the time until a certain event occurs. For example, a quality control specialist may be testing a manufactured product to see how long it takes until it fails. An efficiency expert may be recording the customer traffic at a retail store to streamline scheduling of staff. 
 
 #+latex: \paragraph*{The Exponential Distribution}
-\label{sub:The-Exponential-Distribution}
+#+latex: \label{sub:The-Exponential-Distribution}
 
 We say that \(X\) has an /exponential distribution/ and write \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). 
 \begin{equation}
@@ -5029,7 +5029,7 @@ The exponential distribution is said to be /memoryless/ because exponential rand
 See Exercise \ref{xca:prove-the-memoryless}.
 
 *** The Gamma Distribution
-\label{sub:The-Gamma-Distribution}
+#+latex: \label{sub:The-Gamma-Distribution}
 
 This is a generalization of the exponential distribution. We say that \(X\) has a gamma distribution and write \(X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). It has PDF
 \begin{equation}
@@ -5045,10 +5045,10 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 #+latex: \end{example}
 
 *** The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions
-\label{sub:The-Chi-Square-t-F}
+#+latex: \label{sub:The-Chi-Square-t-F}
 
 #+latex: \paragraph*{The Chi square Distribution}
-\label{sub:The-Chi-Square}
+#+latex: \label{sub:The-Chi-Square}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5100,7 +5100,7 @@ Here are some useful things to know about the chi-square distribution.
 #+end_rem
 
 *** Student's \(t\) distribution
-\label{sub:Student's-t-distribution}
+#+latex: \label{sub:Student's-t-distribution}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5109,7 +5109,7 @@ f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\fra
 is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \textsf{R} functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 *** Snedecor's \(F\) distribution
-\label{sub:snedecor-F-distribution}
+#+latex: \label{sub:snedecor-F-distribution}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5124,10 +5124,10 @@ Here are some notes about the \(F\) distribution.
 #+end_rem
 
 *** Other Popular Distributions
-\label{sub:Other-Popular-Distributions}
+#+latex: \label{sub:Other-Popular-Distributions}
 
 #+latex: \paragraph*{The Cauchy Distribution}
-\label{sub:The-Cauchy-Distribution}
+#+latex: \label{sub:The-Cauchy-Distribution}
 
 This is a special case of the Student's \(t\) distribution. It has PDF
 \begin{equation}
@@ -5138,7 +5138,7 @@ We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). T
 It is easy to see that a \(\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)\) distribution is the same as a \(\mathsf{t}(\mathtt{df}=1)\) distribution. The \(\mathsf{cauchy}\) distribution looks like a \(\mathsf{norm}\) distribution but with very heavy tails. The mean (and variance) do not exist, that is, they are infinite. The median is represented by the \(\mathtt{location}\) parameter, and the \(\mathtt{scale}\) parameter influences the spread of the distribution about its median.
 
 #+latex: \paragraph*{The Beta Distribution}
-\label{sub:The-Beta-Distribution}
+#+latex: \label{sub:The-Beta-Distribution}
 
 This is a generalization of the continuous uniform distribution.
 \begin{equation}
@@ -5152,7 +5152,7 @@ See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian 
 
 
 #+latex: \paragraph*{The Logistic Distribution}
-\label{sub:The-Logistic-Distribution}
+#+latex: \label{sub:The-Logistic-Distribution}
 
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left(-\frac{x-\mu}{\sigma}\right)\right]^{-2},\quad-\infty<x<\infty.
@@ -5160,7 +5160,7 @@ f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left
 We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \textsf{R} function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
 
 #+latex: \paragraph*{The Lognormal Distribution}
-\label{sub:The-Lognormal-Distribution}
+#+latex: \label{sub:The-Lognormal-Distribution}
 
 This is a distribution derived from the normal distribution (hence the name). If \(U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), then \( X = \mathrm{e}^{U} \) has PDF
 \begin{equation}
@@ -5170,7 +5170,7 @@ We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). 
 
 
 #+latex: \paragraph*{The Weibull Distribution}
-\label{sub:The-Weibull-Distribution}
+#+latex: \label{sub:The-Weibull-Distribution}
 
 This has PDF
 \begin{equation}
@@ -5266,12 +5266,12 @@ If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find
 #+end_xca
 
 #+begin_xca
-\label{xca:variance-dunif}
+#+latex: \label{xca:variance-dunif}
 Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). /Hint:/ First calculate \(\E X^{2}\).
 #+end_xca
 
 #+begin_xca
-\label{xca:prove-the-memoryless}
+#+latex: \label{xca:prove-the-memoryless}
 Prove the memoryless property for exponential random variables. That is, for \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\) show that for any \(s,t>0\),
 \[
 \Pr(X>s+t\,|\, X>t)=\Pr(X>s).
@@ -5282,7 +5282,7 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 :PROPERTIES:
 :tangle: R/multdist.R
 :END:
-\label{cha:Multivariable-Distributions}
+#+latex: \label{cha:Multivariable-Distributions}
 
 #+latex: \noindent 
 We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
@@ -5305,7 +5305,7 @@ The interested reader who would like to learn more about any of the below mentio
 - what it looks like when there are more than two random variables present
 
 ** Joint and Marginal Probability Distributions
-\label{sec:Joint-Probability-Distributions}
+#+latex: \label{sec:Joint-Probability-Distributions}
 
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
@@ -5343,7 +5343,7 @@ The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in
 We now introduce some examples of bivariate discrete distributions. The first we have seen before, and the second is based on the first.
 
 #+latex: \begin{example}
-\label{exa:toss-two-dice-joint-pmf}
+#+latex: \label{exa:toss-two-dice-joint-pmf}
 
 Roll a fair die twice. Let \(X\) be the face shown on the first roll, and let \(Y\) be the face shown on the second roll. We have already seen this example in Chapter \ref{cha:Probability}, Example \ref{exa:Toss-a-six-sided-die-twice}. For this example, it suffices to define
 \[
@@ -5360,7 +5360,7 @@ In the previous example, and in many other ones, the joint support can be writte
 
 
 #+latex: \begin{example}
-\label{exa:max-sum-two-dice}
+#+latex: \label{exa:max-sum-two-dice}
 
 Let the random experiment again be to roll a fair die twice, except now let us define the random variables \(U\) and \(V\) by
 \begin{eqnarray*}
@@ -5482,7 +5482,7 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x,\quad y\in S_{Y}.
 
 
 #+latex: \begin{example}
-\label{exa:joint-pdf}
+#+latex: \label{exa:joint-pdf}
 
 Let the joint PDF of \((X,Y)\) be given by
 \[
@@ -5550,7 +5550,7 @@ colSums(temp)
 You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
 
 ** Joint and Marginal Expectation
-\label{sec:Joint-and-Marginal-Expectation}
+#+latex: \label{sec:Joint-and-Marginal-Expectation}
 
 Given a function \(g\) with arguments \((x,y)\) we would like to know the long-run average behavior of \(g(X,Y)\) and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
 \begin{equation}
@@ -5588,7 +5588,7 @@ The correlation is usually denoted by \(\rho_{X,Y}\) or simply \(\rho\) if the r
 1. Equality holds above (\(\rho_{X,Y}=\pm1\)) if and only if \(Y\) is a linear function of \(X\) with probability one.
 
 #+latex: \begin{example}
-\label{exa:max-sum-dice-covariance}
+#+latex: \label{exa:max-sum-dice-covariance}
 
 We will compute the covariance for the discrete distribution in Example \ref{exa:max-sum-two-dice}. The expected value of \(U\) is
 \[
@@ -5650,7 +5650,7 @@ Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \textsf{R} package =Ryacas= \cite{ryacas}. See Section \ref{sub:bivariate-transf-R} for another example where the =Ryacas= package appears.
 
 ** Conditional Distributions
-\label{sec:Conditional-Distributions}
+#+latex: \label{sec:Conditional-Distributions}
 
 If \(x\in S_{X}\) is such that \(f_{X}(x)>0\), then we define the /conditional density/ of \(Y|\, X=x\), denoted \(f_{Y|x}\), by 
 \begin{equation}
@@ -5715,10 +5715,10 @@ where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{
 #+end_rem
 
 ** Independent Random Variables
-\label{sec:Independent-Random-Variables}
+#+latex: \label{sec:Independent-Random-Variables}
 
 *** Independent Random Variables
-\label{sub:Independent-Random-Variables}
+#+latex: \label{sub:Independent-Random-Variables}
 
 We recall from Chapter \ref{cha:Probability} that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
@@ -5759,7 +5759,7 @@ f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
 #+begin_prop
-\label{pro:indep-implies-prodexpect}
+#+latex: \label{pro:indep-implies-prodexpect}
 If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
 \begin{equation}
 \E\left(u(X)v(Y)\right)=\left(\E u(X)\right)\left(\E v(Y)\right).
@@ -5788,19 +5788,19 @@ When \(X\) and \(Y\) are independent then \(\E XY=\E X\,\E Y\). And when the cov
 #+end_proof
 
 #+begin_rem
-\label{rem:cov0-not-imply-indep}
+#+latex: \label{rem:cov0-not-imply-indep}
 Unfortunately, the converse of Corollary \ref{cor:indep-implies-uncorr} is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}.
 #+end_rem
 
 Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
 
 #+begin_fact
-\label{fac:indep-then-function-indep}
+#+latex: \label{fac:indep-then-function-indep}
 If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent for any functions \(u\) and \(v\).
 #+end_fact
 
 *** Combining Independent Random Variables
-\label{sub:Combining-Independent-Random}
+#+latex: \label{sub:Combining-Independent-Random}
 
 Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
 
@@ -5836,7 +5836,7 @@ which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\math
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
 #+begin_prop
-\label{pro:mean-sd-lin-comb-two}
+#+latex: \label{pro:mean-sd-lin-comb-two}
 Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
@@ -5861,7 +5861,7 @@ But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1
 #+end_proof
 
 ** Exchangeable Random Variables
-\label{sec:Exchangeable-Random-Variables}
+#+latex: \label{sec:Exchangeable-Random-Variables}
 
 Two random variables \(X\) and \(Y\) are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
@@ -5880,7 +5880,7 @@ It is straightforward and tedious to check that \(\iint f=1\). We may see immedi
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:binom-exchangeable}
+#+latex: \label{exa:binom-exchangeable}
 Suppose \(X\) and \(Y\) are IID \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). Then their joint PMF is
 \begin{eqnarray*}
 f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
@@ -5899,7 +5899,7 @@ If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) 
 Exchangeability thus contains IID as a special case. 
 
 ** The Bivariate Normal Distribution
-\label{sec:The-Bivariate-Normal}
+#+latex: \label{sec:The-Bivariate-Normal}
 
 The bivariate normal PDF is given by the unwieldy formula
 \begin{multline}
@@ -5947,7 +5947,7 @@ X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\
 From this we immediately get that \(\E X=\mu_{X}\) and \(\mbox{Var}(X)=\sigma_{X}^{2}\) (and the same is true for \(Y\) with the letters switched). And it should be no surprise that the correlation between \(X\) and \(Y\) is exactly \(\mbox{Corr}(X,Y)=\rho\).
 
 #+begin_prop
-\label{pro:mvnorm-cond-dist}
+#+latex: \label{pro:mvnorm-cond-dist}
 The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})\), where
 \begin{equation}
 \mu_{Y|x}=\mu_{Y}+\rho\frac{\sigma_{Y}}{\sigma_{X}}\left(x-\mu_{X}\right),\mbox{ and }\sigma_{Y|x}=\sigma_{Y}\sqrt{1-\rho^{2}}.
@@ -6016,7 +6016,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_html
 
 ** Bivariate Transformations of Random Variables
-\label{sec:Transformations-Multivariate}
+#+latex: \label{sec:Transformations-Multivariate}
 
 We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
@@ -6087,14 +6087,14 @@ It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\
 #+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-\label{sub:bivariate-transf-R}
+#+latex: \label{sub:bivariate-transf-R}
 
 It is possible to do the computations above in \textsf{R} with the =Ryacas= package. The package is an interface to the open-source computer algebra system, ``Yacas''. The user installs Yacas, then employs =Ryacas= to submit commands to Yacas, after which the output is displayed in the \textsf{R} console.
 
 There are not yet any examples of Yacas in this book, but there are online materials to help the interested reader: see [[http://code.google.com/p/ryacas/][here]] to get started.
 
 ** Remarks for the Multivariate Case
-\label{sec:Remarks-for-the-Multivariate}
+#+latex: \label{sec:Remarks-for-the-Multivariate}
 
 There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
@@ -6131,7 +6131,7 @@ f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
 #+begin_prop
-\label{pro:mean-sd-lin-comb}
+#+latex: \label{pro:mean-sd-lin-comb}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
@@ -6194,7 +6194,7 @@ M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf
 We will need the following in Chapter \ref{cha:multiple-linear-regression}.
 
 #+begin_thm
-\label{thm:mvnorm-dist-matrix-prod}
+#+latex: \label{thm:mvnorm-dist-matrix-prod}
 If \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) and \(\mathbf{A}\) is any matrix, then the random vector \(\mathbf{Y}=\mathbf{AX}\)
 is distributed
 \begin{equation}
@@ -6214,7 +6214,7 @@ and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf
 #+end_proof
 
 ** The Multinomial Distribution
-\label{sec:Multinomial}
+#+latex: \label{sec:Multinomial}
 
 We sample \(n\) times, with replacement, from an urn that contains balls of \(k\) different types. Let \(X_{1}\) denote the number of balls in our sample of type 1, let \(X_{2}\) denote the number of balls of type 2, ..., and let \(X_{k}\) denote the number of balls of type \(k\). Suppose the urn has proportion \(p_{1}\) of balls of type 1, proportion \(p_{2}\) of balls of type 2, ..., and proportion \(p_{k}\) of balls of type \(k\). Then the joint PMF of \((X_{1},\ldots,X_{k})\) is
 \begin{eqnarray}
@@ -6321,12 +6321,12 @@ Prove that \( \mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y). \) \label{xca:Prove-cov-short
 #+end_xca
 
 #+begin_xca
-\label{xca:sum-indep-chisq}
+#+latex: \label{xca:sum-indep-chisq}
 Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the distribution of \(X+Y\) (you may want to refer to Equation \ref{eq:mgf-chisq}).
 #+end_xca
 
 #+begin_xca
-\label{xca:diff-indep-norm}
+#+latex: \label{xca:diff-indep-norm}
 Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M_{Y}(-t)\). Use this to find the distribution of \(X-Y\) when \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\)  are independent. 
 #+end_xca
 
@@ -6334,7 +6334,7 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 :PROPERTIES:
 :tangle: R/sampdist.R
 :END:
-\label{cha:Sampling-Distributions}
+#+latex: \label{cha:Sampling-Distributions}
 
 #+latex: \noindent 
 This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
@@ -6358,17 +6358,17 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 - some basic concepts related to sampling distribution utility, such as bias and variance
 
 ** Simple Random Samples
-\label{sec:simple-random-samples}
+#+latex: \label{sec:simple-random-samples}
 
 *** Simple Random Samples
-\label{sub:simple-random-samples}
+#+latex: \label{sub:simple-random-samples}
 
 #+begin_defn
 If \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent with \(X_{i}\sim f\) for \(i=1,2,\ldots,n\), then we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /independent and identically distributed/ (IID) from the population \(f\) or alternatively we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a /simple random sample of size/ \(n\), denoted \(SRS(n)\), from the population \(f\). 
 #+end_defn
 
 #+begin_prop
-\label{pro:mean-sd-xbar}
+#+latex: \label{pro:mean-sd-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the mean and standard deviation of \(\overline{X}\) are given by the formulas \(\mu_{\overline{X}}=\mu\) and \(\sigma_{\overline{X}}=\sigma/\sqrt{n}\).
 #+end_prop
 
@@ -6379,7 +6379,7 @@ Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition \ref{pro:mean-sd-lin-com
 The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section \ref{sec:Central-Limit-Theorem}.
 
 #+begin_prop
-\label{pro:mgf-xbar}
+#+latex: \label{pro:mgf-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with MGF \(M(t)\). Then the MGF of \(\overline{X}\) is given by
 \begin{equation}
 M_{\overline{X}}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
@@ -6401,10 +6401,10 @@ The last step is to recognize that each term in last product above is exactly \(
 #+end_proof
 
 ** Sampling from a Normal Distribution
-\label{sec:sampling-from-normal-dist}
+#+latex: \label{sec:sampling-from-normal-dist}
 
 *** The Distribution of the Sample Mean
-\label{sub:samp-mean-dist-of}
+#+latex: \label{sub:samp-mean-dist-of}
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the sample mean \(\overline{X}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) sampling distribution.
@@ -6426,10 +6426,10 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 #+end_proof
 
 *** The Distribution of the Sample Variance
-\label{sub:Samp-Var-Dist}
+#+latex: \label{sub:Samp-Var-Dist}
 
 #+begin_thm
-\label{thm:Xbar-andS}
+#+latex: \label{thm:Xbar-andS}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, and let
 \begin{equation}
 \overline{X}=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}.
@@ -6448,7 +6448,7 @@ The proof is beyond the scope of the present book, but the theorem is simply too
 #+end_proof
 
 *** The Distribution of Student's \(T\) Statistic
-\label{sub:Student's-t-Distribution}
+#+latex: \label{sub:Student's-t-Distribution}
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the quantity 
@@ -6533,7 +6533,7 @@ There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribut
 #+end_rem
 
 ** The Central Limit Theorem
-\label{sec:Central-Limit-Theorem}
+#+latex: \label{sec:Central-Limit-Theorem}
 
 In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) is a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution then \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\). In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of \(Z\) defined by
 \begin{equation}
@@ -6544,7 +6544,7 @@ is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\).
 However, there are many populations that are /not/ normal ... and the statistician often finds herself sampling from such populations. What can be said in this case? The surprising answer is contained in the following theorem.
 
 #+begin_thm
-\label{thm:central-limit-thrm}
+#+latex: \label{thm:central-limit-thrm}
 *The Central Limit Theorem.* Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the sampling distribution of 
 \begin{equation}
 Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
@@ -6584,7 +6584,7 @@ For example, when the command =clt1()=  is issued a plot window opens to show a 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
 ** Sampling Distributions of Two-Sample Statistics
-\label{sec:Samp-Dist-Two-Samp}
+#+latex: \label{sec:Samp-Dist-Two-Samp}
 
 There are often two populations under consideration, and it sometimes of interest to compare properties between groups. To do so we take independent samples from each population and calculate respective sample statistics for comparison. In some simple cases the sampling distribution of the comparison is known and easy to derive; such cases are the subject of the present section.
 
@@ -6667,7 +6667,7 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 #+end_rem
 
 ** Simulated Sampling Distributions
-\label{sec:Simulated-Sampling-Distributions}
+#+latex: \label{sec:Simulated-Sampling-Distributions}
 
 Some comparisons are meaningful, but their sampling distribution is not quite so tidy to describe analytically. What do we do then?
 
@@ -6788,7 +6788,7 @@ Suppose that we observe a random sample \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) of
 #+end_xca
 
 #+begin_xca
-\label{xca:clt123}
+#+latex: \label{xca:clt123}
 In this exercise we will investigate how the shape of the population distribution affects the time until the distribution of \(\overline{X}\) is acceptably normal.
 #+end_xca
 
@@ -6804,7 +6804,7 @@ And that's all she wrote.
 :PROPERTIES:
 :tangle: R/estimate.R
 :END:
-\label{cha:Estimation}
+#+latex: \label{cha:Estimation}
 
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
@@ -6821,12 +6821,12 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 - the concept of margin of error and its relationship to sample size
 
 ** Point Estimation
-\label{sec:Point-Estimation-1}
+#+latex: \label{sec:Point-Estimation-1}
 
 The following example is how I was introduced to maximum likelihood.
 
 #+latex: \begin{example}
-\label{exa:how-many-fish}
+#+latex: \label{exa:how-many-fish}
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 
 We will fish from the pond and suppose that we capture \(M=7\) fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
@@ -6889,7 +6889,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 #+end_html
 
 #+latex: \begin{example}
-\label{exa:bass-bluegill}
+#+latex: \label{exa:bass-bluegill}
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 
 Let \(p=\mbox{the proportion of bass}\). Without any other information, it is conceivable for \(p\) to be any value in the interval \([0,1]\), but for the sake of argument we will suppose that \(p\) falls strictly between zero and one. How can we learn about the true value of \(p\)? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
@@ -7057,9 +7057,9 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased es
 #+end_defn
 
 #+latex: \begin{example}
-\label{exa:normal-MLE-both}
+#+latex: \label{exa:normal-MLE-both}
 
-Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if \(\mbox{\ensuremath{\theta}}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
+Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
@@ -7157,7 +7157,7 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 ** Confidence Intervals for Means
-\label{sec:Confidence-Intervals-for-Means}
+#+latex: \label{sec:Confidence-Intervals-for-Means}
 
 We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, where \(\mu\) is unknown. We know that we may estimate \(\mu\) with \(\overline{X}\), and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
@@ -7256,7 +7256,7 @@ For a fixed sample size \(n\),
 
 
 #+latex: \begin{example}
-\label{exa:plant-one-samp-z-int}
+#+latex: \label{exa:plant-one-samp-z-int}
 *Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 
 The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
@@ -7358,7 +7358,7 @@ plot(temp, "Conf")
 #+end_src
 
 ** Confidence Intervals for Differences of Means
-\label{sec:Conf-Interv-for-Diff-Means}
+#+latex: \label{sec:Conf-Interv-for-Diff-Means}
 
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) be a \(SRS(m)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Further, assume that the \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) sample is independent of the \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) sample.
 
@@ -7418,7 +7418,7 @@ The basic function is =t.test= which has a =var.equal= argument that may be set 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
 ** Confidence Intervals for Proportions
-\label{sec:Confidence-Intervals-Proportions}
+#+latex: \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 - the proportion of U.S. citizens that support Obama,
@@ -7511,7 +7511,7 @@ B <- with(A, untable(A, Freq))
 #+end_src
 
 ** Confidence Intervals for Variances
-\label{sec:Confidence-Intervals-for-Variances}
+#+latex: \label{sec:Confidence-Intervals-for-Variances}
 
 I am thinking one and two sample problems here.
 
@@ -7520,7 +7520,7 @@ I am thinking one and two sample problems here.
 I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
 
 ** Fitting Distributions
-\label{sec:Fitting-Distributions}
+#+latex: \label{sec:Fitting-Distributions}
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -7528,7 +7528,7 @@ I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= i
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
 ** Sample Size and Margin of Error
-\label{sec:Sample-Size-and-MOE}
+#+latex: \label{sec:Sample-Size-and-MOE}
 
 Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
@@ -7593,7 +7593,7 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
 
 ** Other Topics
-\label{sec:Other-Topics}
+#+latex: \label{sec:Other-Topics}
 
 Mention =mle= from the =stats4= package.
 
@@ -7604,11 +7604,11 @@ Mention =mle= from the =stats4= package.
 
 #+begin_xca
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Find a two-dimensional MLE for \(\theta=(\mu,\sigma)\).
-\label{xca:norm-mu-sig-MLE}
+#+latex: \label{xca:norm-mu-sig-MLE}
 #+end_xca
 
 #+begin_xca
-\label{xca:CI-quad-form}
+#+latex: \label{xca:CI-quad-form}
 Find the upper and lower limits for the confidence interval procedure by finding the roots of \(f\) defined by 
 \[
 f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.
@@ -7620,7 +7620,7 @@ You are going to need the quadratic formula.
 :PROPERTIES:
 :tangle: R/hypoth.R
 :END:
-\label{cha:Hypothesis-Testing}
+#+latex: \label{cha:Hypothesis-Testing}
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -7630,7 +7630,7 @@ You are going to need the quadratic formula.
 - the concept of statistical power and its relation to sample size
 
 ** Introduction
-\label{sec:Introduction-Hypothesis}
+#+latex: \label{sec:Introduction-Hypothesis}
 
 I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr. Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
 
@@ -7666,10 +7666,10 @@ There are two very important final thoughts. First, everybody gets a cookie in t
 
 
 Tests for Proportions
-\label{sec:Tests-for-Proportions}
+#+latex: \label{sec:Tests-for-Proportions}
 
 #+latex: \begin{example}
-\label{exa:widget-machine}
+#+latex: \label{exa:widget-machine}
 
 We have a machine that makes widgets. 
 
@@ -7732,7 +7732,7 @@ Find
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:prop-test-pvalue-A}
+#+latex: \label{exa:prop-test-pvalue-A}
 
 Suppose \(p=\mbox{the proportion of students}\) who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40% acceptance rate for its graduate school. Consider the data stored in the table =UCBAdmissions= from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an \(\alpha=0.01\) significance level.
 
@@ -7765,7 +7765,7 @@ Our test statistic is not less than \(-2.32\), so it does not fall into the crit
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:prop-test-pvalue-B}
+#+latex: \label{exa:prop-test-pvalue-B}
 We are going to do Example \ref{exa:prop-test-pvalue-A} all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
 
 Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately \(-1.68\). But notice that our critical value has changed: \(\alpha=0.05\) and \(-z_{0.05}\) is 
@@ -7835,7 +7835,7 @@ Otherwise, your data -- the raw successes and failures -- should be in a column 
 Once your unsummarized data is a column, then you can use the menu \textsf{Statistics \(\triangleright\) Proportions \(\triangleright\) Single-sample proportion test}...
 
 ** One Sample Tests for Means and Variances
-\label{sec:One-Sample-Tests}
+#+latex: \label{sec:One-Sample-Tests}
 
 *** For Means
 
@@ -7916,7 +7916,7 @@ sigma.test(women$height, sigma = 8)
 #+end_src
 
 ** Two-Sample Tests for Means and Variances
-\label{sec:Two-Sample-Tests-for-Means}
+#+latex: \label{sec:Two-Sample-Tests-for-Means}
 
 The basic idea for this section is the following. We have \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\). distributed independently. We would like to know whether \(X\) and \(Y\) come from the same population distribution, that is, we would like to know:
 \begin{equation}
@@ -7970,9 +7970,10 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 #+end_src
 
 ** Other Hypothesis Tests
-\label{sec:Other-Hypothesis-Tests}
+#+latex: \label{sec:Other-Hypothesis-Tests}
 
-*** Kolmogorov-Smirnov Goodness-of-Fit Test\label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}
+*** Kolmogorov-Smirnov Goodness-of-Fit Test
+#+latex: \label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -7981,7 +7982,7 @@ ks.test(randu$x, "punif")
 #+end_src
 
 *** Shapiro-Wilk Normality Test
-\label{sub:Shapiro-Wilk-Normality-Test}
+#+latex: \label{sub:Shapiro-Wilk-Normality-Test}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -7990,7 +7991,7 @@ shapiro.test(women$height)
 #+end_src
 
 ** Analysis of Variance
-\label{sec:Analysis-of-Variance}
+#+latex: \label{sec:Analysis-of-Variance}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -8079,7 +8080,7 @@ par(old.omd)
 #+end_html
 
 ** Sample Size and Power
-\label{sec:Sample-Size-and-Power}
+#+latex: \label{sec:Sample-Size-and-Power}
 
 The power function of a test for a parameter \(\theta\) is
 \[
@@ -8132,7 +8133,7 @@ power.examp()
 :PROPERTIES:
 :tangle: R/slr.R
 :END:
-\label{cha:simple-linear-regression}
+#+latex: \label{cha:simple-linear-regression}
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -8143,7 +8144,7 @@ power.examp()
 - the concept of influential versus outlying observations, and how to tell the difference
 
 ** Basic Philosophy
-\label{sec:Basic-Philosophy}
+#+latex: \label{sec:Basic-Philosophy}
 
 Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not random (so we will write \(x\)), but \(Y\) is random. We believe that \(Y\) depends in /some/ way on \(x\). Some typical examples of \( (x,Y) \) pairs are
 
@@ -8238,7 +8239,7 @@ segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 
 #+latex: \begin{example}
-\label{exa:Speed-and-Stopping}
+#+latex: \label{exa:Speed-and-Stopping}
 *Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
 #+begin_src R :exports both :results output pp 
 head(cars)
@@ -8284,10 +8285,10 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 #+latex: \end{example}
 
 ** Estimation
-\label{sec:SLR-Estimation}
+#+latex: \label{sec:SLR-Estimation}
 
 *** Point Estimates of the Parameters
-\label{sub:point-estimate-mle-slr}
+#+latex: \label{sub:point-estimate-mle-slr}
 
 Where is \( \mu(x) \)? In essence, we would like to ``fit'' a line to the points. But how do we determine a ``good'' line? Is there a /best/ line? We will use maximum likelihood\index{maximum likelihood} to find it. We know:
 \begin{equation}
@@ -8327,7 +8328,7 @@ n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \end{eqnarray}
 for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise \ref{xca:find-mles-SLR}) gives
 \begin{equation}
-\hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right\slash n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right\slash n}\label{eq:regline-slope-formula}
+\hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right\slash n}\label{eq:regline-slope-formula}
 \end{equation}
 and
 \begin{equation}
@@ -8406,7 +8407,7 @@ ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) +
 To calculate points on the regression line we may simply plug the desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired \(x\) value(s) represented by a data frame. See the example below.
 
 #+latex: \begin{example}
-\label{exa:regline-cars-interpret}
+#+latex: \label{exa:regline-cars-interpret}
 
 Using the regression line for the =cars= data:
 
@@ -8419,7 +8420,7 @@ Using the regression line for the =cars= data:
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
-\label{sub:slr-point-est-regline}
+#+latex: \label{sub:slr-point-est-regline}
 
 We said at the beginning of the chapter that our goal was to estimate \( \mu = \E Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
@@ -8427,7 +8428,7 @@ We said at the beginning of the chapter that our goal was to estimate \( \mu = \
 The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
 
 #+latex: \begin{example}
-\label{exa:regline-cars-pe-8mph}
+#+latex: \label{exa:regline-cars-pe-8mph}
 We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
@@ -8505,7 +8506,7 @@ carsumry$sigma
 #+end_src
 
 *** Interval Estimates of the Parameters
-\label{sub:slr-interval-est-params}
+#+latex: \label{sub:slr-interval-est-params}
 
 We discussed general interval estimation in Chapter \ref{cha:Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
 
@@ -8574,7 +8575,7 @@ confint(cars.lm)
 With 95% confidence, the random interval \( [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] \) covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
-\label{sub:slr-interval-est-regline}
+#+latex: \label{sub:slr-interval-est-regline}
 
 We have seen how to estimate the coefficients of regression line with both point estimates and confidence intervals. We even saw how to estimate a value \(\hat{\mu}(x)\) on the regression line for a given value of \(x\), such as \(x=15\). 
 
@@ -8690,10 +8691,10 @@ print(ci.plot(cars.lm))
 #+end_src
 
 ** Model Utility and Inference
-\label{sec:Model-Utility-SLR}
+#+latex: \label{sec:Model-Utility-SLR}
 
 *** Hypothesis Tests for the Parameters
-\label{sub:slr-hypoth-test-params}
+#+latex: \label{sub:slr-hypoth-test-params}
 
 Much of the attention of SLR is directed toward \(\beta_{1}\) because when \( \beta_{1}\neq 0 \) the mean value of \(Y\) increases (or decreases) as \(x\) increases. It is really boring when \(\beta_{1}=0\), because in that case the mean value of \(Y\) remains the same, regardless of the value of \(x\) (when the regression assumptions hold, of course). It is thus very important to decide whether or not \( \beta_{1} = 0 \). We address the question with a statistical test of the null hypothesis \(H_{0}:\beta_{1}=0\) versus the alternative hypothesis \(H_{1}:\beta_{1}\neq0\), and to do that we need to know the sampling distribution of \(b_{1}\) when the null hypothesis is true.
 
@@ -8788,7 +8789,7 @@ sqrt(carsumry$r.squared)
 We choose the principal square root because the slope of the regression line is positive.
 
 *** Overall /F/ statistic
-\label{sub:slr-overall-F-statistic}
+#+latex: \label{sub:slr-overall-F-statistic}
 
 There is another way to test the significance of the linear regression model. In SLR, the new way also tests the hypothesis \(H_{0}:\beta_{1}=0\) versus \(H_{1}:\beta_{1}\neq0\), but it is done with a new test statistic called the /overall F statistic/. It is defined by
 
@@ -8823,14 +8824,14 @@ Here we see that the \(F\) statistic is \( SRC_R{tmpf} \) with a \(p\)-value ver
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for =speed= squared.
 
 ** Residual Analysis
-\label{sec:Residual-Analysis-SLR}
+#+latex: \label{sec:Residual-Analysis-SLR}
 
 We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub:Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub:Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub:Independence-Assumption}.
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
 *** Normality Assumption
-\label{sub:Normality-Assumption}
+#+latex: \label{sub:Normality-Assumption}
 
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
@@ -8890,11 +8891,11 @@ shapiro.test(residuals(cars.lm))
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 
 *** Constant Variance Assumption
-\label{sub:Constant-Variance-Assumption}
+#+latex: \label{sub:Constant-Variance-Assumption}
 
 We will again go to residual plots to try and determine if the spread of the residuals is changing over time (or index). However, it is unfortunately not that easy because the residuals do not have constant variance! In fact, it can be shown that the variance of the residual \(E_{i}\) is 
 \begin{equation}
-\mbox{Var\ensuremath{(E_{i})}}=\sigma^{2}(1-h_{ii}),\quad i=1,2,\ldots,n,
+\mbox{Var$(E_{i})$}=\sigma^{2}(1-h_{ii}),\quad i=1,2,\ldots,n,
 \end{equation}
 where \(h_{ii}\) is a quantity called the /leverage/ which is defined below. Consequently, in order to check the constant variance assumption we must standardize the residuals before plotting. We estimate the standard error of \(E_{i}\) with \(s_{E_{i}}=s\sqrt{(1-h_{ii})}\) and define the /standardized residuals/ \(R_{i}\), \(i=1,2,\ldots,n\), by 
 \begin{equation} 
@@ -8953,7 +8954,7 @@ bptest(cars.lm)
 For these data we would not reject the null hypothesis at the \(\alpha=0.05\) level. There is relatively weak evidence against the assumption of constant variance. 
 
 *** Independence Assumption
-\label{sub:Independence-Assumption}
+#+latex: \label{sub:Independence-Assumption}
 
 One of the strongest of the regression assumptions is the one regarding independence. Departures from the independence assumption are often exhibited by correlation (or autocorrelation, literally, self-correlation) present in the residuals. There can be positive or negative correlation.
 
@@ -9035,7 +9036,7 @@ We often find problems with our model that suggest that at least one of the thre
 - Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 
 ** Other Diagnostic Tools
-\label{sec:Other-Diagnostic-Tools-SLR}
+#+latex: \label{sec:Other-Diagnostic-Tools-SLR}
 
 There are two types of observations with which we must be especially careful:
 - Influential observations :: are those that have a substantial effect on our estimates, predictions, or inferences. A small change in an influential observation is followed by a large change in the parameter estimates or inferences. 
@@ -9074,7 +9075,7 @@ Values of \(|R_{i}| > 2\) are extreme and suggest that the observation has an ou
 
 Now delete the \(i^{\mathrm{th}}\) case and fit the regression function to the remaining \(n - 1\) cases, producing a fitted value \(\hat{Y}_{(i)}\) with /deleted residual/ \(D_{i}=Y_{i}-\hat{Y}_{(i)}\). It is shown in later classes that 
 \begin{equation}
-\mbox{Var\ensuremath{(D_{i})}}=\frac{S_{(i)}^{2}}{1-h_{ii}},\quad i=1,2,\ldots,n,
+\mbox{Var $(D_{i})$}=\frac{S_{(i)}^{2}}{1-h_{ii}},\quad i=1,2,\ldots,n,
 \end{equation}
 so that the /studentized deleted residuals/ \(t_{i}\) defined by
 \begin{equation}
@@ -9295,7 +9296,7 @@ show that
 #+end_xca
 
 #+begin_xca
-\label{xca:find-mles-SLR}
+#+latex: \label{xca:find-mles-SLR}
 Solve the following system of equations for \(\beta_{1}\) and \(\beta_{0}\) to find the MLEs for slope and intercept in the simple linear regression model.
 \begin{eqnarray*}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
@@ -9304,7 +9305,7 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 #+end_xca
 
 #+begin_xca
-\label{xca:show-alternate-slope-formula}
+#+latex: \label{xca:show-alternate-slope-formula}
 Show that the formula given in Equation \ref{eq:sample-correlation-formula} is equivalent to
 \[
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.
@@ -9315,7 +9316,7 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 :PROPERTIES:
 :tangle: R/mlr.R
 :END:
-\label{cha:multiple-linear-regression}
+#+latex: \label{cha:multiple-linear-regression}
 
 #+latex: \noindent 
 We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -9335,7 +9336,7 @@ Most of the results are stated without proof or with only a cursory justificatio
 - hints about what will be coming later
 
 ** The Multiple Linear Regression Model
-\label{sec:The-MLR-Model}
+#+latex: \label{sec:The-MLR-Model}
 
 The first thing to do is get some better notation. We will write 
 \begin{equation}
@@ -9472,10 +9473,10 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
 ** Estimation and Prediction
-\label{sec:Estimation-and-Prediction-MLR}
+#+latex: \label{sec:Estimation-and-Prediction-MLR}
 
 *** Parameter estimates
-\label{sub:mlr-parameter-estimates}
+#+latex: \label{sub:mlr-parameter-estimates}
 
 We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
 \begin{equation}
@@ -9539,7 +9540,7 @@ head(model.matrix(trees.lm))
 #+end_src
 
 *** Point Estimates of the Regression Surface
-\label{sub:mlr-point-est-regsurface}
+#+latex: \label{sub:mlr-point-est-regsurface}
 
 The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
 \begin{eqnarray}
@@ -9630,7 +9631,7 @@ Using the =trees= data,
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
-\label{sub:mlr-mse-se}
+#+latex: \label{sub:mlr-mse-se}
 
 The residuals are given by
 \begin{equation}
@@ -9668,7 +9669,7 @@ treesumry$sigma
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
 *** Interval Estimates of the Parameters
-\label{sub:mlr-interval-est-params}
+#+latex: \label{sub:mlr-interval-est-params}
 
 We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
@@ -9779,7 +9780,7 @@ Using the =trees= data,
 #+latex: \end{example}
 
 ** Model Utility and Inference
-\label{sec:Model-Utility-and-MLR}
+#+latex: \label{sec:Model-Utility-and-MLR}
 
 *** Multiple Coefficient of Determination
 
@@ -9826,11 +9827,11 @@ treesumry$adj.r.squared
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 
 *** Overall /F/-Test
-\label{sub:mlr-Overall-F-Test}
+#+latex: \label{sub:mlr-Overall-F-Test}
 
 Another way to assess the model's utility is to to test the hypothesis
 \[
-H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one \ensuremath{\beta_{i}\neq0}}.
+H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one $\beta_{i}\neq0$}.
 \]
 The idea is that if all \(\beta_{i}\)'s were zero, then the explanatory variables \(X_{1},\ldots,X_{p}\) would be worthless predictors for the response variable \(Y\). We can test the above hypothesis with the overall \(F\) statistic, which in MLR is defined by
 \begin{equation}
@@ -9849,7 +9850,7 @@ treesumry$fstatistic
 For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
-\label{sub:mlr-Student's-t-Tests}
+#+latex: \label{sub:mlr-Student's-t-Tests}
 
 We know that
 \begin{equation}
@@ -9880,7 +9881,7 @@ treesumry
 We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
 
 ** Polynomial Regression
-\label{sec:Polynomial-Regression}
+#+latex: \label{sec:Polynomial-Regression}
 
 *** Quadratic Regression Model
 
@@ -10009,7 +10010,7 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 #+end_rem
 
 ** Interaction
-\label{sec:Interaction}
+#+latex: \label{sec:Interaction}
 
 In our model for tree volume there have been two independent variables: =Girth= and =Height=. We may suspect that the independent variables are related, that is, values of one variable may tend to influence values of the other. It may be desirable to include an additional term in our model to try and capture the dependence between the variables. Interaction terms are formed by multiplying one (or more) explanatory variable(s) by another. 
 
@@ -10076,7 +10077,7 @@ There are two other ways to include interaction terms in model formulas. For exa
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
 
 ** Qualitative Explanatory Variables
-\label{sec:Qualitative-Explanatory-Variables}
+#+latex: \label{sec:Qualitative-Explanatory-Variables}
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
 
@@ -10204,7 +10205,7 @@ It may look intimidating but there is reason to the madness. First we =split= th
 There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
-\label{sec:Partial-F-Statistic}
+#+latex: \label{sec:Partial-F-Statistic}
 
 We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
@@ -10216,7 +10217,7 @@ H_{0}:\beta_{j+1}=\beta_{j+2}=\cdots=\beta_{p}=0
 \end{equation}
 versus the alternative 
 \begin{equation}
-H_{1}:\mbox{at least one of \ensuremath{\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0}}.
+H_{1}:\mbox{at least one of $\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0$}.
 \end{equation}
 
 The interpretation of \(H_{0}\) is that none of the variables \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\) and the interpretation of \(H_{1}\) is that at least one of \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\). In essence, for this hypothesis test there are two competing models under consideration:
@@ -10239,7 +10240,7 @@ It can be shown when the regression assumptions hold under \(H_{0}\) that the pa
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 
 #+latex: \begin{example}
-\label{exa:mlr-trees-poly-no-rescale}
+#+latex: \label{exa:mlr-trees-poly-no-rescale}
 
 For the =trees= data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
 
@@ -10279,7 +10280,7 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 #+latex: \end{example}
 
 ** Residual Analysis and Diagnostic Tools
-\label{sec:Residual-Analysis-MLR}
+#+latex: \label{sec:Residual-Analysis-MLR}
 
 We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
@@ -10305,7 +10306,7 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
 ** Additional Topics
-\label{sec:Additional-Topics-MLR}
+#+latex: \label{sec:Additional-Topics-MLR}
 
 *** Nonlinear Regression
 
@@ -10373,7 +10374,7 @@ summary(acc.nls)
 #+end_src
 
 *** Multicollinearity
-\label{sub:Multicollinearity}
+#+latex: \label{sub:Multicollinearity}
 
 A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 
@@ -10402,7 +10403,7 @@ AIC=-2\ln L+2(p+1)
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-\label{xca:anova-equality}
+#+latex: \label{xca:anova-equality}
 Use Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the Anova Equality:
 \[
 SSTO=SSE+SSR.
@@ -10413,7 +10414,7 @@ SSTO=SSE+SSR.
 :PROPERTIES:
 :tangle: R/resamp.R
 :END:
-\label{cha:resampling-methods}
+#+latex: \label{cha:resampling-methods}
 
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
@@ -10427,7 +10428,7 @@ I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} an
 - resampling for hypothesis tests (permutation tests)
 
 ** Introduction
-\label{sec:Introduction-Resampling}
+#+latex: \label{sec:Introduction-Resampling}
 
 -  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, /e.g./, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
@@ -10458,12 +10459,12 @@ The above discussion leads us to the following general procedure to approximate 
 1. The bootstrap distribution gives information about the sampling distribution of the original statistic \(S\). In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of \(S\).
 
 ** Bootstrap Standard Errors
-\label{sec:Bootstrap-Standard-Errors}
+#+latex: \label{sec:Bootstrap-Standard-Errors}
 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 
 #+latex: \begin{example}
-\label{exa:Bootstrap-se-mean}
+#+latex: \label{exa:Bootstrap-se-mean}
 
 *Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\).  
 
@@ -10535,7 +10536,7 @@ We only took an original sample of size \(n=25\), and resampling more and more w
 #+end_rem
 
 #+latex: \begin{example}
-\label{exa:Bootstrap-se-median}
+#+latex: \label{exa:Bootstrap-se-median}
 
 *Standard error of the median.* We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
 
@@ -10624,7 +10625,7 @@ Some things to keep in mind about the bootstrap:
 #+end_rem
 
 ** Bootstrap Confidence Intervals
-\label{sec:Bootstrap-Confidence-Intervals}
+#+latex: \label{sec:Bootstrap-Confidence-Intervals}
 
 *** Percentile Confidence Intervals
 
@@ -10634,7 +10635,7 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 
 
 #+latex: \begin{example}
-\label{exa:percentile-interval-median-first}
+#+latex: \label{exa:percentile-interval-median-first}
 
 *Percentile interval for the expected value of the median.* We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
 
@@ -10693,7 +10694,7 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 - Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
 
 ** Resampling in Hypothesis Tests
-\label{sec:Resampling-in-Hypothesis}
+#+latex: \label{sec:Resampling-in-Hypothesis}
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 1. Go collect some information from the two groups and calculate an associated statistic, for example, \(\overline{X}_{1}-\overline{X}_{2}\). 
@@ -10769,7 +10770,7 @@ Here are some things about permutation tests to keep in mind.
 :PROPERTIES:
 :tangle: R/nonparam.R
 :END:
-\label{cha:Nonparametric-Statistics}
+#+latex: \label{cha:Nonparametric-Statistics}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
 
@@ -10783,7 +10784,7 @@ read(IPSUR)
 :PROPERTIES:
 :tangle: R/categ.R
 :END:
-\label{cha:Categorical-Data-Analysis}
+#+latex: \label{cha:Categorical-Data-Analysis}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
 
@@ -10797,7 +10798,7 @@ read(IPSUR)
 :PROPERTIES:
 :tangle: R/timeseries.R
 :END:
-\label{cha:Time-Series}
+#+latex: \label{cha:Time-Series}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \textsf{R}-Forge:
 
@@ -10813,7 +10814,7 @@ read(IPSUR)
 
 
 * \textsf{R} Session Information                                   :appendix:
-\label{cha:R-Session-Information}
+#+latex: \label{cha:R-Session-Information}
 
 If you ever write the \textsf{R} help mailing list with a question, then you should include your session information in the email; it makes the reader's job easier and is requested by the Posting Guide. Here is how to do that, and below is what the output looks like.
 
@@ -10824,7 +10825,7 @@ sessionInfo()
 #+latex: \vfill{}
 
 * GNU Free Documentation License                                   :appendix:
-\label{cha:GNU-Free-Documentation}
+#+latex: \label{cha:GNU-Free-Documentation}
 
 #+begin_latex
 \begin{center}
@@ -11004,7 +11005,7 @@ If you have Invariant Sections without Cover Texts, or some other combination of
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software. 
 
 * History                                                          :appendix:
-\label{cha:History}
+#+latex: \label{cha:History}
 
 | Title:     | Introduction to Probability and Statistics Using \textsf{R}, Second Edition |
 | Year:      | 2011                                                                        |
@@ -11019,11 +11020,12 @@ If your document contains nontrivial examples of program code, we recommend rele
 | Publisher: | G. Jay Kerns                                                               |
 
 * Data                                                             :appendix:
-\label{cha:data}
+#+latex: \label{cha:data}
 
 This appendix is a reference of sorts regarding some of the data structures a statistician is likely to encounter. We discuss their salient features and idiosyncrasies.
 
-** Data Structures \label{sec:Data-Structures}
+** Data Structures 
+#+latex: \label{sec:Data-Structures}
 
 
 *** Vectors
@@ -11182,7 +11184,8 @@ There are at least two ways to do it.
    - if you want to store it as a table then do =A <- xtabs(count ~ poured + guessed, data = D)=
 
 
-** Importing Data \label{sec:Importing-A-Data}
+** Importing Data 
+#+latex: \label{sec:Importing-A-Data}
 
 Statistics is the study of data, so the statistician's first step is usually to obtain data from somewhere or another and read them into \textsf{R}. In this section we describe some of the most common sources of data and how to get data from those sources into a running \textsf{R} session.
 
@@ -11219,12 +11222,14 @@ See =?read.spss= for the available options to customize the file import. Note th
 
 The basic command is =read.table=.
 
-** Creating New Data Sets \label{sec:Creating-New-Data}
+** Creating New Data Sets 
+#+latex: \label{sec:Creating-New-Data}
 Using =c=
 Using =scan=
 Using the \textsf{R} Commander.
 
-** Editing Data \label{sec:Editing-Data-Sets}
+** Editing Data 
+#+latex: \label{sec:Editing-Data-Sets}
 *** Editing Data Values
 *** Inserting Rows and Columns
 *** Deleting Rows and Columns
@@ -11265,11 +11270,13 @@ Tmp <- with(Puromycin, Puromycin[order(-xtfrm(state)), ])
 head(Tmp)
 #+end_src
 
-** Exporting Data \label{sec:Exporting-a-Data}
+** Exporting Data 
+#+latex: \label{sec:Exporting-a-Data}
 
 The basic function is =write.table=. The =MASS= package also has a =write.matrix= function.
 
-** Reshaping Data \label{sec:Reshaping-a-Data}                    :appendix:
+** Reshaping Data 
+#+latex: \label{sec:Reshaping-a-Data}                    :appendix:
 - Aggregation
 - Convert Tables to data frames and back
 
@@ -11280,12 +11287,13 @@ The basic function is =write.table=. The =MASS= package also has a =write.matrix
 =stack=
 
 * Mathematical Machinery                                           :appendix:
-\label{cha:Mathematical-Machinery}
+#+latex: \label{cha:Mathematical-Machinery}
 
 This appendix houses many of the standard definitions and theorems that are used at some point during the narrative. It is targeted for someone reading the book who forgets the precise definition of something and would like a quick reminder of an exact statement. No proofs are given, and the interested reader should consult a good text on Calculus (say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}), Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}), Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}), or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000}, Resnick \cite{Resnick1999}) for details. 
 
 
-** Set Algebra \label{sec:The-Algebra-of}
+** Set Algebra 
+#+latex: \label{sec:The-Algebra-of}
 
 We denote sets by capital letters, \(A\), \(B\), \(C\), /etc/. The letter \(S\) is reserved for the sample space, also known as the universe or universal set, the set which contains all possible elements. The symbol \(\emptyset\) represents the empty set, the set with no elements. 
 
@@ -11332,7 +11340,8 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
    \left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad\mbox{and}\quad\left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}
    \end{equation}
 
-** Differential and Integral Calculus \label{sec:Differential-and-Integral}
+** Differential and Integral Calculus 
+#+latex: \label{sec:Differential-and-Integral}
 
 A function \(f\) of one variable is said to be one-to-one if no two distinct \(x\) values are mapped to the same \(y=f(x)\) value. To show that a function is one-to-one we can either use the horizontal line test or we may start with the equation \(f(x_{1}) = f(x_{2})\) and use algebra to show that it implies \(x_{1} = x_{2}\).
 
@@ -11392,7 +11401,7 @@ A /critical number/ of the function \(f\) is a value \(x^{\ast}\) for which \(f'
 #+end_defn
 
 #+begin_thm
-\label{thm:First-Derivative-Test}
+#+latex: \label{thm:First-Derivative-Test}
 First Derivative Test. If \(f\) is differentiable and if \(x^{\ast}\) is a critical number of \(f\) and if \(f'(x)\geq0\) for \(x\leq x^{\ast}\) and \(f'(x)\leq0\) for \(x\geq x^{\ast}\), then \(x^{\ast}\) is a local maximum of \(f\). If \(f'(x)\leq0\) for \(x\leq x^{\ast}\) and \(f'(x)\geq0\) for \(x\geq x^{\ast}\) , then \(x^{\ast}\) is a local minimum of \(f\).
 #+end_thm
 
@@ -11472,7 +11481,8 @@ If both \(\int_{a}^{\infty}f(x)\,\mathrm{d} x\) and \(\int_{-\infty}^{a}f(x)\,\m
 and we say that \(\int_{-\infty}^{\infty}f(x)\,\mathrm{d} x\) is /convergent/. Otherwise, we say that the improper integral is /divergent/.
 
 
-** Sequences and Series \label{sec:Sequences-and-Series}
+** Sequences and Series 
+#+latex: \label{sec:Sequences-and-Series}
 
 A /sequence/ is an ordered list of numbers, \(a_{1}\), \(a_{2}\), \(a_{3}\), ..., \(a_{n} =\left(a_{k}\right)_{k=1}^{n}\). A sequence may be finite or infinite. In the latter case we write \(a_{1}\), \(a_{2}\), \(a_{3}\), ... \( =\left(a_{k}\right)_{k=1}^{\infty}\). We say that /the infinite sequence/ \(\left(a_{k}\right)_{k=1}^{\infty}\) /converges to the finite limit/ L, and we write
 \begin{equation}
@@ -11565,7 +11575,8 @@ f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad|x-a|<R,
 in which case both of the above series have radius of convergence \(R\).
 
 
-** The Gamma Function \label{sec:The-Gamma-Function}
+** The Gamma Function 
+#+latex: \label{sec:The-Gamma-Function}
 
 The /Gamma function/ \(\Gamma\) will be defined in this book according to the formula
 \begin{equation}
@@ -11578,7 +11589,8 @@ Properties of the Gamma Function:
 - \(\Gamma(1/2)=\sqrt{\pi}\).
 #+end_fact
 
-** Linear Algebra \label{sec:Linear-Algebra}
+** Linear Algebra 
+#+latex: \label{sec:Linear-Algebra}
 *** Matrices
 A /matrix/ is an ordered array of numbers or expressions; typically we write \(\mathbf{A}=\begin{pmatrix}a_{ij}\end{pmatrix}\) or \(\mathbf{A}=\begin{bmatrix}a_{ij}\end{bmatrix}\). If \(\mathbf{A}\) has \(m\) rows and \(n\) columns then we write
 \begin{equation}
@@ -11646,7 +11658,8 @@ A square matrix \(\mathbf{A}\) is nonsingular if and only if \(\mathrm{det}(\mat
 *** Positive (Semi)Definite
 If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is /positive semidefinite/. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is /positive definite/. The connection to statistics is that covariance matrices (see Chapter \ref{cha:Multivariable-Distributions}) are always positive semidefinite, and many of them are even positive definite.
 
-** Multivariable Calculus \label{sec:Multivariable-Calculus}
+** Multivariable Calculus 
+#+latex: \label{sec:Multivariable-Calculus}
 *** Partial Derivatives
 If \(f\) is a function of two variables, its /first-order partial derivatives/ are defined by
 \begin{equation}
@@ -11718,12 +11731,13 @@ If the function \(f\) is continuous on \(A\) and if the Jacobian of \(T\) is non
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation \(T\) maps points \((u_{1},u_{2},\ldots,u_{n})\) to points \((x_{1},x_{2},\ldots,x_{n})\), the Jacobian is the determinant of the \(\mathrm{n}\times\mathrm{n}\) matrix of first-order partial derivatives of \(T\) (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets \(A\) and \(B\).
 
 * Writing Reports with \textsf{R}                                  :appendix:
-\label{cha:Writing-Reports-with}
+#+latex: \label{cha:Writing-Reports-with}
 
 Perhaps the most important part of a statistician's job once the analysis is complete is to communicate the results to others. This is usually done with some type of report that is delivered to the client, manager, or administrator. Other situations that call for reports include term papers, final projects, thesis work, /etc/. This chapter is designed to pass along some tips about writing reports once the work is completed with \textsf{R}.
 
 
-** What to Write \label{sec:What-to-Write}
+** What to Write 
+#+latex: \label{sec:What-to-Write}
 It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr. G. Andy Chang.
 
 *** Basic Outline for a Statistical Report
@@ -11829,7 +11843,8 @@ Program Listings and the \textsf{R} language
 [[http://gregor.gorjanc.googlepages.com/lyx-sweave]]
 
 
-** Formatting Tables \label{sec:Formatting-Tables}
+** Formatting Tables 
+#+latex: \label{sec:Formatting-Tables}
 
 The prettyR package 
 
@@ -11849,7 +11864,7 @@ HTML and prettyR
 R2HTML
 
 * Instructions for Instructors                                     :appendix:
-\label{cha:Instructions-for-Instructors}
+#+latex: \label{cha:Instructions-for-Instructors}
 
 \noun{WARNING: this appendix is not applicable until the exercises
 have been written.} 
@@ -11877,7 +11892,8 @@ runif(1)
 
 Now choose \( SRC_R{set.seed(095259); options(digits = 16); runif(1)*10^16} \)as your secret seed... write it down in a safe place and do not share it with anyone. Next generate the book with your seed using \LyX{}-Sweave or Sweave-\LaTeX{}. You may wish to also generate Student and Instructor Solution Manuals. Guidance regarding this is given below in the How to Use This Document section.
 
-** Generating This Document \label{sec:Generating-This-Document}
+** Generating This Document 
+#+latex: \label{sec:Generating-This-Document}
 
 You will need three (3) things to generate this document for yourself, in addition to a current \textsf{R} distribution which at the time of this writing is \texttt{ SRC_R{version$version.string} } :
 1. a LaTeX distribution,
@@ -11893,7 +11909,8 @@ We will discuss each of these in turn.
 An attempt was made to not be extravagant with fonts or packages so that a person would not need the entire =CTAN= (or =CRAN=) installed on their personal computer to generate the book. Nevertheless, there are a few extra packages required. These packages are listed in the =preamble= of =IPSUR.Rnw=, =IPSUR.tex=, and =IPSUR.lyx=.
 
 
-** How to Use This Document \label{sec:How-to-Use-Document}
+** How to Use This Document 
+#+latex: \label{sec:How-to-Use-Document}
 
 The easiest way to use this document is to install the =IPSUR= package from =CRAN= and be all done. This way would be acceptable if there is another, primary, text being used for the course and \IPSUR\ is only meant to play a supplementary role.
 
@@ -11909,10 +11926,12 @@ To make it easier for those people who do not want to use \LyX{} (or for whateve
 #+latex: \paragraph*{Generating Quizzes and Exams}
 - You can copy-paste selected exercises from the text, put them together, and you have a quiz. Since the numbers are randomly generated you do not need to worry about different semesters. And you will have answer keys already for all of your QUIZZES and EXAMS, too. 
 
-** Ancillary Materials \label{sec:Ancillary-Materials}
+** Ancillary Materials 
+#+latex: \label{sec:Ancillary-Materials}
 In addition to the main text, student manual, and instructor manual, there are two other ancillaries. IPSUR.R, and IPSUR.RData.
 
-** Modifying This Document \label{sec:Modifying-This-Document}
+** Modifying This Document 
+#+latex: \label{sec:Modifying-This-Document}
 Since this document is released under the GNU-FDL, you are free to modify this document however you wish (in accordance with the license -- see Appendix \ref{cha:GNU-Free-Documentation}). The immediate benefit of this is that you can generate the book, with brand new problem sets, and distribute it to your students simply as a PDF (in an email, for instance). As long as you distribute less than 100 such /Opaque/ copies, you are not even required by the GNU-FDL to share your /Transparent/ copy (the source code with the secret key) that you used to generate them. Next semester, choose a new key and generate a new copy to be distributed to the new class. 
 
 #+begin_quote
@@ -11922,7 +11941,7 @@ But more generally, if you are not keen on the way I explained (or failed to exp
 Some individuals will argue that the nature of a statistics textbook like this one, many of the exercises being randomly generated /by design/, does a disservice to the students because the exercises do not use real-world data. That is a valid criticism... but in my case the benefits outweighed the detriments and I moved forward to incorporate static data sets whenever it was feasible and effective. Frankly, and most humbly, the only response I have for those individuals is: ``Please refer to the preceding paragraph.''
 
 * =RcmdrTestDrive= Story                                           :appendix:
-\label{cha:RcmdrTestDrive-Story}
+#+latex: \label{cha:RcmdrTestDrive-Story}
 
 The goal of =RcmdrTestDrive= was to have a data set sufficiently rich in the types of data represented such that a person could load it into the \textsf{R} Commander and be able to explore all of =Rcmdr='s menu options at once. I decided early-on that an efficient way to do this would be to generate the data set randomly, and later add to the list of variables as more =Rcmdr= menu options became available. Generating the data was easy, but generating a story that related all of the respective variables proved to be less so.
 
