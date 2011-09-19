@@ -25,7 +25,8 @@
 :END:
 #+latex: \pagenumbering{arabic} 
 
-\noindent This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say -- and so many people have already said it so much better than I could. When I get something I like I will release it here.
+#+latex: \noindent 
+This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say -- and so many people have already said it so much better than I could. When I get something I like I will release it here.
 
 In the meantime, there is a lot of information already available to a person with an Internet connection. I recommend to start at Wikipedia, which is not a flawless resource but it has the main ideas with links to reputable sources.
 
@@ -72,7 +73,7 @@ for your operating system:
 - MacOS: :: http://cran.r-project.org/bin/macosx/
 - Linux: :: http://cran.r-project.org/bin/linux/
 
-On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for \textquotedbl{}Customized startup options\textquotedbl{}, specify \textsf{Yes}. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
+On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for "Customized startup options", specify \textsf{Yes}. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
 
 #+latex: \paragraph*{Installing \textsf{R} on a USB drive (Windows)}
 
@@ -167,11 +168,10 @@ options(digits = 7)  # back to default
 
 Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
 
-
 *** Assignment, Object names, and Data types
 #+latex: \label{sub:Assignment-Object-names}
 
-It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The === symbol works too, but it is recommended by the \textsf{R} masters to reserve === for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
+It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \textsf{R} masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
 #+begin_src R :exports both :results output pp 
 x <- 7*41/pi   # don't see the calculated value
@@ -369,7 +369,8 @@ It is unnecessary to retype commands repeatedly, since \textsf{R} remembers what
 :END:
 #+latex: \label{cha:Describing-Data-Distributions}
 
-\noindent In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
+#+latex: \noindent 
+In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -1077,7 +1078,6 @@ we can find the order statistics of a variable in the =Active data set= by doing
 
 In =Rcmdr=, we can calculate the sample quantiles for a particular variable with the sequence \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Numerical Summaries}... We can automatically calculate the quartiles for all variables in the =Active data set= with the sequence \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Active Dataset}.
 
-
 *** Measures of Spread
 #+latex: \label{sub:Measures-of-Spread}
 
@@ -1228,7 +1228,6 @@ stem.leaf(precip)
 
 Here is an example of split stems, with two lines per stem. The final digit of each datum has been dropped for the display. The data appear to be left skewed with four extreme values to the left and one extreme value to the right. The sample median is approximately 37 (it turns out to be 36.6).
 
-
 *** Hinges and the Five Number Summary
 #+latex: \label{sub:hinges-and-5NS}
 
@@ -1264,8 +1263,6 @@ Boxplots are also good because one can visually assess multiple features of the 
 - Shape :: is indicated by the relative lengths of the whiskers, and the position of the median inside the box. Boxes with unbalanced whiskers indicate skewness in the direction of the long whisker. Skewed distributions often have the median tending in the opposite direction of skewness. Kurtosis can be assessed using the box and whiskers. A wide box with short whiskers will tend to be platykurtic, while a skinny box with wide whiskers indicates leptokurtic distributions.
 
 - Extreme observations :: are identified with open circles (see below).
-
-
 
 *** Outliers
 #+latex: \label{sub:Outliers}
@@ -1391,8 +1388,6 @@ r=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_
   - xyplot(pressure ~ temperature, data = pressure) (exponential growth)
   - xyplot(weight ~ height, data = women) (strong positive linear)
 
-
-
 *** Multivariate Data
 #+latex: \label{sub:Multivariate-Data}
 
@@ -1425,7 +1420,7 @@ I am thinking here about the \textsf{Statistics} \textsf{\(\triangleright\)} \te
   - Variable width: the width of the drawn boxplots are proportional to \(\sqrt{n_{i}}\), where \(n_{i}\) is the size of the \(i^{\mathrm{th}}\) group. Why? Because many statistics have variability proportional to the reciprocal of the square root of the sample size.
   - Notches: extend to \(1.58\cdot(h_{U}-h_{L})/\sqrt{n}\). The idea is to give roughly a 95% confidence interval for the difference in two medians. See Chapter \ref{cha:Hypothesis-Testing}.
 - Stripcharts
-  - stripchart(weight ~ feed, method=\textquotedbl{}stack\textquotedbl{}, data=chickwts) 
+  - stripchart(weight ~ feed, method= "stack", data=chickwts) 
 - Bar Graphs
   - barplot(xtabs(Freq ~ Admit + Gender, data = UCBAdmissions)) stacked bar chart
   - barplot(xtabs(Freq ~ Admit, data = UCBAdmissions))
@@ -2153,7 +2148,8 @@ And finally, since rolling dice is such a common experiment in probability class
 rolldie(1, makespace = TRUE)
 #+end_src
 
-\noindent or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=, =cards=, =roulette=, \textit{etc}.) have similar =makespace= arguments. Check the documentation for details.
+#+latex: \noindent 
+or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=, =cards=, =roulette=, \textit{etc}.) have similar =makespace= arguments. Check the documentation for details.
 
 #+latex: \end{example}
 
@@ -2397,7 +2393,6 @@ At each stage we will have had two options, or ways, to select a pizza to be mad
 #+latex: \begin{example}
 We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? *Answer:* \(2\cdot3\cdot4\cdot4\cdot10=960\)
 #+latex: \end{example}
-
 
 *** Ordered Samples
 
@@ -3131,8 +3126,6 @@ fastpost / sum(fastpost)
 
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 
-
-
 ** Random Variables
 \label{sec:Random-Variables}
 
@@ -3246,7 +3239,8 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 :END:
 \label{cha:Discrete-Distributions}
 
-\noindent In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
+#+latex: \noindent 
+In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
 
 We give special attention to the empirical distribution since it plays such a fundamental role with respect to resampling and Chapter \ref{cha:resampling-methods}; it will also be needed in Section \ref{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test} where we discuss the Kolmogorov-Smirnov test. Following this is a section in which we introduce a catalogue of discrete random variables that can be used to model experiments.
 
@@ -3260,7 +3254,6 @@ There are some comments on simulation, and we mention transformations of random 
 - the general tools of the trade for manipulation of continuous random variables, integration, /etc/.
 - some details on a couple of discrete models, and exposure to a bunch of other ones
 - how to make new discrete random variables from old ones
-
 
 ** Discrete Random Variables
 \label{sec:discrete-random-variables}
@@ -3430,7 +3423,6 @@ In the \textsf{R} Console window, the \textsf{R} Commander should tell you that 
 
 The default name for the variable is =disunif.sim1=.
 
-
 ** The Binomial Distribution
 \label{sec:binom-dist}
 
@@ -3447,7 +3439,6 @@ If the probability of success is \(p\) then the probability of failure must be \
 f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 \end{equation}
 It is easy to calculate \(\mu=\E X=p\) and \(\E X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
-
 
 *** The Binomial Model
 \label{sub:The-Binomial-Model}
@@ -3827,7 +3818,6 @@ sd(X)
 
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
-
 ** The Empirical Distribution
 \label{sec:empirical-distribution}
 
@@ -3920,7 +3910,6 @@ As we hinted above, the empirical distribution is significant more because of ho
 \label{sec:other-discrete-distributions}
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
-
 
 *** Dependent Bernoulli Trials
 \label{sec:non-bernoulli-trials}
@@ -4037,7 +4026,6 @@ We see that both sampling procedures have the same mean, and the method with the
 \frac{M+N-n}{M+N-1},
 \end{equation}
 is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
-
 
 *** Waiting Time Distributions
 \label{sec:Waiting-Time-Distributions}
@@ -4412,7 +4400,8 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 :END:
 \label{cha:Continuous-Distributions}
 
-\noindent The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
+#+latex: \noindent 
+The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
 
 This chapter begins with continuous random variables and the associated PDFs and CDFs The continuous uniform distribution is highlighted, along with the Gaussian, or normal, distribution. Some mathematical details pave the way for a catalogue of models.
 
@@ -4820,7 +4809,6 @@ qnorm(c(0.025, 0.01, 0.005), lower.tail = FALSE)
 
 Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
-
 
 ** Functions of Continuous Random Variables
 \label{sec:Functions-of-Continuous}
@@ -5298,7 +5286,8 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 :END:
 \label{cha:Multivariable-Distributions}
 
-\noindent We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
+#+latex: \noindent 
+We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
 
 But there is a difference: for a single person, these variables are related. For instance, a person's height betrays a lot of information about that person's weight.
 
@@ -5573,7 +5562,6 @@ or in the discrete case,
 \begin{equation}
 \E\, g(X,Y)=\mathop{\sum\sum}\limits _{(x,y)\in S_{X,Y}}g(x,y)\, f_{X,Y}(x,y).
 \end{equation}
-
 
 *** Covariance and Correlation
 
@@ -6350,7 +6338,8 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 :END:
 \label{cha:Sampling-Distributions}
 
-\noindent This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
+#+latex: \noindent 
+This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
 
 Here is the link: we are presented with a /population/ about which we would like to learn. And while it would be desirable to examine every single member of the population, we find that it is either impossible or infeasible to for us to do so, thus, we resort to collecting a /sample/ instead. We do not lose heart. Our method will suffice, provided the sample is /representative/ of the population. A good way to achieve this is to sample /randomly/ from the population.
 
@@ -6625,7 +6614,6 @@ For the special case of \(\mu_{X}=\mu_{Y}\) we have shown that
 has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, or in other words, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})\) sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec:Conf-Interv-for-Diff-Means}.
 #+end_rem
 
-
 *** Difference of Independent Sample Proportions
 
 #+begin_prop
@@ -6820,7 +6808,8 @@ And that's all she wrote.
 :END:
 \label{cha:Estimation}
 
-\noindent We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
+#+latex: \noindent 
+We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
 
 We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. We make some assumptions about the underlying population distribution and use what we know from Chapter \ref{cha:Sampling-Distributions} about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
@@ -7850,7 +7839,6 @@ Once your unsummarized data is a column, then you can use the menu \textsf{Stati
 ** One Sample Tests for Means and Variances
 \label{sec:One-Sample-Tests}
 
-
 *** For Means
 
 Here, \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. We would like to test \(H_{0}:\mu=\mu_{0}\).
@@ -8518,7 +8506,6 @@ carsumry <- summary(cars.lm)
 carsumry$sigma
 #+end_src
 
-
 *** Interval Estimates of the Parameters
 \label{sub:slr-interval-est-params}
 
@@ -8732,7 +8719,6 @@ summary(cars.lm)
 
 In the =Coefficients= section we find the \(t\) statistics and the \(p\)-values associated with the tests that the respective parameters are zero in the fourth and fifth columns. Since the \(p\)-values are (much) less than 0.05, we conclude that there is strong evidence that the parameters \(\beta_{1}\neq0\) and \(\beta_{0}\neq0\), and as such, we say that there is a statistically significant linear relationship between =dist= and =speed=. 
 
-
 *** Simple Coefficient of Determination
 
 It would be nice to have a single number that indicates how well our linear regression model is doing, and the /simple coefficient of determination/ is designed for that purpose. In what follows, we observe the values \(Y_{1}\), \(Y_{2}\), ...,\(Y_{n}\), and the goal is to estimate \(\mu(x_{0})\), the mean value of \(Y\) at the location \(x_{0}\). 
@@ -8803,7 +8789,6 @@ sqrt(carsumry$r.squared)
 
 We choose the principal square root because the slope of the regression line is positive.
 
-
 *** Overall /F/ statistic
 \label{sub:slr-overall-F-statistic}
 
@@ -8845,7 +8830,6 @@ Note that the value of the \(F\) statistic is the same as the Student's \(t\) st
 We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub:Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub:Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub:Independence-Assumption}.
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
-
 
 *** Normality Assumption
 \label{sub:Normality-Assumption}
@@ -8906,7 +8890,6 @@ shapiro.test(residuals(cars.lm))
 #+end_src
 
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
-
 
 *** Constant Variance Assumption
 \label{sub:Constant-Variance-Assumption}
@@ -9082,7 +9065,6 @@ and their sum is
 \end{eqnarray}
 
 A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation \ref{eq:slr-average-leverage}). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
-
 
 *** Standardized and Studentized Deleted Residuals
 
@@ -9337,7 +9319,8 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 :END:
 \label{cha:multiple-linear-regression}
 
-\noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
+#+latex: \noindent 
+We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
 
 The language is phrased in matrix terms -- for two reasons. First, it is quicker to write and (arguably) more pleasant to read. Second, the matrix approach will be required for later study of the subject; the reader might as well be introduced to it now.
 
@@ -9352,7 +9335,6 @@ Most of the results are stated without proof or with only a cursory justificatio
 - a few thoughts about selected applications of the MLR, such as polynomial, interaction, and dummy variable models
 - some of the uses of residuals to diagnose problems
 - hints about what will be coming later
-
 
 ** The Multiple Linear Regression Model
 \label{sec:The-MLR-Model}
@@ -9445,7 +9427,6 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 \end{equation}
 in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
 #+latex: \end{example}
-
 
 *** What does it mean?
 
@@ -9688,8 +9669,6 @@ treesumry$sigma
 
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
-
-
 *** Interval Estimates of the Parameters
 \label{sub:mlr-interval-est-params}
 
@@ -9732,8 +9711,6 @@ treesPAR <- round(confint(trees.lm), 1)
 #+end_src
 
 For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter \(\beta_{1}\) lies somewhere in the interval \( [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ] \).
-
-
 
 *** Confidence and Prediction Intervals
 
@@ -9803,7 +9780,6 @@ Using the =trees= data,
 
 #+latex: \end{example}
 
-
 ** Model Utility and Inference
 \label{sec:Model-Utility-and-MLR}
 
@@ -9850,7 +9826,6 @@ treesumry$adj.r.squared
 #+end_src
 
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
-
 
 *** Overall /F/-Test
 \label{sub:mlr-Overall-F-Test}
@@ -10035,7 +10010,6 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 
 #+end_rem
 
-
 ** Interaction
 \label{sec:Interaction}
 
@@ -10102,7 +10076,6 @@ There are two other ways to include interaction terms in model formulas. For exa
 #+end_rem
 
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
-
 
 ** Qualitative Explanatory Variables
 \label{sec:Qualitative-Explanatory-Variables}
@@ -10188,8 +10161,6 @@ In general, if an explanatory variable =foo= is qualitative with \(n\) levels =b
 \end{eqnarray*}
 The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
 #+end_rem
-
-
 
 *** Graphing the Regression Lines
 
@@ -10309,7 +10280,6 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 
 #+latex: \end{example}
 
-
 ** Residual Analysis and Diagnostic Tools
 \label{sec:Residual-Analysis-MLR}
 
@@ -10335,8 +10305,6 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 - DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
 - Cook's D: :: compared to an \(\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)\) distribution. Observations falling higher than the 50\(^{\textrm{th}}\) percentile are extreme. 
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
-
-
 
 ** Additional Topics
 \label{sec:Additional-Topics-MLR}
@@ -10406,7 +10374,6 @@ summary(acc.nls)
 #plot(x, fitted(acc.nls))
 #+end_src
 
-
 *** Multicollinearity
 \label{sub:Multicollinearity}
 
@@ -10450,8 +10417,8 @@ SSTO=SSE+SSR.
 :END:
 \label{cha:resampling-methods}
 
-
-\noindent Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
+#+latex: \noindent 
+Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
 
 I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \textsf{R} into the narrative.
 
@@ -10658,9 +10625,6 @@ Some things to keep in mind about the bootstrap:
 
 #+end_rem
 
-
-
-
 ** Bootstrap Confidence Intervals
 \label{sec:Bootstrap-Confidence-Intervals}
 
@@ -10697,7 +10661,6 @@ boot.ci(med_boot, type = c("perc", "norm", "bca"))
 #+end_src
 
 #+latex: \end{example}
-
 
 *** Student's \(t\) intervals (``normal intervals'')
 
@@ -10770,7 +10733,6 @@ In calculating the permutation test /p-value/, the formula is essentially the pr
 library(coin)
 oneway_test(len ~ supp, data = ToothGrowth)
 #+end_src
-
 
 *** Comparison with the Two Sample /t/ test
 
@@ -10880,7 +10842,8 @@ Foundation, Inc.
 \par\end{center}
 #+end_latex
 
-\noindent Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+#+latex: \noindent 
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
 
 ** 0. PREAMBLE
 
@@ -11029,13 +10992,13 @@ The operator of an MMC Site may republish an MMC contained in the site under CC-
 To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page: 
 
 #+begin_quote
-\noindent Copyright (c) YEAR YOUR NAME. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
+Copyright (c) YEAR YOUR NAME. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
 #+end_quote
 
 If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace the with...Texts. line with this:
 
 #+begin_quote
-\noindent with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
 #+end_quote
 
 If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.
@@ -11971,10 +11934,8 @@ The most colorful of those I received was written by Jeffery Cornfield, submitte
 
 ** Case File: ALU-179 ``Murder Madness in Toon Town”
 #+begin_quote
-\noindent \begin{center}
 *WARNING* 
-\par\end{center}
-\noindent This file is not for the faint of heart, dear reader, because it is filled with horrible images that will haunt your nightmares. If you are weak of stomach, have irritable bowel syndrome, or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your own risk.
+This file is not for the faint of heart, dear reader, because it is filled with horrible images that will haunt your nightmares. If you are weak of stomach, have irritable bowel syndrome, or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your own risk.
 #+end_quote
 
 One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been \( SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} \) murders in the past \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} \) days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
@@ -11992,7 +11953,7 @@ Professor Twee T. Bird, a world-renowned forensics specialist and a Czechoslovak
 “Perhaps I will take a drive to find him. The fresh air will do me good.”
 
 #+begin_quote
-\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr. Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr. Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
+I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr. Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr. Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
 #+end_quote
 
 Once our two heroes returned to the beautiful Acme-Looney University, and once Dr. Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
