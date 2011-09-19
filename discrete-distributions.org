@@ -51,12 +51,12 @@ S_{X}=\{u_{1},u_{2},\ldots,u_{k}\}\mbox{ or }S_{X}=\{u_{1},u_{2},u_{3}\ldots\}.
 \end{equation}
 Every discrete random variable \(X\) has associated with it a probability mass function (PMF) \(f_{X}:S_{X}\to[0,1]\) defined by
 \begin{equation}
-f_{X}(x)=\P(X=x),\quad x\in S_{X}.
+f_{X}(x)=\Pr(X=x),\quad x\in S_{X}.
 \end{equation}
 Since values of the PMF represent probabilities, we know from Chapter \ref{cha:Probability} that PMFs enjoy certain properties. In particular, all PMFs satisfy
 1. \(f_{X}(x)>0\) for \(x\in S\),
 2. \(\sum_{x\in S}f_{X}(x)=1\), and
-3. \(\P(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event \(A\subset S\).
+3. \(\Pr(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event \(A\subset S\).
 
 #+latex: \begin{example}
 \label{exa:Toss-a-coin}
@@ -70,7 +70,7 @@ Now let \(X\) be the number of Heads observed. Then \(X\) has support \(S_{X}=\{
 What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(TTT\) occurs, and this event has probability \(1/8\). Therefore, \(f_{X}(0)=1/8\), and the same reasoning shows that \(f_{X}(3)=1/8\). Exactly three outcomes result in \(X=1\), thus, \(f_{X}(1)=3/8\) and \(f_{X}(3)\) holds the remaining \(3/8\) probability (the total is 1). We can represent the PMF with a table:
 | \(x\in S_{X}\)       |   0 |   1 |   2 |   3 | Total |
 |----------------------+-----+-----+-----+-----+-------|
-| \(f_{X}(x)=\P(X=x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+| \(f_{X}(x)=\Pr(X=x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
@@ -99,13 +99,13 @@ We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random exp
 Note that although we say \(X\) is 3.5 on the average, we must keep in mind that our \(X\) never actually equals 3.5 (in fact, it is impossible for \(X\) to equal 3.5).
 #+end_rem
 
-Related to the probability mass function \(f_{X}(x)=\P(X=x)\) is another important function called the /cumulative distribution function/ (CDF), \(F_{X}\). It is defined by the formula
+Related to the probability mass function \(f_{X}(x)=\Pr(X=x)\) is another important function called the /cumulative distribution function/ (CDF), \(F_{X}\). It is defined by the formula
 \begin{equation}
-F_{X}(t)=\P(X\leq t),\quad-\infty<t<\infty.
+F_{X}(t)=\Pr(X\leq t),\quad-\infty<t<\infty.
 \end{equation}
 We know that all PMFs satisfy certain properties, and a similar statement may be made for CDFs. In particular, any CDF \(F_{X}\) satisfies
 - \(F_{X}\) is nondecreasing (\(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\)).
-- \(F_{X}\) is right-continuous (\(\lim_{t\to a^{+}}F_{X}(t)=F_{X}(a)\) for all \(a\in\R\)).
+- \(F_{X}\) is right-continuous (\(\lim_{t\to a^{+}}F_{X}(t)=F_{X}(a)\) for all \(a\in\mathbb{R}\)).
 - \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
 We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). In an abuse of notation we will also write \(X\sim f_{X}\) and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
 
@@ -164,7 +164,7 @@ f_{X}(x)=\frac{1}{m},\quad x=1,2,\ldots,m.
 \end{equation}
 We write \(X\sim\mathsf{disunif}(m)\). A random experiment where this distribution occurs is the choice of an integer at random between 1 and 100, inclusive. Let \(X\) be the number chosen. Then \(X\sim\mathsf{disunif}(m=100)\) and
 \[
-\P(X=x)=\frac{1}{100},\quad x=1,\ldots,100.
+\Pr(X=x)=\frac{1}{100},\quad x=1,\ldots,100.
 \]
 We find a direct formula for the mean of \(X\sim\mathsf{disunif}(m)\):
 \begin{equation}
@@ -256,7 +256,7 @@ A similar argument shows that \(\E X(X-1)=n(n-1)p^{2}\) (see Exercise \ref{xca:b
 \end{alignat*}
 
 #+latex: \begin{example}
-A four-child family. Each child may be either a boy (\(B\)) or a girl (\(G\)). For simplicity we suppose that \(\P(B)=\P(G)=1/2\) and that the genders of the children are determined independently. If we let \(X\) count the number of \(B\)'s, then \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\). Further, \(\P(X=2)\) is
+A four-child family. Each child may be either a boy (\(B\)) or a girl (\(G\)). For simplicity we suppose that \(\Pr(B)=\Pr(G)=1/2\) and that the genders of the children are determined independently. If we let \(X\) count the number of \(B\)'s, then \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\). Further, \(\Pr(X=2)\) is
 \[
 f_{X}(2)={4 \choose 2}(1/2)^{2}(1/2)^{2}=\frac{6}{2^{4}}.
 \]
@@ -277,14 +277,14 @@ We can calculate it in \textsf{R} Commander under the \textsf{Binomial Distribut
 
 #+latex: \end{example}
 
-We know that the \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be \(\P(X=2)=0.3750\).
+We know that the \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be \(\Pr(X=2)=0.3750\).
 
 #+latex: \begin{example}
-Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let \(S=\{ \mbox{get a 6 on one roll} \} \), then \(\P(S)=1/6\) and the rolls constitute Bernoulli trials; thus \(X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)\) and our task is to find \(\P(7\leq X\leq9)\). This is just
+Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let \(S=\{ \mbox{get a 6 on one roll} \} \), then \(\Pr(S)=1/6\) and the rolls constitute Bernoulli trials; thus \(X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)\) and our task is to find \(\Pr(7\leq X\leq9)\). This is just
 \[ 
-\P(7\leq X\leq9)=\sum_{x=7}^{9}{12 \choose x}(1/6)^{x}(5/6)^{12-x}.
+\Pr(7\leq X\leq9)=\sum_{x=7}^{9}{12 \choose x}(1/6)^{x}(5/6)^{12-x}.
 \]
-Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that \(\P(7\leq X\leq9)=\P(X\leq9)-\P(X\leq6)=F_{X}(9)-F_{X}(6)\), so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
+Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that \(\Pr(7\leq X\leq9)=\Pr(X\leq9)-\Pr(X\leq6)=F_{X}(9)-F_{X}(6)\), so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
 
 #+begin_src R :exports both :results output pp  
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
@@ -298,10 +298,10 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
 | \(x=\mbox{\#of Heads}\) |   0 |   1 |   2 |   3 | Total |
 |-------------------------+-----+-----+-----+-----+-------|
-| \(f(x) = \P(X = x)\)    | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
-Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\P(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\P(X\leq x)\) should equal \(\P(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\P(X\leq x)\) should equal \(\P(X=0\mbox{ or }X=1)=\P(X=0)+\P(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
+| \(f(x) = \Pr(X = x)\)    | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\Pr(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\Pr(X\leq x)\) should equal \(\Pr(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\Pr(X\leq x)\) should equal \(\Pr(X=0\mbox{ or }X=1)=\Pr(X=0)+\Pr(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
 \[
-F_{X}(x)=\P(X\leq x)=
+F_{X}(x)=\Pr(X\leq x)=
 \begin{cases}
 0, & x<0,\\
 \frac{1}{8}, & 0\leq x<1,\\
@@ -310,7 +310,7 @@ F_{X}(x)=\P(X\leq x)=
 1, & x\geq3.
 \end{cases}
 \]
-In particular, the CDF of \(X\) is defined for the entire real line, \(\R\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure \ref{fig:binom-cdf-base}.
+In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure \ref{fig:binom-cdf-base}.
 #+latex: \end{example}
 
 #+srcname: binom-cdf-base
@@ -400,8 +400,8 @@ plot(X, cex = 0.2)
  &  &  &  & \tabularnewline
 How to do: &  & with \(\mathtt{stats}\) (default)  &  & with \(\mathtt{distr}\)\tabularnewline
 \hline
-PMF: \(\P(X=x)\) &  & \(\mathtt{dbinom(x,size=n,prob=p)}\) &  & \(\mathtt{d(X)(x)}\)\tabularnewline
-CDF: \(\P(X\leq x)\) &  & \(\mathtt{pbinom(x,size=n,prob=p)}\) &  & \(\mathtt{p(X)(x)}\)\tabularnewline
+PMF: \(\Pr(X=x)\) &  & \(\mathtt{dbinom(x,size=n,prob=p)}\) &  & \(\mathtt{d(X)(x)}\)\tabularnewline
+CDF: \(\Pr(X\leq x)\) &  & \(\mathtt{pbinom(x,size=n,prob=p)}\) &  & \(\mathtt{p(X)(x)}\)\tabularnewline
 Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt{r(X)(k)}\)\tabularnewline
 \hline
  &  &  &  & \tabularnewline
@@ -703,7 +703,7 @@ The binomial and discrete uniform distributions are popular, and rightly so; the
 
 Consider an urn with 7 white balls and 5 black balls. Let our random experiment be to randomly select 4 balls, without replacement, from the urn. Then the probability of observing 3 white balls (and thus 1 black ball) would be
 \begin{equation}
-\P(3W,1B)=\frac{{7 \choose 3}{5 \choose 1}}{{12 \choose 4}}.
+\Pr(3W,1B)=\frac{{7 \choose 3}{5 \choose 1}}{{12 \choose 4}}.
 \end{equation}
 More generally, we sample without replacement \(K\) times from an urn with \(M\) white balls and \(N\) black balls. Let \(X\) be the number of white balls in the sample. The PMF of \(X\) is
 \begin{equation}
@@ -723,7 +723,7 @@ The associated \textsf{R} functions for the PMF and CDF are =dhyper(x, m, n, k)=
 #+latex: \begin{example}
 Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
 
-Find the probability of exactly 3 defectives in the sample, that is, find \(\P(X=3)\). 
+Find the probability of exactly 3 defectives in the sample, that is, find \(\Pr(X=3)\). 
    /Solution:/ We know that \(X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)\). So the required probability is just
    \[
    f_{X}(3)=\frac{{17 \choose 3}{233 \choose 2}}{{250 \choose 5}}.
@@ -742,28 +742,28 @@ Find the probability of exactly 3 defectives in the sample, that is, find \(\P(X
    A
    #+end_src
 
-   We wanted \(\P(X=3)\), and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
+   We wanted \(\Pr(X=3)\), and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
    We know from our above discussion that the sample space should be \(x=0,1,2,3,4,5\), yet, in the table the probabilities are only displayed for \(x = 1,2,3,\) and 4. What is happening? As it turns out, the \textsf{R} Commander will only display probabilities that are 0.00005 or greater. Since \(x=5\) is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the =dhyper= function:
    #+begin_src R :exports both :results output pp  
    dhyper(5, m = 17, n = 233, k = 5)
    #+end_src
-   In other words, \(\P(X=5)\approx0.0000007916049\), a small number indeed.
-Find the probability that there are at most 2 defectives in the sample, that is, compute \(\P(X\leq2)\).
-   /Solution:/ Since \(\P(X\leq2)=\P(X=0,1,2)\), one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives \(0.7011+0.2602+0.0362=0.9975\). Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters \(m\), \(n\), and \(k\) as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
+   In other words, \(\Pr(X=5)\approx0.0000007916049\), a small number indeed.
+Find the probability that there are at most 2 defectives in the sample, that is, compute \(\Pr(X\leq2)\).
+   /Solution:/ Since \(\Pr(X\leq2)=\Pr(X=0,1,2)\), one way to do this would be to add the 0, 1, and 2 entries in the above table. this gives \(0.7011+0.2602+0.0362=0.9975\). Our answer should be correct up to the accuracy of 4 decimal places. However, a more precise method is provided by the \textsf{R} Commander. Under the \textsf{Hypergeometric distribution} menu we select \textsf{Hypergeometric tail probabilities}.... We fill in the parameters \(m\), \(n\), and \(k\) as before, but in the \textsf{Variable value(s)} dialog box we enter the value 2. We notice that the =Lower tail= option is checked, and we leave that alone. Click \textsf{OK}.
 
    #+begin_src R :exports both :results output pp  
    phyper(2, m = 17, n = 233, k = 5)
    #+end_src
 
-   And thus \(\P(X\leq2)\approx 0.9975771\). We have confirmed that the above answer was correct up to four decimal places.
-Find \(\P(X>1)\). 
-   The table did not give us the explicit probability \(\P(X=5)\), so we can not use the table to give us this probability. We need to use another method. Since \(\P(X>1)=1-\P(X\leq1)=1-F_{X}(1)\), we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
+   And thus \(\Pr(X\leq2)\approx 0.9975771\). We have confirmed that the above answer was correct up to four decimal places.
+Find \(\Pr(X>1)\). 
+   The table did not give us the explicit probability \(\Pr(X=5)\), so we can not use the table to give us this probability. We need to use another method. Since \(\Pr(X>1)=1-\Pr(X\leq1)=1-F_{X}(1)\), we can find the probability with \textsf{Hypergeometric tail probabilities}.... We enter 1 for \textsf{Variable Value(s)}, we enter the parameters as before, and in this case we choose the =Upper tail= option. This results in the following output.
 
    #+begin_src R :exports both :results output pp  
    phyper(1, m = 17, n = 233, k = 5, lower.tail = FALSE)
    #+end_src
 
-   In general, the =Upper tail= option of a tail probabilities dialog computes \(\P(X>x)\) for all given \textsf{Variable Value(s)} \(x\).
+   In general, the =Upper tail= option of a tail probabilities dialog computes \(\Pr(X>x)\) for all given \textsf{Variable Value(s)} \(x\).
 Generate \(100,000\) observations of the random variable \(X\).
    We can randomly simulate as many observations of \(X\) as we want in \textsf{R} Commander. Simply choose \textsf{Simulate hypergeometric variates}... in the \textsf{Hypergeometric distribution} dialog. 
    In the \textsf{Number of samples} dialog, type 1. Enter the parameters as above. Under the \textsf{Store Values} section, make sure \textsf{New Data set} is selected. Click \textsf{OK}. 
@@ -819,7 +819,7 @@ Another important class of problems is associated with the amount of time it tak
 #+latex: \paragraph*{The Geometric Distribution}
 \label{sub:The-Geometric-Distribution}
 
-Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\P(S)=p\) then \(X\) has PMF
+Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
 f_{X}(x)=p(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
@@ -838,7 +838,7 @@ We will find in the next section that the mean and variance are
 #+latex: \begin{example}
 The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his attempted field goals in his career up to 2006. Assuming that his successive field goal attempts are approximately Bernoulli trials, find the probability that Jeff misses at least 5 field goals before his first successful goal.
 
-/Solution/: If \(X=\) the number of missed goals until Jeff's first success, then \(X\sim\mathsf{geom}(\mathtt{prob}=0.812)\) and we want \(\P(X\geq5)=\P(X>4)\). We can find this in \textsf{R} with
+/Solution/: If \(X=\) the number of missed goals until Jeff's first success, then \(X\sim\mathsf{geom}(\mathtt{prob}=0.812)\) and we want \(\Pr(X\geq5)=\Pr(X>4)\). We can find this in \textsf{R} with
 
 #+begin_src R :exports both :results output pp  
 pgeom(4, prob = 0.812, lower.tail = FALSE)
@@ -857,7 +857,7 @@ When they say ``geometric distribution'', this is what they mean. It is not hard
 #+latex: \paragraph*{The Negative Binomial Distribution}
 \label{sub:The-Negative-Binomial}
 
-We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\P(S)=p\) then \(X\) has PMF
+We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
 f_{X}(x)={r+x-1 \choose r-1}\, p^{r}(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
@@ -876,10 +876,10 @@ Therefore
 since \(|q|=|1-p|<1\). 
 
 #+latex: \begin{example}
-We flip a coin repeatedly and let \(X\) count the number of Tails until we get seven Heads. What is \(\P(X=5)?\)
+We flip a coin repeatedly and let \(X\) count the number of Tails until we get seven Heads. What is \(\Pr(X=5)?\)
 /Solution/: We know that \(X\sim\mathsf{nbinom}(\mathtt{size}=7,\,\mathtt{prob}=1/2)\).
 \[
-\P(X=5)=f_{X}(5)={7+5-1 \choose 7-1}(1/2)^{7}(1/2)^{5}={11 \choose 6}2^{-12}
+\Pr(X=5)=f_{X}(5)={7+5-1 \choose 7-1}(1/2)^{7}(1/2)^{5}={11 \choose 6}2^{-12}
 \]
 and we can get this in \textsf{R} with
 
@@ -945,7 +945,7 @@ This is a distribution associated with ``rare events'', for reasons which will b
 
 Let \(\lambda\) be the average number of events in the time interval \([0,1]\). Let the random variable \(X\) count the number of events occurring in the interval. Then under certain reasonable conditions it can be shown that
 \begin{equation}
-f_{X}(x)=\P(X=x)=\mathrm{e}^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
+f_{X}(x)=\Pr(X=x)=\mathrm{e}^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldots
 \end{equation}
 We use the notation \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)\). The associated \textsf{R} functions are =dpois(x, lambda)=, =ppois=, =qpois=, and =rpois=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
@@ -961,7 +961,7 @@ Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{
 
 If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) is the average number that occur in unit time, then \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)\), that is,
 \begin{equation}
-\P(X=x)=\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
+\Pr(X=x)=\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
 \end{equation}
 #+end_rem
 
@@ -969,13 +969,13 @@ If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) i
 On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
 /Solution/: The probability that no car arrives is
 \[
-\P(X=0)=\mathrm{e}^{-5}\frac{5^{0}}{0!}=\mathrm{e}^{-5}\approx0.0067.
+\Pr(X=0)=\mathrm{e}^{-5}\frac{5^{0}}{0!}=\mathrm{e}^{-5}\approx0.0067.
 \]
 #+latex: \end{example}
 
 #+latex: \begin{example}
 Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark \ref{rem:poisson-process} we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
-/Solution/: We want \(\P(48\leq Y\leq50)=\P(X\leq50)-\P(X\leq47)\). 
+/Solution/: We want \(\Pr(48\leq Y\leq50)=\Pr(X\leq50)-\Pr(X\leq47)\). 
 
 #+begin_src R :exports both :results output pp  
 diff(ppois(c(47, 50), lambda = 50))

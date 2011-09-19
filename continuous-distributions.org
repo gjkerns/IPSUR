@@ -64,27 +64,27 @@ Every continuous random variable \(X\) has a /probability density function/ (PDF
 that satisfies three basic properties:
 1. \(f_{X}(x)>0\) for \(x\in S_{X}\),
 2. \(\int_{x\in S_{X}}f_{X}(x)\,\mathrm{d} x=1\), and
-3. \(\P(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
+3. \(\Pr(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
 \label{enu: contrvcond3}
 
 #+begin_rem
 We can say the following about continuous random variables:
 - Usually, the set \(A\) in \ref{enu: contrvcond3} takes the form of an interval, for example, \(A=[c,d]\), in which case
   \begin{equation}
-  \P(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
+  \Pr(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
   \end{equation}
 - It follows that the probability that \(X\) falls in a given interval is simply the /area under the curve/ of \(f_{X}\) over the interval.
-- Since the area of a line \(x=c\) in the plane is zero, \(\P(X=c)=0\)  for any value \(c\). In other words, the chance that \(X\) equals a particular value \(c\) is zero, and this is true for any number \(c\). Moreover, when \(a<b\) all of the following probabilities are the same:
+- Since the area of a line \(x=c\) in the plane is zero, \(\Pr(X=c)=0\)  for any value \(c\). In other words, the chance that \(X\) equals a particular value \(c\) is zero, and this is true for any number \(c\). Moreover, when \(a<b\) all of the following probabilities are the same:
   \begin{equation}
-  \P(a\leq X\leq b)=\P(a<X\leq b)=\P(a\leq X<b)=\P(a<X<b).
+  \Pr(a\leq X\leq b)=\Pr(a<X\leq b)=\Pr(a\leq X<b)=\Pr(a<X<b).
   \end{equation}
 - The PDF \(f_{X}\) can sometimes be greater than 1. This is in contrast to the discrete case; every nonzero value of a PMF is a probability which is restricted to lie in the interval \([0,1]\).
 
 #+end_rem
 
-We met the cumulative distribution function, \(F_{X}\), in Chapter \ref{cha:Discrete-Distributions}. Recall that it is defined by \(F_{X}(t)=\P(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
+We met the cumulative distribution function, \(F_{X}\), in Chapter \ref{cha:Discrete-Distributions}. Recall that it is defined by \(F_{X}(t)=\Pr(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
 \begin{equation}
-F_{X}(t)=\P(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
+F_{X}(t)=\Pr(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
 \end{equation}
 
 #+begin_rem
@@ -137,9 +137,9 @@ We will see later that \(f_{X}\) belongs to the /Beta/ family of distributions. 
  & =1^{3}-0^{3}\\
  & =1.
 \end{align*}
-This being said, we may find \(\P(0.14\leq X<0.71)\).
+This being said, we may find \(\Pr(0.14\leq X<0.71)\).
 \begin{align*}
-\P(0.14\leq X<0.71) & =\int_{0.14}^{0.71}3x^{2}\mathrm{d} x,\\
+\Pr(0.14\leq X<0.71) & =\int_{0.14}^{0.71}3x^{2}\mathrm{d} x,\\
  & =\left.x^{3}\right|_{x=0.14}^{0.71}\\
  & =0.71^{3}-0.14^{3}\\
  & \approx0.355167.
@@ -174,9 +174,9 @@ We can show that \(\int_{-\infty}^{\infty}f(x)\mathrm{d} x=1\):
  & =-\left(\lim_{t\to\infty}\frac{1}{t^{3}}-1\right)\\
  & =1.
 \end{align*}
-We calculate \(\P(3.4\leq X<7.1)\):
+We calculate \(\Pr(3.4\leq X<7.1)\):
 \begin{align*}
-\P(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\mathrm{d} x\\
+\Pr(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\mathrm{d} x\\
  & =\left.3\,\frac{1}{-3}x^{-3}\right|_{x=3.4}^{7.1}\\
  & =-1(7.1^{-3}-3.4^{-3})\\
  & \approx0.0226487123.
@@ -203,7 +203,7 @@ which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
 There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the =distr=\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package way.
 
 #+latex: \begin{example}
-Let \(X\) have PDF \(f(x)=3x^{2}\), \(0<x<1\) and find \(\P(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a beta random variable for the sake of argument.)
+Let \(X\) have PDF \(f(x)=3x^{2}\), \(0<x<1\) and find \(\Pr(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a beta random variable for the sake of argument.)
 
 #+begin_src R :exports both :results output pp 
 f <- function(x) 3*x^2
@@ -349,7 +349,7 @@ pnorm(1:3) - pnorm(-(1:3))
 
 #+latex: \begin{example}
 \label{exa:iq-model}
-Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\P(85\leq X\leq115)\)?
+Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\Pr(85\leq X\leq115)\)?
 
 /Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
 #+latex: \end{example}
@@ -362,7 +362,7 @@ Until now we have been given two values and our task has been to find the area u
 #+latex: \begin{example}
 \label{exa:iq-quantile-state-problem}
 Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
-/Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\P(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
+/Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\Pr(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+begin_src R :exports both :results output pp 
 g <- function(x) pnorm(x, mean = 100, sd = 15) - 0.99
 uniroot(g, interval = c(130, 145))
@@ -402,7 +402,7 @@ Here are some properties of quantile functions:
 As the reader might expect, the standard normal distribution is a very special case and has its own special notation.
 
 #+begin_defn
-For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the equation \(\P(Z>z_{\alpha})=\alpha\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\). It can be calculated in one of two equivalent ways: =qnorm(=\(1-\alpha\)=)= and =qnorm(=\(\alpha\)=, lower.tail = FALSE)=. 
+For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the equation \(\Pr(Z>z_{\alpha})=\alpha\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\). It can be calculated in one of two equivalent ways: =qnorm(=\(1-\alpha\)=)= and =qnorm(=\(\alpha\)=, lower.tail = FALSE)=. 
 #+end_defn
 
 There are a few other very important special cases which we will encounter in later chapters. 
@@ -507,7 +507,7 @@ In the case that \(g\) is not monotone we cannot apply Proposition \ref{pro:func
 
 *** The CDF method
 
-We know from Section \ref{sec:continuous-random-variables} that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\P(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\P[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
+We know from Section \ref{sec:continuous-random-variables} that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\Pr(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\Pr[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
 
 #+latex: \begin{example}
 Suppose \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) and
@@ -515,11 +515,11 @@ suppose that we let \(Y=-\ln\, X\). What is the PDF of \(Y\)?
 
 The support set of \(X\) is \((0,1),\) and \(y\) traverses \((0,\infty)\) as \(x\) ranges from \(0\) to \(1\), so the support set of \(Y\) is \(S_{Y}=(0,\infty)\). For any \(y>0\), we consider
 \[
-F_{Y}(y)=\P(Y\leq y)=\P(-\ln\, X\leq y)=\P(X\geq\mathrm{e}^{-y})=1-\P(X<\mathrm{e}^{-y}),
+F_{Y}(y)=\Pr(Y\leq y)=\Pr(-\ln\, X\leq y)=\Pr(X\geq\mathrm{e}^{-y})=1-\Pr(X<\mathrm{e}^{-y}),
 \]
-where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since \(X\) is continuous the two probabilities \(\P(X<\mathrm{e}^{-y})\) and \(\P(X\leq\mathrm{e}^{-y})\) are equal; thus
+where the next to last equality follows because the exponential function is /monotone/ (this point will be revisited later). Now since \(X\) is continuous the two probabilities \(\Pr(X<\mathrm{e}^{-y})\) and \(\Pr(X\leq\mathrm{e}^{-y})\) are equal; thus
 \[
-1-\P(X < \mathrm{e}^{-y})=1-\P(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
+1-\Pr(X < \mathrm{e}^{-y})=1-\Pr(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \]
 Now recalling that the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable satisfies \(F(u)=u\) (see Equation \ref{eq:unif-cdf}), we can say
 \[
@@ -539,11 +539,11 @@ or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of th
 #+begin_proof
 We employ the CDF method. First note that the support of \(Y\) is \((0,1)\). Then for any \(0<y<1\),
 \[
-F_{Y}(y)=\P(Y\leq y)=\P(F_{X}(X)\leq y).
+F_{Y}(y)=\Pr(Y\leq y)=\Pr(F_{X}(X)\leq y).
 \]
 Now since \(F_{X}\) is strictly increasing, it has a well defined inverse function \(F_{X}^{-1}\). Therefore,
 \[
-\P(F_{X}(X)\leq y)=\P(X\leq F_{X}^{-1}(y))=F_{X}[F_{X}^{-1}(y)]=y.
+\Pr(F_{X}(X)\leq y)=\Pr(X\leq F_{X}^{-1}(y))=F_{X}[F_{X}^{-1}(y)]=y.
 \]
 Summarizing, we have seen that \(F_{Y}(y)=y\), \(0<y<1\). But this is exactly the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable. 
 #+end_proof
@@ -557,11 +557,11 @@ The Probability Integral Transform is true for all continuous random variables w
 Let \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(U=Z^{2}\). What is the PDF of \(U\)? 
 Notice first that \(Z^{2}\geq0\), and thus the support of \(U\) is \([0,\infty)\). And for any \(u\geq0\), 
 \[
-F_{U}(u)=\P(U\leq u)=\P(Z^{2}\leq u).
+F_{U}(u)=\Pr(U\leq u)=\Pr(Z^{2}\leq u).
 \]
 But \(Z^{2}\leq u\) occurs if and only if \(-\sqrt{u}\leq Z\leq\sqrt{u}\). The last probability above is simply the area under the standard normal PDF from \(-\sqrt{u}\) to \(\sqrt{u}\), and since \(\phi\) is symmetric about 0, we have
 \[
-\P(Z^{2}\leq u)=2\P(0\leq Z\leq\sqrt{u})=2\left[F_{Z}(\sqrt{u})-F_{Z}(0)\right]=2\Phi(\sqrt{u})-1,
+\Pr(Z^{2}\leq u)=2\Pr(0\leq Z\leq\sqrt{u})=2\left[F_{Z}(\sqrt{u})-F_{Z}(0)\right]=2\Phi(\sqrt{u})-1,
 \]
 because \(\Phi(0)=1/2\). To find the PDF of \(U\) we differentiate the CDF recalling that \(\Phi'=\phi\).
 \[
@@ -603,7 +603,7 @@ W <- sin(exp(X) + 27)
 W
 #+end_src
 
-The warning confirms that the \texttt{d-p-q} functions are not calculated analytically, but are instead based on the randomly simulated values of \(Y\). /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute \(\P(W\leq0.5)\) using the \(W\) above, then define \(W\) again, and compute the (supposedly) same \(\P(W\leq0.5)\) a few moments later.
+The warning confirms that the \texttt{d-p-q} functions are not calculated analytically, but are instead based on the randomly simulated values of \(Y\). /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute \(\Pr(W\leq0.5)\) using the \(W\) above, then define \(W\) again, and compute the (supposedly) same \(\Pr(W\leq0.5)\) a few moments later.
 
 #+begin_src R :exports both :results output pp 
 p(W)(0.5)
@@ -611,7 +611,7 @@ W <- sin(exp(X) + 27)
 p(W)(0.5)
 #+end_src
 
-The answers are not the same! Furthermore, if we were to repeat the process we would get yet another answer for \(\P(W\leq0.5)\).  
+The answers are not the same! Furthermore, if we were to repeat the process we would get yet another answer for \(\Pr(W\leq0.5)\).  
 
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \textsf{R} are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
@@ -640,16 +640,16 @@ The mean is \(\mu=1/\lambda\) and the variance is \(\sigma^{2}=1/\lambda^{2}\).
 
 The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate \(\lambda\) and if \(Y\) counts the number of customers that arrive in the time interval \([0,t)\), then we saw in Section \ref{sec:other-discrete-distributions} that \( Y \sim \mathsf{pois}(\mathtt{lambda}=\lambda t). \) Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let \(X\) be the length of this random time interval. Then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). Observe the following string of equalities:
 \begin{align*}
-\P(X>t) & =\P(\mbox{first arrival after time \emph{t}}),\\
- & =\P(\mbox{no events in [0,\emph{t})}),\\
- & =\P(Y=0),\\
+\Pr(X>t) & =\Pr(\mbox{first arrival after time \emph{t}}),\\
+ & =\Pr(\mbox{no events in [0,\emph{t})}),\\
+ & =\Pr(Y=0),\\
  & =\mathrm{e}^{-\lambda t},
 \end{align*}
-where the last line is the PMF of \(Y\) evaluated at \(y=0\). In other words, \(\P(X\leq t)=1-\mathrm{e}^{-\lambda t}\), which is exactly the CDF of an \(\mathsf{exp}(\mathtt{rate}=\lambda)\) distribution. 
+where the last line is the PMF of \(Y\) evaluated at \(y=0\). In other words, \(\Pr(X\leq t)=1-\mathrm{e}^{-\lambda t}\), which is exactly the CDF of an \(\mathsf{exp}(\mathtt{rate}=\lambda)\) distribution. 
 
 The exponential distribution is said to be /memoryless/ because exponential random variables "forget" how old they are at every instant. That is, the probability that we must wait an additional five hours for a customer to arrive, given that we have already waited seven hours, is exactly the probability that we needed to wait five hours for a customer in the first place. In mathematical symbols, for any \(s,\, t>0\),
 \begin{equation}
-\P(X>s+t\,|\, X>t)=\P(X>s).
+\Pr(X>s+t\,|\, X>t)=\Pr(X>s).
 \end{equation}
 See Exercise \ref{xca:prove-the-memoryless}.
 
@@ -873,17 +873,17 @@ For the following random experiments, decide what the distribution of \(X\) shou
 
 #+begin_xca
 If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find 
-1. \(\P(Z>2.64)\)
+1. \(\Pr(Z>2.64)\)
    #+begin_src R :exports both :results output pp 
    pnorm(2.64, lower.tail = FALSE)
    #+end_src
 
-1. \(\P(0\leq Z<0.87)\)
+1. \(\Pr(0\leq Z<0.87)\)
    #+begin_src R :exports both :results output pp 
    pnorm(0.87) - 1/2
    #+end_src
 
-1. \(\P(|Z|>1.39)\) (Hint: draw a picture!)
+1. \(\Pr(|Z|>1.39)\) (Hint: draw a picture!)
    #+begin_src R :exports both :results output pp 
    2 * pnorm(-1.39)
    #+end_src
@@ -899,6 +899,6 @@ Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\
 \label{xca:prove-the-memoryless}
 Prove the memoryless property for exponential random variables. That is, for \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\) show that for any \(s,t>0\),
 \[
-\P(X>s+t\,|\, X>t)=\P(X>s).
+\Pr(X>s+t\,|\, X>t)=\Pr(X>s).
 \]
 #+end_xca

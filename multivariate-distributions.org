@@ -48,7 +48,7 @@ The interested reader who would like to learn more about any of the below mentio
 
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
-f_{X,Y}(x,y)=\P(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq:joint-pmf}
+f_{X,Y}(x,y)=\Pr(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq:joint-pmf}
 \end{equation}
 Every joint PMF satisfies
 \begin{equation}
@@ -62,8 +62,8 @@ It is customary to extend the function \(f_{X,Y}\) to be defined on all of \(\ma
 
 In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq:theorem-total-probability}): observe
 \begin{eqnarray}
-f_{X}(x) & = & \P(X=x),\\
- & = & \sum_{y\in S_{Y}}\P(X=x,\, Y=y),\\
+f_{X}(x) & = & \Pr(X=x),\\
+ & = & \sum_{y\in S_{Y}}\Pr(X=x,\, Y=y),\\
  & = & \sum_{y\in S_{Y}}f_{X,Y}(x,y).
 \end{eqnarray}
 By interchanging the roles of \(X\) and \(Y\) it is clear that 
@@ -75,7 +75,7 @@ Given the joint PMF we may recover the marginal PMFs, but the converse is not tr
 
 Associated with the joint PMF is the /joint cumulative distribution function/ \(F_{X,Y}\) defined by
 \[
-F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
+F_{X,Y}(x,y)=\Pr(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
 \]
 The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation \ref{eq:joint-pmf}. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
 
@@ -108,7 +108,7 @@ V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
 We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table \ref{tab:max-and-sum-two-dice}. 
 
-We can use the table to calculate the marginal PMF of \(U\), because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\P(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
+We can use the table to calculate the marginal PMF of \(U\), because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\Pr(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
@@ -208,7 +208,7 @@ and
 \end{equation}
 In the continuous case there is not such a simple interpretation for the joint PDF; however, we do have one for the joint CDF, namely,
 \[
-F_{X,Y}(x,y)=\P(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\mathrm{d} v\,\mathrm{d} u,
+F_{X,Y}(x,y)=\Pr(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}(u,v)\,\mathrm{d} v\,\mathrm{d} u,
 \]
 for \((x,y)\in\mathbb{R}^{2}\). If \(X\) and \(Y\) have the joint PDF \(f_{X,Y}\), then the marginal density of \(X\) may be recovered by
 \begin{equation}
@@ -419,7 +419,7 @@ Our initial beliefs about \(\theta\) are represented by a probability distributi
 Compare the above expression to Equation \ref{eq:bayes-rule}.
 
 #+latex: \begin{example}
-Suppose the parameter \(\theta\) is the \(\P(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
+Suppose the parameter \(\theta\) is the \(\Pr(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
 \[
 \theta\sim\pi(\theta)=3(1-\theta)^{2},\quad0<\theta<1.
 \]
@@ -461,11 +461,11 @@ where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{
 
 We recall from Chapter \ref{cha:Probability} that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
-\P(A\cap B)=\P(A)\P(B).
+\Pr(A\cap B)=\Pr(A)\Pr(B).
 \end{equation}
 If it happens that
 \begin{equation}
-\P(X=x,Y=y)=\P(X=x)\P(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
+\Pr(X=x,Y=y)=\Pr(X=x)\Pr(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
 then we say that \(X\) and \(Y\) are /independent random variables/. Otherwise, we say that \(X\) and \(Y\) are /dependent/. Using the PMF notation from above, we see that independent discrete random variables satisfy
 \begin{equation}
@@ -845,7 +845,7 @@ and
 \end{equation}
 or even shorter: \(\int f_{\mathbf{X}}(\mathbf{x})\,\mathrm{d}\mathbf{x}=1\). The joint CDF \(F_{\mathbf{X}}\) is defined by 
 \begin{equation}
-F_{\mathbf{X}}(\mathbf{x})=\P(X_{1}\leq x_{1},\, X_{2}\leq x_{2},\ldots,\, X_{n}\leq x_{n}),
+F_{\mathbf{X}}(\mathbf{x})=\Pr(X_{1}\leq x_{1},\, X_{2}\leq x_{2},\ldots,\, X_{n}\leq x_{n}),
 \end{equation}
 for \(\mathbf{x}\in\mathbb{R}^{n}\). The expectation of a function \(g(\mathbf{X})\) is defined just as we would imagine:
 \begin{equation}
@@ -905,14 +905,14 @@ Bruno de Finetti was a strong proponent of the subjective approach to probabilit
 #+begin_thm
 *De Finetti's Theorem.* Let \(X_{1}\), \(X_{2}\), ... be a sequence of \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) random variables such that \((X_{1},\ldots,X_{k})\) are exchangeable for every \(k\). Then there exists a random variable \(\Theta\) with support \([0,1]\) and PDF \(f_{\Theta}(\theta)\) such that
 \begin{equation}
-\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,\label{eq:definetti-binary}
+\Pr(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,\label{eq:definetti-binary}
 \end{equation}
 for all \(x_{i}=0,\,1\), \(i=1,\,2,\ldots,k\).
 #+end_thm
 
-To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of \(\theta=\P(\mbox{Heads})\). We reach into our pocket and select a coin at random according to some probability -- say, \(f_{\Theta}(\theta)\). We take the randomly selected coin and flip it \(k\) times. 
+To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of \(\theta=\Pr(\mbox{Heads})\). We reach into our pocket and select a coin at random according to some probability -- say, \(f_{\Theta}(\theta)\). We take the randomly selected coin and flip it \(k\) times. 
 
-Think carefully: the conditional probability of observing a sequence  \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\), given a specific coin \(\theta\) would just be \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\), because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the /unconditional/ probability \(\P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})\) by adding up terms that look like
+Think carefully: the conditional probability of observing a sequence  \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\), given a specific coin \(\theta\) would just be \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\), because the coin flips are an independent sequence of Bernoulli trials. But the coin is random, so the Theorem of Total Probability says we can get the /unconditional/ probability \(\Pr(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})\) by adding up terms that look like
 \begin{equation}
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}

@@ -56,18 +56,18 @@ Now let \(F\) denote the (unknown) total number of fish in the pond. We know tha
 
 Looking back to Section \ref{sec:other-discrete-distributions}, we see that the random variable \(X\) has a \(\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)\) distribution. Therefore, for an observed value \(X=x\) the probability would be
 \[
-\P(X=x)=\frac{{M \choose x}{F-M \choose K-x}}{{F \choose K}}.
+\Pr(X=x)=\frac{{M \choose x}{F-M \choose K-x}}{{F \choose K}}.
 \]
-First we notice that \(F\) must be at least 7. Could \(F\) be equal to seven? If \(F=7\) then all of the fish would have been tagged on the first run, and there would be no untagged fish in the pond, thus, \(\P(\mbox{3 successes in 4 trials})=0\). 
+First we notice that \(F\) must be at least 7. Could \(F\) be equal to seven? If \(F=7\) then all of the fish would have been tagged on the first run, and there would be no untagged fish in the pond, thus, \(\Pr(\mbox{3 successes in 4 trials})=0\). 
 What about \(F=8\); what would be the probability of observing \(X=3\) tagged fish?
 \[
-\P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{1 \choose 1}}{{8 \choose 4}}=\frac{35}{70}=0.5.
+\Pr(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{1 \choose 1}}{{8 \choose 4}}=\frac{35}{70}=0.5.
 \]
 Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish would be
 \[
-\P(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
+\Pr(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
 \]
-We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\P(X=x)\) versus \(F\). See Figure \ref{fig:capture-recapture}.
+We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\Pr(X=x)\) versus \(F\). See Figure \ref{fig:capture-recapture}.
 #+latex: \end{example}
 
 #+srcname: capture-recapture
@@ -121,13 +121,13 @@ X_{i}=
 \]
 Since we are returning the fish to the pond once caught, we may think of this as a sampling scheme with replacement where the proportion of bass \(p\) does not change. Given that we allow the fish sufficient time to ``mix'' once returned, it is not completely unreasonable to model our fishing experiment as a sequence of Bernoulli trials, so that the \(X_{i}\)'s would be IID \(\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)\). Under those assumptions we would have
 \begin{eqnarray*}
-\P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n}) & = & \P(X_{1}=x_{1})\,\P(X_{2}=x_{2})\,\cdots\P(X_{n}=x_{n}),\\
+\Pr(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n}) & = & \Pr(X_{1}=x_{1})\,\Pr(X_{2}=x_{2})\,\cdots\Pr(X_{n}=x_{n}),\\
  & = & p^{x_{1}}(1-p)^{x_{1}}\, p^{x_{2}}(1-p)^{x_{2}}\cdots\, p^{x_{n}}(1-p)^{x_{n}},\\
  & = & p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{eqnarray*}
 That is, 
 \[
-\P(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n})=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
+\Pr(X_{1}=x_{1},\, X_{2}=x_{2},\,\ldots,\, X_{n}=x_{n})=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
 This last quantity is a function of \(p\), called the /likelihood function/ \(L(p)\):
 \[
@@ -382,7 +382,7 @@ We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a 
 \end{equation}
 For a big probability \(1-\alpha\), for instance, 95%, we can calculate the quantile \(z_{\alpha/2}\). Then
 \begin{equation}
-\P\left(-z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
+\Pr\left(-z_{\alpha/2}\leq\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\leq z_{\alpha/2}\right)=1-\alpha.
 \end{equation}
 But now consider the following string of equivalent inequalities:
 \[
@@ -399,7 +399,7 @@ But now consider the following string of equivalent inequalities:
 \]
 That is, 
 \begin{equation}
-\P\left(\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
+\Pr\left(\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
 \end{equation}
 
 #+begin_defn
@@ -546,7 +546,7 @@ All of the above intervals for \(\mu\) were two-sided, but there are also one-si
 \end{equation}
 and satisfy
 \begin{equation}
-\P\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\P\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
+\Pr\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\Pr\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
 \end{equation}
 #+end_rem
 
