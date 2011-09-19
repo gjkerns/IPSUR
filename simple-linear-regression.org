@@ -21,7 +21,7 @@
 :PROPERTIES:
 :tangle: R/slr.R
 :END:
-\label{cha:simple-linear-regression}
+#+latex: \label{cha:simple-linear-regression}
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -32,7 +32,7 @@
 - the concept of influential versus outlying observations, and how to tell the difference
 
 ** Basic Philosophy
-\label{sec:Basic-Philosophy}
+#+latex: \label{sec:Basic-Philosophy}
 
 Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not random (so we will write \(x\)), but \(Y\) is random. We believe that \(Y\) depends in /some/ way on \(x\). Some typical examples of \( (x,Y) \) pairs are
 
@@ -127,7 +127,7 @@ segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 
 #+latex: \begin{example}
-\label{exa:Speed-and-Stopping}
+#+latex: \label{exa:Speed-and-Stopping}
 *Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
 #+begin_src R :exports both :results output pp 
 head(cars)
@@ -173,10 +173,10 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 #+latex: \end{example}
 
 ** Estimation
-\label{sec:SLR-Estimation}
+#+latex: \label{sec:SLR-Estimation}
 
 *** Point Estimates of the Parameters
-\label{sub:point-estimate-mle-slr}
+#+latex: \label{sub:point-estimate-mle-slr}
 
 Where is \( \mu(x) \)? In essence, we would like to ``fit'' a line to the points. But how do we determine a ``good'' line? Is there a /best/ line? We will use maximum likelihood\index{maximum likelihood} to find it. We know:
 \begin{equation}
@@ -295,7 +295,7 @@ ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) +
 To calculate points on the regression line we may simply plug the desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired \(x\) value(s) represented by a data frame. See the example below.
 
 #+latex: \begin{example}
-\label{exa:regline-cars-interpret}
+#+latex: \label{exa:regline-cars-interpret}
 
 Using the regression line for the =cars= data:
 
@@ -308,7 +308,7 @@ Using the regression line for the =cars= data:
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
-\label{sub:slr-point-est-regline}
+#+latex: \label{sub:slr-point-est-regline}
 
 We said at the beginning of the chapter that our goal was to estimate \( \mu = \E Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
@@ -316,7 +316,7 @@ We said at the beginning of the chapter that our goal was to estimate \( \mu = \
 The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
 
 #+latex: \begin{example}
-\label{exa:regline-cars-pe-8mph}
+#+latex: \label{exa:regline-cars-pe-8mph}
 We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
@@ -394,7 +394,7 @@ carsumry$sigma
 #+end_src
 
 *** Interval Estimates of the Parameters
-\label{sub:slr-interval-est-params}
+#+latex: \label{sub:slr-interval-est-params}
 
 We discussed general interval estimation in Chapter \ref{cha:Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
 
@@ -463,7 +463,7 @@ confint(cars.lm)
 With 95% confidence, the random interval \( [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] \) covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
-\label{sub:slr-interval-est-regline}
+#+latex: \label{sub:slr-interval-est-regline}
 
 We have seen how to estimate the coefficients of regression line with both point estimates and confidence intervals. We even saw how to estimate a value \(\hat{\mu}(x)\) on the regression line for a given value of \(x\), such as \(x=15\). 
 
@@ -579,10 +579,10 @@ print(ci.plot(cars.lm))
 #+end_src
 
 ** Model Utility and Inference
-\label{sec:Model-Utility-SLR}
+#+latex: \label{sec:Model-Utility-SLR}
 
 *** Hypothesis Tests for the Parameters
-\label{sub:slr-hypoth-test-params}
+#+latex: \label{sub:slr-hypoth-test-params}
 
 Much of the attention of SLR is directed toward \(\beta_{1}\) because when \( \beta_{1}\neq 0 \) the mean value of \(Y\) increases (or decreases) as \(x\) increases. It is really boring when \(\beta_{1}=0\), because in that case the mean value of \(Y\) remains the same, regardless of the value of \(x\) (when the regression assumptions hold, of course). It is thus very important to decide whether or not \( \beta_{1} = 0 \). We address the question with a statistical test of the null hypothesis \(H_{0}:\beta_{1}=0\) versus the alternative hypothesis \(H_{1}:\beta_{1}\neq0\), and to do that we need to know the sampling distribution of \(b_{1}\) when the null hypothesis is true.
 
@@ -677,7 +677,7 @@ sqrt(carsumry$r.squared)
 We choose the principal square root because the slope of the regression line is positive.
 
 *** Overall /F/ statistic
-\label{sub:slr-overall-F-statistic}
+#+latex: \label{sub:slr-overall-F-statistic}
 
 There is another way to test the significance of the linear regression model. In SLR, the new way also tests the hypothesis \(H_{0}:\beta_{1}=0\) versus \(H_{1}:\beta_{1}\neq0\), but it is done with a new test statistic called the /overall F statistic/. It is defined by
 
@@ -712,14 +712,14 @@ Here we see that the \(F\) statistic is \( SRC_R{tmpf} \) with a \(p\)-value ver
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for =speed= squared.
 
 ** Residual Analysis
-\label{sec:Residual-Analysis-SLR}
+#+latex: \label{sec:Residual-Analysis-SLR}
 
 We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub:Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub:Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub:Independence-Assumption}.
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
 *** Normality Assumption
-\label{sub:Normality-Assumption}
+#+latex: \label{sub:Normality-Assumption}
 
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
@@ -779,11 +779,11 @@ shapiro.test(residuals(cars.lm))
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 
 *** Constant Variance Assumption
-\label{sub:Constant-Variance-Assumption}
+#+latex: \label{sub:Constant-Variance-Assumption}
 
 We will again go to residual plots to try and determine if the spread of the residuals is changing over time (or index). However, it is unfortunately not that easy because the residuals do not have constant variance! In fact, it can be shown that the variance of the residual \(E_{i}\) is 
 \begin{equation}
-\mbox{Var\ensuremath{(E_{i})}}=\sigma^{2}(1-h_{ii}),\quad i=1,2,\ldots,n,
+\mbox{Var$(E_{i})$}=\sigma^{2}(1-h_{ii}),\quad i=1,2,\ldots,n,
 \end{equation}
 where \(h_{ii}\) is a quantity called the /leverage/ which is defined below. Consequently, in order to check the constant variance assumption we must standardize the residuals before plotting. We estimate the standard error of \(E_{i}\) with \(s_{E_{i}}=s\sqrt{(1-h_{ii})}\) and define the /standardized residuals/ \(R_{i}\), \(i=1,2,\ldots,n\), by 
 \begin{equation} 
@@ -842,7 +842,7 @@ bptest(cars.lm)
 For these data we would not reject the null hypothesis at the \(\alpha=0.05\) level. There is relatively weak evidence against the assumption of constant variance. 
 
 *** Independence Assumption
-\label{sub:Independence-Assumption}
+#+latex: \label{sub:Independence-Assumption}
 
 One of the strongest of the regression assumptions is the one regarding independence. Departures from the independence assumption are often exhibited by correlation (or autocorrelation, literally, self-correlation) present in the residuals. There can be positive or negative correlation.
 
@@ -924,7 +924,7 @@ We often find problems with our model that suggest that at least one of the thre
 - Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 
 ** Other Diagnostic Tools
-\label{sec:Other-Diagnostic-Tools-SLR}
+#+latex: \label{sec:Other-Diagnostic-Tools-SLR}
 
 There are two types of observations with which we must be especially careful:
 - Influential observations :: are those that have a substantial effect on our estimates, predictions, or inferences. A small change in an influential observation is followed by a large change in the parameter estimates or inferences. 
@@ -963,7 +963,7 @@ Values of \(|R_{i}| > 2\) are extreme and suggest that the observation has an ou
 
 Now delete the \(i^{\mathrm{th}}\) case and fit the regression function to the remaining \(n - 1\) cases, producing a fitted value \(\hat{Y}_{(i)}\) with /deleted residual/ \(D_{i}=Y_{i}-\hat{Y}_{(i)}\). It is shown in later classes that 
 \begin{equation}
-\mbox{Var\ensuremath{(D_{i})}}=\frac{S_{(i)}^{2}}{1-h_{ii}},\quad i=1,2,\ldots,n,
+\mbox{Var $(D_{i})$}=\frac{S_{(i)}^{2}}{1-h_{ii}},\quad i=1,2,\ldots,n,
 \end{equation}
 so that the /studentized deleted residuals/ \(t_{i}\) defined by
 \begin{equation}
@@ -1184,7 +1184,7 @@ show that
 #+end_xca
 
 #+begin_xca
-\label{xca:find-mles-SLR}
+#+latex: \label{xca:find-mles-SLR}
 Solve the following system of equations for \(\beta_{1}\) and \(\beta_{0}\) to find the MLEs for slope and intercept in the simple linear regression model.
 \begin{eqnarray*}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
@@ -1193,7 +1193,7 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 #+end_xca
 
 #+begin_xca
-\label{xca:show-alternate-slope-formula}
+#+latex: \label{xca:show-alternate-slope-formula}
 Show that the formula given in Equation \ref{eq:sample-correlation-formula} is equivalent to
 \[
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.

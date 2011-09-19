@@ -21,7 +21,7 @@
 :PROPERTIES:
 :tangle: R/estimate.R
 :END:
-\label{cha:Estimation}
+#+latex: \label{cha:Estimation}
 
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
@@ -38,12 +38,12 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 - the concept of margin of error and its relationship to sample size
 
 ** Point Estimation
-\label{sec:Point-Estimation-1}
+#+latex: \label{sec:Point-Estimation-1}
 
 The following example is how I was introduced to maximum likelihood.
 
 #+latex: \begin{example}
-\label{exa:how-many-fish}
+#+latex: \label{exa:how-many-fish}
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 
 We will fish from the pond and suppose that we capture \(M=7\) fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
@@ -106,7 +106,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 #+end_html
 
 #+latex: \begin{example}
-\label{exa:bass-bluegill}
+#+latex: \label{exa:bass-bluegill}
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 
 Let \(p=\mbox{the proportion of bass}\). Without any other information, it is conceivable for \(p\) to be any value in the interval \([0,1]\), but for the sake of argument we will suppose that \(p\) falls strictly between zero and one. How can we learn about the true value of \(p\)? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
@@ -274,9 +274,9 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased es
 #+end_defn
 
 #+latex: \begin{example}
-\label{exa:normal-MLE-both}
+#+latex: \label{exa:normal-MLE-both}
 
-Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if \(\mbox{\ensuremath{\theta}}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
+Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca:norm-mu-sig-MLE}) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
@@ -374,7 +374,7 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 ** Confidence Intervals for Means
-\label{sec:Confidence-Intervals-for-Means}
+#+latex: \label{sec:Confidence-Intervals-for-Means}
 
 We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, where \(\mu\) is unknown. We know that we may estimate \(\mu\) with \(\overline{X}\), and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
@@ -473,7 +473,7 @@ For a fixed sample size \(n\),
 
 
 #+latex: \begin{example}
-\label{exa:plant-one-samp-z-int}
+#+latex: \label{exa:plant-one-samp-z-int}
 *Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 
 The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
@@ -575,7 +575,7 @@ plot(temp, "Conf")
 #+end_src
 
 ** Confidence Intervals for Differences of Means
-\label{sec:Conf-Interv-for-Diff-Means}
+#+latex: \label{sec:Conf-Interv-for-Diff-Means}
 
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) be a \(SRS(m)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Further, assume that the \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) sample is independent of the \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) sample.
 
@@ -635,7 +635,7 @@ The basic function is =t.test= which has a =var.equal= argument that may be set 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
 ** Confidence Intervals for Proportions
-\label{sec:Confidence-Intervals-Proportions}
+#+latex: \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 - the proportion of U.S. citizens that support Obama,
@@ -728,7 +728,7 @@ B <- with(A, untable(A, Freq))
 #+end_src
 
 ** Confidence Intervals for Variances
-\label{sec:Confidence-Intervals-for-Variances}
+#+latex: \label{sec:Confidence-Intervals-for-Variances}
 
 I am thinking one and two sample problems here.
 
@@ -737,7 +737,7 @@ I am thinking one and two sample problems here.
 I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
 
 ** Fitting Distributions
-\label{sec:Fitting-Distributions}
+#+latex: \label{sec:Fitting-Distributions}
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -745,7 +745,7 @@ I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= i
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
 ** Sample Size and Margin of Error
-\label{sec:Sample-Size-and-MOE}
+#+latex: \label{sec:Sample-Size-and-MOE}
 
 Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
@@ -810,7 +810,7 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
 
 ** Other Topics
-\label{sec:Other-Topics}
+#+latex: \label{sec:Other-Topics}
 
 Mention =mle= from the =stats4= package.
 
@@ -821,11 +821,11 @@ Mention =mle= from the =stats4= package.
 
 #+begin_xca
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Find a two-dimensional MLE for \(\theta=(\mu,\sigma)\).
-\label{xca:norm-mu-sig-MLE}
+#+latex: \label{xca:norm-mu-sig-MLE}
 #+end_xca
 
 #+begin_xca
-\label{xca:CI-quad-form}
+#+latex: \label{xca:CI-quad-form}
 Find the upper and lower limits for the confidence interval procedure by finding the roots of \(f\) defined by 
 \[
 f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.

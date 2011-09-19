@@ -21,7 +21,7 @@
 :PROPERTIES:
 :tangle: R/resamp.R
 :END:
-\label{cha:resampling-methods}
+#+latex: \label{cha:resampling-methods}
 
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
@@ -35,7 +35,7 @@ I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} an
 - resampling for hypothesis tests (permutation tests)
 
 ** Introduction
-\label{sec:Introduction-Resampling}
+#+latex: \label{sec:Introduction-Resampling}
 
 -  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, /e.g./, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
@@ -66,12 +66,12 @@ The above discussion leads us to the following general procedure to approximate 
 1. The bootstrap distribution gives information about the sampling distribution of the original statistic \(S\). In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of \(S\).
 
 ** Bootstrap Standard Errors
-\label{sec:Bootstrap-Standard-Errors}
+#+latex: \label{sec:Bootstrap-Standard-Errors}
 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 
 #+latex: \begin{example}
-\label{exa:Bootstrap-se-mean}
+#+latex: \label{exa:Bootstrap-se-mean}
 
 *Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\).  
 
@@ -143,7 +143,7 @@ We only took an original sample of size \(n=25\), and resampling more and more w
 #+end_rem
 
 #+latex: \begin{example}
-\label{exa:Bootstrap-se-median}
+#+latex: \label{exa:Bootstrap-se-median}
 
 *Standard error of the median.* We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
 
@@ -232,7 +232,7 @@ Some things to keep in mind about the bootstrap:
 #+end_rem
 
 ** Bootstrap Confidence Intervals
-\label{sec:Bootstrap-Confidence-Intervals}
+#+latex: \label{sec:Bootstrap-Confidence-Intervals}
 
 *** Percentile Confidence Intervals
 
@@ -242,7 +242,7 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 
 
 #+latex: \begin{example}
-\label{exa:percentile-interval-median-first}
+#+latex: \label{exa:percentile-interval-median-first}
 
 *Percentile interval for the expected value of the median.* We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
 
@@ -301,7 +301,7 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 - Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
 
 ** Resampling in Hypothesis Tests
-\label{sec:Resampling-in-Hypothesis}
+#+latex: \label{sec:Resampling-in-Hypothesis}
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 1. Go collect some information from the two groups and calculate an associated statistic, for example, \(\overline{X}_{1}-\overline{X}_{2}\). 

@@ -21,7 +21,7 @@
 :PROPERTIES:
 :tangle: R/mlr.R
 :END:
-\label{cha:multiple-linear-regression}
+#+latex: \label{cha:multiple-linear-regression}
 
 #+latex: \noindent 
 We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -41,7 +41,7 @@ Most of the results are stated without proof or with only a cursory justificatio
 - hints about what will be coming later
 
 ** The Multiple Linear Regression Model
-\label{sec:The-MLR-Model}
+#+latex: \label{sec:The-MLR-Model}
 
 The first thing to do is get some better notation. We will write 
 \begin{equation}
@@ -178,10 +178,10 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
 ** Estimation and Prediction
-\label{sec:Estimation-and-Prediction-MLR}
+#+latex: \label{sec:Estimation-and-Prediction-MLR}
 
 *** Parameter estimates
-\label{sub:mlr-parameter-estimates}
+#+latex: \label{sub:mlr-parameter-estimates}
 
 We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
 \begin{equation}
@@ -245,7 +245,7 @@ head(model.matrix(trees.lm))
 #+end_src
 
 *** Point Estimates of the Regression Surface
-\label{sub:mlr-point-est-regsurface}
+#+latex: \label{sub:mlr-point-est-regsurface}
 
 The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
 \begin{eqnarray}
@@ -336,7 +336,7 @@ Using the =trees= data,
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
-\label{sub:mlr-mse-se}
+#+latex: \label{sub:mlr-mse-se}
 
 The residuals are given by
 \begin{equation}
@@ -374,7 +374,7 @@ treesumry$sigma
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
 *** Interval Estimates of the Parameters
-\label{sub:mlr-interval-est-params}
+#+latex: \label{sub:mlr-interval-est-params}
 
 We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
@@ -485,7 +485,7 @@ Using the =trees= data,
 #+latex: \end{example}
 
 ** Model Utility and Inference
-\label{sec:Model-Utility-and-MLR}
+#+latex: \label{sec:Model-Utility-and-MLR}
 
 *** Multiple Coefficient of Determination
 
@@ -532,11 +532,11 @@ treesumry$adj.r.squared
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 
 *** Overall /F/-Test
-\label{sub:mlr-Overall-F-Test}
+#+latex: \label{sub:mlr-Overall-F-Test}
 
 Another way to assess the model's utility is to to test the hypothesis
 \[
-H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one \ensuremath{\beta_{i}\neq0}}.
+H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one $\beta_{i}\neq0$}.
 \]
 The idea is that if all \(\beta_{i}\)'s were zero, then the explanatory variables \(X_{1},\ldots,X_{p}\) would be worthless predictors for the response variable \(Y\). We can test the above hypothesis with the overall \(F\) statistic, which in MLR is defined by
 \begin{equation}
@@ -555,7 +555,7 @@ treesumry$fstatistic
 For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
-\label{sub:mlr-Student's-t-Tests}
+#+latex: \label{sub:mlr-Student's-t-Tests}
 
 We know that
 \begin{equation}
@@ -586,7 +586,7 @@ treesumry
 We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
 
 ** Polynomial Regression
-\label{sec:Polynomial-Regression}
+#+latex: \label{sec:Polynomial-Regression}
 
 *** Quadratic Regression Model
 
@@ -715,7 +715,7 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 #+end_rem
 
 ** Interaction
-\label{sec:Interaction}
+#+latex: \label{sec:Interaction}
 
 In our model for tree volume there have been two independent variables: =Girth= and =Height=. We may suspect that the independent variables are related, that is, values of one variable may tend to influence values of the other. It may be desirable to include an additional term in our model to try and capture the dependence between the variables. Interaction terms are formed by multiplying one (or more) explanatory variable(s) by another. 
 
@@ -782,7 +782,7 @@ There are two other ways to include interaction terms in model formulas. For exa
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
 
 ** Qualitative Explanatory Variables
-\label{sec:Qualitative-Explanatory-Variables}
+#+latex: \label{sec:Qualitative-Explanatory-Variables}
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
 
@@ -910,7 +910,7 @@ It may look intimidating but there is reason to the madness. First we =split= th
 There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
-\label{sec:Partial-F-Statistic}
+#+latex: \label{sec:Partial-F-Statistic}
 
 We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
@@ -922,7 +922,7 @@ H_{0}:\beta_{j+1}=\beta_{j+2}=\cdots=\beta_{p}=0
 \end{equation}
 versus the alternative 
 \begin{equation}
-H_{1}:\mbox{at least one of \ensuremath{\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0}}.
+H_{1}:\mbox{at least one of $\beta_{j+1},\ \beta_{j+2},\ ,\ldots,\beta_{p}\neq0$}.
 \end{equation}
 
 The interpretation of \(H_{0}\) is that none of the variables \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\) and the interpretation of \(H_{1}\) is that at least one of \(x_{j+1}\), ...,\(x_{p}\) is significantly related to \(Y\). In essence, for this hypothesis test there are two competing models under consideration:
@@ -945,7 +945,7 @@ It can be shown when the regression assumptions hold under \(H_{0}\) that the pa
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 
 #+latex: \begin{example}
-\label{exa:mlr-trees-poly-no-rescale}
+#+latex: \label{exa:mlr-trees-poly-no-rescale}
 
 For the =trees= data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
 
@@ -985,7 +985,7 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 #+latex: \end{example}
 
 ** Residual Analysis and Diagnostic Tools
-\label{sec:Residual-Analysis-MLR}
+#+latex: \label{sec:Residual-Analysis-MLR}
 
 We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
@@ -1011,7 +1011,7 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
 ** Additional Topics
-\label{sec:Additional-Topics-MLR}
+#+latex: \label{sec:Additional-Topics-MLR}
 
 *** Nonlinear Regression
 
@@ -1079,7 +1079,7 @@ summary(acc.nls)
 #+end_src
 
 *** Multicollinearity
-\label{sub:Multicollinearity}
+#+latex: \label{sub:Multicollinearity}
 
 A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 
@@ -1108,7 +1108,7 @@ AIC=-2\ln L+2(p+1)
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-\label{xca:anova-equality}
+#+latex: \label{xca:anova-equality}
 Use Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the Anova Equality:
 \[
 SSTO=SSE+SSR.

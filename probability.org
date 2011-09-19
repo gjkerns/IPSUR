@@ -148,7 +148,7 @@ Note that this one general class of random experiments contains as a special cas
 The =prob= package accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 
 #+latex: \begin{example}
-\label{exa:sample-urn-two-from-three}
+#+latex: \label{exa:sample-urn-two-from-three}
 Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We are going to take a sample of size 2 from the urn. 
 
 #+latex: \paragraph*{Ordered, With Replacement}
@@ -432,7 +432,7 @@ or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=
 One sample space function that does NOT have a =makespace= option is the =urnsamples= function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use =probspace= to assign the model.
 
 #+latex: \begin{example}
-\label{exa:unbalanced-coin}
+#+latex: \label{exa:unbalanced-coin}
 *An unbalanced coin.* While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 #+begin_src R :exports both :results output pp   
@@ -459,17 +459,17 @@ that holds asymptotically. User beware.
 A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\Pr(A)=p\), called the /probability of/ \(A\). Any probability function \(\Pr\) satisfies the following three Kolmogorov Axioms: 
 
 #+begin_ax
-\label{ax:prob-nonnegative}
+#+latex: \label{ax:prob-nonnegative}
 \(\Pr(A)\geq0\) for any event \(A\subset S\).
 #+end_ax
 
 #+begin_ax
-\label{ax:total-mass-one}
+#+latex: \label{ax:total-mass-one}
 \(\Pr(S)=1\).
 #+end_ax
 
 #+begin_ax
-\label{ax:countable-additivity}
+#+latex: \label{ax:countable-additivity}
 If the events \(A_{1}\), \(A_{2}\), \(A_{3}\)... are disjoint then
 \begin{equation}
 \Pr\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\Pr(A_{i})\mbox{ for every }n,
@@ -554,7 +554,7 @@ What is \(\Pr(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:three-child-family}
+#+latex: \label{exa:three-child-family}
 Imagine a three child family, each child being either Boy (\(B\)) or Girl (\(G\)). An example sequence of siblings would be \(BGB\). The sample space may be written
 \[
 S=\left\{ 
@@ -643,7 +643,7 @@ We have as yet glossed over the details. More specifically, =prob= has three arg
 Consequently, =x= should be the entire probability space in the case that =event= is non-null.
 
 ** Counting Methods
-\label{sec:Methods-of-Counting}
+#+latex: \label{sec:Methods-of-Counting}
 
 The equally-likely model is a convenient and popular way to analyze random experiments. And when the equally likely model applies, finding the probability of an event \(A\) amounts to nothing more than counting the number of outcomes that \(A\) contains (together with the number of events in \(S\)). Hence, to be a master of probability one must be skilled at counting outcomes in events of all kinds.
 
@@ -885,7 +885,7 @@ remove(g)
 There is a \textsf{Birthday problem} item in the \textsf{Probability} menu of =RcmdrPlugin.IPSUR=. In the base \textsf{R} version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
 
 ** Conditional Probability
-\label{sec:Conditional-Probability}
+#+latex: \label{sec:Conditional-Probability}
 
 Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \Pr(A) = 4/52 \). Suppose we look at the first card. What now is the probability of \(B\)? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
 \[
@@ -914,7 +914,7 @@ which means that given the information that a Head has occurred, we no longer ne
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:Toss-a-six-sided-die-twice}
+#+latex: \label{exa:Toss-a-six-sided-die-twice}
 Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section \ref{sec:Methods-of-Counting} that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
 #+begin_latex
@@ -1011,7 +1011,7 @@ For any events \(A\), \(B\), and \(C\) with \(\Pr(A)>0\),
 The Multiplication Rule is very important because it allows us to find probabilities in random experiments that have a sequential structure, as the next example shows. 
 
 #+latex: \begin{example}
-\label{exa:two-cards-both-aces}
+#+latex: \label{exa:two-cards-both-aces}
 At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is \(\Pr(\mbox{both Aces})\)?
 
 \[
@@ -1021,7 +1021,7 @@ At the beginning of the section we drew two cards from a standard playing deck. 
 #+latex: \end{example}
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
-\label{sub:howto-ps-objects}
+#+latex: \label{sub:howto-ps-objects}
 
 Continuing Example \ref{exa:two-cards-both-aces}, we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
 
@@ -1050,7 +1050,7 @@ Note that this value matches what we found in Example \ref{exa:two-cards-both-ac
 
 
 #+latex: \begin{example}
-\label{exa:urn-7-red-3-green}
+#+latex: \label{exa:urn-7-red-3-green}
 Consider an urn with 10 balls inside, 7 of which are red and 3 of which are green. Select 3 balls successively from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \), \( B = \{ 2^{\mathrm{nd}} \mbox{ ball is red} \} \), and \( C = \{ 3^{\mathrm{rd}} \mbox{ ball is red} \} \). Then
 \[
 \Pr(\mbox{all 3 balls are red})=\Pr(A\cap B\cap C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.
@@ -1145,7 +1145,7 @@ Using the same reasoning, we can return to the example from the beginning of the
 \]
  
 ** Independent Events
-\label{sec:Independent-Events}
+#+latex: \label{sec:Independent-Events}
 
 Toss a coin twice. The sample space is \(S= \{ HH,\ HT,\ TH,\ TT \} \). We know that \(\Pr(1^{\mathrm{st}}\mbox{ toss is }H)=2/4\), \(\Pr(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4\), and \(\Pr(\mbox{both }H)=1/4\). Then
 \begin{align*} \Pr(2^{\mathrm{nd}}\mbox{ toss is }H\ |\ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\Pr(\mbox{both }H)}{\Pr(1^{\mathrm{st}}\mbox{ toss is }H)},\\
@@ -1209,7 +1209,7 @@ If only the first three conditions hold then \(A\), \(B\), and \(C\) are said to
 We can now deduce the pattern for \(n\) events, \(n>3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise \ref{xca:numb-cond-indep}). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
 
 #+latex: \begin{example}
-\label{exa:toss-ten-coins}
+#+latex: \label{exa:toss-ten-coins}
 Toss ten coins. What is the probability of observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10\). Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the \(A_{i}\) may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
 \begin{align*}
 \Pr(\mbox{at least one }H) & =1-\Pr(\mbox{all }T),\\
@@ -1258,7 +1258,7 @@ As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has 
 Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= argument is specified. Also note that the argument =x= is a /vector/, not a data frame. Something like =iidspace(tosscoin(1),...)= would give an error.
 
 ** Bayes' Rule
-\label{sec:Bayes'-Rule}
+#+latex: \label{sec:Bayes'-Rule}
 
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
@@ -1287,7 +1287,7 @@ Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probab
 What does it mean? Usually in applications we are given (or know) /a priori/ probabilities \(\Pr(B_{k})\). We go out and collect some data, which we represent by the event \(A\). We want to know: how do we *update* \(\Pr(B_{k})\) to \(\Pr(B_{k}|A)\)? The answer: Bayes' Rule.
 
 #+latex: \begin{example}
-\label{exa:misfiling-assistants}
+#+latex: \label{exa:misfiling-assistants}
 *Misfiling Assistants.* In this problem, there are three assistants working at a company: Moe, Larry, and Curly. Their primary job duty is to file paperwork in the filing cabinet when papers become available. The three assistants have different work schedules:
 |          | Moe | Larry | Curly |
 |----------+-----+-------+-------|
@@ -1353,7 +1353,7 @@ The conclusion: *Larry* gets the axe. What is happening is an intricate interpla
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:misfiling-assistants-multiple}
+#+latex: \label{exa:misfiling-assistants-multiple}
 Suppose the boss gets a change of heart and does not fire anybody. But the next day (s)he randomly selects another file and again finds it to be misplaced. To decide whom to fire now, the boss would use the same procedure, with one small change. (S)he would not use the prior probabilities 60%, 30%, and 10%; those are old news. Instead, she would replace the prior probabilities with the posterior probabilities just calculated. After the math she will have new posterior probabilities, updated even more from the day before.
 
 In this way, probabilities found by Bayes' rule are always on the cutting edge, always updated with respect to the best information available at the time.
@@ -1403,7 +1403,7 @@ fastpost / sum(fastpost)
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 
 ** Random Variables
-\label{sec:Random-Variables}
+#+latex: \label{sec:Random-Variables}
 
 We already know about experiments, sample spaces, and events. In this section, we are interested in a /number/ that is associated with the experiment. We conduct a random experiment \(E\) and after learning the outcome \(\omega\) in \(S\) we calculate a number \(X\). That is, to each outcome \(\omega\) in the sample space we associate a number \(X(\omega)=x\). 
 
@@ -1497,7 +1497,7 @@ Note that the default value of =vars= is the names of all columns except =probs=
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-\label{xca:numb-cond-indep}
+#+latex: \label{xca:numb-cond-indep}
 Prove the assertion given in the text: the number of conditions that the events \(A_{1}\), \(A_{2}\), ..., \(A_{n}\) must satisfy in order to be mutually independent is \(2^{n}-n-1\). (/Hint/: think about Pascal's triangle.)
 #+end_xca
 

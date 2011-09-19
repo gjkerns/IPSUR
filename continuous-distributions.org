@@ -21,7 +21,7 @@
 :PROPERTIES:
 :tangle: R/contdist.R
 :END:
-\label{cha:Continuous-Distributions}
+#+latex: \label{cha:Continuous-Distributions}
 
 #+latex: \noindent 
 The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
@@ -44,10 +44,10 @@ The interested reader who would like to learn more about any of the assorted dis
 - how to make new continuous random variables from old ones
 
 ** Continuous Random Variables
-\label{sec:continuous-random-variables}
+#+latex: \label{sec:continuous-random-variables}
 
 *** Probability Density Functions
-\label{sub:probability-density-functions}
+#+latex: \label{sub:probability-density-functions}
 
 Continuous random variables have supports that look like
 \begin{equation}
@@ -65,7 +65,7 @@ that satisfies three basic properties:
 1. \(f_{X}(x)>0\) for \(x\in S_{X}\),
 2. \(\int_{x\in S_{X}}f_{X}(x)\,\mathrm{d} x=1\), and
 3. \(\Pr(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
-\label{enu: contrvcond3}
+#+latex: \label{enu: contrvcond3}
 
 #+begin_rem
 We can say the following about continuous random variables:
@@ -103,7 +103,7 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 #+latex: \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 
 *** Expectation of Continuous Random Variables
-\label{sub:Expectation-of-Continuous}
+#+latex: \label{sub:Expectation-of-Continuous}
 
 For a continuous random variable \(X\) the expected value of \(g(X)\) is
 \begin{equation}
@@ -124,7 +124,7 @@ M_{X}(t)=\E\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}(x)\:\ma
 provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=0\).
 
 #+latex: \begin{example}
-\label{exa:cont-pdf3x2}
+#+latex: \label{exa:cont-pdf3x2}
 
 Let the continuous random variable \(X\) have PDF
 \[
@@ -160,7 +160,7 @@ which gives \(\sigma^{2}=3/5-(3/4)^{2}=3/80\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:cont-pdf-3x4}
+#+latex: \label{exa:cont-pdf-3x4}
 
 We will try one with unbounded support to brush up on improper integration. Let the random variable \(X\) have PDF
 \[
@@ -250,7 +250,7 @@ Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why
 #+latex: \end{example}
 
 ** The Continuous Uniform Distribution
-\label{sec:The-Continuous-Uniform}
+#+latex: \label{sec:The-Continuous-Uniform}
 
 A random variable \(X\) with the continuous uniform distribution on the interval \((a,b)\) has PDF
 \begin{equation}
@@ -283,7 +283,7 @@ using the popular formula for the difference of squares. The variance is left to
 #+latex: \end{example}
 
 ** The Normal Distribution
-\label{sec:The-Normal-Distribution}
+#+latex: \label{sec:The-Normal-Distribution}
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
@@ -348,19 +348,19 @@ pnorm(1:3) - pnorm(-(1:3))
 #+end_src
 
 #+latex: \begin{example}
-\label{exa:iq-model}
+#+latex: \label{exa:iq-model}
 Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\Pr(85\leq X\leq115)\)?
 
 /Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
 #+latex: \end{example}
 
 *** Normal Quantiles and the Quantile Function
-\label{sub:Normal-Quantiles-QF}
+#+latex: \label{sub:Normal-Quantiles-QF}
 
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 
 #+latex: \begin{example}
-\label{exa:iq-quantile-state-problem}
+#+latex: \label{exa:iq-quantile-state-problem}
 Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
 /Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\Pr(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+begin_src R :exports both :results output pp 
@@ -434,14 +434,14 @@ Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
 ** Functions of Continuous Random Variables
-\label{sec:Functions-of-Continuous}
+#+latex: \label{sec:Functions-of-Continuous}
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 
 *** The PDF Method
 
 #+begin_prop
-\label{pro:func-cont-rvs-pdf-formula}
+#+latex: \label{pro:func-cont-rvs-pdf-formula}
 
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
@@ -456,9 +456,8 @@ f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq:univ-t
 \end{equation}
 #+end_rem
 
-
 #+latex: \begin{example}
-\label{exa:lnorm-transformation}
+#+latex: \label{exa:lnorm-transformation}
 Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and let \(Y=\mathrm{e}^{X}\). What is the PDF of \(Y\)? 
 *Solution:* Notice first that \(\mathrm{e}^{x}>0\) for any \(x\), so the support of \(Y\) is \((0,\infty)\). Since the transformation is monotone, we can solve \(y=\mathrm{e}^{x}\) for \(x\) to get \(x=\ln\, y\), giving \(\mathrm{d} x/\mathrm{d} y=1/y\). Therefore, for any \(y>0\),
 \[
@@ -468,7 +467,7 @@ where we have dropped the absolute value bars since \(y>0\). The random variable
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\label{exa:lin-trans-norm}
+#+latex: \label{exa:lin-trans-norm}
 Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X\). What is the PDF of \(Y\)?
 #+latex: \end{example}
 
@@ -484,7 +483,8 @@ f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\qu
 We recognize the PDF of \(Y\) to be that of a \(\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)\) distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
 #+begin_fact
-\label{fac:lin-trans-norm-is-norm}If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
+#+latex: \label{fac:lin-trans-norm-is-norm}
+If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
 #+end_fact
 
 Note that it is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u)\). Instead, leave the transformation in the form \(u=u(x)\) and calculate the derivative of the /original/ transformation
@@ -553,7 +553,7 @@ The Probability Integral Transform is true for all continuous random variables w
 #+end_fact
 
 #+latex: \begin{example}
-\label{exa:distn-of-z-squared}
+#+latex: \label{exa:distn-of-z-squared}
 Let \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(U=Z^{2}\). What is the PDF of \(U\)? 
 Notice first that \(Z^{2}\geq0\), and thus the support of \(U\) is \([0,\infty)\). And for any \(u\geq0\), 
 \[
@@ -616,15 +616,15 @@ The answers are not the same! Furthermore, if we were to repeat the process we w
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \textsf{R} are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
 ** Other Continuous Distributions
-\label{sec:Other-Continuous-Distributions}
+#+latex: \label{sec:Other-Continuous-Distributions}
 
 *** Waiting Time Distributions
-\label{sub:Waiting-Time-Distributions}
+#+latex: \label{sub:Waiting-Time-Distributions}
 
 In some experiments, the random variable being measured is the time until a certain event occurs. For example, a quality control specialist may be testing a manufactured product to see how long it takes until it fails. An efficiency expert may be recording the customer traffic at a retail store to streamline scheduling of staff. 
 
 #+latex: \paragraph*{The Exponential Distribution}
-\label{sub:The-Exponential-Distribution}
+#+latex: \label{sub:The-Exponential-Distribution}
 
 We say that \(X\) has an /exponential distribution/ and write \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). 
 \begin{equation}
@@ -654,7 +654,7 @@ The exponential distribution is said to be /memoryless/ because exponential rand
 See Exercise \ref{xca:prove-the-memoryless}.
 
 *** The Gamma Distribution
-\label{sub:The-Gamma-Distribution}
+#+latex: \label{sub:The-Gamma-Distribution}
 
 This is a generalization of the exponential distribution. We say that \(X\) has a gamma distribution and write \(X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). It has PDF
 \begin{equation}
@@ -670,10 +670,10 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 #+latex: \end{example}
 
 *** The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions
-\label{sub:The-Chi-Square-t-F}
+#+latex: \label{sub:The-Chi-Square-t-F}
 
 #+latex: \paragraph*{The Chi square Distribution}
-\label{sub:The-Chi-Square}
+#+latex: \label{sub:The-Chi-Square}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -725,7 +725,7 @@ Here are some useful things to know about the chi-square distribution.
 #+end_rem
 
 *** Student's \(t\) distribution
-\label{sub:Student's-t-distribution}
+#+latex: \label{sub:Student's-t-distribution}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -734,7 +734,7 @@ f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\fra
 is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \textsf{R} functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 *** Snedecor's \(F\) distribution
-\label{sub:snedecor-F-distribution}
+#+latex: \label{sub:snedecor-F-distribution}
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -749,10 +749,10 @@ Here are some notes about the \(F\) distribution.
 #+end_rem
 
 *** Other Popular Distributions
-\label{sub:Other-Popular-Distributions}
+#+latex: \label{sub:Other-Popular-Distributions}
 
 #+latex: \paragraph*{The Cauchy Distribution}
-\label{sub:The-Cauchy-Distribution}
+#+latex: \label{sub:The-Cauchy-Distribution}
 
 This is a special case of the Student's \(t\) distribution. It has PDF
 \begin{equation}
@@ -763,7 +763,7 @@ We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). T
 It is easy to see that a \(\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)\) distribution is the same as a \(\mathsf{t}(\mathtt{df}=1)\) distribution. The \(\mathsf{cauchy}\) distribution looks like a \(\mathsf{norm}\) distribution but with very heavy tails. The mean (and variance) do not exist, that is, they are infinite. The median is represented by the \(\mathtt{location}\) parameter, and the \(\mathtt{scale}\) parameter influences the spread of the distribution about its median.
 
 #+latex: \paragraph*{The Beta Distribution}
-\label{sub:The-Beta-Distribution}
+#+latex: \label{sub:The-Beta-Distribution}
 
 This is a generalization of the continuous uniform distribution.
 \begin{equation}
@@ -777,7 +777,7 @@ See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian 
 
 
 #+latex: \paragraph*{The Logistic Distribution}
-\label{sub:The-Logistic-Distribution}
+#+latex: \label{sub:The-Logistic-Distribution}
 
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left(-\frac{x-\mu}{\sigma}\right)\right]^{-2},\quad-\infty<x<\infty.
@@ -785,7 +785,7 @@ f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left
 We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \textsf{R} function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
 
 #+latex: \paragraph*{The Lognormal Distribution}
-\label{sub:The-Lognormal-Distribution}
+#+latex: \label{sub:The-Lognormal-Distribution}
 
 This is a distribution derived from the normal distribution (hence the name). If \(U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), then \( X = \mathrm{e}^{U} \) has PDF
 \begin{equation}
@@ -795,7 +795,7 @@ We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). 
 
 
 #+latex: \paragraph*{The Weibull Distribution}
-\label{sub:The-Weibull-Distribution}
+#+latex: \label{sub:The-Weibull-Distribution}
 
 This has PDF
 \begin{equation}
@@ -891,12 +891,12 @@ If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find
 #+end_xca
 
 #+begin_xca
-\label{xca:variance-dunif}
+#+latex: \label{xca:variance-dunif}
 Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). /Hint:/ First calculate \(\E X^{2}\).
 #+end_xca
 
 #+begin_xca
-\label{xca:prove-the-memoryless}
+#+latex: \label{xca:prove-the-memoryless}
 Prove the memoryless property for exponential random variables. That is, for \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\) show that for any \(s,t>0\),
 \[
 \Pr(X>s+t\,|\, X>t)=\Pr(X>s).
