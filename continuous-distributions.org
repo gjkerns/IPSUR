@@ -11,15 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-
-* Continuous Distributions
+* Continuous Distributions                                         :contdist:
+:PROPERTIES:
+:tangle: R/contdist.R
+:END:
 \label{cha:Continuous-Distributions}
 
-\noindent The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
+#+latex: \noindent 
+The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
 
 This chapter begins with continuous random variables and the associated PDFs and CDFs The continuous uniform distribution is highlighted, along with the Gaussian, or normal, distribution. Some mathematical details pave the way for a catalogue of models.
 
@@ -38,10 +43,8 @@ The interested reader who would like to learn more about any of the assorted dis
 
 - how to make new continuous random variables from old ones
 
-
 ** Continuous Random Variables
 \label{sec:continuous-random-variables}
-
 
 *** Probability Density Functions
 \label{sub:probability-density-functions}
@@ -64,39 +67,33 @@ that satisfies three basic properties:
 3. \(\P(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
 \label{enu: contrvcond3}
 
-#+latex: \begin{rem}
+#+begin_rem
 We can say the following about continuous random variables:
-
 - Usually, the set \(A\) in \ref{enu: contrvcond3} takes the form of an interval, for example, \(A=[c,d]\), in which case
   \begin{equation}
   \P(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
   \end{equation}
-
 - It follows that the probability that \(X\) falls in a given interval is simply the /area under the curve/ of \(f_{X}\) over the interval.
-
 - Since the area of a line \(x=c\) in the plane is zero, \(\P(X=c)=0\)  for any value \(c\). In other words, the chance that \(X\) equals a particular value \(c\) is zero, and this is true for any number \(c\). Moreover, when \(a<b\) all of the following probabilities are the same:
-
   \begin{equation}
   \P(a\leq X\leq b)=\P(a<X\leq b)=\P(a\leq X<b)=\P(a<X<b).
   \end{equation}
-
 - The PDF \(f_{X}\) can sometimes be greater than 1. This is in contrast to the discrete case; every nonzero value of a PMF is a probability which is restricted to lie in the interval \([0,1]\).
 
-#+latex: \end{rem}
+#+end_rem
 
 We met the cumulative distribution function, \(F_{X}\), in Chapter \ref{cha:Discrete-Distributions}. Recall that it is defined by \(F_{X}(t)=\P(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
 \begin{equation}
 F_{X}(t)=\P(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
 \end{equation}
 
-#+latex: \begin{rem}
+#+begin_rem
 For any continuous CDF \(F_{X}\) the following are true.
-
 - \(F_{X}\) is nondecreasing , that is, \(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\).
 - \(F_{X}\) is continuous (see Appendix \ref{sec:Differential-and-Integral}). Note the distinction from the discrete case: CDFs of discrete random variables are not continuous, they are only right continuous.
 - \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
 
-#+latex: \end{rem}
+#+end_rem
 
 There is a handy relationship between the CDF and PDF in the continuous case. Consider the derivative of \(F_{X}\):
 \begin{equation}
@@ -213,9 +210,6 @@ f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
 
-#+results[ff04b010bf2bff9ce770336ec39edd4fd4d531e1]:
-: 0.355167 with absolute error < 3.9e-15
-
 Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\E X^{2}-\left(\E X\right)^{2}\) for the variance. 
 
 #+latex: \end{example}
@@ -227,9 +221,6 @@ Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x>1\). We may integrate the function \(xf
 g <- function(x) 3/x^3
 integrate(g, lower = 1, upper = Inf)
 #+end_src
-
-#+results[e48698e6f52151a31bca9666dd8b87b4832c5a3c]:
-: 1.5 with absolute error < 1.7e-14
 
 Compare this to the answer we got in Example \ref{exa:cont-pdf-3x4}. Use =-Inf= for \(-\infty\).
 
@@ -307,15 +298,14 @@ When \(\mu=0\) and \(\sigma=1\) we say that the random variable has a /standard 
 \phi(z)=\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-z^{2}/2}\mbox{ and }\Phi(t)=\int_{-\infty}^{t}\phi(z)\,\mathrm{d} z.
 \end{equation}
 
-#+latex: \begin{prop}
+#+begin_prop
 If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) then
 \begin{equation}
 Z=\frac{X-\mu}{\sigma}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
 The MGF of \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) is relatively easy to derive:
-
 \begin{eqnarray*}
 M_{Z}(t) & = & \int_{-\infty}^{\infty}\mathrm{e}^{tz}\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-z^{2}/2}\mathrm{d} z,\\
  & = & \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}}\exp \{ -\frac{1}{2}\left(z^{2}+2tz+t^{2}\right)+\frac{t^{2}}{2} \} \mathrm{d} z,\\
@@ -342,12 +332,12 @@ M_{X}(t)=\mathrm{e}^{t\mu}\mathrm{e}^{(\sigma t)^{2}/2}=\exp\left\{ \mu t+\sigma
 for \(-\infty<t<\infty\).
 #+latex: \end{example}
 
-#+latex: \begin{fact}
+#+begin_fact
 The same argument above shows that if \(X\) has MGF \(M_{X}(t)\) then the MGF of \(Y=a+bX\) is
 \begin{equation}
 M_{Y}(t)=\mathrm{e}^{ta}M_{X}(bt).
 \end{equation}
-#+latex: \end{fact}
+#+end_fact
 
 #+latex: \begin{example}
 The 68-95-99.7 Rule. We saw in Section \ref{sub:Measures-of-Spread} that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from -- and obtain more precise proportions -- with the following:
@@ -387,16 +377,16 @@ The answer is shown in =$root= which is approximately \( SRC_R{temp} \), that is
 
 The discussion in example \ref{exa:iq-quantile-state-problem} was centered on the search for a value \(x\) that solved an equation \(F(x)=p\), for some given probability \(p\), or in mathematical parlance, the search for \(F^{-1}\), the inverse of the CDF of \(X\), evaluated at \(p\). This is so important that it merits a definition all its own.
 
-#+latex: \begin{defn}
+#+begin_defn
 The /quantile function/
 #+latex: \footnote{The precise definition of the quantile function is \(Q_{X}(p)=\inf \{ x:\ F_{X}(x)\geq p \}\), so at least it is well defined (though perhaps infinite) for the values \(p=0\) and \(p=1\).}
 of a random variable \(X\) is the inverse of its cumulative distribution function:
 \begin{equation}
 Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad0<p<1.
 \end{equation}
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{rem}
+#+begin_rem
 Here are some properties of quantile functions:
 1. The quantile function is defined and finite for all \(0<p<1\).
 1. \(Q_{X}\) is left-continuous (see Appendix \ref{sec:Differential-and-Integral}). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
@@ -407,13 +397,13 @@ Here are some properties of quantile functions:
    \]
    always exist, but may be infinite (that is, sometimes \(\lim_{p\to0}Q(p)=-\infty\) and/or \(\lim_{p\to1}Q(p)=\infty\)).
 
-#+latex: \end{rem}
+#+end_rem
 
 As the reader might expect, the standard normal distribution is a very special case and has its own special notation.
 
-#+latex: \begin{defn}
+#+begin_defn
 For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the equation \(\P(Z>z_{\alpha})=\alpha\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\). It can be calculated in one of two equivalent ways: =qnorm(=\(1-\alpha\)=)= and =qnorm(=\(\alpha\)=, lower.tail = FALSE)=. 
-#+latex: \end{defn}
+#+end_defn
 
 There are a few other very important special cases which we will encounter in later chapters. 
 
@@ -443,31 +433,28 @@ qnorm(c(0.025, 0.01, 0.005), lower.tail = FALSE)
 Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
-
-
 ** Functions of Continuous Random Variables
 \label{sec:Functions-of-Continuous}
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 
-
 *** The PDF Method
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:func-cont-rvs-pdf-formula}
 
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
 f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.\label{eq:univ-trans-pdf-long}
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
-#+latex: \begin{rem}
+#+begin_rem
 The formula in Equation \ref{eq:univ-trans-pdf-long} is nice, but does not really make any sense. It is better to write in the intuitive form
 \begin{equation}
 f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq:univ-trans-pdf-short}
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \begin{example}
@@ -496,9 +483,9 @@ f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\qu
 \end{eqnarray*}
 We recognize the PDF of \(Y\) to be that of a \(\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)\) distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
-#+latex: \begin{fact}
+#+begin_fact
 \label{fac:lin-trans-norm-is-norm}If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
-#+latex: \end{fact}
+#+end_fact
 
 Note that it is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u)\). Instead, leave the transformation in the form \(u=u(x)\) and calculate the derivative of the /original/ transformation
 \begin{equation}
@@ -514,9 +501,9 @@ In many cases there are cancellations and the work is shorter. Of course, it is 
 \end{equation}
 but for the well-behaved examples in this book the trick works just fine.
 
-#+latex: \begin{rem}
+#+begin_rem
 In the case that \(g\) is not monotone we cannot apply Proposition \ref{pro:func-cont-rvs-pdf-formula} directly. However, hope is not lost. Rather, we break the support of \(X\) into pieces such that \(g\) is monotone on each one. We apply Proposition \ref{pro:func-cont-rvs-pdf-formula} on each piece, and finish up by adding the results together.
-#+latex: \end{rem}
+#+end_rem
 
 *** The CDF method
 
@@ -549,7 +536,7 @@ or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of th
 \textbf{\emph{The Probability Integral Transform}}. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 #+latex: \end{example}
 
-#+latex: \begin{proof}
+#+begin_proof
 We employ the CDF method. First note that the support of \(Y\) is \((0,1)\). Then for any \(0<y<1\),
 \[
 F_{Y}(y)=\P(Y\leq y)=\P(F_{X}(X)\leq y).
@@ -559,11 +546,11 @@ Now since \(F_{X}\) is strictly increasing, it has a well defined inverse functi
 \P(F_{X}(X)\leq y)=\P(X\leq F_{X}^{-1}(y))=F_{X}[F_{X}^{-1}(y)]=y.
 \]
 Summarizing, we have seen that \(F_{Y}(y)=y\), \(0<y<1\). But this is exactly the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable. 
-#+latex: \end{proof}
+#+end_proof
 
-#+latex: \begin{fact}
+#+begin_fact
 The Probability Integral Transform is true for all continuous random variables with continuous CDFs, not just for those with strictly increasing CDFs (but the proof is more complicated). The transform is *not* true for discrete random variables, or for continuous random variables having a discrete component (that is, with jumps in their CDF).
-#+latex: \end{fact}
+#+end_fact
 
 #+latex: \begin{example}
 \label{exa:distn-of-z-squared}
@@ -696,21 +683,37 @@ is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We 
 
 The code to produce Figure \ref{fig:chisq-dist-vary-df} is
 
-#+begin_src R :exports code :results graphics silent :file img/chisq-dist-vary-df.pdf
+#+srcname: chisq-dist-vary-df
+#+begin_src R :exports code :results silent
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/chisq-dist-vary-df.pdf}
-    \caption[Chi square distribution for various degrees of freedom]{\small The chi square distribution for various degrees of freedom.}
-    \label{fig:chisq-dist-vary-df}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/chisq-dist-vary-df.ps
+  <<chisq-dist-vary-df>>
 #+end_src
 
-#+latex: \begin{rem}
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/chisq-dist-vary-df.svg
+  <<chisq-dist-vary-df>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/chisq-dist-vary-df.ps}
+  \caption[Chi square distribution for various degrees of freedom]{\small The chi square distribution for various degrees of freedom.}
+  \label{fig:chisq-dist-vary-df}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-chisq-dist-vary-df" class="figure">
+  <p><img src="svg/chisq-dist-vary-df.svg" width=500 alt="svg/chisq-dist-vary-df.svg" /></p>
+  <p>The chi square distribution for various degrees of freedom.</p>
+</div>
+#+end_html
+
+#+begin_rem
 Here are some useful things to know about the chi-square distribution.
 1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example \ref{exa:distn-of-z-squared}, and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem \ref{thm:Xbar-andS} in Section \ref{sub:Samp-Var-Dist}.
 1. The chi-square distribution is supported on the positive \(x\)-axis, with a right-skewed distribution.
@@ -719,7 +722,7 @@ Here are some useful things to know about the chi-square distribution.
    \begin{equation}
    M_{X}(t)=\left(1-2t\right)^{-p},\quad t<1/2.\label{eq:mgf-chisq}
    \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 *** Student's \(t\) distribution
 \label{sub:Student's-t-distribution}
@@ -739,12 +742,11 @@ f_{X}(x)=\frac{\Gamma[(m+n)/2]}{\Gamma(m/2)\Gamma(n/2)}\left(\frac{m}{n}\right)^
 \end{equation}
 is said to have an \(F\) distribution with \((m,n)\) degrees of freedom. We write \(X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\). The associated \textsf{R} functions are =df(x, df1, df2)=, =pf=, =qf=, and =rf=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. We define \(F_{\alpha}(m,n)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\) curve to its right. 
 
-#+latex: \begin{rem}
+#+begin_rem
 Here are some notes about the \(F\) distribution.
 1. If \(X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\) and \(Y=1/X\), then \(Y\sim\mathsf{f}(\mathtt{df1}=n,\,\mathtt{df2}=m)\). Historically, this fact was especially convenient. In the old days, statisticians used printed tables for their statistical calculations. Since the \(F\) tables were symmetric in \(m\) and \(n\), it meant that publishers could cut the size of their printed tables in half. It plays less of a role today now that personal computers are widespread.
 1. If \(X\sim\mathsf{t}(\mathtt{df}=r)\), then \(X^{2}\sim\mathsf{f}(\mathtt{df1}=1,\,\mathtt{df2}=r)\). We will see this again in Section \ref{sub:slr-overall-F-statistic}.
-#+latex: \end{rem}
-
+#+end_rem
 
 *** Other Popular Distributions
 \label{sub:Other-Popular-Distributions}
@@ -817,17 +819,33 @@ mgamma(1:4, shape = 13, rate = 1)
 
 For the plot we can use the function in the following form:
 
-#+begin_src R :exports code :results graphics silent :file img/gamma-mgf.pdf
+#+srcname: gamma-mgf
+#+begin_src R :exports code :results silent
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/gamma-mgf.pdf}
-    \caption[Plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF]{\small A plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF.}
-    \label{fig:gamma-mgf}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/gamma-mgf.ps
+  <<gamma-mgf>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/gamma-mgf.svg
+  <<gamma-mgf>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/gamma-mgf.ps}
+  \caption[Plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF]{\small A plot of the \textsf{gamma}(\texttt{shape} = 13, \texttt{rate} = 1) MGF.}
+  \label{fig:gamma-mgf}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-gamma-mgf" class="figure">
+  <p><img src="svg/gamma-mgf.svg" width=500 alt="svg/gamma-mgf.svg" /></p>
+  <p>A plot of the <code>gamma(shape = 13, rate = 1)</code> MGF.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
@@ -836,24 +854,24 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 Find the constant \(c\) so that the given function is a valid PDF of a random variable \(X\).
 1. \( f(x) = Cx^{n},\quad 0 < x <1 \).
 1. \( f(x) = Cx\mathrm{e}^{-x},\quad 0 < x < \infty\).
 1. \( f(x) = \mathrm{e}^{-(x - C)}, \quad 7 < x < \infty.\)
 1. \( f(x) = Cx^{3}(1 - x)^{2},\quad 0 < x < 1.\)
 1. \( f(x) = C(1 + x^{2}/4)^{-1}, \quad -\infty < x < \infty.\)
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 For the following random experiments, decide what the distribution of \(X\) should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not strictly hold in practice).
 1. We throw a dart at a dart board. Let \(X\) denote the squared linear distance from the bulls-eye to the where the dart landed.
 1. We randomly choose a textbook from the shelf at the bookstore and let \(P\) denote the proportion of the total pages of the book devoted to exercises. 
 1. We measure the time it takes for the water to completely drain out of the kitchen sink.
 1. We randomly sample strangers at the grocery store and ask them how long it will take them to drive home. 
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find 
 1. \(\P(Z>2.64)\)
    #+begin_src R :exports both :results output pp 
@@ -870,17 +888,17 @@ If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find
    2 * pnorm(-1.39)
    #+end_src
 
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:variance-dunif}
 Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). /Hint:/ First calculate \(\E X^{2}\).
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:prove-the-memoryless}
 Prove the memoryless property for exponential random variables. That is, for \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\) show that for any \(s,t>0\),
 \[
 \P(X>s+t\,|\, X>t)=\P(X>s).
 \]
-#+latex: \end{xca}
+#+end_xca

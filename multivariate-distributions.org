@@ -11,14 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* Multivariate Distributions
+* Multivariate Distributions                                       :multdist:
+:PROPERTIES:
+:tangle: R/multdist.R
+:END:
 \label{cha:Multivariable-Distributions}
 
-\noindent We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
+#+latex: \noindent 
+We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
 
 But there is a difference: for a single person, these variables are related. For instance, a person's height betrays a lot of information about that person's weight.
 
@@ -31,19 +37,11 @@ The interested reader who would like to learn more about any of the below mentio
 #+latex: \paragraph*{What do I want them to know?}
 
 - the basic notion of dependence and how it is manifested with multiple variables (two, in particular)
-
 - joint versus marginal distributions/expectation (discrete and continuous)
-
 - some numeric measures of dependence
-
 - conditional distributions, in the context of independence and exchangeability
-
 - some details of at least one multivariate model (discrete and continuous)
-
 - what it looks like when there are more than two random variables present
-
-
-
 
 ** Joint and Marginal Probability Distributions
 \label{sec:Joint-Probability-Distributions}
@@ -52,8 +50,6 @@ Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \
 \begin{equation}
 f_{X,Y}(x,y)=\P(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq:joint-pmf}
 \end{equation}
-
-
 Every joint PMF satisfies
 \begin{equation}
 f_{X,Y}(x,y)>0\mbox{ for all }(x,y)\in S_{X,Y},
@@ -98,7 +94,6 @@ f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6,
 \]
 and the same computation with the letters switched works for \(Y\). 
 #+latex: \end{example}
-
 
 In the previous example, and in many other ones, the joint support can be written as a product set of the support of \(X\) ``times'' the support of \(Y\), that is, it may be represented as a cartesian product set, or rectangle, \(S_{X,Y}=S_{X}\times S_{Y}\), where \(S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} \). As we shall see presently in Section \ref{sec:Independent-Random-Variables}, this form is a necessary condition for \(X\) and \(Y\) to be /independent/ (or alternatively /exchangeable/ when \(S_{X}=S_{Y}\)). But please note that in general it is not required for \(S_{X,Y}\) to be of rectangle form. We next investigate just such an example.
 
@@ -247,7 +242,6 @@ f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
 for \(0<y<1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section \ref{sec:Independent-Random-Variables}.
 #+latex: \end{example}
 
-
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 We will show how to do Example \ref{exa:max-sum-two-dice} using \textsf{R}; it is much simpler to do it with \textsf{R} than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
@@ -306,17 +300,16 @@ or in the discrete case,
 \E\, g(X,Y)=\mathop{\sum\sum}\limits _{(x,y)\in S_{X,Y}}g(x,y)\, f_{X,Y}(x,y).
 \end{equation}
 
-
 *** Covariance and Correlation
 
 There are two very special cases of joint expectation: the /covariance/ and the /correlation/. These are measures which help us quantify the dependence between \(X\) and \(Y\). 
 
-#+latex: \begin{defn}
+#+begin_defn
 The /covariance/ of \(X\) and \(Y\) is
 \begin{equation}
 \mbox{Cov}(X,Y)=\E(X-\E X)(Y-\E Y).
 \end{equation}
-#+latex: \end{defn}
+#+end_defn
 
 By the way, there is a shortcut formula for covariance which is almost as handy as the shortcut for the variance:
 \begin{equation}
@@ -332,7 +325,6 @@ The Pearson product moment correlation between \(X\) and \(Y\) is the covariance
 The correlation is usually denoted by \(\rho_{X,Y}\) or simply \(\rho\) if the random variables are clear from context. There are some important facts about the correlation coefficient: 
 1. The range of correlation is \(-1\leq\rho_{X,Y}\leq1\).
 1. Equality holds above (\(\rho_{X,Y}=\pm1\)) if and only if \(Y\) is a linear function of \(X\) with probability one.
-
 
 #+latex: \begin{example}
 \label{exa:max-sum-dice-covariance}
@@ -396,7 +388,6 @@ Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 
 To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \textsf{R} package =Ryacas= \cite{ryacas}. See Section \ref{sub:bivariate-transf-R} for another example where the =Ryacas= package appears.
 
-
 ** Conditional Distributions
 \label{sec:Conditional-Distributions}
 
@@ -454,15 +445,13 @@ The Bayesian statistician uses the posterior distribution for all matters concer
 
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 We usually do not restrict ourselves to the observation of only one \(X\) conditional on \(\theta\). In fact, it is common to observe an entire sample \(X_{1}\), \(X_{2}\),...,\(X_{n}\) conditional on \(\theta\) (which itself is often multidimensional). Do not be frightened, however, because the intuition is the same. There is a prior distribution \(\pi(\theta)\), a likelihood \(f(x_{1},x_{2},\ldots,x_{n}|\theta)\), and a posterior distribution \(\pi(\theta|x_{1},x_{2},\ldots,x_{n})\). Bayes' Rule states that the relationship between the three is
 \[
 \pi(\theta|x_{1},x_{2},\ldots,x_{n})\propto\pi(\theta)\, f(x_{1},x_{2},\ldots,x_{n}|\theta),
 \]
 where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{n}|u)\,\mathrm{d} u\). Any good textbook on Bayesian Statistics will explain these notions in detail; to the interested reader I recommend Gelman \cite{Gelman2004} or Lee \cite{Lee1997}.
-#+latex: \end{rem}
-
-
+#+end_rem
 
 ** Independent Random Variables
 \label{sec:Independent-Random-Variables}
@@ -505,17 +494,18 @@ In Example \ref{exa:max-sum-two-dice} we considered the same experiment but diff
 f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).
 \]
 #+latex: \end{example}
+
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:indep-implies-prodexpect}
 If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
 \begin{equation}
 \E\left(u(X)v(Y)\right)=\left(\E u(X)\right)\left(\E v(Y)\right).
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
-#+latex: \begin{proof}
+#+begin_proof
 This is straightforward from the definition.
 \begin{eqnarray*}
 \E\left(u(X)v(Y)\right) & = & \iint\, u(x)v(y)\, f_{X,Y}(x,y)\,\mathrm{d} x\mathrm{d} y\\
@@ -523,30 +513,30 @@ This is straightforward from the definition.
  & = & \int u(x)\, f_{X}(x)\,\mathrm{d} x\ \int v(y)\, f_{Y}(y)\,\mathrm{d} y
 \end{eqnarray*}
 and this last quantity is exactly \(\left(\E u(X)\right)\left(\E v(Y)\right)\). 
-#+latex: \end{proof}
+#+end_proof
 
 Now that we have Proposition \ref{pro:indep-implies-prodexpect} we mention a corollary that will help us later to quickly identify those random variables which are /not/ independent.
 
-#+latex: \begin{cor}
+#+begin_cor
 If \(X\) and \(Y\) are independent, then \(\mbox{Cov}(X,Y)=0\), and consequently,
 \(\mbox{Corr}(X,Y)=0\).\label{cor:indep-implies-uncorr}
-#+latex: \end{cor}
+#+end_cor
 
-#+latex: \begin{proof}
+#+begin_proof
 When \(X\) and \(Y\) are independent then \(\E XY=\E X\,\E Y\). And when the covariance is zero the numerator of the correlation is 0.
-#+latex: \end{proof}
+#+end_proof
 
-#+latex: \begin{rem}
+#+begin_rem
 \label{rem:cov0-not-imply-indep}
 Unfortunately, the converse of Corollary \ref{cor:indep-implies-uncorr} is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}.
-#+latex: \end{rem}
+#+end_rem
 
 Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
 
-#+latex: \begin{fact}
+#+begin_fact
 \label{fac:indep-then-function-indep}
 If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent for any functions \(u\) and \(v\).
-#+latex: \end{fact}
+#+end_fact
 
 *** Combining Independent Random Variables
 \label{sub:Combining-Independent-Random}
@@ -560,9 +550,9 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 \end{equation}
 #+latex: \end{cor}
 
-#+latex: \begin{proof}
+#+begin_proof
 Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
-#+latex: \end{proof}
+#+end_proof
 
 Let us take a look at some examples of the corollary in action.
 
@@ -584,15 +574,15 @@ which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\math
 
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:mean-sd-lin-comb-two}
 Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
-#+latex: \begin{proof}
+#+begin_proof
 We use Proposition \ref{pro:expectation-properties}:
 \[
 \E Y=\E\left(a_{1}X_{1}+a_{2}X_{2}\right)=a_{1}\E X_{1}+a_{2}\E X_{2}=a_{1}\mu_{1}+a_{2}\mu_{2}.
@@ -607,9 +597,7 @@ Using linearity of expectation the \(\E\) distributes through the sum. Now \(\E 
  & = & a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}+\left(a_{1}^{2}\mu_{1}^{2}+a_{2}^{2}\mu_{2}^{2}+2a_{1}a_{2}\mu_{1}\mu_{2}\right).
 \end{eqnarray*}
 But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\E Y\right)^{2}\), so the proof is complete.. 
-#+latex: \end{proof}
-
-
+#+end_proof
 
 ** Exchangeable Random Variables
 \label{sec:Exchangeable-Random-Variables}
@@ -643,9 +631,9 @@ and the value is the same if we exchange \(x\) and \(y\). Therefore \((X,Y)\) ar
 
 Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 
-#+latex: \begin{prop}
+#+begin_prop
 If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) and \(Y\) are exchangeable. 
-#+latex: \end{prop}
+#+end_prop
 
 Exchangeability thus contains IID as a special case. 
 
@@ -672,13 +660,13 @@ f_{X,Y}(\mathbf{x})=\frac{1}{2\pi\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}
 \end{equation}
 where in an abuse of notation we have written \(\mathbf{x}\) for \((x,y)\). Note that the formula only holds when \(\rho\neq\pm1\).
 
-#+latex: \begin{rem}
+#+begin_rem
 In Remark \ref{rem:cov0-not-imply-indep} we noted that just because random variables are uncorrelated it does not necessarily mean that they are independent. However, there is an important exception to this rule: the bivariate normal distribution. Indeed, \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) are independent if and only if \(\rho=0\). 
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 Inspection of the joint PDF shows that if \(\mu_{X}=\mu_{Y}\) and \(\sigma_{X}=\sigma_{Y}\) then \(X\) and \(Y\) are exchangeable.
-#+latex: \end{rem}
+#+end_rem
 
 The bivariate normal MGF is
 \begin{equation}
@@ -688,22 +676,22 @@ where \(\mathbf{t}=(t_{1},t_{2})\).
 
 The bivariate normal distribution may be intimidating at first but it turns out to be very tractable compared to other multivariate distributions. An example of this is the following fact about the marginals. 
 
-#+latex: \begin{fact}
+#+begin_fact
 If \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) then
 \begin{equation}
 X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}).
 \end{equation}
-#+latex: \end{fact}
+#+end_fact
 
 From this we immediately get that \(\E X=\mu_{X}\) and \(\mbox{Var}(X)=\sigma_{X}^{2}\) (and the same is true for \(Y\) with the letters switched). And it should be no surprise that the correlation between \(X\) and \(Y\) is exactly \(\mbox{Corr}(X,Y)=\rho\).
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:mvnorm-cond-dist}
 The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})\), where
 \begin{equation}
 \mu_{Y|x}=\mu_{Y}+\rho\frac{\sigma_{Y}}{\sigma_{X}}\left(x-\mu_{X}\right),\mbox{ and }\sigma_{Y|x}=\sigma_{Y}\sqrt{1-\rho^{2}}.
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
 There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} which will be important in Chapter \ref{cha:simple-linear-regression}. First, the conditional mean of \(Y|x\) is linear in \(x\), with slope
 \begin{equation}
@@ -734,7 +722,8 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 We chose the standard bivariate normal, \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I})\), to display.
 
-#+begin_src R :exports code :results graphics silent :file img/mvnorm-pdf.pdf
+#+srcname: mvnorm-pdf
+#+begin_src R :exports code :results silent
 library(mvtnorm)
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
@@ -742,13 +731,28 @@ z <- outer(x, y, FUN = f)
 persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/mvnorm-pdf.pdf}
-    \caption[Graph of a bivariate normal PDF]{\small A graph of a bivariate normal PDF.}
-    \label{fig:mvnorm-pdf}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/mvnorm-pdf.ps
+  <<mvnorm-pdf>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/mvnorm-pdf.svg
+  <<mvnorm-pdf>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[width=5in, height=4in]{ps/mvnorm-pdf.ps}
+  \caption[Graph of a bivariate normal PDF]{\small A graph of a bivariate normal PDF.}
+  \label{fig:mvnorm-pdf}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-mvnorm-pdf" class="figure">
+  <p><img src="svg/mvnorm-pdf.svg" width=500 alt="svg/mvnorm-pdf.svg" /></p>
+  <p>A graph of a bivariate normal PDF.</p>
+</div>
+#+end_html
 
 ** Bivariate Transformations of Random Variables
 \label{sec:Transformations-Multivariate}
@@ -769,7 +773,7 @@ f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.\label
 \end{equation}
 Take a moment and compare Equation \ref{eq:biv-trans-pdf-short} to Equation \ref{eq:univ-trans-pdf-short}. Do you see the connection? 
 
-#+latex: \begin{rem}
+#+begin_rem
 It is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u,v)\) and \(y=y(u,v)\). Instead, leave the transformation in the form \(u=u(x,y)\) and \(v=v(x,y)\) and calculate the Jacobian of the /original/ transformation
 \begin{equation}
 \frac{\partial(u,v)}{\partial(x,y)}=\left|\begin{array}{cc}
@@ -785,7 +789,7 @@ In some cases there will be a cancellation and the work will be lot shorter. Of 
 \frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}},\label{eq:biv-jacob-recip}
 \end{equation}
 but for the well-behaved examples that we will see in this book it works just fine... do you see the connection between Equations \ref{eq:biv-jacob-recip} and \ref{eq:univ-jacob-recip}?
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \begin{example}
@@ -817,10 +821,9 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 \end{equation}
 #+latex: \end{example}
 
-
-#+latex: \begin{rem}
+#+begin_rem
 It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 \label{sub:bivariate-transf-R}
@@ -828,7 +831,6 @@ It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\
 It is possible to do the computations above in \textsf{R} with the =Ryacas= package. The package is an interface to the open-source computer algebra system, ``Yacas''. The user installs Yacas, then employs =Ryacas= to submit commands to Yacas, after which the output is displayed in the \textsf{R} console.
 
 There are not yet any examples of Yacas in this book, but there are online materials to help the interested reader: see [[http://code.google.com/p/ryacas/][here]] to get started.
-
 
 ** Remarks for the Multivariate Case
 \label{sec:Remarks-for-the-Multivariate}
@@ -867,15 +869,15 @@ f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
 for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:mean-sd-lin-comb}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
-#+latex: \begin{proof}
+#+begin_proof
 The mean is easy:
 \[
 \E Y=\E\left(\sum_{i=1}^{n}a_{i}X_{i}\right)=\sum_{i=1}^{n}a_{i}\E X_{i}=\sum_{i=1}^{n}a_{i}\mu_{i}.
@@ -890,23 +892,23 @@ Using linearity of expectation the \(\E\) distributes through the sums. Now \(\E
  & = & \sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}+\left(\sum_{i=1}^{n}a_{i}^{2}\mu_{i}^{2}+2\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}a_{i}a_{j}\mu_{i}\mu_{j}\right)
 \end{eqnarray*}
 To complete the proof, note that the expression in the parentheses is exactly \(\left(\E Y\right)^{2}\), and recall the identity \(\sigma_{Y}^{2}=\E Y^{2}-\left(\E Y\right)^{2}\).  
-#+latex: \end{proof}
+#+end_proof
 
 There is a corresponding statement of Fact \ref{fac:indep-then-function-indep} for the multivariate case. The proof is also omitted here. 
 
-#+latex: \begin{fact}
+#+begin_fact
 If \(\mathbf{X}\) and \(\mathbf{Y}\) are mutually independent random vectors, then \(u(\mathbf{X})\) and \(v(\mathbf{Y})\) are independent for any functions \(u\) and \(v\).
-#+latex: \end{fact}
+#+end_fact
 
 Bruno de Finetti was a strong proponent of the subjective approach to probability. He proved an important theorem in 1931 which illuminates the link between exchangeable random variables and independent random variables. Here it is in one of its simplest forms. 
 
-#+latex: \begin{thm}
+#+begin_thm
 *De Finetti's Theorem.* Let \(X_{1}\), \(X_{2}\), ... be a sequence of \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) random variables such that \((X_{1},\ldots,X_{k})\) are exchangeable for every \(k\). Then there exists a random variable \(\Theta\) with support \([0,1]\) and PDF \(f_{\Theta}(\theta)\) such that
 \begin{equation}
 \P(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,\label{eq:definetti-binary}
 \end{equation}
 for all \(x_{i}=0,\,1\), \(i=1,\,2,\ldots,k\).
-#+latex: \end{thm}
+#+end_thm
 
 To get a handle on the intuitive content de Finetti's theorem, imagine that we have a /bunch/ of coins in our pocket with each having its own unique value of \(\theta=\P(\mbox{Heads})\). We reach into our pocket and select a coin at random according to some probability -- say, \(f_{\Theta}(\theta)\). We take the randomly selected coin and flip it \(k\) times. 
 
@@ -929,16 +931,17 @@ and the MGF is
 M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right\}.
 \end{equation}
 We will need the following in Chapter \ref{cha:multiple-linear-regression}.
-#+latex: \begin{thm}
+
+#+begin_thm
 \label{thm:mvnorm-dist-matrix-prod}
 If \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) and \(\mathbf{A}\) is any matrix, then the random vector \(\mathbf{Y}=\mathbf{AX}\)
 is distributed
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}).
 \end{equation}
-#+latex: \end{thm}
+#+end_thm
 
-#+latex: \begin{proof}
+#+begin_proof
 Look at the MGF of \(\mathbf{Y}\):
 \begin{eqnarray*}
 M_{\mathbf{Y}}(\mathbf{t}) & = & \E\,\exp\left\{ \mathbf{t}^{\mathrm{T}}(\mathbf{AX})\right\} ,\\
@@ -947,8 +950,7 @@ M_{\mathbf{Y}}(\mathbf{t}) & = & \E\,\exp\left\{ \mathbf{t}^{\mathrm{T}}(\mathbf
  & = & \exp\left\{ \left(\mathbf{A}\upmu\right)^{\mathrm{T}}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\mathrm{T}}\left(\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}}\right)\mathbf{t}\right\},
 \end{eqnarray*}
 and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{A}\upmu,\,\mathtt{sigma}=\mathbf{A}\Sigma\mathbf{A}^{\mathrm{T}})\) distribution.
-#+latex: \end{proof}
-
+#+end_proof
 
 ** The Multinomial Distribution
 \label{sec:Multinomial}
@@ -974,10 +976,10 @@ For the most part we will ignore these difficulties, but the careful reader shou
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
 #+latex: \begin{example}
-*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S.~population as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36 democrat, 27 republican, and 37 independent.
+*Dinner with Barack Obama.* During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S. population as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36 democrat, 27 republican, and 37 independent.
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 Here are some facts about the multinomial distribution.
 1. The expected value of \((X_{1},\, X_{2},\,\ldots,\, X_{k})\) is \(n\mathbf{p}_{k\times1}\).
 1. The variance-covariance matrix \(\Sigma\) is symmetric with diagonal entries \(\sigma_{i}^{2}=np_{i}(1-p_{i})\), \(i=1,\,2,\,\ldots,\, k\) and off-diagonal entries \(\mbox{Cov}(X_{i},\, X_{j})=-np_{i}p_{j}\), for \(i\neq j\). The correlation between \(X_{i}\) and \(X_{j}\) is therefore \(\mbox{Corr}(X_{i},\, X_{j})=-\sqrt{p_{i}p_{j}/(1-p_{i})(1-p_{j})}\). 
@@ -986,7 +988,7 @@ Here are some facts about the multinomial distribution.
    \mathbf{p}_{(k-1)\times1}=\left(p_{1},\, p_{2},\,\ldots,\, p_{k-2},\, p_{k-1}+p_{k}\right),
    \end{equation}
    and in particular, \(X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})\).
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -1017,19 +1019,35 @@ Another way to do the plot is with the =scatterplot3d= function in the =scatterp
 : scatterplot3d(A, type = "h", lwd = 3, box = FALSE)
 The =scatterplot3d= graph looks better in this example, but the code is more difficult to understand. And with =cloud= one can easily do conditional plots of the form =cloud(z ~ x + y | f)=, where =f= is a factor.
 
-#+begin_src R :exports code :results graphics silent :file img/multinom-pmf2.pdf
+#+srcname: multinom-pmf2
+#+begin_src R :exports code :results silent
 library(lattice)
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/multinom-pmf2.pdf}
-    \caption[Plot of a multinomial PMF.]{\small A plot of a multinomial PMF.}
-    \label{fig:multinom-pmf2}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/multinom-pmf2.ps
+  <<multinom-pmf2>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/multinom-pmf2.svg
+  <<multinom-pmf2>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[width=5in, height=4in]{ps/multinom-pmf2.ps}
+  \caption[Plot of a multinomial PMF.]{\small A plot of a multinomial PMF.}
+    \label{fig:multinom-pmf2}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-multinom-pmf2" class="figure">
+  <p><img src="svg/multinom-pmf2.svg" width=500 alt="svg/multinom-pmf2.svg" /></p>
+  <p>A plot of a multinomial PMF.</p>
+</div>
+#+end_html
 
 #+latex: \newpage{}
 
@@ -1037,16 +1055,16 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 Prove that \( \mbox{Cov}(X,Y)=\E(XY)-(\E X)(\E Y). \) \label{xca:Prove-cov-shortcut}
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:sum-indep-chisq}
 Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the distribution of \(X+Y\) (you may want to refer to Equation \ref{eq:mgf-chisq}).
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:diff-indep-norm}
 Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M_{Y}(-t)\). Use this to find the distribution of \(X-Y\) when \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\)  are independent. 
-#+latex: \end{xca}
+#+end_xca

@@ -11,11 +11,16 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* Simple Linear Regression
+* Simple Linear Regression                                              :slr:
+:PROPERTIES:
+:tangle: R/slr.R
+:END:
 \label{cha:simple-linear-regression}
 
 #+latex: \paragraph*{What do I want them to know?}
@@ -51,31 +56,31 @@ This helps us in the sense that we concentrate on the estimation of just a few p
 
 More to the point, there are /three simple linear regression/ (SLR) assumptions\index{regression assumptions} that will form the basis for the rest of this chapter:
 
-#+latex: \begin{assumption}
+#+begin_assumption
 We assume that \(\mu\) is a linear function of \(x\), that is, 
 \begin{equation}
 \mu(x)=\beta_{0}+\beta_{1}x,
 \end{equation}
 where \(\beta_{0}\) and \(\beta_{1}\) are unknown constants to be estimated.
-#+latex: \end{assumption}
+#+end_assumption
 
-#+latex: \begin{assumption}
+#+begin_assumption
 We further assume that \( Y_{i} \) is \( \mu(x_{i}) \), a ``signal'', plus some ``error'' (represented by the symbol \( \epsilon_{i} \)):
 \begin{equation}
 Y_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}, \quad i = 1,2,\ldots,n.
 \end{equation}
-#+latex: \end{assumption}
+#+end_assumption
 
-#+latex: \begin{assumption}
+#+begin_assumption
 We lastly assume that the errors are IID normal with mean 0 and variance \( \sigma^{2} \):
 \begin{equation}
 \epsilon_{1},\epsilon_{2},\ldots,\epsilon_{n}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma).
 \end{equation}
-#+latex: \end{assumption}
+#+end_assumption
 
-#+latex: \begin{rem}
+#+begin_rem
 We assume both the normality of the errors \(\epsilon\) and the linearity of the mean function \( \mu \). Recall from Proposition \ref{pro:mvnorm-cond-dist} of Chapter \ref{cha:Multivariable-Distributions} that if \( (X,Y)\sim\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear function of \(x\). This is not a coincidence. In more advanced classes we study the case that both \(X\) and \(Y\) are random, and in particular, when they are jointly normally distributed.
-#+latex: \end{rem}
+#+end_rem
 
 *** What does it all mean?
 See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and /y/-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases
@@ -83,13 +88,21 @@ See Figure \ref{fig:philosophy}. Shown in the figure is a solid line, the regres
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/philosophy.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/philosophy.ps}
   \caption[Philosophical foundations of SLR]{\small Philosophical foundations of SLR.}
   \label{fig:philosophy}
 \end{figure}
 #+end_latex
- 
-#+begin_src R :exports none :results graphics silent :file img/philosophy.pdf
+
+#+begin_html
+<div id="fig-philosophy" class="figure">
+  <p><img src="svg/philosophy.svg" width=500 alt="svg/philosophy.svg" /></p>
+  <p>Philosophical foundations of SLR.</p>
+</div>
+#+end_html
+
+#+srcname: philosophy
+#+begin_src R :exports none :results silent
 # open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h=0, v=0, col = "gray60")
@@ -105,6 +118,14 @@ segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/philosophy.ps
+  <<philosophy>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/philosophy.svg
+  <<philosophy>>
+#+end_src
+
 #+latex: \begin{example}
 \label{exa:Speed-and-Stopping}
 *Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
@@ -116,14 +137,30 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/carscatter.ps}
   \caption[Scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data]{\small A scatterplot of \texttt{dist} versus \texttt{speed} for the \texttt{cars} data.  There is clearly an upward trend to the plot which is approximately linear.}
   \label{fig:Scatter-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/carscatter.pdf
+#+begin_html
+<div id="fig-Scatter-cars" class="figure">
+  <p><img src="svg/Scatter-cars.svg" width=500 alt="svg/Scatter-cars.svg" /></p>
+  <p>Scatterplot of <code>dist</code> versus <code>speed</code> for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: carscatter
+#+begin_src R :exports code :results silent
 qplot(speed, dist, data = cars)
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/carscatter.ps
+  <<carscatter>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/carscatter.svg
+  <<carscatter>>
 #+end_src
 
 You can see the output in Figure \ref{fig:Scatter-cars}, which was produced by the following code.
@@ -196,13 +233,13 @@ we use the ``line of best fit''
 \end{equation}
 where \(\hat{\beta}_{0}\) and \(\hat{\beta}_{1}\) are given as above. For notation we will usually write \( b_{0} = \hat{\beta_{0}} \) and \( b_{1}=\hat{\beta_{1}} \) so that \( \hat{\mu}(x) = b_{0} + b_{1}x \).
 
-#+latex: \begin{rem}
+#+begin_rem
 The formula for \( b_{1} \) in Equation \ref{eq:regline-slope-formula} gets the job done but does not really make any sense. There are many equivalent formulas for \( b_{1} \) that are more intuitive, or at the least are easier to remember. One of the author's favorites is
 \begin{equation}
 b_{1} = r\frac{s_{y}}{s_{x}},\label{eq:sample-correlation-formula}
 \end{equation}
 where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise \ref{xca:show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq:sample-correlation-formula} and Equation \ref{eq:population-slope-slr}.
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -228,15 +265,31 @@ It is good practice to visually inspect the data with the regression line added 
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/carline.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/carline.ps}
   \caption[Scatterplot with added regression line for the \texttt{cars} data]{\small A scatterplot with an added regression line for the \texttt{cars} data.}
   \label{fig:Scatter-cars-regline}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results output graphics silent :file img/carline.pdf
+#+begin_html
+<div id="fig-Scatter-cars-regline" class="figure">
+  <p><img src="svg/carline.svg" width=500 alt="svg/carline.svg" /></p>
+  <p>Thre  <code>overplot</code> method in the <code>CO2</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: carline
+#+begin_src R :exports code :results silent
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
        geom_smooth(method = lm)
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/carline.ps
+  <<carline>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/carline.svg
+  <<carline>>
 #+end_src
 
 To calculate points on the regression line we may simply plug the desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired \(x\) value(s) represented by a data frame. See the example below.
@@ -339,7 +392,6 @@ The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and fo
 carsumry <- summary(cars.lm)
 carsumry$sigma
 #+end_src
-
 
 *** Interval Estimates of the Parameters
 \label{sub:slr-interval-est-params}
@@ -492,11 +544,18 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/carscipi.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/carscipi.ps}
   \caption[Scatterplot with confidence/prediction bands for the \texttt{cars} data]{\small A scatterplot with confidence/prediction bands for the \texttt{cars} data.}
   \label{fig:Scatter-cars-CIPI}
 \end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-Scatter-cars-CIPI" class="figure">
+  <p><img src="svg/carscipi.svg" width=500 alt="svg/carscipi.svg" /></p>
+  <p>A scatterplot with confidence/prediction bands for the <code>cars</code> data.</p>
+</div>
+#+end_html
 
 #+begin_src R :exports code :eval never
 library(HH)
@@ -505,9 +564,18 @@ ci.plot(cars.lm)
 
 Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations \ref{eq:SLR-conf-int-formula} and \ref{eq:SLR-pred-int-formula}.
 
-#+begin_src R :exports none :results graphics silent :file img/carscipi.pdf
+#+srcname: carscipi
+#+begin_src R :exports none :results silent
 library(HH)
 print(ci.plot(cars.lm))
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/carscipi.ps
+  <<carscipi>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/carscipi.svg
+  <<carscipi>>
 #+end_src
 
 ** Model Utility and Inference
@@ -537,7 +605,6 @@ summary(cars.lm)
 #+end_src
 
 In the =Coefficients= section we find the \(t\) statistics and the \(p\)-values associated with the tests that the respective parameters are zero in the fourth and fifth columns. Since the \(p\)-values are (much) less than 0.05, we conclude that there is strong evidence that the parameters \(\beta_{1}\neq0\) and \(\beta_{0}\neq0\), and as such, we say that there is a statistically significant linear relationship between =dist= and =speed=. 
-
 
 *** Simple Coefficient of Determination
 
@@ -609,7 +676,6 @@ sqrt(carsumry$r.squared)
 
 We choose the principal square root because the slope of the regression line is positive.
 
-
 *** Overall /F/ statistic
 \label{sub:slr-overall-F-statistic}
 
@@ -652,7 +718,6 @@ We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
-
 *** Normality Assumption
 \label{sub:Normality-Assumption}
 
@@ -660,7 +725,7 @@ We can assess the normality of the residuals with graphical methods and hypothes
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/Normal-q-q-plot-cars.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/Normal-q-q-plot-cars.ps}
   \caption[Normal q-q plot of the residuals for the \texttt{cars} data]{\small Used for checking the normality assumption. Look out for
 any curvature or substantial departures from the straight line; hopefully
 the dots hug the line closely.}
@@ -668,15 +733,29 @@ the dots hug the line closely.}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/Normal-q-q-plot-cars.pdf
+#+begin_html
+<div id="fig-Normal-q-q-plot-cars" class="figure">
+  <p><img src="svg/Normal-q-q-plot-cars.svg" width=500 alt="svg/Normal-q-q-plot-cars.svg" /></p>
+  <p>Normal q-q plot of the residuals for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: Normal-q-q-plot-cars
+#+begin_src R :exports code :results silent
 plot(cars.lm, which = 2)
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Normal-q-q-plot-cars.ps
+  <<Normal-q-q-plot-cars>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Normal-q-q-plot-cars.svg
+  <<Normal-q-q-plot-cars>>
+#+end_src
 
 #+latex: \paragraph*{Testing the Normality Assumption}
 
 Even though we may be concerned about the plots, we can use tests to determine if the evidence present is statistically significant, or if it could have happened merely by chance. There are many statistical tests of normality. We will use the Shapiro-Wilk test, since it is known to be a good test and to be quite powerful. However, there are many other fine tests of normality including the Anderson-Darling test and the Lillefors test, just to mention two of them.  
-
 
 The Shapiro-Wilk test is based on the statistic
 \begin{equation}
@@ -699,7 +778,6 @@ shapiro.test(residuals(cars.lm))
 
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 
-
 *** Constant Variance Assumption
 \label{sub:Constant-Variance-Assumption}
 
@@ -717,14 +795,30 @@ In this case, we plot the standardized residuals versus the fitted values. The g
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/std-resids-fitted-cars.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/std-resids-fitted-cars.ps}
   \caption[Plot of standardized residuals against the fitted values for the \texttt{cars} data]{\small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.}
   \label{fig:std-resids-fitted-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/std-resids-fitted-cars.pdf
+#+begin_html
+<div id="fig-std-resids-fitted-cars" class="figure">
+  <p><img src="svg/std-resids-fitted-cars.svg" width=500 alt="svg/std-resids-fitted-cars.svg" /></p>
+  <p>Plot of standardized residuals against the fitted values for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: std-resids-fitted-cars
+#+begin_src R :exports code :results silent
 plot(cars.lm, which = 3)
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/std-resids-fitted-cars.ps
+  <<std-resids-fitted-cars>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/std-resids-fitted-cars.svg
+  <<std-resids-fitted-cars>>
 #+end_src
 
 #+latex: \paragraph*{Testing the Constant Variance Assumption}
@@ -758,15 +852,32 @@ On the other hand, negative correlation implies positive residuals followed by n
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/resids-fitted-cars.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/resids-fitted-cars.ps}
   \caption[Plot of the residuals versus the fitted values for the \texttt{cars}
 data]{\small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.}
   \label{fig:resids-fitted-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/resids-fitted-cars.pdf
+#+begin_html
+<div id="fig-resids-fitted-cars" class="figure">
+  <p><img src="svg/resids-fitted-cars.svg" width=500 alt="svg/resids-fitted-cars.svg" /></p>
+  <p>A plot of the residuals versus the fitted values for the <code>cars</code>
+ data.</p>
+</div>
+#+end_html
+
+#+srcname: resids-fitted-cars
+#+begin_src R :exports code :results silent
 plot(cars.lm, which = 1)
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/resids-fitted-cars.ps
+  <<resids-fitted-cars>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/resids-fitted-cars.svg
+  <<resids-fitted-cars>>
 #+end_src
 
 #+latex: \paragraph*{Testing the Independence Assumption}
@@ -841,7 +952,6 @@ and their sum is
 \end{eqnarray}
 
 A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation \ref{eq:slr-average-leverage}). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
-
 
 *** Standardized and Studentized Deleted Residuals
 
@@ -964,14 +1074,30 @@ We can look at a plot of the Cook's distances with the command =plot(cars.lm, wh
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/Cooks-distance-cars.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/Cooks-distance-cars.ps}
   \caption[Cook's distances for the \texttt{cars} data]{\small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.}
   \label{fig:Cooks-distance-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports code :results graphics silent :file img/Cooks-distance-cars.pdf
+#+begin_html
+<div id="fig-Cooks-distance-cars" class="figure">
+  <p><img src="svg/Cooks-distance-cars.svg" width=500 alt="svg/Cooks-distance-cars.svg" /></p>
+  <p>Cook's distances for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: Cooks-distance-cars
+#+begin_src R :exports code :results silent
 plot(cars.lm, which = 4)
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Cooks-distance-cars.ps
+  <<Cooks-distance-cars>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Cooks-distance-cars.svg
+  <<Cooks-distance-cars>>
 #+end_src
 
 Observations with the largest Cook's D values are labeled, hence we see that observations 23, 39, and 49 are suspicious. However, we need to compare to the quantiles of an \( \mathsf{f}(\mathtt{df1} = 2, \, \mathtt{df2} = 48) \) distribution:
@@ -1005,16 +1131,32 @@ The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the s
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{img/Diagnostic-plots-cars.pdf}
+  \includegraphics[angle=270, totalheight=4in]{ps/Diagnostic-plots-cars.ps}
   \caption[Diagnostic plots for the \texttt{cars} data]{\small Diagnostic plots for the \texttt{cars} data.}
   \label{fig:Diagnostic-plots-cars}
 \end{figure}
 #+end_latex
 
-#+begin_src R :exports none :results graphics silent :file img/Diagnostic-plots-cars.pdf
+#+begin_html
+<div id="fig-Diagnostic-plots-cars" class="figure">
+  <p><img src="svg/Diagnostic-plots-cars.svg" width=500 alt="svg/Diagnostic-plots-cars.svg" /></p>
+  <p>Diagnostic plots for the <code>cars</code> data.</p>
+</div>
+#+end_html
+
+#+srcname: Diagnostic-plots-cars
+#+begin_src R :exports none :results silent
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Diagnostic-plots-cars.ps
+  <<Diagnostic-plots-cars>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Diagnostic-plots-cars.svg
+  <<Diagnostic-plots-cars>>
 #+end_src
 
 We have discussed all of the plots except the last, which is possibly the most interesting. It shows Residuals vs. Leverage, which will identify outlying \(y\) values versus outlying \(x\) values. Here we see that observation 23 has a high residual, but low leverage, and it turns out that observations 1 and 2 have relatively high leverage but low/moderate leverage (they are on the right side of the plot, just above the horizontal line). Observation 49 has a large residual with a comparatively large leverage. 
@@ -1033,29 +1175,27 @@ The graph with the identified points is omitted (but the plain plot is shown in 
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 Prove the ANOVA equality, Equation \ref{eq:anovaeq}. /Hint/:
 show that
 \[
 \sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
 \]
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:find-mles-SLR}
 Solve the following system of equations for \(\beta_{1}\) and \(\beta_{0}\) to find the MLEs for slope and intercept in the simple linear regression model.
 \begin{eqnarray*}
 n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 \beta_{0}\sum_{i=1}^{n}x_{i}+\beta_{1}\sum_{i=1}^{n}x_{i}^{2} & = & \sum_{i=1}^{n}x_{i}y_{i}
 \end{eqnarray*}
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:show-alternate-slope-formula}
 Show that the formula given in Equation \ref{eq:sample-correlation-formula} is equivalent to
 \[
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.
 \]
-#+latex: \end{xca}
-
-
+#+end_xca

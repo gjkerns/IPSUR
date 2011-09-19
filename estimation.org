@@ -11,14 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* Estimation
+* Estimation                                                       :estimate:
+:PROPERTIES:
+:tangle: R/estimate.R
+:END:
 \label{cha:Estimation}
 
-\noindent We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
+#+latex: \noindent 
+We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
 
 We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. We make some assumptions about the underlying population distribution and use what we know from Chapter \ref{cha:Sampling-Distributions} about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
@@ -30,7 +36,6 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 - about properties of the estimators they find, such as bias, minimum variance, MSE
 - point versus interval estimation, and how to find and interpret confidence intervals for basic experimental designs
 - the concept of margin of error and its relationship to sample size
-
 
 ** Point Estimation
 \label{sec:Point-Estimation-1}
@@ -65,7 +70,8 @@ Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish woul
 We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\P(X=x)\) versus \(F\). See Figure \ref{fig:capture-recapture}.
 #+latex: \end{example}
 
-#+begin_src R :exports none :results graphics silent :file img/capture-recapture.pdf
+#+srcname: capture-recapture
+#+begin_src R :exports none :results silent
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -76,13 +82,28 @@ lines(9, heights[9], type = "h", lwd = 2)
 points(9, 0, pch = 4, lwd = 3, cex = 2)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/capture-recapture.pdf}
-    \caption[Capture-recapture experiment]{\small A plot of maximum likelihood for the capture-recapture experiment.}
-    \label{fig:capture-recapture}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/capture-recapture.ps
+  <<capture-recapture>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/capture-recapture.svg
+  <<capture-recapture>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/capture-recapture.ps}
+  \caption[Capture-recapture experiment]{\small A plot of maximum likelihood for the capture-recapture experiment.}
+  \label{fig:capture-recapture}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-capture-recapture" class="figure">
+  <p><img src="svg/capture-recapture.svg" width=500 alt="svg/capture-recapture.svg" /></p>
+  <p>A plot of maximum likelihood for the capture-recapture experiment.</p>
+</div>
+#+end_html
 
 #+latex: \begin{example}
 \label{exa:bass-bluegill}
@@ -114,19 +135,35 @@ L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
 A graph of \(L\) for values of \(\sum x_{i}=3,\ 4\), and 5 when \(n=7\) is shown in Figure \ref{fig:fishing-part-two}. 
 
-#+begin_src R :exports code :results graphics silent :file img/fishing-part-two.pdf
+#+srcname: fishing-part-two
+#+begin_src R :exports code :results silent
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/fishing-part-two.pdf}
-    \caption[Assorted likelihood functions for fishing, part two]{\small Assorted likelihood functions for fishing, part two.   Three graphs are shown of \(L\) when \(\sum x_{i}\) equals 3, 4, and 5, respectively, from left to right. We pick an \(L\) that matches the observed data and then maximize \(L\) as a function of \(p\). If \(\sum x_{i}=4\), then the maximum appears to occur somewhere around \(p \approx 0.6\).}
-    \label{fig:fishing-part-two}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/fishing-part-two.ps
+  <<fishing-part-two>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/fishing-part-two.svg
+  <<fishing-part-two>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/fishing-part-two.ps}
+  \caption[Assorted likelihood functions for fishing, part two]{\small Assorted likelihood functions for fishing, part two.   Three graphs are shown of \(L\) when \(\sum x_{i}\) equals 3, 4, and 5, respectively, from left to right. We pick an \(L\) that matches the observed data and then maximize \(L\) as a function of \(p\). If \(\sum x_{i}=4\), then the maximum appears to occur somewhere around \(p \approx 0.6\).}
+  \label{fig:fishing-part-two}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-fishing-part-two" class="figure">
+  <p><img src="svg/fishing-part-two.svg" width=500 alt="svg/fishing-part-two.svg" /></p>
+  <p>Assorted likelihood functions for fishing, part two.</p>
+</div>
+#+end_html
 
 We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec:Differential-and-Integral}) to differentiate \(L\) and set \(L'=0\) to find a maximum.
 \[
@@ -144,17 +181,17 @@ This ``best'' \(p\), the one which maximizes the likelihood, is called the maxim
 \hat{p}=\frac{\sum_{i=1}^{n}x_{i}}{n}=\overline{x}.
 \end{equation}
 
-#+latex: \begin{rem}
+#+begin_rem
 Strictly speaking we have only shown that the derivative equals zero at \(\hat{p}\), so it is theoretically possible that the critical value \(\hat{p}=\overline{x}\) is located at a minimum
 #+latex: \footnote{We can tell from the graph that our value of \(\hat{p}\) is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.}
 instead of a maximum! We should be thorough and check that \(L'>0\) when \(p<\overline{x}\) and \(L'<0\) when \(p>\overline{x}\). Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that \(\hat{p}=\overline{x}\) is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
-#+latex: \end{rem}
+#+end_rem
 
 The result is shown in Figure \ref{fig:species-mle}.
 #+latex: \end{example}
 
-
-#+begin_src R :exports none :results graphics silent :file img/species-mle.pdf
+#+srcname: species-mle
+#+begin_src R :exports none :results silent
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -170,39 +207,54 @@ points(mle, 0, pch = 4, lwd = 2, cex = 2, col = "red")
 text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, pos = 4)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/species-mle.pdf}
-    \caption[Species maximum likelihood]{\small Species maximum likelihood.}
-    \label{fig:species-mle}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/species-mle.ps
+  <<species-mle>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/species-mle.svg
+  <<species-mle>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/species-mle.ps}
+  \caption[Species maximum likelihood]{\small Species maximum likelihood.}
+  \label{fig:species-mle}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-species-mle" class="figure">
+  <p><img src="svg/species-mle.svg" width=500 alt="svg/species-mle.svg" /></p>
+  <p>Species maximum likelihood.</p>
+</div>
+#+end_html
 
 In general, we have a family of PDFs \(f(x|\theta)\) indexed by a parameter \(\theta\) in some parameter space \(\Theta\). We want to learn about \(\theta\). We take a \(SRS(n)\):
 \begin{equation}
 X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are IID \( f(x| \theta ) \).}
 \end{equation}
 
-#+latex: \begin{defn}
+#+begin_defn
 Given the observed data \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the /likelihood function/ \(L\) is defined by 
 \[ 
 L(\theta)=\prod_{i=1}^{n}f(x_{i}|\theta),\quad\theta\in\Theta.
 \]
-#+latex: \end{defn}
+#+end_defn
 
 The next step is to maximize \(L\). The method we will use in this book is to find the derivative \(L'\) and solve the equation \(L'(\theta)=0\). Call a solution \(\hat{\theta}\). We will check that \(L\) is maximized at \(\hat{\theta}\) using the First Derivative Test or the Second Derivative Test \(\left(L''(\hat{\theta})<0\right)\).
 
-#+latex: \begin{defn}
+#+begin_defn
 A value \(\theta\) that maximizes \(L\) is called a /maximum likelihood estimator/ (MLE) and is denoted \(\hat{\theta}\). It is a function of the sample, \(\hat{\theta}=\hat{\theta}\left(X_{1},\, X_{2},\,\ldots,X_{n}\right)\), and is called a /point estimator/ of \(\theta\).
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{rem}
+#+begin_rem
 Some comments about maximum likelihood estimators:
 - Often it is easier to maximize the /log-likelihood/ \(l(\theta)=\ln L(\theta)\) instead of the likelihood \(L\). Since the logarithmic function \(y=\ln x\) is a monotone transformation, the solutions to both problems are the same.
 - MLEs do not always exist (for instance, sometimes the likelihood has a vertical asymptote), and even when they do exist, they are not always unique (imagine a function with a bunch of humps of equal height). For any given problem, there could be zero, one, or any number of values of \(\theta\) for which \(L(\theta)\) is a maximum.
 - The problems we encounter in this book are all very nice with likelihood functions that have closed form representations and which are optimized by some calculus acrobatics. In practice, however, likelihood functions are sometimes nasty in which case we are obliged to use numerical methods to find maxima (if there are any).
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
-#+latex: \end{rem}
+#+end_rem
 
 Notice, in Example \ref{exa:bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
@@ -213,13 +265,13 @@ Notice, in Example \ref{exa:bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}
 \end{eqnarray*}
 which is exactly the same as the parameter which we estimated. More concisely, \(\E\hat{p}=p\), that is, on the average, the estimator is exactly right.
 
-#+latex: \begin{defn}
+#+begin_defn
 Let \(s(X_{1},X_{2},\ldots,X_{n})\) be a statistic which estimates \(\theta\). If 
 \[
 \E s(X_{1},X_{2},\ldots,X_{n})=\theta,
 \]
 then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased estimator/ of \(\theta\). Otherwise, it is /biased/.
-#+latex: \end{defn}
+#+end_defn
 
 #+latex: \begin{example}
 \label{exa:normal-MLE-both}
@@ -350,20 +402,20 @@ That is,
 \P\left(\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\leq\mu\leq\overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)=1-\alpha.
 \end{equation}
 
-#+latex: \begin{defn}
+#+begin_defn
 The interval
 \begin{equation}
 \left[\overline{X}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}},\ \overline{X}+z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
 is a \(100(1-\alpha)\%\) /confidence interval for/ \(\mu\). The quantity \(1-\alpha\) is called the /confidence coefficient/.
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{rem}
+#+begin_rem
 The interval is also sometimes written more compactly as
 \begin{equation}
 \overline{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.\label{eq:z-interval}
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 The interpretation of confidence intervals is tricky and often mistaken by novices. When I am teaching the concept ``live'' during class, I usually ask the students to imagine that my piece of chalk represents the ``unknown'' parameter, and I lay it down on the desk in front of me. Once the chalk has been lain, it is /fixed/; it does not move. Our goal is to estimate the parameter. For the estimator I pick up a sheet of loose paper lying nearby. The estimation procedure is to randomly drop the piece of paper from above, and observe where it lands. If the piece of paper covers the piece of chalk, then we are successful -- our estimator covers the parameter. If it falls off to one side or the other, then we are unsuccessful; our interval fails to cover the parameter.
 
@@ -373,36 +425,51 @@ In the demonstration, the parameter corresponds to the chalk, the sheet of paper
 
 See Figure \ref{fig:ci-examp}, which is a graphical display of these ideas.
 
-
-#+begin_src R :exports code :results graphics silent :file img/carscatter.pdf
+#+srcname: ci-examp
+#+begin_src R :exports code :results silent
 library(TeachingDemos)
 ci.examp()
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/carscatter.pdf}
-    \caption[Simulated confidence intervals]{\small The graph was generated by the \texttt{ci.examp} function from the \texttt{TeachingDemos} package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95\%.}
-    \label{fig:Scatter-cars}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/ci-examp.ps
+  <<ci-examp>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/ci-examp.svg
+  <<ci-examp>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/ci-examp.ps}
+  \caption[Simulated confidence intervals]{\small The graph was generated by the \texttt{ci.examp} function from the \texttt{TeachingDemos} package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95\% confidence interval for the population mean using Equation \ref{eq:z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that ``cover'' the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98\%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95\%.}
+  \label{fig:ci-examp}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-ci-examp" class="figure">
+  <p><img src="svg/ci-examp.svg" width=500 alt="svg/ci-examp.svg" /></p>
+  <p>Simulated confidence intervals.</p>
+</div>
+#+end_html
 
 Under the above framework, we can reason that an ``interval'' with a /larger/ confidence coefficient corresponds to a /wider/ sheet of paper. Furthermore, the width of the confidence interval (sheet of paper) should be /somehow/ related to the amount of information contained in the random sample, \(X_{1}\), \(X_{2}\), ...,
 \(X_{n}\). The following remarks makes these notions precise. 
 
-#+latex: \begin{rem}
+#+begin_rem
 For a fixed confidence coefficient \(1-\alpha\),
 \begin{equation}
 \mbox{if }n\mbox{ increases, then the confidence interval gets \emph{SHORTER}.}
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 For a fixed sample size \(n\),
 \begin{equation}
 \mbox{if }1-\alpha\mbox{ increases, then the confidence interval gets \emph{WIDER}.}
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \begin{example}
@@ -450,7 +517,7 @@ Give some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) from a \(
 4. Calculate the interval.
 5. Draw the conclusion.
 
-#+latex: \begin{rem}
+#+begin_rem
 What if \(\sigma\) is unknown? We instead use the interval
 \begin{equation}
 \overline{X}\pm z_{\alpha/2}\frac{S}{\sqrt{n}},
@@ -463,7 +530,7 @@ where \(S\) is the sample standard deviation.
      \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}.\label{eq:one-samp-t-int}
      \end{equation}
    - if the underlying population is not normal, but approximately normal, then we may use the \(t\) interval, Equation \ref{eq:one-samp-t-int}. The interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
-#+latex: \end{rem}
+#+end_rem
 
 The author learned of a handy acronym from AP Statistics Exam graders that summarizes the important parts of confidence interval estimation, which is PANIC: \emph{P}arameter, \emph{A}ssumptions, \emph{N}ame, \emph{I}nterval, and \emph{C}onclusion.
 - Parameter: :: identify the parameter of interest with the proper symbols. Write down what the parameter means in the context of the problem.
@@ -472,7 +539,7 @@ The author learned of a handy acronym from AP Statistics Exam graders that summa
 - Interval: :: calculate the interval from the sample data. This can be done by hand but will more often be done with the aid of a computer. Regardless of the method, all calculations or code should be shown so that the entire process is repeatable by a subsequent reader.
 - Conclusion: :: state the final results, using language in the context of the problem. Include the appropriate interpretation of the interval, making reference to the confidence coefficient.
 
-#+latex: \begin{rem}
+#+begin_rem
 All of the above intervals for \(\mu\) were two-sided, but there are also one-sided intervals for \(\mu\). They look like
 \begin{equation}
 \left[\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
@@ -481,7 +548,7 @@ and satisfy
 \begin{equation}
 \P\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\P\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \begin{example}
@@ -567,12 +634,11 @@ The basic function is =t.test= which has a =var.equal= argument that may be set 
 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
-
 ** Confidence Intervals for Proportions
 \label{sec:Confidence-Intervals-Proportions}
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
-- the proportion of U.S.~citizens that support Obama,
+- the proportion of U.S. citizens that support Obama,
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
@@ -620,7 +686,7 @@ so it stands to reason that an approximate \(100(1-\alpha)\%\) confidence interv
 \end{equation}
 where \(\hat{p}_{1}=Y_{1}/n_{1}\) and \(\hat{p}_{2}=Y_{2}/n_{2}\).
 
-#+latex: \begin{rem}
+#+begin_rem
 When estimating a single proportion, one-sided intervals are sometimes needed. They take the form
 \begin{equation}
 \left[0,\ \hat{p}+z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\right]
@@ -630,7 +696,7 @@ or
 \left[\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\ 1\right]
 \end{equation}
 or in other words, we know in advance that the true proportion is restricted to the interval \([0,1]\), so we can truncate our confidence interval to those values on either side.
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -661,7 +727,6 @@ library(reshape)
 B <- with(A, untable(A, Freq))
 #+end_src
 
-
 ** Confidence Intervals for Variances
 \label{sec:Confidence-Intervals-for-Variances}
 
@@ -670,7 +735,6 @@ I am thinking one and two sample problems here.
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
-
 
 ** Fitting Distributions
 \label{sec:Fitting-Distributions}
@@ -700,9 +764,9 @@ For the case of a population mean the answer is easy: we set up an equation and 
 Given a situation, given \(\sigma\), given \(E\), we would like to know how big \(n\) has to be to ensure that \(\overline{X}\pm5\) is a 95% confidence interval for \(\mu\).
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 Always round up any decimal values of \(n\), no matter how small the decimal is. Another name for \(E\) is the ``maximum error of the estimate''.
-#+latex: \end{rem}
+#+end_rem
 
 For proportions, recall that the asymptotic formula to estimate \(p\) was
 \[
@@ -729,7 +793,7 @@ OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both si
 Proportion example.
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 For very small populations sometimes the value of \(n\) obtained from the formula is too big. In this case we should use the hypergeometric distribution for a sampling model rather than the binomial model. With this modification the formulas change to the following: if \(N\) denotes the population size then let
 \begin{equation}
 m=z_{\alpha/2}^{2}\frac{p^{\ast}(1-p^{\ast})}{E^{2}}
@@ -739,7 +803,7 @@ and the sample size needed to ensure \(100(1-\alpha)\%\) confidence is achieved 
 n=\frac{m}{1+\frac{m-1}{N}}.
 \end{equation}
 If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p^{\ast}=1/2\).
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
@@ -755,21 +819,16 @@ Mention =mle= from the =stats4= package.
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Find a two-dimensional MLE for \(\theta=(\mu,\sigma)\).
 \label{xca:norm-mu-sig-MLE}
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:CI-quad-form}
 Find the upper and lower limits for the confidence interval procedure by finding the roots of \(f\) defined by 
 \[
 f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}.
 \]
 You are going to need the quadratic formula.
-#+latex: \end{xca}
-
-
-
-
-
+#+end_xca

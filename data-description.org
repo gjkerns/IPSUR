@@ -11,15 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
+* Data Description                                                 :datadesc:
+:PROPERTIES:
+:tangle: R/datadesc.R
+:END:
+#+latex: \label{cha:Describing-Data-Distributions}
 
-* Data Description
-\label{cha:Describing-Data-Distributions}
-
-\noindent In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
+#+latex: \noindent 
+In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -30,7 +35,7 @@
 - all of the above in the context of grouped data, and in particular, the concept of a factor
 
 ** Types of Data 
-\label{sec:Types-of-Data}
+#+latex: \label{sec:Types-of-Data}
 
 Loosely speaking, a datum is any piece of collected information, and a data set is a collection of data related to each other in some way. We will categorize data into five types and describe each in turn:
 
@@ -43,7 +48,7 @@ Loosely speaking, a datum is any piece of collected information, and a data set 
 In each subsection we look at some examples of the type in question and introduce methods to display them.
 
 *** Quantitative data
-\label{sub:Quantitative-Data}
+#+latex: \label{sub:Quantitative-Data}
 
 Quantitative data are any data that measure or are associated with a measurement of the quantity of something. They invariably assume numerical values. Quantitative data can be further subdivided into two categories. 
 
@@ -59,17 +64,9 @@ Note that the distinction between discrete and continuous data is not always cle
 str(precip)
 #+end_src
 
-#+results[59417f66776682ca0fd549a3d227403c621e8900]:
-:  Named num [1:70] 67 54.7 7 48.5 14 17.2 20.7 13 43.4 40.2 ...
-:  - attr(*, "names")= chr [1:70] "Mobile" "Juneau" "Phoenix" "Little Rock" ...
-
 #+begin_src R :exports both :results output pp  
 precip[1:4]
 #+end_src
-
-#+results[945e9eb65b8eb763561202f9fb29becdf9c511a5]:
-:      Mobile      Juneau     Phoenix Little Rock 
-:        67.0        54.7         7.0        48.5
 
 The output shows that =precip= is a numeric vector which has been /named/, that is, each value has a name associated with it (which can be set with the =names=\index{names@\texttt{names}} function). These are quantitative continuous data.
 
@@ -82,10 +79,6 @@ The output shows that =precip= is a numeric vector which has been /named/, that 
 str(rivers)
 #+end_src
 
-#+results[5673ec978725012d16945a734c8db0c362fd2c9f]:
-:  num [1:141] 735 320 325 392 524 ...
-
-
 The output says that =rivers= is a numeric vector of length 141, and the first few values are 735, 320, 325, /etc/. These data are definitely quantitative and it appears that the measurements have been rounded to the nearest mile. Thus, strictly speaking, these are discrete data. But we will find it convenient later to take data like these to be continuous for some of our statistical procedures. 
 #+latex: \end{example}
 
@@ -96,20 +89,17 @@ The output says that =rivers= is a numeric vector of length 141, and the first f
 str(discoveries)
 #+end_src
 
-#+results[7130801ffad165f9d041d36fd5be21c9396642fa]:
-:  Time-Series [1:100] from 1860 to 1959: 5 3 0 2 0 3 2 3 6 1 ...
-
 #+latex: \end{example}
 
 The output is telling us that =discoveries= is a /time series/ (see Section \ref{sub:other-data-types} for more) of length 100. The entries are integers, and since they represent counts this is a good example of discrete quantitative data. We will take a closer look in the following sections.
 
 *** Displaying Quantitative Data
-\label{sub:Displaying-Quantitative-Data}
+#+latex: \label{sub:Displaying-Quantitative-Data}
 
 One of the first things to do when confronted by quantitative data (or any data, for that matter) is to make some sort of visual display to gain some insight into the data's structure. There are almost as many display types from which to choose as there are data sets to plot. We describe some of the more popular alternatives. 
 
 #+latex: \paragraph*{Strip charts\index{strip chart} (also known as Dot plots)\index{dot plot| see\{strip chart\}}}
-\label{par:Strip-charts}
+#+latex: \label{par:Strip-charts}
 
 These can be used for discrete or continuous data, and usually look best when the data set is not too large. Along the horizontal axis is a numerical scale above which the data values are plotted. We can do it in \textsf{R} with a call to the =stripchart=\index{stripchart@\texttt{stripchart}} function. There are three available methods.
 
@@ -129,7 +119,8 @@ stripchart(discoveries, method="stack", xlab="number")
 
 The leftmost graph is a strip chart of the =precip= data. The graph shows tightly clustered values in the middle with some others falling balanced on either side, with perhaps slightly more falling to the left. Later we will call this a symmetric distribution, see Section \ref{sub:Shape}. The middle graph is of the =rivers= data, a vector of length 141. There are several repeated values in the rivers data, and if we were to use the overplot method we would lose some of them in the display. This plot shows a what we will later call a right-skewed shape with perhaps some extreme values on the far right of the display. The third graph strip charts =discoveries= data which are literally a textbook example of a right skewed distribution.
 
-#+begin_src R :exports code :results graphics silent :file img/stripcharts.ps
+#+srcname: stripcharts
+#+begin_src R :exports none :results silent
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
@@ -137,16 +128,28 @@ stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[f80175835182c752a7b590952c7bd0cbbe0ce0ad]:
-[[file:img/stripcharts.ps]]
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/stripcharts.ps
+  <<stripcharts>>
+#+end_src
 
-#+begin_src latex
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/stripcharts.svg
+  <<stripcharts>>
+#+end_src
+
+#+begin_latex
   \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/stripcharts.ps}
+    \includegraphics[angle=270, totalheight=4in]{ps/stripcharts.ps}
     \caption[Strip charts of \texttt{precip}, \texttt{rivers}, and \texttt{discoveries}]{\small Three stripcharts of three data sets.  The first graph uses the \texttt{overplot} method, the second the \texttt{jitter} method, and the third the \texttt{stack} method.}
     \label{fig:stripcharts}
   \end{figure}
-#+end_src
+#+end_latex
+
+#+begin_html
+  <div id="fig-stripcharts" class="figure">
+    <p><img src="svg/stripcharts.svg" width=500 alt="svg/stripcharts.svg" /></p>
+    <p>Three stripcharts of three data sets.  The first graph uses the <code>overplot</code> method, the second the <code>jitter</code> method, and the third the <code>stack</code> method.</p>
+  </div>
+#+end_html
 
 The =DOTplot=\index{DOTplot@\texttt{DOTplot}} function in the =UsingR=\index{R packages!UsingR@\texttt{UsingR}} package \cite{usingr} is another alternative.
 
@@ -174,7 +177,8 @@ m + geom_histogram()
 m + geom_histogram(binwidth = 5)
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/histograms.ps
+#+srcname: histograms
+#+begin_src R :exports none :results silent
 library(ggplot2)
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 a <- m + geom_histogram()
@@ -187,8 +191,13 @@ print(a, vp = vplayout(1, 1))
 print(b, vp = vplayout(2, 1))
 #+end_src
 
-#+results[f2acfc576c4a083aa588d6953fd8b104c4258e00]:
-[[file:img/histograms.ps]]
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/histograms.ps
+  <<histograms>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/histograms.svg
+  <<histograms>>
+#+end_src
 
 #+begin_src R :eval never :exports code
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
@@ -197,13 +206,21 @@ hist(precip, freq = FALSE, main = "")
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/histograms.ps}
-    \caption{(Relative) frequency histograms of the \texttt{precip} data}
-    \label{fig:histograms}
-  \end{figure}
-#+end_src
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/histograms.ps}
+  \caption{(Relative) frequency histograms of the \texttt{precip} data}
+  \label{fig:histograms}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-histograms" class="figure">
+  <p><img src="svg/histograms.svg" width=500 alt="svg/histograms.svg" /></p>
+  <p>(Relative) frequency histograms of the <code>precip</code> data.</p>
+</div>
+#+end_html
+
 
 #+latex: \end{example}
 
@@ -218,23 +235,36 @@ hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 #+end_src
 
-#+begin_src R :exports none :results graphics :file img/histograms-bins.ps
+#+srcname: histograms-bins
+#+begin_src R :exports none :results silent
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
 hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[17c980b0bcce07aecaa846e3a5651ec4f4e2903b]:
-[[file:img/histograms-bins.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/histograms-bins.ps}
-    \caption{More histograms of the \texttt{precip} data}
-    \label{fig:histograms-bins}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/histograms-bins.ps
+  <<histograms-bins>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/histograms-bins.svg
+  <<histograms-bins>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/histograms-bins.ps}
+  \caption{More histograms of the \texttt{precip} data}
+  \label{fig:histograms-bins}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-histograms-bins" class="figure">
+  <p><img src="svg/histograms-bins.svg" width=500 alt="svg/histograms-bins.svg" /></p>
+  <p>More histograms of the <code>precip</code> data.</p>
+</div>
+#+end_html
 
 The leftmost graph (with =breaks = 10=) shows that the distribution is not balanced at all. There are two humps: a big one in the middle and a smaller one to the left. Graphs like this often indicate some underlying group structure to the data; we could now investigate whether the cities for which rainfall was measured were similar in some way, with respect to geographic region, for example.
 
@@ -247,7 +277,7 @@ The rightmost graph in Figure \ref{fig:histograms-bins} shows what happens when 
 Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the data values is taken to be a /leaf/, and the leading digit(s) is (are) taken to be /stems/. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
 
 #+latex: \begin{example}
-\label{exa:-ukdriverdeaths-first}
+#+latex: \label{exa:-ukdriverdeaths-first}
 =UKDriverDeaths=\index{Data sets!UKDriverDeaths@\texttt{UKDriverDeaths}} is a time series that contains the total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984. See =?UKDriverDeaths=. Compulsory seat belt use was introduced on January 31, 1983. We construct a stem and leaf diagram in \textsf{R} with the =stem.leaf=\index{stem.leaf@\texttt{stem.leaf}} function from the =aplpack=\index{R packages@\textsf{R} packages!aplpack@\texttt{aplpack}} package\cite{aplpack}.
 #+latex: \end{example}
 
@@ -255,29 +285,6 @@ Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the dat
 library(aplpack)
 stem.leaf(UKDriverDeaths, depth = FALSE)
 #+end_src
-
-#+results[63ef428674d285ab1c8b83ccc23b9e93310fa4b6]:
-#+begin_example
-1 | 2: represents 120
- leaf unit: 10
-            n: 192
-   10 | 57
-   11 | 136678
-   12 | 123889
-   13 | 0255666888899
-   14 | 00001222344444555556667788889
-   15 | 0000111112222223444455555566677779
-   16 | 01222333444445555555678888889
-   17 | 11233344566667799
-   18 | 00011235568
-   19 | 01234455667799
-   20 | 0000113557788899
-   21 | 145599
-   22 | 013467
-   23 | 9
-   24 | 7
-HI: 2654
-#+end_example
 
 The display shows a more or less balanced mound-shaped distribution, with one or maybe two humps, a big one and a smaller one just to its right. Note that the data have been rounded to the tens place so that each datum gets only one leaf to the right of the dividing line.
 
@@ -301,23 +308,36 @@ plot(LakeHuron, type = "p")
 
 The plots show an overall decreasing trend to the observations, and there appears to be some seasonal variation that increases over time. 
 
-#+begin_src R :exports none :results graphics silent :file img/indpl-lakehuron.ps
+#+srcname: indpl-lakehuron
+#+begin_src R :exports none :results silent
 par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
 plot(LakeHuron, type = "h")
 plot(LakeHuron, type = "p")
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[85411ce8e94cbc3d77ccee44ce80bc87f8c5c945]:
-[[file:img/indpl-lakehuron.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/indpl-lakehuron.ps}
-    \caption{Index plots of the \texttt{LakeHuron} data}
-    \label{fig:indpl-lakehuron}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/indpl-lakehuron.ps
+  <<indpl-lakehuron>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/indpl-lakehuron.svg
+  <<indpl-lakehuron>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/indpl-lakehuron.ps}
+  \caption{Index plots of the \texttt{LakeHuron} data}
+  \label{fig:indpl-lakehuron}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-indpl-lakehuron" class="figure">
+  <p><img src="svg/indpl-lakehuron.svg" width=500 alt="svg/indpl-lakehuron.svg" /></p>
+  <p>Index plots of the <code>LakeHuron</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
@@ -326,7 +346,7 @@ par(mfrow = c(1,1)) # back to normal
 Coming soon.
 
 *** Qualitative Data, Categorical Data, and Factors
-\label{sub:Qualitative-Data}
+#+latex: \label{sub:Qualitative-Data}
 
 Qualitative data are simply any type of data that are not numerical, or do not represent numerical quantities. Examples of qualitative variables include a subject's name, gender, race/ethnicity, political party, socioeconomic status, class rank, driver's license number, and social security number (SSN).
 
@@ -348,9 +368,6 @@ vector gives the two letter postal abbreviations for all 50 states.
 str(state.abb)
 #+end_src
 
-#+results[14854e1deedb43ee143352a6e410f241da4533d5]:
-:  chr [1:50] "AL" "AK" "AZ" "AR" "CA" "CO" "CT" "DE" ...
-
 These would be ID data. The =state.name=\index{Data sets!state.name@\texttt{state.name}} vector lists all of the complete names and those data would also be ID.
 #+latex: \end{example}
 
@@ -362,19 +379,14 @@ str(state.region)
 state.region[1:5]
 #+end_src
 
-#+results[47cf099f4ab0bb71b0479200f59bd81364c0d7b7]:
-:  Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2 2 ...
-: [1] South West  West  South West 
-: Levels: Northeast South North Central West
-
 The =str=\index{str@\texttt{str}} output shows that =state.region= is already stored internally as a factor and it lists a couple of the factor levels. To see all of the levels we printed the first five entries of the vector in the second line.
 #+latex: \end{example}
 
 *** Displaying Qualitative Data
-\label{sub:Displaying-Qualitative-Data}
+#+latex: \label{sub:Displaying-Qualitative-Data}
 
 #+latex: \paragraph*{Tables}
-\label{par:Tables}
+#+latex: \label{par:Tables}
 
 One of the best ways to summarize qualitative data is with a table of the data values. We may count frequencies with the =table= function or list proportions with the =prop.table=\index{prop.table@\texttt{prop.table}} function (whose input is a frequency table). In the \textsf{R} Commander you can do it with \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Frequency Distribution}... Alternatively, to look at tables for all factors in the =Active data set=\index{Active data set@\texttt{Active data set}} you can do \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Summaries} \textsf{\(\triangleright\)} \textsf{Active Dataset}.
 
@@ -382,50 +394,21 @@ One of the best ways to summarize qualitative data is with a table of the data v
 Tbl <- table(state.division)
 #+end_src
 
-#+results[a98aa6194878549c0300d80e5a1ed47e7a60b76f]:
-
 #+begin_src R :exports both :results output pp  
 Tbl
 #+end_src
-
-#+results[9056cf47e352efbd01273afd8ab0d257531ebe19]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:                  6                  3                  8 
-: East South Central West South Central East North Central 
-:                  4                  4                  5 
-: West North Central           Mountain            Pacific 
-:                  7                  8                  5
 
 #+begin_src R :exports both :results output pp  
 Tbl/sum(Tbl)      # relative frequencies
 #+end_src
 
-#+results[46cf9d8ff87027d6b83305ce7768b61ba41ff27d]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:               0.12               0.06               0.16 
-: East South Central West South Central East North Central 
-:               0.08               0.08               0.10 
-: West North Central           Mountain            Pacific 
-:               0.14               0.16               0.10
-
 #+begin_src R :exports both :results output pp  
 prop.table(Tbl)   # same thing
 #+end_src
 
-#+results[934d224e9b7749900e929380472b355f12371710]:
-: state.division
-:        New England    Middle Atlantic     South Atlantic 
-:               0.12               0.06               0.16 
-: East South Central West South Central East North Central 
-:               0.08               0.08               0.10 
-: West North Central           Mountain            Pacific 
-:               0.14               0.16               0.10
-
 
 #+latex: \paragraph*{Bar Graphs}
-\label{par:Bar-Graphs}
+#+latex: \label{par:Bar-Graphs}
 
 A bar graph is the analogue of a histogram for categorical data. A bar is displayed for each level of a factor, with the heights of the bars proportional to the frequencies of observations falling in the respective categories. A disadvantage of bar graphs is that the levels are ordered alphabetically (by default), which may sometimes obscure patterns in the display. 
 
@@ -442,94 +425,129 @@ See Figure \ref{fig:bar-gr-stateregion}. The display on the left is a frequency 
 
 Notice the =cex.names=\index{cex.names@\texttt{cex.names}} argument that we used, above. It shrinks the names on the \(x\) axis by 50% which makes them easier to read. See =?par=\index{par@\texttt{par}} for a detailed list of additional plot parameters.
 
-
-#+begin_src R :exports none :results graphics silent :file img/bar-gr-stateregion.ps
+#+srcname: bar-gr-stateregion
+#+begin_src R :exports none :results silent
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
 barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+results[65df95d84fd5b4b1e9f378a3257d724ebac10119]:
-[[file:img/bar-gr-stateregion.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/bar-gr-stateregion.ps}
-    \caption[Bar graphs of the \texttt{state.region} data]{\small The left graph is a frequency barplot made with \texttt{table} and the right is a relative frequency barplot made with \texttt{prop.table}.}
-    \label{fig:bar-gr-stateregion}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/bar-gr-stateregion.ps
+  <<bar-gr-stateregion>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/bar-gr-stateregion.svg
+  <<bar-gr-stateregion>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/bar-gr-stateregion.ps}
+  \caption[Bar graphs of the \texttt{state.region} data]{\small The left graph is a frequency barplot made with \texttt{table} and the right is a relative frequency barplot made with \texttt{prop.table}.}
+  \label{fig:bar-gr-stateregion}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-bar-gr-stateregion" class="figure">
+  <p><img src="svg/bar-gr-stateregion.svg" width=500 alt="svg/bar-gr-stateregion.svg" /></p>
+  <p>The left graph is a frequency barplot made with <code>table</code> and the right is a relative frequency barplot made with <code>prop.table</code>.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
-
-
 #+latex: \paragraph*{Pareto Diagrams}
-\label{par:Pareto-Diagrams}
+#+latex: \label{par:Pareto-Diagrams}
 
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease -- this is much more difficult when the bars are jumbled. 
 
 #+latex: \begin{example}
 *U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure \ref{fig:Pareto-chart}. The code follows.
 
-
-#+begin_src R :exports code :results graphics silent :file img/Pareto-chart.ps
+#+srcname: Pareto-chart
+#+begin_src R :exports code :results silent
 library(qcc)
 pareto.chart(table(state.division), ylab="Frequency")
 #+end_src
 
-#+results[34150ba44e68c70938dcf09f5808504463bbac80]:
-[[file:img/Pareto-chart.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/Pareto-chart.ps}
-    \caption{Pareto chart of the \texttt{state.division} data}
-    \label{fig:Pareto-chart}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Pareto-chart.ps
+  <<Pareto-chart>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Pareto-chart.svg
+  <<Pareto-chart>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Pareto-chart.ps}
+  \caption{Pareto chart of the \texttt{state.division} data}
+  \label{fig:Pareto-chart}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Pareto-chart" class="figure">
+  <p><img src="svg/Pareto-chart.svg" width=500 alt="svg/Pareto-chart.svg" /></p>
+  <p>Pareto chart of the <code>state.division</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \end{example}
 
 
 
 #+latex: \paragraph*{Dot Charts}
-\label{par:Dotcharts}
+#+latex: \label{par:Dotcharts}
 
 These are a lot like a bar graph that has been turned on its side with the bars replaced by dots on horizontal lines. They do not convey any more (or less) information than the associated bar graph, but the strength lies in the economy of the display. Dot charts are so compact that it is easy to graph very complicated multi-variable interactions together in one graph. See Section \ref{sec:Comparing-Data-Sets}. We will give an example here using the same data as above for comparison. The graph was produced by the following code.
 
 #+latex: \begin{example}
 
-#+begin_src R :exports code :results graphics silent :file img/dot-charts.ps
+#+srcname: dot-charts
+#+begin_src R :exports code :results silent
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
 #+end_src
 
-#+results[2cc7b4080c1c2730270b001b36010a2f4f7c8f3a]:
-[[file:img/dot-charts.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/dot-charts.ps}
-    \caption{Dot chart of the \texttt{state.region} data}
-    \label{fig:dot-charts}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/dot-charts.ps
+  <<dot-charts>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/dot-charts.svg
+  <<dot-charts>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/dot-charts.ps}
+  \caption{Dot chart of the \texttt{state.region} data}
+  \label{fig:dot-charts}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-dot-charts" class="figure">
+  <p><img src="svg/dot-charts.svg" width=500 alt="svg/dot-charts.svg" /></p>
+  <p>Dot chart of the <code>state.region</code> data.</p>
+</div>
+#+end_html
 
 See Figure \ref{fig:dot-charts}. Compare it to Figure \ref{fig:bar-gr-stateregion}.
 
 #+latex: \end{example}
 
 #+latex: \paragraph*{Pie Graphs}
-\label{par:Pie-Graphs}
+#+latex: \label{par:Pie-Graphs}
 
 These can be done with \textsf{R} and the \textsf{R} Commander, but they fallen out of favor in recent years because researchers have determined that while the human eye is good at judging linear measures, it is notoriously bad at judging relative areas (such as those displayed by a pie graph). Pie charts are consequently a very bad way of displaying information. A bar chart or dot chart is a preferable way of displaying qualitative data. See =?pie=\index{pie@\texttt{pie}} for more information.
 
 We are not going to do any examples of a pie graph and discourage their use elsewhere. 
 
 *** Logical Data
-\label{sub:Logical-Data}
+#+latex: \label{sub:Logical-Data}
 
 There is another type of information recognized by \textsf{R} which does not fall into the above categories. The value is either =TRUE= or =FALSE= (note that equivalently you can use =1 = TRUE=, =0 = FALSE=). Here is an example of a logical vector:
 
@@ -539,9 +557,6 @@ y <- (x < 7.3)
 y
 #+end_src
 
-#+results[6b3f05548e94def99a1699ecf3048015f9928dfc]:
-: [1]  TRUE  TRUE  TRUE FALSE FALSE
-
 Many functions in \textsf{R} have options that the user may or may not want to activate in the function call. For example, the =stem.leaf= function has the =depths= argument which is =TRUE= by default. We saw in Section \ref{sub:Quantitative-Data} how to turn the option off, simply enter =stem.leaf(x, depths = FALSE)= and they will not be shown on the display.
 
 We can swap =TRUE= with =FALSE= with the exclamation point =!=.
@@ -550,11 +565,8 @@ We can swap =TRUE= with =FALSE= with the exclamation point =!=.
 !y
 #+end_src
 
-#+results[5278ebd59af802f7101f1732623757a0f3a56845]:
-: [1] FALSE FALSE FALSE  TRUE  TRUE
-
 *** Missing Data
-\label{sub:Missing-Data}
+#+latex: \label{sub:Missing-Data}
 
 Missing data are a persistent and prevalent problem in many statistical analyses, especially those associated with the social sciences. \textsf{R} reserves the special symbol =NA= to representing missing data.
 
@@ -566,19 +578,12 @@ y <- c(5, NA, 1, 2, 2)
 x + y
 #+end_src
 
-#+results[034e716f8ce96dfb6e1fa68c6535c9e479c566e9]:
-: [1]  8 NA NA  6  9
-
 Some functions have a =na.rm= argument which when =TRUE= will ignore missing data as if they were not there (such as =mean=, =var=, =sd=, =IQR=, =mad=, ...). 
 
 #+begin_src R :exports both :results output pp  
 sum(x)
 sum(x, na.rm = TRUE)
 #+end_src
-
-#+results[13e952e320eda92d50173bd0fc19ea4ed02ae31d]:
-: [1] NA
-: [1] 21
 
 Other functions do not have a =na.rm= argument and will return =NA= or an error if the argument has \texttt{NA}s. In those cases we can find the locations of any \texttt{NA}s with the =is.na= function and remove those cases with the =[]= operator.
 
@@ -588,32 +593,28 @@ z <- x[!is.na(x)]
 sum(z)
 #+end_src
 
-#+results[d310be10fa39f7d8ffab7e351af9fc47cceb53bf]:
-: [1] FALSE FALSE  TRUE FALSE FALSE
-: [1] 21
-
 The analogue of =is.na= for rectangular data sets (or data frames) is the =complete.cases= function. See Appendix \ref{sec:Editing-Data-Sets}.
 
 *** Other Data Types
-\label{sub:other-data-types}
+#+latex: \label{sub:other-data-types}
 
 ** Features of Data Distributions
-\label{sec:features-of-data}
+#+latex: \label{sec:features-of-data}
 
 Given that the data have been appropriately displayed, the next step is to try to identify salient features represented in the graph. The acronym to remember is \emph{C}enter, \emph{U}nusual features, \emph{S}pread, and \emph{S}hape. (CUSS).
 
 *** Center
-\label{sub:Center}
+#+latex: \label{sub:Center}
 
 One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure \ref{fig:histograms-bins}, a measure of center would be about \( SRC_R{round(mean(precip))} \). 
 
 *** Spread
-\label{sub:Spread}
+#+latex: \label{sub:Spread}
 
 The spread of a data set is associated with its variability; data sets with a large spread tend to cover a large interval of values, while data sets with small spread tend to cluster tightly around a central value. 
 
 *** Shape
-\label{sub:Shape}
+#+latex: \label{sub:Shape}
 
 When we speak of the /shape/ of a data set, we are usually referring to the shape exhibited by an associated graphical display, such as a histogram. The shape can tell us a lot about any underlying structure to the data, and can help us decide which statistical procedure we should use to analyze them.
 
@@ -629,7 +630,7 @@ We have already encountered skewed distributions: both the discoveries data in F
 Another component to the shape of a distribution is how ``peaked'' it is. Some distributions tend to have a flat shape with thin tails. These are called /platykurtic/, and an example of a platykurtic distribution is the uniform distribution; see Section \ref{sec:The-Continuous-Uniform}. On the other end of the spectrum are distributions with a steep peak, or spike, accompanied by heavy tails; these are called /leptokurtic/. Examples of leptokurtic distributions are the Laplace distribution and the logistic distribution. See Section \ref{sec:Other-Continuous-Distributions}. In between are distributions (called /mesokurtic/) with a rounded peak and moderately sized tails. The standard example of a mesokurtic distribution is the famous bell-shaped curve, also known as the Gaussian, or normal, distribution, and the binomial distribution can be mesokurtic for specific choices of \(p\). See Sections \ref{sec:binom-dist} and \ref{sec:The-Normal-Distribution}.
 
 *** Clusters and Gaps
-\label{sub:clusters-and-gaps}
+#+latex: \label{sub:clusters-and-gaps}
 
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis}.
 
@@ -638,35 +639,10 @@ library(aplpack)
 with(faithful, stem.leaf(eruptions))
 #+end_src
 
-#+results[baa29c772676c13bc84d072e55e11e4bee50e4ac]:
-#+begin_example
-1 | 2: represents 1.2
- leaf unit: 0.1
-            n: 272
-   12     s | 667777777777
-   51    1. | 888888888888888888888888888899999999999
-   71    2* | 00000000000011111111
-   87     t | 2222222222333333
-   92     f | 44444
-   94     s | 66
-   97    2. | 889
-   98    3* | 0
-  102     t | 3333
-  108     f | 445555
-  118     s | 6666677777
-  (16)   3. | 8888888889999999
-  138    4* | 0000000000000000111111111111111
-  107     t | 22222222222233333333333333333
-   78     f | 44444444444445555555555555555555555
-   43     s | 6666666666677777777777
-   21    4. | 88888888888899999
-    4    5* | 0001
-#+end_example
-
 There are definitely two clusters of data here; an upper cluster and a lower cluster. 
 
 *** Extreme Observations and other Unusual Features
-\label{sub:Extreme-Observations-and}
+#+latex: \label{sub:Extreme-Observations-and}
 
 Extreme observations fall far from the rest of the data. Such observations are troublesome to many statistical procedures; they cause exaggerated estimates and instability. It is important to identify extreme observations and examine the source of the data more closely. There are many possible reasons underlying an extreme observation:
 
@@ -677,22 +653,20 @@ Extreme observations fall far from the rest of the data. Such observations are t
 - *Maybe it indicates a deeper trend or phenomenon.* Many of the most influential scientific discoveries were made when the investigator noticed an unexpected result, a value that was not predicted by the classical theory. Albert Einstein, Louis Pasteur, and others built their careers on exactly this circumstance.
 
 ** Descriptive Statistics
-\label{sec:Descriptive-Statistics}
+#+latex: \label{sec:Descriptive-Statistics}
 
 *** Frequencies and Relative Frequencies
-\label{sub:Frequencies-and-Relative}
+#+latex: \label{sub:Frequencies-and-Relative}
 
 These are used for categorical data. The idea is that there are a number of different categories, and we would like to get some idea about how the categories are represented in the population. 
 
 *** Measures of Center
-\label{sub:Measures-of-Center}
+#+latex: \label{sub:Measures-of-Center}
 
 The /sample mean/ is denoted \(\overline{x}\) (read ``\(x\)-bar'') and is simply the arithmetic average of the observations:
-
 \begin{equation} 
 \overline{x}=\frac{x_{1}+x_{2}+\cdots+x_{n}}{n}=\frac{1}{n}\sum_{i=1}^{n}x_{i}.
 \end{equation}
-
 - Good: natural, easy to compute, has nice mathematical properties
 - Bad: sensitive to extreme values
 
@@ -713,19 +687,18 @@ The /trimmed mean/ is a measure designed to address the sensitivity of the sampl
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
-- You can calculate frequencies or relative frequencies with the =table= function, and relative frequencies with =prop.table(table())=. \item You can calculate the sample mean of a data vector =x= with the command =mean(x)=.
- 
-- You can calculate the sample median of =x= with the command =median(x)=. \item You can calculate the trimmed mean with the =trim= argument; =mean(x, trim = 0.05)=.
+- You can calculate frequencies or relative frequencies with the =table= function, and relative frequencies with =prop.table(table())=. 
+- You can calculate the sample mean of a data vector =x= with the command =mean(x)=. 
+- You can calculate the sample median of =x= with the command =median(x)=.
+- You can calculate the trimmed mean with the =trim= argument; =mean(x, trim = 0.05)=.
 
 *** Order Statistics and the Sample Quantiles
-\label{sub:Order-Statistics-and}
+#+latex: \label{sub:Order-Statistics-and}
 
 A common first step in an analysis of a data set is to sort the values. Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), we may sort the values to obtain an increasing sequence
-
 \begin{equation} 
 x_{(1)}\leq x_{(2)}\leq x_{(3)}\leq\cdots\leq x_{(n)}
 \end{equation}
-
 and the resulting values are called the /order statistics/. The \(k^{\mathrm{th}}\) entry in the list, \(x_{(k)}\), is the \(k^{\mathrm{th}}\) order statistic, and approximately \(100(k/n)\)% of the observations fall below \(x_{(k)}\). The order statistics give an indication of the shape of the data distribution, in the sense that a person can look at the order statistics and have an idea about where the data are concentrated, and where they are sparse.
 
 The /sample quantiles/ are related to the order statistics. Unfortunately, there is not a universally accepted definition of them. Indeed, \textsf{R} is equipped to calculate quantiles using nine distinct definitions! We will describe the default method (=type = 7=), but the interested reader can see the details for the other methods with =?quantile=.
@@ -738,7 +711,6 @@ Suppose the data set has \(n\) observations. Find the sample quantile of order \
    \begin{equation}
       \tilde{q}_{p}=x_{(k)}+d(x_{(k+1)}-x_{(k)}).
    \end{equation}
-
 
 The interpretation of \(\tilde{q}_{p}\) is that approximately \(100p\) % of the data fall below the value \(\tilde{q}_{p}\) . 
 
@@ -760,38 +732,32 @@ we can find the order statistics of a variable in the =Active data set= by doing
 
 In =Rcmdr=, we can calculate the sample quantiles for a particular variable with the sequence \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Numerical Summaries}... We can automatically calculate the quartiles for all variables in the =Active data set= with the sequence \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Active Dataset}.
 
-
 *** Measures of Spread
-\label{sub:Measures-of-Spread}
+#+latex: \label{sub:Measures-of-Spread}
 
 #+latex: \paragraph*{Sample Variance and Standard Deviation}
 
 The /sample variance/ is denoted \(s^{2}\) and is calculated with the formula
-
 \begin{equation}
 s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 \end{equation}
-
 The /sample standard deviation/ is \(s=\sqrt{s^{2}}\). Intuitively, the sample variance is approximately the average squared distance of the observations from the sample mean. The sample standard deviation is used to scale the estimate back to the measurement units of the original data.
-
 - Good: tractable, has nice mathematical/statistical properties
 - Bad: sensitive to extreme values
-
 We will spend a lot of time with the variance and standard deviation in the coming chapters. In the meantime, the following two rules give some meaning to the standard deviation, in that there are bounds on how much of the data can fall past a certain distance from the mean.
 
-#+latex: \begin{fact}
+#+begin_fact
 Chebychev's Rule: The proportion of observations within \(k\) standard deviations of the mean is at least \(1-1/k^{2}\), /i.e./, at least 75\%, 89\%, and 94\% of the data are within 2, 3, and 4 standard deviations of the mean, respectively.
-#+latex: \end{fact}
+#+end_fact
 
 Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1-1/1^{2}=0\), which states that at least 0\% of the observations are within one standard deviation of the mean (which is not saying much).
 
 Chebychev's Rule applies to any data distribution, /any/ list of numbers, no matter where it came from or what the histogram looks like. The price for such generality is that the bounds are not very tight; if we know more about how the data are shaped then we can say more about how much of the data can fall a given distance from the mean.
 
-#+latex: \begin{fact}
-\label{fac:Empirical-Rule}Empirical Rule: If data follow a bell-shaped
-curve, then approximately 68\%, 95\%, and 99.7\% of the data are within
-1, 2, and 3 standard deviations of the mean, respectively. 
-#+latex: \end{fact}
+#+begin_fact
+#+latex: \label{fac:Empirical-Rule}
+Empirical Rule: If data follow a bell-shaped curve, then approximately 68%, 95%, and 99.7% of the data are within 1, 2, and 3 standard deviations of the mean, respectively. 
+#+end_fact
 
 
 #+latex: \paragraph*{Interquartile Range}
@@ -804,16 +770,12 @@ Just as the sample mean is sensitive to extreme values, so the associated measur
 #+latex: \paragraph*{Median Absolute Deviation}
 
 A measure even more robust than the \(IQR\) is the /median absolute deviation/ (\(MAD\)). To calculate it we first get the median \(\widetilde{x}\), next the /absolute deviations/ \(|x_{1}-\tilde{x}|\), \(|x_{2}-\tilde{x}|\), ..., \(|x_{n}-\tilde{x}|\), and the \(MAD\) is proportional to the median of those deviations:
-
 \begin{equation}
 MAD\propto\mbox{median}(|x_{1}-\tilde{x}|,\ |x_{2}-\tilde{x}|,\ldots,|x_{n}-\tilde{x}|).
 \end{equation}
-
 That is, the \(MAD=c\cdot\mbox{median}(|x_{1}-\tilde{x}|,\ |x_{2}-\tilde{x}|,\ldots,|x_{n}-\tilde{x}|)\), where \(c\) is a constant chosen so that the \(MAD\) has nice properties. The value of \(c\) in \textsf{R} is by default \(c=1.4286\). This value is chosen to ensure that the estimator of \(\sigma\) is correct, on the average, under suitable sampling assumptions (see Section \ref{sec:Point-Estimation-1}).
-
 - Good: stable, very robust, even more so than the \(IQR\).
 - Bad: not tractable, not well known and less easy to explain.
-
 
 #+latex: \paragraph*{Comparing Apples to Apples}
 
@@ -830,16 +792,15 @@ we may compute the sample range with =range(x)= and the sample variance with =va
 #+latex: \subparagraph*{With the \textsf{R} Commander}
 we can calculate the sample standard deviation with the \textsf{Statistics \(\triangleright\) Summaries \(\triangleright\) Numerical Summaries}... combination. \textsf{R} Commander does not calculate the \(IQR\) or \(MAD\) in any of the menu selections, by default.
 
-*** Measures of Shape \label{sub:Measures-of-Shape}
+*** Measures of Shape 
+#+latex: \label{sub:Measures-of-Shape}
 
 #+latex: \paragraph*{Sample Skewness}
 
 The /sample skewness/, denoted by \(g_{1}\), is defined by the formula
-
 \begin{equation}
 g_{1}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{3}}{s^{3}}.
 \end{equation}
-
 The sample skewness can be any value \(-\infty<g_{1}<\infty\). The sign of \(g_{1}\) indicates the direction of skewness of the distribution. Samples that have \(g_{1}>0\) indicate right-skewed distributions (or positively skewed), and samples with \(g_{1}<0\) indicate left-skewed distributions (or negatively skewed). Values of \(g_{1}\) near zero indicate a symmetric distribution. These are not hard and fast rules, however. The value of \(g_{1}\) is subject to sampling variability and thus only provides a suggestion to the skewness of the underlying distribution. 
 
 We still need to know how big is ``big'', that is, how do we judge whether an observed value of \(g_{1}\) is far enough away from zero for the data set to be considered skewed to the right or left? A good rule of thumb is that data sets with skewness larger than \(2\sqrt{6/n}\) in magnitude are substantially skewed, in the direction of the sign of \(g_{1}\). See Tabachnick & Fidell \cite{Tabachnick2006} for details.
@@ -847,11 +808,9 @@ We still need to know how big is ``big'', that is, how do we judge whether an ob
 #+latex: \paragraph*{Sample Excess Kurtosis}
 
 The /sample excess kurtosis/, denoted by \(g_{2}\), is given by the formula
-
 \begin{equation}
 g_{2}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})^{4}}{s^{4}}-3.
 \end{equation}
-
 The sample excess kurtosis takes values \(-2\leq g_{2}<\infty\). The subtraction of 3 may seem mysterious but it is done so that mound shaped samples have values of \(g_{2}\) near zero. Samples with \(g_{2}>0\) are called /leptokurtic/, and samples with \(g_{2}<0\) are called /platykurtic/. Samples with \(g_{2}\approx0\) are called /mesokurtic/.
 
 As a rule of thumb, if \(|g_{2}|>4\sqrt{6/n}\) then the sample excess kurtosis is substantially different from zero in the direction of the sign of \(g_{2}\). See Tabachnick & Fidell \cite{Tabachnick2006} for details.
@@ -872,17 +831,6 @@ skewness(discoveries)
 2*sqrt(6/length(discoveries))
 #+end_src
 
-#+results[b50b205bb9abc25e7e8f6264a7501c0e2231e526]:
-: Loading required package: class
-: 
-: Attaching package: 'class'
-: 
-: The following object(s) are masked from 'package:reshape':
-: 
-:     condense
-: [1] 1.2076
-: [1] 0.4898979
-
 The data are definitely skewed to the right. Let us check the sample excess kurtosis of the =UKDriverDeaths= data:
 
 #+begin_src R :exports both :results output pp  
@@ -890,14 +838,10 @@ kurtosis(UKDriverDeaths)
 4*sqrt(6/length(UKDriverDeaths))
 #+end_src
 
-#+results[065a2e0e51f36ca7f5651d2fbf8648642ae8f71f]:
-: [1] 0.07133848
-: [1] 0.7071068
-
 so that the =UKDriverDeaths= data appear to be mesokurtic, or at least not substantially leptokurtic.
 
 ** Exploratory Data Analysis
-\label{sec:Exploratory-Data-Analysis}
+#+latex: \label{sec:Exploratory-Data-Analysis}
 
 This field was founded (mostly) by John Tukey (1915-2000). Its tools are useful when not much is known regarding the underlying causes associated with the data set, and are often used for checking assumptions. For example, suppose we perform an experiment and collect some data... now what? We look at the data using exploratory visual tools.
 
@@ -918,37 +862,15 @@ The basic command is =stem(x)= or a more sophisticated version written by Peter 
 
 
 WARNING: Sometimes when making a stem plot the result will not be what you expected. There are several reasons for this: 
-
 - Stemplots by default will trim extreme observations (defined in Section \ref{sub:Outliers}) from the display. This in some cases will result in stemplots that are not as wide as expected.
-
 - The leafs digit is chosen automatically by =stem.leaf= according to an algorithm that the computer believes will represent the data well. Depending on the choice of the digit, =stem.leaf= may drop digits from the data or round the values in unexpected ways.
 
-Let us take a look at the =rivers= data set\label{ite:stemplot-rivers}.
+Let us take a look at the =rivers= data set
+#+latex: \label{ite:stemplot-rivers}.
 
 #+begin_src R :exports both :results output pp  
 stem.leaf(rivers)
 #+end_src
-
-#+results[7ae2adc2e8f1db071cae7f6d0ae8664d41a548df]:
-#+begin_example
-1 | 2: represents 120
- leaf unit: 10
-            n: 141
-    1     1 | 3
-   29     2 | 0111133334555556666778888899
-   64     3 | 00000111122223333455555666677888999
-  (18)    4 | 011222233344566679
-   59     5 | 000222234467
-   47     6 | 0000112235789
-   34     7 | 12233368
-   26     8 | 04579
-   21     9 | 0008
-   17    10 | 035
-   14    11 | 07
-   12    12 | 047
-    9    13 | 0
-HI: 1450 1459 1770 1885 2315 2348 2533 3710
-#+end_example
 
 The stemplot shows a right-skewed shape to the =rivers= data distribution. Notice that the last digit of each of the data values were dropped from the display. Notice also that there were eight extreme observations identified by the computer, and their exact values are listed at the bottom of the stemplot. Look at the scale on the left of the stemplot and try to imagine how ridiculous the graph would have looked had we tried to include enough stems to include these other eight observations; the stemplot would have stretched over several pages. Notice finally that we can use the depths to approximate the sample median for these data. The median lies in the row identified by =(18)=, which means that the median is the average of the ninth and tenth observation on that row. Those two values correspond to =43= and =43=, so a good guess for the median would be 430. (For the record, the sample median is \(\widetilde{x}=425\). Recall that stemplots round the data to the nearest stem-leaf pair.) 
 
@@ -958,30 +880,10 @@ Next let us see what the =precip= data look like.
 stem.leaf(precip)
 #+end_src
 
-#+results[c1d6287ed234eaea8891b237850262487caf789a]:
-#+begin_example
-1 | 2: represents 12
- leaf unit: 1
-            n: 70
-LO: 7 7.2 7.8 7.8
-    8    1* | 1344
-   13    1. | 55677
-   16    2* | 024
-   18    2. | 59
-   28    3* | 0000111234
-  (15)   3. | 555566677788899
-   27    4* | 0000122222334
-   14    4. | 56688899
-    6    5* | 44
-    4    5. | 699
-HI: 67
-#+end_example
-
 Here is an example of split stems, with two lines per stem. The final digit of each datum has been dropped for the display. The data appear to be left skewed with four extreme values to the left and one extreme value to the right. The sample median is approximately 37 (it turns out to be 36.6).
 
-
 *** Hinges and the Five Number Summary
-\label{sub:hinges-and-5NS}
+#+latex: \label{sub:hinges-and-5NS}
 
 Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the hinges are found by the following method:  
 - Find the order statistics \(x_{(1)}\), \(x_{(2)}\), ..., \(x_{(n)}\). 
@@ -998,7 +900,7 @@ An advantage of the \(5NS\) is that it reduces a potentially large data set to a
 If the data are stored in a vector =x=, then you can compute the \(5NS\) with the =fivenum= function.
 
 *** Boxplots
-\label{sub:boxplots}
+#+latex: \label{sub:boxplots}
 
 A boxplot is essentially a graphical representation of the \(5NS\). It can be a handy alternative to a stripchart when the sample size is large.
 
@@ -1016,10 +918,8 @@ Boxplots are also good because one can visually assess multiple features of the 
 
 - Extreme observations :: are identified with open circles (see below).
 
-
-
 *** Outliers
-\label{sub:Outliers}
+#+latex: \label{sub:Outliers}
 
 A /potential outlier/ is any observation that falls beyond 1.5 times the width of the box on either side, that is, any observation less than \(h_{L}-1.5(h_{U}-h_{L})\) or greater than \(h_{U}+1.5(h_{U}-h_{L})\). A /suspected outlier/ is any observation that falls beyond 3 times the width of the box on either side. In \textsf{R}, both potential and suspected outliers (if present) are denoted by open circles; there is no distinction between the two. 
 
@@ -1038,35 +938,27 @@ The =rivers= data. We will look for potential outliers in the =rivers= data.
 boxplot.stats(rivers)$out
 #+end_src
 
-#+results[0e9364cea62f7b6644a80f35c074b6e9e420675d]:
-:  [1] 1459 1450 1243 2348 3710 2315 2533 1306 1270 1885 1770
-
 We may change the =coef= argument to 3 (it is 1.5 by default) to identify suspected outliers.
 
 #+begin_src R :exports both :results output pp  
 boxplot.stats(rivers, coef = 3)$out
 #+end_src
 
-#+results[fdebe1645f73bf7a654e96e25027d00ea3fbd625]:
-: [1] 2348 3710 2315 2533 1885
-
 #+latex: \end{example}
 
 *** Standardizing variables
 
 It is sometimes useful to compare data sets with each other on a scale that is independent of the measurement units. Given a set of observed data \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) we get \(z\) scores, denoted \(z_{1}\), \(z_{2}\), ..., \(z_{n}\), by means of the following formula
-
 \[
 z_{i}=\frac{x_{i}-\overline{x}}{s},\quad i=1,\,2,\,\ldots,\, n.
 \]
-
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
 The =scale= function will rescale a numeric vector (or data frame) by subtracting the sample mean from each value (column) and/or by dividing each observation by the sample standard deviation.
 
 ** Multivariate Data and Data Frames
-\label{sec:multivariate-data}
+#+latex: \label{sec:multivariate-data}
 
 We have had experience with vectors of data, which are long lists of numbers. Typically, each entry in the vector is a single measurement on a subject or experimental unit in the study. We saw in Section \ref{sub:Vectors} how to form vectors with the =c= function or the =scan= function. 
 
@@ -1083,8 +975,6 @@ y <- letters[3:6]
 A <- data.frame(v1 = x, v2 = y)
 #+end_src
 
-#+results[4ced63757421d10dde393e453e0f58eac1434a75]:
-
 #+latex: \end{example}
 
 Notice that =x= and =y= are the same length. This is /necessary/. Also notice that =x= is a numeric vector and =y= is a character vector. We may choose numeric and character vectors (or even factors) for the columns of the data frame, but each column must be of exactly one type. That is, we can have a column for =height= and a column for =gender=, but we will get an error if we try to mix function =height= (numeric) and =gender= (character or factor) information in the same column.
@@ -1092,18 +982,10 @@ Notice that =x= and =y= are the same length. This is /necessary/. Also notice th
 Indexing of data frames is similar to indexing of vectors. To get the entry in row \(i\) and column \(j\) do =A[i,j]=. We can get entire rows and columns by omitting the other index. 
 
 #+begin_src R :exports both :results output pp
-A[3,]
+A[3, ]
 A[1, ]
-A[ ,2]
+A[ , 2]
 #+end_src
-
-#+results[b903147f4703bfb2594d5e5a79e1a57a647fa287]:
-:   v1 v2
-: 3  7  e
-:   v1 v2
-: 1  5  c
-: [1] c d e f
-: Levels: c d e f
 
 There are several things happening above. Notice that =A[3,]= gave a data frame (with the same entries as the third row of =A=) yet =A[1, ]= is a numeric vector. =A[ ,2]= is a factor vector because the default setting for =data.frame= is =stringsAsFactors = TRUE=.
 
@@ -1114,14 +996,10 @@ names(A)
 A$v1
 #+end_src
 
-#+results[59cf901eab890434185cfde36eeb31ef334d1aa2]:
-: [1] "v1" "v2"
-: [1] 5 6 7 8
-
 The above is identical to =A[ ,1]=. 
 
 *** Bivariate Data
-\label{sub:Bivariate-Data}
+#+latex: \label{sub:Bivariate-Data}
 
 - Stacked bar charts
 - odds ratio and relative risk
@@ -1164,10 +1042,8 @@ r=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_
   - xyplot(pressure ~ temperature, data = pressure) (exponential growth)
   - xyplot(weight ~ height, data = women) (strong positive linear)
 
-
-
 *** Multivariate Data
-\label{sub:Multivariate-Data}
+#+latex: \label{sub:Multivariate-Data}
 
 Multivariate Data Display
 
@@ -1179,7 +1055,7 @@ or in \textsf{R} Commander by following \textsf{Statistics} \textsf{\(\triangler
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
 
 ** Comparing Populations
-\label{sec:Comparing-Data-Sets}
+#+latex: \label{sec:Comparing-Data-Sets}
 
 Sometimes we have data from two or more groups (or populations) and we would like to compare them and draw conclusions. Some issues that we would like to address:
 
@@ -1188,8 +1064,6 @@ Sometimes we have data from two or more groups (or populations) and we would lik
 - Comparing outliers and unusual features
 - Comparing shapes.
 
-
-
 *** Numerically
 
 I am thinking here about the \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Numerical Summaries} \textsf{\(\triangleright\) Summarize by groups} option or the \textsf{Statistics} \textsf{\(\triangleright\)} \textsf{Summaries} \textsf{\(\triangleright\)Table of Statistics} option. 
@@ -1197,11 +1071,10 @@ I am thinking here about the \textsf{Statistics} \textsf{\(\triangleright\)} \te
 *** Graphically
 
 - Boxplots
-  - Variable width: the width of the drawn boxplots are proportional to \(\sqrt{n_{i}}\), where \(n_{i}\) is the size of the \(i^{\mathrm{th}}\) group. Why? Because many statistics have variability proportional to the reciprocal of the square root of the sample size. \item Notches: extend to \(1.58\cdot(h_{U}-h_{L})/\sqrt{n}\). The idea is to give roughly a 95% confidence interval for the difference in two medians. See Chapter \ref{cha:Hypothesis-Testing}.
-
+  - Variable width: the width of the drawn boxplots are proportional to \(\sqrt{n_{i}}\), where \(n_{i}\) is the size of the \(i^{\mathrm{th}}\) group. Why? Because many statistics have variability proportional to the reciprocal of the square root of the sample size.
+  - Notches: extend to \(1.58\cdot(h_{U}-h_{L})/\sqrt{n}\). The idea is to give roughly a 95% confidence interval for the difference in two medians. See Chapter \ref{cha:Hypothesis-Testing}.
 - Stripcharts
-  - stripchart(weight ~ feed, method=\textquotedbl{}stack\textquotedbl{}, data=chickwts) 
-
+  - stripchart(weight ~ feed, method= "stack", data=chickwts) 
 - Bar Graphs
   - barplot(xtabs(Freq ~ Admit + Gender, data = UCBAdmissions)) stacked bar chart
   - barplot(xtabs(Freq ~ Admit, data = UCBAdmissions))
@@ -1229,21 +1102,34 @@ library(lattice)
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :file img/xyplot-group.ps
+#+srcname: xyplot-group
+#+begin_src R :exports none :results silent
 library(lattice)
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+end_src
 
-#+results[8355e9e5854f856f05f9cc3dee57fabbae65cf4f]:
-[[file:img/xyplot-group.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/xyplot-group.ps}
-    \caption{}
-    \label{fig:xyplot-group}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/xyplot-group.ps
+  <<xyplot-group>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/xyplot-group.svg
+  <<xyplot-group>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/xyplot-group.ps}
+  \caption{}
+  \label{fig:xyplot-group}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-xyplot-group" class="figure">
+  <p><img src="svg/xyplot-group.svg" width=500 alt="svg/xyplot-group.svg" /></p>
+  <p>Thre  <code>overplot</code> method.</p>
+</div>
+#+end_html
 
 - Scatterplot matrices
   - splom( ~ cbind(GNP.deflator,GNP,Unemployed,Armed.Forces,Population,Year,Employed),  data = longley) 
@@ -1284,7 +1170,7 @@ It is clear that if \(x_{(k)}=y_{(k)}\) for all \(k=1,2,\ldots,n\), then we will
 - If the slope of the line is greater (less) than one, then the spread of the \(Y\) data is greater (less) than the spread of the \(X\) data.
 
 *** Lattice Graphics
-\label{sub:Lattice-Graphics}
+#+latex: \label{sub:Lattice-Graphics}
 
 The following types of plots are useful when there is one variable of interest and there is a factor in the data set by which the variable is categorized. 
 
@@ -1298,22 +1184,34 @@ library(lattice)
 bwplot(~weight | feed, data = chickwts)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :file img/bwplot.ps
+#+srcname: bwplot
+#+begin_src R :exports none :results silent
 library(lattice)
 print(bwplot(~weight | feed, data = chickwts))
 #+end_src
 
-#+results[3bc148f7251076a7599a3e3eaf3e3c8a28a817a0]:
-[[file:img/bwplot.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/bwplot.ps}
-    \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data}
-    \label{fig:bwplot}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/bwplot.ps
+  <<bwplot>>
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/bwplot.svg
+  <<bwplot>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/bwplot.ps}
+  \caption{Boxplots of \texttt{weight} by \texttt{feed} type in the \texttt{chickwts} data.}
+  \label{fig:bwplot}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-bwplot" class="figure">
+  <p><img src="svg/bwplot.svg" width=500 alt="svg/bwplot.svg" /></p>
+  <p>Boxplots of <code>weight</code> by <code>feed</code> type in the <code>chickwts</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \paragraph*{Histograms}
 
@@ -1321,23 +1219,34 @@ print(bwplot(~weight | feed, data = chickwts))
 histogram(~age | education, data = infert)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :file img/histograms-lattice.ps
+#+srcname: histograms-lattice
+#+begin_src R :exports none :results silent
 library(lattice)
 print(histogram(~age | education, data = infert))
 #+end_src
 
-#+results[c52243f6e1f51b56099fe0d301a722427411da47]:
-[[file:img/histograms-lattice.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/histograms-lattice.ps}
-    \caption[Histograms of \texttt{age} by \texttt{education} level]{Histograms of \texttt{age} by \texttt{education} level from the \texttt{infert} data}
-    \label{fig:histograms-lattice}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/histograms-lattice.ps
+  <<histograms-lattice>>
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/histograms-lattice.svg
+  <<histograms-lattice>>
+#+end_src
 
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/histograms-lattice.ps}
+  \caption[Histograms of \texttt{age} by \texttt{education} level]{Histograms of \texttt{age} by \texttt{education} level from the \texttt{infert} data}
+  \label{fig:histograms-lattice}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-histograms-lattice" class="figure">
+  <p><img src="svg/histograms-lattice.svg" width=500 alt="svg/histograms-lattice.svg" /></p>
+  <p>Histograms of <code>age</code> by <code>education</code> level from the <code>infert</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \paragraph*{Scatterplots}
 
@@ -1345,21 +1254,33 @@ print(histogram(~age | education, data = infert))
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :file img/xyplot.ps
+#+srcname: xyplot
+#+begin_src R :exports none :results silent
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 #+end_src
 
-#+results[9c2464a38b63e4be8a05d7256438bddc1c9d5035]:
-[[file:img/xyplot.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/xyplot.ps}
-    \caption[An \texttt{xyplot} of \texttt{Petal.Length} versus \texttt{Petal.Width} by \texttt{Species}]{An \texttt{xyplot} of \texttt{Petal.Length} versus \texttt{Petal.Width} by \texttt{Species} in the \texttt{iris} data}
-    \label{fig:xyplot}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/xyplot.ps
+  <<xyplot>>
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/xyplot.svg
+  <<xyplot>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/xyplot.ps}
+  \caption[An \texttt{xyplot} of \texttt{Petal.Length} versus \texttt{Petal.Width} by \texttt{Species}]{An \texttt{xyplot} of \texttt{Petal.Length} versus \texttt{Petal.Width} by \texttt{Species} in the \texttt{iris} data}
+  \label{fig:xyplot}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-xyplot" class="figure">
+  <p><img src="svg/xyplot.svg" width=500 alt="svg/xyplot.svg" /></p>
+  <p>An <code>xyplot</code> of <code>Petal.Length</code> versus <code>Petal.Width</code> by <code>Species</code> in the <code>iris</code> data.</p>
+</div>
+#+end_html
 
 #+latex: \paragraph*{Coplots}
 
@@ -1367,20 +1288,34 @@ print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :file img/coplot.ps
+#+srcname: coplot
+#+begin_src R :exports none :results silent
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 #+end_src
 
-#+results[6f8b2609dd854db993b345476cb5c38cbc731639]:
-[[file:img/coplot.ps]]
-
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{img/coplot.ps}
-    \caption[A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment}]{A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment} in the \texttt{CO2} data}
-    \label{fig:coplot}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/coplot.ps
+  <<coplot>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/coplot.svg
+  <<coplot>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/coplot.ps}
+  \caption[A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment}]{A \texttt{coplot} of \texttt{conc} versus \texttt{uptake} by \texttt{Type} and \texttt{Treatment} in the \texttt{CO2} data}
+  \label{fig:coplot}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-coplot" class="figure">
+  <p><img src="svg/coplot.svg" width=500 alt="svg/coplot.svg" /></p>
+  <p>A <code>coplot</code> of <code>conc</code> versus <code>uptake</code> by <code>Type</code> and <code>Treatment</code> in the <code>CO2</code> data.</p>
+</div>
+#+end_html
+
 
 #+latex: \newpage{}
 
@@ -1398,40 +1333,40 @@ names(RcmdrTestDrive)
 
 To load the data in the \textsf{R} Commander (=Rcmdr=), click the \textsf{Data Set} button, and select =RcmdrTestDrive= as the active data set. To learn more about the data set and where it comes from, type =?RcmdrTestDrive= at the command line.
 
-#+latex: \begin{xca}
-\label{xca:summary-RcmdrTestDrive}
+#+begin_xca
+#+latex: \label{xca:summary-RcmdrTestDrive}
 
 Perform a summary of all variables in =RcmdrTestDrive=. You can do this with the command =summary(RcmdrTestDrive)=.
 
 Alternatively, you can do this in the =Rcmdr= with the sequence \textsf{Statistics} \textsf{\(\triangleright\) Summaries} \textsf{\(\triangleright\) Active Data Set}. Report the values of the summary statistics for each variable.
 
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 Make a table of the =race= variable. Do this with \textsf{Statistics} \textsf{\(\triangleright\) Summaries} \textsf{\(\triangleright\) IPSUR - Frequency Distributions}...
 
 1. Which ethnicity has the highest frequency?
 1. Which ethnicity has the lowest frequency?
 1. Include a bar graph of =race=. Do this with \textsf{Graphs} \textsf{\(\triangleright\)} \textsf{IPSUR - Bar Graph}...
 
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 Calculate the average =salary= by the factor =gender=. Do this with \textsf{Statistics} \textsf{\(\triangleright\) Summaries} \textsf{\(\triangleright\) Table of Statistics}... 
 1. Which =gender= has the highest mean =salary=? 
 1. Report the highest mean =salary=.
 1. Compare the spreads for the genders by calculating the standard deviation of =salary= by =gender=. Which =gender= has the biggest standard deviation?
 1. Make boxplots of =salary= by =gender= with the following method:
-   #+latex: \begin{quote}
+   #+begin_quote
    On the =Rcmdr=, click \textsf{Graphs} \textsf{\(\triangleright\)} \textsf{IPSUR - Boxplot}...
    In the \textsf{Variable} box, select =salary=.
    Click the \textsf{Plot by groups}... box and select =gender=. Click \textsf{OK}.
    Click \textsf{OK} to graph the boxplot.
-   #+latex: \end{quote}
+   #+end_quote
    How does the boxplot compare to your answers to (1) and (3)?
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 For this problem we will study the variable =reduction=.
 1. Find the order statistics and store them in a vector =x=. /Hint:/ =x <- sort(reduction)=
 1. Find \(x_{(137)}\), the 137\(^{\mathrm{th}}\) order statistic.
@@ -1442,9 +1377,9 @@ For this problem we will study the variable =reduction=.
 1. Make a boxplot of =reduction=, and include the boxplot in your report. You can do this with the =boxplot= function, or in =Rcmdr= with \textsf{Graphs} \textsf{\(\triangleright\)} \textsf{IPSUR - Boxplot}...
 1. Are there any potential/suspected outliers? If so, list their values. /Hint:/ use your answer to (a).
 1. Using the rules discussed in the text, classify answers to (8), if any, as /potential/ or /suspected/ outliers.
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 In this problem we will compare the variables =before= and =after=. Don't forget =library(e1071)=.
 1. Examine the two measures of center for both variables. Judging from these measures, which variable has a higher center?
 1. Which measure of center is more appropriate for =before=? (You may want to look at a boxplot.) Which measure of center is more appropriate for =after=?
@@ -1452,12 +1387,10 @@ In this problem we will compare the variables =before= and =after=. Don't forget
 1. Calculate and report the skewness and kurtosis for =before=. Based on these values, how would you describe the shape of =before=?
 1. Calculate and report the skewness and kurtosis for =after=. Based on these values, how would you describe the shape of =after=?
 1. Plot histograms of =before= and =after= and compare them to your answers to (4) and (5).
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 Describe the following data sets just as if you were communicating with an alien, but one who has had a statistics class. Mention the salient features (data type, important properties, anything special). Support your answers with the appropriate visual displays and descriptive statistics.
 1. Conversion rates of Euro currencies stored in =euro=.
 1. State abbreviations stored in =state.abb=.
-#+latex: \end{xca}
-
-
+#+end_xca

@@ -11,14 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* Multiple Linear Regression
+* Multiple Linear Regression                                            :mlr:
+:PROPERTIES:
+:tangle: R/mlr.R
+:END:
 \label{cha:multiple-linear-regression}
 
-\noindent We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
+#+latex: \noindent 
+We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
 
 The language is phrased in matrix terms -- for two reasons. First, it is quicker to write and (arguably) more pleasant to read. Second, the matrix approach will be required for later study of the subject; the reader might as well be introduced to it now.
 
@@ -33,7 +39,6 @@ Most of the results are stated without proof or with only a cursory justificatio
 - a few thoughts about selected applications of the MLR, such as polynomial, interaction, and dummy variable models
 - some of the uses of residuals to diagnose problems
 - hints about what will be coming later
-
 
 ** The Multiple Linear Regression Model
 \label{sec:The-MLR-Model}
@@ -91,18 +96,34 @@ head(trees)
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig:splom-trees}.
 
-#+begin_src R :exports code :results graphics silent :file img/splom-trees.pdf
+#+srcname: splom-trees
+#+begin_src R :exports code :results silent
 library(lattice)
 splom(trees)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/splom-trees.pdf}
-    \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
-    \label{fig:splom-trees}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/splom-trees.ps
+  <<splom-trees>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/splom-trees.svg
+  <<splom-trees>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/splom-trees.ps}
+  \caption[Scatterplot matrix of \texttt{trees} data]{\small A scatterplot matrix of \texttt{trees} data.}
+  \label{fig:splom-trees}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-splom-trees" class="figure">
+  <p><img src="svg/splom-trees.svg" width=500 alt="svg/splom-trees.svg" /></p>
+  <p>A scatterplot matrix of the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 The dependent (response) variable =Volume= is listed in the first row of the scatterplot matrix. Moving from left to right, we see an approximately linear relationship between =Volume= and the independent (explanatory) variables =Height= and =Girth=. A first guess at a model for these data might be
 \begin{equation}
@@ -110,7 +131,6 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 \end{equation}
 in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
 #+latex: \end{example}
-
 
 *** What does it mean?
 
@@ -123,7 +143,8 @@ One way to do this is with the \textsf{R} Commander in the =Rcmdr= package \cite
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig:3D-scatterplot-trees}.
 
-#+begin_src R :exports code :results graphics silent :file img/3D-scatterplot-trees.pdf
+#+srcname: 3D-scatterplot-trees
+#+begin_src R :exports code :results silent
 library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
                                  pch = 16, highlight.3d = TRUE, 
@@ -131,13 +152,28 @@ s3d <- with(trees, scatterplot3d(Girth, Height, Volume,
 fit <- lm(Volume ~ Girth + Height, data = trees)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/3D-scatterplot-trees.pdf}
-    \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
-    \label{fig:3D-scatterplot-trees}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/3D-scatterplot-trees.ps
+  <<3D-scatterplot-trees>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/3D-scatterplot-trees.svg
+  <<3D-scatterplot-trees>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/3D-scatterplot-trees.ps}
+  \caption[3D scatterplot with regression plane for the \texttt{trees} data]{\small A 3D scatterplot with regression plane for the \texttt{trees} data.}
+  \label{fig:3D-scatterplot-trees}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-3D-scatterplot-trees" class="figure">
+  <p><img src="svg/3D-scatterplot-trees.svg" width=500 alt="svg/3D-scatterplot-trees.svg" /></p>
+  <p> A 3D scatterplot with regression plane for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
@@ -176,13 +212,13 @@ we may solve the equation for \(\upbeta\) to get the maximum likelihood estimato
 \mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}.\label{eq:b-formula-matrix}
 \end{equation}
 
-#+latex: \begin{rem}
+#+begin_rem
 The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 We have only found a critical value, and have not actually shown that the critical value is a minimum. We omit the details and refer the interested reader to \cite{Rao1999}.
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -337,8 +373,6 @@ treesumry$sigma
 
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
-
-
 *** Interval Estimates of the Parameters
 \label{sub:mlr-interval-est-params}
 
@@ -381,8 +415,6 @@ treesPAR <- round(confint(trees.lm), 1)
 #+end_src
 
 For example, using the calculations above we say that for the regression model =Volume ~ Girth + Height= we are 95% confident that the parameter \(\beta_{1}\) lies somewhere in the interval \( [ SRC_R{treesPAR[2, 1]}, SRC_R{treesPAR[2, 2]} ] \).
-
-
 
 *** Confidence and Prediction Intervals
 
@@ -452,7 +484,6 @@ Using the =trees= data,
 
 #+latex: \end{example}
 
-
 ** Model Utility and Inference
 \label{sec:Model-Utility-and-MLR}
 
@@ -499,7 +530,6 @@ treesumry$adj.r.squared
 #+end_src
 
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
-
 
 *** Overall /F/-Test
 \label{sub:mlr-Overall-F-Test}
@@ -555,7 +585,6 @@ treesumry
 
 We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
 
-
 ** Polynomial Regression
 \label{sec:Polynomial-Regression}
 
@@ -563,17 +592,33 @@ We see from the /p-values/ that there is a significant linear relationship betwe
 
 In each of the previous sections we assumed that \(\mu\) was a linear function of the explanatory variables. For example, in SLR we assumed that \(\mu(x)=\beta_{0}+\beta_{1}x\), and in our previous MLR examples we assumed \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\). In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
 
-#+begin_src R :exports code :results graphics silent :file img/Scatterplot-Volume-Girth-trees.pdf
+#+srcname: Scatterplot-Volume-Girth-trees
+#+begin_src R :exports code :results silent
 qplot(Girth, Volume, data = trees)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Scatterplot-Volume-Girth-trees.pdf}
-    \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
-    \label{fig:Scatterplot-Volume-Girth-trees}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Scatterplot-Volume-Girth-trees.ps
+  <<Scatterplot-Volume-Girth-trees>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Scatterplot-Volume-Girth-trees.svg
+  <<Scatterplot-Volume-Girth-trees>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Scatterplot-Volume-Girth-trees.ps}
+  \caption[Scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data]{\small A scatterplot of \texttt{Volume} versus \texttt{Girth} for the \texttt{trees} data.}
+  \label{fig:Scatterplot-Volume-Girth-trees}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Scatterplot-Volume-Girth-trees" class="figure">
+  <p><img src="svg/Scatterplot-Volume-Girth-trees.svg" width=500 alt="svg/Scatterplot-Volume-Girth-trees.svg" /></p>
+  <p>A scatterplot of <code>Volume</code> versus <code>Girth</code> for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig:Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
 \begin{equation}
@@ -609,28 +654,43 @@ summary(treesquad.lm)
 
 We see that the \(F\) statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
-
-#+begin_src R :exports code :results graphics silent :file img/Fitting-the-Quadratic.pdf
+#+srcname: Fitting-the-Quadratic
+#+begin_src R :exports code :results silent
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 #+end_src
 
-#+begin_src latex
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Fitting-the-Quadratic.pdf}
-    \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
-    \label{fig:Fitting-the-Quadratic}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Fitting-the-Quadratic.ps
+  <<Fitting-the-Quadratic>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Fitting-the-Quadratic.svg
+  <<Fitting-the-Quadratic>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Fitting-the-Quadratic.ps}
+  \caption[Quadratic model for the \texttt{trees} data]{\small A quadratic model for the \texttt{trees} data.}
+  \label{fig:Fitting-the-Quadratic}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Fitting-the-Quadratic" class="figure">
+  <p><img src="svg/Fitting-the-Quadratic.svg" width=500 alt="svg/Fitting-the-Quadratic.svg" /></p>
+  <p>A quadratic model for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 The plot is shown in Figure \ref{fig:Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
 #+latex: \end{example}
 
 
-#+latex: \begin{rem}
+#+begin_rem
 When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include \(x^{m}\) as a term in the model, then (s)he should also include all lower order terms \(x\), \(x^{2}\), ...,\(x^{m-1}\) in the model.
-#+latex: \end{rem}
+#+end_rem
 
 We do estimation/prediction the same way that we did in Section \ref{sub:mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
 
@@ -641,7 +701,7 @@ predict(treesquad.lm, newdata = new, interval = "prediction")
 
 The predictions and intervals are slightly different from what they were previously. Notice that it was not necessary to rescale the =Girth= prediction data before input to the =predict= function; the model did the rescaling for us automatically.
 
-#+latex: \begin{rem}
+#+begin_rem
 We have mentioned on several occasions that it is important to rescale the explanatory variables for polynomial regression. Watch what happens if we ignore this advice:
 
 #+begin_src R :exports both :results output pp 
@@ -652,8 +712,7 @@ Now nothing is significant in the model except =Girth^2=. We could delete the =I
 
 In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Statistic} we investigate this issue further.
 
-#+latex: \end{rem}
-
+#+end_rem
 
 ** Interaction
 \label{sec:Interaction}
@@ -716,12 +775,11 @@ new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
 predict(treesint.lm, newdata = new, interval = "prediction")
 #+end_src
 
-#+latex: \begin{rem}
+#+begin_rem
 There are two other ways to include interaction terms in model formulas. For example, we could have written =Girth * Height= or even =(Girth + Height)^2= and both would be the same as =Girth + Height + Girth:Height=. 
-#+latex: \end{rem}
+#+end_rem
 
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
-
 
 ** Qualitative Explanatory Variables
 \label{sec:Qualitative-Explanatory-Variables}
@@ -790,13 +848,13 @@ summary(treesdummy.lm)
 
 From the output we see that all parameter estimates are statistically significant and we conclude that the mean response differs for trees with =Tall = yes= and trees with =Tall = no=.
 
-#+latex: \begin{rem}
+#+begin_rem
 We were somewhat disingenuous when we defined the dummy variable =Tallyes= because, in truth, \textsf{R} defines =Tallyes= automatically without input from the user
 #+latex: \footnote{That is, \textsf{R} by default handles contrasts according to its internal settings which may be customized by the user for fine control. Given that we will not investigate contrasts further in this book it does not serve the discussion to delve into those settings, either. The interested reader should check \texttt{?contrasts} for details.}. 
 Indeed, the author fit the model beforehand and wrote the discussion afterward with the knowledge of what \textsf{R} would do so that the output the reader saw would match what (s)he had previously read. The way that \textsf{R} handles factors internally is part of a much larger topic concerning /contrasts/, which falls outside the scope of this book. The interested reader should see Neter et al \cite{Neter1996} or Fox \cite{Fox1997} for more. 
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 In general, if an explanatory variable =foo= is qualitative with \(n\) levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define \(n-1\) indicator variables in the following way:
 \begin{eqnarray*}
 \mathtt{foobar2} & = & \begin{cases}
@@ -806,15 +864,14 @@ In general, if an explanatory variable =foo= is qualitative with \(n\) levels =b
 0, & \mbox{otherwise.}\end{cases}
 \end{eqnarray*}
 The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
-#+latex: \end{rem}
-
-
+#+end_rem
 
 *** Graphing the Regression Lines
 
 We can see a plot of the two regression lines with the following mouthful of code.
 
-#+begin_src R :exports code :results graphics silent :file img/dummy-variable-trees.pdf
+#+srcname: dummy-variable-trees
+#+begin_src R :exports none :results silent
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
@@ -825,13 +882,28 @@ lines(Fit ~ Girth, data = treesTall[["yes"]])
 lines(Fit ~ Girth, data = treesTall[["no"]])
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/dummy-variable-trees.pdf}
-    \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
-    \label{fig:dummy-variable-trees}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/dummy-variable-trees.ps
+  <<dummy-variable-trees>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/dummy-variable-trees.svg
+  <<dummy-variable-trees>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/dummy-variable-trees.ps}
+  \caption[A dummy variable model for the \texttt{trees} data]{\small A dummy variable model for the \texttt{trees} data.}
+  \label{fig:dummy-variable-trees}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-dummy-variable-trees" class="figure">
+  <p><img src="svg/dummy-variable-trees.svg" width=500 alt="svg/dummy-variable-trees.svg" /></p>
+  <p>A dummy variable model for the <code>trees</code> data.</p>
+</div>
+#+end_html
 
 It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the \texttt{Fit}ted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
 
@@ -912,7 +984,6 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 
 #+latex: \end{example}
 
-
 ** Residual Analysis and Diagnostic Tools
 \label{sec:Residual-Analysis-MLR}
 
@@ -938,8 +1009,6 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 - DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
 - Cook's D: :: compared to an \(\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)\) distribution. Observations falling higher than the 50\(^{\textrm{th}}\) percentile are extreme. 
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
-
-
 
 ** Additional Topics
 \label{sec:Additional-Topics-MLR}
@@ -1009,7 +1078,6 @@ summary(acc.nls)
 #plot(x, fitted(acc.nls))
 #+end_src
 
-
 *** Multicollinearity
 \label{sub:Multicollinearity}
 
@@ -1026,8 +1094,6 @@ We decided to omit a thorough discussion of multicollinearity because we are not
 - What to do when data are not normal
    - Bootstrap (see Chapter \ref{cha:resampling-methods}).
 
-
-
 *** Akaike's Information Criterion
 
 \[
@@ -1041,13 +1107,10 @@ AIC=-2\ln L+2(p+1)
 
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:anova-equality}
 Use Equations \ref{eq:mlr-sse-matrix}, \ref{eq:mlr-ssto-matrix}, and \ref{eq:mlr-ssr-matrix} to prove the Anova Equality:
 \[
 SSTO=SSE+SSR.
 \]
-#+latex: \end{xca}
-
-
-
+#+end_xca

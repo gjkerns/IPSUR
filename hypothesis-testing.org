@@ -11,11 +11,16 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* Hypothesis Testing
+* Hypothesis Testing                                                 :hypoth:
+:PROPERTIES:
+:tangle: R/hypoth.R
+:END:
 \label{cha:Hypothesis-Testing}
 
 #+latex: \paragraph*{What do I want them to know?}
@@ -24,7 +29,6 @@
 - classical hypothesis tests for the standard one and two sample problems with means, variances, and proportions
 - the notion of between versus within group variation and how it plays out with one-way ANOVA
 - the concept of statistical power and its relation to sample size
-
 
 ** Introduction
 \label{sec:Introduction-Hypothesis}
@@ -100,11 +104,11 @@ The /null hypothesis/ \(H_{0}\) is a ``nothing'' hypothesis, whose interpretatio
 2. Suppose that \(H_{0}\) is true and construct a \(100(1-\alpha)\%\) confidence interval for \(p\).
 3. If the confidence interval does not cover \(p=0.10\), then we /reject/ \(H_{0}\). Otherwise, we /fail to reject/ \(H_{0}\).
 
-#+latex: \begin{rem}
+#+begin_rem
 Every time we make a decision it is possible to be wrong, and there are two possible mistakes that we could make. We have committed a 
 - Type I Error :: if we reject \(H_{0}\) when in fact \(H_{0}\) is true. This would be akin to convicting an innocent person for a crime (s)he did not commit.
 - Type II Error :: if we fail to reject \(H_{0}\) when in fact \(H_{1}\) is true. This is analogous to a guilty person escaping conviction.
-#+latex: \end{rem}
+#+end_rem
 
 Type I Errors are usually considered worse
 #+latex: \footnote{There is no mathematical difference between the errors, however. The bottom line is that we choose one type of error to control with an iron fist, and we try to minimize the probability of making the other type. That being said, null hypotheses are often by design to correspond to the ``simpler'' model, so it is often easier to analyze (and thereby control) the probabilities associated with Type I Errors.}, 
@@ -179,10 +183,10 @@ Or do we?
 
 Clearly, for some significance levels we reject, and for some significance levels we do not. Where is the boundary? That is, what is the significance level for which we would /reject/ at any significance level /bigger/, and we would /fail to reject/ at any significance level /smaller/? This boundary value has a special name: it is called the /p-value/ of the test.
 
-#+latex: \begin{defn}
+#+begin_defn
 The /p-value/, or /observed significance level/, of a hypothesis test is the probability when the null hypothesis is true of obtaining the observed value of the test statistic (such as \(\hat{p}\)) or values more extreme -- meaning, in the direction of the alternative hypothesis
 #+latex: \footnote{Bickel and Doksum \cite{Bickel2001} state the definition particularly well: the \(p\)-value is ``the smallest level of significance \(\alpha\) at which an experimenter using the test statistic \(T\) would reject \(H_{0}\) on the basis of the observed sample outcome \(x\)''.}. 
-#+latex: \end{defn}
+#+end_defn
 
 #+latex: \begin{example}
 Calculate the \(p\)-value for the test in Examples \ref{exa:prop-test-pvalue-A} and \ref{exa:prop-test-pvalue-B}.
@@ -198,9 +202,9 @@ We see that the \(p\)-value is strictly between the significance levels \(\alpha
 
 Thus, another way to phrase our significance test procedure is: we will reject \(H_{0}\) at the \(\alpha\)-level of significance if the \(p\)-value is less than \(\alpha\).
 
-#+latex: \begin{rem}
+#+begin_rem
 If we have two populations with proportions \(p_{1}\) and \(p_{2}\) then we can test the null hypothesis \(H_{0}:p_{1}=p_{2}\).
-#+latex: \end{rem}
+#+end_rem
 
 Table Here.
 
@@ -231,10 +235,8 @@ Otherwise, your data -- the raw successes and failures -- should be in a column 
 
 Once your unsummarized data is a column, then you can use the menu \textsf{Statistics \(\triangleright\) Proportions \(\triangleright\) Single-sample proportion test}...
 
-
 ** One Sample Tests for Means and Variances
 \label{sec:One-Sample-Tests}
-
 
 *** For Means
 
@@ -252,9 +254,9 @@ Here, \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{nor
    Table here.
 
 
-#+latex: \begin{rem}
+#+begin_rem
 If \(\sigma\) is unknown but \(n\) is large then we can use the \(z\)-test.
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \begin{example}
 In this example we
@@ -265,10 +267,10 @@ In this example we
 
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 Another name for a \(p\)-value is /tail end probability/. We reject \(H_{0}\) when the \(p\)-value is small.
 The quantity \(\sigma/\sqrt{n}\), when \(\sigma\) is known, is called the /standard error of the sample mean/. In general, if we have an estimator \(\hat{\theta}\) then \(\sigma_{\hat{\theta}}\) is called the /standard error/ of \(\hat{\theta}\). We usually need to estimate \(\sigma_{\hat{\theta}}\) with \(\hat{\sigma_{\hat{\theta}}}\).
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -314,7 +316,6 @@ library(TeachingDemos)
 sigma.test(women$height, sigma = 8)
 #+end_src
 
-
 ** Two-Sample Tests for Means and Variances
 \label{sec:Two-Sample-Tests-for-Means}
 
@@ -334,30 +335,30 @@ T=\frac{\overline{X}-\overline{Y}}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\o
 
 *** Independent Samples
 
-#+latex: \begin{rem}
+#+begin_rem
 If the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are known, then we can plug them in to our statistic:
 \begin{equation} 
 Z=\frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n+\sigma_{Y}^{2}/m}};
 \end{equation}
 the result will have a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution when \(H_{0}:\mu_{X}=\mu_{Y}\) is true. 
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 Even if the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are not known, if both \(n\) and \(m\) are large then we can plug in the sample estimates and the result will have approximately a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution when \(H_{0}:\mu_{X}=\mu_{Y}\) is true.
 \begin{equation} 
 Z=\frac{\overline{X}-\overline{Y}}{\sqrt{S_{X}^{2}/n+S_{Y}^{2}/m}}.
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 It is usually important to construct side-by-side boxplots and other visual displays in concert with the hypothesis test. This gives a visual comparison of the samples and helps to identify departures from the test's assumptions -- such as outliers.
-#+latex: \end{rem}
+#+end_rem
 
-#+latex: \begin{rem}
+#+begin_rem
 WATCH YOUR ASSUMPTIONS.
 - The normality assumption can be relaxed as long as the population distributions are not highly skewed.
 - The equal variance assumption can be relaxed as long as both sample sizes \(n\) and \(m\) are large. However, if one (or both) samples is small, then the test does not perform well; we should instead use the methods of Chapter \ref{cha:resampling-methods}.
-#+latex: \end{rem}
+#+end_rem
 
 For a nonparametric alternative to the two-sample \(F\) test see Chapter \ref{cha:Nonparametric-Statistics}.
 
@@ -389,7 +390,6 @@ ks.test(randu$x, "punif")
 shapiro.test(women$height)
 #+end_src
 
-
 ** Analysis of Variance
 \label{sec:Analysis-of-Variance}
 
@@ -410,8 +410,8 @@ anova(temp)
 
 Plot for the intuition of between versus within group variation.
 
-
-#+begin_src R :exports none :results graphics silent :file img/Between-versus-within.pdf
+#+srcname: Between-versus-within
+#+begin_src R :exports none :results silent
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
 f <- function(x){dnorm(x, mean = 2)}
@@ -423,16 +423,31 @@ curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Between-versus-within.pdf}
-    \caption[Between group versus within group variation]{A plot of between group versus within group variation.}
-    \label{fig:Between-versus-within}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Between-versus-within.ps
+  <<Between-versus-within>>
 #+end_src
 
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Between-versus-within.svg
+  <<Between-versus-within>>
+#+end_src
 
-#+begin_src R :exports code :results graphics silent :file img/Some-F-plots-HH.pdf
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Between-versus-within.ps}
+  \caption[Between group versus within group variation]{A plot of between group versus within group variation.}
+  \label{fig:Between-versus-within}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Between-versus-within" class="figure">
+  <p><img src="svg/Between-versus-within.svg" width=500 alt="svg/Between-versus-within.svg" /></p>
+  <p>A plot of between group versus within group variation.</p>
+</div>
+#+end_html
+
+#+srcname: Some-F-plots-HH
+#+begin_src R :exports code :results silent
 library(HH)
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
@@ -441,13 +456,28 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Some-F-plots-HH.pdf}
-    \caption[Some \(F\) plots from the \texttt{HH} package]{\small Some \(F\) plots from the \texttt{HH} package.}
-    \label{fig:Some-F-plots-HH}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Some-F-plots-HH.ps
+  <<Some-F-plots-HH>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Some-F-plots-HH.svg
+  <<Some-F-plots-HH>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Some-F-plots-HH.ps}
+  \caption[Some \(F\) plots from the \texttt{HH} package]{\small Some \(F\) plots from the \texttt{HH} package.}
+  \label{fig:Some-F-plots-HH}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Some-F-plots-HH" class="figure">
+  <p><img src="svg/Some-F-plots-HH.svg" width=500 alt="svg/Some-F-plots-HH.svg" /></p>
+  <p>Some \(F\) plots from the <code>HH</code> package.</p>
+</div>
+#+end_html
 
 ** Sample Size and Power
 \label{sec:Sample-Size-and-Power}
@@ -464,28 +494,37 @@ Here are some properties of power functions:
 
 I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
 
-
-#+begin_src R :exports code :results graphics silent :file img/power-examp.pdf
+#+srcname: power-examp
+#+begin_src R :exports code :results silent
 library(TeachingDemos)
 power.examp()
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/power-examp.pdf}
-    \caption[Plot of significance level and power]{\small This graph was generated by the \texttt{power.examp} function from the \texttt{TeachingDemos} package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the \emph{power} to detect a non-null mean value of \(\mu=1\). With the command the \texttt{run.power.examp()} at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the \texttt{tkrplot} package for \texttt{run.power.examp}.}
-    \label{fig:power-examp}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/power-examp.ps
+  <<power-examp>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/power-examp.svg
+  <<power-examp>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/power-examp.ps}
+  \caption[Plot of significance level and power]{\small This graph was generated by the \texttt{power.examp} function from the \texttt{TeachingDemos} package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the \emph{power} to detect a non-null mean value of \(\mu=1\). With the command the \texttt{run.power.examp()} at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the \texttt{tkrplot} package for \texttt{run.power.examp}.}
+  \label{fig:power-examp}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-power-examp" class="figure">
+  <p><img src="svg/power-examp.svg" width=500 alt="svg/power-examp.svg" /></p>
+  <p>A plot of significance level and power.</p>
+</div>
+#+end_html
 
 #+latex: \newpage{}
 
 ** Exercises
 
 #+latex: \setcounter{thm}{0}
-
-
-
-
-
-

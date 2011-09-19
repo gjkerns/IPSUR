@@ -11,15 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-
-* Discrete Distributions
+* Discrete Distributions                                           :discdist:
+:PROPERTIES:
+:tangle: R/discdist.R
+:END:
 \label{cha:Discrete-Distributions}
 
-\noindent In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
+#+latex: \noindent 
+In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
 
 We give special attention to the empirical distribution since it plays such a fundamental role with respect to resampling and Chapter \ref{cha:resampling-methods}; it will also be needed in Section \ref{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test} where we discuss the Kolmogorov-Smirnov test. Following this is a section in which we introduce a catalogue of discrete random variables that can be used to model experiments.
 
@@ -33,7 +38,6 @@ There are some comments on simulation, and we mention transformations of random 
 - the general tools of the trade for manipulation of continuous random variables, integration, /etc/.
 - some details on a couple of discrete models, and exposure to a bunch of other ones
 - how to make new discrete random variables from old ones
-
 
 ** Discrete Random Variables
 \label{sec:discrete-random-variables}
@@ -91,9 +95,9 @@ We will calculate the mean of \(X\) in Example \ref{exa:Toss-a-coin}.
 We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable \(X\), and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of \(X\) (another form of the Law of Large Numbers; see Section \ref{sec:Interpreting-Probabilities}). Another way it is commonly stated is that \(X\) is 3.5 ``on the average'' or ``in the long run''.
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 Note that although we say \(X\) is 3.5 on the average, we must keep in mind that our \(X\) never actually equals 3.5 (in fact, it is impossible for \(X\) to equal 3.5).
-#+latex: \end{rem}
+#+end_rem
 
 Related to the probability mass function \(f_{X}(x)=\P(X=x)\) is another important function called the /cumulative distribution function/ (CDF), \(F_{X}\). It is defined by the formula
 \begin{equation}
@@ -203,7 +207,6 @@ In the \textsf{R} Console window, the \textsf{R} Commander should tell you that 
 
 The default name for the variable is =disunif.sim1=.
 
-
 ** The Binomial Distribution
 \label{sec:binom-dist}
 
@@ -220,7 +223,6 @@ If the probability of success is \(p\) then the probability of failure must be \
 f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 \end{equation}
 It is easy to calculate \(\mu=\E X=p\) and \(\E X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
-
 
 *** The Binomial Model
 \label{sub:The-Binomial-Model}
@@ -282,7 +284,6 @@ Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear.
 \[ 
 \P(7\leq X\leq9)=\sum_{x=7}^{9}{12 \choose x}(1/6)^{x}(5/6)^{12-x}.
 \]
-
 Again, one method to solve this problem would be to generate a probability mass table and add up the relevant rows. However, an alternative method is to notice that \(\P(7\leq X\leq9)=\P(X\leq9)-\P(X\leq6)=F_{X}(9)-F_{X}(6)\), so we could get the same answer by using the \textsf{Binomial tail probabilities}... menu in the \textsf{R} Commander or the following from the command line: 
 
 #+begin_src R :exports both :results output pp  
@@ -312,7 +313,8 @@ F_{X}(x)=\P(X\leq x)=
 In particular, the CDF of \(X\) is defined for the entire real line, \(\R\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure \ref{fig:binom-cdf-base}.
 #+latex: \end{example}
 
-#+begin_src R :exports none :results graphics silent :file img/binom-cdf-base.pdf
+#+srcname: binom-cdf-base
+#+begin_src R :exports none :results silent
 plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
 abline(h = c(0,1), lty = 2, col = "grey")
 lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -320,13 +322,28 @@ points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
 points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/binom-cdf-base.pdf}
-    \caption[Graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF]{\small A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF.}
-    \label{fig:binom-cdf-base}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binom-cdf-base.ps
+  <<binom-cdf-base>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binom-cdf-base.svg
+  <<binom-cdf-base>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/binom-cdf-base.ps}
+  \caption[Graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF]{\small A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF.}
+  \label{fig:binom-cdf-base}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-binom-cdf-base" class="figure">
+  <p><img src="svg/binom-cdf-base.svg" width=500 alt="svg/binom-cdf-base.svg" /></p>
+  <p> A graph of the <code>binom(size = 3, prob = 1/2)</code> CDF.</p>
+</div>
+#+end_html
 
 #+latex: \begin{example}
 Another way to do Example \ref{exa:toss-coin-3-withR} is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
@@ -348,18 +365,33 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section \ref{sub:Normal-Quantiles-QF}). See Figure \ref{fig:binom-plot-distr} for an example.
 
-
-#+begin_src R :exports code :results graphics silent :file img/binom-plot-distr.pdf
+#+srcname: binom-plot-distr
+#+begin_src R :exports code :results silent
 plot(X, cex = 0.2)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/binom-plot-distr.pdf}
-    \caption[The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package]{\small The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package.}
-    \label{fig:binom-plot-distr}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binom-plot-distr.ps
+  <<binom-plot-distr>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binom-plot-distr.svg
+  <<binom-plot-distr>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/binom-plot-distr.ps}
+  \caption[The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package]{\small The \textsf{binom}(\texttt{size} = 3, \texttt{prob} = 0.5) distribution from the \texttt{distr} package.}
+  \label{fig:binom-plot-distr}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-binom-plot-distr" class="figure">
+  <p><img src="svg/binom-plot-distr.svg" width=500 alt="svg/binom-plot-distr.svg" /></p>
+  <p>The <code>binom(size = 3, prob = 0.5)</code> distribution from the <code>distr</code> package.</p>
+</div>
+#+end_html
 
 #+begin_latex
 \begin{table}
@@ -393,14 +425,13 @@ PMF has two important numbers associated with it:
 \end{equation}
 Intuitively, for repeated observations of \(X\) we would expect the sample mean to closely approximate \(\mu\) as the sample size increases without bound. For this reason we call \(\mu\) the /expected value/ of \(X\) and we write \(\mu=\E X\), where \(\E\) is an /expectation operator/.
 
-#+latex: \begin{defn}
+#+begin_defn
 More generally, given a function \(g\) we define the \emph{expected value of} \(g(X)\) by
 \begin{equation}
 \E\, g(X)=\sum_{x\in S}g(x)f_{X}(x),
 \end{equation}
 provided the (potentially infinite) series \(\sum_{x}|g(x)|f(x)\) is convergent. We say that \(\E g(X)\) \emph{exists}.
-#+latex: \end{defn}
-
+#+end_defn
 
 In this notation the variance is \(\sigma^{2}=\E(X-\mu)^{2}\) and we prove the identity
 \begin{equation}
@@ -410,32 +441,32 @@ in Exercise \ref{xca:variance-shortcut}. Intuitively, for repeated observations 
 
 Let us take the analogy further. If we expect \(g(X)\) to be close to \(\E g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\E g(X)\). The following theorem makes this idea precise.
 
-#+latex: \begin{prop}
+#+begin_prop
 \label{pro:expectation-properties}
 For any functions \(g\) and \(h\), any random variable \(X\), and any constant \(c\): 
 1. \(\E\: c=c\),
 2. \(\E[c\cdot g(X)]=c\E g(X)\)
 3. \(\E[g(X)+h(X)]=\E g(X)+\E h(X)\),
 provided \(\E g(X)\) and \(\E h(X)\) exist.
-#+latex: \end{prop}
+#+end_prop
 
-#+latex: \begin{proof}
+#+begin_proof
 Go directly from the definition. For example,
 \[
 \E[c\cdot g(X)]=\sum_{x\in S}c\cdot g(x)f_{X}(x)=c\cdot\sum_{x\in S}g(x)f_{X}(x)=c\E g(X).
 \]
-#+latex: \end{proof}
+#+end_proof
 
 *** Moment Generating Functions
 \label{sub:MGFs}
 
-#+latex: \begin{defn}
+#+begin_defn
 Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
 \begin{equation}
 M_{X}(t)=\E\mathrm{e}^{tX}=\sum_{x\in S}\mathrm{e}^{tx}f_{X}(x),
 \end{equation}
 provided the (potentially infinite) series is convergent for all \(t\) in a neighborhood of zero (that is, for all \(-\epsilon<t<\epsilon\), for some \(\epsilon>0\)).
-#+latex: \end{defn}
+#+end_defn
 
 Note that for any MGF \(M_{X}\),
 \begin{equation}
@@ -467,14 +498,14 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 
 We will discuss three applications of moment generating functions in this book. The first is the fact that an MGF may be used to accurately identify the probability distribution that generated it, which rests on the following:
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:mgf-unique}
 The moment generating function, if it exists in a neighborhood of zero, determines a probability distribution /uniquely/. 
-#+latex: \end{thm}
+#+end_thm
 
-#+latex: \begin{proof}
+#+begin_proof
 Unfortunately, the proof of such a theorem is beyond the scope of a text like this one. Interested readers could consult Billingsley \cite{Billingsley1995}.
-#+latex: \end{proof}
+#+end_proof
 
 
 We will see an example of Theorem \ref{thm:mgf-unique} in action.
@@ -538,7 +569,7 @@ Therefore
 See how much easier that was?
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 We learned in this section that \(M^{(r)}(0)=\E X^{r}\). We remember from Calculus II that certain functions \(f\) can be represented by a Taylor series expansion about a point \(a\), which takes the form
 \begin{equation}
 f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all \ensuremath{|x-a|<R},}
@@ -547,7 +578,7 @@ where \(R\) is called the /radius of convergence/ of the series (see Appendix \r
 \begin{equation}
 M_{X}(t)=\sum_{r=0}^{\infty}\frac{\E X^{r}}{r!}t^{r},\quad\mbox{for all \ensuremath{|t|<\epsilon}.}
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \paragraph*{How to do it with \textsf{R}}
 
@@ -571,20 +602,18 @@ sd(X)
 
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
-
 ** The Empirical Distribution
 \label{sec:empirical-distribution}
 
 Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
-#+latex: \begin{defn}
+#+begin_defn
 The /empirical cumulative distribution function/ \(F_{n}\) (written ECDF)\index{Empirical distribution} is the probability distribution that places probability mass \(1/n\) on each of the values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\). The empirical PMF takes the form
 \begin{equation} 
 f_{X}(x)=\frac{1}{n},\quad x\in \{ x_{1},x_{2},...,x_{n} \}.
 \end{equation}
 If the value \(x_{i}\) is repeated \(k\) times, the mass at \(x_{i}\) is accumulated to \(k/n\).
-#+latex: \end{defn}
-
+#+end_defn
 
 The mean of the empirical distribution is
 \begin{equation}
@@ -612,18 +641,33 @@ ecdf(x)
 
 The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter \ref{cha:Hypothesis-Testing}) or resampling (see Chapter \ref{cha:resampling-methods}). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
 
-
-#+begin_src R :exports code :results graphics silent :file img/empirical-CDF.pdf
+#+srcname: empirical-CDF
+#+begin_src R :exports code :results silent
 plot(ecdf(x))
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/empirical-CDF.pdf}
-    \caption[The empirical CDF]{\small The empirical CDF.}
-    \label{fig:empirical-CDF}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/empirical-CDF.ps
+  <<empirical-CDF>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/empirical-CDF.svg
+  <<empirical-CDF>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/empirical-CDF.ps}
+  \caption[The empirical CDF]{\small The empirical CDF.}
+  \label{fig:empirical-CDF}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-empirical-CDF" class="figure">
+  <p><img src="svg/empirical-CDF.svg" width=500 alt="svg/empirical-CDF.svg" /></p>
+  <p>The empirical CDF.</p>
+</div>
+#+end_html
 
 See Figure \ref{fig:empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
 
@@ -650,7 +694,6 @@ As we hinted above, the empirical distribution is significant more because of ho
 \label{sec:other-discrete-distributions}
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
-
 
 *** Dependent Bernoulli Trials
 \label{sec:non-bernoulli-trials}
@@ -768,7 +811,6 @@ We see that both sampling procedures have the same mean, and the method with the
 \end{equation}
 is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 
-
 *** Waiting Time Distributions
 \label{sec:Waiting-Time-Distributions}
 
@@ -804,13 +846,13 @@ pgeom(4, prob = 0.812, lower.tail = FALSE)
 
 #+latex: \end{example}
 
-#+latex: \begin{note}
+#+begin_note
 Some books use a slightly different definition of the geometric distribution. They consider Bernoulli trials and let \(Y\) count instead the number of trials until a success, so that \(Y\) has PMF
 \begin{equation}
 f_{Y}(y)=p(1-p)^{y-1},\quad y=1,2,3,\ldots
 \end{equation}
 When they say ``geometric distribution'', this is what they mean. It is not hard to see that the two definitions are related. In fact, if \(X\) denotes our geometric and \(Y\) theirs, then \(Y=X+1\). Consequently, they have \(\mu_{Y}=\mu_{X}+1\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
-#+latex: \end{note}
+#+end_note
 
 #+latex: \paragraph*{The Negative Binomial Distribution}
 \label{sub:The-Negative-Binomial}
@@ -881,13 +923,13 @@ M_{X}(t)=\left(\frac{0.19}{1-0.81\mathrm{e}^{t}}\right)^{31}.
 Then \(X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)\).
 #+latex: \end{example}
 
-#+latex: \begin{note}
+#+begin_note
 As with the Geometric distribution, some books use a slightly different definition of the Negative Binomial distribution. They consider Bernoulli trials and let \(Y\) be the number of trials until \(r\) successes, so that \(Y\) has PMF
 \begin{equation}
 f_{Y}(y)={y-1 \choose r-1}p^{r}(1-p)^{y-r},\quad y=r,r+1,r+2,\ldots
 \end{equation}
 It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\) theirs, then \(Y=X+r\). Consequently, they have \(\mu_{Y}=\mu_{X}+r\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
-#+latex: \end{note}
+#+end_note
 
 *** Arrival Processes
 \label{sec:Arrival-Processes}
@@ -914,14 +956,14 @@ Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{
 - the probability of two or more events occurring in any subinterval is \(\approx 0\).
 - occurrences in disjoint subintervals are independent.
 
-#+latex: \begin{rem}
+#+begin_rem
 \label{rem:poisson-process}
 
 If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) is the average number that occur in unit time, then \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda t)\), that is,
 \begin{equation}
 \P(X=x)=\mathrm{e}^{-\lambda t}\frac{(\lambda t)^{x}}{x!},\quad x=0,1,2,3\ldots
 \end{equation}
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \begin{example}
 On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
@@ -961,12 +1003,12 @@ f_{Y}(y) & = & f_{X}(y-r),\\
 
 
 Even when the function \(h\) is not one-to-one, we may still find the PMF of \(Y\) simply by accumulating, for each \(y\), the probability of all the \(x\)'s that are mapped to that \(y\).
-#+latex: \begin{prop}
+#+begin_prop
 Let \(X\) be a discrete random variable with PMF \(f_{X}\) supported on the set \(S_{X}\). Let \(Y=h(X)\) for some function \(h\). Then \(Y\) has PMF \(f_{Y}\) defined by
 \begin{equation}
 f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
 #+latex: \begin{example}
 Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
@@ -982,124 +1024,156 @@ From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that 
 There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
 #+latex: \end{example}
 
-#+latex: \begin{prop}
+#+begin_prop
 If \(X\) is a random variable with \(\E X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\), then the mean and variance of \(Y=mX+b\) is
 \begin{equation}
 \mu_{Y}=m\mu+b,\quad\sigma_{Y}^{2}=m^{2}\sigma^{2},\quad\sigma_{Y}=|m|\sigma.
 \end{equation}
-#+latex: \end{prop}
+#+end_prop
 
 #+latex: \newpage{}
 
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
-#+latex: \begin{xca}
+#+begin_xca
 A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
-  -  How is \(X\) distributed? 
-     \[
-     X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
-     \]
-  -  Sketch the probability mass function (roughly).
-     #+begin_src R :exports code :results graphics silent :file img/binomdxca.pdf
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "d")
-     #+end_src
-     #+begin_src latex 
-       \begin{figure}[th]
-         \includegraphics[width=5in, height=4in]{img/binomdxca.pdf}
-         \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
-         \label{fig:binomdxca}
-       \end{figure}
-     #+end_src
-  -  Sketch the cumulative distribution function (roughly).
-     #+begin_src R :exports code :results graphics silent :file img/binompxca.pdf
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "p")
-     #+end_src
-     #+begin_src latex 
-       \begin{figure}[th]
-         \includegraphics[width=5in, height=4in]{img/binompxca.pdf}
-         \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
-         \label{fig:binompxca}
-       \end{figure}
-     #+end_src
-  -  Find the probability that \(X\) is equal to 17.
-     #+begin_src R :exports both :results output pp  
-     dbinom(17, size = 31, prob = 0.447)
-     #+end_src
-  -  Find the probability that \(X\) is at most 13.
-     #+begin_src R :exports both :results output pp  
-     pbinom(13, size = 31, prob = 0.447)
-     #+end_src
-  -  Find the probability that \(X\) is bigger than 11.
-     #+begin_src R :exports both :results output pp  
-     pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
-     #+end_src
-  -  Find the probability that \(X\) is at least 15.
-     #+begin_src R :exports both :results output pp  
-     pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
-     #+end_src
-  -  Find the probability that \(X\) is between 16 and 19, inclusive.
-     #+begin_src R :exports both :results output pp  
-     sum(dbinom(16:19, size = 31, prob = 0.447))
-     diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
-     #+end_src
-  -  Give the mean of \(X\), denoted \(\E X\).
-     #+begin_src R :exports both :results output pp  
-     library(distrEx)
-     X <- Binom(size = 31, prob = 0.447)
-     E(X)
-     #+end_src
-  -  Give the variance of \(X\).
-     #+begin_src R :exports both :results output pp  
-     var(X)
-     #+end_src
-  -  Give the standard deviation of \(X\).
-     #+begin_src R :exports both :results output pp  
-     sd(X)
-     #+end_src
-  -  Find \(\E(4X+51.324)\)
-     #+begin_src R :exports both :results output pp  
-     E(4*X + 51.324)
-     #+end_src
-#+latex: \end{xca}
+- How is \(X\) distributed? 
+  \[
+  X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
+  \]
+- Sketch the probability mass function (roughly).
+#+srcname: binomdxca
+#+begin_src R :exports code :results silent
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "d")
+#+end_src
 
-#+latex: \begin{xca}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binomdxca.ps
+  <<binomdxca>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binomdxca.svg
+  <<binomdxca>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/binomdxca.ps}
+  \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
+  \label{fig:binomdxca}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-binomdxca" class="figure">
+  <p><img src="svg/binomdxca.svg" width=500 alt="svg/binomdxca.svg" /></p>
+  <p>Plot of a binomial PMF.</p>
+</div>
+#+end_html
+- Sketch the cumulative distribution function (roughly).
+   
+#+srcname: binompxca
+#+begin_src R :exports code :results silent
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "p")
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/binompxca.ps
+  <<binompxca>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/binompxca.svg
+  <<binompxca>>
+#+end_src
+
+#+begin_latex
+  \begin{figure}[th]
+    \includegraphics[angle=270, totalheight=4in]{ps/binompxca.ps}
+    \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
+    \label{fig:binompxca}
+  \end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-binompxca" class="figure">
+  <p><img src="svg/binompxca.svg" width=500 alt="svg/binompxca.svg" /></p>
+  <p>Plot of a binomial CDF.</p>
+</div>
+#+end_html
+
+- Find the probability that \(X\) is equal to 17.
+#+begin_src R :exports both :results output pp  
+dbinom(17, size = 31, prob = 0.447)
+#+end_src
+- Find the probability that \(X\) is at most 13.
+#+begin_src R :exports both :results output pp  
+pbinom(13, size = 31, prob = 0.447)
+#+end_src
+- Find the probability that \(X\) is bigger than 11.
+#+begin_src R :exports both :results output pp  
+pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
+#+end_src
+- Find the probability that \(X\) is at least 15.
+#+begin_src R :exports both :results output pp  
+pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
+#+end_src
+- Find the probability that \(X\) is between 16 and 19, inclusive.
+#+begin_src R :exports both :results output pp  
+sum(dbinom(16:19, size = 31, prob = 0.447))
+diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
+#+end_src
+- Give the mean of \(X\), denoted \(\E X\).
+#+begin_src R :exports both :results output pp  
+library(distrEx)
+X <- Binom(size = 31, prob = 0.447)
+E(X)
+#+end_src
+- Give the variance of \(X\).
+#+begin_src R :exports both :results output pp  
+var(X)
+#+end_src
+- Give the standard deviation of \(X\).
+#+begin_src R :exports both :results output pp  
+sd(X)
+#+end_src
+- Find \(\E(4X+51.324)\)
+#+begin_src R :exports both :results output pp  
+E(4*X + 51.324)
+#+end_src
+
+#+end_xca
+
+#+begin_xca
 For the following situations, decide what the distribution of \(X\) should be. In nearly every case, there are additional assumptions that should be made for the distribution to apply; identify those assumptions (which may or may not hold in practice.)
-  - We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let \(X\) denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
-  - In a local lottery in which a three digit number is selected randomly, let \(X\) be the number selected.
-  - We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let \(X\) be the number of times the cup lands perfectly right side up.
-  - We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let \(X\) denote the number of missed shots.
-  - Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let \(X\) count the number of containers that illegally contain contraband.
-  - At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let \(X\) denote the number of birds in the bush. 
-  - We count the number of rain drops that fall in a circular area on a sidewalk during a ten minute period of a thunder storm.
-  - We count the number of moth eggs on our window screen.
-  - We count the number of blades of grass in a one square foot patch of land.
-  - We count the number of pats on a baby's back until (s)he burps.
-#+latex: \end{xca}
+- We shoot basketballs at a basketball hoop, and count the number of shots until we make a goal. Let \(X\) denote the number of missed shots. On a normal day we would typically make about 37% of the shots.
+- In a local lottery in which a three digit number is selected randomly, let \(X\) be the number selected.
+- We drop a Styrofoam cup to the floor twenty times, each time recording whether the cup comes to rest perfectly right side up, or not. Let \(X\) be the number of times the cup lands perfectly right side up.
+- We toss a piece of trash at the garbage can from across the room. If we miss the trash can, we retrieve the trash and try again, continuing to toss until we make the shot. Let \(X\) denote the number of missed shots.
+- Working for the border patrol, we inspect shipping cargo as when it enters the harbor looking for contraband. A certain ship comes to port with 557 cargo containers. Standard practice is to select 10 containers randomly and inspect each one very carefully, classifying it as either having contraband or not. Let \(X\) count the number of containers that illegally contain contraband.
+- At the same time every year, some migratory birds land in a bush outside for a short rest. On a certain day, we look outside and let \(X\) denote the number of birds in the bush. 
+- We count the number of rain drops that fall in a circular area on a sidewalk during a ten minute period of a thunder storm.
+- We count the number of moth eggs on our window screen.
+- We count the number of blades of grass in a one square foot patch of land.
+- We count the number of pats on a baby's back until (s)he burps.
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:variance-shortcut}
 Show that \(\E(X-\mu)^{2}=\E X^{2}-\mu^{2}\). /Hint/: expand the quantity \((X-\mu)^{2}\) and distribute the expectation over the resulting terms.
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:binom-factorial-expectation}
 If \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) show that \(\E X(X-1)=n(n-1)p^{2}\).
-#+latex: \end{xca}
+#+end_xca
 
-#+latex: \begin{xca}
+#+begin_xca
 \label{xca:hyper-mean-variance}
 Calculate the mean and variance of the hypergeometric distribution. Show that 
 \begin{equation}
 \mu=K\frac{M}{M+N},\quad\sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
 \end{equation}
-#+latex: \end{xca}
-
-
-
-
-
+#+end_xca

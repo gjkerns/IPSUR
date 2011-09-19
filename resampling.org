@@ -11,14 +11,15 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
-#+XSLT:
 
-* Resampling Methods
+* Resampling Methods                                                 :resamp:
+:PROPERTIES:
+:tangle: R/resamp.R
+:END:
 \label{cha:resampling-methods}
 
-\noindent Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
+#+latex: \noindent 
+Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
 
 I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \textsf{R} into the narrative.
 
@@ -44,9 +45,9 @@ In short, here are some of the benefits that the advent of resampling methods ha
 - Greater accuracy. :: Many classical methods are based on rough upper bounds or Taylor expansions. The bootstrap procedures can be iterated long enough to give results accurate to several decimal places, often beating classical approximations.  
 - Generality. :: Resampling methods are easy to understand and apply to a large class of seemingly unrelated procedures. One no longer needs to memorize long complicated formulas and algorithms.
 
-#+latex: \begin{rem}
+#+begin_rem
 Due to the special structure of the empirical CDF, to get an IID sample we just need to take a random sample of size \(n\), with replacement, from the observed data \(x_{1},\ldots,x_{n}\). Repeats are expected and acceptable. Since we already sampled to get the original data, the term /resampling/ is used to describe the procedure.
-#+latex: \end{rem}
+#+end_rem
 
 
 #+latex: \paragraph*{General bootstrap procedure.}
@@ -81,18 +82,34 @@ xbarstar <- sapply(resamps, mean, simplify = TRUE)
 
 A histogram of the 1000 values of \(\overline{x}\) is shown in Figure \ref{fig:Bootstrap-se-mean}, and was produced by the following code.
 
-#+begin_src R :exports code :results graphics silent :file img/Bootstrap-se-mean.pdf
+#+srcname: Bootstrap-se-mean
+#+begin_src R :exports code :results silent
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Bootstrap-se-mean.pdf}
-    \caption[Bootstrapping the standard error of the mean, simulated data]{\small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
-    \label{fig:Bootstrap-se-mean}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Bootstrap-se-mean.ps
+  <<Bootstrap-se-mean>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Bootstrap-se-mean.svg
+  <<Bootstrap-se-mean>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Bootstrap-se-mean.ps}
+  \caption[Bootstrapping the standard error of the mean, simulated data]{\small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
+  \label{fig:Bootstrap-se-mean}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Bootstrap-se-mean" class="figure">
+  <p><img src="svg/Bootstrap-se-mean.svg" width=500 alt="svg/Bootstrap-se-mean.svg" /></p>
+  <p>Bootstrapping the standard error of the mean, simulated data.</p>
+</div>
+#+end_html
 
 We have overlain what we know to be the true sampling distribution of \(\overline{X}\), namely, a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{25})\) distribution. The histogram matches the true sampling distribution pretty well with respect to shape and spread... but notice how the histogram is off-center a little bit. This is not a coincidence -- in fact, it can be shown that the mean of the bootstrap distribution is exactly the mean of the original sample, that is, the value of the statistic that we originally observed. Let us calculate the mean of the bootstrap distribution and compare it to the mean of the original sample:
 
@@ -114,11 +131,11 @@ sd(xbarstar)
 
 We know from theory that the true standard error is \(1/\sqrt{25}=0.20\). Our bootstrap estimate is not very far from the theoretical value. 
 
-#+latex: \begin{rem}
+#+begin_rem
 What would happen if we take more resamples? Instead of 1000 resamples, we could increase to, say, 2000, 3000, or even 4000... would it help? The answer is both yes and no. Keep in mind that with resampling methods there are two sources of randomness: that from the original sample, and that from the subsequent resampling procedure. An increased number of resamples would reduce the variation due to the second part, but would do nothing to reduce the variation due to the first part.
 
 We only took an original sample of size \(n=25\), and resampling more and more would never generate more information about the population than was already there. In this sense, the statistician is limited by the information contained in the original sample. 
-#+latex: \end{rem}
+#+end_rem
 
 #+latex: \begin{example}
 \label{exa:Bootstrap-se-median}
@@ -131,18 +148,33 @@ medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
 #+end_src
 
-
-#+begin_src R :exports code :results graphics silent :file img/Bootstrapping-se-median.pdf
+#+srcname: Bootstrapping-se-median
+#+begin_src R :exports code :results silent
 hist(medstar, breaks = 40, prob = TRUE)
 #+end_src
 
-#+begin_src latex 
-  \begin{figure}[th]
-    \includegraphics[width=5in, height=4in]{img/Bootstrapping-se-median.pdf}
-    \caption[Bootstrapping the standard error of the median for the \texttt{rivers} data]{\small Bootstrapping the standard error of the median for the \texttt{rivers} data.}
-    \label{fig:Bootstrapping-se-median}
-  \end{figure}
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Bootstrapping-se-median.ps
+  <<Bootstrapping-se-median>>
 #+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Bootstrapping-se-median.svg
+  <<Bootstrapping-se-median>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/Bootstrapping-se-median.ps}
+  \caption[Bootstrapping the standard error of the median for the \texttt{rivers} data]{\small Bootstrapping the standard error of the median for the \texttt{rivers} data.}
+  \label{fig:Bootstrapping-se-median}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-Bootstrapping-se-median" class="figure">
+  <p><img src="svg/Bootstrapping-se-median.svg" width=500 alt="svg/Bootstrapping-se-median.svg" /></p>
+  <p>Bootstrapping the standard error of the median for the <code>rivers</code> data.</p>
+</div>
+#+end_html
 
 The graph is shown in Figure \ref{fig:Bootstrapping-se-median}, and was produced by the following code.
 
@@ -183,7 +215,7 @@ boot(data = rivers, statistic = median_fun, R = 1000)
 
 We notice that the output from both methods of estimating the standard errors produced similar results. In fact, the =boot= procedure is to be preferred since it invisibly returns much more information (which we will use later) than our naive script and it is much quicker in its computations.
 
-#+latex: \begin{rem}
+#+begin_rem
 Some things to keep in mind about the bootstrap:
 
 - For many statistics, the bootstrap distribution closely resembles the sampling distribution with respect to spread and shape. However, the bootstrap will not have the same center as the true sampling distribution. While the sampling distribution is centered at the population mean (plus any bias), the bootstrap distribution is centered at the original value of the statistic (plus any bias). The =boot= function gives an empirical estimate of the bias of the statistic as part of its output. 
@@ -192,10 +224,7 @@ Some things to keep in mind about the bootstrap:
 
 - You don't get something from nothing. We have seen that we can take a random sample from a population and use bootstrap methods to get a very good idea about standard errors, bias, and the like. However, one must not get lured into believing that by doing some random resampling somehow one gets more information about the parameters than that which was contained in the original sample. Indeed, there is some uncertainty about the parameter due to the randomness of the original sample, and there is even more uncertainty introduced by resampling. One should think of the bootstrap as just another estimation method, nothing more, nothing less.
 
-#+latex: \end{rem}
-
-
-
+#+end_rem
 
 ** Bootstrap Confidence Intervals
 \label{sec:Bootstrap-Confidence-Intervals}
@@ -234,7 +263,6 @@ boot.ci(med_boot, type = c("perc", "norm", "bca"))
 
 #+latex: \end{example}
 
-
 *** Student's \(t\) intervals (``normal intervals'')
 
 The idea is to use confidence intervals that we already know and let the bootstrap help us when we get into trouble. We know that a \(100(1-\alpha)\%\) confidence interval for the mean of a \(SRS(n)\) from a normal distribution is 
@@ -253,9 +281,9 @@ We will use the t-interval method to find the bootstrap CI for the median. We ha
 
 We see that, considering the scale of the data, the confidence intervals compare with each other quite well.
 
-#+latex: \begin{rem}
+#+begin_rem
 We have seen two methods for bootstrapping confidence intervals for a statistic. Which method should we use? If the bias of the bootstrap distribution is small and if the distribution is close to normal, then the percentile and \(t\)-intervals will closely agree. If the intervals are noticeably different, then it should be considered evidence that the normality and bias conditions are not met. In this case, /neither/ interval should be used.
-#+latex: \end{rem}
+#+end_rem
 
 - \(BC_{a}\): bias-corrected and accelerated
    - transformation invariant
@@ -294,22 +322,18 @@ with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 60
 #+latex: \paragraph*{Procedure:}
 
 1. Randomly resample 10 scores from the combined scores of =x1= and =x2=, and assign then to the =x1= group. The rest will then be in the =x2= group. Calculate the difference in (re)sampled means, and store that value.  
-
 1. Repeat this procedure many, many times and draw a histogram of the resampled statistics, called the /permutation distribution/. Locate the observed difference 10.9 on the histogram to get the \(p\)-value. If the \(p\)-value is small, then we consider that evidence against the hypothesis that the groups are the same. 
-
 
 #+latex: \end{example}
 
-#+latex: \begin{rem}
+#+begin_rem
 In calculating the permutation test /p-value/, the formula is essentially the proportion of resample statistics that are greater than or equal to the observed value. Of course, this is merely an /estimate/ of the true \(p\)-value. As it turns out, an adjustment of \(+1\) to both the numerator and denominator of the proportion improves the performance of the estimated \(p\)-value, and this adjustment is implemented in the =ts.perm= function.
-#+latex: \end{rem}
-
+#+end_rem
 
 #+begin_src R :exports both :results output pp 
 library(coin)
 oneway_test(len ~ supp, data = ToothGrowth)
 #+end_src
-
 
 *** Comparison with the Two Sample /t/ test
 
@@ -327,13 +351,13 @@ B <- t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 
 The \(p\)-value for the \(t\)-test was \( SRC_R{round(B$p.value, 3)} \), while the permutation test \(p\)-value was \( SRC_R{round(A$p.value, 3)} \). Note that there is an underlying normality assumption for the \(t\)-test, which isn't present in the permutation test. If the normality assumption may be questionable, then the permutation test would be more reasonable. We see what can happen when using a test in a situation where the assumptions are not met: smaller \(p\)-values. In situations where the normality assumptions are not met, for example, small sample scenarios, the permutation test is to be preferred. In particular, if accuracy is very important then we should use the permutation test. 
 
-#+latex: \begin{rem}
+#+begin_rem
 Here are some things about permutation tests to keep in mind.
 - While the permutation test does not require normality of the populations (as contrasted with the \(t\)-test), nevertheless it still requires that the two groups are exchangeable; see Section \ref{sec:Exchangeable-Random-Variables}. In particular, this means that they must be identically distributed under the null hypothesis. They must have not only the same means, but they must also have the same spread, shape, and everything else. This assumption may or may not be true in a given example, but it will rarely cause the \(t\)-test to outperform the permutation test, because even if the sample standard deviations are markedly different it does not mean that the population standard deviations are different. In many situations the permutation test will also carry over to the \(t\)-test.
 - If the distribution of the groups is close to normal, then the \(t\)-test \(p\)-value and the bootstrap \(p\)-value will be approximately equal. If they differ markedly, then this should be considered evidence that the normality assumptions do not hold.  
 - The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, \(\overline{X}_{1}/\overline{X}_{2}\). Of course, under the null hypothesis this last quantity should be near 1. 
 - Just as with the bootstrap, the answer we get is subject to variability due to the inherent randomness of resampling from the data. We can make the variability as small as we like by taking sufficiently many resamples. How many? If the conclusion is very important (that is, if lots of money is at stake), then take thousands. For point estimation problems typically, \(R=1000\) resamples, or so, is enough. In general, if the true \(p\)-value is \(p\) then the standard error of the estimated \(p\)-value is \(\sqrt{p(1-p)/R}\). You can choose \(R\) to get whatever accuracy desired.
-#+latex: \end{rem}
+#+end_rem
 
 - Other possible testing designs:
    - Matched Pairs Designs. 

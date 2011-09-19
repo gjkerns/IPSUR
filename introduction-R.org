@@ -11,15 +11,20 @@
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* An Introduction to \textsf{R}
-\label{cha:introduction-to-R}
+* An Introduction to \textsf{R}                                      :introR:
+:PROPERTIES:
+:tangle: R/introR.R
+:END:
+#+latex: \label{cha:introduction-to-R}
 
 ** Downloading and Installing \textsf{R} 
-\label{sec:download-install-R}
+#+latex: \label{sec:download-install-R}
 
 The instructions for obtaining \textsf{R} largely depend on the user's hardware and operating system. The \textsf{R} Project has written an \textsf{R} Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
 
@@ -32,7 +37,7 @@ for your operating system:
 - MacOS: :: http://cran.r-project.org/bin/macosx/
 - Linux: :: http://cran.r-project.org/bin/linux/
 
-On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for \textquotedbl{}Customized startup options\textquotedbl{}, specify \textsf{Yes}. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
+On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for "Customized startup options", specify \textsf{Yes}. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
 
 #+latex: \paragraph*{Installing \textsf{R} on a USB drive (Windows)}
 
@@ -45,7 +50,7 @@ With this option you can use \textsf{R} portably and without administrative priv
 Steps 3 and 4 are not required but save you the trouble of navigating to the =R-x.y.z/bin= directory to double-click =Rgui.exe= every time you want to run the program. It is useless to create your own shortcut to =Rgui.exe=. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some /other/ machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 
 *** Installing and Loading Add-on Packages
-\label{sub:installing-loading-packages}
+#+latex: \label{sub:installing-loading-packages}
 
 There are /base/ packages (which come with \textsf{R} automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \textsf{R} being used for this document the default base packages loaded at startup are 
 
@@ -67,8 +72,7 @@ packages in your library.
 For complete, precise information regarding installation of \textsf{R} and add-on packages, see the [[http://cran.r-project.org/manuals.html][\textsf{R} Installation and Administration manual]].
 
 ** Communicating with \textsf{R}
-\label{sec:Communicating-with-R}
-
+#+latex: \label{sec:Communicating-with-R}
 
 #+latex: \paragraph*{One line at a time}
 
@@ -100,14 +104,14 @@ By the word ``GUI'' I mean an interface in which the user communicates with \tex
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
 
 ** Basic \textsf{R} Operations and Concepts
-\label{sec:Basic-R-Operations}
+#+latex: \label{sec:Basic-R-Operations}
 
 The \textsf{R} developers have written an introductory document entitled ``An Introduction to \textsf{R}''. There is a sample session included which shows what basic interaction with \textsf{R} looks like. I recommend that all new users of \textsf{R} read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
 
 Below are some of the most basic operations that can be done with \textsf{R}. Almost every book about \textsf{R} begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
 
 *** Arithmetic
-\label{sub:Arithmetic}
+#+latex: \label{sub:Arithmetic}
 
 #+begin_src R :exports both :results output pp  
 2 + 3       # add
@@ -126,19 +130,12 @@ pi
 options(digits = 7)  # back to default
 #+end_src
 
-#+results[6f6d7c9b7a0784d99109913def5c02796093d448]:
-: [1] 3.333333333333333
-: [1] 1.414213562373095
-: [1] 2.718281828459045
-: [1] 3.141592653589793
-
 Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
 
-
 *** Assignment, Object names, and Data types
-\label{sub:Assignment-Object-names}
+#+latex: \label{sub:Assignment-Object-names}
 
-It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The === symbol works too, but it is recommended by the \textsf{R} masters to reserve === for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
+It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \textsf{R} masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
 #+begin_src R :exports both :results output pp 
 x <- 7*41/pi   # don't see the calculated value
@@ -167,7 +164,7 @@ typeof((0 + 1i)^2)
 Note that you can just type =(1i)^2= to get the same answer. The =NaN=\index{NaN@\texttt{NaN}} stands for ``not a number''; it is represented internally as =double=\index{double}. 
 
 *** Vectors
-\label{sub:Vectors}
+#+latex: \label{sub:Vectors}
 
 All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
 
@@ -219,7 +216,7 @@ letters[-(6:24)]
 #+end_src
 
 *** Functions and Expressions
-\label{sub:Functions-and-Expressions}
+#+latex: \label{sub:Functions-and-Expressions}
 
 A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
 
@@ -276,7 +273,7 @@ exp
 Be warned that most of the =.Internal= functions are written in other computer languages which the beginner may not understand, at least initially.
 
 ** Getting Help
-\label{sec:Getting-Help}
+#+latex: \label{sec:Getting-Help}
 
 When you are using \textsf{R}, it will not take long before you find yourself needing help. Fortunately, \textsf{R} has extensive help resources and you should immediately become familiar with them. Begin by clicking \textsf{Help} on \textsf{Rgui}. The following options are available. 
 - Console: :: gives useful shortcuts, for instance, \textsf{Ctrl+L}, to clear the \textsf{R} console screen. 

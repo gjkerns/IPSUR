@@ -3,21 +3,24 @@
 #+AUTHOR:    G. Jay Kerns
 #+EMAIL:     gkerns@ysu.edu
 #+DATE:      2011-09-18 Sun
-#+DESCRIPTION:
+#+DESCRIPTION: An appendix to IPSUR, mathematical stuff, references, and index.
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+EXPORT_SELECT_TAGS: export
-#+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+EXPORT_SELECT_TAGS:
+#+EXPORT_EXCLUDE_TAGS:
+#+LINK_UP: index.html   
+#+LINK_HOME: http://ipsur.org/index.html
 #+XSLT:
+#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+INCLUDE: "prelim.R" src R :exports none :results hide
 
 * The Appendix
 
-* \textsf{R} Session Information
+
+* \textsf{R} Session Information                                   :appendix:
 \label{cha:R-Session-Information}
 
 If you ever write the \textsf{R} help mailing list with a question, then you should include your session information in the email; it makes the reader's job easier and is requested by the Posting Guide. Here is how to do that, and below is what the output looks like.
@@ -28,7 +31,7 @@ sessionInfo()
 
 #+latex: \vfill{}
 
-* GNU Free Documentation License
+* GNU Free Documentation License                                   :appendix:
 \label{cha:GNU-Free-Documentation}
 
 #+begin_latex
@@ -45,7 +48,8 @@ Foundation, Inc.
 \par\end{center}
 #+end_latex
 
-\noindent Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
+#+latex: \noindent 
+Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
 
 ** 0. PREAMBLE
 
@@ -194,30 +198,35 @@ The operator of an MMC Site may republish an MMC contained in the site under CC-
 To use this License in a document you have written, include a copy of the License in the document and put the following copyright and license notices just after the title page: 
 
 #+begin_quote
-\noindent Copyright (c) YEAR YOUR NAME. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
+Copyright (c) YEAR YOUR NAME. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled GNU Free Documentation License.
 #+end_quote
 
 If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts, replace the with...Texts. line with this:
 
 #+begin_quote
-\noindent with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+with the Invariant Sections being LIST THEIR TITLES, with the Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
 #+end_quote
 
 If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.
 
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software. 
 
-* History
+* History                                                          :appendix:
 \label{cha:History}
 
-| Title:     | Introduction to Probability and Statistics Using \textsf{R} |
-| Year:      | 2011                                                        |
-| Authors:   | G. Jay Kerns                                                |
-| Publisher: | G. Jay Kerns                                                |
+| Title:     | Introduction to Probability and Statistics Using \textsf{R}, Second Edition |
+| Year:      | 2011                                                                        |
+| Authors:   | G. Jay Kerns                                                                |
+| Publisher: | G. Jay Kerns                                                                |
 
 #+latex: \vfill{}
 
-* Data
+| Title:     | Introduction to Probability and Statistics Using \textsf{R}, First Edition |
+| Year:      | 2010                                                                       |
+| Authors:   | G. Jay Kerns                                                               |
+| Publisher: | G. Jay Kerns                                                               |
+
+* Data                                                             :appendix:
 \label{cha:data}
 
 This appendix is a reference of sorts regarding some of the data structures a statistician is likely to encounter. We discuss their salient features and idiosyncrasies.
@@ -468,7 +477,7 @@ head(Tmp)
 
 The basic function is =write.table=. The =MASS= package also has a =write.matrix= function.
 
-** Reshaping Data \label{sec:Reshaping-a-Data}
+** Reshaping Data \label{sec:Reshaping-a-Data}                    :appendix:
 - Aggregation
 - Convert Tables to data frames and back
 
@@ -478,7 +487,7 @@ The basic function is =write.table=. The =MASS= package also has a =write.matrix
 =aggregate=
 =stack=
 
-* Mathematical Machinery
+* Mathematical Machinery                                           :appendix:
 \label{cha:Mathematical-Machinery}
 
 This appendix houses many of the standard definitions and theorems that are used at some point during the narrative. It is targeted for someone reading the book who forgets the precise definition of something and would like a quick reminder of an exact statement. No proofs are given, and the interested reader should consult a good text on Calculus (say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}), Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}), Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}), or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000}, Resnick \cite{Resnick1999}) for details. 
@@ -536,31 +545,31 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
 A function \(f\) of one variable is said to be one-to-one if no two distinct \(x\) values are mapped to the same \(y=f(x)\) value. To show that a function is one-to-one we can either use the horizontal line test or we may start with the equation \(f(x_{1}) = f(x_{2})\) and use algebra to show that it implies \(x_{1} = x_{2}\).
 
 *** Limits and Continuity
-#+latex: \begin{defn}
+#+begin_defn
 Let \(f\) be a function defined on some open interval that contains the number \(a\), except possibly at \(a\) itself. Then we say the /limit of/ \(f(x)\) /as/ \(x\) /approaches/ \(a\) /is/ \(L\), and we write 
 \begin{equation}
 \lim_{x \to a}f(x) = L,
 \end{equation}
 if for every \(\epsilon > 0\) there exists a number \(\delta > 0\) such that \(0 < |x-a| < \delta\) implies \(|f(x) - L| < \epsilon\).
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{defn}
+#+begin_defn
 A function \(f\) is /continuous at a number/ \(a\) if 
 \begin{equation}
 \lim_{x \to a} f(x) = f(a).
 \end{equation}
 The function \(f\) is /right-continuous at the number/ \(a\) if \(\lim_{x\to a^{+}}f(x)=f(a)\), and /left-continuous/ at \(a\) if \(\lim_{x\to a^{-}}f(x)=f(a)\). Finally, the function \(f\) is /continuous on an interval/ \(I\) if it is continuous at every number in the interval. 
-#+latex: \end{defn}
+#+end_defn
 
 *** Differentiation
-#+latex: \begin{defn}
+#+begin_defn
 The /derivative of a function/ \(f\) /at a number/ \(a\), denoted by \(f'(a)\), is
 \begin{equation}
 f'(a)=\lim_{h\to0}\frac{f(a+h)-f(a)}{h},
 \end{equation}
 provided this limit exists.
 A function is /differentiable at/ \(a\) if \(f'(a)\) exists. It is /differentiable on an open interval/ \((a,b)\) if it is differentiable at every number in the interval.
-#+latex: \end{defn}
+#+end_defn
 
 
 
@@ -572,9 +581,9 @@ In the table that follows, \(f\) and \(g\) are differentiable functions and \(c\
 | \(\frac{\mathrm{d}}{\mathrm{d} x}c=0\) | \(\frac{\mathrm{d}}{\mathrm{d} x}x^{n}=nx^{n-1}\) | \((cf)'=cf'\)                                       |
 | \((f\pm g)'=f'\pm g'\)       | \((fg)'=f'g+fg'\)                       | \(\left(\frac{f}{g}\right)'=\frac{f'g-fg'}{g^{2}}\) |
 
-#+latex: \begin{thm}
+#+begin_thm
 Chain Rule: If \(f\) and \(g\) are both differentiable and \(F=f\circ g\) is the composite function defined by \(F(x)=f[g(x)]\), then \(F\) is differentiable and \(F'(x) = f'[ g(x) ] \cdot g'(x)\).  
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Useful Derivatives}
 
@@ -586,59 +595,59 @@ Chain Rule: If \(f\) and \(g\) are both differentiable and \(F=f\circ g\) is the
 |                                        |                                         |                                                  |
 
 *** Optimization
-#+latex: \begin{defn}
+#+begin_defn
 A /critical number/ of the function \(f\) is a value \(x^{\ast}\) for which \(f'(x^{\ast})=0\) or for which \(f'(x^{\ast})\) does not exist.
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{thm}
+#+begin_thm
 \label{thm:First-Derivative-Test}
 First Derivative Test. If \(f\) is differentiable and if \(x^{\ast}\) is a critical number of \(f\) and if \(f'(x)\geq0\) for \(x\leq x^{\ast}\) and \(f'(x)\leq0\) for \(x\geq x^{\ast}\), then \(x^{\ast}\) is a local maximum of \(f\). If \(f'(x)\leq0\) for \(x\leq x^{\ast}\) and \(f'(x)\geq0\) for \(x\geq x^{\ast}\) , then \(x^{\ast}\) is a local minimum of \(f\).
-#+latex: \end{thm}
+#+end_thm
 
-#+latex: \begin{thm}
+#+begin_thm
 Second Derivative Test. If \(f\) is twice differentiable and if \(x^{\ast}\) is a critical number of \(f\), then \(x^{\ast}\) is a local maximum of \(f\) if \(f''(x^{\ast})<0\) and \(x^{\ast}\) is a local minimum of \(f\) if \(f''(x^{\ast})>0\).
-#+latex: \end{thm}
+#+end_thm
 
 *** Integration
 As it turns out, there are all sorts of things called ``integrals'', each defined in its own idiosyncratic way. There are /Riemann/ integrals, /Lebesgue/ integrals, variants of these called /Stieltjes/ integrals, /Daniell/ integrals, /Ito/ integrals, and the list continues. Given that this is an introductory book, we will use the Riemannian integral with the caveat that the Riemann integral is /not/ the integral that will be used in more advanced study.
 
-#+latex: \begin{defn}
+#+begin_defn
 Let \(f\) be defined on \([a,b]\), a closed interval of the real line. For each \(n\), divide \([a,b]\) into subintervals \([x_{i},x_{i+1}]\), \(i=0,1,\ldots,n-1\), of length \(\Delta x_{i}=(b-a)/n\) where \(x_{0}=a\) and \(x_{n}=b\), and let \(x_{i}^{\ast}\) be any points chosen from the respective subintervals. Then the /definite integral/ of \(f\) from \(a\) to \(b\) is defined by
 \begin{equation}
 \int_{a}^{b}f(x)\,\mathrm{d} x=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(x_{i}^{\ast})\,\Delta x_{i},
 \end{equation}
 provided the limit exists, and in that case, we say that \(f\) is /integrable/ from \(a\) to \(b\). 
-#+latex: \end{defn}
+#+end_defn
 
-#+latex: \begin{thm}
+#+begin_thm
 The Fundamental Theorem of Calculus. Suppose \(f\) is continuous on \([a,b]\). Then
 1. the function \(g\) defined by \(g(x)=\int_{a}^{x}f(t)\:\mathrm{d} t\), \(a\leq x\leq b\), is continuous on \([a,b]\) and differentiable on \((a,b)\) with \(g'(x)=f(x)\).
 1. \(\int_{a}^{b}f(x)\,\mathrm{d} x=F(b)-F(a)\), where \(F\) is any /antiderivative/ of \(f\), that is, any function \(F\) satisfying \(F'=f\).
-#+latex: \end{thm}
+#+end_thm
 
 
 #+latex: \paragraph*{Change of Variables}
-#+latex: \begin{thm}
+#+begin_thm
 If \(g\) is a differentiable function whose range is the interval \([a,b]\) and if both \(f\) and \(g'\) are continuous on the range of \(u = g(x)\), then
 \begin{equation}
 \int_{g(a)}^{g(b)}f(u)\:\mathrm{d} u=\int_{a}^{b}f[g(x)]\: g'(x)\:\mathrm{d} x.
 \end{equation}
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Useful Integrals}
 
 
 #+CAPTION: [Some integrals (constants of integration omitted)]{Some integrals (constants of integration omitted).}
 #+LABEL: tab:Useful-Integrals
-| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \abs(x) \)      |
-| \(\int\tan x\:\mathrm{d} x=\ln \abs(\sec x)\)        | \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)            | \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\) |
+| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \mathrm{abs}(x) \) |
+| \(\int\tan x\:\mathrm{d} x=\ln \mathrm{abs}(\sec x)\) | \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)            | \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\) |
 
 #+latex: \paragraph*{Integration by Parts}
 
 \begin{equation}
 \int u\:\mathrm{d} v=uv-\int v\:\mathrm{d} u
 \end{equation}
-#+latex: \begin{thm}
+#+begin_thm
 L'H\^ opital's Rule. Suppose \(f\) and \(g\) are differentiable and \(g'(x)\neq0\) near \(a\), except possibly at \(a\). Suppose that the limit 
 \begin{equation}
 \lim_{x\to a}\frac{f(x)}{g(x)}
@@ -648,7 +657,7 @@ is an indeterminate form of type \(\frac{0}{0}\) or \(\infty/\infty\). Then
 \lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)},
 \end{equation}
 provided the limit on the right-hand side exists or is infinite.
-#+latex: \end{thm}
+#+end_thm
 
 #+latex: \paragraph*{Improper Integrals}
 
@@ -771,11 +780,11 @@ The /Gamma function/ \(\Gamma\) will be defined in this book according to the fo
 \Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\mathrm{e}^{-x}\:\mathrm{d} x,\quad\mbox{for }\alpha > 0.
 \end{equation}
 
-#+latex: \begin{fact}
+#+begin_fact
 Properties of the Gamma Function:
 - \(\Gamma(\alpha)=(\alpha - 1)\Gamma(\alpha - 1)\) for any \(\alpha > 1\), and so \(\Gamma(n)=(n-1)!\) for any positive integer \(n\).
 - \(\Gamma(1/2)=\sqrt{\pi}\).
-#+latex: \end{fact}
+#+end_fact
 
 ** Linear Algebra \label{sec:Linear-Algebra}
 *** Matrices
@@ -812,7 +821,7 @@ The /transpose/ of a matrix \(\mathbf{A}=\begin{pmatrix}a_{ij}\end{pmatrix}\) is
 The /trace/ of a square matrix \(\mathbf{A}\) is the sum of its diagonal elements: \(\mathrm{tr}(\mathbf{A})=\sum_{i}a_{ii}\). 
 
 The /inverse/ of a square matrix \(\mathbf{A}_{\mathrm{n}\times\mathrm{n}}\) (when it exists) is the unique matrix denoted \(\mathbf{A}^{-1}\) which satisfies \(\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\). If \(\mathbf{A}^{-1}\) exists then we say \(\mathbf{A}\) is /invertible/, or /nonsingular/. Note that \(\left(\mathbf{A}^{\mathrm{T}}\right)^{-1}=\left(\mathbf{A}^{\mathrm{-1}}\right)^{\mathrm{T}}\).
-#+latex: \begin{fact}
+#+begin_fact
 The inverse of the \(2\times2\) matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
@@ -820,27 +829,27 @@ c & d\end{bmatrix}\quad\mbox{is}\quad\mathbf{A}^{-1}=\frac{1}{ad-bc}\begin{bmatr
 -c & a\end{bmatrix},
 \end{equation}
 provided \(ad-bc\neq0\).
-#+latex: \end{fact}
+#+end_fact
 
 *** Determinants
-#+latex: \begin{defn}
+#+begin_defn
 The /determinant/ of a square matrix \(\mathbf{A}_{\mathrm{n}\times n}\) is denoted \(\mathrm{det}(\mathbf{A})\) or \(|\mathbf{A}|\) and is defined recursively by
 \begin{equation}
 \mathrm{det}(\mathbf{A})=\sum_{i=1}^{n}(-1)^{i+j}a_{ij}\,\mathrm{det}(\mathbf{M}_{ij}),
 \end{equation}
 where \(\mathbf{M}_{ij}\) is the submatrix formed by deleting the \(i^{\mathrm{th}}\) row and \(j^{\mathrm{th}}\) column of \(\mathbf{A}\). We may choose any fixed \(1\leq j\leq n\) we wish to compute the determinant; the final result is independent of the \(j\) chosen.
-#+latex: \end{defn}
-#+latex: \begin{fact}
+#+end_defn
+#+begin_fact
 The determinant of the \(2\times2\) matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
 c & d\end{bmatrix}\quad\mbox{is}\quad|\mathbf{A}|=ad-bc.
 \end{equation}
-#+latex: \end{fact}
+#+end_fact
 
-#+latex: \begin{fact}
+#+begin_fact
 A square matrix \(\mathbf{A}\) is nonsingular if and only if \(\mathrm{det}(\mathbf{A})\neq0\).
-#+latex: \end{fact}
+#+end_fact
 
 *** Positive (Semi)Definite
 If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is /positive semidefinite/. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is /positive definite/. The connection to statistics is that covariance matrices (see Chapter \ref{cha:Multivariable-Distributions}) are always positive semidefinite, and many of them are even positive definite.
@@ -916,14 +925,14 @@ If the function \(f\) is continuous on \(A\) and if the Jacobian of \(T\) is non
 
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation \(T\) maps points \((u_{1},u_{2},\ldots,u_{n})\) to points \((x_{1},x_{2},\ldots,x_{n})\), the Jacobian is the determinant of the \(\mathrm{n}\times\mathrm{n}\) matrix of first-order partial derivatives of \(T\) (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets \(A\) and \(B\).
 
-* Writing Reports with \textsf{R}
+* Writing Reports with \textsf{R}                                  :appendix:
 \label{cha:Writing-Reports-with}
 
 Perhaps the most important part of a statistician's job once the analysis is complete is to communicate the results to others. This is usually done with some type of report that is delivered to the client, manager, or administrator. Other situations that call for reports include term papers, final projects, thesis work, /etc/. This chapter is designed to pass along some tips about writing reports once the work is completed with \textsf{R}.
 
 
 ** What to Write \label{sec:What-to-Write}
-It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr.~G.~Andy Chang.
+It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr. G. Andy Chang.
 
 *** Basic Outline for a Statistical Report
 1. Executive Summary (a one page description of the study and conclusion) 
@@ -954,7 +963,8 @@ It is possible to summarize this entire appendix with only one sentence: /the st
    1. Discuss any limitations of the study or inferences.
    1. Discuss avenues of future research suggested by the study. 
 
-** How to Write It with R \label{sec:How-to-Write}
+** How to Write It with R 
+#+latex: \label{sec:How-to-Write}
 Once the decision has been made what to write, the next task is to typeset the information to be shared. To do this the author will need to select software to use to write the documents. There are many options available, and choosing one over another is sometimes a matter of taste. But not all software were created equal, and \textsf{R} plays better with some applications than it does with others. 
 In short, \textsf{R} does great with \LaTeX{} and there are many resources available to make writing a document with \textsf{R} and \LaTeX{} easier. But \LaTeX{} is not for the beginner, and there are other word processors which may be acceptable depending on the circumstances.
 
@@ -1017,14 +1027,14 @@ There are programs to make the process easier: AUC\TeX{}.
 
 dev.copy2eps, also dev.copy2pdf
 
-\url{http://www.stat.uni-muenchen.de/~leisch/Sweave/}
+[[http://www.stat.uni-muenchen.de/~leisch/Sweave/]]
 
 
 *** Sweave and \protect\LyX{}
 This approach is nice because it works for all operating  systems. It gives you everything from the last section and makes it easier to use \LaTeX{}. That being said, it is better to know \LaTeX{} already when migrating to \LyX{}, because you understand all of the machinery going on under the hood.
 
 Program Listings and the \textsf{R} language
-\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}
+[[http://gregor.gorjanc.googlepages.com/lyx-sweave]]
 
 
 ** Formatting Tables \label{sec:Formatting-Tables}
@@ -1038,38 +1048,23 @@ library(Hmisc)
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 #+end_src
 
-#+results[0b0ddb8f7dfbc5175a5aff3c39c7105f5d778950]:
-#+begin_example
-cbind(Sepal.Length, Sepal.Width)    N=150
--------+----------+---+------------+-----------+
-|       |          |N  |Sepal.Length|Sepal.Width|
--------+----------+---+------------+-----------+
-|Species|setosa    | 50|5.006000    |3.428000   |
-|       |versicolor| 50|5.936000    |2.770000   |
-|       |virginica | 50|6.588000    |2.974000   |
--------+----------+---+------------+-----------+
-|Overall|          |150|5.843333    |3.057333   |
--------+----------+---+------------+-----------+
-#+end_example
+There is a =method= argument to =summary=, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: =reverse= and =cross=. See =?summary.formula= or the [[http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport][following document]] from Frank Harrell for more details.
 
-There is a =method= argument to =summary=, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: =reverse= and =cross=. See =?summary.formula= or the following document from Frank Harrell for more details \url{http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport}.
-
-
-** Other Formats \label{sec:Other-Formats}
+** Other Formats 
+#+latex: \label{sec:Other-Formats}
 
 HTML and prettyR
 R2HTML
 
-* Instructions for Instructors
+* Instructions for Instructors                                     :appendix:
 \label{cha:Instructions-for-Instructors}
 
 \noun{WARNING: this appendix is not applicable until the exercises
 have been written.} 
-#+begin_src R :exports none
+#+begin_src R :exports none :results silent
 set.seed(095259)
 #+end_src
 
-#+results[ce382389430c46506972e5b1bdefa6fe10c4820a]:
 
 Probably this /book/ could more accurately be described as /software/. The reason is that the document is one big random variable, one observation realized out of millions. It is electronically distributed under the GNU FDL, and ``free'' in both senses: speech and beer.  
 
@@ -1099,7 +1094,7 @@ You will need three (3) things to generate this document for yourself, in additi
 
 We will discuss each of these in turn.
 
-- LaTeX: ::  The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable LaTeX distributions depending on your operating system, one such alternative being MikTeX (\url{http://miktex.org/}) for Microsoft Windows. 
+- LaTeX: ::  The distribution used by the present author was \TeX{} Live (\url{http://www.tug.org/texlive/}). There are plenty of other perfectly suitable LaTeX distributions depending on your operating system, one such alternative being [[http://miktex.org/][MikTeX]] for Microsoft Windows. 
 - Sweave: :: If you have \textsf{R} installed, then the required Sweave files are already on your system... somewhere. The only problems that you may have are likely associated with making sure that your LaTeX distribution knows where to find the =Sweave.sty= file. See the Sweave Homepage (\url{http://www.statistik.lmu.de/~leisch/Sweave/}) for guidance on how to get it working on your particular operating system.
 - LyX: :: Strictly speaking, LyX is not needed to generate this document. But this document was written stem to stern with LyX, taking full advantage of all of the bells and whistles that LyX has to offer over plain \LaTeX{} editors. And it's free. See the LyX homepage (\url{http://www.lyx.org/}) for additional information. If you decide to give LyX a try, then you will need to complete some extra steps to coordinate Sweave and LyX with each other. Luckily, Gregor Gorjanc has a website and an \textsf{R} News article \cite{Gorjanc2008} to help you do exactly that. See the LyX-Sweave homepage (\url{http://gregor.gorjanc.googlepages.com/lyx-sweave}) for details.
 
@@ -1134,7 +1129,7 @@ But more generally, if you are not keen on the way I explained (or failed to exp
 
 Some individuals will argue that the nature of a statistics textbook like this one, many of the exercises being randomly generated /by design/, does a disservice to the students because the exercises do not use real-world data. That is a valid criticism... but in my case the benefits outweighed the detriments and I moved forward to incorporate static data sets whenever it was feasible and effective. Frankly, and most humbly, the only response I have for those individuals is: ``Please refer to the preceding paragraph.''
 
-* =RcmdrTestDrive= Story
+* =RcmdrTestDrive= Story                                           :appendix:
 \label{cha:RcmdrTestDrive-Story}
 
 The goal of =RcmdrTestDrive= was to have a data set sufficiently rich in the types of data represented such that a person could load it into the \textsf{R} Commander and be able to explore all of =Rcmdr='s menu options at once. I decided early-on that an efficient way to do this would be to generate the data set randomly, and later add to the list of variables as more =Rcmdr= menu options became available. Generating the data was easy, but generating a story that related all of the respective variables proved to be less so.
@@ -1145,90 +1140,88 @@ The most colorful of those I received was written by Jeffery Cornfield, submitte
 
 ** Case File: ALU-179 ``Murder Madness in Toon Town”
 #+begin_quote
-\noindent \begin{center}
 *WARNING* 
-\par\end{center}
-\noindent This file is not for the faint of heart, dear reader, because it is filled with horrible images that will haunt your nightmares. If you are weak of stomach, have irritable bowel syndrome, or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your own risk.
+This file is not for the faint of heart, dear reader, because it is filled with horrible images that will haunt your nightmares. If you are weak of stomach, have irritable bowel syndrome, or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your own risk.
 #+end_quote
 
 One fine sunny day, Police Chief R. Runner called up the forensics department at Acme-Looney University. There had been \( SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} \) murders in the past \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} \) days, approximately one murder every hour, of many of the local Human workers, shop keepers, and residents of Toon Town. These alarming rates threatened to destroy the fragile balance of Toon and Human camaraderie that had developed in Toon Town. 
 
-Professor Twee T.~Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
+Professor Twee T. Bird, a world-renowned forensics specialist and a Czechoslovakian native, received the call. “Professor, we need your expertise in this field to identify the pattern of the killer or killers,” Chief Runner exclaimed. “We need to establish a link between these people to stop this massacre.” 
 
 “Yes, Chief Runner, please give me the details of the case,” Professor Bird declared with a heavy native accent, (though, for the sake of the case file, reader, I have decided to leave out the accent due to the fact that it would obviously drive you -- if you will forgive the pun -- looney!) 
 
 “All prints are wiped clean and there are no identifiable marks on the bodies of the victims. All we are able to come up with is the possibility that perhaps there is some kind of alternative method of which we are unaware. We have sent a secure e-mail with a listing of all of the victims’ =races=, =genders=, locations of the bodies, and the sequential =order= in which they were killed. We have also included other information that might be helpful,” said Chief Runner.
 
-“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr.~Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
+“Thank you very much. Perhaps I will contact my colleague in the Statistics Department here, Dr. Elmer Fudd-Einstein,” exclaimed Professor Bird. “He might be able to identify a pattern of attack with mathematics and statistics.”
 
 “Good luck trying to find him, Professor. Last I heard, he had a bottle of scotch and was in the Hundred Acre Woods hunting rabbits,” Chief Runner declared in a manner that questioned the beloved doctor’s credibility. 
 
 “Perhaps I will take a drive to find him. The fresh air will do me good.”
 
 #+begin_quote
-\noindent I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr.~Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr.~Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
+I will skip ahead, dear reader, for much occurred during this time. Needless to say, after a fierce battle with a mountain cat that the Toon-ology Department tagged earlier in the year as “Sylvester,” Professor Bird found Dr. Fudd-Einstein and brought him back, with much bribery of alcohol and the promise of the future slaying of those “wascally wabbits” (it would help to explain that Dr. Fudd-Einstein had a speech impediment which was only worsened during the consumption of alcohol.)
 #+end_quote
 
-Once our two heroes returned to the beautiful Acme-Looney University, and once Dr.~Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
+Once our two heroes returned to the beautiful Acme-Looney University, and once Dr. Fudd-Einstein became sober and coherent, they set off to examine the case and begin solving these mysterious murders.
 
-“First off,” Dr.~Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a =salary= between \( SRC_R{round(min(RcmdrTestDrive$salary))} \) and \( SRC_R{round(max(RcmdrTestDrive$salary))} \) when they retired.” 
+“First off,” Dr. Fudd-Einstein explained, “these people all worked at the University at some point or another. Also, there also seems to be a trend in the fact that they all had a =salary= between \( SRC_R{round(min(RcmdrTestDrive$salary))} \) and \( SRC_R{round(max(RcmdrTestDrive$salary))} \) when they retired.” 
 
 “That’s not really a lot to live off of,” explained Professor Bird. 
 
-“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by =reduction=. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr.~D.~Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr.~Fudd-Einstein. 
+“Yes, but you forget that the Looney Currency System works differently than the rest of the American Currency System. One Looney is equivalent to Ten American Dollars. Also, these faculty members are the ones who faced a cut in their salary, as denoted by =reduction=. Some of them dropped quite substantially when the University had to fix that little /faux pas/ in the Chemistry Department. You remember: when Dr. D. Duck tried to create that ‘Everlasting Elixir?’ As a result, these faculty left the university. Speaking of which, when is his memorial service?” inquired Dr. Fudd-Einstein. 
 
 “This coming Monday. But if there were all of these killings, how in the world could one person do it? It just doesn’t seem to be possible; stay up \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} \) days straight and be able to kill all of these people and have the energy to continue on,” Professor Bird exclaimed, doubting the guilt of only one person. 
 
-“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr.~Fudd-Einstein said as he began feeding the numbers into the massive server. 
+“Perhaps then, it was a group of people, perhaps there was more than one killer placed throughout Toon Town to commit these crimes. If I feed in these variables, along with any others that might have a pattern, the Acme Computer will give us an accurate reading of suspects, with a scant probability of error. As you know, the Acme Computer was developed entirely in house here at Acme-Looney University,” Dr. Fudd-Einstein said as he began feeding the numbers into the massive server. 
 
 “Hey, look at this,” Professor Bird exclaimed, “What’s with this =before= and =after= information?” 
 
-“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either =smokers= or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr.~Fudd-Einstein declared matter-of-factly. 
+“Scroll down; it shows it as a note from the coroner’s office. Apparently Toon Town Coroner Marvin -- that strange fellow from Mars, Pennsylvania -- feels, in his opinion, that given the fact that the cadavers were either =smokers= or non-smokers, and given their personal health, and family medical history, that this was their life expectancy before contact with cigarettes or second-hand smoke and after,” Dr. Fudd-Einstein declared matter-of-factly. 
 
 “Well, would race or gender have something to do with it, Elmer?” inquired Professor Bird.
 
-“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr.~Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
+“Maybe, but I would bet my money on somebody was trying to quiet these faculty before they made a big ruckus about the secret money-laundering of Old Man Acme. You know, most people think that is how the University receives most of its funds, through the mob families out of Chicago. And I would be willing to bet that these faculty figured out the connection and were ready to tell the Looney Police.” Dr. Fudd-Einstein spoke lower, fearing that somebody would overhear their conversation.  
 
-Dr.~Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life... and when I say roared, I mean it literally /roared/. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
+Dr. Fudd-Einstein then pressed \textsf{Enter} on the keyboard and waited for the results. The massive computer roared to life... and when I say roared, I mean it literally /roared/. All the hidden bells, whistles, and alarm clocks in its secret compartments came out and created such a loud racket that classes across the university had to come to a stand-still until it finished computing. 
 
 Once it was completed, the computer listed 4 names:
 
 #+begin_example
 ****************************SUSPECTS****************************
 - Yosemite Sam (“Looney” Insane Asylum) 
-- Wile~E.~Coyote (deceased) 
-- Foghorn~Leghorn (whereabouts unknown) 
+- Wile E. Coyote (deceased) 
+- Foghorn Leghorn (whereabouts unknown) 
 - Granny (1313 Mockingbird Lane, Toon Town USA)
 #+end_example
 
-Dr.~Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
+Dr. Fudd-Einstein and Professor Bird looked on in silence. They could not believe their eyes. The greatest computer on the Gulf of Mexico seaboard just released the most obscure results imaginable.
 
 “There seems to be a mistake. Perhaps something is off,” Professor Bird asked, still unable to believe the results.
 
-“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben & Jerry’s files to identify possible links, creating the most powerful computer in the world... with a tweak of Toon fanaticism,” Dr.~Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
+“Not possible; the Acme Computer takes into account every kind of connection available. It considers affiliations to groups, and affiliations those groups have to other groups. It checks the FBI, CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA, \textsf{R}, MAPLE, SPSS, SAS, and Ben & Jerry’s files to identify possible links, creating the most powerful computer in the world... with a tweak of Toon fanaticism,” Dr. Fudd-Einstein proclaimed, being a proud co-founder of the Acme Computer Technology.
 
 “Wait a minute, Ben & Jerry? What would eating ice cream have to do with anything?” Professor Bird inquired.
 
-“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr.~Fudd-Einstein declared.
+“It is in the works now, but a few of my fellow statistician colleagues are trying to find a mathematical model to link the type of ice cream consumed to the type of person they might become. Assassins always ate vanilla with chocolate sprinkles, a little known fact they would tell you about Oswald and Booth,” Dr. Fudd-Einstein declared.
 
 “I’ve heard about this. My forensics graduate students are trying to identify car thieves with either rocky road or mint chocolate chip… so far, the pattern is showing a clear trend with chocolate chip,” Professor Bird declared. 
-“Well, what do we know about these suspects, Twee?” Dr.~Fudd-Einstein asked.
+“Well, what do we know about these suspects, Twee?” Dr. Fudd-Einstein asked.
 
 “Yosemite Sam was locked up after trying to rob that bank in the West Borough. Apparently his guns were switched and he was sent the Acme Kids Joke Gun and they blew up in his face. The containers of peroxide they contained turned all of his facial hair red. Some little child is running around Toon Town with a pair of .38’s to this day. 
 
-“Wile E.~Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
+“Wile E. Coyote was that psychopath working for the Yahtzee - the fanatics who believed that Toons were superior to Humans. He strapped sticks of Acme Dynamite to his chest to be a martyr for the cause, but before he got to the middle of Toon Town, this defective TNT blew him up. Not a single other person -- Toon or Human -- was even close.
 
-“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr.~Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
+“Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He goes to the homes of prominent Dog citizens and holds one of their relatives for ransom. If they refuse to pay, he sends them to the pound. Either way, they’re sure stuck in the dog house,” Professor Bird laughed. Dr. Fudd-Einstein didn’t seem amused, so Professor Bird continued. 
 
 “Granny is the most beloved alumnus of Acme-Looney University. She was in the first graduating class and gives graciously each year to the university. Without her continued financial support, we wouldn’t have the jobs we do. She worked as a parking attendant at the University lots... wait a minute, take a look at this,” Professor Bird said as he scrolled down in the police information. “Granny’s signature is on each of these faculty members’ =parking= tickets. Kind of odd, considering the Chief-of-Parking signed each personally. The deceased had from as few as \( SRC_R{min(RcmdrTestDrive$parking)} \) ticket to as many as \( SRC_R{max(RcmdrTestDrive$parking)} \). All tickets were unpaid.
 
 “And look at this, Granny married Old Man Acme after graduation. He was a resident of Chicago and rumored to be a consigliere to one of the most prominent crime families in Chicago, the Chuck Jones/Warner Crime Family,” Professor Bird read from the screen as a cold feeling of terror rose from the pit of his stomach. 
 
-“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr.~Fudd-Einstein said in awe and sarcasm.
+“Say, don’t you live at her house? Wow, you’re living under the same roof as one of the greatest criminals/murderers of all time!” Dr. Fudd-Einstein said in awe and sarcasm.
 
 “I would never have suspected her, but I guess it makes sense. She is older, so she doesn’t need near the amount of sleep as a younger person. She has access to all of the vehicles so she can copy license plate numbers and follow them to their houses. She has the finances to pay for this kind of massive campaign on behalf of the Mob, and she hates anyone that even remotely smells like smoke,” Professor Bird explained, wishing to have his hit of nicotine at this time.
 
-“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr.~Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
+“Well, I guess there is nothing left to do but to call Police Chief Runner and have him arrest her,” Dr. Fudd-Einstein explained as he began dialing. “What I can’t understand is how in the world the Police Chief sent me all of this information and somehow seemed to screw it up.”
 
 “What do you mean?” inquired Professor Bird.
 
@@ -1265,7 +1258,8 @@ save.image(file = "../../data/IPSUR.RData")
 tools::resaveRdaFiles('../../data', compress = 'xz')
 Stangle(file="IPSUR.Rnw", output="../IPSUR.R", annotate=TRUE)
 #+end_src
-\end{document}
+
+
 
 
 
