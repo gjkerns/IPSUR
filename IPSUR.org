@@ -1914,7 +1914,7 @@ urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE)
 We may interpret this experiment in a number of alternative ways. One way is to consider this as simply putting two 3-sided dice in a cup, shaking the cup, and looking inside -- as in a game of /Liar's Dice/, for instance. Each row of the sample space is a potential pair we could observe. Another way is to view each outcome as a separate method to distribute two identical golf balls into three boxes labeled 1, 2, and 3. Regardless of the interpretation, =urnsamples= lists every possible way that the experiment can conclude.
 
 #+latex: \end{example}
-Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be =x = c("Red","Blue","Green")=. But, there is an \textbf{important} point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were \textit{distinguishable} in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if =x = c("Red","Red","Blue")=?'' The answer is that =urnsamples= behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
+Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be =x = c("Red","Blue","Green")=. But, there is an *important* point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were \textit{distinguishable} in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if =x = c("Red","Red","Blue")=?'' The answer is that =urnsamples= behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
 surface.
 
 In this way, when the =x= argument of =urnsamples= has repeated elements, the resulting sample space may appear to be =ordered = TRUE= even when, in fact, the call to the function was =urnsamples(..., ordered = FALSE)=. Similar remarks apply for the =replace= argument. 
@@ -2442,11 +2442,11 @@ The quantity \(n!/[k!(n-k)!]\) is called a /binomial coefficient/ and plays a sp
 and is read ``\(n\) choose \(k\)''.
 
 #+latex: \begin{example}
-You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? \textbf{Answer:} \({5 \choose 2}=10\).
+You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? *Answer:* \({5 \choose 2}=10\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? \textbf{Answer:} \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
+Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? *Answer:* \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
 #+latex: \end{example}
 
 
@@ -2965,7 +2965,7 @@ Generalizing from above it is common to repeat a certain experiment multiple tim
 The =iidspace= function was designed specifically for this situation. It has three arguments: =x=, which is a vector of outcomes, =ntrials=, which is an integer telling how many times to repeat the experiment, and =probs= to specify the probabilities of the outcomes of =x= in a single trial. 
 
 #+latex: \begin{example}
-\textbf{An unbalanced coin} (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
+*An unbalanced coin* (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
 
 We may represent tossing our unbalanced coin three times with the following: 
 
@@ -2985,7 +2985,7 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
 #+begin_thm
-\textbf{\emph{(Bayes' Rule).}} Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\Pr(A)>0\). Then 
+*Bayes' Rule*. Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\Pr(A)>0\). Then 
 \begin{equation}
 \Pr(B_{k}|A)=\frac{\Pr(B_{k})\Pr(A|B_{k})}{\sum_{i=1}^{n}\Pr(B_{i})\Pr(A|B_{i})},\quad k=1,2,\ldots,n.\label{eq:bayes-rule}
 \end{equation}
@@ -4662,7 +4662,7 @@ using the popular formula for the difference of squares. The variance is left to
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
-f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \} ,\quad-\infty<x<\infty.
+f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \},\quad -\infty < x < \infty.
 \end{equation}
 We write \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and the associated \textsf{R} function is =dnorm(x, mean = 0, sd = 1)=.
 
@@ -4757,7 +4757,7 @@ The /quantile function/
 #+latex: \footnote{The precise definition of the quantile function is \(Q_{X}(p)=\inf \{ x:\ F_{X}(x)\geq p \}\), so at least it is well defined (though perhaps infinite) for the values \(p=0\) and \(p=1\).}
 of a random variable \(X\) is the inverse of its cumulative distribution function:
 \begin{equation}
-Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad0<p<1.
+Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad 0 < p <1.
 \end{equation}
 #+end_defn
 
@@ -4848,7 +4848,7 @@ Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X
 
 The support of \(X\) is \((-\infty,\infty)\), and as \(x\) goes from \(-\infty\) to \(\infty\), the quantity \(y=4-3x\) also traverses \((-\infty,\infty)\). Solving for \(x\) in the equation \(y=4-3x\) yields \(x=-(y-4)/3\) giving \(\mathrm{d} x/\mathrm{d} y=-1/3\). And since
 \[
-f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2},\quad-\infty<x<\infty,
+f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2}, \quad -\infty < x < \infty ,
 \]
 we have
 \begin{eqnarray*}
@@ -4908,7 +4908,7 @@ or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of th
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\textbf{\emph{The Probability Integral Transform}}. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
+*The Probability Integral Transform*. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 #+latex: \end{example}
 
 #+begin_proof
@@ -11917,11 +11917,11 @@ The easiest way to use this document is to install the =IPSUR= package from =CRA
 If you plan for \IPSUR\ to serve as the primary text for your course, then it would be wise to generate your own version of the document. You will need the source code for the Program which can be downloaded from =CRAN= or the \IPSUR\ website. Once the source is obtained there are four (4) basic steps to generating your own copy.
 
 1. Randomly select a secret ``seed'' of integers and replace my seed of 42 with your own seed. 
-1. Make sure that the \textsf{\textbf{maintext}} branch is turned \textsf{ON} and also make sure that both the \textsf{\textbf{solutions}} branch and the \textsf{\textbf{answers}} branch are turned \textsf{OFF}. Use \LyX{} or your \LaTeX{} editor with Sweave to generate your unique PDF copy of the book and distribute this copy to your students. (See the \LyX{} User's Guide to learn more about branches; the ones referenced above can be found under \textsf{Document \(\triangleright\) Settings \(\triangleright\) Branches}.)
-1. Turn the \textsf{\textbf{maintext}} branch \textsf{OFF} and the \textsf{\textbf{solutions}} branch \textsf{ON}. Generate a ``Student Solutions Manual'' which has complete solutions to selected exercises and distribute the PDF to the students. 
-1. Leave the \textsf{\textbf{solutions}} branch \textsf{ON} and also turn the \textsf{\textbf{answers}} branch \textsf{ON} and generate an ``Instructor Solutions and Answers Manual'' with full solutions to some of the exercises and just answers to the remaining exercises. Do NOT distribute this to the students -- unless of course you want them to have the answers to all of the problems.  
+1. Make sure that the =maintext= branch is turned \textsf{ON} and also make sure that both the =solutions= branch and the \textsf{\textbf{answers}} branch are turned \textsf{OFF}. Use LyX or your LaTeX editor with Sweave to generate your unique PDF copy of the book and distribute this copy to your students. (See the LyX User's Guide to learn more about branches; the ones referenced above can be found under \textsf{Document \(\triangleright\) Settings \(\triangleright\) Branches}.)
+1. Turn the \textsf{\textbf{maintext}} branch \textsf{OFF} and the =solutions= branch \textsf{ON}. Generate a ``Student Solutions Manual'' which has complete solutions to selected exercises and distribute the PDF to the students. 
+1. Leave the =solutions= branch \textsf{ON} and also turn the =answers= branch \textsf{ON} and generate an ``Instructor Solutions and Answers Manual'' with full solutions to some of the exercises and just answers to the remaining exercises. Do NOT distribute this to the students -- unless of course you want them to have the answers to all of the problems.  
 
-To make it easier for those people who do not want to use \LyX{} (or for whatever reason cannot get it working), I have included three (3) Sweave files corresponding to the main text, student solutions, and instructor answers, that are included in the \IPSUR\ source package in the \texttt{/tex} subdirectory. In principle it is possible to change the seed and generate the three parts separately with only Sweave and \LaTeX{}. This method is not recommended by me, but is perhaps desirable for some people.
+To make it easier for those people who do not want to use LyX (or for whatever reason cannot get it working), I have included three (3) Sweave files corresponding to the main text, student solutions, and instructor answers, that are included in the \IPSUR\ source package in the =/tex= subdirectory. In principle it is possible to change the seed and generate the three parts separately with only Sweave and LaTeX. This method is not recommended by me, but is perhaps desirable for some people.
 
 #+latex: \paragraph*{Generating Quizzes and Exams}
 - You can copy-paste selected exercises from the text, put them together, and you have a quiz. Since the numbers are randomly generated you do not need to worry about different semesters. And you will have answer keys already for all of your QUIZZES and EXAMS, too. 
