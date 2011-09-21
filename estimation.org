@@ -257,17 +257,17 @@ Some comments about maximum likelihood estimators:
 
 Notice, in Example \ref{exa:bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
-\E\overline{X} & = & \E\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
- & = & \frac{1}{n}\left(\E X_{1}+\E X_{2}+\cdots+\E X_{n}\right),\\
+\mathbb{E}\overline{X} & = & \mathbb{E}\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
+ & = & \frac{1}{n}\left(\mathbb{E} X_{1}+\mathbb{E} X_{2}+\cdots+\mathbb{E} X_{n}\right),\\
  & = & \frac{1}{n}\left(np\right),\\
  & = & p,
 \end{eqnarray*}
-which is exactly the same as the parameter which we estimated. More concisely, \(\E\hat{p}=p\), that is, on the average, the estimator is exactly right.
+which is exactly the same as the parameter which we estimated. More concisely, \(\mathbb{E}\hat{p}=p\), that is, on the average, the estimator is exactly right.
 
 #+begin_defn
 Let \(s(X_{1},X_{2},\ldots,X_{n})\) be a statistic which estimates \(\theta\). If 
 \[
-\E s(X_{1},X_{2},\ldots,X_{n})=\theta,
+\mathbb{E} s(X_{1},X_{2},\ldots,X_{n})=\theta,
 \]
 then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased estimator/ of \(\theta\). Otherwise, it is /biased/.
 #+end_defn
@@ -285,9 +285,9 @@ where \(\hat{\mu}=\overline{X}\) and
 \end{equation}
 We of course know from \ref{pro:mean-sd-xbar} that \(\hat{\mu}\) is unbiased. What about \(\hat{\sigma^{2}}\)? Let us check: 
 \begin{eqnarray*}
-\E\,\hat{\sigma^{2}} & = & \E\,\frac{n-1}{n}S^{2}\\
- & = & \E\left(\frac{\sigma^{2}}{n}\frac{(n-1)S^{2}}{\sigma^{2}}\right)\\
- & = & \frac{\sigma^{2}}{n}\E\ \mathsf{chisq}(\mathtt{df}=n-1)\\
+\mathbb{E}\,\hat{\sigma^{2}} & = & \mathbb{E}\,\frac{n-1}{n}S^{2}\\
+ & = & \mathbb{E}\left(\frac{\sigma^{2}}{n}\frac{(n-1)S^{2}}{\sigma^{2}}\right)\\
+ & = & \frac{\sigma^{2}}{n}\mathbb{E}\ \mathsf{chisq}(\mathtt{df}=n-1)\\
  & = & \frac{\sigma^{2}}{n}(n-1),
 \end{eqnarray*}
 from which we may conclude two things:
@@ -299,9 +299,9 @@ from which we may conclude two things:
 One of the most common questions in an introductory statistics class is, ``Why do we divide by \(n-1\) when we compute the sample variance? Why do we not divide by \(n\)?'' We see now that division by \(n\) amounts to the use of a /biased/ estimator for \(\sigma^{2}\), that is, if we divided by \(n\) then on the average we would /underestimate/ the true value of \(\sigma^{2}\). We use \(n-1\) so that, on the average, our estimator of \(\sigma^{2}\) will be exactly right. 
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-\textsf{R} can be used to find maximum likelihood estimators in a lot of diverse settings. We will discuss only the most basic here and will leave the rest to more sophisticated texts.
+\(\mathsf{R}\) can be used to find maximum likelihood estimators in a lot of diverse settings. We will discuss only the most basic here and will leave the rest to more sophisticated texts.
 
 For one parameter estimation problems we may use the =optimize= function to find MLEs. The arguments are the function to be maximized (the likelihood function), the range over which the optimization is to take place, and optionally any other arguments to be passed to the likelihood if needed.
 
@@ -323,12 +323,12 @@ A <- optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 
 Note that the =optimize= function by default minimizes the function =L=, so we have to set =maximum = TRUE= to get an MLE. The returned value of =$maximum= gives an approximate value of the MLE to be \( SRC_R{round(A$maximum, 3)} \) and =objective= gives =L= evaluated at the MLE which is approximately \( SRC_R{round(A$objective, 3)} \).
 
-We previously remarked that it is usually more numerically convenient to maximize the log-likelihood (or minimize the negative log-likelihood), and we can just as easily do this with \textsf{R}. We just need to calculate the log-likelihood beforehand which (for this example) is
+We previously remarked that it is usually more numerically convenient to maximize the log-likelihood (or minimize the negative log-likelihood), and we can just as easily do this with \(\mathsf{R}\). We just need to calculate the log-likelihood beforehand which (for this example) is
 \[
 -l(p)=-\sum x_{i}\ln\, p-\left(n-\sum x_{i}\right)\ln(1-p).
 \]
 
-It is done in \textsf{R} with
+It is done in \(\mathsf{R}\) with
 
 #+begin_src R :exports both :results output pp 
 minuslogL <- function(p,x){
@@ -554,7 +554,7 @@ and satisfy
 Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution.  PANIC
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
 #+begin_src R :exports none :results silent
 library(TeachingDemos)
@@ -626,7 +626,7 @@ r=\frac{\left(S_{X}^{2}/n+S_{Y}^{2}/m\right)^{2}}{\frac{1}{n-1}\left(S_{X}^{2}/n
 \end{equation}
 where we understand that \(r\) is rounded down to the nearest integer. The resulting interval has approximately \(100(1-\alpha)\%\) confidence.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The basic function is =t.test= which has a =var.equal= argument that may be set to =TRUE= or =FALSE=. The confidence interval is shown as part of the output, although there is a lot of additional information that is not needed until Chapter
 \ref{cha:Hypothesis-Testing}.
@@ -641,9 +641,9 @@ We would like to know \(p\) which is the ``proportion of successes''. For instan
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
-We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) distributed \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\). Recall from Section \ref{sec:binom-dist} that the common mean of these variables is \(\E X=p\) and the variance is \(\E(X-p)^{2}=p(1-p)\). If we let \(Y=\sum X_{i}\), then from Section \ref{sec:binom-dist} we know that \(Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) and that 
+We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) distributed \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\). Recall from Section \ref{sec:binom-dist} that the common mean of these variables is \(\mathbb{E} X=p\) and the variance is \(\mathbb{E}(X-p)^{2}=p(1-p)\). If we let \(Y=\sum X_{i}\), then from Section \ref{sec:binom-dist} we know that \(Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) and that 
 \[
-\overline{X}=\frac{Y}{n}\mbox{ has }\E\overline{X}=p\mbox{ and }\mathrm{Var}(\overline{X})=\frac{p(1-p)}{n}.
+\overline{X}=\frac{Y}{n}\mbox{ has }\mathbb{E}\overline{X}=p\mbox{ and }\mathrm{Var}(\overline{X})=\frac{p(1-p)}{n}.
 \]
 Thus if \(n\) is large (here is the CLT) then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) would be given by
 \begin{equation}
@@ -698,7 +698,7 @@ or in other words, we know in advance that the true proportion is restricted to 
 #+end_rem
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports both :results output pp 
 library(Hmisc)
@@ -731,15 +731,15 @@ B <- with(A, untable(A, Freq))
 
 I am thinking one and two sample problems here.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \textsf{R} here.
+I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \(\mathsf{R}\) here.
 
 ** Fitting Distributions
 #+latex: \label{sec:Fitting-Distributions}
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
@@ -805,7 +805,7 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 #+end_rem
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
 
 ** Other Topics

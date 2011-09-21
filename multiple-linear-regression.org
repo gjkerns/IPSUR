@@ -138,7 +138,7 @@ The interpretation is simple. The intercept \(\beta_{0}\) represents the mean =V
 
 In simple linear regression, we had one independent variable and our linear regression surface was 1D, simply a line. In multiple regression there are many independent variables and so our linear regression surface will be many-D... in general, a hyperplane. But when there are only two explanatory variables the hyperplane is just an ordinary plane and we can look at it with a 3D scatterplot. 
 
-One way to do this is with the \textsf{R} Commander in the =Rcmdr= package \cite{Foxrcmdr}. It has a 3D scatterplot option under the \textsf{Graphs} menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
+One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \cite{Foxrcmdr}. It has a 3D scatterplot option under the =Graphs= menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig:3D-scatterplot-trees}.
 
@@ -219,7 +219,7 @@ The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical
 We have only found a critical value, and have not actually shown that the critical value is a minimum. We omit the details and refer the interested reader to \cite{Rao1999}.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 We do all of the above just as we would in simple linear regression. The powerhouse is the =lm=\index{lm@\texttt{lm}} function. Everything else is based on it. We separate explanatory variables in the model formula by a plus sign.
 
@@ -291,7 +291,7 @@ If we wanted to predict the average volume of black cherry trees that have =Girt
 We would use the same estimate \(\hat{Y}=35.6\) to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The fitted values are stored inside =trees.lm= and may be accessed with the =fitted= function. We only show the first five fitted values.
 
@@ -301,7 +301,7 @@ fitted(trees.lm)[1:5]
 
 The syntax for general prediction does not change much from simple linear regression. The computations are done with the =predict= function as described below. 
 
-The only difference from SLR is in the way we tell \textsf{R} the values of the explanatory variables for which we want predictions. In SLR we had only one independent variable but in MLR we have many (for the =trees= data we have two). We will store values for the independent variables in the data frame =new=, which has two columns (one for each independent variable) and three rows (we shall make predictions at three different locations).
+The only difference from SLR is in the way we tell \(\mathsf{R}\) the values of the explanatory variables for which we want predictions. In SLR we had only one independent variable but in MLR we have many (for the =trees= data we have two). We will store values for the independent variables in the data frame =new=, which has two columns (one for each independent variable) and three rows (we shall make predictions at three different locations).
 
 #+begin_src R :exports code :results silent 
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
@@ -355,7 +355,7 @@ S^{2}=\frac{SSE}{n-(p+1)}.
 \end{equation}
 That would be a good guess. The /residual standard error/ is \(S=\sqrt{S^{2}}\).
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The residuals are also stored with =trees.lm= and may be accessed with the =residuals= function. We only show the first five residuals.
 
@@ -385,7 +385,7 @@ Now recall Theorem \ref{thm:mvnorm-dist-matrix-prod} that we said we were going 
 \end{equation}
 since
 \begin{equation}
-\E\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\mathbf{X}\upbeta)=\upbeta,
+\mathbb{E}\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\mathbf{X}\upbeta)=\upbeta,
 \end{equation}
 and
 \begin{equation}
@@ -401,7 +401,7 @@ The degrees of freedom for the Student's \(t\) distribution
 #+latex: \footnote{We are taking great leaps over the mathematical details. In particular, we have yet to show that \(s^{2}\) has a chi-square distribution and we have not even come close to showing that \(b_{i}\) and \(s_{b_{i}}\) are independent. But these are entirely outside the scope of the present book and the reader may rest assured that the proofs await in later classes. See C.R. Rao for more.}
 are the same as the denominator of \(S^{2}\). 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 To get confidence intervals for the parameters we need only use =confint=\index{confint@\texttt{confint}}:
 
@@ -440,7 +440,7 @@ Prediction intervals for a new observation at \(\mathbf{x}_{0}\) are given by
 The prediction intervals are wider than the confidence intervals, just as in Section \ref{sub:slr-interval-est-regline}.
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section \ref{sub:slr-interval-est-regline} (which we repeat here for illustration).
 
@@ -517,7 +517,7 @@ This is a problem, because as the philosopher, Occam, once said: ``causes should
 \end{equation}
 It is good practice for the statistician to weigh both \(R^{2}\) and \(\overline{R}^{2}\) during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\) from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
 
 #+begin_src R :exports both :results output pp 
@@ -543,7 +543,7 @@ F=\frac{SSR/p}{SSE/(n-p-1)}.
 \end{equation}
 When the regression assumptions hold and under \(H_{0}\), it can be shown that \(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject \(H_{0}\) when \(F\) is large, that is, when the explained variation is large relative to the unexplained variation.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The overall \(F\) statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
 
@@ -574,7 +574,7 @@ T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 has a Student's \(t\) distribution with \(n-(p+1)\) degrees of freedom. (Remember, we are estimating \(p+1\) parameters.) Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a \(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The Student's \(t\) tests for significance of the individual explanatory variables are shown in the =summary= output.
 
@@ -632,13 +632,13 @@ The regression assumptions are the same. Almost everything indeed is the same. I
 *However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the \(x_{i}\)'s with \(x_{i}-\overline{x}\) (or \((x_{i}-\overline{x})/s\)) before fitting the model
 #+latex: \footnote{Rescaling the data gets the job done but a better way to avoid the multicollinearity introduced by the higher order terms is with /orthogonal polynomials/, whose coefficients are chosen just right so that the polynomials are not correlated with each other. This is beginning to linger outside the scope of this book, however, so we will content ourselves with a brief mention and then stick with the rescaling approach in the discussion that follows. A nice example of orthogonal polynomials in action can be run with \texttt{example(cars)}.}.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-There are multiple ways to fit a quadratic model to the variables =Volume= and =Girth= using \textsf{R}.
+There are multiple ways to fit a quadratic model to the variables =Volume= and =Girth= using \(\mathsf{R}\).
 1. One way would be to square the values for =Girth= and save them in a vector =Girthsq=. Next, fit the linear model =Volume ~ Girth + Girthsq=. 
-2. A second way would be to use the /insulate/ function in \textsf{R}, denoted by =I=:
+2. A second way would be to use the /insulate/ function in \(\mathsf{R}\), denoted by =I=:
    : Volume ~ Girth + I(Girth^2)
-The second method is shorter than the first but the end result is the same. And once we calculate and store the fitted model (in, say, =treesquad.lm=) all of the previous comments regarding \textsf{R} apply.  
+The second method is shorter than the first but the end result is the same. And once we calculate and store the fitted model (in, say, =treesquad.lm=) all of the previous comments regarding \(\mathsf{R}\) apply.  
 3. A third and ``right'' way to do it is with orthogonal polynomials:
    :  Volume ~ poly(Girth, degree = 2)
    See =?poly= and =?cars= for more information. Note that we can recover the approach in 2 with =poly(Girth, degree = 2, raw = TRUE)=.
@@ -747,11 +747,11 @@ Now think about what happens when the interaction term \(\beta_{1:2}x_{1}x_{2}\)
 \end{equation}
 In this case we see that not only the \(y\)-intercept changes when \(x_{1}\) varies, but the slope also changes in \(x_{1}\). Thus, the interaction term allows the slope of the mean response in \(x_{2}\) to increase and decrease as \(x_{1}\) varies. 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 There are several ways to introduce an interaction term into the model.
 1. Make a new variable =prod <- Girth * Height=, then include =prod= in the model formula =Volume ~ Girth + Height + prod=. This method is perhaps the most transparent, but it also reserves memory space unnecessarily.
-2. Once can construct an interaction term directly in \textsf{R} with a colon ``=:=''. For this example, the model formula would look like 
+2. Construct an interaction term directly in \(\mathsf{R}\) with a colon =:=. For this example, the model formula would look like 
    : Volume ~ Girth + Height + Girth:Height 
 
 For the =trees= data, we fit the model with the interaction using method two and see if it is significant:
@@ -797,7 +797,7 @@ We will leave the =Girth= variable alone, but we will replace the variable =Heig
 \end{cases}
 \end{equation}
 
-We can construct =Tall= very quickly in \textsf{R} with the =cut= function:
+We can construct =Tall= very quickly in \(\mathsf{R}\) with the =cut= function:
 
 #+begin_src R :exports both :results output pp 
 trees$Tall <- cut(trees$Height, breaks = c(-Inf, 76, Inf), 
@@ -830,7 +830,7 @@ while trees with =Tall = no= will have the mean response
 \end{equation}
 In essence, we are fitting two regression lines: one for tall trees, and one for short trees. The regression lines have the same slope but they have different \(y\) intercepts (which are exactly \(|\beta_{2}|\) far apart).
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The important thing is to double check that the qualitative variable in question is stored as a factor. The way to check is with the =class= command. For example,
 
@@ -848,13 +848,13 @@ summary(treesdummy.lm)
 From the output we see that all parameter estimates are statistically significant and we conclude that the mean response differs for trees with =Tall = yes= and trees with =Tall = no=.
 
 #+begin_rem
-We were somewhat disingenuous when we defined the dummy variable =Tallyes= because, in truth, \textsf{R} defines =Tallyes= automatically without input from the user
-#+latex: \footnote{That is, \textsf{R} by default handles contrasts according to its internal settings which may be customized by the user for fine control. Given that we will not investigate contrasts further in this book it does not serve the discussion to delve into those settings, either. The interested reader should check \texttt{?contrasts} for details.}. 
-Indeed, the author fit the model beforehand and wrote the discussion afterward with the knowledge of what \textsf{R} would do so that the output the reader saw would match what (s)he had previously read. The way that \textsf{R} handles factors internally is part of a much larger topic concerning /contrasts/, which falls outside the scope of this book. The interested reader should see Neter et al \cite{Neter1996} or Fox \cite{Fox1997} for more. 
+We were somewhat disingenuous when we defined the dummy variable =Tallyes= because, in truth, \(\mathsf{R}\) defines =Tallyes= automatically without input from the user
+#+latex: \footnote{That is, \(\mathsf{R}\) by default handles contrasts according to its internal settings which may be customized by the user for fine control. Given that we will not investigate contrasts further in this book it does not serve the discussion to delve into those settings, either. The interested reader should check \texttt{?contrasts} for details.}. 
+Indeed, the author fit the model beforehand and wrote the discussion afterward with the knowledge of what \(\mathsf{R}\) would do so that the output the reader saw would match what (s)he had previously read. The way that \(\mathsf{R}\) handles factors internally is part of a much larger topic concerning /contrasts/, which falls outside the scope of this book. The interested reader should see Neter et al \cite{Neter1996} or Fox \cite{Fox1997} for more. 
 #+end_rem
 
 #+begin_rem
-In general, if an explanatory variable =foo= is qualitative with \(n\) levels =bar1=, =bar2=, ..., =barn= then \textsf{R} will by default automatically define \(n-1\) indicator variables in the following way:
+In general, if an explanatory variable =foo= is qualitative with \(n\) levels =bar1=, =bar2=, ..., =barn= then \(\mathsf{R}\) will by default automatically define \(n-1\) indicator variables in the following way:
 \begin{eqnarray*}
 \mathtt{foobar2} & = & \begin{cases}
 1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\
@@ -862,7 +862,7 @@ In general, if an explanatory variable =foo= is qualitative with \(n\) levels =b
 1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\
 0, & \mbox{otherwise.}\end{cases}
 \end{eqnarray*}
-The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \textsf{R} will take care of the rest. 
+The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make sure that =foo= is stored as a factor and \(\mathsf{R}\) will take care of the rest. 
 #+end_rem
 
 *** Graphing the Regression Lines
@@ -906,7 +906,7 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 
 It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the \texttt{Fit}ted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
 
-There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \textsf{R} are done in a similar, consecutive fashion.
+There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \(\mathsf{R}\) are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
 #+latex: \label{sec:Partial-F-Statistic}
@@ -939,7 +939,7 @@ F=\frac{(SSE_{r}-SSE_{f})/(p-j)}{SSE_{f}/(n-p-1)}.
 It can be shown when the regression assumptions hold under \(H_{0}\) that the partial \(F\) statistic has an \(\mathsf{f}(\mathtt{df1}=p-j,\,\mathtt{df2}=n-p-1)\) distribution. We calculate the \(p\)-value of the observed partial \(F\) statistic and reject \(H_{0}\) if the \(p\)-value is small. 
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 

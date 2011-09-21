@@ -75,13 +75,13 @@ M_{\overline{X}}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
 #+begin_proof
 Go from the definition:
 \begin{eqnarray*}
-M_{\overline{X}}(t) & = & \E\,\mathrm{e}^{t\overline{X}},\\
- & = & \E\,\mathrm{e}^{t(X_{1}+\cdots+X_{n})/n},\\
- & = & \E\,\mathrm{e}^{tX_{1}/n}\mathrm{e}^{tX_{2}/n}\cdots\mathrm{e}^{tX_{n}/n}.
+M_{\overline{X}}(t) & = & \mathbb{E}\,\mathrm{e}^{t\overline{X}},\\
+ & = & \mathbb{E}\,\mathrm{e}^{t(X_{1}+\cdots+X_{n})/n},\\
+ & = & \mathbb{E}\,\mathrm{e}^{tX_{1}/n}\mathrm{e}^{tX_{2}/n}\cdots\mathrm{e}^{tX_{n}/n}.
 \end{eqnarray*}
 And because \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent, Proposition \ref{pro:indep-implies-prodexpect} allows us to distribute the expectation among each term in the product, which is
 \[
-\E\mathrm{e}^{tX_{1}/n}\,\E\mathrm{e}^{tX_{2}/n}\cdots\E\mathrm{e}^{tX_{n}/n}.
+\mathbb{E}\mathrm{e}^{tX_{1}/n}\,\mathbb{E}\mathrm{e}^{tX_{2}/n}\cdots\mathbb{E}\mathrm{e}^{tX_{n}/n}.
 \]
 The last step is to recognize that each term in last product above is exactly \(M(t/n)\).
 #+end_proof
@@ -166,7 +166,7 @@ This distribution was first published by W. S. Gosset (1900) under the pseudonym
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty.
 \end{equation}
-Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure \ref{fig:Student's-t-dist-vary-df}. As with the normal distribution, there are four functions in \textsf{R} associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
+Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure \ref{fig:Student's-t-dist-vary-df}. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
 
 
 The code to produce Figure \ref{fig:Student's-t-dist-vary-df} is
@@ -250,7 +250,7 @@ Notice that the shape of the underlying population's distribution is not mention
 How large is ``sufficiently large''? It is here that the shape of the underlying population distribution plays a role. For populations with distributions that are approximately symmetric and mound-shaped, the samples may need to be only of size four or five, while for highly skewed or heavy-tailed populations the samples may need to be much larger for the distribution of the sample means to begin to show a bell-shape. Regardless, for a given population distribution (with finite standard deviation) the approximation tends to be better for larger sample sizes.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The =TeachingDemos= package \cite{Snowteachingdemos} has =clt.examp= and the =distrTeach= \cite{Ruckdescheldistr} package has =illustrateCLT=. Try the following at the command line (output omitted):
 #+begin_src R :exports code :eval never
@@ -357,7 +357,7 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 
 Some comparisons are meaningful, but their sampling distribution is not quite so tidy to describe analytically. What do we do then?
 
-As it turns out, we do not need to know the exact analytical form of the sampling distribution; sometimes it is enough to approximate it with a simulated distribution. In this section we will show you how. Note that \textsf{R} is particularly well suited to compute simulated sampling distributions, much more so than, say, SPSS or SAS.
+As it turns out, we do not need to know the exact analytical form of the sampling distribution; sometimes it is enough to approximate it with a simulated distribution. In this section we will show you how. Note that \(\mathsf{R}\) is particularly well suited to compute simulated sampling distributions, much more so than, say, SPSS or SAS.
 
 *** The Interquartile Range
 

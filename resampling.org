@@ -25,7 +25,7 @@
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
 
-I have seen /Statistical Computing with \textsf{R}/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \textsf{R} into the narrative.
+I have seen /Statistical Computing with \(\mathsf{R}\)/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \(\mathsf{R}\) into the narrative.
 
 #+latex: \paragraph*{What do I want them to know?}
 
@@ -195,12 +195,12 @@ mean(medstar) - median(rivers)
 #+latex: \end{example}
 
 #+latex: \begin{example}
-*The boot package in R*. It turns out that there are many bootstrap procedures and commands already built into base \textsf{R}, in the =boot= package. Further, inside the =boot= package there is even a function called =boot=\index{boot@\texttt{boot}}. The basic syntax is of the form:
+*The boot package in R*. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the =boot= package. Further, inside the =boot= package there is even a function called =boot=\index{boot@\texttt{boot}}. The basic syntax is of the form:
 
 :  boot(data, statistic, R)
 
 #+latex: \end{example}
- Here, =data= is a vector (or matrix) containing the data to be resampled, =statistic= is a defined function, /of two arguments/, that tells which statistic should be computed, and the parameter =R= specifies how many resamples should be taken.
+ Here, =data= is a vector (or matrix) containing the data to be resampled, =statistic= is a defined function, /of two arguments/, that tells which statistic should be computed, and the parameter \(\mathsf{R}\) specifies how many resamples should be taken.
 
 For the standard error of the mean (Example \ref{exa:Bootstrap-se-mean}):
 
@@ -237,7 +237,7 @@ Some things to keep in mind about the bootstrap:
 
 As a first try, we want to obtain a 95% confidence interval for a parameter. Typically the statistic we use to estimate the parameter is centered at (or at least close by) the parameter; in such cases a 95% confidence interval for the parameter is nothing more than a 95% confidence interval for the statistic. And to find a 95% confidence interval for the statistic we need only go to its sampling distribution to find an interval that contains 95% of the area. (The most popular choice is the equal-tailed interval with 2.5% in each tail.)
 
-This is incredibly easy to accomplish with the bootstrap. We need only to take a bunch of bootstrap resamples, order them, and choose the \(\alpha/2\)th and \((1-\alpha)\)th percentiles. There is a function =boot.ci=\index{boot.ci@\texttt{boot.ci}} in \textsf{R} already created to do just this. Note that in order  to use the function =boot.ci= we must first run the =boot= function and save the output in a variable, for example, =data.boot=. We then plug =data.boot= into the function =boot.ci=.
+This is incredibly easy to accomplish with the bootstrap. We need only to take a bunch of bootstrap resamples, order them, and choose the \(\alpha/2\)th and \((1-\alpha)\)th percentiles. There is a function =boot.ci=\index{boot.ci@\texttt{boot.ci}} in \(\mathsf{R}\) already created to do just this. Note that in order  to use the function =boot.ci= we must first run the =boot= function and save the output in a variable, for example, =data.boot=. We then plug =data.boot= into the function =boot.ci=.
 
 
 #+latex: \begin{example}
@@ -277,7 +277,7 @@ where \(\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\) is the appropriate critical val
 \begin{equation}
 \mbox{statistic}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)*\mathrm{SE}(\mbox{statistic})
 \end{equation}
- will have approximately \(100(1-\alpha)\%\) confidence of containing \(\E(\mathrm{statistic})\). 
+ will have approximately \(100(1-\alpha)\%\) confidence of containing \(\mathbb{E}(\mathrm{statistic})\). 
 
 #+latex: \begin{example}
 We will use the t-interval method to find the bootstrap CI for the median. We have looked at the bootstrap distribution; it appears to be symmetric and approximately mound shaped. Further, we may check that the bias is approximately 40, which on the scale of these data is practically negligible. Thus, we may consider looking at the \(t\)-intervals. Note that, since our sample is so large, instead of \(t\)-intervals we will essentially be using \(z\)-intervals. 

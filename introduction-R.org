@@ -16,61 +16,61 @@
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+INCLUDE: "prelim.R" src R :exports none :results hide
 
-* An Introduction to \textsf{R}                                      :introR:
+* An Introduction to \(\mathsf{R}\)                                  :introR:
 :PROPERTIES:
 :tangle: R/introR.R
 :END:
 #+latex: \label{cha:introduction-to-R}
 
-** Downloading and Installing \textsf{R} 
+** Downloading and Installing \(\mathsf{R}\)  
 #+latex: \label{sec:download-install-R}
 
-The instructions for obtaining \textsf{R} largely depend on the user's hardware and operating system. The \textsf{R} Project has written an \textsf{R} Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
+The instructions for obtaining \(\mathsf{R}\) largely depend on the user's hardware and operating system. The \(\mathsf{R}\)  Project has written an \(\mathsf{R}\)  Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
 
-*** Installing \textsf{R}
+*** Installing \(\mathsf{R}\) 
 
-Visit one of the links below to download the latest version of \textsf{R}
+Visit one of the links below to download the latest version of \(\mathsf{R}\) 
 for your operating system:
 
 - Microsoft Windows: :: http://cran.r-project.org/bin/windows/base/
 - MacOS: :: http://cran.r-project.org/bin/macosx/
 - Linux: :: http://cran.r-project.org/bin/linux/
 
-On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for "Customized startup options", specify \textsf{Yes}. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
+On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for "Customized startup options", specify =Yes=. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
 
-#+latex: \paragraph*{Installing \textsf{R} on a USB drive (Windows)}
+#+latex: \paragraph*{Installing \(\mathsf{R}\) on a USB drive (Windows)}
 
-With this option you can use \textsf{R} portably and without administrative privileges. There is an entry in the \textsf{R} for Windows FAQ about this. Here is the procedure I use:  
+With this option you can use \(\mathsf{R}\) portably and without administrative privileges. There is an entry in the \(\mathsf{R}\) for Windows FAQ about this. Here is the procedure I use:  
 1. Download the Windows installer above and start installation as usual. When it asks /where/ to install, navigate to the top-level directory of the USB drive instead of the default =C= drive.
 2. When it asks whether to modify the Windows registry, uncheck the box; we do NOT want to tamper with the registry. 
-3. After installation, change the name of the folder from =R-x.y.z= to just plain =R=. (Even quicker: do this in step 1.) 
-4. [[http://ipsur.r-forge.r-project.org/book/download/R.exe][Download this shortcut]] and move it to the top-level directory of the USB drive, right beside the =R= folder, not inside the folder. Use the downloaded shortcut to run \textsf{R}.
+3. After installation, change the name of the folder from =R-x.y.z= to just plain \(\mathsf{R}\). (Even quicker: do this in step 1.) 
+4. [[http://ipsur.r-forge.r-project.org/book/download/R.exe][Download this shortcut]] and move it to the top-level directory of the USB drive, right beside the \(\mathsf{R}\) folder, not inside the folder. Use the downloaded shortcut to run \(\mathsf{R}\).
 
 Steps 3 and 4 are not required but save you the trouble of navigating to the =R-x.y.z/bin= directory to double-click =Rgui.exe= every time you want to run the program. It is useless to create your own shortcut to =Rgui.exe=. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some /other/ machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 
 *** Installing and Loading Add-on Packages
 #+latex: \label{sub:installing-loading-packages}
 
-There are /base/ packages (which come with \textsf{R} automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \textsf{R} being used for this document the default base packages loaded at startup are 
+There are /base/ packages (which come with \(\mathsf{R}\) automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \(\mathsf{R}\) being used for this document the default base packages loaded at startup are 
 
 #+begin_src R :exports both :results output pp
 getOption("defaultPackages")
 #+end_src
 
-The base packages are maintained by a select group of volunteers, called ``\textsf{R} Core''. In addition to the base packages, there are literally thousands of additional contributed packages written by individuals all over the world. These are stored worldwide on mirrors of the Comprehensive \textsf{R} Archive Network, or =CRAN= for short. Given an active Internet connection, anybody is free to download and install these packages and even inspect the source code.
+The base packages are maintained by a select group of volunteers, called \(\mathsf{R}\) Core. In addition to the base packages, there are literally thousands of additional contributed packages written by individuals all over the world. These are stored worldwide on mirrors of the Comprehensive \(\mathsf{R}\) Archive Network, or =CRAN= for short. Given an active Internet connection, anybody is free to download and install these packages and even inspect the source code.
 
-To install a package named =foo=, open up \textsf{R} and type =install.packages("foo")=\index{install.packages@\texttt{install.packages}}. To install =foo= and additionally install all of the other packages on which =foo= depends, instead type =install.packages("foo", depends = TRUE)=.
+To install a package named =foo=, open up \(\mathsf{R}\) and type =install.packages("foo")=\index{install.packages@\texttt{install.packages}}. To install =foo= and additionally install all of the other packages on which =foo= depends, instead type =install.packages("foo", depends = TRUE)=.
 
 The general command =install.packages()= will (on most operating systems) open a window containing a huge list of available packages; simply choose one or more to install.
 
-No matter how many packages are installed onto the system, each one must first be loaded for use with the =library=\index{library@\texttt{library}} function. For instance, the =foreign= package \cite{foreign} contains all sorts of functions needed to import data sets into \textsf{R} from other software such as SPSS, SAS, /etc/. But none of those functions will be available until the command =library(foreign)= is issued. 
+No matter how many packages are installed onto the system, each one must first be loaded for use with the =library=\index{library@\texttt{library}} function. For instance, the =foreign= package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, /etc/. But none of those functions will be available until the command =library(foreign)= is issued. 
 
 Type =library()= at the command prompt (described below) to see a list of all available
 packages in your library.
 
-For complete, precise information regarding installation of \textsf{R} and add-on packages, see the [[http://cran.r-project.org/manuals.html][\textsf{R} Installation and Administration manual]].
+For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the [[http://cran.r-project.org/manuals.html][\(\mathsf{R}\) Installation and Administration manual]].
 
-** Communicating with \textsf{R}
+** Communicating with \(\mathsf{R}\)
 #+latex: \label{sec:Communicating-with-R}
 
 #+latex: \paragraph*{One line at a time}
@@ -83,31 +83,31 @@ This is the most basic method and is the first one that beginners will use.
 
 #+latex: \paragraph*{Multiple lines at a time}
 
-For longer programs (called /scripts/) there is too much code to write all at once at the command prompt. Furthermore, for longer scripts it is convenient to be able to only modify a certain piece of the script and run it again in \textsf{R}. Programs called /script editors/ are specially designed to aid the communication and code writing process. They have all sorts of helpful features including \textsf{R} syntax highlighting, automatic code completion, delimiter matching, and dynamic help on the \textsf{R} functions as they are being written. Even more, they often have all of the text editing features of programs like Microsoft\(\circledR\)Word. Lastly, most script editors are fully customizable in the sense that the user can customize the appearance of the interface to choose what colors to display, when to display them, and how to display them.
+For longer programs (called /scripts/) there is too much code to write all at once at the command prompt. Furthermore, for longer scripts it is convenient to be able to only modify a certain piece of the script and run it again in \(\mathsf{R}\). Programs called /script editors/ are specially designed to aid the communication and code writing process. They have all sorts of helpful features including \(\mathsf{R}\) syntax highlighting, automatic code completion, delimiter matching, and dynamic help on the \(\mathsf{R}\) functions as they are being written. Even more, they often have all of the text editing features of programs like Microsoft\(\circledR\)Word. Lastly, most script editors are fully customizable in the sense that the user can customize the appearance of the interface to choose what colors to display, when to display them, and how to display them.
 
-- \textsf{R} Editor (Windows):\index{R Editor@\textsf{R} Editor} :: In Microsoft\(\circledR\) Windows, \textsf{R}Gui has its own built-in script editor, called \textsf{R} Editor. From the console window, select \textsf{File} \textsf{\(\triangleright\)} \textsf{New} \textsf{Script}. A script window opens, and the lines of code can be written in the window. When satisfied with the code, the user highlights all of the commands and presses \textsf{Ctrl+R}. The commands are automatically run at once in \textsf{R} and the output is shown. To save the script for later, click \textsf{File} \textsf{\(\triangleright\)} \textsf{Save as...} in \textsf{R} Editor. The script can be reopened later with \textsf{File} \textsf{\(\triangleright\)} \textsf{Open Script...} in \textsf{RGui}. Note that \textsf{R} Editor does not have the fancy syntax highlighting that the others do.
-- \textsf{R}WinEdt:\index{RWinEdt@\textsf{R}WinEdt} :: This option is coordinated with WinEdt for \LaTeX{} and has additional features such as code highlighting, remote sourcing, and a ton of other things. However, one first needs to download and install a shareware version of another program, WinEdt, which is only free for a while -- pop-up windows will eventually appear that ask for a registration code. \textsf{R}WinEdt is nevertheless a very fine choice if you already own WinEdt or are planning to purchase it in the near future.
-- Tinn \textsf{R}/Sciviews K:\index{Tinn R@Tinn \textsf{R}}\index{Sciviews K} :: This one is completely free and has all of the above mentioned options and more. It is simple enough to use that the user can virtually begin working with it immediately after installation. But Tinn-\textsf{R} proper is only available for Microsoft\(\circledR\) Windows operating systems. If you are on MacOS or Linux, a comparable alternative is Sci-Views - Komodo Edit.
-- Emacs/ESS:\index{Emacs}\index{ESS} :: Emacs is an all purpose text editor. It can do absolutely anything with respect to modifying, searching, editing, and manipulating, text. And if Emacs can't do it, then you can write a program that extends Emacs to do it. Once such extension is called =ESS=, which stands for \emph{E}macs \emph{S}peaks \emph{S}tatistics. With ESS a person can speak to \textsf{R}, do all of the tricks that the other script editors offer, and much, much, more. Please see the following for installation details, documentation, reference cards, and a whole lot more: http://ess.r-project.org.
+- \(\mathsf{R}\) Editor (Windows):\index{R Editor@\textsf{R} Editor} :: In Microsoft\(\circledR\) Windows, \(\mathsf{R}\) Gui has its own built-in script editor, called \(\mathsf{R}\) Editor. From the console window, select =File= \(\triangleright\) =New Script=. A script window opens, and the lines of code can be written in the window. When satisfied with the code, the user highlights all of the commands and presses \textsf{Ctrl+R}. The commands are automatically run at once in \(\mathsf{R}\) and the output is shown. To save the script for later, click =File= \(\triangleright\) =Save as...= in \(\mathsf{R}\) Editor. The script can be reopened later with =File= \(\triangleright\)} =Open Script...= in =RGui=. Note that \(\mathsf{R}\) Editor does not have the fancy syntax highlighting that the others do.
+- \(\mathsf{R}\) WinEdt:\index{RWinEdt@\textsf{R}WinEdt} :: This option is coordinated with WinEdt for \LaTeX{} and has additional features such as code highlighting, remote sourcing, and a ton of other things. However, one first needs to download and install a shareware version of another program, WinEdt, which is only free for a while -- pop-up windows will eventually appear that ask for a registration code. \(\mathsf{R}\) WinEdt is nevertheless a very fine choice if you already own WinEdt or are planning to purchase it in the near future.
+- Tinn \(\mathsf{R}\) / Sciviews K:\index{Tinn R@Tinn \textsf{R}}\index{Sciviews K} :: This one is completely free and has all of the above mentioned options and more. It is simple enough to use that the user can virtually begin working with it immediately after installation. But Tinn \(\mathsf{R}\) proper is only available for Microsoft\(\circledR\) Windows operating systems. If you are on MacOS or Linux, a comparable alternative is Sci-Views - Komodo Edit.
+- Emacs/ESS:\index{Emacs}\index{ESS} :: Emacs is an all purpose text editor. It can do absolutely anything with respect to modifying, searching, editing, and manipulating, text. And if Emacs can't do it, then you can write a program that extends Emacs to do it. Once such extension is called =ESS=, which stands for \emph{E}macs \emph{S}peaks \emph{S}tatistics. With ESS a person can speak to \(\mathsf{R}\), do all of the tricks that the other script editors offer, and much, much, more. Please see the following for installation details, documentation, reference cards, and a whole lot more: http://ess.r-project.org.
      /Fair warning/: if you want to try Emacs and if you grew up with Microsoft\(\circledR\) Windows or Macintosh, then you are going to need to relearn everything you thought you knew about computers your whole life. (Or, since Emacs is completely customizable, you can reconfigure Emacs to behave the way you want.) I have personally experienced this transformation and I will never go back.
-- JGR (read ``Jaguar''):\index{JGR} :: This one has the bells and whistles of \textsf{RGui} plus it is based on Java, so it works on multiple operating systems. It has its own script editor like \textsf{R} Editor but with additional features such as syntax highlighting and code-completion. If you do not use Microsoft\(\circledR\) Windows (or even if you do) you definitely want to check out this one. 
+- JGR (read ``Jaguar''):\index{JGR} :: This one has the bells and whistles of =RGui= plus it is based on Java, so it works on multiple operating systems. It has its own script editor like \(\mathsf{R}\) Editor but with additional features such as syntax highlighting and code-completion. If you do not use Microsoft\(\circledR\) Windows (or even if you do) you definitely want to check out this one. 
 - Kate, Bluefish, /etc/ :: There are literally dozens of other text editors available, many of them free, and each has its own (dis)advantages. I only have mentioned the ones with which I have had substantial personal experience and have enjoyed at some point. Play around, and let me know what you find.
 
 #+latex: \paragraph*{Graphical User Interfaces (GUIs)}
 
-By the word ``GUI'' I mean an interface in which the user communicates with \textsf{R} by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \textsf{R}-Project website at http://www.sciviews.org/_rgui/. On the left side of the screen (under *Projects*) there are several choices available. 
+By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at http://www.sciviews.org/_rgui/. On the left side of the screen (under *Projects*) there are several choices available. 
 
-- \textsf{R} Commander :: provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \textsf{R} Commander's assistance. It is well suited for the introductory level. =Rcmdr= also allows for user-contributed ``Plugins'' which are separate packages on =CRAN= that add extra functionality to the =Rcmdr= package. The plugins are typically named with the prefix =RcmdrPlugin= to make them easy to identify in the =CRAN= package list. One such plugin is the =RcmdrPlugin.IPSUR= package which accompanies this text.
+- \(\mathsf{R}\) Commander :: provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. =Rcmdr= also allows for user-contributed ``Plugins'' which are separate packages on =CRAN= that add extra functionality to the =Rcmdr= package. The plugins are typically named with the prefix =RcmdrPlugin= to make them easy to identify in the =CRAN= package list. One such plugin is the =RcmdrPlugin.IPSUR= package which accompanies this text.
 - Poor Man's GUI\index{Poor Man's GUI} :: is an alternative to the =Rcmdr= which is based on GTk instead of Tcl/Tk. It has been a while since I used it but I remember liking it very much when I did. One thing that stood out was that the user could drag-and-drop data sets for plots. See here for more information: http://wiener.math.csi.cuny.edu/pmg/. 
 - Rattle\index{Rattle} :: is a data mining toolkit which was designed to manage/analyze very large data sets, but it provides enough other general functionality to merit mention here. See \cite{rattle} for more information.
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
 
-** Basic \textsf{R} Operations and Concepts
+** Basic \(\mathsf{R}\) Operations and Concepts
 #+latex: \label{sec:Basic-R-Operations}
 
-The \textsf{R} developers have written an introductory document entitled ``An Introduction to \textsf{R}''. There is a sample session included which shows what basic interaction with \textsf{R} looks like. I recommend that all new users of \textsf{R} read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
+The \(\mathsf{R}\) developers have written an introductory document entitled ``An Introduction to \(\mathsf{R}\)''. There is a sample session included which shows what basic interaction with \(\mathsf{R}\) looks like. I recommend that all new users of \(\mathsf{R}\) read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
 
-Below are some of the most basic operations that can be done with \textsf{R}. Almost every book about \textsf{R} begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
+Below are some of the most basic operations that can be done with \(\mathsf{R}\). Almost every book about \(\mathsf{R}\) begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
 
 *** Arithmetic
 #+latex: \label{sub:Arithmetic}
@@ -118,7 +118,7 @@ Below are some of the most basic operations that can be done with \textsf{R}. Al
 7^8         # 7 to the 8th power
 #+end_src
 
-Notice the comment character =#=\index{#@\texttt{\#}}. Anything typed after a =#= symbol is ignored by \textsf{R}. We know that \(20/6\) is a repeating decimal, but the above example shows only 7 digits. We can change the number of digits displayed with =options=\index{options@\texttt{options}}:
+Notice the comment character =#=\index{#@\texttt{\#}}. Anything typed after a =#= symbol is ignored by \(\mathsf{R}\). We know that \(20/6\) is a repeating decimal, but the above example shows only 7 digits. We can change the number of digits displayed with =options=\index{options@\texttt{options}}:
 
 #+begin_src R :exports both :results output pp 
 options(digits = 16)
@@ -134,18 +134,18 @@ Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22,
 *** Assignment, Object names, and Data types
 #+latex: \label{sub:Assignment-Object-names}
 
-It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \textsf{R} masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
+It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \(\mathsf{R}\) masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
 #+begin_src R :exports both :results output pp 
 x <- 7*41/pi   # don't see the calculated value
 x              # take a look
 #+end_src
 
-When choosing a variable name you can use letters, numbers, dots ``\texttt{.}'', or underscore ``\texttt{\_}'' characters. You cannot use mathematical operators, and a leading dot may not be followed by a number. Examples of valid names are: =x=, =x1=, =y.value=, and =!y_hat=. (More precisely, the set of allowable characters in object names depends on one's particular system and locale; see An Introduction to \textsf{R} for more discussion on this.)
+When choosing a variable name you can use letters, numbers, dots ``\texttt{.}'', or underscore ``\texttt{\_}'' characters. You cannot use mathematical operators, and a leading dot may not be followed by a number. Examples of valid names are: =x=, =x1=, =y.value=, and =!y_hat=. (More precisely, the set of allowable characters in object names depends on one's particular system and locale; see An Introduction to \(\mathsf{R}\) for more discussion on this.)
 
 Objects can be of many /types/, /modes/, and /classes/. At this level, it is not necessary to investigate all of the intricacies of the respective types, but there are some with which you need to become familiar:
 
-- integer: :: the values \(0\), \(\pm1\), \(\pm2\), ...; these are represented exactly by \textsf{R}.
+- integer: :: the values \(0\), \(\pm1\), \(\pm2\), ...; these are represented exactly by \(\mathsf{R}\).
 - double: :: real numbers (rational and irrational); these numbers are not represented exactly (save integers or fractions with a denominator that is a power of 2, see \cite{Venables2010}).
 - character: :: elements that are wrapped with pairs of ="= or ';
 - logical: :: includes =TRUE=, =FALSE=, and =NA= (which are reserved words); the =NA=\index{NA@\texttt{NA}} stands for ``not available'', /i.e./, a missing value.
@@ -169,16 +169,16 @@ All of this time we have been manipulating vectors of length 1. Now let us move 
 
 #+latex: \paragraph*{Entering data vectors}
 
-*The long way:*\index{c@\texttt{c}} If you would like to enter the data =74,31,95,61,76,34,23,54,96= into \textsf{R}, you may create a data vector with the =c= function (which is short for /concatenate/).
+*The long way:*\index{c@\texttt{c}} If you would like to enter the data =74,31,95,61,76,34,23,54,96= into \(\mathsf{R}\), you may create a data vector with the =c= function (which is short for /concatenate/).
 
 #+begin_src R :exports both :results output pp 
 x <- c(74, 31, 95, 61, 76, 34, 23, 54, 96)
 x
 #+end_src
 
-The elements of a vector are usually coerced by \textsf{R} to the the most general type of any of the elements, so if you do =c(1, "2")= then the result will be =c("1", "2")=.
+The elements of a vector are usually coerced by \(\mathsf{R}\) to the the most general type of any of the elements, so if you do =c(1, "2")= then the result will be =c("1", "2")=.
 
-*A shorter way:* \index{scan@\texttt{scan}}: The =scan= method is useful when the data are stored somewhere else. For instance, you may type =x <- scan()= at the command prompt and \textsf{R} will display =1:= to indicate that it is waiting for the first data value. Type a value and press \textsf{Enter}, at which point \textsf{R} will display =2:=, and so forth. Note that entering an empty line stops the scan. This method is especially handy when you have a column of values, say, stored in a text file or spreadsheet. You may copy and paste them all at the =1:= prompt, and \textsf{R} will store all of the values instantly in the vector =x=. 
+*A shorter way:* \index{scan@\texttt{scan}}: The =scan= method is useful when the data are stored somewhere else. For instance, you may type =x <- scan()= at the command prompt and \(\mathsf{R}\) will display =1:= to indicate that it is waiting for the first data value. Type a value and press =Enter=, at which point \(\mathsf{R}\) will display =2:=, and so forth. Note that entering an empty line stops the scan. This method is especially handy when you have a column of values, say, stored in a text file or spreadsheet. You may copy and paste them all at the =1:= prompt, and \(\mathsf{R}\) will store all of the values instantly in the vector =x=. 
 
 *Repeated data; regular patterns:* the =seq=\index{seq@\texttt{seq}} function will generate all sorts of sequences of numbers. It has the arguments =from=, =to=, =by=, and =length.out= which can be set in concert with one another. We will do a couple of examples to show you how it works.
 
@@ -228,7 +228,7 @@ mean(x)      # sample mean
 sd(x)        # sample standard deviation
 #+end_src
 
-It will not be long before the user starts to wonder how a particular function is doing its job, and since \textsf{R} is open-source, anybody is free to look under the hood of a function to see how things are calculated. For detailed instructions see the article ``Accessing the Sources'' by Uwe Ligges \cite{Ligges2006}. In short:
+It will not be long before the user starts to wonder how a particular function is doing its job, and since \(\mathsf{R}\) is open-source, anybody is free to look under the hood of a function to see how things are calculated. For detailed instructions see the article ``Accessing the Sources'' by Uwe Ligges \cite{Ligges2006}. In short:
 
 *Type the name of the function* without any parentheses or arguments. If you are lucky then the code for the entire function will be printed, right there looking at you. For instance, suppose that we would like to see how the =intersect=\index{intersect@\texttt{intersect}} function works:
 
@@ -254,7 +254,7 @@ Now we learn that there are two different =rev(x)= functions, only one of which 
 rev.default
 #+end_src
 
-*Some functions are hidden* by a /namespace/ (see An Introduction to \textsf{R} \cite{Venables2010}), and are not visible on the first try. For example, if we try to look at the code for =wilcox.test=\index{wilcox.test@\texttt{wilcox.test}} (see Chapter \ref{cha:Nonparametric-Statistics}) we get the following:
+*Some functions are hidden* by a /namespace/ (see An Introduction to \(\mathsf{R}\) \cite{Venables2010}), and are not visible on the first try. For example, if we try to look at the code for =wilcox.test=\index{wilcox.test@\texttt{wilcox.test}} (see Chapter \ref{cha:Nonparametric-Statistics}) we get the following:
 
 #+begin_src R :exports both :results output pp 
 wilcox.test
@@ -263,7 +263,7 @@ methods(wilcox.test)
 
 If we were to try =wilcox.test.default=  we would get a ``not found'' error, because it is hidden behind the namespace for the package =stats= (shown in the last line when we tried =wilcox.test=). In cases like these we prefix the package name to the front of the function name with three colons; the command =stats:::wilcox.test.default= will show the source code, omitted here for brevity.
 
-*If it shows* =.Internal(something)=\index{.Internal@\texttt{.Internal}} or =.Primitive(something)=\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \textsf{R} (which is /not/ a binary version with an =.exe= extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is =exp=:
+*If it shows* =.Internal(something)=\index{.Internal@\texttt{.Internal}} or =.Primitive(something)=\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \(\mathsf{R}\) (which is /not/ a binary version with an =.exe= extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is =exp=:
 
 #+begin_src R :exports both :results output pp 
 exp
@@ -274,52 +274,52 @@ Be warned that most of the =.Internal= functions are written in other computer l
 ** Getting Help
 #+latex: \label{sec:Getting-Help}
 
-When you are using \textsf{R}, it will not take long before you find yourself needing help. Fortunately, \textsf{R} has extensive help resources and you should immediately become familiar with them. Begin by clicking \textsf{Help} on \textsf{Rgui}. The following options are available. 
-- Console: :: gives useful shortcuts, for instance, \textsf{Ctrl+L}, to clear the \textsf{R} console screen. 
-- FAQ on \textsf{R}: :: frequently asked questions concerning general \textsf{R} operation.
-- FAQ on \textsf{R} for Windows: :: frequently asked questions about \textsf{R}, tailored to the Microsoft Windows operating system.
-- Manuals: :: technical manuals about all features of the \textsf{R} system including installation, the complete language definition, and add-on packages.
-- \textsf{R} functions (text)...: :: use this if you know the /exact/ name of the function you want to know more about, for example, =mean= or =plot=. Typing =mean= in the window is equivalent to typing =help("mean")=\index{help@\texttt{help}} at the command line, or more simply, =?mean=\index{?@\texttt{?}}. Note that this method only works if the function of interest is contained in a package that is already loaded into the search path with =library=. 
+When you are using \(\mathsf{R}\), it will not take long before you find yourself needing help. Fortunately, \(\mathsf{R}\) has extensive help resources and you should immediately become familiar with them. Begin by clicking =Help= on =RGui=. The following options are available. 
+- Console: :: gives useful shortcuts, for instance, =Ctrl+L=, to clear the \(\mathsf{R}\) console screen. 
+- FAQ on \(\mathsf{R}\): :: frequently asked questions concerning general \(\mathsf{R}\) operation.
+- FAQ on \(\mathsf{R}\) for Windows: :: frequently asked questions about \(\mathsf{R}\), tailored to the Microsoft Windows operating system.
+- Manuals: :: technical manuals about all features of the \(\mathsf{R}\) system including installation, the complete language definition, and add-on packages.
+- \(\mathsf{R}\) functions (text)...: :: use this if you know the /exact/ name of the function you want to know more about, for example, =mean= or =plot=. Typing =mean= in the window is equivalent to typing =help("mean")=\index{help@\texttt{help}} at the command line, or more simply, =?mean=\index{?@\texttt{?}}. Note that this method only works if the function of interest is contained in a package that is already loaded into the search path with =library=. 
 - HTML Help: :: use this to browse the manuals with point-and-click links. It also has a Search Engine \& Keywords for searching the help page titles, with point-and-click links for the search results. This is possibly the best help method for beginners. It can be started from the command line with the command =help.start()=\index{help.start@\texttt{help.start}}.
 - Search help ...: :: use this if you do not know the exact name of the function of interest, or if the function is in a package that has not been loaded yet. For example, you may enter =plo= and a text window will return listing all the help files with an alias, concept, or title matching `=plo=' using regular expression matching; it is equivalent to typing =help.search("plo")=\index{help.search@\texttt{help.search}} at the command line. The advantage is that you do not need to know the exact name of the function; the disadvantage is that you cannot point-and-click the results. Therefore, one may wish to use the HTML Help search engine instead. An equivalent way is =??plo=\index{??@\texttt{??}} at the command line.
-- search.r-project.org ...: :: this will search for words in help lists and email archives of the \textsf{R} Project. It can be very useful for finding other questions that other users have asked. 
+- search.r-project.org ...: :: this will search for words in help lists and email archives of the \(\mathsf{R}\) Project. It can be very useful for finding other questions that other users have asked. 
 - Apropos ...: :: use this for more sophisticated partial name matching of functions. See =?apropos=\index{apropos@\texttt{apropos}} for details.
 
 On the help pages for a function there are sometimes ``Examples'' listed at the bottom of the page, which will work if copy-pasted at the command line (unless marked otherwise). The =example=\index{example@\texttt{example}} function will run the code automatically, skipping the intermediate step. For instance, we may try =example(mean)= to see a few examples of how the =mean= function works.
 
-*** \textsf{R} Help Mailing Lists
+*** \(\mathsf{R}\) Help Mailing Lists
 
-There are several mailing lists associated with \textsf{R}, and there is a huge community of people that read and answer questions related to \textsf{R}. See [[http://www.r-project.org/mail.html][here]] for an idea of what is available. Particularly pay attention to the bottom of the page which lists several special interest groups (SIGs) related to \textsf{R}.
+There are several mailing lists associated with \(\mathsf{R}\), and there is a huge community of people that read and answer questions related to \(\mathsf{R}\). See [[http://www.r-project.org/mail.html][here]] for an idea of what is available. Particularly pay attention to the bottom of the page which lists several special interest groups (SIGs) related to \(\mathsf{R}\).
 
-Bear in mind that \textsf{R} is free software, which means that it was written by volunteers, and the people that frequent the mailing lists are also volunteers who are not paid by customer support fees. Consequently, if you want to use the mailing lists for free advice then you must adhere to some basic etiquette, or else you may not get a reply, or even worse, you may receive a reply which is a bit less cordial than you are used to. Below are a few considerations: 
-1. Read the [[http://cran.r-project.org/faqs.html][FAQ]]. Note that there are different FAQs for different operating systems. You should read these now, even without a question at the moment, to learn a lot about the idiosyncrasies of \textsf{R}.
+Bear in mind that \(\mathsf{R}\) is free software, which means that it was written by volunteers, and the people that frequent the mailing lists are also volunteers who are not paid by customer support fees. Consequently, if you want to use the mailing lists for free advice then you must adhere to some basic etiquette, or else you may not get a reply, or even worse, you may receive a reply which is a bit less cordial than you are used to. Below are a few considerations: 
+1. Read the [[http://cran.r-project.org/faqs.html][FAQ]]. Note that there are different FAQs for different operating systems. You should read these now, even without a question at the moment, to learn a lot about the idiosyncrasies of \(\mathsf{R}\).
 2. Search the archives. Even if your question is not a FAQ, there is a very high likelihood that your question has been asked before on the mailing list. If you want to know about topic =foo=, then you can do =RSiteSearch("foo")=\index{RSiteSearch@\texttt{RSiteSearch}} to search the mailing list archives (and the online help) for it. 
 3. Do a Google search and an \texttt{RSeek.org} search.
 
-If your question is not a FAQ, has not been asked on \textsf{R}-help before, and does not yield to a Google (or alternative) search, then, and only then, should you even consider writing to \textsf{R}-help. Below are a few additional considerations. 
+If your question is not a FAQ, has not been asked on \(\mathsf{R}\)-help before, and does not yield to a Google (or alternative) search, then, and only then, should you even consider writing to \(\mathsf{R}\)-help. Below are a few additional considerations. 
 
 - Read the [[http://www.r-project.org/posting-guide.html][posting guide]] before posting. This will save you a lot of trouble and pain. 
-- Get rid of the command prompts (=>=) from output. Readers of your message will take the text from your mail and copy-paste into an \textsf{R} session. If you make the readers' job easier then it will increase the likelihood of a response. 
-- Questions are often related to a specific data set, and the best way to communicate the data is with a =dump=\index{dump@\texttt{dump}} command. For instance, if your question involves data stored in a vector =x=, you can type =dump("x","")= at the command prompt and copy-paste the output into the body of your email message. Then the reader may easily copy-paste the message from your email into \textsf{R} and =x= will be available to him/her.
-- Sometimes the answer the question is related to the operating system used, the attached packages, or the exact version of \textsf{R} being used. The =sessionInfo()=\index{sessionInfo@\texttt{sessionInfo}} command collects all of this information to be copy-pasted into an email (and the Posting Guide requests this information). See Appendix \ref{cha:R-Session-Information} for an example.
+- Get rid of the command prompts (=>=) from output. Readers of your message will take the text from your mail and copy-paste into an \(\mathsf{R}\) session. If you make the readers' job easier then it will increase the likelihood of a response. 
+- Questions are often related to a specific data set, and the best way to communicate the data is with a =dump=\index{dump@\texttt{dump}} command. For instance, if your question involves data stored in a vector =x=, you can type =dump("x","")= at the command prompt and copy-paste the output into the body of your email message. Then the reader may easily copy-paste the message from your email into \(\mathsf{R}\) and =x= will be available to him/her.
+- Sometimes the answer the question is related to the operating system used, the attached packages, or the exact version of \(\mathsf{R}\) being used. The =sessionInfo()=\index{sessionInfo@\texttt{sessionInfo}} command collects all of this information to be copy-pasted into an email (and the Posting Guide requests this information). See Appendix \ref{cha:R-Session-Information} for an example.
 
 ** External Resources
 
-There is a mountain of information on the Internet about \textsf{R}. Below are a few of the important ones. 
-- The \textsf{R}- Project for Statistical Computing:\index{The R-Project@The \textsf{R}-Project}: Go [[http://www.r-project.org/][there]] first.
-- The Comprehensive \textsf{R} Archive Network:\index{CRAN}: [[http://cran.r-project.org/][That is where]] \textsf{R} is stored along with thousands of contributed packages. There are also loads of contributed information (books, tutorials, /etc/.). There are mirrors all over the world with duplicate information.
-- \textsf{R}-Forge:\index{R-Forge@\textsf{R}-Forge}: [[http://r-forge.r-project.org/][This is another location]] where \textsf{R} packages are stored. Here you can find development code which has not yet been released to \textsf{CRAN}. 
-- \textsf{R}-Wiki:\index{R-Wiki@\textsf{R}-Wiki}: There are many tips, tricks, and general advice [[http://wiki.r-project.org/rwiki/doku.php][listed here]]. If you find a trick of your own, login and share it with the world. 
-- Other: the [[http://addictedtor.free.fr/graphiques/][\textsf{R} Graph Gallery]]\index{R Graph Gallery@\textsf{R} Graph Gallery} and [[http://bm2.genes.nig.ac.jp/RGM2/index.php][\textsf{R} Graphical Manual]]\index{R Graphical Manual@\textsf{R} Graphical Manual} have literally thousands of graphs to peruse. [[http://www.rseek.org][\textsf{R}Seek]] is a search engine based on Google specifically tailored for \textsf{R} queries. 
+There is a mountain of information on the Internet about \(\mathsf{R}\). Below are a few of the important ones. 
+- The \(\mathsf{R}\)- Project for Statistical Computing:\index{The R-Project@The \textsf{R}-Project}: Go [[http://www.r-project.org/][there]] first.
+- The Comprehensive \(\mathsf{R}\) Archive Network:\index{CRAN}: [[http://cran.r-project.org/][That is where]] \(\mathsf{R}\) is stored along with thousands of contributed packages. There are also loads of contributed information (books, tutorials, /etc/.). There are mirrors all over the world with duplicate information.
+- \(\mathsf{R}\)-Forge:\index{R-Forge@\textsf{R}-Forge}: [[http://r-forge.r-project.org/][This is another location]] where \(\mathsf{R}\) packages are stored. Here you can find development code which has not yet been released to =CRAN=. 
+- \(\mathsf{R}\)-Wiki:\index{R-Wiki@\textsf{R}-Wiki}: There are many tips, tricks, and general advice [[http://wiki.r-project.org/rwiki/doku.php][listed here]]. If you find a trick of your own, login and share it with the world. 
+- Other: the [[http://addictedtor.free.fr/graphiques/][\(\mathsf{R}\) Graph Gallery]]\index{R Graph Gallery@\textsf{R} Graph Gallery} and [[http://bm2.genes.nig.ac.jp/RGM2/index.php][\(\mathsf{R}\) Graphical Manual]]\index{R Graphical Manual@\textsf{R} Graphical Manual} have literally thousands of graphs to peruse. [[http://www.rseek.org][\(\mathsf{R}\) Seek]] is a search engine based on Google specifically tailored for \(\mathsf{R}\) queries. 
 
 ** Other Tips
 
-It is unnecessary to retype commands repeatedly, since \textsf{R} remembers what you have recently entered on the command line. On the Microsoft\(\circledR\) Windows \textsf{R}Gui, to cycle through the previous commands just push the \(\uparrow\) (up arrow) key. On Emacs/ESS the command is =M-p= (which means hold down the \textsf{Alt} button and press ``p''). More generally, the command =history()=\index{history@\texttt{history}} will show a whole list of recently entered commands. 
+It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers what you have recently entered on the command line. On the Microsoft\(\circledR\) Windows \(\mathsf{R}\) Gui, to cycle through the previous commands just push the \(\uparrow\) (up arrow) key. On Emacs/ESS the command is =M-p= (which means hold down the =Alt= button and press ``p''). More generally, the command =history()=\index{history@\texttt{history}} will show a whole list of recently entered commands. 
 - To find out what all variables are in the current work environment, use the commands =objects()=\index{objects@\texttt{objects}} or =ls()=\index{ls@\texttt{ls}}. These list all available objects in the workspace. If you wish to remove one or more variables, use =remove(var1, var2, var3)=\index{remove@\texttt{remove}}, or more simply use =rm(var1, var2, var3)=, and to remove all objects use =rm(list = ls())=.
-- Another use of =scan= is when you have a long list of numbers (separated by spaces or on different lines) already typed somewhere else, say in a text file. To enter all the data in one fell swoop, first highlight and copy the list of numbers to the Clipboard with \textsf{Edit} \textsf{\(\triangleright\)} \textsf{Copy} (or by right-clicking and selecting \textsf{Copy}). Next type the =x <- scan()= command in the \textsf{R} console, and paste the numbers at the =1:= prompt with \textsf{Edit} \textsf{\(\triangleright\)} \textsf{Paste}. All of the numbers will automatically be entered into the vector =x=.
-- The command =Ctrl+l= clears the display in the Microsoft\(\circledR\) Windows \textsf{R}Gui. In Emacs/ESS, press =Ctrl+l= repeatedly to cycle point (the place where the cursor is) to the bottom, middle, and top of the display.  
-- Once you use \textsf{R} for awhile there may be some commands that you wish to run automatically whenever \textsf{R} starts. These commands may be saved in a file called =Rprofile.site=\index{Rprofile.site@\texttt{Rprofile.site}} which is usually in the =etc= folder, which lives in the \textsf{R} home directory (which on Microsoft\(\circledR\) Windows usually is =C:\Program Files\R=). Alternatively, you can make a file =.Rprofile=\index{.Rprofile@\texttt{.Rprofile}} to be stored in the user's home directory, or anywhere \textsf{R} is invoked. This allows for multiple configurations for different projects or users. See ``Customizing the Environment'' of /An Introduction to R/ for more details.
-- When exiting \textsf{R} the user is given the option to ``save the workspace''. I recommend that beginners DO NOT save the workspace when quitting. If \textsf{Yes} is selected, then all of the objects and data currently in \textsf{R}'s memory is saved in a file located in the working directory called =.RData=\index{.RData@\texttt{.RData}}. This file is then automatically loaded the next time \textsf{R} starts (in which case \textsf{R} will say =[previously saved workspace restored]=). This is a valuable feature for experienced users of \textsf{R}, but I find that it causes more trouble than it saves with beginners. 
+- Another use of =scan= is when you have a long list of numbers (separated by spaces or on different lines) already typed somewhere else, say in a text file. To enter all the data in one fell swoop, first highlight and copy the list of numbers to the Clipboard with =Edit= \(\triangleright\) =Copy= (or by right-clicking and selecting =Copy=). Next type the =x <- scan()= command in the \(\mathsf{R}\) console, and paste the numbers at the =1:= prompt with =Edit= \(\triangleright\) =Paste=. All of the numbers will automatically be entered into the vector =x=.
+- The command =Ctrl+l= clears the display in the Microsoft\(\circledR\) Windows \(\mathsf{R}\) Gui. In Emacs/ESS, press =Ctrl+l= repeatedly to cycle point (the place where the cursor is) to the bottom, middle, and top of the display.  
+- Once you use \(\mathsf{R}\) for awhile there may be some commands that you wish to run automatically whenever \(\mathsf{R}\) starts. These commands may be saved in a file called =Rprofile.site=\index{Rprofile.site@\texttt{Rprofile.site}} which is usually in the =etc= folder, which lives in the \(\mathsf{R}\) home directory (which on Microsoft\(\circledR\) Windows usually is =C:\Program Files\R=). Alternatively, you can make a file =.Rprofile=\index{.Rprofile@\texttt{.Rprofile}} to be stored in the user's home directory, or anywhere \(\mathsf{R}\) is invoked. This allows for multiple configurations for different projects or users. See ``Customizing the Environment'' of /An Introduction to R/ for more details.
+- When exiting \(\mathsf{R}\) the user is given the option to ``save the workspace''. I recommend that beginners DO NOT save the workspace when quitting. If =Yes= is selected, then all of the objects and data currently in \(\mathsf{R}\)'s memory is saved in a file located in the working directory called =.RData=\index{.RData@\texttt{.RData}}. This file is then automatically loaded the next time \(\mathsf{R}\) starts (in which case \(\mathsf{R}\) will say =[previously saved workspace restored]=). This is a valuable feature for experienced users of \(\mathsf{R}\), but I find that it causes more trouble than it saves with beginners. 
 
 #+latex: \newpage{}
 

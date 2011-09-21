@@ -106,19 +106,19 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 
 For a continuous random variable \(X\) the expected value of \(g(X)\) is
 \begin{equation}
-\E g(X)=\int_{x\in S}g(x)f_{X}(x)\:\mathrm{d} x,
+\mathbb{E} g(X)=\int_{x\in S}g(x)f_{X}(x)\:\mathrm{d} x,
 \end{equation}
-provided the (potentially improper) integral \(\int_{S}|g(x)|\, f(x)\mathrm{d} x\) is convergent. One important example is the mean \(\mu\), also known as \(\E X\):
+provided the (potentially improper) integral \(\int_{S}|g(x)|\, f(x)\mathrm{d} x\) is convergent. One important example is the mean \(\mu\), also known as \(\mathbb{E} X\):
 \begin{equation}
-\mu=\E X=\int_{x\in S}xf_{X}(x)\:\mathrm{d} x,
+\mu=\mathbb{E} X=\int_{x\in S}xf_{X}(x)\:\mathrm{d} x,
 \end{equation}
 provided \(\int_{S}|x|f(x)\mathrm{d} x\) is finite. Also there is the variance
 \begin{equation}
-\sigma^{2}=\E(X-\mu)^{2}=\int_{x\in S}(x-\mu)^{2}f_{X}(x)\,\mathrm{d} x,
+\sigma^{2}=\mathbb{E}(X-\mu)^{2}=\int_{x\in S}(x-\mu)^{2}f_{X}(x)\,\mathrm{d} x,
 \end{equation}
-which can be computed with the alternate formula \(\sigma^{2}=\E X^{2}-(\E X)^{2}\). In addition, there is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\). The moment generating function is given by
+which can be computed with the alternate formula \(\sigma^{2}=\mathbb{E} X^{2}-(\mathbb{E} X)^{2}\). In addition, there is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\). The moment generating function is given by
 \begin{equation}
-M_{X}(t)=\E\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}(x)\:\mathrm{d} x,
+M_{X}(t)=\mathbb{E}\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}(x)\:\mathrm{d} x,
 \end{equation}
 provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=0\).
 
@@ -149,9 +149,9 @@ We can find the mean and variance in an identical manner.
  & =\frac{3}{4}x^{4}|_{x=0}^{1},\\
  & =\frac{3}{4}.
 \end{align*}
-It would perhaps be best to calculate the variance with the shortcut formula \(\sigma^{2}=\E X^{2}-\mu^{2}\):
+It would perhaps be best to calculate the variance with the shortcut formula \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
 \begin{align*}
-\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{0}^{1}x^{2}\cdot3x^{2}\:\mathrm{d} x\\
+\mathbb{E} X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{0}^{1}x^{2}\cdot3x^{2}\:\mathrm{d} x\\
  & =\left.\frac{3}{5}x^{5}\right|_{x=0}^{1}\\
  & =3/5.
 \end{align*}
@@ -187,9 +187,9 @@ We locate the mean and variance just like before.
  & =-\frac{3}{2}\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
  & =\frac{3}{2}.
 \end{align*}
-Again we use the shortcut \(\sigma^{2}=\E X^{2}-\mu^{2}\):
+Again we use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
 \begin{align*}
-\E X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
+\mathbb{E} X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
  & =\left.3\:\frac{1}{-1}x^{-1}\right|_{x=1}^{\infty}\\
  & =-3\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
  & =3,
@@ -197,7 +197,7 @@ Again we use the shortcut \(\sigma^{2}=\E X^{2}-\mu^{2}\):
 which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the =distr=\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package way.
 
@@ -209,7 +209,7 @@ f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
 
-Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\E X^{2}-\left(\E X\right)^{2}\) for the variance. 
+Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
 
 #+latex: \end{example}
 
@@ -255,7 +255,7 @@ A random variable \(X\) with the continuous uniform distribution on the interval
 \begin{equation}
 f_{X}(x)=\frac{1}{b-a},\quad a<x<b.
 \end{equation}
-The associated \textsf{R} function is \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF \(F_{X}\):
+The associated \(\mathsf{R}\) function is \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF \(F_{X}\):
 \begin{equation}
 F_{X}(t)=
 \begin{cases}
@@ -272,7 +272,7 @@ The continuous uniform distribution is the continuous analogue of the discrete u
 Choose a number in \( [0,1] \) at random, and let \(X\) be the number chosen. Then \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 The mean of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\) is relatively simple to calculate:
 \begin{align*}
-\mu=\E X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\mathrm{d} x,\\
+\mu=\mathbb{E} X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\mathrm{d} x,\\
  & =\int_{a}^{b}x\ \frac{1}{b-a}\ \mathrm{d} x,\\
  & =\left.\frac{1}{b-a}\ \frac{x^{2}}{2}\ \right|_{x=a}^{b},\\
  & =\frac{1}{b-a}\ \frac{b^{2}-a^{2}}{2},\\
@@ -286,9 +286,9 @@ using the popular formula for the difference of squares. The variance is left to
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
-f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \} ,\quad-\infty<x<\infty.
+f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \},\quad -\infty < x < \infty.
 \end{equation}
-We write \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and the associated \textsf{R} function is =dnorm(x, mean = 0, sd = 1)=.
+We write \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and the associated \(\mathsf{R}\) function is =dnorm(x, mean = 0, sd = 1)=.
 
 The familiar bell-shaped curve, the normal distribution is also known as the /Gaussian distribution/ because the German mathematician C. F. Gauss largely contributed to its mathematical development. This distribution is by far the most important distribution, continuous or discrete. The normal model appears in the theory of all sorts of natural phenomena, from to the way particles of smoke dissipate in a closed room, to the journey of a bottle in the ocean to the white noise of cosmic background radiation.
 
@@ -322,7 +322,7 @@ Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
 Therefore
 \[
-M_{X}(t)=\E\mathrm{e}^{tX}=\E\mathrm{e}^{t(\sigma Z+\mu)}=\E\mathrm{e}^{\sigma tX}\mathrm{e}^{\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
+M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tX}\mathrm{e}^{\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
 \]
 and we know that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get
 \[
@@ -381,7 +381,7 @@ The /quantile function/
 #+latex: \footnote{The precise definition of the quantile function is \(Q_{X}(p)=\inf \{ x:\ F_{X}(x)\geq p \}\), so at least it is well defined (though perhaps infinite) for the values \(p=0\) and \(p=1\).}
 of a random variable \(X\) is the inverse of its cumulative distribution function:
 \begin{equation}
-Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad0<p<1.
+Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad 0 < p <1.
 \end{equation}
 #+end_defn
 
@@ -407,12 +407,12 @@ For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the
 There are a few other very important special cases which we will encounter in later chapters. 
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) \) function. 
 
 #+latex: \begin{example}
-Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \textsf{R}. 
+Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \(\mathsf{R}\). 
 
 #+begin_src R :exports both :results output pp 
 qnorm(0.99, mean = 100, sd = 15)
@@ -472,7 +472,7 @@ Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X
 
 The support of \(X\) is \((-\infty,\infty)\), and as \(x\) goes from \(-\infty\) to \(\infty\), the quantity \(y=4-3x\) also traverses \((-\infty,\infty)\). Solving for \(x\) in the equation \(y=4-3x\) yields \(x=-(y-4)/3\) giving \(\mathrm{d} x/\mathrm{d} y=-1/3\). And since
 \[
-f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2},\quad-\infty<x<\infty,
+f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2}, \quad -\infty < x < \infty ,
 \]
 we have
 \begin{eqnarray*}
@@ -532,7 +532,7 @@ or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of th
 #+latex: \end{example}
 
 #+latex: \begin{example}
-\textbf{\emph{The Probability Integral Transform}}. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
+*The Probability Integral Transform*. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 #+latex: \end{example}
 
 #+begin_proof
@@ -573,7 +573,7 @@ f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^
 This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section \ref{sec:Other-Continuous-Distributions}.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example \ref{exa:lin-trans-norm} quite nicely:
 
@@ -612,7 +612,7 @@ p(W)(0.5)
 
 The answers are not the same! Furthermore, if we were to repeat the process we would get yet another answer for \(\Pr(W\leq0.5)\).  
 
-The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \textsf{R} are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
+The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \(\mathsf{R}\) are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
 ** Other Continuous Distributions
 #+latex: \label{sec:Other-Continuous-Distributions}
@@ -629,7 +629,7 @@ We say that \(X\) has an /exponential distribution/ and write \(X\sim\mathsf{exp
 \begin{equation}
 f_{X}(x)=\lambda\mathrm{e}^{-\lambda x},\quad x>0
 \end{equation}
-The associated \textsf{R} functions are =dexp(x, rate = 1)=, =pexp=, =qexp=, and =rexp=, which give the PDF, CDF, quantile function, and simulate random variates, respectively.
+The associated \(\mathsf{R}\) functions are =dexp(x, rate = 1)=, =pexp=, =qexp=, and =rexp=, which give the PDF, CDF, quantile function, and simulate random variates, respectively.
 
 The parameter \(\lambda\) measures the rate of arrivals (to be described later) and must be positive. The CDF is given by the formula
 \begin{equation}
@@ -660,7 +660,7 @@ This is a generalization of the exponential distribution. We say that \(X\) has 
 f_{X}(x)=\frac{\lambda^{\alpha}}{\Gamma(\alpha)}\: x^{\alpha-1}\mathrm{e}^{-\lambda x},\quad x>0.
 \end{equation}
 
-The associated \textsf{R} functions are =dgamma(x, shape, rate = 1)=, =pgamma=, =qgamma=, and =rgamma=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. If \(\alpha=1\) then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). The mean is \(\mu=\alpha/\lambda\) and the variance is \(\sigma^{2}=\alpha/\lambda^{2}\).
+The associated \(\mathsf{R}\) functions are =dgamma(x, shape, rate = 1)=, =pgamma=, =qgamma=, and =rgamma=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. If \(\alpha=1\) then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). The mean is \(\mu=\alpha/\lambda\) and the variance is \(\sigma^{2}=\alpha/\lambda^{2}\).
 
 To motivate the gamma distribution recall that if \(X\) measures the length of time until the first event occurs in a Poisson process with rate \(\lambda\) then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). If we let \(Y\) measure the length of time until the \(\alpha^{\mathrm{th}}\) event occurs then \(Y\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). When \(\alpha\) is an integer this distribution is also known as the /Erlang/ distribution.
 
@@ -678,7 +678,7 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\mathrm{e}^{-x/2},\quad x>0,
 \end{equation}
-is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \textsf{R} functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure \ref{fig:chisq-dist-vary-df}. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
+is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \(\mathsf{R}\) functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure \ref{fig:chisq-dist-vary-df}. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
 
 The code to produce Figure \ref{fig:chisq-dist-vary-df} is
 
@@ -730,7 +730,7 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty
 \end{equation}
-is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \textsf{R} functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
+is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \(\mathsf{R}\) functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 *** Snedecor's \(F\) distribution
 #+latex: \label{sub:snedecor-F-distribution}
@@ -739,7 +739,7 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(m+n)/2]}{\Gamma(m/2)\Gamma(n/2)}\left(\frac{m}{n}\right)^{m/2}x^{m/2-1}\left(1+\frac{m}{n}x\right)^{-(m+n)/2},\quad x>0.
 \end{equation}
-is said to have an \(F\) distribution with \((m,n)\) degrees of freedom. We write \(X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\). The associated \textsf{R} functions are =df(x, df1, df2)=, =pf=, =qf=, and =rf=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. We define \(F_{\alpha}(m,n)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\) curve to its right. 
+is said to have an \(F\) distribution with \((m,n)\) degrees of freedom. We write \(X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\). The associated \(\mathsf{R}\) functions are =df(x, df1, df2)=, =pf=, =qf=, and =rf=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. We define \(F_{\alpha}(m,n)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\) curve to its right. 
 
 #+begin_rem
 Here are some notes about the \(F\) distribution.
@@ -757,7 +757,7 @@ This is a special case of the Student's \(t\) distribution. It has PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\beta\pi}\left[1+\left(\frac{x-m}{\beta}\right)^{2}\right]^{-1},\quad-\infty<x<\infty.
 \end{equation}
-We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). The associated \textsf{R} function is =dcauchy(x, location = 0, scale = 1)=.
+We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). The associated \(\mathsf{R}\) function is =dcauchy(x, location = 0, scale = 1)=.
 
 It is easy to see that a \(\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)\) distribution is the same as a \(\mathsf{t}(\mathtt{df}=1)\) distribution. The \(\mathsf{cauchy}\) distribution looks like a \(\mathsf{norm}\) distribution but with very heavy tails. The mean (and variance) do not exist, that is, they are infinite. The median is represented by the \(\mathtt{location}\) parameter, and the \(\mathtt{scale}\) parameter influences the spread of the distribution about its median.
 
@@ -768,7 +768,7 @@ This is a generalization of the continuous uniform distribution.
 \begin{equation}
 f_{X}(x)=\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}\: x^{\alpha-1}(1-x)^{\beta-1},\quad0<x<1
 \end{equation}
-We write \(X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)\). The associated \textsf{R} function is =dbeta(x, shape1, shape2)=. The mean and variance are
+We write \(X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)\). The associated \(\mathsf{R}\) function is =dbeta(x, shape1, shape2)=. The mean and variance are
 \begin{equation} 
 \mu=\frac{\alpha}{\alpha+\beta}\mbox{ and }\sigma^{2}=\frac{\alpha\beta}{\left(\alpha+\beta\right)^{2}\left(\alpha+\beta+1\right)}.
 \end{equation}
@@ -781,7 +781,7 @@ See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian 
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left(-\frac{x-\mu}{\sigma}\right)\right]^{-2},\quad-\infty<x<\infty.
 \end{equation}
-We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \textsf{R} function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
+We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \(\mathsf{R}\) function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
 
 #+latex: \paragraph*{The Lognormal Distribution}
 #+latex: \label{sub:The-Lognormal-Distribution}
@@ -790,7 +790,7 @@ This is a distribution derived from the normal distribution (hence the name). If
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^{2}}\right],\quad0<x<\infty.
 \end{equation}
-We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). The associated \textsf{R} function is =dlnorm(x, meanlog = 0, sdlog = 1)=. Notice that the support is concentrated on the positive \(x\) axis; the distribution is right-skewed with a heavy tail. See Example \ref{exa:lnorm-transformation}.
+We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). The associated \(\mathsf{R}\) function is =dlnorm(x, meanlog = 0, sdlog = 1)=. Notice that the support is concentrated on the positive \(x\) axis; the distribution is right-skewed with a heavy tail. See Example \ref{exa:lnorm-transformation}.
 
 
 #+latex: \paragraph*{The Weibull Distribution}
@@ -800,10 +800,10 @@ This has PDF
 \begin{equation}
 f_{X}(x)=\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}\exp\left(\frac{x}{\beta}\right)^{\alpha},\quad x>0.
 \end{equation}
-We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\). The associated \textsf{R} function is =dweibull(x, shape, scale = 1)=. 
+We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\). The associated \(\mathsf{R}\) function is =dweibull(x, shape, scale = 1)=. 
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 There is some support of moments and moment generating functions for some continuous probability distributions included in the =actuar= package \cite{Dutangactuar}. The convention is =m= in front of the distribution name for raw moments, and =mgf= in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 
@@ -891,7 +891,7 @@ If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find
 
 #+begin_xca
 #+latex: \label{xca:variance-dunif}
-Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). /Hint:/ First calculate \(\E X^{2}\).
+Calculate the variance of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). /Hint:/ First calculate \(\mathbb{E} X^{2}\).
 #+end_xca
 
 #+begin_xca

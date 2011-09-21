@@ -212,7 +212,7 @@ Example.
 #+latex: \end{example}
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The following does the test.
 
@@ -226,13 +226,13 @@ Do the following to make the plot.
 
 Use Yates' continuity correction when the expected frequency of successes is less than 10. You can use it all of the time, but you will have a decrease in power. For large samples the correction does not matter. 
 
-#+latex: \paragraph*{With the \textsf{R} Commander}
+#+latex: \paragraph*{With the \(\mathsf{R}\) Commander}
 
-If you already know the number of successes and failures, then you can use the menu \textsf{Statistics \(\triangleright\) Proportions \(\triangleright\) IPSUR Enter table for single sample}...
+If you already know the number of successes and failures, then you can use the menu =Statistics= \(\triangleright\) =Proportions= \(\triangleright\) =IPSUR Enter table for single sample...=
 
-Otherwise, your data -- the raw successes and failures -- should be in a column of the Active Data Set. Furthermore, the data must be stored as a ``factor'' internally. If the data are not a factor but are numeric then you can use the menu \textsf{Data \(\triangleright\) Manage variables in active data set \(\triangleright\) Convert numeric variables to factors}... to convert the variable to a factor. Or, you can always use the =factor= function.
+Otherwise, your data -- the raw successes and failures -- should be in a column of the Active Data Set. Furthermore, the data must be stored as a ``factor'' internally. If the data are not a factor but are numeric then you can use the menu =Data= \(\triangleright\) =Manage variables in active data set= \(\triangleright\) =Convert numeric variables to factors...= to convert the variable to a factor. Or, you can always use the =factor= function.
 
-Once your unsummarized data is a column, then you can use the menu \textsf{Statistics \(\triangleright\) Proportions \(\triangleright\) Single-sample proportion test}...
+Once your unsummarized data is a column, then you can use the menu =Statistics= \(\triangleright\) =Proportions= \(\triangleright\) =Single-sample proportion test...=
 
 ** One Sample Tests for Means and Variances
 #+latex: \label{sec:One-Sample-Tests}
@@ -271,9 +271,9 @@ Another name for a \(p\)-value is /tail end probability/. We reject \(H_{0}\) wh
 The quantity \(\sigma/\sqrt{n}\), when \(\sigma\) is known, is called the /standard error of the sample mean/. In general, if we have an estimator \(\hat{\theta}\) then \(\sigma_{\hat{\theta}}\) is called the /standard error/ of \(\hat{\theta}\). We usually need to estimate \(\sigma_{\hat{\theta}}\) with \(\hat{\sigma_{\hat{\theta}}}\).
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-I am thinking =z.test=\index{z.test@\texttt{z.test}} in =TeachingDemos=, =t.test=\index{t.test@\texttt{t.test}} in base \textsf{\small R}.
+I am thinking =z.test=\index{z.test@\texttt{z.test}} in =TeachingDemos=, =t.test=\index{t.test@\texttt{t.test}} in base \(\mathsf{R}\).
 
 #+begin_src R :exports both :results output pp 
 x <- rnorm(37, mean = 2, sd = 3)
@@ -288,9 +288,9 @@ x <- rnorm(13, mean = 2, sd = 3)
 t.test(x, mu = 0, conf.level = 0.90, alternative = "greater")
 #+end_src
 
-#+latex: \paragraph*{With the \textsf{R} Commander}
+#+latex: \paragraph*{With the \(\mathsf{R}\) Commander}
 
-Your data should be in a single numeric column (a variable) of the Active Data Set. Use the menu \textsf{Statistics \(\triangleright\) Means \(\triangleright\) Single-sample t-test...} 
+Your data should be in a single numeric column (a variable) of the Active Data Set. Use the menu =Statistics= \(\triangleright\) =Means= \(\triangleright\) =Single-sample t-test...= 
 
 *** Tests for a Variance
 
@@ -307,7 +307,7 @@ Give some data and a hypothesis.
 #+latex: \end{example}
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package.
 
 #+begin_src R :exports both :results output pp 
@@ -363,7 +363,7 @@ For a nonparametric alternative to the two-sample \(F\) test see Chapter \ref{ch
 
 *** Paired Samples
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports both :results output pp 
 t.test(extra ~ group, data = sleep, paired = TRUE)
@@ -375,7 +375,7 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 *** Kolmogorov-Smirnov Goodness-of-Fit Test
 #+latex: \label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports both :results output pp 
 ks.test(randu$x, "punif")
@@ -384,7 +384,7 @@ ks.test(randu$x, "punif")
 *** Shapiro-Wilk Normality Test
 #+latex: \label{sub:Shapiro-Wilk-Normality-Test}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports both :results output pp 
 shapiro.test(women$height)
@@ -393,7 +393,7 @@ shapiro.test(women$height)
 ** Analysis of Variance
 #+latex: \label{sec:Analysis-of-Variance}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 I am thinking 
 #+begin_src R :exports both :results output pp 
@@ -490,7 +490,7 @@ Here are some properties of power functions:
 1. \(\beta(\theta)\leq\alpha\) for any \(\theta\in\Theta_{0}\), and \(\beta(\theta_{0})=\alpha\). We interpret this by saying that no matter what value \(\theta\) takes inside the null parameter space, there is never more than a chance of \(\alpha\) of rejecting the null hypothesis. We have controlled the Type I error rate to be no greater than \(\alpha\).
 2. \(\lim_{n\to\infty}\beta(\theta)=1\) for any fixed \(\theta\in\Theta_{1}\). In other words, as the sample size grows without bound we are able to detect a nonnull value of \(\theta\) with increasing accuracy, no matter how close it lies to the null parameter space. This may appear to be a good thing at first glance, but it often turns out to be a curse, because this means that our Type II error rate grows as the sample size increases. 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
 

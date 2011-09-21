@@ -41,9 +41,9 @@ Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not rando
 
 Given information about the relationship between \(x\) and \(Y\), we would like to /predict/ future values of \(Y\) for particular values of \(x\). This turns out to be a difficult problem \!\!
 #+latex: \footnote{Yogi Berra once said, ``It is always difficult to make predictions, especially about the future.''}
-, so instead we first tackle an easier problem: we estimate \( \E Y \). How can we accomplish this? Well, we know that \(Y\) depends somehow on \(x\), so it stands to reason that
+, so instead we first tackle an easier problem: we estimate \( \mathbb{E} Y \). How can we accomplish this? Well, we know that \(Y\) depends somehow on \(x\), so it stands to reason that
 \begin{equation}
-\E Y = \mu(x),\ \mbox{a function of }x.
+\mathbb{E} Y = \mu(x),\ \mbox{a function of }x.
 \end{equation}
 
 But we should be able to say more than that. To focus our efforts we impose some structure on the functional form of \(\mu\). For instance, 
@@ -240,19 +240,19 @@ b_{1} = r\frac{s_{y}}{s_{x}},\label{eq:sample-correlation-formula}
 where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise \ref{xca:show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq:sample-correlation-formula} and Equation \ref{eq:population-slope-slr}.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports none :results silent
 tmpcoef <- round(as.numeric(coef(lm(dist ~ speed, cars))), 2)
 #+end_src
 
-Here we go. \textsf{R} will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
+Here we go. \(\mathsf{R}\) will calculate the linear regression line with the =lm= function. We will store the result in an object which we will call =cars.lm=. Here is how it works:
 
 #+begin_src R :exports code :results silent
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
 
-The first part of the input to the =lm= function, =dist ~ speed=, is a /model formula/, read as ``\texttt{dist} is described (or modeled) by \texttt{speed}''. The =data = cars= argument tells \textsf{R} where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function (alternatively, we could just type =cars.lm= to see the same thing):
+The first part of the input to the =lm= function, =dist ~ speed=, is a /model formula/, read as ``\texttt{dist} is described (or modeled) by \texttt{speed}''. The =data = cars= argument tells \(\mathsf{R}\) where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function (alternatively, we could just type =cars.lm= to see the same thing):
 
 #+begin_src R :exports both :results output pp 
 coef(cars.lm)
@@ -309,7 +309,7 @@ Using the regression line for the =cars= data:
 *** Point Estimates of the Regression Line
 #+latex: \label{sub:slr-point-est-regline}
 
-We said at the beginning of the chapter that our goal was to estimate \( \mu = \E Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
+We said at the beginning of the chapter that our goal was to estimate \( \mu = \mathbb{E} Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
 1. a future value of \(Y\) at \(x_{0}\).
 The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
@@ -332,7 +332,7 @@ In an abuse of notation we will sometimes write \(\hat{Y}\) or \(\hat{Y}(x_{0})\
 We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The fitted values are automatically computed as a byproduct of the model fitting procedure and are already stored as a component of the =cars.lm= object. We may access them with the =fitted= function (we only show the first five entries):
 
@@ -370,7 +370,7 @@ and we estimate \(\sigma\) with the /standard error/
 #+latex: \footnote{Be careful not to confuse the mean square error \(S^{2}\) with the sample variance \(S^{2}\) in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase \(s^{2}\) or the bulky \(MSE\).}
 \(S=\sqrt{S^{2}}\).
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The residuals for the model may be obtained with the =residuals= function; we only show the first few entries in the interest of space:
 
@@ -385,7 +385,7 @@ tmps <- round(summary(cars.lm)$sigma, 2)
 
 In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
-The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \textsf{R} in Section \ref{sub:slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
+The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in Section \ref{sub:slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
 
 #+begin_src R :exports both :results output pp
 carsumry <- summary(cars.lm)
@@ -440,7 +440,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution and a \(100(1-\alpha)\%\) con
 b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}.
 \end{equation}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+begin_src R :exports none :results silent
 A <- matrix(as.numeric(round(carsumry$coef, 3)), nrow = 2)
@@ -492,18 +492,18 @@ Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \( 100(1-\al
 We notice that the prediction interval in Equation \ref{eq:SLR-pred-int-formula} is wider than the confidence interval in Equation \ref{eq:SLR-conf-int-formula}, as we expected at the beginning of the section.
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-Confidence and prediction intervals are calculated in \textsf{R} with the =predict=\index{predict@\texttt{predict}} function, which we encountered in Section \ref{sub:slr-point-est-regline}. There we neglected to take advantage of its additional =interval= argument. The general syntax follows. 
+Confidence and prediction intervals are calculated in \(\mathsf{R}\) with the =predict=\index{predict@\texttt{predict}} function, which we encountered in Section \ref{sub:slr-point-est-regline}. There we neglected to take advantage of its additional =interval= argument. The general syntax follows. 
 
 #+latex: \begin{example}
-We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed =cars.lm= earlier, and we will use this for input to the =predict= function. Also, we need to tell \textsf{R} the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. /This is important/. 
+We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed =cars.lm= earlier, and we will use this for input to the =predict= function. Also, we need to tell \(\mathsf{R}\) the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. /This is important/. 
 
 #+begin_src R :exports code :results silent
 new <- data.frame(speed = c(5, 6, 21))
 #+end_src
 
-Next we instruct \textsf{R} to calculate the intervals. Confidence intervals are given by 
+Next we instruct \(\mathsf{R}\) to calculate the intervals. Confidence intervals are given by 
 
 #+begin_src R :exports both :results output pp 
 predict(cars.lm, newdata = new, interval = "confidence")
@@ -595,7 +595,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution; therefore, when \(\beta_{1}=
 Similarly, we may test the hypothesis \(H_{0}:\beta_{0}=0\) versus the alternative \(H_{1}:\beta_{0}\neq0\) with the statistic \(T=b_{0}/S_{b_{0}}\), where \(S_{b_{0}}\) is given in Section \ref{sub:slr-interval-est-params}. The test is conducted the same way as for \(\beta_{1}\). 
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Let us take another look at the output from =summary(cars.lm)=:
 
@@ -646,9 +646,9 @@ We interpret \(r^{2}\) as the proportion of total variation that is explained by
 Related to the simple coefficient of determination is the sample correlation coefficient, \(r\). As you can guess, the way we get \(r\) is by the formula \(|r|=\sqrt{r^{2}}\). The sign of \(r\) is equal the sign of the slope estimate \(b_{1}\). That is, if the regression line \(\hat{\mu}(x)\) has positive slope, then \(r=\sqrt{r^{2}}\). Likewise, if the slope of \(\hat{\mu}(x)\) is negative, then \(r=-\sqrt{r^{2}}\).
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-The primary method to display partitioned sums of squared errors is with an /ANOVA table/. The command in \textsf{R} to produce such a table is =anova=. The input to =anova= is the result of an =lm= call which for the =cars= data is =cars.lm=.
+The primary method to display partitioned sums of squared errors is with an /ANOVA table/. The command in \(\mathsf{R}\) to produce such a table is =anova=. The input to =anova= is the result of an =lm= call which for the =cars= data is =cars.lm=.
 
 #+begin_src R :exports both :results output pp 
 anova(cars.lm)
@@ -694,7 +694,7 @@ F=\left(\frac{b_{1}}{S_{b_{1}}}\right)^{2}.
 
 So why bother to define the \(F\) statistic? Why not just square the \(t\) statistic and be done with it? The answer is that the \(F\) statistic has a more complicated interpretation and plays a more important role in the multiple linear regression model which we will study in Chapter \ref{cha:multiple-linear-regression}. See Section \ref{sub:mlr-Overall-F-Test} for details.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The overall \(F\) statistic and \(p\)-value are displayed in the bottom line of the =summary(cars.lm)= output. It is also shown in the final columns of =anova(cars.lm)=:
 
@@ -769,7 +769,7 @@ versus
 \[
 H_{1}:\mbox{ the residuals are not normally distributed.}
 \]
-The results from \textsf{R} are
+The results from \(\mathsf{R}\) are
 
 #+begin_src R :exports both :results output pp 
 shapiro.test(residuals(cars.lm))
@@ -827,12 +827,12 @@ We will use the Breusch-Pagan test to decide whether the variance of the residua
 W_{i} = E_{i}^{2} - \frac{SSE}{n}, \quad i=1,2,\ldots,n.
 \end{equation}
 
-By default the same explanatory variables are used in the new model which produces fitted values \(\hat{W}_{i}\), \(i=1,2,\ldots,n\). The Breusch-Pagan test statistic in \textsf{R} is then calculated with 
+By default the same explanatory variables are used in the new model which produces fitted values \(\hat{W}_{i}\), \(i=1,2,\ldots,n\). The Breusch-Pagan test statistic in \(\mathsf{R}\) is then calculated with 
 \begin{equation}
 BP=n\sum_{i=1}^{n}\hat{W}_{i}^{2}\div\sum_{i=1}^{n}W_{i}^{2}.
 \end{equation}
 We reject the null hypothesis if \(BP\) is too large, which happens when the explained variation i the new model is large relative to the unexplained variation in the original model.
-We do it in \textsf{R} with the =bptest= function from the =lmtest= package \cite{Zeileislmtest}. 
+We do it in \(\mathsf{R}\) with the =bptest= function from the =lmtest= package \cite{Zeileislmtest}. 
 #+begin_src R :exports both :results output pp 
 library(lmtest)
 bptest(cars.lm)
@@ -885,7 +885,7 @@ We may statistically test whether there is evidence of autocorrelation in the re
 \begin{equation}
 D=\frac{\sum_{i=2}^{n}(E_{i}-E_{i-1})^{2}}{\sum_{j=1}^{n}E_{j}^{2}}.
 \end{equation}
-Exact critical values are difficult to obtain, but \textsf{R} will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
+Exact critical values are difficult to obtain, but \(\mathsf{R}\) will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
 
 #+begin_src R :exports both :results output pp 
 library(lmtest)
@@ -973,7 +973,7 @@ have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed valu
 The folklore in regression classes is that a test based on the statistic in Equation \ref{eq:slr-studentized-deleted-resids} can be too liberal. A rule of thumb is if we suspect an observation to be an outlier /before/ seeing the data then we say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if we suspect an observation to be an outlier /after/ seeing the data then we should only say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha/n\). The latter rule of thumb is called the /Bonferroni approach/ and can be overly conservative for large data sets. The responsible statistician should look at the data and use his/her best judgement, in every case.
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 We can calculate the standardized residuals with the =rstandard= function. The input is the =lm= object, which is =cars.lm=.
 
@@ -1060,7 +1060,7 @@ It shows that Cook's distance depends both on the residual \(E_{i}\) and the lev
 
 To assess the significance of \(D\), we compare to quantiles of an \(\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=n-2)\) distribution. A rule of thumb is to classify observations falling higher than the \(50^{\mathrm{th}}\) percentile as being extreme. 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 We can calculate the Cook's Distances with the =cooks.distance= function.
 

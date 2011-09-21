@@ -84,9 +84,9 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 
 For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the /sample space/\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
-Most of the probability work in this book is done with the =prob= package \cite{Kernsprob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section \ref{sub:Multivariate-Data}). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \textsf{R} Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section \ref{sub:howto-ps-objects} for details.
+Most of the probability work in this book is done with the =prob= package \cite{Kernsprob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section \ref{sub:Multivariate-Data}). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section \ref{sub:howto-ps-objects} for details.
 
 #+latex: \begin{example}
 Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
@@ -101,7 +101,7 @@ The sample space =S= contains the column =lands= which stores the outcomes =down
 #+latex: \end{example}
 
 Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the =expand.grid= function in the =base= package, =combn= in the =combinat= package \cite{combinat}, and =permsn= in the =prob= package
-#+latex: \footnote{The seasoned \textsf{R} user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
+#+latex: \footnote{The seasoned \(\mathsf{R}\) user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
 Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the =tosscoin= function:
 
 #+begin_src R :exports both :results output pp  
@@ -142,7 +142,7 @@ There is more. Suppose we do not actually keep track of which ball came first. A
 
 Note that this one general class of random experiments contains as a special case all of the common elementary random experiments. Tossing a coin twice is equivalent to selecting two balls labeled \(H\) and \(T\) from an urn, with replacement. The die-roll experiment is equivalent to selecting a ball from an urn with six elements, labeled 1 through 6.
 
-#+latex: \paragraph*{How to do it with \textsf{R}} 
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)} 
 
 The =prob= package accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 
@@ -152,7 +152,7 @@ Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We ar
 
 #+latex: \paragraph*{Ordered, With Replacement}
 
-If sampling is with replacement, then we can get any outcome 1, 2, or 3 on any draw. Further, by ``ordered'' we mean that we shall keep track of the order of the draws that we observe. We can accomplish this in \textsf{R} with
+If sampling is with replacement, then we can get any outcome 1, 2, or 3 on any draw. Further, by ``ordered'' we mean that we shall keep track of the order of the draws that we observe. We can accomplish this in \(\mathsf{R}\) with
 
 #+begin_src R :exports both :results output pp  
 urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
@@ -191,7 +191,7 @@ urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE)
 We may interpret this experiment in a number of alternative ways. One way is to consider this as simply putting two 3-sided dice in a cup, shaking the cup, and looking inside -- as in a game of /Liar's Dice/, for instance. Each row of the sample space is a potential pair we could observe. Another way is to view each outcome as a separate method to distribute two identical golf balls into three boxes labeled 1, 2, and 3. Regardless of the interpretation, =urnsamples= lists every possible way that the experiment can conclude.
 
 #+latex: \end{example}
-Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be =x = c("Red","Blue","Green")=. But, there is an \textbf{important} point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were \textit{distinguishable} in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if =x = c("Red","Red","Blue")=?'' The answer is that =urnsamples= behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
+Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be =x = c("Red","Blue","Green")=. But, there is an *important* point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were \textit{distinguishable} in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if =x = c("Red","Red","Blue")=?'' The answer is that =urnsamples= behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
 surface.
 
 In this way, when the =x= argument of =urnsamples= has repeated elements, the resulting sample space may appear to be =ordered = TRUE= even when, in fact, the call to the function was =urnsamples(..., ordered = FALSE)=. Similar remarks apply for the =replace= argument. 
@@ -203,7 +203,7 @@ An /event/\index{event} \(A\) is merely a collection of outcomes, or in other wo
 #+latex: \footnote{This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.}.
 After the performance of a random experiment \(E\) we say that the event \(A\) /occurred/ if the experiment's outcome belongs to \(A\). We say that a bunch of events \(A_{1}\), \(A_{2}\), \(A_{3}\), ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if \(A_{i}\cap A_{j}=\emptyset\) for any distinct pair \(A_{i}\neq A_{j}\). For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec:The-Algebra-of}.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Given a data frame sample/probability space =S=, we may extract rows using the =[]= operator: 
 
@@ -331,7 +331,7 @@ Notice that =setdiff= is not symmetric. Further, note that we can calculate the 
 
 #+begin_note
 
-When the =prob= package loads you will notice a message: ``\texttt{The following object(s) are masked from package:base: intersect, setdiff,}''. The reason for this message is that there already exist methods for the functions =intersect=, =setdiff=, =subset=, and =union= in the =base= package which ships with \textsf{R}. However, these methods were designed for when the arguments are vectors of the same mode. Since we are manipulating sample spaces which are data frames and lists, it was necessary to write methods to handle those cases as well. When the =prob= package is loaded, \textsf{R} recognizes that there are multiple versions of the same function in the search path and acts to shield the new definitions from the existing ones. But there is no cause for alarm, thankfully, because the =prob= functions have been carefully defined to match the usual =base= package definition in the case that the arguments are vectors. 
+When the =prob= package loads you will notice a message: ``\texttt{The following object(s) are masked from package:base: intersect, setdiff,}''. The reason for this message is that there already exist methods for the functions =intersect=, =setdiff=, =subset=, and =union= in the =base= package which ships with \(\mathsf{R}\). However, these methods were designed for when the arguments are vectors of the same mode. Since we are manipulating sample spaces which are data frames and lists, it was necessary to write methods to handle those cases as well. When the =prob= package is loaded, \(\mathsf{R}\) recognizes that there are multiple versions of the same function in the search path and acts to shield the new definitions from the existing ones. But there is no cause for alarm, thankfully, because the =prob= functions have been carefully defined to match the usual =base= package definition in the case that the arguments are vectors. 
 
 #+end_note
 
@@ -390,11 +390,11 @@ The ELM appears in the relative frequency approach as a fascinating fact of Natu
 
 The ELM is only available when there are finitely many elements in the sample space.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 In the =prob= package, a probability space is an object of outcomes =S= and a vector of probabilities (called =probs=) with entries that correspond to each outcome in =S=. When =S= is a data frame, we may simply add a column called =probs= to =S= and we will be finished; the probability space will simply be a data frame which we may call =S=. In the case that S is a list, we may combine the =outcomes= and =probs= into a larger list, =space=; it will have two components: =outcomes= and =probs=. The only requirements we need are for the entries of =probs= to be nonnegative and =sum(probs)= to be one.
 
-To accomplish this in \textsf{R}, we may use the =probspace= function. The general syntax is =probspace(x, probs)=, where =x= is a sample space of outcomes and =probs= is a vector (of the same length as the number of outcomes in =x=). The specific choice of =probs= depends on the context of the problem, and some examples follow to demonstrate some of the more common choices. 
+To accomplish this in \(\mathsf{R}\), we may use the =probspace= function. The general syntax is =probspace(x, probs)=, where =x= is a sample space of outcomes and =probs= is a vector (of the same length as the number of outcomes in =x=). The specific choice of =probs= depends on the context of the problem, and some examples follow to demonstrate some of the more common choices. 
 
 #+latex: \begin{example}
 The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has \(n\) outcomes, then =probs= would be a vector of length \(n\) with identical entries \(1/n\). The quickest way to generate =probs= is with the =rep= function. We will start with the experiment of rolling a die, so that \(n=6\). We will construct the sample space, generate the =probs= vector, and put them together with =probspace=. 
@@ -444,7 +444,7 @@ The same procedure can be used to represent an unbalanced die, roulette wheel, /
 
 *** Words of Warning
 
-It should be mentioned that while the splendour of \textsf{R} is uncontested,  it, like everything else, has limits both with respect to the sample/probability spaces it can manage and with respect to the finite accuracy of the representation of most numbers (see the \textsf{R} FAQ 7.31). When playing around with probability, one may be tempted to set up a probability space for tossing 100 coins or rolling 50 dice in an attempt to answer some scintillating question. (Bear in mind: rolling a die just 9 times has a sample space with over /10 million/ outcomes.)
+It should be mentioned that while the splendour of \(\mathsf{R}\) is uncontested,  it, like everything else, has limits both with respect to the sample/probability spaces it can manage and with respect to the finite accuracy of the representation of most numbers (see the \(\mathsf{R}\) FAQ 7.31). When playing around with probability, one may be tempted to set up a probability space for tossing 100 coins or rolling 50 dice in an attempt to answer some scintillating question. (Bear in mind: rolling a die just 9 times has a sample space with over /10 million/ outcomes.)
 
 Alas, even if there were enough RAM to barely hold the sample space (and there were enough time to wait for it to be generated), the infinitesimal probabilities that are associated with /so many/ outcomes make it difficult for the underlying machinery to handle reliably. In some cases, special algorithms need to be called just to give something
 that holds asymptotically. User beware.
@@ -607,7 +607,7 @@ It should be clear that there are only four possible royal flushes. Thus, if we 
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Probabilities are calculated in the =prob= package with the =prob= function.
 
@@ -719,19 +719,19 @@ The quantity \(n!/[k!(n-k)!]\) is called a /binomial coefficient/ and plays a sp
 and is read ``\(n\) choose \(k\)''.
 
 #+latex: \begin{example}
-You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? \textbf{Answer:} \({5 \choose 2}=10\).
+You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? *Answer:* \({5 \choose 2}=10\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? \textbf{Answer:} \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
+Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? *Answer:* \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
 #+latex: \end{example}
 
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The factorial \(n!\) is computed with the command =factorial(n)= and the binomial coefficient \({n \choose k}\) with the command =choose(n,k)=.
 
-The sample spaces we have computed so far have been relatively small, and we can visually study them without much trouble. However, it is /very/ easy to generate sample spaces that are prohibitively large. And while \textsf{R} is wonderful and powerful and does almost everything except wash windows, even \textsf{R} has limits of which we should be mindful.
+The sample spaces we have computed so far have been relatively small, and we can visually study them without much trouble. However, it is /very/ easy to generate sample spaces that are prohibitively large. And while \(\mathsf{R}\) is wonderful and powerful and does almost everything except wash windows, even \(\mathsf{R}\) has limits of which we should be mindful.
 
 But we often do not need to actually generate the sample space; it suffices to count the number of outcomes. The =nsamp= function will calculate the number of rows in a sample space made by =urnsamples= without actually devoting the memory resources necessary to generate the space. The arguments are =n=, the number of (distinguishable) objects in the urn, =k=, the sample size, and =replace=, =ordered=, as above.
 
@@ -868,7 +868,7 @@ remove(g)
 </div>
 #+end_html
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 We can make the plot in Figure \ref{fig:The-Birthday-Problem} with the following sequence of commands.
 
@@ -881,7 +881,7 @@ abline(v = 23, lty = 2)
 remove(g)
 #+end_src
 
-There is a \textsf{Birthday problem} item in the \textsf{Probability} menu of =RcmdrPlugin.IPSUR=. In the base \textsf{R} version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
+There is a =Birthday problem= item in the =Probability= menu of =RcmdrPlugin.IPSUR=. In the base \(\mathsf{R}\) version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
 
 ** Conditional Probability
 #+latex: \label{sec:Conditional-Probability}
@@ -947,7 +947,7 @@ The outcomes lying in the event \(A\) are marked with the symbol ``\(\varprod\)'
 Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the lower right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Continuing with Example \ref{exa:Toss-a-six-sided-die-twice}, the first thing to do is set up the probability space with the =rolldie= function.
 
@@ -1019,7 +1019,7 @@ At the beginning of the section we drew two cards from a standard playing deck. 
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 #+latex: \label{sub:howto-ps-objects}
 
 Continuing Example \ref{exa:two-cards-both-aces}, we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
@@ -1057,7 +1057,7 @@ Consider an urn with 10 balls inside, 7 of which are red and 3 of which are gree
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 Example \ref{exa:urn-7-red-3-green} is similar to Example \ref{exa:two-cards-both-aces}, but it is even easier. We need to set up an urn (vector =L=) to hold the balls, we sample from =L= to get the sample space (data frame =M=), and we associate a probability vector (column =probs=) with the outcomes (rows of =M=) of the sample space. The final result is a probability space (an ordinary data frame =N=).
 
@@ -1220,7 +1220,7 @@ which is approximately \(0.9990234\).
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 #+latex: \begin{example}
 Toss ten coins. What is the probability of observing at least one Head?
@@ -1242,7 +1242,7 @@ Generalizing from above it is common to repeat a certain experiment multiple tim
 The =iidspace= function was designed specifically for this situation. It has three arguments: =x=, which is a vector of outcomes, =ntrials=, which is an integer telling how many times to repeat the experiment, and =probs= to specify the probabilities of the outcomes of =x= in a single trial. 
 
 #+latex: \begin{example}
-\textbf{An unbalanced coin} (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
+*An unbalanced coin* (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
 
 We may represent tossing our unbalanced coin three times with the following: 
 
@@ -1262,7 +1262,7 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
 #+begin_thm
-\textbf{\emph{(Bayes' Rule).}} Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\Pr(A)>0\). Then 
+*Bayes' Rule*. Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\Pr(A)>0\). Then 
 \begin{equation}
 \Pr(B_{k}|A)=\frac{\Pr(B_{k})\Pr(A|B_{k})}{\sum_{i=1}^{n}\Pr(B_{i})\Pr(A|B_{i})},\quad k=1,2,\ldots,n.\label{eq:bayes-rule}
 \end{equation}
@@ -1358,7 +1358,7 @@ Suppose the boss gets a change of heart and does not fire anybody. But the next 
 In this way, probabilities found by Bayes' rule are always on the cutting edge, always updated with respect to the best information available at the time.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 There are not any special functions for Bayes' Rule in the =prob= package, but problems like the ones above are easy enough to do by hand.
 
@@ -1436,7 +1436,7 @@ In contrast, the support of \(Z\) is a continuous interval, containing all ratio
 #+latex: \footnote{This isn't really the reason, but it serves as an effective litmus test at the introductory level. See Billingsley or Resnick.},
 random variables with supports like \(Z\) are called /continuous random variables/, to be studied in Chapter \ref{cha:Continuous-Distributions}.
 
-#+latex: \paragraph*{How to do it with \textsf{R}}
+#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
 
 The primary vessel for this task is the =addrv= function. There are two ways to use it, and we will describe both.
 
@@ -1463,7 +1463,7 @@ prob(S, U > 6)
 
 #+latex: \paragraph*{Supply a Function}
 
-Sometimes we have a function laying around that we would like to apply to some of the outcome variables, but it is unfortunately tedious to write out the formula defining what the new variable would be. The =addrv= function has an argument =FUN= specifically for this case. Its value should be a legitimate function from \textsf{R}, such as =sum=, =mean=, =median=, and so forth. Or, you can define your own function. Continuing the previous example, let's define \(V=\max(X1,X2,X3)\) and \(W=X1+X2+X3\). 
+Sometimes we have a function laying around that we would like to apply to some of the outcome variables, but it is unfortunately tedious to write out the formula defining what the new variable would be. The =addrv= function has an argument =FUN= specifically for this case. Its value should be a legitimate function from \(\mathsf{R}\), such as =sum=, =mean=, =median=, and so forth. Or, you can define your own function. Continuing the previous example, let's define \(V=\max(X1,X2,X3)\) and \(W=X1+X2+X3\). 
 
 #+begin_src R :exports both :results output pp  
 S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V") 
