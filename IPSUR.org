@@ -1093,10 +1093,10 @@ The /sample standard deviation/ is \(s=\sqrt{s^{2}}\). Intuitively, the sample v
 We will spend a lot of time with the variance and standard deviation in the coming chapters. In the meantime, the following two rules give some meaning to the standard deviation, in that there are bounds on how much of the data can fall past a certain distance from the mean.
 
 #+begin_fact
-Chebychev's Rule: The proportion of observations within \(k\) standard deviations of the mean is at least \(1-1/k^{2}\), /i.e./, at least 75\%, 89\%, and 94\% of the data are within 2, 3, and 4 standard deviations of the mean, respectively.
+Chebychev's Rule: The proportion of observations within \(k\) standard deviations of the mean is at least \(1-1/k^{2}\), /i.e./, at least 75%, 89%, and 94% of the data are within 2, 3, and 4 standard deviations of the mean, respectively.
 #+end_fact
 
-Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1-1/1^{2}=0\), which states that at least 0\% of the observations are within one standard deviation of the mean (which is not saying much).
+Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1-1/1^{2}=0\), which states that at least 0% of the observations are within one standard deviation of the mean (which is not saying much).
 
 Chebychev's Rule applies to any data distribution, /any/ list of numbers, no matter where it came from or what the histogram looks like. The price for such generality is that the bounds are not very tight; if we know more about how the data are shaped then we can say more about how much of the data can fall a given distance from the mean.
 
@@ -1111,7 +1111,7 @@ Empirical Rule: If data follow a bell-shaped curve, then approximately 68%, 95%,
 Just as the sample mean is sensitive to extreme values, so the associated measure of spread is similarly sensitive to extremes. Further, the problem is exacerbated by the fact that the extreme distances are squared. We know that the sample quartiles are resistant to extremes, and a measure of spread associated with them is the /interquartile range/ (\(IQR\)) defined by \(IQR=q_{0.75}-q_{0.25}\).
 
 - Good: stable, resistant to outliers, robust to nonnormality, easy to explain
-- Bad: not as tractable, need to sort the data, only involves the middle 50\% of the data.
+- Bad: not as tractable, need to sort the data, only involves the middle 50% of the data.
 
 **** Median Absolute Deviation
 
@@ -2790,31 +2790,31 @@ M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
 N <- probspace(M)
 #+end_src
 
-Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\} \). Rows of =N= that satisfy this condition have \texttt{X1=="red" \& X2=="red" \& X3=="red"}, but there must be an easier way. Indeed, there is. The =isrep= function (short for ``is repeated'') in the =prob= package was written for this purpose. The command =isrep(N,"red",3)= will test each row of =N= to see whether the value \texttt{"red"} appears =3= times. The result is exactly what we need to define an event with the =prob= function. Observe
+Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\} \). Rows of =N= that satisfy this condition have \(\mathtt{X1=="red"\ \&\ X2=="red"\ \&\ X3=="red"}\), but there must be an easier way. Indeed, there is. The =isrep= function (short for ``is repeated'') in the =prob= package was written for this purpose. The command =isrep(N,"red",3)= will test each row of =N= to see whether the value =red= appears =3= times. The result is exactly what we need to define an event with the =prob= function. Observe
 
 #+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 3))
 #+end_src
 
-Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-green}. Now let us try some other probability questions. What is the probability of getting two ="red"=s?
+Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-green}. Now let us try some other probability questions. What is the probability of getting two =red='s?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 2))
 #+end_src
 
-Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing \texttt{"red"}, then \texttt{"green"}, then \texttt{"red"}?
+Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec:other-discrete-distributions}. What is the probability of observing =red=, then =green=, then =red=?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+end_src
 
-Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What is the probability of observing \texttt{"red"}, \texttt{"green"}, and \texttt{"red"}, in no particular order?
+Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What is the probability of observing =red=, =green=, and =red=, in no particular order?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red")))
 #+end_src
 
-We already knew this. It is the probability of observing two ="red"=s, above.
+We already knew this. It is the probability of observing two =red='s, above.
 
 #+latex: \begin{example}
 Consider two urns, the first with 5 red balls and 3 green balls, and the second with 2 red balls and 6 green balls. Your friend randomly selects one ball from the first urn and transfers it to the second urn, without disclosing the color of the ball. You select one ball from the second urn. What is the probability that the selected ball is red? Let \( A = \{ \mbox{transferred ball is red} \} \) and \( B = \{ \mbox{selected ball is red} \} \). Write
