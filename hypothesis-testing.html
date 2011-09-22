@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Hypothesis Testing</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-09-21 18:26:00 EDT"/>
+<meta name="author" content="G. Jay Kerns"/>
+<meta name="description" content="This chapter discusses hypothesis testing in the Neyman-Pearson tradition."/>
+<meta name="keywords" content="hypothesis testing statistics one two sample"/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="index.html   "> UP </a>
+ |
+ <a accesskey="H" href="http://ipsur.org/index.html"> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Hypothesis Testing</h1>
+
+
+
+
+---
+layout: chapter
+title: Hypothesis Testing
+previous: estimation.html
+next: simple-linear-regression.html
+description: This chapter discusses hypothesis testing in the Neyman-Pearson tradition.
+keywords: hypothesis testing statistics one two sample
+---
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Hypothesis Testing</a>
+<ul>
+<li><a href="#sec-1-1">Introduction</a>
+<ul>
+<li><a href="#sec-1-1-1">Terminology</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">One Sample Tests for Means and Variances</a>
+<ul>
+<li><a href="#sec-1-2-1">For Means</a></li>
+<li><a href="#sec-1-2-2">Tests for a Variance</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">Two-Sample Tests for Means and Variances</a>
+<ul>
+<li><a href="#sec-1-3-1">Independent Samples</a></li>
+<li><a href="#sec-1-3-2">Paired Samples</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">Other Hypothesis Tests</a>
+<ul>
+<li><a href="#sec-1-4-1">Kolmogorov-Smirnov Goodness-of-Fit Test</a></li>
+<li><a href="#sec-1-4-2">Shapiro-Wilk Normality Test</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">Analysis of Variance</a></li>
+<li><a href="#sec-1-6">Sample Size and Power</a></li>
+<li><a href="#sec-1-7">Exercises</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Hypothesis Testing</h2>
+<div class="outline-text-2" id="text-1">
+
+
+
+<ul>
+<li>basic terminology and philosophy of the Neyman-Pearson paradigm
+</li>
+<li>classical hypothesis tests for the standard one and two sample problems with means, variances, and proportions
+</li>
+<li>the notion of between versus within group variation and how it plays out with one-way ANOVA
+</li>
+<li>the concept of statistical power and its relation to sample size
+</li>
+</ul>
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Introduction</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr. Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
+</p>
+<p>
+The instructor (with a box of cookies in hand) enters a class of fifteen or more students and produces a brand-new, sealed deck of ordinary playing cards. The instructor asks for a student volunteer to break the seal, and then the instructor prominently shuffles the deck
+several times in front of the class, after which time the students are asked to line up in a row. They are going to play a game. Each student will draw a card from the top of the deck, in turn. If the card is black, then the lucky student will get a cookie. If the card is red, then the unlucky student will sit down empty-handed. Let the game begin.
+</p>
+<p>
+The first student draws a card: red. There are jeers and outbursts, and the student slinks off to his/her chair. (S)he is disappointed, of course, but not really. After all, (s)he had a 50-50 chance of getting black, and it did not happen. Oh well.
+</p>
+<p>
+The second student draws a card: red, again. There are more jeers, and the second student slips away. This student is also disappointed, but again, not so much, because it is probably his/her unlucky day. On to the next student.
+</p>
+<p>
+The student draws: red again! There are a few wiseguys who yell (happy to make noise, more than anything else), but there are a few other students who are not yelling any more &ndash; they are thinking. This is the third red in a row, which is possible, of course, but what is going on, here? They are not quite sure. They are now concentrating on the next card&hellip; it is bound to be black, right?
+</p>
+<p>
+The fourth student draws: red. Hmmm&hellip; now there are groans instead of outbursts. A few of the students at the end of the line shrug their shoulders and start to make their way back to their desk, complaining that the teacher does not want to give away any cookies. There are still some students in line though, salivating, waiting for the inevitable black to appear.
+</p>
+<p>
+The fifth student draws red. Now it isn't funny any more. As the remaining students make their way back to their seats an uproar ensues, from an entire classroom demanding cookies.
+</p>
+
+<p>
+Keep the preceding experiment in the back of your mind as you read the following sections. When you have finished the entire chapter, come back and read this introduction again. All of the mathematical jargon that follows is connected to the above paragraphs. In the meantime, I will get you started:
+</p>
+<dl>
+<dt>Null hypothesis:</dt><dd>it is an ordinary deck of playing cards, shuffled thoroughly.
+</dd>
+<dt>Alternative hypothesis:</dt><dd>either it is a trick deck of cards, or the instructor did some fancy shufflework.
+</dd>
+<dt>Observed data:</dt><dd>a sequence of draws from the deck, five reds in a row.
+</dd>
+</dl>
+
+
+<p>
+If it were truly an ordinary, well-shuffled deck of cards, the probability of observing zero blacks out of a sample of size five (without replacement) from a deck with 26 black cards and 26 red cards would be
+</p>
+
+
+
+<pre class="src src-R">dhyper(0, m = 26, n = 26, k = 5)
+</pre>
+
+
+<pre class="example">
+[1] 0.02531012
+</pre>
+
+
+<p>
+There are two very important final thoughts. First, everybody gets a cookie in the end. Second, the students invariably (and aggressively) attempt to get me to open up the deck and reveal the true nature of the cards. I never do.
+</p>
+
+<p>
+Tests for Proportions
+</p>
+
+<p>
+We have a machine that makes widgets. 
+</p>
+<ul>
+<li>Under normal operation, about 0.10 of the widgets produced are defective.
+</li>
+<li>Go out and purchase a torque converter.
+</li>
+<li>Install the torque converter, and observe \(n=100\) widgets from the machine.
+</li>
+<li>Let \(Y=\mbox{number of defective widgets observed}\).
+</li>
+</ul>
+
+
+<p>
+If
+</p>
+<ul>
+<li>\(Y=0\), then the torque converter is great!
+</li>
+<li>\(Y=4\), then the torque converter seems to be helping. 
+</li>
+<li>\(Y=9\), then there is not much evidence that the torque converter helps.
+</li>
+<li>\(Y=17\), then throw away the torque converter.
+</li>
+</ul>
+
+
+<p>
+Let \(p\) denote the proportion of defectives produced by the machine. Before the installation of the torque converter \(p\) was \(0.10\). Then we installed the torque converter. Did \(p\) change? Did it go up or down? We use statistics to decide. Our method is to observe data and construct a 95% confidence interval for \(p\),
+\begin{equation}
+\hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
+\end{equation}
+If the confidence interval is 
+</p><ul>
+<li>\([0.01,\,0.05]\), then we are 95% confident that \(0.01\leq p\leq0.05\), so there is evidence that the torque converter is helping.
+</li>
+<li>\([0.15,\,0.19]\), then we are 95% confident that \(0.15\leq p\leq0.19\), so there is evidence that the torque converter is hurting.
+</li>
+<li>\([0.07,\,0.11]\), then there is not enough evidence to conclude that the torque converter is doing anything at all, positive or negative.
+</li>
+</ul>
+
+
+
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1">Terminology</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+<p>
+The <i>null hypothesis</i> \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, <i>etc</i>. In Example <a href="#exa-widget-machine">widget-machine</a> the null hypothesis would be \(H_{0}:\, p=0.10.\) The <i>alternative hypothesis</i> \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically <i>test</i> the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
+</p><ol>
+<li>Go out and collect some data, in particular, a simple random sample of observations from the machine.
+</li>
+<li>Suppose that \(H_{0}\) is true and construct a \(100(1-\alpha)\%\) confidence interval for \(p\).
+</li>
+<li>If the confidence interval does not cover \(p=0.10\), then we <i>reject</i> \(H_{0}\). Otherwise, we <i>fail to reject</i> \(H_{0}\).
+</li>
+</ol>
+
+
+<p>
+<div class="rem">
+Every time we make a decision it is possible to be wrong, and there are two possible mistakes that we could make. We have committed a 
+</p><dl>
+<dt>Type I Error</dt><dd>if we reject \(H_{0}\) when in fact \(H_{0}\) is true. This would be akin to convicting an innocent person for a crime (s)he did not commit.
+</dd>
+<dt>Type II Error</dt><dd>if we fail to reject \(H_{0}\) when in fact \(H_{1}\) is true. This is analogous to a guilty person escaping conviction.
+</dd>
+</dl>
+
+
+<p>
+</div>
+</p>
+<p>
+Type I Errors are usually considered worse
+and we design our statistical procedures to control the probability of making such a mistake. We define the
+\begin{equation}
+\mbox{significance level of the test}=\Pr(\mbox{Type I Error})=\alpha.
+\end{equation}
+We want \(\alpha\) to be small which conventionally means, say, \(\alpha=0.05\), \(\alpha=0.01\), or \(\alpha=0.005\) (but could mean anything, in principle).
+</p><ul>
+<li>The <i>rejection region</i> (also known as the <i>critical region</i>) for the test is the set of sample values which would result in the rejection of \(H_{0}\). For Example <a href="#exa-widget-machine">widget-machine</a>, the rejection region would be all possible samples that result in a 95% confidence interval that does not cover \(p=0.10\).
+</li>
+<li>The above example with \(H_{1}:p\neq0.10\) is called a <i>two-sided</i> test. Many times we are interested in a <i>one-sided</i> test, which would look like \(H_{1}:p&lt;0.10\) or \(H_{1}:p&gt;0.10\).
+</li>
+</ul>
+
+
+<p>
+We are ready for tests of hypotheses for one proportion.
+Table here.
+Don't forget the assumptions.
+</p>
+<p>
+Find
+</p><ol>
+<li>The null and alternative hypotheses.
+</li>
+<li>Check your assumptions.
+</li>
+<li>Define a critical region with an \(\alpha=0.05\) significance level.
+</li>
+<li>Calculate the value of the test statistic and state your conclusion.
+</li>
+</ol>
+
+
+
+<p>
+Suppose \(p=\mbox{the proportion of students}\) who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40% acceptance rate for its graduate school. Consider the data stored in the table <code>UCBAdmissions</code> from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an \(\alpha=0.01\) significance level.
+</p>
+<p>
+Our null hypothesis in this problem is \(H_{0}:\, p=0.4\) and the alternative hypothesis is \(H_{1}:\, p&lt;0.4\). We reject the null hypothesis if \(\hat{p}\) is too small, that is, if
+\begin{equation} 
+\frac{\hat{p}-0.4}{\sqrt{0.4(1-0.4)/n}}<-z_{\alpha},
+\end{equation}
+where \(\alpha=0.01\) and \(-z_{0.01}\) is 
+</p>
+
+
+<pre class="src src-R">-qnorm(0.99)
+</pre>
+
+
+<pre class="example">
+[1] -2.326348
+</pre>
+
+
+<p>
+Our only remaining task is to find the value of the test statistic and see where it falls relative to the critical value. We can find the number of people admitted and not admitted to the UCB graduate school with the following. 
+</p>
+
+
+
+<pre class="src src-R">A <span style="color: #008b8b;">&lt;-</span> as.data.frame(UCBAdmissions)
+head(A)
+xtabs(Freq ~ Admit, data = A)
+</pre>
+
+
+
+<pre class="example">     Admit Gender Dept Freq
+1 Admitted   Male    A  512
+2 Rejected   Male    A  313
+3 Admitted Female    A   89
+4 Rejected Female    A   19
+5 Admitted   Male    B  353
+6 Rejected   Male    B  207
+Admit
+Admitted Rejected 
+    1755     2771
+</pre>
+
+
+<p>
+Now we calculate the value of the test statistic.
+</p>
+
+
+
+<pre class="src src-R">phat <span style="color: #008b8b;">&lt;-</span> 1755/(1755 + 2771)
+(phat - 0.4)/sqrt(0.4 * 0.6/(1755 + 2771)) 
+</pre>
+
+
+<pre class="example">
+[1] -1.680919
+</pre>
+
+
+<p>
+Our test statistic is not less than \(-2.32\), so it does not fall into the critical region. Therefore, we <i>fail</i> to reject the null hypothesis that the true proportion of students admitted to graduate school is less than 40% and say that the observed data are consistent with the officer's claim at the \(\alpha=0.01\) significance level. 
+</p>
+
+<p>
+We are going to do Example <a href="#exa-prop-test-pvalue-A">prop-test-pvalue-A</a> all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
+</p>
+<p>
+Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately \(-1.68\). But notice that our critical value has changed: \(\alpha=0.05\) and \(-z_{0.05}\) is 
+</p>
+
+
+<pre class="src src-R">-qnorm(0.95)
+</pre>
+
+
+<pre class="example">
+[1] -1.644854
+</pre>
+
+
+<p>
+Our test statistic is less than \(-1.64\) so it now falls into the critical region! We now <i>reject</i> the null hypothesis and conclude that the 1973 data provide evidence that the true proportion of students admitted to the graduate school of UCB in 1973 was significantly less than 40%. The data are <i>not</i> consistent with the officer's claim at the \(\alpha=0.05\) significance level.
+</p>
+<p>
+What is going on, here? If we choose \(\alpha=0.05\) then we reject the null hypothesis, but if we choose \(\alpha=0.01\) then we fail to reject the null hypothesis. Our final conclusion seems to depend on our selection of the significance level. This is bad; for a particular test, we never know whether our conclusion would have been different if we had chosen a different significance level. 
+</p>
+<p>
+Or do we?
+</p>
+<p>
+Clearly, for some significance levels we reject, and for some significance levels we do not. Where is the boundary? That is, what is the significance level for which we would <i>reject</i> at any significance level <i>bigger</i>, and we would <i>fail to reject</i> at any significance level <i>smaller</i>? This boundary value has a special name: it is called the <i>p-value</i> of the test.
+</p>
+<p>
+<div class="defn">
+The <i>p-value</i>, or <i>observed significance level</i>, of a hypothesis test is the probability when the null hypothesis is true of obtaining the observed value of the test statistic (such as \(\hat{p}\)) or values more extreme &ndash; meaning, in the direction of the alternative hypothesis
+</div>
+</p>
+<p>
+Calculate the \(p\)-value for the test in Examples <a href="#exa-prop-test-pvalue-A">prop-test-pvalue-A</a> and <a href="#exa-prop-test-pvalue-B">prop-test-pvalue-B</a>.
+</p>
+<p>
+The \(p\)-value for this test is the probability of obtaining a \(z\)-score equal to our observed test statistic (which had \(z\)-score \(\approx-1.680919\)) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval \((-\infty,\,-1.680919]\). We can get this easily with
+</p>
+
+
+
+<pre class="src src-R">pnorm(-1.680919)
+</pre>
+
+
+<pre class="example">
+[1] 0.04638932
+</pre>
+
+
+<p>
+We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example <a href="#exa-prop-test-pvalue-A">prop-test-pvalue-A</a>) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example <a href="#exa-prop-test-pvalue-B">prop-test-pvalue-B</a>). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at <i>any</i> given significance level.
+</p>
+<p>
+Thus, another way to phrase our significance test procedure is: we will reject \(H_{0}\) at the \(\alpha\)-level of significance if the \(p\)-value is less than \(\alpha\).
+</p>
+<p>
+<div class="rem">
+If we have two populations with proportions \(p_{1}\) and \(p_{2}\) then we can test the null hypothesis \(H_{0}:p_{1}=p_{2}\).
+</div>
+</p>
+<p>
+Table Here.
+</p>
+<p>
+Example.
+</p>
+
+
+<p>
+The following does the test.
+</p>
+
+
+
+<pre class="src src-R">prop.test(1755, 1755 + 2771, p = 0.4, alternative = <span style="color: #8b2252;">"less"</span>, 
+          conf.level = 0.99, correct = <span style="color: #228b22;">FALSE</span>)
+</pre>
+
+
+
+<pre class="example">
+	1-sample proportions test without continuity
+	correction
+
+data:  1755 out of 1755 + 2771, null probability 0.4 
+X-squared = 2.8255, df = 1, p-value = 0.04639
+alternative hypothesis: true p is less than 0.4 
+99 percent confidence interval:
+ 0.0000000 0.4047326 
+sample estimates:
+        p 
+0.3877596
+</pre>
+
+
+<p>
+Do the following to make the plot.
+</p>
+
+<p>
+Use Yates' continuity correction when the expected frequency of successes is less than 10. You can use it all of the time, but you will have a decrease in power. For large samples the correction does not matter. 
+</p>
+
+<p>
+If you already know the number of successes and failures, then you can use the menu <code>Statistics</code> \(\triangleright\) <code>Proportions</code> \(\triangleright\) <code>IPSUR Enter table for single sample...</code>
+</p>
+<p>
+Otherwise, your data &ndash; the raw successes and failures &ndash; should be in a column of the Active Data Set. Furthermore, the data must be stored as a ``factor'' internally. If the data are not a factor but are numeric then you can use the menu <code>Data</code> \(\triangleright\) <code>Manage variables in active data set</code> \(\triangleright\) <code>Convert numeric variables to factors...</code> to convert the variable to a factor. Or, you can always use the <code>factor</code> function.
+</p>
+<p>
+Once your unsummarized data is a column, then you can use the menu <code>Statistics</code> \(\triangleright\) <code>Proportions</code> \(\triangleright\) <code>Single-sample proportion test...</code>
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2">One Sample Tests for Means and Variances</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1">For Means</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+
+<p>
+Here, \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. We would like to test \(H_{0}:\mu=\mu_{0}\).
+</p>
+<dl>
+<dt>Case A:</dt><dd>Suppose \(\sigma\) is known. Then under \(H_{0}\),
+   \[
+   Z=\frac{\overline{X}-\mu_{0}}{\sigma/\sqrt{n}}\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1).
+   \]
+   Table here.
+</dd>
+<dt>Case B:</dt><dd>When \(\sigma\) is unknown, under \(H_{0}\)
+   \[
+   T = \frac{\overline{X}-\mu_{0}}{S/\sqrt{n}}\sim\mathsf{t}(\mathtt{df}=n-1).
+   \]
+   Table here.
+</dd>
+</dl>
+
+
+
+<p>
+<div class="rem">
+If \(\sigma\) is unknown but \(n\) is large then we can use the \(z\)-test.
+</div>
+</p>
+<p>
+In this example we
+</p><ol>
+<li>Find the null and alternative hypotheses.
+</li>
+<li>Choose a test and find the critical region.
+</li>
+<li>Calculate the value of the test statistic and state the conclusion.
+</li>
+<li>Find the \(p\)-value.
+</li>
+</ol>
+
+
+
+<p>
+<div class="rem">
+Another name for a \(p\)-value is <i>tail end probability</i>. We reject \(H_{0}\) when the \(p\)-value is small.
+The quantity \(\sigma/\sqrt{n}\), when \(\sigma\) is known, is called the <i>standard error of the sample mean</i>. In general, if we have an estimator \(\hat{\theta}\) then \(\sigma_{\hat{\theta}}\) is called the <i>standard error</i> of \(\hat{\theta}\). We usually need to estimate \(\sigma_{\hat{\theta}}\) with \(\hat{\sigma_{\hat{\theta}}}\).
+</div>
+</p>
+
+<p>
+I am thinking <code>z.test</code>\index{z.test@\texttt{z.test}} in <code>TeachingDemos</code>, <code>t.test</code>\index{t.test@\texttt{t.test}} in base \(\mathsf{R}\).
+</p>
+
+
+
+<pre class="src src-R">x <span style="color: #008b8b;">&lt;-</span> rnorm(37, mean = 2, sd = 3)
+<span style="color: #008b8b;">library</span>(TeachingDemos)
+z.test(x, mu = 1, sd = 3, conf.level = 0.90)
+</pre>
+
+
+
+<pre class="example"> 
+	One Sample z-test
+
+data:  x 
+z = 2.2984, n = 37.000, Std. Dev. = 3.000, Std. Dev.
+of the sample mean = 0.493, p-value = 0.02154
+alternative hypothesis: true mean is not equal to 1 
+90 percent confidence interval:
+ 1.322349 2.944823 
+sample estimates:
+mean of x 
+ 2.133586
+</pre>
+
+
+<p>
+The <code>RcmdrPlugin.IPSUR</code> package does not have a menu for <code>z.test</code> yet. 
+</p>
+
+
+
+<pre class="src src-R">x <span style="color: #008b8b;">&lt;-</span> rnorm(13, mean = 2, sd = 3)
+t.test(x, mu = 0, conf.level = 0.90, alternative = <span style="color: #8b2252;">"greater"</span>)
+</pre>
+
+
+
+<pre class="example">
+	One Sample t-test
+
+data:  x 
+t = 1.4317, df = 12, p-value = 0.08887
+alternative hypothesis: true mean is greater than 0 
+90 percent confidence interval:
+ 0.06373348        Inf 
+sample estimates:
+mean of x 
+ 1.208197
+</pre>
+
+
+
+<p>
+Your data should be in a single numeric column (a variable) of the Active Data Set. Use the menu <code>Statistics</code> \(\triangleright\) <code>Means</code> \(\triangleright\) <code>Single-sample t-test...</code> 
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2">Tests for a Variance</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+
+<p>
+Here, \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) are a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. We would like to test \(H_{0}:\sigma^{2}=\sigma_{0}\). We know that under \(H_{0}\),
+\[
+X^{2}=\frac{(n-1)S^{2}}{\sigma^{2}}\sim\mathsf{chisq}(\mathtt{df}=n-1).
+\]
+Table here.
+</p>
+<p>
+Give some data and a hypothesis.
+</p><ul>
+<li>Give an \(\alpha\)-level and test the critical region way.
+</li>
+<li>Find the \(p\)-value for the test.
+</li>
+</ul>
+
+
+
+<p>
+I am thinking about <code>sigma.test</code>\index{sigma.test@\texttt{sigma.test}} in the <code>TeachingDemos</code> package.
+</p>
+
+
+
+<pre class="src src-R"><span style="color: #008b8b;">library</span>(TeachingDemos)
+sigma.test(women$height, sigma = 8)
+</pre>
+
+
+
+<pre class="example">
+	One sample Chi-squared test for variance
+
+data:  women$height 
+X-squared = 4.375, df = 14, p-value = 0.01449
+alternative hypothesis: true variance is not equal to 64 
+95 percent confidence interval:
+ 10.72019 49.74483 
+sample estimates:
+var of women$height 
+                 20
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">Two-Sample Tests for Means and Variances</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+<p>
+The basic idea for this section is the following. We have \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\). distributed independently. We would like to know whether \(X\) and \(Y\) come from the same population distribution, that is, we would like to know:
+\begin{equation}
+\mbox{Does }X\overset{\mathrm{d}}{=}Y?
+\end{equation}
+where the symbol \(\overset{\mathrm{d}}{=}\) means equality of probability distributions.
+Since both \(X\) and \(Y\) are normal, we may rephrase the question:
+\begin{equation}
+\mbox{Does }\mu_{X}=\mu_{Y}\mbox{ and }\sigma_{X}=\sigma_{Y}?
+\end{equation}
+Suppose first that we do not know the values of \(\sigma_{X}\) and \(\sigma_{Y}\), but we know that they are equal, \(\sigma_{X}=\sigma_{Y}\). Our test would then simplify to \(H_{0}:\mu_{X}=\mu_{Y}\). We collect data \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) and \(Y_{1}\), \(Y_{2}\), &hellip;, \(Y_{m}\), both simple random samples of size \(n\) and \(m\) from their respective normal distributions. Then under \(H_{0}\) (that is, assuming \(H_{0}\) is true) we have \(\mu_{X}=\mu_{Y}\) or rewriting, \(\mu_{X}-\mu_{Y}=0\), so 
+\begin{equation}
+T=\frac{\overline{X}-\overline{Y}}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}=\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{S_{p}\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
+\end{equation}
+
+</p>
+</div>
+
+<div id="outline-container-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1">Independent Samples</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+
+<p>
+<div class="rem">
+If the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are known, then we can plug them in to our statistic:
+\begin{equation} 
+Z=\frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n+\sigma_{Y}^{2}/m}};
+\end{equation}
+the result will have a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution when \(H_{0}:\mu_{X}=\mu_{Y}\) is true. 
+</div>
+</p>
+<p>
+<div class="rem">
+Even if the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are not known, if both \(n\) and \(m\) are large then we can plug in the sample estimates and the result will have approximately a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution when \(H_{0}:\mu_{X}=\mu_{Y}\) is true.
+\begin{equation} 
+Z=\frac{\overline{X}-\overline{Y}}{\sqrt{S_{X}^{2}/n+S_{Y}^{2}/m}}.
+\end{equation}
+</div>
+</p>
+<p>
+<div class="rem">
+It is usually important to construct side-by-side boxplots and other visual displays in concert with the hypothesis test. This gives a visual comparison of the samples and helps to identify departures from the test's assumptions &ndash; such as outliers.
+</div>
+</p>
+<p>
+<div class="rem">
+WATCH YOUR ASSUMPTIONS.
+</p><ul>
+<li>The normality assumption can be relaxed as long as the population distributions are not highly skewed.
+</li>
+<li>The equal variance assumption can be relaxed as long as both sample sizes \(n\) and \(m\) are large. However, if one (or both) samples is small, then the test does not perform well; we should instead use the methods of Chapter <a href="#cha-resampling-methods">resampling-methods</a>.
+</li>
+</ul>
+
+
+<p>
+</div>
+</p>
+<p>
+For a nonparametric alternative to the two-sample \(F\) test see Chapter <a href="#cha-Nonparametric-Statistics">Nonparametric-Statistics</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2">Paired Samples</h4>
+<div class="outline-text-4" id="text-1-3-2">
+
+
+
+
+
+
+<pre class="src src-R">t.test(extra ~ group, data = sleep, paired = <span style="color: #228b22;">TRUE</span>)
+</pre>
+
+
+
+<pre class="example">
+	Paired t-test
+
+data:  extra by group 
+t = -4.0621, df = 9, p-value = 0.002833
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ -2.4598858 -0.7001142 
+sample estimates:
+mean of the differences 
+                  -1.58
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">Other Hypothesis Tests</h3>
+<div class="outline-text-3" id="text-1-4">
+
+
+
+</div>
+
+<div id="outline-container-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1">Kolmogorov-Smirnov Goodness-of-Fit Test</h4>
+<div class="outline-text-4" id="text-1-4-1">
+
+
+
+
+
+
+<pre class="src src-R">ks.test(randu$x, <span style="color: #8b2252;">"punif"</span>)
+</pre>
+
+
+<pre class="example">
+
+	One-sample Kolmogorov-Smirnov test
+
+data:  randu$x 
+D = 0.0555, p-value = 0.1697
+alternative hypothesis: two-sided
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2">Shapiro-Wilk Normality Test</h4>
+<div class="outline-text-4" id="text-1-4-2">
+
+
+
+
+
+
+<pre class="src src-R">shapiro.test(women$height)
+</pre>
+
+
+<pre class="example">
+
+	Shapiro-Wilk normality test
+
+data:  women$height 
+W = 0.9636, p-value = 0.7545
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">Analysis of Variance</h3>
+<div class="outline-text-3" id="text-1-5">
+
+
+
+<p>
+I am thinking 
+</p>
+
+
+<pre class="src src-R">with(chickwts, by(weight, feed, shapiro.test))
+</pre>
+
+
+
+<pre class="example">feed: casein
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9166, p-value = 0.2592
+
+--------------------------------------------- 
+feed: horsebean
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9376, p-value = 0.5265
+
+--------------------------------------------- 
+feed: linseed
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9693, p-value = 0.9035
+
+--------------------------------------------- 
+feed: meatmeal
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9791, p-value = 0.9612
+
+--------------------------------------------- 
+feed: soybean
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9464, p-value = 0.5064
+
+--------------------------------------------- 
+feed: sunflower
+
+	Shapiro-Wilk normality test
+
+data:  dd[x, ] 
+W = 0.9281, p-value = 0.3603
+</pre>
+
+
+<p>
+and
+</p>
+
+
+<pre class="src src-R">temp <span style="color: #008b8b;">&lt;-</span> lm(weight ~ feed, data = chickwts)
+</pre>
+
+<p>
+and 
+</p>
+
+
+<pre class="src src-R">anova(temp)
+</pre>
+
+
+<pre class="example">
+ Analysis of Variance Table
+
+Response: weight
+          Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+feed       5 231129   46226  15.365 5.936e-10 ***
+Residuals 65 195556    3009                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre>
+
+
+<p>
+Plot for the intuition of between versus within group variation.
+</p>
+
+
+
+
+
+
+
+
+
+<div id="fig-Between-versus-within" class="figure">
+  <p><img src="svg/Between-versus-within.svg" width=500 alt="svg/Between-versus-within.svg" /></p>
+  <p>A plot of between group versus within group variation.</p>
+</div>
+
+
+<pre class="src src-R"><span style="color: #008b8b;">library</span>(HH)
+old.omd <span style="color: #008b8b;">&lt;-</span> par(omd = c(.05,.88, .05,1))
+F.setup(df1 = 5, df2 = 30)
+F.curve(df1 = 5, df2 = 30, col=<span style="color: #8b2252;">'blue'</span>)
+F.observed(3, df1 = 5, df2 = 30)
+par(old.omd)
+</pre>
+
+
+
+
+
+
+
+<div id="fig-Some-F-plots-HH" class="figure">
+  <p><img src="svg/Some-F-plots-HH.svg" width=500 alt="svg/Some-F-plots-HH.svg" /></p>
+  <p>Some \(F\) plots from the <code>HH</code> package.</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6">Sample Size and Power</h3>
+<div class="outline-text-3" id="text-1-6">
+
+
+<p>
+The power function of a test for a parameter \(\theta\) is
+\[
+\beta(\theta)=\Pr_{\theta}(\mbox{Reject }H_{0}),\quad-\infty<\theta<\infty.
+\]
+Here are some properties of power functions:
+</p><ol>
+<li>\(\beta(\theta)\leq\alpha\) for any \(\theta\in\Theta_{0}\), and \(\beta(\theta_{0})=\alpha\). We interpret this by saying that no matter what value \(\theta\) takes inside the null parameter space, there is never more than a chance of \(\alpha\) of rejecting the null hypothesis. We have controlled the Type I error rate to be no greater than \(\alpha\).
+</li>
+<li>\(\lim_{n\to\infty}\beta(\theta)=1\) for any fixed \(\theta\in\Theta_{1}\). In other words, as the sample size grows without bound we are able to detect a nonnull value of \(\theta\) with increasing accuracy, no matter how close it lies to the null parameter space. This may appear to be a good thing at first glance, but it often turns out to be a curse, because this means that our Type II error rate grows as the sample size increases. 
+</li>
+</ol>
+
+
+
+<p>
+I am thinking about <code>replicate</code>\index{replicate@\texttt{replicate}} here, and also <code>power.examp</code>\index{power.examp@\texttt{power.examp}} from the <code>TeachingDemos</code> package. There is an even better plot in upcoming work from the <code>HH</code> package.
+</p>
+
+
+
+<pre class="src src-R"><span style="color: #008b8b;">library</span>(TeachingDemos)
+power.examp()
+</pre>
+
+
+
+
+
+
+
+<div id="fig-power-examp" class="figure">
+  <p><img src="svg/power-examp.svg" width=500 alt="svg/power-examp.svg" /></p>
+  <p>A plot of significance level and power.</p>
+</div>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7">Exercises</h3>
+<div class="outline-text-3" id="text-1-7">
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-09-21 18:26:00 EDT</p>
+<p class="author">Author: G. Jay Kerns</p>
+<p class="creator">Org version 7.7 with Emacs version 23</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
