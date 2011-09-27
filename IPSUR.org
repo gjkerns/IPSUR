@@ -56,11 +56,13 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 * An Introduction to \(\mathsf{R}\)                                  :introR:
 :PROPERTIES:
 :tangle: R/introR.R
+:CUSTOM_ID: cha:introduction-to-R
 :END:
-#+latex: \label{cha:introduction-to-R}
 
-** Downloading and Installing \(\mathsf{R}\)  
-#+latex: \label{sec:download-install-R}
+** Downloading and Installing \(\mathsf{R}\)
+:PROPERTIES:
+:CUSTOM_ID: sec:download-install-R
+:END:  
 
 The instructions for obtaining \(\mathsf{R}\) largely depend on the user's hardware and operating system. The \(\mathsf{R}\)  Project has written an \(\mathsf{R}\)  Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
 
@@ -86,7 +88,9 @@ With this option you can use \(\mathsf{R}\) portably and without administrative 
 Steps 3 and 4 are not required but save you the trouble of navigating to the =R-x.y.z/bin= directory to double-click =Rgui.exe= every time you want to run the program. It is useless to create your own shortcut to =Rgui.exe=. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some /other/ machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 
 *** Installing and Loading Add-on Packages
-#+latex: \label{sub:installing-loading-packages}
+:PROPERTIES:
+:CUSTOM_ID: sub:installing-loading-packages
+:END:
 
 There are /base/ packages (which come with \(\mathsf{R}\) automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \(\mathsf{R}\) being used for this document the default base packages loaded at startup are 
 
@@ -108,7 +112,9 @@ packages in your library.
 For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the [[http://cran.r-project.org/manuals.html][\(\mathsf{R}\) Installation and Administration manual]].
 
 ** Communicating with \(\mathsf{R}\)
-#+latex: \label{sec:Communicating-with-R}
+:PROPERTIES:
+:CUSTOM_ID: sec:Communicating-with-R
+:END:
 
 **** One line at a time
 
@@ -140,14 +146,18 @@ By the word ``GUI'' I mean an interface in which the user communicates with \(\m
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
 
 ** Basic \(\mathsf{R}\) Operations and Concepts
-#+latex: \label{sec:Basic-R-Operations}
+:PROPERTIES:
+:CUSTOM_ID: sec:Basic-R-Operations
+:END:
 
 The \(\mathsf{R}\) developers have written an introductory document entitled ``An Introduction to \(\mathsf{R}\)''. There is a sample session included which shows what basic interaction with \(\mathsf{R}\) looks like. I recommend that all new users of \(\mathsf{R}\) read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
 
 Below are some of the most basic operations that can be done with \(\mathsf{R}\). Almost every book about \(\mathsf{R}\) begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
 
 *** Arithmetic
-#+latex: \label{sub:Arithmetic}
+:PROPERTIES:
+:CUSTOM_ID: sub:Arithmetic
+:END:
 
 #+begin_src R :exports both :results output pp  
 2 + 3       # add
@@ -169,7 +179,9 @@ options(digits = 7)  # back to default
 Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
 
 *** Assignment, Object names, and Data types
-#+latex: \label{sub:Assignment-Object-names}
+:PROPERTIES:
+:CUSTOM_ID: sub:Assignment-Object-names
+:END:
 
 It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \(\mathsf{R}\) masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
@@ -200,7 +212,9 @@ typeof((0 + 1i)^2)
 Note that you can just type =(1i)^2= to get the same answer. The =NaN=\index{NaN@\texttt{NaN}} stands for ``not a number''; it is represented internally as =double=\index{double}. 
 
 *** Vectors
-#+latex: \label{sub:Vectors}
+:PROPERTIES:
+:CUSTOM_ID: sub:Vectors
+:END:
 
 All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
 
@@ -252,7 +266,9 @@ letters[-(6:24)]
 #+end_src
 
 *** Functions and Expressions
-#+latex: \label{sub:Functions-and-Expressions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Functions-and-Expressions
+:END:
 
 A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
 
@@ -309,7 +325,9 @@ exp
 Be warned that most of the =.Internal= functions are written in other computer languages which the beginner may not understand, at least initially.
 
 ** Getting Help
-#+latex: \label{sec:Getting-Help}
+:PROPERTIES:
+:CUSTOM_ID: sec:Getting-Help
+:END:
 
 When you are using \(\mathsf{R}\), it will not take long before you find yourself needing help. Fortunately, \(\mathsf{R}\) has extensive help resources and you should immediately become familiar with them. Begin by clicking =Help= on =RGui=. The following options are available. 
 - Console: :: gives useful shortcuts, for instance, =Ctrl+L=, to clear the \(\mathsf{R}\) console screen. 
@@ -366,8 +384,8 @@ It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers 
 * Data Description                                                 :datadesc:
 :PROPERTIES:
 :tangle: R/datadesc.R
+:CUSTOM_ID: cha:Describing-Data-Distributions
 :END:
-#+latex: \label{cha:Describing-Data-Distributions}
 
 #+latex: \noindent 
 In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
@@ -380,8 +398,10 @@ In this chapter we introduce the different types of data that a statistician is 
 - methods to describe data (visually/numerically) with respect to the properties, and how the methods differ depending on the data type
 - all of the above in the context of grouped data, and in particular, the concept of a factor
 
-** Types of Data 
-#+latex: \label{sec:Types-of-Data}
+** Types of Data
+:PROPERTIES:
+:CUSTOM_ID: sec:Types-of-Data
+:END: 
 
 Loosely speaking, a datum is any piece of collected information, and a data set is a collection of data related to each other in some way. We will categorize data into five types and describe each in turn:
 
@@ -394,7 +414,9 @@ Loosely speaking, a datum is any piece of collected information, and a data set 
 In each subsection we look at some examples of the type in question and introduce methods to display them.
 
 *** Quantitative data
-#+latex: \label{sub:Quantitative-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Quantitative-Data
+:END:
 
 Quantitative data are any data that measure or are associated with a measurement of the quantity of something. They invariably assume numerical values. Quantitative data can be further subdivided into two categories. 
 
@@ -440,12 +462,16 @@ str(discoveries)
 The output is telling us that =discoveries= is a /time series/ (see Section \ref{sub:other-data-types} for more) of length 100. The entries are integers, and since they represent counts this is a good example of discrete quantitative data. We will take a closer look in the following sections.
 
 *** Displaying Quantitative Data
-#+latex: \label{sub:Displaying-Quantitative-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Displaying-Quantitative-Data
+:END:
 
 One of the first things to do when confronted by quantitative data (or any data, for that matter) is to make some sort of visual display to gain some insight into the data's structure. There are almost as many display types from which to choose as there are data sets to plot. We describe some of the more popular alternatives. 
 
 **** Strip charts\index{strip chart} (also known as Dot plots)\index{dot plot| see\{strip chart\}}
-#+latex: \label{par:Strip-charts}
+:PROPERTIES:
+:CUSTOM_ID: par:Strip-charts
+:END:
 
 These can be used for discrete or continuous data, and usually look best when the data set is not too large. Along the horizontal axis is a numerical scale above which the data values are plotted. We can do it in \(\mathsf{R}\) with a call to the =stripchart=\index{stripchart@\texttt{stripchart}} function. There are three available methods.
 
@@ -474,17 +500,17 @@ stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/stripcharts.ps
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/datadesc/stripcharts.ps
   <<stripcharts>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/stripcharts.svg
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/datadesc/stripcharts.svg
   <<stripcharts>>
 #+end_src
 
 #+begin_latex
   \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{ps/stripcharts.ps}
+    \includegraphics[angle=270, totalheight=4in]{ps/datadesc/stripcharts.ps}
     \caption[Strip charts of \texttt{precip}, \texttt{rivers}, and \texttt{discoveries}]{\small Three stripcharts of three data sets.  The first graph uses the \texttt{overplot} method, the second the \texttt{jitter} method, and the third the \texttt{stack} method.}
     \label{fig:stripcharts}
   \end{figure}
@@ -492,7 +518,7 @@ par(mfrow = c(1,1)) # back to normal
 
 #+begin_html
   <div id="fig-stripcharts" class="figure">
-    <p><img src="svg/stripcharts.svg" width=500 alt="svg/stripcharts.svg" /></p>
+    <p><img src="svg/datadesc/stripcharts.svg" width=500 alt="svg/datadesc/stripcharts.svg" /></p>
     <p>Three stripcharts of three data sets.  The first graph uses the <code>overplot</code> method, the second the <code>jitter</code> method, and the third the <code>stack</code> method.</p>
   </div>
 #+end_html
@@ -541,7 +567,7 @@ print(b, vp = vplayout(2, 1))
   <<histograms>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/histograms.svg
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/datadesc/histograms.svg
   <<histograms>>
 #+end_src
 
@@ -554,7 +580,7 @@ par(mfrow = c(1,1)) # back to normal
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/histograms.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/datadesc/histograms.ps}
   \caption{(Relative) frequency histograms of the \texttt{precip} data}
   \label{fig:histograms}
 \end{figure}
@@ -562,7 +588,7 @@ par(mfrow = c(1,1)) # back to normal
 
 #+begin_html
 <div id="fig-histograms" class="figure">
-  <p><img src="svg/histograms.svg" width=500 alt="svg/histograms.svg" /></p>
+  <p><img src="svg/datadesc/histograms.svg" width=500 alt="svg/datadesc/histograms.svg" /></p>
   <p>(Relative) frequency histograms of the <code>precip</code> data.</p>
 </div>
 #+end_html
@@ -692,7 +718,9 @@ par(mfrow = c(1,1)) # back to normal
 Coming soon.
 
 *** Qualitative Data, Categorical Data, and Factors
-#+latex: \label{sub:Qualitative-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Qualitative-Data
+:END:
 
 Qualitative data are simply any type of data that are not numerical, or do not represent numerical quantities. Examples of qualitative variables include a subject's name, gender, race/ethnicity, political party, socioeconomic status, class rank, driver's license number, and social security number (SSN).
 
@@ -729,10 +757,14 @@ The =str=\index{str@\texttt{str}} output shows that =state.region= is already st
 #+latex: \end{example}
 
 *** Displaying Qualitative Data
-#+latex: \label{sub:Displaying-Qualitative-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Displaying-Qualitative-Data
+:END:
 
 **** Tables
-#+latex: \label{par:Tables}
+:PROPERTIES:
+:CUSTOM_ID: par:Tables
+:END:
 
 One of the best ways to summarize qualitative data is with a table of the data values. We may count frequencies with the =table= function or list proportions with the =prop.table=\index{prop.table@\texttt{prop.table}} function (whose input is a frequency table). In the \(\mathsf{R}\) Commander you can do it with =Statistics= \(\triangleright\) =Frequency Distribution...= Alternatively, to look at tables for all factors in the =Active data set=\index{Active data set@\texttt{Active data set}} you can do =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Active Dataset=.
 
@@ -754,7 +786,9 @@ prop.table(Tbl)   # same thing
 
 
 **** Bar Graphs
-#+latex: \label{par:Bar-Graphs}
+:PROPERTIES:
+:CUSTOM_ID: par:Bar-Graphs
+:END:
 
 A bar graph is the analogue of a histogram for categorical data. A bar is displayed for each level of a factor, with the heights of the bars proportional to the frequencies of observations falling in the respective categories. A disadvantage of bar graphs is that the levels are ordered alphabetically (by default), which may sometimes obscure patterns in the display. 
 
@@ -805,7 +839,9 @@ par(mfrow = c(1,1)) # back to normal
 #+latex: \end{example}
 
 **** Pareto Diagrams
-#+latex: \label{par:Pareto-Diagrams}
+:PROPERTIES:
+:CUSTOM_ID: par:Pareto-Diagrams
+:END:
 
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease -- this is much more difficult when the bars are jumbled. 
 
@@ -846,7 +882,9 @@ pareto.chart(table(state.division), ylab="Frequency")
 
 
 **** Dot Charts
-#+latex: \label{par:Dotcharts}
+:PROPERTIES:
+:CUSTOM_ID: par:Dotcharts
+:END:
 
 These are a lot like a bar graph that has been turned on its side with the bars replaced by dots on horizontal lines. They do not convey any more (or less) information than the associated bar graph, but the strength lies in the economy of the display. Dot charts are so compact that it is easy to graph very complicated multi-variable interactions together in one graph. See Section \ref{sec:Comparing-Data-Sets}. We will give an example here using the same data as above for comparison. The graph was produced by the following code.
 
@@ -886,14 +924,18 @@ See Figure \ref{fig:dot-charts}. Compare it to Figure \ref{fig:bar-gr-stateregio
 #+latex: \end{example}
 
 **** Pie Graphs
-#+latex: \label{par:Pie-Graphs}
+:PROPERTIES:
+:CUSTOM_ID: par:Pie-Graphs
+:END:
 
 These can be done with \(\mathsf{R}\) and the \(\mathsf{R}\) Commander, but they fallen out of favor in recent years because researchers have determined that while the human eye is good at judging linear measures, it is notoriously bad at judging relative areas (such as those displayed by a pie graph). Pie charts are consequently a very bad way of displaying information. A bar chart or dot chart is a preferable way of displaying qualitative data. See =?pie=\index{pie@\texttt{pie}} for more information.
 
 We are not going to do any examples of a pie graph and discourage their use elsewhere. 
 
 *** Logical Data
-#+latex: \label{sub:Logical-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Logical-Data
+:END:
 
 There is another type of information recognized by \(\mathsf{R}\) which does not fall into the above categories. The value is either =TRUE= or =FALSE= (note that equivalently you can use =1 = TRUE=, =0 = FALSE=). Here is an example of a logical vector:
 
@@ -912,7 +954,9 @@ We can swap =TRUE= with =FALSE= with the exclamation point =!=.
 #+end_src
 
 *** Missing Data
-#+latex: \label{sub:Missing-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Missing-Data
+:END:
 
 Missing data are a persistent and prevalent problem in many statistical analyses, especially those associated with the social sciences. \(\mathsf{R}\) reserves the special symbol =NA= to representing missing data.
 
@@ -942,25 +986,35 @@ sum(z)
 The analogue of =is.na= for rectangular data sets (or data frames) is the =complete.cases= function. See Appendix \ref{sec:Editing-Data-Sets}.
 
 *** Other Data Types
-#+latex: \label{sub:other-data-types}
+:PROPERTIES:
+:CUSTOM_ID: sub:other-data-types
+:END:
 
 ** Features of Data Distributions
-#+latex: \label{sec:features-of-data}
+:PROPERTIES:
+:CUSTOM_ID: sec:features-of-data
+:END:
 
 Given that the data have been appropriately displayed, the next step is to try to identify salient features represented in the graph. The acronym to remember is \emph{C}enter, \emph{U}nusual features, \emph{S}pread, and \emph{S}hape. (CUSS).
 
 *** Center
-#+latex: \label{sub:Center}
+:PROPERTIES:
+:CUSTOM_ID: sub:Center
+:END:
 
 One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure \ref{fig:histograms-bins}, a measure of center would be about \( SRC_R{round(mean(precip))} \). 
 
 *** Spread
-#+latex: \label{sub:Spread}
+:PROPERTIES:
+:CUSTOM_ID: sub:Spread
+:END:
 
 The spread of a data set is associated with its variability; data sets with a large spread tend to cover a large interval of values, while data sets with small spread tend to cluster tightly around a central value. 
 
 *** Shape
-#+latex: \label{sub:Shape}
+:PROPERTIES:
+:CUSTOM_ID: sub:Shape
+:END:
 
 When we speak of the /shape/ of a data set, we are usually referring to the shape exhibited by an associated graphical display, such as a histogram. The shape can tell us a lot about any underlying structure to the data, and can help us decide which statistical procedure we should use to analyze them.
 
@@ -976,7 +1030,9 @@ We have already encountered skewed distributions: both the discoveries data in F
 Another component to the shape of a distribution is how ``peaked'' it is. Some distributions tend to have a flat shape with thin tails. These are called /platykurtic/, and an example of a platykurtic distribution is the uniform distribution; see Section \ref{sec:The-Continuous-Uniform}. On the other end of the spectrum are distributions with a steep peak, or spike, accompanied by heavy tails; these are called /leptokurtic/. Examples of leptokurtic distributions are the Laplace distribution and the logistic distribution. See Section \ref{sec:Other-Continuous-Distributions}. In between are distributions (called /mesokurtic/) with a rounded peak and moderately sized tails. The standard example of a mesokurtic distribution is the famous bell-shaped curve, also known as the Gaussian, or normal, distribution, and the binomial distribution can be mesokurtic for specific choices of \(p\). See Sections \ref{sec:binom-dist} and \ref{sec:The-Normal-Distribution}.
 
 *** Clusters and Gaps
-#+latex: \label{sub:clusters-and-gaps}
+:PROPERTIES:
+:CUSTOM_ID: sub:clusters-and-gaps
+:END:
 
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section \ref{sec:Exploratory-Data-Analysis}.
 
@@ -988,7 +1044,9 @@ with(faithful, stem.leaf(eruptions))
 There are definitely two clusters of data here; an upper cluster and a lower cluster. 
 
 *** Extreme Observations and other Unusual Features
-#+latex: \label{sub:Extreme-Observations-and}
+:PROPERTIES:
+:CUSTOM_ID: sub:Extreme-Observations-and
+:END:
 
 Extreme observations fall far from the rest of the data. Such observations are troublesome to many statistical procedures; they cause exaggerated estimates and instability. It is important to identify extreme observations and examine the source of the data more closely. There are many possible reasons underlying an extreme observation:
 
@@ -999,15 +1057,21 @@ Extreme observations fall far from the rest of the data. Such observations are t
 - *Maybe it indicates a deeper trend or phenomenon.* Many of the most influential scientific discoveries were made when the investigator noticed an unexpected result, a value that was not predicted by the classical theory. Albert Einstein, Louis Pasteur, and others built their careers on exactly this circumstance.
 
 ** Descriptive Statistics
-#+latex: \label{sec:Descriptive-Statistics}
+:PROPERTIES:
+:CUSTOM_ID: sec:Descriptive-Statistics
+:END:
 
 *** Frequencies and Relative Frequencies
-#+latex: \label{sub:Frequencies-and-Relative}
+:PROPERTIES:
+:CUSTOM_ID: sub:Frequencies-and-Relative
+:END:
 
 These are used for categorical data. The idea is that there are a number of different categories, and we would like to get some idea about how the categories are represented in the population. 
 
 *** Measures of Center
-#+latex: \label{sub:Measures-of-Center}
+:PROPERTIES:
+:CUSTOM_ID: sub:Measures-of-Center
+:END:
 
 The /sample mean/ is denoted \(\overline{x}\) (read ``\(x\)-bar'') and is simply the arithmetic average of the observations:
 \begin{equation} 
@@ -1039,7 +1103,9 @@ The /trimmed mean/ is a measure designed to address the sensitivity of the sampl
 - You can calculate the trimmed mean with the =trim= argument; =mean(x, trim = 0.05)=.
 
 *** Order Statistics and the Sample Quantiles
-#+latex: \label{sub:Order-Statistics-and}
+:PROPERTIES:
+:CUSTOM_ID: sub:Order-Statistics-and
+:END:
 
 A common first step in an analysis of a data set is to sort the values. Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), we may sort the values to obtain an increasing sequence
 \begin{equation} 
@@ -1079,7 +1145,9 @@ we can find the order statistics of a variable in the =Active data set= by doing
 In =Rcmdr=, we can calculate the sample quantiles for a particular variable with the sequence =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Numerical Summaries...= We can automatically calculate the quartiles for all variables in the =Active data set= with the sequence =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Active Dataset=.
 
 *** Measures of Spread
-#+latex: \label{sub:Measures-of-Spread}
+:PROPERTIES:
+:CUSTOM_ID: sub:Measures-of-Spread
+:END:
 
 **** Sample Variance and Standard Deviation
 
@@ -1138,8 +1206,10 @@ we may compute the sample range with =range(x)= and the sample variance with =va
 #+latex: \subparagraph*{With the \(\mathsf{R}\) Commander}
 we can calculate the sample standard deviation with the =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Numerical Summaries...= combination. \(\mathsf{R}\) Commander does not calculate the \(IQR\) or \(MAD\) in any of the menu selections, by default.
 
-*** Measures of Shape 
-#+latex: \label{sub:Measures-of-Shape}
+*** Measures of Shape
+:PROPERTIES:
+:CUSTOM_ID: sub:Measures-of-Shape
+:END: 
 
 **** Sample Skewness
 
@@ -1187,7 +1257,9 @@ kurtosis(UKDriverDeaths)
 so that the =UKDriverDeaths= data appear to be mesokurtic, or at least not substantially leptokurtic.
 
 ** Exploratory Data Analysis
-#+latex: \label{sec:Exploratory-Data-Analysis}
+:PROPERTIES:
+:CUSTOM_ID: sec:Exploratory-Data-Analysis
+:END:
 
 This field was founded (mostly) by John Tukey (1915-2000). Its tools are useful when not much is known regarding the underlying causes associated with the data set, and are often used for checking assumptions. For example, suppose we perform an experiment and collect some data... now what? We look at the data using exploratory visual tools.
 
@@ -1229,7 +1301,9 @@ stem.leaf(precip)
 Here is an example of split stems, with two lines per stem. The final digit of each datum has been dropped for the display. The data appear to be left skewed with four extreme values to the left and one extreme value to the right. The sample median is approximately 37 (it turns out to be 36.6).
 
 *** Hinges and the Five Number Summary
-#+latex: \label{sub:hinges-and-5NS}
+:PROPERTIES:
+:CUSTOM_ID: sub:hinges-and-5NS
+:END:
 
 Given a data set \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the hinges are found by the following method:  
 - Find the order statistics \(x_{(1)}\), \(x_{(2)}\), ..., \(x_{(n)}\). 
@@ -1246,7 +1320,9 @@ An advantage of the \(5NS\) is that it reduces a potentially large data set to a
 If the data are stored in a vector =x=, then you can compute the \(5NS\) with the =fivenum= function.
 
 *** Boxplots
-#+latex: \label{sub:boxplots}
+:PROPERTIES:
+:CUSTOM_ID: sub:boxplots
+:END:
 
 A boxplot is essentially a graphical representation of the \(5NS\). It can be a handy alternative to a stripchart when the sample size is large.
 
@@ -1265,7 +1341,9 @@ Boxplots are also good because one can visually assess multiple features of the 
 - Extreme observations :: are identified with open circles (see below).
 
 *** Outliers
-#+latex: \label{sub:Outliers}
+:PROPERTIES:
+:CUSTOM_ID: sub:Outliers
+:END:
 
 A /potential outlier/ is any observation that falls beyond 1.5 times the width of the box on either side, that is, any observation less than \(h_{L}-1.5(h_{U}-h_{L})\) or greater than \(h_{U}+1.5(h_{U}-h_{L})\). A /suspected outlier/ is any observation that falls beyond 3 times the width of the box on either side. In \(\mathsf{R}\), both potential and suspected outliers (if present) are denoted by open circles; there is no distinction between the two. 
 
@@ -1304,7 +1382,9 @@ z_{i}=\frac{x_{i}-\overline{x}}{s},\quad i=1,\,2,\,\ldots,\, n.
 The =scale= function will rescale a numeric vector (or data frame) by subtracting the sample mean from each value (column) and/or by dividing each observation by the sample standard deviation.
 
 ** Multivariate Data and Data Frames
-#+latex: \label{sec:multivariate-data}
+:PROPERTIES:
+:CUSTOM_ID: sec:multivariate-data
+:END:
 
 We have had experience with vectors of data, which are long lists of numbers. Typically, each entry in the vector is a single measurement on a subject or experimental unit in the study. We saw in Section \ref{sub:Vectors} how to form vectors with the =c= function or the =scan= function. 
 
@@ -1345,7 +1425,9 @@ A$v1
 The above is identical to =A[ ,1]=. 
 
 *** Bivariate Data
-#+latex: \label{sub:Bivariate-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Bivariate-Data
+:END:
 
 - Stacked bar charts
 - odds ratio and relative risk
@@ -1387,7 +1469,9 @@ r=\frac{\sum_{i=1}^{n}(x_{i}-\overline{x})(y_{i}-\overline{y})}{\sqrt{\sum_{i=1}
   - xyplot(weight ~ height, data = women) (strong positive linear)
 
 *** Multivariate Data
-#+latex: \label{sub:Multivariate-Data}
+:PROPERTIES:
+:CUSTOM_ID: sub:Multivariate-Data
+:END:
 
 Multivariate Data Display
 
@@ -1399,7 +1483,9 @@ or in \(\mathsf{R}\) Commander by following =Statistics= \(\triangleright\) =Con
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
 
 ** Comparing Populations
-#+latex: \label{sec:Comparing-Data-Sets}
+:PROPERTIES:
+:CUSTOM_ID: sec:Comparing-Data-Sets
+:END:
 
 Sometimes we have data from two or more groups (or populations) and we would like to compare them and draw conclusions. Some issues that we would like to address:
 
@@ -1514,7 +1600,9 @@ It is clear that if \(x_{(k)}=y_{(k)}\) for all \(k=1,2,\ldots,n\), then we will
 - If the slope of the line is greater (less) than one, then the spread of the \(Y\) data is greater (less) than the spread of the \(X\) data.
 
 *** Lattice Graphics
-#+latex: \label{sub:Lattice-Graphics}
+:PROPERTIES:
+:CUSTOM_ID: sub:Lattice-Graphics
+:END:
 
 The following types of plots are useful when there is one variable of interest and there is a factor in the data set by which the variable is categorized. 
 
@@ -1739,9 +1827,8 @@ Describe the following data sets just as if you were communicating with an alien
 * Probability                                                          :prob:
 :PROPERTIES:
 :tangle: R/prob.R
+:CUSTOM_ID: cha:Probability
 :END:
-#+latex: \label{cha:Probability}
-
 
 #+latex: \noindent 
 In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
@@ -1800,7 +1887,9 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 #+end_html
 
 ** Sample Spaces
-#+latex: \label{sec:Sample-Spaces}
+:PROPERTIES:
+:CUSTOM_ID: sec:Sample-Spaces
+:END:
 
 For a random experiment \(E\), the set of all possible outcomes of \(E\) is called the /sample space/\index{sample space} and is denoted by the letter \(S\). For a coin-toss experiment, \(S\) would be the results ``Head'' and ``Tail'', which we may represent by \( S = \{H,T \} \). Formally, the performance of a random experiment is the unpredictable selection of an outcome in \(S\).
 
@@ -1852,7 +1941,9 @@ head(cards())
 The =cards= function that we just used has optional arguments =jokers= (if you would like Jokers to be in the deck) and =makespace= which we will discuss later. There is also a =roulette= function which returns the sample space associated with one spin on a roulette wheel. There are EU and USA versions available. Interested readers may contribute any other game or sample spaces that may be of general interest.
 
 *** Sampling from Urns
-#+latex: \label{sub:sampling-from-urns}
+:PROPERTIES:
+:CUSTOM_ID: sub:sampling-from-urns
+:END:
 
 This is perhaps the most fundamental type of random experiment. We have an urn that contains a bunch of distinguishable objects (balls) inside. We shake up the urn, reach inside, grab a ball, and take a look. That's all.
 
@@ -1917,7 +2008,9 @@ surface.
 In this way, when the =x= argument of =urnsamples= has repeated elements, the resulting sample space may appear to be =ordered = TRUE= even when, in fact, the call to the function was =urnsamples(..., ordered = FALSE)=. Similar remarks apply for the =replace= argument. 
 
 ** Events
-#+latex: \label{sec:Events}
+:PROPERTIES:
+:CUSTOM_ID: sec:Events
+:END:
 
 An /event/\index{event} \(A\) is merely a collection of outcomes, or in other words, a subset of the sample space
 #+latex: \footnote{This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.}.
@@ -2056,7 +2149,9 @@ When the =prob= package loads you will notice a message: =The following object(s
 #+end_note
 
 ** Model Assignment
-#+latex: \label{sec:Interpreting-Probabilities}
+:PROPERTIES:
+:CUSTOM_ID: sec:Interpreting-Probabilities
+:END:
 
 Let us take a look at the coin-toss experiment more closely. What do we mean when we say ``the probability of Heads'' or write \(\Pr(\mbox{Heads})\)? Given a coin and an itchy thumb, how do we go about finding what \(\Pr(\mbox{Heads})\) should be?
 
@@ -2170,10 +2265,14 @@ Alas, even if there were enough RAM to barely hold the sample space (and there w
 that holds asymptotically. User beware.
 
 ** Properties of Probability
-#+latex: \label{sec:Properties-of-Probability}
+:PROPERTIES:
+:CUSTOM_ID: sec:Properties-of-Probability
+:END:
 
 *** Probability Functions
-#+latex: \label{sub:Probability-Functions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Probability-Functions
+:END:
 
 A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\Pr(A)=p\), called the /probability of/ \(A\). Any probability function \(\Pr\) satisfies the following three Kolmogorov Axioms: 
 
@@ -2362,7 +2461,9 @@ We have as yet glossed over the details. More specifically, =prob= has three arg
 Consequently, =x= should be the entire probability space in the case that =event= is non-null.
 
 ** Counting Methods
-#+latex: \label{sec:Methods-of-Counting}
+:PROPERTIES:
+:CUSTOM_ID: sec:Methods-of-Counting
+:END:
 
 The equally-likely model is a convenient and popular way to analyze random experiments. And when the equally likely model applies, finding the probability of an event \(A\) amounts to nothing more than counting the number of outcomes that \(A\) contains (together with the number of events in \(S\)). Hence, to be a master of probability one must be skilled at counting outcomes in events of all kinds.
 
@@ -2604,7 +2705,9 @@ remove(g)
 There is a =Birthday problem= item in the =Probability= menu of =RcmdrPlugin.IPSUR=. In the base \(\mathsf{R}\) version, one can compute approximate probabilities for the more general case of probabilities other than 1/2, for differing total number of days in the year, and even for more than two matches.
 
 ** Conditional Probability
-#+latex: \label{sec:Conditional-Probability}
+:PROPERTIES:
+:CUSTOM_ID: sec:Conditional-Probability
+:END:
 
 Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \Pr(A) = 4/52 \). Suppose we look at the first card. What now is the probability of \(B\)? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
 \[
@@ -2740,7 +2843,9 @@ At the beginning of the section we drew two cards from a standard playing deck. 
 #+latex: \end{example}
 
 **** How to do it with \(\mathsf{R}\)
-#+latex: \label{sub:howto-ps-objects}
+:PROPERTIES:
+:CUSTOM_ID: sub:howto-ps-objects
+:END:
 
 Continuing Example \ref{exa:two-cards-both-aces}, we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
 
@@ -2864,7 +2969,9 @@ Using the same reasoning, we can return to the example from the beginning of the
 \]
  
 ** Independent Events
-#+latex: \label{sec:Independent-Events}
+:PROPERTIES:
+:CUSTOM_ID: sec:Independent-Events
+:END:
 
 Toss a coin twice. The sample space is \(S= \{ HH,\ HT,\ TH,\ TT \} \). We know that \(\Pr(1^{\mathrm{st}}\mbox{ toss is }H)=2/4\), \(\Pr(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4\), and \(\Pr(\mbox{both }H)=1/4\). Then
 \begin{align*} \Pr(2^{\mathrm{nd}}\mbox{ toss is }H\ |\ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\Pr(\mbox{both }H)}{\Pr(1^{\mathrm{st}}\mbox{ toss is }H)},\\
@@ -2977,7 +3084,9 @@ As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has 
 Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= argument is specified. Also note that the argument =x= is a /vector/, not a data frame. Something like =iidspace(tosscoin(1),...)= would give an error.
 
 ** Bayes' Rule
-#+latex: \label{sec:Bayes'-Rule}
+:PROPERTIES:
+:CUSTOM_ID: sec:Bayes'-Rule
+:END:
 
 We mentioned the subjective view of probability in Section \ref{sec:Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
@@ -3122,7 +3231,9 @@ fastpost / sum(fastpost)
 Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
 
 ** Random Variables
-#+latex: \label{sec:Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Random-Variables
+:END:
 
 We already know about experiments, sample spaces, and events. In this section, we are interested in a /number/ that is associated with the experiment. We conduct a random experiment \(E\) and after learning the outcome \(\omega\) in \(S\) we calculate a number \(X\). That is, to each outcome \(\omega\) in the sample space we associate a number \(X(\omega)=x\). 
 
@@ -3231,8 +3342,8 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 * Discrete Distributions                                           :discdist:
 :PROPERTIES:
 :tangle: R/discdist.R
+:CUSTOM_ID: cha:Discrete-Distributions
 :END:
-#+latex: \label{cha:Discrete-Distributions}
 
 #+latex: \noindent 
 In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
@@ -3251,10 +3362,14 @@ There are some comments on simulation, and we mention transformations of random 
 - how to make new discrete random variables from old ones
 
 ** Discrete Random Variables
-#+latex: \label{sec:discrete-random-variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:discrete-random-variables
+:END:
 
 *** Probability Mass Functions
-#+latex: \label{sub:probability-mass-functions}
+:PROPERTIES:
+:CUSTOM_ID: sub:probability-mass-functions
+:END:
 
 Discrete random variables are characterized by their supports which take the form
 \begin{equation}
@@ -3285,7 +3400,9 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
-#+latex: \label{sub:mean-variance-sd}
+:PROPERTIES:
+:CUSTOM_ID: sub:mean-variance-sd
+:END:
 
 There are numbers associated with PMFs. One important example is the mean \(\mu\), also known as \(\mathbb{E} X\) (which we will discuss later):
 \begin{equation}
@@ -3321,7 +3438,9 @@ We know that all PMFs satisfy certain properties, and a similar statement may be
 We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). In an abuse of notation we will also write \(X\sim f_{X}\) and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
 
 **** How to do it with \(\mathsf{R}\)
-#+latex: \label{sub:disc-rv-how-r}
+:PROPERTIES:
+:CUSTOM_ID: sub:disc-rv-how-r
+:END:
 
 The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
 
@@ -3365,7 +3484,9 @@ E(X); var(X); sd(X)
 #+end_src
 
 ** The Discrete Uniform Distribution
-#+latex: \label{sec:disc-uniform-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:disc-uniform-dist
+:END:
 
 We have seen the basic building blocks of discrete distributions and we now study particular models that statisticians often encounter in the field. Perhaps the most fundamental of all is the /discrete uniform/ distribution.
 
@@ -3419,7 +3540,9 @@ In the \(\mathsf{R}\) Console window, the \(\mathsf{R}\) Commander should tell y
 The default name for the variable is =disunif.sim1=.
 
 ** The Binomial Distribution
-#+latex: \label{sec:binom-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:binom-dist
+:END:
 
 The binomial distribution is based on a /Bernoulli trial/, which is a random experiment in which there are only two possible outcomes: success (\(S\)) and failure (\(F\)). We conduct the Bernoulli trial and let 
 \begin{equation}
@@ -3436,7 +3559,9 @@ f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 It is easy to calculate \(\mu=\mathbb{E} X=p\) and \(\mathbb{E} X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
 
 *** The Binomial Model
-#+latex: \label{sub:The-Binomial-Model}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Binomial-Model
+:END:
 
 The Binomial model has three defining properties:
 - Bernoulli trials are conducted \(n\) times,
@@ -3623,10 +3748,14 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
 #+end_latex
 
 ** Expectation and Moment Generating Functions
-#+latex: \label{sec:expectation-and-mgfs}
+:PROPERTIES:
+:CUSTOM_ID: sec:expectation-and-mgfs
+:END:
 
 *** The Expectation Operator
-#+latex: \label{sub:expectation-operator}
+:PROPERTIES:
+:CUSTOM_ID: sub:expectation-operator
+:END:
 
 We next generalize some of the concepts from Section \ref{sub:mean-variance-sd}. There we saw that every
 #+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
@@ -3669,7 +3798,9 @@ Go directly from the definition. For example,
 #+end_proof
 
 *** Moment Generating Functions
-#+latex: \label{sub:MGFs}
+:PROPERTIES:
+:CUSTOM_ID: sub:MGFs
+:END:
 
 #+begin_defn
 Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
@@ -3814,7 +3945,9 @@ sd(X)
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
 ** The Empirical Distribution
-#+latex: \label{sec:empirical-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sec:empirical-distribution
+:END:
 
 Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
@@ -3902,15 +4035,21 @@ We can get the empirical quantile function in \(\mathsf{R}\) with =quantile(x, p
 As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter \ref{cha:resampling-methods}.
 
 ** Other Discrete Distributions
-#+latex: \label{sec:other-discrete-distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:other-discrete-distributions
+:END:
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
 
 *** Dependent Bernoulli Trials
-#+latex: \label{sec:non-bernoulli-trials}
+:PROPERTIES:
+:CUSTOM_ID: sec:non-bernoulli-trials
+:END:
 
 **** The Hypergeometric Distribution
-#+latex: \label{sub:hypergeometric-dist}
+:PROPERTIES:
+:CUSTOM_ID: sub:hypergeometric-dist
+:END:
 
 Consider an urn with 7 white balls and 5 black balls. Let our random experiment be to randomly select 4 balls, without replacement, from the urn. Then the probability of observing 3 white balls (and thus 1 black ball) would be
 \begin{equation}
@@ -4001,7 +4140,9 @@ Generate \(100,000\) observations of the random variable \(X\).
 #+latex: \end{example}
 
 **** Sampling With and Without Replacement
-#+latex: \label{sub:Sampling-With-and}
+:PROPERTIES:
+:CUSTOM_ID: sub:Sampling-With-and
+:END:
 
 Suppose that we have a large urn with, say, \(M\) white balls and \(N\) black balls. We take a sample of size \(n\) from the urn, and let \(X\) count the number of white balls in the sample. If we sample
 - without replacement, :: then \(X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)\) and has mean and variance
@@ -4023,12 +4164,16 @@ We see that both sampling procedures have the same mean, and the method with the
 is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 
 *** Waiting Time Distributions
-#+latex: \label{sec:Waiting-Time-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Waiting-Time-Distributions
+:END:
 
 Another important class of problems is associated with the amount of time it takes for a specified event of interest to occur. For example, we could flip a coin repeatedly until we observe Heads. We could toss a piece of paper repeatedly until we make it in the trash can.
 
 **** The Geometric Distribution
-#+latex: \label{sub:The-Geometric-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Geometric-Distribution
+:END:
 
 Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -4066,7 +4211,9 @@ When they say ``geometric distribution'', this is what they mean. It is not hard
 #+end_note
 
 **** The Negative Binomial Distribution
-#+latex: \label{sub:The-Negative-Binomial}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Negative-Binomial
+:END:
 
 We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -4143,10 +4290,14 @@ It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\
 #+end_note
 
 *** Arrival Processes
-#+latex: \label{sec:Arrival-Processes}
+:PROPERTIES:
+:CUSTOM_ID: sec:Arrival-Processes
+:END:
 
 **** The Poisson Distribution
-#+latex: \label{sub:The-Poisson-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Poisson-Distribution
+:END:
 
 This is a distribution associated with ``rare events'', for reasons which will become clear in a moment. The events might be:
 - traffic accidents,
@@ -4195,7 +4346,9 @@ diff(ppois(c(47, 50), lambda = 50))
 #+latex: \end{example}
 
 ** Functions of Discrete Random Variables
-#+latex: \label{sec:functions-discrete-rvs}
+:PROPERTIES:
+:CUSTOM_ID: sec:functions-discrete-rvs
+:END:
 
 We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix \ref{sec:Differential-and-Integral}), the solution can be found by simple substitution.
 
@@ -4392,8 +4545,8 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 * Continuous Distributions                                         :contdist:
 :PROPERTIES:
 :tangle: R/contdist.R
+:CUSTOM_ID: cha:Continuous-Distributions
 :END:
-#+latex: \label{cha:Continuous-Distributions}
 
 #+latex: \noindent 
 The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
@@ -4416,10 +4569,14 @@ The interested reader who would like to learn more about any of the assorted dis
 - how to make new continuous random variables from old ones
 
 ** Continuous Random Variables
-#+latex: \label{sec:continuous-random-variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:continuous-random-variables
+:END:
 
 *** Probability Density Functions
-#+latex: \label{sub:probability-density-functions}
+:PROPERTIES:
+:CUSTOM_ID: sub:probability-density-functions
+:END:
 
 Continuous random variables have supports that look like
 \begin{equation}
@@ -4475,7 +4632,9 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 #+latex: \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 
 *** Expectation of Continuous Random Variables
-#+latex: \label{sub:Expectation-of-Continuous}
+:PROPERTIES:
+:CUSTOM_ID: sub:Expectation-of-Continuous
+:END:
 
 For a continuous random variable \(X\) the expected value of \(g(X)\) is
 \begin{equation}
@@ -4622,7 +4781,9 @@ Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why
 #+latex: \end{example}
 
 ** The Continuous Uniform Distribution
-#+latex: \label{sec:The-Continuous-Uniform}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Continuous-Uniform
+:END:
 
 A random variable \(X\) with the continuous uniform distribution on the interval \((a,b)\) has PDF
 \begin{equation}
@@ -4655,7 +4816,9 @@ using the popular formula for the difference of squares. The variance is left to
 #+latex: \end{example}
 
 ** The Normal Distribution
-#+latex: \label{sec:The-Normal-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Normal-Distribution
+:END:
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
@@ -4727,7 +4890,9 @@ Let the random experiment consist of a person taking an IQ test, and let \(X\) b
 #+latex: \end{example}
 
 *** Normal Quantiles and the Quantile Function
-#+latex: \label{sub:Normal-Quantiles-QF}
+:PROPERTIES:
+:CUSTOM_ID: sub:Normal-Quantiles-QF
+:END:
 
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 
@@ -4806,7 +4971,9 @@ Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
 ** Functions of Continuous Random Variables
-#+latex: \label{sec:Functions-of-Continuous}
+:PROPERTIES:
+:CUSTOM_ID: sec:Functions-of-Continuous
+:END:
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 
@@ -4988,15 +5155,21 @@ The answers are not the same! Furthermore, if we were to repeat the process we w
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \(\mathsf{R}\) are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
 ** Other Continuous Distributions
-#+latex: \label{sec:Other-Continuous-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Continuous-Distributions
+:END:
 
 *** Waiting Time Distributions
-#+latex: \label{sub:Waiting-Time-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Waiting-Time-Distributions
+:END:
 
 In some experiments, the random variable being measured is the time until a certain event occurs. For example, a quality control specialist may be testing a manufactured product to see how long it takes until it fails. An efficiency expert may be recording the customer traffic at a retail store to streamline scheduling of staff. 
 
 **** The Exponential Distribution
-#+latex: \label{sub:The-Exponential-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Exponential-Distribution
+:END:
 
 We say that \(X\) has an /exponential distribution/ and write \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). 
 \begin{equation}
@@ -5026,7 +5199,9 @@ The exponential distribution is said to be /memoryless/ because exponential rand
 See Exercise \ref{xca:prove-the-memoryless}.
 
 *** The Gamma Distribution
-#+latex: \label{sub:The-Gamma-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Gamma-Distribution
+:END:
 
 This is a generalization of the exponential distribution. We say that \(X\) has a gamma distribution and write \(X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). It has PDF
 \begin{equation}
@@ -5042,10 +5217,14 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 #+latex: \end{example}
 
 *** The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions
-#+latex: \label{sub:The-Chi-Square-t-F}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Chi-Square-t-F
+:END:
 
 **** The Chi square Distribution
-#+latex: \label{sub:The-Chi-Square}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Chi-Square
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5097,7 +5276,9 @@ Here are some useful things to know about the chi-square distribution.
 #+end_rem
 
 *** Student's \(t\) distribution
-#+latex: \label{sub:Student's-t-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:Student's-t-distribution
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5106,7 +5287,9 @@ f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\fra
 is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \(\mathsf{R}\) functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 *** Snedecor's \(F\) distribution
-#+latex: \label{sub:snedecor-F-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:snedecor-F-distribution
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -5121,10 +5304,14 @@ Here are some notes about the \(F\) distribution.
 #+end_rem
 
 *** Other Popular Distributions
-#+latex: \label{sub:Other-Popular-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Other-Popular-Distributions
+:END:
 
 **** The Cauchy Distribution
-#+latex: \label{sub:The-Cauchy-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Cauchy-Distribution
+:END:
 
 This is a special case of the Student's \(t\) distribution. It has PDF
 \begin{equation}
@@ -5135,7 +5322,9 @@ We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). T
 It is easy to see that a \(\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)\) distribution is the same as a \(\mathsf{t}(\mathtt{df}=1)\) distribution. The \(\mathsf{cauchy}\) distribution looks like a \(\mathsf{norm}\) distribution but with very heavy tails. The mean (and variance) do not exist, that is, they are infinite. The median is represented by the \(\mathtt{location}\) parameter, and the \(\mathtt{scale}\) parameter influences the spread of the distribution about its median.
 
 **** The Beta Distribution
-#+latex: \label{sub:The-Beta-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Beta-Distribution
+:END:
 
 This is a generalization of the continuous uniform distribution.
 \begin{equation}
@@ -5149,7 +5338,9 @@ See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian 
 
 
 **** The Logistic Distribution
-#+latex: \label{sub:The-Logistic-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Logistic-Distribution
+:END:
 
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left(-\frac{x-\mu}{\sigma}\right)\right]^{-2},\quad-\infty<x<\infty.
@@ -5157,7 +5348,9 @@ f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left
 We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \(\mathsf{R}\) function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
 
 **** The Lognormal Distribution
-#+latex: \label{sub:The-Lognormal-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Lognormal-Distribution
+:END:
 
 This is a distribution derived from the normal distribution (hence the name). If \(U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), then \( X = \mathrm{e}^{U} \) has PDF
 \begin{equation}
@@ -5167,7 +5360,9 @@ We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). 
 
 
 **** The Weibull Distribution
-#+latex: \label{sub:The-Weibull-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Weibull-Distribution
+:END:
 
 This has PDF
 \begin{equation}
@@ -5278,8 +5473,8 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 * Multivariate Distributions                                       :multdist:
 :PROPERTIES:
 :tangle: R/multdist.R
+:CUSTOM_ID: cha:Multivariable-Distributions
 :END:
-#+latex: \label{cha:Multivariable-Distributions}
 
 #+latex: \noindent 
 We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
@@ -5300,7 +5495,9 @@ The interested reader who would like to learn more about any of the below mentio
 - what it looks like when there are more than two random variables present
 
 ** Joint and Marginal Probability Distributions
-#+latex: \label{sec:Joint-Probability-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Joint-Probability-Distributions
+:END:
 
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
@@ -5545,7 +5742,9 @@ colSums(temp)
 You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
 
 ** Joint and Marginal Expectation
-#+latex: \label{sec:Joint-and-Marginal-Expectation}
+:PROPERTIES:
+:CUSTOM_ID: sec:Joint-and-Marginal-Expectation
+:END:
 
 Given a function \(g\) with arguments \((x,y)\) we would like to know the long-run average behavior of \(g(X,Y)\) and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
 \begin{equation}
@@ -5645,7 +5844,9 @@ Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{ryacas}. See Section \ref{sub:bivariate-transf-R} for another example where the =Ryacas= package appears.
 
 ** Conditional Distributions
-#+latex: \label{sec:Conditional-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Conditional-Distributions
+:END:
 
 If \(x\in S_{X}\) is such that \(f_{X}(x)>0\), then we define the /conditional density/ of \(Y|\, X=x\), denoted \(f_{Y|x}\), by 
 \begin{equation}
@@ -5710,10 +5911,14 @@ where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{
 #+end_rem
 
 ** Independent Random Variables
-#+latex: \label{sec:Independent-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Independent-Random-Variables
+:END:
 
 *** Independent Random Variables
-#+latex: \label{sub:Independent-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sub:Independent-Random-Variables
+:END:
 
 We recall from Chapter \ref{cha:Probability} that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
@@ -5795,7 +6000,9 @@ If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent f
 #+end_fact
 
 *** Combining Independent Random Variables
-#+latex: \label{sub:Combining-Independent-Random}
+:PROPERTIES:
+:CUSTOM_ID: sub:Combining-Independent-Random
+:END:
 
 Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
 
@@ -5856,7 +6063,9 @@ But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1
 #+end_proof
 
 ** Exchangeable Random Variables
-#+latex: \label{sec:Exchangeable-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Exchangeable-Random-Variables
+:END:
 
 Two random variables \(X\) and \(Y\) are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
@@ -5894,7 +6103,9 @@ If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) 
 Exchangeability thus contains IID as a special case. 
 
 ** The Bivariate Normal Distribution
-#+latex: \label{sec:The-Bivariate-Normal}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Bivariate-Normal
+:END:
 
 The bivariate normal PDF is given by the unwieldy formula
 \begin{multline}
@@ -6011,7 +6222,9 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_html
 
 ** Bivariate Transformations of Random Variables
-#+latex: \label{sec:Transformations-Multivariate}
+:PROPERTIES:
+:CUSTOM_ID: sec:Transformations-Multivariate
+:END:
 
 We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
@@ -6082,14 +6295,18 @@ It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\
 #+end_rem
 
 **** How to do it with \(\mathsf{R}\)
-#+latex: \label{sub:bivariate-transf-R}
+:PROPERTIES:
+:CUSTOM_ID: sub:bivariate-transf-R
+:END:
 
 It is possible to do the computations above in \(\mathsf{R}\) with the =Ryacas= package. The package is an interface to the open-source computer algebra system, ``Yacas''. The user installs Yacas, then employs =Ryacas= to submit commands to Yacas, after which the output is displayed in the \(\mathsf{R}\) console.
 
 There are not yet any examples of Yacas in this book, but there are online materials to help the interested reader: see [[http://code.google.com/p/ryacas/][here]] to get started.
 
 ** Remarks for the Multivariate Case
-#+latex: \label{sec:Remarks-for-the-Multivariate}
+:PROPERTIES:
+:CUSTOM_ID: sec:Remarks-for-the-Multivariate
+:END:
 
 There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
@@ -6209,7 +6426,9 @@ and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf
 #+end_proof
 
 ** The Multinomial Distribution
-#+latex: \label{sec:Multinomial}
+:PROPERTIES:
+:CUSTOM_ID: sec:Multinomial
+:END:
 
 We sample \(n\) times, with replacement, from an urn that contains balls of \(k\) different types. Let \(X_{1}\) denote the number of balls in our sample of type 1, let \(X_{2}\) denote the number of balls of type 2, ..., and let \(X_{k}\) denote the number of balls of type \(k\). Suppose the urn has proportion \(p_{1}\) of balls of type 1, proportion \(p_{2}\) of balls of type 2, ..., and proportion \(p_{k}\) of balls of type \(k\). Then the joint PMF of \((X_{1},\ldots,X_{k})\) is
 \begin{eqnarray}
@@ -6328,8 +6547,8 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 * Sampling Distributions                                           :sampdist:
 :PROPERTIES:
 :tangle: R/sampdist.R
+:CUSTOM_ID: cha:Sampling-Distributions
 :END:
-#+latex: \label{cha:Sampling-Distributions}
 
 #+latex: \noindent 
 This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
@@ -6353,10 +6572,14 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 - some basic concepts related to sampling distribution utility, such as bias and variance
 
 ** Simple Random Samples
-#+latex: \label{sec:simple-random-samples}
+:PROPERTIES:
+:CUSTOM_ID: sec:simple-random-samples
+:END:
 
 *** Simple Random Samples
-#+latex: \label{sub:simple-random-samples}
+:PROPERTIES:
+:CUSTOM_ID: sub:simple-random-samples
+:END:
 
 #+begin_defn
 If \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent with \(X_{i}\sim f\) for \(i=1,2,\ldots,n\), then we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /independent and identically distributed/ (IID) from the population \(f\) or alternatively we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a /simple random sample of size/ \(n\), denoted \(SRS(n)\), from the population \(f\). 
@@ -6396,10 +6619,14 @@ The last step is to recognize that each term in last product above is exactly \(
 #+end_proof
 
 ** Sampling from a Normal Distribution
-#+latex: \label{sec:sampling-from-normal-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:sampling-from-normal-dist
+:END:
 
 *** The Distribution of the Sample Mean
-#+latex: \label{sub:samp-mean-dist-of}
+:PROPERTIES:
+:CUSTOM_ID: sub:samp-mean-dist-of
+:END:
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the sample mean \(\overline{X}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) sampling distribution.
@@ -6421,7 +6648,9 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 #+end_proof
 
 *** The Distribution of the Sample Variance
-#+latex: \label{sub:Samp-Var-Dist}
+:PROPERTIES:
+:CUSTOM_ID: sub:Samp-Var-Dist
+:END:
 
 #+begin_thm
 #+latex: \label{thm:Xbar-andS}
@@ -6443,7 +6672,9 @@ The proof is beyond the scope of the present book, but the theorem is simply too
 #+end_proof
 
 *** The Distribution of Student's \(T\) Statistic
-#+latex: \label{sub:Student's-t-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:Student's-t-Distribution
+:END:
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the quantity 
@@ -6528,7 +6759,9 @@ There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribut
 #+end_rem
 
 ** The Central Limit Theorem
-#+latex: \label{sec:Central-Limit-Theorem}
+:PROPERTIES:
+:CUSTOM_ID: sec:Central-Limit-Theorem
+:END:
 
 In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) is a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution then \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\). In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of \(Z\) defined by
 \begin{equation}
@@ -6579,7 +6812,9 @@ For example, when the command =clt1()=  is issued a plot window opens to show a 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
 ** Sampling Distributions of Two-Sample Statistics
-#+latex: \label{sec:Samp-Dist-Two-Samp}
+:PROPERTIES:
+:CUSTOM_ID: sec:Samp-Dist-Two-Samp
+:END:
 
 There are often two populations under consideration, and it sometimes of interest to compare properties between groups. To do so we take independent samples from each population and calculate respective sample statistics for comparison. In some simple cases the sampling distribution of the comparison is known and easy to derive; such cases are the subject of the present section.
 
@@ -6662,7 +6897,9 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 #+end_rem
 
 ** Simulated Sampling Distributions
-#+latex: \label{sec:Simulated-Sampling-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Simulated-Sampling-Distributions
+:END:
 
 Some comparisons are meaningful, but their sampling distribution is not quite so tidy to describe analytically. What do we do then?
 
@@ -6798,8 +7035,8 @@ And that's all she wrote.
 * Estimation                                                       :estimate:
 :PROPERTIES:
 :tangle: R/estimate.R
+:CUSTOM_ID: cha:Estimation
 :END:
-#+latex: \label{cha:Estimation}
 
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
@@ -6816,7 +7053,9 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 - the concept of margin of error and its relationship to sample size
 
 ** Point Estimation
-#+latex: \label{sec:Point-Estimation-1}
+:PROPERTIES:
+:CUSTOM_ID: sec:Point-Estimation-1
+:END:
 
 The following example is how I was introduced to maximum likelihood.
 
@@ -7152,7 +7391,9 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 ** Confidence Intervals for Means
-#+latex: \label{sec:Confidence-Intervals-for-Means}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-for-Means
+:END:
 
 We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, where \(\mu\) is unknown. We know that we may estimate \(\mu\) with \(\overline{X}\), and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
@@ -7353,7 +7594,9 @@ plot(temp, "Conf")
 #+end_src
 
 ** Confidence Intervals for Differences of Means
-#+latex: \label{sec:Conf-Interv-for-Diff-Means}
+:PROPERTIES:
+:CUSTOM_ID: sec:Conf-Interv-for-Diff-Means
+:END:
 
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) be a \(SRS(m)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Further, assume that the \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) sample is independent of the \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) sample.
 
@@ -7413,7 +7656,9 @@ The basic function is =t.test= which has a =var.equal= argument that may be set 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
 ** Confidence Intervals for Proportions
-#+latex: \label{sec:Confidence-Intervals-Proportions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-Proportions
+:END:
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 - the proportion of U.S. citizens that support Obama,
@@ -7506,7 +7751,9 @@ B <- with(A, untable(A, Freq))
 #+end_src
 
 ** Confidence Intervals for Variances
-#+latex: \label{sec:Confidence-Intervals-for-Variances}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-for-Variances
+:END:
 
 I am thinking one and two sample problems here.
 
@@ -7515,15 +7762,18 @@ I am thinking one and two sample problems here.
 I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \(\mathsf{R}\) here.
 
 ** Fitting Distributions
-#+latex: \label{sec:Fitting-Distributions}
-
+:PROPERTIES:
+:CUSTOM_ID: sec:Fitting-Distributions
+:END:
 
 **** How to do it with \(\mathsf{R}\)
 
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
 ** Sample Size and Margin of Error
-#+latex: \label{sec:Sample-Size-and-MOE}
+:PROPERTIES:
+:CUSTOM_ID: sec:Sample-Size-and-MOE
+:END:
 
 Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
@@ -7588,7 +7838,9 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
 
 ** Other Topics
-#+latex: \label{sec:Other-Topics}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Topics
+:END:
 
 Mention =mle= from the =stats4= package.
 
@@ -7614,8 +7866,8 @@ You are going to need the quadratic formula.
 * Hypothesis Testing                                                 :hypoth:
 :PROPERTIES:
 :tangle: R/hypoth.R
+:CUSTOM_ID: cha:Hypothesis-Testing
 :END:
-#+latex: \label{cha:Hypothesis-Testing}
 
 **** What do I want them to know?
 
@@ -7625,7 +7877,9 @@ You are going to need the quadratic formula.
 - the concept of statistical power and its relation to sample size
 
 ** Introduction
-#+latex: \label{sec:Introduction-Hypothesis}
+:PROPERTIES:
+:CUSTOM_ID: sec:Introduction-Hypothesis
+:END:
 
 I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr. Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
 
@@ -7660,8 +7914,10 @@ dhyper(0, m = 26, n = 26, k = 5)
 There are two very important final thoughts. First, everybody gets a cookie in the end. Second, the students invariably (and aggressively) attempt to get me to open up the deck and reveal the true nature of the cards. I never do.
 
 
-Tests for Proportions
-#+latex: \label{sec:Tests-for-Proportions}
+** Tests for Proportions
+:PROPERTIES:
+:CUSTOM_ID: sec:Tests-for-Proportions
+:END:
 
 #+latex: \begin{example}
 #+latex: \label{exa:widget-machine}
@@ -7830,7 +8086,9 @@ Otherwise, your data -- the raw successes and failures -- should be in a column 
 Once your unsummarized data is a column, then you can use the menu =Statistics= \(\triangleright\) =Proportions= \(\triangleright\) =Single-sample proportion test...=
 
 ** One Sample Tests for Means and Variances
-#+latex: \label{sec:One-Sample-Tests}
+:PROPERTIES:
+:CUSTOM_ID: sec:One-Sample-Tests
+:END:
 
 *** For Means
 
@@ -7911,7 +8169,9 @@ sigma.test(women$height, sigma = 8)
 #+end_src
 
 ** Two-Sample Tests for Means and Variances
-#+latex: \label{sec:Two-Sample-Tests-for-Means}
+:PROPERTIES:
+:CUSTOM_ID: sec:Two-Sample-Tests-for-Means
+:END:
 
 The basic idea for this section is the following. We have \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\). distributed independently. We would like to know whether \(X\) and \(Y\) come from the same population distribution, that is, we would like to know:
 \begin{equation}
@@ -7965,10 +8225,14 @@ t.test(extra ~ group, data = sleep, paired = TRUE)
 #+end_src
 
 ** Other Hypothesis Tests
-#+latex: \label{sec:Other-Hypothesis-Tests}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Hypothesis-Tests
+:END:
 
 *** Kolmogorov-Smirnov Goodness-of-Fit Test
-#+latex: \label{sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test}
+:PROPERTIES:
+:CUSTOM_ID: sub:Kolmogorov-Smirnov-Goodness-of-Fit-Test
+:END:
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -7977,7 +8241,9 @@ ks.test(randu$x, "punif")
 #+end_src
 
 *** Shapiro-Wilk Normality Test
-#+latex: \label{sub:Shapiro-Wilk-Normality-Test}
+:PROPERTIES:
+:CUSTOM_ID: sub:Shapiro-Wilk-Normality-Test
+:END:
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -7986,7 +8252,9 @@ shapiro.test(women$height)
 #+end_src
 
 ** Analysis of Variance
-#+latex: \label{sec:Analysis-of-Variance}
+:PROPERTIES:
+:CUSTOM_ID: sec:Analysis-of-Variance
+:END:
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -8075,7 +8343,9 @@ par(old.omd)
 #+end_html
 
 ** Sample Size and Power
-#+latex: \label{sec:Sample-Size-and-Power}
+:PROPERTIES:
+:CUSTOM_ID: sec:Sample-Size-and-Power
+:END:
 
 The power function of a test for a parameter \(\theta\) is
 \[
@@ -8127,8 +8397,8 @@ power.examp()
 * Simple Linear Regression                                              :slr:
 :PROPERTIES:
 :tangle: R/slr.R
+:CUSTOM_ID: cha:simple-linear-regression
 :END:
-#+latex: \label{cha:simple-linear-regression}
 
 **** What do I want them to know?
 
@@ -8139,7 +8409,9 @@ power.examp()
 - the concept of influential versus outlying observations, and how to tell the difference
 
 ** Basic Philosophy
-#+latex: \label{sec:Basic-Philosophy}
+:PROPERTIES:
+:CUSTOM_ID: sec:Basic-Philosophy
+:END:
 
 Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not random (so we will write \(x\)), but \(Y\) is random. We believe that \(Y\) depends in /some/ way on \(x\). Some typical examples of \( (x,Y) \) pairs are
 
@@ -8280,10 +8552,14 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 #+latex: \end{example}
 
 ** Estimation
-#+latex: \label{sec:SLR-Estimation}
+:PROPERTIES:
+:CUSTOM_ID: sec:SLR-Estimation
+:END:
 
 *** Point Estimates of the Parameters
-#+latex: \label{sub:point-estimate-mle-slr}
+:PROPERTIES:
+:CUSTOM_ID: sub:point-estimate-mle-slr
+:END:
 
 Where is \( \mu(x) \)? In essence, we would like to ``fit'' a line to the points. But how do we determine a ``good'' line? Is there a /best/ line? We will use maximum likelihood\index{maximum likelihood} to find it. We know:
 \begin{equation}
@@ -8415,7 +8691,9 @@ Using the regression line for the =cars= data:
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
-#+latex: \label{sub:slr-point-est-regline}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-point-est-regline
+:END:
 
 We said at the beginning of the chapter that our goal was to estimate \( \mu = \mathbb{E} Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
@@ -8501,7 +8779,9 @@ carsumry$sigma
 #+end_src
 
 *** Interval Estimates of the Parameters
-#+latex: \label{sub:slr-interval-est-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-interval-est-params
+:END:
 
 We discussed general interval estimation in Chapter \ref{cha:Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
 
@@ -8570,7 +8850,9 @@ confint(cars.lm)
 With 95% confidence, the random interval \( [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] \) covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
-#+latex: \label{sub:slr-interval-est-regline}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-interval-est-regline
+:END:
 
 We have seen how to estimate the coefficients of regression line with both point estimates and confidence intervals. We even saw how to estimate a value \(\hat{\mu}(x)\) on the regression line for a given value of \(x\), such as \(x=15\). 
 
@@ -8686,10 +8968,14 @@ print(ci.plot(cars.lm))
 #+end_src
 
 ** Model Utility and Inference
-#+latex: \label{sec:Model-Utility-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Model-Utility-SLR
+:END:
 
 *** Hypothesis Tests for the Parameters
-#+latex: \label{sub:slr-hypoth-test-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-hypoth-test-params
+:END:
 
 Much of the attention of SLR is directed toward \(\beta_{1}\) because when \( \beta_{1}\neq 0 \) the mean value of \(Y\) increases (or decreases) as \(x\) increases. It is really boring when \(\beta_{1}=0\), because in that case the mean value of \(Y\) remains the same, regardless of the value of \(x\) (when the regression assumptions hold, of course). It is thus very important to decide whether or not \( \beta_{1} = 0 \). We address the question with a statistical test of the null hypothesis \(H_{0}:\beta_{1}=0\) versus the alternative hypothesis \(H_{1}:\beta_{1}\neq0\), and to do that we need to know the sampling distribution of \(b_{1}\) when the null hypothesis is true.
 
@@ -8784,7 +9070,9 @@ sqrt(carsumry$r.squared)
 We choose the principal square root because the slope of the regression line is positive.
 
 *** Overall /F/ statistic
-#+latex: \label{sub:slr-overall-F-statistic}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-overall-F-statistic
+:END:
 
 There is another way to test the significance of the linear regression model. In SLR, the new way also tests the hypothesis \(H_{0}:\beta_{1}=0\) versus \(H_{1}:\beta_{1}\neq0\), but it is done with a new test statistic called the /overall F statistic/. It is defined by
 
@@ -8819,14 +9107,18 @@ Here we see that the \(F\) statistic is \( SRC_R{tmpf} \) with a \(p\)-value ver
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for =speed= squared.
 
 ** Residual Analysis
-#+latex: \label{sec:Residual-Analysis-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Residual-Analysis-SLR
+:END:
 
 We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub:Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub:Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub:Independence-Assumption}.
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
 *** Normality Assumption
-#+latex: \label{sub:Normality-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Normality-Assumption
+:END:
 
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
@@ -8886,7 +9178,9 @@ shapiro.test(residuals(cars.lm))
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 
 *** Constant Variance Assumption
-#+latex: \label{sub:Constant-Variance-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Constant-Variance-Assumption
+:END:
 
 We will again go to residual plots to try and determine if the spread of the residuals is changing over time (or index). However, it is unfortunately not that easy because the residuals do not have constant variance! In fact, it can be shown that the variance of the residual \(E_{i}\) is 
 \begin{equation}
@@ -8949,7 +9243,9 @@ bptest(cars.lm)
 For these data we would not reject the null hypothesis at the \(\alpha=0.05\) level. There is relatively weak evidence against the assumption of constant variance. 
 
 *** Independence Assumption
-#+latex: \label{sub:Independence-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Independence-Assumption
+:END:
 
 One of the strongest of the regression assumptions is the one regarding independence. Departures from the independence assumption are often exhibited by correlation (or autocorrelation, literally, self-correlation) present in the residuals. There can be positive or negative correlation.
 
@@ -9031,7 +9327,9 @@ We often find problems with our model that suggest that at least one of the thre
 - Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 
 ** Other Diagnostic Tools
-#+latex: \label{sec:Other-Diagnostic-Tools-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Diagnostic-Tools-SLR
+:END:
 
 There are two types of observations with which we must be especially careful:
 - Influential observations :: are those that have a substantial effect on our estimates, predictions, or inferences. A small change in an influential observation is followed by a large change in the parameter estimates or inferences. 
@@ -9310,8 +9608,8 @@ Show that the formula given in Equation \ref{eq:sample-correlation-formula} is e
 * Multiple Linear Regression                                            :mlr:
 :PROPERTIES:
 :tangle: R/mlr.R
+:CUSTOM_ID: cha:multiple-linear-regression
 :END:
-#+latex: \label{cha:multiple-linear-regression}
 
 #+latex: \noindent 
 We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -9331,7 +9629,9 @@ Most of the results are stated without proof or with only a cursory justificatio
 - hints about what will be coming later
 
 ** The Multiple Linear Regression Model
-#+latex: \label{sec:The-MLR-Model}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-MLR-Model
+:END:
 
 The first thing to do is get some better notation. We will write 
 \begin{equation}
@@ -9468,10 +9768,14 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
 ** Estimation and Prediction
-#+latex: \label{sec:Estimation-and-Prediction-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Estimation-and-Prediction-MLR
+:END:
 
 *** Parameter estimates
-#+latex: \label{sub:mlr-parameter-estimates}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-parameter-estimates
+:END:
 
 We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
 \begin{equation}
@@ -9535,7 +9839,9 @@ head(model.matrix(trees.lm))
 #+end_src
 
 *** Point Estimates of the Regression Surface
-#+latex: \label{sub:mlr-point-est-regsurface}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-point-est-regsurface
+:END:
 
 The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
 \begin{eqnarray}
@@ -9626,7 +9932,9 @@ Using the =trees= data,
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
-#+latex: \label{sub:mlr-mse-se}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-mse-se
+:END:
 
 The residuals are given by
 \begin{equation}
@@ -9664,7 +9972,9 @@ treesumry$sigma
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
 *** Interval Estimates of the Parameters
-#+latex: \label{sub:mlr-interval-est-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-interval-est-params
+:END:
 
 We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
@@ -9775,7 +10085,9 @@ Using the =trees= data,
 #+latex: \end{example}
 
 ** Model Utility and Inference
-#+latex: \label{sec:Model-Utility-and-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Model-Utility-and-MLR
+:END:
 
 *** Multiple Coefficient of Determination
 
@@ -9822,7 +10134,9 @@ treesumry$adj.r.squared
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 
 *** Overall /F/-Test
-#+latex: \label{sub:mlr-Overall-F-Test}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-Overall-F-Test
+:END:
 
 Another way to assess the model's utility is to to test the hypothesis
 \[
@@ -9845,7 +10159,9 @@ treesumry$fstatistic
 For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
-#+latex: \label{sub:mlr-Student's-t-Tests}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-Student's-t-Tests
+:END:
 
 We know that
 \begin{equation}
@@ -9876,7 +10192,9 @@ treesumry
 We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
 
 ** Polynomial Regression
-#+latex: \label{sec:Polynomial-Regression}
+:PROPERTIES:
+:CUSTOM_ID: sec:Polynomial-Regression
+:END:
 
 *** Quadratic Regression Model
 
@@ -10005,7 +10323,9 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 #+end_rem
 
 ** Interaction
-#+latex: \label{sec:Interaction}
+:PROPERTIES:
+:CUSTOM_ID: sec:Interaction
+:END:
 
 In our model for tree volume there have been two independent variables: =Girth= and =Height=. We may suspect that the independent variables are related, that is, values of one variable may tend to influence values of the other. It may be desirable to include an additional term in our model to try and capture the dependence between the variables. Interaction terms are formed by multiplying one (or more) explanatory variable(s) by another. 
 
@@ -10072,7 +10392,9 @@ There are two other ways to include interaction terms in model formulas. For exa
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
 
 ** Qualitative Explanatory Variables
-#+latex: \label{sec:Qualitative-Explanatory-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Qualitative-Explanatory-Variables
+:END:
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
 
@@ -10200,7 +10522,9 @@ It may look intimidating but there is reason to the madness. First we =split= th
 There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \(\mathsf{R}\) are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
-#+latex: \label{sec:Partial-F-Statistic}
+:PROPERTIES:
+:CUSTOM_ID: sec:Partial-F-Statistic
+:END:
 
 We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
@@ -10275,7 +10599,9 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 #+latex: \end{example}
 
 ** Residual Analysis and Diagnostic Tools
-#+latex: \label{sec:Residual-Analysis-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Residual-Analysis-MLR
+:END:
 
 We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
@@ -10301,7 +10627,9 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
 ** Additional Topics
-#+latex: \label{sec:Additional-Topics-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Additional-Topics-MLR
+:END:
 
 *** Nonlinear Regression
 
@@ -10369,7 +10697,9 @@ summary(acc.nls)
 #+end_src
 
 *** Multicollinearity
-#+latex: \label{sub:Multicollinearity}
+:PROPERTIES:
+:CUSTOM_ID: sub:Multicollinearity
+:END:
 
 A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 
@@ -10408,8 +10738,8 @@ SSTO=SSE+SSR.
 * Resampling Methods                                                 :resamp:
 :PROPERTIES:
 :tangle: R/resamp.R
+:CUSTOM_ID: cha:resampling-methods
 :END:
-#+latex: \label{cha:resampling-methods}
 
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
@@ -10423,7 +10753,9 @@ I have seen /Statistical Computing with \(\mathsf{R}\)/ by Rizzo \cite{Rizzo2008
 - resampling for hypothesis tests (permutation tests)
 
 ** Introduction
-#+latex: \label{sec:Introduction-Resampling}
+:PROPERTIES:
+:CUSTOM_ID: sec:Introduction-Resampling
+:END:
 
 -  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, /e.g./, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
@@ -10454,7 +10786,9 @@ The above discussion leads us to the following general procedure to approximate 
 1. The bootstrap distribution gives information about the sampling distribution of the original statistic \(S\). In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of \(S\).
 
 ** Bootstrap Standard Errors
-#+latex: \label{sec:Bootstrap-Standard-Errors}
+:PROPERTIES:
+:CUSTOM_ID: sec:Bootstrap-Standard-Errors
+:END:
 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 
@@ -10620,7 +10954,9 @@ Some things to keep in mind about the bootstrap:
 #+end_rem
 
 ** Bootstrap Confidence Intervals
-#+latex: \label{sec:Bootstrap-Confidence-Intervals}
+:PROPERTIES:
+:CUSTOM_ID: sec:Bootstrap-Confidence-Intervals
+:END:
 
 *** Percentile Confidence Intervals
 
@@ -10689,7 +11025,9 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 - Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
 
 ** Resampling in Hypothesis Tests
-#+latex: \label{sec:Resampling-in-Hypothesis}
+:PROPERTIES:
+:CUSTOM_ID: sec:Resampling-in-Hypothesis
+:END:
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 1. Go collect some information from the two groups and calculate an associated statistic, for example, \(\overline{X}_{1}-\overline{X}_{2}\). 
@@ -10764,8 +11102,8 @@ Here are some things about permutation tests to keep in mind.
 * Nonparametric Statistics                                         :nonparam:
 :PROPERTIES:
 :tangle: R/nonparam.R
+:CUSTOM_ID: cha:Nonparametric-Statistics
 :END:
-#+latex: \label{cha:Nonparametric-Statistics}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
@@ -10778,8 +11116,8 @@ read(IPSUR)
 * Categorical Data Analysis                                           :categ:
 :PROPERTIES:
 :tangle: R/categ.R
+:CUSTOM_ID: cha:Categorical-Data-Analysis
 :END:
-#+latex: \label{cha:Categorical-Data-Analysis}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
@@ -10792,8 +11130,8 @@ read(IPSUR)
 * Time Series                                                    :timeseries:
 :PROPERTIES:
 :tangle: R/timeseries.R
+:CUSTOM_ID: cha:Time-Series
 :END:
-#+latex: \label{cha:Time-Series}
 
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
@@ -10809,7 +11147,9 @@ read(IPSUR)
 
 
 * \(\mathsf{R}\) Session Information                               :appendix:
-#+latex: \label{cha:R-Session-Information}
+:PROPERTIES:
+:CUSTOM_ID: cha:R-Session-Information
+:END:
 
 If you ever write the \(\mathsf{R}\) help mailing list with a question, then you should include your session information in the email; it makes the reader's job easier and is requested by the Posting Guide. Here is how to do that, and below is what the output looks like.
 
@@ -10820,7 +11160,9 @@ sessionInfo()
 #+latex: \vfill{}
 
 * GNU Free Documentation License                                   :appendix:
-#+latex: \label{cha:GNU-Free-Documentation}
+:PROPERTIES:
+:CUSTOM_ID: cha:GNU-Free-Documentation
+:END:
 
 #+begin_latex
 \begin{center}
@@ -11000,7 +11342,9 @@ If you have Invariant Sections without Cover Texts, or some other combination of
 If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software. 
 
 * History                                                          :appendix:
-#+latex: \label{cha:History}
+:PROPERTIES:
+:CUSTOM_ID: cha:History
+:END:
 
 | Title:     | Introduction to Probability and Statistics Using \(\mathsf{R}\), Second Edition |
 | Year:      | 2011                                                                        |
@@ -11015,13 +11359,16 @@ If your document contains nontrivial examples of program code, we recommend rele
 | Publisher: | G. Jay Kerns                                                               |
 
 * Data                                                             :appendix:
-#+latex: \label{cha:data}
+:PROPERTIES:
+:CUSTOM_ID: cha:data
+:END:
 
 This appendix is a reference of sorts regarding some of the data structures a statistician is likely to encounter. We discuss their salient features and idiosyncrasies.
 
-** Data Structures 
-#+latex: \label{sec:Data-Structures}
-
+** Data Structures
+:PROPERTIES:
+:CUSTOM_ID: sec:Data-Structures
+:END: 
 
 *** Vectors
 
@@ -11179,8 +11526,10 @@ There are at least two ways to do it.
    - if you want to store it as a table then do =A <- xtabs(count ~ poured + guessed, data = D)=
 
 
-** Importing Data 
-#+latex: \label{sec:Importing-A-Data}
+** Importing Data
+:PROPERTIES:
+:CUSTOM_ID: sec:Importing-A-Data
+:END: 
 
 Statistics is the study of data, so the statistician's first step is usually to obtain data from somewhere or another and read them into \(\mathsf{R}\). In this section we describe some of the most common sources of data and how to get data from those sources into a running \(\mathsf{R}\) session.
 
@@ -11217,14 +11566,20 @@ See =?read.spss= for the available options to customize the file import. Note th
 
 The basic command is =read.table=.
 
-** Creating New Data Sets 
-#+latex: \label{sec:Creating-New-Data}
+** Creating New Data Sets
+:PROPERTIES:
+:CUSTOM_ID: sec:Creating-New-Data
+:END: 
+
 Using =c=
 Using =scan=
 Using the \(\mathsf{R}\) Commander.
 
-** Editing Data 
-#+latex: \label{sec:Editing-Data-Sets}
+** Editing Data
+:PROPERTIES:
+:CUSTOM_ID: sec:Editing-Data-Sets
+:END: 
+
 *** Editing Data Values
 *** Inserting Rows and Columns
 *** Deleting Rows and Columns
@@ -11265,13 +11620,18 @@ Tmp <- with(Puromycin, Puromycin[order(-xtfrm(state)), ])
 head(Tmp)
 #+end_src
 
-** Exporting Data 
-#+latex: \label{sec:Exporting-a-Data}
+** Exporting Data
+:PROPERTIES:
+:CUSTOM_ID: sec:Exporting-a-Data
+:END: 
 
 The basic function is =write.table=. The =MASS= package also has a =write.matrix= function.
 
-** Reshaping Data 
-#+latex: \label{sec:Reshaping-a-Data}                    :appendix:
+** Reshaping Data
+:PROPERTIES:
+:CUSTOM_ID: sec:Reshaping-a-Data
+:END: 
+
 - Aggregation
 - Convert Tables to data frames and back
 
@@ -11282,13 +11642,18 @@ The basic function is =write.table=. The =MASS= package also has a =write.matrix
 =stack=
 
 * Mathematical Machinery                                           :appendix:
-#+latex: \label{cha:Mathematical-Machinery}
+:PROPERTIES:
+:CUSTOM_ID: cha:Mathematical-Machinery
+:END:
 
 This appendix houses many of the standard definitions and theorems that are used at some point during the narrative. It is targeted for someone reading the book who forgets the precise definition of something and would like a quick reminder of an exact statement. No proofs are given, and the interested reader should consult a good text on Calculus (say, Stewart \cite{Stewart2008} or Apostol \cite{Apostol1967,ApostolI1967}), Linear Algebra (say, Strang \cite{Strang1988} and Magnus \cite{Magnus1999}), Real Analysis (say, Folland \cite{Folland1999}, or Carothers \cite{Carothers2000}), or Measure Theory (Billingsley \cite{Billingsley1995}, Ash \cite{Ash2000}, Resnick \cite{Resnick1999}) for details. 
 
 
-** Set Algebra 
-#+latex: \label{sec:The-Algebra-of}
+** Set Algebra
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Algebra-of
+:END: 
+
 
 We denote sets by capital letters, \(A\), \(B\), \(C\), /etc/. The letter \(S\) is reserved for the sample space, also known as the universe or universal set, the set which contains all possible elements. The symbol \(\emptyset\) represents the empty set, the set with no elements. 
 
@@ -11335,8 +11700,10 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
    \left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad\mbox{and}\quad\left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}
    \end{equation}
 
-** Differential and Integral Calculus 
-#+latex: \label{sec:Differential-and-Integral}
+** Differential and Integral Calculus
+:PROPERTIES:
+:CUSTOM_ID: sec:Differential-and-Integral
+:END: 
 
 A function \(f\) of one variable is said to be one-to-one if no two distinct \(x\) values are mapped to the same \(y=f(x)\) value. To show that a function is one-to-one we can either use the horizontal line test or we may start with the equation \(f(x_{1}) = f(x_{2})\) and use algebra to show that it implies \(x_{1} = x_{2}\).
 
@@ -11476,8 +11843,10 @@ If both \(\int_{a}^{\infty}f(x)\,\mathrm{d} x\) and \(\int_{-\infty}^{a}f(x)\,\m
 and we say that \(\int_{-\infty}^{\infty}f(x)\,\mathrm{d} x\) is /convergent/. Otherwise, we say that the improper integral is /divergent/.
 
 
-** Sequences and Series 
-#+latex: \label{sec:Sequences-and-Series}
+** Sequences and Series
+:PROPERTIES:
+:CUSTOM_ID: sec:Sequences-and-Series
+:END: 
 
 A /sequence/ is an ordered list of numbers, \(a_{1}\), \(a_{2}\), \(a_{3}\), ..., \(a_{n} =\left(a_{k}\right)_{k=1}^{n}\). A sequence may be finite or infinite. In the latter case we write \(a_{1}\), \(a_{2}\), \(a_{3}\), ... \( =\left(a_{k}\right)_{k=1}^{\infty}\). We say that /the infinite sequence/ \(\left(a_{k}\right)_{k=1}^{\infty}\) /converges to the finite limit/ L, and we write
 \begin{equation}
@@ -11570,8 +11939,10 @@ f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad|x-a|<R,
 in which case both of the above series have radius of convergence \(R\).
 
 
-** The Gamma Function 
-#+latex: \label{sec:The-Gamma-Function}
+** The Gamma Function
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Gamma-Function
+:END: 
 
 The /Gamma function/ \(\Gamma\) will be defined in this book according to the formula
 \begin{equation}
@@ -11584,8 +11955,11 @@ Properties of the Gamma Function:
 - \(\Gamma(1/2)=\sqrt{\pi}\).
 #+end_fact
 
-** Linear Algebra 
-#+latex: \label{sec:Linear-Algebra}
+** Linear Algebra
+:PROPERTIES:
+:CUSTOM_ID: sec:Linear-Algebra
+:END: 
+
 *** Matrices
 A /matrix/ is an ordered array of numbers or expressions; typically we write \(\mathbf{A}=\begin{pmatrix}a_{ij}\end{pmatrix}\) or \(\mathbf{A}=\begin{bmatrix}a_{ij}\end{bmatrix}\). If \(\mathbf{A}\) has \(m\) rows and \(n\) columns then we write
 \begin{equation}
@@ -11653,8 +12027,11 @@ A square matrix \(\mathbf{A}\) is nonsingular if and only if \(\mathrm{det}(\mat
 *** Positive (Semi)Definite
 If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is /positive semidefinite/. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is /positive definite/. The connection to statistics is that covariance matrices (see Chapter \ref{cha:Multivariable-Distributions}) are always positive semidefinite, and many of them are even positive definite.
 
-** Multivariable Calculus 
-#+latex: \label{sec:Multivariable-Calculus}
+** Multivariable Calculus
+:PROPERTIES:
+:CUSTOM_ID: sec:Multivariable-Calculus
+:END: 
+
 *** Partial Derivatives
 If \(f\) is a function of two variables, its /first-order partial derivatives/ are defined by
 \begin{equation}
@@ -11726,13 +12103,18 @@ If the function \(f\) is continuous on \(A\) and if the Jacobian of \(T\) is non
 A multivariate change of variables is defined in an analogous way: the one-to-one transformation \(T\) maps points \((u_{1},u_{2},\ldots,u_{n})\) to points \((x_{1},x_{2},\ldots,x_{n})\), the Jacobian is the determinant of the \(\mathrm{n}\times\mathrm{n}\) matrix of first-order partial derivatives of \(T\) (lined up in the natural manner), and instead of a double integral we have a multiple integral over multidimensional sets \(A\) and \(B\).
 
 * Writing Reports with \(\mathsf{R}\)                                  :appendix:
-#+latex: \label{cha:Writing-Reports-with}
+:PROPERTIES:
+:CUSTOM_ID: cha:Writing-Reports-with
+:END:
 
 Perhaps the most important part of a statistician's job once the analysis is complete is to communicate the results to others. This is usually done with some type of report that is delivered to the client, manager, or administrator. Other situations that call for reports include term papers, final projects, thesis work, /etc/. This chapter is designed to pass along some tips about writing reports once the work is completed with \(\mathsf{R}\).
 
 
-** What to Write 
-#+latex: \label{sec:What-to-Write}
+** What to Write
+:PROPERTIES:
+:CUSTOM_ID: sec:What-to-Write
+:END: 
+
 It is possible to summarize this entire appendix with only one sentence: /the statistician's goal is to communicate with others/. To this end, there are some general guidelines that I give to students which are based on an outline originally written and shared with me by Dr. G. Andy Chang.
 
 *** Basic Outline for a Statistical Report
@@ -11764,8 +12146,11 @@ It is possible to summarize this entire appendix with only one sentence: /the st
    1. Discuss any limitations of the study or inferences.
    1. Discuss avenues of future research suggested by the study. 
 
-** How to Write It with R 
-#+latex: \label{sec:How-to-Write}
+** How to Write It with R
+:PROPERTIES:
+:CUSTOM_ID: sec:How-to-Write
+:END: 
+
 Once the decision has been made what to write, the next task is to typeset the information to be shared. To do this the author will need to select software to use to write the documents. There are many options available, and choosing one over another is sometimes a matter of taste. But not all software were created equal, and \(\mathsf{R}\) plays better with some applications than it does with others. 
 In short, \(\mathsf{R}\) does great with \LaTeX{} and there are many resources available to make writing a document with \(\mathsf{R}\) and \LaTeX{} easier. But \LaTeX{} is not for the beginner, and there are other word processors which may be acceptable depending on the circumstances.
 
@@ -11838,8 +12223,10 @@ Program Listings and the \(\mathsf{R}\) language
 [[http://gregor.gorjanc.googlepages.com/lyx-sweave]]
 
 
-** Formatting Tables 
-#+latex: \label{sec:Formatting-Tables}
+** Formatting Tables
+:PROPERTIES:
+:CUSTOM_ID: sec:Formatting-Tables
+:END: 
 
 The prettyR package 
 
@@ -11852,14 +12239,18 @@ summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 
 There is a =method= argument to =summary=, which is set to \texttt{method = "response"} by default. There are two other methods for summarizing data: =reverse= and =cross=. See =?summary.formula= or the [[http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/StatReport][following document]] from Frank Harrell for more details.
 
-** Other Formats 
-#+latex: \label{sec:Other-Formats}
+** Other Formats
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Formats
+:END: 
 
 HTML and prettyR
 R2HTML
 
 * Instructions for Instructors                                     :appendix:
-#+latex: \label{cha:Instructions-for-Instructors}
+:PROPERTIES:
+:CUSTOM_ID: cha:Instructions-for-Instructors
+:END:
 
 \noun{WARNING: this appendix is not applicable until the exercises
 have been written.} 
@@ -11887,8 +12278,10 @@ runif(1)
 
 Now choose \( SRC_R{set.seed(095259); options(digits = 16); runif(1)*10^16} \)as your secret seed... write it down in a safe place and do not share it with anyone. Next generate the book with your seed using \LyX{}-Sweave or Sweave-\LaTeX{}. You may wish to also generate Student and Instructor Solution Manuals. Guidance regarding this is given below in the How to Use This Document section.
 
-** Generating This Document 
-#+latex: \label{sec:Generating-This-Document}
+** Generating This Document
+:PROPERTIES:
+:CUSTOM_ID: sec:Generating-This-Document
+:END: 
 
 You will need three (3) things to generate this document for yourself, in addition to a current \(\mathsf{R}\) distribution which at the time of this writing is \texttt{ SRC_R{version$version.string} } :
 1. a LaTeX distribution,
@@ -11904,8 +12297,10 @@ We will discuss each of these in turn.
 An attempt was made to not be extravagant with fonts or packages so that a person would not need the entire =CTAN= (or =CRAN=) installed on their personal computer to generate the book. Nevertheless, there are a few extra packages required. These packages are listed in the =preamble= of =IPSUR.Rnw=, =IPSUR.tex=, and =IPSUR.lyx=.
 
 
-** How to Use This Document 
-#+latex: \label{sec:How-to-Use-Document}
+** How to Use This Document
+:PROPERTIES:
+:CUSTOM_ID: sec:How-to-Use-Document
+:END: 
 
 The easiest way to use this document is to install the =IPSUR= package from =CRAN= and be all done. This way would be acceptable if there is another, primary, text being used for the course and \IPSUR\ is only meant to play a supplementary role.
 
@@ -11921,12 +12316,18 @@ To make it easier for those people who do not want to use LyX (or for whatever r
 **** Generating Quizzes and Exams
 - You can copy-paste selected exercises from the text, put them together, and you have a quiz. Since the numbers are randomly generated you do not need to worry about different semesters. And you will have answer keys already for all of your QUIZZES and EXAMS, too. 
 
-** Ancillary Materials 
-#+latex: \label{sec:Ancillary-Materials}
+** Ancillary Materials
+:PROPERTIES:
+:CUSTOM_ID: sec:Ancillary-Materials
+:END: 
+
 In addition to the main text, student manual, and instructor manual, there are two other ancillaries. IPSUR.R, and IPSUR.RData.
 
-** Modifying This Document 
-#+latex: \label{sec:Modifying-This-Document}
+** Modifying This Document
+:PROPERTIES:
+:CUSTOM_ID: sec:Modifying-This-Document
+:END: 
+
 Since this document is released under the GNU-FDL, you are free to modify this document however you wish (in accordance with the license -- see Appendix \ref{cha:GNU-Free-Documentation}). The immediate benefit of this is that you can generate the book, with brand new problem sets, and distribute it to your students simply as a PDF (in an email, for instance). As long as you distribute less than 100 such /Opaque/ copies, you are not even required by the GNU-FDL to share your /Transparent/ copy (the source code with the secret key) that you used to generate them. Next semester, choose a new key and generate a new copy to be distributed to the new class. 
 
 #+begin_quote
@@ -11936,7 +12337,9 @@ But more generally, if you are not keen on the way I explained (or failed to exp
 Some individuals will argue that the nature of a statistics textbook like this one, many of the exercises being randomly generated /by design/, does a disservice to the students because the exercises do not use real-world data. That is a valid criticism... but in my case the benefits outweighed the detriments and I moved forward to incorporate static data sets whenever it was feasible and effective. Frankly, and most humbly, the only response I have for those individuals is: ``Please refer to the preceding paragraph.''
 
 * =RcmdrTestDrive= Story                                           :appendix:
-#+latex: \label{cha:RcmdrTestDrive-Story}
+:PROPERTIES:
+:CUSTOM_ID: cha:RcmdrTestDrive-Story
+:END:
 
 The goal of =RcmdrTestDrive= was to have a data set sufficiently rich in the types of data represented such that a person could load it into the \(\mathsf{R}\) Commander and be able to explore all of =Rcmdr='s menu options at once. I decided early-on that an efficient way to do this would be to generate the data set randomly, and later add to the list of variables as more =Rcmdr= menu options became available. Generating the data was easy, but generating a story that related all of the respective variables proved to be less so.
 
