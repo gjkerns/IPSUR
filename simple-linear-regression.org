@@ -80,10 +80,10 @@ keywords: simple linear regression statistics R
 * Simple Linear Regression                                              :slr:
 :PROPERTIES:
 :tangle: R/slr.R
+:CUSTOM_ID: cha:simple-linear-regression
 :END:
-#+latex: \label{cha:simple-linear-regression}
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - basic philosophy of SLR and the regression assumptions
 - point and interval estimation of the model parameters, and how to use it to make predictions
@@ -92,7 +92,9 @@ keywords: simple linear regression statistics R
 - the concept of influential versus outlying observations, and how to tell the difference
 
 ** Basic Philosophy
-#+latex: \label{sec:Basic-Philosophy}
+:PROPERTIES:
+:CUSTOM_ID: sec:Basic-Philosophy
+:END:
 
 Here we have two variables \(X\) and \(Y\). For our purposes, \(X\) is not random (so we will write \(x\)), but \(Y\) is random. We believe that \(Y\) depends in /some/ way on \(x\). Some typical examples of \( (x,Y) \) pairs are
 
@@ -205,7 +207,7 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
 
 #+begin_html
 <div id="fig-Scatter-cars" class="figure">
-  <p><img src="svg/Scatter-cars.svg" width=500 alt="svg/Scatter-cars.svg" /></p>
+  <p><img src="svg/Scatter-cars.svg" width=500 alt="svg/carscatter.svg" /></p>
   <p>Scatterplot of <code>dist</code> versus <code>speed</code> for the <code>cars</code> data.</p>
 </div>
 #+end_html
@@ -233,10 +235,14 @@ There is a pronounced upward trend to the data points, and the pattern looks app
 #+latex: \end{example}
 
 ** Estimation
-#+latex: \label{sec:SLR-Estimation}
+:PROPERTIES:
+:CUSTOM_ID: sec:SLR-Estimation
+:END:
 
 *** Point Estimates of the Parameters
-#+latex: \label{sub:point-estimate-mle-slr}
+:PROPERTIES:
+:CUSTOM_ID: sub:point-estimate-mle-slr
+:END:
 
 Where is \( \mu(x) \)? In essence, we would like to ``fit'' a line to the points. But how do we determine a ``good'' line? Is there a /best/ line? We will use maximum likelihood\index{maximum likelihood} to find it. We know:
 \begin{equation}
@@ -276,7 +282,7 @@ n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \end{eqnarray}
 for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise \ref{xca:find-mles-SLR}) gives
 \begin{equation}
-\hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right\slash n}\label{eq:regline-slope-formula}
+\hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right/ n}\label{eq:regline-slope-formula}
 \end{equation}
 and
 \begin{equation}
@@ -301,7 +307,7 @@ b_{1} = r\frac{s_{y}}{s_{x}},\label{eq:sample-correlation-formula}
 where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise \ref{xca:show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq:sample-correlation-formula} and Equation \ref{eq:population-slope-slr}.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 #+begin_src R :exports none :results silent
 tmpcoef <- round(as.numeric(coef(lm(dist ~ speed, cars))), 2)
@@ -368,7 +374,9 @@ Using the regression line for the =cars= data:
 #+latex: \end{example}
 
 *** Point Estimates of the Regression Line
-#+latex: \label{sub:slr-point-est-regline}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-point-est-regline
+:END:
 
 We said at the beginning of the chapter that our goal was to estimate \( \mu = \mathbb{E} Y \), and the arguments in Section \ref{sub:point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
@@ -393,7 +401,7 @@ In an abuse of notation we will sometimes write \(\hat{Y}\) or \(\hat{Y}(x_{0})\
 We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The fitted values are automatically computed as a byproduct of the model fitting procedure and are already stored as a component of the =cars.lm= object. We may access them with the =fitted= function (we only show the first five entries):
 
@@ -431,7 +439,7 @@ and we estimate \(\sigma\) with the /standard error/
 #+latex: \footnote{Be careful not to confuse the mean square error \(S^{2}\) with the sample variance \(S^{2}\) in Chapter \ref{cha:Describing-Data-Distributions}. Other notation the reader may encounter is the lowercase \(s^{2}\) or the bulky \(MSE\).}
 \(S=\sqrt{S^{2}}\).
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The residuals for the model may be obtained with the =residuals= function; we only show the first few entries in the interest of space:
 
@@ -454,7 +462,9 @@ carsumry$sigma
 #+end_src
 
 *** Interval Estimates of the Parameters
-#+latex: \label{sub:slr-interval-est-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-interval-est-params
+:END:
 
 We discussed general interval estimation in Chapter \ref{cha:Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
 
@@ -501,7 +511,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution and a \(100(1-\alpha)\%\) con
 b_{0}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{0}}.
 \end{equation}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 #+begin_src R :exports none :results silent
 A <- matrix(as.numeric(round(carsumry$coef, 3)), nrow = 2)
@@ -523,7 +533,9 @@ confint(cars.lm)
 With 95% confidence, the random interval \( [ SRC_R{B[2,1]}, SRC_R{B[2,2]} ] \) covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
-#+latex: \label{sub:slr-interval-est-regline}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-interval-est-regline
+:END:
 
 We have seen how to estimate the coefficients of regression line with both point estimates and confidence intervals. We even saw how to estimate a value \(\hat{\mu}(x)\) on the regression line for a given value of \(x\), such as \(x=15\). 
 
@@ -553,7 +565,7 @@ Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \( 100(1-\al
 We notice that the prediction interval in Equation \ref{eq:SLR-pred-int-formula} is wider than the confidence interval in Equation \ref{eq:SLR-conf-int-formula}, as we expected at the beginning of the section.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 Confidence and prediction intervals are calculated in \(\mathsf{R}\) with the =predict=\index{predict@\texttt{predict}} function, which we encountered in Section \ref{sub:slr-point-est-regline}. There we neglected to take advantage of its additional =interval= argument. The general syntax follows. 
 
@@ -639,10 +651,14 @@ print(ci.plot(cars.lm))
 #+end_src
 
 ** Model Utility and Inference
-#+latex: \label{sec:Model-Utility-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Model-Utility-SLR
+:END:
 
 *** Hypothesis Tests for the Parameters
-#+latex: \label{sub:slr-hypoth-test-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-hypoth-test-params
+:END:
 
 Much of the attention of SLR is directed toward \(\beta_{1}\) because when \( \beta_{1}\neq 0 \) the mean value of \(Y\) increases (or decreases) as \(x\) increases. It is really boring when \(\beta_{1}=0\), because in that case the mean value of \(Y\) remains the same, regardless of the value of \(x\) (when the regression assumptions hold, of course). It is thus very important to decide whether or not \( \beta_{1} = 0 \). We address the question with a statistical test of the null hypothesis \(H_{0}:\beta_{1}=0\) versus the alternative hypothesis \(H_{1}:\beta_{1}\neq0\), and to do that we need to know the sampling distribution of \(b_{1}\) when the null hypothesis is true.
 
@@ -656,7 +672,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution; therefore, when \(\beta_{1}=
 Similarly, we may test the hypothesis \(H_{0}:\beta_{0}=0\) versus the alternative \(H_{1}:\beta_{0}\neq0\) with the statistic \(T=b_{0}/S_{b_{0}}\), where \(S_{b_{0}}\) is given in Section \ref{sub:slr-interval-est-params}. The test is conducted the same way as for \(\beta_{1}\). 
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 Let us take another look at the output from =summary(cars.lm)=:
 
@@ -707,7 +723,7 @@ We interpret \(r^{2}\) as the proportion of total variation that is explained by
 Related to the simple coefficient of determination is the sample correlation coefficient, \(r\). As you can guess, the way we get \(r\) is by the formula \(|r|=\sqrt{r^{2}}\). The sign of \(r\) is equal the sign of the slope estimate \(b_{1}\). That is, if the regression line \(\hat{\mu}(x)\) has positive slope, then \(r=\sqrt{r^{2}}\). Likewise, if the slope of \(\hat{\mu}(x)\) is negative, then \(r=-\sqrt{r^{2}}\).
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The primary method to display partitioned sums of squared errors is with an /ANOVA table/. The command in \(\mathsf{R}\) to produce such a table is =anova=. The input to =anova= is the result of an =lm= call which for the =cars= data is =cars.lm=.
 
@@ -737,7 +753,9 @@ sqrt(carsumry$r.squared)
 We choose the principal square root because the slope of the regression line is positive.
 
 *** Overall /F/ statistic
-#+latex: \label{sub:slr-overall-F-statistic}
+:PROPERTIES:
+:CUSTOM_ID: sub:slr-overall-F-statistic
+:END:
 
 There is another way to test the significance of the linear regression model. In SLR, the new way also tests the hypothesis \(H_{0}:\beta_{1}=0\) versus \(H_{1}:\beta_{1}\neq0\), but it is done with a new test statistic called the /overall F statistic/. It is defined by
 
@@ -755,7 +773,7 @@ F=\left(\frac{b_{1}}{S_{b_{1}}}\right)^{2}.
 
 So why bother to define the \(F\) statistic? Why not just square the \(t\) statistic and be done with it? The answer is that the \(F\) statistic has a more complicated interpretation and plays a more important role in the multiple linear regression model which we will study in Chapter \ref{cha:multiple-linear-regression}. See Section \ref{sub:mlr-Overall-F-Test} for details.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The overall \(F\) statistic and \(p\)-value are displayed in the bottom line of the =summary(cars.lm)= output. It is also shown in the final columns of =anova(cars.lm)=:
 
@@ -772,14 +790,18 @@ Here we see that the \(F\) statistic is \( SRC_R{tmpf} \) with a \(p\)-value ver
 Note that the value of the \(F\) statistic is the same as the Student's \(t\) statistic for =speed= squared.
 
 ** Residual Analysis
-#+latex: \label{sec:Residual-Analysis-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Residual-Analysis-SLR
+:END:
 
 We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub:Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub:Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub:Independence-Assumption}.
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
 *** Normality Assumption
-#+latex: \label{sub:Normality-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Normality-Assumption
+:END:
 
 We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig:Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig:Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
@@ -813,7 +835,7 @@ plot(cars.lm, which = 2)
   <<Normal-q-q-plot-cars>>
 #+end_src
 
-#+latex: \paragraph*{Testing the Normality Assumption}
+**** Testing the Normality Assumption
 
 Even though we may be concerned about the plots, we can use tests to determine if the evidence present is statistically significant, or if it could have happened merely by chance. There are many statistical tests of normality. We will use the Shapiro-Wilk test, since it is known to be a good test and to be quite powerful. However, there are many other fine tests of normality including the Anderson-Darling test and the Lillefors test, just to mention two of them.  
 
@@ -839,7 +861,9 @@ shapiro.test(residuals(cars.lm))
 For these data we would reject the assumption of normality of the residuals at the \(\alpha=0.05\) significance level, but do not lose heart, because the regression model is reasonably robust to departures from the normality assumption. As long as the residual distribution is not highly skewed, then the regression estimators will perform reasonably well. Moreover, departures from constant variance and independence will sometimes affect the quantile plots and histograms, therefore it is wise to delay final decisions regarding normality until all diagnostic measures have been investigated.
 
 *** Constant Variance Assumption
-#+latex: \label{sub:Constant-Variance-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Constant-Variance-Assumption
+:END:
 
 We will again go to residual plots to try and determine if the spread of the residuals is changing over time (or index). However, it is unfortunately not that easy because the residuals do not have constant variance! In fact, it can be shown that the variance of the residual \(E_{i}\) is 
 \begin{equation}
@@ -881,7 +905,7 @@ plot(cars.lm, which = 3)
   <<std-resids-fitted-cars>>
 #+end_src
 
-#+latex: \paragraph*{Testing the Constant Variance Assumption}
+**** Testing the Constant Variance Assumption
 
 We will use the Breusch-Pagan test to decide whether the variance of the residuals is nonconstant. The null hypothesis is that the variance is the same for all observations, and the alternative hypothesis is that the variance is not the same for all observations. The test statistic is found by fitting a linear model to the centered squared residuals,
 \begin{equation}
@@ -902,7 +926,9 @@ bptest(cars.lm)
 For these data we would not reject the null hypothesis at the \(\alpha=0.05\) level. There is relatively weak evidence against the assumption of constant variance. 
 
 *** Independence Assumption
-#+latex: \label{sub:Independence-Assumption}
+:PROPERTIES:
+:CUSTOM_ID: sub:Independence-Assumption
+:END:
 
 One of the strongest of the regression assumptions is the one regarding independence. Departures from the independence assumption are often exhibited by correlation (or autocorrelation, literally, self-correlation) present in the residuals. There can be positive or negative correlation.
 
@@ -940,7 +966,7 @@ plot(cars.lm, which = 1)
   <<resids-fitted-cars>>
 #+end_src
 
-#+latex: \paragraph*{Testing the Independence Assumption}
+**** Testing the Independence Assumption
 
 We may statistically test whether there is evidence of autocorrelation in the residuals with the Durbin-Watson test. The test is based on the statistic
 \begin{equation}
@@ -984,7 +1010,9 @@ We often find problems with our model that suggest that at least one of the thre
 - Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha:Time-Series}.
 
 ** Other Diagnostic Tools
-#+latex: \label{sec:Other-Diagnostic-Tools-SLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Diagnostic-Tools-SLR
+:END:
 
 There are two types of observations with which we must be especially careful:
 - Influential observations :: are those that have a substantial effect on our estimates, predictions, or inferences. A small change in an influential observation is followed by a large change in the parameter estimates or inferences. 
@@ -1034,7 +1062,7 @@ have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed valu
 The folklore in regression classes is that a test based on the statistic in Equation \ref{eq:slr-studentized-deleted-resids} can be too liberal. A rule of thumb is if we suspect an observation to be an outlier /before/ seeing the data then we say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if we suspect an observation to be an outlier /after/ seeing the data then we should only say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha/n\). The latter rule of thumb is called the /Bonferroni approach/ and can be overly conservative for large data sets. The responsible statistician should look at the data and use his/her best judgement, in every case.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 We can calculate the standardized residuals with the =rstandard= function. The input is the =lm= object, which is =cars.lm=.
 
@@ -1074,7 +1102,7 @@ Here we see that observations 1, 2, and 50 have leverages bigger than double the
 
 *** Influential Observations
 
-#+latex: \paragraph*{\(DFBETAS\) and \(DFFITS\)}
+**** \(DFBETAS\) and \(DFFITS\)
 
 Any time we do a statistical analysis, we are confronted with the variability of data. It is always a concern when an observation plays too large a role in our regression model, and we would not like or procedures to be overly influenced by the value of a single observation. Hence, it becomes desirable to check to see how much our estimates and predictions would change if one of the observations were not included in the analysis. If an observation changes the estimates/predictions a large amount, then the observation is influential and should be subjected to a higher level of scrutiny.
 
@@ -1109,7 +1137,7 @@ dff[1:5]
 
 A rule of thumb is to flag observations whose \(DFFIT\) exceeds one in absolute value, but there are none of those in this data set.
 
-#+latex: \paragraph*{Cook's Distance}
+**** Cook's Distance
 
 The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated
 #+latex: \footnote{Cook's distances are actually defined by a different formula than the one shown. The formula in Equation \ref{eq:slr-cooks-distance} is algebraically equivalent to the defining formula and is, in the author's opinion, more transparent.}
@@ -1121,7 +1149,7 @@ It shows that Cook's distance depends both on the residual \(E_{i}\) and the lev
 
 To assess the significance of \(D\), we compare to quantiles of an \(\mathsf{f}(\mathtt{df1}=2,\,\mathtt{df2}=n-2)\) distribution. A rule of thumb is to classify observations falling higher than the \(50^{\mathrm{th}}\) percentile as being extreme. 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 We can calculate the Cook's Distances with the =cooks.distance= function.
 
@@ -1256,6 +1284,6 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 #+latex: \label{xca:show-alternate-slope-formula}
 Show that the formula given in Equation \ref{eq:sample-correlation-formula} is equivalent to
 \[
-\hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right\slash n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right\slash n}.
+\hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right/ n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right/ n}.
 \]
 #+end_xca

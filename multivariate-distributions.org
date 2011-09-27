@@ -64,8 +64,8 @@ keywords: multivariate distribution R probability statistics
 * Multivariate Distributions                                       :multdist:
 :PROPERTIES:
 :tangle: R/multdist.R
+:CUSTOM_ID: cha:Multivariable-Distributions
 :END:
-#+latex: \label{cha:Multivariable-Distributions}
 
 #+latex: \noindent 
 We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
@@ -76,9 +76,7 @@ The concept we are hinting at is the notion of /dependence/ between random varia
 
 The interested reader who would like to learn more about any of the below mentioned multivariate distributions should take a look at /Discrete Multivariate Distributions/ by Johnson /et al/\cite{Johnson1997} or /Continuous Multivariate Distributions/ \cite{Kotz2000} by Kotz /et al/.
 
-
-
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - the basic notion of dependence and how it is manifested with multiple variables (two, in particular)
 - joint versus marginal distributions/expectation (discrete and continuous)
@@ -88,7 +86,9 @@ The interested reader who would like to learn more about any of the below mentio
 - what it looks like when there are more than two random variables present
 
 ** Joint and Marginal Probability Distributions
-#+latex: \label{sec:Joint-Probability-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Joint-Probability-Distributions
+:END:
 
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
@@ -256,11 +256,11 @@ F_{X,Y}(x,y)=\Pr(X\leq x,\, Y\leq y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f_{X,Y}
 \]
 for \((x,y)\in\mathbb{R}^{2}\). If \(X\) and \(Y\) have the joint PDF \(f_{X,Y}\), then the marginal density of \(X\) may be recovered by
 \begin{equation}
-f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\mathrm{d} y,\quad x\in S_{X}
+f_{X}(x)=\int_{S_{Y}}f_{X,Y}(x,y)\,\mathrm{d} y,\quad x \in S_{X}
 \end{equation}
 and the marginal PDF of \(Y\) may be found with
 \begin{equation}
-f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x,\quad y\in S_{Y}.
+f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x, \quad y \in S_{Y}.
 \end{equation}
 
 
@@ -286,7 +286,7 @@ f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
 for \(0<y<1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section \ref{sec:Independent-Random-Variables}.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 We will show how to do Example \ref{exa:max-sum-two-dice} using \(\mathsf{R}\); it is much simpler to do it with \(\mathsf{R}\) than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
 
@@ -333,7 +333,9 @@ colSums(temp)
 You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
 
 ** Joint and Marginal Expectation
-#+latex: \label{sec:Joint-and-Marginal-Expectation}
+:PROPERTIES:
+:CUSTOM_ID: sec:Joint-and-Marginal-Expectation
+:END:
 
 Given a function \(g\) with arguments \((x,y)\) we would like to know the long-run average behavior of \(g(X,Y)\) and how to mathematically calculate it. Expectation in this context is computed in the pedestrian way. We simply integrate (sum) with respect to the joint probability density (mass) function.
 \begin{equation}
@@ -417,7 +419,7 @@ which is 13/50. Therefore the covariance of \((X,Y)\) is
 \]
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example \ref{exa:max-sum-dice-covariance}.
 
@@ -433,7 +435,9 @@ Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
 To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{ryacas}. See Section \ref{sub:bivariate-transf-R} for another example where the =Ryacas= package appears.
 
 ** Conditional Distributions
-#+latex: \label{sec:Conditional-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Conditional-Distributions
+:END:
 
 If \(x\in S_{X}\) is such that \(f_{X}(x)>0\), then we define the /conditional density/ of \(Y|\, X=x\), denoted \(f_{Y|x}\), by 
 \begin{equation}
@@ -498,10 +502,14 @@ where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{
 #+end_rem
 
 ** Independent Random Variables
-#+latex: \label{sec:Independent-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Independent-Random-Variables
+:END:
 
 *** Independent Random Variables
-#+latex: \label{sub:Independent-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sub:Independent-Random-Variables
+:END:
 
 We recall from Chapter \ref{cha:Probability} that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
@@ -583,7 +591,9 @@ If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent f
 #+end_fact
 
 *** Combining Independent Random Variables
-#+latex: \label{sub:Combining-Independent-Random}
+:PROPERTIES:
+:CUSTOM_ID: sub:Combining-Independent-Random
+:END:
 
 Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
 
@@ -644,7 +654,9 @@ But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1
 #+end_proof
 
 ** Exchangeable Random Variables
-#+latex: \label{sec:Exchangeable-Random-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Exchangeable-Random-Variables
+:END:
 
 Two random variables \(X\) and \(Y\) are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
@@ -682,7 +694,9 @@ If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) 
 Exchangeability thus contains IID as a special case. 
 
 ** The Bivariate Normal Distribution
-#+latex: \label{sec:The-Bivariate-Normal}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Bivariate-Normal
+:END:
 
 The bivariate normal PDF is given by the unwieldy formula
 \begin{multline}
@@ -743,7 +757,7 @@ There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} whic
 \end{equation}
 Second, the conditional variance of \(Y|x\) is independent of \(x\). 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The multivariate normal distribution is implemented in both the =mvtnorm= package \cite{Genzmvtnorm} and the =mnormt= package \cite{mnormt}. We use the =mvtnorm= package in this book simply because it is a dependency of another package used in the book. 
 
@@ -799,7 +813,9 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 #+end_html
 
 ** Bivariate Transformations of Random Variables
-#+latex: \label{sec:Transformations-Multivariate}
+:PROPERTIES:
+:CUSTOM_ID: sec:Transformations-Multivariate
+:END:
 
 We studied in Section \ref{sec:Functions-of-Continuous} how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
@@ -869,15 +885,19 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 It may not be obvious, but Equation \ref{eq:biv-norm-hidden} is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
-#+latex: \label{sub:bivariate-transf-R}
+**** How to do it with \(\mathsf{R}\)
+:PROPERTIES:
+:CUSTOM_ID: sub:bivariate-transf-R
+:END:
 
 It is possible to do the computations above in \(\mathsf{R}\) with the =Ryacas= package. The package is an interface to the open-source computer algebra system, ``Yacas''. The user installs Yacas, then employs =Ryacas= to submit commands to Yacas, after which the output is displayed in the \(\mathsf{R}\) console.
 
 There are not yet any examples of Yacas in this book, but there are online materials to help the interested reader: see [[http://code.google.com/p/ryacas/][here]] to get started.
 
 ** Remarks for the Multivariate Case
-#+latex: \label{sec:Remarks-for-the-Multivariate}
+:PROPERTIES:
+:CUSTOM_ID: sec:Remarks-for-the-Multivariate
+:END:
 
 There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix \ref{sec:Linear-Algebra}). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
@@ -997,7 +1017,9 @@ and the last expression is the MGF of an \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf
 #+end_proof
 
 ** The Multinomial Distribution
-#+latex: \label{sec:Multinomial}
+:PROPERTIES:
+:CUSTOM_ID: sec:Multinomial
+:END:
 
 We sample \(n\) times, with replacement, from an urn that contains balls of \(k\) different types. Let \(X_{1}\) denote the number of balls in our sample of type 1, let \(X_{2}\) denote the number of balls of type 2, ..., and let \(X_{k}\) denote the number of balls of type \(k\). Suppose the urn has proportion \(p_{1}\) of balls of type 1, proportion \(p_{2}\) of balls of type 2, ..., and proportion \(p_{k}\) of balls of type \(k\). Then the joint PMF of \((X_{1},\ldots,X_{k})\) is
 \begin{eqnarray}
@@ -1034,7 +1056,7 @@ Here are some facts about the multinomial distribution.
    and in particular, \(X_{i}\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p_{i})\).
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There is support for the multinomial distribution in base \(\mathsf{R}\), namely in the =stats= package. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
 

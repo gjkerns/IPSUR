@@ -69,8 +69,8 @@ keywords: continuous random variable R statistics
 * Continuous Distributions                                         :contdist:
 :PROPERTIES:
 :tangle: R/contdist.R
+:CUSTOM_ID: cha:Continuous-Distributions
 :END:
-#+latex: \label{cha:Continuous-Distributions}
 
 #+latex: \noindent 
 The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
@@ -80,7 +80,7 @@ This chapter begins with continuous random variables and the associated PDFs and
 The interested reader who would like to learn more about any of the assorted discrete distributions mentioned below should take a look at /Continuous Univariate Distributions, Volumes 1/ and /2/ by Johnson /et al/ \cite{Johnson1994,Johnson1995}.
 
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - how to choose a reasonable continuous model under a variety of physical circumstances
 
@@ -93,10 +93,14 @@ The interested reader who would like to learn more about any of the assorted dis
 - how to make new continuous random variables from old ones
 
 ** Continuous Random Variables
-#+latex: \label{sec:continuous-random-variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:continuous-random-variables
+:END:
 
 *** Probability Density Functions
-#+latex: \label{sub:probability-density-functions}
+:PROPERTIES:
+:CUSTOM_ID: sub:probability-density-functions
+:END:
 
 Continuous random variables have supports that look like
 \begin{equation}
@@ -152,7 +156,9 @@ the last equality being true by the Fundamental Theorem of Calculus, part (2) (s
 #+latex: \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 
 *** Expectation of Continuous Random Variables
-#+latex: \label{sub:Expectation-of-Continuous}
+:PROPERTIES:
+:CUSTOM_ID: sub:Expectation-of-Continuous
+:END:
 
 For a continuous random variable \(X\) the expected value of \(g(X)\) is
 \begin{equation}
@@ -247,7 +253,7 @@ Again we use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
 which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the =distr=\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package way.
 
@@ -299,19 +305,21 @@ Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why
 #+latex: \end{example}
 
 ** The Continuous Uniform Distribution
-#+latex: \label{sec:The-Continuous-Uniform}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Continuous-Uniform
+:END:
 
 A random variable \(X\) with the continuous uniform distribution on the interval \((a,b)\) has PDF
 \begin{equation}
-f_{X}(x)=\frac{1}{b-a},\quad a<x<b.
+f_{X}(x)=\frac{1}{b-a}, \quad a < x < b.
 \end{equation}
 The associated \(\mathsf{R}\) function is \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF \(F_{X}\):
 \begin{equation}
 F_{X}(t)=
 \begin{cases}
-0, & t<0,\\
-\frac{t-a}{b-a}, & a\leq t<b,\\
-1, & t\geq b.
+0, & t < 0,\\
+\frac{t-a}{b-a}, & a\leq t < b,\\
+1, & t \geq b.
 \end{cases}
 \label{eq:unif-cdf}
 \end{equation}
@@ -332,7 +340,9 @@ using the popular formula for the difference of squares. The variance is left to
 #+latex: \end{example}
 
 ** The Normal Distribution
-#+latex: \label{sec:The-Normal-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-Normal-Distribution
+:END:
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
@@ -404,7 +414,9 @@ Let the random experiment consist of a person taking an IQ test, and let \(X\) b
 #+latex: \end{example}
 
 *** Normal Quantiles and the Quantile Function
-#+latex: \label{sub:Normal-Quantiles-QF}
+:PROPERTIES:
+:CUSTOM_ID: sub:Normal-Quantiles-QF
+:END:
 
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 
@@ -457,7 +469,7 @@ For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the
 There are a few other very important special cases which we will encounter in later chapters. 
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) \) function. 
 
@@ -483,7 +495,9 @@ Note the =lower.tail= argument. We would get the same answer with
 : qnorm(c(0.975, 0.99, 0.995))
 
 ** Functions of Continuous Random Variables
-#+latex: \label{sec:Functions-of-Continuous}
+:PROPERTIES:
+:CUSTOM_ID: sec:Functions-of-Continuous
+:END:
 
 The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec:Differential-and-Integral}.
 
@@ -623,7 +637,7 @@ f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^
 This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section \ref{sec:Other-Continuous-Distributions}.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example \ref{exa:lin-trans-norm} quite nicely:
 
@@ -665,15 +679,21 @@ The answers are not the same! Furthermore, if we were to repeat the process we w
 The answers were close, though. And the underlying randomly generated \(X\)'s were not the same so it should hardly be a surprise that the calculated \(W\)'s were not the same, either. This serves as a warning (in concert with the one that =distr= provides) that we should be careful to remember that complicated transformations computed by \(\mathsf{R}\) are only approximate and may fluctuate slightly due to the nature of the way the estimates are calculated.
 
 ** Other Continuous Distributions
-#+latex: \label{sec:Other-Continuous-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Continuous-Distributions
+:END:
 
 *** Waiting Time Distributions
-#+latex: \label{sub:Waiting-Time-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Waiting-Time-Distributions
+:END:
 
 In some experiments, the random variable being measured is the time until a certain event occurs. For example, a quality control specialist may be testing a manufactured product to see how long it takes until it fails. An efficiency expert may be recording the customer traffic at a retail store to streamline scheduling of staff. 
 
-#+latex: \paragraph*{The Exponential Distribution}
-#+latex: \label{sub:The-Exponential-Distribution}
+**** The Exponential Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Exponential-Distribution
+:END:
 
 We say that \(X\) has an /exponential distribution/ and write \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). 
 \begin{equation}
@@ -703,7 +723,9 @@ The exponential distribution is said to be /memoryless/ because exponential rand
 See Exercise \ref{xca:prove-the-memoryless}.
 
 *** The Gamma Distribution
-#+latex: \label{sub:The-Gamma-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Gamma-Distribution
+:END:
 
 This is a generalization of the exponential distribution. We say that \(X\) has a gamma distribution and write \(X\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). It has PDF
 \begin{equation}
@@ -719,10 +741,14 @@ At a car wash, two customers arrive per hour on the average. We decide to measur
 #+latex: \end{example}
 
 *** The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions
-#+latex: \label{sub:The-Chi-Square-t-F}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Chi-Square-t-F
+:END:
 
-#+latex: \paragraph*{The Chi square Distribution}
-#+latex: \label{sub:The-Chi-Square}
+**** The Chi square Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Chi-Square
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -774,7 +800,9 @@ Here are some useful things to know about the chi-square distribution.
 #+end_rem
 
 *** Student's \(t\) distribution
-#+latex: \label{sub:Student's-t-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:Student's-t-distribution
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -783,7 +811,9 @@ f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\fra
 is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \(\mathsf{R}\) functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec:sampling-from-normal-dist}.
 
 *** Snedecor's \(F\) distribution
-#+latex: \label{sub:snedecor-F-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:snedecor-F-distribution
+:END:
 
 A random variable \(X\) with PDF
 \begin{equation}
@@ -798,10 +828,14 @@ Here are some notes about the \(F\) distribution.
 #+end_rem
 
 *** Other Popular Distributions
-#+latex: \label{sub:Other-Popular-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Other-Popular-Distributions
+:END:
 
-#+latex: \paragraph*{The Cauchy Distribution}
-#+latex: \label{sub:The-Cauchy-Distribution}
+**** The Cauchy Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Cauchy-Distribution
+:END:
 
 This is a special case of the Student's \(t\) distribution. It has PDF
 \begin{equation}
@@ -811,8 +845,10 @@ We write \(X\sim\mathsf{cauchy}(\mathtt{location}=m,\,\mathtt{scale}=\beta)\). T
 
 It is easy to see that a \(\mathsf{cauchy}(\mathtt{location}=0,\,\mathtt{scale}=1)\) distribution is the same as a \(\mathsf{t}(\mathtt{df}=1)\) distribution. The \(\mathsf{cauchy}\) distribution looks like a \(\mathsf{norm}\) distribution but with very heavy tails. The mean (and variance) do not exist, that is, they are infinite. The median is represented by the \(\mathtt{location}\) parameter, and the \(\mathtt{scale}\) parameter influences the spread of the distribution about its median.
 
-#+latex: \paragraph*{The Beta Distribution}
-#+latex: \label{sub:The-Beta-Distribution}
+**** The Beta Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Beta-Distribution
+:END:
 
 This is a generalization of the continuous uniform distribution.
 \begin{equation}
@@ -825,16 +861,20 @@ We write \(X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)\).
 See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian statistics because it is a good model for one's prior beliefs about a population proportion \(p\), \(0\leq p\leq1\).
 
 
-#+latex: \paragraph*{The Logistic Distribution}
-#+latex: \label{sub:The-Logistic-Distribution}
+**** The Logistic Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Logistic-Distribution
+:END:
 
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma}\exp\left(-\frac{x-\mu}{\sigma}\right)\left[1+\exp\left(-\frac{x-\mu}{\sigma}\right)\right]^{-2},\quad-\infty<x<\infty.
 \end{equation}
 We write \(X\sim\mathsf{logis}(\mathtt{location}=\mu,\,\mathtt{scale}=\sigma)\). The associated \(\mathsf{R}\) function is =dlogis(x, location = 0, scale = 1)=. The logistic distribution comes up in differential equations as a model for population growth under certain assumptions. The mean is \(\mu\) and the variance is \(\pi^{2}\sigma^{2}/3\).
 
-#+latex: \paragraph*{The Lognormal Distribution}
-#+latex: \label{sub:The-Lognormal-Distribution}
+**** The Lognormal Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Lognormal-Distribution
+:END:
 
 This is a distribution derived from the normal distribution (hence the name). If \(U\sim\mathtt{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), then \( X = \mathrm{e}^{U} \) has PDF
 \begin{equation}
@@ -843,8 +883,10 @@ f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^
 We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). The associated \(\mathsf{R}\) function is =dlnorm(x, meanlog = 0, sdlog = 1)=. Notice that the support is concentrated on the positive \(x\) axis; the distribution is right-skewed with a heavy tail. See Example \ref{exa:lnorm-transformation}.
 
 
-#+latex: \paragraph*{The Weibull Distribution}
-#+latex: \label{sub:The-Weibull-Distribution}
+**** The Weibull Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Weibull-Distribution
+:END:
 
 This has PDF
 \begin{equation}
@@ -853,7 +895,7 @@ f_{X}(x)=\frac{\alpha}{\beta}\left(\frac{x}{\beta}\right)^{\alpha-1}\exp\left(\f
 We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\). The associated \(\mathsf{R}\) function is =dweibull(x, shape, scale = 1)=. 
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There is some support of moments and moment generating functions for some continuous probability distributions included in the =actuar= package \cite{Dutangactuar}. The convention is =m= in front of the distribution name for raw moments, and =mgf= in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 

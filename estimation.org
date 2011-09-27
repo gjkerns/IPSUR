@@ -49,15 +49,15 @@ keywords:  point interval estimation confidence unbiased
 * Estimation                                                       :estimate:
 :PROPERTIES:
 :tangle: R/estimate.R
+:CUSTOM_ID: cha:Estimation
 :END:
-#+latex: \label{cha:Estimation}
 
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
 
 We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. We make some assumptions about the underlying population distribution and use what we know from Chapter \ref{cha:Sampling-Distributions} about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 - how to look at a problem, identify a reasonable model, and estimate a parameter associated with the model
 - about maximum likelihood, and in particular, how to
    - eyeball a likelihood to get a maximum
@@ -67,7 +67,9 @@ We find an estimator with the methods of Section \ref{sec:Point-Estimation-1}. W
 - the concept of margin of error and its relationship to sample size
 
 ** Point Estimation
-#+latex: \label{sec:Point-Estimation-1}
+:PROPERTIES:
+:CUSTOM_ID: sec:Point-Estimation-1
+:END:
 
 The following example is how I was introduced to maximum likelihood.
 
@@ -144,8 +146,8 @@ Suppose we catch \(n\) fish. Let
 \[
 X_{i}=
 \begin{cases}
-1, & \mbox{if the \mbox{i}\mbox{th} fish is a bass,}\\
-0, & \mbox{if the \mbox{i}\mbox{th} fish is a bluegill.}
+1, & \mbox{if the \(i\mathrm{th}\) fish is a bass,}\\
+0, & \mbox{if the \(i\mathrm{th}\) fish is a bluegill.}
 \end{cases}
 \]
 Since we are returning the fish to the pond once caught, we may think of this as a sampling scheme with replacement where the proportion of bass \(p\) does not change. Given that we allow the fish sufficient time to ``mix'' once returned, it is not completely unreasonable to model our fishing experiment as a sequence of Bernoulli trials, so that the \(X_{i}\)'s would be IID \(\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)\). Under those assumptions we would have
@@ -329,7 +331,7 @@ from which we may conclude two things:
 One of the most common questions in an introductory statistics class is, ``Why do we divide by \(n-1\) when we compute the sample variance? Why do we not divide by \(n\)?'' We see now that division by \(n\) amounts to the use of a /biased/ estimator for \(\sigma^{2}\), that is, if we divided by \(n\) then on the average we would /underestimate/ the true value of \(\sigma^{2}\). We use \(n-1\) so that, on the average, our estimator of \(\sigma^{2}\) will be exactly right. 
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 \(\mathsf{R}\) can be used to find maximum likelihood estimators in a lot of diverse settings. We will discuss only the most basic here and will leave the rest to more sophisticated texts.
 
@@ -403,7 +405,9 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 ** Confidence Intervals for Means
-#+latex: \label{sec:Confidence-Intervals-for-Means}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-for-Means
+:END:
 
 We are given \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) that are an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, where \(\mu\) is unknown. We know that we may estimate \(\mu\) with \(\overline{X}\), and we have seen that this estimator is the MLE. But how good is our estimate? We know that 
 \begin{equation} 
@@ -584,7 +588,7 @@ and satisfy
 Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution.  PANIC
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
 #+begin_src R :exports none :results silent
 library(TeachingDemos)
@@ -604,7 +608,9 @@ plot(temp, "Conf")
 #+end_src
 
 ** Confidence Intervals for Differences of Means
-#+latex: \label{sec:Conf-Interv-for-Diff-Means}
+:PROPERTIES:
+:CUSTOM_ID: sec:Conf-Interv-for-Diff-Means
+:END:
 
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) be a \(SRS(m)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Further, assume that the \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) sample is independent of the \(Y_{1}\), \(Y_{2}\), ..., \(Y_{m}\) sample.
 
@@ -627,13 +633,13 @@ Now let
 \begin{equation}
 U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
 \end{equation}
-Then by Exercise \ref{xca:sum-indep-chisq} we know that \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and is not a large leap to believe that \(U\) is independent of \(\overline{X}-\overline{Y}\); thus
+Then by Exercise \ref{xca:sum-indep-chisq} we know that \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and it is not a large leap to believe that \(U\) is independent of \(\overline{X}-\overline{Y}\); thus
 \begin{equation}
-T=\frac{Z}{\sqrt{\left.U\right\slash (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
+T = \frac{Z}{\sqrt{\left.U\right/ (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{equation}
 But
 \begin{align*}
-T & =\frac{\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right\slash (n+m-2)}},\\
+T & =\frac{\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sigma\sqrt{\frac{1}{n}+\frac{1}{m}}}}{\sqrt{\left.\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}\right/ (n+m-2)}},\\
  & =\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left(\frac{1}{n}+\frac{1}{m}\right)\left(\frac{(n-1)S_{X}^{2}+(m-1)S_{Y}^{2}}{n+m-2}\right)}},\\
  & \sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{align*}
@@ -656,7 +662,7 @@ r=\frac{\left(S_{X}^{2}/n+S_{Y}^{2}/m\right)^{2}}{\frac{1}{n-1}\left(S_{X}^{2}/n
 \end{equation}
 where we understand that \(r\) is rounded down to the nearest integer. The resulting interval has approximately \(100(1-\alpha)\%\) confidence.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The basic function is =t.test= which has a =var.equal= argument that may be set to =TRUE= or =FALSE=. The confidence interval is shown as part of the output, although there is a lot of additional information that is not needed until Chapter
 \ref{cha:Hypothesis-Testing}.
@@ -664,7 +670,9 @@ The basic function is =t.test= which has a =var.equal= argument that may be set 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
 ** Confidence Intervals for Proportions
-#+latex: \label{sec:Confidence-Intervals-Proportions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-Proportions
+:END:
 
 We would like to know \(p\) which is the ``proportion of successes''. For instance, \(p\) could be:
 - the proportion of U.S. citizens that support Obama,
@@ -695,7 +703,7 @@ OOPS...! Equation \ref{eq:ci-p-no-good} is of no use to us because the \underbar
    \]
    satisfies \(f(p)\leq0\). But \(f\) is quadratic in \(p\) so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca:CI-quad-form}):
    \begin{equation}
-   \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right\slash \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
+   \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right/ \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
    \end{equation}
    This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter \ref{cha:Categorical-Data-Analysis}. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
 
@@ -728,7 +736,7 @@ or in other words, we know in advance that the true proportion is restricted to 
 #+end_rem
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 #+begin_src R :exports both :results output pp 
 library(Hmisc)
@@ -757,24 +765,29 @@ B <- with(A, untable(A, Freq))
 #+end_src
 
 ** Confidence Intervals for Variances
-#+latex: \label{sec:Confidence-Intervals-for-Variances}
+:PROPERTIES:
+:CUSTOM_ID: sec:Confidence-Intervals-for-Variances
+:END:
 
 I am thinking one and two sample problems here.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \(\mathsf{R}\) here.
 
 ** Fitting Distributions
-#+latex: \label{sec:Fitting-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Fitting-Distributions
+:END:
 
-
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 
 ** Sample Size and Margin of Error
-#+latex: \label{sec:Sample-Size-and-MOE}
+:PROPERTIES:
+:CUSTOM_ID: sec:Sample-Size-and-MOE
+:END:
 
 Sections \ref{sec:Confidence-Intervals-for-Means} through \ref{sec:Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
@@ -835,11 +848,13 @@ If we do not have a good value for the estimate \(p^{\ast}\) then we may use \(p
 #+end_rem
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I am also thinking about =replicate=.
 
 ** Other Topics
-#+latex: \label{sec:Other-Topics}
+:PROPERTIES:
+:CUSTOM_ID: sec:Other-Topics
+:END:
 
 Mention =mle= from the =stats4= package.
 

@@ -67,8 +67,8 @@ keywords: sampling distribution statistics R probability
 * Sampling Distributions                                           :sampdist:
 :PROPERTIES:
 :tangle: R/sampdist.R
+:CUSTOM_ID: cha:Sampling-Distributions
 :END:
-#+latex: \label{cha:Sampling-Distributions}
 
 #+latex: \noindent 
 This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha:Describing-Data-Distributions} through \ref{cha:Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
@@ -83,7 +83,7 @@ We begin by introducing the notion of simple random samples and cataloguing some
 
 With the CLT in hand, we then investigate the sampling distributions of several other popular statistics, taking full advantage of those with a tractable form. We finish the chapter with an exploration of statistics whose sampling distributions are not quite so tractable, and to accomplish this goal we will use simulation methods that are grounded in all of our work in the previous four chapters.
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - the notion of population versus simple random sample, parameter versus statistic, and population distribution versus sampling distribution
 - the classical sampling distributions of the standard one and two sample statistics
@@ -92,10 +92,14 @@ With the CLT in hand, we then investigate the sampling distributions of several 
 - some basic concepts related to sampling distribution utility, such as bias and variance
 
 ** Simple Random Samples
-#+latex: \label{sec:simple-random-samples}
+:PROPERTIES:
+:CUSTOM_ID: sec:simple-random-samples
+:END:
 
 *** Simple Random Samples
-#+latex: \label{sub:simple-random-samples}
+:PROPERTIES:
+:CUSTOM_ID: sub:simple-random-samples
+:END:
 
 #+begin_defn
 If \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent with \(X_{i}\sim f\) for \(i=1,2,\ldots,n\), then we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are /independent and identically distributed/ (IID) from the population \(f\) or alternatively we say that \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are a /simple random sample of size/ \(n\), denoted \(SRS(n)\), from the population \(f\). 
@@ -135,10 +139,14 @@ The last step is to recognize that each term in last product above is exactly \(
 #+end_proof
 
 ** Sampling from a Normal Distribution
-#+latex: \label{sec:sampling-from-normal-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:sampling-from-normal-dist
+:END:
 
 *** The Distribution of the Sample Mean
-#+latex: \label{sub:samp-mean-dist-of}
+:PROPERTIES:
+:CUSTOM_ID: sub:samp-mean-dist-of
+:END:
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the sample mean \(\overline{X}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\) sampling distribution.
@@ -160,7 +168,9 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 #+end_proof
 
 *** The Distribution of the Sample Variance
-#+latex: \label{sub:Samp-Var-Dist}
+:PROPERTIES:
+:CUSTOM_ID: sub:Samp-Var-Dist
+:END:
 
 #+begin_thm
 #+latex: \label{thm:Xbar-andS}
@@ -182,7 +192,9 @@ The proof is beyond the scope of the present book, but the theorem is simply too
 #+end_proof
 
 *** The Distribution of Student's \(T\) Statistic
-#+latex: \label{sub:Student's-t-Distribution}
+:PROPERTIES:
+:CUSTOM_ID: sub:Student's-t-Distribution
+:END:
 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Then the quantity 
@@ -195,7 +207,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-1)\) sampling distribution.
 #+begin_proof
 Divide the numerator and denominator by \(\sigma\) and rewrite
 \[
-T=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{\sqrt{\left.\frac{(n-1)S^{2}}{\sigma^{2}}\right\slash (n-1)}}.
+T=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{\sqrt{\left.\frac{(n-1)S^{2}}{\sigma^{2}}\right/ (n-1)}}.
 \]
 Now let 
 \[
@@ -267,7 +279,9 @@ There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribut
 #+end_rem
 
 ** The Central Limit Theorem
-#+latex: \label{sec:Central-Limit-Theorem}
+:PROPERTIES:
+:CUSTOM_ID: sec:Central-Limit-Theorem
+:END:
 
 In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec:sampling-from-normal-dist} that when \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) is a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution then \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\). In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of \(Z\) defined by
 \begin{equation}
@@ -298,7 +312,7 @@ Notice that the shape of the underlying population's distribution is not mention
 How large is ``sufficiently large''? It is here that the shape of the underlying population distribution plays a role. For populations with distributions that are approximately symmetric and mound-shaped, the samples may need to be only of size four or five, while for highly skewed or heavy-tailed populations the samples may need to be much larger for the distribution of the sample means to begin to show a bell-shape. Regardless, for a given population distribution (with finite standard deviation) the approximation tends to be better for larger sample sizes.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The =TeachingDemos= package \cite{Snowteachingdemos} has =clt.examp= and the =distrTeach= \cite{Ruckdescheldistr} package has =illustrateCLT=. Try the following at the command line (output omitted):
 #+begin_src R :exports code :eval never
@@ -318,7 +332,9 @@ For example, when the command =clt1()=  is issued a plot window opens to show a 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
 ** Sampling Distributions of Two-Sample Statistics
-#+latex: \label{sec:Samp-Dist-Two-Samp}
+:PROPERTIES:
+:CUSTOM_ID: sec:Samp-Dist-Two-Samp
+:END:
 
 There are often two populations under consideration, and it sometimes of interest to compare properties between groups. To do so we take independent samples from each population and calculate respective sample statistics for comparison. In some simple cases the sampling distribution of the comparison is known and easy to derive; such cases are the subject of the present section.
 
@@ -327,8 +343,8 @@ There are often two populations under consideration, and it sometimes of interes
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) are independent samples. Then the quantity
 \begin{equation}
-\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
-has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution. Equivalently, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right\slash n_{1}+\left.\sigma_{Y}^{2}\right\slash n_{2}})\) sampling distribution.
+\frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right/ n_{1}+\left.\sigma_{Y}^{2}\right/ n_{2}}}\label{eq:diff-indep-sample-means}\end{equation}
+has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution. Equivalently, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right/ n_{1}+\left.\sigma_{Y}^{2}\right/ n_{2}})\) sampling distribution.
 #+end_prop
 
 #+begin_proof
@@ -383,11 +399,11 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 #+begin_proof
 We know from Theorem \ref{thm:Xbar-andS} that \((n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{1}-1)\) and \((n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{2}-1)\). Now write
 \[
-F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{Y}^{2}\right\slash (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right\slash (n_{2}-1)}\cdot\frac{\left.1\right\slash \sigma_{X}^{2}}{\left.1\right\slash \sigma_{Y}^{2}},
+F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{Y}^{2}\right/ (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right/ (n_{2}-1)}\cdot\frac{\left.1\right/ \sigma_{X}^{2}}{\left.1\right/ \sigma_{Y}^{2}},
 \]
 by multiplying and dividing the numerator with \(n_{1}-1\) and doing likewise for the denominator with \(n_{2}-1\). Now we may regroup the terms into
 \[
-F=\frac{\left.\frac{(n_{1}-1)S_{X}^{2}}{\sigma_{X}^{2}}\right\slash (n_{1}-1)}{\left.\frac{(n_{2}-1)S_{Y}^{2}}{\sigma_{Y}^{2}}\right\slash (n_{2}-1)},
+F=\frac{\left.\frac{(n_{1}-1)S_{X}^{2}}{\sigma_{X}^{2}}\right/ (n_{1}-1)}{\left.\frac{(n_{2}-1)S_{Y}^{2}}{\sigma_{Y}^{2}}\right/ (n_{2}-1)},
 \]
 and we recognize \(F\) to be the ratio of independent \(\mathsf{chisq}\) distributions, each divided by its respective numerator \(\mathtt{df}=n_{1}-1\) and denominator \(\mathtt{df}=n_{1}-1\) degrees of freedom. This is, indeed, the definition of Snedecor's \(F\) distribution. 
 #+end_proof
@@ -401,7 +417,9 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 #+end_rem
 
 ** Simulated Sampling Distributions
-#+latex: \label{sec:Simulated-Sampling-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Simulated-Sampling-Distributions
+:END:
 
 Some comparisons are meaningful, but their sampling distribution is not quite so tidy to describe analytically. What do we do then?
 

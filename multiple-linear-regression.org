@@ -83,8 +83,8 @@ keywords: multiple linear regression R statistics
 * Multiple Linear Regression                                            :mlr:
 :PROPERTIES:
 :tangle: R/mlr.R
+:CUSTOM_ID: cha:multiple-linear-regression
 :END:
-#+latex: \label{cha:multiple-linear-regression}
 
 #+latex: \noindent 
 We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -94,7 +94,7 @@ The language is phrased in matrix terms -- for two reasons. First, it is quicker
 Most of the results are stated without proof or with only a cursory justification. Those yearning for more should consult an advanced text in linear regression for details, such as /Applied Linear Regression Models/ \cite{Neter1996} or /Linear Models: Least Squares and Alternatives/ \cite{Rao1999}.
 
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - the basic MLR model, and how it relates to the SLR
 - how to estimate the parameters and use those estimates to make predictions
@@ -104,7 +104,9 @@ Most of the results are stated without proof or with only a cursory justificatio
 - hints about what will be coming later
 
 ** The Multiple Linear Regression Model
-#+latex: \label{sec:The-MLR-Model}
+:PROPERTIES:
+:CUSTOM_ID: sec:The-MLR-Model
+:END:
 
 The first thing to do is get some better notation. We will write 
 \begin{equation}
@@ -241,10 +243,14 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 Looking at the graph we see that the data points fall close to a plane in three dimensional space. (The plot looks remarkably good. In the author's experience it is rare to see points fit so well to the plane without some additional work.)
 
 ** Estimation and Prediction
-#+latex: \label{sec:Estimation-and-Prediction-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Estimation-and-Prediction-MLR
+:END:
 
 *** Parameter estimates
-#+latex: \label{sub:mlr-parameter-estimates}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-parameter-estimates
+:END:
 
 We will proceed exactly like we did in Section \ref{sec:SLR-Estimation}. We know
 \begin{equation}
@@ -283,7 +289,7 @@ The formula in Equation \ref{eq:b-formula-matrix} is convenient for mathematical
 We have only found a critical value, and have not actually shown that the critical value is a minimum. We omit the details and refer the interested reader to \cite{Rao1999}.
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 We do all of the above just as we would in simple linear regression. The powerhouse is the =lm=\index{lm@\texttt{lm}} function. Everything else is based on it. We separate explanatory variables in the model formula by a plus sign.
 
@@ -308,7 +314,9 @@ head(model.matrix(trees.lm))
 #+end_src
 
 *** Point Estimates of the Regression Surface
-#+latex: \label{sub:mlr-point-est-regsurface}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-point-est-regsurface
+:END:
 
 The parameter estimates \(\mathbf{b}\) make it easy to find the fitted values\index{fitted values}, \(\hat{\mathbf{Y}}\). We write them individually as \(\hat{Y}_{i}\), \(i=1,2,\ldots,n\), and recall that they are defined by
 \begin{eqnarray}
@@ -355,7 +363,7 @@ If we wanted to predict the average volume of black cherry trees that have =Girt
 We would use the same estimate \(\hat{Y}=35.6\) to predict the measured =Volume= of another black cherry tree -- yet to be observed -- that has =Girth = 15= in and is =Height = 77= ft tall.
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The fitted values are stored inside =trees.lm= and may be accessed with the =fitted= function. We only show the first five fitted values.
 
@@ -399,7 +407,9 @@ Using the =trees= data,
 #+latex: \end{example}
 
 *** Mean Square Error and Standard Error
-#+latex: \label{sub:mlr-mse-se}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-mse-se
+:END:
 
 The residuals are given by
 \begin{equation}
@@ -419,7 +429,7 @@ S^{2}=\frac{SSE}{n-(p+1)}.
 \end{equation}
 That would be a good guess. The /residual standard error/ is \(S=\sqrt{S^{2}}\).
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The residuals are also stored with =trees.lm= and may be accessed with the =residuals= function. We only show the first five residuals.
 
@@ -437,7 +447,9 @@ treesumry$sigma
 For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 
 *** Interval Estimates of the Parameters
-#+latex: \label{sub:mlr-interval-est-params}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-interval-est-params
+:END:
 
 We showed in Section \ref{sub:mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
@@ -465,7 +477,7 @@ The degrees of freedom for the Student's \(t\) distribution
 #+latex: \footnote{We are taking great leaps over the mathematical details. In particular, we have yet to show that \(s^{2}\) has a chi-square distribution and we have not even come close to showing that \(b_{i}\) and \(s_{b_{i}}\) are independent. But these are entirely outside the scope of the present book and the reader may rest assured that the proofs await in later classes. See C.R. Rao for more.}
 are the same as the denominator of \(S^{2}\). 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 To get confidence intervals for the parameters we need only use =confint=\index{confint@\texttt{confint}}:
 
@@ -504,7 +516,7 @@ Prediction intervals for a new observation at \(\mathbf{x}_{0}\) are given by
 The prediction intervals are wider than the confidence intervals, just as in Section \ref{sub:slr-interval-est-regline}.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section \ref{sub:slr-interval-est-regline} (which we repeat here for illustration).
 
@@ -548,7 +560,9 @@ Using the =trees= data,
 #+latex: \end{example}
 
 ** Model Utility and Inference
-#+latex: \label{sec:Model-Utility-and-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Model-Utility-and-MLR
+:END:
 
 *** Multiple Coefficient of Determination
 
@@ -581,7 +595,7 @@ This is a problem, because as the philosopher, Occam, once said: ``causes should
 \end{equation}
 It is good practice for the statistician to weigh both \(R^{2}\) and \(\overline{R}^{2}\) during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\) from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
 
 #+begin_src R :exports both :results output pp 
@@ -595,7 +609,9 @@ treesumry$adj.r.squared
 High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig:3D-scatterplot-trees}.
 
 *** Overall /F/-Test
-#+latex: \label{sub:mlr-Overall-F-Test}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-Overall-F-Test
+:END:
 
 Another way to assess the model's utility is to to test the hypothesis
 \[
@@ -607,7 +623,7 @@ F=\frac{SSR/p}{SSE/(n-p-1)}.
 \end{equation}
 When the regression assumptions hold and under \(H_{0}\), it can be shown that \(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject \(H_{0}\) when \(F\) is large, that is, when the explained variation is large relative to the unexplained variation.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The overall \(F\) statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
 
@@ -618,7 +634,9 @@ treesumry$fstatistic
 For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
-#+latex: \label{sub:mlr-Student's-t-Tests}
+:PROPERTIES:
+:CUSTOM_ID: sub:mlr-Student's-t-Tests
+:END:
 
 We know that
 \begin{equation}
@@ -638,7 +656,7 @@ T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 has a Student's \(t\) distribution with \(n-(p+1)\) degrees of freedom. (Remember, we are estimating \(p+1\) parameters.) Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a \(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The Student's \(t\) tests for significance of the individual explanatory variables are shown in the =summary= output.
 
@@ -649,7 +667,9 @@ treesumry
 We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
 
 ** Polynomial Regression
-#+latex: \label{sec:Polynomial-Regression}
+:PROPERTIES:
+:CUSTOM_ID: sec:Polynomial-Regression
+:END:
 
 *** Quadratic Regression Model
 
@@ -696,7 +716,7 @@ The regression assumptions are the same. Almost everything indeed is the same. I
 *However, there is one important difference.* When we introduce the squared variable in the model we inadvertently also introduce strong dependence between the terms which can cause significant numerical problems when it comes time to calculate the parameter estimates. Therefore, we should usually rescale the independent variable to have mean zero (and even variance one if we wish) *before* fitting the model. That is, we replace the \(x_{i}\)'s with \(x_{i}-\overline{x}\) (or \((x_{i}-\overline{x})/s\)) before fitting the model
 #+latex: \footnote{Rescaling the data gets the job done but a better way to avoid the multicollinearity introduced by the higher order terms is with /orthogonal polynomials/, whose coefficients are chosen just right so that the polynomials are not correlated with each other. This is beginning to linger outside the scope of this book, however, so we will content ourselves with a brief mention and then stick with the rescaling approach in the discussion that follows. A nice example of orthogonal polynomials in action can be run with \texttt{example(cars)}.}.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There are multiple ways to fit a quadratic model to the variables =Volume= and =Girth= using \(\mathsf{R}\).
 1. One way would be to square the values for =Girth= and save them in a vector =Girthsq=. Next, fit the linear model =Volume ~ Girth + Girthsq=. 
@@ -778,7 +798,9 @@ In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec:Partial-F-Sta
 #+end_rem
 
 ** Interaction
-#+latex: \label{sec:Interaction}
+:PROPERTIES:
+:CUSTOM_ID: sec:Interaction
+:END:
 
 In our model for tree volume there have been two independent variables: =Girth= and =Height=. We may suspect that the independent variables are related, that is, values of one variable may tend to influence values of the other. It may be desirable to include an additional term in our model to try and capture the dependence between the variables. Interaction terms are formed by multiplying one (or more) explanatory variable(s) by another. 
 
@@ -797,7 +819,7 @@ of an interaction term between \(x{}_{1}\) and \(x_{2}\).
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{What does it mean?}
+**** What does it mean?
 
 Consider the mean response \(\mu(x_{1},x_{2})\) as a function of \(x_{2}\):
 \begin{equation}
@@ -811,7 +833,7 @@ Now think about what happens when the interaction term \(\beta_{1:2}x_{1}x_{2}\)
 \end{equation}
 In this case we see that not only the \(y\)-intercept changes when \(x_{1}\) varies, but the slope also changes in \(x_{1}\). Thus, the interaction term allows the slope of the mean response in \(x_{2}\) to increase and decrease as \(x_{1}\) varies. 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 There are several ways to introduce an interaction term into the model.
 1. Make a new variable =prod <- Girth * Height=, then include =prod= in the model formula =Volume ~ Girth + Height + prod=. This method is perhaps the most transparent, but it also reserves memory space unnecessarily.
@@ -845,7 +867,9 @@ There are two other ways to include interaction terms in model formulas. For exa
 These examples can be generalized to more than two independent variables, say three, four, or even more. We may be interested in seeing whether any pairwise interactions are significant. We do this with a model formula that looks something like =y ~ (x1 + x2 + x3 + x4)^2=.  
 
 ** Qualitative Explanatory Variables
-#+latex: \label{sec:Qualitative-Explanatory-Variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:Qualitative-Explanatory-Variables
+:END:
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub:Qualitative-Data}.
 
@@ -894,7 +918,7 @@ while trees with =Tall = no= will have the mean response
 \end{equation}
 In essence, we are fitting two regression lines: one for tall trees, and one for short trees. The regression lines have the same slope but they have different \(y\) intercepts (which are exactly \(|\beta_{2}|\) far apart).
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The important thing is to double check that the qualitative variable in question is stored as a factor. The way to check is with the =class= command. For example,
 
@@ -973,7 +997,9 @@ It may look intimidating but there is reason to the madness. First we =split= th
 There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \(\mathsf{R}\) are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
-#+latex: \label{sec:Partial-F-Statistic}
+:PROPERTIES:
+:CUSTOM_ID: sec:Partial-F-Statistic
+:END:
 
 We saw in Section \ref{sub:mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub:mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
@@ -1003,7 +1029,7 @@ F=\frac{(SSE_{r}-SSE_{f})/(p-j)}{SSE_{f}/(n-p-1)}.
 It can be shown when the regression assumptions hold under \(H_{0}\) that the partial \(F\) statistic has an \(\mathsf{f}(\mathtt{df1}=p-j,\,\mathtt{df2}=n-p-1)\) distribution. We calculate the \(p\)-value of the observed partial \(F\) statistic and reject \(H_{0}\) if the \(p\)-value is small. 
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 
@@ -1048,7 +1074,9 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 #+latex: \end{example}
 
 ** Residual Analysis and Diagnostic Tools
-#+latex: \label{sec:Residual-Analysis-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Residual-Analysis-MLR
+:END:
 
 We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec:Residual-Analysis-SLR} and \ref{sec:Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
@@ -1074,7 +1102,9 @@ We encountered many, many diagnostic measures for simple linear regression in Se
 Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha:simple-linear-regression}.
 
 ** Additional Topics
-#+latex: \label{sec:Additional-Topics-MLR}
+:PROPERTIES:
+:CUSTOM_ID: sec:Additional-Topics-MLR
+:END:
 
 *** Nonlinear Regression
 
@@ -1142,7 +1172,9 @@ summary(acc.nls)
 #+end_src
 
 *** Multicollinearity
-#+latex: \label{sub:Multicollinearity}
+:PROPERTIES:
+:CUSTOM_ID: sub:Multicollinearity
+:END:
 
 A multiple regression model exhibits /multicollinearity/ when two or more of the explanatory variables are substantially correlated with each other. We can measure multicollinearity by having one of the explanatory play the role of ``dependent variable'' and regress it on the remaining explanatory variables. The the \(R^{2}\) of the resulting model is near one, then we say that the model is multicollinear or shows multicollinearity.
 

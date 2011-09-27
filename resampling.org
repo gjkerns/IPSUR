@@ -55,22 +55,24 @@ keywords: resampling bootstrap permutation testing
 * Resampling Methods                                                 :resamp:
 :PROPERTIES:
 :tangle: R/resamp.R
+:CUSTOM_ID: cha:resampling-methods
 :END:
-#+latex: \label{cha:resampling-methods}
 
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
 
 I have seen /Statistical Computing with \(\mathsf{R}\)/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \(\mathsf{R}\) into the narrative.
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - basic philosophy of resampling and why it is important
 - resampling for standard errors and confidence intervals
 - resampling for hypothesis tests (permutation tests)
 
 ** Introduction
-#+latex: \label{sec:Introduction-Resampling}
+:PROPERTIES:
+:CUSTOM_ID: sec:Introduction-Resampling
+:END:
 
 -  Classical question :: Given a population of interest, how may we effectively learn some of its salient features, /e.g./, the population's mean? One way is through representative random sampling. Given a random sample, we summarize the information contained therein by calculating a reasonable statistic, /e.g./, the sample mean. Given a value of a statistic, how do we know whether that value is significantly different from that which was expected? We don't; we look at the /sampling distribution/ of the statistic, and we try to make probabilistic assertions based on a confidence level or other consideration. For example, we may find ourselves saying things like, "With 95% confidence, the true population mean is greater than zero".
 
@@ -90,7 +92,7 @@ Due to the special structure of the empirical CDF, to get an IID sample we just 
 #+end_rem
 
 
-#+latex: \paragraph*{General bootstrap procedure.}
+**** General bootstrap procedure.
 
 The above discussion leads us to the following general procedure to approximate the sampling distribution of a statistic \(S=S(x_{1},x_{2},\ldots,x_{n})\) based on an observed simple random sample \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) of size \(n\): 
 
@@ -101,7 +103,9 @@ The above discussion leads us to the following general procedure to approximate 
 1. The bootstrap distribution gives information about the sampling distribution of the original statistic \(S\). In particular, the bootstrap distribution gives us some idea about the center, spread, and shape of the sampling distribution of \(S\).
 
 ** Bootstrap Standard Errors
-#+latex: \label{sec:Bootstrap-Standard-Errors}
+:PROPERTIES:
+:CUSTOM_ID: sec:Bootstrap-Standard-Errors
+:END:
 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 
@@ -267,7 +271,9 @@ Some things to keep in mind about the bootstrap:
 #+end_rem
 
 ** Bootstrap Confidence Intervals
-#+latex: \label{sec:Bootstrap-Confidence-Intervals}
+:PROPERTIES:
+:CUSTOM_ID: sec:Bootstrap-Confidence-Intervals
+:END:
 
 *** Percentile Confidence Intervals
 
@@ -336,7 +342,9 @@ We have seen two methods for bootstrapping confidence intervals for a statistic.
 - Studentized bootstrap confidence intervals where is the Studentized version of is the  order statistic of the simulation
 
 ** Resampling in Hypothesis Tests
-#+latex: \label{sec:Resampling-in-Hypothesis}
+:PROPERTIES:
+:CUSTOM_ID: sec:Resampling-in-Hypothesis
+:END:
 
 The classical two-sample problem can be stated as follows: given two groups of interest, we would like to know whether these two groups are significantly different from one another or whether the groups are reasonably similar. The standard way to decide is to 
 1. Go collect some information from the two groups and calculate an associated statistic, for example, \(\overline{X}_{1}-\overline{X}_{2}\). 
@@ -359,7 +367,7 @@ The average amounts can be found:
 
 with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 600 mg measurements seem to have a higher average, and we might be interested in trying to decide if the average amounts are =significantly= different. The null hypothesis should be that there is no difference in the amounts, that is, the groups are more or less the same. If the null hypothesis were true, then the two groups would indeed be the same, or just one big group. In that case, the observed difference in the sample means just reflects the random assignment into the arbitrary =x1= and =x2= categories. It is now clear how we may resample, consistent with the null hypothesis.
 
-#+latex: \paragraph*{Procedure:}
+**** Procedure:
 
 1. Randomly resample 10 scores from the combined scores of =x1= and =x2=, and assign then to the =x1= group. The rest will then be in the =x2= group. Calculate the difference in (re)sampled means, and store that value.  
 1. Repeat this procedure many, many times and draw a histogram of the resampled statistics, called the /permutation distribution/. Locate the observed difference 10.9 on the histogram to get the \(p\)-value. If the \(p\)-value is small, then we consider that evidence against the hypothesis that the groups are the same. 

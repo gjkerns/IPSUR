@@ -63,11 +63,13 @@ keywords: introduction R statistics
 * An Introduction to \(\mathsf{R}\)                                  :introR:
 :PROPERTIES:
 :tangle: R/introR.R
+:CUSTOM_ID: cha:introduction-to-R
 :END:
-#+latex: \label{cha:introduction-to-R}
 
-** Downloading and Installing \(\mathsf{R}\)  
-#+latex: \label{sec:download-install-R}
+** Downloading and Installing \(\mathsf{R}\)
+:PROPERTIES:
+:CUSTOM_ID: sec:download-install-R
+:END:  
 
 The instructions for obtaining \(\mathsf{R}\) largely depend on the user's hardware and operating system. The \(\mathsf{R}\)  Project has written an \(\mathsf{R}\)  Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
 
@@ -82,7 +84,7 @@ for your operating system:
 
 On Microsoft Windows, click the =R-x.y.z.exe= installer to start installation. When it asks for "Customized startup options", specify =Yes=. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the =rgl= package \cite{rgl}.
 
-#+latex: \paragraph*{Installing \(\mathsf{R}\) on a USB drive (Windows)}
+**** Installing \(\mathsf{R}\) on a USB drive (Windows)
 
 With this option you can use \(\mathsf{R}\) portably and without administrative privileges. There is an entry in the \(\mathsf{R}\) for Windows FAQ about this. Here is the procedure I use:  
 1. Download the Windows installer above and start installation as usual. When it asks /where/ to install, navigate to the top-level directory of the USB drive instead of the default =C= drive.
@@ -93,7 +95,9 @@ With this option you can use \(\mathsf{R}\) portably and without administrative 
 Steps 3 and 4 are not required but save you the trouble of navigating to the =R-x.y.z/bin= directory to double-click =Rgui.exe= every time you want to run the program. It is useless to create your own shortcut to =Rgui.exe=. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some /other/ machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 
 *** Installing and Loading Add-on Packages
-#+latex: \label{sub:installing-loading-packages}
+:PROPERTIES:
+:CUSTOM_ID: sub:installing-loading-packages
+:END:
 
 There are /base/ packages (which come with \(\mathsf{R}\) automatically), and /contributed/ packages (which must be downloaded for installation). For example, on the version of \(\mathsf{R}\) being used for this document the default base packages loaded at startup are 
 
@@ -115,9 +119,11 @@ packages in your library.
 For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the [[http://cran.r-project.org/manuals.html][\(\mathsf{R}\) Installation and Administration manual]].
 
 ** Communicating with \(\mathsf{R}\)
-#+latex: \label{sec:Communicating-with-R}
+:PROPERTIES:
+:CUSTOM_ID: sec:Communicating-with-R
+:END:
 
-#+latex: \paragraph*{One line at a time}
+**** One line at a time
 
 This is the most basic method and is the first one that beginners will use.
 - RGui (Microsoft \(\circledR\) Windows)
@@ -125,7 +131,7 @@ This is the most basic method and is the first one that beginners will use.
 - Emacs/ESS, XEmacs
 - JGR
 
-#+latex: \paragraph*{Multiple lines at a time}
+**** Multiple lines at a time
 
 For longer programs (called /scripts/) there is too much code to write all at once at the command prompt. Furthermore, for longer scripts it is convenient to be able to only modify a certain piece of the script and run it again in \(\mathsf{R}\). Programs called /script editors/ are specially designed to aid the communication and code writing process. They have all sorts of helpful features including \(\mathsf{R}\) syntax highlighting, automatic code completion, delimiter matching, and dynamic help on the \(\mathsf{R}\) functions as they are being written. Even more, they often have all of the text editing features of programs like Microsoft\(\circledR\)Word. Lastly, most script editors are fully customizable in the sense that the user can customize the appearance of the interface to choose what colors to display, when to display them, and how to display them.
 
@@ -137,7 +143,7 @@ For longer programs (called /scripts/) there is too much code to write all at on
 - JGR (read ``Jaguar''):\index{JGR} :: This one has the bells and whistles of =RGui= plus it is based on Java, so it works on multiple operating systems. It has its own script editor like \(\mathsf{R}\) Editor but with additional features such as syntax highlighting and code-completion. If you do not use Microsoft\(\circledR\) Windows (or even if you do) you definitely want to check out this one. 
 - Kate, Bluefish, /etc/ :: There are literally dozens of other text editors available, many of them free, and each has its own (dis)advantages. I only have mentioned the ones with which I have had substantial personal experience and have enjoyed at some point. Play around, and let me know what you find.
 
-#+latex: \paragraph*{Graphical User Interfaces (GUIs)}
+**** Graphical User Interfaces (GUIs)
 
 By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at http://www.sciviews.org/_rgui/. On the left side of the screen (under *Projects*) there are several choices available. 
 
@@ -147,14 +153,18 @@ By the word ``GUI'' I mean an interface in which the user communicates with \(\m
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
 
 ** Basic \(\mathsf{R}\) Operations and Concepts
-#+latex: \label{sec:Basic-R-Operations}
+:PROPERTIES:
+:CUSTOM_ID: sec:Basic-R-Operations
+:END:
 
 The \(\mathsf{R}\) developers have written an introductory document entitled ``An Introduction to \(\mathsf{R}\)''. There is a sample session included which shows what basic interaction with \(\mathsf{R}\) looks like. I recommend that all new users of \(\mathsf{R}\) read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
 
 Below are some of the most basic operations that can be done with \(\mathsf{R}\). Almost every book about \(\mathsf{R}\) begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
 
 *** Arithmetic
-#+latex: \label{sub:Arithmetic}
+:PROPERTIES:
+:CUSTOM_ID: sub:Arithmetic
+:END:
 
 #+begin_src R :exports both :results output pp  
 2 + 3       # add
@@ -176,7 +186,9 @@ options(digits = 7)  # back to default
 Note that it is possible to set =digits=\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the =sqrt=\index{sqrt@\texttt{sqrt}} function for square roots and the =exp=\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
 
 *** Assignment, Object names, and Data types
-#+latex: \label{sub:Assignment-Object-names}
+:PROPERTIES:
+:CUSTOM_ID: sub:Assignment-Object-names
+:END:
 
 It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the =<-= operator (with a space on either side). The ~=~ symbol works too, but it is recommended by the \(\mathsf{R}\) masters to reserve ~=~ for specifying arguments to functions (discussed later). In this book we will follow their advice and use =<-= for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
 
@@ -207,11 +219,13 @@ typeof((0 + 1i)^2)
 Note that you can just type =(1i)^2= to get the same answer. The =NaN=\index{NaN@\texttt{NaN}} stands for ``not a number''; it is represented internally as =double=\index{double}. 
 
 *** Vectors
-#+latex: \label{sub:Vectors}
+:PROPERTIES:
+:CUSTOM_ID: sub:Vectors
+:END:
 
 All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
 
-#+latex: \paragraph*{Entering data vectors}
+**** Entering data vectors
 
 *The long way:*\index{c@\texttt{c}} If you would like to enter the data =74,31,95,61,76,34,23,54,96= into \(\mathsf{R}\), you may create a data vector with the =c= function (which is short for /concatenate/).
 
@@ -240,7 +254,7 @@ Note that we can get the first line much quicker with the colon operator.
 The vector =LETTERS=\index{LETTERS@\texttt{LETTERS}} has the 26 letters of the English alphabet in uppercase and =letters=\index{letters@\texttt{letters}} has all of them in lowercase.
 
 
-#+latex: \paragraph*{Indexing data vectors}
+**** Indexing data vectors
 
 Sometimes we do not want the whole vector, but just a piece of it. We can access the intermediate parts with the =[]=\index{[]@\texttt{{[}{]}}} operator. Observe (with =x= defined above)
 
@@ -259,7 +273,9 @@ letters[-(6:24)]
 #+end_src
 
 *** Functions and Expressions
-#+latex: \label{sub:Functions-and-Expressions}
+:PROPERTIES:
+:CUSTOM_ID: sub:Functions-and-Expressions
+:END:
 
 A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
 
@@ -316,7 +332,9 @@ exp
 Be warned that most of the =.Internal= functions are written in other computer languages which the beginner may not understand, at least initially.
 
 ** Getting Help
-#+latex: \label{sec:Getting-Help}
+:PROPERTIES:
+:CUSTOM_ID: sec:Getting-Help
+:END:
 
 When you are using \(\mathsf{R}\), it will not take long before you find yourself needing help. Fortunately, \(\mathsf{R}\) has extensive help resources and you should immediately become familiar with them. Begin by clicking =Help= on =RGui=. The following options are available. 
 - Console: :: gives useful shortcuts, for instance, =Ctrl+L=, to clear the \(\mathsf{R}\) console screen. 

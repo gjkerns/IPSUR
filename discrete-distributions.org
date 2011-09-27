@@ -69,8 +69,8 @@ keywords: discrete random variable R statistics
 * Discrete Distributions                                           :discdist:
 :PROPERTIES:
 :tangle: R/discdist.R
+:CUSTOM_ID: cha:Discrete-Distributions
 :END:
-#+latex: \label{cha:Discrete-Distributions}
 
 #+latex: \noindent 
 In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
@@ -80,7 +80,7 @@ We give special attention to the empirical distribution since it plays such a fu
 There are some comments on simulation, and we mention transformations of random variables in the discrete case. The interested reader who would like to learn more about any of the assorted discrete distributions mentioned here should take a look at /Univariate Discrete Distributions/ by Johnson /et al/\cite{Johnson1993}.
 
 
-#+latex: \paragraph*{What do I want them to know?}
+**** What do I want them to know?
 
 - how to choose a reasonable discrete model under a variety of physical circumstances
 - item the notion of mathematical expectation, how to calculate it, and basic properties- moment generating functions (yes, I want them to hear about those)
@@ -89,10 +89,14 @@ There are some comments on simulation, and we mention transformations of random 
 - how to make new discrete random variables from old ones
 
 ** Discrete Random Variables
-#+latex: \label{sec:discrete-random-variables}
+:PROPERTIES:
+:CUSTOM_ID: sec:discrete-random-variables
+:END:
 
 *** Probability Mass Functions
-#+latex: \label{sub:probability-mass-functions}
+:PROPERTIES:
+:CUSTOM_ID: sub:probability-mass-functions
+:END:
 
 Discrete random variables are characterized by their supports which take the form
 \begin{equation}
@@ -123,7 +127,9 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
-#+latex: \label{sub:mean-variance-sd}
+:PROPERTIES:
+:CUSTOM_ID: sub:mean-variance-sd
+:END:
 
 There are numbers associated with PMFs. One important example is the mean \(\mu\), also known as \(\mathbb{E} X\) (which we will discuss later):
 \begin{equation}
@@ -158,8 +164,10 @@ We know that all PMFs satisfy certain properties, and a similar statement may be
 - \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
 We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). In an abuse of notation we will also write \(X\sim f_{X}\) and for the named distributions the PMF or CDF will be identified by the family name instead of the defining formula.
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
-#+latex: \label{sub:disc-rv-how-r}
+**** How to do it with \(\mathsf{R}\)
+:PROPERTIES:
+:CUSTOM_ID: sub:disc-rv-how-r
+:END:
 
 The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
 
@@ -203,7 +211,9 @@ E(X); var(X); sd(X)
 #+end_src
 
 ** The Discrete Uniform Distribution
-#+latex: \label{sec:disc-uniform-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:disc-uniform-dist
+:END:
 
 We have seen the basic building blocks of discrete distributions and we now study particular models that statisticians often encounter in the field. Perhaps the most fundamental of all is the /discrete uniform/ distribution.
 
@@ -232,19 +242,19 @@ and finally,
 Roll a die and let \(X\) be the upward face showing. Then \(m=6\), \(\mu=7/2=3.5\), and \(\sigma^{2}=(6^{2}-1)/12=35/12\).
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
-#+latex: \paragraph*{From the console:}
+**** From the console:
 One can choose an integer at random with the =sample= function. The general syntax to simulate a discrete uniform random variable is =sample(x, size, replace = TRUE)=.
 
 The argument =x= identifies the numbers from which to randomly sample. If =x= is a number, then sampling is done from 1 to =x=. The argument =size= tells how big the sample size should be, and =replace= tells whether or not numbers should be replaced in the urn after having been sampled. The default option is =replace = FALSE= but for discrete uniforms the sampled values should be replaced. Some examples follow.
 
-#+latex: \paragraph*{Examples}
+**** Examples
 - To roll a fair die 3000 times, do =sample(6, size = 3000, replace = TRUE)=.
 - To choose 27 random numbers from 30 to 70, do =sample(30:70, size = 27, replace = TRUE)=.
 - To flip a fair coin 1000 times, do =sample(c("H","T"), size = 1000, replace = TRUE)=.
 
-#+latex: \paragraph*{With the \(\mathsf{R}\) Commander:}
+**** With the \(\mathsf{R}\) Commander:
 
 Follow the sequence =Probability= \(\triangleright\) =Discrete Distributions= \(\triangleright\) =Discrete Uniform distribution= \(\triangleright\) =Simulate Discrete uniform variates...=.
 
@@ -257,7 +267,9 @@ In the \(\mathsf{R}\) Console window, the \(\mathsf{R}\) Commander should tell y
 The default name for the variable is =disunif.sim1=.
 
 ** The Binomial Distribution
-#+latex: \label{sec:binom-dist}
+:PROPERTIES:
+:CUSTOM_ID: sec:binom-dist
+:END:
 
 The binomial distribution is based on a /Bernoulli trial/, which is a random experiment in which there are only two possible outcomes: success (\(S\)) and failure (\(F\)). We conduct the Bernoulli trial and let 
 \begin{equation}
@@ -274,7 +286,9 @@ f_{X}(x)=p^{x}(1-p)^{1-x},\quad x=0,1.
 It is easy to calculate \(\mu=\mathbb{E} X=p\) and \(\mathbb{E} X^{2}=p\) so that \(\sigma^{2}=p-p^{2}=p(1-p)\).
 
 *** The Binomial Model
-#+latex: \label{sub:The-Binomial-Model}
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Binomial-Model
+:END:
 
 The Binomial model has three defining properties:
 - Bernoulli trials are conducted \(n\) times,
@@ -312,7 +326,7 @@ f_{X}(2)={4 \choose 2}(1/2)^{2}(1/2)^{2}=\frac{6}{2^{4}}.
 The mean number of boys is \(4(1/2)=2\) and the variance of \(X\) is \(4(1/2)(1/2)=1\).
 #+latex: \end{example}
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The corresponding \(\mathsf{R}\) function for the PMF and CDF are =dbinom= and =pbinom=, respectively. We demonstrate their use in the following examples.  
 
@@ -461,10 +475,14 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
 #+end_latex
 
 ** Expectation and Moment Generating Functions
-#+latex: \label{sec:expectation-and-mgfs}
+:PROPERTIES:
+:CUSTOM_ID: sec:expectation-and-mgfs
+:END:
 
 *** The Expectation Operator
-#+latex: \label{sub:expectation-operator}
+:PROPERTIES:
+:CUSTOM_ID: sub:expectation-operator
+:END:
 
 We next generalize some of the concepts from Section \ref{sub:mean-variance-sd}. There we saw that every
 #+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
@@ -507,7 +525,9 @@ Go directly from the definition. For example,
 #+end_proof
 
 *** Moment Generating Functions
-#+latex: \label{sub:MGFs}
+:PROPERTIES:
+:CUSTOM_ID: sub:MGFs
+:END:
 
 #+begin_defn
 Given a random variable \(X\), its /moment generating function/ (abbreviated MGF) is defined by the formula
@@ -543,7 +563,7 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 \end{alignat*}
 
 
-#+latex: \paragraph*{Applications}
+**** Applications
 
 We will discuss three applications of moment generating functions in this book. The first is the fact that an MGF may be used to accurately identify the probability distribution that generated it, which rests on the following:
 
@@ -569,7 +589,7 @@ Then \(X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)\).
 
 An MGF is also known as a ``Laplace Transform'' and is manipulated in that context in many branches of science and engineering.
 
-#+latex: \paragraph*{Why is it called a Moment Generating Function?}
+**** Why is it called a Moment Generating Function?
 
 This brings us to the second powerful application of MGFs. Many of the models we study have a simple MGF, indeed, which permits us to determine the mean, variance, and even higher moments very quickly. Let us see why. We already know that 
 \begin{alignat*}{1}
@@ -577,7 +597,7 @@ M(t)= & \sum_{x\in S}\mathrm{e}^{tx}f(x).
 \end{alignat*}
 Take the derivative with respect to \(t\) to get
 \begin{equation}
-M'(t)=\frac{\diff}{\diff t}\left(\sum_{x\in S}\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}\ \frac{\diff}{\diff t}\left(\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}x\mathrm{e}^{tx}f(x),
+M'(t)=\frac{\mathrm{d}}{\mathrm{d} t}\left(\sum_{x\in S}\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}\ \frac{\mathrm{d}}{\mathrm{d} t}\left(\mathrm{e}^{tx}f(x)\right)=\sum_{x\in S}x\mathrm{e}^{tx}f(x),
 \end{equation}
 and so if we plug in zero for \(t\) we see
 \begin{equation}
@@ -587,7 +607,7 @@ Similarly, \(M''(t)=\sum x^{2}\mathrm{e}^{tx}f(x)\) so that \(M''(0)=\mathbb{E} 
 #+latex: \footnote{We are glossing over some significant mathematical details in our derivation. Suffice it to say that when the MGF exists in a neighborhood of \(t=0\), the exchange of differentiation and summation is valid in that neighborhood, and our remarks hold true.}
 that
 \begin{equation}
-M_{X}^{(r)}(0)=\mathbb{E} X^{r}=\mbox{$r^{\mathrm{th}$} moment of $X$ about the origin.}
+M_{X}^{(r)}(0)=\mathbb{E} X^{r}=\mbox{\(r^{\mathrm{th}}\) moment of \(X\) about the origin.}
 \end{equation}
 
 These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In addition to these are the so called /central moments/ \(\mu_{r}\) defined by
@@ -629,7 +649,7 @@ M_{X}(t)=\sum_{r=0}^{\infty}\frac{\mathbb{E} X^{r}}{r!}t^{r},\quad\mbox{for all 
 \end{equation}
 #+end_rem
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The =distrEx= package provides an expectation operator =E= which can be used on random variables that have been defined in the ordinary =distr= sense:
 
@@ -652,7 +672,9 @@ sd(X)
 There are even methods for =IQR=, =mad=, =skewness=, and =kurtosis=.
 
 ** The Empirical Distribution
-#+latex: \label{sec:empirical-distribution}
+:PROPERTIES:
+:CUSTOM_ID: sec:empirical-distribution
+:END:
 
 Do an experiment \(n\) times and observe \(n\) values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\) of a random variable \(X\). For simplicity in most of the discussion that follows it will be convenient to imagine that the observed values are distinct, but the remarks are valid even when the observed values are repeated. 
 
@@ -679,7 +701,7 @@ s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 The /empirical quantile function/ is the inverse of the ECDF. See Section \ref{sub:Normal-Quantiles-QF}.
 
 
-#+latex: \paragraph*{How to do it with \(\mathsf{R}\)}
+**** How to do it with \(\mathsf{R}\)
 
 The empirical distribution is not directly available as a distribution in the same way that the other base probability distributions are, but there are plenty of resources available for the determined investigator.  Given a data vector of observed values =x=, we can see the empirical CDF with the =ecdf=\index{ecdf@\texttt{ecdf}} function:
 
@@ -740,15 +762,21 @@ We can get the empirical quantile function in \(\mathsf{R}\) with =quantile(x, p
 As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter \ref{cha:resampling-methods}.
 
 ** Other Discrete Distributions
-#+latex: \label{sec:other-discrete-distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:other-discrete-distributions
+:END:
 
 The binomial and discrete uniform distributions are popular, and rightly so; they are simple and form the foundation for many other more complicated distributions. But the particular uniform and binomial models only apply to a limited range of problems. In this section we introduce situations for which we need more than what the uniform and binomial offer.
 
 *** Dependent Bernoulli Trials
-#+latex: \label{sec:non-bernoulli-trials}
+:PROPERTIES:
+:CUSTOM_ID: sec:non-bernoulli-trials
+:END:
 
-#+latex: \paragraph*{The Hypergeometric Distribution}
-#+latex: \label{sub:hypergeometric-dist}
+**** The Hypergeometric Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:hypergeometric-dist
+:END:
 
 Consider an urn with 7 white balls and 5 black balls. Let our random experiment be to randomly select 4 balls, without replacement, from the urn. Then the probability of observing 3 white balls (and thus 1 black ball) would be
 \begin{equation}
@@ -815,7 +843,7 @@ Find \(\Pr(X>1)\).
    In general, the =Upper tail= option of a tail probabilities dialog computes \(\Pr(X > x)\) for all given =Variable Value(s)= \(x\).
 Generate \(100,000\) observations of the random variable \(X\).
    We can randomly simulate as many observations of \(X\) as we want in \(\mathsf{R}\) Commander. Simply choose =Simulate hypergeometric variates...= in the =Hypergeometric distribution= dialog. 
-   In the =Number of samples= dialog, type 1. Enter the parameters as above. Under the \textsf{Store Values} section, make sure =New Data set= is selected. Click =OK=. 
+   In the =Number of samples= dialog, type 1. Enter the parameters as above. Under the =Store Values= section, make sure =New Data set= is selected. Click =OK=. 
    A new dialog should open, with the default name =Simset1=.  We could change this if we like, according to the rules for \(\mathsf{R}\) object names. In the sample size box, enter 100000. Click =OK=. 
    In the Console Window, \(\mathsf{R}\) Commander should issue an alert that =Simset1= has been initialized, and in a few seconds, it should also state that 100,000 hypergeometric variates were stored in =hyper.sim1=. We can view the sample by clicking the =View Data Set= button on the \(\mathsf{R}\) Commander interface.
    We know from our formulas that \(\mu=K\cdot M/(M+N)=5*17/250=0.34\). We can check our formulas using the fact that with repeated observations of \(X\) we would expect about 0.34 defectives on the average. To see how our sample reflects the true mean, we can compute the sample mean
@@ -838,8 +866,10 @@ Generate \(100,000\) observations of the random variable \(X\).
 
 #+latex: \end{example}
 
-#+latex: \paragraph*{Sampling With and Without Replacement}
-#+latex: \label{sub:Sampling-With-and}
+**** Sampling With and Without Replacement
+:PROPERTIES:
+:CUSTOM_ID: sub:Sampling-With-and
+:END:
 
 Suppose that we have a large urn with, say, \(M\) white balls and \(N\) black balls. We take a sample of size \(n\) from the urn, and let \(X\) count the number of white balls in the sample. If we sample
 - without replacement, :: then \(X\sim\mathsf{hyper}(\mathtt{m=}M,\,\mathtt{n}=N,\,\mathtt{k}=n)\) and has mean and variance
@@ -861,12 +891,16 @@ We see that both sampling procedures have the same mean, and the method with the
 is called a /finite population correction/. For a fixed sample size \(n\), as \(M,N\to\infty\) it is clear that the correction goes to 1, that is, for infinite populations the sampling schemes are essentially the same with respect to mean and variance.
 
 *** Waiting Time Distributions
-#+latex: \label{sec:Waiting-Time-Distributions}
+:PROPERTIES:
+:CUSTOM_ID: sec:Waiting-Time-Distributions
+:END:
 
 Another important class of problems is associated with the amount of time it takes for a specified event of interest to occur. For example, we could flip a coin repeatedly until we observe Heads. We could toss a piece of paper repeatedly until we make it in the trash can.
 
-#+latex: \paragraph*{The Geometric Distribution}
-#+latex: \label{sub:The-Geometric-Distribution}
+**** The Geometric Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Geometric-Distribution
+:END:
 
 Suppose that we conduct Bernoulli trials repeatedly, noting the successes and failures. Let \(X\) be the number of failures before a success. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -903,8 +937,10 @@ f_{Y}(y)=p(1-p)^{y-1},\quad y=1,2,3,\ldots
 When they say ``geometric distribution'', this is what they mean. It is not hard to see that the two definitions are related. In fact, if \(X\) denotes our geometric and \(Y\) theirs, then \(Y=X+1\). Consequently, they have \(\mu_{Y}=\mu_{X}+1\) and \(\sigma_{Y}^{2}=\sigma_{X}^{2}\).
 #+end_note
 
-#+latex: \paragraph*{The Negative Binomial Distribution}
-#+latex: \label{sub:The-Negative-Binomial}
+**** The Negative Binomial Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Negative-Binomial
+:END:
 
 We may generalize the problem and consider the case where we wait for /more/ than one success. Suppose that we conduct Bernoulli trials repeatedly, noting the respective successes and failures. Let \(X\) count the number of failures before \(r\) successes. If \(\Pr(S)=p\) then \(X\) has PMF
 \begin{equation}
@@ -981,10 +1017,14 @@ It is again not hard to see that if \(X\) denotes our Negative Binomial and \(Y\
 #+end_note
 
 *** Arrival Processes
-#+latex: \label{sec:Arrival-Processes}
+:PROPERTIES:
+:CUSTOM_ID: sec:Arrival-Processes
+:END:
 
-#+latex: \paragraph*{The Poisson Distribution}
-#+latex: \label{sub:The-Poisson-Distribution}
+**** The Poisson Distribution
+:PROPERTIES:
+:CUSTOM_ID: sub:The-Poisson-Distribution
+:END:
 
 This is a distribution associated with ``rare events'', for reasons which will become clear in a moment. The events might be:
 - traffic accidents,
@@ -998,7 +1038,7 @@ f_{X}(x)=\Pr(X=x)=\mathrm{e}^{-\lambda}\frac{\lambda^{x}}{x!},\quad x=0,1,2,\ldo
 \end{equation}
 We use the notation \(X\sim\mathsf{pois}(\mathtt{lambda}=\lambda)\). The associated \(\mathsf{R}\) functions are =dpois(x, lambda)=, =ppois=, =qpois=, and =rpois=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
-#+latex: \paragraph*{What are the reasonable conditions?}
+**** What are the reasonable conditions?
 
 Divide \([0,1]\) into subintervals of length \(1/n\). A /Poisson process/\index{Poisson process} satisfies the following conditions:
 - the probability of an event occurring in a particular subinterval is \(\approx\lambda/n\).
@@ -1033,7 +1073,9 @@ diff(ppois(c(47, 50), lambda = 50))
 #+latex: \end{example}
 
 ** Functions of Discrete Random Variables
-#+latex: \label{sec:functions-discrete-rvs}
+:PROPERTIES:
+:CUSTOM_ID: sec:functions-discrete-rvs
+:END:
 
 We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix \ref{sec:Differential-and-Integral}), the solution can be found by simple substitution.
 
