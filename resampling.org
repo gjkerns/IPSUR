@@ -132,17 +132,17 @@ hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Bootstrap-se-mean.ps
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/resamp/Bootstrap-se-mean.ps
   <<Bootstrap-se-mean>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Bootstrap-se-mean.svg
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/resamp/Bootstrap-se-mean.svg
   <<Bootstrap-se-mean>>
 #+end_src
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/Bootstrap-se-mean.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/resamp/Bootstrap-se-mean.ps}
   \caption[Bootstrapping the standard error of the mean, simulated data]{\small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.}
   \label{fig:Bootstrap-se-mean}
 \end{figure}
@@ -150,7 +150,7 @@ curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 
 #+begin_html
 <div id="fig-Bootstrap-se-mean" class="figure">
-  <p><img src="svg/Bootstrap-se-mean.svg" width=500 alt="svg/Bootstrap-se-mean.svg" /></p>
+  <p><img src="svg/resamp/Bootstrap-se-mean.svg" width=500 alt="svg/resamp/Bootstrap-se-mean.svg" /></p>
   <p>Bootstrapping the standard error of the mean, simulated data.</p>
 </div>
 #+end_html
@@ -197,17 +197,17 @@ sd(medstar)
 hist(medstar, breaks = 40, prob = TRUE)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/Bootstrapping-se-median.ps
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/resamp/Bootstrapping-se-median.ps
   <<Bootstrapping-se-median>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/Bootstrapping-se-median.svg
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/resamp/Bootstrapping-se-median.svg
   <<Bootstrapping-se-median>>
 #+end_src
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/Bootstrapping-se-median.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/resamp/Bootstrapping-se-median.ps}
   \caption[Bootstrapping the standard error of the median for the \texttt{rivers} data]{\small Bootstrapping the standard error of the median for the \texttt{rivers} data.}
   \label{fig:Bootstrapping-se-median}
 \end{figure}
@@ -215,7 +215,7 @@ hist(medstar, breaks = 40, prob = TRUE)
 
 #+begin_html
 <div id="fig-Bootstrapping-se-median" class="figure">
-  <p><img src="svg/Bootstrapping-se-median.svg" width=500 alt="svg/Bootstrapping-se-median.svg" /></p>
+  <p><img src="svg/resamp/Bootstrapping-se-median.svg" width=500 alt="svg/resamp/Bootstrapping-se-median.svg" /></p>
   <p>Bootstrapping the standard error of the median for the <code>rivers</code> data.</p>
 </div>
 #+end_html
@@ -371,8 +371,6 @@ with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 60
 
 1. Randomly resample 10 scores from the combined scores of =x1= and =x2=, and assign then to the =x1= group. The rest will then be in the =x2= group. Calculate the difference in (re)sampled means, and store that value.  
 1. Repeat this procedure many, many times and draw a histogram of the resampled statistics, called the /permutation distribution/. Locate the observed difference 10.9 on the histogram to get the \(p\)-value. If the \(p\)-value is small, then we consider that evidence against the hypothesis that the groups are the same. 
-
-#+latex: \end{example}
 
 #+begin_rem
 In calculating the permutation test /p-value/, the formula is essentially the proportion of resample statistics that are greater than or equal to the observed value. Of course, this is merely an /estimate/ of the true \(p\)-value. As it turns out, an adjustment of \(+1\) to both the numerator and denominator of the proportion improves the performance of the estimated \(p\)-value, and this adjustment is implemented in the =ts.perm= function.
