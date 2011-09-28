@@ -60,6 +60,21 @@ lang="en" xml:lang="en">
                                  font-weight:bold; }
   /*]]>*/-->
 </style>
+<script type="text/javascript" src="http://orgmode.org/org-info.js"></script>
+<script type="text/javascript" >
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "0");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
 <script type="text/javascript">
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
@@ -299,12 +314,36 @@ Finally, and most importantly, I would like to thank my wife for her patience an
 </li>
 <li><a href="#cha-Describing-Data-Distributions">2 Data Description</a>
 <ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#sec-Types-of-Data">2.1 What do I want them to know?</a></li>
+</ul></li>
+</ul>
+</li>
 <li><a href="#sec-Types-of-Data">2.1 Types of Data</a>
 <ul>
 <li><a href="#sub-Quantitative-Data">2.1.1 Quantitative data</a></li>
-<li><a href="#sub-Displaying-Quantitative-Data">2.1.2 Displaying Quantitative Data</a></li>
+<li><a href="#sub-Displaying-Quantitative-Data">2.1.2 Displaying Quantitative Data</a>
+<ul>
+<li><a href="#par-Strip-charts">2.1.2.1 Strip charts\index{strip chart} (also known as Dot plots)\index{dot plot| see\{strip chart\}}</a></li>
+<li><a href="#sec-2-1-2-2">2.1.2.2 Histogram\index{Histogram}</a></li>
+<li><a href="#sec-2-1-2-3">2.1.2.3 Stemplots (more to be said in Section Exploratory-Data-Analysis)</a></li>
+<li><a href="#sec-2-1-2-4">2.1.2.4 Index plots</a></li>
+<li><a href="#sec-2-1-2-5">2.1.2.5 Density estimates</a></li>
+</ul>
+</li>
 <li><a href="#sub-Qualitative-Data">2.1.3 Qualitative Data, Categorical Data, and Factors</a></li>
-<li><a href="#sub-Displaying-Qualitative-Data">2.1.4 Displaying Qualitative Data</a></li>
+<li><a href="#sub-Displaying-Qualitative-Data">2.1.4 Displaying Qualitative Data</a>
+<ul>
+<li><a href="#par-Tables">2.1.4.1 Tables</a></li>
+<li><a href="#par-Bar-Graphs">2.1.4.2 Bar Graphs</a></li>
+<li><a href="#par-Pareto-Diagrams">2.1.4.3 Pareto Diagrams</a></li>
+<li><a href="#par-Dotcharts">2.1.4.4 Dot Charts</a></li>
+<li><a href="#par-Pie-Graphs">2.1.4.5 Pie Graphs</a></li>
+</ul>
+</li>
 <li><a href="#sub-Logical-Data">2.1.5 Logical Data</a></li>
 <li><a href="#sub-Missing-Data">2.1.6 Missing Data</a></li>
 <li><a href="#sub-other-data-types">2.1.7 Other Data Types</a></li>
@@ -314,7 +353,12 @@ Finally, and most importantly, I would like to thank my wife for her patience an
 <ul>
 <li><a href="#sub-Center">2.2.1 Center</a></li>
 <li><a href="#sub-Spread">2.2.2 Spread</a></li>
-<li><a href="#sub-Shape">2.2.3 Shape</a></li>
+<li><a href="#sub-Shape">2.2.3 Shape</a>
+<ul>
+<li><a href="#sec-2-2-3-1">2.2.3.1 Symmetry and Skewness</a></li>
+<li><a href="#sec-2-2-3-2">2.2.3.2 Kurtosis</a></li>
+</ul>
+</li>
 <li><a href="#sub-clusters-and-gaps">2.2.4 Clusters and Gaps</a></li>
 <li><a href="#sub-Extreme-Observations-and">2.2.5 Extreme Observations and other Unusual Features</a></li>
 </ul>
@@ -322,19 +366,55 @@ Finally, and most importantly, I would like to thank my wife for her patience an
 <li><a href="#sec-Descriptive-Statistics">2.3 Descriptive Statistics</a>
 <ul>
 <li><a href="#sub-Frequencies-and-Relative">2.3.1 Frequencies and Relative Frequencies</a></li>
-<li><a href="#sub-Measures-of-Center">2.3.2 Measures of Center</a></li>
-<li><a href="#sub-Order-Statistics-and">2.3.3 Order Statistics and the Sample Quantiles</a></li>
-<li><a href="#sub-Measures-of-Spread">2.3.4 Measures of Spread</a></li>
-<li><a href="#sub-Measures-of-Shape">2.3.5 Measures of Shape</a></li>
+<li><a href="#sub-Measures-of-Center">2.3.2 Measures of Center</a>
+<ul>
+<li><a href="#sec-2-3-2-1">2.3.2.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
+<li><a href="#sub-Order-Statistics-and">2.3.3 Order Statistics and the Sample Quantiles</a>
+<ul>
+<li><a href="#sec-2-3-3-1">2.3.3.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
+<li><a href="#sub-Measures-of-Spread">2.3.4 Measures of Spread</a>
+<ul>
+<li><a href="#sec-2-3-4-1">2.3.4.1 Sample Variance and Standard Deviation</a></li>
+<li><a href="#sec-2-3-4-2">2.3.4.2 Interquartile Range</a></li>
+<li><a href="#sec-2-3-4-3">2.3.4.3 Median Absolute Deviation</a></li>
+<li><a href="#sec-2-3-4-4">2.3.4.4 Comparing Apples to Apples</a></li>
+<li><a href="#sec-2-3-4-5">2.3.4.5 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
+<li><a href="#sub-Measures-of-Shape">2.3.5 Measures of Shape</a>
+<ul>
+<li><a href="#sec-2-3-5-1">2.3.5.1 Sample Skewness</a></li>
+<li><a href="#sec-2-3-5-2">2.3.5.2 Sample Excess Kurtosis</a></li>
+<li><a href="#sec-2-3-5-3">2.3.5.3 How to do it with \(\mathsf{R}\)</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-Exploratory-Data-Analysis">2.4 Exploratory Data Analysis</a>
 <ul>
-<li><a href="#sec-2-4-1">2.4.1 More About Stemplots</a></li>
-<li><a href="#sub-hinges-and-5NS">2.4.2 Hinges and the Five Number Summary</a></li>
+<li><a href="#sec-2-4-1">2.4.1 More About Stemplots</a>
+<ul>
+<li><a href="#sec-2-4-1-1">2.4.1.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
+<li><a href="#sub-hinges-and-5NS">2.4.2 Hinges and the Five Number Summary</a>
+<ul>
+<li><a href="#sec-2-4-2-1">2.4.2.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
 <li><a href="#sub-boxplots">2.4.3 Boxplots</a></li>
-<li><a href="#sub-Outliers">2.4.4 Outliers</a></li>
-<li><a href="#sec-2-4-5">2.4.5 Standardizing variables</a></li>
+<li><a href="#sub-Outliers">2.4.4 Outliers</a>
+<ul>
+<li><a href="#sec-2-4-4-1">2.4.4.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4-5">2.4.5 Standardizing variables</a>
+<ul>
+<li><a href="#sec-2-4-5-1">2.4.5.1 How to do it with \(\mathsf{R}\)</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-multivariate-data">2.5 Multivariate Data and Data Frames</a>
@@ -347,7 +427,13 @@ Finally, and most importantly, I would like to thank my wife for her patience an
 <ul>
 <li><a href="#sec-2-6-1">2.6.1 Numerically</a></li>
 <li><a href="#sec-2-6-2">2.6.2 Graphically</a></li>
-<li><a href="#sub-Lattice-Graphics">2.6.3 Lattice Graphics</a></li>
+<li><a href="#sub-Lattice-Graphics">2.6.3 Lattice Graphics</a>
+<ul>
+<li><a href="#sec-2-6-3-1">2.6.3.1 Side by side boxplots</a></li>
+<li><a href="#sec-2-6-3-2">2.6.3.2 Histograms</a></li>
+<li><a href="#sec-2-6-3-3">2.6.3.3 Scatterplots</a></li>
+<li><a href="#sec-2-6-3-4">2.6.3.4 Coplots</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-2-7">2.7 Exercises</a></li>
