@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>An Introduction to R</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-09-21 18:27:45 EDT"/>
+<meta name="generated" content="2011-09-28 14:40:19 EDT"/>
 <meta name="author" content="G. Jay Kerns"/>
 <meta name="description" content="This is a basic introduction to the R statistical environment."/>
 <meta name="keywords" content="introduction R statistics"/>
@@ -60,6 +60,21 @@ lang="en" xml:lang="en">
                                  font-weight:bold; }
   /*]]>*/-->
 </style>
+<script type="text/javascript" src="http://orgmode.org/org-info.js"></script>
+<script type="text/javascript" >
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "http://ipsur.org/index.html");
+org_html_manager.set("LINK_UP", "index.html   ");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "0");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
 <script type="text/javascript">
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
@@ -143,13 +158,12 @@ lang="en" xml:lang="en">
 
 ---
 layout: chapter
-title: An Introduction to R
+title: IPSUR - An Introduction to R
 previous: introduction-probability-statistics.html
 next: data-description.html
 description: This is a basic introduction to the R statistical environment.
 keywords: introduction R statistics
 ---
-
 
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -186,17 +200,53 @@ keywords: introduction R statistics
 </div>
 </div>
 
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">An Introduction to \(\mathsf{R}\)</h2>
-<div class="outline-text-2" id="text-1">
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#cha-introduction-to-R">1 An Introduction to \(\mathsf{R}\)</a>
+<ul>
+<li><a href="#sec-download-install-R">1.1 Downloading and Installing \(\mathsf{R}\)</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 Installing \(\mathsf{R}\)</a></li>
+<li><a href="#sub-installing-loading-packages">1.1.2 Installing and Loading Add-on Packages</a></li>
+</ul>
+</li>
+<li><a href="#sec-Communicating-with-R">1.2 Communicating with \(\mathsf{R}\)</a></li>
+<li><a href="#sec-Basic-R-Operations">1.3 Basic \(\mathsf{R}\) Operations and Concepts</a>
+<ul>
+<li><a href="#sub-Arithmetic">1.3.1 Arithmetic</a></li>
+<li><a href="#sub-Assignment-Object-names">1.3.2 Assignment, Object names, and Data types</a></li>
+<li><a href="#sub-Vectors">1.3.3 Vectors</a></li>
+<li><a href="#sub-Functions-and-Expressions">1.3.4 Functions and Expressions</a></li>
+</ul>
+</li>
+<li><a href="#sec-Getting-Help">1.4 Getting Help</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1 \(\mathsf{R}\) Help Mailing Lists</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5 External Resources</a></li>
+<li><a href="#sec-1-6">1.6 Other Tips</a></li>
+<li><a href="#sec-1-7">1.7 Exercises</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-cha-introduction-to-R" class="outline-2">
+<h2 id="cha-introduction-to-R"><a name="sec-1" id="sec-1"></a><span class="section-number-2">1</span> An Introduction to \(\mathsf{R}\)</h2>
+<div class="outline-text-2" id="text-cha-introduction-to-R">
 
 
 
 </div>
 
-<div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1">Downloading and Installing \(\mathsf{R}\)</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-sec-download-install-R" class="outline-3">
+<h3 id="sec-download-install-R"><a name="sec-1-1" id="sec-1-1"></a><span class="section-number-3">1.1</span> Downloading and Installing \(\mathsf{R}\)</h3>
+<div class="outline-text-3" id="text-sec-download-install-R">
 
 
 <p>
@@ -206,7 +256,7 @@ The instructions for obtaining \(\mathsf{R}\) largely depend on the user's hardw
 </div>
 
 <div id="outline-container-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1">Installing \(\mathsf{R}\)</h4>
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Installing \(\mathsf{R}\)</h4>
 <div class="outline-text-4" id="text-1-1-1">
 
 
@@ -227,6 +277,8 @@ for your operating system:
 <p>
 On Microsoft Windows, click the <code>R-x.y.z.exe</code> installer to start installation. When it asks for "Customized startup options", specify <code>Yes</code>. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the <code>rgl</code> package \cite{rgl}.
 </p>
+<ul>
+<li id="sec-1-1-1-1">Installing \(\mathsf{R}\) on a USB drive (Windows)<br/>
 
 <p>
 With this option you can use \(\mathsf{R}\) portably and without administrative privileges. There is an entry in the \(\mathsf{R}\) for Windows FAQ about this. Here is the procedure I use:  
@@ -245,13 +297,15 @@ With this option you can use \(\mathsf{R}\) portably and without administrative 
 <p>
 Steps 3 and 4 are not required but save you the trouble of navigating to the <code>R-x.y.z/bin</code> directory to double-click <code>Rgui.exe</code> every time you want to run the program. It is useless to create your own shortcut to <code>Rgui.exe</code>. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some <i>other</i> machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
 </p>
+</li>
+</ul>
 </div>
 
 </div>
 
-<div id="outline-container-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2">Installing and Loading Add-on Packages</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-sub-installing-loading-packages" class="outline-4">
+<h4 id="sub-installing-loading-packages"><a name="sec-1-1-2" id="sec-1-1-2"></a><span class="section-number-4">1.1.2</span> Installing and Loading Add-on Packages</h4>
+<div class="outline-text-4" id="text-sub-installing-loading-packages">
 
 
 <p>
@@ -294,11 +348,13 @@ For complete, precise information regarding installation of \(\mathsf{R}\) and a
 
 </div>
 
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2">Communicating with \(\mathsf{R}\)</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-Communicating-with-R" class="outline-3">
+<h3 id="sec-Communicating-with-R"><a name="sec-1-2" id="sec-1-2"></a><span class="section-number-3">1.2</span> Communicating with \(\mathsf{R}\)</h3>
+<div class="outline-text-3" id="text-sec-Communicating-with-R">
 
 
+<ul>
+<li id="sec-1-2-1">One line at a time<br/>
 
 <p>
 This is the most basic method and is the first one that beginners will use.
@@ -314,6 +370,10 @@ This is the most basic method and is the first one that beginners will use.
 </ul>
 
 
+</li>
+</ul>
+<ul>
+<li id="sec-1-2-2">Multiple lines at a time<br/>
 
 <p>
 For longer programs (called <i>scripts</i>) there is too much code to write all at once at the command prompt. Furthermore, for longer scripts it is convenient to be able to only modify a certain piece of the script and run it again in \(\mathsf{R}\). Programs called <i>script editors</i> are specially designed to aid the communication and code writing process. They have all sorts of helpful features including \(\mathsf{R}\) syntax highlighting, automatic code completion, delimiter matching, and dynamic help on the \(\mathsf{R}\) functions as they are being written. Even more, they often have all of the text editing features of programs like Microsoft\(\circledR\)Word. Lastly, most script editors are fully customizable in the sense that the user can customize the appearance of the interface to choose what colors to display, when to display them, and how to display them.
@@ -335,6 +395,10 @@ For longer programs (called <i>scripts</i>) there is too much code to write all 
 </dl>
 
 
+</li>
+</ul>
+<ul>
+<li id="sec-1-2-3">Graphical User Interfaces (GUIs)<br/>
 
 <p>
 By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at <a href="http://www.sciviews.org/_rgui/">http://www.sciviews.org/_rgui/</a>. On the left side of the screen (under <b>Projects</b>) there are several choices available. 
@@ -351,13 +415,15 @@ By the word ``GUI'' I mean an interface in which the user communicates with \(\m
 </dl>
 
 
+</li>
+</ul>
 </div>
 
 </div>
 
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3">Basic \(\mathsf{R}\) Operations and Concepts</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-Basic-R-Operations" class="outline-3">
+<h3 id="sec-Basic-R-Operations"><a name="sec-1-3" id="sec-1-3"></a><span class="section-number-3">1.3</span> Basic \(\mathsf{R}\) Operations and Concepts</h3>
+<div class="outline-text-3" id="text-sec-Basic-R-Operations">
 
 
 <p>
@@ -369,9 +435,9 @@ Below are some of the most basic operations that can be done with \(\mathsf{R}\)
 
 </div>
 
-<div id="outline-container-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1">Arithmetic</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-sub-Arithmetic" class="outline-4">
+<h4 id="sub-Arithmetic"><a name="sec-1-3-1" id="sec-1-3-1"></a><span class="section-number-4">1.3.1</span> Arithmetic</h4>
+<div class="outline-text-4" id="text-sub-Arithmetic">
 
 
 
@@ -420,9 +486,9 @@ Note that it is possible to set <code>digits</code>\index{digits@\texttt{digits}
 
 </div>
 
-<div id="outline-container-1-3-2" class="outline-4">
-<h4 id="sec-1-3-2">Assignment, Object names, and Data types</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-sub-Assignment-Object-names" class="outline-4">
+<h4 id="sub-Assignment-Object-names"><a name="sec-1-3-2" id="sec-1-3-2"></a><span class="section-number-4">1.3.2</span> Assignment, Object names, and Data types</h4>
+<div class="outline-text-4" id="text-sub-Assignment-Object-names">
 
 
 <p>
@@ -489,14 +555,16 @@ Note that you can just type <code>(1i)^2</code> to get the same answer. The <cod
 
 </div>
 
-<div id="outline-container-1-3-3" class="outline-4">
-<h4 id="sec-1-3-3">Vectors</h4>
-<div class="outline-text-4" id="text-1-3-3">
+<div id="outline-container-sub-Vectors" class="outline-4">
+<h4 id="sub-Vectors"><a name="sec-1-3-3" id="sec-1-3-3"></a><span class="section-number-4">1.3.3</span> Vectors</h4>
+<div class="outline-text-4" id="text-sub-Vectors">
 
 
 <p>
 All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
 </p>
+<ul>
+<li id="sec-1-3-3-1">Entering data vectors<br/>
 
 <p>
 <b>The long way:</b>\index{c@\texttt{c}} If you would like to enter the data <code>74,31,95,61,76,34,23,54,96</code> into \(\mathsf{R}\), you may create a data vector with the <code>c</code> function (which is short for <i>concatenate</i>).
@@ -556,6 +624,10 @@ Note that we can get the first line much quicker with the colon operator.
 The vector <code>LETTERS</code>\index{LETTERS@\texttt{LETTERS}} has the 26 letters of the English alphabet in uppercase and <code>letters</code>\index{letters@\texttt{letters}} has all of them in lowercase.
 </p>
 
+</li>
+</ul>
+<ul>
+<li id="sec-1-3-3-2">Indexing data vectors<br/>
 
 <p>
 Sometimes we do not want the whole vector, but just a piece of it. We can access the intermediate parts with the <code>[]</code>\index{[]@\texttt{{[}{]}}} operator. Observe (with <code>x</code> defined above)
@@ -595,13 +667,15 @@ letters[-(6:24)]
 </pre>
 
 
+</li>
+</ul>
 </div>
 
 </div>
 
-<div id="outline-container-1-3-4" class="outline-4">
-<h4 id="sec-1-3-4">Functions and Expressions</h4>
-<div class="outline-text-4" id="text-1-3-4">
+<div id="outline-container-sub-Functions-and-Expressions" class="outline-4">
+<h4 id="sub-Functions-and-Expressions"><a name="sec-1-3-4" id="sec-1-3-4"></a><span class="section-number-4">1.3.4</span> Functions and Expressions</h4>
+<div class="outline-text-4" id="text-sub-Functions-and-Expressions">
 
 
 <p>
@@ -747,9 +821,9 @@ Be warned that most of the <code>.Internal</code> functions are written in other
 
 </div>
 
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4">Getting Help</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-Getting-Help" class="outline-3">
+<h3 id="sec-Getting-Help"><a name="sec-1-4" id="sec-1-4"></a><span class="section-number-3">1.4</span> Getting Help</h3>
+<div class="outline-text-3" id="text-sec-Getting-Help">
 
 
 <p>
@@ -783,7 +857,7 @@ On the help pages for a function there are sometimes ``Examples'' listed at the 
 </div>
 
 <div id="outline-container-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1">\(\mathsf{R}\) Help Mailing Lists</h4>
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> \(\mathsf{R}\) Help Mailing Lists</h4>
 <div class="outline-text-4" id="text-1-4-1">
 
 
@@ -823,7 +897,7 @@ If your question is not a FAQ, has not been asked on \(\mathsf{R}\)-help before,
 </div>
 
 <div id="outline-container-1-5" class="outline-3">
-<h3 id="sec-1-5">External Resources</h3>
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> External Resources</h3>
 <div class="outline-text-3" id="text-1-5">
 
 
@@ -848,7 +922,7 @@ There is a mountain of information on the Internet about \(\mathsf{R}\). Below a
 </div>
 
 <div id="outline-container-1-6" class="outline-3">
-<h3 id="sec-1-6">Other Tips</h3>
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Other Tips</h3>
 <div class="outline-text-3" id="text-1-6">
 
 
@@ -874,7 +948,7 @@ It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers 
 </div>
 
 <div id="outline-container-1-7" class="outline-3">
-<h3 id="sec-1-7">Exercises</h3>
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Exercises</h3>
 <div class="outline-text-3" id="text-1-7">
 
 </div>
@@ -883,7 +957,7 @@ It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers 
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-09-21 18:27:45 EDT</p>
+<p class="date">Date: 2011-09-28 14:40:19 EDT</p>
 <p class="author">Author: G. Jay Kerns</p>
 <p class="creator">Org version 7.7 with Emacs version 23</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
