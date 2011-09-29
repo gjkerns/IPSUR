@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: 
+#+EXPORT_SELECT_TAGS: datadesc
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
@@ -481,7 +481,7 @@ These can be used for discrete or continuous data, and usually look best when th
 
 - stack :: plots repeated values stacked on top of one another. This method is best used for discrete data with a lot of ties; if there are no repeats then this method is identical to overplot.
 
-See Figure [[fig-stripcharts][Stripcharts]], which was produced by the following code.
+See Figure [[fig-stripcharts][stripcharts]], which was produced by the following code.
 
 #+begin_src R :exports code :eval never
 stripchart(precip, xlab="rainfall")
@@ -532,9 +532,9 @@ These are typically used for continuous data. A histogram is constructed by firs
 These are one of the most common summary displays, and they are often misidentified as ``Bar Graphs'' (see below.) The scale on the \(y\) axis can be frequency, percentage, or density (relative frequency). The term histogram was coined by Karl Pearson in 1891, see \cite{Miller}.
 
 #+latex: \begin{example}
-*Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-Various-stripchart-methods][Various stripchart methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
+*Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 
-There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure [[fig-histograms][Histograms]].
+There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure [[fig-histograms][histograms]].
 
 #+begin_src R :exports code :eval never
 hist(precip, main = "")
@@ -599,7 +599,7 @@ par(mfrow = c(1,1)) # back to normal
 Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
 
 #+latex: \begin{example}
-Recall that the strip chart in Figure [[fig-Various-stripchart-methods][Various stripchart methods]] suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure [[fig-histograms-bins][Histograms-bins]] which was produced by the following code.
+Recall that the strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure [[fig-histograms-bins][histograms-bins]] which was produced by the following code.
 
 
 #+begin_src R :exports code :eval never
@@ -640,7 +640,7 @@ par(mfrow = c(1,1)) # back to normal
 
 The leftmost graph (with =breaks = 10=) shows that the distribution is not balanced at all. There are two humps: a big one in the middle and a smaller one to the left. Graphs like this often indicate some underlying group structure to the data; we could now investigate whether the cities for which rainfall was measured were similar in some way, with respect to geographic region, for example.
 
-The rightmost graph in Figure [[fig-histograms-bins][Histograms-bins]] shows what happens when the number of bins is too large: the histogram is too grainy and hides the rounded appearance of the earlier histograms. If we were to continue increasing the number of bins we would eventually get all observed bins to have exactly one element, which is nothing more than a glorified strip chart.
+The rightmost graph in Figure [[fig-histograms-bins][histograms-bins]] shows what happens when the number of bins is too large: the histogram is too grainy and hides the rounded appearance of the earlier histograms. If we were to continue increasing the number of bins we would eventually get all observed bins to have exactly one element, which is nothing more than a glorified strip chart.
 
 #+latex: \end{example}
 
@@ -671,7 +671,7 @@ Done with the =plot=\index{plot@\texttt{plot}} function. These are good for plot
 
 
 #+latex: \begin{example}
-*Level of Lake Huron 1875-1972.* Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875--1972. The data are stored in the time series =LakeHuron=\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See =?LakeHuron=. Figure [[fig-indpl-lakehuron][Indl-Lakehuron]] was produced with the following code:
+*Level of Lake Huron 1875-1972.* Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875--1972. The data are stored in the time series =LakeHuron=\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See =?LakeHuron=. Figure [[fig-indpl-lakehuron][indpl-lakehuron]] was produced with the following code:
 
 #+begin_src R :exports code :eval never
 plot(LakeHuron, type = "h")
@@ -800,7 +800,7 @@ barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 #+end_src
 
-See Figure [[fig-bar-gr-stateregion][Bar-graph-StateRegion]]. The display on the left is a frequency bar graph because the \(y\) axis shows counts, while the display on the left is a relative frequency bar graph. The only difference between the two is the scale. Looking at the graph we see that the majority of the fifty states are in the South, followed by West, North Central, and finally Northeast. Over 30\% of the states are in the South.
+See Figure [[fig-bar-gr-stateregion][bar-gr-stateregion]]. The display on the left is a frequency bar graph because the \(y\) axis shows counts, while the display on the left is a relative frequency bar graph. The only difference between the two is the scale. Looking at the graph we see that the majority of the fifty states are in the South, followed by West, North Central, and finally Northeast. Over 30\% of the states are in the South.
 
 Notice the =cex.names=\index{cex.names@\texttt{cex.names}} argument that we used, above. It shrinks the names on the \(x\) axis by 50% which makes them easier to read. See =?par=\index{par@\texttt{par}} for a detailed list of additional plot parameters.
 
@@ -845,7 +845,7 @@ par(mfrow = c(1,1)) # back to normal
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease -- this is much more difficult when the bars are jumbled. 
 
 #+latex: \begin{example}
-*U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto Chart]]. The code follows.
+*U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto-chart]]. The code follows.
 
 #+srcname: Pareto-chart
 #+begin_src R :exports code :results silent
@@ -916,7 +916,7 @@ dotchart(as.vector(x), labels = names(x))
 </div>
 #+end_html
 
-See Figure [[fig-dot-charts][Dot Charts]]. Compare it to Figure [[fig-bar-gr-stateregion][Bar-Graph-StateRegion]].
+See Figure [[fig-dot-charts][dot-charts]]. Compare it to Figure [[fig-bar-gr-stateregion][bar-gr-stateregion]].
 
 #+latex: \end{example}
 
@@ -999,7 +999,7 @@ Given that the data have been appropriately displayed, the next step is to try t
 :CUSTOM_ID: sub-Center
 :END:
 
-One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure [[fig-histograms-bins][Histograms-Bins]], a measure of center would be about \( SRC_R{round(mean(precip))} \). 
+One of the most basic features of a data set is its center. Loosely speaking, the center of a data set is associated with a number that represents a middle or general tendency of the data. Of course, there are usually several values that would serve as a center, and our later tasks will be focused on choosing an appropriate one for the data at hand. Judging from the histogram that we saw in Figure [[fig-histograms-bins][histograms-bins]], a measure of center would be about \( SRC_R{round(mean(precip))} \). 
 
 *** Spread
 :PROPERTIES:
@@ -1020,7 +1020,7 @@ When we speak of the /shape/ of a data set, we are usually referring to the shap
 A distribution is said to be /right-skewed/ (or /positively skewed/) if the right tail seems to be stretched from the center. A /left-skewed/ (or /negatively skewed/) distribution is stretched to the left side. A symmetric distribution has a graph that is balanced about its center, in the sense that half of the graph may be reflected about a central line of symmetry to match the other
 half.
 
-We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][Strip Charts]] and the =precip= data in Figure [[fig-histograms-bins][Histograms-Bins]] appear right-skewed. The =UKDriverDeaths= data in Example [[exa-ukdriverdeaths-first][UK Driver Deaths]] is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stemplot).
+We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][stripcharts]] and the =precip= data in Figure [[fig-histograms-bins][histograms-bins]] appear right-skewed. The =UKDriverDeaths= data in Example [[exa-ukdriverdeaths-first][UK Driver Deaths]] is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stemplot).
 
 **** Kurtosis
 
@@ -1164,7 +1164,7 @@ Note that Chebychev's Rule does not say anything about when \(k=1\), because \(1
 Chebychev's Rule applies to any data distribution, /any/ list of numbers, no matter where it came from or what the histogram looks like. The price for such generality is that the bounds are not very tight; if we know more about how the data are shaped then we can say more about how much of the data can fall a given distance from the mean.
 
 #+begin_fact
-#+latex: \label{fac:Empirical-Rule}
+#+latex: \label{fac-Empirical-Rule}
 Empirical Rule: If data follow a bell-shaped curve, then approximately 68%, 95%, and 99.7% of the data are within 1, 2, and 3 standard deviations of the mean, respectively. 
 #+end_fact
 
@@ -1470,7 +1470,7 @@ Multivariate Data Display
 - Multi-Way Tables. You can do this with =table=,
 or in \(\mathsf{R}\) Commander by following =Statistics= \(\triangleright\) =Contingency Tables= \(\triangleright\) =Multi-way Tables=.
 - Scatterplot matrix. used for displaying pairwise scatterplots simultaneously. Again, look for linear association and correlation.
-- 3D Scatterplot. See Figure \pageref{fig-3D-scatterplot-trees}
+- 3D Scatterplot. See Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]]
 - =plot(state.region, state.division)= 
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
 
@@ -2638,7 +2638,7 @@ As a surprising consequence, consider this: how many people does it take to be i
 
 When I have asked this question to students, the usual response is ``somewhere around \(n=180\) people'' in the room. The reasoning seems to be that in order to get a 50% chance of a match, there should be 50% of the available days to be occupied. The number of students in a typical classroom is 25, so as a companion question I ask students to estimate the probability of a match when there are \(n=25\) students in the room. Common estimates are a 1%, or 0.5%, or even 0.1% chance of a match. After they have given their estimates, we go around the room and each student announces their birthday. More often than not, we observe a match in the class, to the students' disbelief.
 
-Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure [[fig-birthday][Birthday]] shows a graph of the birthday probabilities:
+Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure [[fig-birthday][birthday]] shows a graph of the birthday probabilities:
 #+latex: \end{example}
 
 #+srcname: birthday
@@ -2679,7 +2679,7 @@ remove(g)
 
 **** How to do it with \(\mathsf{R}\)
 
-We can make the plot in Figure [[fig-birthday][Birthday]] with the following sequence of commands.
+We can make the plot in Figure [[fig-birthday][birthday]] with the following sequence of commands.
 
 #+begin_src R :exports code :eval never
 g <- Vectorize(pbirthday.ipsur)
@@ -3633,7 +3633,7 @@ F_{X}(x)=\Pr(X\leq x)=
 1, & x\geq3.
 \end{cases}
 \]
-In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure [[fig-binom-cdf-base][Binom CDF Base]].
+In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure [[fig-binom-cdf-base][binom-cdf-base]].
 #+latex: \end{example}
 
 #+srcname: binom-cdf-base
@@ -3686,7 +3686,7 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 #+latex: \end{example}
 
-Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][Binom plot distr]] for an example.
+Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][binom-plot-distr]] for an example.
 
 #+srcname: binom-plot-distr
 #+begin_src R :exports code :results silent
@@ -3769,7 +3769,7 @@ in Exercise [[xca-variance-shortcut][Variance Shortcut]]. Intuitively, for repea
 Let us take the analogy further. If we expect \(g(X)\) to be close to \(\mathbb{E} g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\mathbb{E} g(X)\). The following theorem makes this idea precise.
 
 #+begin_prop
-#+latex: \label{pro:expectation-properties}
+#+latex: \label{pro-expectation-properties}
 For any functions \(g\) and \(h\), any random variable \(X\), and any constant \(c\): 
 1. \(\mathbb{E}\: c=c\),
 2. \(\mathbb{E}[c\cdot g(X)]=c\mathbb{E} g(X)\)
@@ -3827,7 +3827,7 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 We will discuss three applications of moment generating functions in this book. The first is the fact that an MGF may be used to accurately identify the probability distribution that generated it, which rests on the following:
 
 #+begin_thm
-#+latex: \label{thm:mgf-unique}
+#+latex: \label{thm-mgf-unique}
 The moment generating function, if it exists in a neighborhood of zero, determines a probability distribution /uniquely/. 
 #+end_thm
 
@@ -3998,7 +3998,7 @@ plot(ecdf(x))
 </div>
 #+end_html
 
-See Figure [[fig-empirical-CDF][Empirical CDF]]. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
+See Figure [[fig-empirical-CDF][empirical-CDF]]. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
 
 The empirical PDF is not usually of particular interest in itself, but if we really wanted we could define a function to serve as the empirical PDF:
 
@@ -4911,7 +4911,7 @@ Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad 0 < p <1.
 Here are some properties of quantile functions:
 1. The quantile function is defined and finite for all \(0<p<1\).
 1. \(Q_{X}\) is left-continuous (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
-1. In the continuous case the graph of \(Q_{X}\) may be obtained by reflecting the graph of \(F_{X}\) about the line \(y=x\). In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure [[fig-binom-plot-distr][Binom Plot distr]] for a comparison. 
+1. In the continuous case the graph of \(Q_{X}\) may be obtained by reflecting the graph of \(F_{X}\) about the line \(y=x\). In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure [[fig-binom-plot-distr][binom-plot-distr]] for a comparison. 
 1. The two limits
    \[
    \lim_{p\to0^{+}}Q_{X}(p)\quad\mbox{and}\quad\lim_{p\to1^{-}}Q_{X}(p)
@@ -4963,7 +4963,7 @@ The goal of this section is to determine the distribution of \(U=g(X)\) based on
 *** The PDF Method
 
 #+begin_prop
-#+latex: \label{pro:func-cont-rvs-pdf-formula}
+#+latex: \label{pro-func-cont-rvs-pdf-formula}
 
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
@@ -5005,7 +5005,7 @@ f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\qu
 We recognize the PDF of \(Y\) to be that of a \(\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)\) distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
 #+begin_fact
-#+latex: \label{fac:lin-trans-norm-is-norm}
+#+latex: \label{fac-lin-trans-norm-is-norm}
 If \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) and if \(Y=a+bX\) for constants \(a\) and \(b\), with \(b\neq0\), then \(Y\sim\mathsf{norm}(\mathtt{mean}=a+b\mu,\,\mathtt{sd}=|b|\sigma)\). 
 #+end_fact
 
@@ -5213,9 +5213,9 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\mathrm{e}^{-x/2},\quad x>0,
 \end{equation}
-is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \(\mathsf{R}\) functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure [[fig-chisq-dist-vary-df][Chisq-vary-df]]. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
+is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \(\mathsf{R}\) functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure [[fig-chisq-dist-vary-df][chisq-dist-vary-df]]. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
 
-The code to produce Figure [[fig-chisq-dist-vary-df][Chisq-vary-df]] is
+The code to produce Figure [[fig-chisq-dist-vary-df][chisq-dist-vary-df]] is
 
 #+srcname: chisq-dist-vary-df
 #+begin_src R :exports code :results silent
@@ -5940,7 +5940,7 @@ f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 
 #+begin_prop
-#+latex: \label{pro:indep-implies-prodexpect}
+#+latex: \label{pro-indep-implies-prodexpect}
 If \(X\) and \(Y\) are independent, then for any functions \(u\) and \(v\), 
 \begin{equation}
 \mathbb{E}\left(u(X)v(Y)\right)=\left(\mathbb{E} u(X)\right)\left(\mathbb{E} v(Y)\right).
@@ -5976,7 +5976,7 @@ Unfortunately, the converse of Corollary [[cor-indep-implies-uncorr]] is not tru
 Proposition [[pro-indep-implies-prodexpect]] is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
 
 #+begin_fact
-#+latex: \label{fac:indep-then-function-indep}
+#+latex: \label{fac-indep-then-function-indep}
 If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent for any functions \(u\) and \(v\).
 #+end_fact
 
@@ -5995,7 +5995,7 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 #+latex: \end{cor}
 
 #+begin_proof
-Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition [[pro:indep-implies-prodexpect]], and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
+Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition [[pro-indep-implies-prodexpect]], and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
 #+end_proof
 
 Let us take a look at some examples of the corollary in action.
@@ -6019,7 +6019,7 @@ which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\math
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 
 #+begin_prop
-#+latex: \label{pro:mean-sd-lin-comb-two}
+#+latex: \label{pro-mean-sd-lin-comb-two}
 Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
@@ -6134,7 +6134,7 @@ X\sim\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\mbox{ and }Y\
 From this we immediately get that \(\mathbb{E} X=\mu_{X}\) and \(\mbox{Var}(X)=\sigma_{X}^{2}\) (and the same is true for \(Y\) with the letters switched). And it should be no surprise that the correlation between \(X\) and \(Y\) is exactly \(\mbox{Corr}(X,Y)=\rho\).
 
 #+begin_prop
-#+latex: \label{pro:mvnorm-cond-dist}
+#+latex: \label{pro-mvnorm-cond-dist}
 The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y|x},\,\mathtt{sd}=\sigma_{Y|x})\), where
 \begin{equation}
 \mu_{Y|x}=\mu_{Y}+\rho\frac{\sigma_{Y}}{\sigma_{X}}\left(x-\mu_{X}\right),\mbox{ and }\sigma_{Y|x}=\sigma_{Y}\sqrt{1-\rho^{2}}.
@@ -6324,7 +6324,7 @@ f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
 #+begin_prop
-#+latex: \label{pro:mean-sd-lin-comb}
+#+latex: \label{pro-mean-sd-lin-comb}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
 \mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
@@ -6387,7 +6387,7 @@ M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf
 We will need the following in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]].
 
 #+begin_thm
-#+latex: \label{thm:mvnorm-dist-matrix-prod}
+#+latex: \label{thm-mvnorm-dist-matrix-prod}
 If \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) and \(\mathbf{A}\) is any matrix, then the random vector \(\mathbf{Y}=\mathbf{AX}\)
 is distributed
 \begin{equation}
@@ -6427,7 +6427,7 @@ is called a /multinomial coefficient/ which generalizes the notion of a binomial
 
 The form and notation we have just described matches the \(\mathsf{R}\) usage but is not standard among other texts. Most other books use the above for a \(k-1\) dimension multinomial distribution, because the linear constraint \(x_{1}+x_{2}+\cdots+x_{k}=n\) means that once the values of \(X_{1}\), \(X_{2}\), ..., \(X_{k-1}\) are known the final value \(X_{k}\) is determined, not random. Another term used for this is a /singular/ distribution. 
 
-For the most part we will ignore these difficulties, but the careful reader should keep them in mind. There is not much of a difference in practice, except that below we will use a two-dimensional support set for a three-dimension multinomial distribution. See Figure [[fig-multinom-pmf2][Multinomial PMF]].
+For the most part we will ignore these difficulties, but the careful reader should keep them in mind. There is not much of a difference in practice, except that below we will use a two-dimensional support set for a three-dimension multinomial distribution. See Figure [[fig-multinom-pmf2][multinom-pmf2]].
 
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
@@ -6568,7 +6568,7 @@ If \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent with \(X_{i}\sim f\) for
 #+end_defn
 
 #+begin_prop
-#+latex: \label{pro:mean-sd-xbar}
+#+latex: \label{pro-mean-sd-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the mean and standard deviation of \(\overline{X}\) are given by the formulas \(\mu_{\overline{X}}=\mu\) and \(\sigma_{\overline{X}}=\sigma/\sqrt{n}\).
 #+end_prop
 
@@ -6579,7 +6579,7 @@ Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition [[pro-mean-sd-lin-comb]]
 The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section [[sec-Central-Limit-Theorem][Central Limit Theorem]].
 
 #+begin_prop
-#+latex: \label{pro:mgf-xbar}
+#+latex: \label{pro-mgf-xbar}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with MGF \(M(t)\). Then the MGF of \(\overline{X}\) is given by
 \begin{equation}
 M_{\overline{X}}(t)=\left[M\left(\frac{t}{n}\right)\right]^{n}.
@@ -6593,7 +6593,7 @@ M_{\overline{X}}(t) & = & \mathbb{E}\,\mathrm{e}^{t\overline{X}},\\
  & = & \mathbb{E}\,\mathrm{e}^{t(X_{1}+\cdots+X_{n})/n},\\
  & = & \mathbb{E}\,\mathrm{e}^{tX_{1}/n}\mathrm{e}^{tX_{2}/n}\cdots\mathrm{e}^{tX_{n}/n}.
 \end{eqnarray*}
-And because \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent, Proposition \ref{pro:indep-implies-prodexpect} allows us to distribute the expectation among each term in the product, which is
+And because \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent, Proposition [[pro-indep-implies-prodexpect]] allows us to distribute the expectation among each term in the product, which is
 \[
 \mathbb{E}\mathrm{e}^{tX_{1}/n}\,\mathbb{E}\mathrm{e}^{tX_{2}/n}\cdots\mathbb{E}\mathrm{e}^{tX_{n}/n}.
 \]
@@ -6615,11 +6615,11 @@ Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(
 #+end_prop
 
 #+begin_proof
-The mean and standard deviation of \(\overline{X}\) follow directly from Proposition \ref{pro:mean-sd-xbar}. To address the shape, first remember from Section \ref{sec-The-Normal-Distribution} that the \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) MGF is of the form
+The mean and standard deviation of \(\overline{X}\) follow directly from Proposition [[pro-mean-sd-xbar]]. To address the shape, first remember from Section [[sec-The-Normal-Distribution][Normal Distribution]] that the \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) MGF is of the form
 \[
 M(t)=\exp\left[ \mu t+\sigma^{2}t^{2}/2\right] .
 \]
-Now use Proposition \ref{pro:mgf-xbar} to find
+Now use Proposition [[pro-mgf-xbar]] to find
 \begin{eqnarray*}
 M_{\overline{X}}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
  & = & \left[\exp\left( \mu(t/n)+\sigma^{2}(t/n)^{2}/2\right) \right]^{n},\\
@@ -6635,7 +6635,7 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 :END:
 
 #+begin_thm
-#+latex: \label{thm:Xbar-andS}
+#+latex: \label{thm-Xbar-andS}
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, and let
 \begin{equation}
 \overline{X}=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}.
@@ -6681,17 +6681,17 @@ T=\frac{Z}{\sqrt{V/r}},
 \end{equation}
 where \(r=n-1\).
 
-We know from Section \ref{sub-samp-mean-dist-of} that \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and we know from Section \ref{sub-Samp-Var-Dist} that \(V\sim\mathsf{chisq}(\mathtt{df}=n-1)\). Further, since we are sampling from a normal distribution, Theorem \ref{thm:Xbar-andS} gives that \(\overline{X}\) and \(S^{2}\) are independent and by Fact \ref{fac:indep-then-function-indep} so are \(Z\) and \(V\). In summary, the distribution of \(T\) is the same as the distribution of the quantity \(Z/\sqrt{V/r}\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and \(V\sim\mathsf{chisq}(\mathtt{df}=r)\) are independent. This is in fact the definition of Student's \(t\) distribution.
+We know from Section [[sub-samp-mean-dist-of][Distribution of Xbar]] that \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and we know from Section [[sub-Samp-Var-Dist][Sample Variance Distribution]] that \(V\sim\mathsf{chisq}(\mathtt{df}=n-1)\). Further, since we are sampling from a normal distribution, Theorem [[thm-Xbar-andS][Xbar and S]] gives that \(\overline{X}\) and \(S^{2}\) are independent and by Fact [[fac-indep-then-function-indep]] so are \(Z\) and \(V\). In summary, the distribution of \(T\) is the same as the distribution of the quantity \(Z/\sqrt{V/r}\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and \(V\sim\mathsf{chisq}(\mathtt{df}=r)\) are independent. This is in fact the definition of Student's \(t\) distribution.
 #+end_proof
 
-This distribution was first published by W. S. Gosset (1900) under the pseudonym Student, and the distribution has consequently come to be known as Student's \(t\) distribution. The PDF of \(T\) can be derived explicitly using the techniques of Section \ref{sec-Functions-of-Continuous}; it takes the form 
+This distribution was first published by W. S. Gosset (1900) under the pseudonym Student, and the distribution has consequently come to be known as Student's \(t\) distribution. The PDF of \(T\) can be derived explicitly using the techniques of Section [[sec-Functions-of-Continuous][Functions of Continuous Random Variables]]; it takes the form 
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty.
 \end{equation}
-Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure \ref{fig-Student's-t-dist-vary-df}. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
+Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]]. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
 
 
-The code to produce Figure \ref{fig-Student's-t-dist-vary-df} is
+The code to produce Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]] is
 
 #+srcname: Student's-t-dist-vary-df
 #+begin_src R :exports code :results silent
@@ -6745,7 +6745,7 @@ There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribut
 :CUSTOM_ID: sec-Central-Limit-Theorem
 :END:
 
-In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section \ref{sec-sampling-from-normal-dist} that when \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) is a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution then \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\). In other words, we may say (owing to Fact \ref{fac:lin-trans-norm-is-norm}) when the underlying population is normal that the sampling distribution of \(Z\) defined by
+In this section we study the distribution of the sample mean when the underlying distribution is /not/ normal. We saw in Section [[sec-sampling-from-normal-dist][Sampling from Normal]] that when \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) is a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution then \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma/\sqrt{n})\). In other words, we may say (owing to Fact [[fac-lin-trans-norm-is-norm]]) when the underlying population is normal that the sampling distribution of \(Z\) defined by
 \begin{equation}
 Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
 \end{equation}
@@ -6754,7 +6754,7 @@ is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\).
 However, there are many populations that are /not/ normal ... and the statistician often finds herself sampling from such populations. What can be said in this case? The surprising answer is contained in the following theorem.
 
 #+begin_thm
-#+latex: \label{thm:central-limit-thrm}
+#+latex: \label{thm-central-limit-thrm}
 *The Central Limit Theorem.* Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distribution with mean \(\mu\) and finite standard deviation \(\sigma\). Then the sampling distribution of 
 \begin{equation}
 Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}
@@ -6763,11 +6763,11 @@ approaches a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution as 
 #+end_thm
 
 #+begin_rem
-We suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) are IID, and we learned in Section \ref{sub-simple-random-samples} that \(\overline{X}\) has mean \(\mu\) and standard deviation \(\sigma/\sqrt{n}\), so we already knew that \(Z\) has mean zero and standard deviation one. The beauty of the CLT is that it addresses the /shape/ of \(Z\)'s distribution when the sample size is large.
+We suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) are IID, and we learned in Section [[sub-simple-random-samples][Simple Random Samples]] that \(\overline{X}\) has mean \(\mu\) and standard deviation \(\sigma/\sqrt{n}\), so we already knew that \(Z\) has mean zero and standard deviation one. The beauty of the CLT is that it addresses the /shape/ of \(Z\)'s distribution when the sample size is large.
 #+end_rem
 
 #+begin_rem
-Notice that the shape of the underlying population's distribution is not mentioned in Theorem \ref{thm:central-limit-thrm}; indeed, the result is true for any population that is well-behaved enough to have a finite standard deviation. In particular, if the population is normally distributed then we know from Section \ref{sub-samp-mean-dist-of} that the distribution of \(\overline{X}\) (and \(Z\) by extension) is /exactly/ normal, for /every/ \(n\).
+Notice that the shape of the underlying population's distribution is not mentioned in Theorem [[thm-central-limit-thrm][CLT]]; indeed, the result is true for any population that is well-behaved enough to have a finite standard deviation. In particular, if the population is normally distributed then we know from Section [[sub-samp-mean-dist-of][Distribution of Xbar]] that the distribution of \(\overline{X}\) (and \(Z\) by extension) is /exactly/ normal, for /every/ \(n\).
 #+end_rem
 
 #+begin_rem
@@ -6787,9 +6787,9 @@ library(distrTeach)
 example(illustrateCLT)
 #+end_src
 
-The =IPSUR=  package has the functions =clt1=, =clt2=, and =clt3= (see Exercise \ref{xca-clt123} at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
+The =IPSUR=  package has the functions =clt1=, =clt2=, and =clt3= (see Exercise [[xca-clt123][clt123]] at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
 
-For example, when the command =clt1()=  is issued a plot window opens to show a graph of the PDF of a \(\mathsf{t}(\mathtt{df}=3)\) distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size =sample.size = 2= from the population distribution =rt= a total of =N.iter = 100000= times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of \(\overline{X}\), see Section \ref{sec-Simulated-Sampling-Distributions}. Also shown are the sample mean and sample variance of all of the simulated  \( \overline{X} \) values. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated \( \overline{X} \) values is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
+For example, when the command =clt1()=  is issued a plot window opens to show a graph of the PDF of a \(\mathsf{t}(\mathtt{df}=3)\) distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size =sample.size = 2= from the population distribution =rt= a total of =N.iter = 100000= times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of \(\overline{X}\), see Section [[sec-Simulated-Sampling-Distributions][Simulated Sampling Distributions]]. Also shown are the sample mean and sample variance of all of the simulated  \( \overline{X} \) values. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated \( \overline{X} \) values is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
 
 The three separate =clt1=, =clt2=, and =clt3= functions were written so that students could compare what happens overall when the shape of the population distribution changes. It would be possible to combine all three into one big function, =clt= which covers all three cases (and more). 
 
@@ -6810,18 +6810,18 @@ has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution. 
 #+end_prop
 
 #+begin_proof
-We know that \(\overline{X}\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X}/\sqrt{n_{1}})\) and we also know that \(\overline{Y}\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}/\sqrt{n_{2}})\). And since the samples \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ..., \(Y_{n_{2}}\) are independent, so too are \(\overline{X}\) and \(\overline{Y}\). The distribution of their difference is thus normal as well, and the mean and standard deviation are given by Proposition \ref{pro:mean-sd-lin-comb-two}.
+We know that \(\overline{X}\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X}/\sqrt{n_{1}})\) and we also know that \(\overline{Y}\) is \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y}/\sqrt{n_{2}})\). And since the samples \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ..., \(Y_{n_{2}}\) are independent, so too are \(\overline{X}\) and \(\overline{Y}\). The distribution of their difference is thus normal as well, and the mean and standard deviation are given by Proposition [[pro-mean-sd-lin-comb-two]].
 #+end_proof
 
 #+begin_rem
-Even if the distribution of one or both of the samples is not normal, the quantity in Equation \ref{eq-diff-indep-sample-means} will be approximately normal provided both sample sizes are large.
+Even if the distribution of one or both of the samples is not normal, the quantity in Equation [[eq-diff-indep-sample-means]] will be approximately normal provided both sample sizes are large.
 #+end_rem
 
 #+begin_rem
 For the special case of \(\mu_{X}=\mu_{Y}\) we have shown that 
 \begin{equation} \frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}}}
 \end{equation}
-has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, or in other words, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})\) sampling distribution. This will be important when it comes time to do hypothesis tests; see Section \ref{sec-Conf-Interv-for-Diff-Means}.
+has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, or in other words, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})\) sampling distribution. This will be important when it comes time to do hypothesis tests; see Section [[sec-Conf-Interv-for-Diff-Means][Confidence Intervals for Difference of Means]].
 #+end_rem
 
 *** Difference of Independent Sample Proportions
@@ -6843,9 +6843,9 @@ provided both \(n_{1}\) and \(n_{2}\) are sufficiently large.
 #+end_prop
 
 #+begin_proof
-We know that \(\hat{p}_{1}\) is approximately normal for \(n_{1}\) sufficiently large by the CLT, and we know that \(\hat{p}_{2}\) is approximately normal for \(n_{2}\) sufficiently large, also by the CLT. Further, \(\hat{p}_{1}\) and \(\hat{p}_{2}\) are independent since they are derived from independent samples. And a difference of independent (approximately) normal distributions is (approximately) normal, by Exercise \ref{xca-diff-indep-norm}.
+We know that \(\hat{p}_{1}\) is approximately normal for \(n_{1}\) sufficiently large by the CLT, and we know that \(\hat{p}_{2}\) is approximately normal for \(n_{2}\) sufficiently large, also by the CLT. Further, \(\hat{p}_{1}\) and \(\hat{p}_{2}\) are independent since they are derived from independent samples. And a difference of independent (approximately) normal distributions is (approximately) normal, by Exercise [[xca-diff-indep-norm]].
 #+latex: \footnote{This does not explicitly follow because of our cavalier use of ``approximately'' in too many places. To be more thorough, however, would require more concepts than we can afford at the moment. The interested reader may consult a more advanced text, specifically the topic of weak convergence, that is, convergence in distribution.}
-The expressions for the mean and standard deviation follow immediately from Proposition \ref{pro:mean-sd-lin-comb-two} combined with the formulas for the \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) distribution from Chapter \ref{cha-Discrete-Distributions}.
+The expressions for the mean and standard deviation follow immediately from Proposition [[pro-mean-sd-lin-comb-two]] combined with the formulas for the \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) distribution from Chapter [[cha-Discrete-Distributions][Discrete Distributions]].
 #+end_proof
 
 *** Ratio of Independent Sample Variances
@@ -6859,7 +6859,7 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 #+end_prop
 
 #+begin_proof
-We know from Theorem \ref{thm:Xbar-andS} that \((n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{1}-1)\) and \((n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{2}-1)\). Now write
+We know from Theorem [[thm-Xbar-andS][Xbar and S]] that \((n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{1}-1)\) and \((n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{2}-1)\). Now write
 \[
 F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{Y}^{2}\right/ (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right/ (n_{2}-1)}\cdot\frac{\left.1\right/ \sigma_{X}^{2}}{\left.1\right/ \sigma_{Y}^{2}},
 \]
@@ -6875,7 +6875,7 @@ For the special case of \(\sigma_{X}=\sigma_{Y}\) we have shown that
 \begin{equation}
 F=\frac{S_{X}^{2}}{S_{Y}^{2}}
 \end{equation}
-has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling distribution. This will be important in Chapters \ref{cha-Estimation} onward.
+has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling distribution. This will be important in Chapters [[cha-Estimation][Estimation]] onward.
 #+end_rem
 
 ** Simulated Sampling Distributions
@@ -7023,7 +7023,7 @@ And that's all she wrote.
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
 
-We find an estimator with the methods of Section \ref{sec-Point-Estimation-1}. We make some assumptions about the underlying population distribution and use what we know from Chapter \ref{cha-Sampling-Distributions} about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
+We find an estimator with the methods of Section [[sec-Point-Estimation-1][Point Estimation 1]]. We make some assumptions about the underlying population distribution and use what we know from Chapter [[cha-Sampling-Distributions][Sampling Distributions]] about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
 ** What do I want them to know?
 - how to look at a problem, identify a reasonable model, and estimate a parameter associated with the model
@@ -7053,7 +7053,7 @@ and suppose for the sake of argument that we catch \(K=4\) fish and we find that
 
 Now let \(F\) denote the (unknown) total number of fish in the pond. We know that \(F\geq7\), because we tagged that many on the first trip. In fact, if we let \(N\) denote the number of untagged fish in the pond, then \(F=M+N\). We have sampled \(K=4\) times, without replacement, from an urn which has \(M=7\) white balls and \(N=F-M\) black balls, and we have observed \(x=3\) of them to be white. What is the probability of this?
 
-Looking back to Section \ref{sec-other-discrete-distributions}, we see that the random variable \(X\) has a \(\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)\) distribution. Therefore, for an observed value \(X=x\) the probability would be
+Looking back to Section [[sec-other-discrete-distributions][Other Discrete Distributions]], we see that the random variable \(X\) has a \(\mathsf{hyper}(\mathtt{m}=M,\,\mathtt{n}=F-M,\,\mathtt{k}=K)\) distribution. Therefore, for an observed value \(X=x\) the probability would be
 \[
 \Pr(X=x)=\frac{{M \choose x}{F-M \choose K-x}}{{F \choose K}}.
 \]
@@ -7066,7 +7066,7 @@ Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish woul
 \[
 \Pr(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
 \]
-We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\Pr(X=x)\) versus \(F\). See Figure \ref{fig-capture-recapture}.
+We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\Pr(X=x)\) versus \(F\). See Figure [[fig-capture-recapture][capture-recapture]].
 #+latex: \end{example}
 
 #+srcname: capture-recapture
@@ -7132,7 +7132,7 @@ This last quantity is a function of \(p\), called the /likelihood function/ \(L(
 \[
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
-A graph of \(L\) for values of \(\sum x_{i}=3,\ 4\), and 5 when \(n=7\) is shown in Figure \ref{fig-fishing-part-two}. 
+A graph of \(L\) for values of \(\sum x_{i}=3,\ 4\), and 5 when \(n=7\) is shown in Figure [[fig-fishing-part-two][fishing-part-two]]. 
 
 #+srcname: fishing-part-two
 #+begin_src R :exports code :results silent
@@ -7164,7 +7164,7 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 </div>
 #+end_html
 
-We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix \ref{sec-Differential-and-Integral}) to differentiate \(L\) and set \(L'=0\) to find a maximum.
+We want the value of \(p\) which has the highest likelihood, that is, we again wish to maximize the likelihood. We know from calculus (see Appendix [[sec-Differential-and-Integral][Differential and Integral Calculus]]) to differentiate \(L\) and set \(L'=0\) to find a maximum.
 \[
 L'(p)=\left(\sum x_{i}\right)p^{\sum x_{i}-1}(1-p)^{n-\sum x_{i}}+p^{\sum x_{i}}\left(n-\sum x_{i}\right)(1-p)^{n-\sum x_{i}-1}(-1).
 \]
@@ -7183,10 +7183,10 @@ This ``best'' \(p\), the one which maximizes the likelihood, is called the maxim
 #+begin_rem
 Strictly speaking we have only shown that the derivative equals zero at \(\hat{p}\), so it is theoretically possible that the critical value \(\hat{p}=\overline{x}\) is located at a minimum
 #+latex: \footnote{We can tell from the graph that our value of \(\hat{p}\) is a maximum instead of a minimum so we do not really need to worry for this example. Other examples are not so easy, however, and we should be careful to be cognizant of this extra step.}
-instead of a maximum! We should be thorough and check that \(L'>0\) when \(p<\overline{x}\) and \(L'<0\) when \(p>\overline{x}\). Then by the First Derivative Test (Theorem \ref{thm:First-Derivative-Test}) we could be certain that \(\hat{p}=\overline{x}\) is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
+instead of a maximum! We should be thorough and check that \(L'>0\) when \(p<\overline{x}\) and \(L'<0\) when \(p>\overline{x}\). Then by the First Derivative Test (Theorem [[thm-First-Derivative-Test][FDT]]) we could be certain that \(\hat{p}=\overline{x}\) is indeed a maximum likelihood estimator, and not a minimum likelihood estimator.
 #+end_rem
 
-The result is shown in Figure \ref{fig-species-mle}.
+The result is shown in Figure [[fig-species-mle][species-mle]].
 #+latex: \end{example}
 
 #+srcname: species-mle
@@ -7255,7 +7255,7 @@ Some comments about maximum likelihood estimators:
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
 #+end_rem
 
-Notice, in Example \ref{exa-bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
+Notice, in Example [[exa-bass-bluegill]] we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
 \mathbb{E}\overline{X} & = & \mathbb{E}\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
  & = & \frac{1}{n}\left(\mathbb{E} X_{1}+\mathbb{E} X_{2}+\cdots+\mathbb{E} X_{n}\right),\\
@@ -7275,7 +7275,7 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased es
 #+latex: \begin{example}
 #+latex: \label{exa-normal-MLE-both}
 
-Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca-norm-mu-sig-MLE}) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
+Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise [[xca-norm-mu-sig-MLE]]) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
 \end{equation}
@@ -7283,7 +7283,7 @@ where \(\hat{\mu}=\overline{X}\) and
 \begin{equation}
 \hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}\right)^{2}=\frac{n-1}{n}S^{2}.
 \end{equation}
-We of course know from \ref{pro:mean-sd-xbar} that \(\hat{\mu}\) is unbiased. What about \(\hat{\sigma^{2}}\)? Let us check: 
+We of course know from [[pro-mean-sd-xbar]] that \(\hat{\mu}\) is unbiased. What about \(\hat{\sigma^{2}}\)? Let us check: 
 \begin{eqnarray*}
 \mathbb{E}\,\hat{\sigma^{2}} & = & \mathbb{E}\,\frac{n-1}{n}S^{2}\\
  & = & \mathbb{E}\left(\frac{\sigma^{2}}{n}\frac{(n-1)S^{2}}{\sigma^{2}}\right)\\
@@ -7304,7 +7304,7 @@ One of the most common questions in an introductory statistics class is, ``Why d
 
 For one parameter estimation problems we may use the =optimize= function to find MLEs. The arguments are the function to be maximized (the likelihood function), the range over which the optimization is to take place, and optionally any other arguments to be passed to the likelihood if needed.
 
-Let us see how to do Example \ref{exa-bass-bluegill}. Recall that our likelihood function was given by
+Let us see how to do Example [[exa-bass-bluegill]]. Recall that our likelihood function was given by
 \begin{equation}
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{equation}
@@ -7342,7 +7342,7 @@ For multiparameter problems we may use a similar approach by way of the =mle= fu
 
 #+latex: \begin{example}
 
-*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in Example \ref{exa-normal-MLE-both} that \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
+*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in Example [[exa-normal-MLE-both]] that \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
 
 #+begin_src R :exports code :results silent
 minuslogL <- function(mu, sigma2){
@@ -7359,7 +7359,7 @@ MaxLikeEst <- mle(minuslogL, start = list(mu = 5, sigma2 = 0.5))
 summary(MaxLikeEst)
 #+end_src
 
-The outputted MLEs are shown above, and =mle= even gives us estimates for the standard errors of \(\hat{\mu}\) and \(\hat{\sigma}^{2}\) (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix \ref{sec-Multivariable-Calculus}). Let us check how close the numerical MLEs came to the theoretical MLEs:
+The outputted MLEs are shown above, and =mle= even gives us estimates for the standard errors of \(\hat{\mu}\) and \(\hat{\sigma}^{2}\) (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix [[sec-Multivariable-Calculus][Multivariable Calculus]]). Let us check how close the numerical MLEs came to the theoretical MLEs:
 
 #+begin_src R :exports both :results output pp 
 mean(x); var(x)*29/30; sd(x)/sqrt(30)
@@ -7423,7 +7423,7 @@ Then I ask them: suppose we were to repeat this procedure hundreds, thousands, m
 
 In the demonstration, the parameter corresponds to the chalk, the sheet of paper corresponds to the confidence interval, and the random experiment corresponds to dropping the sheet of paper. The percentage of the time that we are successful /exactly/ corresponds to the /confidence coefficient/. That is, if we use a 95% confidence interval, then we can say that, in the long run, approximately 95% of our intervals will cover the true parameter (which is fixed, but unknown). 
 
-See Figure \ref{fig-ci-examp}, which is a graphical display of these ideas.
+See Figure [[fig-ci-examp][ci-examp]], which is a graphical display of these ideas.
 
 #+srcname: ci-examp
 #+begin_src R :exports code :results silent
@@ -7529,7 +7529,7 @@ where \(S\) is the sample standard deviation.
      \begin{equation}
      \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}.\label{eq-one-samp-t-int}
      \end{equation}
-   - if the underlying population is not normal, but approximately normal, then we may use the \(t\) interval, Equation \ref{eq-one-samp-t-int}. The interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
+   - if the underlying population is not normal, but approximately normal, then we may use the \(t\) interval, Equation [[eq-one-samp-t-int]]. The interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
 #+end_rem
 
 The author learned of a handy acronym from AP Statistics Exam graders that summarizes the important parts of confidence interval estimation, which is PANIC: \emph{P}arameter, \emph{A}ssumptions, \emph{N}ame, \emph{I}nterval, and \emph{C}onclusion.
@@ -7556,7 +7556,7 @@ Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) 
 #+latex: \end{example}
 
 *** How to do it with \(\mathsf{R}\)
-We can do Example \ref{exa-plant-one-samp-z-int} with the following code.
+We can do Example [[exa-plant-one-samp-z-int]] with the following code.
 #+begin_src R :exports none :results silent
 library(TeachingDemos)
 #+end_src
@@ -7567,7 +7567,7 @@ temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
 temp
 #+end_src
 
-The confidence interval bounds are shown in the sixth line down of the output (please disregard all of the additional output information for now -- we will use it in Chapter \ref{cha-Hypothesis-Testing}). We can make the plot for Figure \ref{fig-plant-z-int-plot} with
+The confidence interval bounds are shown in the sixth line down of the output (please disregard all of the additional output information for now -- we will use it in Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]]). We can make the plot for Figure [[fig-plant-z-int-plot][plant-z-int-plot]] with
 
 #+begin_src R :exports code :eval never
 library(IPSUR)
@@ -7590,7 +7590,7 @@ Therefore, a \( 100(1-\alpha)\% \) confidence interval for \(\mu_{X}-\mu_{Y}\) i
 \left(\overline{X}-\overline{Y}\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.\label{eq-two-samp-mean-CI}
 \end{equation}
 Unfortunately, most of the time the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are unknown. This leads us to the following:
-- If both sample sizes are large, then we may appeal to the CLT/SLLN (see \ref{sec-Central-Limit-Theorem}) and substitute \(S_{X}^{2}\) and \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the interval \ref{eq-two-samp-mean-CI}. The resulting confidence interval will have approximately \(100(1-\alpha)\%\) confidence.
+- If both sample sizes are large, then we may appeal to the CLT/SLLN (see Section [[sec-Central-Limit-Theorem][Central Limit Theorem]]) and substitute \(S_{X}^{2}\) and \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the interval [[eq-two-samp-mean-CI]]. The resulting confidence interval will have approximately \(100(1-\alpha)\%\) confidence.
 - If one or more of the sample sizes is small then we are in trouble, unless
     -the underlying populations are both normal and \(\sigma_{X}=\sigma_{Y}\). In this case (setting \(\sigma=\sigma_{X}=\sigma_{Y}\)), 
     \begin{equation}
@@ -7600,7 +7600,7 @@ Now let
 \begin{equation}
 U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
 \end{equation}
-Then by Exercise \ref{xca-sum-indep-chisq} we know that \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and it is not a large leap to believe that \(U\) is independent of \(\overline{X}-\overline{Y}\); thus
+Then by Exercise [[xca-sum-indep-chisq]] we know that \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and it is not a large leap to believe that \(U\) is independent of \(\overline{X}-\overline{Y}\); thus
 \begin{equation}
 T = \frac{Z}{\sqrt{\left.U\right/ (n+m-2)}}\sim\mathsf{t}(\mathtt{df}=n+m-2).
 \end{equation}
@@ -7631,8 +7631,7 @@ where we understand that \(r\) is rounded down to the nearest integer. The resul
 
 *** How to do it with \(\mathsf{R}\)
 
-The basic function is =t.test= which has a =var.equal= argument that may be set to =TRUE= or =FALSE=. The confidence interval is shown as part of the output, although there is a lot of additional information that is not needed until Chapter
-\ref{cha-Hypothesis-Testing}.
+The basic function is =t.test= which has a =var.equal= argument that may be set to =TRUE= or =FALSE=. The confidence interval is shown as part of the output, although there is a lot of additional information that is not needed until Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]].
 
 There is not any specific functionality to handle the \(z\)-interval for small samples, but if the samples are large then =t.test= with =var.equal = FALSE= will be essentially the same thing. The standard deviations are never (?) known in advance anyway so it does not really matter in practice. 
 
@@ -7646,7 +7645,7 @@ We would like to know \(p\) which is the ``proportion of successes''. For instan
 - the proportion of smokers among adults age 18 or over,
 - the proportion of people worldwide infected by the H1N1 virus.
 
-We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) distributed \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\). Recall from Section \ref{sec-binom-dist} that the common mean of these variables is \(\mathbb{E} X=p\) and the variance is \(\mathbb{E}(X-p)^{2}=p(1-p)\). If we let \(Y=\sum X_{i}\), then from Section \ref{sec-binom-dist} we know that \(Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) and that 
+We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) distributed \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\). Recall from Section [[sec-binom-dist][Binomial Distribution]] that the common mean of these variables is \(\mathbb{E} X=p\) and the variance is \(\mathbb{E}(X-p)^{2}=p(1-p)\). If we let \(Y=\sum X_{i}\), then from Section [[sec-binom-dist][Binomial Distribution]] we know that \(Y\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) and that 
 \[
 \overline{X}=\frac{Y}{n}\mbox{ has }\mathbb{E}\overline{X}=p\mbox{ and }\mathrm{Var}(\overline{X})=\frac{p(1-p)}{n}.
 \]
@@ -7654,7 +7653,7 @@ Thus if \(n\) is large (here is the CLT) then an approximate \(100(1-\alpha)\%\)
 \begin{equation}
 \overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.\label{eq-ci-p-no-good}
 \end{equation}
-OOPS...! Equation \ref{eq-ci-p-no-good} is of no use to us because the \underbar{unknown} parameter \(p\) is in the formula! (If we knew what \(p\) was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
+OOPS...! Equation [[eq-ci-p-no-good]] is of no use to us because the \underbar{unknown} parameter \(p\) is in the formula! (If we knew what \(p\) was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
 1. Replace \(p\) with \(\hat{p}=\overline{X}\). Then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) is given by 
    \begin{equation}
    \hat{p}\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
@@ -7668,11 +7667,11 @@ OOPS...! Equation \ref{eq-ci-p-no-good} is of no use to us because the \underbar
    \[
    f(p)=\left(Y/n-p\right)^{2}-z_{\alpha/2}^{2}\frac{p(1-p)}{n}
    \]
-   satisfies \(f(p)\leq0\). But \(f\) is quadratic in \(p\) so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise \ref{xca-CI-quad-form}):
+   satisfies \(f(p)\leq0\). But \(f\) is quadratic in \(p\) so its graph is a parabola; it has two roots, and these roots form the limits of the confidence interval. We can find them with the quadratic formula (see Exercise [[xca-CI-quad-form]]):
    \begin{equation}
    \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right/ \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
    \end{equation}
-   This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter \ref{cha-Categorical-Data-Analysis}. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
+   This approach is called the /score interval/ because it is based on the inversion of the ``Score test''. See Chapter [[cha-Categorical-Data-Analysis][Categorical Data Analysis]]. It is also known as the /Wilson interval/; see Agresti \cite{Agresti2002}.
 
 
 For two proportions \(p_{1}\) and \(p_{2}\), we may collect independent \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) samples of size \(n_{1}\) and \(n_{2}\), respectively. Let \(Y_{1}\) and \(Y_{2}\) denote the number of successes in the respective samples. 
@@ -7755,7 +7754,7 @@ I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
 :CUSTOM_ID: sec-Sample-Size-and-MOE
 :END:
 
-Sections \ref{sec-Confidence-Intervals-for-Means} through \ref{sec-Confidence-Intervals-for-Variances} all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
+Sections [[sec-Confidence-Intervals-for-Means][Confidence Intervals for Means]] through [[sec-Confidence-Intervals-for-Variances][Confidence Intervals for Variances]] all began the same way: we were given the sample size \(n\) and the confidence coefficient \(1-\alpha\), and our task was to find a margin of error \(E\) so that 
 \[
 \hat{\theta}\pm E\mbox{ is a }100(1-\alpha)\%\mbox{ confidence interval for }\theta.
 \]
@@ -7785,7 +7784,7 @@ Reasoning as above we would want
 E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.\label{eq-samp-size-prop-ME}
 \end{align}
-OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both sides of Equation \ref{eq-samp-size-prop-ME}. Again, there are two solutions to the problem.
+OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both sides of Equation [[eq-samp-size-prop-ME]]. Again, there are two solutions to the problem.
 
 1. If we have a good idea of what \(p\) is, say \(p^{\ast}\) then we can plug it in to get
    \begin{equation}
@@ -7927,7 +7926,7 @@ If the confidence interval is
 
 *** Terminology
 
-The /null hypothesis/ \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, /etc/. In Example \ref{exa-widget-machine} the null hypothesis would be \(H_{0}:\, p=0.10.\) The /alternative hypothesis/ \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically /test/ the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
+The /null hypothesis/ \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, /etc/. In Example [[exa-widget-machine]] the null hypothesis would be \(H_{0}:\, p=0.10.\) The /alternative hypothesis/ \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically /test/ the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
 1. Go out and collect some data, in particular, a simple random sample of observations from the machine.
 2. Suppose that \(H_{0}\) is true and construct a \(100(1-\alpha)\%\) confidence interval for \(p\).
 3. If the confidence interval does not cover \(p=0.10\), then we /reject/ \(H_{0}\). Otherwise, we /fail to reject/ \(H_{0}\).
@@ -7945,7 +7944,7 @@ and we design our statistical procedures to control the probability of making su
 \mbox{significance level of the test}=\Pr(\mbox{Type I Error})=\alpha.
 \end{equation}
 We want \(\alpha\) to be small which conventionally means, say, \(\alpha=0.05\), \(\alpha=0.01\), or \(\alpha=0.005\) (but could mean anything, in principle).
-- The /rejection region/ (also known as the /critical region/) for the test is the set of sample values which would result in the rejection of \(H_{0}\). For Example \ref{exa-widget-machine}, the rejection region would be all possible samples that result in a 95% confidence interval that does not cover \(p=0.10\).
+- The /rejection region/ (also known as the /critical region/) for the test is the set of sample values which would result in the rejection of \(H_{0}\). For Example [[exa-widget-machine]], the rejection region would be all possible samples that result in a 95% confidence interval that does not cover \(p=0.10\).
 - The above example with \(H_{1}:p\neq0.10\) is called a /two-sided/ test. Many times we are interested in a /one-sided/ test, which would look like \(H_{1}:p<0.10\) or \(H_{1}:p>0.10\).
 
 We are ready for tests of hypotheses for one proportion.
@@ -7995,7 +7994,7 @@ Our test statistic is not less than \(-2.32\), so it does not fall into the crit
 
 #+latex: \begin{example}
 #+latex: \label{exa-prop-test-pvalue-B}
-We are going to do Example \ref{exa-prop-test-pvalue-A} all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
+We are going to do Example [[exa-prop-test-pvalue-A]] all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
 
 Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately \(-1.68\). But notice that our critical value has changed: \(\alpha=0.05\) and \(-z_{0.05}\) is 
 #+latex: \end{example}
@@ -8017,7 +8016,7 @@ The /p-value/, or /observed significance level/, of a hypothesis test is the pro
 #+end_defn
 
 #+latex: \begin{example}
-Calculate the \(p\)-value for the test in Examples \ref{exa-prop-test-pvalue-A} and \ref{exa-prop-test-pvalue-B}.
+Calculate the \(p\)-value for the test in Examples [[exa-prop-test-pvalue-A]] and [[exa-prop-test-pvalue-B]].
 
 The \(p\)-value for this test is the probability of obtaining a \(z\)-score equal to our observed test statistic (which had \(z\)-score \(\approx-1.680919\)) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval \((-\infty,\,-1.680919]\). We can get this easily with
 #+latex: \end{example}
@@ -8026,7 +8025,7 @@ The \(p\)-value for this test is the probability of obtaining a \(z\)-score equa
 pnorm(-1.680919)
 #+end_src
 
-We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example \ref{exa-prop-test-pvalue-A}) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example \ref{exa-prop-test-pvalue-B}). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at /any/ given significance level.
+We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example [[exa-prop-test-pvalue-A]]) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example [[exa-prop-test-pvalue-B]]). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at /any/ given significance level.
 
 Thus, another way to phrase our significance test procedure is: we will reject \(H_{0}\) at the \(\alpha\)-level of significance if the \(p\)-value is less than \(\alpha\).
 
@@ -8187,10 +8186,10 @@ It is usually important to construct side-by-side boxplots and other visual disp
 #+begin_rem
 WATCH YOUR ASSUMPTIONS.
 - The normality assumption can be relaxed as long as the population distributions are not highly skewed.
-- The equal variance assumption can be relaxed as long as both sample sizes \(n\) and \(m\) are large. However, if one (or both) samples is small, then the test does not perform well; we should instead use the methods of Chapter \ref{cha-resampling-methods}.
+- The equal variance assumption can be relaxed as long as both sample sizes \(n\) and \(m\) are large. However, if one (or both) samples is small, then the test does not perform well; we should instead use the methods of Chapter [[cha-resampling-methods][Resampling Methods]].
 #+end_rem
 
-For a nonparametric alternative to the two-sample \(F\) test see Chapter \ref{cha-Nonparametric-Statistics}.
+For a nonparametric alternative to the two-sample \(F\) test see Chapter [[cha-Nonparametric-Statistics][Nonparametric Statistics]].
 
 *** Paired Samples
 
@@ -8434,11 +8433,11 @@ We lastly assume that the errors are IID normal with mean 0 and variance \( \sig
 #+end_assumption
 
 #+begin_rem
-We assume both the normality of the errors \(\epsilon\) and the linearity of the mean function \( \mu \). Recall from Proposition \ref{pro:mvnorm-cond-dist} of Chapter \ref{cha-Multivariable-Distributions} that if \( (X,Y)\sim\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear function of \(x\). This is not a coincidence. In more advanced classes we study the case that both \(X\) and \(Y\) are random, and in particular, when they are jointly normally distributed.
+We assume both the normality of the errors \(\epsilon\) and the linearity of the mean function \( \mu \). Recall from Proposition [[pro-mvnorm-cond-dist]] of Chapter [[cha-Multivariable-Distributions][Multivariate Distributions]] that if \( (X,Y)\sim\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear function of \(x\). This is not a coincidence. In more advanced classes we study the case that both \(X\) and \(Y\) are random, and in particular, when they are jointly normally distributed.
 #+end_rem
 
 *** What does it all mean?
-See Figure \ref{fig-philosophy}. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and /y/-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases
+See Figure [[fig-philosophy][philosophy]]. Shown in the figure is a solid line, the regression line\index{regression line} \(\mu\), which in this display has slope 0.5 and /y/-intercept 2.5, that is, \( \mu(x) = 2.5 + 0.5x \). The intuition is that for each given value of \(x\), we observe a random value of \(Y\) which is normally distributed with a mean equal to the height of the regression line at that \(x\) value. Normal densities are superimposed on the plot to drive this point home; in principle, the densities stand outside of the page, perpendicular to the plane of the paper. The figure shows three such values of \(x\), namely, \( x = 1 \), \( x = 2.5 \), and \( x = 4 \). Not only do we assume that the observations at the three locations are independent, but we also assume that their distributions have the same spread. In mathematical terms this means that the normal densities all along the line have identical standard deviations -- there is no ``fanning out'' or ``scrunching in'' of the normal densities as \(x\) increases
 #+latex: \footnote{In practical terms, this constant variance assumption is often violated, in that we often observe scatterplots that fan out from the line as \(x\) gets large or small. We say under those circumstances that the data show \emph{heteroscedasticity}. There are methods to address it, but they fall outside the realm of SLR.}.
 
 #+begin_latex
@@ -8518,7 +8517,7 @@ qplot(speed, dist, data = cars)
   <<carscatter>>
 #+end_src
 
-You can see the output in Figure \ref{fig-Scatter-cars}, which was produced by the following code.
+You can see the output in Figure [[fig-Scatter-cars][carscatter]], which was produced by the following code.
 
 #+begin_src R :exports code :eval never :results silent
 plot(dist ~ speed, data = cars)
@@ -8551,7 +8550,7 @@ We take the natural logarithm to get
 \begin{equation}
 \ln L(\beta_{0},\beta_{1},\sigma)=-\frac{n}{2}\ln(2\pi\sigma^{2})-\frac{\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}.\label{eq-regML-lnL}
 \end{equation}
- We would like to maximize this function of \( \beta_{0} \) and \( \beta_{1} \). See Appendix \ref{sec-Multivariable-Calculus} which tells us that we should find critical points by means of the partial derivatives. Let us start by differentiating with respect to \( \beta_{0} \):
+ We would like to maximize this function of \( \beta_{0} \) and \( \beta_{1} \). See Appendix [[sec-Multivariable-Calculus][Multivariable Calculus]] which tells us that we should find critical points by means of the partial derivatives. Let us start by differentiating with respect to \( \beta_{0} \):
 \begin{equation}
 \frac{\partial}{\partial\beta_{0}}\ln L=0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-1),
 \end{equation}
@@ -8559,7 +8558,7 @@ and the partial derivative equals zero when \( \sum_{i=1}^{n}(y_{i}-\beta_{0}-\b
 \begin{equation}
 n \beta_{0} + \beta_{1} \sum_{i=1}^{n} x_{i} = \sum_{i = 1}^{n}y_{i}.\label{eq-regML-a}
 \end{equation}
-Moving on, we next take the partial derivative of \( \ln L \) (Equation \ref{eq-regML-lnL}) with respect to \( \beta_{1} \) to get
+Moving on, we next take the partial derivative of \( \ln L \) (Equation [[eq-regML-lnL]]) with respect to \( \beta_{1} \) to get
 \begin{alignat}{1}
 \frac{\partial}{\partial\beta_{1}}\ln L=\  & 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\
 = & \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}y_{i}-\beta_{0}x_{i}-\beta_{1}x_{i}^{2}\right),
@@ -8568,12 +8567,12 @@ and this equals zero when the last sum equals zero, that is, when
 \begin{equation}
 \beta_{0} \sum_{i = 1}^{n}x_{i} + \beta_{1} \sum_{i = 1}^{n}x_{i}^{2} = \sum_{i = 1}^{n}x_{i}y_{i}.\label{eq-regML-b}
 \end{equation}
-Solving the system of equations \ref{eq-regML-a} and \ref{eq-regML-b}
+Solving the system of equations [[eq-regML-a]] and [[eq-regML-b]]
 \begin{eqnarray}
 n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \beta_{0}\sum_{i = 1}^{n}x_{i}+\beta_{1}\sum_{i = 1}^{n}x_{i}^{2} & = & \sum_{i = 1}^{n}x_{i}y_{i}
 \end{eqnarray}
-for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise \ref{xca-find-mles-SLR}) gives
+for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise [[xca-find-mles-SLR]]) gives
 \begin{equation}
 \hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right/ n}\label{eq-regline-slope-formula}
 \end{equation}
@@ -8593,11 +8592,11 @@ we use the ``line of best fit''
 where \(\hat{\beta}_{0}\) and \(\hat{\beta}_{1}\) are given as above. For notation we will usually write \( b_{0} = \hat{\beta_{0}} \) and \( b_{1}=\hat{\beta_{1}} \) so that \( \hat{\mu}(x) = b_{0} + b_{1}x \).
 
 #+begin_rem
-The formula for \( b_{1} \) in Equation \ref{eq-regline-slope-formula} gets the job done but does not really make any sense. There are many equivalent formulas for \( b_{1} \) that are more intuitive, or at the least are easier to remember. One of the author's favorites is
+The formula for \( b_{1} \) in Equation [[eq-regline-slope-formula]] gets the job done but does not really make any sense. There are many equivalent formulas for \( b_{1} \) that are more intuitive, or at the least are easier to remember. One of the author's favorites is
 \begin{equation}
 b_{1} = r\frac{s_{y}}{s_{x}},\label{eq-sample-correlation-formula}
 \end{equation}
-where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise \ref{xca-show-alternate-slope-formula}. Also, notice the similarity between Equation \ref{eq-sample-correlation-formula} and Equation \ref{eq-population-slope-slr}.
+where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise [[xca-show-alternate-slope-formula]]. Also, notice the similarity between Equation [[eq-sample-correlation-formula]] and Equation [[eq-population-slope-slr]].
 #+end_rem
 
 **** How to do it with \(\mathsf{R}\)
@@ -8620,7 +8619,7 @@ coef(cars.lm)
 
 The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{tmpcoef[1]} + SRC_R{tmpcoef[2]} \cdot \mathtt{speed} \).
 
-It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure \ref{fig-Scatter-cars-regline}.
+It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure [[fig-Scatter-cars-regline][Scatter-cars-regline]].
 
 #+begin_latex
 \begin{figure}[th]
@@ -8671,7 +8670,7 @@ Using the regression line for the =cars= data:
 :CUSTOM_ID: sub-slr-point-est-regline
 :END:
 
-We said at the beginning of the chapter that our goal was to estimate \( \mu = \mathbb{E} Y \), and the arguments in Section \ref{sub-point-estimate-mle-slr} showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
+We said at the beginning of the chapter that our goal was to estimate \( \mu = \mathbb{E} Y \), and the arguments in Section [[sub-point-estimate-mle-slr][Point Estimation]] showed how to obtain an estimate \( \hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we will reap the benefits of our work in more ways than we previously disclosed. Given a particular value \(x_{0}\), there are two values we would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
 1. a future value of \(Y\) at \(x_{0}\).
 The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
@@ -8681,7 +8680,7 @@ The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(
 We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
-Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data (which we saw in Example \ref{exa-Speed-and-Stopping}).
+Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data (which we saw in Example [[exa-Speed-and-Stopping]]).
 
 #+begin_src R :exports both :results output pp
 cars[5, ]
@@ -8691,7 +8690,7 @@ There is a special name for estimates \( \hat{\mu}(x_{0}) \) when \( x_{0} \) ma
 
 In an abuse of notation we will sometimes write \(\hat{Y}\) or \(\hat{Y}(x_{0})\) to denote a point on the regression line even when \(x_{0}\) does not belong to the original data if the context of the statement obviates any danger of confusion.
 
-We saw in Example \ref{exa-regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
+We saw in Example [[exa-regline-cars-interpret]] that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -8707,7 +8706,7 @@ Predictions at \(x\) values that are not necessarily part of the original data a
 predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 #+end_src
 
-Note that there were no observed cars that traveled 6 mph or 21 mph. Also note that our estimate for a car traveling 8 mph matches the value we computed by hand in Example \ref{exa-regline-cars-pe-8mph}.
+Note that there were no observed cars that traveled 6 mph or 21 mph. Also note that our estimate for a car traveling 8 mph matches the value we computed by hand in Example [[exa-regline-cars-pe-8mph]].
 
 *** Mean Square Error and Standard Error
 
@@ -8744,9 +8743,9 @@ tmpred <- round(as.numeric(predict(cars.lm, newdata = data.frame(speed = 8))), 2
 tmps <- round(summary(cars.lm)$sigma, 2)
 #+end_src
 
-In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa-Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
+In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example [[exa-Speed-and-Stopping]]; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
-The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in Section \ref{sub-slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
+The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in Section [[sub-slr-interval-est-params][Interval Estimation]]). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
 
 #+begin_src R :exports both :results output pp
 carsumry <- summary(cars.lm)
@@ -8758,9 +8757,9 @@ carsumry$sigma
 :CUSTOM_ID: sub-slr-interval-est-params
 :END:
 
-We discussed general interval estimation in Chapter \ref{cha-Estimation}. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
+We discussed general interval estimation in Chapter [[cha-Estimation][Estimation]]. There we found that we could use what we know about the sampling distribution of certain statistics to construct confidence intervals for the parameter being estimated. We will continue in that vein, and to get started we will determine the sampling distributions of the parameter estimates, \(b_{1}\) and \(b_{0}\).
 
-To that end, we can see from Equation \ref{eq-regline-slope-formula} (and it is made clear in Chapter \ref{cha-multiple-linear-regression}) that \(b_{1}\) is just a linear combination of normally distributed random variables, so \(b_{1}\) is normally distributed too. Further, it can be shown that
+To that end, we can see from Equation [[eq-regline-slope-formula]] (and it is made clear in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]]) that \(b_{1}\) is just a linear combination of normally distributed random variables, so \(b_{1}\) is normally distributed too. Further, it can be shown that
 \begin{equation}
 b_{1}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{1},\,\mathtt{sd}=\sigma_{b_{1}}\right)
 \end{equation}
@@ -8773,7 +8772,7 @@ is called /the standard error of/ \(b_{1}\) which unfortunately depends on the u
 S_{b_{1}}=\frac{S}{\sqrt{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
 
-Now, it turns out that \(b_{0}\), \(b_{1}\), and \(S\) are mutually independent (see the footnote in Section \ref{sub-mlr-interval-est-params}). Therefore, the quantity
+Now, it turns out that \(b_{0}\), \(b_{1}\), and \(S\) are mutually independent (see the footnote in Section [[sub-mlr-interval-est-params][MLR Interval Estimation]]). Therefore, the quantity
 \begin{equation}
 T=\frac{b_{1}-\beta_{1}}{S_{b_{1}}}
 \end{equation}
@@ -8782,7 +8781,7 @@ has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution and a \(100(1 - \alpha)\% \) 
 b_{1}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\, S_{b_{1}.}
 \end{equation}
 
-It is also sometimes of interest to construct a confidence interval for \(\beta_{0}\) in which case we will need the sampling distribution of \(b_{0}\). It is shown in Chapter \ref{cha-multiple-linear-regression} that
+It is also sometimes of interest to construct a confidence interval for \(\beta_{0}\) in which case we will need the sampling distribution of \(b_{0}\). It is shown in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]] that
 \begin{equation}
 b_{0}\sim\mathsf{norm}\left(\mathtt{mean}=\beta_{0},\,\mathtt{sd}=\sigma_{b_{0}}\right),
 \end{equation}
@@ -8816,7 +8815,7 @@ Let us take a look at the output from =summary(cars.lm)=:
 summary(cars.lm)
 #+end_src
 
-In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section \ref{sec-Model-Utility-SLR}. If we wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use \( b_{1} = SRC_R{A[2,1]} \) and \( S_{b_{1}} = SRC_R{A[2,2]} \) together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \) critical value to calculate \( b_{1} \pm \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could use the =confint= function.
+In the =Coefficients= section we find the parameter estimates and their respective standard errors in the second and third columns; the other columns are discussed in Section [[sec-Model-Utility-SLR][SLR Model Utility]]. If we wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use \( b_{1} = SRC_R{A[2,1]} \) and \( S_{b_{1}} = SRC_R{A[2,2]} \) together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \) critical value to calculate \( b_{1} \pm \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could use the =confint= function.
 
 #+begin_src R :exports both :results output pp 
 confint(cars.lm)
@@ -8854,11 +8853,11 @@ Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \( 100(1-\al
 \begin{equation}
 \hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.\label{eq-SLR-pred-int-formula}
 \end{equation}
-We notice that the prediction interval in Equation \ref{eq-SLR-pred-int-formula} is wider than the confidence interval in Equation \ref{eq-SLR-conf-int-formula}, as we expected at the beginning of the section.
+We notice that the prediction interval in Equation [[eq-SLR-pred-int-formula]] is wider than the confidence interval in Equation [[eq-SLR-conf-int-formula]], as we expected at the beginning of the section.
 
 **** How to do it with \(\mathsf{R}\)
 
-Confidence and prediction intervals are calculated in \(\mathsf{R}\) with the =predict=\index{predict@\texttt{predict}} function, which we encountered in Section \ref{sub-slr-point-est-regline}. There we neglected to take advantage of its additional =interval= argument. The general syntax follows. 
+Confidence and prediction intervals are calculated in \(\mathsf{R}\) with the =predict=\index{predict@\texttt{predict}} function, which we encountered in Section [[sub-slr-point-est-regline][SLR Point Estimation]]. There we neglected to take advantage of its additional =interval= argument. The general syntax follows. 
 
 #+latex: \begin{example}
 We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed =cars.lm= earlier, and we will use this for input to the =predict= function. Also, we need to tell \(\mathsf{R}\) the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. /This is important/. 
@@ -8901,9 +8900,9 @@ Using the =cars= data,
 
 *** Graphing the Confidence and Prediction Bands
 
-We earlier guessed that a bound on the value of a single new observation would be inherently less certain than a bound for an average (mean) value; therefore, we expect the CIs for the mean to be tighter than the PIs for a new observation. A close look at the standard deviations in Equations \ref{eq-SLR-conf-int-formula} and \ref{eq-SLR-pred-int-formula} confirms our guess, but we would like to see a picture to drive the point home.
+We earlier guessed that a bound on the value of a single new observation would be inherently less certain than a bound for an average (mean) value; therefore, we expect the CIs for the mean to be tighter than the PIs for a new observation. A close look at the standard deviations in Equations [[eq-SLR-conf-int-formula]] and [[eq-SLR-pred-int-formula]] confirms our guess, but we would like to see a picture to drive the point home.
 
-We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure \ref{fig-Scatter-cars-CIPI}.
+We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure [[fig-Scatter-cars-CIPI][Scatter-cars-CIPI]].
 
 #+begin_latex
 \begin{figure}[th]
@@ -8925,7 +8924,7 @@ library(HH)
 ci.plot(cars.lm)
 #+end_src
 
-Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations \ref{eq-SLR-conf-int-formula} and \ref{eq-SLR-pred-int-formula}.
+Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations [[eq-SLR-conf-int-formula]] and [[eq-SLR-pred-int-formula]].
 
 #+srcname: carscipi
 #+begin_src R :exports none :results silent
@@ -8953,14 +8952,14 @@ print(ci.plot(cars.lm))
 
 Much of the attention of SLR is directed toward \(\beta_{1}\) because when \( \beta_{1}\neq 0 \) the mean value of \(Y\) increases (or decreases) as \(x\) increases. It is really boring when \(\beta_{1}=0\), because in that case the mean value of \(Y\) remains the same, regardless of the value of \(x\) (when the regression assumptions hold, of course). It is thus very important to decide whether or not \( \beta_{1} = 0 \). We address the question with a statistical test of the null hypothesis \(H_{0}:\beta_{1}=0\) versus the alternative hypothesis \(H_{1}:\beta_{1}\neq0\), and to do that we need to know the sampling distribution of \(b_{1}\) when the null hypothesis is true.
 
-To this end we already know from Section \ref{sub-slr-interval-est-params} that the quantity
+To this end we already know from Section [[sub-slr-interval-est-params][SLR Interval Estimation]] that the quantity
 
 \begin{equation} 
 T=\frac{b_{1}-\beta_{1}}{S_{b_{1}}}
 \end{equation}
 has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution; therefore, when \(\beta_{1}=0\) the quantity \(b_{1}/S_{b_{1}}\) has a \(\mathsf{t}(\mathtt{df}=n-2)\) distribution and we can compute a \(p\)-value by comparing the observed value of \(b_{1}/S{}_{b_{1}}\) with values under a \(\mathsf{t}(\mathtt{df}=n-2)\) curve. 
 
-Similarly, we may test the hypothesis \(H_{0}:\beta_{0}=0\) versus the alternative \(H_{1}:\beta_{0}\neq0\) with the statistic \(T=b_{0}/S_{b_{0}}\), where \(S_{b_{0}}\) is given in Section \ref{sub-slr-interval-est-params}. The test is conducted the same way as for \(\beta_{1}\). 
+Similarly, we may test the hypothesis \(H_{0}:\beta_{0}=0\) versus the alternative \(H_{1}:\beta_{0}\neq0\) with the statistic \(T=b_{0}/S_{b_{0}}\), where \(S_{b_{0}}\) is given in Section [[sub-slr-interval-est-params][SLR Interval Estimation]]. The test is conducted the same way as for \(\beta_{1}\). 
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -9033,7 +9032,7 @@ The value of \(r^{2}\) is stored in the =r.squared= component of =summary(cars.l
 carsumry$r.squared
 #+end_src
 
-We already knew this. We saw it in the next to the last line of the =summary(cars.lm)= output where it was called =Multiple R-squared=. Listed right beside it is the =Adjusted R-squared= which we will discuss in Chapter \ref{cha-multiple-linear-regression}.  For the =cars= data, we find \(r\) to be
+We already knew this. We saw it in the next to the last line of the =summary(cars.lm)= output where it was called =Multiple R-squared=. Listed right beside it is the =Adjusted R-squared= which we will discuss in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]].  For the =cars= data, we find \(r\) to be
 
 #+begin_src R :exports both :results output pp 
 sqrt(carsumry$r.squared)
@@ -9054,13 +9053,13 @@ F=\frac{SSR}{SSE/(n-2)}.\label{eq-slr-overall-F-statistic}
 
 Under the regression assumptions and when \(H_{0}\) is true, the \(F\) statistic has an \(\mathtt{f}(\mathtt{df1}=1,\,\mathtt{df2}=n-2)\) distribution. We reject \(H_{0}\) when \(F\) is large -- that is, when the explained variation is large relative to the unexplained variation.
 
-All this being said, we have not yet gained much from the overall \(F\) statistic because we already knew from Section \ref{sub-slr-hypoth-test-params} how to test \(H_{0}:\beta_{1}=0\)... we use the Student's \(t\) statistic. What is worse is that (in the simple linear regression model) it can be proved that the \(F\) in Equation \ref{eq-slr-overall-F-statistic} is exactly the Student's \(t\) statistic for \(\beta_{1}\) squared,
+All this being said, we have not yet gained much from the overall \(F\) statistic because we already knew from Section [[sub-slr-hypoth-test-params][SLR Hypothesis Testing]] how to test \(H_{0}:\beta_{1}=0\)... we use the Student's \(t\) statistic. What is worse is that (in the simple linear regression model) it can be proved that the \(F\) in Equation [[eq-slr-overall-F-statistic][SLR Overall F]] is exactly the Student's \(t\) statistic for \(\beta_{1}\) squared,
 
 \begin{equation}
 F=\left(\frac{b_{1}}{S_{b_{1}}}\right)^{2}.
 \end{equation}
 
-So why bother to define the \(F\) statistic? Why not just square the \(t\) statistic and be done with it? The answer is that the \(F\) statistic has a more complicated interpretation and plays a more important role in the multiple linear regression model which we will study in Chapter \ref{cha-multiple-linear-regression}. See Section \ref{sub-mlr-Overall-F-Test} for details.
+So why bother to define the \(F\) statistic? Why not just square the \(t\) statistic and be done with it? The answer is that the \(F\) statistic has a more complicated interpretation and plays a more important role in the multiple linear regression model which we will study in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]]. See Section [[sub-mlr-Overall-F-Test][MLR Overall F]] for details.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -9083,7 +9082,7 @@ Note that the value of the \(F\) statistic is the same as the Student's \(t\) st
 :CUSTOM_ID: sec-Residual-Analysis-SLR
 :END:
 
-We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section \ref{sub-Normality-Assumption}. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section \ref{sub-Constant-Variance-Assumption}. Last, the residuals should be independent, and we check this in Section \ref{sub-Independence-Assumption}.
+We know from our model that \(Y=\mu(x)+\epsilon\), or in other words, \(\epsilon=Y-\mu(x)\). Further, we know that \(\epsilon\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sigma)\). We may estimate \(\epsilon_{i}\) with the /residual/ \(E_{i}=Y_{i}-\hat{Y_{i}}\), where \(\hat{Y_{i}}=\hat{\mu}(x_{i})\). If the regression assumptions hold, then the residuals should be normally distributed. We check this in Section [[sub-Normality-Assumption][Normality Assumption]]. Further, the residuals should have mean zero with constant variance \(\sigma^{2}\), and we check this in Section [[sub-Constant-Variance-Assumption][Constant Variance Assumption]]. Last, the residuals should be independent, and we check this in Section [[sub-Independence-Assumption][Independence Assumption]].
 
 In every case, we will begin by looking at residual plots -- that is, scatterplots of the residuals \(E_{i}\) versus index or predicted values \(\hat{Y_{i}}\) -- and follow up with hypothesis tests.
 
@@ -9092,7 +9091,7 @@ In every case, we will begin by looking at residual plots -- that is, scatterplo
 :CUSTOM_ID: sub-Normality-Assumption
 :END:
 
-We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure \ref{fig-Normal-q-q-plot-cars}. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure \ref{fig-Normal-q-q-plot-cars}. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
+We can assess the normality of the residuals with graphical methods and hypothesis tests. To check graphically whether the residuals are normally distributed we may look at histograms or /q-q/ plots. We first examine a histogram in Figure [[fig-Normal-q-q-plot-cars][Normal-q-q-plot-cars]]. There we see that the distribution of the residuals appears to be mound shaped, for the most part. We can plot the order statistics of the sample versus quantiles from a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution with the command =plot(cars.lm, which = 2)=, and the results are in Figure [[fig-Normal-q-q-plot-cars][Normal-q-q-plot-cars]]. If the assumption of normality were true, then we would expect points randomly scattered about the dotted straight line displayed in the figure. In this case, we see a slight departure from normality in that the dots show systematic clustering on one side or the other of the line. The points on the upper end of the plot also appear begin to stray from the line. We would say there is some evidence that the residuals are not perfectly normal. 
 
 #+begin_latex
 \begin{figure}[th]
@@ -9132,7 +9131,7 @@ The Shapiro-Wilk test is based on the statistic
 \begin{equation}
 W=\frac{\left(\sum_{i=1}^{n}a_{i}E_{(i)}\right)^{2}}{\sum_{j=1}^{n}E_{j}^{2}},
 \end{equation}
-where the \(E_{(i)}\) are the ordered residuals and the \(a_{i}\) are constants derived from the order statistics of a sample of size \(n\) from a normal distribution. See Section \ref{sub-Shapiro-Wilk-Normality-Test}.
+where the \(E_{(i)}\) are the ordered residuals and the \(a_{i}\) are constants derived from the order statistics of a sample of size \(n\) from a normal distribution. See Section [[sub-Shapiro-Wilk-Normality-Test][Shapiro Wilk Normality Test]].
 We perform the Shapiro-Wilk test below, using the =shapiro.test= function from the =stats= package. The hypotheses are
 \[
 H_{0}:\mbox{ the residuals are normally distributed }
@@ -9164,7 +9163,7 @@ R_{i}=\frac{E_{i}}{s\,\sqrt{1-h_{ii}}},\quad i=1,2,\ldots,n.
 \end{equation}
 For the constant variance assumption we do not need the sign of the residual so we will plot \(\sqrt{|R_{i}|}\) versus the fitted values. As we look at a scatterplot of \(\sqrt{|R_{i}|}\) versus \(\hat{Y}_{i}\) we would expect under the regression assumptions to see a constant band of observations, indicating no change in the magnitude of the observed distance from the line. We want to watch out for a fanning-out of the residuals, or a less common funneling-in of the residuals. Both patterns indicate a change in the residual variance and a consequent departure from the regression assumptions, the first an increase, the second a decrease.
 
-In this case, we plot the standardized residuals versus the fitted values. The graph may be seen in Figure \ref{fig-std-resids-fitted-cars}. For these data there does appear to be somewhat of a slight fanning-out of the residuals.
+In this case, we plot the standardized residuals versus the fitted values. The graph may be seen in Figure [[fig-std-resids-fitted-cars][std-resids-fitted-cars]]. For these data there does appear to be somewhat of a slight fanning-out of the residuals.
 
 #+begin_latex
 \begin{figure}[th]
@@ -9223,7 +9222,7 @@ One of the strongest of the regression assumptions is the one regarding independ
 
 Positive correlation is displayed by positive residuals followed by positive residuals, and negative residuals followed by negative residuals. Looking from left to right, this is exhibited by a cyclical feature in the residual plots, with long sequences of positive residuals being followed by long sequences of negative ones.
 
-On the other hand, negative correlation implies positive residuals followed by negative residuals, which are then followed by positive residuals, /etc/. Consequently, negatively correlated residuals are often associated with an alternating pattern in the residual plots. We examine the residual plot in Figure \ref{fig-resids-fitted-cars}. There is no obvious cyclical wave pattern or structure to the residual plot. 
+On the other hand, negative correlation implies positive residuals followed by negative residuals, which are then followed by positive residuals, /etc/. Consequently, negatively correlated residuals are often associated with an alternating pattern in the residual plots. We examine the residual plot in Figure [[fig-resids-fitted-cars][resids-fitted-cars]]. There is no obvious cyclical wave pattern or structure to the residual plot. 
 
 #+begin_latex
 \begin{figure}[th]
@@ -9296,7 +9295,7 @@ We often find problems with our model that suggest that at least one of the thre
   \end{alignat*}
   Alternatively, we can use the method of /weighted least squares/. This is studied in more detail in later classes. 
 - Error distribution is not normal :: The same transformations for stabilizing the variance are equally appropriate for smoothing the residuals to a more Gaussian form. In fact, often we will kill two birds with one stone.
-- Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter \ref{cha-Time-Series}.
+- Errors are not independent :: There is a large class of autoregressive models to be used in this situation which occupy the latter part of Chapter [[cha-Time-Series][Time Series]].
 
 ** Other Diagnostic Tools
 :PROPERTIES:
@@ -9328,11 +9327,11 @@ and their sum is
  & = & 2.\label{eq-slr-average-leverage}
 \end{eqnarray}
 
-A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation \ref{eq-slr-average-leverage}). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
+A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation [[eq-slr-average-leverage]]). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
 
 *** Standardized and Studentized Deleted Residuals
 
-We have already encountered the /standardized residuals/ \(r_{i}\) in Section \ref{sub-Constant-Variance-Assumption}; they are merely residuals that have been divided by their respective standard deviations: 
+We have already encountered the /standardized residuals/ \(r_{i}\) in Section [[sub-Constant-Variance-Assumption][Constant Variance Assumption]]; they are merely residuals that have been divided by their respective standard deviations: 
 \begin{equation}
 R_{i}=\frac{E_{i}}{S\sqrt{1-h_{ii}}},\quad i=1,2,\ldots,n.
 \end{equation}
@@ -9348,7 +9347,7 @@ t_{i}=\frac{D_{i}}{S_{(i)}/(1-h_{ii})},\quad i=1,2,\ldots,n,\label{eq-slr-studen
 \end{equation}
 have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed values of \(t_{i}\) to this distribution to decide whether or not an observation is extreme. 
 
-The folklore in regression classes is that a test based on the statistic in Equation \ref{eq-slr-studentized-deleted-resids} can be too liberal. A rule of thumb is if we suspect an observation to be an outlier /before/ seeing the data then we say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if we suspect an observation to be an outlier /after/ seeing the data then we should only say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha/n\). The latter rule of thumb is called the /Bonferroni approach/ and can be overly conservative for large data sets. The responsible statistician should look at the data and use his/her best judgement, in every case.
+The folklore in regression classes is that a test based on the statistic in Equation [[eq-slr-studentized-deleted-resids]] can be too liberal. A rule of thumb is if we suspect an observation to be an outlier /before/ seeing the data then we say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if we suspect an observation to be an outlier /after/ seeing the data then we should only say it is significantly outlying if its two-tailed \(p\)-value is less than \(\alpha/n\). The latter rule of thumb is called the /Bonferroni approach/ and can be overly conservative for large data sets. The responsible statistician should look at the data and use his/her best judgement, in every case.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -9402,7 +9401,7 @@ and the \(DFBETAS\) for the slope \(b_{1}\) are given by
 \begin{equation}
 (DFBETAS)_{1(i)}=\frac{b_{1}-b_{1(i)}}{S_{(i)}\left[\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\right]^{-1/2}},\quad i=1,2,\ldots,n.
 \end{equation}
-See Section \ref{sec-Residual-Analysis-MLR} for a better way to write these. The signs of the \(DFBETAS\) indicate whether the coefficients would increase or decrease as a result of including the observation. If the \(DFBETAS\) are large, then the observation has a large impact on those regression coefficients. We label observations as suspicious if their \(DFBETAS\) have magnitude greater 1 for small data or \(2/\sqrt{n}\) for large data sets.
+See Section [[sec-Residual-Analysis-MLR][MLR Residual Analysis]] for a better way to write these. The signs of the \(DFBETAS\) indicate whether the coefficients would increase or decrease as a result of including the observation. If the \(DFBETAS\) are large, then the observation has a large impact on those regression coefficients. We label observations as suspicious if their \(DFBETAS\) have magnitude greater 1 for small data or \(2/\sqrt{n}\) for large data sets.
 We can calculate the \(DFBETAS\) with the =dfbetas= function (some output has been omitted):
 
 #+begin_src R :exports both :results output pp 
@@ -9503,7 +9502,7 @@ plot(cars.lm)
 par(mfrow = c(1,1))
 #+end_src
 
-The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure \ref{fig-Diagnostic-plots-cars}:
+The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the same display. The diagnostic plots for the =cars= data are shown in Figure [[fig-Diagnostic-plots-cars][Diagnostic-plots-cars]]:
 
 #+begin_latex
 \begin{figure}[th]
@@ -9544,7 +9543,7 @@ plot(cars.lm, which = 5)   # std'd resids vs lev plot
 identify(leverage, sres, n = 4)   # identify 4 points
 #+end_src
 
-The graph with the identified points is omitted (but the plain plot is shown in the bottom right corner of Figure \ref{fig-Diagnostic-plots-cars}). Observations 1 and 2 fall on the far right side of the plot, near the horizontal axis.
+The graph with the identified points is omitted (but the plain plot is shown in the bottom right corner of Figure [[fig-Diagnostic-plots-cars][Diagnostic-plots-cars]]). Observations 1 and 2 fall on the far right side of the plot, near the horizontal axis.
 
 #+latex: \newpage{}
 
@@ -9552,7 +9551,7 @@ The graph with the identified points is omitted (but the plain plot is shown in 
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-Prove the ANOVA equality, Equation \ref{eq-anovaeq}. /Hint/:
+Prove the ANOVA equality, Equation [[eq-anovaeq]]. /Hint/:
 show that
 \[
 \sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
@@ -9570,7 +9569,7 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 
 #+begin_xca
 #+latex: \label{xca-show-alternate-slope-formula}
-Show that the formula given in Equation \ref{eq-sample-correlation-formula} is equivalent to
+Show that the formula given in Equation [[eq-sample-correlation-formula]] is equivalent to
 \[
 \hat{\beta}_{1} = \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right/ n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right/ n}.
 \]
@@ -9619,7 +9618,7 @@ y_{n}
 1 & x_{1n} & x_{2n} & \cdots & x_{pn}
 \end{bmatrix}.
 \end{equation}
-The vector \(\mathbf{Y}\) is called the /response vector/ \index{response vector} and the matrix \(\mathbf{X}\) is called the /model matrix/ \index{model matrix}. As in Chapter \ref{cha-simple-linear-regression}, the most general assumption that relates \(\mathbf{Y}\) to \(\mathbf{X}\) is
+The vector \(\mathbf{Y}\) is called the /response vector/ \index{response vector} and the matrix \(\mathbf{X}\) is called the /model matrix/ \index{model matrix}. As in Chapter [[cha-simple-linear-regression][Simple Linear Regression]], the most general assumption that relates \(\mathbf{Y}\) to \(\mathbf{X}\) is
 \begin{equation}
 \mathbf{Y}=\mu(\mathbf{X})+\upepsilon,
 \end{equation}
@@ -9655,7 +9654,7 @@ The data are in the =datasets= package and are already on the search path; they 
 head(trees)
 #+end_src
 
-Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure \ref{fig-splom-trees}.
+Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure [[fig-splom-trees][splom-trees]].
 
 #+srcname: splom-trees
 #+begin_src R :exports code :results silent
@@ -9702,7 +9701,7 @@ In simple linear regression, we had one independent variable and our linear regr
 
 One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \cite{Foxrcmdr}. It has a 3D scatterplot option under the =Graphs= menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
 
-Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure \ref{fig-3D-scatterplot-trees}.
+Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
 #+srcname: 3D-scatterplot-trees
 #+begin_src R :exports code :results silent
@@ -9748,7 +9747,7 @@ Looking at the graph we see that the data points fall close to a plane in three 
 :CUSTOM_ID: sub-mlr-parameter-estimates
 :END:
 
-We will proceed exactly like we did in Section \ref{sec-SLR-Estimation}. We know
+We will proceed exactly like we did in Section [[sec-SLR-Estimation][SLR Estimation]]. We know
 \begin{equation}
 \upepsilon\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0}_{\mathrm{n}\times1},\,\mathtt{sigma}=\sigma^{2}\mathbf{I}_{\mathrm{n}\times\mathrm{n}}\right),
 \end{equation}
@@ -9757,7 +9756,7 @@ which means that \(\mathbf{Y}=\mathbf{X}\upbeta+\upepsilon\) has an \(\mathsf{mv
 L(\upbeta,\sigma)=\frac{1}{2\pi^{n/2}\sigma}\exp\left\{ -\frac{1}{2\sigma^{2}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\right\}.
 \end{equation}
 
-To /maximize/ the likelihood\index{maximum likelihood} in \(\upbeta\), we need to /minimize/ the quantity \(g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\). We do this by differentiating \(g\) with respect to \(\upbeta\). (It may be a good idea to brush up on the material in Appendices \ref{sec-Linear-Algebra} and \ref{sec-Multivariable-Calculus}.) First we will rewrite \(g\):
+To /maximize/ the likelihood\index{maximum likelihood} in \(\upbeta\), we need to /minimize/ the quantity \(g(\upbeta)=\left(\mathbf{Y}-\mathbf{X}\upbeta\right)^{\mathrm{T}}\left(\mathbf{Y}-\mathbf{X}\upbeta\right)\). We do this by differentiating \(g\) with respect to \(\upbeta\). (It may be a good idea to brush up on the material in Appendices [[sec-Linear-Algebra][Linear Algebra]] and [[sec-Multivariable-Calculus][Multivariable Calculus]].) First we will rewrite \(g\):
 \begin{equation}
 g(\upbeta)=\mathbf{Y}^{\mathrm{T}}\mathbf{Y}-\mathbf{Y}^{\mathrm{T}}\mathbf{X}\upbeta-\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{Y}+\upbeta^{\mathrm{T}}\mathbf{X}^{\mathrm{T}}\mathbf{X}\upbeta,
 \end{equation}
@@ -9778,7 +9777,7 @@ we may solve the equation for \(\upbeta\) to get the maximum likelihood estimato
 \end{equation}
 
 #+begin_rem
-The formula in Equation \ref{eq-b-formula-matrix} is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
+The formula in Equation [[eq-b-formula-matrix]] is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
 #+end_rem
 
 #+begin_rem
@@ -9823,14 +9822,14 @@ They are expressed more compactly by the matrix equation
 \begin{equation}
 \hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
 \end{equation}
-From Equation \ref{eq-b-formula-matrix} we know that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), so we can rewrite
+From Equation [[eq-b-formula-matrix]] we know that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), so we can rewrite
 \begin{eqnarray}
 \hat{\mathbf{Y}} & = & \mathbf{X}\left[\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\right],\\
  & = & \mathbf{H}\mathbf{Y},
 \end{eqnarray}
 where \(\mathbf{H}=\mathbf{X}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) is appropriately named /the hat matrix/\index{hat matrix} because it ``puts the hat on \(\mathbf{Y}\)''. The hat matrix is very important in later courses. Some facts about \(\mathbf{H}\) are
 - \(\mathbf{H}\) is a symmetric square matrix, of dimension \(\mathrm{n}\times\mathrm{n}\).
-- The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\) (compare to Equation \ref{eq-slr-leverage-between}).
+- The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\) (compare to Equation [[eq-slr-leverage-between]]).
 - The trace is \(\mathrm{tr}(\mathbf{H})=p\).
 - \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/) which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of \(\mathbf{I}-\mathbf{H}\).
 
@@ -9911,7 +9910,7 @@ The residuals are given by
 \begin{equation}
 \mathbf{E}=\mathbf{Y}-\hat{\mathbf{Y}}=\mathbf{Y}-\mathbf{H}\mathbf{Y}=(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
-Now we can use Theorem \ref{thm:mvnorm-dist-matrix-prod} to see that the residuals are distributed
+Now we can use Theorem [[thm-mvnorm-dist-matrix-prod]] to see that the residuals are distributed
 \begin{equation}
 \mathbf{E}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\sigma^{2}(\mathbf{I}-\mathbf{H})),
 \end{equation}
@@ -9947,11 +9946,11 @@ For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma, 3)} \).
 :CUSTOM_ID: sub-mlr-interval-est-params
 :END:
 
-We showed in Section \ref{sub-mlr-parameter-estimates} that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
+We showed in Section [[sub-mlr-parameter-estimates][MLR Parameter Estimates]] that \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\), which is really just a big matrix -- namely \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\) -- multiplied by \(\mathbf{Y}\). It stands to reason that the sampling distribution of \(\mathbf{b}\) would be intimately related to the distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}\right).
 \end{equation}
-Now recall Theorem \ref{thm:mvnorm-dist-matrix-prod} that we said we were going to need eventually (the time is now). That proposition guarantees that
+Now recall Theorem [[thm-mvnorm-dist-matrix-prod]] that we said we were going to need eventually (the time is now). That proposition guarantees that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right),\label{eq-distn-b-mlr}
 \end{equation}
@@ -9965,7 +9964,7 @@ and
 \end{equation}
 the first equality following because the matrix \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\) is symmetric.
 
-There is a lot that we can glean from Equation \ref{eq-distn-b-mlr}. First, it follows that the estimator \(\mathbf{b}\) is unbiased (see Section \ref{sec-Point-Estimation-1}). Second, the variances of \(b_{0}\), \(b_{1}\), ..., \(b_{n}\) are exactly the diagonal elements of \(\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\), which is completely known except for that pesky parameter \(\sigma^{2}\). Third, we can estimate the standard error of \(b_{i}\) (denoted \(S_{b_{i}}\)) with the mean square error \(S\) (defined in the previous section) multiplied by the corresponding diagonal element of \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\). Finally, given estimates of the standard errors we may construct confidence intervals for \(\beta_{i}\) with an interval that looks like
+There is a lot that we can glean from Equation [[eq-distn-b-mlr]]. First, it follows that the estimator \(\mathbf{b}\) is unbiased (see Section [[sec-Point-Estimation-1][Point Estimation 1]]). Second, the variances of \(b_{0}\), \(b_{1}\), ..., \(b_{n}\) are exactly the diagonal elements of \(\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\), which is completely known except for that pesky parameter \(\sigma^{2}\). Third, we can estimate the standard error of \(b_{i}\) (denoted \(S_{b_{i}}\)) with the mean square error \(S\) (defined in the previous section) multiplied by the corresponding diagonal element of \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\). Finally, given estimates of the standard errors we may construct confidence intervals for \(\beta_{i}\) with an interval that looks like
 \begin{equation}
 b_{i}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)S_{b_{i}}.
 \end{equation}
@@ -9989,13 +9988,13 @@ For example, using the calculations above we say that for the regression model =
 
 *** Confidence and Prediction Intervals
 
-We saw in Section \ref{sub-mlr-point-est-regsurface} how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
+We saw in Section [[sub-mlr-point-est-regsurface][MLR Estimate Regsurface]] how to make point estimates of the mean value of additional observations and predict values of future observations, but how good are our estimates? We need confidence and prediction intervals to gauge their accuracy, and lucky for us the formulas look similar to the ones we saw in SLR.
 
-In Equation \ref{eq-mlr-single-yhat-matrix} we wrote \( \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and in Equation \ref{eq-distn-b-mlr} we saw that
+In Equation [[eq-mlr-single-yhat-matrix]] we wrote \( \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and in Equation [[eq-distn-b-mlr]] we saw that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
-The following is therefore immediate from Theorem \ref{thm:mvnorm-dist-matrix-prod}:
+The following is therefore immediate from Theorem [[thm-mvnorm-dist-matrix-prod]]:
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{x}_{0}^{\mathrm{T}}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\right).
 \end{equation}
@@ -10009,11 +10008,11 @@ Prediction intervals for a new observation at \(\mathbf{x}_{0}\) are given by
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-p-1)\, S\sqrt{1+\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}}.
 \end{equation}
-The prediction intervals are wider than the confidence intervals, just as in Section \ref{sub-slr-interval-est-regline}.
+The prediction intervals are wider than the confidence intervals, just as in Section [[sub-slr-interval-est-regline][SLR Interval Estimate Regline]].
 
 **** How to do it with \(\mathsf{R}\)
 
-The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section \ref{sub-slr-interval-est-regline} (which we repeat here for illustration).
+The syntax is identical to that used in SLR, with the proviso that we need to specify values of the independent variables in the data frame =new= as we did in Section [[sub-slr-interval-est-regline][SLR Interval Estimate Regline]] (which we repeat here for illustration).
 
 #+begin_src R :exports code :results silent 
 new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
@@ -10061,7 +10060,7 @@ Using the =trees= data,
 
 *** Multiple Coefficient of Determination
 
-We saw in Section \ref{sub-mlr-mse-se} that the error sum of squares \(SSE\) can be conveniently written in MLR as 
+We saw in Section [[sub-mlr-mse-se][MLR MSE SE]] that the error sum of squares \(SSE\) can be conveniently written in MLR as 
 \begin{equation}
 SSE=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.\label{eq-mlr-sse-matrix}
 \end{equation}
@@ -10073,11 +10072,11 @@ and
 \begin{alignat}{1}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.\label{eq-mlr-ssr-matrix}
 \end{alignat}
-(The matrix \(\mathbf{J}\) is defined in Appendix \ref{sec-Linear-Algebra}.) Immediately from Equations \ref{eq-mlr-sse-matrix}, \ref{eq-mlr-ssto-matrix}, and \ref{eq-mlr-ssr-matrix} we get the /Anova Equality/
+(The matrix \(\mathbf{J}\) is defined in Appendix [[sec-Linear-Algebra][Linear Algebra]].) Immediately from Equations [[eq-mlr-sse-matrix]], [[eq-mlr-ssto-matrix]], and [[eq-mlr-ssr-matrix]] we get the /Anova Equality/
 \begin{equation} 
 SSTO=SSE+SSR.
 \end{equation}
-(See Exercise \ref{xca-anova-equality}.) We define the /multiple coefficient of determination/ by the formula
+(See Exercise [[xca-anova-equality]].) We define the /multiple coefficient of determination/ by the formula
 \begin{equation} 
 R^{2}=1-\frac{SSE}{SSTO}.
 \end{equation}
@@ -10101,7 +10100,7 @@ treesumry$r.squared
 treesumry$adj.r.squared
 #+end_src
 
-High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure \ref{fig-3D-scatterplot-trees}.
+High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
 *** Overall /F/-Test
 :PROPERTIES:
@@ -10144,7 +10143,7 @@ H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
 where \(\beta_{i}\) is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting \(H_{0}\) if the /p-value/ is small. If \(H_{0}\) is rejected, then we conclude that there is a significant relationship between \(Y\) and \(x_{i}\) /in the regression model/ \(Y\sim(x_{1},\ldots,x_{p})\). This last part of the sentence is very important because the significance of the variable \(x_{i}\) sometimes depends on the presence of other independent variables in the model
 #+latex: \footnote{In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub-Multicollinearity}.}.
 
-To test the hypothesis we go to find the sampling distribution of \( b_{i} \), the estimator of the corresponding parameter \( \beta_{i} \), when the null hypothesis is true. We saw in Section \ref{sub-mlr-interval-est-params} that 
+To test the hypothesis we go to find the sampling distribution of \( b_{i} \), the estimator of the corresponding parameter \( \beta_{i} \), when the null hypothesis is true. We saw in Section [[sub-mlr-interval-est-params][MLR Interval Estimate Parameters]] that 
 \begin{equation}
 T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 \end{equation}
@@ -10197,7 +10196,7 @@ qplot(Girth, Volume, data = trees)
 </div>
 #+end_html
 
-For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure \ref{fig-Scatterplot-Volume-Girth-trees}. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
+For example, let us examine a scatterplot of =Volume= versus =Girth= a little more closely. See Figure [[fig-Scatterplot-Volume-Girth-trees][Scatterplot-Volume-Girth-trees]]. There might be a slight curvature to the data; the volume curves ever so slightly upward as the girth increases. After looking at the plot we might try to capture the curvature with a mean response such as 
 \begin{equation}
 \mu(x_{1})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{1}^{2}.
 \end{equation}
@@ -10260,7 +10259,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 </div>
 #+end_html
 
-The plot is shown in Figure \ref{fig-Fitting-the-Quadratic}. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
+The plot is shown in Figure [[fig-Fitting-the-Quadratic][Fitting-the-Quadratic]]. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed =Girth= data and not on the original scale.
 
 #+latex: \end{example}
 
@@ -10269,7 +10268,7 @@ The plot is shown in Figure \ref{fig-Fitting-the-Quadratic}. Pay attention to th
 When a model includes a quadratic term for an independent variable, it is customary to also include the linear term in the model. The principle is called /parsimony/. More generally, if the researcher decides to include \(x^{m}\) as a term in the model, then (s)he should also include all lower order terms \(x\), \(x^{2}\), ...,\(x^{m-1}\) in the model.
 #+end_rem
 
-We do estimation/prediction the same way that we did in Section \ref{sub-mlr-point-est-regsurface}, except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
+We do estimation/prediction the same way that we did in Section [[sub-mlr-point-est-regsurface][MLR Point Estimation Regsurface]], except we do not need a =Height= column in the dataframe =new= since the variable is not included in the quadratic model.
 
 #+begin_src R :exports both :results output pp 
 new <- data.frame(Girth = c(9.1, 11.6, 12.5))
@@ -10285,9 +10284,9 @@ We have mentioned on several occasions that it is important to rescale the expla
 summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
 #+end_src
 
-Now nothing is significant in the model except =Girth^2=. We could delete the =Intercept= and =Girth= from the model, but the model would no longer be /parsimonious/. A novice may see the output and be confused about how to proceed, while the seasoned statistician recognizes immediately that =Girth= and =Girth^2= are highly correlated (see Section \ref{sub-Multicollinearity}). The only remedy to this ailment is to rescale =Girth=, which we should have done in the first place.
+Now nothing is significant in the model except =Girth^2=. We could delete the =Intercept= and =Girth= from the model, but the model would no longer be /parsimonious/. A novice may see the output and be confused about how to proceed, while the seasoned statistician recognizes immediately that =Girth= and =Girth^2= are highly correlated (see Section [[sub-Multicollinearity][Multicollinearity]]). The only remedy to this ailment is to rescale =Girth=, which we should have done in the first place.
 
-In Example \ref{exa-mlr-trees-poly-no-rescale} of Section \ref{sec-Partial-F-Statistic} we investigate this issue further.
+In Example [[exa-mlr-trees-poly-no-rescale]] of Section [[sec-Partial-F-Statistic][Partial F Statistic]] we investigate this issue further.
 
 #+end_rem
 
@@ -10365,7 +10364,7 @@ These examples can be generalized to more than two independent variables, say th
 :CUSTOM_ID: sec-Qualitative-Explanatory-Variables
 :END:
 
-We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section \ref{sub-Qualitative-Data}.
+We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section [[sub-Qualitative-Data][Qualitative Data]].
 
 #+latex: \begin{note*}
 The =trees= data do not have any qualitative explanatory variables, so we will construct one for illustrative purposes
@@ -10420,7 +10419,7 @@ The important thing is to double check that the qualitative variable in question
 class(trees$Tall)
 #+end_src
 
-If the qualitative variable is not yet stored as a factor then we may convert it to one with the =factor= command. See Section \ref{sub-Qualitative-Data}. Other than this we perform MLR as we normally would.
+If the qualitative variable is not yet stored as a factor then we may convert it to one with the =factor= command. See Section [[sub-Qualitative-Data][Qualitative Data]]. Other than this we perform MLR as we normally would.
 
 #+begin_src R :exports both :results output pp 
 treesdummy.lm <- lm(Volume ~ Girth + Tall, data = trees)
@@ -10495,7 +10494,7 @@ There are other -- shorter -- ways to plot regression lines by groups, namely th
 :CUSTOM_ID: sec-Partial-F-Statistic
 :END:
 
-We saw in Section \ref{sub-mlr-Overall-F-Test} how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section \ref{sub-mlr-Student's-t-Tests} how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
+We saw in Section [[sub-mlr-Overall-F-Test][MLR Overall F]] how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section [[sub-mlr-Student's-t-Tests][MLR Student's t Tests]] how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
 \end{equation}
@@ -10571,7 +10570,7 @@ In this case, the improvement to the reduced model that is attributable to =Heig
 :CUSTOM_ID: sec-Residual-Analysis-MLR
 :END:
 
-We encountered many, many diagnostic measures for simple linear regression in Sections \ref{sec-Residual-Analysis-SLR} and \ref{sec-Other-Diagnostic-Tools-SLR}. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
+We encountered many, many diagnostic measures for simple linear regression in Sections [[sec-Residual-Analysis-SLR][SLR Residual Analysis]] and [[sec-Other-Diagnostic-Tools-SLR][SLR Other Diagnostic Tools]]. All of these are valid in multiple linear regression, too, but there are some slight changes that we need to make for the multivariate case. We list these below, and apply them to the trees example.  
 
 - Shapiro-Wilk, Breusch-Pagan, Durbin-Watson: :: unchanged from SLR, but we are now equipped to talk about the Shapiro-Wilk test statistic for the residuals. It is defined by the formula 
    \begin{equation}
@@ -10582,7 +10581,7 @@ We encountered many, many diagnostic measures for simple linear regression in Se
    \mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
    \end{equation}
    where \(\mathbf{m}_{\mathrm{n}\times1}\) and \(\mathbf{V}_{\mathrm{n}\times\mathrm{n}}\) are the mean and covariance matrix, respectively, of the order statistics from an \(\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I}\right)\) distribution. 
-- Leverages: :: are defined to be the diagonal entries of the hat matrix \(\mathbf{H}\) (which is why we called them \(h_{ii}\) in Section \ref{sub-mlr-point-est-regsurface}). The sum of the leverages is \(\mbox{tr}(\mathbf{H})=p+1\). One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is \(2(p+1)/n\), and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
+- Leverages: :: are defined to be the diagonal entries of the hat matrix \(\mathbf{H}\) (which is why we called them \(h_{ii}\) in Section [[sub-mlr-point-est-regsurface][MLR Point Estimation Regsurface]]). The sum of the leverages is \(\mbox{tr}(\mathbf{H})=p+1\). One rule of thumb considers a leverage extreme if it is larger than double the mean leverage value, which is \(2(p+1)/n\), and another rule of thumb considers leverages bigger than 0.5 to indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
 - Standardized residuals: :: unchanged. Considered extreme if \(|R_{i}|>2\). 
 - Studentized residuals: :: compared to a \(\mathsf{t}(\mathtt{df}=n-p-2)\) distribution.  
 - DFBETAS: :: The formula is generalized to
@@ -10592,7 +10591,7 @@ We encountered many, many diagnostic measures for simple linear regression in Se
    where \(c_{jj}\) is the \(j^{\mathrm{th}}\) diagonal entry of \((\mathbf{X}^{\mathrm{T}}\mathbf{X})^{-1}\). Values larger than one for small data sets or \(2/\sqrt{n}\) for large data sets should be investigated.
 - DFFITS: :: unchanged. Larger than one in absolute value is considered extreme.
 - Cook's D: :: compared to an \(\mathsf{f}(\mathtt{df1}=p+1,\,\mathtt{df2}=n-p-1)\) distribution. Observations falling higher than the 50\(^{\textrm{th}}\) percentile are extreme. 
-Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter \ref{cha-simple-linear-regression}.
+Note that plugging the value \(p=1\) into the formulas will recover all of the ones we saw in Chapter [[cha-simple-linear-regression][Simple Linear Regression]].
 
 ** Additional Topics
 :PROPERTIES:
@@ -10611,7 +10610,7 @@ where \(r\) and \(d\) represent the radius and diameter of the tree, respectivel
 \end{equation}
 where \(\beta_{1}\) and \(\beta_{2}\) are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
 
-How can we fit this model? The model is not linear in the parameters any more, so our linear regression methods will not work... or will they? In the =trees= example we may take the logarithm of both sides of Equation \ref{eq-trees-nonlin-reg} to get
+How can we fit this model? The model is not linear in the parameters any more, so our linear regression methods will not work... or will they? In the =trees= example we may take the logarithm of both sides of Equation [[eq-trees-nonlin-reg]] to get
 \begin{equation}
 \mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
 \end{equation}
@@ -10680,7 +10679,7 @@ Once multicollinearity has been diagnosed there are several approaches to remedi
 We decided to omit a thorough discussion of multicollinearity because we are not equipped to handle the mathematical details. Perhaps the topic will receive more attention in a later edition.
 
 - What to do when data are not normal
-   - Bootstrap (see Chapter \ref{cha-resampling-methods}).
+   - Bootstrap (see Chapter [[cha-resampling-methods][Resampling Methods]]).
 
 *** Akaike's Information Criterion
 
@@ -10697,7 +10696,7 @@ AIC=-2\ln L+2(p+1)
 
 #+begin_xca
 #+latex: \label{xca-anova-equality}
-Use Equations \ref{eq-mlr-sse-matrix}, \ref{eq-mlr-ssto-matrix}, and \ref{eq-mlr-ssr-matrix} to prove the Anova Equality:
+Use Equations [[eq-mlr-sse-matrix]], [[eq-mlr-ssto-matrix]], and [[eq-mlr-ssr-matrix]] to prove the Anova Equality:
 \[
 SSTO=SSE+SSR.
 \]
@@ -10729,7 +10728,7 @@ I have seen /Statistical Computing with \(\mathsf{R}\)/ by Rizzo \cite{Rizzo2008
 
 - Problem :: Unfortunately, in most cases the sampling distribution is /unknown/. Thus, in the past, in efforts to say something useful, statisticians have been obligated to place some restrictive assumptions on the underlying population. For example, if we suppose that the population has a normal distribution, then we can say that the distribution of \(\overline{X}\) is normal, too, with the same mean (and a smaller standard deviation). It is then easy to draw conclusions, make inferences, and go on about our business. 
 
-- Alternative :: We don't know what the underlying population distributions is, so let us /estimate/ it, just like we would with any other parameter. The statistic we use is the /empirical CDF/, that is, the function that places mass \(1/n\) at each of the observed data points \(x_{1},\ldots,x_{n}\) (see Section \ref{sec-empirical-distribution}). As the sample size increases, we would expect the approximation to get better and better (with IID observations, it does, and there is a wonderful theorem by Glivenko and Cantelli that proves it). And now that we have an (estimated) population distribution, it is easy to find the sampling distribution of any statistic we like: just *sample* from the empirical CDF many, many times, calculate the statistic each time, and make a histogram. Done! Of course, the number of samples needed to get a representative histogram is prohibitively large... human beings are simply too slow (and clumsy) to do this tedious procedure.
+- Alternative :: We don't know what the underlying population distributions is, so let us /estimate/ it, just like we would with any other parameter. The statistic we use is the /empirical CDF/, that is, the function that places mass \(1/n\) at each of the observed data points \(x_{1},\ldots,x_{n}\) (see Section [[sec-empirical-distribution][Empirical Distribution]]). As the sample size increases, we would expect the approximation to get better and better (with IID observations, it does, and there is a wonderful theorem by Glivenko and Cantelli that proves it). And now that we have an (estimated) population distribution, it is easy to find the sampling distribution of any statistic we like: just *sample* from the empirical CDF many, many times, calculate the statistic each time, and make a histogram. Done! Of course, the number of samples needed to get a representative histogram is prohibitively large... human beings are simply too slow (and clumsy) to do this tedious procedure.
 
 Fortunately, computers are very skilled at doing simple, repetitive tasks very quickly and accurately. So we employ them to give us a reasonable idea about the sampling distribution of our statistic, and we use the generated sampling distribution to guide our inferences and draw our conclusions. If we would like to have a better approximation for the sampling distribution (within the confines of the information contained in the original sample), we merely tell the computer to sample more. In this (restricted) sense, we are limited only by our current computational speed and pocket book.
 
@@ -10764,7 +10763,7 @@ Since the bootstrap distribution gives us information about a statistic's sampli
 
 *Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\).  
 
-Of course, we do not really need a bootstrap distribution here because from Section \ref{sec-sampling-from-normal-dist} we know that \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})\), but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
+Of course, we do not really need a bootstrap distribution here because from Section [[sec-sampling-from-normal-dist][Sampling from Normal]] we know that \(\overline{X}\sim\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1/\sqrt{n})\), but we proceed anyway to investigate how the bootstrap performs when we know what the answer should be ahead of time.
 
 We will take a random sample of size \(n=25\) from the population. Then we will /resample/ the data 1000 times to get 1000 resamples of size 25. We will calculate the sample mean of each of the resamples, and will study the data distribution of the 1000 values of \(\overline{x}\).
 
@@ -10774,7 +10773,7 @@ resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
 #+end_src
 
-A histogram of the 1000 values of \(\overline{x}\) is shown in Figure \ref{fig-Bootstrap-se-mean}, and was produced by the following code.
+A histogram of the 1000 values of \(\overline{x}\) is shown in Figure [[fig-Bootstrap-se-mean][Bootstrap-se-mean]], and was produced by the following code.
 
 #+srcname: Bootstrap-se-mean
 #+begin_src R :exports code :results silent
@@ -10815,7 +10814,7 @@ mean(xbarstar) - mean(srs)
 
 #+latex: \end{example}
 
-Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called /bootstrap estimate of bias/. Since the estimate is so small we would expect our original statistic (\(\overline{X}\)) to have small bias, but this is no surprise to us because we already knew from Section \ref{sub-simple-random-samples} that \(\overline{X}\) is an unbiased estimator of the population mean.
+Notice how close the two values are. The difference between them is an estimate of how biased the original statistic is, the so-called /bootstrap estimate of bias/. Since the estimate is so small we would expect our original statistic (\(\overline{X}\)) to have small bias, but this is no surprise to us because we already knew from Section [[sub-simple-random-samples][Simple Random Samples]] that \(\overline{X}\) is an unbiased estimator of the population mean.
 
 Now back to our original problem, we would like to estimate the standard error of \(\overline{X}\). Looking at the histogram, we see that the spread of the bootstrap distribution is similar to the spread of the sampling distribution. Therefore, it stands to reason that we could estimate the standard error of \(\overline{X}\) with the sample standard deviation of the resample statistics. Let us try and see.
 
@@ -10870,7 +10869,7 @@ hist(medstar, breaks = 40, prob = TRUE)
 </div>
 #+end_html
 
-The graph is shown in Figure \ref{fig-Bootstrapping-se-median}, and was produced by the following code.
+The graph is shown in Figure [[fig-Bootstrapping-se-median][Bootstrapping-se-median]], and was produced by the following code.
 
 #+begin_src R :exports code :eval never
 hist(medstar, breaks = 40, prob = TRUE)
@@ -10892,7 +10891,7 @@ mean(medstar) - median(rivers)
 #+latex: \end{example}
  Here, =data= is a vector (or matrix) containing the data to be resampled, =statistic= is a defined function, /of two arguments/, that tells which statistic should be computed, and the parameter \(\mathsf{R}\) specifies how many resamples should be taken.
 
-For the standard error of the mean (Example \ref{exa-Bootstrap-se-mean}):
+For the standard error of the mean (Example [[exa-Bootstrap-se-mean]]):
 
 #+begin_src R :exports both :results output pp 
 library(boot)
@@ -10900,7 +10899,7 @@ mean_fun <- function(x, indices) mean(x[indices])
 boot(data = srs, statistic = mean_fun, R = 1000)
 #+end_src
 
-For the standard error of the median (Example \ref{exa-Bootstrap-se-median}):
+For the standard error of the median (Example [[exa-Bootstrap-se-median]]):
 
 #+begin_src R :exports both :results output pp 
 median_fun <- function(x, indices) median(x[indices])
@@ -11033,7 +11032,7 @@ oneway_test(len ~ supp, data = ToothGrowth)
 
 *** Comparison with the Two Sample /t/ test
 
-We know from Chapter \ref{cha-Hypothesis-Testing} to use the two-sample \(t\)-test to tell whether there is an improvement as a result of taking the intervention class. Note that the \(t\)-test assumes normal underlying populations, with unknown variance, and small sample \(n=10\). What does the \(t\)-test say? Below is the output. 
+We know from Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]] to use the two-sample \(t\)-test to tell whether there is an improvement as a result of taking the intervention class. Note that the \(t\)-test assumes normal underlying populations, with unknown variance, and small sample \(n=10\). What does the \(t\)-test say? Below is the output. 
 
 #+begin_src R :exports both :results output pp 
 t.test(len ~ supp, data = ToothGrowth, 
@@ -11049,7 +11048,7 @@ The \(p\)-value for the \(t\)-test was \( SRC_R{round(B$p.value, 3)} \), while t
 
 #+begin_rem
 Here are some things about permutation tests to keep in mind.
-- While the permutation test does not require normality of the populations (as contrasted with the \(t\)-test), nevertheless it still requires that the two groups are exchangeable; see Section \ref{sec-Exchangeable-Random-Variables}. In particular, this means that they must be identically distributed under the null hypothesis. They must have not only the same means, but they must also have the same spread, shape, and everything else. This assumption may or may not be true in a given example, but it will rarely cause the \(t\)-test to outperform the permutation test, because even if the sample standard deviations are markedly different it does not mean that the population standard deviations are different. In many situations the permutation test will also carry over to the \(t\)-test.
+- While the permutation test does not require normality of the populations (as contrasted with the \(t\)-test), nevertheless it still requires that the two groups are exchangeable; see Section [[sec-Exchangeable-Random-Variables][Exchangeable Random Variables]]. In particular, this means that they must be identically distributed under the null hypothesis. They must have not only the same means, but they must also have the same spread, shape, and everything else. This assumption may or may not be true in a given example, but it will rarely cause the \(t\)-test to outperform the permutation test, because even if the sample standard deviations are markedly different it does not mean that the population standard deviations are different. In many situations the permutation test will also carry over to the \(t\)-test.
 - If the distribution of the groups is close to normal, then the \(t\)-test \(p\)-value and the bootstrap \(p\)-value will be approximately equal. If they differ markedly, then this should be considered evidence that the normality assumptions do not hold.  
 - The generality of the permutation test is such that one can use all kinds of statistics to compare the two groups. One could compare the difference in variances or the difference in (just about anything). Alternatively, one could compare the ratio of sample means, \(\overline{X}_{1}/\overline{X}_{2}\). Of course, under the null hypothesis this last quantity should be near 1. 
 - Just as with the bootstrap, the answer we get is subject to variability due to the inherent randomness of resampling from the data. We can make the variability as small as we like by taking sufficiently many resamples. How many? If the conclusion is very important (that is, if lots of money is at stake), then take thousands. For point estimation problems typically, \(R=1000\) resamples, or so, is enough. In general, if the true \(p\)-value is \(p\) then the standard error of the estimated \(p\)-value is \(\sqrt{p(1-p)/R}\). You can choose \(R\) to get whatever accuracy desired.
@@ -11718,7 +11717,7 @@ A /critical number/ of the function \(f\) is a value \(x^{\ast}\) for which \(f'
 #+end_defn
 
 #+begin_thm
-#+latex: \label{thm:First-Derivative-Test}
+#+latex: \label{thm-First-Derivative-Test}
 First Derivative Test. If \(f\) is differentiable and if \(x^{\ast}\) is a critical number of \(f\) and if \(f'(x)\geq0\) for \(x\leq x^{\ast}\) and \(f'(x)\leq0\) for \(x\geq x^{\ast}\), then \(x^{\ast}\) is a local maximum of \(f\). If \(f'(x)\leq0\) for \(x\leq x^{\ast}\) and \(f'(x)\geq0\) for \(x\geq x^{\ast}\) , then \(x^{\ast}\) is a local minimum of \(f\).
 #+end_thm
 
@@ -11972,7 +11971,7 @@ A square matrix \(\mathbf{A}\) is nonsingular if and only if \(\mathrm{det}(\mat
 #+end_fact
 
 *** Positive (Semi)Definite
-If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is /positive semidefinite/. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is /positive definite/. The connection to statistics is that covariance matrices (see Chapter \ref{cha-Multivariable-Distributions}) are always positive semidefinite, and many of them are even positive definite.
+If the matrix \(\mathbf{A}\) satisfies \(\mathbf{x^{\mathrm{T}}}\mathbf{A}\mathbf{x}\geq0\) for all vectors \(\mathbf{x}\neq\mathbf{0}\), then we say that \(\mathbf{A}\) is /positive semidefinite/. If strict inequality holds for all \(\mathbf{x}\neq\mathbf{0}\), then \(\mathbf{A}\) is /positive definite/. The connection to statistics is that covariance matrices (see Chapter [[cha-Multivariable-Distributions][Multivariate Distributions]]) are always positive semidefinite, and many of them are even positive definite.
 
 ** Multivariable Calculus
 :PROPERTIES:
@@ -12004,7 +12003,7 @@ Suppose the point \((a,b)\) is a /critical point/ of \(f\), that is, suppose \((
 \begin{equation}
 \frac{\partial f}{\partial x}(a,b)=\frac{\partial f}{\partial y}(a,b)=0.
 \end{equation}
-Further suppose \(\frac{\partial^{2}f}{\partial x^{2}}\) and \(\frac{\partial^{2}f}{\partial y^{2}}\) are continuous near \((a,b)\). Let the /Hessian matrix/ \(H\) (not to be confused with the /hat matrix/ \(\mathbf{H}\) of Chapter \ref{cha-multiple-linear-regression}) be defined by
+Further suppose \(\frac{\partial^{2}f}{\partial x^{2}}\) and \(\frac{\partial^{2}f}{\partial y^{2}}\) are continuous near \((a,b)\). Let the /Hessian matrix/ \(H\) (not to be confused with the /hat matrix/ \(\mathbf{H}\) of Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]]) be defined by
 \begin{equation}
 H = 
 \begin{bmatrix}
@@ -12267,7 +12266,7 @@ In addition to the main text, student manual, and instructor manual, there are t
 :CUSTOM_ID: sec-Modifying-This-Document
 :END: 
 
-Since this document is released under the GNU-FDL, you are free to modify this document however you wish (in accordance with the license -- see Appendix \ref{cha-GNU-Free-Documentation}). The immediate benefit of this is that you can generate the book, with brand new problem sets, and distribute it to your students simply as a PDF (in an email, for instance). As long as you distribute less than 100 such /Opaque/ copies, you are not even required by the GNU-FDL to share your /Transparent/ copy (the source code with the secret key) that you used to generate them. Next semester, choose a new key and generate a new copy to be distributed to the new class. 
+Since this document is released under the GNU-FDL, you are free to modify this document however you wish (in accordance with the license -- see Appendix [[cha-GNU-Free-Documentation][GNU FDL]]). The immediate benefit of this is that you can generate the book, with brand new problem sets, and distribute it to your students simply as a PDF (in an email, for instance). As long as you distribute less than 100 such /Opaque/ copies, you are not even required by the GNU-FDL to share your /Transparent/ copy (the source code with the secret key) that you used to generate them. Next semester, choose a new key and generate a new copy to be distributed to the new class. 
 
 #+begin_quote
 But more generally, if you are not keen on the way I explained (or failed to explain) something, then you are _free_ to rewrite it. If you would like to cover more (or less) material, then you are _free_ to add (or delete) whatever Chapters/Sections/Paragraphs that you wish. And since you have the source code, you do not need to retype the wheel. 
