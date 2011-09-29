@@ -5,7 +5,7 @@
 #+DESCRIPTION: This is a basic introduction to the essential ideas of probability and statistics.
 #+KEYWORDS: introduction probability statistics
 #+LANGUAGE:  en
-#+OPTIONS:   H:5 toc:3 \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
+#+OPTIONS:   H:4 toc:3 \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:nil
 #+INFOJS_OPT: view:info toc:nil ftoc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
@@ -1481,7 +1481,7 @@ It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers 
 #+latex: \noindent 
 In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
 
-**** What do I want them to know?
+** What do I want them to know?
 
 - different data types, such as quantitative versus qualitative, nominal versus ordinal, and discrete versus continuous
 - basic graphical displays for assorted data types, and some of their (dis)advantages 
@@ -1875,7 +1875,6 @@ Tbl/sum(Tbl)      # relative frequencies
 prop.table(Tbl)   # same thing
 #+end_src
 
-
 **** Bar Graphs
 :PROPERTIES:
 :CUSTOM_ID: par:Bar-Graphs
@@ -1969,8 +1968,6 @@ pareto.chart(table(state.division), ylab="Frequency")
 #+end_html
 
 #+latex: \end{example}
-
-
 
 **** Dot Charts
 :PROPERTIES:
@@ -2185,7 +2182,6 @@ The /trimmed mean/ is a measure designed to address the sensitivity of the sampl
 - Good: resistant to extreme values, shares nice statistical properties
 - Bad: need to sort the data
 
-
 **** How to do it with \(\mathsf{R}\)
 
 - You can calculate frequencies or relative frequencies with the =table= function, and relative frequencies with =prop.table(table())=. 
@@ -2220,7 +2216,6 @@ The interpretation of \(\tilde{q}_{p}\) is that approximately \(100p\) % of the 
 Keep in mind that there is not a unique definition of percentiles, quartiles, /etc/. Open a different book, and you'll find a different definition. The difference is small and seldom plays a role except in small data sets with repeated values. In fact, most people do not even notice in common use.
 
 Clearly, the most popular sample quantile is \(\tilde{q}_{0.50}\), also known as the sample median, \(\tilde{x}\). The closest runners-up are the /first quartile/ \(\tilde{q}_{0.25}\) and the /third quartile/ \(\tilde{q}_{0.75}\) (the /second quartile/ is the median). 
-
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -2264,7 +2259,6 @@ Chebychev's Rule applies to any data distribution, /any/ list of numbers, no mat
 Empirical Rule: If data follow a bell-shaped curve, then approximately 68%, 95%, and 99.7% of the data are within 1, 2, and 3 standard deviations of the mean, respectively. 
 #+end_fact
 
-
 **** Interquartile Range
 
 Just as the sample mean is sensitive to extreme values, so the associated measure of spread is similarly sensitive to extremes. Further, the problem is exacerbated by the fact that the extreme distances are squared. We know that the sample quartiles are resistant to extremes, and a measure of spread associated with them is the /interquartile range/ (\(IQR\)) defined by \(IQR=q_{0.75}-q_{0.25}\).
@@ -2287,7 +2281,6 @@ That is, the \(MAD=c\cdot\mbox{median}(|x_{1}-\tilde{x}|,\ |x_{2}-\tilde{x}|,\ld
 We have seen three different measures of spread which, for a given data set, will give three different answers. Which one should we use? It depends on the data set. If the data are well behaved, with an approximate bell-shaped distribution, then the sample mean and sample standard deviation are natural choices with nice mathematical properties. However, if the data have an unusual or skewed shape with several extreme values, perhaps the more resistant choices among the \(IQR\) or \(MAD\) would be more appropriate.
 
 However, once we are looking at the three numbers it is important to understand that the estimators are not all measuring the same quantity, on the average. In particular, it can be shown that when the data follow an approximately bell-shaped distribution, then on the average, the sample standard deviation \(s\) and the \(MAD\) will be the approximately the same value, namely, \(\sigma\), but the \(IQR\) will be on the average 1.349 times larger than \(s\) and the \(MAD\). See \ref{cha:Sampling-Distributions} for more details.
-
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -2363,7 +2356,6 @@ There are many bells and whistles associated with stemplots, and the =stem.leaf=
 - Split Stems: :: The standard stemplot has only one line per stem, which means that all observations with first digit =3= are plotted on the same line, regardless of the value of the second digit. But this gives some stemplots a ``skyscraper'' appearance, with too many observations stacked onto the same stem. We can often fix the display by increasing the number of lines available for a given stem. For example, we could make two lines per stem, say, =3*= and =3.=. Observations with second digit 0 through 4 would go on the upper line, while observations with second digit 5 through 9 would go on the lower line. (We could do a similar thing with five lines per stem, or even ten lines per stem.) The end result is a more spread out stemplot which often looks better. A good example of this was shown on page \pageref{exa:stemleaf-multiple-lines-stem}. 
 
 - Depths: :: these are used to give insight into the balance of the observations as they accumulate toward the median. In a column beside the standard stemplot, the frequency of the stem containing the sample median is shown in parentheses. Next, frequencies are accumulated from the outside inward, including the outliers. Distributions that are more symmetric will have better balanced depths on either side of the sample median.
-
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -2698,7 +2690,6 @@ It is clear that if \(x_{(k)}=y_{(k)}\) for all \(k=1,2,\ldots,n\), then we will
 The following types of plots are useful when there is one variable of interest and there is a factor in the data set by which the variable is categorized. 
 
 It is sometimes nice to set =lattice.options(default.theme = "col.whitebg")=
-
 
 **** Side by side boxplots
 
