@@ -534,7 +534,7 @@ These are one of the most common summary displays, and they are often misidentif
 #+latex: \begin{example}
 *Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-Various-stripchart-methods][Various stripchart methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 
-There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure \ref{fig-histograms}.
+There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure [[fig-histograms][Histograms]].
 
 #+begin_src R :exports code :eval never
 hist(precip, main = "")
@@ -649,7 +649,7 @@ The rightmost graph in Figure [[fig-histograms-bins][Histograms-bins]] shows wha
 Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the data values is taken to be a /leaf/, and the leading digit(s) is (are) taken to be /stems/. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
 
 #+latex: \begin{example}
-#+latex: \label{exa:-ukdriverdeaths-first}
+#+latex: \label{exa-ukdriverdeaths-first}
 =UKDriverDeaths=\index{Data sets!UKDriverDeaths@\texttt{UKDriverDeaths}} is a time series that contains the total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984. See =?UKDriverDeaths=. Compulsory seat belt use was introduced on January 31, 1983. We construct a stem and leaf diagram in \(\mathsf{R}\) with the =stem.leaf=\index{stem.leaf@\texttt{stem.leaf}} function from the =aplpack=\index{R packages@\textsf{R} packages!aplpack@\texttt{aplpack}} package\cite{aplpack}.
 #+latex: \end{example}
 
@@ -1020,7 +1020,7 @@ When we speak of the /shape/ of a data set, we are usually referring to the shap
 A distribution is said to be /right-skewed/ (or /positively skewed/) if the right tail seems to be stretched from the center. A /left-skewed/ (or /negatively skewed/) distribution is stretched to the left side. A symmetric distribution has a graph that is balanced about its center, in the sense that half of the graph may be reflected about a central line of symmetry to match the other
 half.
 
-We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][Strip Charts]] and the =precip= data in Figure [[fig-histograms-bins][Histograms-Bins]] appear right-skewed. The =UKDriverDeaths= data in Example \ref{exa:-ukdriverdeaths-first} is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stemplot).
+We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][Strip Charts]] and the =precip= data in Figure [[fig-histograms-bins][Histograms-Bins]] appear right-skewed. The =UKDriverDeaths= data in Example [[exa-ukdriverdeaths-first][UK Driver Deaths]] is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stemplot).
 
 **** Kurtosis
 
@@ -1262,7 +1262,7 @@ There are many bells and whistles associated with stemplots, and the =stem.leaf=
 
 - Trim Outliers: :: Some data sets have observations that fall far from the bulk of the other data (in a sense made more precise in Section [[sub-Outliers][Outliers]]). These extreme observations often obscure the underlying structure to the data and are best left out of the data display. The =trim.outliers= argument (which is =TRUE= by default) will separate the extreme observations from the others and graph the stemplot without them; they are listed at the bottom (respectively, top) of the stemplot with the label =HI= (respectively =LO=). 
 
-- Split Stems: :: The standard stemplot has only one line per stem, which means that all observations with first digit =3= are plotted on the same line, regardless of the value of the second digit. But this gives some stemplots a ``skyscraper'' appearance, with too many observations stacked onto the same stem. We can often fix the display by increasing the number of lines available for a given stem. For example, we could make two lines per stem, say, =3*= and =3.=. Observations with second digit 0 through 4 would go on the upper line, while observations with second digit 5 through 9 would go on the lower line. (We could do a similar thing with five lines per stem, or even ten lines per stem.) The end result is a more spread out stemplot which often looks better. A good example of this was shown on page \pageref{exa:stemleaf-multiple-lines-stem}. 
+- Split Stems: :: The standard stemplot has only one line per stem, which means that all observations with first digit =3= are plotted on the same line, regardless of the value of the second digit. But this gives some stemplots a ``skyscraper'' appearance, with too many observations stacked onto the same stem. We can often fix the display by increasing the number of lines available for a given stem. For example, we could make two lines per stem, say, =3*= and =3.=. Observations with second digit 0 through 4 would go on the upper line, while observations with second digit 5 through 9 would go on the lower line. (We could do a similar thing with five lines per stem, or even ten lines per stem.) The end result is a more spread out stemplot which often looks better. A good example of this was shown on page \pageref{exa-stemleaf-multiple-lines-stem}. 
 
 - Depths: :: these are used to give insight into the balance of the observations as they accumulate toward the median. In a column beside the standard stemplot, the frequency of the stem containing the sample median is shown in parentheses. Next, frequencies are accumulated from the outside inward, including the outliers. Distributions that are more symmetric will have better balanced depths on either side of the sample median.
 
@@ -1494,7 +1494,7 @@ I am thinking here about the =Statistics= \(\triangleright\) =Numerical Summarie
 
 - Boxplots
   - Variable width: the width of the drawn boxplots are proportional to \(\sqrt{n_{i}}\), where \(n_{i}\) is the size of the \(i^{\mathrm{th}}\) group. Why? Because many statistics have variability proportional to the reciprocal of the square root of the sample size.
-  - Notches: extend to \(1.58\cdot(h_{U}-h_{L})/\sqrt{n}\). The idea is to give roughly a 95% confidence interval for the difference in two medians. See Chapter \ref{cha-Hypothesis-Testing}.
+  - Notches: extend to \(1.58\cdot(h_{U}-h_{L})/\sqrt{n}\). The idea is to give roughly a 95% confidence interval for the difference in two medians. See Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]].
 - Stripcharts
   - stripchart(weight ~ feed, method= "stack", data=chickwts) 
 - Bar Graphs
@@ -1885,7 +1885,7 @@ For a random experiment \(E\), the set of all possible outcomes of \(E\) is call
 
 *** How to do it with \(\mathsf{R}\)
 
-Most of the probability work in this book is done with the =prob= package \cite{Kernsprob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section \ref{sub-Multivariate-Data}). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section \ref{sub-howto-ps-objects} for details.
+Most of the probability work in this book is done with the =prob= package \cite{Kernsprob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section [[sub-Multivariate-Data][Multivariate Data]]). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section [[sub-howto-ps-objects][How to =ps=]] for details.
 
 #+latex: \begin{example}
 Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
@@ -1948,7 +1948,7 @@ Note that this one general class of random experiments contains as a special cas
 The =prob= package accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 
 #+latex: \begin{example}
-#+latex: \label{exa:sample-urn-two-from-three}
+#+latex: \label{exa-sample-urn-two-from-three}
 Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We are going to take a sample of size 2 from the urn. 
 
 **** Ordered, With Replacement
@@ -2004,7 +2004,7 @@ In this way, when the =x= argument of =urnsamples= has repeated elements, the re
 
 An /event/\index{event} \(A\) is merely a collection of outcomes, or in other words, a subset of the sample space
 #+latex: \footnote{This naive definition works for finite or countably infinite sample spaces, but is inadequate for sample spaces in general. In this book, we will not address the subtleties that arise, but will refer the interested reader to any text on advanced probability or measure theory.}.
-After the performance of a random experiment \(E\) we say that the event \(A\) /occurred/ if the experiment's outcome belongs to \(A\). We say that a bunch of events \(A_{1}\), \(A_{2}\), \(A_{3}\), ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if \(A_{i}\cap A_{j}=\emptyset\) for any distinct pair \(A_{i}\neq A_{j}\). For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix \ref{sec-The-Algebra-of}.
+After the performance of a random experiment \(E\) we say that the event \(A\) /occurred/ if the experiment's outcome belongs to \(A\). We say that a bunch of events \(A_{1}\), \(A_{2}\), \(A_{3}\), ... are /mutually exclusive/\index{mutually exclusive} or /disjoint/ if \(A_{i}\cap A_{j}=\emptyset\) for any distinct pair \(A_{i}\neq A_{j}\). For instance, in the coin-toss experiment the events \( A = \{ \mbox{Heads} \}\) and \( B = \{ \mbox{Tails} \} \) would be mutually exclusive. Now would be a good time to review the algebra of sets in Appendix [[sec-The-Algebra-of][Algebra of Sets]].
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -2130,7 +2130,7 @@ setdiff(A,B)
 setdiff(B,A) 
 #+end_src 
 
-Notice that =setdiff= is not symmetric. Further, note that we can calculate the /complement/ of a set \(A\), denoted \(A^{c}\) and defined to be the elements of \(S\) that are not in \(A\) simply with =setdiff(S,A)=. There have been methods written for =intersect=, =setdiff=, =subset=, and =union= in the case that the input objects are of class =ps=. See Section \ref{sub-howto-ps-objects}.
+Notice that =setdiff= is not symmetric. Further, note that we can calculate the /complement/ of a set \(A\), denoted \(A^{c}\) and defined to be the elements of \(S\) that are not in \(A\) simply with =setdiff(S,A)=. There have been methods written for =intersect=, =setdiff=, =subset=, and =union= in the case that the input objects are of class =ps=. See Section [[sub-howto-ps-objects][How to =ps=]].
 
 #+begin_note
 
@@ -2175,7 +2175,7 @@ This approach was espoused by Richard von Mises in the early twentieth century, 
 
 *** The Subjective Approach
 
-The subjective approach interprets probability as the experimenter's /degree of belief/ that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section \ref{sec-Bayes'-Rule}. 
+The subjective approach interprets probability as the experimenter's /degree of belief/ that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section [[sec-Bayes'-Rule][Bayes' Rule]]. 
 
 So for the coin toss example, a person may have \(\Pr(\mbox{Heads})=1/2\) in the absence of additional information. But perhaps the observer knows additional information about the coin or the thrower that would shift the probability in a certain direction. For instance, parlor magicians may be trained to be quite skilled at tossing coins, and some are so skilled that they may toss a fair coin and get nothing but Heads, indefinitely. I have /seen/ this. It was similarly claimed in /Bringing Down the House/ \cite{Mezrich2003} that MIT students were accomplished enough with cards to be able to cut a deck to the same location, every single time. In such cases, one clearly should use the additional information to assign \(\Pr(\mbox{Heads})\) away from the symmetry value of \(1/2\).
 
@@ -2236,7 +2236,7 @@ or just =rolldie(1, TRUE)=. Many of the other sample space functions (=tosscoin=
 One sample space function that does NOT have a =makespace= option is the =urnsamples= function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use =probspace= to assign the model.
 
 #+latex: \begin{example}
-#+latex: \label{exa:unbalanced-coin}
+#+latex: \label{exa-unbalanced-coin}
 *An unbalanced coin.* While the =makespace= argument to =tosscoin= is useful to represent the tossing of a /fair/ coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 
 #+begin_src R :exports both :results output pp   
@@ -2294,7 +2294,7 @@ The intuition behind the axioms goes like this: first, the probability of an eve
 
 For any events \(A\) and \(B\),
 
-1. \(\Pr(A^{c})=1-\Pr(A)\).\label{enu:prop-prob-complement} 
+1. \(\Pr(A^{c})=1-\Pr(A)\).\label{enu-prop-prob-complement} 
   #+begin_proof
   Since \(A\cup A^{c}=S\) and \(A\cap A^{c}=\emptyset\), we have
   \[
@@ -2315,7 +2315,7 @@ For any events \(A\) and \(B\),
   #+end_proof
 1. \(0\leq\Pr(A)\leq1\).
   #+begin_proof
-  The left inequality is immediate from Axiom \ref{ax-prob-nonnegative}, and the second inequality follows from Property 3 since \(A\subset S\).
+  The left inequality is immediate from Axiom [[ax-prob-nonnegative][Probability is Nonnegative]], and the second inequality follows from Property 3 since \(A\subset S\).
   #+end_proof
 
 1. *The General Addition Rule.*
@@ -2358,11 +2358,11 @@ Suppose the experiment \(E\) consists of tossing a fair coin twice. The sample s
 
 What is \(\Pr(\mbox{at least 1 Head})\)? Looking at the sample space we see the elements \(HH\), \(HT\), and \(TH\) have at least one Head; thus, \(\Pr(\mbox{at least 1 Head})=3/4\). 
 
-What is \(\Pr(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by Property \ref{enu:prop-prob-complement} means \(\Pr(\mbox{no Heads})=1-\Pr(\mbox{at least one head})=1-3/4=1/4\). It is obvious in this simple example that the only outcome with no Heads is \(TT\), however, this complementation trick can be handy in more complicated problems.
+What is \(\Pr(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by Property [[enu-prop-prob-complement][prob-comp]] means \(\Pr(\mbox{no Heads})=1-\Pr(\mbox{at least one head})=1-3/4=1/4\). It is obvious in this simple example that the only outcome with no Heads is \(TT\), however, this complementation trick can be handy in more complicated problems.
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:three-child-family}
+#+latex: \label{exa-three-child-family}
 Imagine a three child family, each child being either Boy (\(B\)) or Girl (\(G\)). An example sequence of siblings would be \(BGB\). The sample space may be written
 \[
 S=\left\{ 
@@ -2412,7 +2412,7 @@ Staying with the deck of cards, let another random experiment be the selection o
 
 What is \(\Pr(\mbox{Royal Flush})\), or in other words, \(\Pr(\mbox{A, K, Q, J, 10 all in the same suit})\)? 
 
-It should be clear that there are only four possible royal flushes. Thus, if we could only count the number of outcomes in \(S\) then we could simply divide four by that number and we would have our answer under the equally likely model. This is the subject of Section \ref{sec-Methods-of-Counting}.
+It should be clear that there are only four possible royal flushes. Thus, if we could only count the number of outcomes in \(S\) then we could simply divide four by that number and we would have our answer under the equally likely model. This is the subject of Section [[sec-Methods-of-Counting][Counting Methods]].
 
 #+latex: \end{example}
 
@@ -2442,7 +2442,7 @@ prob(S, suit == "Heart")
 
 We also find =prob(B) = 0.23= (listed here approximately, but 12/52 actually) and =prob(S) = 1=. Internally, the =prob= function operates by summing the =probs= column of its argument. It will find subsets on-the-fly if desired.
 
-We have as yet glossed over the details. More specifically, =prob= has three arguments: =x=, which is a probability space (or a subset of one), =event=, which is a logical expression used to define a subset, and =given=, which is described in Section \ref{sec-Conditional-Probability}.
+We have as yet glossed over the details. More specifically, =prob= has three arguments: =x=, which is a probability space (or a subset of one), =event=, which is a logical expression used to define a subset, and =given=, which is described in Section [[sec-Conditional-Probability][Conditional Probability]].
 
 /WARNING/. The =event= argument is used to define a subset of =x=, that is, the only outcomes used in the probability calculation will be those that are elements of =x= and satisfy =event= simultaneously. In other words, =prob(x, event)= calculates 
 
@@ -2556,7 +2556,7 @@ But we often do not need to actually generate the sample space; it suffices to c
 
 
 #+latex: \begin{example}
-We will compute the number of outcomes for each of the four =urnsamples= examples that we saw in Example \ref{exa:sample-urn-two-from-three}. Recall that we took a sample of size two from an urn with three distinguishable elements.
+We will compute the number of outcomes for each of the four =urnsamples= examples that we saw in Example [[exa-sample-urn-two-from-three][Sample-urn-2-from-3]]. Recall that we took a sample of size two from an urn with three distinguishable elements.
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp   
@@ -2626,7 +2626,7 @@ For starters we will ignore leap years and assume that there are only 365 days i
 
 Let us next think about the sample space. There are 365 possibilities for the first person's birthday, 365 possibilities for the second, and so forth. The total number of possible birthday sequences is therefore \(\#(S)=365^{n}\).
 
-Now we will use the complementation trick we saw in Example \ref{exa:three-child-family}. We realize that the only situation in which \(A\) does /not/ occur is if there are /no/ matches among all people in the room, that is, only when everybody's birthday is different, so
+Now we will use the complementation trick we saw in Example [[exa-three-child-family][Three Child Family]]. We realize that the only situation in which \(A\) does /not/ occur is if there are /no/ matches among all people in the room, that is, only when everybody's birthday is different, so
 \[
 \Pr(A)=1-\Pr(A^{c})=1-\frac{\#(A^{c})}{\#(S)},
 \]
@@ -2638,7 +2638,7 @@ As a surprising consequence, consider this: how many people does it take to be i
 
 When I have asked this question to students, the usual response is ``somewhere around \(n=180\) people'' in the room. The reasoning seems to be that in order to get a 50% chance of a match, there should be 50% of the available days to be occupied. The number of students in a typical classroom is 25, so as a companion question I ask students to estimate the probability of a match when there are \(n=25\) students in the room. Common estimates are a 1%, or 0.5%, or even 0.1% chance of a match. After they have given their estimates, we go around the room and each student announces their birthday. More often than not, we observe a match in the class, to the students' disbelief.
 
-Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure \ref{fig-birthday} shows a graph of the birthday probabilities:
+Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure [[fig-birthday][Birthday]] shows a graph of the birthday probabilities:
 #+latex: \end{example}
 
 #+srcname: birthday
@@ -2679,7 +2679,7 @@ remove(g)
 
 **** How to do it with \(\mathsf{R}\)
 
-We can make the plot in Figure \ref{fig-The-Birthday-Problem} with the following sequence of commands.
+We can make the plot in Figure [[fig-birthday][Birthday]] with the following sequence of commands.
 
 #+begin_src R :exports code :eval never
 g <- Vectorize(pbirthday.ipsur)
@@ -2724,8 +2724,8 @@ which means that given the information that a Head has occurred, we no longer ne
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:Toss-a-six-sided-die-twice}
-Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section \ref{sec-Methods-of-Counting} that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
+#+latex: \label{exa-Toss-a-six-sided-die-twice}
+Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section [[sec-Methods-of-Counting][Counting Methods]] that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
 #+begin_latex
 \begin{table}
@@ -2760,7 +2760,7 @@ Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in t
 
 *** How to do it with \(\mathsf{R}\)
 
-Continuing with Example \ref{exa:Toss-a-six-sided-die-twice}, the first thing to do is set up the probability space with the =rolldie= function.
+Continuing with Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]], the first thing to do is set up the probability space with the =rolldie= function.
 
 #+begin_src R :exports both :results output pp  
 library(prob)
@@ -2821,7 +2821,7 @@ For any events \(A\), \(B\), and \(C\) with \(\Pr(A)>0\),
 The Multiplication Rule is very important because it allows us to find probabilities in random experiments that have a sequential structure, as the next example shows. 
 
 #+latex: \begin{example}
-#+latex: \label{exa:two-cards-both-aces}
+#+latex: \label{exa-two-cards-both-aces}
 At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is \(\Pr(\mbox{both Aces})\)?
 
 \[
@@ -2835,7 +2835,7 @@ At the beginning of the section we drew two cards from a standard playing deck. 
 :CUSTOM_ID: sub-howto-ps-objects
 :END:
 
-Continuing Example \ref{exa:two-cards-both-aces}, we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
+Continuing Example [[exa-two-cards-both-aces][Both Aces]], we set up the probability space by way of a three step process. First we employ the =cards= function to get a data frame =L= with two columns: =rank= and =suit=. Both columns are stored internally as factors with 13 and 4 levels, respectively.
 
 Next we sample two cards randomly from the =L= data frame by way of the =urnsamples= function. It returns a list =M= which contains all possible pairs of rows from =L= (there are =choose(52,2)= of them). The sample space for this experiment is exactly the list =M=.
 
@@ -2858,11 +2858,11 @@ Now that we have the probability space =N= we are ready to do some probability. 
 prob(N, all(rank == "A"))
 #+end_src
 
-Note that this value matches what we found in Example \ref{exa:two-cards-both-aces}, above. We could calculate all sorts of probabilities at this point; we are limited only by the complexity of the event's computer representation. 
+Note that this value matches what we found in Example [[exa-two-cards-both-aces][Both Aces]], above. We could calculate all sorts of probabilities at this point; we are limited only by the complexity of the event's computer representation. 
 
 
 #+latex: \begin{example}
-#+latex: \label{exa:urn-7-red-3-green}
+#+latex: \label{exa-urn-7-red-3-green}
 Consider an urn with 10 balls inside, 7 of which are red and 3 of which are green. Select 3 balls successively from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \), \( B = \{ 2^{\mathrm{nd}} \mbox{ ball is red} \} \), and \( C = \{ 3^{\mathrm{rd}} \mbox{ ball is red} \} \). Then
 \[
 \Pr(\mbox{all 3 balls are red})=\Pr(A\cap B\cap C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.
@@ -2872,7 +2872,7 @@ Consider an urn with 10 balls inside, 7 of which are red and 3 of which are gree
 
 **** How to do it with \(\mathsf{R}\)
 
-Example \ref{exa:urn-7-red-3-green} is similar to Example \ref{exa:two-cards-both-aces}, but it is even easier. We need to set up an urn (vector =L=) to hold the balls, we sample from =L= to get the sample space (data frame =M=), and we associate a probability vector (column =probs=) with the outcomes (rows of =M=) of the sample space. The final result is a probability space (an ordinary data frame =N=).
+Example [[exa-urn-7-red-3-green][Urn 7 red 3 green]] is similar to Example [[exa-two-cards-both-aces][Both Aces]], but it is even easier. We need to set up an urn (vector =L=) to hold the balls, we sample from =L= to get the sample space (data frame =M=), and we associate a probability vector (column =probs=) with the outcomes (rows of =M=) of the sample space. The final result is a probability space (an ordinary data frame =N=).
 
 It is easier for us this time because our urn is a vector instead of a =cards()= data frame. Before there were two dimensions of information associated with the outcomes (rank and suit) but presently we have only one dimension (color).
 
@@ -2889,13 +2889,13 @@ Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\}
 prob(N, isrep(N, "red", 3))
 #+end_src
 
-Note that this answer matches what we found in Example \ref{exa:urn-7-red-3-green}. Now let us try some other probability questions. What is the probability of getting two =red='s?
+Note that this answer matches what we found in Example [[exa-urn-7-red-3-green][Urn 7 red 3 green]]. Now let us try some other probability questions. What is the probability of getting two =red='s?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isrep(N, "red", 2))
 #+end_src
 
-Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section \ref{sec-other-discrete-distributions}. What is the probability of observing =red=, then =green=, then =red=?
+Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section [[sec-other-discrete-distributions][Other Discrete Distributions]]. What is the probability of observing =red=, then =green=, then =red=?
 
 #+begin_src R :exports both :results output pp  
 prob(N, isin(N, c("red","green","red"), ordered = TRUE))
@@ -2928,7 +2928,7 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 #+latex: \end{example}
 
 #+latex: \begin{example}
-We saw the =RcmdrTestDrive= data set in Chapter \ref{cha-introduction-to-R} in which a two-way table of the smoking status versus the gender was 
+We saw the =RcmdrTestDrive= data set in Chapter [[cha-introduction-to-R][Intro to R]] in which a two-way table of the smoking status versus the gender was 
 
 #+begin_src R :exports both :results output pp  
 .Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
@@ -2976,7 +2976,7 @@ Events \(A\) and \(B\) are said to be /independent/ if
 Otherwise, the events are said to be /dependent/. 
 #+end_defn
 
-The connection with the above example stems from the following. We know from Section \ref{sec-Conditional-Probability} that when \(\Pr(B)>0\) we may write
+The connection with the above example stems from the following. We know from Section [[sec-Conditional-Probability][Conditional Probability]] that when \(\Pr(B)>0\) we may write
 \begin{equation}
 \Pr(A|B)=\frac{\Pr(A\cap B)}{\Pr(B)}.
 \end{equation}
@@ -2998,7 +2998,7 @@ Suppose that \(A\) and \(B\) are independent. We will show the second one; the o
 \[
 \Pr(A^{c}\cap B)=\Pr(A^{c})\Pr(B).
 \]
-To this end, note that the Multiplication Rule, Equation \ref{eq-multiplication-rule-short} implies 
+To this end, note that the Multiplication Rule, Equation [[eq-multiplication-rule-short][MR short]] implies 
 \begin{eqnarray*}
 \Pr(A^{c}\cap B) & = & \Pr(B)\Pr(A^{c}|B),\\
  & = & \Pr(B)[1-\Pr(A|B)],\\
@@ -3020,10 +3020,10 @@ and
 If only the first three conditions hold then \(A\), \(B\), and \(C\) are said to be independent /pairwise/. Note that pairwise independence is not the same as mutual independence when the number of events is larger than two.
 #+end_defn
 
-We can now deduce the pattern for \(n\) events, \(n>3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise \ref{xca-numb-cond-indep}). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
+We can now deduce the pattern for \(n\) events, \(n>3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise [[xca-numb-cond-indep][Number conditions indep]]). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
 
 #+latex: \begin{example}
-#+latex: \label{exa:toss-ten-coins}
+#+latex: \label{exa-toss-ten-coins}
 Toss ten coins. What is the probability of observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10\). Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the \(A_{i}\) may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
 \begin{align*}
 \Pr(\mbox{at least one }H) & =1-\Pr(\mbox{all }T),\\
@@ -3046,7 +3046,7 @@ A <- subset(S, isrep(S, vals = "T", nrep = 10))
 1 - prob(A)
 #+end_src
 
-Compare this answer to what we got in Example \ref{exa:toss-ten-coins}.
+Compare this answer to what we got in Example [[exa-toss-ten-coins][Toss 10 coins]].
 
 #+latex: \end{example}
 
@@ -3057,7 +3057,7 @@ Generalizing from above it is common to repeat a certain experiment multiple tim
 The =iidspace= function was designed specifically for this situation. It has three arguments: =x=, which is a vector of outcomes, =ntrials=, which is an integer telling how many times to repeat the experiment, and =probs= to specify the probabilities of the outcomes of =x= in a single trial. 
 
 #+latex: \begin{example}
-*An unbalanced coin* (continued, see Example \ref{exa:unbalanced-coin}). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
+*An unbalanced coin* (continued, see Example [[exa-unbalanced-coin][Unbalanced Coin]]). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
 
 We may represent tossing our unbalanced coin three times with the following: 
 
@@ -3076,7 +3076,7 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 :CUSTOM_ID: sec-Bayes'-Rule
 :END:
 
-We mentioned the subjective view of probability in Section \ref{sec-Interpreting-Probabilities}. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
+We mentioned the subjective view of probability in Section [[sec-Interpreting-Probabilities][Interpreting Probabilities]]. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
 
 #+begin_thm
 *Bayes' Rule*. Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\Pr(A)>0\). Then 
@@ -3094,7 +3094,7 @@ Since \(\Pr(A)>0\) we may divide through to obtain
 \[
 \Pr(B_{k}|A)=\frac{\Pr(B_{k})\Pr(A|B_{k})}{\Pr(A)}.
 \]
-Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation \ref{eq-theorem-total-probability}) gives the denominator of the last expression to be
+Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation [[eq-theorem-total-probability][TTP]]) gives the denominator of the last expression to be
 \[
 \Pr(A)=\sum_{k=1}^{n}\Pr(B_{k}\cap A)=\sum_{k=1}^{n}\Pr(B_{k})\Pr(A|B_{k}).
 \]
@@ -3103,7 +3103,7 @@ Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probab
 What does it mean? Usually in applications we are given (or know) /a priori/ probabilities \(\Pr(B_{k})\). We go out and collect some data, which we represent by the event \(A\). We want to know: how do we *update* \(\Pr(B_{k})\) to \(\Pr(B_{k}|A)\)? The answer: Bayes' Rule.
 
 #+latex: \begin{example}
-#+latex: \label{exa:misfiling-assistants}
+#+latex: \label{exa-misfiling-assistants}
 *Misfiling Assistants.* In this problem, there are three assistants working at a company: Moe, Larry, and Curly. Their primary job duty is to file paperwork in the filing cabinet when papers become available. The three assistants have different work schedules:
 |          | Moe | Larry | Curly |
 |----------+-----+-------+-------|
@@ -3149,7 +3149,7 @@ Using the same procedure we may calculate
 \Pr(L|A)=0.0021\mbox{ and }\Pr(C|A)=0.0010.
 \]
 
-Now let's find the denominator, \(\Pr(A)\). The key here is the notion that if a file is misplaced, then either Moe or Larry or Curly must have filed it; there is no one else around to do the misfiling. Further, these possibilities are mutually exclusive. We may use the Theorem of Total Probability \ref{eq-theorem-total-probability} to write
+Now let's find the denominator, \(\Pr(A)\). The key here is the notion that if a file is misplaced, then either Moe or Larry or Curly must have filed it; there is no one else around to do the misfiling. Further, these possibilities are mutually exclusive. We may use the Theorem of Total Probability [[eq-theorem-total-probability][TTP]] to write
 \[ 
 \Pr(A)=\Pr(A\cap M)+\Pr(A\cap L)+\Pr(A\cap C).
 \]
@@ -3169,7 +3169,7 @@ The conclusion: *Larry* gets the axe. What is happening is an intricate interpla
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:misfiling-assistants-multiple}
+#+latex: \label{exa-misfiling-assistants-multiple}
 Suppose the boss gets a change of heart and does not fire anybody. But the next day (s)he randomly selects another file and again finds it to be misplaced. To decide whom to fire now, the boss would use the same procedure, with one small change. (S)he would not use the prior probabilities 60%, 30%, and 10%; those are old news. Instead, she would replace the prior probabilities with the posterior probabilities just calculated. After the math she will have new posterior probabilities, updated even more from the day before.
 
 In this way, probabilities found by Bayes' rule are always on the cutting edge, always updated with respect to the best information available at the time.
@@ -3180,7 +3180,7 @@ In this way, probabilities found by Bayes' rule are always on the cutting edge, 
 There are not any special functions for Bayes' Rule in the =prob= package, but problems like the ones above are easy enough to do by hand.
 
 #+latex: \begin{example}
-*Misfiling assistants* (continued from Example \ref{exa:misfiling-assistants}). We store the prior probabilities and the likelihoods in vectors and go to town.
+*Misfiling assistants* (continued from Example [[exa-misfiling-assistants][Misfiling Assistants]]). We store the prior probabilities and the likelihoods in vectors and go to town.
 
 #+begin_src R :exports both :results output pp  
 prior <- c(0.6, 0.3, 0.1)
@@ -3192,7 +3192,7 @@ post / sum(post)
 #+latex: \end{example}
 
 
-Compare these answers with what we got in Example \ref{exa:misfiling-assistants}. We would replace =prior= with =post= in a future calculation. We could raise =like= to a power to see how the posterior is affected by future document mistakes. (Do you see why? Think back to Section \ref{sec-Independent-Events}.)
+Compare these answers with what we got in Example [[exa-misfiling-assistants][Misfiling Assistants]]. We would replace =prior= with =post= in a future calculation. We could raise =like= to a power to see how the posterior is affected by future document mistakes. (Do you see why? Think back to Section [[sec-Independent-Events][Independent Events]].)
 
 
 #+latex: \begin{example}
@@ -3216,7 +3216,7 @@ fastpost <- prior * like^8
 fastpost / sum(fastpost)
 #+end_src
 
-Compare this to what we got in Example \ref{exa:misfiling-assistants-multiple}.
+Compare this to what we got in Example [[exa-misfiling-assistants-multiple][Misfiling Assistants Multiple]].
 
 ** Random Variables
 :PROPERTIES:
@@ -3249,11 +3249,11 @@ Let \(E\) be the experiment of flipping a coin repeatedly until observing a Head
 Let \(E\) be the experiment of tossing a coin in the air, and define the random variable \( Z = \mbox{the time (in seconds) until the coin hits the ground} \). In this case, the sample space is inconvenient to describe. Yet the support of \(Z\) would be \((0,\infty)\). Of course, it is reasonable to suppose that the coin will return to Earth in a short amount of time; in practice, the set \((0,\infty)\) is admittedly too large. However, we will find that in many circumstances it is mathematically convenient to study the extended set rather than a restricted one. 
 #+latex: \end{example}
 
-There are important differences between the supports of \(X\), \(Y\), and \(Z\). The support of \(X\) is a finite collection of elements that can be inspected all at once. And while the support of \(Y\) cannot be exhaustively written down, its elements can nevertheless be listed in a naturally ordered sequence. Random variables with supports similar to those of \(X\) and \(Y\) are called /discrete random variables/. We study these in Chapter \ref{cha-Discrete-Distributions}.
+There are important differences between the supports of \(X\), \(Y\), and \(Z\). The support of \(X\) is a finite collection of elements that can be inspected all at once. And while the support of \(Y\) cannot be exhaustively written down, its elements can nevertheless be listed in a naturally ordered sequence. Random variables with supports similar to those of \(X\) and \(Y\) are called /discrete random variables/. We study these in Chapter [[cha-Discrete-Distributions][Discrete Distributions]].
 
 In contrast, the support of \(Z\) is a continuous interval, containing all rational and irrational positive real numbers. For this reason
 #+latex: \footnote{This isn't really the reason, but it serves as an effective litmus test at the introductory level. See Billingsley or Resnick.},
-random variables with supports like \(Z\) are called /continuous random variables/, to be studied in Chapter \ref{cha-Continuous-Distributions}.
+random variables with supports like \(Z\) are called /continuous random variables/, to be studied in Chapter [[cha-Continuous-Distributions][Continuous Distributions]].
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -3336,7 +3336,7 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 #+latex: \noindent 
 In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
 
-We give special attention to the empirical distribution since it plays such a fundamental role with respect to resampling and Chapter \ref{cha-resampling-methods}; it will also be needed in Section \ref{sub-Kolmogorov-Smirnov-Goodness-of-Fit-Test} where we discuss the Kolmogorov-Smirnov test. Following this is a section in which we introduce a catalogue of discrete random variables that can be used to model experiments.
+We give special attention to the empirical distribution since it plays such a fundamental role with respect to resampling and Chapter [[cha-resampling-methods][Resampling Methods]]; it will also be needed in Section [[sub-Kolmogorov-Smirnov-Goodness-of-Fit-Test][Kolmogorov-Smirnov]] where we discuss the Kolmogorov-Smirnov test. Following this is a section in which we introduce a catalogue of discrete random variables that can be used to model experiments.
 
 There are some comments on simulation, and we mention transformations of random variables in the discrete case. The interested reader who would like to learn more about any of the assorted discrete distributions mentioned here should take a look at /Univariate Discrete Distributions/ by Johnson /et al/\cite{Johnson1993}.
 
@@ -3366,13 +3366,13 @@ Every discrete random variable \(X\) has associated with it a probability mass f
 \begin{equation}
 f_{X}(x)=\Pr(X=x),\quad x\in S_{X}.
 \end{equation}
-Since values of the PMF represent probabilities, we know from Chapter \ref{cha-Probability} that PMFs enjoy certain properties. In particular, all PMFs satisfy
+Since values of the PMF represent probabilities, we know from Chapter [[cha-Probability][Probability]] that PMFs enjoy certain properties. In particular, all PMFs satisfy
 1. \(f_{X}(x)>0\) for \(x\in S\),
 2. \(\sum_{x\in S}f_{X}(x)=1\), and
 3. \(\Pr(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event \(A\subset S\).
 
 #+latex: \begin{example}
-#+latex: \label{exa:Toss-a-coin}
+#+latex: \label{exa-Toss-a-coin}
 
 Toss a coin 3 times. The sample space would be
 \[
@@ -3399,15 +3399,15 @@ provided the (potentially infinite) series \(\sum|x|f_{X}(x)\) is convergent. An
 \begin{equation}
 \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x),
 \end{equation}
-which can be computed (see Exercise \ref{xca-variance-shortcut}) with the alternate formula \(\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
+which can be computed (see Exercise [[xca-variance-shortcut][Variance Shortcut]]) with the alternate formula \(\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
  
 #+latex: \begin{example}
-#+latex: \label{exa:disc-pmf-mean}
-We will calculate the mean of \(X\) in Example \ref{exa:Toss-a-coin}.
+#+latex: \label{exa-disc-pmf-mean}
+We will calculate the mean of \(X\) in Example [[exa-Toss-a-coin][Toss a coin]].
 \[
 \mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=3.5.
 \]
-We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable \(X\), and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of \(X\) (another form of the Law of Large Numbers; see Section \ref{sec-Interpreting-Probabilities}). Another way it is commonly stated is that \(X\) is 3.5 ``on the average'' or ``in the long run''.
+We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable \(X\), and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of \(X\) (another form of the Law of Large Numbers; see Section [[sec-Interpreting-Probabilities][Interpreting Probabilities]]). Another way it is commonly stated is that \(X\) is 3.5 ``on the average'' or ``in the long run''.
 #+latex: \end{example}
 
 #+begin_rem
@@ -3429,14 +3429,14 @@ We say that \(X\) has the distribution \(F_{X}\) and we write \(X\sim F_{X}\). I
 :CUSTOM_ID: sub-disc-rv-how-r
 :END:
 
-The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example \ref{exa:disc-pmf-mean}. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
+The mean and variance of a discrete random variable is easy to compute at the console. Let's return to Example [[exa-disc-pmf-mean][Disc PMF mean]]. We will start by defining a vector =x= containing the support of \(X\), and a vector =f= to contain the values of \(f_{X}\) at the respective outcomes in =x=:
 
 #+begin_src R :exports code :results silent
 x <- c(0,1,2,3)
 f <- c(1/8, 3/8, 3/8, 1/8)
 #+end_src
 
-To calculate the mean \(\mu\), we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \(\mathsf{R}\) since operations on vectors are performed /element-wise/ (see Section \ref{sub-Functions-and-Expressions}): 
+To calculate the mean \(\mu\), we need to multiply the corresponding values of =x= and =f= and add them. This is easily accomplished in \(\mathsf{R}\) since operations on vectors are performed /element-wise/ (see Section [[sub-Functions-and-Expressions][Functions and Expressions]]): 
 
 #+begin_src R :exports both :results output pp  
 mu <- sum(x * f)
@@ -3570,7 +3570,7 @@ We next find the mean:
 = & np\,\sum_{x-1=0}^{n-1}{n-1 \choose x-1}p^{(x-1)}(1-p)^{(n-1)-(x-1)},\\
 = & np.
 \end{alignat*}
-A similar argument shows that \(\mathbb{E} X(X-1)=n(n-1)p^{2}\) (see Exercise \ref{xca-binom-factorial-expectation}). Therefore
+A similar argument shows that \(\mathbb{E} X(X-1)=n(n-1)p^{2}\) (see Exercise [[xca-binom-factorial-expectation][Binom factorial exp]]). Therefore
 \begin{alignat*}{1}
 \sigma^{2}= & \mathbb{E} X(X-1)+\mathbb{E} X-[\mathbb{E} X]^{2},\\
 = & n(n-1)p^{2}+np-(np)^{2},\\
@@ -3617,7 +3617,7 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:toss-coin-3-withR}
+#+latex: \label{exa-toss-coin-3-withR}
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
 | \(x=\mbox{\#of Heads}\) |   0 |   1 |   2 |   3 | Total |
 |-------------------------+-----+-----+-----+-----+-------|
@@ -3633,7 +3633,7 @@ F_{X}(x)=\Pr(X\leq x)=
 1, & x\geq3.
 \end{cases}
 \]
-In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure \ref{fig-binom-cdf-base}.
+In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure [[fig-binom-cdf-base][Binom CDF Base]].
 #+latex: \end{example}
 
 #+srcname: binom-cdf-base
@@ -3669,7 +3669,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 #+end_html
 
 #+latex: \begin{example}
-Another way to do Example \ref{exa:toss-coin-3-withR} is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
+Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
 
 #+begin_src R :exports both :results output pp  
 library(distr)
@@ -3686,7 +3686,7 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 #+latex: \end{example}
 
-Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section \ref{sub-Normal-Quantiles-QF}). See Figure \ref{fig-binom-plot-distr} for an example.
+Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][Binom plot distr]] for an example.
 
 #+srcname: binom-plot-distr
 #+begin_src R :exports code :results silent
@@ -3744,7 +3744,7 @@ Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt
 :CUSTOM_ID: sub-expectation-operator
 :END:
 
-We next generalize some of the concepts from Section \ref{sub-mean-variance-sd}. There we saw that every
+We next generalize some of the concepts from Section [[sub-mean-variance-sd][Mean-variance-sd]]. There we saw that every
 #+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
 PMF has two important numbers associated with it:
 \begin{equation}
@@ -3764,7 +3764,7 @@ In this notation the variance is \(\sigma^{2}=\mathbb{E}(X-\mu)^{2}\) and we pro
 \begin{equation}
 \mathbb{E}(X-\mu)^{2}=\mathbb{E} X^{2}-(\mathbb{E} X)^{2}
 \end{equation}
-in Exercise \ref{xca-variance-shortcut}. Intuitively, for repeated observations of \(X\) we would expect the sample mean of the \(g(X)\) values to closely approximate \(\mathbb{E}\, g(X)\) as the sample size increases without bound.
+in Exercise [[xca-variance-shortcut][Variance Shortcut]]. Intuitively, for repeated observations of \(X\) we would expect the sample mean of the \(g(X)\) values to closely approximate \(\mathbb{E}\, g(X)\) as the sample size increases without bound.
 
 Let us take the analogy further. If we expect \(g(X)\) to be close to \(\mathbb{E} g(X)\) on the average, where would we expect \(3g(X)\) to be on the average? It could only be \(3\mathbb{E} g(X)\). The following theorem makes this idea precise.
 
@@ -3836,7 +3836,7 @@ Unfortunately, the proof of such a theorem is beyond the scope of a text like th
 #+end_proof
 
 
-We will see an example of Theorem \ref{thm:mgf-unique} in action.
+We will see an example of Theorem [[thm-mgf-unique][MGF Unique]] in action.
 
 #+latex: \begin{example}
 Suppose we encounter a random variable which has MGF
@@ -3877,7 +3877,7 @@ These are also known as /raw moments/ and are sometimes denoted \(\mu_{r}'\). In
 #+latex: \begin{example}
 Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with $M(t)=(q+p\mathrm{e}^{t})^{n}$}\).
 
-We calculated the mean and variance of a binomial random variable in Section \ref{sec-binom-dist} by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
+We calculated the mean and variance of a binomial random variable in Section [[sec-binom-dist][Binomial Distribution]] by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
 \begin{alignat*}{1}
 M'(t)= & n(q+p\mathrm{e}^{t})^{n-1}p\mathrm{e}^{t}\left|_{t=0}\right.,\\
 = & n\cdot1^{n-1}p,\\
@@ -3902,7 +3902,7 @@ We learned in this section that \(M^{(r)}(0)=\mathbb{E} X^{r}\). We remember fro
 \begin{equation}
 f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all $|x-a|<R$,}
 \end{equation}
-where \(R\) is called the /radius of convergence/ of the series (see Appendix \ref{sec-Sequences-and-Series}). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
+where \(R\) is called the /radius of convergence/ of the series (see Appendix [[sec-Sequences-and-Series][Sequences and Series]]). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
 \begin{equation}
 M_{X}(t)=\sum_{r=0}^{\infty}\frac{\mathbb{E} X^{r}}{r!}t^{r},\quad\mbox{for all $|t|<\epsilon$.}
 \end{equation}
@@ -3957,7 +3957,7 @@ and this last quantity looks very close to what we already know to be the sample
 \begin{equation}
 s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}.
 \end{equation}
-The /empirical quantile function/ is the inverse of the ECDF. See Section \ref{sub-Normal-Quantiles-QF}.
+The /empirical quantile function/ is the inverse of the ECDF. See Section [[sub-Normal-Quantiles-QF][Normal Quantiles]].
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -3968,7 +3968,7 @@ x <- c(4, 7, 9, 11, 12)
 ecdf(x)
 #+end_src
 
-The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter \ref{cha-Hypothesis-Testing}) or resampling (see Chapter \ref{cha-resampling-methods}). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
+The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]]) or resampling (see Chapter [[cha-resampling-methods][Resampling Methods]]). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
 
 #+srcname: empirical-CDF
 #+begin_src R :exports code :results silent
@@ -3998,7 +3998,7 @@ plot(ecdf(x))
 </div>
 #+end_html
 
-See Figure \ref{fig-empirical-CDF}. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
+See Figure [[fig-empirical-CDF][Empirical CDF]]. The graph is of a right-continuous function with jumps exactly at the locations stored in =x=. There are no repeated values in =x= so all of the jumps are equal to \(1/5=0.2\).
 
 The empirical PDF is not usually of particular interest in itself, but if we really wanted we could define a function to serve as the empirical PDF:
 
@@ -4015,9 +4015,9 @@ x <- c(0,0,1)
 sample(x, size = 7, replace = TRUE)
 #+end_src
 
-We can get the empirical quantile function in \(\mathsf{R}\) with =quantile(x, probs = p, type = 1)=; see Section \ref{sub-Normal-Quantiles-QF}.
+We can get the empirical quantile function in \(\mathsf{R}\) with =quantile(x, probs = p, type = 1)=; see Section [[sub-Normal-Quantiles-QF][Normal Quantiles]].
 
-As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter \ref{cha-resampling-methods}.
+As we hinted above, the empirical distribution is significant more because of how and where it appears in more sophisticated applications. We will explore some of these in later chapters -- see, for instance, Chapter [[cha-resampling-methods][Resampling Methods]].
 
 ** Other Discrete Distributions
 :PROPERTIES:
@@ -4048,12 +4048,12 @@ We say that \(X\) has a /hypergeometric distribution/ and write \(X\sim\mathsf{h
 
 The support set for the hypergeometric distribution is a little bit tricky. It is tempting to say that \(x\) should go from 0 (no white balls in the sample) to \(K\) (no black balls in the sample), but that does not work if \(K>M\), because it is impossible to have more white balls in the sample than there were white balls originally in the urn. We have the same trouble if \(K>N\). The good news is that the majority of examples we study have \(K\leq M\) and \(K\leq N\) and we will happily take the support to be \(x=0,\ 1,\ \ldots,\ K\). 
 
-It is shown in Exercise \ref{xca-hyper-mean-variance} that
+It is shown in Exercise [[xca-hyper-mean-variance][Hyper-MV]] that
 \begin{equation}
 \mu=K\frac{M}{M+N},\quad\sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
 \end{equation}
 
-The associated \(\mathsf{R}\) functions for the PMF and CDF are =dhyper(x, m, n, k)= and =phyper=, respectively. There are two more functions: =qhyper=, which we will discuss in Section \ref{sub-Normal-Quantiles-QF}, and =rhyper=, discussed below.
+The associated \(\mathsf{R}\) functions for the PMF and CDF are =dhyper(x, m, n, k)= and =phyper=, respectively. There are two more functions: =qhyper=, which we will discuss in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]], and =rhyper=, discussed below.
 
 #+latex: \begin{example}
 Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
@@ -4166,7 +4166,7 @@ f_{X}(x)=p(1-p)^{x},\quad x=0,1,2,\ldots
 \end{equation}
 (Why?) We say that \(X\) has a /Geometric distribution/ and we write \(X\sim\mathsf{geom}(\mathtt{prob}=p)\). The associated \(\mathsf{R}\) functions are =dgeom(x, prob)=, =pgeom=, =qgeom=, and =rhyper=, which give the PMF, CDF, quantile function, and simulate random variates, respectively.
 
-Again it is clear that \(f(x)\geq0\) and we check that \(\sum f(x)=1\) (see Equation \ref{eq-geom-series} in Appendix \ref{sec-Sequences-and-Series}):
+Again it is clear that \(f(x)\geq0\) and we check that \(\sum f(x)=1\) (see Equation [[eq-geom-series][Geometric Series]] in Appendix [[sec-Sequences-and-Series][Sequences and Series]]):
 \begin{alignat*}{1}
 \sum_{x=0}^{\infty}p(1-p)^{x}= & p\sum_{x=0}^{\infty}q^{x}=p\,\frac{1}{1-q}=1.
 \end{alignat*}
@@ -4321,7 +4321,7 @@ On the average, five cars arrive at a particular car wash every hour. Let \(X\) 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark \ref{rem:poisson-process} we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
+Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark [[rem-poisson-process][Poisson Process]] we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
 /Solution/: We want \(\Pr(48\leq Y\leq50)=\Pr(X\leq50)-\Pr(X\leq47)\). 
 
 #+begin_src R :exports both :results output pp  
@@ -4335,10 +4335,10 @@ diff(ppois(c(47, 50), lambda = 50))
 :CUSTOM_ID: sec-functions-discrete-rvs
 :END:
 
-We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix \ref{sec-Differential-and-Integral}), the solution can be found by simple substitution.
+We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]), the solution can be found by simple substitution.
 
 #+latex: \begin{example}
-Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We saw in \ref{sec-other-discrete-distributions} that \(X\) represents the number of failures until \(r\) successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the \(r^{\mathrm{th}}\) success occurs, which we will denote by \(Y\). In a given performance of the experiment, the number of failures (\(X\)) and the number of successes (\(r\)) together will comprise the total number of trials (\(Y\)), or in other words, \(X+r=Y\). We may let \(h\) be defined by \(h(x)=x+r\) so that \(Y=h(X)\), and we notice that \(h\) is linear and hence one-to-one. Finally, \(X\) takes values \(0,\ 1,\ 2,\ldots\) implying that the support of \(Y\) would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for \(X\) we get \(X=Y-r\). Examining the PMF of \(X\)
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We saw in [[sec-other-discrete-distributions][Other Discrete Distributions]] that \(X\) represents the number of failures until \(r\) successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the \(r^{\mathrm{th}}\) success occurs, which we will denote by \(Y\). In a given performance of the experiment, the number of failures (\(X\)) and the number of successes (\(r\)) together will comprise the total number of trials (\(Y\)), or in other words, \(X+r=Y\). We may let \(h\) be defined by \(h(x)=x+r\) so that \(Y=h(X)\), and we notice that \(h\) is linear and hence one-to-one. Finally, \(X\) takes values \(0,\ 1,\ 2,\ldots\) implying that the support of \(Y\) would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for \(X\) we get \(X=Y-r\). Examining the PMF of \(X\)
 \begin{equation}
 f_{X}(x)={r+x-1 \choose r-1}\, p^{r}(1-p)^{x},
 \end{equation}
@@ -4578,11 +4578,11 @@ that satisfies three basic properties:
 1. \(f_{X}(x)>0\) for \(x\in S_{X}\),
 2. \(\int_{x\in S_{X}}f_{X}(x)\,\mathrm{d} x=1\), and
 3. \(\Pr(X\in A)=\int_{x\in A}f_{X}(x)\:\mathrm{d} x\), for an event \(A\subset S_{X}\).
-#+latex: \label{enu: contrvcond3}
+#+latex: \label{enu-contrvcond3}
 
 #+begin_rem
 We can say the following about continuous random variables:
-- Usually, the set \(A\) in \ref{enu: contrvcond3} takes the form of an interval, for example, \(A=[c,d]\), in which case
+- Usually, the set \(A\) in [[enu-contrvcond3]] takes the form of an interval, for example, \(A=[c,d]\), in which case
   \begin{equation}
   \Pr(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
   \end{equation}
@@ -4595,7 +4595,7 @@ We can say the following about continuous random variables:
 
 #+end_rem
 
-We met the cumulative distribution function, \(F_{X}\), in Chapter \ref{cha-Discrete-Distributions}. Recall that it is defined by \(F_{X}(t)=\Pr(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
+We met the cumulative distribution function, \(F_{X}\), in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. Recall that it is defined by \(F_{X}(t)=\Pr(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
 \begin{equation}
 F_{X}(t)=\Pr(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
 \end{equation}
@@ -4603,7 +4603,7 @@ F_{X}(t)=\Pr(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\i
 #+begin_rem
 For any continuous CDF \(F_{X}\) the following are true.
 - \(F_{X}\) is nondecreasing , that is, \(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\).
-- \(F_{X}\) is continuous (see Appendix \ref{sec-Differential-and-Integral}). Note the distinction from the discrete case: CDFs of discrete random variables are not continuous, they are only right continuous.
+- \(F_{X}\) is continuous (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]). Note the distinction from the discrete case: CDFs of discrete random variables are not continuous, they are only right continuous.
 - \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
 
 #+end_rem
@@ -4612,7 +4612,7 @@ There is a handy relationship between the CDF and PDF in the continuous case. Co
 \begin{equation}
 F'_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t}F_{X}(t)=\frac{\mathrm{d}}{\mathrm{d} t}\,\int_{-\infty}^{t}f_{X}(x)\,\mathrm{d} x=f_{X}(t),
 \end{equation}
-the last equality being true by the Fundamental Theorem of Calculus, part (2) (see Appendix \ref{sec-Differential-and-Integral}). In short, \((F_{X})'=f_{X}\) in the continuous case
+the last equality being true by the Fundamental Theorem of Calculus, part (2) (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]). In short, \((F_{X})'=f_{X}\) in the continuous case
 #+latex: \footnote{In the discrete case, \(f_{X}(x)=F_{X}(x)-\lim_{t\to x^{-}}F_{X}(t)\).}. 
 
 *** Expectation of Continuous Random Variables
@@ -4639,7 +4639,7 @@ M_{X}(t)=\mathbb{E}\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}
 provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=0\).
 
 #+latex: \begin{example}
-#+latex: \label{exa:cont-pdf3x2}
+#+latex: \label{exa-cont-pdf3x2}
 
 Let the continuous random variable \(X\) have PDF
 \[
@@ -4675,7 +4675,7 @@ which gives \(\sigma^{2}=3/5-(3/4)^{2}=3/80\).
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:cont-pdf-3x4}
+#+latex: \label{exa-cont-pdf-3x4}
 
 We will try one with unbounded support to brush up on improper integration. Let the random variable \(X\) have PDF
 \[
@@ -4725,7 +4725,7 @@ f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
 
-Compare this to the answer we found in Example \ref{exa:cont-pdf3x2}. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
+Compare this to the answer we found in Example [[exa-cont-pdf3x2][Cont-pdf3x2]]. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
 
 #+latex: \end{example}
 
@@ -4737,12 +4737,12 @@ g <- function(x) 3/x^3
 integrate(g, lower = 1, upper = Inf)
 #+end_src
 
-Compare this to the answer we got in Example \ref{exa:cont-pdf-3x4}. Use =-Inf= for \(-\infty\).
+Compare this to the answer we got in Example [[exa-cont-pdf-3x4][Cont-pdf3x4]]. Use =-Inf= for \(-\infty\).
 
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Let us redo Example \ref{exa:cont-pdf3x2} with the =distr= package. The method is similar to that encountered in Section \ref{sub-disc-rv-how-r} in Chapter \ref{cha-Discrete-Distributions}. We define an absolutely continuous random variable:
+Let us redo Example [[exa-cont-pdf3x2][Cont-pdf3x2]] with the =distr= package. The method is similar to that encountered in Section [[sub-disc-rv-how-r][Discrete RV How R]] in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. We define an absolutely continuous random variable:
 #+begin_src R :exports none :results silent
 library(distr)
 library(distrEx)
@@ -4761,7 +4761,7 @@ library(distrEx)
 E(X); var(X); 3/80
 #+end_src
 
-Compare these answers to the ones we found in Example \ref{exa:cont-pdf3x2}. Why are they different? Because the =distrEx= package resorts to numerical methods when it encounters a model it does not recognize. This means that the answers we get for calculations may not exactly match the theoretical values. Be careful.
+Compare these answers to the ones we found in Example [[exa-cont-pdf3x2][Cont-pdf3x2]]. Why are they different? Because the =distrEx= package resorts to numerical methods when it encounters a model it does not recognize. This means that the answers we get for calculations may not exactly match the theoretical values. Be careful.
 #+latex: \end{example}
 
 ** The Continuous Uniform Distribution
@@ -4796,7 +4796,7 @@ The mean of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\) is relativel
  & =\frac{1}{b-a}\ \frac{b^{2}-a^{2}}{2},\\
  & =\frac{b+a}{2},
 \end{align*}
-using the popular formula for the difference of squares. The variance is left to Exercise \ref{xca-variance-dunif}.
+using the popular formula for the difference of squares. The variance is left to Exercise [[xca-variance-dunif][Variance Uniform]].
 #+latex: \end{example}
 
 ** The Normal Distribution
@@ -4859,7 +4859,7 @@ M_{Y}(t)=\mathrm{e}^{ta}M_{X}(bt).
 #+end_fact
 
 #+latex: \begin{example}
-The 68-95-99.7 Rule. We saw in Section \ref{sub-Measures-of-Spread} that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from -- and obtain more precise proportions -- with the following:
+The 68-95-99.7 Rule. We saw in Section [[sub-Measures-of-Spread][Measures of Spread]] that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from -- and obtain more precise proportions -- with the following:
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp 
@@ -4867,7 +4867,7 @@ pnorm(1:3) - pnorm(-(1:3))
 #+end_src
 
 #+latex: \begin{example}
-#+latex: \label{exa:iq-model}
+#+latex: \label{exa-iq-model}
 Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\Pr(85\leq X\leq115)\)?
 
 /Solution/: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
@@ -4881,9 +4881,9 @@ Let the random experiment consist of a person taking an IQ test, and let \(X\) b
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 
 #+latex: \begin{example}
-#+latex: \label{exa:iq-quantile-state-problem}
-Assuming the IQ model of Example \ref{exa:iq-model}, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
-/Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\Pr(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule \ref{fac:Empirical-Rule}; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
+#+latex: \label{exa-iq-quantile-state-problem}
+Assuming the IQ model of Example [[exa-iq-model][IQ Model]], what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
+/Solution/: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\Pr(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the =uniroot= function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule [[fac-Empirical-Rule][Empirical Rule]]; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 #+begin_src R :exports both :results output pp 
 g <- function(x) pnorm(x, mean = 100, sd = 15) - 0.99
 uniroot(g, interval = c(130, 145))
@@ -4896,7 +4896,7 @@ temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 The answer is shown in =$root= which is approximately \( SRC_R{temp} \), that is, a person with this IQ score or higher falls in the top 1% of all IQ scores.
 #+latex: \end{example}
 
-The discussion in example \ref{exa:iq-quantile-state-problem} was centered on the search for a value \(x\) that solved an equation \(F(x)=p\), for some given probability \(p\), or in mathematical parlance, the search for \(F^{-1}\), the inverse of the CDF of \(X\), evaluated at \(p\). This is so important that it merits a definition all its own.
+The discussion in Example [[exa-iq-quantile-state-problem][IQ Quantile]] was centered on the search for a value \(x\) that solved an equation \(F(x)=p\), for some given probability \(p\), or in mathematical parlance, the search for \(F^{-1}\), the inverse of the CDF of \(X\), evaluated at \(p\). This is so important that it merits a definition all its own.
 
 #+begin_defn
 The /quantile function/
@@ -4910,8 +4910,8 @@ Q_{X}(p)=\min\left\{ x:\ F_{X}(x)\geq p\right\} ,\quad 0 < p <1.
 #+begin_rem
 Here are some properties of quantile functions:
 1. The quantile function is defined and finite for all \(0<p<1\).
-1. \(Q_{X}\) is left-continuous (see Appendix \ref{sec-Differential-and-Integral}). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
-1. In the continuous case the graph of \(Q_{X}\) may be obtained by reflecting the graph of \(F_{X}\) about the line \(y=x\). In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure \ref{fig-binom-plot-distr} for a comparison. 
+1. \(Q_{X}\) is left-continuous (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]). For discrete random variables it is a step function, and for continuous random variables it is a continuous function.
+1. In the continuous case the graph of \(Q_{X}\) may be obtained by reflecting the graph of \(F_{X}\) about the line \(y=x\). In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure [[fig-binom-plot-distr][Binom Plot distr]] for a comparison. 
 1. The two limits
    \[
    \lim_{p\to0^{+}}Q_{X}(p)\quad\mbox{and}\quad\lim_{p\to1^{-}}Q_{X}(p)
@@ -4933,7 +4933,7 @@ There are a few other very important special cases which we will encounter in la
 Quantile functions are defined for all of the base distributions with the =q= prefix to the distribution name, except for the ECDF whose quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) \) function. 
 
 #+latex: \begin{example}
-Back to Example \ref{exa:iq-quantile-state-problem}, we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \(\mathsf{R}\). 
+Back to Example [[exa-iq-quantile-state-problem][IQ Quantile]], we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \(\mathsf{R}\). 
 
 #+begin_src R :exports both :results output pp 
 qnorm(0.99, mean = 100, sd = 15)
@@ -4943,7 +4943,7 @@ Compare this answer to the one obtained earlier with =uniroot=.
 #+latex: \end{example}
 
 #+latex: \begin{example}
-Find the values \(z_{0.025}\), \(z_{0.01}\), and \(z_{0.005}\) (these will play an important role from Chapter \ref{cha-Estimation} onward).
+Find the values \(z_{0.025}\), \(z_{0.01}\), and \(z_{0.005}\) (these will play an important role from Chapter [[cha-Estimation][Estimation]] onward).
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp 
@@ -4958,7 +4958,7 @@ Note the =lower.tail= argument. We would get the same answer with
 :CUSTOM_ID: sec-Functions-of-Continuous
 :END:
 
-The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix \ref{sec-Differential-and-Integral}.
+The goal of this section is to determine the distribution of \(U=g(X)\) based on the distribution of \(X\). In the discrete case all we needed to do was back substitute for \(x=g^{-1}(u)\) in the PMF of \(X\) (sometimes accumulating probability mass along the way). In the continuous case, however, we need more sophisticated tools. Now would be a good time to review Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]].
 
 *** The PDF Method
 
@@ -4972,24 +4972,24 @@ f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1
 #+end_prop
 
 #+begin_rem
-The formula in Equation \ref{eq-univ-trans-pdf-long} is nice, but does not really make any sense. It is better to write in the intuitive form
+The formula in Equation [[eq-univ-trans-pdf-long]] is nice, but does not really make any sense. It is better to write in the intuitive form
 \begin{equation}
 f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.\label{eq-univ-trans-pdf-short}
 \end{equation}
 #+end_rem
 
 #+latex: \begin{example}
-#+latex: \label{exa:lnorm-transformation}
+#+latex: \label{exa-lnorm-transformation}
 Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and let \(Y=\mathrm{e}^{X}\). What is the PDF of \(Y\)? 
 *Solution:* Notice first that \(\mathrm{e}^{x}>0\) for any \(x\), so the support of \(Y\) is \((0,\infty)\). Since the transformation is monotone, we can solve \(y=\mathrm{e}^{x}\) for \(x\) to get \(x=\ln\, y\), giving \(\mathrm{d} x/\mathrm{d} y=1/y\). Therefore, for any \(y>0\),
 \[
 f_{Y}(y)=f_{X}(\ln y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{ \frac{(\ln y-\mu)^{2}}{2\sigma^{2}}\right\} \cdot\frac{1}{y},
 \]
-where we have dropped the absolute value bars since \(y>0\). The random variable \(Y\) is said to have a /lognormal distribution/; see Section \ref{sec-Other-Continuous-Distributions}.
+where we have dropped the absolute value bars since \(y>0\). The random variable \(Y\) is said to have a /lognormal distribution/; see Section [[sec-Other-Continuous-Distributions][Other Continuous Distributions]].
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:lin-trans-norm}
+#+latex: \label{exa-lin-trans-norm}
 Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X\). What is the PDF of \(Y\)?
 #+latex: \end{example}
 
@@ -5024,12 +5024,12 @@ In many cases there are cancellations and the work is shorter. Of course, it is 
 but for the well-behaved examples in this book the trick works just fine.
 
 #+begin_rem
-In the case that \(g\) is not monotone we cannot apply Proposition \ref{pro:func-cont-rvs-pdf-formula} directly. However, hope is not lost. Rather, we break the support of \(X\) into pieces such that \(g\) is monotone on each one. We apply Proposition \ref{pro:func-cont-rvs-pdf-formula} on each piece, and finish up by adding the results together.
+In the case that \(g\) is not monotone we cannot apply Proposition [[pro-func-cont-rvs-pdf-formula][func-cont-rvs-pdf]] directly. However, hope is not lost. Rather, we break the support of \(X\) into pieces such that \(g\) is monotone on each one. We apply Proposition [[pro-func-cont-rvs-pdf-formula][func-cont-rvs-pdf]] on each piece, and finish up by adding the results together.
 #+end_rem
 
 *** The CDF method
 
-We know from Section \ref{sec-continuous-random-variables} that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\Pr(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\Pr[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
+We know from Section [[sec-continuous-random-variables][Continuous Random Variables]] that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\Pr(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\Pr[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
 
 #+latex: \begin{example}
 Suppose \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) and
@@ -5043,7 +5043,7 @@ where the next to last equality follows because the exponential function is /mon
 \[
 1-\Pr(X < \mathrm{e}^{-y})=1-\Pr(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \]
-Now recalling that the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable satisfies \(F(u)=u\) (see Equation \ref{eq-unif-cdf}), we can say
+Now recalling that the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable satisfies \(F(u)=u\) (see Equation [[eq-unif-cdf][Uniform CDF]]), we can say
 \[
 F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad\mbox{for }y>0.
 \]
@@ -5051,7 +5051,7 @@ We have consequently found the formula for the CDF of \(Y\); to obtain the PDF \
 \[
 f_{Y}(y)=\frac{\mathrm{d}}{\mathrm{d} y}\left(1-\mathrm{e}^{-y}\right)=0-\mathrm{e}^{-y}(-1),
 \]
-or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of the exponential family of distributions, see Section \ref{sec-Other-Continuous-Distributions}. 
+or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a member of the exponential family of distributions, see Section [[sec-Other-Continuous-Distributions][Other Continuous Distributions]]. 
 #+latex: \end{example}
 
 #+latex: \begin{example}
@@ -5075,7 +5075,7 @@ The Probability Integral Transform is true for all continuous random variables w
 #+end_fact
 
 #+latex: \begin{example}
-#+latex: \label{exa:distn-of-z-squared}
+#+latex: \label{exa-distn-of-z-squared}
 Let \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(U=Z^{2}\). What is the PDF of \(U\)? 
 Notice first that \(Z^{2}\geq0\), and thus the support of \(U\) is \([0,\infty)\). And for any \(u\geq0\), 
 \[
@@ -5093,12 +5093,12 @@ Substituting,
 \[
 f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u},\quad u>0.
 \]
-This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section \ref{sec-Other-Continuous-Distributions}.
+This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section [[sec-Other-Continuous-Distributions][Other Continuous Distributions]].
 #+latex: \end{example}
 
 **** How to do it with \(\mathsf{R}\)
 
-The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example \ref{exa:lin-trans-norm} quite nicely:
+The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example [[exa-lin-trans-norm][Linear Trans-Norm]] quite nicely:
 
 #+begin_src R :exports both :results output pp 
 library(distr)
@@ -5107,14 +5107,14 @@ Y <- 4 - 3*X
 Y
 #+end_src
 
-So =distr= ``knows'' that a linear transformation of a normal random variable is again normal, and it even knows what the correct =mean= and =sd= should be. But it is impossible for =distr= to know everything, and it is not long before we venture outside of the transformations that =distr= recognizes. Let us try Example \ref{exa:lnorm-transformation}:
+So =distr= ``knows'' that a linear transformation of a normal random variable is again normal, and it even knows what the correct =mean= and =sd= should be. But it is impossible for =distr= to know everything, and it is not long before we venture outside of the transformations that =distr= recognizes. Let us try Example [[exa-lnorm-transformation][Lnorm Trans]]:
 
 #+begin_src R :exports both :results output pp 
 Y <- exp(X)
 Y
 #+end_src
 
-The result is an object of class =AbscontDistribution=, which is one of the classes that =distr= uses to denote general distributions that it does not recognize (it turns out that \(Z\) has a /lognormal/ distribution; see Section \ref{sec-Other-Continuous-Distributions}). A simplified description of the process that =distr= undergoes when it encounters a transformation \(Y=g(X)\) that it does not recognize is
+The result is an object of class =AbscontDistribution=, which is one of the classes that =distr= uses to denote general distributions that it does not recognize (it turns out that \(Z\) has a /lognormal/ distribution; see Section [[sec-Other-Continuous-Distributions][Other Continuous Distributions]]). A simplified description of the process that =distr= undergoes when it encounters a transformation \(Y=g(X)\) that it does not recognize is
 1. Randomly generate many, many copies \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) from the distribution of \(X\),
 1. Compute \(Y_{1}=g(X_{1})\), \(Y_{2}=g(X_{2})\), ..., \(Y_{n}=g(X_{n})\) and store them for use.
 1. Calculate the PDF, CDF, quantiles, and random variates using the simulated values of \(Y\).
@@ -5166,7 +5166,7 @@ F_{X}(t)=1-\mathrm{e}^{-\lambda t},\quad t>0.
 \end{equation}
 The mean is \(\mu=1/\lambda\) and the variance is \(\sigma^{2}=1/\lambda^{2}\). 
 
-The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate \(\lambda\) and if \(Y\) counts the number of customers that arrive in the time interval \([0,t)\), then we saw in Section \ref{sec-other-discrete-distributions} that \( Y \sim \mathsf{pois}(\mathtt{lambda}=\lambda t). \) Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let \(X\) be the length of this random time interval. Then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). Observe the following string of equalities:
+The exponential distribution is closely related to the Poisson distribution. If customers arrive at a store according to a Poisson process with rate \(\lambda\) and if \(Y\) counts the number of customers that arrive in the time interval \([0,t)\), then we saw in Section [[sec-other-discrete-distributions][Other Discrete Distributions]] that \( Y \sim \mathsf{pois}(\mathtt{lambda}=\lambda t). \) Now consider a different question: let us start our clock at time 0 and stop the clock when the first customer arrives. Let \(X\) be the length of this random time interval. Then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). Observe the following string of equalities:
 \begin{align*}
 \Pr(X>t) & =\Pr(\mbox{first arrival after time \emph{t}}),\\
  & =\Pr(\mbox{no events in [0,\emph{t})}),\\
@@ -5179,7 +5179,7 @@ The exponential distribution is said to be /memoryless/ because exponential rand
 \begin{equation}
 \Pr(X>s+t\,|\, X>t)=\Pr(X>s).
 \end{equation}
-See Exercise \ref{xca-prove-the-memoryless}.
+See Exercise [[xca-prove-the-memoryless][Prove Memoryless]].
 
 **** The Gamma Distribution
 :PROPERTIES:
@@ -5213,9 +5213,9 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{1}{\Gamma(p/2)2^{p/2}}x^{p/2-1}\mathrm{e}^{-x/2},\quad x>0,
 \end{equation}
-is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \(\mathsf{R}\) functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure \ref{fig-chisq-dist-vary-df}. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
+is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We write \(X\sim\mathsf{chisq}(\mathtt{df}=p)\). The associated \(\mathsf{R}\) functions are =dchisq(x, df)=, =pchisq=, =qchisq=, and =rchisq=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Figure [[fig-chisq-dist-vary-df][Chisq-vary-df]]. In an obvious notation we may define \(\chi_{\alpha}^{2}(p)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{chisq}(\mathtt{df}=p)\) curve to its right.
 
-The code to produce Figure \ref{fig-chisq-dist-vary-df} is
+The code to produce Figure [[fig-chisq-dist-vary-df][Chisq-vary-df]] is
 
 #+srcname: chisq-dist-vary-df
 #+begin_src R :exports code :results silent
@@ -5249,7 +5249,7 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
 #+begin_rem
 Here are some useful things to know about the chi-square distribution.
-1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example \ref{exa:distn-of-z-squared}, and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem \ref{thm:Xbar-andS} in Section \ref{sub-Samp-Var-Dist}.
+1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example [[exa-distn-of-z-squared][Distn Z2]], and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem [[thm-Xbar-and-S][Xbar and S]] in Section [[sub-Samp-Var-Dist][Sample Variance Distribution]].
 1. The chi-square distribution is supported on the positive \(x\)-axis, with a right-skewed distribution.
 1. The \(\mathsf{chisq}(\mathtt{df}=p)\) distribution is the same as a \(\mathsf{gamma}(\mathtt{shape}=p/2,\,\mathtt{rate}=1/2)\) distribution. 
 1. The MGF of \(X\sim\mathsf{chisq}(\mathtt{df}=p)\) is
@@ -5267,7 +5267,7 @@ A random variable \(X\) with PDF
 \begin{equation}
 f_{X}(x)=\frac{\Gamma\left[(r+1)/2\right]}{\sqrt{r\pi}\,\Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad-\infty<x<\infty
 \end{equation}
-is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \(\mathsf{R}\) functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section \ref{sec-sampling-from-normal-dist}.
+is said to have /Student's/ \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The associated \(\mathsf{R}\) functions are =dt=,=pt=, =qt=, and =rt=, which give the PDF, CDF, quantile function, and simulate random variates, respectively. See Section [[sec-sampling-from-normal-dist][Sampling from Normal]].
 
 **** Snedecor's \(F\) distribution
 :PROPERTIES:
@@ -5283,7 +5283,7 @@ is said to have an \(F\) distribution with \((m,n)\) degrees of freedom. We writ
 #+begin_rem
 Here are some notes about the \(F\) distribution.
 1. If \(X\sim\mathsf{f}(\mathtt{df1}=m,\,\mathtt{df2}=n)\) and \(Y=1/X\), then \(Y\sim\mathsf{f}(\mathtt{df1}=n,\,\mathtt{df2}=m)\). Historically, this fact was especially convenient. In the old days, statisticians used printed tables for their statistical calculations. Since the \(F\) tables were symmetric in \(m\) and \(n\), it meant that publishers could cut the size of their printed tables in half. It plays less of a role today now that personal computers are widespread.
-1. If \(X\sim\mathsf{t}(\mathtt{df}=r)\), then \(X^{2}\sim\mathsf{f}(\mathtt{df1}=1,\,\mathtt{df2}=r)\). We will see this again in Section \ref{sub-slr-overall-F-statistic}.
+1. If \(X\sim\mathsf{t}(\mathtt{df}=r)\), then \(X^{2}\sim\mathsf{f}(\mathtt{df1}=1,\,\mathtt{df2}=r)\). We will see this again in Section [[sub-slr-overall-F-statistic][SLR Overall F]].
 #+end_rem
 
 *** Other Popular Distributions
@@ -5317,7 +5317,7 @@ We write \(X\sim\mathsf{beta}(\mathtt{shape1}=\alpha,\,\mathtt{shape2}=\beta)\).
 \begin{equation} 
 \mu=\frac{\alpha}{\alpha+\beta}\mbox{ and }\sigma^{2}=\frac{\alpha\beta}{\left(\alpha+\beta\right)^{2}\left(\alpha+\beta+1\right)}.
 \end{equation}
-See Example \ref{exa:cont-pdf3x2}. This distribution comes up a lot in Bayesian statistics because it is a good model for one's prior beliefs about a population proportion \(p\), \(0\leq p\leq1\).
+See Example [[exa-cont-pdf3x2][Cont-pdf3x2]]. This distribution comes up a lot in Bayesian statistics because it is a good model for one's prior beliefs about a population proportion \(p\), \(0\leq p\leq1\).
 
 **** The Logistic Distribution
 :PROPERTIES:
@@ -5338,7 +5338,7 @@ This is a distribution derived from the normal distribution (hence the name). If
 \begin{equation}
 f_{X}(x)=\frac{1}{\sigma x\sqrt{2\pi}}\exp\left[\frac{-(\ln x-\mu)^{2}}{2\sigma^{2}}\right],\quad0<x<\infty.
 \end{equation}
-We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). The associated \(\mathsf{R}\) function is =dlnorm(x, meanlog = 0, sdlog = 1)=. Notice that the support is concentrated on the positive \(x\) axis; the distribution is right-skewed with a heavy tail. See Example \ref{exa:lnorm-transformation}.
+We write \(X\sim\mathsf{lnorm}(\mathtt{meanlog}=\mu,\,\mathtt{sdlog}=\sigma)\). The associated \(\mathsf{R}\) function is =dlnorm(x, meanlog = 0, sdlog = 1)=. Notice that the support is concentrated on the positive \(x\) axis; the distribution is right-skewed with a heavy tail. See Example [[exa-lnorm-transformation][Lnorm-trans]].
 
 **** The Weibull Distribution
 :PROPERTIES:
@@ -5494,7 +5494,7 @@ and
 \end{equation}
 It is customary to extend the function \(f_{X,Y}\) to be defined on all of \(\mathbb{R}^{2}\) by setting \(f_{X,Y}(x,y)=0\) for \((x,y)\not\in S_{X,Y}\). 
 
-In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation\ref{eq-theorem-total-probability}): observe
+In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are given only the joint PMF then we may recover each of the marginal PMFs by using the Theorem of Total Probability (see Equation [[eq-theorem-total-probability][TTP]]): observe
 \begin{eqnarray}
 f_{X}(x) & = & \Pr(X=x),\\
  & = & \sum_{y\in S_{Y}}\Pr(X=x,\, Y=y),\\
@@ -5511,14 +5511,14 @@ Associated with the joint PMF is the /joint cumulative distribution function/ \(
 \[
 F_{X,Y}(x,y)=\Pr(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
 \]
-The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation \ref{eq-joint-pmf}. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
+The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation [[eq-joint-pmf][JPMF]]. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
 
 We now introduce some examples of bivariate discrete distributions. The first we have seen before, and the second is based on the first.
 
 #+latex: \begin{example}
-#+latex: \label{exa:toss-two-dice-joint-pmf}
+#+latex: \label{exa-toss-two-dice-joint-pmf}
 
-Roll a fair die twice. Let \(X\) be the face shown on the first roll, and let \(Y\) be the face shown on the second roll. We have already seen this example in Chapter \ref{cha-Probability}, Example \ref{exa:Toss-a-six-sided-die-twice}. For this example, it suffices to define
+Roll a fair die twice. Let \(X\) be the face shown on the first roll, and let \(Y\) be the face shown on the second roll. We have already seen this example in Chapter [[cha-Probability][Probability]], Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]]. For this example, it suffices to define
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6.
 \]
@@ -5529,24 +5529,24 @@ f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6,
 and the same computation with the letters switched works for \(Y\). 
 #+latex: \end{example}
 
-In the previous example, and in many other ones, the joint support can be written as a product set of the support of \(X\) ``times'' the support of \(Y\), that is, it may be represented as a cartesian product set, or rectangle, \(S_{X,Y}=S_{X}\times S_{Y}\), where \(S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} \). As we shall see presently in Section \ref{sec-Independent-Random-Variables}, this form is a necessary condition for \(X\) and \(Y\) to be /independent/ (or alternatively /exchangeable/ when \(S_{X}=S_{Y}\)). But please note that in general it is not required for \(S_{X,Y}\) to be of rectangle form. We next investigate just such an example.
+In the previous example, and in many other ones, the joint support can be written as a product set of the support of \(X\) ``times'' the support of \(Y\), that is, it may be represented as a cartesian product set, or rectangle, \(S_{X,Y}=S_{X}\times S_{Y}\), where \(S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} \). As we shall see presently in Section [[sec-Independent-Random-Variables][Independent Random Variables]], this form is a necessary condition for \(X\) and \(Y\) to be /independent/ (or alternatively /exchangeable/ when \(S_{X}=S_{Y}\)). But please note that in general it is not required for \(S_{X,Y}\) to be of rectangle form. We next investigate just such an example.
 
 
 #+latex: \begin{example}
-#+latex: \label{exa:max-sum-two-dice}
+#+latex: \label{exa-max-sum-two-dice}
 
 Let the random experiment again be to roll a fair die twice, except now let us define the random variables \(U\) and \(V\) by
 \begin{eqnarray*}
 U & = & \mbox{the maximum of the two rolls, and }\\
 V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
-We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table \ref{tab-max-and-sum-two-dice}. 
+We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table [[tab-max-and-sum-two-dice][Max-sum two dice]]. 
 
-We can use the table to calculate the marginal PMF of \(U\), because from Example \ref{exa:Toss-a-six-sided-die-twice} we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\Pr(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
+We can use the table to calculate the marginal PMF of \(U\), because from Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]] we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\Pr(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
-We may do a similar thing for \(V\); see the right half of Table \ref{tab-max-and-sum-two-dice}. Collecting all of the probability we will find that the marginal PMF of \(V\) is
+We may do a similar thing for \(V\); see the right half of Table [[tab-max-and-sum-two-dice][Max-sum two dice]]. Collecting all of the probability we will find that the marginal PMF of \(V\) is
 \begin{equation}
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
@@ -5582,7 +5582,7 @@ f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{table}
 #+end_latex
 
-We may collapse the two matrices from Table \ref{tab-max-and-sum-two-dice} into one, big matrix of pairs of values \((u,v)\). The result is shown in Table \ref{tab--max-sum-two-dice-joint}. 
+We may collapse the two matrices from Table [[tab-max-and-sum-two-dice][Max-sum two dice]] into one, big matrix of pairs of values \((u,v)\). The result is shown in Table [[tab--max-sum-two-dice-joint][Max-sum two dice joint]]. 
 
 #+begin_latex
 \begin{table}
@@ -5602,7 +5602,7 @@ We may collapse the two matrices from Table \ref{tab-max-and-sum-two-dice} into 
 \end{table}
 #+end_latex
 
-Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example \ref{exa:toss-two-dice-joint-pmf}. See Table \ref{tab-max-sum-joint-pmf}.
+Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example [[exa-toss-two-dice-joint-pmf][Two dice joint]]. See Table [[tab-max-sum-joint-pmf][Max-sum joint]].
 
 #+begin_latex
 \begin{table}
@@ -5627,7 +5627,7 @@ Again, each of these pairs has probability \(1/36\) associated with it and we ar
 \end{table}
 #+end_latex
 
-The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation \ref{eq-marginal-pmf}, so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table \ref{tab-max-sum-joint-pmf}, and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
+The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation [[eq-marginal-pmf]], so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table [[tab-max-sum-joint-pmf][Max-sum joint]], and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
 #+latex: \end{example}
 
 Continuing the reasoning for the discrete case, given two continuous random variables \(X\) and \(Y\) there similarly exists
@@ -5655,7 +5655,7 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x, \quad y \in S_{Y}.
 
 
 #+latex: \begin{example}
-#+latex: \label{exa:joint-pdf}
+#+latex: \label{exa-joint-pdf}
 
 Let the joint PDF of \((X,Y)\) be given by
 \[
@@ -5673,12 +5673,12 @@ f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
  & = & \left.\frac{6}{5}\left(\frac{x^{2}}{2}+xy^{2}\right)\right|_{x=0}^{1},\\
  & = & \frac{6}{5}\left(\frac{1}{2}+y^{2}\right),
 \end{eqnarray*}
-for \(0<y<1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section \ref{sec-Independent-Random-Variables}.
+for \(0<y<1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section [[sec-Independent-Random-Variables][Independent Random Variables]].
 #+latex: \end{example}
 
 *** How to do it with \(\mathsf{R}\)
 
-We will show how to do Example \ref{exa:max-sum-two-dice} using \(\mathsf{R}\); it is much simpler to do it with \(\mathsf{R}\) than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
+We will show how to do Example [[exa-max-sum-two-dice][Max-sum two dice]] using \(\mathsf{R}\); it is much simpler to do it with \(\mathsf{R}\) than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
 
 #+begin_src R :exports none :results silent
 library(prob)
@@ -5699,13 +5699,13 @@ UV <- marginal(S, vars = c("U", "V"))
 head(UV)
 #+end_src
 
-The data frame is difficult to understand. It would be better to have a tabular display like Table \ref{tab-max-sum-joint-pmf}. We can do that with the =xtabs= function. 
+The data frame is difficult to understand. It would be better to have a tabular display like Table [[tab-max-sum-joint-pmf][Max-sum joint]]. We can do that with the =xtabs= function. 
 
 #+begin_src R :exports both :results output pp 
 xtabs(round(probs,3) ~ U + V, data = UV)
 #+end_src
 
-Compare these values to the ones shown in Table \ref{tab-max-sum-joint-pmf}. We can repeat the process with =marginal= to get the univariate marginal distributions of \(U\) and \(V\) separately.
+Compare these values to the ones shown in Table [[tab-max-sum-joint-pmf][Max-sum joint]]. We can repeat the process with =marginal= to get the univariate marginal distributions of \(U\) and \(V\) separately.
 
 #+begin_src R :exports both :results output pp 
 marginal(UV, vars = "U")
@@ -5720,7 +5720,7 @@ rowSums(temp)
 colSums(temp)
 #+end_src
 
-You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example \ref{exa:max-sum-two-dice}.
+You should check that the answers that we have obtained exactly match the same (somewhat laborious) calculations that we completed in Example [[exa-max-sum-two-dice][Max-sum two dice]].
 
 ** Joint and Marginal Expectation
 :PROPERTIES:
@@ -5751,7 +5751,7 @@ By the way, there is a shortcut formula for covariance which is almost as handy 
 \begin{equation}
 \mbox{Cov}(X,Y)=\mathbb{E}(XY)-(\mathbb{E} X)(\mathbb{E} Y).
 \end{equation}
-The proof is left to Exercise \ref{xca-Prove-cov-shortcut}.
+The proof is left to Exercise [[xca-Prove-cov-shortcut][Prove Covariance Shortcut]].
 
 The Pearson product moment correlation between \(X\) and \(Y\) is the covariance between \(X\) and \(Y\) rescaled to fall in the interval \([-1,1]\). It is formally defined by 
 \begin{equation}
@@ -5763,9 +5763,9 @@ The correlation is usually denoted by \(\rho_{X,Y}\) or simply \(\rho\) if the r
 1. Equality holds above (\(\rho_{X,Y}=\pm1\)) if and only if \(Y\) is a linear function of \(X\) with probability one.
 
 #+latex: \begin{example}
-#+latex: \label{exa:max-sum-dice-covariance}
+#+latex: \label{exa-max-sum-dice-covariance}
 
-We will compute the covariance for the discrete distribution in Example \ref{exa:max-sum-two-dice}. The expected value of \(U\) is
+We will compute the covariance for the discrete distribution in Example [[exa-max-sum-two-dice][Max-sum two dice]]. The expected value of \(U\) is
 \[
 \mathbb{E} U=\sum_{u=1}^{6}u\, f_{U}(u)=\sum_{u=1}^{6}u\,\frac{2u-1}{36}=1\left(\frac{1}{36}\right)+2\left(\frac{3}{36}\right)+\cdots+6\left(\frac{11}{36}\right)=\frac{161}{36},
 \]
@@ -5788,7 +5788,7 @@ We will do a continuous example so that you can see how it works.
 
 #+latex: \begin{example}
 
-Let us find the covariance of the variables \((X,Y)\) from Example \ref{exa:joint-pdf}. The expected value of \(X\) is
+Let us find the covariance of the variables \((X,Y)\) from Example [[exa-joint-pdf]]. The expected value of \(X\) is
 \[
 \mathbb{E} X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\mathrm{d} x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
 \]
@@ -5811,7 +5811,7 @@ which is 13/50. Therefore the covariance of \((X,Y)\) is
 
 **** How to do it with \(\mathsf{R}\)
 
-There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example \ref{exa:max-sum-dice-covariance}.
+There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example [[exa-max-sum-dice-covariance][Max-sum covariance]].
 
 #+begin_src R :exports both :results output pp 
 Eu <- sum(S$U*S$probs)
@@ -5820,9 +5820,9 @@ Euv <- sum(S$U*S$V*S$probs)
 Euv - Eu * Ev
 #+end_src
 
-Compare this answer to what we got in Example \ref{exa:max-sum-dice-covariance}.
+Compare this answer to what we got in Example [[exa-max-sum-dice-covariance][Max-sum covariance]].
 
-To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{ryacas}. See Section \ref{sub-bivariate-transf-R} for another example where the =Ryacas= package appears.
+To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{ryacas}. See Section [[sub-bivariate-transf-R][Bivariate Trans with R]] for another example where the =Ryacas= package appears.
 
 ** Conditional Distributions
 :PROPERTIES:
@@ -5850,11 +5850,11 @@ Let the joint PDF of \(X\) and \(Y\) be given by
 
 Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter \(\theta\) which is of primary interest, and about which we would like to learn. But rather than observing \(\theta\) directly, we instead observe a random variable \(X\) whose probability distribution depends on \(\theta\). Using the information we provided by \(X,\) we would like to update the information that we have about \(\theta\).
 
-Our initial beliefs about \(\theta\) are represented by a probability distribution, called the /prior distribution/, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the /likelihood function/, also called the /likelihood of/ \(X\) /conditional on/ \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the /posterior distribution of/ \(\theta\) /given the observation/ \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section \ref{sec-Bayes'-Rule} where it was called Bayes' Rule:
+Our initial beliefs about \(\theta\) are represented by a probability distribution, called the /prior distribution/, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the /likelihood function/, also called the /likelihood of/ \(X\) /conditional on/ \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the /posterior distribution of/ \(\theta\) /given the observation/ \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section [[sec-Bayes'-Rule][Bayes' Rule]] where it was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
-Compare the above expression to Equation \ref{eq-bayes-rule}.
+Compare the above expression to Equation [[eq-bayes-rule][BR]].
 
 #+latex: \begin{example}
 Suppose the parameter \(\theta\) is the \(\Pr(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
@@ -5901,7 +5901,7 @@ where the constant of proportionality is \(\int\pi(u)\, f(x_{1},x_{2},\ldots,x_{
 :CUSTOM_ID: sub-Independent-Random-Variables
 :END:
 
-We recall from Chapter \ref{cha-Probability} that the events \(A\) and \(B\) are said to be independent when
+We recall from Chapter [[cha-Probability][Probability]] that the events \(A\) and \(B\) are said to be independent when
 \begin{equation}
 \Pr(A\cap B)=\Pr(A)\Pr(B).
 \end{equation}
@@ -5920,7 +5920,7 @@ f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
 then we say that \(X\) and \(Y\) are independent.
 
 #+latex: \begin{example}
-In Example \ref{exa:toss-two-dice-joint-pmf} we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
+In Example [[exa-toss-two-dice-joint-pmf][Toss two dice joint]] we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6,
 \]
@@ -5931,7 +5931,7 @@ f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}
 #+latex: \end{example}
 
 #+latex: \begin{example}
-In Example \ref{exa:max-sum-two-dice} we considered the same experiment but different random variables \(U\) and \(V\). We can prove that \(U\) and \(V\) are not independent if we can find a single pair \((u,v)\) where the independence equality does not hold. There are many such pairs. One of them is \((6,12)\):
+In Example [[exa-max-sum-two-dice][Max-sum two dice]] we considered the same experiment but different random variables \(U\) and \(V\). We can prove that \(U\) and \(V\) are not independent if we can find a single pair \((u,v)\) where the independence equality does not hold. There are many such pairs. One of them is \((6,12)\):
 \[
 f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).
 \]
@@ -5957,7 +5957,7 @@ This is straightforward from the definition.
 and this last quantity is exactly \(\left(\mathbb{E} u(X)\right)\left(\mathbb{E} v(Y)\right)\). 
 #+end_proof
 
-Now that we have Proposition \ref{pro:indep-implies-prodexpect} we mention a corollary that will help us later to quickly identify those random variables which are /not/ independent.
+Now that we have Proposition [[pro-indep-implies-prodexpect]] we mention a corollary that will help us later to quickly identify those random variables which are /not/ independent.
 
 #+begin_cor
 If \(X\) and \(Y\) are independent, then \(\mbox{Cov}(X,Y)=0\), and consequently,
@@ -5970,10 +5970,10 @@ When \(X\) and \(Y\) are independent then \(\mathbb{E} XY=\mathbb{E} X\,\mathbb{
 
 #+begin_rem
 #+latex: \label{rem:cov0-not-imply-indep}
-Unfortunately, the converse of Corollary \ref{cor:indep-implies-uncorr} is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}.
+Unfortunately, the converse of Corollary [[cor-indep-implies-uncorr]] is not true. That is, there are many random variables which are dependent yet their covariance and correlation is zero. For more details, see Casella and Berger \cite{Casella2002}.
 #+end_rem
 
-Proposition \ref{pro:indep-implies-prodexpect} is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
+Proposition [[pro-indep-implies-prodexpect]] is useful to us and we will receive mileage out of it, but there is another fact which will play an even more important role. Unfortunately, the proof is beyond the techniques presented here. The inquisitive reader should consult Casella and Berger \cite{Casella2002}, Resnick \cite{Resnick1999}, /etc/.
 
 #+begin_fact
 #+latex: \label{fac:indep-then-function-indep}
@@ -5985,7 +5985,7 @@ If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent f
 :CUSTOM_ID: sub-Combining-Independent-Random
 :END:
 
-Another important corollary of Proposition \ref{pro:indep-implies-prodexpect} will allow us to find the distribution of sums of random variables. 
+Another important corollary of Proposition [[pro-indep-implies-prodexpect]] will allow us to find the distribution of sums of random variables. 
 
 #+latex: \begin{cor}
 If \(X\) and \(Y\) are independent, then the moment generating function of \(X+Y\) is 
@@ -5995,7 +5995,7 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 #+latex: \end{cor}
 
 #+begin_proof
-Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition \ref{pro:indep-implies-prodexpect}, and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
+Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition [[pro:indep-implies-prodexpect]], and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
 #+end_proof
 
 Let us take a look at some examples of the corollary in action.
@@ -6027,7 +6027,7 @@ Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\m
 #+end_prop
 
 #+begin_proof
-We use Proposition \ref{pro:expectation-properties}:
+We use Proposition [[pro-expectation-properties][Expectation Properties]]:
 \[
 \mathbb{E} Y=\mathbb{E}\left(a_{1}X_{1}+a_{2}X_{2}\right)=a_{1}\mathbb{E} X_{1}+a_{2}\mathbb{E} X_{2}=a_{1}\mu_{1}+a_{2}\mu_{2}.
 \]
@@ -6065,7 +6065,7 @@ It is straightforward and tedious to check that \(\iint f=1\). We may see immedi
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:binom-exchangeable}
+#+latex: \label{exa-binom-exchangeable}
 Suppose \(X\) and \(Y\) are IID \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). Then their joint PMF is
 \begin{eqnarray*}
 f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
@@ -6075,7 +6075,7 @@ f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
 and the value is the same if we exchange \(x\) and \(y\). Therefore \((X,Y)\) are exchangeable.
 #+latex: \end{example}
 
-Looking at Example \ref{exa:binom-exchangeable} more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
+Looking at Example [[exa-binom-exchangeable][Binomial Exchangeable]] more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 
 #+begin_prop
 If \(X\) and \(Y\) are IID (with common marginal distribution \(F\)) then \(X\) and \(Y\) are exchangeable. 
@@ -6102,14 +6102,14 @@ for \((x,y)\in\mathbb{R}^{2}\). We write \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean
 \end{array}
 \right).
 \end{equation}
-See Appendix \ref{cha-Mathematical-Machinery}. The vector notation allows for a more compact rendering of the joint PDF:
+See Appendix [[cha-Mathematical-Machinery][Mathematical Machinery]]. The vector notation allows for a more compact rendering of the joint PDF:
 \begin{equation}
 f_{X,Y}(\mathbf{x})=\frac{1}{2\pi\left|\Sigma\right|^{1/2}}\exp\left\{ -\frac{1}{2}\left(\mathbf{x}-\upmu\right)^{\top}\Sigma^{-1}\left(\mathbf{x}-\upmu\right)\right\} ,
 \end{equation}
 where in an abuse of notation we have written \(\mathbf{x}\) for \((x,y)\). Note that the formula only holds when \(\rho\neq\pm1\).
 
 #+begin_rem
-In Remark \ref{rem:cov0-not-imply-indep} we noted that just because random variables are uncorrelated it does not necessarily mean that they are independent. However, there is an important exception to this rule: the bivariate normal distribution. Indeed, \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) are independent if and only if \(\rho=0\). 
+In Remark [[rem-cov0-not-imply-indep]] we noted that just because random variables are uncorrelated it does not necessarily mean that they are independent. However, there is an important exception to this rule: the bivariate normal distribution. Indeed, \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) are independent if and only if \(\rho=0\). 
 #+end_rem
 
 #+begin_rem
@@ -6141,7 +6141,7 @@ The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\m
 \end{equation}
 #+end_prop
 
-There are a few things to note about Proposition \ref{pro:mvnorm-cond-dist} which will be important in Chapter \ref{cha-simple-linear-regression}. First, the conditional mean of \(Y|x\) is linear in \(x\), with slope
+There are a few things to note about Proposition [[pro-mvnorm-cond-dist]] which will be important in Chapter [[cha-simple-linear-regression][Simple Linear Regression]]. First, the conditional mean of \(Y|x\) is linear in \(x\), with slope
 \begin{equation}
 \rho\,\frac{\sigma_{Y}}{\sigma_{X}}.\label{eq-population-slope-slr}
 \end{equation}
@@ -6207,11 +6207,11 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 :CUSTOM_ID: sec-Transformations-Multivariate
 :END:
 
-We studied in Section \ref{sec-Functions-of-Continuous} how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
+We studied in Section [[sec-Functions-of-Continuous][Functions of Continuous RVs]] how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
 U=g(X,Y)\quad\mbox{and}\quad V=h(X,Y),
 \end{equation}
-where \(g\) and \(h\) are two given functions, typically ``nice'' in the sense of Appendix \ref{sec-Multivariable-Calculus}. 
+where \(g\) and \(h\) are two given functions, typically ``nice'' in the sense of Appendix [[sec-Multivariable-Calculus][Multivariable Calculus]]. 
 
 Suppose that the transformation \((x,y)\longmapsto(u,v)\) is one-to-one. Then an inverse transformation \(x=x(u,v)\) and \(y=y(u,v)\) exists, so let \(\partial(x,y)/\partial(u,v)\) denote the Jacobian of the inverse transformation. Then the joint PDF of \((U,V)\) is given by 
 \begin{equation}
@@ -6221,7 +6221,7 @@ or we can rewrite more shortly as
 \begin{equation}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.\label{eq-biv-trans-pdf-short}
 \end{equation}
-Take a moment and compare Equation \ref{eq-biv-trans-pdf-short} to Equation \ref{eq-univ-trans-pdf-short}. Do you see the connection? 
+Take a moment and compare Equation [[eq-biv-trans-pdf-short]] to Equation [[eq-univ-trans-pdf-short]]. Do you see the connection? 
 
 #+begin_rem
 It is sometimes easier to /postpone/ solving for the inverse transformation \(x=x(u,v)\) and \(y=y(u,v)\). Instead, leave the transformation in the form \(u=u(x,y)\) and \(v=v(x,y)\) and calculate the Jacobian of the /original/ transformation
@@ -6238,7 +6238,7 @@ In some cases there will be a cancellation and the work will be lot shorter. Of 
 \begin{equation}
 \frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}},\label{eq-biv-jacob-recip}
 \end{equation}
-but for the well-behaved examples that we will see in this book it works just fine... do you see the connection between Equations \ref{eq-biv-jacob-recip} and \ref{eq-univ-jacob-recip}?
+but for the well-behaved examples that we will see in this book it works just fine... do you see the connection between Equations [[eq-biv-jacob-recip]] and [[eq-univ-jacob-recip]]?
 #+end_rem
 
 
@@ -6272,7 +6272,7 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 #+latex: \end{example}
 
 #+begin_rem
-It may not be obvious, but Equation \ref{eq-biv-norm-hidden} is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem \ref{thm:mvnorm-dist-matrix-prod}.
+It may not be obvious, but Equation [[eq-biv-norm-hidden]] is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem [[thm-mvnorm-dist-matrix-prod]].
 #+end_rem
 
 *** How to do it with \(\mathsf{R}\)
@@ -6289,7 +6289,7 @@ There are not yet any examples of Yacas in this book, but there are online mater
 :CUSTOM_ID: sec-Remarks-for-the-Multivariate
 :END:
 
-There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix \ref{sec-Linear-Algebra}). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
+There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix [[sec-Linear-Algebra][Linear Algebra]]). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x})>0,\quad\mbox{for }\mathbf{x}\in S_{\mathbf{X}},
 \end{equation}
@@ -6348,7 +6348,7 @@ Using linearity of expectation the \(\mathbb{E}\) distributes through the sums. 
 To complete the proof, note that the expression in the parentheses is exactly \(\left(\mathbb{E} Y\right)^{2}\), and recall the identity \(\sigma_{Y}^{2}=\mathbb{E} Y^{2}-\left(\mathbb{E} Y\right)^{2}\).  
 #+end_proof
 
-There is a corresponding statement of Fact \ref{fac:indep-then-function-indep} for the multivariate case. The proof is also omitted here. 
+There is a corresponding statement of Fact [[fac-indep-then-function-indep]] for the multivariate case. The proof is also omitted here. 
 
 #+begin_fact
 If \(\mathbf{X}\) and \(\mathbf{Y}\) are mutually independent random vectors, then \(u(\mathbf{X})\) and \(v(\mathbf{Y})\) are independent for any functions \(u\) and \(v\).
@@ -6370,11 +6370,11 @@ Think carefully: the conditional probability of observing a sequence  \(X_{1}=x_
 \begin{equation}
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}
-where we sum over all possible coins. The right-hand side of Equation \ref{eq-definetti-binary} is a sophisticated way to denote this process.
+where we sum over all possible coins. The right-hand side of Equation [[eq-definetti-binary]] is a sophisticated way to denote this process.
 
 Of course, the integral's value does not change if we jumble the \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The power of de Finetti's Theorem is that /every/ infinite binary exchangeable sequence can be written in the above form.
 
-The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation \ref{eq-definetti-binary} to Section \ref{sec-Bayes'-Rule} and Section \ref{sec-Conditional-Distributions}.
+The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation [[eq-definetti-binary]] to Section [[sec-Bayes'-Rule][Bayes' Rule]] and Section [[sec-Conditional-Distributions][Conditional Distributions]].
 
 The multivariate normal distribution immediately generalizes from the bivariate case. If the matrix \(\Sigma\) is nonsingular then the joint PDF of \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) is
 \begin{equation}
@@ -6384,7 +6384,7 @@ and the MGF is
 \begin{equation}
 M_{\mathbf{X}}(\mathbf{t})=\exp\left\{ \upmu^{\top}\mathbf{t}+\frac{1}{2}\mathbf{t}^{\top}\Sigma\mathbf{t}\right\}.
 \end{equation}
-We will need the following in Chapter \ref{cha-multiple-linear-regression}.
+We will need the following in Chapter [[cha-multiple-linear-regression][Multiple Linear Regression]].
 
 #+begin_thm
 #+latex: \label{thm:mvnorm-dist-matrix-prod}
@@ -6423,11 +6423,11 @@ Several comments are in order. First, the joint support set \(S_{X_{1},\ldots X_
 \begin{equation}
 {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}=\frac{n!}{x_{1}!\, x_{2}!\,\cdots x_{k}!}
 \end{equation}
-is called a /multinomial coefficient/ which generalizes the notion of a binomial coefficient we saw in Equation \ref{eq-binomial-coefficient}. 
+is called a /multinomial coefficient/ which generalizes the notion of a binomial coefficient we saw in Equation [[eq-binomial-coefficient]]. 
 
 The form and notation we have just described matches the \(\mathsf{R}\) usage but is not standard among other texts. Most other books use the above for a \(k-1\) dimension multinomial distribution, because the linear constraint \(x_{1}+x_{2}+\cdots+x_{k}=n\) means that once the values of \(X_{1}\), \(X_{2}\), ..., \(X_{k-1}\) are known the final value \(X_{k}\) is determined, not random. Another term used for this is a /singular/ distribution. 
 
-For the most part we will ignore these difficulties, but the careful reader should keep them in mind. There is not much of a difference in practice, except that below we will use a two-dimensional support set for a three-dimension multinomial distribution. See Figure \ref{fig-multinom-pmf2}.
+For the most part we will ignore these difficulties, but the careful reader should keep them in mind. There is not much of a difference in practice, except that below we will use a two-dimensional support set for a three-dimension multinomial distribution. See Figure [[fig-multinom-pmf2][Multinomial PMF]].
 
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
@@ -6517,7 +6517,7 @@ Prove that \( \mbox{Cov}(X,Y)=\mathbb{E}(XY)-(\mathbb{E} X)(\mathbb{E} Y). \) \l
 
 #+begin_xca
 #+latex: \label{xca-sum-indep-chisq}
-Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the distribution of \(X+Y\) (you may want to refer to Equation \ref{eq-mgf-chisq}).
+Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the distribution of \(X+Y\) (you may want to refer to Equation [[eq-mgf-chisq]]).
 #+end_xca
 
 #+begin_xca
@@ -6533,11 +6533,11 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 
 
 #+latex: \noindent 
-This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters \ref{cha-Describing-Data-Distributions} through \ref{cha-Multivariable-Distributions} to inferential statistics which forms the latter part of this book.
+This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters [[cha-Describing-Data-Distributions][Data Description]] through [[cha-Multivariable-Distributions][Multivariate Distributions]] to inferential statistics which forms the latter part of this book.
 
 Here is the link: we are presented with a /population/ about which we would like to learn. And while it would be desirable to examine every single member of the population, we find that it is either impossible or infeasible to for us to do so, thus, we resort to collecting a /sample/ instead. We do not lose heart. Our method will suffice, provided the sample is /representative/ of the population. A good way to achieve this is to sample /randomly/ from the population.
 
-Supposing for the sake of argument that we have collected a random sample, the next task is to make some /sense/ out of the data because the complete list of sample information is usually cumbersome, unwieldy. We summarize the data set with a descriptive /statistic/, a quantity calculated from the data (we saw many examples of these in Chapter \ref{cha-Describing-Data-Distributions}). But our sample was random... therefore, it stands to reason that our statistic will be random, too. How is the statistic distributed?
+Supposing for the sake of argument that we have collected a random sample, the next task is to make some /sense/ out of the data because the complete list of sample information is usually cumbersome, unwieldy. We summarize the data set with a descriptive /statistic/, a quantity calculated from the data (we saw many examples of these in Chapter [[cha-Describing-Data-Distributions][Data Description]]). But our sample was random... therefore, it stands to reason that our statistic will be random, too. How is the statistic distributed?
 
 The probability distribution associated with the population (from which we sample) is called the /population distribution/, and the probability distribution associated with our statistic is called its /sampling distribution/; clearly, the two are interrelated. To learn about the population distribution, it is imperative to know everything we can about the sampling distribution. Such is the goal of this chapter.
 
@@ -6573,10 +6573,10 @@ Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a population distr
 #+end_prop
 
 #+begin_proof
-Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition \ref{pro:mean-sd-lin-comb}.
+Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition [[pro-mean-sd-lin-comb]].
 #+end_proof
 
-The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section \ref{sec-Central-Limit-Theorem}.
+The next fact will be useful to us when it comes time to prove the Central Limit Theorem in Section [[sec-Central-Limit-Theorem][Central Limit Theorem]].
 
 #+begin_prop
 #+latex: \label{pro:mgf-xbar}
@@ -7042,7 +7042,7 @@ We find an estimator with the methods of Section \ref{sec-Point-Estimation-1}. W
 The following example is how I was introduced to maximum likelihood.
 
 #+latex: \begin{example}
-#+latex: \label{exa:how-many-fish}
+#+latex: \label{exa-how-many-fish}
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 
 We will fish from the pond and suppose that we capture \(M=7\) fish. On each caught fish we attach an unobtrusive tag to the fish's tail, and release it back into the water. 
@@ -7105,7 +7105,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 #+end_html
 
 #+latex: \begin{example}
-#+latex: \label{exa:bass-bluegill}
+#+latex: \label{exa-bass-bluegill}
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (/Micropterus dolomieu/) and bluegill (/Lepomis macrochirus/); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 
 Let \(p=\mbox{the proportion of bass}\). Without any other information, it is conceivable for \(p\) to be any value in the interval \([0,1]\), but for the sake of argument we will suppose that \(p\) falls strictly between zero and one. How can we learn about the true value of \(p\)? Go fishing! As before, we will use catch-and-release, but unlike before, we will not tag the fish. We will simply note the species of any caught fish before returning it to the pond. 
@@ -7255,7 +7255,7 @@ Some comments about maximum likelihood estimators:
 - MLEs are just one of _many_ possible estimators. One of the more popular alternatives are the /method of moments estimators/; see Casella and Berger \cite{Casella2002} for more.
 #+end_rem
 
-Notice, in Example \ref{exa:bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
+Notice, in Example \ref{exa-bass-bluegill} we had \(X_{i}\) IID \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
 \mathbb{E}\overline{X} & = & \mathbb{E}\frac{X_{1}+X_{2}+\cdots+X_{n}}{n},\\
  & = & \frac{1}{n}\left(\mathbb{E} X_{1}+\mathbb{E} X_{2}+\cdots+\mathbb{E} X_{n}\right),\\
@@ -7273,7 +7273,7 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an /unbiased es
 #+end_defn
 
 #+latex: \begin{example}
-#+latex: \label{exa:normal-MLE-both}
+#+latex: \label{exa-normal-MLE-both}
 
 Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise \ref{xca-norm-mu-sig-MLE}) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
@@ -7304,7 +7304,7 @@ One of the most common questions in an introductory statistics class is, ``Why d
 
 For one parameter estimation problems we may use the =optimize= function to find MLEs. The arguments are the function to be maximized (the likelihood function), the range over which the optimization is to take place, and optionally any other arguments to be passed to the likelihood if needed.
 
-Let us see how to do Example \ref{exa:bass-bluegill}. Recall that our likelihood function was given by
+Let us see how to do Example \ref{exa-bass-bluegill}. Recall that our likelihood function was given by
 \begin{equation}
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \end{equation}
@@ -7342,7 +7342,7 @@ For multiparameter problems we may use a similar approach by way of the =mle= fu
 
 #+latex: \begin{example}
 
-*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in Example \ref{exa:normal-MLE-both} that \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
+*Plant Growth.* We will investigate the =weight= variable of the =PlantGrowth= data. We will suppose that the weights constitute a random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not unreasonable based on a histogram and other exploratory measures. We will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in Example \ref{exa-normal-MLE-both} that \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given above. Let us check whether this is plausible numerically. The negative log-likelihood function is
 
 #+begin_src R :exports code :results silent
 minuslogL <- function(mu, sigma2){
@@ -7473,7 +7473,7 @@ For a fixed sample size \(n\),
 
 
 #+latex: \begin{example}
-#+latex: \label{exa:plant-one-samp-z-int}
+#+latex: \label{exa-plant-one-samp-z-int}
 *Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 
 The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
@@ -7556,7 +7556,7 @@ Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) 
 #+latex: \end{example}
 
 *** How to do it with \(\mathsf{R}\)
-We can do Example \ref{exa:plant-one-samp-z-int} with the following code.
+We can do Example \ref{exa-plant-one-samp-z-int} with the following code.
 #+begin_src R :exports none :results silent
 library(TeachingDemos)
 #+end_src
@@ -7898,7 +7898,7 @@ There are two very important final thoughts. First, everybody gets a cookie in t
 :END:
 
 #+latex: \begin{example}
-#+latex: \label{exa:widget-machine}
+#+latex: \label{exa-widget-machine}
 
 We have a machine that makes widgets. 
 
@@ -7927,7 +7927,7 @@ If the confidence interval is
 
 *** Terminology
 
-The /null hypothesis/ \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, /etc/. In Example \ref{exa:widget-machine} the null hypothesis would be \(H_{0}:\, p=0.10.\) The /alternative hypothesis/ \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically /test/ the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
+The /null hypothesis/ \(H_{0}\) is a ``nothing'' hypothesis, whose interpretation could be that nothing has changed, there is no difference, there is nothing special taking place, /etc/. In Example \ref{exa-widget-machine} the null hypothesis would be \(H_{0}:\, p=0.10.\) The /alternative hypothesis/ \(H_{1}\) is the hypothesis that something has changed, in this case, \(H_{1}:\, p\neq0.10\). Our goal is to statistically /test/ the hypothesis \(H_{0}:\, p=0.10\) versus the alternative \(H_{1}:\, p\neq0.10\). Our procedure will be:
 1. Go out and collect some data, in particular, a simple random sample of observations from the machine.
 2. Suppose that \(H_{0}\) is true and construct a \(100(1-\alpha)\%\) confidence interval for \(p\).
 3. If the confidence interval does not cover \(p=0.10\), then we /reject/ \(H_{0}\). Otherwise, we /fail to reject/ \(H_{0}\).
@@ -7945,7 +7945,7 @@ and we design our statistical procedures to control the probability of making su
 \mbox{significance level of the test}=\Pr(\mbox{Type I Error})=\alpha.
 \end{equation}
 We want \(\alpha\) to be small which conventionally means, say, \(\alpha=0.05\), \(\alpha=0.01\), or \(\alpha=0.005\) (but could mean anything, in principle).
-- The /rejection region/ (also known as the /critical region/) for the test is the set of sample values which would result in the rejection of \(H_{0}\). For Example \ref{exa:widget-machine}, the rejection region would be all possible samples that result in a 95% confidence interval that does not cover \(p=0.10\).
+- The /rejection region/ (also known as the /critical region/) for the test is the set of sample values which would result in the rejection of \(H_{0}\). For Example \ref{exa-widget-machine}, the rejection region would be all possible samples that result in a 95% confidence interval that does not cover \(p=0.10\).
 - The above example with \(H_{1}:p\neq0.10\) is called a /two-sided/ test. Many times we are interested in a /one-sided/ test, which would look like \(H_{1}:p<0.10\) or \(H_{1}:p>0.10\).
 
 We are ready for tests of hypotheses for one proportion.
@@ -7961,7 +7961,7 @@ Find
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:prop-test-pvalue-A}
+#+latex: \label{exa-prop-test-pvalue-A}
 
 Suppose \(p=\mbox{the proportion of students}\) who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40% acceptance rate for its graduate school. Consider the data stored in the table =UCBAdmissions= from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an \(\alpha=0.01\) significance level.
 
@@ -7994,8 +7994,8 @@ Our test statistic is not less than \(-2.32\), so it does not fall into the crit
 #+latex: \end{example}
 
 #+latex: \begin{example}
-#+latex: \label{exa:prop-test-pvalue-B}
-We are going to do Example \ref{exa:prop-test-pvalue-A} all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
+#+latex: \label{exa-prop-test-pvalue-B}
+We are going to do Example \ref{exa-prop-test-pvalue-A} all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
 
 Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately \(-1.68\). But notice that our critical value has changed: \(\alpha=0.05\) and \(-z_{0.05}\) is 
 #+latex: \end{example}
@@ -8017,7 +8017,7 @@ The /p-value/, or /observed significance level/, of a hypothesis test is the pro
 #+end_defn
 
 #+latex: \begin{example}
-Calculate the \(p\)-value for the test in Examples \ref{exa:prop-test-pvalue-A} and \ref{exa:prop-test-pvalue-B}.
+Calculate the \(p\)-value for the test in Examples \ref{exa-prop-test-pvalue-A} and \ref{exa-prop-test-pvalue-B}.
 
 The \(p\)-value for this test is the probability of obtaining a \(z\)-score equal to our observed test statistic (which had \(z\)-score \(\approx-1.680919\)) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval \((-\infty,\,-1.680919]\). We can get this easily with
 #+latex: \end{example}
@@ -8026,7 +8026,7 @@ The \(p\)-value for this test is the probability of obtaining a \(z\)-score equa
 pnorm(-1.680919)
 #+end_src
 
-We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example \ref{exa:prop-test-pvalue-A}) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example \ref{exa:prop-test-pvalue-B}). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at /any/ given significance level.
+We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example \ref{exa-prop-test-pvalue-A}) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example \ref{exa-prop-test-pvalue-B}). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at /any/ given significance level.
 
 Thus, another way to phrase our significance test procedure is: we will reject \(H_{0}\) at the \(\alpha\)-level of significance if the \(p\)-value is less than \(\alpha\).
 
@@ -8482,7 +8482,7 @@ segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 
 #+latex: \begin{example}
-#+latex: \label{exa:Speed-and-Stopping}
+#+latex: \label{exa-Speed-and-Stopping}
 *Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
 #+begin_src R :exports both :results output pp 
 head(cars)
@@ -8654,7 +8654,7 @@ ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) +
 To calculate points on the regression line we may simply plug the desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with the =predict= function. The inputs to =predict= are the fitted linear model object, =cars.lm=, and the desired \(x\) value(s) represented by a data frame. See the example below.
 
 #+latex: \begin{example}
-#+latex: \label{exa:regline-cars-interpret}
+#+latex: \label{exa-regline-cars-interpret}
 
 Using the regression line for the =cars= data:
 
@@ -8677,11 +8677,11 @@ We said at the beginning of the chapter that our goal was to estimate \( \mu = \
 The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
 
 #+latex: \begin{example}
-#+latex: \label{exa:regline-cars-pe-8mph}
+#+latex: \label{exa-regline-cars-pe-8mph}
 We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 #+latex: \end{example}
 
-Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data (which we saw in Example \ref{exa:Speed-and-Stopping}).
+Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the =cars= data (which we saw in Example \ref{exa-Speed-and-Stopping}).
 
 #+begin_src R :exports both :results output pp
 cars[5, ]
@@ -8691,7 +8691,7 @@ There is a special name for estimates \( \hat{\mu}(x_{0}) \) when \( x_{0} \) ma
 
 In an abuse of notation we will sometimes write \(\hat{Y}\) or \(\hat{Y}(x_{0})\) to denote a point on the regression line even when \(x_{0}\) does not belong to the original data if the context of the statement obviates any danger of confusion.
 
-We saw in Example \ref{exa:regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
+We saw in Example \ref{exa-regline-cars-interpret} that spooky things can happen when we are cavalier about point estimation. While it is usually acceptable to predict/estimate at values of \(x_{0}\) that fall within the range of the original \(x\) data, it is reckless to use \(\hat{\mu}\) for point estimates at locations outside that range. Such estimates are usually worthless. /Do not extrapolate/ unless there are compelling external reasons, and even then, temper it with a good deal of caution.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -8707,7 +8707,7 @@ Predictions at \(x\) values that are not necessarily part of the original data a
 predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 #+end_src
 
-Note that there were no observed cars that traveled 6 mph or 21 mph. Also note that our estimate for a car traveling 8 mph matches the value we computed by hand in Example \ref{exa:regline-cars-pe-8mph}.
+Note that there were no observed cars that traveled 6 mph or 21 mph. Also note that our estimate for a car traveling 8 mph matches the value we computed by hand in Example \ref{exa-regline-cars-pe-8mph}.
 
 *** Mean Square Error and Standard Error
 
@@ -8744,7 +8744,7 @@ tmpred <- round(as.numeric(predict(cars.lm, newdata = data.frame(speed = 8))), 2
 tmps <- round(summary(cars.lm)$sigma, 2)
 #+end_src
 
-In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa:Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
+In the last section, we calculated the fitted value for \(x=8\) and found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} \). Now, it turns out that there was only one recorded observation at \(x = 8\), and we have seen this value in the output of =head(cars)= in Example \ref{exa-Speed-and-Stopping}; it was \(\mathtt{dist} = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} \). Now take a look at the last entry of =residuals(cars.lm)=, above. It is not a coincidence.
 
 The estimate \(S\) for \(\sigma\) is called the =Residual standard error= and for the =cars= data is shown a few lines up on the =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in Section \ref{sub-slr-interval-est-params}). We may read it from there to be \( S\approx SRC_R{tmps} \), or we can access it directly from the =summary= object.
 
@@ -10287,7 +10287,7 @@ summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
 
 Now nothing is significant in the model except =Girth^2=. We could delete the =Intercept= and =Girth= from the model, but the model would no longer be /parsimonious/. A novice may see the output and be confused about how to proceed, while the seasoned statistician recognizes immediately that =Girth= and =Girth^2= are highly correlated (see Section \ref{sub-Multicollinearity}). The only remedy to this ailment is to rescale =Girth=, which we should have done in the first place.
 
-In Example \ref{exa:mlr-trees-poly-no-rescale} of Section \ref{sec-Partial-F-Statistic} we investigate this issue further.
+In Example \ref{exa-mlr-trees-poly-no-rescale} of Section \ref{sec-Partial-F-Statistic} we investigate this issue further.
 
 #+end_rem
 
@@ -10527,7 +10527,7 @@ It can be shown when the regression assumptions hold under \(H_{0}\) that the pa
 The key ingredient above is that the two competing models are /nested/ in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute =lm= objects both for the complete model and the reduced model then compare the answers with the =anova= function.
 
 #+latex: \begin{example}
-#+latex: \label{exa:mlr-trees-poly-no-rescale}
+#+latex: \label{exa-mlr-trees-poly-no-rescale}
 
 For the =trees= data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
 
@@ -10760,7 +10760,7 @@ The above discussion leads us to the following general procedure to approximate 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 
 #+latex: \begin{example}
-#+latex: \label{exa:Bootstrap-se-mean}
+#+latex: \label{exa-Bootstrap-se-mean}
 
 *Standard error of the mean.*  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\).  
 
@@ -10832,7 +10832,7 @@ We only took an original sample of size \(n=25\), and resampling more and more w
 #+end_rem
 
 #+latex: \begin{example}
-#+latex: \label{exa:Bootstrap-se-median}
+#+latex: \label{exa-Bootstrap-se-median}
 
 *Standard error of the median.* We look at one where we do not know the answer ahead of time. This example uses the =rivers=\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite:stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
 
@@ -10892,7 +10892,7 @@ mean(medstar) - median(rivers)
 #+latex: \end{example}
  Here, =data= is a vector (or matrix) containing the data to be resampled, =statistic= is a defined function, /of two arguments/, that tells which statistic should be computed, and the parameter \(\mathsf{R}\) specifies how many resamples should be taken.
 
-For the standard error of the mean (Example \ref{exa:Bootstrap-se-mean}):
+For the standard error of the mean (Example \ref{exa-Bootstrap-se-mean}):
 
 #+begin_src R :exports both :results output pp 
 library(boot)
@@ -10900,7 +10900,7 @@ mean_fun <- function(x, indices) mean(x[indices])
 boot(data = srs, statistic = mean_fun, R = 1000)
 #+end_src
 
-For the standard error of the median (Example \ref{exa:Bootstrap-se-median}):
+For the standard error of the median (Example \ref{exa-Bootstrap-se-median}):
 
 #+begin_src R :exports both :results output pp 
 median_fun <- function(x, indices) median(x[indices])
@@ -10933,7 +10933,7 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 
 
 #+latex: \begin{example}
-#+latex: \label{exa:percentile-interval-median-first}
+#+latex: \label{exa-percentile-interval-median-first}
 
 *Percentile interval for the expected value of the median.* We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
 
