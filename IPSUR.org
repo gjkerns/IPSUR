@@ -1128,13 +1128,13 @@ Clearly, the most popular sample quantile is \(\tilde{q}_{0.50}\), also known as
 
 **** How to do it with \(\mathsf{R}\)
 
-#+latex: \subparagraph*{At the command prompt}
-we can find the order statistics of a data set stored in a vector =x= with the command =sort(x)=.
+*At the command prompt*
+We can find the order statistics of a data set stored in a vector =x= with the command =sort(x)=.
 
 We can calculate the sample quantiles of any order \(p\) where \(0<p<1\) for a data set stored in a data vector =x= with the =quantile= function, for instance, the command =quantile(x, probs = c(0, 0.25, 0.37))= will return the smallest observation, the first quartile, \(\tilde{q}_{0.25}\), and the 37th sample quantile, \(\tilde{q}_{0.37}\). For \(\tilde{q}_{p}\) simply change the values in the =probs= argument to the value \(p\).
 
 
-#+latex: \subparagraph*{With the \(\mathsf{R}\) Commander}
+*With the R Commander*
 we can find the order statistics of a variable in the =Active data set= by doing =Data= \(\triangleright\) =Manage variables in Active data set...= \(\triangleright\) =Compute new variable...= In the =Expression to compute= dialog simply type =sort(varname)=, where =varname= is the variable that it is desired to sort.
 
 In =Rcmdr=, we can calculate the sample quantiles for a particular variable with the sequence =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Numerical Summaries...= We can automatically calculate the quartiles for all variables in the =Active data set= with the sequence =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Active Dataset=.
@@ -1193,10 +1193,10 @@ However, once we are looking at the three numbers it is important to understand 
 
 **** How to do it with \(\mathsf{R}\)
 
-#+latex: \subparagraph*{At the command prompt}
+*At the command prompt*
 we may compute the sample range with =range(x)= and the sample variance with =var(x)=, where =x= is a numeric vector. The sample standard deviation is =sqrt(var(x))= or just =sd(x)=. The \(IQR\) is =IQR(x)= and the median absolute deviation is =mad(x)=.
 
-#+latex: \subparagraph*{With the \(\mathsf{R}\) Commander}
+*With the R Commander*
 we can calculate the sample standard deviation with the =Statistics= \(\triangleright\) =Summaries= \(\triangleright\) =Numerical Summaries...= combination. \(\mathsf{R}\) Commander does not calculate the \(IQR\) or \(MAD\) in any of the menu selections, by default.
 
 *** Measures of Shape
@@ -2264,7 +2264,7 @@ that holds asymptotically. User beware.
 :CUSTOM_ID: sub-Probability-Functions
 :END:
 
-A /probability function/ is a rule that associates with each event \(A\) of the sample space a unique number \(\Pr(A)=p\), called the /probability of/ \(A\). Any probability function \(\Pr\) satisfies the following three Kolmogorov Axioms: 
+A /probability function/ is a rule that associates with each event \(A\) of the sample space a single number \(\Pr(A)=p\), called the /probability of/ \(A\). Any probability function \(\Pr\) satisfies the following three Kolmogorov Axioms: 
 
 #+begin_ax
 #+LABEL: ax-prob-nonnegative
@@ -2727,35 +2727,48 @@ which means that given the information that a Head has occurred, we no longer ne
 #+LABEL: exa-Toss-a-six-sided-die-twice
 Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section [[sec-Methods-of-Counting][Counting Methods]] that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
+
+#+srcname: twodiceAB
+#+begin_src R :exports none :results silent
+library(ggplot2)
+library(prob)
+A <- rolldie(2)
+B <- subset(A, X1==X2)
+C <- subset(A, X1+X2 > 7)
+B$lab <- rep("X", dim(B)[1])
+C$lab <- rep("O", dim(C)[1])
+p <- ggplot(rbind(B, C), aes(x=X1, y=X2, label=lab))
+p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/prob/twodiceAB.ps
+  <<twodiceAB>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/prob/twodiceAB.svg
+  <<twodiceAB>>
+#+end_src
+
 #+begin_latex
-\begin{table}
-\begin{center}
-\begin{tabular}{c}
-\begin{sideways}
-First Roll
-\end{sideways}\tabularnewline
-\end{tabular}\begin{tabular}{c|cccccc|}
-\multicolumn{1}{c}{} & \multicolumn{6}{c}{Second Roll}\tabularnewline
-\multicolumn{1}{c}{} & 1 & 2 & 3 & 4 & 5 & \multicolumn{1}{c}{6}\tabularnewline
-\cline{2-7} 
-1 & \(\varprod\) &  &  &  &  & \tabularnewline
-2 &  & \(\varprod\) &  &  &  & {\Large \(\bigcirc\)}\tabularnewline
-3 &  &  & \(\varprod\) &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)}\tabularnewline
-4 &  &  &  & {\huge \(\otimes\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)}\tabularnewline
-5 &  &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\huge \(\otimes\)} & {\Large \(\bigcirc\)}\tabularnewline
-6 &  & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\Large \(\bigcirc\)} & {\huge \(\otimes\)}\tabularnewline
-\cline{2-7} 
-\end{tabular}
-\caption{Rolling two dice\label{tab-Rolling-two-dice}}
-\end{center}
-\end{table}
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/prob/twodiceAB.ps}
+  \caption[Rolling two dice]{\small Rolling two dice. The outcomes in A are marked with X, the outcomes in B are marked with O.}
+  \label{fig-twodiceAB}
+\end{figure}
 #+end_latex
 
-The outcomes lying in the event \(A\) are marked with the symbol ``\(\varprod\)'', the outcomes falling in \(B\) are marked with ``\(\bigcirc\)'', and those in both \(A\) and \(B\) are marked ``\(\otimes\)''. Now it is clear that \(\Pr(A)=6/36\), \(\Pr(B)=15/36\), and \(\Pr(A\cap B)=3/36\).  Finally, 
+#+begin_html
+<div id="fig-twodiceAB" class="figure">
+  <p><img src="svg/prob/twodiceAB.svg" width=500 alt="svg/prob/twodiceAB.svg" /></p>
+  <p>Rolling two dice. The outcomes in A are marked with X, the outcomes in B are marked with O.</p>
+</div>
+#+end_html
+
+The outcomes lying in the event \(A\) are marked with the symbol ``X'', the outcomes falling in \(B\) are marked with ``O'', and the outcomes in \(A\cap B\) are those where the letters overlap. Now it is clear that \(\Pr(A)=6/36\), \(\Pr(B)=15/36\), and \(\Pr(A\cap B)=3/36\).  Finally, 
 \[
 \Pr(A|B)=\frac{3/36}{15/36}=\frac{1}{5},\quad\Pr(B|A)=\frac{3/36}{6/36}=\frac{1}{2}.
 \]
-Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the lower right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
+Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the upper right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
 #+latex: \end{example}
 
 *** How to do it with \(\mathsf{R}\)
@@ -3319,8 +3332,7 @@ Note that the default value of =vars= is the names of all columns except =probs=
 Prove the assertion given in the text: the number of conditions that the events \(A_{1}\), \(A_{2}\), ..., \(A_{n}\) must satisfy in order to be mutually independent is \(2^{n}-n-1\). (/Hint/: think about Pascal's triangle.)
 #+end_xca
 
-*** Answer:
-
+*Answer:*
 The events must satisfy the product equalities two at a time, of which there are \({n \choose 2}\), then they must satisfy an additional \({n \choose 3}\) conditions three at a time, and so on, until they satisfy the \({n \choose n}=1\) condition including all \(n\) events. In total, there are 
 \[
 {n \choose 2}+{n \choose 3}+\cdots+{n \choose n}=\sum_{k=0}^{n}{n \choose k}-\left[{n \choose 0}+{n \choose 1}\right]
@@ -3340,8 +3352,7 @@ We give special attention to the empirical distribution since it plays such a fu
 
 There are some comments on simulation, and we mention transformations of random variables in the discrete case. The interested reader who would like to learn more about any of the assorted discrete distributions mentioned here should take a look at /Univariate Discrete Distributions/ by Johnson /et al/\cite{Johnson1993}.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - how to choose a reasonable discrete model under a variety of physical circumstances
 - item the notion of mathematical expectation, how to calculate it, and basic properties- moment generating functions (yes, I want them to hear about those)
 - the general tools of the trade for manipulation of continuous random variables, integration, /etc/.
@@ -3381,9 +3392,9 @@ S=\{ HHH,\ HTH,\ THH,\ TTH,\ HHT,\ HTT,\ THT,\ TTT\}.
 Now let \(X\) be the number of Heads observed. Then \(X\) has support \(S_{X}=\{ 0,1,2,3\} \). Assuming that the coin is fair and was tossed in exactly the same way each time, it is not unreasonable to suppose that the outcomes in the sample space are all equally likely. 
 
 What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(TTT\) occurs, and this event has probability \(1/8\). Therefore, \(f_{X}(0)=1/8\), and the same reasoning shows that \(f_{X}(3)=1/8\). Exactly three outcomes result in \(X=1\), thus, \(f_{X}(1)=3/8\) and \(f_{X}(3)\) holds the remaining \(3/8\) probability (the total is 1). We can represent the PMF with a table:
-| \(x\in S_{X}\)       |   0 |   1 |   2 |   3 | Total |
-|----------------------+-----+-----+-----+-----+-------|
-| \(f_{X}(x)=\Pr(X=x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+| \(x\in S_{X}\)        |   |   0 |   1 |   2 |   3 | Total |
+|-----------------------+---+-----+-----+-----+-----+-------|
+| \(f_{X}(x)=\Pr(X=x)\) |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
@@ -3619,9 +3630,9 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+latex: \begin{example}
 #+LABEL: exa-toss-coin-3-withR
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
-| \(x=\mbox{\#of Heads}\) |   0 |   1 |   2 |   3 | Total |
-|-------------------------+-----+-----+-----+-----+-------|
-| \(f(x) = \Pr(X = x)\)    | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+| \(x=\mbox{\#of Heads}\) |   |   0 |   1 |   2 |   3 | Total |
+|-------------------------+---+-----+-----+-----+-----+-------|
+| \(f(x) = \Pr(X = x)\)   |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\Pr(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\Pr(X\leq x)\) should equal \(\Pr(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\Pr(X\leq x)\) should equal \(\Pr(X=0\mbox{ or }X=1)=\Pr(X=0)+\Pr(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
 \[
 F_{X}(x)=\Pr(X\leq x)=
@@ -3716,23 +3727,14 @@ plot(X, cex = 0.2)
 </div>
 #+end_html
 
-#+begin_latex
-\begin{table}
-\begin{tabular}{lllll}
-\multicolumn{5}{l}{Given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).}\tabularnewline
- &  &  &  & \tabularnewline
-How to do: &  & with \(\mathtt{stats}\) (default)  &  & with \(\mathtt{distr}\)\tabularnewline
-\hline
-PMF: \(\Pr(X=x)\) &  & \(\mathtt{dbinom(x,size=n,prob=p)}\) &  & \(\mathtt{d(X)(x)}\)\tabularnewline
-CDF: \(\Pr(X\leq x)\) &  & \(\mathtt{pbinom(x,size=n,prob=p)}\) &  & \(\mathtt{p(X)(x)}\)\tabularnewline
-Simulate \(k\) variates &  & \(\mathtt{rbinom(k,size=n,prob=p)}\) &  & \(\mathtt{r(X)(k)}\)\tabularnewline
-\hline
- &  &  &  & \tabularnewline
-\multicolumn{5}{r}{For \(\mathtt{distr}\) need \texttt{X <-} \(\mathtt{Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\)}\tabularnewline
-\end{tabular}
-\caption{Correspondence between \texttt{stats} and \texttt{distr}}
-\end{table}
-#+end_latex
+#+CAPTION: [Correspondence between =stats= and =distr=.]{Correspondence between =stats= and =distr=. We are given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).  For the =distr= package we must first set \(\mathtt{X\ <-\ Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\).}
+| How to do:              | with =stats= (default)               | with =distr=         |
+|-------------------------+--------------------------------------+----------------------|
+| PMF: \(\Pr(X=x)\)       | \(\mathtt{dbinom(x,size=n,prob=p)}\) | \(\mathtt{d(X)(x)}\) |
+| CDF:  \(\Pr(X\leq x)\)  | \(\mathtt{pbinom(x,size=n,prob=p)}\) | \(\mathtt{p(X)(x)}\) |
+| Simulate \(k\) variates | \(\mathtt{rbinom(k,size=n,prob=p)}\) | \(\mathtt{r(X)(k)}\) |
+|-------------------------+--------------------------------------+----------------------|
+
 
 ** Expectation and Moment Generating Functions
 :PROPERTIES:
@@ -4361,15 +4363,15 @@ f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 
 #+latex: \begin{example}
 Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
-| x               |    0 |   1 |    2 |   3 |    4 |
-|-----------------+------+-----+------+-----+------|
-| \(f_{X}(x)\)    | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
-|-----------------+------+-----+------+-----+------|
-| \(y=(x-2)^{2}\) |    1 |   0 |    1 |   4 |    9 |
+| x               |   |    0 |   1 |    2 |   3 |    4 |
+|-----------------+---+------+-----+------+-----+------|
+| \(f_{X}(x)\)    |   | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
+|-----------------+---+------+-----+------+-----+------|
+| \(y=(x-2)^{2}\) |   |    1 |   0 |    1 |   4 |    9 |
 From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that \(h(x)=(x-1)^{2}\) is not one-to-one on the support of \(X\), because both \(x=0\) and \(x=2\) are mapped by \(h\) to \(y=1\). Nevertheless, we see that \(Y=0\) only when \(X=1\), which has probability \(1/4\); therefore, \(f_{Y}(0)\) should equal \(1/4\). A similar approach works for \(y=4\) and \(y=9\). And \(Y=1\) exactly when \(X=0\) or \(X=2\), which has total probability \(7/16\). In summary, the PMF of \(Y\) may be written:
-| y          |   0 |    1 |   4 |    9 |
-|------------+-----+------+-----+------|
-| \(f_{Y}(y)\) | 1/4 | 7/16 | 1/4 | 1/16 |
+| y            |   |   0 |    1 |   4 |    9 |
+|--------------+---+-----+------+-----+------|
+| \(f_{Y}(y)\) |   | 1/4 | 7/16 | 1/4 | 1/16 |
 There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
 #+latex: \end{example}
 
@@ -4540,16 +4542,11 @@ This chapter begins with continuous random variables and the associated PDFs and
 
 The interested reader who would like to learn more about any of the assorted discrete distributions mentioned below should take a look at /Continuous Univariate Distributions, Volumes 1/ and /2/ by Johnson /et al/ \cite{Johnson1994,Johnson1995}.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - how to choose a reasonable continuous model under a variety of physical circumstances
-
 - basic correspondence between continuous versus discrete random variables
-
 - the general tools of the trade for manipulation of continuous random variables, integration, /etc/.
-
 - some details on a couple of continuous models, and exposure to a bunch of other ones
-
 - how to make new continuous random variables from old ones
 
 ** Continuous Random Variables
@@ -5466,8 +5463,7 @@ The concept we are hinting at is the notion of /dependence/ between random varia
 
 The interested reader who would like to learn more about any of the below mentioned multivariate distributions should take a look at /Discrete Multivariate Distributions/ by Johnson /et al/\cite{Johnson1997} or /Continuous Multivariate Distributions/ \cite{Kotz2000} by Kotz /et al/.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - the basic notion of dependence and how it is manifested with multiple variables (two, in particular)
 - joint versus marginal distributions/expectation (discrete and continuous)
 - some numeric measures of dependence
@@ -5551,83 +5547,99 @@ We may do a similar thing for \(V\); see the right half of Table [[tab-max-and-s
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
 
-#+begin_latex
-\begin{table}
-\hfill{}\subfloat[\(U=\max(X,Y)\)]{\begin{centering}
-\begin{tabular}{c|cccccc}
-\(U\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
-\hline
-1 & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
-2 & 2 & 2 & 3 & 4 & 5 & 6\tabularnewline
-3 & 3 & 3 & 3 & 4 & 5 & 6\tabularnewline
-4 & 4 & 4 & 4 & 4 & 5 & 6\tabularnewline
-5 & 5 & 5 & 5 & 5 & 5 & 6\tabularnewline
-6 & 6 & 6 & 6 & 6 & 6 & 6\tabularnewline
-\end{tabular}
-\par\end{centering}
-}\hfill{}\subfloat[\(V=X+Y\)]{\begin{centering}
-\begin{tabular}{c|cccccc}
-\(V\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
-\hline
-1 & 2 & 3 & 4 & 5 & 6 & 7\tabularnewline
-2 & 3 & 4 & 5 & 6 & 7 & 8\tabularnewline
-3 & 4 & 5 & 6 & 7 & 8 & 9\tabularnewline
-4 & 5 & 6 & 7 & 8 & 9 & 10\tabularnewline
-5 & 6 & 7 & 8 & 9 & 10 & 11\tabularnewline
-6 & 7 & 8 & 9 & 10 & 11 & 12\tabularnewline
-\end{tabular}
-\par\end{centering}
-}\hfill{}
-\caption{Maximum \(U\) and sum \(V\) of a pair of dice rolls \((X,Y)\)}
-\label{tab-max-and-sum-two-dice}
-\end{table}
-#+end_latex
 
-We may collapse the two matrices from Table [[tab-max-and-sum-two-dice][Max-sum two dice]] into one, big matrix of pairs of values \((u,v)\). The result is shown in Table [[tab--max-sum-two-dice-joint][Max-sum two dice joint]]. 
+#+srcname: max-and-sum-two-dice
+#+begin_src R :exports none :results silent
+library(ggplot2)
+library(prob)
+A <- rolldie(2, makespace = TRUE)
+A <- addrv(A, max, name = "U")
+A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
+p1 <- ggplot(A, aes(x=X1, y=X2, label=U))
+p1 <- p1 + geom_text() + xlab("X1 = First roll") + 
+      ylab("X2 = Second roll") + opts(title = "U = max(X1,X2)")
+p2 <- ggplot(A, aes(x=X1, y=X2, label=V))
+p2 <- p2 + geom_text() + xlab("X1 = First roll") + 
+      ylab("") + opts(title = "V = X1 + X2")
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(1, 2)))
+vplayout <- function(x, y) viewport(layout.pos.row = x, layout.pos.col = y)
+print(p1, vp = vplayout(1, 1))
+print(p2, vp = vplayout(1, 2))
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/multdist/max-and-sum-two-dice.ps
+  <<max-and-sum-two-dice>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/multdist/max-and-sum-two-dice.svg
+  <<max-and-sum-two-dice>>
+#+end_src
 
 #+begin_latex
-\begin{table}
-\begin{centering}
-\begin{tabular}{c|cccccc}
-\((U,V)\) & 1 & 2 & 3 & 4 & 5 & 6\tabularnewline
-\hline
-1 & (1,2) & (2,3) & (3,4) & (4,5) & (5,6) & (6,7)\tabularnewline
-2 & (2,3) & (2,4) & (3,5) & (4,6) & (5,7) & (6,8)\tabularnewline
-3 & (3,4) & (3,5) & (3,6) & (4,7) & (5,8) & (6,9)\tabularnewline
-4 & (4,5) & (4,6) & (4,7) & (4,8) & (5,9) & (6,10)\tabularnewline
-5 & (5,6) & (5,7) & (5,8) & (5,9) & (5,10) & (6,11)\tabularnewline
-6 & (6,7) & (6,8) & (6,9) & (6,10) & (6,11) & (6,12)\tabularnewline
-\end{tabular}
-\par\end{centering}
-\caption{Joint values of \(U=\max(X,Y)\) and \(V=X+Y\)
-\label{tab--max-sum-two-dice-joint}}
-\end{table}
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/multdist/max-and-sum-two-dice.ps}
+  \caption[Max and Sum of two dice]{\small Rolling two dice. The value of U is the maximum of the two rolls, while the value of V is the sum of the two rolls.}
+  \label{fig-max-and-sum-two-dice}
+\end{figure}
 #+end_latex
+
+#+begin_html
+<div id="fig-max-and-sum-two-dice" class="figure">
+  <p><img src="svg/multdist/max-and-sum-two-dice.svg" width=500 alt="svg/multdist/max-and-sum-two-dice.svg" /></p>
+  <p>Rolling two dice. The value of U is the maximum of the two rolls, while the value of V is the sum of the two rolls.</p>
+</div>
+#+end_html
+
+We may collapse the two matrices from Figure [[fig-max-and-sum-two-dice][max-and-sum-two-dice]] into one, big matrix of pairs of values \((u,v)\). The result is shown in Table [[fig-max-sum-two-dice-joint][max-sum-two-dice-joint]]. 
+
+
+#+srcname: max-sum-two-dice-joint
+#+begin_src R :exports none :results silent
+labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
+p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
+p3 + geom_text() + xlab("First roll") + ylab("Second roll") + 
+  opts(title = "Joint distribution of (U,V) pairs")
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/multdist/max-sum-two-dice-joint.ps
+  <<max-sum-two-dice-joint>>
+#+end_src
+
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/multdist/max-sum-two-dice-joint.svg
+  <<max-sum-two-dice-joint>>
+#+end_src
+
+#+begin_latex
+\begin{figure}[th]
+  \includegraphics[angle=270, totalheight=4in]{ps/multdist/max-sum-two-dice-joint.ps}
+  \caption[Joint outcomes of Max and Sum]{\small Rolling two dice. Joint values of U and V are shown as pairs, for each outcome in the sample space.}
+  \label{fig-max-sum-two-dice-joint}
+\end{figure}
+#+end_latex
+
+#+begin_html
+<div id="fig-max-sum-two-dice-joint" class="figure">
+  <p><img src="svg/multdist/max-sum-two-dice-joint.svg" width=500 alt="svg/multdist/max-sum-two-dice-joint.svg" /></p>
+  <p>Rolling two dice. Joint values of U and V are shown as pairs, for each outcome in the sample space.</p>
+</div>
+#+end_html
 
 Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example [[exa-toss-two-dice-joint-pmf][Two dice joint]]. See Table [[tab-max-sum-joint-pmf][Max-sum joint]].
 
-#+begin_latex
-\begin{table}
-\begin{centering}
-\begin{tabular}{|c|ccccccccccc|c|}
-\hline 
- & {\small 2} & {\small 3} & {\small 4} & {\small 5} & {\small 6} & {\small 7} & {\small 8} & {\small 9} & {\small 10} & {\small 11} & {\small 12} & {\small Total}\tabularnewline
-\hline
-{\small 1} & {\small \(1/36\)} &  &  &  &  &  &  &  &  &  &  & {\small \(1/36\)}\tabularnewline
-{\small 2} &  & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  &  &  &  &  & {\small \(3/36\)}\tabularnewline
-{\small 3} &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  &  &  & {\small \(5/36\)}\tabularnewline
-{\small 4} &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  &  &  & {\small \(7/36\)}\tabularnewline
-{\small 5} &  &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} &  &  & {\small \(9/36\)}\tabularnewline
-{\small 6} &  &  &  &  &  & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(2/36\)} & {\small \(1/36\)} & {\small \(11/36\)}\tabularnewline
-\hline 
-{\small Total} & {\small \(1/36\)} & {\small \(2/36\)} & {\small \(3/36\)} & {\small \(4/36\)} & {\small \(5/36\)} & {\small \(6/36\)} & {\small \(5/36\)} & {\small \(4/36\)} & {\small \(3/36\)} & {\small \(2/36\)} & {\small \(1/36\)} & {\small 1}\tabularnewline
-\hline
-\end{tabular}
-\par\end{centering}
-\caption[The joint PMF of \((U,V)\)]{\small The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively. }
-\label{tab-max-sum-joint-pmf}
-\end{table}
-#+end_latex
+#+LABEL: tab-max-sum-joint-pmf
+#+CAPTION: [The joint PMF of \((U,V)\)]{The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively.}
+|       | 2        | 3        | 4        | 5        | 6        | 7        | 8        | 9        | 10       | 11       | 12       | Total     |
+|-------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-----------|
+|  /    |     <    |          |          |          |          |          |          |          |          |          |          |    <      |
+|     1 | \(1/36\) |          |          |          |          |          |          |          |          |          |          | \(1/36\)  |
+|     2 |          | \(2/36\) | \(1/36\) |          |          |          |          |          |          |          |          | \(3/36\)  |
+|     3 |          |          | \(2/36\) | \(2/36\) | \(1/36\) |          |          |          |          |          |          | \(5/36\)  |
+|     4 |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) |          |          |          |          | \(7/36\)  |
+|     5 |          |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) |          |          | \(9/36\)  |
+|     6 |          |          |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) | \(11/36\) |
+|-------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-----------|
+| Total | \(1/36\) | \(2/36\) | \(3/36\) | \(4/36\) | \(5/36\) | \(6/36\) | \(5/36\) | \(4/36\) | \(3/36\) | \(2/36\) | \(1/36\) | 1         |
 
 The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation [[eq-marginal-pmf]], so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table [[tab-max-sum-joint-pmf][Max-sum joint]], and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
 #+latex: \end{example}
@@ -5701,13 +5713,13 @@ UV <- marginal(S, vars = c("U", "V"))
 head(UV)
 #+end_src
 
-The data frame is difficult to understand. It would be better to have a tabular display like Table [[tab-max-sum-joint-pmf][Max-sum joint]]. We can do that with the =xtabs= function. 
+The data frame is difficult to understand. It would be better to have a tabular display like Table [[tab-max-sum-joint-pmf][max-sum-joint-pmf]]. We can do that with the =xtabs= function. 
 
 #+begin_src R :exports both :results output pp 
 xtabs(round(probs,3) ~ U + V, data = UV)
 #+end_src
 
-Compare these values to the ones shown in Table [[tab-max-sum-joint-pmf][Max-sum joint]]. We can repeat the process with =marginal= to get the univariate marginal distributions of \(U\) and \(V\) separately.
+Compare these values to the ones shown in Table [[tab-max-sum-joint-pmf][max-sum-joint-pmf]]. We can repeat the process with =marginal= to get the univariate marginal distributions of \(U\) and \(V\) separately.
 
 #+begin_src R :exports both :results output pp 
 marginal(UV, vars = "U")
@@ -5990,12 +6002,12 @@ If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent f
 
 Another important corollary of Proposition [[pro-indep-implies-prodexpect]] will allow us to find the distribution of sums of random variables. 
 
-#+latex: \begin{cor}
+#+begin_cor
 If \(X\) and \(Y\) are independent, then the moment generating function of \(X+Y\) is 
 \begin{equation}
 M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 \end{equation}
-#+latex: \end{cor}
+#+end_cor
 
 #+begin_proof
 Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in Proposition [[pro-indep-implies-prodexpect]], and remember the identity \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
@@ -6549,8 +6561,7 @@ We begin by introducing the notion of simple random samples and cataloguing some
 
 With the CLT in hand, we then investigate the sampling distributions of several other popular statistics, taking full advantage of those with a tractable form. We finish the chapter with an exploration of statistics whose sampling distributions are not quite so tractable, and to accomplish this goal we will use simulation methods that are grounded in all of our work in the previous four chapters.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - the notion of population versus simple random sample, parameter versus statistic, and population distribution versus sampling distribution
 - the classical sampling distributions of the standard one and two sample statistics
 - how to generate a simulated sampling distribution when the statistic is crazy
@@ -7029,7 +7040,7 @@ We will discuss two branches of estimation procedures: point estimation and inte
 
 We find an estimator with the methods of Section [[sec-Point-Estimation-1][Point Estimation 1]]. We make some assumptions about the underlying population distribution and use what we know from Chapter [[cha-Sampling-Distributions][Sampling Distributions]] about sampling distributions both to study how the estimator will perform, and to find intervals of confidence for underlying parameters associated with the population distribution. Once we have confidence intervals we can do inference in the form of hypothesis tests in the next chapter.
 
-** What do I want them to know?
+*What do I want them to know?*
 - how to look at a problem, identify a reasonable model, and estimate a parameter associated with the model
 - about maximum likelihood, and in particular, how to
    - eyeball a likelihood to get a maximum
@@ -7851,8 +7862,7 @@ You are going to need the quadratic formula.
 :CUSTOM_ID: cha-Hypothesis-Testing
 :END:
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - basic terminology and philosophy of the Neyman-Pearson paradigm
 - classical hypothesis tests for the standard one and two sample problems with means, variances, and proportions
 - the notion of between versus within group variation and how it plays out with one-way ANOVA
@@ -7865,6 +7875,7 @@ You are going to need the quadratic formula.
 
 I spent a week during the summer of 2005 at the University of Nebraska at Lincoln grading Advanced Placement Statistics exams, and while I was there I attended a presentation by Dr. Roxy Peck. At the end of her talk she described an activity she had used with students to introduce the basic concepts of hypothesis testing. I was impressed by the activity and have used it in my own classes several times since.
 
+#+begin_quote
 The instructor (with a box of cookies in hand) enters a class of fifteen or more students and produces a brand-new, sealed deck of ordinary playing cards. The instructor asks for a student volunteer to break the seal, and then the instructor prominently shuffles the deck
 #+latex: \footnote{The jokers are removed before shuffling.}
 several times in front of the class, after which time the students are asked to line up in a row. They are going to play a game. Each student will draw a card from the top of the deck, in turn. If the card is black, then the lucky student will get a cookie. If the card is red, then the unlucky student will sit down empty-handed. Let the game begin.
@@ -7878,8 +7889,7 @@ The student draws: red again! There are a few wiseguys who yell (happy to make n
 The fourth student draws: red. Hmmm... now there are groans instead of outbursts. A few of the students at the end of the line shrug their shoulders and start to make their way back to their desk, complaining that the teacher does not want to give away any cookies. There are still some students in line though, salivating, waiting for the inevitable black to appear.
 
 The fifth student draws red. Now it isn't funny any more. As the remaining students make their way back to their seats an uproar ensues, from an entire classroom demanding cookies.
-
-#+latex: \bigskip{}
+#+end_quote
 
 Keep the preceding experiment in the back of your mind as you read the following sections. When you have finished the entire chapter, come back and read this introduction again. All of the mathematical jargon that follows is connected to the above paragraphs. In the meantime, I will get you started:
 
@@ -8379,7 +8389,7 @@ power.examp()
 :CUSTOM_ID: cha-simple-linear-regression
 :END:
 
-** What do I want them to know?
+*What do I want them to know?*
 
 - basic philosophy of SLR and the regression assumptions
 - point and interval estimation of the model parameters, and how to use it to make predictions
@@ -8503,7 +8513,7 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
 
 #+begin_html
 <div id="fig-Scatter-cars" class="figure">
-  <p><img src="svg/slr/Scatter-cars.svg" width=500 alt="svg/slr/carscatter.svg" /></p>
+  <p><img src="svg/slr/carscatter.svg" width=500 alt="svg/slr/carscatter.svg" /></p>
   <p>Scatterplot of <code>dist</code> versus <code>speed</code> for the <code>cars</code> data.</p>
 </div>
 #+end_html
@@ -9593,8 +9603,7 @@ The language is phrased in matrix terms -- for two reasons. First, it is quicker
 
 Most of the results are stated without proof or with only a cursory justification. Those yearning for more should consult an advanced text in linear regression for details, such as /Applied Linear Regression Models/ \cite{Neter1996} or /Linear Models: Least Squares and Alternatives/ \cite{Rao1999}.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - the basic MLR model, and how it relates to the SLR
 - how to estimate the parameters and use those estimates to make predictions
 - basic strategies to determine whether or not the model is doing a good job
@@ -10370,7 +10379,7 @@ These examples can be generalized to more than two independent variables, say th
 
 We have so far been concerned with numerical independent variables taking values in a subset of real numbers. In this section, we extend our treatment to include the case in which one of the explanatory variables is qualitative, that is, a /factor/. Qualitative variables take values in a set of /levels/, which may or may not be ordered. See Section [[sub-Qualitative-Data][Qualitative Data]].
 
-#+latex: \begin{note*}
+*Note:*
 The =trees= data do not have any qualitative explanatory variables, so we will construct one for illustrative purposes
 #+latex: \footnote{This procedure of replacing a continuous variable by a discrete/qualitative one is called \emph{binning}, and is almost \emph{never} the right thing to do. We are in a bind at this point, however, because we have invested this chapter in the \texttt{trees} data and I do not want to switch mid-discussion. I am currently searching for a data set with pre-existing qualitative variables that also conveys the same points present in the trees data, and when I find it I will update this chapter accordingly.}.
 We will leave the =Girth= variable alone, but we will replace the variable =Height= by a new variable =Tall= which indicates whether or not the cherry tree is taller than a certain threshold (which for the sake of argument will be the sample median height of 76 ft). That is, =Tall= will be defined by
@@ -10391,7 +10400,7 @@ trees$Tall[1:5]
 #+end_src
 
 Note that =Tall= is automatically generated to be a factor with the labels in the correct order. See =?cut= for more. 
-#+latex: \end{note*}
+
 
 Once we have =Tall=, we include it in the regression model just like we would any other variable. It is handled internally in a special way. Define a ``dummy variable'' =Tallyes= that takes values
 \begin{equation}
@@ -10717,8 +10726,7 @@ Computers have changed the face of statistics. Their quick computational speed a
 
 I have seen /Statistical Computing with \(\mathsf{R}\)/ by Rizzo \cite{Rizzo2008} and I recommend it to those looking for a more advanced treatment with additional topics. I believe that /Monte Carlo Statistical Methods/ by Robert and Casella \cite{Robert2004} has a new edition that integrates \(\mathsf{R}\) into the narrative.
 
-** What do I want them to know?
-
+*What do I want them to know?*
 - basic philosophy of resampling and why it is important
 - resampling for standard errors and confidence intervals
 - resampling for hypothesis tests (permutation tests)
