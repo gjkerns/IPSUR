@@ -14,26 +14,6 @@
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+INCLUDE: "prelim.R" src R :exports none :results hide
 
-#+BEGIN_HTML
----
-layout: chapter
-title: IPSUR - Preface
-previous: index.html
-next: introduction-probability-statistics.html
-description: This is a preface to IPSUR, Introduction to Probability and Statistics Using R.
-keywords: preface IPSUR
----
-
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#sec-1">Preface</a></li>
-</ul>
-</div>
-</div>
-#+END_HTML
-
 * Preface
 
 #+latex: \chapter*{Preface}
@@ -48,8 +28,7 @@ In an attempt to be correct I have included material in this book which I would 
 
 The vision for this document is a more or less self contained, essentially complete, correct, introductory textbook. There should be plenty of exercises for the student, with full solutions for some, and no solutions for others (so that the instructor may assign them for grading). By =Sweave='s dynamic nature it is possible to write randomly generated exercises and I had planned to implement this idea already throughout the book. Alas, there are only 24 hours in a day. Look for more in future editions.
 
-Seasoned readers will be able to detect my origins: /Probability and Statistical Inference/ by Hogg and Tanis \cite{Hogg2006}, /Statistical Inference/ by Casella and Berger \cite{Casella2002}, and /Theory of Point Estimation/ and /Testing Statistical Hypotheses/ by Lehmann \cite{Lehmann1998,Lehmann1986}. I highly recommend each of those books to every reader of this one. Some \(\mathsf{R}\) books with ``introductory'' in the title that I recommend are /Introductory Statistics with R/ 
-by Dalgaard \cite{Dalgaard2008} and /Using R for Introductory Statistics/ by Verzani \cite{Verzani2005}. Surely there are many, many other good introductory books about \(\mathsf{R}\), but frankly, I have tried to steer clear of them for the past year or so to avoid any undue influence on my own writing.
+Seasoned readers will be able to detect my origins: /Probability and Statistical Inference/ by Hogg and Tanis \cite{Hogg2006}, /Statistical Inference/ by Casella and Berger \cite{Casella2002}, and /Theory of Point Estimation/ and /Testing Statistical Hypotheses/ by Lehmann \cite{Lehmann1998,Lehmann1986}. I highly recommend each of those books to every reader of this one. Some \(\mathsf{R}\) books with ``introductory'' in the title that I recommend are /Introductory Statistics with R/ by Dalgaard \cite{Dalgaard2008} and /Using R for Introductory Statistics/ by Verzani \cite{Verzani2005}. Surely there are many, many other good introductory books about \(\mathsf{R}\), but frankly, I have tried to steer clear of them for the past year or so to avoid any undue influence on my own writing.
 
 I would like to make special mention of two other books: /Introduction to Statistical Thought/ by Michael Lavine \cite{Lavine2009} and /Introduction to Probability/ by Grinstead and Snell \cite{Grinstead1997}. Both of these books are /free/ and are what ultimately convinced me to release \IPSUR under a free license, too.
 
@@ -58,51 +37,36 @@ Please bear in mind that the title of this book is ``Introduction to Probability
 Despite any misgivings: here it is, warts and all. I humbly invite said individuals to take this book, with the GNU Free Documentation License (GNU-FDL) in hand, and make it better. In that spirit there are at least a few ways in my view in which this book could be improved.
 
 - Better data. :: The data analyzed in this book are almost entirely from the =datasets= package in base \(\mathsf{R}\), and here is why:
-
   - I made a conscious effort to minimize dependence on contributed packages,
-
   - The data are instantly available, already in the correct format, so we need not take time to manage them, and 
-
   - The data are /real/.
 
 I made no attempt to choose data sets that would be interesting to the students; rather, data were chosen for their potential to convey a statistical point. Many of the data sets are decades old or more (for instance, the data used to introduce simple linear regression are the speeds and stopping distances of cars in the 1920's).
 
 In a perfect world with infinite time I would research and contribute recent, /real/ data in a context crafted to engage the students in /every/ example. One day I hope to stumble over said time. In the meantime, I will add new data sets incrementally as time permits.
-
 - More proofs. :: I would like to include more proofs for the sake of completeness (I understand that some people would not consider more proofs to be improvement). Many proofs have been skipped entirely, and I am not aware of any rhyme or reason to the current omissions. I will add more when I get a chance.  
-
 - More and better~graphics. :: I have not used the =ggplot2= package \cite{Wickam2009} because I do not know how to use it yet. It is on my to-do list.
-
 - More and better exercises. :: There are only a few exercises in the first edition simply because I have not had time to write more. I have toyed with the =exams= package \cite{exams} and I believe that it is a right way to move forward. As I learn more about what the package can do I would like to incorporate it into later editions of this book.
 
 
 #+latex: \section*{About This Document}
-
 \IPSUR contains many interrelated parts: the /Document/, the /Program/, the /Package/, and the /Ancillaries/. In short, the /Document/ is what you are reading right now. The /Program/ provides an efficient means to modify the Document. The /Package/ is an \(\mathsf{R}\) package that houses the Program and the Document. Finally, the /Ancillaries/ are extra materials that reside in the Package and were produced by the Program to supplement use of the Document. We briefly describe each of them in turn.
 
 #+latex: \subsection*{The Document}
 
-The /Document/ is that which you are reading right now -- \IPSUR's /raison d'\^etre/. There are transparent copies (nonproprietary text files) and opaque copies (everything else). See the GNU-FDL in Appendix \ref{cha:GNU-Free-Documentation} for more precise language and details.
+The /Document/ is that which you are reading right now -- \IPSUR's /raison d'\^etre/. There are transparent copies (nonproprietary text files) and opaque copies (everything else). See the GNU-FDL in Appendix [[cha-GNU-Free-Documentation][GNU FDL]] for more precise language and details.
 
+- IPSUR.tex :: is a transparent copy of the Document to be typeset with a LaTeX distribution such as MikTeX or TeX Live. Any reader is free to modify the Document and release the modified version in accordance with the provisions of the GNU-FDL. Note that this file cannot be used to generate a randomized copy of the Document. Indeed, in its released form it is only capable of typesetting the exact version of \IPSUR which you are currently reading. Furthermore, the =.tex= file is unable to generate any of the ancillary materials. 
 
-- IPSUR.tex :: is a transparent copy of the Document to be typeset with a \LaTeX{} distribution such as Mik\TeX{} or \TeX{} Live. Any reader is free to modify the Document and release the modified version in accordance with the provisions of the GNU-FDL. Note that this file cannot be used to generate a randomized copy of the Document. Indeed, in its released form it is only capable of typesetting the exact version of \IPSUR which you are currently reading. Furthermore, the =.tex= file is unable to generate any of the ancillary materials. 
-
-- IPSUR-xxx.eps, IPSUR-xxx.pdf :: are the image files for every graph in the Document. These are needed when typesetting with \LaTeX{}.
-
+- IPSUR-xxx.eps, IPSUR-xxx.pdf :: are the image files for every graph in the Document. These are needed when typesetting with LaTeX.
 - IPSUR.pdf :: is an opaque copy of the Document. This is the file that instructors would likely want to distribute to students. 
-
 - IPSUR.dvi :: is another opaque copy of the Document in a different file format.
 
 #+latex: \subsection*{The Program}
 
 The /Program/ includes =IPSUR.lyx= and its nephew =IPSUR.Rnw=; the purpose of each is to give individuals a way to quickly customize the Document for their particular purpose(s).
-
-
-- IPSUR.lyx :: is the source LyX file for the Program, released under the GNU General Public License (GNU GPL) Version 3. This file is opened, modified, and compiled with LyX, a sophisticated open-source document processor, and may be used (together with =Sweave=) to generate a randomized, modified copy of the Document with brand new data sets for some of the exercises and the solution manuals (in the Second Edition). Additionally, LyX can easily activate/deactivate entire blocks of the document, /e.g./ the /proofs/ of the theorems, the student /solutions/ to the exercises, or the instructor /answers/ to the problems, so that the new author may choose which sections (s)he would like to include in the final Document (again, Second Edition). The =IPSUR.lyx= file is all that a person needs (in addition to a properly configured system -- see Appendix \ref{cha:Instructions-for-Instructors}) to generate/compile/export to all of the other formats described above and below, which includes the ancillary materials =IPSUR.Rdata= and =IPSUR.R=.
-
+- IPSUR.lyx :: is the source LyX file for the Program, released under the GNU General Public License (GNU GPL) Version 3. This file is opened, modified, and compiled with LyX, a sophisticated open-source document processor, and may be used (together with =Sweave=) to generate a randomized, modified copy of the Document with brand new data sets for some of the exercises and the solution manuals (in the Second Edition). Additionally, LyX can easily activate/deactivate entire blocks of the document, /e.g./ the /proofs/ of the theorems, the student /solutions/ to the exercises, or the instructor /answers/ to the problems, so that the new author may choose which sections (s)he would like to include in the final Document (again, Second Edition). The =IPSUR.lyx= file is all that a person needs (in addition to a properly configured system -- see Appendix [[cha-Instructions-for-Instructors][Instructions for Instructors]]) to generate/compile/export to all of the other formats described above and below, which includes the ancillary materials =IPSUR.Rdata= and =IPSUR.R=.
 - IPSUR.Rnw :: is another form of the source code for the Program, also released under the GNU GPL Version 3. It was produced by exporting =IPSUR.lyx= into \(\mathsf{R}\)/Sweave format (=.Rnw=). This file may be processed with Sweave to generate a randomized copy of =IPSUR.tex= -- a transparent copy of the Document -- together with the ancillary materials =IPSUR.Rdata= and =IPSUR.R=. Please note, however, that =IPSUR.Rnw= is just a simple text file which does not support many of the extra features that LyX offers such as WYSIWYM editing, instantly (de)activating branches of the manuscript, and more. 
-
-
 
 #+latex: \subsection*{The Package}
 
