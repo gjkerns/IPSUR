@@ -5,7 +5,7 @@
 #+LANGUAGE:  en
 #+OPTIONS:   H:5 toc:3 \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:nil
-#+INFOJS_OPT: view:info toc:nil sdepth:3 ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+INFOJS_OPT: view:info toc:nil sdepth:2 ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
@@ -19,6 +19,8 @@
 #+LATEX: \input{tex/preface-second}
 #+LATEX: \input{tex/preface-first}
 #+INCLUDE: "R/prelim.R" src R :exports none :results hide
+
+#+html: <link REL="SHORTCUT ICON" HREF="http://ipsur.org/img/favicon.ico">
 
 * An Introduction to Probability and Statistics                     :introps:
 :PROPERTIES:
@@ -1541,7 +1543,7 @@ print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+begin_latex
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/datadesc/xyplot-group.ps}
-  \caption{}
+  \caption[Scatterplot of Petal width versus length in the iris data.]{Scatterplot of Petal width versus length in the iris data.}
   \label{fig-xyplot-group}
 \end{figure}
 #+end_latex
@@ -3255,6 +3257,8 @@ We usually denote random variables by uppercase letters such as \(X\), \(Y\), an
 #+latex: \begin{example}
 Let \(E\) be the experiment of flipping a coin twice. We have seen that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define the random variable \(X = \mbox{the number of heads}\). That is, for example, \(X(HH)=2\), while \(X(HT)=1\). We may make a table of the possibilities:
 
+#+LABEL: tab-flip-coin-twice
+#+CAPTION: [Flipping a coin twice]{Flipping a coin twice.}
 | \(\omega\in S\) | \(HH\) | \(HT\) | \(TH\) | \(TT\) |
 |-----------------+--------+--------+--------+--------|
 | \(X(\omega)=x\) |      2 |      1 |      1 |      0 |
@@ -3400,9 +3404,13 @@ S=\{ HHH,\ HTH,\ THH,\ TTH,\ HHT,\ HTT,\ THT,\ TTT\}.
 Now let \(X\) be the number of Heads observed. Then \(X\) has support \(S_{X}=\{ 0,1,2,3\} \). Assuming that the coin is fair and was tossed in exactly the same way each time, it is not unreasonable to suppose that the outcomes in the sample space are all equally likely. 
 
 What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(TTT\) occurs, and this event has probability \(1/8\). Therefore, \(f_{X}(0)=1/8\), and the same reasoning shows that \(f_{X}(3)=1/8\). Exactly three outcomes result in \(X=1\), thus, \(f_{X}(1)=3/8\) and \(f_{X}(3)\) holds the remaining \(3/8\) probability (the total is 1). We can represent the PMF with a table:
+
+#+LABEL: tab-pmf-flip-coin-three
+#+CAPTION: [Flipping a coin thrice: the PMF]{Flipping a coin three times: the PMF.}
 | \(x\in S_{X}\)        |   |   0 |   1 |   2 |   3 | Total |
 |-----------------------+---+-----+-----+-----+-----+-------|
 | \(f_{X}(x)=\mathbb{P}(X=x)\) |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+
 #+latex: \end{example}
 
 *** Mean, Variance, and Standard Deviation
@@ -3638,9 +3646,13 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 #+latex: \begin{example}
 #+LABEL: exa-toss-coin-3-withR
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
-| \(x=\mbox{\#of Heads}\) |   |   0 |   1 |   2 |   3 | Total |
-|-------------------------+---+-----+-----+-----+-----+-------|
-| \(f(x) = \mathbb{P}(X = x)\)   |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+
+#+LABEL: tab-flip-coin-thrice
+#+CAPTION: [Flipping a coin thrice: PMF]{Flipping a coin three times: the PMF.}
+| \(x=\mbox{\#of Heads}\)      |   |   0 |   1 |   2 |   3 | Total |
+|------------------------------+---+-----+-----+-----+-----+-------|
+| \(f(x) = \mathbb{P}(X = x)\) |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+
 Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\mathbb{P}(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\mathbb{P}(X\leq x)\) should equal \(\mathbb{P}(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\mathbb{P}(X\leq x)\) should equal \(\mathbb{P}(X=0\mbox{ or }X=1)=\mathbb{P}(X=0)+\mathbb{P}(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
 \[
 F_{X}(x)=\mathbb{P}(X\leq x)=
@@ -3735,7 +3747,7 @@ plot(X, cex = 0.2)
 </div>
 #+end_html
 
-#+CAPTION: [Correspondence between =stats= and =distr=.]{Correspondence between =stats= and =distr=. We are given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).  For the =distr= package we must first set \(\mathtt{X\ <-\ Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\).}
+#+CAPTION: [Correspondence between \texttt{stats} and \texttt{distr}.]{Correspondence between =stats= and =distr=. We are given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).  For the =distr= package we must first set \(\mathtt{X\ <-\ Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\).}
 | How to do:              | with =stats= (default)               | with =distr=         |
 |-------------------------+--------------------------------------+----------------------|
 | PMF: \(\mathbb{P}(X=x)\)       | \(\mathtt{dbinom(x,size=n,prob=p)}\) | \(\mathtt{d(X)(x)}\) |
@@ -4371,15 +4383,23 @@ f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 
 #+latex: \begin{example}
 Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
+
+#+LABEL: tab-disc-transf
+#+CAPTION: [Transform discrete random variable]{Transforming a discrete random variable.}
 | x               |   |    0 |   1 |    2 |   3 |    4 |
 |-----------------+---+------+-----+------+-----+------|
 | \(f_{X}(x)\)    |   | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
 |-----------------+---+------+-----+------+-----+------|
 | \(y=(x-2)^{2}\) |   |    1 |   0 |    1 |   4 |    9 |
+
 From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that \(h(x)=(x-1)^{2}\) is not one-to-one on the support of \(X\), because both \(x=0\) and \(x=2\) are mapped by \(h\) to \(y=1\). Nevertheless, we see that \(Y=0\) only when \(X=1\), which has probability \(1/4\); therefore, \(f_{Y}(0)\) should equal \(1/4\). A similar approach works for \(y=4\) and \(y=9\). And \(Y=1\) exactly when \(X=0\) or \(X=2\), which has total probability \(7/16\). In summary, the PMF of \(Y\) may be written:
+
+#+LABEL: tab-disc-transf-pmf
+#+CAPTION: [Transforming discrete random variable: PMF]{Transforming a discrete random variable, its PMF.}
 | y            |   |   0 |    1 |   4 |    9 |
 |--------------+---+-----+------+-----+------|
 | \(f_{Y}(y)\) |   | 1/4 | 7/16 | 1/4 | 1/16 |
+
 There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
 #+latex: \end{example}
 
@@ -5637,17 +5657,17 @@ Again, each of these pairs has probability \(1/36\) associated with it and we ar
 
 #+LABEL: tab-max-sum-joint-pmf
 #+CAPTION: [The joint PMF of \((U,V)\)]{The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively.}
-|       | 2        | 3        | 4        | 5        | 6        | 7        | 8        | 9        | 10       | 11       | 12       | Total     |
-|-------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-----------|
-|  /    |     <    |          |          |          |          |          |          |          |          |          |          |    <      |
-|     1 | \(1/36\) |          |          |          |          |          |          |          |          |          |          | \(1/36\)  |
-|     2 |          | \(2/36\) | \(1/36\) |          |          |          |          |          |          |          |          | \(3/36\)  |
-|     3 |          |          | \(2/36\) | \(2/36\) | \(1/36\) |          |          |          |          |          |          | \(5/36\)  |
-|     4 |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) |          |          |          |          | \(7/36\)  |
-|     5 |          |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) |          |          | \(9/36\)  |
-|     6 |          |          |          |          |          | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(2/36\) | \(1/36\) | \(11/36\) |
-|-------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+-----------|
-| Total | \(1/36\) | \(2/36\) | \(3/36\) | \(4/36\) | \(5/36\) | \(6/36\) | \(5/36\) | \(4/36\) | \(3/36\) | \(2/36\) | \(1/36\) | 1         |
+|       | 2                | 3                | 4                | 5                | 6                | 7                | 8                | 9                | 10               | 11               | 12               | Total            |
+|-------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+|     / | <                |                  |                  |                  |                  |                  |                  |                  |                  |                  |                  | <                |
+|     1 | \(\frac{1}{36}\) |                  |                  |                  |                  |                  |                  |                  |                  |                  |                  | \(\frac{1}{36}\) |
+|     2 |                  | \(\frac{2}{36}\) | \(\frac{1}{36}\) |                  |                  |                  |                  |                  |                  |                  |                  | \(\frac{3}{36}\)  |
+|     3 |                  |                  | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{1}{36}\) |                  |                  |                  |                  |                  |                  | \(\frac{5}{36}\)  |
+|     4 |                  |                  |                  | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{1}{36}\) |                  |                  |                  |                  | \(\frac{7}{36}\)  |
+|     5 |                  |                  |                  |                  | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{1}{36}\) |                  |                  | \(\frac{9}{36}\)  |
+|     6 |                  |                  |                  |                  |                  | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{2}{36}\) | \(\frac{1}{36}\) | \(\frac{11}{36}\) |
+|-------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------|
+| Total | \(\frac{1}{36}\) | \(\frac{2}{36}\) | \(\frac{3}{36}\)  | \(\frac{4}{36}\)  | \(\frac{5}{36}\)  | \(\frac{6}{36}\)  | \(\frac{5}{36}\)  | \(\frac{4}{36}\)  | \(\frac{3}{36}\)  | \(\frac{2}{36}\) | \(\frac{1}{36}\) | 1                |
 
 The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation [[eq-marginal-pmf]], so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table [[tab-max-sum-joint-pmf][Max-sum joint]], and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
 #+latex: \end{example}
@@ -11019,10 +11039,8 @@ Of course, we usually compute a /p-value/, defined to be the probability of the 
 
 #+latex: \begin{example}
 A study concerned differing dosages of the antiretroviral drug AZT. The common dosage is 300mg daily. Higher doses cause more side affects, but are they significantly higher? We examine for a 600mg dose. The data are as follows: We compare the scores from the two groups by computing the difference in their sample means. The 300mg data were entered in x1 and the 600mg data were entered into x2. The observed difference was
-
 | 300mg  | 284 | 279 | 289 | 292 | 287 | 295 | 285 | 279 | 306 | 298 |
 | 600mg  | 298 | 307 | 297 | 279 | 291 | 335 | 299 | 300 | 306 | 291 |
-
 The average amounts can be found:
 : > mean(x1)
 : [1] 289.4
