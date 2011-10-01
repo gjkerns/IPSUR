@@ -46,13 +46,13 @@ curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
-postscript(file="ps/chisq-dist-vary-df.ps")
+postscript(file="ps/contdist/chisq-dist-vary-df.ps")
   curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
   ind <- c(4, 5, 10, 15)
   for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 dev.off()
 
-svg(file="svg/chisq-dist-vary-df.svg")
+svg(file="svg/contdist/chisq-dist-vary-df.svg")
   curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
   ind <- c(4, 5, 10, 15)
   for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
@@ -63,11 +63,11 @@ mgamma(1:4, shape = 13, rate = 1)
 
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 
-postscript(file="ps/gamma-mgf.ps")
+postscript(file="ps/contdist/gamma-mgf.ps")
   plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 dev.off()
 
-svg(file="svg/gamma-mgf.svg")
+svg(file="svg/contdist/gamma-mgf.svg")
   plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 dev.off()
 

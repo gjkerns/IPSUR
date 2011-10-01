@@ -31,7 +31,7 @@ lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p 
 points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
 points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
-postscript(file="ps/binom-cdf-base.ps")
+postscript(file="ps/discdist/binom-cdf-base.ps")
   plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
   abline(h = c(0,1), lty = 2, col = "grey")
   lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -39,7 +39,7 @@ postscript(file="ps/binom-cdf-base.ps")
   points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 dev.off()
 
-svg(file="svg/binom-cdf-base.svg")
+svg(file="svg/discdist/binom-cdf-base.svg")
   plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
   abline(h = c(0,1), lty = 2, col = "grey")
   lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -56,11 +56,11 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 plot(X, cex = 0.2)
 
-postscript(file="ps/binom-plot-distr.ps")
+postscript(file="ps/discdist/binom-plot-distr.ps")
   plot(X, cex = 0.2)
 dev.off()
 
-svg(file="svg/binom-plot-distr.svg")
+svg(file="svg/discdist/binom-plot-distr.svg")
   plot(X, cex = 0.2)
 dev.off()
 
@@ -77,11 +77,11 @@ ecdf(x)
 
 plot(ecdf(x))
 
-postscript(file="ps/empirical-CDF.ps")
+postscript(file="ps/discdist/empirical-CDF.ps")
   plot(ecdf(x))
 dev.off()
 
-svg(file="svg/empirical-CDF.svg")
+svg(file="svg/discdist/empirical-CDF.svg")
   plot(ecdf(x))
 dev.off()
 
@@ -112,55 +112,55 @@ dnbinom(5, size = 7, prob = 0.5)
 
 diff(ppois(c(47, 50), lambda = 50))
 
-     library(distr)
-     X <- Binom(size = 31, prob = 0.447)
-     plot(X, to.draw.arg = "d")
+library(distr)
+X <- Binom(size = 31, prob = 0.447)
+plot(X, to.draw.arg = "d")
 
-postscript(file="ps/binomdxca.ps")
-            library(distr)
-            X <- Binom(size = 31, prob = 0.447)
-            plot(X, to.draw.arg = "d")
+postscript(file="ps/discdist/binomdxca.ps")
+  library(distr)
+  X <- Binom(size = 31, prob = 0.447)
+  plot(X, to.draw.arg = "d")
 dev.off()
 
-svg(file="svg/binomdxca.svg")
-            library(distr)
-            X <- Binom(size = 31, prob = 0.447)
-            plot(X, to.draw.arg = "d")
+svg(file="svg/discdist/binomdxca.svg")
+  library(distr)
+  X <- Binom(size = 31, prob = 0.447)
+  plot(X, to.draw.arg = "d")
 dev.off()
 
 library(distr)
 X <- Binom(size = 31, prob = 0.447)
 plot(X, to.draw.arg = "p")
 
-postscript(file="ps/binompxca.ps")
+postscript(file="ps/discdist/binompxca.ps")
   library(distr)
   X <- Binom(size = 31, prob = 0.447)
   plot(X, to.draw.arg = "p")
 dev.off()
 
-svg(file="svg/binompxca.svg")
+svg(file="svg/discdist/binompxca.svg")
   library(distr)
   X <- Binom(size = 31, prob = 0.447)
   plot(X, to.draw.arg = "p")
 dev.off()
 
-     dbinom(17, size = 31, prob = 0.447)
+dbinom(17, size = 31, prob = 0.447)
 
-     pbinom(13, size = 31, prob = 0.447)
+pbinom(13, size = 31, prob = 0.447)
 
-     pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
+pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
 
-     pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
+pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
 
-     sum(dbinom(16:19, size = 31, prob = 0.447))
-     diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
+sum(dbinom(16:19, size = 31, prob = 0.447))
+diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
 
-     library(distrEx)
-     X <- Binom(size = 31, prob = 0.447)
-     E(X)
+library(distrEx)
+X <- Binom(size = 31, prob = 0.447)
+E(X)
 
-     var(X)
+var(X)
 
-     sd(X)
+sd(X)
 
-     E(4*X + 51.324)
+E(4*X + 51.324)

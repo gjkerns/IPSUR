@@ -6,12 +6,12 @@ xbarstar <- sapply(resamps, mean, simplify = TRUE)
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 
-postscript(file="ps/Bootstrap-se-mean.ps")
+postscript(file="ps/resamp/Bootstrap-se-mean.ps")
   hist(xbarstar, breaks = 40, prob = TRUE)
   curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
 
-svg(file="svg/Bootstrap-se-mean.svg")
+svg(file="svg/resamp/Bootstrap-se-mean.svg")
   hist(xbarstar, breaks = 40, prob = TRUE)
   curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
@@ -28,11 +28,11 @@ sd(medstar)
 
 hist(medstar, breaks = 40, prob = TRUE)
 
-postscript(file="ps/Bootstrapping-se-median.ps")
+postscript(file="ps/resamp/Bootstrapping-se-median.ps")
   hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 
-svg(file="svg/Bootstrapping-se-median.svg")
+svg(file="svg/resamp/Bootstrapping-se-median.svg")
   hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 

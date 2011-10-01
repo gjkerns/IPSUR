@@ -15,7 +15,7 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
   "toss coin, roll die", "count ants on sidewalk", "measure rainfall" ), 
   cex = 2 )
 
-postscript(file="ps/diagram.ps")
+postscript(file="ps/prob/diagram.ps")
   require(diagram)
   par(mex = 0.2, cex = 0.5)
   openplotmat(frame.plot=TRUE)
@@ -33,7 +33,7 @@ postscript(file="ps/diagram.ps")
     cex = 2 )
 dev.off()
 
-svg(file="svg/diagram.svg")
+svg(file="svg/prob/diagram.svg")
   require(diagram)
   par(mex = 0.2, cex = 0.5)
   openplotmat(frame.plot=TRUE)
@@ -163,7 +163,7 @@ qplot(x, y) + geom_hline(yintercept=0.5) +
   ylab = "Prob(at least one match)" )
 remove(g)
 
-postscript(file="ps/birthday.ps")
+postscript(file="ps/prob/birthday.ps")
   g <- Vectorize(pbirthday.ipsur)
   x <- 1:50; y <- g(1:50)
   qplot(x, y) + geom_hline(yintercept=0.5) +
@@ -175,7 +175,7 @@ postscript(file="ps/birthday.ps")
   remove(g)
 dev.off()
 
-svg(file="svg/birthday.svg")
+svg(file="svg/prob/birthday.svg")
   g <- Vectorize(pbirthday.ipsur)
   x <- 1:50; y <- g(1:50)
   qplot(x, y) + geom_hline(yintercept=0.5) +
@@ -193,6 +193,40 @@ plot(1:50, g(1:50), xlab = "Number of people in room",
 abline(h = 0.5)
 abline(v = 23, lty = 2)
 remove(g)
+
+library(ggplot2)
+library(prob)
+A <- rolldie(2)
+B <- subset(A, X1==X2)
+C <- subset(A, X1+X2 > 7)
+B$lab <- rep("X", dim(B)[1])
+C$lab <- rep("O", dim(C)[1])
+p <- ggplot(rbind(B, C), aes(x=X1, y=X2, label=lab))
+p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
+
+postscript(file="ps/prob/twodiceAB.ps")
+  library(ggplot2)
+  library(prob)
+  A <- rolldie(2)
+  B <- subset(A, X1==X2)
+  C <- subset(A, X1+X2 > 7)
+  B$lab <- rep("X", dim(B)[1])
+  C$lab <- rep("O", dim(C)[1])
+  p <- ggplot(rbind(B, C), aes(x=X1, y=X2, label=lab))
+  p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
+dev.off()
+
+svg(file="svg/prob/twodiceAB.svg")
+  library(ggplot2)
+  library(prob)
+  A <- rolldie(2)
+  B <- subset(A, X1==X2)
+  C <- subset(A, X1+X2 > 7)
+  B$lab <- rep("X", dim(B)[1])
+  C$lab <- rep("O", dim(C)[1])
+  p <- ggplot(rbind(B, C), aes(x=X1, y=X2, label=lab))
+  p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
+dev.off()
 
 library(prob)
 S <- rolldie(2, makespace = TRUE)  # assumes ELM

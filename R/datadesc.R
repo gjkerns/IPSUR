@@ -17,7 +17,7 @@ stripchart(rivers, method="jitter", xlab="length")
 stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 
-postscript(file="ps/stripcharts.ps")
+postscript(file="ps/datadesc/stripcharts.ps")
   par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
   stripchart(precip, xlab="rainfall")
   stripchart(rivers, method="jitter", xlab="length")
@@ -25,7 +25,7 @@ postscript(file="ps/stripcharts.ps")
   par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-svg(file="svg/stripcharts.svg")
+svg(file="svg/datadesc/stripcharts.svg")
   par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
   stripchart(precip, xlab="rainfall")
   stripchart(rivers, method="jitter", xlab="length")
@@ -51,7 +51,7 @@ viewport(layout.pos.row = x, layout.pos.col = y)
 print(a, vp = vplayout(1, 1))
 print(b, vp = vplayout(2, 1))
 
-postscript(file="ps/histograms.ps")
+postscript(file="ps/datadesc/histograms.ps")
   library(ggplot2)
   m <- ggplot(as.data.frame(precip), aes(x = precip))
   a <- m + geom_histogram()
@@ -64,7 +64,7 @@ postscript(file="ps/histograms.ps")
   print(b, vp = vplayout(2, 1))
 dev.off()
 
-svg(file="svg/histograms.svg")
+svg(file="svg/datadesc/histograms.svg")
   library(ggplot2)
   m <- ggplot(as.data.frame(precip), aes(x = precip))
   a <- m + geom_histogram()
@@ -90,14 +90,14 @@ hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 200, main = "")
 par(mfrow = c(1,1)) # back to normal
 
-postscript(file="ps/histograms-bins.ps")
+postscript(file="ps/datadesc/histograms-bins.ps")
   par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
   hist(precip, breaks = 10, main = "")
   hist(precip, breaks = 200, main = "")
   par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-svg(file="svg/histograms-bins.svg")
+svg(file="svg/datadesc/histograms-bins.svg")
   par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
   hist(precip, breaks = 10, main = "")
   hist(precip, breaks = 200, main = "")
@@ -115,14 +115,14 @@ plot(LakeHuron, type = "h")
 plot(LakeHuron, type = "p")
 par(mfrow = c(1,1)) # back to normal
 
-postscript(file="ps/indpl-lakehuron.ps")
+postscript(file="ps/datadesc/indpl-lakehuron.ps")
   par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
   plot(LakeHuron, type = "h")
   plot(LakeHuron, type = "p")
   par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-svg(file="svg/indpl-lakehuron.svg")
+svg(file="svg/datadesc/indpl-lakehuron.svg")
   par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
   plot(LakeHuron, type = "h")
   plot(LakeHuron, type = "p")
@@ -150,14 +150,14 @@ barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 par(mfrow = c(1,1)) # back to normal
 
-postscript(file="ps/bar-gr-stateregion.ps")
+postscript(file="ps/datadesc/bar-gr-stateregion.ps")
   par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
   barplot(table(state.region), cex.names = 0.50)
   barplot(prop.table(table(state.region)), cex.names = 0.50)
   par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-svg(file="svg/bar-gr-stateregion.svg")
+svg(file="svg/datadesc/bar-gr-stateregion.svg")
   par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
   barplot(table(state.region), cex.names = 0.50)
   barplot(prop.table(table(state.region)), cex.names = 0.50)
@@ -167,12 +167,12 @@ dev.off()
 library(qcc)
 pareto.chart(table(state.division), ylab="Frequency")
 
-postscript(file="ps/Pareto-chart.ps")
+postscript(file="ps/datadesc/Pareto-chart.ps")
   library(qcc)
   pareto.chart(table(state.division), ylab="Frequency")
 dev.off()
 
-svg(file="svg/Pareto-chart.svg")
+svg(file="svg/datadesc/Pareto-chart.svg")
   library(qcc)
   pareto.chart(table(state.division), ylab="Frequency")
 dev.off()
@@ -180,12 +180,12 @@ dev.off()
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
 
-postscript(file="ps/dot-charts.ps")
+postscript(file="ps/datadesc/dot-charts.ps")
   x <- table(state.region)
   dotchart(as.vector(x), labels = names(x))
 dev.off()
 
-svg(file="svg/dot-charts.svg")
+svg(file="svg/datadesc/dot-charts.svg")
   x <- table(state.region)
   dotchart(as.vector(x), labels = names(x))
 dev.off()
@@ -242,12 +242,12 @@ xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 library(lattice)
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 
-postscript(file="ps/xyplot-group.ps")
+postscript(file="ps/datadesc/xyplot-group.ps")
   library(lattice)
   print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
 
-svg(file="svg/xyplot-group.svg")
+svg(file="svg/datadesc/xyplot-group.svg")
   library(lattice)
   print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
@@ -258,12 +258,12 @@ bwplot(~weight | feed, data = chickwts)
 library(lattice)
 print(bwplot(~weight | feed, data = chickwts))
 
-postscript(file="ps/bwplot.ps")
+postscript(file="ps/datadesc/bwplot.ps")
   library(lattice)
   print(bwplot(~weight | feed, data = chickwts))
 dev.off()
 
-svg(file="svg/bwplot.svg")
+svg(file="svg/datadesc/bwplot.svg")
   library(lattice)
   print(bwplot(~weight | feed, data = chickwts))
 dev.off()
@@ -273,12 +273,12 @@ histogram(~age | education, data = infert)
 library(lattice)
 print(histogram(~age | education, data = infert))
 
-postscript(file="ps/histograms-lattice.ps")
+postscript(file="ps/datadesc/histograms-lattice.ps")
   library(lattice)
   print(histogram(~age | education, data = infert))
 dev.off()
 
-svg(file="svg/histograms-lattice.svg")
+svg(file="svg/datadesc/histograms-lattice.svg")
   library(lattice)
   print(histogram(~age | education, data = infert))
 dev.off()
@@ -287,11 +287,11 @@ xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 
-postscript(file="ps/xyplot.ps")
+postscript(file="ps/datadesc/xyplot.ps")
   print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
-svg(file="svg/xyplot.svg")
+svg(file="svg/datadesc/xyplot.svg")
   print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
@@ -299,11 +299,11 @@ coplot(conc ~ uptake | Type * Treatment, data = CO2)
 
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 
-postscript(file="ps/coplot.ps")
+postscript(file="ps/datadesc/coplot.ps")
   print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 
-svg(file="svg/coplot.svg")
+svg(file="svg/datadesc/coplot.svg")
   print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 

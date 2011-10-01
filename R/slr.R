@@ -13,7 +13,7 @@ segments(1,3, 1+dnorm(0,0,0.5),3, lty = 2, col = "gray")
 segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 
-postscript(file="ps/philosophy.ps")
+postscript(file="ps/slr/philosophy.ps")
   # open window
   plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
   abline(h=0, v=0, col = "gray60")
@@ -29,7 +29,7 @@ postscript(file="ps/philosophy.ps")
   segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 dev.off()
 
-svg(file="svg/philosophy.svg")
+svg(file="svg/slr/philosophy.svg")
   # open window
   plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
   abline(h=0, v=0, col = "gray60")
@@ -49,14 +49,12 @@ head(cars)
 
 qplot(speed, dist, data = cars)
 
-postscript(file="ps/carscatter.ps")
-  library(TeachingDemos)
-  ci.examp()qplot(speed, dist, data = cars)
+postscript(file="ps/slr/carscatter.ps")
+  qplot(speed, dist, data = cars)
 dev.off()
 
-svg(file="svg/carscatter.svg")
-  library(TeachingDemos)
-  ci.examp()qplot(speed, dist, data = cars)
+svg(file="svg/slr/carscatter.svg")
+  qplot(speed, dist, data = cars)
 dev.off()
 
 plot(dist ~ speed, data = cars)
@@ -70,12 +68,12 @@ coef(cars.lm)
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
        geom_smooth(method = lm)
 
-postscript(file="ps/carline.ps")
+postscript(file="ps/slr/carline.ps")
   ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
          geom_smooth(method = lm)
 dev.off()
 
-svg(file="svg/carline.svg")
+svg(file="svg/slr/carline.svg")
   ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
          geom_smooth(method = lm)
 dev.off()
@@ -117,12 +115,12 @@ ci.plot(cars.lm)
 library(HH)
 print(ci.plot(cars.lm))
 
-postscript(file="ps/carscipi.ps")
+postscript(file="ps/slr/carscipi.ps")
   library(HH)
   print(ci.plot(cars.lm))
 dev.off()
 
-svg(file="svg/carscipi.svg")
+svg(file="svg/slr/carscipi.svg")
   library(HH)
   print(ci.plot(cars.lm))
 dev.off()
@@ -141,11 +139,11 @@ tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 
 plot(cars.lm, which = 2)
 
-postscript(file="ps/Normal-q-q-plot-cars.ps")
+postscript(file="ps/slr/Normal-q-q-plot-cars.ps")
   plot(cars.lm, which = 2)
 dev.off()
 
-svg(file="svg/Normal-q-q-plot-cars.svg")
+svg(file="svg/slr/Normal-q-q-plot-cars.svg")
   plot(cars.lm, which = 2)
 dev.off()
 
@@ -153,11 +151,11 @@ shapiro.test(residuals(cars.lm))
 
 plot(cars.lm, which = 3)
 
-postscript(file="ps/std-resids-fitted-cars.ps")
+postscript(file="ps/slr/std-resids-fitted-cars.ps")
   plot(cars.lm, which = 3)
 dev.off()
 
-svg(file="svg/std-resids-fitted-cars.svg")
+svg(file="svg/slr/std-resids-fitted-cars.svg")
   plot(cars.lm, which = 3)
 dev.off()
 
@@ -166,11 +164,11 @@ bptest(cars.lm)
 
 plot(cars.lm, which = 1)
 
-postscript(file="ps/resids-fitted-cars.ps")
+postscript(file="ps/slr/resids-fitted-cars.ps")
   plot(cars.lm, which = 1)
 dev.off()
 
-svg(file="svg/resids-fitted-cars.svg")
+svg(file="svg/slr/resids-fitted-cars.svg")
   plot(cars.lm, which = 1)
 dev.off()
 
@@ -202,11 +200,11 @@ cooksD[1:4]
 
 plot(cars.lm, which = 4)
 
-postscript(file="ps/Cooks-distance-cars.ps")
+postscript(file="ps/slr/Cooks-distance-cars.ps")
   plot(cars.lm, which = 4)
 dev.off()
 
-svg(file="svg/Cooks-distance-cars.svg")
+svg(file="svg/slr/Cooks-distance-cars.svg")
   plot(cars.lm, which = 4)
 dev.off()
 
@@ -223,13 +221,13 @@ par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
 
-postscript(file="ps/Diagnostic-plots-cars.ps")
+postscript(file="ps/slr/Diagnostic-plots-cars.ps")
   par(mfrow = c(2,2))
   plot(cars.lm)
   par(mfrow = c(1,1))
 dev.off()
 
-svg(file="svg/Diagnostic-plots-cars.svg")
+svg(file="svg/slr/Diagnostic-plots-cars.svg")
   par(mfrow = c(2,2))
   plot(cars.lm)
   par(mfrow = c(1,1))
