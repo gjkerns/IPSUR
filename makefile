@@ -38,6 +38,9 @@ html:
 			   (load \"~/git/config/dotemacs.el\") \
                            (R) \
                            (org-publish \"ipsurhtml\"))"
+	rm sitemap.org
+	rm theindex.org
+	rm *.orgx
 
 R:
 	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") \
