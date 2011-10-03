@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Introduction to Probability and Statistics Using R</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2011-10-03 10:35:36 EDT"/>
+<meta name="author" content="G. Jay Kerns"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+<script type="text/javascript" src="http://orgmode.org/org-info.js"></script>
+<script type="text/javascript" >
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "2");
+org_html_manager.set("LINK_HOME", "http://ipsur.org/index.html");
+org_html_manager.set("LINK_UP", "IPSUR.html   ");
+org_html_manager.set("LOCAL_TOC", "0");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "0");
+org_html_manager.set("VIEW", "info");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="IPSUR.html   "> UP </a>
+ |
+ <a accesskey="H" href="http://ipsur.org/index.html"> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Introduction to Probability and Statistics Using R</h1>
+
+
+
+
+<link REL="SHORTCUT ICON" HREF="http://ipsur.org/img/favicon.ico">
+
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#cha-introduction-to-R">1 An Introduction to R</a>
+<ul>
+<li><a href="#sec-download-install-R">1.1 Downloading and Installing \(\mathsf{R}\)</a></li>
+<li><a href="#sec-Communicating-with-R">1.2 Communicating with \(\mathsf{R}\)</a></li>
+<li><a href="#sec-Basic-R-Operations">1.3 Basic \(\mathsf{R}\) Operations and Concepts</a></li>
+<li><a href="#sec-Getting-Help">1.4 Getting Help</a></li>
+<li><a href="#sec-1-5">1.5 External Resources</a></li>
+<li><a href="#sec-1-6">1.6 Other Tips</a></li>
+<li><a href="#sec-1-7">1.7 Exercises</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-cha-introduction-to-R" class="outline-2">
+<h2 id="cha-introduction-to-R"><a name="sec-1" id="sec-1"></a><span class="section-number-2">1</span> An Introduction to R</h2>
+<div class="outline-text-2" id="text-cha-introduction-to-R">
+
+
+
+</div>
+
+<div id="outline-container-sec-download-install-R" class="outline-3">
+<h3 id="sec-download-install-R"><a name="sec-1-1" id="sec-1-1"></a><span class="section-number-3">1.1</span> Downloading and Installing \(\mathsf{R}\)</h3>
+<div class="outline-text-3" id="text-sec-download-install-R">
+
+
+<p>
+The instructions for obtaining \(\mathsf{R}\) largely depend on the user's hardware and operating system. The \(\mathsf{R}\)  Project has written an \(\mathsf{R}\)  Installation and Administration manual with complete, precise instructions about what to do, together with all sorts of additional information. The following is just a primer to get a person started.
+</p>
+
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> Installing \(\mathsf{R}\)</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+
+<p>
+Visit one of the links below to download the latest version of \(\mathsf{R}\) 
+for your operating system:
+</p>
+<dl>
+<dt>Microsoft Windows:</dt><dd><a href="http://cran.r-project.org/bin/windows/base/">http://cran.r-project.org/bin/windows/base/</a>
+</dd>
+<dt>MacOS:</dt><dd><a href="http://cran.r-project.org/bin/macosx/">http://cran.r-project.org/bin/macosx/</a>
+</dd>
+<dt>Linux:</dt><dd><a href="http://cran.r-project.org/bin/linux/">http://cran.r-project.org/bin/linux/</a>
+</dd>
+</dl>
+
+
+<p>
+On Microsoft Windows, click the <code>R-x.y.z.exe</code> installer to start installation. When it asks for "Customized startup options", specify <code>Yes</code>. In the next window, be sure to select the SDI (single document interface) option; this is useful later when we discuss three dimensional plots with the <code>rgl</code> package \cite{rgl}.
+</p>
+
+</div>
+
+<div id="outline-container-1-1-1-1" class="outline-5">
+<h5 id="sec-1-1-1-1"><span class="section-number-5">1.1.1.1</span> Installing \(\mathsf{R}\) on a USB drive (Windows)</h5>
+<div class="outline-text-5" id="text-1-1-1-1">
+
+
+<p>
+With this option you can use \(\mathsf{R}\) portably and without administrative privileges. There is an entry in the \(\mathsf{R}\) for Windows FAQ about this. Here is the procedure I use:  
+</p><ol>
+<li>Download the Windows installer above and start installation as usual. When it asks <i>where</i> to install, navigate to the top-level directory of the USB drive instead of the default <code>C</code> drive.
+</li>
+<li>When it asks whether to modify the Windows registry, uncheck the box; we do NOT want to tamper with the registry. 
+</li>
+<li>After installation, change the name of the folder from <code>R-x.y.z</code> to just plain \(\mathsf{R}\). (Even quicker: do this in step 1.) 
+</li>
+<li><a href="http://ipsur.r-forge.r-project.org/book/download/R.exe">Download this shortcut</a> and move it to the top-level directory of the USB drive, right beside the \(\mathsf{R}\) folder, not inside the folder. Use the downloaded shortcut to run \(\mathsf{R}\).
+</li>
+</ol>
+
+
+<p>
+Steps 3 and 4 are not required but save you the trouble of navigating to the <code>R-x.y.z/bin</code> directory to double-click <code>Rgui.exe</code> every time you want to run the program. It is useless to create your own shortcut to <code>Rgui.exe</code>. Windows does not allow shortcuts to have relative paths; they always have a drive letter associated with them. So if you make your own shortcut and plug your USB drive into some <i>other</i> machine that happens to assign your drive a different letter, then your shortcut will no longer be pointing to the right place. 
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-sub-installing-loading-packages" class="outline-4">
+<h4 id="sub-installing-loading-packages"><a name="sec-1-1-2" id="sec-1-1-2"></a><span class="section-number-4">1.1.2</span> Installing and Loading Add-on Packages</h4>
+<div class="outline-text-4" id="text-sub-installing-loading-packages">
+
+
+<p>
+There are <i>base</i> packages (which come with \(\mathsf{R}\) automatically), and <i>contributed</i> packages (which must be downloaded for installation). For example, on the version of \(\mathsf{R}\) being used for this document the default base packages loaded at startup are 
+</p>
+
+
+
+<pre class="src src-R">getOption(<span style="font-style: italic;">"defaultPackages"</span>)
+</pre>
+
+
+<pre class="example">
+[1] "datasets"  "utils"     "grDevices" "graphics"  "stats"     "methods"
+</pre>
+
+
+<p>
+The base packages are maintained by a select group of volunteers, called \(\mathsf{R}\) Core. In addition to the base packages, there are literally thousands of additional contributed packages written by individuals all over the world. These are stored worldwide on mirrors of the Comprehensive \(\mathsf{R}\) Archive Network, or <code>CRAN</code> for short. Given an active Internet connection, anybody is free to download and install these packages and even inspect the source code.
+</p>
+<p>
+To install a package named <code>foo</code>, open up \(\mathsf{R}\) and type <code>install.packages("foo")</code>\index{install.packages@\texttt{install.packages}}. To install <code>foo</code> and additionally install all of the other packages on which <code>foo</code> depends, instead type <code>install.packages("foo", depends = TRUE)</code>.
+</p>
+<p>
+The general command <code>install.packages()</code> will (on most operating systems) open a window containing a huge list of available packages; simply choose one or more to install.
+</p>
+<p>
+No matter how many packages are installed onto the system, each one must first be loaded for use with the <code>library</code>\index{library@\texttt{library}} function. For instance, the <code>foreign</code> package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, <i>etc</i>. But none of those functions will be available until the command <code>library(foreign)</code> is issued. 
+</p>
+<p>
+Type <code>library()</code> at the command prompt (described below) to see a list of all available
+packages in your library.
+</p>
+<p>
+For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the <a href="http://cran.r-project.org/manuals.html">\(\mathsf{R}\) Installation and Administration manual</a>.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-sec-Communicating-with-R" class="outline-3">
+<h3 id="sec-Communicating-with-R"><a name="sec-1-2" id="sec-1-2"></a><span class="section-number-3">1.2</span> Communicating with \(\mathsf{R}\)</h3>
+<div class="outline-text-3" id="text-sec-Communicating-with-R">
+
+
+
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> One line at a time</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+
+<p>
+This is the most basic method and is the first one that beginners will use.
+</p><ul>
+<li>RGui (Microsoft \(\circledR\) Windows)
+</li>
+<li>Terminal
+</li>
+<li>Emacs/ESS, XEmacs
+</li>
+<li>JGR
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> Multiple lines at a time</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+
+<p>
+For longer programs (called <i>scripts</i>) there is too much code to write all at once at the command prompt. Furthermore, for longer scripts it is convenient to be able to only modify a certain piece of the script and run it again in \(\mathsf{R}\). Programs called <i>script editors</i> are specially designed to aid the communication and code writing process. They have all sorts of helpful features including \(\mathsf{R}\) syntax highlighting, automatic code completion, delimiter matching, and dynamic help on the \(\mathsf{R}\) functions as they are being written. Even more, they often have all of the text editing features of programs like Microsoft\(\circledR\)Word. Lastly, most script editors are fully customizable in the sense that the user can customize the appearance of the interface to choose what colors to display, when to display them, and how to display them.
+</p>
+<dl>
+<dt>\(\mathsf{R}\) Editor (Windows):\index{R Editor@\textsf{R} Editor}</dt><dd>In Microsoft\(\circledR\) Windows, \(\mathsf{R}\) Gui has its own built-in script editor, called \(\mathsf{R}\) Editor. From the console window, select <code>File</code> \(\triangleright\) <code>New Script</code>. A script window opens, and the lines of code can be written in the window. When satisfied with the code, the user highlights all of the commands and presses \textsf{Ctrl+R}. The commands are automatically run at once in \(\mathsf{R}\) and the output is shown. To save the script for later, click <code>File</code> \(\triangleright\) <code>Save as...</code> in \(\mathsf{R}\) Editor. The script can be reopened later with <code>File</code> \(\triangleright\)} <code>Open Script...</code> in <code>RGui</code>. Note that \(\mathsf{R}\) Editor does not have the fancy syntax highlighting that the others do.
+</dd>
+<dt>\(\mathsf{R}\) WinEdt:\index{RWinEdt@\textsf{R}WinEdt}</dt><dd>This option is coordinated with WinEdt for \LaTeX{} and has additional features such as code highlighting, remote sourcing, and a ton of other things. However, one first needs to download and install a shareware version of another program, WinEdt, which is only free for a while &ndash; pop-up windows will eventually appear that ask for a registration code. \(\mathsf{R}\) WinEdt is nevertheless a very fine choice if you already own WinEdt or are planning to purchase it in the near future.
+</dd>
+<dt>Tinn \(\mathsf{R}\) / Sciviews K:\index{Tinn R@Tinn \textsf{R}}\index{Sciviews K}</dt><dd>This one is completely free and has all of the above mentioned options and more. It is simple enough to use that the user can virtually begin working with it immediately after installation. But Tinn \(\mathsf{R}\) proper is only available for Microsoft\(\circledR\) Windows operating systems. If you are on MacOS or Linux, a comparable alternative is Sci-Views - Komodo Edit.
+</dd>
+<dt>Emacs/ESS:\index{Emacs}\index{ESS}</dt><dd>Emacs is an all purpose text editor. It can do absolutely anything with respect to modifying, searching, editing, and manipulating, text. And if Emacs can't do it, then you can write a program that extends Emacs to do it. Once such extension is called <code>ESS</code>, which stands for <i>E</i>-macs <i>S</i>-peaks <i>S</i>-tatistics. With ESS a person can speak to \(\mathsf{R}\), do all of the tricks that the other script editors offer, and much, much, more. Please see the following for installation details, documentation, reference cards, and a whole lot more: <a href="http://ess.r-project.org">http://ess.r-project.org</a>.
+     <i>Fair warning</i>: if you want to try Emacs and if you grew up with Microsoft\(\circledR\) Windows or Macintosh, then you are going to need to relearn everything you thought you knew about computers your whole life. (Or, since Emacs is completely customizable, you can reconfigure Emacs to behave the way you want.) I have personally experienced this transformation and I will never go back.
+</dd>
+<dt>JGR (read ``Jaguar''):\index{JGR}</dt><dd>This one has the bells and whistles of <code>RGui</code> plus it is based on Java, so it works on multiple operating systems. It has its own script editor like \(\mathsf{R}\) Editor but with additional features such as syntax highlighting and code-completion. If you do not use Microsoft\(\circledR\) Windows (or even if you do) you definitely want to check out this one. 
+</dd>
+<dt>Kate, Bluefish, <i>etc</i></dt><dd>There are literally dozens of other text editors available, many of them free, and each has its own (dis)advantages. I only have mentioned the ones with which I have had substantial personal experience and have enjoyed at some point. Play around, and let me know what you find.
+</dd>
+</dl>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> Graphical User Interfaces (GUIs)</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+
+<p>
+By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at <a href="http://www.sciviews.org/_rgui/">http://www.sciviews.org/_rgui/</a>. On the left side of the screen (under <b>Projects</b>) there are several choices available. 
+</p>
+<dl>
+<dt>\(\mathsf{R}\) Commander</dt><dd>provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. <code>Rcmdr</code> also allows for user-contributed ``Plugins'' which are separate packages on <code>CRAN</code> that add extra functionality to the <code>Rcmdr</code> package. The plugins are typically named with the prefix <code>RcmdrPlugin</code> to make them easy to identify in the <code>CRAN</code> package list. One such plugin is the <code>RcmdrPlugin.IPSUR</code> package which accompanies this text.
+</dd>
+<dt>Poor Man's GUI\index{Poor Man's GUI}</dt><dd>is an alternative to the <code>Rcmdr</code> which is based on GTk instead of Tcl/Tk. It has been a while since I used it but I remember liking it very much when I did. One thing that stood out was that the user could drag-and-drop data sets for plots. See here for more information: <a href="http://wiener.math.csi.cuny.edu/pmg/">http://wiener.math.csi.cuny.edu/pmg/</a>. 
+</dd>
+<dt>Rattle\index{Rattle}</dt><dd>is a data mining toolkit which was designed to manage/analyze very large data sets, but it provides enough other general functionality to merit mention here. See \cite{rattle} for more information.
+</dd>
+<dt>Deducer\index{Deducer}</dt><dd>is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
+</dd>
+</dl>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-sec-Basic-R-Operations" class="outline-3">
+<h3 id="sec-Basic-R-Operations"><a name="sec-1-3" id="sec-1-3"></a><span class="section-number-3">1.3</span> Basic \(\mathsf{R}\) Operations and Concepts</h3>
+<div class="outline-text-3" id="text-sec-Basic-R-Operations">
+
+
+<p>
+The \(\mathsf{R}\) developers have written an introductory document entitled ``An Introduction to \(\mathsf{R}\)''. There is a sample session included which shows what basic interaction with \(\mathsf{R}\) looks like. I recommend that all new users of \(\mathsf{R}\) read that document, but bear in mind that there are concepts mentioned which will be unfamiliar to the beginner.
+</p>
+<p>
+Below are some of the most basic operations that can be done with \(\mathsf{R}\). Almost every book about \(\mathsf{R}\) begins with a section like the one below; look around to see all sorts of things that can be done at this most basic level.
+</p>
+
+</div>
+
+<div id="outline-container-sub-Arithmetic" class="outline-4">
+<h4 id="sub-Arithmetic"><a name="sec-1-3-1" id="sec-1-3-1"></a><span class="section-number-4">1.3.1</span> Arithmetic</h4>
+<div class="outline-text-4" id="text-sub-Arithmetic">
+
+
+
+
+
+<pre class="src src-R">2 + 3       <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">add</span>
+4 * 5 / 6   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">multiply and divide</span>
+7^8         <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">7 to the 8th power</span>
+</pre>
+
+
+<pre class="example">
+[1] 5
+[1] 3.333333
+[1] 5764801
+</pre>
+
+
+<p>
+Notice the comment character <code>#</code>\index{#@\texttt{\#}}. Anything typed after a <code>#</code> symbol is ignored by \(\mathsf{R}\). We know that \(20/6\) is a repeating decimal, but the above example shows only 7 digits. We can change the number of digits displayed with <code>options</code>\index{options@\texttt{options}}:
+</p>
+
+
+
+<pre class="src src-R">options(digits = 16)
+10/3                 <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">see more digits</span>
+sqrt(2)              <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">square root</span>
+exp(1)               <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Euler's constant, e</span>
+pi       
+options(digits = 7)  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">back to default</span>
+</pre>
+
+
+<pre class="example">
+[1] 3.333333333333333
+[1] 1.414213562373095
+[1] 2.718281828459045
+[1] 3.141592653589793
+</pre>
+
+
+<p>
+Note that it is possible to set <code>digits</code>\index{digits@\texttt{digits}} up to 22, but setting them over 16 is not recommended (the extra significant digits are not necessarily reliable). Above notice the <code>sqrt</code>\index{sqrt@\texttt{sqrt}} function for square roots and the <code>exp</code>\index{exp@\texttt{exp}} function for powers of \(\mathrm{e}\), Euler's number.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-sub-Assignment-Object-names" class="outline-4">
+<h4 id="sub-Assignment-Object-names"><a name="sec-1-3-2" id="sec-1-3-2"></a><span class="section-number-4">1.3.2</span> Assignment, Object names, and Data types</h4>
+<div class="outline-text-4" id="text-sub-Assignment-Object-names">
+
+
+<p>
+It is often convenient to assign numbers and values to variables (objects) to be used later. The proper way to assign values to a variable is with the <code>&lt;-</code> operator (with a space on either side). The <code>=</code> symbol works too, but it is recommended by the \(\mathsf{R}\) masters to reserve <code>=</code> for specifying arguments to functions (discussed later). In this book we will follow their advice and use <code>&lt;-</code> for assignment. Once a variable is assigned, its value can be printed by simply entering the variable name by itself.
+</p>
+
+
+
+<pre class="src src-R">x <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> 7*41/pi   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">don't see the calculated value</span>
+x              <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">take a look</span>
+</pre>
+
+
+<pre class="example">
+[1] 91.35494
+</pre>
+
+
+<p>
+When choosing a variable name you can use letters, numbers, dots ``\texttt{.}'', or underscore ``\texttt{_}'' characters. You cannot use mathematical operators, and a leading dot may not be followed by a number. Examples of valid names are: <code>x</code>, <code>x1</code>, <code>y.value</code>, and <code>!y_hat</code>. (More precisely, the set of allowable characters in object names depends on one's particular system and locale; see An Introduction to \(\mathsf{R}\) for more discussion on this.)
+</p>
+<p>
+Objects can be of many <i>types</i>, <i>modes</i>, and <i>classes</i>. At this level, it is not necessary to investigate all of the intricacies of the respective types, but there are some with which you need to become familiar:
+</p>
+<dl>
+<dt>integer:</dt><dd>the values \(0\), \(\pm1\), \(\pm2\), &hellip;; these are represented exactly by \(\mathsf{R}\).
+</dd>
+<dt>double:</dt><dd>real numbers (rational and irrational); these numbers are not represented exactly (save integers or fractions with a denominator that is a power of 2, see \cite{Venables2010}).
+</dd>
+<dt>character:</dt><dd>elements that are wrapped with pairs of ="= or ';
+</dd>
+<dt>logical:</dt><dd>includes <code>TRUE</code>, <code>FALSE</code>, and <code>NA</code> (which are reserved words); the <code>NA</code>\index{NA@\texttt{NA}} stands for ``not available'', <i>i.e.</i>, a missing value.
+</dd>
+</dl>
+
+
+<p>
+You can determine an object's type with the <code>typeof</code>\index{typeof@\texttt{typeof}} function. In addition to the above, there is the <code>complex</code>\index{complex@\texttt{complex}}\index{as.complex@\texttt{as.complex}} data type:
+</p>
+
+
+
+<pre class="src src-R">sqrt(-1)              <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">isn't defined</span>
+sqrt(-1+0i)           <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">is defined</span>
+sqrt(as.complex(-1))  <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">same thing</span>
+(0 + 1i)^2            <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">should be -1</span>
+typeof((0 + 1i)^2)
+</pre>
+
+
+<pre class="example">
+[1] NaN
+[1] 0+1i
+[1] 0+1i
+[1] -1+0i
+[1] "complex"
+</pre>
+
+
+<p>
+Note that you can just type <code>(1i)^2</code> to get the same answer. The <code>NaN</code>\index{NaN@\texttt{NaN}} stands for ``not a number''; it is represented internally as <code>double</code>\index{double}. 
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-sub-Vectors" class="outline-4">
+<h4 id="sub-Vectors"><a name="sec-1-3-3" id="sec-1-3-3"></a><span class="section-number-4">1.3.3</span> Vectors</h4>
+<div class="outline-text-4" id="text-sub-Vectors">
+
+
+<p>
+All of this time we have been manipulating vectors of length 1. Now let us move to vectors with multiple entries.
+</p>
+
+</div>
+
+<div id="outline-container-1-3-3-1" class="outline-5">
+<h5 id="sec-1-3-3-1"><span class="section-number-5">1.3.3.1</span> Entering data vectors</h5>
+<div class="outline-text-5" id="text-1-3-3-1">
+
+
+<p>
+<b>The long way:</b>\index{c@\texttt{c}} If you would like to enter the data <code>74,31,95,61,76,34,23,54,96</code> into \(\mathsf{R}\), you may create a data vector with the <code>c</code> function (which is short for <i>concatenate</i>).
+</p>
+
+
+
+<pre class="src src-R">x <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> c(74, 31, 95, 61, 76, 34, 23, 54, 96)
+x
+</pre>
+
+
+<pre class="example">
+[1] 74 31 95 61 76 34 23 54 96
+</pre>
+
+
+<p>
+The elements of a vector are usually coerced by \(\mathsf{R}\) to the the most general type of any of the elements, so if you do <code>c(1, "2")</code> then the result will be <code>c("1", "2")</code>.
+</p>
+<p>
+<b>A shorter way:</b> \index{scan@\texttt{scan}}: The <code>scan</code> method is useful when the data are stored somewhere else. For instance, you may type <code>x &lt;- scan()</code> at the command prompt and \(\mathsf{R}\) will display <code>1:</code> to indicate that it is waiting for the first data value. Type a value and press <code>Enter</code>, at which point \(\mathsf{R}\) will display <code>2:</code>, and so forth. Note that entering an empty line stops the scan. This method is especially handy when you have a column of values, say, stored in a text file or spreadsheet. You may copy and paste them all at the <code>1:</code> prompt, and \(\mathsf{R}\) will store all of the values instantly in the vector <code>x</code>. 
+</p>
+<p>
+<b>Repeated data; regular patterns:</b> the <code>seq</code>\index{seq@\texttt{seq}} function will generate all sorts of sequences of numbers. It has the arguments <code>from</code>, <code>to</code>, <code>by</code>, and <code>length.out</code> which can be set in concert with one another. We will do a couple of examples to show you how it works.
+</p>
+
+
+
+<pre class="src src-R">seq(from = 1, to = 5)
+seq(from = 2, by = -0.1, length.out = 4)
+</pre>
+
+
+<pre class="example">
+[1] 1 2 3 4 5
+[1] 2.0 1.9 1.8 1.7
+</pre>
+
+
+<p>
+Note that we can get the first line much quicker with the colon operator.
+</p>
+
+
+
+<pre class="src src-R">1:5
+</pre>
+
+
+<pre class="example">
+[1] 1 2 3 4 5
+</pre>
+
+
+<p>
+The vector <code>LETTERS</code>\index{LETTERS@\texttt{LETTERS}} has the 26 letters of the English alphabet in uppercase and <code>letters</code>\index{letters@\texttt{letters}} has all of them in lowercase.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3-3-2" class="outline-5">
+<h5 id="sec-1-3-3-2"><span class="section-number-5">1.3.3.2</span> Indexing data vectors</h5>
+<div class="outline-text-5" id="text-1-3-3-2">
+
+
+<p>
+Sometimes we do not want the whole vector, but just a piece of it. We can access the intermediate parts with the <code>[]</code>\index{[]@\texttt{{[}{]}}} operator. Observe (with <code>x</code> defined above)
+</p>
+
+
+
+<pre class="src src-R">x[1]
+x[2:4]
+x[c(1,3,4,8)]
+x[-c(1,3,4,8)]
+</pre>
+
+
+<pre class="example">
+[1] 74
+[1] 31 95 61
+[1] 74 95 61 54
+[1] 31 76 34 23 96
+</pre>
+
+
+<p>
+Notice that we used the minus sign to specify those elements that we do <i>not</i> want. 
+</p>
+
+
+
+<pre class="src src-R">LETTERS[1:5]
+letters[-(6:24)]
+</pre>
+
+
+<pre class="example">
+[1] "A" "B" "C" "D" "E"
+[1] "a" "b" "c" "d" "e" "y" "z"
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-sub-Functions-and-Expressions" class="outline-4">
+<h4 id="sub-Functions-and-Expressions"><a name="sec-1-3-4" id="sec-1-3-4"></a><span class="section-number-4">1.3.4</span> Functions and Expressions</h4>
+<div class="outline-text-4" id="text-sub-Functions-and-Expressions">
+
+
+<p>
+A function takes arguments as input and returns an object as output. There are functions to do all sorts of things. We show some examples below.
+</p>
+
+
+
+<pre class="src src-R">x <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> 1:5
+sum(x)
+length(x)
+min(x)
+mean(x)      <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sample mean</span>
+sd(x)        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">sample standard deviation</span>
+</pre>
+
+
+<pre class="example">
+[1] 15
+[1] 5
+[1] 1
+[1] 3
+[1] 1.581139
+</pre>
+
+
+<p>
+It will not be long before the user starts to wonder how a particular function is doing its job, and since \(\mathsf{R}\) is open-source, anybody is free to look under the hood of a function to see how things are calculated. For detailed instructions see the article ``Accessing the Sources'' by Uwe Ligges \cite{Ligges2006}. In short:
+</p>
+<p>
+<b>Type the name of the function</b> without any parentheses or arguments. If you are lucky then the code for the entire function will be printed, right there looking at you. For instance, suppose that we would like to see how the <code>intersect</code>\index{intersect@\texttt{intersect}} function works:
+</p>
+
+
+
+<pre class="src src-R">intersect
+</pre>
+
+
+<pre class="example">
+function (x, ...) 
+UseMethod("intersect")
+&lt;environment: namespace:prob&gt;
+</pre>
+
+
+<p>
+<b>If instead</b> it shows <code>UseMethod(something)</code>\index{UseMethod@\texttt{UseMethod}} then you will need to choose the <i>class</i> of the object to be inputted and next look at the <i>method</i> that will be <i>dispatched</i> to the object. For instance, typing <code>rev</code>\index{rev@\texttt{rev}} says 
+</p>
+
+
+
+<pre class="src src-R">rev
+</pre>
+
+
+<pre class="example">
+function (x) 
+UseMethod("rev")
+&lt;environment: namespace:base&gt;
+</pre>
+
+
+<p>
+The output is telling us that there are multiple methods associated with the <code>rev</code> function. To see what these are, type
+</p>
+
+
+
+<pre class="src src-R">methods(rev)
+</pre>
+
+
+<pre class="example">
+[1] rev.default     rev.dendrogram* rev.zoo         rev.zooreg*    
+
+   Non-visible functions are asterisked
+</pre>
+
+
+<p>
+Now we learn that there are two different <code>rev(x)</code> functions, only one of which being chosen at each call depending on what <code>x</code> is. There is one for <code>dendrogram</code> objects and a <code>default</code> method for everything else. Simply type the name to see what each method does. For example, the <code>default</code> method can be viewed with
+</p>
+
+
+
+<pre class="src src-R">rev.default
+</pre>
+
+
+<pre class="example">
+function (x) 
+if (length(x)) x[length(x):1L] else x
+&lt;environment: namespace:base&gt;
+</pre>
+
+
+<p>
+<b>Some functions are hidden</b> by a <i>namespace</i> (see An Introduction to \(\mathsf{R}\) \cite{Venables2010}), and are not visible on the first try. For example, if we try to look at the code for <code>wilcox.test</code>\index{wilcox.test@\texttt{wilcox.test}} (see Chapter <a href="#cha-Nonparametric-Statistics">Nonparametric Statistics</a>) we get the following:
+</p>
+
+
+
+<pre class="src src-R">wilcox.test
+methods(wilcox.test)
+</pre>
+
+
+<pre class="example">
+function (x, ...) 
+UseMethod("wilcox.test")
+&lt;environment: namespace:stats&gt;
+[1] wilcox.test.default* wilcox.test.formula*
+
+   Non-visible functions are asterisked
+</pre>
+
+
+<p>
+If we were to try <code>wilcox.test.default</code>  we would get a ``not found'' error, because it is hidden behind the namespace for the package <code>stats</code> (shown in the last line when we tried <code>wilcox.test</code>). In cases like these we prefix the package name to the front of the function name with three colons; the command <code>stats:::wilcox.test.default</code> will show the source code, omitted here for brevity.
+</p>
+<p>
+<b>If it shows</b> <code>.Internal(something)</code>\index{.Internal@\texttt{.Internal}} or <code>.Primitive(something)</code>\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \(\mathsf{R}\) (which is <i>not</i> a binary version with an <code>.exe</code> extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is <code>exp</code>:
+</p>
+
+
+
+<pre class="src src-R">exp
+</pre>
+
+
+<pre class="example">
+function (x)  .Primitive("exp")
+</pre>
+
+
+<p>
+Be warned that most of the <code>.Internal</code> functions are written in other computer languages which the beginner may not understand, at least initially.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-sec-Getting-Help" class="outline-3">
+<h3 id="sec-Getting-Help"><a name="sec-1-4" id="sec-1-4"></a><span class="section-number-3">1.4</span> Getting Help</h3>
+<div class="outline-text-3" id="text-sec-Getting-Help">
+
+
+<p>
+When you are using \(\mathsf{R}\), it will not take long before you find yourself needing help. Fortunately, \(\mathsf{R}\) has extensive help resources and you should immediately become familiar with them. Begin by clicking <code>Help</code> on <code>RGui</code>. The following options are available. 
+</p><dl>
+<dt>Console:</dt><dd>gives useful shortcuts, for instance, <code>Ctrl+L</code>, to clear the \(\mathsf{R}\) console screen. 
+</dd>
+<dt>FAQ on \(\mathsf{R}\):</dt><dd>frequently asked questions concerning general \(\mathsf{R}\) operation.
+</dd>
+<dt>FAQ on \(\mathsf{R}\) for Windows:</dt><dd>frequently asked questions about \(\mathsf{R}\), tailored to the Microsoft Windows operating system.
+</dd>
+<dt>Manuals:</dt><dd>technical manuals about all features of the \(\mathsf{R}\) system including installation, the complete language definition, and add-on packages.
+</dd>
+<dt>\(\mathsf{R}\) functions (text)&hellip;:</dt><dd>use this if you know the <i>exact</i> name of the function you want to know more about, for example, <code>mean</code> or <code>plot</code>. Typing <code>mean</code> in the window is equivalent to typing <code>help("mean")</code>\index{help@\texttt{help}} at the command line, or more simply, <code>?mean</code>\index{?@\texttt{?}}. Note that this method only works if the function of interest is contained in a package that is already loaded into the search path with <code>library</code>. 
+</dd>
+<dt>HTML Help:</dt><dd>use this to browse the manuals with point-and-click links. It also has a Search Engine \&amp; Keywords for searching the help page titles, with point-and-click links for the search results. This is possibly the best help method for beginners. It can be started from the command line with the command <code>help.start()</code>\index{help.start@\texttt{help.start}}.
+</dd>
+<dt>Search help &hellip;:</dt><dd>use this if you do not know the exact name of the function of interest, or if the function is in a package that has not been loaded yet. For example, you may enter <code>plo</code> and a text window will return listing all the help files with an alias, concept, or title matching `=plo=' using regular expression matching; it is equivalent to typing <code>help.search("plo")</code>\index{help.search@\texttt{help.search}} at the command line. The advantage is that you do not need to know the exact name of the function; the disadvantage is that you cannot point-and-click the results. Therefore, one may wish to use the HTML Help search engine instead. An equivalent way is <code>??plo</code>\index{??@\texttt{??}} at the command line.
+</dd>
+<dt>search.r-project.org &hellip;:</dt><dd>this will search for words in help lists and email archives of the \(\mathsf{R}\) Project. It can be very useful for finding other questions that other users have asked. 
+</dd>
+<dt>Apropos &hellip;:</dt><dd>use this for more sophisticated partial name matching of functions. See <code>?apropos</code>\index{apropos@\texttt{apropos}} for details.
+</dd>
+</dl>
+
+
+<p>
+On the help pages for a function there are sometimes ``Examples'' listed at the bottom of the page, which will work if copy-pasted at the command line (unless marked otherwise). The <code>example</code>\index{example@\texttt{example}} function will run the code automatically, skipping the intermediate step. For instance, we may try <code>example(mean)</code> to see a few examples of how the <code>mean</code> function works.
+</p>
+
+</div>
+
+<div id="outline-container-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> \(\mathsf{R}\) Help Mailing Lists</h4>
+<div class="outline-text-4" id="text-1-4-1">
+
+
+<p>
+There are several mailing lists associated with \(\mathsf{R}\), and there is a huge community of people that read and answer questions related to \(\mathsf{R}\). See <a href="http://www.r-project.org/mail.html">here</a> for an idea of what is available. Particularly pay attention to the bottom of the page which lists several special interest groups (SIGs) related to \(\mathsf{R}\).
+</p>
+<p>
+Bear in mind that \(\mathsf{R}\) is free software, which means that it was written by volunteers, and the people that frequent the mailing lists are also volunteers who are not paid by customer support fees. Consequently, if you want to use the mailing lists for free advice then you must adhere to some basic etiquette, or else you may not get a reply, or even worse, you may receive a reply which is a bit less cordial than you are used to. Below are a few considerations: 
+</p><ol>
+<li>Read the <a href="http://cran.r-project.org/faqs.html">FAQ</a>. Note that there are different FAQs for different operating systems. You should read these now, even without a question at the moment, to learn a lot about the idiosyncrasies of \(\mathsf{R}\).
+</li>
+<li>Search the archives. Even if your question is not a FAQ, there is a very high likelihood that your question has been asked before on the mailing list. If you want to know about topic <code>foo</code>, then you can do <code>RSiteSearch("foo")</code>\index{RSiteSearch@\texttt{RSiteSearch}} to search the mailing list archives (and the online help) for it. 
+</li>
+<li>Do a Google search and an \texttt{RSeek.org} search.
+</li>
+</ol>
+
+
+<p>
+If your question is not a FAQ, has not been asked on \(\mathsf{R}\)-help before, and does not yield to a Google (or alternative) search, then, and only then, should you even consider writing to \(\mathsf{R}\)-help. Below are a few additional considerations. 
+</p>
+<ul>
+<li>Read the <a href="http://www.r-project.org/posting-guide.html">posting guide</a> before posting. This will save you a lot of trouble and pain. 
+</li>
+<li>Get rid of the command prompts (<code>&gt;</code>) from output. Readers of your message will take the text from your mail and copy-paste into an \(\mathsf{R}\) session. If you make the readers' job easier then it will increase the likelihood of a response. 
+</li>
+<li>Questions are often related to a specific data set, and the best way to communicate the data is with a <code>dump</code>\index{dump@\texttt{dump}} command. For instance, if your question involves data stored in a vector <code>x</code>, you can type <code>dump("x","")</code> at the command prompt and copy-paste the output into the body of your email message. Then the reader may easily copy-paste the message from your email into \(\mathsf{R}\) and <code>x</code> will be available to him/her.
+</li>
+<li>Sometimes the answer the question is related to the operating system used, the attached packages, or the exact version of \(\mathsf{R}\) being used. The <code>sessionInfo()</code>\index{sessionInfo@\texttt{sessionInfo}} command collects all of this information to be copy-pasted into an email (and the Posting Guide requests this information). See Appendix <a href="#cha-R-Session-Information">R Session Info</a> for an example.
+</li>
+</ul>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> External Resources</h3>
+<div class="outline-text-3" id="text-1-5">
+
+
+<p>
+There is a mountain of information on the Internet about \(\mathsf{R}\). Below are a few of the important ones. 
+</p><ul>
+<li>The \(\mathsf{R}\)- Project for Statistical Computing:\index{The R-Project@The \textsf{R}-Project}: Go <a href="http://www.r-project.org/">there</a> first.
+</li>
+<li>The Comprehensive \(\mathsf{R}\) Archive Network:\index{CRAN}: <a href="http://cran.r-project.org/">That is where</a> \(\mathsf{R}\) is stored along with thousands of contributed packages. There are also loads of contributed information (books, tutorials, <i>etc</i>.). There are mirrors all over the world with duplicate information.
+</li>
+<li>\(\mathsf{R}\)-Forge:\index{R-Forge@\textsf{R}-Forge}: <a href="http://r-forge.r-project.org/">This is another location</a> where \(\mathsf{R}\) packages are stored. Here you can find development code which has not yet been released to <code>CRAN</code>. 
+</li>
+<li>\(\mathsf{R}\)-Wiki:\index{R-Wiki@\textsf{R}-Wiki}: There are many tips, tricks, and general advice <a href="http://wiki.r-project.org/rwiki/doku.php">listed here</a>. If you find a trick of your own, login and share it with the world. 
+</li>
+<li>Other: the <a href="http://addictedtor.free.fr/graphiques/">\(\mathsf{R}\) Graph Gallery</a>\index{R Graph Gallery@\textsf{R} Graph Gallery} and <a href="http://bm2.genes.nig.ac.jp/RGM2/index.php">\(\mathsf{R}\) Graphical Manual</a>\index{R Graphical Manual@\textsf{R} Graphical Manual} have literally thousands of graphs to peruse. <a href="http://www.rseek.org">\(\mathsf{R}\) Seek</a> is a search engine based on Google specifically tailored for \(\mathsf{R}\) queries. 
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Other Tips</h3>
+<div class="outline-text-3" id="text-1-6">
+
+
+<p>
+It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers what you have recently entered on the command line. On the Microsoft\(\circledR\) Windows \(\mathsf{R}\) Gui, to cycle through the previous commands just push the \(\uparrow\) (up arrow) key. On Emacs/ESS the command is <code>M-p</code> (which means hold down the <code>Alt</code> button and press ``p''). More generally, the command <code>history()</code>\index{history@\texttt{history}} will show a whole list of recently entered commands. 
+</p><ul>
+<li>To find out what all variables are in the current work environment, use the commands <code>objects()</code>\index{objects@\texttt{objects}} or <code>ls()</code>\index{ls@\texttt{ls}}. These list all available objects in the workspace. If you wish to remove one or more variables, use <code>remove(var1, var2, var3)</code>\index{remove@\texttt{remove}}, or more simply use <code>rm(var1, var2, var3)</code>, and to remove all objects use <code>rm(list = ls())</code>.
+</li>
+<li>Another use of <code>scan</code> is when you have a long list of numbers (separated by spaces or on different lines) already typed somewhere else, say in a text file. To enter all the data in one fell swoop, first highlight and copy the list of numbers to the Clipboard with <code>Edit</code> \(\triangleright\) <code>Copy</code> (or by right-clicking and selecting <code>Copy</code>). Next type the <code>x &lt;- scan()</code> command in the \(\mathsf{R}\) console, and paste the numbers at the <code>1:</code> prompt with <code>Edit</code> \(\triangleright\) <code>Paste</code>. All of the numbers will automatically be entered into the vector <code>x</code>.
+</li>
+<li>The command <code>Ctrl+l</code> clears the display in the Microsoft\(\circledR\) Windows \(\mathsf{R}\) Gui. In Emacs/ESS, press <code>Ctrl+l</code> repeatedly to cycle point (the place where the cursor is) to the bottom, middle, and top of the display.  
+</li>
+<li>Once you use \(\mathsf{R}\) for awhile there may be some commands that you wish to run automatically whenever \(\mathsf{R}\) starts. These commands may be saved in a file called <code>Rprofile.site</code>\index{Rprofile.site@\texttt{Rprofile.site}} which is usually in the <code>etc</code> folder, which lives in the \(\mathsf{R}\) home directory (which on Microsoft\(\circledR\) Windows usually is <code>C:\Program Files\R</code>). Alternatively, you can make a file <code>.Rprofile</code>\index{.Rprofile@\texttt{.Rprofile}} to be stored in the user's home directory, or anywhere \(\mathsf{R}\) is invoked. This allows for multiple configurations for different projects or users. See ``Customizing the Environment'' of <i>An Introduction to R</i> for more details.
+</li>
+<li>When exiting \(\mathsf{R}\) the user is given the option to ``save the workspace''. I recommend that beginners DO NOT save the workspace when quitting. If <code>Yes</code> is selected, then all of the objects and data currently in \(\mathsf{R}\)'s memory is saved in a file located in the working directory called <code>.RData</code>\index{.RData@\texttt{.RData}}. This file is then automatically loaded the next time \(\mathsf{R}\) starts (in which case \(\mathsf{R}\) will say <code>[previously saved workspace restored]</code>). This is a valuable feature for experienced users of \(\mathsf{R}\), but I find that it causes more trouble than it saves with beginners. 
+</li>
+</ul>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> Exercises</h3>
+<div class="outline-text-3" id="text-1-7">
+
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2011-10-03 10:35:36 EDT</p>
+<p class="author">Author: G. Jay Kerns</p>
+<p class="creator">Org version 7.7 with Emacs version 23</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>
