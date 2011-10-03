@@ -3407,9 +3407,9 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 
 #+LABEL: tab-pmf-flip-coin-three
 #+CAPTION: [Flipping a coin thrice: the PMF]{Flipping a coin three times: the PMF.}
-| \(x\in S_{X}\)        |   |   0 |   1 |   2 |   3 | Total |
-|-----------------------+---+-----+-----+-----+-----+-------|
-| \(f_{X}(x)=\mathbb{P}(X=x)\) |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+| \(x\in S_{X}\)               |   0 |   1 |   2 |   3 | Total |
+|------------------------------+-----+-----+-----+-----+-------|
+| \(f_{X}(x)=\mathbb{P}(X=x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 
 #+latex: \end{example}
 
@@ -3649,9 +3649,9 @@ Toss a coin three times and let \(X\) be the number of Heads observed. We know f
 
 #+LABEL: tab-flip-coin-thrice
 #+CAPTION: [Flipping a coin thrice: PMF]{Flipping a coin three times: the PMF.}
-| \(x=\mbox{\#of Heads}\)      |   |   0 |   1 |   2 |   3 | Total |
-|------------------------------+---+-----+-----+-----+-----+-------|
-| \(f(x) = \mathbb{P}(X = x)\) |   | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
+| \(x=\mbox{\#of Heads}\)      |   0 |   1 |   2 |   3 | Total |
+|------------------------------+-----+-----+-----+-----+-------|
+| \(f(x) = \mathbb{P}(X = x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 
 Our next goal is to write down the CDF of \(X\) explicitly. The first case is easy: it is impossible for \(X\) to be negative, so if \(x<0\) then we should have \(\mathbb{P}(X\leq x)=0\). Now choose a value \(x\) satisfying \(0\leq x<1\), say, \(x=0.3\). The only way that \(X\leq x\) could happen would be if \(X=0\), therefore, \(\mathbb{P}(X\leq x)\) should equal \(\mathbb{P}(X=0)\), and the same is true for any \(0\leq x<1\). Similarly, for any \(1\leq x<2\), say, \(x=1.73\), the event \(\{ X\leq x \}\) is exactly the event \(\{ X=0\mbox{ or }X=1 \}\). Consequently, \(\mathbb{P}(X\leq x)\) should equal \(\mathbb{P}(X=0\mbox{ or }X=1)=\mathbb{P}(X=0)+\mathbb{P}(X=1)\). Continuing in this fashion, we may figure out the values of \(F_{X}(x)\) for all possible inputs \(-\infty<x<\infty\), and we may summarize our observations with the following piecewise defined function:
 \[
@@ -3754,7 +3754,6 @@ plot(X, cex = 0.2)
 | CDF:  \(\mathbb{P}(X\leq x)\)  | \(\mathtt{pbinom(x,size=n,prob=p)}\) | \(\mathtt{p(X)(x)}\) |
 | Simulate \(k\) variates | \(\mathtt{rbinom(k,size=n,prob=p)}\) | \(\mathtt{r(X)(k)}\) |
 |-------------------------+--------------------------------------+----------------------|
-
 
 ** Expectation and Moment Generating Functions
 :PROPERTIES:
@@ -4386,19 +4385,19 @@ Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X
 
 #+LABEL: tab-disc-transf
 #+CAPTION: [Transform discrete random variable]{Transforming a discrete random variable.}
-| x               |   |    0 |   1 |    2 |   3 |    4 |
-|-----------------+---+------+-----+------+-----+------|
-| \(f_{X}(x)\)    |   | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
-|-----------------+---+------+-----+------+-----+------|
-| \(y=(x-2)^{2}\) |   |    1 |   0 |    1 |   4 |    9 |
+| x               |    0 |   1 |    2 |   3 |    4 |
+|-----------------+------+-----+------+-----+------|
+| \(f_{X}(x)\)    | 1/16 | 1/4 | 6/16 | 1/4 | 1/16 |
+|-----------------+------+-----+------+-----+------|
+| \(y=(x-2)^{2}\) |    1 |   0 |    1 |   4 |    9 |
 
 From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that \(h(x)=(x-1)^{2}\) is not one-to-one on the support of \(X\), because both \(x=0\) and \(x=2\) are mapped by \(h\) to \(y=1\). Nevertheless, we see that \(Y=0\) only when \(X=1\), which has probability \(1/4\); therefore, \(f_{Y}(0)\) should equal \(1/4\). A similar approach works for \(y=4\) and \(y=9\). And \(Y=1\) exactly when \(X=0\) or \(X=2\), which has total probability \(7/16\). In summary, the PMF of \(Y\) may be written:
 
 #+LABEL: tab-disc-transf-pmf
 #+CAPTION: [Transforming discrete random variable: PMF]{Transforming a discrete random variable, its PMF.}
-| y            |   |   0 |    1 |   4 |    9 |
-|--------------+---+-----+------+-----+------|
-| \(f_{Y}(y)\) |   | 1/4 | 7/16 | 1/4 | 1/16 |
+| y            |   0 |    1 |   4 |    9 |
+|--------------+-----+------+-----+------|
+| \(f_{Y}(y)\) | 1/4 | 7/16 | 1/4 | 1/16 |
 
 There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
 #+latex: \end{example}
@@ -4418,111 +4417,17 @@ If \(X\) is a random variable with \(\mathbb{E} X=\mu\) and \(\mbox{Var}(X)=\sig
 #+begin_xca
 A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let \(X\) equal the number of students in a random sample of size \(n=31\) who have used Wikipedia as a source. 
 - How is \(X\) distributed? 
-  \[
-  X\sim\mathsf{binom}(\mathtt{size}=31,\,\mathtt{prob}=0.447)
-  \]
 - Sketch the probability mass function (roughly).
-#+srcname: binomdxca
-#+begin_src R :exports code :results silent
-library(distr)
-X <- Binom(size = 31, prob = 0.447)
-plot(X, to.draw.arg = "d")
-#+end_src
-
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/discdist/binomdxca.ps
-  <<binomdxca>>
-#+end_src
-
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/discdist/binomdxca.svg
-  <<binomdxca>>
-#+end_src
-
-#+begin_latex
-\begin{figure}[th]
-  \includegraphics[angle=270, totalheight=4in]{ps/discdist/binomdxca.ps}
-  \caption[Plot of a binomial PMF]{\small Plot of a binomial PMF.}
-  \label{fig-binomdxca}
-\end{figure}
-#+end_latex
-
-#+begin_html
-<div id="fig-binomdxca" class="figure">
-  <p><img src="svg/discdist/binomdxca.svg" width=500 alt="svg/discdist/binomdxca.svg" /></p>
-  <p>Plot of a binomial PMF.</p>
-</div>
-#+end_html
 - Sketch the cumulative distribution function (roughly).
-   
-#+srcname: binompxca
-#+begin_src R :exports code :results silent
-library(distr)
-X <- Binom(size = 31, prob = 0.447)
-plot(X, to.draw.arg = "p")
-#+end_src
-
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/discdist/binompxca.ps
-  <<binompxca>>
-#+end_src
-
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/discdist/binompxca.svg
-  <<binompxca>>
-#+end_src
-
-#+begin_latex
-  \begin{figure}[th]
-    \includegraphics[angle=270, totalheight=4in]{ps/discdist/binompxca.ps}
-    \caption[Plot of a binomial CDF]{\small Plot of a binomial CDF.}
-    \label{fig-binompxca}
-  \end{figure}
-#+end_latex
-
-#+begin_html
-<div id="fig-binompxca" class="figure">
-  <p><img src="svg/discdist/binompxca.svg" width=500 alt="svg/discdist/binompxca.svg" /></p>
-  <p>Plot of a binomial CDF.</p>
-</div>
-#+end_html
-
 - Find the probability that \(X\) is equal to 17.
-#+begin_src R :exports both :results output pp  
-dbinom(17, size = 31, prob = 0.447)
-#+end_src
 - Find the probability that \(X\) is at most 13.
-#+begin_src R :exports both :results output pp  
-pbinom(13, size = 31, prob = 0.447)
-#+end_src
 - Find the probability that \(X\) is bigger than 11.
-#+begin_src R :exports both :results output pp  
-pbinom(11, size = 31, prob = 0.447, lower.tail = FALSE)
-#+end_src
 - Find the probability that \(X\) is at least 15.
-#+begin_src R :exports both :results output pp  
-pbinom(14, size = 31, prob = 0.447, lower.tail = FALSE)
-#+end_src
 - Find the probability that \(X\) is between 16 and 19, inclusive.
-#+begin_src R :exports both :results output pp  
-sum(dbinom(16:19, size = 31, prob = 0.447))
-diff(pbinom(c(19,15), size = 31, prob = 0.447, lower.tail = FALSE))
-#+end_src
 - Give the mean of \(X\), denoted \(\mathbb{E} X\).
-#+begin_src R :exports both :results output pp  
-library(distrEx)
-X <- Binom(size = 31, prob = 0.447)
-E(X)
-#+end_src
 - Give the variance of \(X\).
-#+begin_src R :exports both :results output pp  
-var(X)
-#+end_src
 - Give the standard deviation of \(X\).
-#+begin_src R :exports both :results output pp  
-sd(X)
-#+end_src
 - Find \(\mathbb{E}(4X+51.324)\)
-#+begin_src R :exports both :results output pp  
-E(4*X + 51.324)
-#+end_src
-
 #+end_xca
 
 #+begin_xca

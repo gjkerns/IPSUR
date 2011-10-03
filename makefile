@@ -49,8 +49,8 @@ R:
                            (org-babel-tangle-file \"IPSUR.org\"))"
 
 clean:
-	-rm $(outputtex)/*
-	-rm $(outputhtml)/*
+	-rm -r $(outputtex)
+	-rm -r $(outputhtml)
 
 backup:
 	-mkdir $(backup)
