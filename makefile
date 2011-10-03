@@ -1,4 +1,4 @@
-outputtex = .outputtex
+outputtex = .outputlatex
 outputhtml = .outputhtml
 orgfile = IPSUR
 backup = .backup
