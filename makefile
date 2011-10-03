@@ -4,12 +4,9 @@ orgfile = IPSUR
 backup = .backup
 
 all:
-	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") \
-	(load \"~/git/config/dotemacs.el\") \
-	(R) \
-	(org-publish \"ipsurlatex\") \
-	(org-babel-tangle-file \"IPSUR.org\") \
-	(org-publish \"ipsurhtml\"))"
+	-mkdir $(outputtex)
+	-mkdir $(outputhtml)
+	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-publish \"ipsurlatex\") (org-babel-tangle-file \"IPSUR.org\") (org-publish \"ipsurhtml\"))"
 	cd $(outputtex)
 	latex $(orgfile).tex
 	bibtex $(orgfile)
@@ -20,6 +17,7 @@ all:
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(orgfile).pdf $(orgfile).ps
 
 latex:
+	-mkdir $(outputtex)
 	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-publish \"ipsurlatex\"))"
 	cd $(outputtex)
 	latex $(orgfile).tex
@@ -31,19 +29,14 @@ latex:
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(orgfile).pdf $(orgfile).ps
 
 html:
-	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") \
-			   (load \"~/git/config/dotemacs.el\") \
-                           (R) \
-                           (org-publish \"ipsurhtml\"))"
-	rm sitemap.org
-	rm theindex.org
-	rm *.orgx
+	-mkdir $(outputhtml)
+	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-publish \"ipsurhtml\"))"
+	-rm sitemap.org
+	-rm theindex.org
+	-rm *.orgx
 
 R:
-	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") \
-			   (load \"~/git/config/dotemacs.el\") \
-                           (R) \
-                           (org-babel-tangle-file \"IPSUR.org\"))"
+	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-babel-tangle-file \"IPSUR.org\"))"
 
 clean:
 	-rm -r $(outputtex)
