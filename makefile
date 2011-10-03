@@ -19,11 +19,8 @@ all:
 	dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(orgfile).pdf $(orgfile).ps
 
-tex:
-	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") \
-	(load \"~/git/config/dotemacs.el\") \
-	(R) \
-	(org-publish \"ipsurlatex\"))"
+latex:
+	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-publish \"ipsurlatex\"))"
 	cd $(outputtex)
 	latex $(orgfile).tex
 	bibtex $(orgfile)
