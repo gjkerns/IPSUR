@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: introR
+#+EXPORT_SELECT_TAGS: contdist
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
@@ -3649,7 +3649,7 @@ Toss a coin three times and let \(X\) be the number of Heads observed. We know f
 
 #+LABEL: tab-flip-coin-thrice
 #+CAPTION: [Flipping a coin thrice: PMF]{Flipping a coin three times: the PMF.}
-| \(x=\mbox{\#of Heads}\)      |   0 |   1 |   2 |   3 | Total |
+| \(x=\mbox{num. of Heads}\)   |   0 |   1 |   2 |   3 | Total |
 |------------------------------+-----+-----+-----+-----+-------|
 | \(f(x) = \mathbb{P}(X = x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 
@@ -3921,7 +3921,7 @@ See how much easier that was?
 #+begin_rem
 We learned in this section that \(M^{(r)}(0)=\mathbb{E} X^{r}\). We remember from Calculus II that certain functions \(f\) can be represented by a Taylor series expansion about a point \(a\), which takes the form
 \begin{equation}
-f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad\mbox{for all $|x-a|<R$,}
+f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad \mbox{for all \(|x-a| < R\),}
 \end{equation}
 where \(R\) is called the /radius of convergence/ of the series (see Appendix [[sec-Sequences-and-Series][Sequences and Series]]). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
 \begin{equation}
@@ -4230,8 +4230,8 @@ We say that \(X\) has a /Negative Binomial distribution/ and write \(X\sim\maths
 
 As usual it should be clear that \(f_{X}(x)\geq 0\) and the fact that \(\sum f_{X}(x)=1\) follows from a generalization of the geometric series by means of a Maclaurin's series expansion:
 \begin{alignat}{1}
-\frac{1}{1-t}= & \sum_{k=0}^{\infty}t^{k},\quad\mbox{for $-1<t<1$},\mbox{ and}\\
-\frac{1}{(1-t)^{r}}= & \sum_{k=0}^{\infty}{r+k-1 \choose r-1}\, t^{k},\quad\mbox{for $-1<t<1$}.
+\frac{1}{1-t}= & \sum_{k=0}^{\infty}t^{k},\quad \mbox{for \(-1 < t < 1\)},\mbox{ and}\\
+\frac{1}{(1-t)^{r}}= & \sum_{k=0}^{\infty}{r+k-1 \choose r-1}\, t^{k},\quad \mbox{for \(-1 < t < 1\)}.
 \end{alignat}
 Therefore
 \begin{equation}
@@ -4522,7 +4522,6 @@ We can say the following about continuous random variables:
   \mathbb{P}(a\leq X\leq b)=\mathbb{P}(a<X\leq b)=\mathbb{P}(a\leq X<b)=\mathbb{P}(a<X<b).
   \end{equation}
 - The PDF \(f_{X}\) can sometimes be greater than 1. This is in contrast to the discrete case; every nonzero value of a PMF is a probability which is restricted to lie in the interval \([0,1]\).
-
 #+end_rem
 
 We met the cumulative distribution function, \(F_{X}\), in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. Recall that it is defined by \(F_{X}(t)=\mathbb{P}(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
@@ -4535,7 +4534,6 @@ For any continuous CDF \(F_{X}\) the following are true.
 - \(F_{X}\) is nondecreasing , that is, \(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\).
 - \(F_{X}\) is continuous (see Appendix [[sec-Differential-and-Integral][Differential-Integral Calculus]]). Note the distinction from the discrete case: CDFs of discrete random variables are not continuous, they are only right continuous.
 - \(\lim_{t\to-\infty}F_{X}(t)=0\) and \(\lim_{t\to\infty}F_{X}(t)=1\).
-
 #+end_rem
 
 There is a handy relationship between the CDF and PDF in the continuous case. Consider the derivative of \(F_{X}\):

@@ -33,4 +33,4 @@ clean:
 backup:
 	-mkdir $(backup)
 	cp $(outputtex)/$(orgfile).pdf $(backup)/$(orgfile).pdf 
-	cp $(outputhtml)/$(orgfile).html $(backup)/$(orgfile).html
+	cp $(outputtex)/$(orgfile).html $(backup)/$(orgfile).html
