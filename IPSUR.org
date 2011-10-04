@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: contdist
+#+EXPORT_SELECT_TAGS:
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
@@ -668,8 +668,8 @@ Notice that the \texttt{depth}s\index{depths} have been suppressed. To learn mor
 
 Done with the =plot=\index{plot@\texttt{plot}} function. These are good for plotting data which are ordered, for example, when the data are measured over time. That is, the first observation was measured at time 1, the second at time 2, /etc/. It is a two dimensional plot, in which the index (or time) is the \(x\) variable and the measured value is the \(y\) variable. There are several plotting methods for index plots, and we mention two of them:
 
-- spikes :: draws a vertical line from the \(x\)-axis to the observation height (\texttt{type = "h"}).
-- points :: plots a simple point at the observation height (=type = "p"=).
+- spikes :: draws a vertical line from the \(x\)-axis to the observation height.
+- points :: plots a simple point at the observation height.
 
 
 #+latex: \begin{example}
@@ -802,7 +802,7 @@ barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 #+end_src
 
-See Figure [[fig-bar-gr-stateregion][bar-gr-stateregion]]. The display on the left is a frequency bar graph because the \(y\) axis shows counts, while the display on the left is a relative frequency bar graph. The only difference between the two is the scale. Looking at the graph we see that the majority of the fifty states are in the South, followed by West, North Central, and finally Northeast. Over 30\% of the states are in the South.
+See Figure [[fig-bar-gr-stateregion][bar-gr-stateregion]]. The display on the left is a frequency bar graph because the \(y\) axis shows counts, while the display on the left is a relative frequency bar graph. The only difference between the two is the scale. Looking at the graph we see that the majority of the fifty states are in the South, followed by West, North Central, and finally Northeast. Over 30% of the states are in the South.
 
 Notice the =cex.names=\index{cex.names@\texttt{cex.names}} argument that we used, above. It shrinks the names on the \(x\) axis by 50% which makes them easier to read. See =?par=\index{par@\texttt{par}} for a detailed list of additional plot parameters.
 
@@ -2702,13 +2702,13 @@ There is a =Birthday problem= item in the =Probability= menu of =RcmdrPlugin.IPS
 
 Consider a full deck of 52 standard playing cards. Now select two cards from the deck, in succession. Let \( A = \{ \mbox{first card drawn is an Ace} \} \) and \( B = \{ \mbox{second card drawn is an Ace} \} \). Since there are four Aces in the deck, it is natural to assign \( \mathbb{P}(A) = 4/52 \). Suppose we look at the first card. What now is the probability of \(B\)? Of course, the answer depends on the value of the first card. If the first card is an Ace, then the probability that the second also is an Ace should be \( 3/51 \), but if the first card is not an Ace, then the probability that the second is an Ace should be \( 4/51 \). As notation for these two situations we write
 \[
-\mathbb{P}(B|A)=3/51,\quad\mathbb{P}(B|A^{c})=4/51.
+\mathbb{P}(B|A)=3/51,\quad \mathbb{P}(B|A^{c})=4/51.
 \]
 
 #+begin_defn
 The conditional probability of \(B\) given \(A\), denoted \(\mathbb{P}(B|A)\), is defined by
 \begin{equation}
-\mathbb{P}(B|A)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(A)},\quad\mbox{if }\mathbb{P}(A)>0.
+\mathbb{P}(B|A)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(A)},\quad \mbox{if }\mathbb{P}(A)>0.
 \end{equation}
 We will not be discussing a conditional probability of \(B\) given \(A\) when \(\mathbb{P}(A)=0\), even though this theory exists, is well developed, and forms the foundation for the study of stochastic processes
 #+latex: \footnote{Conditional probability in this case is defined by means of \emph{conditional expectation}, a topic that is well beyond the scope of this text. The interested reader should consult an advanced text on probability theory, such as Billingsley, Resnick, or Ash Dooleans-Dade.}.
@@ -2769,7 +2769,7 @@ p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
 
 The outcomes lying in the event \(A\) are marked with the symbol ``X'', the outcomes falling in \(B\) are marked with ``O'', and the outcomes in \(A\cap B\) are those where the letters overlap. Now it is clear that \(\mathbb{P}(A)=6/36\), \(\mathbb{P}(B)=15/36\), and \(\mathbb{P}(A\cap B)=3/36\).  Finally, 
 \[
-\mathbb{P}(A|B)=\frac{3/36}{15/36}=\frac{1}{5},\quad\mathbb{P}(B|A)=\frac{3/36}{6/36}=\frac{1}{2}.
+\mathbb{P}(A|B)=\frac{3/36}{15/36}=\frac{1}{5},\quad \mathbb{P}(B|A)=\frac{3/36}{6/36}=\frac{1}{2}.
 \]
 Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the upper right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
 #+latex: \end{example}
@@ -3443,7 +3443,7 @@ Note that although we say \(X\) is 3.5 on the average, we must keep in mind that
 
 Related to the probability mass function \(f_{X}(x)=\mathbb{P}(X=x)\) is another important function called the /cumulative distribution function/ (CDF), \(F_{X}\). It is defined by the formula
 \begin{equation}
-F_{X}(t)=\mathbb{P}(X\leq t),\quad-\infty<t<\infty.
+F_{X}(t)=\mathbb{P}(X\leq t),\quad -\infty < t < \infty.
 \end{equation}
 We know that all PMFs satisfy certain properties, and a similar statement may be made for CDFs. In particular, any CDF \(F_{X}\) satisfies
 - \(F_{X}\) is nondecreasing (\(t_{1}\leq t_{2}\) implies \(F_{X}(t_{1})\leq F_{X}(t_{2})\)).
@@ -3769,7 +3769,7 @@ We next generalize some of the concepts from Section [[sub-mean-variance-sd][Mea
 #+latex: \footnote{Not every, only those PMFs for which the (potentially infinite) series converges.}
 PMF has two important numbers associated with it:
 \begin{equation}
-\mu=\sum_{x\in S}xf_{X}(x),\quad\sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x).
+\mu=\sum_{x\in S}xf_{X}(x),\quad \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x).
 \end{equation}
 Intuitively, for repeated observations of \(X\) we would expect the sample mean to closely approximate \(\mu\) as the sample size increases without bound. For this reason we call \(\mu\) the /expected value/ of \(X\) and we write \(\mu=\mathbb{E} X\), where \(\mathbb{E}\) is an /expectation operator/.
 
@@ -3828,7 +3828,7 @@ We will calculate the MGF for the two distributions introduced above.
 Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
 Since \(f(x)=1/m\), the MGF takes the form
 \[
-M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad\mbox{for any $t$.}
+M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad \mbox{for any $t$.}
 \]
 
 #+latex: \end{example}
@@ -3840,7 +3840,7 @@ Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 = & \sum_{x=0}^{n}{n \choose x}\,(p\mathrm{e}^{t})^{x}q^{n-x},\\
-= & (p\mathrm{e}^{t}+q)^{n},\quad\mbox{for any $t$.}
+= & (p\mathrm{e}^{t}+q)^{n},\quad \mbox{for any $t$.}
 \end{alignat*}
 
 **** Applications
@@ -3925,7 +3925,7 @@ f(x)=\sum_{r=0}^{\infty}\frac{f^{(r)}(a)}{r!}(x-a)^{r},\quad \mbox{for all \(|x-
 \end{equation}
 where \(R\) is called the /radius of convergence/ of the series (see Appendix [[sec-Sequences-and-Series][Sequences and Series]]). We combine the two to say that if an MGF exists for all \(t\) in the interval \((-\epsilon,\epsilon)\), then we can write
 \begin{equation}
-M_{X}(t)=\sum_{r=0}^{\infty}\frac{\mathbb{E} X^{r}}{r!}t^{r},\quad\mbox{for all $|t|<\epsilon$.}
+M_{X}(t)=\sum_{r=0}^{\infty}\frac{\mathbb{E} X^{r}}{r!}t^{r},\quad \mbox{for all $|t|<\epsilon$.}
 \end{equation}
 #+end_rem
 
@@ -4071,7 +4071,7 @@ The support set for the hypergeometric distribution is a little bit tricky. It i
 
 It is shown in Exercise [[xca-hyper-mean-variance][Hyper-MV]] that
 \begin{equation}
-\mu=K\frac{M}{M+N},\quad\sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
+\mu=K\frac{M}{M+N},\quad \sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
 \end{equation}
 
 The associated \(\mathsf{R}\) functions for the PMF and CDF are =dhyper(x, m, n, k)= and =phyper=, respectively. There are two more functions: =qhyper=, which we will discuss in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]], and =rhyper=, discussed below.
@@ -4255,11 +4255,11 @@ Let us next compute the MGF of \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{\infty}\mathrm{e}^{tx}\ {r+x-1 \choose r-1}p^{r}q^{x}\\
 = & p^{r}\sum_{x=0}^{\infty}{r+x-1 \choose r-1}[q\mathrm{e}^{t}]^{x}\\
-= & p^{r}(1-qe^{t})^{-r},\quad\mbox{provided $|q\mathrm{e}^{t}|<1$,}
+= & p^{r}(1-qe^{t})^{-r},\quad \mbox{provided $|q\mathrm{e}^{t}|<1$,}
 \end{alignat*}
 and so
 \begin{equation}
-M_{X}(t)=\left(\frac{p}{1-q\mathrm{e}^{t}}\right)^{r},\quad\mbox{for $q\mathrm{e}^{t}<1$}.
+M_{X}(t)=\left(\frac{p}{1-q\mathrm{e}^{t}}\right)^{r},\quad \mbox{for $q\mathrm{e}^{t}<1$}.
 \end{equation}
 We see that \(q\mathrm{e}^{t}<1\) when \(t<-\ln(1-p)\).
 
@@ -4405,7 +4405,7 @@ There is not a special name for the distribution of \(Y\), it is just an example
 #+begin_prop
 If \(X\) is a random variable with \(\mathbb{E} X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\), then the mean and variance of \(Y=mX+b\) is
 \begin{equation}
-\mu_{Y}=m\mu+b,\quad\sigma_{Y}^{2}=m^{2}\sigma^{2},\quad\sigma_{Y}=|m|\sigma.
+\mu_{Y}=m\mu+b,\quad \sigma_{Y}^{2}=m^{2}\sigma^{2},\quad \sigma_{Y}=|m|\sigma.
 \end{equation}
 #+end_prop
 
@@ -4458,7 +4458,7 @@ If \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) show that \(\mathb
 #+LABEL: xca-hyper-mean-variance
 Calculate the mean and variance of the hypergeometric distribution. Show that 
 \begin{equation}
-\mu=K\frac{M}{M+N},\quad\sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
+\mu=K\frac{M}{M+N},\quad \sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
 \end{equation}
 #+end_xca
 
@@ -4526,7 +4526,7 @@ We can say the following about continuous random variables:
 
 We met the cumulative distribution function, \(F_{X}\), in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. Recall that it is defined by \(F_{X}(t)=\mathbb{P}(X\leq t)\), for \(-\infty<t<\infty\). While in the discrete case the CDF is unwieldy, in the continuous case the CDF has a relatively convenient form:
 \begin{equation}
-F_{X}(t)=\mathbb{P}(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad-\infty<t<\infty.
+F_{X}(t)=\mathbb{P}(X\leq t)=\int_{-\infty}^{t}f_{X}(x)\:\mathrm{d} x,\quad -\infty < t < \infty.
 \end{equation}
 
 #+begin_rem
@@ -4571,7 +4571,7 @@ provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=
 
 Let the continuous random variable \(X\) have PDF
 \[
-f_{X}(x)=3x^{2},\quad0\leq x\leq 1.
+f_{X}(x)=3x^{2},\quad 0\leq x\leq 1.
 \]
 We will see later that \(f_{X}\) belongs to the /Beta/ family of distributions. It is easy to see that \(\int_{-\infty}^{\infty}f(x)\mathrm{d} x=1\).
 \begin{align*}
@@ -4734,7 +4734,7 @@ using the popular formula for the difference of squares. The variance is left to
 
 We say that \(X\) has a /normal distribution/ if it has PDF
 \begin{equation}
-f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \},\quad -\infty < x < \infty.
+f_{X}(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp \left\{ \frac{-(x-\mu)^{2}}{2\sigma^{2}} \right\},\quad -\infty < x < \infty.
 \end{equation}
 We write \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and the associated \(\mathsf{R}\) function is =dnorm(x, mean = 0, sd = 1)=.
 
@@ -4760,7 +4760,7 @@ M_{Z}(t) & = & \int_{-\infty}^{\infty}\mathrm{e}^{tz}\frac{1}{\sqrt{2\pi}}\mathr
 \end{eqnarray*}
 and the quantity in the parentheses is the total area under a \(\mathsf{norm}(\mathtt{mean}=-t,\,\mathtt{sd}=1)\) density, which is one. Therefore,
 \begin{equation}
-M_{Z}(t)=\mathrm{e}^{-t^{2}/2},\quad-\infty<t<\infty.
+M_{Z}(t)=\mathrm{e}^{-t^{2}/2},\quad -\infty < t < \infty.
 \end{equation}
 
 #+latex: \begin{example}
@@ -4842,7 +4842,7 @@ Here are some properties of quantile functions:
 1. In the continuous case the graph of \(Q_{X}\) may be obtained by reflecting the graph of \(F_{X}\) about the line \(y=x\). In the discrete case, before reflecting one should: 1) connect the dots to get rid of the jumps -- this will make the graph look like a set of stairs, 2) erase the horizontal lines so that only vertical lines remain, and finally 3) swap the open circles with the solid dots. Please see Figure [[fig-binom-plot-distr][binom-plot-distr]] for a comparison. 
 1. The two limits
    \[
-   \lim_{p\to0^{+}}Q_{X}(p)\quad\mbox{and}\quad\lim_{p\to1^{-}}Q_{X}(p)
+   \lim_{p\to0^{+}}Q_{X}(p)\quad \mbox{and}\quad \lim_{p\to1^{-}}Q_{X}(p)
    \]
    always exist, but may be infinite (that is, sometimes \(\lim_{p\to0}Q(p)=-\infty\) and/or \(\lim_{p\to1}Q(p)=\infty\)).
 
@@ -4851,7 +4851,7 @@ Here are some properties of quantile functions:
 As the reader might expect, the standard normal distribution is a very special case and has its own special notation.
 
 #+begin_defn
-For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the equation \(\mathbb{P}(Z>z_{\alpha})=\alpha\), where \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\). It can be calculated in one of two equivalent ways: =qnorm(=\(1-\alpha\)=)= and =qnorm(=\(\alpha\)=, lower.tail = FALSE)=. 
+For \(0<\alpha<1\), the symbol \(z_{\alpha}\) denotes the unique solution of the equation \( \mathbb{P} ( Z > z_{\alpha}) = \alpha\), where \(Z \sim \mathsf{norm}(\mathtt{mean} = 0,\,\mathtt{sd} = 1)\). It can be calculated in one of two equivalent ways: \(\mathtt{qnorm(} 1 - \alpha \mathtt{)} \) and \(\mathtt{qnorm(} \alpha \mathtt{, lower.tail = FALSE)} \). 
 #+end_defn
 
 There are a few other very important special cases which we will encounter in later chapters. 
@@ -4927,8 +4927,8 @@ f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2}, \quad -\infty < x < \infty 
 \]
 we have
 \begin{eqnarray*}
-f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\quad-\infty<y<\infty,\\
- & = & \frac{1}{3\sqrt{2\pi}}\mathrm{e}^{-(y-4)^{2}/2\cdot3^{2}},\quad-\infty<y<\infty.
+f_{Y}(y) & = & f_{X}\left(\frac{y-4}{3}\right)\cdot\left|-\frac{1}{3}\right|,\quad -\infty < y < \infty,\\
+ & = & \frac{1}{3\sqrt{2\pi}}\mathrm{e}^{-(y-4)^{2}/2\cdot3^{2}},\quad -\infty < y < \infty.
 \end{eqnarray*}
 We recognize the PDF of \(Y\) to be that of a \(\mathsf{norm}(\mathtt{mean}=4,\,\mathtt{sd}=3)\) distribution. Indeed, we may use an identical argument as the above to prove the following fact:
 
@@ -4973,7 +4973,7 @@ where the next to last equality follows because the exponential function is /mon
 \]
 Now recalling that the CDF of a \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable satisfies \(F(u)=u\) (see Equation [[eq-unif-cdf][Uniform CDF]]), we can say
 \[
-F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad\mbox{for }y>0.
+F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad \mbox{for }y>0.
 \]
 We have consequently found the formula for the CDF of \(Y\); to obtain the PDF \(f_{Y}\) we need only differentiate \(F_{Y}\):
 \[
@@ -5046,14 +5046,14 @@ The result is an object of class =AbscontDistribution=, which is one of the clas
 1. Randomly generate many, many copies \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) from the distribution of \(X\),
 1. Compute \(Y_{1}=g(X_{1})\), \(Y_{2}=g(X_{2})\), ..., \(Y_{n}=g(X_{n})\) and store them for use.
 1. Calculate the PDF, CDF, quantiles, and random variates using the simulated values of \(Y\).
-As long as the transformation is sufficiently nice, such as a linear transformation, the exponential, absolute value, /etc./, the \texttt{d-p-q} functions are calculated analytically based on the d-p-q functions associated with \(X\). But if we try a crazy transformation then we are greeted by a warning:
+As long as the transformation is sufficiently nice, such as a linear transformation, the exponential, absolute value, /etc./, the =d-p-q= functions are calculated analytically based on the =d-p-q= functions associated with \(X\). But if we try a crazy transformation then we are greeted by a warning:
 
 #+begin_src R :exports both :results output pp 
 W <- sin(exp(X) + 27)
 W
 #+end_src
 
-The warning confirms that the \texttt{d-p-q} functions are not calculated analytically, but are instead based on the randomly simulated values of \(Y\). /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute \(\mathbb{P}(W\leq0.5)\) using the \(W\) above, then define \(W\) again, and compute the (supposedly) same \(\mathbb{P}(W\leq0.5)\) a few moments later.
+The warning confirms that the =d-p-q= functions are not calculated analytically, but are instead based on the randomly simulated values of \(Y\). /We must be careful to remember this./ The nature of random simulation means that we can get different answers to the same question: watch what happens when we compute \(\mathbb{P}(W\leq0.5)\) using the \(W\) above, then define \(W\) again, and compute the (supposedly) same \(\mathbb{P}(W\leq0.5)\) a few moments later.
 
 #+begin_src R :exports both :results output pp 
 p(W)(0.5)
@@ -5182,7 +5182,7 @@ Here are some useful things to know about the chi-square distribution.
 1. The \(\mathsf{chisq}(\mathtt{df}=p)\) distribution is the same as a \(\mathsf{gamma}(\mathtt{shape}=p/2,\,\mathtt{rate}=1/2)\) distribution. 
 1. The MGF of \(X\sim\mathsf{chisq}(\mathtt{df}=p)\) is
    \begin{equation}
-   M_{X}(t)=\left(1-2t\right)^{-p},\quad t<1/2.\label{eq-mgf-chisq}
+   M_{X}(t)=\left(1-2t\right)^{-p},\quad t < 1/2.\label{eq-mgf-chisq}
    \end{equation}
 #+end_rem
 
@@ -5349,20 +5349,8 @@ For the following random experiments, decide what the distribution of \(X\) shou
 #+begin_xca
 If \(Z\) is \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), find 
 1. \(\mathbb{P}(Z>2.64)\)
-   #+begin_src R :exports both :results output pp 
-   pnorm(2.64, lower.tail = FALSE)
-   #+end_src
-
 1. \(\mathbb{P}(0\leq Z<0.87)\)
-   #+begin_src R :exports both :results output pp 
-   pnorm(0.87) - 1/2
-   #+end_src
-
 1. \(\mathbb{P}(|Z|>1.39)\) (Hint: draw a picture!)
-   #+begin_src R :exports both :results output pp 
-   2 * pnorm(-1.39)
-   #+end_src
-
 #+end_xca
 
 #+begin_xca
@@ -5409,7 +5397,7 @@ The interested reader who would like to learn more about any of the below mentio
 
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed /pairs/ \((x,y)\), called the /joint support set/ of \(X\) and \(Y\). Then the /joint probability mass function/ of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
-f_{X,Y}(x,y)=\mathbb{P}(X=x,\, Y=y),\quad\mbox{for }(x,y)\in S_{X,Y}.\label{eq-joint-pmf}
+f_{X,Y}(x,y)=\mathbb{P}(X=x,\, Y=y),\quad \mbox{for }(x,y)\in S_{X,Y}.\label{eq-joint-pmf}
 \end{equation}
 Every joint PMF satisfies
 \begin{equation}
@@ -5436,7 +5424,7 @@ Given the joint PMF we may recover the marginal PMFs, but the converse is not tr
 
 Associated with the joint PMF is the /joint cumulative distribution function/ \(F_{X,Y}\) defined by
 \[
-F_{X,Y}(x,y)=\mathbb{P}(X\leq x,\, Y\leq y),\quad\mbox{for }(x,y)\in\mathbb{R}^{2}.
+F_{X,Y}(x,y)=\mathbb{P}(X\leq x,\, Y\leq y),\quad \mbox{for }(x,y)\in\mathbb{R}^{2}.
 \]
 The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in principle we could calculate it by adding up quantities of the form in Equation [[eq-joint-pmf][JPMF]]. The joint CDF is typically not used in practice due to its inconvenient form; one can usually get by with the joint PMF alone.
 
@@ -5804,7 +5792,7 @@ Compare the above expression to Equation [[eq-bayes-rule][BR]].
 #+latex: \begin{example}
 Suppose the parameter \(\theta\) is the \(\mathbb{P}(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
 \[
-\theta\sim\pi(\theta)=3(1-\theta)^{2},\quad0<\theta<1.
+\theta\sim\pi(\theta)=3(1-\theta)^{2},\quad 0 < \theta < 1.
 \]
 To learn more about \(\theta\), we will do what is natural: flip the coin. We will observe a random variable \(X\) which takes the value \(1\) if the coin shows Heads, and 0 if the coin shows Tails. Under these circumstances, \(X\) will have a Bernoulli distribution, and in particular, \(X|\theta\sim\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=\theta)\):
 \[ 
@@ -5814,7 +5802,7 @@ Based on the observation \(X=x\), we will update the prior distribution to the p
 \begin{eqnarray*}
 \pi(\theta|x) & \propto & \pi(\theta)\, f(x|\theta),\\
  & = & \theta^{x}(1-\theta)^{1-x}\cdot3(1-\theta)^{2},\\
- & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad0<\theta<1,
+ & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad 0 < \theta < 1,
 \end{eqnarray*}
 where the constant of proportionality is given by
 \[
@@ -5852,15 +5840,15 @@ We recall from Chapter [[cha-Probability][Probability]] that the events \(A\) an
 \end{equation}
 If it happens that
 \begin{equation}
-\mathbb{P}(X=x,Y=y)=\mathbb{P}(X=x)\mathbb{P}(Y=y),\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
+\mathbb{P}(X=x,Y=y)=\mathbb{P}(X=x)\mathbb{P}(Y=y),\quad \mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
 then we say that \(X\) and \(Y\) are /independent random variables/. Otherwise, we say that \(X\) and \(Y\) are /dependent/. Using the PMF notation from above, we see that independent discrete random variables satisfy
 \begin{equation}
-f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y}.
+f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad \mbox{for every }x\in S_{X},\ y\in S_{Y}.
 \end{equation}
 Continuing the reasoning, given two continuous random variables \(X\) and \(Y\) with joint PDF \(f_{X,Y}\) and respective marginal PDFs \(f_{X}\) and \(f_{Y}\) that are supported on the sets \(S_{X}\) and \(S_{Y}\), if it happens that
 \begin{equation}
-f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad\mbox{for every }x\in S_{X},\ y\in S_{Y},
+f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad \mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
 then we say that \(X\) and \(Y\) are independent.
 
@@ -5968,7 +5956,7 @@ Even when we cannot use the MGF trick to identify the exact distribution of a li
 #+LABEL: pro-mean-sd-lin-comb-two
 Let \(X_{1}\) and \(X_{2}\) be independent with respective population means \(\mu_{1}\) and \(\mu_{2}\) and population standard deviations \(\sigma_{1}\) and \(\sigma_{2}\). For given constants \(a_{1}\) and \(a_{2}\), define \(Y=a_{1}X_{1}+a_{2}X_{2}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
-\mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad\sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
+\mu_{Y}=a_{1}\mu_{1}+a_{2}\mu_{2},\quad \sigma_{Y}=\left(a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}\right)^{1/2}.
 \end{equation}
 #+end_prop
 
@@ -5986,7 +5974,7 @@ Using linearity of expectation the \(\mathbb{E}\) distributes through the sum. N
 \mathbb{E} Y^{2} & = & a_{1}^{2}(\sigma_{1}^{2}+\mu_{1}^{2})+a_{2}^{2}(\sigma_{2}^{2}+\mu_{2}^{2})+2a_{1}a_{2}\mu_{1}\mu_{2},\\
  & = & a_{1}^{2}\sigma_{1}^{2}+a_{2}^{2}\sigma_{2}^{2}+\left(a_{1}^{2}\mu_{1}^{2}+a_{2}^{2}\mu_{2}^{2}+2a_{1}a_{2}\mu_{1}\mu_{2}\right).
 \end{eqnarray*}
-But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\mathbb{E} Y\right)^{2}\), so the proof is complete.. 
+But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1}+a_{2}\mu_{2}\right)^{2}=\left(\mathbb{E} Y\right)^{2}\), so the proof is complete.
 #+end_proof
 
 ** Exchangeable Random Variables
@@ -5996,7 +5984,7 @@ But notice that the expression in the parentheses is exactly \(\left(a_{1}\mu_{1
 
 Two random variables \(X\) and \(Y\) are said to be /exchangeable/ if their joint CDF is a symmetric function of its arguments:
 \begin{equation}
-F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad\mbox{for all }(x,y)\in\mathbb{R}^{2}.
+F_{X,Y}(x,y)=F_{X,Y}(y,x),\quad \mbox{for all }(x,y)\in\mathbb{R}^{2}.
 \end{equation} 
 When the joint density \(f\) exists, we may equivalently say that \(X\) and \(Y\) are exchangeable if \(f(x,y)=f(y,x)\) for all \((x,y)\).
 
@@ -6041,7 +6029,7 @@ f_{X,Y}(x,y)=\frac{1}{2\pi\,\sigma_{X}\sigma_{Y}\sqrt{1-\rho^{2}}}\exp\left\{ -\
 \end{multline}
 for \((x,y)\in\mathbb{R}^{2}\). We write \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\), where
 \begin{equation}
-\upmu=(\mu_{X},\,\mu_{Y})^{T},\quad\sum=\left(
+\upmu=(\mu_{X},\,\mu_{Y})^{T},\quad \sum=\left(
 \begin{array}{cc}
 \sigma_{X}^{2} & \rho\sigma_{X}\sigma_{Y}\\
 \rho\sigma_{X}\sigma_{Y} & \sigma_{Y}^{2}
@@ -6155,7 +6143,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 We studied in Section [[sec-Functions-of-Continuous][Functions of Continuous RVs]] how to find the PDF of \(Y=g(X)\) given the PDF of \(X\). But now we have two random variables \(X\) and Y, with joint PDF \(f_{X,Y}\), and we would like to consider the joint PDF of two new random variables
 \begin{equation}
-U=g(X,Y)\quad\mbox{and}\quad V=h(X,Y),
+U=g(X,Y)\quad \mbox{and}\quad V=h(X,Y),
 \end{equation}
 where \(g\) and \(h\) are two given functions, typically ``nice'' in the sense of Appendix [[sec-Multivariable-Calculus][Multivariable Calculus]]. 
 
@@ -6209,11 +6197,11 @@ in which case the Jacobian of the inverse transformation is
 \]
 As \((x,y)\) traverses \(\mathbb{R}^{2}\), so too does \((u,v)\). Since the joint PDF of \((X,Y)\) is
 \[
-f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad(x,y)\in\mathbb{R}^{2},
+f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad (x,y)\in\mathbb{R}^{2},
 \]
 we get that the joint PDF of \((U,V)\) is
 \begin{equation}
-f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad(u,v)\in\mathbb{R}^{2}.\label{eq-biv-norm-hidden}
+f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad (u,v)\in\mathbb{R}^{2}.\label{eq-biv-norm-hidden}
 \end{equation}
 #+latex: \end{example}
 
@@ -6237,7 +6225,7 @@ There are not yet any examples of Yacas in this book, but there are online mater
 
 There is nothing spooky about \(n\geq3\) random variables. We just have a whole bunch of them: \(X_{1}\), \(X_{2}\),..., \(X_{n}\), which we can shorten to \(\mathbf{X}=(X_{1},X_{2},\ldots,X_{n})^{\mathrm{T}}\) to make the formulas prettier (now may be a good time to check out Appendix [[sec-Linear-Algebra][Linear Algebra]]). For \(\mathbf{X}\) supported on the set \(S_{\mathbf{X}}\), the joint PDF \(f_{\mathbf{X}}\) (if it exists) satisfies
 \begin{equation}
-f_{\mathbf{X}}(\mathbf{x})>0,\quad\mbox{for }\mathbf{x}\in S_{\mathbf{X}},
+f_{\mathbf{X}}(\mathbf{x})>0,\quad \mbox{for }\mathbf{x}\in S_{\mathbf{X}},
 \end{equation}
 and
 \begin{equation}
@@ -6273,7 +6261,7 @@ for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},
 #+LABEL: pro-mean-sd-lin-comb
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be independent with respective population means \(\mu_{1}\), \(\mu_{2}\), ..., \(\mu_{n}\) and standard deviations \(\sigma_{1}\), \(\sigma_{2}\), ..., \(\sigma_{n}\). For given constants \(a_{1}\), \(a_{2}\), ...,\(a_{n}\) define \(Y=\sum_{i=1}^{n}a_{i}X_{i}\). Then the mean and standard deviation of \(Y\) are given by the formulas
 \begin{equation}
-\mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad\sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
+\mu_{Y}=\sum_{i=1}^{n}a_{i}\mu_{i},\quad \sigma_{Y}=\left(\sum_{i=1}^{n}a_{i}^{2}\sigma_{i}^{2}\right)^{1/2}.
 \end{equation}
 #+end_prop
 
@@ -6579,7 +6567,7 @@ and we recognize this last quantity as the MGF of a \(\mathsf{norm}(\mathtt{mean
 #+LABEL: thm-Xbar-andS
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) be a \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution, and let
 \begin{equation}
-\overline{X}=\sum_{i=1}^{n}X_{i}\quad\mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}.
+\overline{X}=\sum_{i=1}^{n}X_{i}\quad \mbox{and}\quad S^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_{i}-\overline{X})^{2}.
 \end{equation}
 Then
 1. \(\overline{X}\) and \(S^{2}\) are independent, and
@@ -6614,7 +6602,7 @@ T=\frac{\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}}{S/\sigma}=\frac{\frac{\overlin
 \]
 Now let 
 \[
-Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\quad\mbox{and}\quad V=\frac{(n-1)S^{2}}{\sigma^{2}},
+Z=\frac{\overline{X}-\mu}{\sigma/\sqrt{n}}\quad \mbox{and}\quad V=\frac{(n-1)S^{2}}{\sigma^{2}},
 \]
 so that
 \begin{equation}
@@ -6770,7 +6758,7 @@ has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution, 
 #+begin_prop
 Let \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{1})\) distribution and let \(Y_{1}\), \(Y_{2}\), ..., \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p_{2})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), ... , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), ... , \(Y_{n_{2}}\) are independent samples. Define 
 \begin{equation}
-\hat{p}_{1}=\frac{1}{n_{1}}\sum_{i=1}^{n_{1}}X_{i}\quad\mbox{and}\quad\hat{p}_{2}=\frac{1}{n_{2}}\sum_{j=1}^{n_{2}}Y_{j}.
+\hat{p}_{1}=\frac{1}{n_{1}}\sum_{i=1}^{n_{1}}X_{i}\quad \mbox{and}\quad \hat{p}_{2}=\frac{1}{n_{2}}\sum_{j=1}^{n_{2}}Y_{j}.
 \end{equation}
 Then the sampling distribution of
 \begin{equation}
@@ -6934,7 +6922,7 @@ mu <- round(rnorm(10, mean = 20))
 #+end_src
 
 #+begin_xca
-Suppose that we observe a random sample \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) of size \( SRS( n =  SRC_R{ n[ k ] } ) \) from a \( \mathsf{norm}(\mathtt{mean}= SRC_R{ mu[ k ] }) \) distribution. 
+Suppose that we observe a random sample \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) of size SRS( n =  \(SRC_R{n[1]}\) ) from a \( \mathsf{norm}(\mathtt{mean}= SRC_R{mu[1]} ) \) distribution. 
 1. What is the mean of \(\overline{X}\)?
 1. What is the standard deviation of \(\overline{X}\)?
 1. What is the distribution of \(\overline{X}\)? (approximately)
@@ -7178,7 +7166,7 @@ X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are IID \( f(x| \theta ) \).}
 #+begin_defn
 Given the observed data \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), the /likelihood function/ \(L\) is defined by 
 \[ 
-L(\theta)=\prod_{i=1}^{n}f(x_{i}|\theta),\quad\theta\in\Theta.
+L(\theta)=\prod_{i=1}^{n}f(x_{i}|\theta),\quad \theta\in\Theta.
 \]
 #+end_defn
 
@@ -7474,11 +7462,11 @@ The author learned of a handy acronym from AP Statistics Exam graders that summa
 #+begin_rem
 All of the above intervals for \(\mu\) were two-sided, but there are also one-sided intervals for \(\mu\). They look like
 \begin{equation}
-\left[\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad\mbox{or}\quad\left(-\infty,\ \overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
+\left[\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}},\ \infty\right)\quad \mbox{or}\quad \left(-\infty,\ \overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\right]
 \end{equation}
 and satisfy
 \begin{equation}
-\mathbb{P}\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad\mbox{and}\quad\mathbb{P}\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
+\mathbb{P}\left(\overline{X}-z_{\alpha}\frac{\sigma}{\sqrt{n}}\leq\mu\right)=1-\alpha\quad \mbox{and}\quad \mathbb{P}\left(\overline{X}+z_{\alpha}\frac{\sigma}{\sqrt{n}}\geq\mu\right)=1-\alpha.
 \end{equation}
 #+end_rem
 
@@ -8255,7 +8243,7 @@ par(old.omd)
 
 The power function of a test for a parameter \(\theta\) is
 \[
-\beta(\theta)=\mathbb{P}_{\theta}(\mbox{Reject }H_{0}),\quad-\infty<\theta<\infty.
+\beta(\theta)=\mathbb{P}_{\theta}(\mbox{Reject }H_{0}),\quad -\infty < \theta < \infty.
 \]
 Here are some properties of power functions:
 1. \(\beta(\theta)\leq\alpha\) for any \(\theta\in\Theta_{0}\), and \(\beta(\theta_{0})=\alpha\). We interpret this by saying that no matter what value \(\theta\) takes inside the null parameter space, there is never more than a chance of \(\alpha\) of rejecting the null hypothesis. We have controlled the Type I error rate to be no greater than \(\alpha\).
@@ -8542,7 +8530,7 @@ Here we go. \(\mathsf{R}\) will calculate the linear regression line with the =l
 cars.lm <- lm(dist ~ speed, data = cars)
 #+end_src
 
-The first part of the input to the =lm= function, =dist ~ speed=, is a /model formula/, read as ``\texttt{dist} is described (or modeled) by \texttt{speed}''. The =data = cars= argument tells \(\mathsf{R}\) where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function (alternatively, we could just type =cars.lm= to see the same thing):
+The first part of the input to the =lm= function, =dist ~ speed=, is a /model formula/, read like this: =dist= is described (or modeled) by =speed=. The =data = cars= argument tells \(\mathsf{R}\) where to look for the variables quoted in the model formula. The output object =cars.lm= contains a multitude of information. Let's first take a look at the coefficients of the fitted regression line, which are extracted by the =coef= function (alternatively, we could just type =cars.lm= to see the same thing):
 
 #+begin_src R :exports both :results output pp 
 coef(cars.lm)
@@ -9541,7 +9529,7 @@ y_{2}\\
 \vdots\\
 y_{n}
 \end{bmatrix},
-\quad\mbox{and}\quad\mathbf{X}_{\mathrm{n}\times(\mathrm{p}+1)}=
+\quad \mbox{and}\quad \mathbf{X}_{\mathrm{n}\times(\mathrm{p}+1)}=
 \begin{bmatrix}1 & x_{11} & x_{21} & \cdots & x_{p1}\\
 1 & x_{12} & x_{22} & \cdots & x_{p2}\\
 \vdots & \vdots & \vdots & \ddots & \vdots\\
@@ -10532,7 +10520,7 @@ Note that plugging the value \(p=1\) into the formulas will recover all of the o
 
 We spent the entire chapter talking about the =trees= data, and all of our models looked like =Volume ~ Girth + Height= or a variant of this model. But let us think again: we know from elementary school that the volume of a rectangle is \(V=lwh\) and the volume of a cylinder (which is closer to what a black cherry tree looks like) is
 \begin{equation}
-V=\pi r^{2}h\quad\mbox{or}\quad V=4\pi dh,
+V=\pi r^{2}h\quad \mbox{or}\quad V=4\pi dh,
 \end{equation}
 where \(r\) and \(d\) represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for \(\mu\) might be
 \begin{equation}
@@ -11568,7 +11556,7 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
    \end{equation}
 1. The Associative Property: 
    \begin{equation}
-   (A\cup B)\cup C=A\cup(B\cup C),\quad(A\cap B)\cap C=A\cap(B\cap C)
+   (A\cup B)\cup C=A\cup(B\cup C),\quad (A\cap B)\cap C=A\cap(B\cap C)
    \end{equation}
 1. The Distributive Property: 
    \begin{equation}
@@ -11576,11 +11564,11 @@ Given subsets \(A\) and \(B\), we may manipulate them in an algebraic fashion. T
    \end{equation}
 1. DeMorgan's Laws
    \begin{equation}
-   (A\cup B)^{c}=A^{c}\cap B^{c}\quad\mbox{and}\quad(A\cap B)^{c}=A^{c}\cup B^{c},
+   (A\cup B)^{c}=A^{c}\cap B^{c}\quad \mbox{and}\quad (A\cap B)^{c}=A^{c}\cup B^{c},
    \end{equation}
    or more generally,
    \begin{equation}
-   \left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad\mbox{and}\quad\left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}
+   \left(\bigcup_{\alpha}A_{\alpha}\right)^{c}=\bigcap_{\alpha}A_{\alpha}^{c},\quad \mbox{and}\quad \left(\bigcap_{\alpha}A_{\alpha}\right)^{c}=\bigcup_{\alpha}A_{\alpha}^{c}
    \end{equation}
 
 ** Differential and Integral Calculus
@@ -11774,7 +11762,7 @@ In both of the above the series on the left is convergent if the series on the r
 
 **** The Geometric Series
 \begin{equation}
-\sum_{k=0}^{\infty} x^{k} = \frac{1}{1 - x},\quad|x| < 1.\label{eq-geom-series}
+\sum_{k=0}^{\infty} x^{k} = \frac{1}{1 - x},\quad |x| < 1.\label{eq-geom-series}
 \end{equation}
 
 **** The Exponential Series
@@ -11784,13 +11772,13 @@ In both of the above the series on the left is convergent if the series on the r
 
 Other Series
 \begin{equation}
-\sum_{k=0}^{\infty}{m+k-1 \choose m-1}x^{k}=\frac{1}{(1-x)^{m}},\quad|x|<1.\label{eq-negbin-series}
+\sum_{k=0}^{\infty}{m+k-1 \choose m-1}x^{k}=\frac{1}{(1-x)^{m}},\quad |x|<1.\label{eq-negbin-series}
 \end{equation}
 \begin{equation}
--\sum_{k=1}^{\infty}\frac{x^{n}}{n}=\ln(1-x),\quad|x|<1.\label{eq-log-series}
+-\sum_{k=1}^{\infty}\frac{x^{n}}{n}=\ln(1-x),\quad |x| < 1.\label{eq-log-series}
 \end{equation}
 \begin{equation}
-\sum_{k=0}^{\infty}{n \choose k}x^{k}=(1+x)^{n},\quad|x|<1.\label{eq-binom-series-infinite}
+\sum_{k=0}^{\infty}{n \choose k}x^{k}=(1+x)^{n},\quad |x| < 1.\label{eq-binom-series-infinite}
 \end{equation}
 
 *** Taylor Series
@@ -11805,10 +11793,10 @@ c_{k}=\frac{f^{(k)}(a)}{k!},\quad k=0,1,2,\ldots
 \end{equation}
 Furthermore, the function \(f\) is differentiable on the open interval \((a-R,\, a+R)\) with
 \begin{equation}
-f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad|x-a|<R,
+f'(x)=\sum_{k=1}^{\infty}kc_{k}(x-a)^{k-1},\quad |x-a| < R,
 \end{equation}
 \begin{equation}
-\int f(x)\,\mathrm{d} x=C+\sum_{k=0}^{\infty}c_{k}\frac{(x-a)^{k+1}}{k+1},\quad|x-a|<R,
+\int f(x)\,\mathrm{d} x=C+\sum_{k=0}^{\infty}c_{k}\frac{(x-a)^{k+1}}{k+1},\quad |x-a| < R,
 \end{equation}
 in which case both of the above series have radius of convergence \(R\).
 
@@ -11819,7 +11807,7 @@ in which case both of the above series have radius of convergence \(R\).
 
 The /Gamma function/ \(\Gamma\) will be defined in this book according to the formula
 \begin{equation}
-\Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\mathrm{e}^{-x}\:\mathrm{d} x,\quad\mbox{for }\alpha > 0.
+\Gamma(\alpha)=\int_{0}^{\infty}x^{\alpha-1}\mathrm{e}^{-x}\:\mathrm{d} x,\quad \mbox{for }\alpha > 0.
 \end{equation}
 
 #+begin_fact
@@ -11871,7 +11859,7 @@ The /inverse/ of a square matrix \(\mathbf{A}_{\mathrm{n}\times\mathrm{n}}\) (wh
 The inverse of the \(2\times2\) matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
-c & d\end{bmatrix}\quad\mbox{is}\quad\mathbf{A}^{-1}=\frac{1}{ad-bc}\begin{bmatrix}d & -b\\
+c & d\end{bmatrix}\quad \mbox{is}\quad \mathbf{A}^{-1}=\frac{1}{ad-bc}\begin{bmatrix}d & -b\\
 -c & a\end{bmatrix},
 \end{equation}
 provided \(ad-bc\neq0\).
@@ -11889,7 +11877,7 @@ where \(\mathbf{M}_{ij}\) is the submatrix formed by deleting the \(i^{\mathrm{t
 The determinant of the \(2\times2\) matrix
 \begin{equation}
 \mathbf{A}=\begin{bmatrix}a & b\\
-c & d\end{bmatrix}\quad\mbox{is}\quad|\mathbf{A}|=ad-bc.
+c & d\end{bmatrix}\quad \mbox{is} \quad |\mathbf{A}|=ad-bc.
 \end{equation}
 #+end_fact
 
@@ -11916,7 +11904,7 @@ and
 \end{equation}
 provided these limits exist. The /second-order partial derivatives/ of \(f\) are defined by
 \begin{equation}
-\frac{\partial^{2}f}{\partial x^{2}}=\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right),\quad\frac{\partial^{2}f}{\partial y^{2}}=\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right),\quad\frac{\partial^{2}f}{\partial x\partial y}=\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right),\quad\frac{\partial^{2}f}{\partial y\partial x}=\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right).
+\frac{\partial^{2}f}{\partial x^{2}}=\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right),\quad \frac{\partial^{2}f}{\partial y^{2}}=\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right),\quad \frac{\partial^{2}f}{\partial x\partial y}=\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial y}\right),\quad \frac{\partial^{2}f}{\partial y\partial x}=\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right).
 \end{equation}
 In many cases (and for all cases in this book) it is true that
 \begin{equation}
