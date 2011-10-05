@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS:
+#+EXPORT_SELECT_TAGS: resamp
 #+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
@@ -61,6 +61,15 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 :tangle: R/introR.R
 :CUSTOM_ID: cha-introduction-to-R
 :END:
+
+Every \(\mathsf{R}\) book I have ever seen has had a section/chapter that is an introduction to \(\mathsf{R}\), and so does this one.  The goal of this chapter is for a person to get up and running, ready for the material that follows.  See Section [[sec-External-Resources][External Resources]] for links to other material which the reader may find useful. 
+
+*What do I want them to know?*
+- Where to find \(\mathsf{R}\) to install on a home computer, and a few comments to help with the usual hiccups that occur when installing something.
+- Abbreviated remarks about the available options to interact with \(\mathsf{R}\).
+- Basic operations (arithmetic, entering data, vectors) at the command prompt.
+- How and where to find help when they get in trouble.
+- Other little shortcuts I am usually asked when introducing \(\mathsf{R}\).
 
 ** Downloading and Installing \(\mathsf{R}\)
 :PROPERTIES:
@@ -361,6 +370,9 @@ If your question is not a FAQ, has not been asked on \(\mathsf{R}\)-help before,
 - Sometimes the answer the question is related to the operating system used, the attached packages, or the exact version of \(\mathsf{R}\) being used. The =sessionInfo()=\index{sessionInfo@\texttt{sessionInfo}} command collects all of this information to be copy-pasted into an email (and the Posting Guide requests this information). See Appendix [[cha-R-Session-Information][R Session Info]] for an example.
 
 ** External Resources
+:PROPERTIES:
+:CUSTOM_ID: sec-External-Resources
+:END:
 
 There is a mountain of information on the Internet about \(\mathsf{R}\). Below are a few of the important ones. 
 - The \(\mathsf{R}\)- Project for Statistical Computing:\index{The R-Project@The \textsf{R}-Project}: Go [[http://www.r-project.org/][there]] first.
@@ -1059,6 +1071,12 @@ Extreme observations fall far from the rest of the data. Such observations are t
 :PROPERTIES:
 :CUSTOM_ID: sec-Descriptive-Statistics
 :END:
+
+One of my favorite professors would repeatedly harp, ``You cannot do statistics without data.''  
+
+
+*What do I want them to know?*
+- The fundamental data types we encounter most often, how to classify given data into a likely type, and that sometimes the distinction is blurry.\
 
 *** Frequencies and Relative Frequencies
 :PROPERTIES:
@@ -10921,6 +10939,7 @@ Of course, we usually compute a /p-value/, defined to be the probability of the 
 
 #+latex: \begin{example}
 A study concerned differing dosages of the antiretroviral drug AZT. The common dosage is 300mg daily. Higher doses cause more side affects, but are they significantly higher? We examine for a 600mg dose. The data are as follows: We compare the scores from the two groups by computing the difference in their sample means. The 300mg data were entered in x1 and the 600mg data were entered into x2. The observed difference was
+
 | 300mg  | 284 | 279 | 289 | 292 | 287 | 295 | 285 | 279 | 306 | 298 |
 | 600mg  | 298 | 307 | 297 | 279 | 291 | 335 | 299 | 300 | 306 | 291 |
 The average amounts can be found:
@@ -10930,6 +10949,8 @@ The average amounts can be found:
 : [1] 300.3
 
 with an observed difference of =mean(x2) - mean(x1) = 10.9=. As expected, the 600 mg measurements seem to have a higher average, and we might be interested in trying to decide if the average amounts are =significantly= different. The null hypothesis should be that there is no difference in the amounts, that is, the groups are more or less the same. If the null hypothesis were true, then the two groups would indeed be the same, or just one big group. In that case, the observed difference in the sample means just reflects the random assignment into the arbitrary =x1= and =x2= categories. It is now clear how we may resample, consistent with the null hypothesis.
+#+latex: \end{example}
+
 
 *** Procedure:
 
