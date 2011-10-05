@@ -62,6 +62,11 @@ This book is devoted mostly to the frequentist viewpoint because that is how I w
 :CUSTOM_ID: cha-introduction-to-R
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Introduction to R
+# All code released under GPL Version 3
+#+end_src
+
 Every \(\mathsf{R}\) book I have ever seen has had a section/chapter that is an introduction to \(\mathsf{R}\), and so does this one.  The goal of this chapter is for a person to get up and running, ready for the material that follows.  See Section [[sec-External-Resources][External Resources]] for links to other material which the reader may find useful. 
 
 *What do I want them to know?*
@@ -116,7 +121,7 @@ To install a package named =foo=, open up \(\mathsf{R}\) and type =install.packa
 
 The general command =install.packages()= will (on most operating systems) open a window containing a huge list of available packages; simply choose one or more to install.
 
-No matter how many packages are installed onto the system, each one must first be loaded for use with the =library=\index{library@\texttt{library}} function. For instance, the =foreign= package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, /etc/. But none of those functions will be available until the command =library(foreign)= is issued. 
+No matter how many packages are installed onto the system, each one must first be loaded for use with the =library=\index{library@\texttt{library}} function. For instance, the =foreign= package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, /etc/. But none of those functions will be available until the command =library("foreign")= is issued. 
 
 Type =library()= at the command prompt (described below) to see a list of all available
 packages in your library.
@@ -401,6 +406,11 @@ It is unnecessary to retype commands repeatedly, since \(\mathsf{R}\) remembers 
 :CUSTOM_ID: cha-Describing-Data-Distributions
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Data Description
+# All code released under GPL Version 3
+#+end_src
+
 #+latex: \noindent 
 In this chapter we introduce the different types of data that a statistician is likely to encounter, and in each subsection we give some examples of how to display the data of that particular type. Once we see how to display data distributions, we next introduce the basic properties of data distributions. We qualitatively explore several data sets. Once that we have intuitive properties of data sets, we next discuss how we may numerically measure and describe those properties with descriptive statistics.
 
@@ -560,15 +570,14 @@ Notice the argument \(\mathtt{main = ""}\) which suppresses the main title from 
 #+begin_src R :eval never :exports code
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 m + geom_histogram()
-m + geom_histogram(binwidth = 5)
+m + geom_histogram(aes(y = ..density..))
 #+end_src
 
 #+srcname: histograms
 #+begin_src R :exports none :results silent
-library(ggplot2)
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 a <- m + geom_histogram()
-b <- m + geom_histogram(binwidth = 5)
+b <- m + geom_histogram(aes(y = ..density..))
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(2, 1)))
 vplayout <- function(x, y)
@@ -617,16 +626,28 @@ Recall that the strip chart in Figure [[fig-Various-stripchart-methods][Various-
 
 
 #+begin_src R :exports code :eval never
-hist(precip, breaks = 10, main = "")
-hist(precip, breaks = 200, main = "")
+qplot(precip, geom = "histogram", binwidth = 1)
+qplot(precip, geom = "histogram", binwidth = 5)
+qplot(precip, geom = "histogram", binwidth = 20)
+m <- ggplot(as.data.frame(precip), aes(x = precip))
+m + geom_histogram(binwidth = 1)
+m + geom_histogram(binwidth = 5)
+m + geom_histogram(binwidth = 20)
 #+end_src
 
 #+srcname: histograms-bins
 #+begin_src R :exports none :results silent
-par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
-hist(precip, breaks = 10, main = "")
-hist(precip, breaks = 200, main = "")
-par(mfrow = c(1,1)) # back to normal
+m <- ggplot(as.data.frame(precip), aes(x = precip))
+a1 <- m + geom_histogram(binwidth = 1)
+a2 <- m + geom_histogram(binwidth = 5)
+a3 <- m + geom_histogram(binwidth = 20)
+grid.newpage()
+pushViewport(viewport(layout = grid.layout(3, 1)))
+vplayout <- function(x, y)
+viewport(layout.pos.row = x, layout.pos.col = y)
+print(a1, vp = vplayout(1, 1))
+print(a2, vp = vplayout(2, 1))
+print(a3, vp = vplayout(3, 1))
 #+end_src
 
 #+begin_src R :exports none :results graphics silent :noweb yes :file ps/datadesc/histograms-bins.ps
@@ -668,7 +689,6 @@ Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the dat
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp  
-library(aplpack)
 stem.leaf(UKDriverDeaths, depth = FALSE)
 #+end_src
 
@@ -687,19 +707,42 @@ Done with the =plot=\index{plot@\texttt{plot}} function. These are good for plot
 #+latex: \begin{example}
 *Level of Lake Huron 1875-1972.* Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875--1972. The data are stored in the time series =LakeHuron=\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See =?LakeHuron=. Figure [[fig-indpl-lakehuron][indpl-lakehuron]] was produced with the following code:
 
+Here is how to do it with base \(\mathsf{R}\).
+
 #+begin_src R :exports code :eval never
-plot(LakeHuron, type = "h")
+plot(LakeHuron)
 plot(LakeHuron, type = "p")
+plot(LakeHuron, type = "h")
 #+end_src
+
+Here is how to do it with =ggplot2=.
+
+#+begin_src R :exports code :eval never
+huron <- data.frame(year = time(LakeHuron), level = as.vector(LakeHuron))
+h <- ggplot(huron, aes(x=year)) 
+h + geom_path(aes(y = level))
+h + geom_point(aes(y = level))
+h + geom_ribbon(aes(ymin = 576, ymax = level))
+#+end_src
+
+Here is how to do it with =lattice=.
+
+#+begin_src R :exports code :eval never
+library(lattice)
+xyplot(level ~ year, data = huron, type = "l")
+xyplot(level ~ year, data = huron, type = "p")
+#+end_src
+
 
 The plots show an overall decreasing trend to the observations, and there appears to be some seasonal variation that increases over time. 
 
 #+srcname: indpl-lakehuron
 #+begin_src R :exports none :results silent
-par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
-plot(LakeHuron, type = "h")
+par(mfrow = c(3,1))
+plot(LakeHuron)
 plot(LakeHuron, type = "p")
-par(mfrow = c(1,1)) # back to normal
+plot(LakeHuron, type = "h")
+par(mfrow = c(1,1))
 #+end_src
 
 #+begin_src R :exports none :results graphics silent :noweb yes :file ps/datadesc/indpl-lakehuron.ps
@@ -729,7 +772,16 @@ par(mfrow = c(1,1)) # back to normal
 
 **** Density estimates
 
-Coming soon.
+The default method uses a Gaussian kernel density estimate.
+
+#+begin_src R :eval never
+# The Old Faithful geyser data
+     d <- density(faithful$eruptions, bw = "sj")
+     d
+     plot(d)
+hist(precip, freq = FALSE)
+lines(density(precip))
+#+end_src
 
 *** Qualitative Data, Categorical Data, and Factors
 :PROPERTIES:
@@ -863,7 +915,6 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
 
 #+srcname: Pareto-chart
 #+begin_src R :exports code :results silent
-library(qcc)
 pareto.chart(table(state.division), ylab="Frequency")
 #+end_src
 
@@ -1048,7 +1099,6 @@ Another component to the shape of a distribution is how ``peaked'' it is. Some d
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]].
 
 #+begin_src R :exports both :results output pp
-library(aplpack)
 with(faithful, stem.leaf(eruptions))
 #+end_src
 
@@ -1255,7 +1305,6 @@ We said earlier that the =discoveries= data looked positively skewed; let's see 
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp  
-library(e1071)
 skewness(discoveries)
 2*sqrt(6/length(discoveries))
 #+end_src
@@ -1494,6 +1543,20 @@ or in \(\mathsf{R}\) Commander by following =Statistics= \(\triangleright\) =Con
 - =plot(state.region, state.division)= 
 - =barplot(table(state.division,state.region), legend.text=TRUE)=
 
+#+begin_src :eval never
+require(graphics)
+mosaicplot(HairEyeColor)
+x <- apply(HairEyeColor, c(1, 2), sum)
+x
+mosaicplot(x, main = "Relation between hair and eye color")
+y <- apply(HairEyeColor, c(1, 3), sum)
+y
+mosaicplot(y, main = "Relation between hair color and sex")
+z <- apply(HairEyeColor, c(2, 3), sum)
+z
+mosaicplot(z, main = "Relation between eye color and sex")
+#+end_src
+
 ** Comparing Populations
 :PROPERTIES:
 :CUSTOM_ID: sec-Comparing-Data-Sets
@@ -1540,13 +1603,11 @@ I am thinking here about the =Statistics= \(\triangleright\) =Numerical Summarie
 - Scatterplots
 
 #+begin_src R :exports code :eval never
-library(lattice)
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 #+end_src
 
 #+srcname: xyplot-group
 #+begin_src R :exports none :results silent
-library(lattice)
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+end_src
 
@@ -1623,13 +1684,11 @@ It is sometimes nice to set =lattice.options(default.theme = "col.whitebg")=
 **** Side by side boxplots
 
 #+begin_src R :exports code :eval never
-library(lattice)
 bwplot(~weight | feed, data = chickwts)
 #+end_src
 
 #+srcname: bwplot
 #+begin_src R :exports none :results silent
-library(lattice)
 print(bwplot(~weight | feed, data = chickwts))
 #+end_src
 
@@ -1664,7 +1723,6 @@ histogram(~age | education, data = infert)
 
 #+srcname: histograms-lattice
 #+begin_src R :exports none :results silent
-library(lattice)
 print(histogram(~age | education, data = infert))
 #+end_src
 
@@ -1762,13 +1820,32 @@ print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 
 #+latex: \newpage{}
 
+** Some Remarks about Plotting
+
+Getting your labels to look right
+#+begin_src R :eval never
+library(ggplot2)
+a <- qplot(state.division, geom = "bar")
+a + opts(axis.text.x = theme_text(angle = -90, hjust = 0))
+#+end_src
+
+#+begin_src R :eval never
+hist(precip, freq = FALSE)
+lines(density(precip))
+qplot(precip, geom = "density")
+m <- ggplot(as.data.frame(precip), aes(x = precip))
+m + geom_histogram()
+m + geom_histogram(aes(y = ..density..)) + geom_density()
+#+end_src
+
+
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
 Open \(\mathsf{R}\) and issue the following commands at the command line to get started. Note that you need to have the =RcmdrPlugin.IPSUR= package installed, and for some exercises you need the =e1071= package.
 
 #+begin_src R :exports code :results silent
-library(RcmdrPlugin.IPSUR)
+library("RcmdrPlugin.IPSUR")
 data(RcmdrTestDrive)
 attach(RcmdrTestDrive)
 names(RcmdrTestDrive)
@@ -1820,7 +1897,7 @@ For this problem we will study the variable =reduction=.
 #+end_xca
 
 #+begin_xca
-In this problem we will compare the variables =before= and =after=. Don't forget =library(e1071)=.
+In this problem we will compare the variables =before= and =after=. Don't forget =library("e1071")=.
 1. Examine the two measures of center for both variables. Judging from these measures, which variable has a higher center?
 1. Which measure of center is more appropriate for =before=? (You may want to look at a boxplot.) Which measure of center is more appropriate for =after=?
 1. Based on your answer to (2), choose an appropriate measure of spread for each variable, calculate it, and report its value. Which variable has the biggest spread? (Note that you need to make sure that your measures are on the same scale.) 
@@ -1840,6 +1917,11 @@ Describe the following data sets just as if you were communicating with an alien
 :tangle: R/prob.R
 :CUSTOM_ID: cha-Probability
 :END:
+
+#+begin_src R :exports none :eval never
+# Chapter: Probability
+# All code released under GPL Version 3
+#+end_src
 
 #+latex: \noindent 
 In this chapter we define the basic terminology associated with probability and derive some of its properties. We discuss three interpretations of probability. We discuss conditional probability and independent events, along with Bayes' Theorem. We finish the chapter with an introduction to random variables, which paves the way for the next two chapters.
@@ -1924,7 +2006,6 @@ Some sample spaces are so common that convenience wrappers were written to set t
 Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the =tosscoin= function:
 
 #+begin_src R :exports both :results output pp  
-library(prob)
 tosscoin(1)
 #+end_src
 
@@ -2751,8 +2832,6 @@ Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,
 
 #+srcname: twodiceAB
 #+begin_src R :exports none :results silent
-library(ggplot2)
-library(prob)
 A <- rolldie(2)
 B <- subset(A, X1==X2)
 C <- subset(A, X1+X2 > 7)
@@ -2797,7 +2876,6 @@ Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in t
 Continuing with Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]], the first thing to do is set up the probability space with the =rolldie= function.
 
 #+begin_src R :exports both :results output pp  
-library(prob)
 S <- rolldie(2, makespace = TRUE)  # assumes ELM
 head(S)                            #  first few rows
 #+end_src
@@ -2880,7 +2958,6 @@ But do not be intimidated. The object =N= is nothing more than a list with two e
 Putting all of this together we do 
 
 #+begin_src R :exports code :results silent
-library(prob)
 L <- cards()
 M <- urnsamples(L, size = 2)
 N <- probspace(M)
@@ -2911,7 +2988,6 @@ Example [[exa-urn-7-red-3-green][Urn 7 red 3 green]] is similar to Example [[exa
 It is easier for us this time because our urn is a vector instead of a =cards()= data frame. Before there were two dimensions of information associated with the outcomes (rank and suit) but presently we have only one dimension (color).
 
 #+begin_src R :exports code :results silent
-library(prob)
 L <- rep(c("red","green"), times = c(7,3))
 M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
 N <- probspace(M)
@@ -3375,6 +3451,11 @@ conditions to be satisfied, but the binomial series in the expression on the rig
 :CUSTOM_ID: cha-Discrete-Distributions
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Discrete Distributions
+# All code released under GPL Version 3
+#+end_src
+
 #+latex: \noindent 
 In this chapter we introduce discrete random variables, those who take values in a finite or countably infinite support set. We discuss probability mass functions and some special expectations, namely, the mean, variance and standard deviation. Some of the more important discrete distributions are explored in detail, and the more general concept of expectation is defined, which paves the way for moment generating functions. 
 
@@ -3510,7 +3591,6 @@ F
 As easy as this is, it is even easier to do with the =distrEx= package \cite{Ruckdescheldistr}. We define a random variable =X= as an object, then compute things from the object such as mean, variance, and standard deviation with the functions =E=, =var=, and =sd=:
 
 #+begin_src R :exports both :results output pp  
-library(distrEx)
 X <- DiscreteDistribution(supp = 0:3, prob = c(1,3,3,1)/8)
 E(X); var(X); sd(X)
 #+end_src
@@ -3721,7 +3801,6 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
 
 #+begin_src R :exports both :results output pp  
-library(distr)
 X <- Binom(size = 3, prob = 1/2)
 X
 #+end_src
@@ -3953,7 +4032,6 @@ The =distrEx= package provides an expectation operator =E= which can be used on 
 
 #+begin_src R :exports both :results output pp  
 X <- Binom(size = 3, prob = 0.45)
-library(distrEx)
 E(X)
 E(3*X + 4)
 #+end_src
@@ -4486,6 +4564,11 @@ Calculate the mean and variance of the hypergeometric distribution. Show that
 :CUSTOM_ID: cha-Continuous-Distributions
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Continuous Distributions
+# All code released under GPL Version 3
+#+end_src
+
 #+latex: \noindent 
 The focus of the last chapter was on random variables whose support can be written down in a list of values (finite or countably infinite), such as the number of successes in a sequence of Bernoulli trials. Now we move to random variables whose support is a whole range of values, say, an interval \((a,b)\). It is shown in later classes that it is impossible to write all of the numbers down in a list; there are simply too many of them.
 
@@ -4689,13 +4772,8 @@ Compare this to the answer we got in Example [[exa-cont-pdf-3x4][Cont-pdf3x4]]. 
 
 #+latex: \begin{example}
 Let us redo Example [[exa-cont-pdf3x2][Cont-pdf3x2]] with the =distr= package. The method is similar to that encountered in Section [[sub-disc-rv-how-r][Discrete RV How R]] in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. We define an absolutely continuous random variable:
-#+begin_src R :exports none :results silent
-library(distr)
-library(distrEx)
-#+end_src
 
 #+begin_src R :exports both :results output pp
-library(distr)
 f <- function(x) 3*x^2
 X <- AbscontDistribution(d = f, low1 = 0, up1 = 1)
 p(X)(0.71) - p(X)(0.14)
@@ -4703,7 +4781,6 @@ p(X)(0.71) - p(X)(0.14)
 
 Compare this to the answer we found earlier. Now let us try expectation with the =distrEx= package \cite{Ruckdescheldistr}:
 #+begin_src R :exports both :results output pp 
-library(distrEx)
 E(X); var(X); 3/80
 #+end_src
 
@@ -5047,7 +5124,6 @@ This is what we will later call a /chi-square distribution with 1 degree of free
 The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example [[exa-lin-trans-norm][Linear Trans-Norm]] quite nicely:
 
 #+begin_src R :exports both :results output pp 
-library(distr)
 X <- Norm(mean = 0, sd = 1)
 Y <- 4 - 3*X
 Y
@@ -5306,7 +5382,6 @@ Calculate the first four raw moments for \(X\sim\mathsf{gamma}(\mathtt{shape}=13
 
 We load the =actuar= package and use the functions =mgamma= and =mgfgamma=:
 #+begin_src R :exports both :results output pp 
-library(actuar)
 mgamma(1:4, shape = 13, rate = 1)
 #+end_src
 
@@ -5390,6 +5465,10 @@ Prove the memoryless property for exponential random variables. That is, for \(X
 :CUSTOM_ID: cha-Multivariable-Distributions
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Multivariate Distributions
+# All code released under GPL Version 3
+#+end_src
 
 #+latex: \noindent 
 We have built up quite a catalogue of distributions, discrete and continuous. They were all univariate, however, meaning that we only considered one random variable at a time. We can imagine nevertheless many random variables associated with a single person: their height, their weight, their wrist circumference (all continuous), or their eye/hair color, shoe size, whether they are right handed, left handed, or ambidextrous (all categorical), and we can even surmise reasonable probability distributions to associate with each of these variables.
@@ -5487,16 +5566,14 @@ f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 
 #+srcname: max-and-sum-two-dice
 #+begin_src R :exports none :results silent
-library(ggplot2)
-library(prob)
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
 A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
 p1 <- ggplot(A, aes(x=X1, y=X2, label=U))
-p1 <- p1 + geom_text() + xlab("X1 = First roll") + 
+p1 <- p1 + geom_text(size = 6) + xlab("X1 = First roll") + 
       ylab("X2 = Second roll") + opts(title = "U = max(X1,X2)")
 p2 <- ggplot(A, aes(x=X1, y=X2, label=V))
-p2 <- p2 + geom_text() + xlab("X1 = First roll") + 
+p2 <- p2 + geom_text(size = 6) + xlab("X1 = First roll") + 
       ylab("") + opts(title = "V = X1 + X2")
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(1, 2)))
@@ -5535,7 +5612,7 @@ We may collapse the two matrices from Figure [[fig-max-and-sum-two-dice][max-and
 #+begin_src R :exports none :results silent
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
-p3 + geom_text() + xlab("First roll") + ylab("Second roll") + 
+p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") + 
   opts(title = "Joint distribution of (U,V) pairs")
 #+end_src
 
@@ -5631,12 +5708,7 @@ for \(0 < y < 1\). In this example the joint support set was a rectangle \([0,1]
 
 We will show how to do Example [[exa-max-sum-two-dice][Max-sum two dice]] using \(\mathsf{R}\); it is much simpler to do it with \(\mathsf{R}\) than without. First we set up the sample space with the =rolldie= function. Next, we add random variables \(U\) and \(V\) with the =addrv= function. We take a look at the very top of the data frame (probability space) to make sure that everything is operating according to plan.
 
-#+begin_src R :exports none :results silent
-library(prob)
-#+end_src
-
-#+begin_src R :exports both :results output pp
-library(prob)  
+#+begin_src R :exports both :results output pp  
 S <- rolldie(2, makespace = TRUE)
 S <- addrv(S, FUN = max, invars = c("X1","X2"), name = "U")
 S <- addrv(S, FUN = sum, invars = c("X1","X2"), name = "V")
@@ -6106,14 +6178,13 @@ The multivariate normal distribution is implemented in both the =mvtnorm= packag
 The =mvtnorm= package has functions =dmvnorm= and =rmvnorm= for the PDF and to generate random vectors, respectively. Let us get started with a graph of the bivariate normal PDF. We can make the plot with the following code, where the workhorse is the =persp= function in base \(\mathsf{R}\).
 
 Another way to do this is with the =curve3d= function in the =emdbook= package \cite{emdbook}. It looks like this:
-: library(emdbook); library(mvtnorm) # note: the order matters
+: library("emdbook"); library("mvtnorm") # note: the order matters
 : mu <- c(0,0); sigma <- diag(2)
 : f <- function(x,y) dmvnorm(c(x,y), mean = mu, sigma = sigma)
 : curve3d(f(x,y), from = c(-3,-3), to = c(3,3), theta = -30, phi = 30)
 The code above is slightly shorter than that using =persp= and is easier to understand. One must be careful, however. If the =library= calls are swapped then the code will not work because both packages =emdbook= and =mvtnorm= have a function called =dmvnorm=; one must load them to the search path in the correct order or \(\mathsf{R}\) will use the wrong one (the arguments are named differently and the underlying algorithms are different).
 
 #+begin_src R :exports code :eval never
-library(mvtnorm)
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
@@ -6124,7 +6195,6 @@ We chose the standard bivariate normal, \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{
 
 #+srcname: mvnorm-pdf
 #+begin_src R :exports code :results silent
-library(mvtnorm)
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
@@ -6402,15 +6472,9 @@ Here are some facts about the multinomial distribution.
 
 There is support for the multinomial distribution in base \(\mathsf{R}\), namely in the =stats= package. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
 
-#+begin_src R :exports none :results hide
-library(combinat)
-#+end_src
-
 #+begin_src R :exports both :results output pp 
-library(combinat)
 tmp <- t(xsimplex(3, 6))
 p <- apply(tmp, MARGIN = 1, FUN = dmultinom, prob = c(36,27,37))
-library(prob)
 S <- probspace(tmp, probs = p)
 ProbTable <- xtabs(probs ~ X1 + X2, data = S)
 round(ProbTable, 3)
@@ -6419,7 +6483,7 @@ round(ProbTable, 3)
 Do some examples of =rmultinom=.
 
 Another way to do the plot is with the =scatterplot3d= function in the =scatterplot3d= package \cite{Liggesscatterplot3d}. It looks like this: 
-: library(scatterplot3d)
+: library("scatterplot3d")
 : X <- t(as.matrix(expand.grid(0:6, 0:6)))
 : X <- X[, colSums(X) <= 6 ]; X <- rbind(X, 6 - colSums(X))
 : Z <- round(apply(X, 2, function(x) dmultinom(x, prob = 1:3)), 3)
@@ -6429,7 +6493,6 @@ The =scatterplot3d= graph looks better in this example, but the code is more dif
 
 #+srcname: multinom-pmf2
 #+begin_src R :exports code :results silent
-library(lattice)
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 #+end_src
@@ -6484,6 +6547,10 @@ Show that when \(X\) and \(Y\) are independent the MGF of \(X-Y\) is \(M_{X}(t)M
 :CUSTOM_ID: cha-Sampling-Distributions
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Sampling Distributions
+# All code released under GPL Version 3
+#+end_src
 
 #+latex: \noindent 
 This is an important chapter; it is the bridge from probability and descriptive statistics that we studied in Chapters [[cha-Describing-Data-Distributions][Data Description]] through [[cha-Multivariable-Distributions][Multivariate Distributions]] to inferential statistics which forms the latter part of this book.
@@ -6725,12 +6792,10 @@ How large is ``sufficiently large''? It is here that the shape of the underlying
 
 The =TeachingDemos= package \cite{Snowteachingdemos} has =clt.examp= and the =distrTeach= \cite{Ruckdescheldistr} package has =illustrateCLT=. Try the following at the command line (output omitted):
 #+begin_src R :exports code :eval never
-library(TeachingDemos)
 example(clt.examp)
 #+end_src
 and
 #+begin_src R :exports code :eval never
-library(distrTeach)
 example(illustrateCLT)
 #+end_src
 
@@ -6966,6 +7031,11 @@ And that's all she wrote.
 :tangle: R/estimate.R
 :CUSTOM_ID: cha-Estimation
 :END:
+
+#+begin_src R :exports none :eval never
+# Chapter: Data Description
+# All code released under GPL Version 3
+#+end_src
 
 #+latex: \noindent 
 We will discuss two branches of estimation procedures: point estimation and interval estimation. We briefly discuss point estimation first and then spend the rest of the chapter on interval estimation.
@@ -7301,7 +7371,6 @@ Note that we omitted the data as an argument to the log-likelihood function; the
 
 #+begin_src R :exports both :results output pp 
 x <- PlantGrowth$weight
-library(stats4)
 MaxLikeEst <- mle(minuslogL, start = list(mu = 5, sigma2 = 0.5))
 summary(MaxLikeEst)
 #+end_src
@@ -7374,7 +7443,6 @@ See Figure [[fig-ci-examp][ci-examp]], which is a graphical display of these ide
 
 #+srcname: ci-examp
 #+begin_src R :exports code :results silent
-library(TeachingDemos)
 ci.examp()
 #+end_src
 
@@ -7419,7 +7487,6 @@ The parameter of interest is \(\mu\), which represents the true mean weight of t
 #+latex: \end{example}
 
 #+begin_src R :exports both :results output pp 
-library(aplpack)
 with(PlantGrowth, stem.leaf(weight))
 #+end_src
 
@@ -7495,12 +7562,8 @@ Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\) 
 
 *** How to do it with \(\mathsf{R}\)
 We can do Example [[exa-plant-one-samp-z-int]] with the following code.
-#+begin_src R :exports none :results silent
-library(TeachingDemos)
-#+end_src
 
 #+begin_src R :exports both :results output pp 
-library(TeachingDemos)
 temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
 temp
 #+end_src
@@ -7508,7 +7571,6 @@ temp
 The confidence interval bounds are shown in the sixth line down of the output (please disregard all of the additional output information for now -- we will use it in Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]]). We can make the plot for Figure [[fig-plant-z-int-plot][plant-z-int-plot]] with
 
 #+begin_src R :exports code :eval never
-library(IPSUR)
 plot(temp, "Conf")
 #+end_src
 
@@ -7642,7 +7704,6 @@ or in other words, we know in advance that the true proportion is restricted to 
 *** How to do it with \(\mathsf{R}\)
 
 #+begin_src R :exports both :results output pp 
-library(Hmisc)
 binconf(x = 7, n = 25, method = "asymptotic")
 #+end_src
 
@@ -7652,7 +7713,6 @@ binconf(x = 7, n = 25, method = "wilson")
 
 The default value of the =method= argument is =wilson=.  An alternate way is 
 #+begin_src R :exports none :results silent
-library(RcmdrPlugin.IPSUR)
 data(RcmdrTestDrive)
 #+end_src
 
@@ -7663,7 +7723,6 @@ prop.test(rbind(tab), conf.level = 0.95, correct = FALSE)
 
 #+begin_src R :exports code :results silent
 A <- as.data.frame(Titanic)
-library(reshape)
 B <- with(A, untable(A, Freq))
 #+end_src
 
@@ -7784,6 +7843,11 @@ You are going to need the quadratic formula.
 :tangle: R/hypoth.R
 :CUSTOM_ID: cha-Hypothesis-Testing
 :END:
+
+#+begin_src R :exports none :eval never
+# Chapter: Hypothesis Testing
+# All code released under GPL Version 3
+#+end_src
 
 *What do I want them to know?*
 - basic terminology and philosophy of the Neyman-Pearson paradigm
@@ -8043,7 +8107,6 @@ I am thinking =z.test=\index{z.test@\texttt{z.test}} in =TeachingDemos=, =t.test
 
 #+begin_src R :exports both :results output pp 
 x <- rnorm(37, mean = 2, sd = 3)
-library(TeachingDemos)
 z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 #+end_src
 
@@ -8076,7 +8139,6 @@ Give some data and a hypothesis.
 I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package.
 
 #+begin_src R :exports both :results output pp 
-library(TeachingDemos)
 sigma.test(women$height, sigma = 8)
 #+end_src
 
@@ -8223,7 +8285,6 @@ rug(y1)
 
 #+srcname: Some-F-plots-HH
 #+begin_src R :exports code :results silent
-library(HH)
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
 F.curve(df1 = 5, df2 = 30, col='blue')
@@ -8273,7 +8334,6 @@ I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and al
 
 #+srcname: power-examp
 #+begin_src R :exports code :results silent
-library(TeachingDemos)
 power.examp()
 #+end_src
 
@@ -8311,6 +8371,11 @@ power.examp()
 :tangle: R/slr.R
 :CUSTOM_ID: cha-simple-linear-regression
 :END:
+
+#+begin_src R :exports none :eval never
+# Chapter: Simple Linear Regression
+# All code released under GPL Version 3
+#+end_src
 
 *What do I want them to know?*
 
@@ -8857,7 +8922,6 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 #+end_html
 
 #+begin_src R :exports code :eval never
-library(HH)
 ci.plot(cars.lm)
 #+end_src
 
@@ -8865,7 +8929,6 @@ Notice that the bands curve outward from the regression line as the \(x\) values
 
 #+srcname: carscipi
 #+begin_src R :exports none :results silent
-library(HH)
 print(ci.plot(cars.lm))
 #+end_src
 
@@ -9143,8 +9206,7 @@ BP=n\sum_{i=1}^{n}\hat{W}_{i}^{2}\div\sum_{i=1}^{n}W_{i}^{2}.
 \end{equation}
 We reject the null hypothesis if \(BP\) is too large, which happens when the explained variation i the new model is large relative to the unexplained variation in the original model.
 We do it in \(\mathsf{R}\) with the =bptest= function from the =lmtest= package \cite{Zeileislmtest}. 
-#+begin_src R :exports both :results output pp 
-library(lmtest)
+#+begin_src R :exports both :results output pp
 bptest(cars.lm)
 #+end_src
 
@@ -9200,7 +9262,6 @@ D=\frac{\sum_{i=2}^{n}(E_{i}-E_{i-1})^{2}}{\sum_{j=1}^{n}E_{j}^{2}}.
 Exact critical values are difficult to obtain, but \(\mathsf{R}\) will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
 
 #+begin_src R :exports both :results output pp 
-library(lmtest)
 dwtest(cars.lm, alternative = "two.sided")
 #+end_src
 
@@ -9518,6 +9579,10 @@ Show that the formula given in Equation [[eq-sample-correlation-formula]] is equ
 :CUSTOM_ID: cha-multiple-linear-regression
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Multiple Linear Regression
+# All code released under GPL Version 3
+#+end_src
 
 #+latex: \noindent 
 We know a lot about simple linear regression models, and a next step is to study multiple regression models that have more than one independent (explanatory) variable. In the discussion that follows we will assume that we have \(p\) explanatory variables, where \(p>1\).
@@ -9594,7 +9659,6 @@ Let us take a look at a visual display of the data. For multiple variables, inst
 
 #+srcname: splom-trees
 #+begin_src R :exports code :results silent
-library(lattice)
 splom(trees)
 #+end_src
 
@@ -9641,7 +9705,6 @@ Another way to do it is with the =scatterplot3d= function in the =scatterplot3d=
 
 #+srcname: 3D-scatterplot-trees
 #+begin_src R :exports code :results silent
-library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
                                  pch = 16, highlight.3d = TRUE, 
                                  angle = 60))
@@ -10644,6 +10707,11 @@ SSTO=SSE+SSR.
 :CUSTOM_ID: cha-resampling-methods
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Resampling Methods
+# All code released under GPL Version 3
+#+end_src
+
 #+latex: \noindent 
 Computers have changed the face of statistics. Their quick computational speed and flawless accuracy, coupled with large data sets acquired by the researcher, make them indispensable for many modern analyses. In particular, resampling methods (due in large part to Bradley Efron) have gained prominence in the modern statistician's repertoire. We first look at a classical problem to get some insight why. 
 
@@ -10829,7 +10897,6 @@ mean(medstar) - median(rivers)
 For the standard error of the mean (Example [[exa-Bootstrap-se-mean]]):
 
 #+begin_src R :exports both :results output pp 
-library(boot)
 mean_fun <- function(x, indices) mean(x[indices])
 boot(data = srs, statistic = mean_fun, R = 1000)
 #+end_src
@@ -10885,7 +10952,6 @@ quantile(thetast, c(0.025, 0.975))
 *Confidence interval for expected value of the median, second try.*  Now we will do it the right way with the =boot= function.
 
 #+begin_src R :exports both :results output pp 
-library(boot)
 med_fun <- function(x, ind) median(x[ind])
 med_boot <- boot(stack.loss, med_fun, R = 2000)
 boot.ci(med_boot, type = c("perc", "norm", "bca"))
@@ -10962,7 +11028,6 @@ In calculating the permutation test /p-value/, the formula is essentially the pr
 #+end_rem
 
 #+begin_src R :exports both :results output pp 
-library(coin)
 oneway_test(len ~ supp, data = ToothGrowth)
 #+end_src
 
@@ -11005,11 +11070,16 @@ Here are some things about permutation tests to keep in mind.
 :CUSTOM_ID: cha-Nonparametric-Statistics
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Nonparametric Statistics
+# All code released under GPL Version 3
+#+end_src
+
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
 #+begin_src R :exports code :eval never
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
-library(IPSUR)
+library("IPSUR")
 read(IPSUR)
 #+end_src
 
@@ -11019,11 +11089,16 @@ read(IPSUR)
 :CUSTOM_ID: cha-Categorical-Data-Analysis
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Categorical Data Analysis
+# All code released under GPL Version 3
+#+end_src
+
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
 #+begin_src R :exports code :eval never
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
-library(IPSUR)
+library("IPSUR")
 read(IPSUR)
 #+end_src
 
@@ -11033,14 +11108,18 @@ read(IPSUR)
 :CUSTOM_ID: cha-Time-Series
 :END:
 
+#+begin_src R :exports none :eval never
+# Chapter: Time Series
+# All code released under GPL Version 3
+#+end_src
+
 This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
 
 #+begin_src R :exports code :eval never
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
-library(IPSUR)
+library("IPSUR")
 read(IPSUR)
 #+end_src
-
 
 #+latex: \appendix
 
@@ -11378,7 +11457,6 @@ Note that there are as many preliminary columns of =A= as there are dimensions t
 The form of =A= is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of =A= exactly the number of times shown in the =Freq= column. The =reshape= package \cite{Wickhamreshape} has the function =untable= designed for that very purpose: 
 
 #+begin_src R :exports both :results output pp 
-library(reshape)
 B <- with(A, untable(A, Freq))
 head(B)
 #+end_src
@@ -11439,7 +11517,7 @@ There are many other data sets available in the thousands of contributed package
 
 :  data(package = .packages(all.available = TRUE))
 
-To load the data set =foo= in the contributed package =bar= issue the commands =library(bar)= followed by =data(foo)=, or just the single command  
+To load the data set =foo= in the contributed package =bar= issue the commands =library("bar")= followed by =data(foo)=, or just the single command  
 
 :  data(foo, package = "bar")
 
@@ -11452,7 +11530,7 @@ Often the data set of interest is stored in some other, proprietary, format by t
 As an example, suppose the data are stored in the SPSS file =foo.sav= which the user has copied to the working directory; it can be imported with the commands
 
 #+begin_src R :exports code :eval never
-library(foreign)
+library("foreign")
 read.spss("foo.sav")
 #+end_src
 
@@ -12069,7 +12147,7 @@ Here are the basic steps to typeset a statistical report with OO.o.
    or write whatever code you want between the symbols \texttt{<\textcompwordmark{}<>\textcompwordmark{}>=} and \texttt{@}.
 1. Open \(\mathsf{R}\) and type the following:
    #+begin_src R :exports code :eval never
-   library(odfWeave)
+   library("odfWeave")
    odfWeave(file = "infile.odt", dest = "outfile.odt")
    #+end_src
 1. The compiled (=.odt=) file, complete with all of the \(\mathsf{R}\) output automatically inserted in the correct places, will now be the file =outfile.odt= located in the working directory. Open =outfile.odt=, examine it, modify it, and repeat if desired. 
@@ -12108,7 +12186,6 @@ The prettyR package
 The Hmisc package
 
 #+begin_src R :exports both :results output pp 
-library(Hmisc)
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 #+end_src
 
