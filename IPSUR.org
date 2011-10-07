@@ -8461,7 +8461,7 @@ See Figure [[fig-philosophy][philosophy]]. Shown in the figure is a solid line, 
 #+begin_src R :exports none :results silent
 # open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
-abline(h=0, v=0, col = "gray60")
+abline(h = 0, v = 0, col = "gray60")
 abline(a = 2.5, b = 0.5, lwd = 2)
 x <- 600:3000/600
 y <- dnorm(x, mean = 3, sd = 0.5)
@@ -8469,9 +8469,9 @@ lines(y + 1.0, x)
 lines(y + 2.5, x + 0.75)
 lines(y + 4.0, x + 1.5)
 abline(v = c(1, 2.5, 4), lty = 2, col = "grey")
-segments(1,3, 1+dnorm(0,0,0.5),3, lty = 2, col = "gray")
-segments(2.5, 3.75, 2.5+dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
-segments(4,4.5, 4+dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
+segments(1, 3, 1 + dnorm(0,0,0.5),3, lty = 2, col = "gray")
+segments(2.5, 3.75, 2.5 + dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
+segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 #+end_src
 
 #+begin_src R :exports none :results graphics silent :noweb yes :file ps/slr/philosophy.ps
@@ -8522,6 +8522,7 @@ qplot(speed, dist, data = cars)
 You can see the output in Figure [[fig-Scatter-cars][carscatter]], which was produced by the following code.
 
 #+begin_src R :exports code :eval never :results silent
+qplot(speed, dist, data = cars)
 plot(dist ~ speed, data = cars)
 #+end_src
 
@@ -8634,14 +8635,14 @@ It is good practice to visually inspect the data with the regression line added 
 #+begin_html
 <div id="fig-Scatter-cars-regline" class="figure">
   <p><img src="svg/slr/carline.svg" width=500 alt="svg/slr/carline.svg" /></p>
-  <p>Thre  <code>overplot</code> method in the <code>CO2</code> data.</p>
+  <p>A scatterplot with an added regression line for the <code>cars</code> data.</p>
 </div>
 #+end_html
 
 #+srcname: carline
 #+begin_src R :exports code :results silent
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
-       geom_smooth(method = lm)
+       geom_smooth(method = lm, se = FALSE)
 #+end_src
 
 #+begin_src R :exports none :results graphics silent :noweb yes :file ps/slr/carline.ps
@@ -8922,6 +8923,7 @@ We may plot the confidence and prediction intervals with one fell swoop using th
 #+end_html
 
 #+begin_src R :exports code :eval never
+library(HH)
 ci.plot(cars.lm)
 #+end_src
 
