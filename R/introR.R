@@ -1,4 +1,7 @@
 
+# Chapter: Introduction to R
+# All code released under GPL Version 3
+
 getOption("defaultPackages")
 
 2 + 3       # add

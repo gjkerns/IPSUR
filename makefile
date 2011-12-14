@@ -1,3 +1,4 @@
+outputR = R
 outputtex = .outputlatex
 outputhtml = .outputhtml
 orgfile = IPSUR
@@ -24,11 +25,13 @@ html:
 	-rm -r ~/.org-timestamps
 
 R:
+	-mkdir $(outputR)
 	emacs -batch -eval "(progn (load \"~/git/org-mode/lisp/org.el\") (load \"~/git/config/dotemacs.el\") (R) (org-babel-tangle-file \"IPSUR.org\"))"
 
 clean:
 	-rm -r $(outputtex)
 	-rm -r $(outputhtml)
+	-rm -r $(outputR)
 
 backup:
 	-mkdir $(backup)

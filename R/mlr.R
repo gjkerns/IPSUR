@@ -1,39 +1,30 @@
 
+# Chapter: Multiple Linear Regression
+# All code released under GPL Version 3
+
 head(trees)
 
-library(lattice)
 splom(trees)
 
 postscript(file="ps/mlr/splom-trees.ps")
-  library(lattice)
-  splom(trees)
+  
 dev.off()
 
 svg(file="svg/mlr/splom-trees.svg")
-  library(lattice)
-  splom(trees)
+  
 dev.off()
 
-library(scatterplot3d)
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
                                  pch = 16, highlight.3d = TRUE, 
                                  angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
 
 postscript(file="ps/mlr/3D-scatterplot-trees.ps")
-  library(scatterplot3d)
-  s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
-                                   pch = 16, highlight.3d = TRUE, 
-                                   angle = 60))
-  fit <- lm(Volume ~ Girth + Height, data = trees)
+  
 dev.off()
 
 svg(file="svg/mlr/3D-scatterplot-trees.svg")
-  library(scatterplot3d)
-  s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
-                                   pch = 16, highlight.3d = TRUE, 
-                                   angle = 60))
-  fit <- lm(Volume ~ Girth + Height, data = trees)
+  
 dev.off()
 
 trees.lm <- lm(Volume ~ Girth + Height, data = trees)
@@ -81,11 +72,11 @@ treesumry
 qplot(Girth, Volume, data = trees)
 
 postscript(file="ps/mlr/Scatterplot-Volume-Girth-trees.ps")
-  qplot(Girth, Volume, data = trees)
+  
 dev.off()
 
 svg(file="svg/mlr/Scatterplot-Volume-Girth-trees.svg")
-  qplot(Girth, Volume, data = trees)
+  
 dev.off()
 
 treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                    data = trees)
@@ -95,13 +86,11 @@ a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 
 postscript(file="ps/mlr/Fitting-the-Quadratic.ps")
-  a <- ggplot(trees, aes(scale(Girth), Volume))
-  a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
+  
 dev.off()
 
 svg(file="svg/mlr/Fitting-the-Quadratic.svg")
-  a <- ggplot(trees, aes(scale(Girth), Volume))
-  a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
+  
 dev.off()
 
 new <- data.frame(Girth = c(9.1, 11.6, 12.5))
@@ -136,25 +125,11 @@ lines(Fit ~ Girth, data = treesTall[["yes"]])
 lines(Fit ~ Girth, data = treesTall[["no"]])
 
 postscript(file="ps/mlr/dummy-variable-trees.ps")
-  treesTall <- split(trees, trees$Tall)
-  treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
-  treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
-  plot(Volume ~ Girth, data = trees, type = "n")
-  points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
-  points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
-  lines(Fit ~ Girth, data = treesTall[["yes"]])
-  lines(Fit ~ Girth, data = treesTall[["no"]])
+  
 dev.off()
 
 svg(file="svg/mlr/dummy-variable-trees.svg")
-  treesTall <- split(trees, trees$Tall)
-  treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
-  treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
-  plot(Volume ~ Girth, data = trees, type = "n")
-  points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
-  points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
-  lines(Fit ~ Girth, data = treesTall[["yes"]])
-  lines(Fit ~ Girth, data = treesTall[["no"]])
+  
 dev.off()
 
 treesfull.lm <- lm(Volume ~ Girth + I(Girth^2) + Height + 

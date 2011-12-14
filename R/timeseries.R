@@ -1,4 +1,7 @@
 
+# Chapter: Time Series
+# All code released under GPL Version 3
+
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
-library(IPSUR)
+library("IPSUR")
 read(IPSUR)

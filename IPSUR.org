@@ -9,8 +9,12 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: 
-#+BABEL: :session *R* :exports results :results value raw :cache no :tangle yes
+#+EXPORT_SELECT_TAGS: introps introR datadesc prob
+#+PROPERTY: session *R*
+#+PROPERTY: exports results
+#+PROPERTY: results value raw
+#+PROPERTY: cache no
+#+PROPERTY: tangle yes
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english]
@@ -2784,6 +2788,7 @@ remove(g)
 We can make the plot in Figure [[fig-birthday][birthday]] with the following sequence of commands.
 
 #+begin_src R :exports code :eval never
+library(RcmdrPlugin.IPSUR)
 g <- Vectorize(pbirthday.ipsur)
 plot(1:50, g(1:50), xlab = "Number of people in room", 
   ylab = "Prob(at least one match)" )
@@ -3042,10 +3047,10 @@ We saw the =RcmdrTestDrive= data set in Chapter [[cha-introduction-to-R][Intro t
 
 #+begin_src R :exports both :results output pp  
 .Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
-addmargins(.Table) # Table with Marginal Distributions
+addmargins(.Table) # Table with marginal distributions
 #+end_src
 
-If one person were selected at random from the data set, then we see from the two-way table that \(\mathbb{P}(\mbox{Female})=70/168\) and \(\mathbb{P}(\mbox{Smoker})=32/168\). Now suppose that one of the subjects quits smoking, but we do not know the person's gender. If we select one subject at random, what now is \(\mathbb{P}(\mbox{Female})\)? Let \( A = \{ \mbox{the quitter is a female} \} \) and \( B = \{ \mbox{selected person is a female} \} \). Write
+If one person were selected at random from the data set, then we see from the two-way table that \(\mathbb{P}(\mbox{Female})=70/168\) and \(\mathbb{P}(\mbox{Smoker})=32/168\). Now suppose that one of the subjects quits smoking, but we do not know the person's gender. If we now select one nonsmoker at random, what would be \(\mathbb{P}(\mbox{Female})\)? This example is just like the last example, but with different labels. Let \( A = \{ \mbox{the quitter is a female} \} \) and \( B = \{ \mbox{selected nonsmoker is a female} \} \). Write
 \begin{align*}
 B & =S\cap B\\
  & =(A\cup A^{c})\cap B\\
@@ -3055,10 +3060,10 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 \begin{align*}
 \mathbb{P}(B) & =\mathbb{P}(A\cap B)+\mathbb{P}(A^{c}\cap B),\\
  & =\mathbb{P}(A)\mathbb{P}(B|A)+\mathbb{P}(A^{c})\mathbb{P}(B|A^{c}),\\
- & =\frac{5}{8}\cdot\frac{3}{9}+\frac{3}{8}\cdot\frac{2}{9},\\
- & =\frac{21}{72},
+ & =\frac{9}{32}\cdot\frac{62}{137}+\frac{23}{32}\cdot\frac{76}{137},\\
+ & =\frac{2306}{4384},
 \end{align*}
-(which is 7/24 in lowest terms).
+(which is 1153/2192 in lowest terms).
 
 #+latex: \end{example}
 Using the same reasoning, we can return to the example from the beginning of the section and show that
@@ -3261,7 +3266,7 @@ Let's try to find \(\mathbb{P}(M\cap A)\), which is just \(\mathbb{P}(M)\cdot\ma
 \]
 Using the same procedure we may calculate
 \[
-\mathbb{P}(L|A)=0.0021\mbox{ and }\mathbb{P}(C|A)=0.0010.
+\mathbb{P}(L \cap A)=0.0021\mbox{ and }\mathbb{P}(C \cap A)=0.0010.
 \]
 
 Now let's find the denominator, \(\mathbb{P}(A)\). The key here is the notion that if a file is misplaced, then either Moe or Larry or Curly must have filed it; there is no one else around to do the misfiling. Further, these possibilities are mutually exclusive. We may use the Theorem of Total Probability [[eq-theorem-total-probability][TTP]] to write
