@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: introps introR
+#+EXPORT_SELECT_TAGS: discdist
 #+PROPERTY: session *R*
 #+PROPERTY: exports results
 #+PROPERTY: results value raw
@@ -519,7 +519,7 @@ stripchart(discoveries, method="stack", xlab="number")
 
 The leftmost graph is a strip chart of the =precip= data. The graph shows tightly clustered values in the middle with some others falling balanced on either side, with perhaps slightly more falling to the left. Later we will call this a symmetric distribution, see Section [[sub-Shape][Shape]]. The middle graph is of the =rivers= data, a vector of length 141. There are several repeated values in the rivers data, and if we were to use the overplot method we would lose some of them in the display. This plot shows a what we will later call a right-skewed shape with perhaps some extreme values on the far right of the display. The third graph strip charts =discoveries= data which are literally a textbook example of a right skewed distribution.
 
-#+srcname: stripcharts
+#+name: stripcharts
 #+begin_src R :exports none :results silent
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall")
@@ -577,7 +577,7 @@ m + geom_histogram()
 m + geom_histogram(aes(y = ..density..))
 #+end_src
 
-#+srcname: histograms
+#+name: histograms
 #+begin_src R :exports none :results silent
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 a <- m + geom_histogram()
@@ -639,7 +639,7 @@ m + geom_histogram(binwidth = 5)
 m + geom_histogram(binwidth = 20)
 #+end_src
 
-#+srcname: histograms-bins
+#+name: histograms-bins
 #+begin_src R :exports none :results silent
 m <- ggplot(as.data.frame(precip), aes(x = precip))
 a1 <- m + geom_histogram(binwidth = 1)
@@ -740,7 +740,7 @@ xyplot(level ~ year, data = huron, type = "p")
 
 The plots show an overall decreasing trend to the observations, and there appears to be some seasonal variation that increases over time. 
 
-#+srcname: indpl-lakehuron
+#+name: indpl-lakehuron
 #+begin_src R :exports none :results silent
 par(mfrow = c(3,1))
 plot(LakeHuron)
@@ -874,7 +874,7 @@ See Figure [[fig-bar-gr-stateregion][bar-gr-stateregion]]. The display on the le
 
 Notice the =cex.names=\index{cex.names@\texttt{cex.names}} argument that we used, above. It shrinks the names on the \(x\) axis by 50% which makes them easier to read. See =?par=\index{par@\texttt{par}} for a detailed list of additional plot parameters.
 
-#+srcname: bar-gr-stateregion
+#+name: bar-gr-stateregion
 #+begin_src R :exports none :results silent
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
 barplot(table(state.region), cex.names = 0.50)
@@ -917,7 +917,7 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
 #+latex: \begin{example}
 *U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto-chart]]. The code follows.
 
-#+srcname: Pareto-chart
+#+name: Pareto-chart
 #+begin_src R :exports code :results silent
 pareto.chart(table(state.division), ylab="Frequency")
 #+end_src
@@ -956,7 +956,7 @@ These are a lot like a bar graph that has been turned on its side with the bars 
 
 #+latex: \begin{example}
 
-#+srcname: dot-charts
+#+name: dot-charts
 #+begin_src R :exports code :results silent
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
@@ -1610,7 +1610,7 @@ I am thinking here about the =Statistics= \(\triangleright\) =Numerical Summarie
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 #+end_src
 
-#+srcname: xyplot-group
+#+name: xyplot-group
 #+begin_src R :exports none :results silent
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+end_src
@@ -1691,7 +1691,7 @@ It is sometimes nice to set =lattice.options(default.theme = "col.whitebg")=
 bwplot(~weight | feed, data = chickwts)
 #+end_src
 
-#+srcname: bwplot
+#+name: bwplot
 #+begin_src R :exports none :results silent
 print(bwplot(~weight | feed, data = chickwts))
 #+end_src
@@ -1725,7 +1725,7 @@ print(bwplot(~weight | feed, data = chickwts))
 histogram(~age | education, data = infert)
 #+end_src
 
-#+srcname: histograms-lattice
+#+name: histograms-lattice
 #+begin_src R :exports none :results silent
 print(histogram(~age | education, data = infert))
 #+end_src
@@ -1759,7 +1759,7 @@ print(histogram(~age | education, data = infert))
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 #+end_src
 
-#+srcname: xyplot
+#+name: xyplot
 #+begin_src R :exports none :results silent
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 #+end_src
@@ -1793,7 +1793,7 @@ print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
 #+end_src
 
-#+srcname: coplot
+#+name: coplot
 #+begin_src R :exports none :results silent
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 #+end_src
@@ -1940,7 +1940,7 @@ In this book we distinguish between two types of experiments: /deterministic/ an
 - Bayes' Rule and how it relates to the subjective view of probability
 - what we mean by 'random variables', and where they come from
 
-#+srcname: diagram
+#+name: diagram
 #+begin_src R :exports none :results silent
 require(diagram)
 par(mex = 0.2, cex = 0.5)
@@ -2537,22 +2537,22 @@ B <- subset(S, rank %in% 7:9)
 Now it is easy to calculate 
 
 #+begin_src R :exports both :results output pp   
-prob(A) 
+prob::prob(A) 
 #+end_src 
 
 Note that we can get the same answer with 
 
 #+begin_src R :exports both :results output pp   
-prob(S, suit == "Heart") 
+prob::prob(S, suit == "Heart") 
 #+end_src 
 
-We also find =prob(B) = 0.23= (listed here approximately, but 12/52 actually) and =prob(S) = 1=. Internally, the =prob= function operates by summing the =probs= column of its argument. It will find subsets on-the-fly if desired.
+We also find =prob::prob(B) = 0.23= (listed here approximately, but 12/52 actually) and =prob::prob(S) = 1=. Internally, the =prob= function operates by summing the =probs= column of its argument. It will find subsets on-the-fly if desired.
 
 We have as yet glossed over the details. More specifically, =prob= has three arguments: =x=, which is a probability space (or a subset of one), =event=, which is a logical expression used to define a subset, and =given=, which is described in Section [[sec-Conditional-Probability][Conditional Probability]].
 
-/WARNING/. The =event= argument is used to define a subset of =x=, that is, the only outcomes used in the probability calculation will be those that are elements of =x= and satisfy =event= simultaneously. In other words, =prob(x, event)= calculates 
+/WARNING/. The =event= argument is used to define a subset of =x=, that is, the only outcomes used in the probability calculation will be those that are elements of =x= and satisfy =event= simultaneously. In other words, =prob::prob(x, event)= calculates 
 
-: prob(intersect(x, subset(x, event)))
+: prob::prob(intersect(x, subset(x, event)))
 
 Consequently, =x= should be the entire probability space in the case that =event= is non-null.
 
@@ -2747,7 +2747,7 @@ When I have asked this question to students, the usual response is ``somewhere a
 Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure [[fig-birthday][birthday]] shows a graph of the birthday probabilities:
 #+latex: \end{example}
 
-#+srcname: birthday
+#+name: birthday
 #+begin_src R :exports none :results silent
 g <- Vectorize(pbirthday.ipsur)
 x <- 1:50; y <- g(1:50)
@@ -2755,8 +2755,7 @@ qplot(x, y) + geom_hline(yintercept=0.5) +
   geom_vline(xintercept = 23, linetype = 2) +
   xlab("number of people in room") +
   ylab("Prob(at least one match)")
-# plot(1:50, g(1:50), xlab = "Number of people in room", 
-  ylab = "Prob(at least one match)" )
+# plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)" )
 remove(g)
 #+end_src
 
@@ -2835,7 +2834,7 @@ which means that given the information that a Head has occurred, we no longer ne
 Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section [[sec-Methods-of-Counting][Counting Methods]] that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 
 
-#+srcname: twodiceAB
+#+name: twodiceAB
 #+begin_src R :exports none :results silent
 A <- rolldie(2)
 B <- subset(A, X1==X2)
@@ -2895,15 +2894,15 @@ B <- subset(S, X1 + X2 >= 8)
 And now we are ready to calculate probabilities. To do conditional probability, we use the =given= argument of the =prob= function:
 
 #+begin_src R :exports both :results output pp  
-prob(A, given = B)
-prob(B, given = A)
+prob::prob(A, given = B)
+prob::prob(B, given = A)
 #+end_src
 
 Note that we do not actually need to define the events \(A\) and \(B\) separately as long as we reference the original probability space \(S\) as the first argument of the =prob= calculation:
 
 #+begin_src R :exports both :results output pp  
-prob(S, X1==X2, given = (X1 + X2 >= 8) )
-prob(S, X1+X2 >= 8, given = (X1==X2) )
+prob::prob(S, X1==X2, given = (X1 + X2 >= 8) )
+prob::prob(S, X1+X2 >= 8, given = (X1==X2) )
 #+end_src
 
 *** Properties and Rules
@@ -2971,7 +2970,7 @@ N <- probspace(M)
 Now that we have the probability space =N= we are ready to do some probability. We use the =prob= function, just like before. The only trick is to specify the event of interest correctly, and recall that we were interested in \(\mathbb{P}(\mbox{both Aces})\). But if the cards are both Aces then the =rank= of both cards should be =A=, which sounds like a job for the =all= function:
 
 #+begin_src R :exports both :results output pp  
-prob(N, all(rank == "A"))
+prob::prob(N, all(rank == "A"))
 #+end_src
 
 Note that this value matches what we found in Example [[exa-two-cards-both-aces][Both Aces]], above. We could calculate all sorts of probabilities at this point; we are limited only by the complexity of the event's computer representation. 
@@ -3001,25 +3000,25 @@ N <- probspace(M)
 Now let us think about how to set up the event \(\{ \mbox{all 3 balls are red}\} \). Rows of =N= that satisfy this condition have \(\mathtt{X1=="red"\ \&\ X2=="red"\ \&\ X3=="red"}\), but there must be an easier way. Indeed, there is. The =isrep= function (short for ``is repeated'') in the =prob= package was written for this purpose. The command =isrep(N,"red",3)= will test each row of =N= to see whether the value =red= appears =3= times. The result is exactly what we need to define an event with the =prob= function. Observe
 
 #+begin_src R :exports both :results output pp  
-prob(N, isrep(N, "red", 3))
+prob::prob(N, isrep(N, "red", 3))
 #+end_src
 
 Note that this answer matches what we found in Example [[exa-urn-7-red-3-green][Urn 7 red 3 green]]. Now let us try some other probability questions. What is the probability of getting two =red='s?
 
 #+begin_src R :exports both :results output pp  
-prob(N, isrep(N, "red", 2))
+prob::prob(N, isrep(N, "red", 2))
 #+end_src
 
 Note that the exact value is \(21/40\); we will learn a quick way to compute this in Section [[sec-other-discrete-distributions][Other Discrete Distributions]]. What is the probability of observing =red=, then =green=, then =red=?
 
 #+begin_src R :exports both :results output pp  
-prob(N, isin(N, c("red","green","red"), ordered = TRUE))
+prob::prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+end_src
 
 Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What is the probability of observing =red=, =green=, and =red=, in no particular order?
 
 #+begin_src R :exports both :results output pp  
-prob(N, isin(N, c("red","green","red")))
+prob::prob(N, isin(N, c("red","green","red")))
 #+end_src
 
 We already knew this. It is the probability of observing two =red='s, above.
@@ -3045,7 +3044,9 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 #+latex: \begin{example}
 We saw the =RcmdrTestDrive= data set in Chapter [[cha-introduction-to-R][Intro to R]] in which a two-way table of the smoking status versus the gender was 
 
-#+begin_src R :exports both :results output pp  
+#+begin_src R :exports both :results output pp
+library(RcmdrPlugin.IPSUR)
+data(RcmdrTestDrive)  
 .Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
 addmargins(.Table) # Table with marginal distributions
 #+end_src
@@ -3158,7 +3159,7 @@ Toss ten coins. What is the probability of observing at least one Head?
 #+begin_src R :exports both :results output pp  
 S <- tosscoin(10, makespace = TRUE)
 A <- subset(S, isrep(S, vals = "T", nrep = 10))
-1 - prob(A)
+1 - prob::prob(A)
 #+end_src
 
 Compare this answer to what we got in Example [[exa-toss-ten-coins][Toss 10 coins]].
@@ -3401,7 +3402,7 @@ head(S)
 We see from the \(U\) column it is operating just like it should. We can now answer questions like
 
 #+begin_src R :exports both :results output pp   
-prob(S, U > 6) 
+prob::prob(S, U > 6) 
 #+end_src 
 
 **** Supply a Function
@@ -3770,7 +3771,7 @@ F_{X}(x)=\mathbb{P}(X\leq x)=
 In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure [[fig-binom-cdf-base][binom-cdf-base]].
 #+latex: \end{example}
 
-#+srcname: binom-cdf-base
+#+name: binom-cdf-base
 #+begin_src R :exports none :results silent
 plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
 abline(h = c(0,1), lty = 2, col = "grey")
@@ -3821,7 +3822,7 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][binom-plot-distr]] for an example.
 
-#+srcname: binom-plot-distr
+#+name: binom-plot-distr
 #+begin_src R :exports code :results silent
 plot(X, cex = 0.2)
 #+end_src
@@ -4092,7 +4093,7 @@ ecdf(x)
 
 The above shows that the returned value of =ecdf(x)= is not a /number/ but rather a /function/. The ECDF is not usually used by itself in this form. More commonly it is used as an intermediate step in a more complicated calculation, for instance, in hypothesis testing (see Chapter [[cha-Hypothesis-Testing][Hypothesis Testing]]) or resampling (see Chapter [[cha-resampling-methods][Resampling Methods]]). It is nevertheless instructive to see what the =ecdf= looks like, and there is a special plot method for =ecdf= objects.
 
-#+srcname: empirical-CDF
+#+name: empirical-CDF
 #+begin_src R :exports code :results silent
 plot(ecdf(x))
 #+end_src
@@ -5244,7 +5245,7 @@ is said to have a /chi-square distribution/ with \(p\) /degrees of freedom/. We 
 
 The code to produce Figure [[fig-chisq-dist-vary-df][chisq-dist-vary-df]] is
 
-#+srcname: chisq-dist-vary-df
+#+name: chisq-dist-vary-df
 #+begin_src R :exports code :results silent
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
@@ -5392,7 +5393,7 @@ mgamma(1:4, shape = 13, rate = 1)
 
 For the plot we can use the function in the following form:
 
-#+srcname: gamma-mgf
+#+name: gamma-mgf
 #+begin_src R :exports code :results silent
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 #+end_src
@@ -5569,7 +5570,7 @@ f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
 
 
-#+srcname: max-and-sum-two-dice
+#+name: max-and-sum-two-dice
 #+begin_src R :exports none :results silent
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
@@ -5613,7 +5614,7 @@ print(p2, vp = vplayout(1, 2))
 We may collapse the two matrices from Figure [[fig-max-and-sum-two-dice][max-and-sum-two-dice]] into one, big matrix of pairs of values \((u,v)\). The result is shown in Table [[fig-max-sum-two-dice-joint][max-sum-two-dice-joint]]. 
 
 
-#+srcname: max-sum-two-dice-joint
+#+name: max-sum-two-dice-joint
 #+begin_src R :exports none :results silent
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
@@ -6198,7 +6199,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 We chose the standard bivariate normal, \(\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\mathbf{I})\), to display.
 
-#+srcname: mvnorm-pdf
+#+name: mvnorm-pdf
 #+begin_src R :exports code :results silent
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
@@ -6496,7 +6497,7 @@ Another way to do the plot is with the =scatterplot3d= function in the =scatterp
 : scatterplot3d(A, type = "h", lwd = 3, box = FALSE)
 The =scatterplot3d= graph looks better in this example, but the code is more difficult to understand. And with =cloud= one can easily do conditional plots of the form =cloud(z ~ x + y | f)=, where =f= is a factor.
 
-#+srcname: multinom-pmf2
+#+name: multinom-pmf2
 #+begin_src R :exports code :results silent
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
@@ -6712,7 +6713,7 @@ Any random variable \(X\) with the preceding PDF is said to have Student's \(t\)
 
 The code to produce Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]] is
 
-#+srcname: Student's-t-dist-vary-df
+#+name: Student's-t-dist-vary-df
 #+begin_src R :exports code :results silent
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
@@ -6922,7 +6923,7 @@ sd(iqrs)
 
 Now let's take a look at a plot of the simulated values
 
-#+srcname: simulated-IQR
+#+name: simulated-IQR
 #+begin_src R :exports code :results silent
 hist(iqrs, breaks = 20)
 #+end_src
@@ -6970,7 +6971,7 @@ sd(mads)
 
 Now let's take a look at a plot of the simulated values
 
-#+srcname: simulated-MAD
+#+name: simulated-MAD
 #+begin_src R :exports code :results silent
 hist(mads, breaks = 20)
 #+end_src
@@ -7091,7 +7092,7 @@ Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish woul
 We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\mathbb{P}(X=x)\) versus \(F\). See Figure [[fig-capture-recapture][capture-recapture]].
 #+latex: \end{example}
 
-#+srcname: capture-recapture
+#+name: capture-recapture
 #+begin_src R :exports none :results silent
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
@@ -7156,7 +7157,7 @@ L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
 \]
 A graph of \(L\) for values of \(\sum x_{i}=3,\ 4\), and 5 when \(n=7\) is shown in Figure [[fig-fishing-part-two][fishing-part-two]]. 
 
-#+srcname: fishing-part-two
+#+name: fishing-part-two
 #+begin_src R :exports code :results silent
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
@@ -7211,7 +7212,7 @@ instead of a maximum! We should be thorough and check that \(L'>0\) when \(p<\ov
 The result is shown in Figure [[fig-species-mle][species-mle]].
 #+latex: \end{example}
 
-#+srcname: species-mle
+#+name: species-mle
 #+begin_src R :exports none :results silent
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
@@ -7446,7 +7447,7 @@ In the demonstration, the parameter corresponds to the chalk, the sheet of paper
 
 See Figure [[fig-ci-examp][ci-examp]], which is a graphical display of these ideas.
 
-#+srcname: ci-examp
+#+name: ci-examp
 #+begin_src R :exports code :results silent
 ci.examp()
 #+end_src
@@ -8252,7 +8253,7 @@ anova(temp)
 
 Plot for the intuition of between versus within group variation.
 
-#+srcname: Between-versus-within
+#+name: Between-versus-within
 #+begin_src R :exports none :results silent
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
@@ -8288,7 +8289,7 @@ rug(y1)
 </div>
 #+end_html
 
-#+srcname: Some-F-plots-HH
+#+name: Some-F-plots-HH
 #+begin_src R :exports code :results silent
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
@@ -8337,7 +8338,7 @@ Here are some properties of power functions:
 
 I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
 
-#+srcname: power-examp
+#+name: power-examp
 #+begin_src R :exports code :results silent
 power.examp()
 #+end_src
@@ -8462,7 +8463,7 @@ See Figure [[fig-philosophy][philosophy]]. Shown in the figure is a solid line, 
 </div>
 #+end_html
 
-#+srcname: philosophy
+#+name: philosophy
 #+begin_src R :exports none :results silent
 # open window
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
@@ -8511,7 +8512,7 @@ The =speed= represents how fast the car was going (\(x\)) in miles per hour and 
 </div>
 #+end_html
 
-#+srcname: carscatter
+#+name: carscatter
 #+begin_src R :exports code :results silent
 qplot(speed, dist, data = cars)
 #+end_src
@@ -8644,7 +8645,7 @@ It is good practice to visually inspect the data with the regression line added 
 </div>
 #+end_html
 
-#+srcname: carline
+#+name: carline
 #+begin_src R :exports code :results silent
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
        geom_smooth(method = lm, se = FALSE)
@@ -8934,7 +8935,7 @@ ci.plot(cars.lm)
 
 Notice that the bands curve outward from the regression line as the \(x\) values move away from the center. This is expected once we notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation formulas in Equations [[eq-SLR-conf-int-formula]] and [[eq-SLR-pred-int-formula]].
 
-#+srcname: carscipi
+#+name: carscipi
 #+begin_src R :exports none :results silent
 print(ci.plot(cars.lm))
 #+end_src
@@ -9117,7 +9118,7 @@ the dots hug the line closely.}
 </div>
 #+end_html
 
-#+srcname: Normal-q-q-plot-cars
+#+name: Normal-q-q-plot-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 2)
 #+end_src
@@ -9187,7 +9188,7 @@ In this case, we plot the standardized residuals versus the fitted values. The g
 </div>
 #+end_html
 
-#+srcname: std-resids-fitted-cars
+#+name: std-resids-fitted-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 3)
 #+end_src
@@ -9247,7 +9248,7 @@ data]{\small Used for checking the independence assumption. Watch out for any pa
 </div>
 #+end_html
 
-#+srcname: resids-fitted-cars
+#+name: resids-fitted-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 1)
 #+end_src
@@ -9467,7 +9468,7 @@ We can look at a plot of the Cook's distances with the command =plot(cars.lm, wh
 </div>
 #+end_html
 
-#+srcname: Cooks-distance-cars
+#+name: Cooks-distance-cars
 #+begin_src R :exports code :results silent
 plot(cars.lm, which = 4)
 #+end_src
@@ -9524,7 +9525,7 @@ The =par= command is used so that \(2\times 2 = 4\) plots will be shown on the s
 </div>
 #+end_html
 
-#+srcname: Diagnostic-plots-cars
+#+name: Diagnostic-plots-cars
 #+begin_src R :exports none :results silent
 par(mfrow = c(2,2))
 plot(cars.lm)
@@ -9664,7 +9665,7 @@ head(trees)
 
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure [[fig-splom-trees][splom-trees]].
 
-#+srcname: splom-trees
+#+name: splom-trees
 #+begin_src R :exports code :results silent
 splom(trees)
 #+end_src
@@ -9710,7 +9711,7 @@ One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
-#+srcname: 3D-scatterplot-trees
+#+name: 3D-scatterplot-trees
 #+begin_src R :exports code :results silent
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
                                  pch = 16, highlight.3d = TRUE, 
@@ -10174,7 +10175,7 @@ We see from the /p-values/ that there is a significant linear relationship betwe
 
 In each of the previous sections we assumed that \(\mu\) was a linear function of the explanatory variables. For example, in SLR we assumed that \(\mu(x)=\beta_{0}+\beta_{1}x\), and in our previous MLR examples we assumed \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\). In every case the scatterplots indicated that our assumption was reasonable. Sometimes, however, plots of the data suggest that the linear model is incomplete and should be modified.
 
-#+srcname: Scatterplot-Volume-Girth-trees
+#+name: Scatterplot-Volume-Girth-trees
 #+begin_src R :exports code :results silent
 qplot(Girth, Volume, data = trees)
 #+end_src
@@ -10236,7 +10237,7 @@ summary(treesquad.lm)
 
 We see that the \(F\) statistic indicates the overall model including =Girth= and =Girth^2= is significant. Further, there is strong evidence that both =Girth= and =Girth^2= are significantly related to =Volume=. We may examine a scatterplot together with the fitted quadratic function using the =lines= function, which adds a line to the plot tracing the estimated mean response.
 
-#+srcname: Fitting-the-Quadratic
+#+name: Fitting-the-Quadratic
 #+begin_src R :exports code :results silent
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
@@ -10456,7 +10457,7 @@ The level =bar1= is represented by \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\
 
 We can see a plot of the two regression lines with the following mouthful of code.
 
-#+srcname: dummy-variable-trees
+#+name: dummy-variable-trees
 #+begin_src R :exports none :results silent
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
@@ -10785,7 +10786,7 @@ xbarstar <- sapply(resamps, mean, simplify = TRUE)
 
 A histogram of the 1000 values of \(\overline{x}\) is shown in Figure [[fig-Bootstrap-se-mean][Bootstrap-se-mean]], and was produced by the following code.
 
-#+srcname: Bootstrap-se-mean
+#+name: Bootstrap-se-mean
 #+begin_src R :exports code :results silent
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
@@ -10851,7 +10852,7 @@ medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
 #+end_src
 
-#+srcname: Bootstrapping-se-median
+#+name: Bootstrapping-se-median
 #+begin_src R :exports code :results silent
 hist(medstar, breaks = 40, prob = TRUE)
 #+end_src
