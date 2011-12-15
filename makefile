@@ -31,7 +31,6 @@ R:
 clean:
 	-rm -r $(outputtex)
 	-rm -r $(outputhtml)
-	-rm -r $(outputR)
 
 backup:
 	-mkdir $(backup)
