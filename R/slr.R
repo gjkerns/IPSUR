@@ -17,11 +17,35 @@ segments(2.5, 3.75, 2.5 + dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
 segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 
 postscript(file="ps/slr/philosophy.ps")
-  
+  # open window
+  plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
+  abline(h = 0, v = 0, col = "gray60")
+  abline(a = 2.5, b = 0.5, lwd = 2)
+  x <- 600:3000/600
+  y <- dnorm(x, mean = 3, sd = 0.5)
+  lines(y + 1.0, x)
+  lines(y + 2.5, x + 0.75)
+  lines(y + 4.0, x + 1.5)
+  abline(v = c(1, 2.5, 4), lty = 2, col = "grey")
+  segments(1, 3, 1 + dnorm(0,0,0.5),3, lty = 2, col = "gray")
+  segments(2.5, 3.75, 2.5 + dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
+  segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 dev.off()
 
 svg(file="svg/slr/philosophy.svg")
-  
+  # open window
+  plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
+  abline(h = 0, v = 0, col = "gray60")
+  abline(a = 2.5, b = 0.5, lwd = 2)
+  x <- 600:3000/600
+  y <- dnorm(x, mean = 3, sd = 0.5)
+  lines(y + 1.0, x)
+  lines(y + 2.5, x + 0.75)
+  lines(y + 4.0, x + 1.5)
+  abline(v = c(1, 2.5, 4), lty = 2, col = "grey")
+  segments(1, 3, 1 + dnorm(0,0,0.5),3, lty = 2, col = "gray")
+  segments(2.5, 3.75, 2.5 + dnorm(0,0,0.5), 3.75, lty = 2, col = "gray")
+  segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 dev.off()
 
 head(cars)
@@ -29,11 +53,11 @@ head(cars)
 qplot(speed, dist, data = cars)
 
 postscript(file="ps/slr/carscatter.ps")
-  
+  qplot(speed, dist, data = cars)
 dev.off()
 
 svg(file="svg/slr/carscatter.svg")
-  
+  qplot(speed, dist, data = cars)
 dev.off()
 
 qplot(speed, dist, data = cars)
@@ -49,11 +73,13 @@ ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) +
        geom_smooth(method = lm, se = FALSE)
 
 postscript(file="ps/slr/carline.ps")
-  
+  ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
+         geom_smooth(method = lm, se = FALSE)
 dev.off()
 
 svg(file="svg/slr/carline.svg")
-  
+  ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
+         geom_smooth(method = lm, se = FALSE)
 dev.off()
 
 cars[5, ]
@@ -93,11 +119,11 @@ ci.plot(cars.lm)
 print(ci.plot(cars.lm))
 
 postscript(file="ps/slr/carscipi.ps")
-  
+  print(ci.plot(cars.lm))
 dev.off()
 
 svg(file="svg/slr/carscipi.svg")
-  
+  print(ci.plot(cars.lm))
 dev.off()
 
 summary(cars.lm)
@@ -115,11 +141,11 @@ tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 plot(cars.lm, which = 2)
 
 postscript(file="ps/slr/Normal-q-q-plot-cars.ps")
-  
+  plot(cars.lm, which = 2)
 dev.off()
 
 svg(file="svg/slr/Normal-q-q-plot-cars.svg")
-  
+  plot(cars.lm, which = 2)
 dev.off()
 
 shapiro.test(residuals(cars.lm))
@@ -127,11 +153,11 @@ shapiro.test(residuals(cars.lm))
 plot(cars.lm, which = 3)
 
 postscript(file="ps/slr/std-resids-fitted-cars.ps")
-  
+  plot(cars.lm, which = 3)
 dev.off()
 
 svg(file="svg/slr/std-resids-fitted-cars.svg")
-  
+  plot(cars.lm, which = 3)
 dev.off()
 
 bptest(cars.lm)
@@ -139,11 +165,11 @@ bptest(cars.lm)
 plot(cars.lm, which = 1)
 
 postscript(file="ps/slr/resids-fitted-cars.ps")
-  
+  plot(cars.lm, which = 1)
 dev.off()
 
 svg(file="svg/slr/resids-fitted-cars.svg")
-  
+  plot(cars.lm, which = 1)
 dev.off()
 
 dwtest(cars.lm, alternative = "two.sided")
@@ -174,11 +200,11 @@ cooksD[1:4]
 plot(cars.lm, which = 4)
 
 postscript(file="ps/slr/Cooks-distance-cars.ps")
-  
+  plot(cars.lm, which = 4)
 dev.off()
 
 svg(file="svg/slr/Cooks-distance-cars.svg")
-  
+  plot(cars.lm, which = 4)
 dev.off()
 
 F0.50 <- qf(0.5, df1 = 2, df2 = 48)
@@ -195,11 +221,15 @@ plot(cars.lm)
 par(mfrow = c(1,1))
 
 postscript(file="ps/slr/Diagnostic-plots-cars.ps")
-  
+  par(mfrow = c(2,2))
+  plot(cars.lm)
+  par(mfrow = c(1,1))
 dev.off()
 
 svg(file="svg/slr/Diagnostic-plots-cars.svg")
-  
+  par(mfrow = c(2,2))
+  plot(cars.lm)
+  par(mfrow = c(1,1))
 dev.off()
 
 plot(cars.lm, which = 5)          # std'd resids vs lev plot

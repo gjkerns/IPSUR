@@ -34,11 +34,19 @@ points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
 points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
 postscript(file="ps/discdist/binom-cdf-base.ps")
-  
+  plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
+  abline(h = c(0,1), lty = 2, col = "grey")
+  lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
+  points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
+  points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 dev.off()
 
 svg(file="svg/discdist/binom-cdf-base.svg")
-  
+  plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
+  abline(h = c(0,1), lty = 2, col = "grey")
+  lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
+  points(0:3, pbinom(0:3, size = 3, prob = 0.5), pch = 16, cex = 1.2)
+  points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 dev.off()
 
 X <- Binom(size = 3, prob = 1/2)
@@ -50,11 +58,11 @@ p(X)(2)   # cdf of X evaluated at x = 2
 plot(X, cex = 0.2)
 
 postscript(file="ps/discdist/binom-plot-distr.ps")
-  
+  plot(X, cex = 0.2)
 dev.off()
 
 svg(file="svg/discdist/binom-plot-distr.svg")
-  
+  plot(X, cex = 0.2)
 dev.off()
 
 X <- Binom(size = 3, prob = 0.45)
@@ -70,11 +78,11 @@ ecdf(x)
 plot(ecdf(x))
 
 postscript(file="ps/discdist/empirical-CDF.ps")
-  
+  plot(ecdf(x))
 dev.off()
 
 svg(file="svg/discdist/empirical-CDF.svg")
-  
+  plot(ecdf(x))
 dev.off()
 
 epdf <- function(x) function(t){sum(x %in% t)/length(x)}

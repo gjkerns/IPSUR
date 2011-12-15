@@ -10,11 +10,13 @@ hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 
 postscript(file="ps/resamp/Bootstrap-se-mean.ps")
-  
+  hist(xbarstar, breaks = 40, prob = TRUE)
+  curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
 
 svg(file="svg/resamp/Bootstrap-se-mean.svg")
-  
+  hist(xbarstar, breaks = 40, prob = TRUE)
+  curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
 
 mean(xbarstar)
@@ -30,11 +32,11 @@ sd(medstar)
 hist(medstar, breaks = 40, prob = TRUE)
 
 postscript(file="ps/resamp/Bootstrapping-se-median.ps")
-  
+  hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 
 svg(file="svg/resamp/Bootstrapping-se-median.svg")
-  
+  hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 
 hist(medstar, breaks = 40, prob = TRUE)

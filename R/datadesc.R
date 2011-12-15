@@ -21,11 +21,19 @@ stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
 par(mfrow = c(1,1)) # back to normal
 
 postscript(file="ps/datadesc/stripcharts.ps")
-  
+  par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
+  stripchart(precip, xlab="rainfall")
+  stripchart(rivers, method="jitter", xlab="length")
+  stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
+  par(mfrow = c(1,1)) # back to normal
 dev.off()
 
 svg(file="svg/datadesc/stripcharts.svg")
-  
+  par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
+  stripchart(precip, xlab="rainfall")
+  stripchart(rivers, method="jitter", xlab="length")
+  stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
+  par(mfrow = c(1,1)) # back to normal
 dev.off()
 
 hist(precip, main = "")
@@ -46,11 +54,47 @@ print(a, vp = vplayout(1, 1))
 print(b, vp = vplayout(2, 1))
 
 postscript(file="ps/datadesc/histograms.ps")
-  
+  m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a <- m + geom_histogram()
+  b <- m + geom_histogram(aes(y = ..density..))
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(2, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a, vp = vplayout(1, 1))
+  print(b, vp = vplayout(2, 1))m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a1 <- m + geom_histogram(binwidth = 1)
+  a2 <- m + geom_histogram(binwidth = 5)
+  a3 <- m + geom_histogram(binwidth = 20)
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(3, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a1, vp = vplayout(1, 1))
+  print(a2, vp = vplayout(2, 1))
+  print(a3, vp = vplayout(3, 1))print(histogram(~age | education, data = infert))
 dev.off()
 
 svg(file="svg/datadesc/histograms.svg")
-  
+  m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a <- m + geom_histogram()
+  b <- m + geom_histogram(aes(y = ..density..))
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(2, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a, vp = vplayout(1, 1))
+  print(b, vp = vplayout(2, 1))m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a1 <- m + geom_histogram(binwidth = 1)
+  a2 <- m + geom_histogram(binwidth = 5)
+  a3 <- m + geom_histogram(binwidth = 20)
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(3, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a1, vp = vplayout(1, 1))
+  print(a2, vp = vplayout(2, 1))
+  print(a3, vp = vplayout(3, 1))print(histogram(~age | education, data = infert))
 dev.off()
 
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
@@ -79,11 +123,31 @@ print(a2, vp = vplayout(2, 1))
 print(a3, vp = vplayout(3, 1))
 
 postscript(file="ps/datadesc/histograms-bins.ps")
-  
+  m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a1 <- m + geom_histogram(binwidth = 1)
+  a2 <- m + geom_histogram(binwidth = 5)
+  a3 <- m + geom_histogram(binwidth = 20)
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(3, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a1, vp = vplayout(1, 1))
+  print(a2, vp = vplayout(2, 1))
+  print(a3, vp = vplayout(3, 1))
 dev.off()
 
 svg(file="svg/datadesc/histograms-bins.svg")
-  
+  m <- ggplot(as.data.frame(precip), aes(x = precip))
+  a1 <- m + geom_histogram(binwidth = 1)
+  a2 <- m + geom_histogram(binwidth = 5)
+  a3 <- m + geom_histogram(binwidth = 20)
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(3, 1)))
+  vplayout <- function(x, y)
+  viewport(layout.pos.row = x, layout.pos.col = y)
+  print(a1, vp = vplayout(1, 1))
+  print(a2, vp = vplayout(2, 1))
+  print(a3, vp = vplayout(3, 1))
 dev.off()
 
 stem.leaf(UKDriverDeaths, depth = FALSE)
@@ -109,11 +173,19 @@ plot(LakeHuron, type = "h")
 par(mfrow = c(1,1))
 
 postscript(file="ps/datadesc/indpl-lakehuron.ps")
-  
+  par(mfrow = c(3,1))
+  plot(LakeHuron)
+  plot(LakeHuron, type = "p")
+  plot(LakeHuron, type = "h")
+  par(mfrow = c(1,1))
 dev.off()
 
 svg(file="svg/datadesc/indpl-lakehuron.svg")
-  
+  par(mfrow = c(3,1))
+  plot(LakeHuron)
+  plot(LakeHuron, type = "p")
+  plot(LakeHuron, type = "h")
+  par(mfrow = c(1,1))
 dev.off()
 
 # The Old Faithful geyser data
@@ -145,32 +217,40 @@ barplot(prop.table(table(state.region)), cex.names = 0.50)
 par(mfrow = c(1,1)) # back to normal
 
 postscript(file="ps/datadesc/bar-gr-stateregion.ps")
-  
+  par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
+  barplot(table(state.region), cex.names = 0.50)
+  barplot(prop.table(table(state.region)), cex.names = 0.50)
+  par(mfrow = c(1,1)) # back to normal
 dev.off()
 
 svg(file="svg/datadesc/bar-gr-stateregion.svg")
-  
+  par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
+  barplot(table(state.region), cex.names = 0.50)
+  barplot(prop.table(table(state.region)), cex.names = 0.50)
+  par(mfrow = c(1,1)) # back to normal
 dev.off()
 
 pareto.chart(table(state.division), ylab="Frequency")
 
 postscript(file="ps/datadesc/Pareto-chart.ps")
-  
+  pareto.chart(table(state.division), ylab="Frequency")
 dev.off()
 
 svg(file="svg/datadesc/Pareto-chart.svg")
-  
+  pareto.chart(table(state.division), ylab="Frequency")
 dev.off()
 
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
 
 postscript(file="ps/datadesc/dot-charts.ps")
-  
+  x <- table(state.region)
+  dotchart(as.vector(x), labels = names(x))
 dev.off()
 
 svg(file="svg/datadesc/dot-charts.svg")
-  
+  x <- table(state.region)
+  dotchart(as.vector(x), labels = names(x))
 dev.off()
 
 x <- 5:9
@@ -222,11 +302,11 @@ xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 
 postscript(file="ps/datadesc/xyplot-group.ps")
-  
+  print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
 
 svg(file="svg/datadesc/xyplot-group.svg")
-  
+  print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
 
 bwplot(~weight | feed, data = chickwts)
@@ -234,11 +314,11 @@ bwplot(~weight | feed, data = chickwts)
 print(bwplot(~weight | feed, data = chickwts))
 
 postscript(file="ps/datadesc/bwplot.ps")
-  
+  print(bwplot(~weight | feed, data = chickwts))
 dev.off()
 
 svg(file="svg/datadesc/bwplot.svg")
-  
+  print(bwplot(~weight | feed, data = chickwts))
 dev.off()
 
 histogram(~age | education, data = infert)
@@ -246,11 +326,11 @@ histogram(~age | education, data = infert)
 print(histogram(~age | education, data = infert))
 
 postscript(file="ps/datadesc/histograms-lattice.ps")
-  
+  print(histogram(~age | education, data = infert))
 dev.off()
 
 svg(file="svg/datadesc/histograms-lattice.svg")
-  
+  print(histogram(~age | education, data = infert))
 dev.off()
 
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
@@ -258,11 +338,11 @@ xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 
 postscript(file="ps/datadesc/xyplot.ps")
-  
+  print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
 svg(file="svg/datadesc/xyplot.svg")
-  
+  print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
@@ -270,11 +350,11 @@ coplot(conc ~ uptake | Type * Treatment, data = CO2)
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 
 postscript(file="ps/datadesc/coplot.ps")
-  
+  print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 
 svg(file="svg/datadesc/coplot.svg")
-  
+  print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 
 library(ggplot2)

@@ -51,11 +51,27 @@ curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 
 postscript(file="ps/hypoth/Between-versus-within.ps")
-  
+  y1 <- rnorm(300, mean = c(2,8,22))
+  plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
+  f <- function(x){dnorm(x, mean = 2)}
+  curve(f, from = -1, to = 5, add = TRUE, lwd = 2)
+  f <- function(x){dnorm(x, mean = 8)}
+  curve(f, from = 5, to = 11, add = TRUE, lwd = 2)
+  f <- function(x){dnorm(x, mean = 22)}
+  curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
+  rug(y1)
 dev.off()
 
 svg(file="svg/hypoth/Between-versus-within.svg")
-  
+  y1 <- rnorm(300, mean = c(2,8,22))
+  plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
+  f <- function(x){dnorm(x, mean = 2)}
+  curve(f, from = -1, to = 5, add = TRUE, lwd = 2)
+  f <- function(x){dnorm(x, mean = 8)}
+  curve(f, from = 5, to = 11, add = TRUE, lwd = 2)
+  f <- function(x){dnorm(x, mean = 22)}
+  curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
+  rug(y1)
 dev.off()
 
 old.omd <- par(omd = c(.05,.88, .05,1))
@@ -65,19 +81,27 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 
 postscript(file="ps/hypoth/Some-F-plots-HH.ps")
-  
+  old.omd <- par(omd = c(.05,.88, .05,1))
+  F.setup(df1 = 5, df2 = 30)
+  F.curve(df1 = 5, df2 = 30, col='blue')
+  F.observed(3, df1 = 5, df2 = 30)
+  par(old.omd)
 dev.off()
 
 svg(file="svg/hypoth/Some-F-plots-HH.svg")
-  
+  old.omd <- par(omd = c(.05,.88, .05,1))
+  F.setup(df1 = 5, df2 = 30)
+  F.curve(df1 = 5, df2 = 30, col='blue')
+  F.observed(3, df1 = 5, df2 = 30)
+  par(old.omd)
 dev.off()
 
 power.examp()
 
 postscript(file="ps/hypoth/power-examp.ps")
-  
+  power.examp()
 dev.off()
 
 svg(file="svg/hypoth/power-examp.svg")
-  
+  power.examp()
 dev.off()
