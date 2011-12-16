@@ -12,7 +12,7 @@
 %%BoundingBox: 18 18 594 774
 %%EndComments
 %%BeginProlog
-/bp  { gs 612.00 0 translate 90 rotate gs } def
+/bp  { gs sRGB 612.00 0 translate 90 rotate gs } def
 % begin .ps.prolog
 /gs  { gsave } bind def
 /gr  { grestore } bind def
@@ -38,6 +38,9 @@
 /cl  { grestore gsave newpath 3 index 3 index moveto 1 index
        4 -1 roll lineto  exch 1 index lineto lineto
        closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
 /sRGB { [ /CIEBasedABC
           << /DecodeLMN
                [ { dup 0.03928 le
@@ -52,9 +55,7 @@
              /WhitePoint [0.9505 1.0 1.0890]
            >>
          ] setcolorspace } bind def
-/s   { scalefont setfont } bind def
-% end   .ps.prolog
-/srgb { sRGB setcolor } bind def
+/srgb { setcolor } bind def
 %%IncludeResource: font Helvetica
 /Helvetica findfont
 dup length dict begin
@@ -98,7 +99,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -167,12 +168,12 @@ np
 o
 18.00 306.00 396.00 594.00 cl
 /Font1 findfont 10 s
-0 setgray
+0 0 0 srgb
 190.61 321.54 (Fitted v) 0 ta
 -0.250 (alues) tb gr
 28.76 455.98 (Residuals) .5 90 t
 67.00 366.96 370.90 545.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -283,16 +284,16 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 218.95 550.38 (Residuals vs Fitted) .5 0 t
 18.00 306.00 396.00 594.00 cl
 /Font1 findfont 7 s
-0 setgray
+0 0 0 srgb
 343.26 525.36 (49) 1 0 t
 215.24 524.03 (23) 0 0 t
 268.84 500.96 (35) 0 0 t
 67.00 366.96 370.90 545.00 cl
-0.7451 setgray
+0.7451 0.7451 0.7451 srgb
 0.75 setlinewidth
 [ 0.00 3.00] 0 setdash
 1 setlinecap
@@ -304,7 +305,7 @@ np
 o
 445.00 366.96 748.90 545.00 cl
 445.00 366.96 748.90 545.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -361,7 +362,7 @@ o
 737.65 526.90 2.24 c p1
 634.01 443.68 2.24 c p1
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -440,12 +441,12 @@ np
 o
 396.00 306.00 774.00 594.00 cl
 /Font1 findfont 10 s
-0 setgray
+0 0 0 srgb
 596.95 321.54 (Theoretical Quantiles) .5 0 t
 406.76 405.12 (Standardiz) 90 ta
 -0.150 (ed residuals) tb gr
 445.00 366.96 748.90 545.00 cl
-0.4980 setgray
+0.4980 0.4980 0.4980 srgb
 0.75 setlinewidth
 [ 0.00 3.00] 0 setdash
 1 setlinecap
@@ -457,18 +458,18 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 563.11 550.38 (Nor) 0 ta
 0.300 (mal Q-Q) tb gr
 396.00 306.00 774.00 594.00 cl
 /Font1 findfont 7 s
-0 setgray
+0 0 0 srgb
 734.66 525.23 (49) 1 0 t
 713.69 521.30 (23) 0 0 t
 699.42 497.01 (35) 0 0 t
 67.00 78.96 370.90 257.00 cl
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -537,7 +538,7 @@ np
 o
 18.00 18.00 396.00 306.00 cl
 /Font1 findfont 10 s
-0 setgray
+0 0 0 srgb
 190.61 33.54 (Fitted v) 0 ta
 -0.250 (alues) tb gr
 0.75 setlinewidth
@@ -546,44 +547,44 @@ o
 1 setlinejoin
 10.00 setmiterlimit
 np
-28.09 113.06 m
--0.72 1.29 l
+25.69 113.06 m
+-0.71 1.29 l
 3.78 1.29 l
--9.65 1.72 l
+-9.66 1.72 l
 0 105.07 l
 o
 np
-31.15 118.87 m
+28.76 118.87 m
 -7.56 0 l
 o
-30.96 119.34 (S) 0 90 t
-30.96 126.01 (t) 0 90 t
-30.96 128.79 (a) 0 90 t
-30.96 134.35 (n) 0 90 t
-30.96 139.91 (d) 0 90 t
-30.96 145.47 (a) 0 90 t
-30.96 151.03 (r) 0 90 t
-30.96 154.36 (d) 0 90 t
-30.96 159.92 (i) 0 90 t
-30.96 162.14 (z) 0 90 t
-30.96 167.14 (e) 0 90 t
-30.96 172.70 (d) 0 90 t
-30.96 178.26 ( ) 0 90 t
-30.96 181.04 (r) 0 90 t
-30.96 184.37 (e) 0 90 t
-30.96 189.93 (s) 0 90 t
-30.96 194.93 (i) 0 90 t
-30.96 197.15 (d) 0 90 t
-30.96 202.71 (u) 0 90 t
-30.96 208.27 (a) 0 90 t
-30.96 213.83 (l) 0 90 t
-30.96 216.05 (s) 0 90 t
+28.57 119.34 (S) 0 90 t
+28.57 126.01 (t) 0 90 t
+28.57 128.79 (a) 0 90 t
+28.57 134.35 (n) 0 90 t
+28.57 139.91 (d) 0 90 t
+28.57 145.47 (a) 0 90 t
+28.57 151.03 (r) 0 90 t
+28.57 154.36 (d) 0 90 t
+28.57 159.92 (i) 0 90 t
+28.57 162.14 (z) 0 90 t
+28.57 167.14 (e) 0 90 t
+28.57 172.70 (d) 0 90 t
+28.57 178.26 ( ) 0 90 t
+28.57 181.04 (r) 0 90 t
+28.57 184.37 (e) 0 90 t
+28.57 189.93 (s) 0 90 t
+28.57 194.93 (i) 0 90 t
+28.57 197.15 (d) 0 90 t
+28.57 202.71 (u) 0 90 t
+28.57 208.27 (a) 0 90 t
+28.57 213.83 (l) 0 90 t
+28.57 216.05 (s) 0 90 t
 np
-31.15 221.51 m
+28.76 221.51 m
 -7.56 0 l
 o
 67.00 78.96 370.90 257.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -694,17 +695,17 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 218.95 262.38 (Scale-Location) .5 0 t
 18.00 18.00 396.00 306.00 cl
 /Font1 findfont 7 s
-0 setgray
+0 0 0 srgb
 343.26 248.73 (49) 1 0 t
 215.24 245.19 (23) 0 0 t
 268.84 221.28 (35) 0 0 t
 445.00 78.96 748.90 257.00 cl
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -788,7 +789,7 @@ np
 o
 396.00 18.00 774.00 306.00 cl
 /Font1 findfont 10 s
-0 setgray
+0 0 0 srgb
 576.11 33.54 (Le) 0 ta
 -0.300 (v) tb
 -0.250 (er) tb
@@ -796,7 +797,7 @@ o
 406.76 117.12 (Standardiz) 90 ta
 -0.150 (ed residuals) tb gr
 445.00 78.96 748.90 257.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -905,7 +906,7 @@ np
 67.60 7.92 l
 0 0 l
 o
-0.7451 setgray
+0.7451 0.7451 0.7451 srgb
 0.75 setlinewidth
 [ 0.00 3.00] 0 setdash
 np
@@ -1221,10 +1222,10 @@ np
 17.93 0 l
 o
 /Font1 findfont 10 s
-0 setgray
+0 0 0 srgb
 480.86 87.32 (Cook's distance) 0 0 t
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -1242,14 +1243,14 @@ o
 1 0 0 srgb
 751.89 230.53 (0.5) 0 0 t
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 536.26 262.38 (Residuals vs Le) 0 ta
 -0.360 (v) tb
 -0.300 (er) tb
 -0.120 (age) tb gr
 396.00 18.00 774.00 306.00 cl
 /Font1 findfont 7 s
-0 setgray
+0 0 0 srgb
 634.52 237.36 (49) 1 0 t
 511.75 233.72 (23) 0 0 t
 546.08 92.85 (39) 0 0 t

@@ -12,7 +12,7 @@
 %%BoundingBox: 18 18 594 774
 %%EndComments
 %%BeginProlog
-/bp  { gs 612.00 0 translate 90 rotate gs } def
+/bp  { gs sRGB 612.00 0 translate 90 rotate gs } def
 % begin .ps.prolog
 /gs  { gsave } bind def
 /gr  { grestore } bind def
@@ -38,6 +38,9 @@
 /cl  { grestore gsave newpath 3 index 3 index moveto 1 index
        4 -1 roll lineto  exch 1 index lineto lineto
        closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
 /sRGB { [ /CIEBasedABC
           << /DecodeLMN
                [ { dup 0.03928 le
@@ -52,9 +55,7 @@
              /WhitePoint [0.9505 1.0 1.0890]
            >>
          ] setcolorspace } bind def
-/s   { scalefont setfont } bind def
-% end   .ps.prolog
-/srgb { sRGB setcolor } bind def
+/srgb { setcolor } bind def
 %%IncludeResource: font Helvetica
 /Helvetica findfont
 dup length dict begin
@@ -98,7 +99,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 77.04 91.44 743.76 534.96 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -155,7 +156,7 @@ bp
 719.07 489.88 2.70 c p1
 491.71 282.57 2.70 c p1
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -234,12 +235,12 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 410.40 36.72 (Theoretical Quantiles) .5 0 t
 30.96 252.17 (Standardiz) 90 ta
 -0.180 (ed residuals) tb gr
 77.04 91.44 743.76 534.96 cl
-0.4980 setgray
+0.4980 0.4980 0.4980 srgb
 0.75 setlinewidth
 [ 0.00 3.00] 0 setdash
 1 setlinecap
@@ -251,16 +252,16 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 410.40 22.32 (lm\(dist ~ speed\)) .5 0 t
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 376.56 541.44 (Nor) 0 ta
 0.300 (mal Q-Q) tb gr
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 9 s
-0 setgray
+0 0 0 srgb
 715.47 487.73 (49) 1 0 t
 663.55 477.96 (23) 0 0 t
 632.24 417.44 (35) 0 0 t

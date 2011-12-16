@@ -12,7 +12,7 @@
 %%BoundingBox: 18 18 594 774
 %%EndComments
 %%BeginProlog
-/bp  { gs 612.00 0 translate 90 rotate gs } def
+/bp  { gs sRGB 612.00 0 translate 90 rotate gs } def
 % begin .ps.prolog
 /gs  { gsave } bind def
 /gr  { grestore } bind def
@@ -38,6 +38,9 @@
 /cl  { grestore gsave newpath 3 index 3 index moveto 1 index
        4 -1 roll lineto  exch 1 index lineto lineto
        closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
 /sRGB { [ /CIEBasedABC
           << /DecodeLMN
                [ { dup 0.03928 le
@@ -52,9 +55,7 @@
              /WhitePoint [0.9505 1.0 1.0890]
            >>
          ] setcolorspace } bind def
-/s   { scalefont setfont } bind def
-% end   .ps.prolog
-/srgb { sRGB setcolor } bind def
+/srgb { setcolor } bind def
 %%IncludeResource: font Helvetica
 /Helvetica findfont
 dup length dict begin
@@ -98,7 +99,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 77.04 91.44 743.76 534.96 cl
-/bg { 0 setgray } def
+/bg { 0 0 0 srgb } def
 101.73 107.87 4.05 c p2
 170.33 107.87 4.05 c p2
 238.92 477.47 4.05 c p2
@@ -110,7 +111,7 @@ bp
 650.47 288.79 4.05 c p2
 719.07 259.50 4.05 c p2
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -189,13 +190,13 @@ np
 o
 18.00 18.00 774.00 594.00 cl
 /Font1 findfont 12 s
-0 setgray
+0 0 0 srgb
 351.04 36.72 (n) 0 ta
 -0.120 (umber of fish in pond) tb gr
 30.96 286.19 (Lik) 90 ta
 -0.240 (elihood) tb gr
 77.04 91.44 743.76 534.96 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap

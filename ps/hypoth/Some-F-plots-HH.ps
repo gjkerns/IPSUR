@@ -12,7 +12,7 @@
 %%BoundingBox: 18 18 594 774
 %%EndComments
 %%BeginProlog
-/bp  { gs 612.00 0 translate 90 rotate gs } def
+/bp  { gs sRGB 612.00 0 translate 90 rotate gs } def
 % begin .ps.prolog
 /gs  { gsave } bind def
 /gr  { grestore } bind def
@@ -38,6 +38,9 @@
 /cl  { grestore gsave newpath 3 index 3 index moveto 1 index
        4 -1 roll lineto  exch 1 index lineto lineto
        closepath clip newpath } bind def
+/rgb { setrgbcolor } bind def
+/s   { scalefont setfont } bind def
+% end   .ps.prolog
 /sRGB { [ /CIEBasedABC
           << /DecodeLMN
                [ { dup 0.03928 le
@@ -52,9 +55,7 @@
              /WhitePoint [0.9505 1.0 1.0890]
            >>
          ] setcolorspace } bind def
-/s   { scalefont setfont } bind def
-% end   .ps.prolog
-/srgb { sRGB setcolor } bind def
+/srgb { setcolor } bind def
 %%IncludeResource: font Helvetica
 /Helvetica findfont
 dup length dict begin
@@ -98,7 +99,7 @@ dup length dict begin
 %%Page: 1 1
 bp
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -148,7 +149,7 @@ np
 o
 55.80 46.80 683.28 594.00 cl
 /Font1 findfont 14 s
-0 setgray
+0 0 0 srgb
 300.25 560.95 (F) 0 0 t
 /Font5 findfont 14 s
 308.81 560.95 ( ) 0 0 t
@@ -187,7 +188,7 @@ o
 /Font1 findfont 12 s
 68.76 327.60 (F density) .5 90 t
 114.84 120.24 653.04 534.96 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -202,7 +203,7 @@ np
 0 414.72 l
 o
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -239,7 +240,7 @@ o
 667.44 415.57 (0.6) 0 0 t
 667.44 510.33 (0.8) 0 0 t
 114.84 120.24 653.04 534.96 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -413,7 +414,7 @@ np
 0 -0.85 l
 cp p3
 18.00 18.00 774.00 594.00 cl
-0 setgray
+0 0 0 srgb
 0.75 setlinewidth
 [] 0 setdash
 1 setlinecap
@@ -432,7 +433,7 @@ o
 0 0 1 srgb
 387.28 65.52 (2.534) .5 0 t
 34.11 65.52 (f) .5 0 t
-0 setgray
+0 0 0 srgb
 733.77 94.32 (shaded area) .5 0 t
 0 0 1 srgb
 733.77 65.52 (0.05) .5 0 t
