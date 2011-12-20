@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: 
+#+EXPORT_SELECT_TAGS: datadesc
 #+PROPERTY: session *R*
 #+PROPERTY: exports results
 #+PROPERTY: results value raw
@@ -453,7 +453,8 @@ Quantitative data are any data that measure or are associated with a measurement
 
 Note that the distinction between discrete and continuous data is not always clear-cut. Sometimes it is convenient to treat data as if they were continuous, even though strictly speaking they are not continuous. See the examples.
 
-#+latex: \begin{example}
+#+LABEL: exa-ann-precip
+#+begin_exampletoo
 *Annual Precipitation in US Cities.* The vector =precip=\index{Data sets!precip@\texttt{precip}} contains average amount of rainfall (in inches) for each of 70 cities in the United States and Puerto Rico. Let us take a look at the data:
 
 #+begin_src R :exports both :results output pp  
@@ -466,9 +467,9 @@ precip[1:4]
 
 The output shows that =precip= is a numeric vector which has been /named/, that is, each value has a name associated with it (which can be set with the =names=\index{names@\texttt{names}} function). These are quantitative continuous data.
 
-#+latex: \end{example}
+#+end_exampletoo
 
-#+latex: \begin{example}
+#+begin_exampletoo
 *Lengths of Major North American Rivers.* The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector =rivers=\index{Data sets!rivers@\texttt{rivers}} in the =datasets= package (which ships with base \(\mathsf{R}\)). See =?rivers=. Let us take a look at the data with the =str=\index{str@\texttt{str}} function.
 
 #+begin_src R :exports both :results output pp  
@@ -476,16 +477,16 @@ str(rivers)
 #+end_src
 
 The output says that =rivers= is a numeric vector of length 141, and the first few values are 735, 320, 325, /etc/. These data are definitely quantitative and it appears that the measurements have been rounded to the nearest mile. Thus, strictly speaking, these are discrete data. But we will find it convenient later to take data like these to be continuous for some of our statistical procedures. 
-#+latex: \end{example}
+#+end_exampletoo
 
-#+latex: \begin{example}
+#+begin_exampletoo
 *Yearly Numbers of Important Discoveries.* The vector =discoveries=\index{Data sets!discoveries@\texttt{discoveries}} contains numbers of “great” inventions/discoveries in each year from 1860 to 1959, as reported by the 1975 World Almanac. Let us take a look at the data:
 
 #+begin_src R :exports both :results output pp  
 str(discoveries)
 #+end_src
 
-#+latex: \end{example}
+#+end_exampletoo
 
 The output is telling us that =discoveries= is a /time series/ (see Section [[file:data-description::sub-other-data-types][Other Data Types]] for more) of length 100. The entries are integers, and since they represent counts this is a good example of discrete quantitative data. We will take a closer look in the following sections.
 
@@ -4529,7 +4530,7 @@ A recent national study showed that approximately 44.7% of college students have
 - Give the mean of \(X\), denoted \(\mathbb{E} X\).
 - Give the variance of \(X\).
 - Give the standard deviation of \(X\).
-- Find \(\mathbb{E}(4X+51.324)\)
+- Find \(\mathbb{E}(4X+51.324)\).
 #+end_xca
 
 #+begin_xca
@@ -5429,7 +5430,7 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "
 #+latex: \setcounter{thm}{0}
 
 #+begin_xca
-Find the constant \(c\) so that the given function is a valid PDF of a random variable \(X\).
+Find the constant \(C\) so that the given function is a valid PDF of a random variable \(X\).
 1. \( f(x) = Cx^{n},\quad 0 < x <1 \).
 1. \( f(x) = Cx\mathrm{e}^{-x},\quad 0 < x < \infty\).
 1. \( f(x) = \mathrm{e}^{-(x - C)}, \quad 7 < x < \infty.\)
@@ -5690,7 +5691,6 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x, \quad y \in S_{Y}.
 
 #+latex: \begin{example}
 #+LABEL: exa-joint-pdf
-
 Let the joint PDF of \((X,Y)\) be given by
 \[
 f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad 0 < x < 1,\ 0 < y < 1.
@@ -5867,12 +5867,8 @@ We define \(f_{X|y}\) in a similar fashion.
 #+latex: \begin{example}
 Let the joint PMF of \(X\) and \(Y\) be given by
 \[
-f_{X,Y}(x,y)=
+f_{X,Y}(x,y) =
 \]
-#+latex: \end{example}
-
-#+latex: \begin{example}
-Let the joint PDF of \(X\) and \(Y\) be given by
 #+latex: \end{example}
 
 *** Bayesian Connection
@@ -6709,7 +6705,6 @@ This distribution was first published by W. S. Gosset (1900) under the pseudonym
 f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad -\infty < x < \infty.
 \end{equation}
 Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]]. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
-
 
 The code to produce Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]] is
 
