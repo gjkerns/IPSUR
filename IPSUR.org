@@ -453,7 +453,6 @@ Quantitative data are any data that measure or are associated with a measurement
 
 Note that the distinction between discrete and continuous data is not always clear-cut. Sometimes it is convenient to treat data as if they were continuous, even though strictly speaking they are not continuous. See the examples.
 
-#+LABEL: exa-ann-precip
 #+begin_exampletoo
 *Annual Precipitation in US Cities.* The vector =precip=\index{Data sets!precip@\texttt{precip}} contains average amount of rainfall (in inches) for each of 70 cities in the United States and Puerto Rico. Let us take a look at the data:
 
@@ -465,8 +464,7 @@ str(precip)
 precip[1:4]
 #+end_src
 
-The output shows that =precip= is a numeric vector which has been /named/, that is, each value has a name associated with it (which can be set with the =names=\index{names@\texttt{names}} function). These are quantitative continuous data.
-
+The output shows that =precip= is a numeric vector which has been /named/, that is, each value has a name associated with it (which can be set with the =names=\index{names@\texttt{names}} function). These are quantitative continuous data. 
 #+end_exampletoo
 
 #+begin_exampletoo
@@ -560,7 +558,8 @@ These are typically used for continuous data. A histogram is constructed by firs
 
 These are one of the most common summary displays, and they are often misidentified as ``Bar Graphs'' (see below.) The scale on the \(y\) axis can be frequency, percentage, or density (relative frequency). The term histogram was coined by Karl Pearson in 1891, see \cite{Miller}.
 
-#+latex: \begin{example}
+#+begin_exampletoo
+# <<exa-annual>>
 *Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 
 There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure [[fig-histograms][histograms]].
@@ -622,9 +621,9 @@ par(mfrow = c(1,1)) # back to normal
 #+end_html
 
 
-#+latex: \end{example}
+#+end_exampletoo
 
-Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
+Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.  See Example \ref{exa-annual}.
 
 #+latex: \begin{example}
 Recall that the strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure [[fig-histograms-bins][histograms-bins]] which was produced by the following code.
