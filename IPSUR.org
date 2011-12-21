@@ -9,7 +9,7 @@
 #+LINK_UP: IPSUR.html   
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-#+EXPORT_SELECT_TAGS: datadesc
+#+EXPORT_SELECT_TAGS:
 #+PROPERTY: session *R*
 #+PROPERTY: exports results
 #+PROPERTY: results value raw
@@ -4721,31 +4721,31 @@ f_{X}(x)=\frac{3}{x^{4}},\quad x>1.
 \]
 We can show that \(\int_{-\infty}^{\infty}f(x)\mathrm{d} x=1\):
 \begin{align*}
-\int_{-\infty}^{\infty}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}\frac{3}{x^{4}}\:\mathrm{d} x\\
- & =\lim_{t\to\infty}\int_{1}^{t}\frac{3}{x^{4}}\:\mathrm{d} x\\
- & =\lim_{t\to\infty}\ \left.3\,\frac{1}{-3}x^{-3}\right|_{x=1}^{t}\\
- & =-\left(\lim_{t\to\infty}\frac{1}{t^{3}}-1\right)\\
+\int_{-\infty}^{\infty}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}\frac{3}{x^{4}}\:\mathrm{d} x,\\
+ & =\lim_{t\to\infty}\int_{1}^{t}\frac{3}{x^{4}}\:\mathrm{d} x,\\
+ & =\lim_{t\to\infty}\ \left.3\,\frac{1}{-3}x^{-3}\right|_{x=1}^{t},\\
+ & =-\left(\lim_{t\to\infty}\frac{1}{t^{3}}-1\right),\\
  & =1.
 \end{align*}
 We calculate \(\mathbb{P}(3.4\leq X<7.1)\):
 \begin{align*}
-\mathbb{P}(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\mathrm{d} x\\
- & =\left.3\,\frac{1}{-3}x^{-3}\right|_{x=3.4}^{7.1}\\
- & =-1(7.1^{-3}-3.4^{-3})\\
+\mathbb{P}(3.4\leq X<7.1) & =\int_{3.4}^{7.1}3x^{-4}\mathrm{d} x,\\
+ & =\left.3\,\frac{1}{-3}x^{-3}\right|_{x=3.4}^{7.1},\\
+ & =-1(7.1^{-3}-3.4^{-3}),\\
  & \approx0.0226487123.
 \end{align*}
 We locate the mean and variance just like before.
 \begin{align*}
-\mu=\int_{-\infty}^{\infty}xf_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
- & =\left.3\,\frac{1}{-2}x^{-2}\right|_{x=1}^{\infty}\\
- & =-\frac{3}{2}\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
+\mu=\int_{-\infty}^{\infty}xf_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x\cdot\frac{3}{x^{4}}\:\mathrm{d} x,\\
+ & =\left.3\,\frac{1}{-2}x^{-2}\right|_{x=1}^{\infty},\\
+ & =-\frac{3}{2}\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right),\\
  & =\frac{3}{2}.
 \end{align*}
 Again we use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
 \begin{align*}
-\mathbb{E} X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\mathrm{d} x\\
- & =\left.3\:\frac{1}{-1}x^{-1}\right|_{x=1}^{\infty}\\
- & =-3\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right)\\
+\mathbb{E} X^{2}=\int_{-\infty}^{\infty}x^{2}f_{X}(x)\mathrm{d} x & =\int_{1}^{\infty}x^{2}\cdot\frac{3}{x^{4}}\:\mathrm{d} x,\\
+ & =\left.3\:\frac{1}{-1}x^{-1}\right|_{x=1}^{\infty},\\
+ & =-3\left(\lim_{t\to\infty}\frac{1}{t^{2}}-1\right),\\
  & =3,
 \end{align*}
 which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
@@ -4763,12 +4763,12 @@ f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 #+end_src
 
-Compare this to the answer we found in Example [[exa-cont-pdf3x2][Cont-pdf3x2]]. We could integrate the function \(xf(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
+Compare this to the answer we found in Example [[exa-cont-pdf3x2][Cont-pdf3x2]]. We could integrate the function \(x \cdot f(x)=\) =3*x^3= from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
 
 #+end_exampletoo
 
 #+begin_exampletoo
-Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x>1\). We may integrate the function \(xf(x)=\) =3/x^3= from zero to infinity to get the mean of \(X\).
+Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x>1\). We may integrate the function \(g(x) = x \cdot f(x)=\) =3/x^3= from zero to infinity to get the mean of \(X\).
 
 #+begin_src R :exports both :results output pp 
 g <- function(x) 3/x^3
@@ -4864,7 +4864,7 @@ M_{Z}(t) & = & \int_{-\infty}^{\infty}\mathrm{e}^{tz}\frac{1}{\sqrt{2\pi}}\mathr
 \end{eqnarray*}
 and the quantity in the parentheses is the total area under a \(\mathsf{norm}(\mathtt{mean}=-t,\,\mathtt{sd}=1)\) density, which is one. Therefore,
 \begin{equation}
-M_{Z}(t)=\mathrm{e}^{-t^{2}/2},\quad -\infty < t < \infty.
+M_{Z}(t)=\mathrm{e}^{t^{2}/2},\quad -\infty < t < \infty.
 \end{equation}
 
 #+begin_exampletoo
@@ -4874,7 +4874,7 @@ Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
 Therefore
 \[
-M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tX}\mathrm{e}^{\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
+M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tX}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
 \]
 and we know that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get
 \[
@@ -5126,7 +5126,7 @@ f_{U}(u)=\left(2\Phi(\sqrt{u})-1\right)'=2\phi(\sqrt{u})\cdot\frac{1}{2\sqrt{u}}
 \]
 Substituting,
 \[
-f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u},\quad u>0.
+f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u/2},\quad u > 0.
 \]
 This is what we will later call a /chi-square distribution with 1 degree of freedom/. See Section [[sec-Other-Continuous-Distributions][Other Continuous Distributions]].
 #+end_exampletoo
