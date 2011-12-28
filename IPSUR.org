@@ -8895,7 +8895,7 @@ coef(cars.lm)
 
 The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{tmpcoef[1]} + SRC_R{tmpcoef[2]} \cdot \mathtt{speed} \).
 
-It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure [[fig-Scatter-cars-regline][Scatter-cars-regline]].
+It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the =abline= function. The inputs to =abline= are the coefficients of =cars.lm=; see Figure [[fig-Scatter-cars-regline][Scatter-cars-regline]].
 
 #+begin_latex
 \begin{figure}[th]
@@ -8914,8 +8914,7 @@ It is good practice to visually inspect the data with the regression line added 
 
 #+name: carline
 #+begin_src R :exports code :results silent
-ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
-       geom_smooth(method = lm, se = FALSE)
+ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + geom_smooth(method = lm, se = FALSE)
 #+end_src
 
 #+begin_src R :exports none :results graphics silent :noweb yes :file ps/slr/carline.ps
@@ -9997,9 +9996,7 @@ Another way to do it is with the =scatterplot3d= function in the =scatterplot3d=
 
 #+name: 3D-scatterplot-trees
 #+begin_src R :exports code :results silent
-s3d <- with(trees, scatterplot3d(Girth, Height, Volume, 
-                                 pch = 16, highlight.3d = TRUE, 
-                                 angle = 60))
+s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
 #+end_src
 
@@ -10528,7 +10525,7 @@ The second method is shorter than the first but the end result is the same. And 
 We will fit the quadratic model to the =trees= data and display the results with =summary=, being careful to rescale the data before fitting the model. We may rescale the =Girth= variable to have zero mean and unit variance on-the-fly with the =scale= function.
 
 #+begin_src R :exports both :results output pp 
-treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                    data = trees)
+treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
 summary(treesquad.lm)
 #+end_src
 
@@ -11652,12 +11649,12 @@ If your document contains nontrivial examples of program code, we recommend rele
 | Authors:   | G. Jay Kerns                                                                |
 | Publisher: | G. Jay Kerns                                                                |
 
-#+latex: \vfill{}
-
 | Title:     | Introduction to Probability and Statistics Using \(\mathsf{R}\), First Edition |
 | Year:      | 2010                                                                       |
 | Authors:   | G. Jay Kerns                                                               |
 | Publisher: | G. Jay Kerns                                                               |
+
+#+latex: \vfill{}
 
 * Data                                                             :appendix:
 :PROPERTIES:
