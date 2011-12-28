@@ -53,7 +53,7 @@ Inferential statistics does more. There is an inference associated with the data
 
 I would like to mention that there are two schools of thought of statistics: frequentist and bayesian. The difference between the schools is related to how the two groups interpret the underlying probability (see Section [[sec-Interpreting-Probabilities][Interpreting Probabilities]]). The frequentist school gained a lot of ground among statisticians due in large part to the work of Fisher, Neyman, and Pearson in the early twentieth century. That dominance lasted until inexpensive computing power became widely available; nowadays the bayesian school is garnering more attention and at an increasing rate.
 
-This book is devoted mostly to the frequentist viewpoint because that is how I was trained, with the conspicuous exception of Sections [[sec-Bayes'-Rule][Bayes' Rule]] and [[sec-Conditional-Distributions][Conditional Distributions]]. I plan to add more bayesian material in later editions of this book.
+This book is devoted mostly to the frequentist viewpoint because that is how I was trained, with the conspicuous exception of Sections [[sec-Bayes-Rule][Bayes' Rule]] and [[sec-Conditional-Distributions][Conditional Distributions]]. I plan to add more bayesian material in later editions of this book.
 
 #+latex: \newpage{}
 
@@ -127,8 +127,7 @@ The general command =install.packages()= will (on most operating systems) open a
 
 No matter how many packages are installed onto the system, each one must first be loaded for use with the =library=\index{library@\texttt{library}} function. For instance, the =foreign= package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, /etc/. But none of those functions will be available until the command =library("foreign")= is issued. 
 
-Type =library()= at the command prompt (described below) to see a list of all available
-packages in your library.
+Type =library()= at the command prompt (described below) to see a list of all available packages in your library.
 
 For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the [[http://cran.r-project.org/manuals.html][\(\mathsf{R}\) Installation and Administration manual]].
 
@@ -161,7 +160,7 @@ For longer programs (called /scripts/) there is too much code to write all at on
 
 By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at http://www.sciviews.org/_rgui/. On the left side of the screen (under *Projects*) there are several choices available. 
 
-- \(\mathsf{R}\) Commander :: provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. =Rcmdr= also allows for user-contributed ``Plugins'' which are separate packages on =CRAN= that add extra functionality to the =Rcmdr= package. The plugins are typically named with the prefix =RcmdrPlugin= to make them easy to identify in the =CRAN= package list. One such plugin is the =RcmdrPlugin.IPSUR= package which accompanies this text.
+- \(\mathsf{R}\) Commander :: provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. =Rcmdr= \cite{Rcmdr} also allows for user-contributed ``Plugins'' which are separate packages on =CRAN= that add extra functionality to the =Rcmdr= package. The plugins are typically named with the prefix =RcmdrPlugin= to make them easy to identify in the =CRAN= package list. One such plugin is the =RcmdrPlugin.IPSUR= package \cite{RcmdrPlugin.IPSUR} which accompanies this text.
 - Poor Man's GUI\index{Poor Man's GUI} :: is an alternative to the =Rcmdr= which is based on GTk instead of Tcl/Tk. It has been a while since I used it but I remember liking it very much when I did. One thing that stood out was that the user could drag-and-drop data sets for plots. See here for more information: http://wiener.math.csi.cuny.edu/pmg/. 
 - Rattle\index{Rattle} :: is a data mining toolkit which was designed to manage/analyze very large data sets, but it provides enough other general functionality to merit mention here. See \cite{rattle} for more information.
 - Deducer\index{Deducer} :: is relatively new and shows promise from what I have seen, but I have not actually used it in the classroom yet.
@@ -334,7 +333,7 @@ wilcox.test
 methods(wilcox.test)
 #+end_src
 
-If we were to try =wilcox.test.default=  we would get a ``not found'' error, because it is hidden behind the namespace for the package =stats= (shown in the last line when we tried =wilcox.test=). In cases like these we prefix the package name to the front of the function name with three colons; the command =stats:::wilcox.test.default= will show the source code, omitted here for brevity.
+If we were to try =wilcox.test.default=  we would get a ``not found'' error, because it is hidden behind the namespace for the package =stats= \cite{stats} (shown in the last line when we tried =wilcox.test=). In cases like these we prefix the package name to the front of the function name with three colons; the command =stats:::wilcox.test.default= will show the source code, omitted here for brevity.
 
 *If it shows* =.Internal(something)=\index{.Internal@\texttt{.Internal}} or =.Primitive(something)=\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \(\mathsf{R}\) (which is /not/ a binary version with an =.exe= extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is =exp=:
 
@@ -468,7 +467,7 @@ The output shows that =precip= is a numeric vector which has been /named/, that 
 #+end_exampletoo
 
 #+begin_exampletoo
-*Lengths of Major North American Rivers.* The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector =rivers=\index{Data sets!rivers@\texttt{rivers}} in the =datasets= package (which ships with base \(\mathsf{R}\)). See =?rivers=. Let us take a look at the data with the =str=\index{str@\texttt{str}} function.
+*Lengths of Major North American Rivers.* The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector =rivers=\index{Data sets!rivers@\texttt{rivers}} in the =datasets= package \cite{datasets} (which ships with base \(\mathsf{R}\)). See =?rivers=. Let us take a look at the data with the =str=\index{str@\texttt{str}} function.
 
 #+begin_src R :exports both :results output pp  
 str(rivers)
@@ -550,7 +549,7 @@ par(mfrow = c(1,1)) # back to normal
   </div>
 #+end_html
 
-The =DOTplot=\index{DOTplot@\texttt{DOTplot}} function in the =UsingR=\index{R packages!UsingR@\texttt{UsingR}} package \cite{usingr} is another alternative.
+The =DOTplot=\index{DOTplot@\texttt{DOTplot}} function in the =UsingR=\index{R packages!UsingR@\texttt{UsingR}} package \cite{UsingR} is another alternative.
 
 **** Histogram\index{Histogram}
 
@@ -560,7 +559,7 @@ These are one of the most common summary displays, and they are often misidentif
 
 #+begin_exampletoo
 # <<exa-annual>>
-*Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
+*Annual Precipitation in US Cities.* We are going to take another look at the =precip=\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure [[fig-stripcharts][Various-stripchart-methods]] suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 
 There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the =hist=\index{hist@\texttt{hist}} function. The following code produces the plots in Figure [[fig-histograms][histograms]].
 
@@ -625,7 +624,7 @@ par(mfrow = c(1,1)) # back to normal
 Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
 
 #+begin_exampletoo
-Recall that the strip chart in Figure [[fig-Various-stripchart-methods][Various-stripchart-methods]] suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure [[fig-histograms-bins][histograms-bins]] which was produced by the following code.
+Recall that the strip chart in Figure [[fig-stripcharts][Various-stripchart-methods]] suggested a relatively balanced shape to the =precip= data distribution. Watch what happens when we change the bins slightly (with the =breaks= argument to =hist=). See Figure [[fig-histograms-bins][histograms-bins]] which was produced by the following code.
 
 
 #+begin_src R :exports code :eval never
@@ -1101,6 +1100,7 @@ Another component to the shape of a distribution is how ``peaked'' it is. Some d
 
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the =faithful= data which contains the duration of =eruptions= and the =waiting= time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]].
 
+# <<exa-stemleaf-multiple-lines-stem>>
 #+begin_src R :exports both :results output pp
 with(faithful, stem.leaf(eruptions))
 #+end_src
@@ -1301,7 +1301,7 @@ Notice that both the sample skewness and the sample kurtosis are invariant with 
 
 **** How to do it with \(\mathsf{R}\)
 
-The =e1071= package \cite{Dimitriadoue1071} has the =skewness= function for the sample skewness and the =kurtosis= function for the sample excess kurtosis. Both functions have a =na.rm= argument which is =FALSE= by default.
+The =e1071= package \cite{e1071} has the =skewness= function for the sample skewness and the =kurtosis= function for the sample excess kurtosis. Both functions have a =na.rm= argument which is =FALSE= by default.
 
 #+begin_exampletoo
 We said earlier that the =discoveries= data looked positively skewed; let's see what the statistics say:
@@ -1845,7 +1845,7 @@ m + geom_histogram(aes(y = ..density..)) + geom_density()
 ** Exercises
 #+latex: \setcounter{thm}{0}
 
-Open \(\mathsf{R}\) and issue the following commands at the command line to get started. Note that you need to have the =RcmdrPlugin.IPSUR= package installed, and for some exercises you need the =e1071= package.
+Open \(\mathsf{R}\) and issue the following commands at the command line to get started. Note that you need to have the =RcmdrPlugin.IPSUR= package \cite{RcmdrPlugin.IPSUR} installed, and for some exercises you need the =e1071= package \cite{e1071}.
 
 #+begin_src R :exports code :results silent
 library("RcmdrPlugin.IPSUR")
@@ -1990,7 +1990,7 @@ For a random experiment \(E\), the set of all possible outcomes of \(E\) is call
 
 *** How to do it with \(\mathsf{R}\)
 
-Most of the probability work in this book is done with the =prob= package \cite{Kernsprob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section [[sub-Multivariate-Data][Multivariate Data]]). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section [[sub-howto-ps-objects][How to =ps=]] for details.
+Most of the probability work in this book is done with the =prob= package \cite{prob}. A sample space is (usually) represented by a /data frame/, that is, a rectangular collection of variables (see Section [[sub-Multivariate-Data][Multivariate Data]]). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general /list/ data structure. See Section [[sub-howto-ps-objects][How to =ps=]] for details.
 
 #+begin_exampletoo
 Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
@@ -2004,7 +2004,7 @@ The sample space =S= contains the column =lands= which stores the outcomes =down
 
 #+end_exampletoo
 
-Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the =expand.grid= function in the =base= package, =combn= in the =combinat= package \cite{combinat}, and =permsn= in the =prob= package
+Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the =expand.grid= function in the =base= package \cite{base}, =combn= in the =combinat= package \cite{combinat}, and =permsn= in the =prob= package \cite{prob}
 #+latex: \footnote{The seasoned \(\mathsf{R}\) user can get the job done without the convenience wrappers. I encourage the beginner to use them to get started, but I also recommend that introductory students wean themselves as soon as possible. The wrappers were designed for ease and intuitive use, not for speed or efficiency.}.
 Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the =tosscoin= function:
 
@@ -2280,7 +2280,7 @@ This approach was espoused by Richard von Mises in the early twentieth century, 
 
 *** The Subjective Approach
 
-The subjective approach interprets probability as the experimenter's /degree of belief/ that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section [[sec-Bayes'-Rule][Bayes' Rule]]. 
+The subjective approach interprets probability as the experimenter's /degree of belief/ that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section [[sec-Bayes-Rule][Bayes' Rule]]. 
 
 So for the coin toss example, a person may have \(\mathbb{P}(\mbox{Heads})=1/2\) in the absence of additional information. But perhaps the observer knows additional information about the coin or the thrower that would shift the probability in a certain direction. For instance, parlor magicians may be trained to be quite skilled at tossing coins, and some are so skilled that they may toss a fair coin and get nothing but Heads, indefinitely. I have /seen/ this. It was similarly claimed in /Bringing Down the House/ \cite{Mezrich2003} that MIT students were accomplished enough with cards to be able to cut a deck to the same location, every single time. In such cases, one clearly should use the additional information to assign \(\mathbb{P}(\mbox{Heads})\) away from the symmetry value of \(1/2\).
 
@@ -3191,7 +3191,7 @@ Note that =iidspace= will assume =x= has equally likely outcomes if no =probs= a
 
 ** Bayes' Rule
 :PROPERTIES:
-:CUSTOM_ID: sec-Bayes'-Rule
+:CUSTOM_ID: sec-Bayes-Rule
 :END:
 
 We mentioned the subjective view of probability in Section [[sec-Interpreting-Probabilities][Interpreting Probabilities]]. In this section we introduce a rule that allows us to update our probabilities when new information becomes available. 
@@ -3597,7 +3597,7 @@ F <- cumsum(f)
 F
 #+end_src
 
-As easy as this is, it is even easier to do with the =distrEx= package \cite{Ruckdescheldistr}. We define a random variable =X= as an object, then compute things from the object such as mean, variance, and standard deviation with the functions =E=, =var=, and =sd=:
+As easy as this is, it is even easier to do with the =distrEx= package \cite{distrEx}. We define a random variable =X= as an object, then compute things from the object such as mean, variance, and standard deviation with the functions =E=, =var=, and =sd=:
 
 #+begin_src R :exports both :results output pp  
 X <- DiscreteDistribution(supp = 0:3, prob = c(1,3,3,1)/8)
@@ -3807,7 +3807,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 #+end_html
 
 #+begin_exampletoo
-Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
+Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
 
 #+begin_src R :exports both :results output pp  
 X <- Binom(size = 3, prob = 1/2)
@@ -4788,7 +4788,7 @@ X <- AbscontDistribution(d = f, low1 = 0, up1 = 1)
 p(X)(0.71) - p(X)(0.14)
 #+end_src
 
-Compare this to the answer we found earlier. Now let us try expectation with the =distrEx= package \cite{Ruckdescheldistr}:
+Compare this to the answer we found earlier. Now let us try expectation with the =distrEx= package:
 #+begin_src R :exports both :results output pp 
 E(X); var(X); 3/80
 #+end_src
@@ -5283,7 +5283,7 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
 #+begin_rem
 Here are some useful things to know about the chi-square distribution.
-1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example [[exa-distn-of-z-squared][Distn Z2]], and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem [[thm-Xbar-and-S][Xbar and S]] in Section [[sub-Samp-Var-Dist][Sample Variance Distribution]].
+1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example [[exa-distn-of-z-squared][Distn Z2]], and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem [[thm-Xbar-andS][Xbar and S]] in Section [[sub-Samp-Var-Dist][Sample Variance Distribution]].
 1. The chi-square distribution is supported on the positive \(x\)-axis, with a right-skewed distribution.
 1. The \(\mathsf{chisq}(\mathtt{df}=p)\) distribution is the same as a \(\mathsf{gamma}(\mathtt{shape}=p/2,\,\mathtt{rate}=1/2)\) distribution. 
 1. The MGF of \(X\sim\mathsf{chisq}(\mathtt{df}=p)\) is
@@ -5388,7 +5388,7 @@ We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\)
 
 **** How to do it with \(\mathsf{R}\)
 
-There is some support of moments and moment generating functions for some continuous probability distributions included in the =actuar= package \cite{Dutangactuar}. The convention is =m= in front of the distribution name for raw moments, and =mgf= in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
+There is some support of moments and moment generating functions for some continuous probability distributions included in the =actuar= package \cite{actuar}. The convention is =m= in front of the distribution name for raw moments, and =mgf= in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 
 #+begin_exampletoo
 Calculate the first four raw moments for \(X\sim\mathsf{gamma}(\mathtt{shape}=13,\,\mathtt{rate}=1)\) and plot the moment generating function.
@@ -5567,13 +5567,13 @@ Let the random experiment again be to roll a fair die twice, except now let us d
 U & = & \mbox{the maximum of the two rolls, and }\\
 V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
-We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table [[tab-max-and-sum-two-dice][Max-sum two dice]]. 
+We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Figure [[fig-max-and-sum-two-dice][Max-sum two dice]]. 
 
 We can use the table to calculate the marginal PMF of \(U\), because from Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]] we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\mathbb{P}(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
-We may do a similar thing for \(V\); see the right half of Table [[tab-max-and-sum-two-dice][Max-sum two dice]]. Collecting all of the probability we will find that the marginal PMF of \(V\) is
+We may do a similar thing for \(V\); see the right half of Figure [[fig-max-and-sum-two-dice][Max-sum two dice]]. Collecting all of the probability we will find that the marginal PMF of \(V\) is
 \begin{equation}
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
@@ -5859,7 +5859,7 @@ Euv - Eu * Ev
 
 Compare this answer to what we got in Example [[exa-max-sum-dice-covariance][Max-sum covariance]].
 
-To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{ryacas}. See Section [[sub-bivariate-transf-R][Bivariate Trans with R]] for another example where the =Ryacas= package appears.
+To do the continuous case we could use the computer algebra utilities of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas= \cite{Ryacas}. See Section [[sub-bivariate-transf-R][Bivariate Trans with R]] for another example where the =Ryacas= package appears.
 
 ** Conditional Distributions
 :PROPERTIES:
@@ -5883,7 +5883,7 @@ f_{X,Y}(x,y) =
 
 Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter \(\theta\) which is of primary interest, and about which we would like to learn. But rather than observing \(\theta\) directly, we instead observe a random variable \(X\) whose probability distribution depends on \(\theta\). Using the information we provided by \(X,\) we would like to update the information that we have about \(\theta\).
 
-Our initial beliefs about \(\theta\) are represented by a probability distribution, called the /prior distribution/, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the /likelihood function/, also called the /likelihood of/ \(X\) /conditional on/ \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the /posterior distribution of/ \(\theta\) /given the observation/ \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section [[sec-Bayes'-Rule][Bayes' Rule]] where it was called Bayes' Rule:
+Our initial beliefs about \(\theta\) are represented by a probability distribution, called the /prior distribution/, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the /likelihood function/, also called the /likelihood of/ \(X\) /conditional on/ \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the /posterior distribution of/ \(\theta\) /given the observation/ \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section [[sec-Bayes-Rule][Bayes' Rule]] where it was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
@@ -6184,7 +6184,7 @@ Second, the conditional variance of \(Y|x\) is independent of \(x\).
 
 *** How to do it with \(\mathsf{R}\)
 
-The multivariate normal distribution is implemented in both the =mvtnorm= package \cite{Genzmvtnorm} and the =mnormt= package \cite{mnormt}. We use the =mvtnorm= package in this book simply because it is a dependency of another package used in the book. 
+The multivariate normal distribution is implemented in both the =mvtnorm= package \cite{mvtnorm:1} and the =mnormt= package \cite{mnormt}. We use the =mvtnorm= package in this book simply because it is a dependency of another package used in the book. 
 
 The =mvtnorm= package has functions =dmvnorm= and =rmvnorm= for the PDF and to generate random vectors, respectively. Let us get started with a graph of the bivariate normal PDF. We can make the plot with the following code, where the workhorse is the =persp= function in base \(\mathsf{R}\).
 
@@ -6411,7 +6411,7 @@ where we sum over all possible coins. The right-hand side of Equation [[eq-defin
 
 Of course, the integral's value does not change if we jumble the \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The power of de Finetti's Theorem is that /every/ infinite binary exchangeable sequence can be written in the above form.
 
-The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation [[eq-definetti-binary]] to Section [[sec-Bayes'-Rule][Bayes' Rule]] and Section [[sec-Conditional-Distributions][Conditional Distributions]].
+The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation [[eq-definetti-binary]] to Section [[sec-Bayes-Rule][Bayes' Rule]] and Section [[sec-Conditional-Distributions][Conditional Distributions]].
 
 The multivariate normal distribution immediately generalizes from the bivariate case. If the matrix \(\Sigma\) is nonsingular then the joint PDF of \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) is
 \begin{equation}
@@ -6497,7 +6497,7 @@ round(ProbTable, 3)
 
 Do some examples of =rmultinom=.
 
-Another way to do the plot is with the =scatterplot3d= function in the =scatterplot3d= package \cite{Liggesscatterplot3d}. It looks like this: 
+Another way to do the plot is with the =scatterplot3d= function in the =scatterplot3d= package \cite{scatterplot3d}. It looks like this: 
 : library("scatterplot3d")
 : X <- t(as.matrix(expand.grid(0:6, 0:6)))
 : X <- X[, colSums(X) <= 6 ]; X <- rbind(X, 6 - colSums(X))
@@ -6717,9 +6717,9 @@ This distribution was first published by W. S. Gosset (1900) under the pseudonym
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad -\infty < x < \infty.
 \end{equation}
-Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]]. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
+Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) /degrees of freedom/, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure [[fig-Students-t-dist-vary-df][Student's-t-dist-vary-df]]. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely =dt=, =pt=,=qt=, and =rt=, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
 
-The code to produce Figure [[fig-Student's-t-dist-vary-df][Student's-t-dist-vary-df]] is
+The code to produce Figure [[fig-Students-t-dist-vary-df][Student's-t-dist-vary-df]] is
 
 #+name: Student's-t-dist-vary-df
 #+begin_src R :exports code :results silent
@@ -6740,7 +6740,7 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/sampdist/Student's-t-dist-vary-df.ps}
   \caption[Student's \(t\) distribution for various degrees of freedom]{\small A plot of Student's \(t\) distribution for various degrees of freedom.}
-  \label{fig-Student's-t-dist-vary-df}
+  \label{fig-Students-t-dist-vary-df}
 \end{figure}
 #+end_latex
 
@@ -6804,7 +6804,7 @@ How large is ``sufficiently large''? It is here that the shape of the underlying
 
 *** How to do it with \(\mathsf{R}\)
 
-The =TeachingDemos= package \cite{Snowteachingdemos} has =clt.examp= and the =distrTeach= \cite{Ruckdescheldistr} package has =illustrateCLT=. Try the following at the command line (output omitted):
+The =TeachingDemos= package \cite{TeachingDemos} has =clt.examp= and the =distrTeach= \cite{distrTeach} package has =illustrateCLT=. Try the following at the command line (output omitted):
 #+begin_src R :exports code :eval never
 example(clt.examp)
 #+end_src
@@ -6813,7 +6813,7 @@ and
 example(illustrateCLT)
 #+end_src
 
-The =IPSUR=  package has the functions =clt1=, =clt2=, and =clt3= (see Exercise [[xca-clt123][clt123]] at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
+The =IPSUR=  package \cite{IPSUR} has the functions =clt1=, =clt2=, and =clt3= (see Exercise [[xca-clt123][clt123]] at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
 
 For example, when the command =clt1()=  is issued a plot window opens to show a graph of the PDF of a \(\mathsf{t}(\mathtt{df}=3)\) distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size =sample.size = 2= from the population distribution =rt= a total of =N.iter = 100000= times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of \(\overline{X}\), see Section [[sec-Simulated-Sampling-Distributions][Simulated Sampling Distributions]]. Also shown are the sample mean and sample variance of all of the simulated  \( \overline{X} \) values. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated \( \overline{X} \) values is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
 
@@ -7371,7 +7371,7 @@ optimize(minuslogL, interval = c(0,1), x = x)
 
 Note that we did not need =maximum = TRUE= because we minimized the negative log-likelihood. The answer for the MLE is essentially the same as before, but the =$objective= value was different, of course.
 
-For multiparameter problems we may use a similar approach by way of the =mle= function in the =stats4= package. 
+For multiparameter problems we may use a similar approach by way of the =mle= function in the =stats4= package \cite{stats4}. 
 
 #+begin_exampletoo
 
@@ -7401,7 +7401,7 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 
 #+end_exampletoo
 
-There is functionality in the =distrTest= package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
+There is functionality in the =distrTest= package \cite{distrTest} to calculate theoretical MLEs; we will skip examples of these for the time being.
 
 ** Confidence Intervals for Means
 :PROPERTIES:
@@ -7764,7 +7764,7 @@ I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= i
 
 *** How to do it with \(\mathsf{R}\)
 
-I am thinking about =fitdistr= from the =MASS= package \cite{Venables2002}.
+I am thinking about =fitdistr= from the =MASS= package \cite{MASS}.
 
 ** Sample Size and Margin of Error
 :PROPERTIES:
@@ -8351,7 +8351,7 @@ Here are some properties of power functions:
 
 *** How to do it with \(\mathsf{R}\)
 
-I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package.
+I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package \cite{HH}.
 
 #+name: power-examp
 #+begin_src R :exports code :results silent
@@ -8369,7 +8369,7 @@ power.examp()
 #+begin_latex
 \begin{figure}[th]
   \includegraphics[angle=270, totalheight=4in]{ps/hypoth/power-examp.ps}
-  \caption[Plot of significance level and power]{\small This graph was generated by the \texttt{power.examp} function from the \texttt{TeachingDemos} package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the \emph{power} to detect a non-null mean value of \(\mu=1\). With the command the \texttt{run.power.examp()} at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the \texttt{tkrplot} package for \texttt{run.power.examp}.}
+  \caption[Plot of significance level and power]{\small This graph was generated by the \texttt{power.examp} function from the \texttt{TeachingDemos} package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the \emph{power} to detect a non-null mean value of \(\mu=1\). With the command the \texttt{run.power.examp()} at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the \texttt{tkrplot} package \cite{tkrplot} for \texttt{run.power.examp}.}
   \label{fig-power-examp}
 \end{figure}
 #+end_latex
@@ -8510,7 +8510,7 @@ segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 head(cars)
 #+end_src
 
-The =speed= represents how fast the car was going (\(x\)) in miles per hour and =dist= (\(Y\)) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the =qplot= command in the =ggplot2= package. 
+The =speed= represents how fast the car was going (\(x\)) in miles per hour and =dist= (\(Y\)) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the =qplot= command in the =ggplot2= package \cite{ggplot2}. 
 
 #+begin_latex
 \begin{figure}[th]
@@ -8933,7 +8933,7 @@ Using the =cars= data,
 
 We earlier guessed that a bound on the value of a single new observation would be inherently less certain than a bound for an average (mean) value; therefore, we expect the CIs for the mean to be tighter than the PIs for a new observation. A close look at the standard deviations in Equations [[eq-SLR-conf-int-formula]] and [[eq-SLR-pred-int-formula]] confirms our guess, but we would like to see a picture to drive the point home.
 
-We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{Heibergerhh}. The graph is displayed in Figure [[fig-Scatter-cars-CIPI][Scatter-cars-CIPI]].
+We may plot the confidence and prediction intervals with one fell swoop using the =ci.plot= function from the =HH= package \cite{HH}. The graph is displayed in Figure [[fig-Scatter-cars-CIPI][Scatter-cars-CIPI]].
 
 #+begin_latex
 \begin{figure}[th]
@@ -9237,7 +9237,7 @@ By default the same explanatory variables are used in the new model which produc
 BP=n\sum_{i=1}^{n}\hat{W}_{i}^{2}\div\sum_{i=1}^{n}W_{i}^{2}.
 \end{equation}
 We reject the null hypothesis if \(BP\) is too large, which happens when the explained variation i the new model is large relative to the unexplained variation in the original model.
-We do it in \(\mathsf{R}\) with the =bptest= function from the =lmtest= package \cite{Zeileislmtest}. 
+We do it in \(\mathsf{R}\) with the =bptest= function from the =lmtest= package \cite{lmtest}. 
 #+begin_src R :exports both :results output pp
 bptest(cars.lm)
 #+end_src
@@ -9356,8 +9356,8 @@ and their sum is
 \sum_{i=1}^{n}h_{ii} & = & \sum_{i=1}^{n}\left[\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}}\right],\\
  & = & \frac{n}{n}+\frac{\sum_{i}(x_{i}-\overline{x})^{2}}{\sum_{k}(x_{k}-\overline{x})^{2}},\\
  & = & 2.
-# <<eq-slr-average-leverage>>
 \end{eqnarray}
+# <<eq-slr-average-leverage>>
 
 A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation [[eq-slr-average-leverage]]). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
 
@@ -9691,7 +9691,7 @@ The data are in the =datasets= package and are already on the search path; they 
 head(trees)
 #+end_src
 
-Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{Sarkarlattice} as shown below. The plot is shown in Figure [[fig-splom-trees][splom-trees]].
+Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the =splom= function in the =lattice= package \cite{lattice} as shown below. The plot is shown in Figure [[fig-splom-trees][splom-trees]].
 
 #+name: splom-trees
 #+begin_src R :exports code :results silent
@@ -9735,7 +9735,7 @@ The interpretation is simple. The intercept \(\beta_{0}\) represents the mean =V
 
 In simple linear regression, we had one independent variable and our linear regression surface was 1D, simply a line. In multiple regression there are many independent variables and so our linear regression surface will be many-D... in general, a hyperplane. But when there are only two explanatory variables the hyperplane is just an ordinary plane and we can look at it with a 3D scatterplot. 
 
-One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \cite{Foxrcmdr}. It has a 3D scatterplot option under the =Graphs= menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
+One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \cite{Rcmdr}. It has a 3D scatterplot option under the =Graphs= menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
 
 Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
@@ -10170,7 +10170,7 @@ For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} \) wit
 
 *** Student's /t/ Tests
 :PROPERTIES:
-:CUSTOM_ID: sub-mlr-Student's-t-Tests
+:CUSTOM_ID: sub-mlr-Students-t-Tests
 :END:
 
 We know that
@@ -10535,7 +10535,7 @@ There are other -- shorter -- ways to plot regression lines by groups, namely th
 :CUSTOM_ID: sec-Partial-F-Statistic
 :END:
 
-We saw in Section [[sub-mlr-Overall-F-Test][MLR Overall F]] how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section [[sub-mlr-Student's-t-Tests][MLR Student's t Tests]] how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
+We saw in Section [[sub-mlr-Overall-F-Test][MLR Overall F]] how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section [[sub-mlr-Students-t-Tests][MLR Student's t Tests]] how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
 \end{equation}
@@ -10930,7 +10930,7 @@ mean(medstar) - median(rivers)
 #+end_exampletoo
 
 #+begin_exampletoo
-*The boot package in R*. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the =boot= package. Further, inside the =boot= package there is even a function called =boot=\index{boot@\texttt{boot}}. The basic syntax is of the form:
+*The boot package in R*. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the =boot= package. Further, inside the =boot= package \cite{boot:1} there is even a function called =boot=\index{boot@\texttt{boot}}. The basic syntax is of the form:
 
 :  boot(data, statistic, R)
 
@@ -11497,7 +11497,7 @@ head(A)
 
 Note that there are as many preliminary columns of =A= as there are dimensions to the table. The rows of =A= contain every possible combination of levels from each of the dimensions. There is also a =Freq= column, which shows how many observations there were at that particular combination of levels. 
 
-The form of =A= is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of =A= exactly the number of times shown in the =Freq= column. The =reshape= package \cite{Wickhamreshape} has the function =untable= designed for that very purpose: 
+The form of =A= is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of =A= exactly the number of times shown in the =Freq= column. The =reshape= package \cite{reshape} has the function =untable= designed for that very purpose: 
 
 #+begin_src R :exports both :results output pp 
 B <- with(A, untable(A, Freq))
@@ -12181,7 +12181,7 @@ It is also possible to communicate with \(\mathsf{R}\) through OpenOffice.org, w
 *** OpenOffice.org and \texttt{odfWeave}
 OpenOffice.org (OO.o) is an open source desktop productivity suite which mirrors Microsoft\(\circledR\) Office. It is especially nice because it works on all operating systems. OO.o can read most document formats, and in particular, it will read =.doc= files. The standard OO.o file extension for documents is =.odt=, which stands for ``open document text''.
 
-The =odfWeave=  package \cite{odfweave} provides a way to generate an =.odt= file with \(\mathsf{R}\) input and output code formatted correctly and inserted in the correct places, without any additional work. In this way, one does not need to worry about all of the trouble of typesetting \(\mathsf{R}\) output. Another advantage of =odfWeave= is that it allows you to generate the report dynamically; if the data underlying the report change or are updated, then a few clicks (or commands) will generate a brand new report.
+The =odfWeave=  package \cite{odfWeave} provides a way to generate an =.odt= file with \(\mathsf{R}\) input and output code formatted correctly and inserted in the correct places, without any additional work. In this way, one does not need to worry about all of the trouble of typesetting \(\mathsf{R}\) output. Another advantage of =odfWeave= is that it allows you to generate the report dynamically; if the data underlying the report change or are updated, then a few clicks (or commands) will generate a brand new report.
 
 One disadvantage is that the source =.odt=  file is not easy to read, because it is difficult to visually distinguish the noweb parts (where the \(\mathsf{R}\) code is) from the non-noweb parts. This can be fixed by manually changing the font of the noweb sections to, for instance, Courier font, size =10pt=. But it is extra work. It would be nice if a program would discriminate between the two different sections and automatically typeset the respective parts in their correct fonts. This is one of the advantages to \LyX{}.
 
@@ -12232,9 +12232,9 @@ Program Listings and the \(\mathsf{R}\) language
 :CUSTOM_ID: sec-Formatting-Tables
 :END: 
 
-The prettyR package 
+The prettyR package \cite{prettyR}.
 
-The Hmisc package
+The Hmisc package \cite{Hmisc}.
 
 #+begin_src R :exports both :results output pp 
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
@@ -12454,7 +12454,7 @@ Detective Pyork E. Pig
 \addcontentsline{toc}{chapter}{\bibname}
 \bibliographystyle{plainurl}
 \nocite{*}
-\bibliography{IPSUR}
+\bibliography{IPSUR,Rpackages-2.14.1}
 \vfill{}
 \cleardoublepage
 \phantomsection
