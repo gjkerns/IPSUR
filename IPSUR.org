@@ -4874,7 +4874,7 @@ Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
 Therefore
 \[
-M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tX}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
+M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tZ}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
 \]
 and we know that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get
 \[
@@ -5569,7 +5569,7 @@ V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
 We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Figure [[fig-max-and-sum-two-dice][Max-sum two dice]]. 
 
-We can use the table to calculate the marginal PMF of \(U\), because from Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]] we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\mathbb{P}(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
+We can use the table to calculate the marginal PMF of \(U\), because from Example [[exa-Toss-a-six-sided-die-twice][Toss die twice]] we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the bottom left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\mathbb{P}(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
@@ -5654,7 +5654,7 @@ p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") +
 </div>
 #+end_html
 
-Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example [[exa-toss-two-dice-joint-pmf][Two dice joint]]. See Table [[tab-max-sum-joint-pmf][Max-sum joint]].
+Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears only once, but \((2,3)\) appears twice. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example [[exa-toss-two-dice-joint-pmf][Two dice joint]]. See Table [[tab-max-sum-joint-pmf][Max-sum joint]].
 
 #+LABEL: tab-max-sum-joint-pmf
 #+CAPTION: [The joint PMF of \((U,V)\)]{The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively.}
@@ -5836,13 +5836,13 @@ and the expected value of \(Y\) is
 Finally, the expected value of \(XY\) is
 \begin{eqnarray*}
 \mathbb{E} XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\mathrm{d} x\,\mathrm{d} y,\\
- & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
- & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\mathrm{d} y,\\
- & = & \frac{1}{5}+\frac{3}{50},
+ & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{5}x^{2}y^{3}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
+ & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{5}y^{3}\right)\mathrm{d} y,\\
+ & = & \frac{1}{5}+\frac{3}{20},
 \end{eqnarray*}
-which is 13/50. Therefore the covariance of \((X,Y)\) is
+which is 7/20. Therefore the covariance of \((X,Y)\) is
 \[
-\mbox{Cov}(X,Y)=\frac{13}{50}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=-\frac{1}{100}.
+\mbox{Cov}(X,Y)=\frac{7}{20}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=\frac{2}{25}.
 \]
 #+end_exampletoo
 
@@ -5900,7 +5900,7 @@ f_{X|\theta}(x|\theta)=\theta^{x}(1-\theta)^{1-x},\quad x=0,1.
 \]
 Based on the observation \(X=x\), we will update the prior distribution to the posterior distribution, and we will do so with Bayes' Rule: it says
 \begin{eqnarray*}
-\pi(\theta|x) & \propto & \pi(\theta)\, f(x|\theta),\\
+\pi(\theta|x) & \propto & f(x|\theta) \, \pi(\theta),\\
  & = & \theta^{x}(1-\theta)^{1-x}\cdot3(1-\theta)^{2},\\
  & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad 0 < \theta < 1,
 \end{eqnarray*}
@@ -6294,7 +6294,7 @@ in which case the Jacobian of the inverse transformation is
 -3 & 2\\
 \frac{5}{2} & -\frac{3}{2}
 \end{vmatrix}
-= 3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
+= -3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
 \]
 As \((x,y)\) traverses \(\mathbb{R}^{2}\), so too does \((u,v)\). Since the joint PDF of \((X,Y)\) is
 \[
@@ -6357,7 +6357,7 @@ for every \(\mathbf{x}\) in their joint support \(S_{\mathbf{X}}\), and we say t
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
-for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
+for any reordering (permutation) \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 
 #+begin_prop
 # <<pro-mean-sd-lin-comb>>
