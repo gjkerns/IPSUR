@@ -6221,7 +6221,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{ps/multdist/mvnorm-pdf.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/multdist/mvnorm-pdf.ps}
   \caption[Graph of a bivariate normal PDF]{\small A graph of a bivariate normal PDF.}
   \label{fig-mvnorm-pdf}
 \end{figure}
@@ -6521,7 +6521,7 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 
 #+begin_latex
 \begin{figure}[th]
-  \includegraphics[width=5in, height=4in]{ps/multdist/multinom-pmf2.ps}
+  \includegraphics[angle=270, totalheight=4in]{ps/multdist/multinom-pmf2.ps}
   \caption[Plot of a multinomial PMF.]{\small A plot of a multinomial PMF.}
     \label{fig-multinom-pmf2}
 \end{figure}
@@ -6720,19 +6720,19 @@ Any random variable \(X\) with the preceding PDF is said to have Student's \(t\)
 
 The code to produce Figure [[fig-Students-t-dist-vary-df][Student's-t-dist-vary-df]] is
 
-#+name: Student's-t-dist-vary-df
+#+name: Students-t-dist-vary-df
 #+begin_src R :exports code :results silent
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
 for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file ps/sampdist/Student's-t-dist-vary-df.ps
-  <<Student's-t-dist-vary-df>>
+#+begin_src R :exports none :results graphics silent :noweb yes :file ps/sampdist/Students-t-dist-vary-df.ps
+  <<Students-t-dist-vary-df>>
 #+end_src
 
-#+begin_src R :exports none :results graphics silent :noweb yes :file svg/sampdist/Student's-t-dist-vary-df.svg
-  <<Student's-t-dist-vary-df>>
+#+begin_src R :exports none :results graphics silent :noweb yes :file svg/sampdist/Students-t-dist-vary-df.svg
+  <<Students-t-dist-vary-df>>
 #+end_src
 
 #+begin_latex
@@ -6744,8 +6744,8 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 #+end_latex
 
 #+begin_html
-<div id="fig-Student's-t-dist-vary-df" class="figure">
-  <p><img src="svg/sampdist/Student's-t-dist-vary-df.svg" width=500 alt="svg/sampdist/Student's-t-dist-vary-df.svg" /></p>
+<div id="fig-Students-t-dist-vary-df" class="figure">
+  <p><img src="svg/sampdist/Students-t-dist-vary-df.svg" width=500 alt="svg/sampdist/Students-t-dist-vary-df.svg" /></p>
   <p>A plot of Student's t distribution for various degrees of freedom.</p>
 </div>
 #+end_html
@@ -10657,8 +10657,7 @@ How can we fit this model? The model is not linear in the parameters any more, s
 and this new model \(\mu^{\ast}\) is linear in the parameters \(\beta_{0}^{\ast}=\ln\beta_{0}\), \(\beta_{1}^{\ast}=\beta_{1}\) and \(\beta_{2}^{\ast}=\beta_{2}\). We can use what we have learned to fit a linear model =log(Volume) ~ log(Girth) + log(Height)=, and everything will proceed as before, with one exception: we will need to be mindful when it comes time to make predictions because the model will have been fit on the log scale, and we will need to transform our predictions back to the original scale (by exponentiating with =exp=) to make sense.
 
 #+begin_src R :exports both :results output pp 
-treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height), 
-                     data = trees)
+treesNonlin.lm <- lm(log(Volume) ~ log(Girth) + log(Height), data = trees)
 summary(treesNonlin.lm)
 #+end_src
 
