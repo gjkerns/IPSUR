@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Introduction to Probability and Statistics Using R"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-12-28 01:54:29 EST"/>
+<meta name="generated" content="2011-12-28 13:47:25 EST"/>
 <meta name="author" content="G. Jay Kerns"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -985,7 +985,7 @@ UseMethod("intersect")
 <pre class="example">
 function (x) 
 UseMethod("rev")
-&lt;bytecode: 0x8f46514&gt;
+&lt;bytecode: 0xa175514&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1021,7 +1021,7 @@ Now we learn that there are two different <code>rev(x)</code> functions, only on
 <pre class="example">
 function (x) 
 if (length(x)) x[length(x):1L] else x
-&lt;bytecode: 0xb1e250c&gt;
+&lt;bytecode: 0xc41660c&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1040,7 +1040,7 @@ methods(wilcox.test)
 <pre class="example">
 function (x, ...) 
 UseMethod("wilcox.test")
-&lt;bytecode: 0x95f5ec0&gt;
+&lt;bytecode: 0xa824ec0&gt;
 &lt;environment: namespace:stats&gt;
 [1] wilcox.test.default* wilcox.test.formula*
 
@@ -1157,13 +1157,13 @@ If your question is not a FAQ, has not been asked on \(\mathsf{R}\)-help before,
 <p>
 There is a mountain of information on the Internet about \(\mathsf{R}\). Below are a few of the important ones. 
 </p><ul>
-<li>The \(\mathsf{R}\)- Project for Statistical Computing:\index{The R-Project@The \textsf{R}-Project}: Go <a href="http://www.r-project.org/">there</a> first.
+<li>The \(\mathsf{R}\)- Project for Statistical Computing\index{The R-Project@The \textsf{R}-Project}: Go <a href="http://www.r-project.org/">there</a> first.
 </li>
-<li>The Comprehensive \(\mathsf{R}\) Archive Network:\index{CRAN}: <a href="http://cran.r-project.org/">That is where</a> \(\mathsf{R}\) is stored along with thousands of contributed packages. There are also loads of contributed information (books, tutorials, <i>etc</i>.). There are mirrors all over the world with duplicate information.
+<li>The Comprehensive \(\mathsf{R}\) Archive Network\index{CRAN}: <a href="http://cran.r-project.org/">That is where</a> \(\mathsf{R}\) is stored along with thousands of contributed packages. There are also loads of contributed information (books, tutorials, <i>etc</i>.). There are mirrors all over the world with duplicate information.
 </li>
-<li>\(\mathsf{R}\)-Forge:\index{R-Forge@\textsf{R}-Forge}: <a href="http://r-forge.r-project.org/">This is another location</a> where \(\mathsf{R}\) packages are stored. Here you can find development code which has not yet been released to <code>CRAN</code>. 
+<li>\(\mathsf{R}\)-Forge\index{R-Forge@\textsf{R}-Forge}: <a href="http://r-forge.r-project.org/">This is another location</a> where \(\mathsf{R}\) packages are stored. Here you can find development code which has not yet been released to <code>CRAN</code>. 
 </li>
-<li>\(\mathsf{R}\)-Wiki:\index{R-Wiki@\textsf{R}-Wiki}: There are many tips, tricks, and general advice <a href="http://wiki.r-project.org/rwiki/doku.php">listed here</a>. If you find a trick of your own, login and share it with the world. 
+<li>\(\mathsf{R}\)-Wiki\index{R-Wiki@\textsf{R}-Wiki}: There are many tips, tricks, and general advice <a href="http://wiki.r-project.org/rwiki/doku.php">listed here</a>. If you find a trick of your own, login and share it with the world. 
 </li>
 <li>Other: the <a href="http://addictedtor.free.fr/graphiques/">\(\mathsf{R}\) Graph Gallery</a>\index{R Graph Gallery@\textsf{R} Graph Gallery} and <a href="http://bm2.genes.nig.ac.jp/RGM2/index.php">\(\mathsf{R}\) Graphical Manual</a>\index{R Graphical Manual@\textsf{R} Graphical Manual} have literally thousands of graphs to peruse. <a href="http://www.rseek.org">\(\mathsf{R}\) Seek</a> is a search engine based on Google specifically tailored for \(\mathsf{R}\) queries. 
 </li>
@@ -1288,8 +1288,10 @@ Quantitative data are any data that measure or are associated with a measurement
 Note that the distinction between discrete and continuous data is not always clear-cut. Sometimes it is convenient to treat data as if they were continuous, even though strictly speaking they are not continuous. See the examples.
 </p>
 
+
 <div class="exampletoo">
-<p><b>Annual Precipitation in US Cities.</b> The vector <code>precip</code>\index{Data sets!precip@\texttt{precip}} contains average amount of rainfall (in inches) for each of 70 cities in the United States and Puerto Rico. Let us take a look at the data:
+<p>
+<b>Annual Precipitation in US Cities.</b> The vector <code>precip</code>\index{Data sets!precip@\texttt{precip}} contains average amount of rainfall (in inches) for each of 70 cities in the United States and Puerto Rico. Let us take a look at the data:
 </p>
 
 
@@ -1298,19 +1300,31 @@ Note that the distinction between discrete and continuous data is not always cle
 </pre>
 
 
+<pre class="example">
+ Named num [1:70] 67 54.7 7 48.5 14 17.2 20.7 13 43.4 40.2 ...
+ - attr(*, "names")= chr [1:70] "Mobile" "Juneau" "Phoenix" "Little Rock" ...
+</pre>
+
+
+
+
 
 <pre class="src src-R">precip[1:4]
 </pre>
 
 
+<pre class="example">
+     Mobile      Juneau     Phoenix Little Rock 
+       67.0        54.7         7.0        48.5
+</pre>
+
+
 <p>
 The output shows that <code>precip</code> is a numeric vector which has been <i>named</i>, that is, each value has a name associated with it (which can be set with the <code>names</code>\index{names@\texttt{names}} function). These are quantitative continuous data. 
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><b>Lengths of Major North American Rivers.</b> The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector <code>rivers</code>\index{Data sets!rivers@\texttt{rivers}} in the <code>datasets</code> package \cite{datasets} (which ships with base \(\mathsf{R}\)). See <code>?rivers</code>. Let us take a look at the data with the <code>str</code>\index{str@\texttt{str}} function.
+<b>Lengths of Major North American Rivers.</b> The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector <code>rivers</code>\index{Data sets!rivers@\texttt{rivers}} in the <code>datasets</code> package \cite{datasets} (which ships with base \(\mathsf{R}\)). See <code>?rivers</code>. Let us take a look at the data with the <code>str</code>\index{str@\texttt{str}} function.
 </p>
 
 
@@ -1319,20 +1333,29 @@ The output shows that <code>precip</code> is a numeric vector which has been <i>
 </pre>
 
 
+<pre class="example">
+ num [1:141] 735 320 325 392 524 ...
+</pre>
+
+
 <p>
 The output says that <code>rivers</code> is a numeric vector of length 141, and the first few values are 735, 320, 325, <i>etc</i>. These data are definitely quantitative and it appears that the measurements have been rounded to the nearest mile. Thus, strictly speaking, these are discrete data. But we will find it convenient later to take data like these to be continuous for some of our statistical procedures. 
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><b>Yearly Numbers of Important Discoveries.</b> The vector <code>discoveries</code>\index{Data sets!discoveries@\texttt{discoveries}} contains numbers of “great” inventions/discoveries in each year from 1860 to 1959, as reported by the 1975 World Almanac. Let us take a look at the data:
+<b>Yearly Numbers of Important Discoveries.</b> The vector <code>discoveries</code>\index{Data sets!discoveries@\texttt{discoveries}} contains numbers of “great” inventions/discoveries in each year from 1860 to 1959, as reported by the 1975 World Almanac. Let us take a look at the data:
 </p>
 
 
 
 <pre class="src src-R">str(discoveries)
 </pre>
+
+
+<pre class="example">
+ Time-Series [1:100] from 1860 to 1959: 5 3 0 2 0 3 2 3 6 1 ...
+</pre>
+
 
 
 
@@ -1424,8 +1447,10 @@ These are typically used for continuous data. A histogram is constructed by firs
 These are one of the most common summary displays, and they are often misidentified as ``Bar Graphs'' (see below.) The scale on the \(y\) axis can be frequency, percentage, or density (relative frequency). The term histogram was coined by Karl Pearson in 1891, see \cite{Miller}.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-annual" id="exa-annual"></a>
+<p>
+<a name="exa-annual" id="exa-annual"></a>
 <b>Annual Precipitation in US Cities.</b> We are going to take another look at the <code>precip</code>\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure <a href="#fig-stripcharts">Various-stripchart-methods</a> suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 </p>
 <p>
@@ -1452,26 +1477,9 @@ m + geom_histogram(aes(y = ..density..))
 
 
 
-<pre class="src src-R">m <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(as.data.frame(precip), aes(x = precip))
-a <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> m + geom_histogram()
-b <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> m + geom_histogram(aes(y = ..density..))
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(2, 1)))
-<span style="font-weight: bold;">vplayout</span> <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> <span style="font-weight: bold;">function</span>(x, y)
-viewport(layout.pos.row = x, layout.pos.col = y)
-print(a, vp = vplayout(1, 1))
-print(b, vp = vplayout(2, 1))
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;histograms&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;histograms&gt;&gt;
-</pre>
 
 
 
@@ -1489,14 +1497,17 @@ par(mfrow = c(1,1)) <span style="font-weight: bold; font-style: italic;"># </spa
 </div>
 
 
+
 </div>
 
 <p>
 Please mind the biggest weakness of histograms: the graph obtained strongly depends on the bins chosen. Choose another set of bins, and you will get a different histogram. Moreover, there are not any definitive criteria by which bins should be defined; the best choice for a given data set is the one which illuminates the data set's underlying structure (if any). Luckily for us there are algorithms to automatically choose bins that are likely to display well, and more often than not the default bins do a good job. This is not always the case, however, and a responsible statistician will investigate many bin choices to test the stability of the display.
 </p>
 
+
 <div class="exampletoo">
-<p>Recall that the strip chart in Figure <a href="#fig-stripcharts">Various-stripchart-methods</a> suggested a relatively balanced shape to the <code>precip</code> data distribution. Watch what happens when we change the bins slightly (with the <code>breaks</code> argument to <code>hist</code>). See Figure <a href="#fig-histograms-bins">histograms-bins</a> which was produced by the following code.
+<p>
+Recall that the strip chart in Figure <a href="#fig-stripcharts">Various-stripchart-methods</a> suggested a relatively balanced shape to the <code>precip</code> data distribution. Watch what happens when we change the bins slightly (with the <code>breaks</code> argument to <code>hist</code>). See Figure <a href="#fig-histograms-bins">histograms-bins</a> which was produced by the following code.
 </p>
 
 
@@ -1513,28 +1524,9 @@ m + geom_histogram(binwidth = 20)
 
 
 
-<pre class="src src-R">m <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(as.data.frame(precip), aes(x = precip))
-a1 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> m + geom_histogram(binwidth = 1)
-a2 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> m + geom_histogram(binwidth = 5)
-a3 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> m + geom_histogram(binwidth = 20)
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(3, 1)))
-<span style="font-weight: bold;">vplayout</span> <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> <span style="font-weight: bold;">function</span>(x, y)
-viewport(layout.pos.row = x, layout.pos.col = y)
-print(a1, vp = vplayout(1, 1))
-print(a2, vp = vplayout(2, 1))
-print(a3, vp = vplayout(3, 1))
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;histograms-bins&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;histograms-bins&gt;&gt;
-</pre>
 
 
 
@@ -1549,6 +1541,7 @@ The leftmost graph (with <code>breaks = 10</code>) shows that the distribution i
 <p>
 The rightmost graph in Figure <a href="#fig-histograms-bins">histograms-bins</a> shows what happens when the number of bins is too large: the histogram is too grainy and hides the rounded appearance of the earlier histograms. If we were to continue increasing the number of bins we would eventually get all observed bins to have exactly one element, which is nothing more than a glorified strip chart.
 </p>
+
 
 </div>
 
@@ -1565,13 +1558,12 @@ The rightmost graph in Figure <a href="#fig-histograms-bins">histograms-bins</a>
 Stemplots have two basic parts: <i>stems</i> and <i>leaves</i>. The final digit of the data values is taken to be a <i>leaf</i>, and the leading digit(s) is (are) taken to be <i>stems</i>. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-ukdriverdeaths-first" id="exa-ukdriverdeaths-first"></a>
+<p>
+<a name="exa-ukdriverdeaths-first" id="exa-ukdriverdeaths-first"></a>
 <code>UKDriverDeaths</code>\index{Data sets!UKDriverDeaths@\texttt{UKDriverDeaths}} is a time series that contains the total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984. See <code>?UKDriverDeaths</code>. Compulsory seat belt use was introduced on January 31, 1983. We construct a stem and leaf diagram in \(\mathsf{R}\) with the <code>stem.leaf</code>\index{stem.leaf@\texttt{stem.leaf}} function from the <code>aplpack</code>\index{R packages@\textsf{R} packages!aplpack@\texttt{aplpack}} package\cite{aplpack}.
-</p>
 </div>
-
-
 
 
 <pre class="src src-R">stem.leaf(UKDriverDeaths, depth = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
@@ -1601,7 +1593,6 @@ HI: 2654
 </pre>
 
 
-<p>
 The display shows a more or less balanced mound-shaped distribution, with one or maybe two humps, a big one and a smaller one just to its right. Note that the data have been rounded to the tens place so that each datum gets only one leaf to the right of the dividing line.
 </p>
 <p>
@@ -1629,8 +1620,10 @@ Done with the <code>plot</code>\index{plot@\texttt{plot}} function. These are go
 
 
 
+
 <div class="exampletoo">
-<p><b>Level of Lake Huron 1875-1972.</b> Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875&ndash;1972. The data are stored in the time series <code>LakeHuron</code>\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See <code>?LakeHuron</code>. Figure <a href="#fig-indpl-lakehuron">indpl-lakehuron</a> was produced with the following code:
+<p>
+<b>Level of Lake Huron 1875-1972.</b> Brockwell and Davis \cite{Brockwell1991} give the annual measurements of the level (in feet) of Lake Huron from 1875&ndash;1972. The data are stored in the time series <code>LakeHuron</code>\index{Data sets!LakeHuron@\texttt{LakeHuron}}. See <code>?LakeHuron</code>. Figure <a href="#fig-indpl-lakehuron">indpl-lakehuron</a> was produced with the following code:
 </p>
 <p>
 Here is how to do it with base \(\mathsf{R}\).
@@ -1677,22 +1670,9 @@ The plots show an overall decreasing trend to the observations, and there appear
 
 
 
-<pre class="src src-R">par(mfrow = c(3,1))
-plot(LakeHuron)
-plot(LakeHuron, type = <span style="font-style: italic;">"p"</span>)
-plot(LakeHuron, type = <span style="font-style: italic;">"h"</span>)
-par(mfrow = c(1,1))
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;indpl-lakehuron&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;indpl-lakehuron&gt;&gt;
-</pre>
 
 
 
@@ -1700,6 +1680,7 @@ par(mfrow = c(1,1))
   <p><img src="svg/datadesc/indpl-lakehuron.svg" width=500 alt="svg/datadesc/indpl-lakehuron.svg" /></p>
   <p>Index plots of the <code>LakeHuron</code> data.</p>
 </div>
+
 
 
 </div>
@@ -1747,8 +1728,10 @@ In contrast, ordinal factors have some sort of ordered structure to the underlyi
 Factors have special status in \(\mathsf{R}\). They are represented internally by numbers, but even when they are written numerically their values do not convey any numeric meaning or obey any mathematical rules (that is, Stage III cancer is not Stage I cancer + Stage II cancer).
 </p>
 
+
 <div class="exampletoo">
-<p>The <code>state.abb</code>\index{Data sets!state.abb@\texttt{state.abb}}
+<p>
+The <code>state.abb</code>\index{Data sets!state.abb@\texttt{state.abb}}
 vector gives the two letter postal abbreviations for all 50 states.
 </p>
 
@@ -1758,14 +1741,17 @@ vector gives the two letter postal abbreviations for all 50 states.
 </pre>
 
 
+<pre class="example">
+ chr [1:50] "AL" "AK" "AZ" "AR" "CA" "CO" ...
+</pre>
+
+
 <p>
 These would be ID data. The <code>state.name</code>\index{Data sets!state.name@\texttt{state.name}} vector lists all of the complete names and those data would also be ID.
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><b>U.S. State Facts and Features.</b> The U.S. Department of Commerce of the U.S. Census Bureau releases all sorts of information in the <i>Statistical Abstract of the United States</i>, and the <code>state.region</code>\index{Data sets!state.region@\texttt{state.region}} data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See <code>?state.region</code>.
+<b>U.S. State Facts and Features.</b> The U.S. Department of Commerce of the U.S. Census Bureau releases all sorts of information in the <i>Statistical Abstract of the United States</i>, and the <code>state.region</code>\index{Data sets!state.region@\texttt{state.region}} data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See <code>?state.region</code>.
 </p>
 
 
@@ -1775,12 +1761,18 @@ state.region[1:5]
 </pre>
 
 
+<pre class="example">
+ Factor w/ 4 levels "Northeast","South",..: 2 4 4 2 4 4 1 2 2 2 ...
+[1] South West  West  South West 
+Levels: Northeast South North Central West
+</pre>
+
+
 <p>
 The <code>str</code>\index{str@\texttt{str}} output shows that <code>state.region</code> is already stored internally as a factor and it lists a couple of the factor levels. To see all of the levels we printed the first five entries of the vector in the second line.
-</p>
 </div>
 
-</div>
+</p></div>
 
 </div>
 
@@ -1872,8 +1864,10 @@ West North Central           Mountain            Pacific
 A bar graph is the analogue of a histogram for categorical data. A bar is displayed for each level of a factor, with the heights of the bars proportional to the frequencies of observations falling in the respective categories. A disadvantage of bar graphs is that the levels are ordered alphabetically (by default), which may sometimes obscure patterns in the display. 
 </p>
 
+
 <div class="exampletoo">
-<p><b>U.S. State Facts and Features.</b> The <code>state.region</code> data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See <code>?state.region</code>. It is already stored internally as a factor. We make a bar graph with the <code>barplot</code>\index{barplot@\texttt{barplot}} function: 
+<p>
+<b>U.S. State Facts and Features.</b> The <code>state.region</code> data lists each of the 50 states and the region to which it belongs, be it Northeast, South, North Central, or West. See <code>?state.region</code>. It is already stored internally as a factor. We make a bar graph with the <code>barplot</code>\index{barplot@\texttt{barplot}} function: 
 </p>
 
 
@@ -1893,21 +1887,9 @@ Notice the <code>cex.names</code>\index{cex.names@\texttt{cex.names}} argument t
 
 
 
-<pre class="src src-R">par(mfrow = c(1,2)) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">2 plots: 1 row, 2 columns</span>
-barplot(table(state.region), cex.names = 0.50)
-barplot(prop.table(table(state.region)), cex.names = 0.50)
-par(mfrow = c(1,1)) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">back to normal</span>
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;bar-gr-stateregion&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;bar-gr-stateregion&gt;&gt;
-</pre>
 
 
 
@@ -1915,6 +1897,7 @@ par(mfrow = c(1,1)) <span style="font-weight: bold; font-style: italic;"># </spa
   <p><img src="svg/datadesc/bar-gr-stateregion.svg" width=500 alt="svg/datadesc/bar-gr-stateregion.svg" /></p>
   <p>The left graph is a frequency barplot made with <code>table</code> and the right is a relative frequency barplot made with <code>prop.table</code>.</p>
 </div>
+
 
 
 </div>
@@ -1932,8 +1915,10 @@ par(mfrow = c(1,1)) <span style="font-weight: bold; font-style: italic;"># </spa
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease &ndash; this is much more difficult when the bars are jumbled. 
 </p>
 
+
 <div class="exampletoo">
-<p><b>U.S. State Facts and Features.</b> The <code>state.division</code>\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the <code>RcmdrPlugin.IPSUR</code>\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package \cite{RcmdrPlugin.IPSUR} or with the <code>pareto.chart</code>\index{pareto.chart@\texttt{pareto.chart}} function from the <code>qcc</code>\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure <a href="#fig-Pareto-chart">Pareto-chart</a>. The code follows.
+<p>
+<b>U.S. State Facts and Features.</b> The <code>state.division</code>\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the <code>RcmdrPlugin.IPSUR</code>\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package \cite{RcmdrPlugin.IPSUR} or with the <code>pareto.chart</code>\index{pareto.chart@\texttt{pareto.chart}} function from the <code>qcc</code>\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure <a href="#fig-Pareto-chart">Pareto-chart</a>. The code follows.
 </p>
 
 
@@ -1943,13 +1928,7 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
 
 
 
-<pre class="src src-R">  &lt;&lt;Pareto-chart&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;Pareto-chart&gt;&gt;
-</pre>
 
 
 
@@ -1957,6 +1936,7 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
   <p><img src="svg/datadesc/Pareto-chart.svg" width=500 alt="svg/datadesc/Pareto-chart.svg" /></p>
   <p>Pareto chart of the <code>state.division</code> data.</p>
 </div>
+
 
 
 </div>
@@ -1974,9 +1954,8 @@ A pareto diagram is a lot like a bar graph except the bars are rearranged such t
 These are a lot like a bar graph that has been turned on its side with the bars replaced by dots on horizontal lines. They do not convey any more (or less) information than the associated bar graph, but the strength lies in the economy of the display. Dot charts are so compact that it is easy to graph very complicated multi-variable interactions together in one graph. See Section <a href="#sec-3-6">Comparing Data Sets</a>. We will give an example here using the same data as above for comparison. The graph was produced by the following code.
 </p>
 
+
 <div class="exampletoo">
-
-
 
 
 <pre class="src src-R">x <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> table(state.region)
@@ -1985,13 +1964,7 @@ dotchart(as.vector(x), labels = names(x))
 
 
 
-<pre class="src src-R">  &lt;&lt;dot-charts&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;dot-charts&gt;&gt;
-</pre>
 
 
 
@@ -2003,6 +1976,7 @@ dotchart(as.vector(x), labels = names(x))
 <p>
 See Figure <a href="#fig-dot-charts">dot-charts</a>. Compare it to Figure <a href="#fig-bar-gr-stateregion">bar-gr-stateregion</a>.
 </p>
+
 
 </div>
 
@@ -2652,12 +2626,11 @@ Notice that both the sample skewness and the sample kurtosis are invariant with 
 The <code>e1071</code> package \cite{e1071} has the <code>skewness</code> function for the sample skewness and the <code>kurtosis</code> function for the sample excess kurtosis. Both functions have a <code>na.rm</code> argument which is <code>FALSE</code> by default.
 </p>
 
+
 <div class="exampletoo">
-<p>We said earlier that the <code>discoveries</code> data looked positively skewed; let's see what the statistics say:
-</p>
+<p>
+We said earlier that the <code>discoveries</code> data looked positively skewed; let's see what the statistics say:
 </div>
-
-
 
 
 <pre class="src src-R">skewness(discoveries)
@@ -2665,13 +2638,9 @@ The <code>e1071</code> package \cite{e1071} has the <code>skewness</code> functi
 </pre>
 
 
-<pre class="example">
-[1] 1.2076
-[1] 0.4898979
-</pre>
+: [1] 1.2076
+: [1] 0.4898979
 
-
-<p>
 The data are definitely skewed to the right. Let us check the sample excess kurtosis of the <code>UKDriverDeaths</code> data:
 </p>
 
@@ -2922,13 +2891,20 @@ What do we do about outliers? They merit further investigation. The primary goal
 The quickest way to visually identify outliers is with a boxplot, described above. Another way is with the <code>boxplot.stats</code> function.
 </p>
 
+
 <div class="exampletoo">
-<p>The <code>rivers</code> data. We will look for potential outliers in the <code>rivers</code> data.
+<p>
+The <code>rivers</code> data. We will look for potential outliers in the <code>rivers</code> data.
 </p>
 
 
 
 <pre class="src src-R">boxplot.stats(rivers)$out
+</pre>
+
+
+<pre class="example">
+ [1] 1459 1450 1243 2348 3710 2315 2533 1306 1270 1885 1770
 </pre>
 
 
@@ -2940,6 +2916,12 @@ We may change the <code>coef</code> argument to 3 (it is 1.5 by default) to iden
 
 <pre class="src src-R">boxplot.stats(rivers, coef = 3)$out
 </pre>
+
+
+<pre class="example">
+[1] 2348 3710 2315 2533 1885
+</pre>
+
 
 
 
@@ -2993,8 +2975,10 @@ However, statistical studies often involve experiments where there are two (or m
 The corresponding objects in \(\mathsf{R}\) are called <i>data frames</i>, and they can be constructed with the <code>data.frame</code> function. Each row is an observation, and each column is a variable.
 </p>
 
+
 <div class="exampletoo">
-<p>Suppose we have two vectors <code>x</code> and <code>y</code> and we want to make a data frame out of them.
+<p>
+Suppose we have two vectors <code>x</code> and <code>y</code> and we want to make a data frame out of them.
 </p>
 
 
@@ -3003,6 +2987,7 @@ The corresponding objects in \(\mathsf{R}\) are called <i>data frames</i>, and t
 y <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> letters[3:6]
 A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> data.frame(v1 = x, v2 = y)
 </pre>
+
 
 
 
@@ -3023,6 +3008,15 @@ A[ , 2]
 </pre>
 
 
+<pre class="example">
+  v1 v2
+3  7  e
+  v1 v2
+1  5  c
+[1] c d e f
+Levels: c d e f
+</pre>
+
 
 <p>
 There are several things happening above. Notice that <code>A[3,]</code> gave a data frame (with the same entries as the third row of <code>A</code>) yet <code>A[1, ]</code> is a numeric vector. <code>A[ ,2]</code> is a factor vector because the default setting for <code>data.frame</code> is <code>stringsAsFactors = TRUE</code>.
@@ -3037,6 +3031,15 @@ Data frames have a <code>names</code> attribute and the names may be extracted w
 A[<span style="font-style: italic;">'v1'</span>]
 </pre>
 
+
+<pre class="example">
+[1] "v1" "v2"
+  v1
+1  5
+2  6
+3  7
+4  8
+</pre>
 
 
 <p>
@@ -3745,8 +3748,10 @@ For a random experiment \(E\), the set of all possible outcomes of \(E\) is call
 Most of the probability work in this book is done with the <code>prob</code> package \cite{prob}. A sample space is (usually) represented by a <i>data frame</i>, that is, a rectangular collection of variables (see Section <a href="#sec-3-5-2">Multivariate Data</a>). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general <i>list</i> data structure. See Section <a href="#sec-4-6-2-1">How to <code>ps</code></a> for details.
 </p>
 
+
 <div class="exampletoo">
-<p>Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
+<p>
+Consider the random experiment of dropping a Styrofoam cup onto the floor from a height of four feet. The cup hits the ground and eventually comes to rest. It could land upside down, right side up, or it could land on its side. We represent these possible outcomes of the random experiment by the following.
 </p>
 
 
@@ -3756,9 +3761,18 @@ S
 </pre>
 
 
+<pre class="example">
+  lands
+1  down
+2    up
+3  side
+</pre>
+
+
 <p>
 The sample space <code>S</code> contains the column <code>lands</code> which stores the outcomes <code>down</code>, <code>up</code>, and <code>side</code>. 
 </p>
+
 
 </div>
 
@@ -3884,8 +3898,10 @@ Note that this one general class of random experiments contains as a special cas
 The <code>prob</code> package \cite{prob} accomplishes sampling from urns with the <code>urnsamples</code>\index{urnsamples@\texttt{urnsamples}} function, which has arguments <code>x</code>, <code>size</code>, <code>replace</code>, and <code>ordered</code>. The argument <code>x</code> represents the urn from which sampling is to be done. The <code>size</code> argument tells how large the sample will be. The <code>ordered</code> and <code>replace</code> arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-sample-urn-two-from-three" id="exa-sample-urn-two-from-three"></a>
+<p>
+<a name="exa-sample-urn-two-from-three" id="exa-sample-urn-two-from-three"></a>
 Let our urn simply contain three balls, labeled 1, 2, and 3, respectively. We are going to take a sample of size 2 from the urn. 
 </p>
 </div>
@@ -3904,6 +3920,20 @@ If sampling is with replacement, then we can get any outcome 1, 2, or 3 on any d
 
 
 <pre class="src src-R">urnsamples(1:3, size = 2, replace = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>, ordered = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>)
+</pre>
+
+
+
+<pre class="example">  X1 X2
+1  1  1
+2  2  1
+3  3  1
+4  1  2
+5  2  2
+6  3  2
+7  1  3
+8  2  3
+9  3  3
 </pre>
 
 
@@ -3929,6 +3959,17 @@ Here sampling is without replacement, so we may not observe the same number twic
 </pre>
 
 
+<pre class="example">
+  X1 X2
+1  1  2
+2  2  1
+3  1  3
+4  3  1
+5  2  3
+6  3  2
+</pre>
+
+
 <p>
 This is just as we expected. Notice that there are less rows in this answer due to the more restrictive sampling procedure. If the numbers 1, 2, and 3 represented ``Fred'', ``Mary'', and ``Sue'', respectively, then this experiment would be equivalent to selecting two people of the three to serve as president and vice-president of a company, respectively, and the sample space shown above lists all possible ways that this could be done.
 </p>
@@ -3948,6 +3989,14 @@ Again, we may not observe the same outcome twice, but in this case, we will only
 
 
 <pre class="src src-R">urnsamples(1:3, size = 2, replace = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>, ordered = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>) 
+</pre>
+
+
+<pre class="example">
+  X1 X2
+1  1  2
+2  1  3
+3  2  3
 </pre>
 
 
@@ -3973,12 +4022,25 @@ The last possibility is perhaps the most interesting. We replace the balls after
 </pre>
 
 
+<pre class="example">
+  X1 X2
+1  1  1
+2  1  2
+3  1  3
+4  2  2
+5  2  3
+6  3  3
+</pre>
+
+
 <p>
 We may interpret this experiment in a number of alternative ways. One way is to consider this as simply putting two 3-sided dice in a cup, shaking the cup, and looking inside &ndash; as in a game of <i>Liar's Dice</i>, for instance. Each row of the sample space is a potential pair we could observe. Another way is to view each outcome as a separate method to distribute two identical golf balls into three boxes labeled 1, 2, and 3. Regardless of the interpretation, <code>urnsamples</code> lists every possible way that the experiment can conclude.
 </p>
 
+
 </div>
-<p>Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be <code>x = c("Red","Blue","Green")</code>. But, there is an <b>important</b> point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were <i>distinguishable</i> in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if <code>x = c("Red","Red","Blue")</code>?'' The answer is that <code>urnsamples</code> behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
+<p>
+Note that the urn does not need to contain numbers; we could have just as easily taken our urn to be <code>x = c("Red","Blue","Green")</code>. But, there is an <b>important</b> point to mention before proceeding. Astute readers will notice that in our example, the balls in the urn were <i>distinguishable</i> in the sense that each had a unique label to distinguish it from the others in the urn. A natural question would be, ``What happens if your urn has indistinguishable elements, for example, what if <code>x = c("Red","Red","Blue")</code>?'' The answer is that <code>urnsamples</code> behaves as if each ball in the urn is distinguishable, regardless of its actual contents. We may thus imagine that while there are two red balls in the urn, the balls are such that we can tell them apart (in principle) by looking closely enough at the imperfections on their
 surface.
 </p>
 <p>
@@ -4524,8 +4586,10 @@ In the <code>prob</code> package \cite{prob}, a probability space is an object o
 To accomplish this in \(\mathsf{R}\), we may use the <code>probspace</code> function. The general syntax is <code>probspace(x, probs)</code>, where <code>x</code> is a sample space of outcomes and <code>probs</code> is a vector (of the same length as the number of outcomes in <code>x</code>). The specific choice of <code>probs</code> depends on the context of the problem, and some examples follow to demonstrate some of the more common choices. 
 </p>
 
+
 <div class="exampletoo">
-<p>The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has \(n\) outcomes, then <code>probs</code> would be a vector of length \(n\) with identical entries \(1/n\). The quickest way to generate <code>probs</code> is with the <code>rep</code> function. We will start with the experiment of rolling a die, so that \(n=6\). We will construct the sample space, generate the <code>probs</code> vector, and put them together with <code>probspace</code>. 
+<p>
+The Equally Likely Model asserts that every outcome of the sample space has the same probability, thus, if a sample space has \(n\) outcomes, then <code>probs</code> would be a vector of length \(n\) with identical entries \(1/n\). The quickest way to generate <code>probs</code> is with the <code>rep</code> function. We will start with the experiment of rolling a die, so that \(n=6\). We will construct the sample space, generate the <code>probs</code> vector, and put them together with <code>probspace</code>. 
 </p>
 
 
@@ -4533,6 +4597,17 @@ To accomplish this in \(\mathsf{R}\), we may use the <code>probspace</code> func
 <pre class="src src-R">outcomes <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rolldie(1) 
 p <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rep(1/6, times = 6) 
 probspace(outcomes, probs = p) 
+</pre>
+
+
+<pre class="example">
+  X1     probs
+1  1 0.1666667
+2  2 0.1666667
+3  3 0.1666667
+4  4 0.1666667
+5  5 0.1666667
+6  6 0.1666667
 </pre>
 
 
@@ -4546,6 +4621,17 @@ The <code>probspace</code> function is designed to save us some time in the most
 </pre>
 
 
+<pre class="example">
+  x     probs
+1 1 0.1666667
+2 2 0.1666667
+3 3 0.1666667
+4 4 0.1666667
+5 5 0.1666667
+6 6 0.1666667
+</pre>
+
+
 <p>
 Further, since the equally likely model plays such a fundamental role in the study of probability the <code>probspace</code> function will assume that the equally model is desired if no <code>probs</code> are specified. Thus, we get the same answer with only 
 </p>
@@ -4553,6 +4639,17 @@ Further, since the equally likely model plays such a fundamental role in the stu
 
 
 <pre class="src src-R">probspace(1:6) 
+</pre>
+
+
+<pre class="example">
+  x     probs
+1 1 0.1666667
+2 2 0.1666667
+3 3 0.1666667
+4 4 0.1666667
+5 5 0.1666667
+6 6 0.1666667
 </pre>
 
 
@@ -4566,9 +4663,21 @@ And finally, since rolling dice is such a common experiment in probability class
 </pre>
 
 
+<pre class="example">
+  X1     probs
+1  1 0.1666667
+2  2 0.1666667
+3  3 0.1666667
+4  4 0.1666667
+5  5 0.1666667
+6  6 0.1666667
+</pre>
+
+
 <p>
 or just <code>rolldie(1, TRUE)</code>. Many of the other sample space functions (<code>tosscoin</code>, <code>cards</code>, <code>roulette</code>, <i>etc</i>.) have similar <code>makespace</code> arguments. Check the documentation for details.
 </p>
+
 
 </div>
 
@@ -4576,8 +4685,10 @@ or just <code>rolldie(1, TRUE)</code>. Many of the other sample space functions 
 One sample space function that does NOT have a <code>makespace</code> option is the <code>urnsamples</code> function. This was intentional. The reason is that under the varied sampling assumptions the outcomes in the respective sample spaces are NOT, in general, equally likely. It is important for the user to carefully consider the experiment to decide whether or not the outcomes are equally likely and then use <code>probspace</code> to assign the model.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-unbalanced-coin" id="exa-unbalanced-coin"></a>
+<p>
+<a name="exa-unbalanced-coin" id="exa-unbalanced-coin"></a>
 <b>An unbalanced coin.</b> While the <code>makespace</code> argument to <code>tosscoin</code> is useful to represent the tossing of a <i>fair</i> coin, it is not always appropriate. For example, suppose our coin is not perfectly balanced, for instance, maybe the \(H\) side is somewhat heavier such that the chances of a \(H\) appearing in a single toss is 0.70 instead of 0.5. We may set up the probability space with 
 </p>
 
@@ -4587,9 +4698,17 @@ One sample space function that does NOT have a <code>makespace</code> option is 
 </pre>
 
 
+<pre class="example">
+  toss1 probs
+1     H   0.7
+2     T   0.3
+</pre>
+
+
 <p>
 The same procedure can be used to represent an unbalanced die, roulette wheel, <i>etc</i>.
 </p>
+
 
 </div>
 
@@ -4756,26 +4875,24 @@ For an event \(A\subset S\), we write \(A\) as a collection of elementary outcom
 In other words, under the equally likely model, the probability of an event \(A\) is determined by the number of elementary events that \(A\) contains. 
 </p>
 
+
 <div class="exampletoo">
-<p>Consider the random experiment \(E\) of tossing a coin. Then the sample space is \(S=\{H,T\}\), and under the equally likely model, these two outcomes have \(\mathbb{P}(H)=\mathbb{P}(T)=1/2\). This model is taken when it is reasonable to assume that the coin is fair.
-</p>
+<p>
+Consider the random experiment \(E\) of tossing a coin. Then the sample space is \(S=\{H,T\}\), and under the equally likely model, these two outcomes have \(\mathbb{P}(H)=\mathbb{P}(T)=1/2\). This model is taken when it is reasonable to assume that the coin is fair.
 </div>
 
-
 <div class="exampletoo">
-<p>Suppose the experiment \(E\) consists of tossing a fair coin twice. The sample space may be represented by \(S=\{HH,\, HT,\, TH,\, TT\}\). Given that the coin is fair and that the coin is tossed in an independent and identical manner, it is reasonable to apply the equally likely model. 
+Suppose the experiment \(E\) consists of tossing a fair coin twice. The sample space may be represented by \(S=\{HH,\, HT,\, TH,\, TT\}\). Given that the coin is fair and that the coin is tossed in an independent and identical manner, it is reasonable to apply the equally likely model. 
 </p>
 <p>
 What is \(\mathbb{P}(\mbox{at least 1 Head})\)? Looking at the sample space we see the elements \(HH\), \(HT\), and \(TH\) have at least one Head; thus, \(\mathbb{P}(\mbox{at least 1 Head})=3/4\). 
 </p>
 <p>
 What is \(\mathbb{P}(\mbox{no Heads})\)? Notice that the event \(\{ \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by Property <a href="#enu-prop-prob-complement">prob-comp</a> means \(\mathbb{P}(\mbox{no Heads})=1-\mathbb{P}(\mbox{at least one head})=1-3/4=1/4\). It is obvious in this simple example that the only outcome with no Heads is \(TT\), however, this complementation trick can be handy in more complicated problems.
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-three-child-family" id="exa-three-child-family"></a>
+<a name="exa-three-child-family" id="exa-three-child-family"></a>
 Imagine a three child family, each child being either Boy (\(B\)) or Girl (\(G\)). An example sequence of siblings would be \(BGB\). The sample space may be written
 \[
 S=\left\{ 
@@ -4799,18 +4916,14 @@ Thus
 \mathbb{P}(\mbox{at most 2 Boys})=1-\mathbb{P}(GGG)=1-1/8=7/8.
 \]
 
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>Consider the experiment of rolling a six-sided die, and let the outcome be the face showing up when the die comes to rest. Then \( S = \{ 1,\,2,\,3,\,4,\,5,\,6 \} \). It is usually reasonable to suppose that the die is fair, so that the six outcomes are equally likely.
-</p>
+Consider the experiment of rolling a six-sided die, and let the outcome be the face showing up when the die comes to rest. Then \( S = \{ 1,\,2,\,3,\,4,\,5,\,6 \} \). It is usually reasonable to suppose that the die is fair, so that the six outcomes are equally likely.
 </div>
 
-
 <div class="exampletoo">
-<p>Consider a standard deck of 52 cards. These are usually labeled with the four <i>suits</i>: Clubs, Diamonds, Hearts, and Spades, and the 13 <i>ranks</i>: 2, 3, 4, &hellip;, 10, Jack (J), Queen (Q), King (K), and Ace (A). Depending on the game played, the Ace may be ranked below 2 or above King. 
+Consider a standard deck of 52 cards. These are usually labeled with the four <i>suits</i>: Clubs, Diamonds, Hearts, and Spades, and the 13 <i>ranks</i>: 2, 3, 4, &hellip;, 10, Jack (J), Queen (Q), King (K), and Ace (A). Depending on the game played, the Ace may be ranked below 2 or above King. 
 </p>
 <p>
 Let the random experiment \(E\) consist of drawing exactly one card from a well-shuffled deck, and let the outcome be the face of the card. Define the events \( A = \{ \mbox{draw an Ace} \} \) and \( B = \{ \mbox{draw a Club} \} \). Bear in mind: we are only drawing one card.
@@ -4829,12 +4942,10 @@ To find \(\mathbb{P}(A\cup B)\) we may use the above with the General Addition R
  & = & 16/52.
 \end{eqnarray*}
 
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>Staying with the deck of cards, let another random experiment be the selection of a five card stud poker hand, where ``five card stud'' means that we draw exactly five cards from the deck without replacement, no more, and no less. It turns out that the sample space \(S\) is so large and complicated that we will be obliged to settle for the trivial description \( S = \{ \mbox{all possible 5 card hands} \} \) for the time being. We will have a more precise description later.
+Staying with the deck of cards, let another random experiment be the selection of a five card stud poker hand, where ``five card stud'' means that we draw exactly five cards from the deck without replacement, no more, and no less. It turns out that the sample space \(S\) is so large and complicated that we will be obliged to settle for the trivial description \( S = \{ \mbox{all possible 5 card hands} \} \) for the time being. We will have a more precise description later.
 </p>
 <p>
 What is \(\mathbb{P}(\mbox{Royal Flush})\), or in other words, \(\mathbb{P}(\mbox{A, K, Q, J, 10 all in the same suit})\)? 
@@ -4842,6 +4953,7 @@ What is \(\mathbb{P}(\mbox{Royal Flush})\), or in other words, \(\mathbb{P}(\mbo
 <p>
 It should be clear that there are only four possible royal flushes. Thus, if we could only count the number of outcomes in \(S\) then we could simply divide four by that number and we would have our answer under the equally likely model. This is the subject of Section <a href="#sec-4-5">Counting Methods</a>.
 </p>
+
 
 </div>
 
@@ -4939,8 +5051,10 @@ More generally, if the experiment is composed of \(k\) successive steps which ma
 </div>
 
 
+
 <div class="exampletoo">
-<p>We would like to order a pizza. It will be sure to have cheese (and marinara sauce), but we may elect to add one or more of the following five (5) available toppings:
+<p>
+We would like to order a pizza. It will be sure to have cheese (and marinara sauce), but we may elect to add one or more of the following five (5) available toppings:
 \[
 \mbox{pepperoni, sausage, anchovies, olives, and green peppers.}
 \]
@@ -4953,15 +5067,15 @@ There are many ways to approach the problem, but the quickest avenue employs the
 At each stage we will have had two options, or ways, to select a pizza to be made. The Multiplication Principle says that we should multiply the 2's to find the total number of possible pizzas: \(2\cdot2\cdot2\cdot2\cdot2=2^{5}=32\).
 </p>
 
-</div>
 
+</div>
 
 <div class="exampletoo">
-<p>We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? <b>Answer:</b> \(2\cdot3\cdot4\cdot4\cdot10=960\)
-</p>
+<p>
+We would like to buy a desktop computer to study statistics. We go to a website to build our computer our way. Given a line of products we have many options to customize our computer. In particular, there are 2 choices for a processor, 3 different operating systems, 4 levels of memory, 4 hard drives of differing sizes, and 10 choices for a monitor. How many possible types of computer must the company be prepared to build? <b>Answer:</b> \(2\cdot3\cdot4\cdot4\cdot10=960\)
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-4-5-1" class="outline-4">
@@ -5003,24 +5117,21 @@ n! & = & n(n-1)(n-2)\cdots3\cdot2\cdot1.
 </div>
 
 
-<div class="exampletoo">
-<p>Take a coin and flip it 7 times. How many sequences of Heads and Tails are possible? <b>Answer:</b> \(2^{7}=128\).
-</p>
-</div>
-
 
 <div class="exampletoo">
-<p>In a class of 20 students, we randomly select a class president, a class vice-president, and a treasurer. How many ways can this be done? <b>Answer:</b> \(20\cdot19\cdot18=6840\).
-</p>
+<p>
+Take a coin and flip it 7 times. How many sequences of Heads and Tails are possible? <b>Answer:</b> \(2^{7}=128\).
 </div>
-
 
 <div class="exampletoo">
-<p>We rent five movies to watch over the span of two nights. We wish to watch 3 movies on the first night. How many distinct sequences of 3 movies could we possibly watch? <b>Answer:</b> \(5\cdot4\cdot3=60\).
-</p>
+In a class of 20 students, we randomly select a class president, a class vice-president, and a treasurer. How many ways can this be done? <b>Answer:</b> \(20\cdot19\cdot18=6840\).
 </div>
 
+<div class="exampletoo">
+We rent five movies to watch over the span of two nights. We wish to watch 3 movies on the first night. How many distinct sequences of 3 movies could we possibly watch? <b>Answer:</b> \(5\cdot4\cdot3=60\).
 </div>
+
+</p></div>
 
 </div>
 
@@ -5052,18 +5163,17 @@ The quantity \(n!/[k!(n-k)!]\) is called a <i>binomial coefficient</i> and plays
 and is read ``\(n\) choose \(k\)''.
 </p>
 
-<div class="exampletoo">
-<p>You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? <b>Answer:</b> \({5 \choose 2}=10\).
-</p>
-</div>
-
 
 <div class="exampletoo">
-<p>Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? <b>Answer:</b> \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
-</p>
+<p>
+You rent five movies to watch over the span of two nights, but only wish to watch 3 movies the first night. Your friend, Fred, wishes to borrow some movies to watch at his house on the first night. You owe Fred a favor, and allow him to select 2 movies from the set of 5. How many choices does Fred have? <b>Answer:</b> \({5 \choose 2}=10\).
 </div>
 
+<div class="exampletoo">
+Place 3 six-sided dice into a cup. Next, shake the cup well and pour out the dice. How many distinct rolls are possible? <b>Answer:</b> \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\). 
+</div>
 
+</p>
 </div>
 
 <div id="outline-container-4-5-2-1" class="outline-5">
@@ -5097,12 +5207,11 @@ But we often do not need to actually generate the sample space; it suffices to c
 
 
 
+
 <div class="exampletoo">
-<p>We will compute the number of outcomes for each of the four <code>urnsamples</code> examples that we saw in Example <a href="#exa-sample-urn-two-from-three">Sample-urn-2-from-3</a>. Recall that we took a sample of size two from an urn with three distinguishable elements.
-</p>
+<p>
+We will compute the number of outcomes for each of the four <code>urnsamples</code> examples that we saw in Example <a href="#exa-sample-urn-two-from-three">Sample-urn-2-from-3</a>. Recall that we took a sample of size two from an urn with three distinguishable elements.
 </div>
-
-
 
 
 <pre class="src src-R">nsamp(n=3, k=2, replace = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>, ordered = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>) 
@@ -5112,15 +5221,11 @@ nsamp(n=3, k=2, replace = <span style="font-weight: bold; text-decoration: under
 </pre>
 
 
-<pre class="example">
-[1] 9
-[1] 6
-[1] 3
-[1] 6
-</pre>
+: [1] 9
+: [1] 6
+: [1] 3
+: [1] 6
 
-
-<p>
 Compare these answers with the length of the data frames generated above.
 </p>
 </div>
@@ -5136,8 +5241,10 @@ Compare these answers with the length of the data frames generated above.
 A benefit of <code>nsamp</code> is that it is <i>vectorized</i> so that entering vectors instead of numbers for <code>n</code>, <code>k</code>, <code>replace</code>, and <code>ordered</code> results in a vector of corresponding answers. This becomes particularly convenient for combinatorics problems.
 </p>
 
+
 <div class="exampletoo">
-<p>There are 11 artists who each submit a portfolio containing 7 paintings for competition in an art exhibition. Unfortunately, the gallery director only has space in the winners' section to accommodate 12 paintings in a row equally spread over three consecutive walls. The director decides to give the first, second, and third place winners each a wall to display the work of their choice. The walls boast 31 separate lighting options apiece. How many displays are possible?
+<p>
+There are 11 artists who each submit a portfolio containing 7 paintings for competition in an art exhibition. Unfortunately, the gallery director only has space in the winners' section to accommodate 12 paintings in a row equally spread over three consecutive walls. The director decides to give the first, second, and third place winners each a wall to display the work of their choice. The walls boast 31 separate lighting options apiece. How many displays are possible?
 </p>
 <p>
 <b>Answer:</b> The judges will pick 3 (ranked) winners out of 11 (with <code>rep = FALSE</code>, <code>ord = TRUE</code>). Each artist will select 4 of his/her paintings from 7 for display in a row (<code>rep = FALSE</code>, <code>ord = TRUE</code>), and lastly, each of the 3 walls has 31 lighting possibilities (<code>rep = TRUE</code>, <code>ord = TRUE</code>). These three numbers can be calculated quickly with 
@@ -5166,6 +5273,11 @@ r <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> c(<s
 </pre>
 
 
+<pre class="example">
+[1] 24774195600
+</pre>
+
+
 <p>
 Compare this with the some other ways to compute the same thing: 
 </p>
@@ -5173,6 +5285,11 @@ Compare this with the some other ways to compute the same thing:
 
 
 <pre class="src src-R">(11*10*9)*(7*6*5*4)*313 
+</pre>
+
+
+<pre class="example">
+[1] 260290800
 </pre>
 
 
@@ -5186,6 +5303,11 @@ or alternatively
 </pre>
 
 
+<pre class="example">
+[1] 260290800
+</pre>
+
+
 <p>
 or even 
 </p>
@@ -5196,6 +5318,12 @@ or even
 </pre>
 
 
+<pre class="example">
+[1] 260290800
+</pre>
+
+
+
 
 </div>
 
@@ -5203,8 +5331,10 @@ or even
 As one can guess, in many of the standard counting problems there aren't substantial savings in the amount of typing; it is about the same using <code>nsamp</code> versus <code>factorial</code> and <code>choose</code>. But the virtue of <code>nsamp</code> lies in its collecting the relevant counting formulas in a one-stop shop. Ultimately, it is up to the user to choose the method that works best for him/herself. 
 </p>
 
+
 <div class="exampletoo">
-<p><b>The Birthday Problem.</b> Suppose that there are \(n\) people together in a room. Each person announces the date of his/her birthday in turn. The question is: what is the probability of at least one match? If we let the event \(A\) represent 
+<p>
+<b>The Birthday Problem.</b> Suppose that there are \(n\) people together in a room. Each person announces the date of his/her birthday in turn. The question is: what is the probability of at least one match? If we let the event \(A\) represent 
 \[
 \{ \mbox{there is at least one match}, \}
 \]
@@ -5232,10 +5362,7 @@ When I have asked this question to students, the usual response is ``somewhere a
 </p>
 <p>
 Students are usually surprised to hear that, using the formula above, one needs only \(n=23\) students to have a greater than 50% chance of at least one match. Figure <a href="#fig-birthday">birthday</a> shows a graph of the birthday probabilities:
-</p>
 </div>
-
-
 
 
 
@@ -5249,7 +5376,7 @@ Students are usually surprised to hear that, using the formula above, one needs 
   <p>The birthday problem. The horizontal line is at <code>p = 0.50</code> and the vertical line is at <code>n = 23</code>.</p>
 </div>
 
-</div>
+</p></div>
 
 </div>
 
@@ -5305,8 +5432,10 @@ We will not be discussing a conditional probability of \(B\) given \(A\) when \(
 </div>
 
 
+
 <div class="exampletoo">
-<p>Toss a coin twice. The sample space is given by \(S=\{ HH,\ HT,\ TH,\ TT \} \). Let \(A= \{ \mbox{a head occurs} \} \) and \(B= \{ \mbox{a head and tail occur} \} \). It should be clear that \(\mathbb{P}(A)=3/4\), \(\mathbb{P}(B)=2/4\), and \(\mathbb{P}(A\cap B)=2/4\). What now are the probabilities \(\mathbb{P}(A|B)\) and \(\mathbb{P}(B|A)\)?
+<p>
+Toss a coin twice. The sample space is given by \(S=\{ HH,\ HT,\ TH,\ TT \} \). Let \(A= \{ \mbox{a head occurs} \} \) and \(B= \{ \mbox{a head and tail occur} \} \). It should be clear that \(\mathbb{P}(A)=3/4\), \(\mathbb{P}(B)=2/4\), and \(\mathbb{P}(A\cap B)=2/4\). What now are the probabilities \(\mathbb{P}(A|B)\) and \(\mathbb{P}(B|A)\)?
 \[
 \mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}=\frac{2/4}{2/4}=1,
 \]
@@ -5315,36 +5444,19 @@ in other words, once we know that a Head and Tail occur, we may be certain that 
 \mathbb{P}(B|A)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(A)}=\frac{2/4}{3/4}=\frac{2}{3},
 \]
 which means that given the information that a Head has occurred, we no longer need to account for the outcome \(TT\), and the remaining three outcomes are equally likely with exactly two outcomes lying in the set \(B\). 
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-Toss-a-six-sided-die-twice" id="exa-Toss-a-six-sided-die-twice"></a>
+<a name="exa-Toss-a-six-sided-die-twice" id="exa-Toss-a-six-sided-die-twice"></a>
 Toss a six-sided die twice. The sample space consists of all ordered pairs \((i,j)\) of the numbers \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \} \). We know from Section <a href="#sec-4-5">Counting Methods</a> that \( \# (S) = 6^{2} = 36 \). Let \( A = \{ \mbox{outcomes match} \} \) and \( B = \{ \mbox{sum of outcomes at least 8} \} \). The sample space may be represented by a matrix:
 </p>
 
 
 
 
-<pre class="src src-R">A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rolldie(2)
-B <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> subset(A, X1==X2)
-C <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> subset(A, X1+X2 &gt; 7)
-B$lab <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rep(<span style="font-style: italic;">"X"</span>, dim(B)[1])
-C$lab <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rep(<span style="font-style: italic;">"O"</span>, dim(C)[1])
-p <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(rbind(B, C), aes(x=X1, y=X2, label=lab))
-p + geom_text(size = 15) + xlab(<span style="font-style: italic;">"First roll"</span>) + ylab(<span style="font-style: italic;">"Second roll"</span>)
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;twodiceAB&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;twodiceAB&gt;&gt;
-</pre>
 
 
 
@@ -5359,10 +5471,9 @@ The outcomes lying in the event \(A\) are marked with the symbol ``X'', the outc
 \mathbb{P}(A|B)=\frac{3/36}{15/36}=\frac{1}{5},\quad \mathbb{P}(B|A)=\frac{3/36}{6/36}=\frac{1}{2}.
 \]
 Again, we see that given the knowledge that \(B\) occurred (the 15 outcomes in the upper right triangle), there are 3 of the 15 that fall into the set \(A\), thus the probability is \(3/15\). Similarly, given that \(A\) occurred (we are on the diagonal), there are 3 out of 6 outcomes that also fall in \(B\), thus, the probability of \(B\) given \(A\) is 1/2. 
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-4-6-1" class="outline-4">
@@ -5498,16 +5609,17 @@ The following theorem establishes that conditional probabilities behave just lik
 <p>The Multiplication Rule is very important because it allows us to find probabilities in random experiments that have a sequential structure, as the next example shows. 
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-two-cards-both-aces" id="exa-two-cards-both-aces"></a>
+<p>
+<a name="exa-two-cards-both-aces" id="exa-two-cards-both-aces"></a>
 At the beginning of the section we drew two cards from a standard playing deck. Now we may answer our original question, what is \(\mathbb{P}(\mbox{both Aces})\)?
 \[
 \mathbb{P}(\mbox{both Aces})=\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B|A)=\frac{4}{52}\cdot\frac{3}{51}\approx0.00452.
 \]
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-sub-howto-ps-objects" class="outline-5">
@@ -5559,17 +5671,18 @@ Note that this value matches what we found in Example <a href="#exa-two-cards-bo
 </p>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-urn-7-red-3-green" id="exa-urn-7-red-3-green"></a>
+<p>
+<a name="exa-urn-7-red-3-green" id="exa-urn-7-red-3-green"></a>
 Consider an urn with 10 balls inside, 7 of which are red and 3 of which are green. Select 3 balls successively from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \), \( B = \{ 2^{\mathrm{nd}} \mbox{ ball is red} \} \), and \( C = \{ 3^{\mathrm{rd}} \mbox{ ball is red} \} \). Then
 \[
 \mathbb{P}(\mbox{all 3 balls are red})=\mathbb{P}(A\cap B\cap C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.
 \]
 
-</p>
 </div>
 
-</div>
+</p></div>
 
 </div>
 
@@ -5657,8 +5770,10 @@ Note that the exact value is \(7/20\) (do it with the Multiplication Rule). What
 We already knew this. It is the probability of observing two <code>red</code>'s, above.
 </p>
 
+
 <div class="exampletoo">
-<p>Consider two urns, the first with 5 red balls and 3 green balls, and the second with 2 red balls and 6 green balls. Your friend randomly selects one ball from the first urn and transfers it to the second urn, without disclosing the color of the ball. You select one ball from the second urn. What is the probability that the selected ball is red? Let \( A = \{ \mbox{transferred ball is red} \} \) and \( B = \{ \mbox{selected ball is red} \} \). Write
+<p>
+Consider two urns, the first with 5 red balls and 3 green balls, and the second with 2 red balls and 6 green balls. Your friend randomly selects one ball from the first urn and transfers it to the second urn, without disclosing the color of the ball. You select one ball from the second urn. What is the probability that the selected ball is red? Let \( A = \{ \mbox{transferred ball is red} \} \) and \( B = \{ \mbox{selected ball is red} \} \). Write
 \begin{align*}
 B & =S\cap B\\
  & =(A\cup A^{c})\cap B\\
@@ -5674,11 +5789,12 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 (which is 7/24 in lowest terms).
 </p>
 
+
 </div>
 
-
 <div class="exampletoo">
-<p>We saw the <code>RcmdrTestDrive</code> data set in Chapter <a href="#sec-2">Intro to R</a> in which a two-way table of the smoking status versus the gender was 
+<p>
+We saw the <code>RcmdrTestDrive</code> data set in Chapter <a href="#sec-2">Intro to R</a> in which a two-way table of the smoking status versus the gender was 
 </p>
 
 
@@ -5687,6 +5803,15 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 data(RcmdrTestDrive)  
 .Table <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> xtabs( ~ smoking + gender, data = RcmdrTestDrive)
 addmargins(.Table) <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Table with marginal distributions</span>
+</pre>
+
+
+<pre class="example">
+           gender
+smoking     Female Male Sum
+  Nonsmoker     61   75 136
+  Smoker         9   23  32
+  Sum           70   98 168
 </pre>
 
 
@@ -5707,8 +5832,10 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 (which is 1153/2192 in lowest terms).
 </p>
 
+
 </div>
-<p>Using the same reasoning, we can return to the example from the beginning of the section and show that
+<p>
+Using the same reasoning, we can return to the example from the beginning of the section and show that
 \[
 \mathbb{P}(\{ \mbox{second card is an Ace} \} )=4/52.
 \]
@@ -5804,8 +5931,10 @@ If only the first three conditions hold then \(A\), \(B\), and \(C\) are said to
 We can now deduce the pattern for \(n\) events, \(n&gt;3\). The events will be mutually independent only if they satisfy the product equality pairwise, then in groups of three, in groups of four, and so forth, up to all \(n\) events at once. For \(n\) events, there will be \(2^{n}-n-1\) equations that must be satisfied (see Exercise <a href="#xca-numb-cond-indep">Number conditions indep</a>). Although these requirements for a set of events to be mutually independent may seem stringent, the good news is that for most of the situations considered in this book the conditions will all be met (or at least we will suppose that they are).
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-toss-ten-coins" id="exa-toss-ten-coins"></a>
+<p>
+<a name="exa-toss-ten-coins" id="exa-toss-ten-coins"></a>
 Toss ten coins. What is the probability of observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\ i=1,2,\ldots,10\). Supposing that we toss the coins in such a way that they do not interfere with each other, this is one of the situations where all of the \(A_{i}\) may be considered mutually independent due to the nature of the tossing. Of course, the only way that there will not be at least one Head showing is if all tosses are Tails. Therefore,
 \begin{align*}
 \mathbb{P}(\mbox{at least one }H) & =1-\mathbb{P}(\mbox{all }T),\\
@@ -5815,6 +5944,7 @@ Toss ten coins. What is the probability of observing at least one Head? Answer: 
 \end{align*}
 which is approximately \(0.9990234\).
 </p>
+
 
 </div>
 
@@ -5827,8 +5957,10 @@ which is approximately \(0.9990234\).
 
 
 
+
 <div class="exampletoo">
-<p>Toss ten coins. What is the probability of observing at least one Head?
+<p>
+Toss ten coins. What is the probability of observing at least one Head?
 </p>
 
 
@@ -5839,9 +5971,15 @@ A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> subs
 </pre>
 
 
+<pre class="example">
+[1] 0.9990234
+</pre>
+
+
 <p>
 Compare this answer to what we got in Example <a href="#exa-toss-ten-coins">Toss 10 coins</a>.
 </p>
+
 
 </div>
 
@@ -5861,8 +5999,10 @@ Generalizing from above it is common to repeat a certain experiment multiple tim
 The <code>iidspace</code> function was designed specifically for this situation. It has three arguments: <code>x</code>, which is a vector of outcomes, <code>ntrials</code>, which is an integer telling how many times to repeat the experiment, and <code>probs</code> to specify the probabilities of the outcomes of <code>x</code> in a single trial. 
 </p>
 
+
 <div class="exampletoo">
-<p><b>An unbalanced coin</b> (continued, see Example <a href="#exa-unbalanced-coin">Unbalanced Coin</a>). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
+<p>
+<b>An unbalanced coin</b> (continued, see Example <a href="#exa-unbalanced-coin">Unbalanced Coin</a>). It was easy enough to set up the probability space for one unbalanced toss, however, the situation becomes more complicated when there are many tosses involved. Clearly, the outcome \(HHH\) should not have the same probability as \(TTT\), which should again not have the same probability as \(HTH\). At the same time, there is symmetry in the experiment in that the coin does not remember the face it shows from toss to toss, and it is easy enough to toss the coin in a similar way repeatedly.
 </p>
 <p>
 We may represent tossing our unbalanced coin three times with the following: 
@@ -5874,9 +6014,23 @@ We may represent tossing our unbalanced coin three times with the following:
 </pre>
 
 
+<pre class="example">
+  X1 X2 X3 probs
+1  H  H  H 0.343
+2  T  H  H 0.147
+3  H  T  H 0.147
+4  T  T  H 0.063
+5  H  H  T 0.147
+6  T  H  T 0.063
+7  H  T  T 0.063
+8  T  T  T 0.027
+</pre>
+
+
 <p>
 As expected, the outcome \(HHH\) has the largest probability, while \(TTT\) has the smallest. (Since the trials are independent, \(\mathbb{P}(HHH)=0.7^{3}\) and \(\mathbb{P}(TTT)=0.3^{3}\), <i>etc</i>.) Note that the result of the function call is a probability space, not a sample space (which we could construct already with the <code>tosscoin</code> or <code>urnsamples</code> functions). The same procedure could be used to model an unbalanced die or any other experiment that may be represented with a vector of possible outcomes.
 </p>
+
 
 </div>
 
@@ -5927,8 +6081,10 @@ Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probab
 What does it mean? Usually in applications we are given (or know) <i>a priori</i> probabilities \(\mathbb{P}(B_{k})\). We go out and collect some data, which we represent by the event \(A\). We want to know: how do we <b>update</b> \(\mathbb{P}(B_{k})\) to \(\mathbb{P}(B_{k}|A)\)? The answer: Bayes' Rule.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-misfiling-assistants" id="exa-misfiling-assistants"></a>
+<p>
+<a name="exa-misfiling-assistants" id="exa-misfiling-assistants"></a>
 <b>Misfiling Assistants.</b> In this problem, there are three assistants working at a company: Moe, Larry, and Curly. Their primary job duty is to file paperwork in the filing cabinet when papers become available. The three assistants have different work schedules:
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -6037,20 +6193,17 @@ This last quantity is called the posterior probability that Moe misfiled the doc
 </table>
 
 The conclusion: <b>Larry</b> gets the axe. What is happening is an intricate interplay between the time on the job and the misfile rate. It is not obvious who the winner (or in this case, loser) will be, and the statistician needs to consult Bayes' Rule to determine the best course of action.
-
 </div>
-
 
 <div class="exampletoo">
-<p><a name="exa-misfiling-assistants-multiple" id="exa-misfiling-assistants-multiple"></a>
+<a name="exa-misfiling-assistants-multiple" id="exa-misfiling-assistants-multiple"></a>
 Suppose the boss gets a change of heart and does not fire anybody. But the next day (s)he randomly selects another file and again finds it to be misplaced. To decide whom to fire now, the boss would use the same procedure, with one small change. (S)he would not use the prior probabilities 60%, 30%, and 10%; those are old news. Instead, she would replace the prior probabilities with the posterior probabilities just calculated. After the math she will have new posterior probabilities, updated even more from the day before.
-</p>
+
 <p>
 In this way, probabilities found by Bayes' rule are always on the cutting edge, always updated with respect to the best information available at the time.
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-4-8-1" class="outline-4">
@@ -6062,8 +6215,10 @@ In this way, probabilities found by Bayes' rule are always on the cutting edge, 
 There are not any special functions for Bayes' Rule in the <code>prob</code> package \cite{prob}, but problems like the ones above are easy enough to do by hand.
 </p>
 
+
 <div class="exampletoo">
-<p><b>Misfiling assistants</b> (continued from Example <a href="#exa-misfiling-assistants">Misfiling Assistants</a>). We store the prior probabilities and the likelihoods in vectors and go to town.
+<p>
+<b>Misfiling assistants</b> (continued from Example <a href="#exa-misfiling-assistants">Misfiling Assistants</a>). We store the prior probabilities and the likelihoods in vectors and go to town.
 </p>
 
 
@@ -6075,6 +6230,12 @@ post / sum(post)
 </pre>
 
 
+<pre class="example">
+[1] 0.3673469 0.4285714 0.2040816
+</pre>
+
+
+
 
 </div>
 
@@ -6084,8 +6245,10 @@ Compare these answers with what we got in Example <a href="#exa-misfiling-assist
 </p>
 
 
+
 <div class="exampletoo">
-<p>Let us incorporate the posterior probability (<code>post</code>) information from the last example and suppose that the assistants misfile seven more documents. Using Bayes' Rule, what would the new posterior probabilities be?
+<p>
+Let us incorporate the posterior probability (<code>post</code>) information from the last example and suppose that the assistants misfile seven more documents. Using Bayes' Rule, what would the new posterior probabilities be?
 </p>
 
 
@@ -6096,12 +6259,15 @@ post / sum(post)
 </pre>
 
 
-<p>
-We see that the individual with the highest probability of having misfiled all eight documents given the observed data is no longer Larry, but Curly. 
-</p>
-</div>
+<pre class="example">
+[1] 0.0003355044 0.1473949328 0.8522695627
+</pre>
+
 
 <p>
+We see that the individual with the highest probability of having misfiled all eight documents given the observed data is no longer Larry, but Curly. 
+</div>
+
 There are two important points. First, we did not divide <code>post</code> by the sum of its entries until the very last step; we do not need to calculate it, and it will save us computing time to postpone normalization until absolutely necessary, namely, until we finally want to interpret them as probabilities.
 </p>
 <p>
@@ -6114,6 +6280,10 @@ Second, the reader might be wondering what the boss would get if (s)he skipped t
 fastpost / sum(fastpost)
 </pre>
 
+
+<pre class="example">
+[1] 0.0003355044 0.1473949328 0.8522695627
+</pre>
 
 
 <p>
@@ -6142,8 +6312,10 @@ We already know about experiments, sample spaces, and events. In this section, w
 We usually denote random variables by uppercase letters such as \(X\), \(Y\), and \(Z\), and we denote their observed values by lowercase letters \(x\), \(y\), and \(z\). Just as \(S\) is the set of all possible outcomes of \(E\), we call the set of all possible values of \(X\) the <i>support</i> of \(X\) and denote it by \(S_{X}\).
 </p>
 
+
 <div class="exampletoo">
-<p>Let \(E\) be the experiment of flipping a coin twice. We have seen that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define the random variable \(X = \mbox{the number of heads}\). That is, for example, \(X(HH)=2\), while \(X(HT)=1\). We may make a table of the possibilities:
+<p>
+Let \(E\) be the experiment of flipping a coin twice. We have seen that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define the random variable \(X = \mbox{the number of heads}\). That is, for example, \(X(HH)=2\), while \(X(HT)=1\). We may make a table of the possibilities:
 </p>
 <table  border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" id="tab-flip-coin-twice">
 <caption>Flipping a coin twice.</caption>
@@ -6160,22 +6332,16 @@ We usually denote random variables by uppercase letters such as \(X\), \(Y\), an
 
 <p>
 Taking a look at the second row of the table, we see that the support of \(X\) &ndash; the set of all numbers that \(X\) assumes &ndash; would be \( S_{X}= \{ 0,1,2 \} \).
-</p>
 </div>
-
 
 <div class="exampletoo">
-<p>Let \(E\) be the experiment of flipping a coin repeatedly until observing a Head. The sample space would be \(S= \{ H,\ TH,\ TTH,\ TTTH,\ \ldots \} \). Now define the random variable \(Y=\mbox{the number of Tails before the first head}\). Then the support of \(Y\) would be \( S_{Y}= \{ 0,1,2,\ldots \} \).
-</p>
+Let \(E\) be the experiment of flipping a coin repeatedly until observing a Head. The sample space would be \(S= \{ H,\ TH,\ TTH,\ TTTH,\ \ldots \} \). Now define the random variable \(Y=\mbox{the number of Tails before the first head}\). Then the support of \(Y\) would be \( S_{Y}= \{ 0,1,2,\ldots \} \).
 </div>
-
 
 <div class="exampletoo">
-<p>Let \(E\) be the experiment of tossing a coin in the air, and define the random variable \( Z = \mbox{the time (in seconds) until the coin hits the ground} \). In this case, the sample space is inconvenient to describe. Yet the support of \(Z\) would be \((0,\infty)\). Of course, it is reasonable to suppose that the coin will return to Earth in a short amount of time; in practice, the set \((0,\infty)\) is admittedly too large. However, we will find that in many circumstances it is mathematically convenient to study the extended set rather than a restricted one. 
-</p>
+Let \(E\) be the experiment of tossing a coin in the air, and define the random variable \( Z = \mbox{the time (in seconds) until the coin hits the ground} \). In this case, the sample space is inconvenient to describe. Yet the support of \(Z\) would be \((0,\infty)\). Of course, it is reasonable to suppose that the coin will return to Earth in a short amount of time; in practice, the set \((0,\infty)\) is admittedly too large. However, we will find that in many circumstances it is mathematically convenient to study the extended set rather than a restricted one. 
 </div>
 
-<p>
 There are important differences between the supports of \(X\), \(Y\), and \(Z\). The support of \(X\) is a finite collection of elements that can be inspected all at once. And while the support of \(Y\) cannot be exhaustively written down, its elements can nevertheless be listed in a naturally ordered sequence. Random variables with supports similar to those of \(X\) and \(Y\) are called <i>discrete random variables</i>. We study these in Chapter <a href="#sec-5">Discrete Distributions</a>.
 </p>
 <p>
@@ -6447,8 +6613,10 @@ Since values of the PMF represent probabilities, we know from Chapter <a href="#
 
 
 
+
 <div class="exampletoo">
-<p><a name="exa-Toss-a-coin" id="exa-Toss-a-coin"></a>
+<p>
+<a name="exa-Toss-a-coin" id="exa-Toss-a-coin"></a>
 </p>
 <p>
 Toss a coin 3 times. The sample space would be
@@ -6474,6 +6642,7 @@ What is the PMF of \(X\)? Notice that \(X\) is zero exactly when the outcome \(T
 
 
 
+
 </div>
 
 </div>
@@ -6496,18 +6665,19 @@ provided the (potentially infinite) series \(\sum|x|f_{X}(x)\) is convergent. An
 \end{equation}
 which can be computed (see Exercise <a href="#xca-variance-shortcut">Variance Shortcut</a>) with the alternate formula \(\sigma^{2}=\sum x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
 </p>
+ 
 
 <div class="exampletoo">
-<p><a name="exa-disc-pmf-mean" id="exa-disc-pmf-mean"></a>
+<p>
+<a name="exa-disc-pmf-mean" id="exa-disc-pmf-mean"></a>
 We will calculate the mean of \(X\) in Example <a href="#exa-Toss-a-coin">Toss a coin</a>.
 \[
 \mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=3.5.
 \]
 We interpret \(\mu = 3.5\) by reasoning that if we were to repeat the random experiment many times, independently each time, observe many corresponding outcomes of the random variable \(X\), and take the sample mean of the observations, then the calculated value would fall close to 3.5. The approximation would get better as we observe more and more values of \(X\) (another form of the Law of Large Numbers; see Section <a href="#sec-4-3">Interpreting Probabilities</a>). Another way it is commonly stated is that \(X\) is 3.5 ``on the average'' or ``in the long run''.
-</p>
 </div>
 
-
+</p>
 <div class="rem">
 <p>Note that although we say \(X\) is 3.5 on the average, we must keep in mind that our \(X\) never actually equals 3.5 (in fact, it is impossible for \(X\) to equal 3.5).
 </p>
@@ -6664,13 +6834,11 @@ and finally,
 \sigma^{2}=\sum_{x=1}^{m}x^{2}f_{X}(x)-\mu^{2}=\frac{(m+1)(2m+1)}{6}-\left(\frac{m+1}{2}\right)^{2}=\cdots=\frac{m^{2}-1}{12}.
 \end{equation}
 
-</p>
 <div class="exampletoo">
-<p>Roll a die and let \(X\) be the upward face showing. Then \(m=6\), \(\mu=7/2=3.5\), and \(\sigma^{2}=(6^{2}-1)/12=35/12\).
-</p>
+Roll a die and let \(X\) be the upward face showing. Then \(m=6\), \(\mu=7/2=3.5\), and \(\sigma^{2}=(6^{2}-1)/12=35/12\).
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-5-2-1" class="outline-4">
@@ -6801,17 +6969,15 @@ A similar argument shows that \(\mathbb{E} X(X-1)=n(n-1)p^{2}\) (see Exercise <a
 = & np-np^{2}=np(1-p).
 \end{alignat*}
 
-</p>
 <div class="exampletoo">
-<p>A four-child family. Each child may be either a boy (\(B\)) or a girl (\(G\)). For simplicity we suppose that \(\mathbb{P}(B)=\mathbb{P}(G)=1/2\) and that the genders of the children are determined independently. If we let \(X\) count the number of \(B\)'s, then \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\). Further, \(\mathbb{P}(X=2)\) is
+A four-child family. Each child may be either a boy (\(B\)) or a girl (\(G\)). For simplicity we suppose that \(\mathbb{P}(B)=\mathbb{P}(G)=1/2\) and that the genders of the children are determined independently. If we let \(X\) count the number of \(B\)'s, then \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\). Further, \(\mathbb{P}(X=2)\) is
 \[
 f_{X}(2)={4 \choose 2}(1/2)^{2}(1/2)^{2}=\frac{6}{2^{4}}.
 \]
 The mean number of boys is \(4(1/2)=2\) and the variance of \(X\) is \(4(1/2)(1/2)=1\).
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-5-3-1-1" class="outline-5">
@@ -6823,15 +6989,21 @@ The mean number of boys is \(4(1/2)=2\) and the variance of \(X\) is \(4(1/2)(1/
 The corresponding \(\mathsf{R}\) function for the PMF and CDF are <code>dbinom</code> and <code>pbinom</code>, respectively. We demonstrate their use in the following examples.  
 </p>
 
+
 <div class="exampletoo">
-<p>We can calculate it in \(\mathsf{R}\) Commander under the <code>Binomial Distribution</code> menu with the <code>Binomial probabilities</code> menu item.
+<p>
+We can calculate it in \(\mathsf{R}\) Commander under the <code>Binomial Distribution</code> menu with the <code>Binomial probabilities</code> menu item.
 </p>
 
-
-<pre class="src src-R">  A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> data.frame(Pr=dbinom(0:4, size = 4, prob = 0.5))
-  rownames(A) <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> 0:4 
-  A
+<pre class="example">
+      Pr
+0 0.0625
+1 0.2500
+2 0.3750
+3 0.2500
+4 0.0625
 </pre>
+
 
 
 
@@ -6841,8 +7013,10 @@ The corresponding \(\mathsf{R}\) function for the PMF and CDF are <code>dbinom</
 We know that the \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution is supported on the integers 0, 1, 2, 3, and 4; thus the table is complete. We can read off the answer to be \(\mathbb{P}(X=2)=0.3750\).
 </p>
 
+
 <div class="exampletoo">
-<p>Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let \(S=\{ \mbox{get a 6 on one roll} \} \), then \(\mathbb{P}(S)=1/6\) and the rolls constitute Bernoulli trials; thus \(X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)\) and our task is to find \(\mathbb{P}(7\leq X\leq9)\). This is just
+<p>
+Roll 12 dice simultaneously, and let \(X\) denote the number of 6's that appear. We wish to find the probability of getting seven, eight, or nine 6's. If we let \(S=\{ \mbox{get a 6 on one roll} \} \), then \(\mathbb{P}(S)=1/6\) and the rolls constitute Bernoulli trials; thus \(X\sim\mathsf{binom}(\mathtt{size}=12,\ \mathtt{prob}=1/6)\) and our task is to find \(\mathbb{P}(7\leq X\leq9)\). This is just
 \[ 
 \mathbb{P}(7\leq X\leq9)=\sum_{x=7}^{9}{12 \choose x}(1/6)^{x}(5/6)^{12-x}.
 \]
@@ -6856,12 +7030,19 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  <span style="font-weight: bold; fon
 </pre>
 
 
+<pre class="example">
+[1] 0.001291758
+[1] 0.001291758
+</pre>
+
+
+
 
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-toss-coin-3-withR" id="exa-toss-coin-3-withR"></a>
+<p>
+<a name="exa-toss-coin-3-withR" id="exa-toss-coin-3-withR"></a>
 Toss a coin three times and let \(X\) be the number of Heads observed. We know from before that \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which implies the following PMF:
 </p>
 <table  border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" id="tab-flip-coin-thrice">
@@ -6890,10 +7071,7 @@ F_{X}(x)=\mathbb{P}(X\leq x)=
 \end{cases}
 \]
 In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is shown in Figure <a href="#fig-binom-cdf-base">binom-cdf-base</a>.
-</p>
 </div>
-
-
 
 
 
@@ -6907,15 +7085,21 @@ In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R
   <p> A graph of the <code>binom(size = 3, prob = 1/2)</code> CDF.</p>
 </div>
 
-
 <div class="exampletoo">
-<p>Another way to do Example <a href="#exa-toss-coin-3-withR">Toss coin 3 with R</a> is with the <code>distr</code> family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object <code>X</code>, and then questions about the random variable translate to functions on and involving <code>X</code>. Random variables with distributions from the <code>base</code> package\cite{base} are specified by capitalizing the name of the distribution.
+Another way to do Example <a href="#exa-toss-coin-3-withR">Toss coin 3 with R</a> is with the <code>distr</code> family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object <code>X</code>, and then questions about the random variable translate to functions on and involving <code>X</code>. Random variables with distributions from the <code>base</code> package\cite{base} are specified by capitalizing the name of the distribution.
 </p>
 
 
 
 <pre class="src src-R">X <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> Binom(size = 3, prob = 1/2)
 X
+</pre>
+
+
+<pre class="example">
+Distribution Object of Class: Binom
+ size: 3
+ prob: 0.5
 </pre>
 
 
@@ -6928,6 +7112,13 @@ The analogue of the <code>dbinom</code> function for <code>X</code> is the <code
 <pre class="src src-R">d(X)(1)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">pmf of X evaluated at x = 1</span>
 p(X)(2)   <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">cdf of X evaluated at x = 2</span>
 </pre>
+
+
+<pre class="example">
+[1] 0.375
+[1] 0.875
+</pre>
+
 
 
 
@@ -7068,23 +7259,20 @@ M_{X}(0)=\mathbb{E}\mathrm{e}^{0\cdot X}=\mathbb{E}1=1.
 We will calculate the MGF for the two distributions introduced above.
 </p>
 
+
 <div class="exampletoo">
-<p>Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
+<p>
+Find the MGF for \(X\sim\mathsf{disunif}(m)\). 
 Since \(f(x)=1/m\), the MGF takes the form
 \[
 M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad \mbox{for any \(t\).}
 \]
 
-</p>
 </div>
-
 
 <div class="exampletoo">
-<p>Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
-</p>
+Find the MGF for \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
 </div>
-
-
 
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
@@ -7092,7 +7280,7 @@ M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
 = & (p\mathrm{e}^{t}+q)^{n},\quad \mbox{for any $t$.}
 \end{alignat*}
 
-
+</p>
 </div>
 
 <div id="outline-container-5-4-2-1" class="outline-5">
@@ -7121,16 +7309,16 @@ The moment generating function, if it exists in a neighborhood of zero, determin
 We will see an example of Theorem <a href="#thm-mgf-unique">MGF Unique</a> in action.
 </p>
 
+
 <div class="exampletoo">
-<p>Suppose we encounter a random variable which has MGF
+<p>
+Suppose we encounter a random variable which has MGF
 \[
 M_{X}(t)=(0.3+0.7\mathrm{e}^{t})^{13}.
 \]
 Then \(X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)\).
-</p>
 </div>
 
-<p>
 An MGF is also known as a ``Laplace Transform'' and is manipulated in that context in many branches of science and engineering.
 </p>
 </div>
@@ -7166,9 +7354,8 @@ These are also known as <i>raw moments</i> and are sometimes denoted \(\mu_{r}'\
 \mu_{r}=\mathbb{E}(X-\mu)^{r},\quad r=1,2,\ldots
 \end{equation}
 
-</p>
 <div class="exampletoo">
-<p>Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with $M(t)=(q+p\mathrm{e}^{t})^{n}$}\).
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{ with $M(t)=(q+p\mathrm{e}^{t})^{n}$}\).
 </p>
 <p>
 We calculated the mean and variance of a binomial random variable in Section <a href="#sec-5-3">Binomial Distribution</a> by means of the binomial series. But look how quickly we find the mean and variance with the moment generating function.
@@ -7189,10 +7376,9 @@ Therefore
 = & np-np^{2}=npq.
 \end{alignat*}
 See how much easier that was?
-</p>
 </div>
 
-
+</p>
 <div class="rem">
 <p>We learned in this section that \(M^{(r)}(0)=\mathbb{E} X^{r}\). We remember from Calculus II that certain functions \(f\) can be represented by a Taylor series expansion about a point \(a\), which takes the form
 \begin{equation}
@@ -7434,8 +7620,10 @@ It is shown in Exercise <a href="#xca-hyper-mean-variance">Hyper-MV</a> that
 The associated \(\mathsf{R}\) functions for the PMF and CDF are <code>dhyper(x, m, n, k)</code> and <code>phyper</code>, respectively. There are two more functions: <code>qhyper</code>, which we will discuss in Section <a href="#sec-6-3-1">Normal Quantiles</a>, and <code>rhyper</code>, discussed below.
 </p>
 
+
 <div class="exampletoo">
-<p>Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
+<p>
+Suppose in a certain shipment of 250 Pentium processors there are 17 defective processors. A quality control consultant randomly collects 5 processors for inspection to determine whether or not they are defective. Let \(X\) denote the number of defectives in the sample.
 </p>
 <p>
 Find the probability of exactly 3 defectives in the sample, that is, find \(\mathbb{P}(X=3)\). 
@@ -7452,6 +7640,11 @@ Find the probability of exactly 3 defectives in the sample, that is, find \(\mat
 </pre>
 
 
+<pre class="example">
+[1] 0.002351153
+</pre>
+
+
 <p>
    To find it with the \(\mathsf{R}\) Commander we go <code>Probability</code> \(\triangleright\) <code>Discrete Distributions</code> \(\triangleright\) <code>Hypergeometric distribution</code> \(\triangleright\) <code>Hypergeometric probabilities...</code>. We fill in the parameters \(m=17\), \(n=233\), and \(k=5\). Click <code>OK</code>, and the following table is shown in the window.
 </p>
@@ -7464,6 +7657,16 @@ Find the probability of exactly 3 defectives in the sample, that is, find \(\mat
 </pre>
 
 
+<pre class="example">
+            Pr
+0 7.011261e-01
+1 2.602433e-01
+2 3.620776e-02
+3 2.351153e-03
+4 7.093997e-05
+</pre>
+
+
 <p>
    We wanted \(\mathbb{P}(X=3)\), and this is found from the table to be approximately 0.0024. The value is rounded to the fourth decimal place.
    We know from our above discussion that the sample space should be \(x=0,1,2,3,4,5\), yet, in the table the probabilities are only displayed for \(x = 1,2,3,\) and 4. What is happening? As it turns out, the \(\mathsf{R}\) Commander will only display probabilities that are 0.00005 or greater. Since \(x=5\) is not shown, it suggests that the outcome has a tiny probability. To find its exact value we use the <code>dhyper</code> function:
@@ -7472,6 +7675,12 @@ Find the probability of exactly 3 defectives in the sample, that is, find \(\mat
 
 <pre class="src src-R">   dhyper(5, m = 17, n = 233, k = 5)
 </pre>
+
+
+<pre class="example">
+[1] 7.916049e-07
+</pre>
+
 
 <p>
    In other words, \(\mathbb{P}(X=5)\approx0.0000007916049\), a small number indeed.
@@ -7485,6 +7694,11 @@ Find the probability that there are at most 2 defectives in the sample, that is,
 </pre>
 
 
+<pre class="example">
+[1] 0.9975771
+</pre>
+
+
 <p>
    And thus \(\mathbb{P}(X\leq2)\approx 0.9975771\). We have confirmed that the above answer was correct up to four decimal places.
 Find \(\mathbb{P}(X&gt;1)\). 
@@ -7494,6 +7708,11 @@ Find \(\mathbb{P}(X&gt;1)\).
 
 
 <pre class="src src-R">   phyper(1, m = 17, n = 233, k = 5, lower.tail = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
+</pre>
+
+
+<pre class="example">
+[1] 0.03863065
 </pre>
 
 
@@ -7529,6 +7748,12 @@ Generate \(100,000\) observations of the random variable \(X\).
 
 <pre class="src src-R">   rhyper(10, m = 17, n = 233, k = 5)
 </pre>
+
+
+<pre class="example">
+ [1] 0 0 0 0 1 0 0 0 0 0
+</pre>
+
 
 
 
@@ -7610,9 +7835,8 @@ We will find in the next section that the mean and variance are
 \end{equation}
 
 
-</p>
 <div class="exampletoo">
-<p>The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his attempted field goals in his career up to 2006. Assuming that his successive field goal attempts are approximately Bernoulli trials, find the probability that Jeff misses at least 5 field goals before his first successful goal.
+The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his attempted field goals in his career up to 2006. Assuming that his successive field goal attempts are approximately Bernoulli trials, find the probability that Jeff misses at least 5 field goals before his first successful goal.
 </p>
 <p>
 <i>Solution</i>: If \(X=\) the number of missed goals until Jeff's first success, then \(X\sim\mathsf{geom}(\mathtt{prob}=0.812)\) and we want \(\mathbb{P}(X\geq5)=\mathbb{P}(X&gt;4)\). We can find this in \(\mathsf{R}\) with
@@ -7622,6 +7846,12 @@ We will find in the next section that the mean and variance are
 
 <pre class="src src-R">pgeom(4, prob = 0.812, lower.tail = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
 </pre>
+
+
+<pre class="example">
+[1] 0.0002348493
+</pre>
+
 
 
 
@@ -7667,8 +7897,10 @@ Therefore
 since \(|q|=|1-p|&lt;1\). 
 </p>
 
+
 <div class="exampletoo">
-<p>We flip a coin repeatedly and let \(X\) count the number of Tails until we get seven Heads. What is \(\mathbb{P}(X=5)?\)
+<p>
+We flip a coin repeatedly and let \(X\) count the number of Tails until we get seven Heads. What is \(\mathbb{P}(X=5)?\)
 <i>Solution</i>: We know that \(X\sim\mathsf{nbinom}(\mathtt{size}=7,\,\mathtt{prob}=1/2)\).
 \[
 \mathbb{P}(X=5)=f_{X}(5)={7+5-1 \choose 7-1}(1/2)^{7}(1/2)^{5}={11 \choose 6}2^{-12}
@@ -7679,6 +7911,11 @@ and we can get this in \(\mathsf{R}\) with
 
 
 <pre class="src src-R">dnbinom(5, size = 7, prob = 0.5)
+</pre>
+
+
+<pre class="example">
+[1] 0.112793
 </pre>
 
 
@@ -7710,20 +7947,17 @@ M''(0)= & \left.\frac{rq\mathrm{e}^{t}(1-q\mathrm{e}^{t})-rq\mathrm{e}^{t}(-q\ma
 = & \frac{rq}{p^{2}}+\left(\frac{rq}{p}\right)^{2}.
 \end{alignat*}
 Finally we may say \( \sigma^{2} = M''(0) - [M'(0)]^{2} = rq/p^{2}. \)
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>A random variable has MGF
+A random variable has MGF
 \[
 M_{X}(t)=\left(\frac{0.19}{1-0.81\mathrm{e}^{t}}\right)^{31}.
 \]
 Then \(X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)\).
-</p>
 </div>
 
-
+</p>
 <div class="note">
 <p>As with the Geometric distribution, some books use a slightly different definition of the Negative Binomial distribution. They consider Bernoulli trials and let \(Y\) be the number of trials until \(r\) successes, so that \(Y\) has PMF
 \begin{equation}
@@ -7805,18 +8039,18 @@ If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) i
 </div>
 
 
+
 <div class="exampletoo">
-<p>On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
+<p>
+On the average, five cars arrive at a particular car wash every hour. Let \(X\) count the number of cars that arrive from 10AM to 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also, \(\mu=\sigma^{2}=5\). What is the probability that no car arrives during this period? 
 <i>Solution</i>: The probability that no car arrives is
 \[
 \mathbb{P}(X=0)=\mathrm{e}^{-5}\frac{5^{0}}{0!}=\mathrm{e}^{-5}\approx0.0067.
 \]
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark <a href="#rem-poisson-process">Poisson Process</a> we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
+Suppose the car wash above is in operation from 8AM to 6PM, and we let \(Y\) be the number of customers that appear in this period. Since this period covers a total of 10 hours, from Remark <a href="#rem-poisson-process">Poisson Process</a> we get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is the probability that there are between 48 and 50 customers, inclusive? 
 <i>Solution</i>: We want \(\mathbb{P}(48\leq Y\leq50)=\mathbb{P}(X\leq50)-\mathbb{P}(X\leq47)\). 
 </p>
 
@@ -7824,6 +8058,12 @@ If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) i
 
 <pre class="src src-R">diff(ppois(c(47, 50), lambda = 50))
 </pre>
+
+
+<pre class="example">
+[1] 0.1678485
+</pre>
+
 
 
 
@@ -7844,8 +8084,10 @@ If \(X\) counts the number of events in the interval \([0,t]\) and \(\lambda\) i
 We have built a large catalogue of discrete distributions, but the tools of this section will give us the ability to consider infinitely many more. Given a random variable \(X\) and a given function \(h\), we may consider \(Y=h(X)\). Since the values of \(X\) are determined by chance, so are the values of \(Y\). The question is, what is the PMF of the random variable \(Y\)? The answer, of course, depends on \(h\). In the case that \(h\) is one-to-one (see Appendix <a href="#sec-21-2">Differential-Integral Calculus</a>), the solution can be found by simple substitution.
 </p>
 
+
 <div class="exampletoo">
-<p>Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We saw in <a href="#sec-5-6">Other Discrete Distributions</a> that \(X\) represents the number of failures until \(r\) successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the \(r^{\mathrm{th}}\) success occurs, which we will denote by \(Y\). In a given performance of the experiment, the number of failures (\(X\)) and the number of successes (\(r\)) together will comprise the total number of trials (\(Y\)), or in other words, \(X+r=Y\). We may let \(h\) be defined by \(h(x)=x+r\) so that \(Y=h(X)\), and we notice that \(h\) is linear and hence one-to-one. Finally, \(X\) takes values \(0,\ 1,\ 2,\ldots\) implying that the support of \(Y\) would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for \(X\) we get \(X=Y-r\). Examining the PMF of \(X\)
+<p>
+Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We saw in <a href="#sec-5-6">Other Discrete Distributions</a> that \(X\) represents the number of failures until \(r\) successes in a sequence of Bernoulli trials. Suppose now that instead we were interested in counting the number of trials (successes and failures) until the \(r^{\mathrm{th}}\) success occurs, which we will denote by \(Y\). In a given performance of the experiment, the number of failures (\(X\)) and the number of successes (\(r\)) together will comprise the total number of trials (\(Y\)), or in other words, \(X+r=Y\). We may let \(h\) be defined by \(h(x)=x+r\) so that \(Y=h(X)\), and we notice that \(h\) is linear and hence one-to-one. Finally, \(X\) takes values \(0,\ 1,\ 2,\ldots\) implying that the support of \(Y\) would be \(\{ r,\ r+1,\ r+2,\ldots \}\). Solving for \(X\) we get \(X=Y-r\). Examining the PMF of \(X\)
 \begin{equation}
 f_{X}(x)={r+x-1 \choose r-1}\, p^{r}(1-p)^{x},
 \end{equation}
@@ -7855,11 +8097,9 @@ f_{Y}(y) & = & f_{X}(y-r),\\
  & = & {r+(y-r)-1 \choose r-1}\, p^{r}(1-p)^{y-r},\\
  & = & {y-1 \choose r-1}\, p^{r}(1-p)^{y-r},\quad y=r,\, r+1,\ldots
 \end{eqnarray*}
-</p>
 </div>
 
 
-<p>
 Even when the function \(h\) is not one-to-one, we may still find the PMF of \(Y\) simply by accumulating, for each \(y\), the probability of all the \(x\)'s that are mapped to that \(y\).
 </p>
 <div class="prop">
@@ -7871,8 +8111,10 @@ f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 </div>
 
 
+
 <div class="exampletoo">
-<p>Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
+<p>
+Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
 </p>
 <table  border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" id="tab-disc-transf">
 <caption>Transforming a discrete random variable.</caption>
@@ -7908,10 +8150,9 @@ From this we see that \(Y\) has support \(S_{Y}=\{0,1,4,9\}\). We also see that 
 
 <p>
 There is not a special name for the distribution of \(Y\), it is just an example of what to do when the transformation of a random variable is not one-to-one. The method is the same for more complicated problems.
-</p>
 </div>
 
-
+</p>
 <div class="prop">
 <p>If \(X\) is a random variable with \(\mathbb{E} X=\mu\) and \(\mbox{Var}(X)=\sigma^{2}\), then the mean and variance of \(Y=mX+b\) is
 \begin{equation}
@@ -8184,8 +8425,10 @@ M_{X}(t)=\mathbb{E}\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}
 provided the integral exists (is finite) for all \(t\) in a neighborhood of \(t=0\).
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-cont-pdf3x2" id="exa-cont-pdf3x2"></a>
+<p>
+<a name="exa-cont-pdf3x2" id="exa-cont-pdf3x2"></a>
 </p>
 <p>
 Let the continuous random variable \(X\) have PDF
@@ -8219,12 +8462,10 @@ It would perhaps be best to calculate the variance with the shortcut formula \(\
  & =3/5.
 \end{align*}
 which gives \(\sigma^{2}=3/5-(3/4)^{2}=3/80\).
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-cont-pdf-3x4" id="exa-cont-pdf-3x4"></a>
+<a name="exa-cont-pdf-3x4" id="exa-cont-pdf-3x4"></a>
 </p>
 <p>
 We will try one with unbounded support to brush up on improper integration. Let the random variable \(X\) have PDF
@@ -8261,10 +8502,9 @@ Again we use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
  & =3,
 \end{align*}
 which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-6-1-2-1" class="outline-5">
@@ -8276,8 +8516,10 @@ which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
 There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the <code>distr</code>\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package \cite{distr} way.
 </p>
 
+
 <div class="exampletoo">
-<p>Let \(X\) have PDF \(f(x)=3x^{2}\), \(0&lt;x&lt;1\) and find \(\mathbb{P}(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a beta random variable for the sake of argument.)
+<p>
+Let \(X\) have PDF \(f(x)=3x^{2}\), \(0&lt;x&lt;1\) and find \(\mathbb{P}(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a beta random variable for the sake of argument.)
 </p>
 
 
@@ -8287,15 +8529,21 @@ integrate(f, lower = 0.14, upper = 0.71)
 </pre>
 
 
+<pre class="example">
+0.355167 with absolute error &lt; 3.9e-15
+</pre>
+
+
 <p>
 Compare this to the answer we found in Example <a href="#exa-cont-pdf3x2">Cont-pdf3x2</a>. We could integrate the function \(x \cdot f(x)=\) <code>3*x^3</code> from zero to one to get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance. 
 </p>
 
+
 </div>
 
-
 <div class="exampletoo">
-<p>Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x&gt;1\). We may integrate the function \(g(x) = x \cdot f(x)=\) <code>3/x^3</code> from zero to infinity to get the mean of \(X\).
+<p>
+Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x&gt;1\). We may integrate the function \(g(x) = x \cdot f(x)=\) <code>3/x^3</code> from zero to infinity to get the mean of \(X\).
 </p>
 
 
@@ -8305,15 +8553,21 @@ integrate(g, lower = 1, upper = <span style="font-weight: bold; text-decoration:
 </pre>
 
 
+<pre class="example">
+1.5 with absolute error &lt; 1.7e-14
+</pre>
+
+
 <p>
 Compare this to the answer we got in Example <a href="#exa-cont-pdf-3x4">Cont-pdf3x4</a>. Use <code>-Inf</code> for \(-\infty\).
 </p>
 
+
 </div>
 
-
 <div class="exampletoo">
-<p>Let us redo Example <a href="#exa-cont-pdf3x2">Cont-pdf3x2</a> with the <code>distr</code> package \cite{distr}. The method is similar to that encountered in Section <a href="#sec-5-1-2-1">Discrete RV How R</a> in Chapter <a href="#sec-5">Discrete Distributions</a>. We define an absolutely continuous random variable:
+<p>
+Let us redo Example <a href="#exa-cont-pdf3x2">Cont-pdf3x2</a> with the <code>distr</code> package \cite{distr}. The method is similar to that encountered in Section <a href="#sec-5-1-2-1">Discrete RV How R</a> in Chapter <a href="#sec-5">Discrete Distributions</a>. We define an absolutely continuous random variable:
 </p>
 
 
@@ -8321,6 +8575,11 @@ Compare this to the answer we got in Example <a href="#exa-cont-pdf-3x4">Cont-pd
 <pre class="src src-R"><span style="font-weight: bold;">f</span> <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> <span style="font-weight: bold;">function</span>(x) 3*x^2
 X <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> AbscontDistribution(d = f, low1 = 0, up1 = 1)
 p(X)(0.71) - p(X)(0.14)
+</pre>
+
+
+<pre class="example">
+[1] 0.355167
 </pre>
 
 
@@ -8333,12 +8592,18 @@ Compare this to the answer we found earlier. Now let us try expectation with the
 </pre>
 
 
+<pre class="example">
+[1] 0.7496337
+[1] 0.03768305
+[1] 0.0375
+</pre>
+
+
 <p>
 Compare these answers to the ones we found in Example <a href="#exa-cont-pdf3x2">Cont-pdf3x2</a>. Why are they different? Because the <code>distrEx</code> package resorts to numerical methods when it encounters a model it does not recognize. This means that the answers we get for calculations may not exactly match the theoretical values. Be careful.
-</p>
 </div>
 
-</div>
+</p></div>
 </div>
 </div>
 
@@ -8368,8 +8633,10 @@ F_{X}(t)=
 The continuous uniform distribution is the continuous analogue of the discrete uniform distribution; it is used to model experiments whose outcome is an interval of numbers that are ``equally likely'' in the sense that any two intervals of equal length in the support have the same probability associated with them.
 </p>
 
+
 <div class="exampletoo">
-<p>Choose a number in \( [0,1] \) at random, and let \(X\) be the number chosen. Then \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
+<p>
+Choose a number in \( [0,1] \) at random, and let \(X\) be the number chosen. Then \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 The mean of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\) is relatively simple to calculate:
 \begin{align*}
 \mu=\mathbb{E} X & =\int_{-\infty}^{\infty}x\, f_{X}(x)\,\mathrm{d} x,\\
@@ -8379,10 +8646,9 @@ The mean of \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\) is relativel
  & =\frac{b+a}{2},
 \end{align*}
 using the popular formula for the difference of squares. The variance is left to Exercise <a href="#xca-variance-dunif">Variance Uniform</a>.
-</p>
 </div>
 
-</div>
+</p></div>
 
 </div>
 
@@ -8428,9 +8694,8 @@ and the quantity in the parentheses is the total area under a \(\mathsf{norm}(\m
 M_{Z}(t)=\mathrm{e}^{t^{2}/2},\quad -\infty < t < \infty.
 \end{equation}
 
-</p>
 <div class="exampletoo">
-<p>The MGF of \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) is then not difficult either because 
+The MGF of \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) is then not difficult either because 
 \[
 Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
@@ -8443,10 +8708,9 @@ and we know that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get
 M_{X}(t)=\mathrm{e}^{t\mu}\mathrm{e}^{(\sigma t)^{2}/2}=\exp\left\{ \mu t+\sigma^{2}t^{2}/2\right\} ,
 \]
 for \(-\infty&lt;t&lt;\infty\).
-</p>
 </div>
 
-
+</p>
 <div class="fact">
 <p>The same argument above shows that if \(X\) has MGF \(M_{X}(t)\) then the MGF of \(Y=a+bX\) is
 \begin{equation}
@@ -8456,34 +8720,28 @@ M_{Y}(t)=\mathrm{e}^{ta}M_{X}(bt).
 </div>
 
 
+
 <div class="exampletoo">
-<p>The 68-95-99.7 Rule. We saw in Section <a href="#sec-3-3-4">Measures of Spread</a> that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from &ndash; and obtain more precise proportions &ndash; with the following:
-</p>
+<p>
+The 68-95-99.7 Rule. We saw in Section <a href="#sec-3-3-4">Measures of Spread</a> that when an empirical distribution is approximately bell shaped there are specific proportions of the observations which fall at varying distances from the (sample) mean. We can see where these come from &ndash; and obtain more precise proportions &ndash; with the following:
 </div>
-
-
 
 
 <pre class="src src-R">pnorm(1:3) - pnorm(-(1:3))
 </pre>
 
 
-<pre class="example">
-[1] 0.6826895 0.9544997 0.9973002
-</pre>
-
-
+: [1] 0.6826895 0.9544997 0.9973002
 
 <div class="exampletoo">
-<p><a name="exa-iq-model" id="exa-iq-model"></a>
+<a name="exa-iq-model" id="exa-iq-model"></a>
 Let the random experiment consist of a person taking an IQ test, and let \(X\) be the score on the test. The scores on such a test are typically standardized to have a mean of 100 and a standard deviation of 15, and IQ tests have (approximately and notoriously) a bell-shaped distribution. What is \(\mathbb{P}(85\leq X\leq115)\)?
 </p>
 <p>
 <i>Solution</i>: this one is easy because the limits 85 and 115 fall exactly one standard deviation (below and above, respectively) from the mean of 100. The answer is therefore approximately 68%.
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-sub-Normal-Quantiles-QF" class="outline-4">
@@ -8495,8 +8753,10 @@ Let the random experiment consist of a person taking an IQ test, and let \(X\) b
 Until now we have been given two values and our task has been to find the area under the PDF between those values. In this section, we go in reverse: we are given an area, and we would like to find the value(s) that correspond to that area. 
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-iq-quantile-state-problem" id="exa-iq-quantile-state-problem"></a>
+<p>
+<a name="exa-iq-quantile-state-problem" id="exa-iq-quantile-state-problem"></a>
 Assuming the IQ model of Example <a href="#exa-iq-model">IQ Model</a>, what is the lowest possible IQ score that a person can have and still be in the top 1% of all IQ scores?
 <i>Solution</i>: If a person is in the top 1%, then that means that 99% of the people have lower IQ scores. So, in other words, we are looking for a value \(x\) such that \(F(x)=\mathbb{P}(X\leq x)\) satisfies \(F(x)=0.99\), or yet another way to say it is that we would like to solve the equation \(F(x)-0.99=0\). For the sake of argument, let us see how to do this the long way. We define the function \(g(x)=F(x)-0.99\), and then look for the root of \(g\) with the <code>uniroot</code> function. It uses numerical procedures to find the root so we need to give it an interval of \(x\) values in which to search for the root. We can get an educated guess from the Empirical Rule <a href="#fac-Empirical-Rule">Empirical Rule</a>; the root should be somewhere between two and three standard deviations (15 each) above the mean (which is 100).
 </p>
@@ -8508,16 +8768,26 @@ uniroot(g, interval = c(130, 145))
 
 
 
-<pre class="src src-R">temp <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> round(uniroot(g, interval = c(130, 145))$root, 4)
+<pre class="example">$root
+[1] 134.8952
+
+$f.root
+[1] -4.873083e-09
+
+$iter
+[1] 6
+
+$estim.prec
+[1] 6.103516e-05
 </pre>
 
 
-<p>
-The answer is shown in <code>$root</code> which is approximately \( SRC_R{temp} \), that is, a person with this IQ score or higher falls in the top 1% of all IQ scores.
-</p>
-</div>
+
 
 <p>
+The answer is shown in <code>$root</code> which is approximately \(  134.8952 \), that is, a person with this IQ score or higher falls in the top 1% of all IQ scores.
+</div>
+
 The discussion in Example <a href="#exa-iq-quantile-state-problem">IQ Quantile</a> was centered on the search for a value \(x\) that solved an equation \(F(x)=p\), for some given probability \(p\), or in mathematical parlance, the search for \(F^{-1}\), the inverse of the CDF of \(X\), evaluated at \(p\). This is so important that it merits a definition all its own.
 </p>
 
@@ -8576,8 +8846,10 @@ There are a few other very important special cases which we will encounter in la
 Quantile functions are defined for all of the base distributions with the <code>q</code> prefix to the distribution name, except for the ECDF whose quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x, \mathtt{probs} = p, \mathtt{type} = 1) \) function. 
 </p>
 
+
 <div class="exampletoo">
-<p>Back to Example <a href="#exa-iq-quantile-state-problem">IQ Quantile</a>, we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \(\mathsf{R}\). 
+<p>
+Back to Example <a href="#exa-iq-quantile-state-problem">IQ Quantile</a>, we are looking for \(Q_{X}(0.99)\), where \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could not be easier to do with \(\mathsf{R}\). 
 </p>
 
 
@@ -8586,30 +8858,26 @@ Quantile functions are defined for all of the base distributions with the <code>
 </pre>
 
 
+<pre class="example">
+[1] 134.8952
+</pre>
+
+
 <p>
 Compare this answer to the one obtained earlier with <code>uniroot</code>.
-</p>
 </div>
-
 
 <div class="exampletoo">
-<p>Find the values \(z_{0.025}\), \(z_{0.01}\), and \(z_{0.005}\) (these will play an important role from Chapter <a href="#sec-9">Estimation</a> onward).
-</p>
+Find the values \(z_{0.025}\), \(z_{0.01}\), and \(z_{0.005}\) (these will play an important role from Chapter <a href="#sec-9">Estimation</a> onward).
 </div>
-
-
 
 
 <pre class="src src-R">qnorm(c(0.025, 0.01, 0.005), lower.tail = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
 </pre>
 
 
-<pre class="example">
-[1] 1.959964 2.326348 2.575829
-</pre>
+: [1] 1.959964 2.326348 2.575829
 
-
-<p>
 Note the <code>lower.tail</code> argument. We would get the same answer with
 </p><pre class="example">
 qnorm(c(0.975, 0.99, 0.995))
@@ -8662,25 +8930,23 @@ f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.
 </div>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-lnorm-transformation" id="exa-lnorm-transformation"></a>
+<p>
+<a name="exa-lnorm-transformation" id="exa-lnorm-transformation"></a>
 Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and let \(Y=\mathrm{e}^{X}\). What is the PDF of \(Y\)? 
 <b>Solution:</b> Notice first that \(\mathrm{e}^{x}&gt;0\) for any \(x\), so the support of \(Y\) is \((0,\infty)\). Since the transformation is monotone, we can solve \(y=\mathrm{e}^{x}\) for \(x\) to get \(x=\ln\, y\), giving \(\mathrm{d} x/\mathrm{d} y=1/y\). Therefore, for any \(y&gt;0\),
 \[
 f_{Y}(y)=f_{X}(\ln y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{ \frac{(\ln y-\mu)^{2}}{2\sigma^{2}}\right\} \cdot\frac{1}{y},
 \]
 where we have dropped the absolute value bars since \(y&gt;0\). The random variable \(Y\) is said to have a <i>lognormal distribution</i>; see Section <a href="#sec-6-5">Other Continuous Distributions</a>.
-</p>
 </div>
-
 
 <div class="exampletoo">
-<p><a name="exa-lin-trans-norm" id="exa-lin-trans-norm"></a>
+<a name="exa-lin-trans-norm" id="exa-lin-trans-norm"></a>
 Suppose \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(Y=4-3X\). What is the PDF of \(Y\)?
-</p>
 </div>
 
-<p>
 The support of \(X\) is \((-\infty,\infty)\), and as \(x\) goes from \(-\infty\) to \(\infty\), the quantity \(y=4-3x\) also traverses \((-\infty,\infty)\). Solving for \(x\) in the equation \(y=4-3x\) yields \(x=-(y-4)/3\) giving \(\mathrm{d} x/\mathrm{d} y=-1/3\). And since
 \[
 f_{X}(x)=\frac{1}{\sqrt{2\pi}}\mathrm{e}^{-x^{2}/2}, \quad -\infty < x < \infty ,
@@ -8734,8 +9000,10 @@ but for the well-behaved examples in this book the trick works just fine.
 We know from Section <a href="#sec-6-1">Continuous Random Variables</a> that \(f_{X}=F_{X}'\) in the continuous case. Starting from the equation \(F_{Y}(y)=\mathbb{P}(Y\leq y)\), we may substitute \(g(X)\) for \(Y\), then solve for \(X\) to obtain \(\mathbb{P}[X\leq g^{-1}(y)]\), which is just another way to write \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect to \(y\) will yield the PDF of \(Y\).
 </p>
 
+
 <div class="exampletoo">
-<p>Suppose \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) and
+<p>
+Suppose \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) and
 suppose that we let \(Y=-\ln\, X\). What is the PDF of \(Y\)?
 </p>
 <p>
@@ -8756,16 +9024,13 @@ We have consequently found the formula for the CDF of \(Y\); to obtain the PDF \
 f_{Y}(y)=\frac{\mathrm{d}}{\mathrm{d} y}\left(1-\mathrm{e}^{-y}\right)=0-\mathrm{e}^{-y}(-1),
 \]
 or \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y&gt;0\). This turns out to be a member of the exponential family of distributions, see Section <a href="#sec-6-5">Other Continuous Distributions</a>. 
-</p>
 </div>
-
 
 <div class="exampletoo">
-<p><b>The Probability Integral Transform</b>. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
-</p>
+<b>The Probability Integral Transform</b>. Given a continuous random variable \(X\) with strictly increasing CDF \(F_{X}\), let the random variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
 </div>
 
-
+</p>
 <div class="proof">
 <p>We employ the CDF method. First note that the support of \(Y\) is \((0,1)\). Then for any \(0&lt;y&lt;1\),
 \[
@@ -8786,8 +9051,10 @@ Summarizing, we have seen that \(F_{Y}(y)=y\), \(0&lt;y&lt;1\). But this is exac
 </div>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-distn-of-z-squared" id="exa-distn-of-z-squared"></a>
+<p>
+<a name="exa-distn-of-z-squared" id="exa-distn-of-z-squared"></a>
 Let \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let \(U=Z^{2}\). What is the PDF of \(U\)? 
 Notice first that \(Z^{2}\geq0\), and thus the support of \(U\) is \([0,\infty)\). And for any \(u\geq0\), 
 \[
@@ -8806,10 +9073,9 @@ Substituting,
 f_{U}(u)=u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi u)^{-1/2}\mathrm{e}^{-u/2},\quad u > 0.
 \]
 This is what we will later call a <i>chi-square distribution with 1 degree of freedom</i>. See Section <a href="#sec-6-5">Other Continuous Distributions</a>.
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-6-4-2-1" class="outline-5">
@@ -8984,12 +9250,13 @@ The associated \(\mathsf{R}\) functions are <code>dgamma(x, shape, rate = 1)</co
 To motivate the gamma distribution recall that if \(X\) measures the length of time until the first event occurs in a Poisson process with rate \(\lambda\) then \(X\sim\mathsf{exp}(\mathtt{rate}=\lambda)\). If we let \(Y\) measure the length of time until the \(\alpha^{\mathrm{th}}\) event occurs then \(Y\sim\mathsf{gamma}(\mathtt{shape}=\alpha,\,\mathtt{rate}=\lambda)\). When \(\alpha\) is an integer this distribution is also known as the <i>Erlang</i> distribution.
 </p>
 
+
 <div class="exampletoo">
-<p>At a car wash, two customers arrive per hour on the average. We decide to measure how long it takes until the third customer arrives. If \(Y\) denotes this random time then \(Y\sim\mathsf{gamma}(\mathtt{shape}=3,\,\mathtt{rate}=1/2)\).
-</p>
+<p>
+At a car wash, two customers arrive per hour on the average. We decide to measure how long it takes until the third customer arrives. If \(Y\) denotes this random time then \(Y\sim\mathsf{gamma}(\mathtt{shape}=3,\,\mathtt{rate}=1/2)\).
 </div>
 
-</div>
+</p></div>
 </div>
 
 </div>
@@ -9214,8 +9481,10 @@ We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\)
 There is some support of moments and moment generating functions for some continuous probability distributions included in the <code>actuar</code> package \cite{actuar}. The convention is <code>m</code> in front of the distribution name for raw moments, and <code>mgf</code> in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 </p>
 
+
 <div class="exampletoo">
-<p>Calculate the first four raw moments for \(X\sim\mathsf{gamma}(\mathtt{shape}=13,\,\mathtt{rate}=1)\) and plot the moment generating function.
+<p>
+Calculate the first four raw moments for \(X\sim\mathsf{gamma}(\mathtt{shape}=13,\,\mathtt{rate}=1)\) and plot the moment generating function.
 </p>
 <p>
 We load the <code>actuar</code> package and use the functions <code>mgamma</code> and <code>mgfgamma</code>:
@@ -9223,6 +9492,11 @@ We load the <code>actuar</code> package and use the functions <code>mgamma</code
 
 
 <pre class="src src-R">mgamma(1:4, shape = 13, rate = 1)
+</pre>
+
+
+<pre class="example">
+[1]    13   182  2730 43680
 </pre>
 
 
@@ -9237,13 +9511,7 @@ For the plot we can use the function in the following form:
 
 
 
-<pre class="src src-R">  &lt;&lt;gamma-mgf&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;gamma-mgf&gt;&gt;
-</pre>
 
 
 
@@ -9251,6 +9519,7 @@ For the plot we can use the function in the following form:
   <p><img src="svg/contdist/gamma-mgf.svg" width=500 alt="svg/contdist/gamma-mgf.svg" /></p>
   <p>A plot of the <code>gamma(shape = 13, rate = 1)</code> MGF.</p>
 </div>
+
 
 
 </div>
@@ -9429,8 +9698,10 @@ The bivariate joint CDF is not quite as tractable as the univariate CDFs, but in
 We now introduce some examples of bivariate discrete distributions. The first we have seen before, and the second is based on the first.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-toss-two-dice-joint-pmf" id="exa-toss-two-dice-joint-pmf"></a>
+<p>
+<a name="exa-toss-two-dice-joint-pmf" id="exa-toss-two-dice-joint-pmf"></a>
 </p>
 <p>
 Roll a fair die twice. Let \(X\) be the face shown on the first roll, and let \(Y\) be the face shown on the second roll. We have already seen this example in Chapter <a href="#sec-4">Probability</a>, Example <a href="#exa-Toss-a-six-sided-die-twice">Toss die twice</a>. For this example, it suffices to define
@@ -9442,16 +9713,16 @@ The marginal PMFs are given by \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and \(f_{Y}
 f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6,
 \]
 and the same computation with the letters switched works for \(Y\). 
-</p>
 </div>
 
-<p>
 In the previous example, and in many other ones, the joint support can be written as a product set of the support of \(X\) ``times'' the support of \(Y\), that is, it may be represented as a cartesian product set, or rectangle, \(S_{X,Y}=S_{X}\times S_{Y}\), where \(S_{X} \times S_{Y}= \{ (x,y):\ x\in S_{X},\, y\in S_{Y} \} \). As we shall see presently in Section <a href="#sec-7-4">Independent Random Variables</a>, this form is a necessary condition for \(X\) and \(Y\) to be <i>independent</i> (or alternatively <i>exchangeable</i> when \(S_{X}=S_{Y}\)). But please note that in general it is not required for \(S_{X,Y}\) to be of rectangle form. We next investigate just such an example.
 </p>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-max-sum-two-dice" id="exa-max-sum-two-dice"></a>
+<p>
+<a name="exa-max-sum-two-dice" id="exa-max-sum-two-dice"></a>
 </p>
 <p>
 Let the random experiment again be to roll a fair die twice, except now let us define the random variables \(U\) and \(V\) by
@@ -9473,31 +9744,9 @@ f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 
 
 
-<pre class="src src-R">A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> rolldie(2, makespace = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>)
-A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> addrv(A, max, name = <span style="font-style: italic;">"U"</span>)
-A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> addrv(A, sum, name = <span style="font-style: italic;">"V"</span>, invars = c(<span style="font-style: italic;">"X1"</span>, <span style="font-style: italic;">"X2"</span>))
-p1 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(A, aes(x=X1, y=X2, label=U))
-p1 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> p1 + geom_text(size = 6) + xlab(<span style="font-style: italic;">"X1 = First roll"</span>) + 
-      ylab(<span style="font-style: italic;">"X2 = Second roll"</span>) + opts(title = <span style="font-style: italic;">"U = max(X1,X2)"</span>)
-p2 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(A, aes(x=X1, y=X2, label=V))
-p2 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> p2 + geom_text(size = 6) + xlab(<span style="font-style: italic;">"X1 = First roll"</span>) + 
-      ylab(<span style="font-style: italic;">""</span>) + opts(title = <span style="font-style: italic;">"V = X1 + X2"</span>)
-grid.newpage()
-pushViewport(viewport(layout = grid.layout(1, 2)))
-<span style="font-weight: bold;">vplayout</span> <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> <span style="font-weight: bold;">function</span>(x, y) viewport(layout.pos.row = x, layout.pos.col = y)
-print(p1, vp = vplayout(1, 1))
-print(p2, vp = vplayout(1, 2))
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;max-and-sum-two-dice&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;max-and-sum-two-dice&gt;&gt;
-</pre>
 
 
 
@@ -9512,21 +9761,9 @@ We may collapse the two matrices from Figure <a href="#fig-max-and-sum-two-dice"
 
 
 
-<pre class="src src-R">labs <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> with(A, paste(<span style="font-style: italic;">"("</span>, U, <span style="font-style: italic;">","</span>, V, <span style="font-style: italic;">")"</span>, sep = <span style="font-style: italic;">""</span>))
-p3 <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> ggplot(A, aes(x = X1, y = X2, label = labs))
-p3 + geom_text(size = 6) + xlab(<span style="font-style: italic;">"First roll"</span>) + ylab(<span style="font-style: italic;">"Second roll"</span>) + 
-  opts(title = <span style="font-style: italic;">"Joint distribution of (U,V) pairs"</span>)
-</pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;max-sum-two-dice-joint&gt;&gt;
-</pre>
-
-
-
-<pre class="src src-R">  &lt;&lt;max-sum-two-dice-joint&gt;&gt;
-</pre>
 
 
 
@@ -9563,10 +9800,8 @@ Again, each of these pairs has probability \(1/36\) associated with it and we ar
 
 <p>
 The joint support of \((U,V)\) is concentrated along the main diagonal;  note that the nonzero entries do not form a rectangle. Also notice that if we form row and column totals we are doing exactly the same thing as Equation <a href="#eq-marginal-pmf">eq-marginal-pmf</a>, so that the marginal distribution of \(U\) is the list of totals in the right ``margin'' of the Table <a href="#tab-max-sum-joint-pmf">Max-sum joint</a>, and the marginal distribution of \(V\)  is the list of totals in the bottom ``margin''. 
-</p>
 </div>
 
-<p>
 Continuing the reasoning for the discrete case, given two continuous random variables \(X\) and \(Y\) there similarly exists
 a function \(f_{X,Y}(x,y)\) associated with \(X\) and \(Y\) called the <i>joint probability density function</i> of \(X\) and \(Y\). Every joint PDF satisfies
 \begin{equation}
@@ -9590,9 +9825,8 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x, \quad y \in S_{Y}.
 \end{equation}
 
 
-</p>
 <div class="exampletoo">
-<p><a name="exa-joint-pdf" id="exa-joint-pdf"></a>
+<a name="exa-joint-pdf" id="exa-joint-pdf"></a>
 Let the joint PDF of \((X,Y)\) be given by
 \[
 f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad 0 < x < 1,\ 0 < y < 1.
@@ -9610,10 +9844,9 @@ f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
  & = & \frac{6}{5}\left(\frac{1}{2}+y^{2}\right),
 \end{eqnarray*}
 for \(0 &lt; y &lt; 1\). In this example the joint support set was a rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\) are not independent. See Section <a href="#sec-7-4">Independent Random Variables</a>.
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-7-1-1" class="outline-4">
@@ -9818,8 +10051,10 @@ The correlation is usually denoted by \(\rho_{X,Y}\) or simply \(\rho\) if the r
 
 
 
+
 <div class="exampletoo">
-<p><a name="exa-max-sum-dice-covariance" id="exa-max-sum-dice-covariance"></a>
+<p>
+<a name="exa-max-sum-dice-covariance" id="exa-max-sum-dice-covariance"></a>
 </p>
 <p>
 We will compute the covariance for the discrete distribution in Example <a href="#exa-max-sum-two-dice">Max-sum two dice</a>. The expected value of \(U\) is
@@ -9839,12 +10074,11 @@ Therefore the covariance of \((U,V)\) is
 \mbox{Cov}(U,V)=\mathbb{E} UV-\left(\mathbb{E} U\right)\left(\mathbb{E} V\right)=\frac{308}{9}-\frac{161}{36}\cdot7=\frac{35}{12}.
 \]
 All we need now are the standard deviations of \(U\) and \(V\) to calculate the correlation coefficient (omitted).
-</p>
 </div>
 
-<p>
 We will do a continuous example so that you can see how it works.
 </p>
+
 
 <div class="exampletoo">
 
@@ -9868,10 +10102,9 @@ which is 7/20. Therefore the covariance of \((X,Y)\) is
 \[
 \mbox{Cov}(X,Y)=\frac{7}{20}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=\frac{2}{25}.
 \]
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-7-2-1-1" class="outline-5">
@@ -9922,15 +10155,16 @@ f_{Y|x}(y|x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)},\quad y\in S_{Y}.
 We define \(f_{X|y}\) in a similar fashion.
 </p>
 
+
 <div class="exampletoo">
-<p>Let the joint PMF of \(X\) and \(Y\) be given by
+<p>
+Let the joint PMF of \(X\) and \(Y\) be given by
 \[
 f_{X,Y}(x,y) =
 \]
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-7-3-1" class="outline-4">
@@ -9949,8 +10183,10 @@ Our initial beliefs about \(\theta\) are represented by a probability distributi
 Compare the above expression to Equation <a href="#eq-bayes-rule">BR</a>.
 </p>
 
+
 <div class="exampletoo">
-<p>Suppose the parameter \(\theta\) is the \(\mathbb{P}(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
+<p>
+Suppose the parameter \(\theta\) is the \(\mathbb{P}(\mbox{Heads})\) for a biased coin. It could be any value from 0 to 1. Perhaps we have some prior information about this coin, for example, maybe we have seen this coin before and we have reason to believe that it shows Heads less than half of the time. Suppose that we represent our beliefs about \(\theta\) with a \(\mathsf{beta}(\mathtt{shape1}=1,\,\mathtt{shape2}=3)\) prior distribution, that is, we assume 
 \[
 \theta\sim\pi(\theta)=3(1-\theta)^{2},\quad 0 < \theta < 1.
 \]
@@ -9974,6 +10210,7 @@ the integral being calculated by inspection of the formula for a \(\mathsf{beta}
 \]
 The Bayesian statistician uses the posterior distribution for all matters concerning inference about \(\theta\).
 </p>
+
 
 </div>
 
@@ -10025,8 +10262,10 @@ f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad \mbox{for every }x\in S_{X},\ y\in S_{Y},
 then we say that \(X\) and \(Y\) are independent.
 </p>
 
+
 <div class="exampletoo">
-<p>In Example <a href="#exa-toss-two-dice-joint-pmf">Toss two dice joint</a> we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
+<p>
+In Example <a href="#exa-toss-two-dice-joint-pmf">Toss two dice joint</a> we considered the random experiment of rolling a fair die twice. There we found the joint PMF to be
 \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6,
 \]
@@ -10034,19 +10273,15 @@ and we found the marginal PMFs \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and \(f_{Y}
 \[
 f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}(x)\, f_{Y}(y).
 \]
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>In Example <a href="#exa-max-sum-two-dice">Max-sum two dice</a> we considered the same experiment but different random variables \(U\) and \(V\). We can prove that \(U\) and \(V\) are not independent if we can find a single pair \((u,v)\) where the independence equality does not hold. There are many such pairs. One of them is \((6,12)\):
+In Example <a href="#exa-max-sum-two-dice">Max-sum two dice</a> we considered the same experiment but different random variables \(U\) and \(V\). We can prove that \(U\) and \(V\) are not independent if we can find a single pair \((u,v)\) where the independence equality does not hold. There are many such pairs. One of them is \((6,12)\):
 \[
 f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\, f_{V}(12).
 \]
-</p>
 </div>
 
-<p>
 Independent random variables are very useful to the mathematician. They have many, many, tractable properties. We mention some of the more important ones.
 </p>
 
@@ -10136,26 +10371,24 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 Let us take a look at some examples of the corollary in action.
 </p>
 
+
 <div class="exampletoo">
-<p>Let \(X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)\) and \(Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)\) be independent. Then \(X+Y\) has MGF
+<p>
+Let \(X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)\) and \(Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)\) be independent. Then \(X+Y\) has MGF
 \[
 M_{X+Y}(t)=M_{X}(t)\, M_{Y}(t)=\left(q+p\mathrm{e}^{t}\right)^{n_{1}}\left(q+p\mathrm{e}^{t}\right)^{n_{2}}=\left(q+p\mathrm{e}^{t}\right)^{n_{1}+n_{2}},
 \]
 which is the MGF of a \(\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\) distribution. Therefore, \(X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\).
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p>Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\) be independent. Then \(X+Y\) has MGF
+Let \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\) and \(Y\sim\mathsf{norm}(\mathtt{mean}=\mu_{2},\,\mathtt{sd}=\sigma_{2})\) be independent. Then \(X+Y\) has MGF
 \[
 M_{X}(t)\, M_{Y}(t)=\exp\left\{ \mu_{1}t+t^{2}\sigma_{1}^{2}/2\right\} \exp\left\{ \mu_{2}t+t^{2}\sigma_{2}^{2}/2\right\} =\exp\left\{ \left(\mu_{1}+\mu_{2}\right)t+t^{2}\left(\sigma_{1}^{2}+\sigma_{2}^{2}\right)/2\right\} ,
 \]
 which is the MGF of a \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\mathtt{sd}=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}}\right)\) distribution. 
-</p>
 </div>
 
-<p>
 Even when we cannot use the MGF trick to identify the exact distribution of a linear combination of random variables, we can still say something about its mean and variance.
 </p>
 
@@ -10208,18 +10441,18 @@ When the joint density \(f\) exists, we may equivalently say that \(X\) and \(Y\
 Exchangeable random variables exhibit symmetry in the sense that a person may exchange one variable for the other with no substantive changes to their joint random behavior. While independence speaks to a <i>lack of influence</i> between the two variables, exchangeability aims to capture the <i>symmetry</i> between them.
 </p>
 
+
 <div class="exampletoo">
-<p>Let \(X\) and \(Y\) have joint PDF
+<p>
+Let \(X\) and \(Y\) have joint PDF
 \begin{multline}
 f_{X,Y}(x,y)=(1+\alpha)\lambda^{2}\mathrm{e}^{-\lambda(x+y)}+\alpha(2\lambda)^{2}\mathrm{e}^{-2\lambda(x+y)}-2\alpha\lambda^{2}\left(\mathrm{e}^{-\lambda(2x+y)}+\mathrm{e}^{-\lambda(x+2y)}\right).
 \end{multline}
 It is straightforward and tedious to check that \(\iint f=1\). We may see immediately that \(f_{X,Y}(x,y)=f_{X,Y}(y,x)\) for all \((x,y)\), which confirms that \(X\) and \(Y\) are exchangeable. Here, \(\alpha\) is said to be an association parameter. This particular example is one from the Farlie-Gumbel-Morgenstern family of distributions; see \cite{Kotz2000}.
-</p>
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-binom-exchangeable" id="exa-binom-exchangeable"></a>
+<a name="exa-binom-exchangeable" id="exa-binom-exchangeable"></a>
 Suppose \(X\) and \(Y\) are IID \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). Then their joint PMF is
 \begin{eqnarray*}
 f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
@@ -10227,10 +10460,8 @@ f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
  & = & {n \choose x}{n \choose y}\, p^{x+y}(1-p)^{2n-(x+y)},
 \end{eqnarray*}
 and the value is the same if we exchange \(x\) and \(y\). Therefore \((X,Y)\) are exchangeable.
-</p>
 </div>
 
-<p>
 Looking at Example <a href="#exa-binom-exchangeable">Binomial Exchangeable</a> more closely we see that the fact that \((X,Y)\) are exchangeable has nothing to do with the \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it only matters that they are independent (so that the joint PDF factors) and they are identically distributed (in which case we may swap letters to no effect). We could just have easily used any other marginal distribution. We will take this as a proof of the following proposition.
 </p>
 
@@ -10434,8 +10665,10 @@ but for the well-behaved examples that we will see in this book it works just fi
 
 
 
+
 <div class="exampletoo">
-<p>Let \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})\) and consider the transformation
+<p>
+Let \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})\) and consider the transformation
 \begin{align*}
 U= & \ 3X+4Y,\\
 V= & \ 5X+6Y.
@@ -10462,10 +10695,9 @@ we get that the joint PDF of \((U,V)\) is
 \label{eq-biv-norm-hidden}
 f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad (u,v)\in\mathbb{R}^{2}.
 \end{equation}
-</p>
 </div>
 
-
+</p>
 <div class="rem">
 <p>It may not be obvious, but Equation <a href="#eq-biv-norm-hidden">eq-biv-norm-hidden</a> is the PDF of a \(\mathsf{mvnorm}\) distribution. For a more general result see Theorem <a href="#thm-mvnorm-dist-matrix-prod">thm-mvnorm-dist-matrix-prod</a>.
 </p>
@@ -10669,12 +10901,13 @@ For the most part we will ignore these difficulties, but the careful reader shou
 When \(k=2\), we have \(x_{1}=x\) and \(x_{2}=n-x\), we have \(p_{1}=p\) and \(p_{2}=1-p\), and the multinomial coefficient is literally a binomial coefficient. In the previous notation we have thus shown that the \(\mathsf{multinom}(\mathtt{size}=n,\,\mathtt{prob}=\mathbf{p}_{2\times1})\) distribution is the same as a \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 </p>
 
+
 <div class="exampletoo">
-<p><b>Dinner with Barack Obama.</b> During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S. population as a whole, Suppose Barack Obama wants to have <a href="http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans">dinner</a> with 36 democrat, 27 republican, and 37 independent.
-</p>
+<p>
+<b>Dinner with Barack Obama.</b> During the 2008 U.S. presidential primary, Barack Obama offered to have dinner with three randomly selected monetary contributors to his campaign. Imagine the thousands of people in the contributor database. For the sake of argument, Suppose that the database was approximately representative of the U.S. population as a whole, Suppose Barack Obama wants to have <a href="http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans">dinner</a> with 36 democrat, 27 republican, and 37 independent.
 </div>
 
-
+</p>
 <div class="rem">
 <p>Here are some facts about the multinomial distribution.
 </p><ol>
@@ -11049,24 +11282,20 @@ ind <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> c(
 Similar to that done for the normal we may define \(\mathsf{t}_{\alpha}(\mathtt{df}=n-1)\) as the number on the \(x\)-axis such that there is exactly \(\alpha\) area under the \(\mathsf{t}(\mathtt{df}=n-1)\) curve to its right.
 </p>
 
+
 <div class="exampletoo">
-<p>Find \(\mathsf{t}{}_{0.01}(\mathtt{df}=23)\) with the quantile function.
-</p>
+<p>
+Find \(\mathsf{t}{}_{0.01}(\mathtt{df}=23)\) with the quantile function.
 </div>
-
-
 
 
 <pre class="src src-R">qt(0.01, df = 23, lower.tail = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
 </pre>
 
 
-<pre class="example">
-[1] 2.499867
-</pre>
+: [1] 2.499867
 
-
-
+</p>
 <div class="rem">
 <p>There are a few things to note about the \(\mathtt{t}(\mathtt{df}=r)\) distribution.
 </p><ol>
@@ -11336,7 +11565,7 @@ We can look at the mean of the simulated values
 
 
 <pre class="example">
-[1] 1.343608
+[1] 1.34318
 </pre>
 
 
@@ -11350,7 +11579,7 @@ and we can see the standard deviation
 
 
 <pre class="example">
-[1] 0.1624308
+[1] 0.1645976
 </pre>
 
 
@@ -11401,7 +11630,7 @@ We can look at the mean of the simulated values
 
 
 <pre class="example">
-[1] 1.002832
+[1] 1.002645
 </pre>
 
 
@@ -11416,7 +11645,7 @@ and we can see the standard deviation
 
 
 <pre class="example">
-[1] 0.1085052
+[1] 0.1111925
 </pre>
 
 
@@ -11548,8 +11777,10 @@ We find an estimator with the methods of Section <a href="#sec-9-1">Point Estima
 The following example is how I was introduced to maximum likelihood.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-how-many-fish" id="exa-how-many-fish"></a>
+<p>
+<a name="exa-how-many-fish" id="exa-how-many-fish"></a>
 Suppose we have a small pond in our backyard, and in the pond there live some fish. We would like to know how many fish live in the pond. How can we estimate this? One procedure developed by researchers is the capture-recapture method. Here is how it works.
 </p>
 <p>
@@ -11577,10 +11808,7 @@ Similarly, if \(F=9\) then the probability of observing \(X=3\) tagged fish woul
 \mathbb{P}(\mbox{3 successes in 4 trials})=\frac{{7 \choose 3}{2 \choose 1}}{{9 \choose 4}}=\frac{70}{126}\approx0.556.
 \]
 We can see already that the observed data \(X=3\) is more likely when \(F=9\) than it is when \(F=8\). And here lies the genius of Sir Ronald Aylmer Fisher: he asks, ``What is the value of \(F\) which has the highest likelihood?'' In other words, for all of the different possible values of \(F\), which one makes the above probability the biggest? We can answer this question with a plot of \(\mathbb{P}(X=x)\) versus \(F\). See Figure <a href="#fig-capture-recapture">capture-recapture</a>.
-</p>
 </div>
-
-
 
 
 
@@ -11594,9 +11822,8 @@ We can see already that the observed data \(X=3\) is more likely when \(F=9\) th
   <p>A plot of maximum likelihood for the capture-recapture experiment.</p>
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-bass-bluegill" id="exa-bass-bluegill"></a>
+<a name="exa-bass-bluegill" id="exa-bass-bluegill"></a>
 In the last example we were only concerned with how many fish were in the pond, but now, we will ask a different question. Suppose it is known that there are only two species of fish in the pond: smallmouth bass (<i>Micropterus dolomieu</i>) and bluegill (<i>Lepomis macrochirus</i>); perhaps we built the pond some years ago and stocked it with only these two species. We would like to estimate the proportion of fish in the pond which are bass.
 </p>
 <p>
@@ -11637,13 +11864,7 @@ curve(x^3*(1-x)^4, 0, 1, add = <span style="font-weight: bold; text-decoration: 
 
 
 
-<pre class="src src-R">  &lt;&lt;fishing-part-two&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;fishing-part-two&gt;&gt;
-</pre>
 
 
 
@@ -11678,10 +11899,7 @@ instead of a maximum! We should be thorough and check that \(L'&gt;0\) when \(p&
 
 <p>
 The result is shown in Figure <a href="#fig-species-mle">species-mle</a>.
-</p>
 </div>
-
-
 
 
 
@@ -11695,7 +11913,6 @@ The result is shown in Figure <a href="#fig-species-mle">species-mle</a>.
   <p>Species maximum likelihood.</p>
 </div>
 
-<p>
 In general, we have a family of PDFs \(f(x|\theta)\) indexed by a parameter \(\theta\) in some parameter space \(\Theta\). We want to learn about \(\theta\). We take a \(SRS(n)\):
 \begin{equation}
 X_{1},\, X_{2},\,\ldots,X_{n}\mbox{ which are IID \( f(x| \theta ) \).}
@@ -11758,8 +11975,10 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an <i>unbiased 
 </div>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-normal-MLE-both" id="exa-normal-MLE-both"></a>
+<p>
+<a name="exa-normal-MLE-both" id="exa-normal-MLE-both"></a>
 </p>
 <p>
 Let \(X_{1}\), \(X_{2}\), &hellip; , \(X_{n}\) be an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. It can be shown (in Exercise <a href="#xca-norm-mu-sig-MLE">xca-norm-mu-sig-MLE</a>) that if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
@@ -11784,6 +12003,7 @@ from which we may conclude two things:
 <li>\(S^{2}=n\hat{\sigma^{2}}/(n-1)\) is an unbiased estimator of \(\sigma^{2}\).
 </li>
 </ul>
+
 
 
 
@@ -11870,6 +12090,7 @@ Note that we did not need <code>maximum = TRUE</code> because we minimized the n
 For multiparameter problems we may use a similar approach by way of the <code>mle</code> function in the <code>stats4</code> package \cite{stats4}. 
 </p>
 
+
 <div class="exampletoo">
 
 <p>
@@ -11896,6 +12117,21 @@ summary(MaxLikeEst)
 </pre>
 
 
+
+<pre class="example"> Maximum likelihood estimation
+
+Call:
+mle(minuslogl = minuslogL, start = list(mu = 5, sigma2 = 0.5))
+
+Coefficients:
+        Estimate Std. Error
+mu     5.0729848  0.1258666
+sigma2 0.4752721  0.1227108
+
+-2 log L: 62.82084
+</pre>
+
+
 <p>
 The outputted MLEs are shown above, and <code>mle</code> even gives us estimates for the standard errors of \(\hat{\mu}\) and \(\hat{\sigma}^{2}\) (which were obtained by inverting the numerical Hessian matrix at the optima; see Appendix <a href="#sec-21-6">Multivariable Calculus</a>). Let us check how close the numerical MLEs came to the theoretical MLEs:
 </p>
@@ -11906,9 +12142,17 @@ The outputted MLEs are shown above, and <code>mle</code> even gives us estimates
 </pre>
 
 
+<pre class="example">
+[1] 5.073
+[1] 0.475281
+[1] 0.1280195
+</pre>
+
+
 <p>
 The numerical MLEs were very close to the theoretical MLEs. We already knew that the standard error of \(\hat{\mu}=\overline{X}\) is \(\sigma/\sqrt{n}\), and the numerical estimate of this was very close too.
 </p>
+
 
 </div>
 
@@ -12015,17 +12259,18 @@ For a fixed sample size \(n\), if \(1-\alpha\) increases, then the confidence in
 </div>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-plant-one-samp-z-int" id="exa-plant-one-samp-z-int"></a>
+<p>
+<a name="exa-plant-one-samp-z-int" id="exa-plant-one-samp-z-int"></a>
 <b>Results from an Experiment on Plant Growth.</b> The <code>PlantGrowth</code> data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 </p>
 <p>
 The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
 </p>
 
+
 </div>
-
-
 
 
 <pre class="src src-R">with(PlantGrowth, stem.leaf(weight))
@@ -12102,12 +12347,13 @@ We find the sample mean of the data to be \(\overline{x}=5.073\) and \(z_{\alpha
 which comes out to approximately \([4.823,\,5.323]\). In conclusion, we are 95% confident that the true mean weight \(\mu\) of all plants of this species lies somewhere between 4.823 g and 5.323 g, that is, we are 95% confident that the interval \([4.823,\,5.323]\) covers \(\mu\).
 </p>
 
+
 <div class="exampletoo">
-<p>Give some data with \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Maybe small sample?
-</p>
+<p>
+Give some data with \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution. Maybe small sample?
 </div>
 
-<ol>
+</p><ol>
 <li>What is the parameter of interest? in the context of the problem.
 </li>
 <li>Give a point estimate for \(\mu\).
@@ -12181,12 +12427,13 @@ and satisfy
 
 
 
+
 <div class="exampletoo">
-<p>Small sample, some data with \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution.  PANIC
-</p>
+<p>
+Small sample, some data with \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) an \(SRS(n)\) from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution.  PANIC
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-9-2-1" class="outline-4">
@@ -12550,12 +12797,13 @@ We already know (we can see in the formulas above) that \(E\) decreases as \(n\)
 For the case of a population mean the answer is easy: we set up an equation and solve for \(n\).
 </p>
 
+
 <div class="exampletoo">
-<p>Given a situation, given \(\sigma\), given \(E\), we would like to know how big \(n\) has to be to ensure that \(\overline{X}\pm5\) is a 95% confidence interval for \(\mu\).
-</p>
+<p>
+Given a situation, given \(\sigma\), given \(E\), we would like to know how big \(n\) has to be to ensure that \(\overline{X}\pm5\) is a 95% confidence interval for \(\mu\).
 </div>
 
-
+</p>
 <div class="rem">
 <p>Always round up any decimal values of \(n\), no matter how small the decimal is. Another name for \(E\) is the ``maximum error of the estimate''.
 </p>
@@ -12590,12 +12838,13 @@ OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both si
 
 
 
+
 <div class="exampletoo">
-<p>Proportion example.
-</p>
+<p>
+Proportion example.
 </div>
 
-
+</p>
 <div class="rem">
 <p>For very small populations sometimes the value of \(n\) obtained from the formula is too big. In this case we should use the hypergeometric distribution for a sampling model rather than the binomial model. With this modification the formulas change to the following: if \(N\) denotes the population size then let
 \begin{equation}
@@ -12760,8 +13009,10 @@ There are two very important final thoughts. First, everybody gets a cookie in t
 
 
 
+
 <div class="exampletoo">
-<p><a name="exa-widget-machine" id="exa-widget-machine"></a>
+<p>
+<a name="exa-widget-machine" id="exa-widget-machine"></a>
 </p>
 <p>
 We have a machine that makes widgets. 
@@ -12807,6 +13058,7 @@ If the confidence interval is
 <li>\([0.07,\,0.11]\), then there is not enough evidence to conclude that the torque converter is doing anything at all, positive or negative.
 </li>
 </ul>
+
 
 
 
@@ -12867,8 +13119,10 @@ Table here.
 Don't forget the assumptions.
 </p>
 
+
 <div class="exampletoo">
-<p>Find
+<p>
+Find
 </p><ol>
 <li>The null and alternative hypotheses.
 </li>
@@ -12881,12 +13135,11 @@ Don't forget the assumptions.
 </ol>
 
 
-
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-prop-test-pvalue-A" id="exa-prop-test-pvalue-A"></a>
+<p>
+<a name="exa-prop-test-pvalue-A" id="exa-prop-test-pvalue-A"></a>
 </p>
 <p>
 Suppose \(p=\mbox{the proportion of students}\) who are admitted to the graduate school of the University of California at Berkeley, and suppose that a public relations officer boasts that UCB has historically had a 40% acceptance rate for its graduate school. Consider the data stored in the table <code>UCBAdmissions</code> from 1973. Assuming these observations constituted a simple random sample, are they consistent with the officer's claim, or do they provide evidence that the acceptance rate was significantly less than 40%? Use an \(\alpha=0.01\) significance level.
@@ -12904,6 +13157,11 @@ where \(\alpha=0.01\) and \(-z_{0.01}\) is
 </pre>
 
 
+<pre class="example">
+[1] -2.326348
+</pre>
+
+
 <p>
 Our only remaining task is to find the value of the test statistic and see where it falls relative to the critical value. We can find the number of people admitted and not admitted to the UCB graduate school with the following. 
 </p>
@@ -12913,6 +13171,20 @@ Our only remaining task is to find the value of the test statistic and see where
 <pre class="src src-R">A <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> as.data.frame(UCBAdmissions)
 head(A)
 xtabs(Freq ~ Admit, data = A)
+</pre>
+
+
+
+<pre class="example">     Admit Gender Dept Freq
+1 Admitted   Male    A  512
+2 Rejected   Male    A  313
+3 Admitted Female    A   89
+4 Rejected Female    A   19
+5 Admitted   Male    B  353
+6 Rejected   Male    B  207
+Admit
+Admitted Rejected 
+    1755     2771
 </pre>
 
 
@@ -12927,34 +13199,33 @@ Now we calculate the value of the test statistic.
 </pre>
 
 
+<pre class="example">
+[1] -1.680919
+</pre>
+
+
 <p>
 Our test statistic is not less than \(-2.32\), so it does not fall into the critical region. Therefore, we <i>fail</i> to reject the null hypothesis that the true proportion of students admitted to graduate school is less than 40% and say that the observed data are consistent with the officer's claim at the \(\alpha=0.01\) significance level. 
 </p>
 
+
 </div>
 
-
 <div class="exampletoo">
-<p><a name="exa-prop-test-pvalue-B" id="exa-prop-test-pvalue-B"></a>
+<p>
+<a name="exa-prop-test-pvalue-B" id="exa-prop-test-pvalue-B"></a>
 We are going to do Example <a href="#exa-prop-test-pvalue-A">exa-prop-test-pvalue-A</a> all over again. Everything will be exactly the same except for one change. Suppose we choose significance level \(\alpha=0.05\) instead of \(\alpha=0.01\). Are the 1973 data consistent with the officer's claim?
 </p>
 <p>
 Our null and alternative hypotheses are the same. Our observed test statistic is the same: it was approximately \(-1.68\). But notice that our critical value has changed: \(\alpha=0.05\) and \(-z_{0.05}\) is 
-</p>
 </div>
-
-
 
 <pre class="src src-R">-qnorm(0.95)
 </pre>
 
 
-<pre class="example">
-[1] -1.644854
-</pre>
+: [1] -1.644854
 
-
-<p>
 Our test statistic is less than \(-1.64\) so it now falls into the critical region! We now <i>reject</i> the null hypothesis and conclude that the 1973 data provide evidence that the true proportion of students admitted to the graduate school of UCB in 1973 was significantly less than 40%. The data are <i>not</i> consistent with the officer's claim at the \(\alpha=0.05\) significance level.
 </p>
 <p>
@@ -12973,27 +13244,22 @@ Clearly, for some significance levels we reject, and for some significance level
 </div>
 
 
+
 <div class="exampletoo">
-<p>Calculate the \(p\)-value for the test in Examples <a href="#exa-prop-test-pvalue-A">exa-prop-test-pvalue-A</a> and <a href="#exa-prop-test-pvalue-B">exa-prop-test-pvalue-B</a>.
+<p>
+Calculate the \(p\)-value for the test in Examples <a href="#exa-prop-test-pvalue-A">exa-prop-test-pvalue-A</a> and <a href="#exa-prop-test-pvalue-B">exa-prop-test-pvalue-B</a>.
 </p>
 <p>
 The \(p\)-value for this test is the probability of obtaining a \(z\)-score equal to our observed test statistic (which had \(z\)-score \(\approx-1.680919\)) or more extreme, which in this example is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval \((-\infty,\,-1.680919]\). We can get this easily with
-</p>
 </div>
-
-
 
 
 <pre class="src src-R">pnorm(-1.680919)
 </pre>
 
 
-<pre class="example">
-[1] 0.04638932
-</pre>
+: [1] 0.04638932
 
-
-<p>
 We see that the \(p\)-value is strictly between the significance levels \(\alpha=0.01\) and \(\alpha=0.05\). This makes sense: it has to be bigger than \(\alpha=0.01\) (otherwise we would have rejected \(H_{0}\) in Example <a href="#exa-prop-test-pvalue-A">exa-prop-test-pvalue-A</a>) and it must also be smaller than \(\alpha=0.05\) (otherwise we would not have rejected \(H_{0}\) in Example <a href="#exa-prop-test-pvalue-B">exa-prop-test-pvalue-B</a>). Indeed, \(p\)-values are a characteristic indicator of whether or not we would have rejected at assorted significance levels, and for this reason a statistician will often skip the calculation of critical regions and critical values entirely. If (s)he knows the \(p\)-value, then (s)he knows immediately whether or not (s)he would have rejected at <i>any</i> given significance level.
 </p>
 <p>
@@ -13009,12 +13275,13 @@ Thus, another way to phrase our significance test procedure is: we will reject \
 Table Here.
 </p>
 
+
 <div class="exampletoo">
-<p>Example.
-</p>
+<p>
+Example.
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-10-2-1-1" class="outline-5">
@@ -13120,8 +13387,10 @@ Here, \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) are a \(SRS(n)\) from a \(\maths
 </div>
 
 
+
 <div class="exampletoo">
-<p>In this example we
+<p>
+In this example we
 </p><ol>
 <li>Find the null and alternative hypotheses.
 </li>
@@ -13132,6 +13401,7 @@ Here, \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) are a \(SRS(n)\) from a \(\maths
 <li>Find the \(p\)-value.
 </li>
 </ol>
+
 
 
 
@@ -13168,14 +13438,14 @@ z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 	One Sample z-test
 
 data:  x 
-z = 0.9614, n = 37.000, Std. Dev. = 3.000, Std. Dev.
-of the sample mean = 0.493, p-value = 0.3364
+z = 1.7293, n = 37.000, Std. Dev. = 3.000, Std. Dev.
+of the sample mean = 0.493, p-value = 0.08375
 alternative hypothesis: true mean is not equal to 1 
 90 percent confidence interval:
- 0.6629226 2.2853962 
+ 1.041660 2.664134 
 sample estimates:
 mean of x 
- 1.474159
+ 1.852897
 </pre>
 
 
@@ -13195,13 +13465,13 @@ t.test(x, mu = 0, conf.level = 0.90, alternative = <span style="font-style: ital
 	One Sample t-test
 
 data:  x 
-t = 1.9272, df = 12, p-value = 0.03898
+t = 1.4025, df = 12, p-value = 0.09305
 alternative hypothesis: true mean is greater than 0 
 90 percent confidence interval:
- 0.6135461       Inf 
+ 0.045305      Inf 
 sample estimates:
 mean of x 
- 2.070973
+ 1.372172
 </pre>
 
 
@@ -13235,15 +13505,16 @@ X^{2}=\frac{(n-1)S^{2}}{\sigma^{2}}\sim\mathsf{chisq}(\mathtt{df}=n-1).
 Table here.
 </p>
 
+
 <div class="exampletoo">
-<p>Give some data and a hypothesis.
+<p>
+Give some data and a hypothesis.
 </p><ul>
 <li>Give an \(\alpha\)-level and test the critical region way.
 </li>
 <li>Find the \(p\)-value for the test.
 </li>
 </ul>
-
 
 
 </div>
@@ -13811,13 +14082,26 @@ Y_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}, \quad i = 1,2,\ldots,n.
 
 
 
+
 <div class="exampletoo">
-<p><a name="exa-Speed-and-Stopping" id="exa-Speed-and-Stopping"></a>
+<p>
+<a name="exa-Speed-and-Stopping" id="exa-Speed-and-Stopping"></a>
 <b>Speed and stopping distance of cars.</b> We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the <code>datasets</code> package \cite{datasets}. It has two variables: <code>speed</code> and <code>dist</code>. We can take a look at some of the values in the data frame: 
 </p>
 
 
 <pre class="src src-R">head(cars)
+</pre>
+
+
+<pre class="example">
+  speed dist
+1     4    2
+2     4   10
+3     7    4
+4     7   22
+5     8   16
+6     9   10
 </pre>
 
 
@@ -13838,13 +14122,7 @@ The <code>speed</code> represents how fast the car was going (\(x\)) in miles pe
 
 
 
-<pre class="src src-R">  &lt;&lt;carscatter&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;carscatter&gt;&gt;
-</pre>
 
 
 <p>
@@ -13860,10 +14138,9 @@ plot(dist ~ speed, data = cars)
 
 <p>
 There is a pronounced upward trend to the data points, and the pattern looks approximately linear. There does not appear to be substantial fanning out of the points or extreme values. 
-</p>
 </div>
 
-</div>
+</p></div>
 </div>
 
 </div>
@@ -14016,8 +14293,10 @@ It is good practice to visually inspect the data with the regression line added 
 To calculate points on the regression line we may simply plug the desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with the <code>predict</code> function. The inputs to <code>predict</code> are the fitted linear model object, <code>cars.lm</code>, and the desired \(x\) value(s) represented by a data frame. See the example below.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-regline-cars-interpret" id="exa-regline-cars-interpret"></a>
+<p>
+<a name="exa-regline-cars-interpret" id="exa-regline-cars-interpret"></a>
 </p>
 <p>
 Using the regression line for the <code>cars</code> data:
@@ -14027,13 +14306,12 @@ Using the regression line for the <code>cars</code> data:
    This represents the average stopping distance (in feet) for a car going 8 mph. 
 </li>
 <li>Interpret the slope \(\beta_{1}\). 
-   The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately \( SRC_R{tmpcoef[2]} \) additional feet to stop for each additional mph increase in speed.
+   The true slope \(\beta_{1}\) represents the increase in average stopping distance for each mile per hour faster that the car drives. In this case, we estimate the car to take approximately \(  3.93 \) additional feet to stop for each additional mph increase in speed.
 </li>
 <li>Interpret the intercept \( \beta_{0} \).
-   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \( SRC_R{tmpcoef[1]} \) ). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be <i>extrapolating</i>, a dangerous practice which often gives nonsensical results.
+   This would represent the mean stopping distance for a car traveling 0 mph (which our regression line estimates to be \(  -17.58 \) ). Of course, this interpretation does not make any sense for this example, because a car travelling 0 mph takes 0 ft to stop (it was not moving in the first place)! What went wrong? Looking at the data, we notice that the smallest speed for which we have measured data is 4 mph. Therefore, if we predict what would happen for slower speeds then we would be <i>extrapolating</i>, a dangerous practice which often gives nonsensical results.
 </li>
 </ol>
-
 
 
 </div>
@@ -14060,13 +14338,13 @@ We said at the beginning of the chapter that our goal was to estimate \( \mu = \
 <p>The first is a number, \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\), but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-regline-cars-pe-8mph" id="exa-regline-cars-pe-8mph"></a>
-We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} + (8) ( SRC_R{tmpcoef[2]} ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
-</p>
+<p>
+<a name="exa-regline-cars-pe-8mph" id="exa-regline-cars-pe-8mph"></a>
+We may use the regression line to obtain a point estimate of the mean stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1}) \approx  -17.58 + (8) (  3.93 ) \approx 13.88 \). We would also use 13.88 as a point estimate for the stopping distance of a future car traveling 8 mph. 
 </div>
 
-<p>
 Note that we actually have observed data for a car traveling 8 mph; its stopping distance was 16 ft as listed in the fifth row of the <code>cars</code> data (which we saw in Example <a href="#exa-Speed-and-Stopping">exa-Speed-and-Stopping</a>).
 </p>
 
@@ -14384,8 +14662,10 @@ We notice that the prediction interval in Equation <a href="#eq-SLR-pred-int-for
 Confidence and prediction intervals are calculated in \(\mathsf{R}\) with the <code>predict</code>\index{predict@\texttt{predict}} function, which we encountered in Section <a href="#sec-11-2-2">SLR Point Estimation</a>. There we neglected to take advantage of its additional <code>interval</code> argument. The general syntax follows. 
 </p>
 
+
 <div class="exampletoo">
-<p>We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed <code>cars.lm</code> earlier, and we will use this for input to the <code>predict</code> function. Also, we need to tell \(\mathsf{R}\) the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. <i>This is important</i>. 
+<p>
+We will find confidence and prediction intervals for the stopping distance of a car travelling 5, 6, and 21 mph (note from the graph that there are no collected data for these speeds). We have computed <code>cars.lm</code> earlier, and we will use this for input to the <code>predict</code> function. Also, we need to tell \(\mathsf{R}\) the values of \(x_{0}\) at which we want the predictions made, and store the \(x_{0}\) values in a data frame whose variable is labeled with the correct name. <i>This is important</i>. 
 </p>
 
 
@@ -14404,9 +14684,14 @@ Next we instruct \(\mathsf{R}\) to calculate the intervals. Confidence intervals
 </pre>
 
 
-
-<pre class="src src-R">carsCI <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> round(predict(cars.lm, newdata = new, interval = <span style="font-style: italic;">"confidence"</span>), 2)
+<pre class="example">
+        fit       lwr      upr
+1  2.082949 -7.644150 11.81005
+2  6.015358 -2.973341 15.00406
+3 65.001489 58.597384 71.40559
 </pre>
+
+
 
 
 <p>
@@ -14419,9 +14704,15 @@ Prediction intervals are given by
 </pre>
 
 
-
-<pre class="src src-R">carsPI <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> round(predict(cars.lm, newdata = new, interval = <span style="font-style: italic;">"prediction"</span>), 2)
+<pre class="example">
+        fit       lwr      upr
+1  2.082949 -30.33359 34.49948
+2  6.015358 -26.18731 38.21803
+3 65.001489  33.42257 96.58040
 </pre>
+
+
+
 
 
 
@@ -14431,17 +14722,18 @@ Prediction intervals are given by
 The type of interval is dictated by the <code>interval</code> argument (which is <code>none</code> by default), and the default confidence level is 95\% (which can be changed with the <code>level</code> argument). 
 </p>
 
+
 <div class="exampletoo">
-<p>Using the <code>cars</code> data,
+<p>
+Using the <code>cars</code> data,
 </p><ol>
 <li>Report a point estimate of and a 95% confidence interval for the mean stopping distance for a car travelling 5 mph.
-   The fitted value for \(x=5\) is \( SRC_R{carsCI[1, 1]} \), so a point estimate would be \( SRC_R{carsCI[1, 1]} \) ft. The 95% CI is given by \( [ SRC_R{carsCI[1, 2]}, SRC_R{carsCI[1, 3]} ] \), so with 95% confidence the mean stopping distance lies somewhere between \( SRC_R{carsCI[1, 2]} \) ft and \( SRC_R{carsCI[1, 3]} \) ft.
+   The fitted value for \(x=5\) is \(  2.08 \), so a point estimate would be \(  2.08 \) ft. The 95% CI is given by \( [  -7.64,  11.81 ] \), so with 95% confidence the mean stopping distance lies somewhere between \(  -7.64 \) ft and \(  11.81 \) ft.
 </li>
 <li>Report a point prediction for and a 95% prediction interval for the stopping distance of a hypothetical car travelling 21 mph.
-   The fitted value for \(x = 21\) is \( SRC_R{carsPI[3, 1]} \), so a point prediction for the stopping distance is \( SRC_R{carsPI[3, 1]} \) ft. The 95% PI is \( [ SRC_R{carsPI[3, 2]}, SRC_R{carsPI[3, 3]} ] \), so with 95% confidence we may assert that the hypothetical stopping distance for a car travelling 21 mph would lie somewhere between \( SRC_R{carsPI[3, 2]} \) ft and \( SRC_R{carsPI[3, 3]} \) ft.
+   The fitted value for \(x = 21\) is \(  65 \), so a point prediction for the stopping distance is \(  65 \) ft. The 95% PI is \( [  33.42,  96.58 ] \), so with 95% confidence we may assert that the hypothetical stopping distance for a car travelling 21 mph would lie somewhere between \(  33.42 \) ft and \(  96.58 \) ft.
 </li>
 </ol>
-
 
 
 </div>
@@ -15589,9 +15881,8 @@ The assumption on \(\upepsilon\) is equivalent to the assumption that \(\epsilon
 Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
 
-</p>
 <div class="exampletoo">
-<p><b>Girth, Height, and Volume for Black Cherry trees.</b> \index{Data sets!trees@\texttt{trees}}
+<b>Girth, Height, and Volume for Black Cherry trees.</b> \index{Data sets!trees@\texttt{trees}}
 Measurements were made of the girth, height, and volume of timber in 31 felled black cherry trees. Note that girth is the diameter of the tree (in inches) measured at 4 ft 6 in above the ground. The variables are
 </p>
 <ol>
@@ -15614,6 +15905,17 @@ The data are in the <code>datasets</code> package \cite{datasets} and are alread
 </pre>
 
 
+<pre class="example">
+  Girth Height Volume
+1   8.3     70   10.3
+2   8.6     65   10.3
+3   8.8     63   10.2
+4  10.5     72   16.4
+5  10.7     81   18.8
+6  10.8     83   19.7
+</pre>
+
+
 <p>
 Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the <code>splom</code> function in the <code>lattice</code> package \cite{lattice} as shown below. The plot is shown in Figure <a href="#fig-splom-trees">splom-trees</a>.
 </p>
@@ -15625,13 +15927,7 @@ Let us take a look at a visual display of the data. For multiple variables, inst
 
 
 
-<pre class="src src-R">  &lt;&lt;splom-trees&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;splom-trees&gt;&gt;
-</pre>
 
 
 
@@ -15646,10 +15942,9 @@ The dependent (response) variable <code>Volume</code> is listed in the first row
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 \end{equation}
 in which case the quantity \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-12-1-1" class="outline-4">
@@ -15874,19 +16169,20 @@ which is just a fancy way to write
 \hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
 \end{equation}
 </p>
+ 
 
 <div class="exampletoo">
-<p>If we wanted to predict the average volume of black cherry trees that have <code>Girth = 15</code> in and are <code>Height = 77</code> ft tall then we would use the estimate 
+<p>
+If we wanted to predict the average volume of black cherry trees that have <code>Girth = 15</code> in and are <code>Height = 77</code> ft tall then we would use the estimate 
 \begin{alignat*}{1}
 \hat{\mu}(15,\,77)= & -58+4.7(15)+0.3(77),\\
 \approx & 35.6\mbox{\,\ ft}^{3}.
 \end{alignat*}
 
 We would use the same estimate \(\hat{Y}=35.6\) to predict the measured <code>Volume</code> of another black cherry tree &ndash; yet to be observed &ndash; that has <code>Girth = 15</code> in and is <code>Height = 77</code> ft tall.
-</p>
 </div>
 
-
+</p>
 </div>
 
 <div id="outline-container-12-2-2-1" class="outline-5">
@@ -15960,22 +16256,23 @@ We continue just like we would have done in SLR.
 
 
 
+
 <div class="exampletoo">
-<p>Using the <code>trees</code> data,
+<p>
+Using the <code>trees</code> data,
 </p><ol>
 <li>Report a point estimate of the mean <code>Volume</code> of a tree of <code>Girth</code> 9.1 in and <code>Height</code> 69 ft.
 
 <p>
-   The fitted value for \(x_{1}=9.1\) and \(x_{2}=69\) is \( SRC_R{treesFIT[ 1 ]} \), so a point estimate would be \( SRC_R{treesFIT[ 1 ]} \) cubic feet. 
+   The fitted value for \(x_{1}=9.1\) and \(x_{2}=69\) is \(  8.3 \), so a point estimate would be \(  8.3 \) cubic feet. 
 </p>
 </li>
 <li>Report a point prediction for and a 95% prediction interval for the <code>Volume</code> of a hypothetical tree of <code>Girth</code> 12.5 in and <code>Height</code> 87 ft.
 
 <p>
-   The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \( SRC_R{treesFIT[ 3 ]} \), so a point prediction for the <code>Volume</code> is \( SRC_R{treesFIT[ 3 ]} \) cubic feet. 
+   The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \(  30.4 \), so a point prediction for the <code>Volume</code> is \(  30.4 \) cubic feet. 
 </p></li>
 </ol>
-
 
 
 </div>
@@ -16218,22 +16515,25 @@ Prediction intervals are given by
 As before, the interval type is decided by the <code>interval</code> argument and the default confidence level is 95% (which can be changed with the <code>level</code> argument).
 </p>
 
+
 <div class="exampletoo">
-<p>Using the <code>trees</code> data, 
+<p>
+Using the <code>trees</code> data, 
 </p>
 <ol>
 <li>Report a 95% confidence interval for the mean <code>Volume</code> of a tree of <code>Girth</code> 9.1 in and <code>Height</code> 69 ft.
 
 <p>
-   The 95% CI is given by \( [ SRC_R{treesCI[1, 2]}, SRC_R{treesCI[1, 3]} ] \), so with 95% confidence the mean <code>Volume</code> lies somewhere between \( SRC_R{treesCI[1, 2]} \) cubic feet and \( SRC_R{treesCI[1, 3]} \) cubic feet.
+   The 95% CI is given by \( [  5.8,  10.8 ] \), so with 95% confidence the mean <code>Volume</code> lies somewhere between \(  5.8 \) cubic feet and \(  10.8 \) cubic feet.
 </p>
 </li>
 <li>Report a 95% prediction interval for the <code>Volume</code> of a hypothetical tree of <code>Girth</code> 12.5 in and <code>Height</code> 87 ft.
 
 <p>
-   The 95% prediction interval is given by \( [ SRC_R{treesCI[3, 2]}, SRC_R{treesCI[3, 3]} ] \), so with 95% confidence we may assert that the hypothetical <code>Volume</code> of a tree of <code>Girth</code> 12.5 in and <code>Height</code> 87 ft would lie somewhere between \( SRC_R{treesCI[3, 2]} \) cubic feet and \( SRC_R{treesCI[3, 3]} \) feet.
+   The 95% prediction interval is given by \( [  26.9,  33.8 ] \), so with 95% confidence we may assert that the hypothetical <code>Volume</code> of a tree of <code>Girth</code> 12.5 in and <code>Height</code> 87 ft would lie somewhere between \(  26.9 \) cubic feet and \(  33.8 \) feet.
 </p></li>
 </ol>
+
 
 
 
@@ -16535,14 +16835,39 @@ Volume ~ Girth + I(Girth^2)
 
 
 
+
 <div class="exampletoo">
-<p>We will fit the quadratic model to the <code>trees</code> data and display the results with <code>summary</code>, being careful to rescale the data before fitting the model. We may rescale the <code>Girth</code> variable to have zero mean and unit variance on-the-fly with the <code>scale</code> function.
+<p>
+We will fit the quadratic model to the <code>trees</code> data and display the results with <code>summary</code>, being careful to rescale the data before fitting the model. We may rescale the <code>Girth</code> variable to have zero mean and unit variance on-the-fly with the <code>scale</code> function.
 </p>
 
 
 
 <pre class="src src-R">treesquad.lm <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                    data = trees)
 summary(treesquad.lm)
+</pre>
+
+
+
+<pre class="example">
+Call:
+lm(formula = Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.4889 -2.4293 -0.3718  2.0764  7.6447 
+
+Coefficients:
+                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)        27.7452     0.8161  33.996  &lt; 2e-16 ***
+scale(Girth)       14.5995     0.6773  21.557  &lt; 2e-16 ***
+I(scale(Girth)^2)   2.5067     0.5729   4.376 0.000152 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+Residual standard error: 3.335 on 28 degrees of freedom
+Multiple R-squared: 0.9616,	Adjusted R-squared: 0.9588 
+F-statistic: 350.5 on 2 and 28 DF,  p-value: &lt; 2.2e-16
 </pre>
 
 
@@ -16558,13 +16883,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 
 
 
-<pre class="src src-R">  &lt;&lt;Fitting-the-Quadratic&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;Fitting-the-Quadratic&gt;&gt;
-</pre>
 
 
 
@@ -16576,6 +16895,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 <p>
 The plot is shown in Figure <a href="#fig-Fitting-the-Quadratic">Fitting-the-Quadratic</a>. Pay attention to the scale on the \(x\)-axis: it is on the scale of the transformed <code>Girth</code> data and not on the original scale.
 </p>
+
 
 </div>
 
@@ -16596,6 +16916,13 @@ We do estimation/prediction the same way that we did in Section <a href="#sec-12
 predict(treesquad.lm, newdata = new, interval = <span style="font-style: italic;">"prediction"</span>)
 </pre>
 
+
+<pre class="example">
+       fit       lwr      upr
+1 11.56982  4.347426 18.79221
+2 20.30615 13.299050 27.31325
+3 25.92290 18.972934 32.87286
+</pre>
 
 
 <p>
@@ -16637,8 +16964,10 @@ In our model for tree volume there have been two independent variables: <code>Gi
 </p>
 
 
+
 <div class="exampletoo">
-<p>Perhaps the <code>Girth</code> and <code>Height</code> of the tree interact to influence the its <code>Volume</code>; we would like to investigate whether the model (<code>Girth</code> = \(x_{1}\) and <code>Height</code> = \(x_{2}\)) 
+<p>
+Perhaps the <code>Girth</code> and <code>Height</code> of the tree interact to influence the its <code>Volume</code>; we would like to investigate whether the model (<code>Girth</code> = \(x_{1}\) and <code>Height</code> = \(x_{2}\)) 
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon
 \end{equation}
@@ -16649,6 +16978,7 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\beta_{1:2}x_{1}x_{2}+\epsilon,
 where the subscript \(1:2\) denotes that \(\beta_{1:2}\) is a coefficient
 of an interaction term between \(x{}_{1}\) and \(x_{2}\). 
 </p>
+
 
 </div>
 
@@ -17012,8 +17342,10 @@ It can be shown when the regression assumptions hold under \(H_{0}\) that the pa
 The key ingredient above is that the two competing models are <i>nested</i> in the sense that the reduced model is entirely contained within the complete model. The way to test whether the improvement is significant is to compute <code>lm</code> objects both for the complete model and the reduced model then compare the answers with the <code>anova</code> function.
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-mlr-trees-poly-no-rescale" id="exa-mlr-trees-poly-no-rescale"></a>
+<p>
+<a name="exa-mlr-trees-poly-no-rescale" id="exa-mlr-trees-poly-no-rescale"></a>
 </p>
 <p>
 For the <code>trees</code> data, let us fit a polynomial regression model and for the sake of argument we will ignore our own good advice and fail to rescale the explanatory variables. 
@@ -17024,6 +17356,32 @@ For the <code>trees</code> data, let us fit a polynomial regression model and fo
 <pre class="src src-R">treesfull.lm <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> lm(Volume ~ Girth + I(Girth^2) + Height + 
                    I(Height^2), data = trees)
 summary(treesfull.lm)
+</pre>
+
+
+
+<pre class="example"> 
+Call:
+lm(formula = Volume ~ Girth + I(Girth^2) + Height + I(Height^2), 
+    data = trees)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-4.368 -1.670 -0.158  1.792  4.358 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.955101  63.013630  -0.015    0.988    
+Girth       -2.796569   1.468677  -1.904    0.068 .  
+I(Girth^2)   0.265446   0.051689   5.135 2.35e-05 ***
+Height       0.119372   1.784588   0.067    0.947    
+I(Height^2)  0.001717   0.011905   0.144    0.886    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+Residual standard error: 2.674 on 26 degrees of freedom
+Multiple R-squared: 0.9771,	Adjusted R-squared: 0.9735 
+F-statistic:   277 on 4 and 26 DF,  p-value: &lt; 2.2e-16
 </pre>
 
 
@@ -17052,6 +17410,19 @@ To delete the intercept from the model we used <code>-1</code> in the model form
 </pre>
 
 
+<pre class="example">
+Analysis of Variance Table
+
+Model 1: Volume ~ -1 + Girth + I(Girth^2)
+Model 2: Volume ~ Girth + I(Girth^2) + Height + I(Height^2)
+  Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
+1     29 321.65                                
+2     26 185.86  3    135.79 6.3319 0.002279 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+</pre>
+
+
 <p>
 We see from the output that the complete model is highly significant compared to the model that does not incorporate <code>Height</code> or the <code>Intercept</code>. We wonder (with our tongue in our cheek) if the <code>Height^2</code> term in the full model is causing all of the trouble. We will fit an alternative reduced model that only deletes <code>Height^2</code>. 
 </p>
@@ -17064,9 +17435,21 @@ anova(treesreduced2.lm, treesfull.lm)
 </pre>
 
 
+<pre class="example">
+ Analysis of Variance Table
+
+Model 1: Volume ~ Girth + I(Girth^2) + Height
+Model 2: Volume ~ Girth + I(Girth^2) + Height + I(Height^2)
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1     27 186.01                           
+2     26 185.86  1   0.14865 0.0208 0.8865
+</pre>
+
+
 <p>
 In this case, the improvement to the reduced model that is attributable to <code>Height^2</code> is not significant, so we can delete <code>Height^2</code> from the model with a clear conscience. We notice that the <i>p-value</i> for this latest partial \(F\) test is 0.8865, which seems to be remarkably close to the <i>p-value</i> we saw for the univariate <i>t</i> test of <code>Height^2</code> at the beginning of this example. In fact, the <i>p-values</i> are <i>exactly</i> the same. Perhaps now we gain some insight into the true meaning of the univariate tests.
 </p>
+
 
 </div>
 
@@ -17465,8 +17848,10 @@ The above discussion leads us to the following general procedure to approximate 
 Since the bootstrap distribution gives us information about a statistic's sampling distribution, we can use the bootstrap distribution to estimate properties of the statistic. We will illustrate the bootstrap procedure in the special case that the statistic \(S\) is a standard error. 
 </p>
 
+
 <div class="exampletoo">
-<p><a name="exa-Bootstrap-se-mean" id="exa-Bootstrap-se-mean"></a>
+<p>
+<a name="exa-Bootstrap-se-mean" id="exa-Bootstrap-se-mean"></a>
 </p>
 <p>
 <b>Standard error of the mean.</b>  In this example we illustrate the bootstrap by estimating the standard error of the sample meanand we will do it in the special case that the underlying population is \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\).  
@@ -17498,13 +17883,7 @@ curve(dnorm(x, 3, 0.2), add = <span style="font-weight: bold; text-decoration: u
 
 
 
-<pre class="src src-R">  &lt;&lt;Bootstrap-se-mean&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;Bootstrap-se-mean&gt;&gt;
-</pre>
 
 
 
@@ -17525,6 +17904,14 @@ mean(xbarstar) - mean(srs)
 </pre>
 
 
+<pre class="example">
+[1] 3.05643
+[1] 3.05766
+[1] -0.001229869
+</pre>
+
+
+
 
 </div>
 
@@ -17541,6 +17928,10 @@ Now back to our original problem, we would like to estimate the standard error o
 </pre>
 
 
+<pre class="example">
+[1] 0.2134432
+</pre>
+
 
 <p>
 We know from theory that the true standard error is \(1/\sqrt{25}=0.20\). Our bootstrap estimate is not very far from the theoretical value. 
@@ -17555,8 +17946,10 @@ We only took an original sample of size \(n=25\), and resampling more and more w
 </div>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-Bootstrap-se-median" id="exa-Bootstrap-se-median"></a>
+<p>
+<a name="exa-Bootstrap-se-median" id="exa-Bootstrap-se-median"></a>
 </p>
 <p>
 <b>Standard error of the median.</b> We look at one where we do not know the answer ahead of time. This example uses the <code>rivers</code>\index{Data sets!rivers@\texttt{rivers}} data set. Recall the stemplot on page \vpageref{ite-stemplot-rivers} that we made for these data which shows them to be markedly right-skewed, so a natural estimate of center would be the sample median. Unfortunately, its sampling distribution falls out of our reach. We use the bootstrap to help us with this problem, and the modifications to the last example are trivial.
@@ -17570,19 +17963,20 @@ sd(medstar)
 </pre>
 
 
+<pre class="example">
+[1] 25.2366
+</pre>
+
+
+
+
 
 <pre class="src src-R">hist(medstar, breaks = 40, prob = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>)
 </pre>
 
 
 
-<pre class="src src-R">  &lt;&lt;Bootstrapping-se-median&gt;&gt;
-</pre>
 
-
-
-<pre class="src src-R">  &lt;&lt;Bootstrapping-se-median&gt;&gt;
-</pre>
 
 
 
@@ -17608,12 +18002,20 @@ mean(medstar) - median(rivers)
 </pre>
 
 
+<pre class="example">
+[1] 425
+[1] 426.47
+[1] 1.47
+</pre>
+
+
+
 
 </div>
 
-
 <div class="exampletoo">
-<p><b>The boot package in R</b>. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the <code>boot</code> package. Further, inside the <code>boot</code> package \cite{boot:1} there is even a function called <code>boot</code>\index{boot@\texttt{boot}}. The basic syntax is of the form:
+<p>
+<b>The boot package in R</b>. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the <code>boot</code> package. Further, inside the <code>boot</code> package \cite{boot:1} there is even a function called <code>boot</code>\index{boot@\texttt{boot}}. The basic syntax is of the form:
 </p>
 <pre class="example">
  boot(data, statistic, R)
@@ -17621,8 +18023,10 @@ mean(medstar) - median(rivers)
 
 
 
+
 </div>
-<p> Here, <code>data</code> is a vector (or matrix) containing the data to be resampled, <code>statistic</code> is a defined function, <i>of two arguments</i>, that tells which statistic should be computed, and the parameter \(\mathsf{R}\) specifies how many resamples should be taken.
+<p>
+ Here, <code>data</code> is a vector (or matrix) containing the data to be resampled, <code>statistic</code> is a defined function, <i>of two arguments</i>, that tells which statistic should be computed, and the parameter \(\mathsf{R}\) specifies how many resamples should be taken.
 </p>
 <p>
 For the standard error of the mean (Example <a href="#exa-Bootstrap-se-mean">exa-Bootstrap-se-mean</a>):
@@ -17634,6 +18038,20 @@ For the standard error of the mean (Example <a href="#exa-Bootstrap-se-mean">exa
 boot(data = srs, statistic = mean_fun, R = 1000)
 </pre>
 
+
+
+<pre class="example">
+ORDINARY NONPARAMETRIC BOOTSTRAP
+
+
+Call:
+boot(data = srs, statistic = mean_fun, R = 1000)
+
+
+Bootstrap Statistics :
+    original      bias    std. error
+t1*  3.05766 -0.01117741     0.21834
+</pre>
 
 
 <p>
@@ -17658,7 +18076,7 @@ boot(data = rivers, statistic = median_fun, R = 1000)
 
 Bootstrap Statistics :
     original  bias    std. error
-t1*      425   1.772    25.17292
+t1*      425   2.003     26.8763
 </pre>
 
 
@@ -17709,8 +18127,10 @@ This is incredibly easy to accomplish with the bootstrap. We need only to take a
 </p>
 
 
+
 <div class="exampletoo">
-<p><a name="exa-percentile-interval-median-first" id="exa-percentile-interval-median-first"></a>
+<p>
+<a name="exa-percentile-interval-median-first" id="exa-percentile-interval-median-first"></a>
 </p>
 <p>
 <b>Percentile interval for the expected value of the median.</b> We will try the naive approach where we generate the resamples and calculate the percentile interval by hand.
@@ -17726,12 +18146,21 @@ quantile(thetast, c(0.025, 0.975))
 </pre>
 
 
+<pre class="example">
+[1] 14.78
+[1] 15
+ 2.5% 97.5% 
+   12    18
+</pre>
+
+
+
 
 </div>
 
-
 <div class="exampletoo">
-<p><b>Confidence interval for expected value of the median, second try.</b>  Now we will do it the right way with the <code>boot</code> function.
+<p>
+<b>Confidence interval for expected value of the median, second try.</b>  Now we will do it the right way with the <code>boot</code> function.
 </p>
 
 
@@ -17740,6 +18169,21 @@ quantile(thetast, c(0.025, 0.975))
 med_boot <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> boot(stack.loss, med_fun, R = 2000)
 boot.ci(med_boot, type = c(<span style="font-style: italic;">"perc"</span>, <span style="font-style: italic;">"norm"</span>, <span style="font-style: italic;">"bca"</span>))
 </pre>
+
+
+
+<pre class="example"> BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+Based on 2000 bootstrap replicates
+
+CALL : 
+boot.ci(boot.out = med_boot, type = c("perc", "norm", "bca"))
+
+Intervals : 
+Level      Normal             Percentile            BCa          
+95%   (11.93, 18.53 )   (12.00, 18.00 )   (11.00, 18.00 )  
+Calculations and Intervals on Original Scale
+</pre>
+
 
 
 
@@ -17766,12 +18210,12 @@ where \(\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\) is the appropriate critical val
  will have approximately \(100(1-\alpha)\%\) confidence of containing \(\mathbb{E}(\mathrm{statistic})\). 
 </p>
 
+
 <div class="exampletoo">
-<p>We will use the t-interval method to find the bootstrap CI for the median. We have looked at the bootstrap distribution; it appears to be symmetric and approximately mound shaped. Further, we may check that the bias is approximately 40, which on the scale of these data is practically negligible. Thus, we may consider looking at the \(t\)-intervals. Note that, since our sample is so large, instead of \(t\)-intervals we will essentially be using \(z\)-intervals. 
-</p>
+<p>
+We will use the t-interval method to find the bootstrap CI for the median. We have looked at the bootstrap distribution; it appears to be symmetric and approximately mound shaped. Further, we may check that the bias is approximately 40, which on the scale of these data is practically negligible. Thus, we may consider looking at the \(t\)-intervals. Note that, since our sample is so large, instead of \(t\)-intervals we will essentially be using \(z\)-intervals. 
 </div>
 
-<p>
 We see that, considering the scale of the data, the confidence intervals compare with each other quite well.
 </p>
 
@@ -17834,8 +18278,10 @@ The classical two-sample problem can be stated as follows: given two groups of i
 Of course, we usually compute a <i>p-value</i>, defined to be the probability of the observed value of the statistic or more extreme when the null hypothesis is true. Small \(p\)-values are evidence against the null hypothesis. It is not immediately obvious how to use resampling methods here, so we discuss an example.
 </p>
 
-<div class="exampletoo">
-<p>A study concerned differing dosages of the antiretroviral drug AZT. The common dosage is 300mg daily. Higher doses cause more side affects, but are they significantly higher? We examine for a 600mg dose. The data are as follows: We compare the scores from the two groups by computing the difference in their sample means. The 300mg data were entered in x1 and the 600mg data were entered into x2. The observed difference was
+
+<div class="exampletoo"> 
+<p>
+A study concerned differing dosages of the antiretroviral drug AZT. The common dosage is 300mg daily. Higher doses cause more side affects, but are they significantly higher? We examine for a 600mg dose. The data are as follows: We compare the scores from the two groups by computing the difference in their sample means. The 300mg data were entered in x1 and the 600mg data were entered into x2. The observed difference was
 </p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
@@ -17858,11 +18304,9 @@ The average amounts can be found:
 
 <p>
 with an observed difference of <code>mean(x2) - mean(x1) = 10.9</code>. As expected, the 600 mg measurements seem to have a higher average, and we might be interested in trying to decide if the average amounts are <code>significantly</code> different. The null hypothesis should be that there is no difference in the amounts, that is, the groups are more or less the same. If the null hypothesis were true, then the two groups would indeed be the same, or just one big group. In that case, the observed difference in the sample means just reflects the random assignment into the arbitrary <code>x1</code> and <code>x2</code> categories. It is now clear how we may resample, consistent with the null hypothesis.
-</p>
 </div>
 
-
-
+</p>
 </div>
 
 <div id="outline-container-13-4-1" class="outline-4">
@@ -20615,7 +21059,7 @@ Detective Pyork E. Pig
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-12-28 01:54:29 EST</p>
+<p class="date">Date: 2011-12-28 13:47:25 EST</p>
 <p class="author">Author: G. Jay Kerns</p>
 <p class="creator">Org version 7.8.02 with Emacs version 23</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
