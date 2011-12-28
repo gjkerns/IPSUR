@@ -295,7 +295,7 @@ A[1, ]
 A[ , 2]
 
 names(A)
-A$v1
+A['v1']
 
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 
