@@ -35,4 +35,4 @@ clean:
 backup:
 	-mkdir $(backup)
 	cp $(outputtex)/$(orgfile).pdf $(backup)/$(orgfile).pdf 
-	cp $(outputtex)/$(orgfile).html $(backup)/$(orgfile).html
+	cp $(outputhtml)/$(orgfile).html $(backup)/$(orgfile).html

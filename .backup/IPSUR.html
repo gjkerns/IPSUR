@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Introduction to Probability and Statistics Using R"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-12-20 22:24:09 EST"/>
+<meta name="generated" content="2011-12-27 23:06:19 EST"/>
 <meta name="author" content="G. Jay Kerns"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -203,7 +203,7 @@ org_html_manager.setup();  // activate after the parameters are set
 <li><a href="#sec-Methods-of-Counting">4.5 Counting Methods</a></li>
 <li><a href="#sec-Conditional-Probability">4.6 Conditional Probability</a></li>
 <li><a href="#sec-Independent-Events">4.7 Independent Events</a></li>
-<li><a href="#sec-Bayes--Rule">4.8 Bayes' Rule</a></li>
+<li><a href="#sec-Bayes-Rule">4.8 Bayes' Rule</a></li>
 <li><a href="#sec-Random-Variables">4.9 Random Variables</a></li>
 <li><a href="#sec-4-10">4.10 Exercises</a></li>
 </ul>
@@ -426,7 +426,7 @@ Inferential statistics does more. There is an inference associated with the data
 I would like to mention that there are two schools of thought of statistics: frequentist and bayesian. The difference between the schools is related to how the two groups interpret the underlying probability (see Section <a href="#sec-4-3">Interpreting Probabilities</a>). The frequentist school gained a lot of ground among statisticians due in large part to the work of Fisher, Neyman, and Pearson in the early twentieth century. That dominance lasted until inexpensive computing power became widely available; nowadays the bayesian school is garnering more attention and at an increasing rate.
 </p>
 <p>
-This book is devoted mostly to the frequentist viewpoint because that is how I was trained, with the conspicuous exception of Sections <a href="#sec-Bayes--Rule">Bayes' Rule</a> and <a href="#sec-7-3">Conditional Distributions</a>. I plan to add more bayesian material in later editions of this book.
+This book is devoted mostly to the frequentist viewpoint because that is how I was trained, with the conspicuous exception of Sections <a href="#sec-4-8">Bayes' Rule</a> and <a href="#sec-7-3">Conditional Distributions</a>. I plan to add more bayesian material in later editions of this book.
 </p>
 
 </div>
@@ -569,8 +569,7 @@ The general command <code>install.packages()</code> will (on most operating syst
 No matter how many packages are installed onto the system, each one must first be loaded for use with the <code>library</code>\index{library@\texttt{library}} function. For instance, the <code>foreign</code> package \cite{foreign} contains all sorts of functions needed to import data sets into \(\mathsf{R}\) from other software such as SPSS, SAS, <i>etc</i>. But none of those functions will be available until the command <code>library("foreign")</code> is issued. 
 </p>
 <p>
-Type <code>library()</code> at the command prompt (described below) to see a list of all available
-packages in your library.
+Type <code>library()</code> at the command prompt (described below) to see a list of all available packages in your library.
 </p>
 <p>
 For complete, precise information regarding installation of \(\mathsf{R}\) and add-on packages, see the <a href="http://cran.r-project.org/manuals.html">\(\mathsf{R}\) Installation and Administration manual</a>.
@@ -649,7 +648,7 @@ For longer programs (called <i>scripts</i>) there is too much code to write all 
 By the word ``GUI'' I mean an interface in which the user communicates with \(\mathsf{R}\) by way of points-and-clicks in a menu of some sort. Again, there are many, many options and I only mention ones that I have used and enjoyed. Some of the other more popular script editors can be downloaded from the \(\mathsf{R}\)-Project website at <a href="http://www.sciviews.org/_rgui/">http://www.sciviews.org/_rgui/</a>. On the left side of the screen (under <b>Projects</b>) there are several choices available. 
 </p>
 <dl>
-<dt>\(\mathsf{R}\) Commander</dt><dd>provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. <code>Rcmdr</code> also allows for user-contributed ``Plugins'' which are separate packages on <code>CRAN</code> that add extra functionality to the <code>Rcmdr</code> package. The plugins are typically named with the prefix <code>RcmdrPlugin</code> to make them easy to identify in the <code>CRAN</code> package list. One such plugin is the <code>RcmdrPlugin.IPSUR</code> package which accompanies this text.
+<dt>\(\mathsf{R}\) Commander</dt><dd>provides\index{R Commander@\textsf{R} Commander} a point-and-click interface to many basic statistical tasks. It is called the ``Commander'' because every time one makes a selection from the menus, the code corresponding to the task is listed in the output window. One can take this code, copy-and-paste it to a text file, then re-run it again at a later time without the \(\mathsf{R}\) Commander's assistance. It is well suited for the introductory level. <code>Rcmdr</code> \cite{Rcmdr} also allows for user-contributed ``Plugins'' which are separate packages on <code>CRAN</code> that add extra functionality to the <code>Rcmdr</code> package. The plugins are typically named with the prefix <code>RcmdrPlugin</code> to make them easy to identify in the <code>CRAN</code> package list. One such plugin is the <code>RcmdrPlugin.IPSUR</code> package \cite{RcmdrPlugin.IPSUR} which accompanies this text.
 </dd>
 <dt>Poor Man's GUI\index{Poor Man's GUI}</dt><dd>is an alternative to the <code>Rcmdr</code> which is based on GTk instead of Tcl/Tk. It has been a while since I used it but I remember liking it very much when I did. One thing that stood out was that the user could drag-and-drop data sets for plots. See here for more information: <a href="http://wiener.math.csi.cuny.edu/pmg/">http://wiener.math.csi.cuny.edu/pmg/</a>. 
 </dd>
@@ -986,7 +985,7 @@ UseMethod("intersect")
 <pre class="example">
 function (x) 
 UseMethod("rev")
-&lt;bytecode: 0xa00d620&gt;
+&lt;bytecode: 0x9cf4514&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1022,7 +1021,7 @@ Now we learn that there are two different <code>rev(x)</code> functions, only on
 <pre class="example">
 function (x) 
 if (length(x)) x[length(x):1L] else x
-&lt;bytecode: 0xb57f920&gt;
+&lt;bytecode: 0xbf9050c&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1041,7 +1040,7 @@ methods(wilcox.test)
 <pre class="example">
 function (x, ...) 
 UseMethod("wilcox.test")
-&lt;bytecode: 0xa6ad330&gt;
+&lt;bytecode: 0xa3a3ec0&gt;
 &lt;environment: namespace:stats&gt;
 [1] wilcox.test.default* wilcox.test.formula*
 
@@ -1050,7 +1049,7 @@ UseMethod("wilcox.test")
 
 
 <p>
-If we were to try <code>wilcox.test.default</code>  we would get a ``not found'' error, because it is hidden behind the namespace for the package <code>stats</code> (shown in the last line when we tried <code>wilcox.test</code>). In cases like these we prefix the package name to the front of the function name with three colons; the command <code>stats:::wilcox.test.default</code> will show the source code, omitted here for brevity.
+If we were to try <code>wilcox.test.default</code>  we would get a ``not found'' error, because it is hidden behind the namespace for the package <code>stats</code> \cite{stats} (shown in the last line when we tried <code>wilcox.test</code>). In cases like these we prefix the package name to the front of the function name with three colons; the command <code>stats:::wilcox.test.default</code> will show the source code, omitted here for brevity.
 </p>
 <p>
 <b>If it shows</b> <code>.Internal(something)</code>\index{.Internal@\texttt{.Internal}} or <code>.Primitive(something)</code>\index{.Primitive@\texttt{.Primitive}}, then it will be necessary to download the source code of \(\mathsf{R}\) (which is <i>not</i> a binary version with an <code>.exe</code> extension) and search inside the code there. See Ligges \cite{Ligges2006} for more discussion on this. An example is <code>exp</code>:
@@ -1311,7 +1310,7 @@ The output shows that <code>precip</code> is a numeric vector which has been <i>
 
 
 <div class="exampletoo">
-<p><b>Lengths of Major North American Rivers.</b> The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector <code>rivers</code>\index{Data sets!rivers@\texttt{rivers}} in the <code>datasets</code> package (which ships with base \(\mathsf{R}\)). See <code>?rivers</code>. Let us take a look at the data with the <code>str</code>\index{str@\texttt{str}} function.
+<p><b>Lengths of Major North American Rivers.</b> The U.S. Geological Survey recorded the lengths (in miles) of several rivers in North America. They are stored in the vector <code>rivers</code>\index{Data sets!rivers@\texttt{rivers}} in the <code>datasets</code> package \cite{datasets} (which ships with base \(\mathsf{R}\)). See <code>?rivers</code>. Let us take a look at the data with the <code>str</code>\index{str@\texttt{str}} function.
 </p>
 
 
@@ -1407,7 +1406,7 @@ The leftmost graph is a strip chart of the <code>precip</code> data. The graph s
   </div>
 
 <p>
-The <code>DOTplot</code>\index{DOTplot@\texttt{DOTplot}} function in the <code>UsingR</code>\index{R packages!UsingR@\texttt{UsingR}} package \cite{usingr} is another alternative.
+The <code>DOTplot</code>\index{DOTplot@\texttt{DOTplot}} function in the <code>UsingR</code>\index{R packages!UsingR@\texttt{UsingR}} package \cite{UsingR} is another alternative.
 </p>
 </div>
 
@@ -1427,7 +1426,7 @@ These are one of the most common summary displays, and they are often misidentif
 
 <div class="exampletoo">
 <p><a name="exa-annual" id="exa-annual"></a>
-<b>Annual Precipitation in US Cities.</b> We are going to take another look at the <code>precip</code>\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure <a href="#fig-Various-stripchart-methods">Various-stripchart-methods</a> suggested a loosely balanced distribution; let us now look to see what a histogram says. 
+<b>Annual Precipitation in US Cities.</b> We are going to take another look at the <code>precip</code>\index{Data sets!precip@\texttt{precip}} data that we investigated earlier. The strip chart in Figure <a href="#fig-stripcharts">Various-stripchart-methods</a> suggested a loosely balanced distribution; let us now look to see what a histogram says. 
 </p>
 <p>
 There are many ways to plot histograms in \(\mathsf{R}\), and one of the easiest is with the <code>hist</code>\index{hist@\texttt{hist}} function. The following code produces the plots in Figure <a href="#fig-histograms">histograms</a>.
@@ -1497,7 +1496,7 @@ Please mind the biggest weakness of histograms: the graph obtained strongly depe
 </p>
 
 <div class="exampletoo">
-<p>Recall that the strip chart in Figure <a href="#fig-Various-stripchart-methods">Various-stripchart-methods</a> suggested a relatively balanced shape to the <code>precip</code> data distribution. Watch what happens when we change the bins slightly (with the <code>breaks</code> argument to <code>hist</code>). See Figure <a href="#fig-histograms-bins">histograms-bins</a> which was produced by the following code.
+<p>Recall that the strip chart in Figure <a href="#fig-stripcharts">Various-stripchart-methods</a> suggested a relatively balanced shape to the <code>precip</code> data distribution. Watch what happens when we change the bins slightly (with the <code>breaks</code> argument to <code>hist</code>). See Figure <a href="#fig-histograms-bins">histograms-bins</a> which was produced by the following code.
 </p>
 
 
@@ -2231,7 +2230,9 @@ Another component to the shape of a distribution is how ``peaked'' it is. Some d
 <p>
 Clusters or gaps are sometimes observed in quantitative data distributions. They indicate clumping of the data about distinct values, and gaps may exist between clusters. Clusters often suggest an underlying grouping to the data. For example, take a look at the <code>faithful</code> data which contains the duration of <code>eruptions</code> and the <code>waiting</code> time between eruptions of the Old Faithful geyser in Yellowstone National Park. Do not be frightened by the complicated information at the left of the display for now; we will learn how to interpret it in Section <a href="#sec-3-4">Exploratory Data Analysis</a>.
 </p>
-
+<p>
+<a name="exa-stemleaf-multiple-lines-stem" id="exa-stemleaf-multiple-lines-stem"></a>
+</p>
 
 
 <pre class="src src-R">with(faithful, stem.leaf(eruptions))
@@ -2648,7 +2649,7 @@ Notice that both the sample skewness and the sample kurtosis are invariant with 
 
 
 <p>
-The <code>e1071</code> package \cite{Dimitriadoue1071} has the <code>skewness</code> function for the sample skewness and the <code>kurtosis</code> function for the sample excess kurtosis. Both functions have a <code>na.rm</code> argument which is <code>FALSE</code> by default.
+The <code>e1071</code> package \cite{e1071} has the <code>skewness</code> function for the sample skewness and the <code>kurtosis</code> function for the sample excess kurtosis. Both functions have a <code>na.rm</code> argument which is <code>FALSE</code> by default.
 </p>
 
 <div class="exampletoo">
@@ -3033,7 +3034,7 @@ Data frames have a <code>names</code> attribute and the names may be extracted w
 
 
 <pre class="src src-R">names(A)
-A$v1
+A[<span style="font-style: italic;">'v1'</span>]
 </pre>
 
 
@@ -3535,7 +3536,7 @@ Getting your labels to look right
 
 
 <p>
-Open \(\mathsf{R}\) and issue the following commands at the command line to get started. Note that you need to have the <code>RcmdrPlugin.IPSUR</code> package installed, and for some exercises you need the <code>e1071</code> package.
+Open \(\mathsf{R}\) and issue the following commands at the command line to get started. Note that you need to have the <code>RcmdrPlugin.IPSUR</code> package \cite{RcmdrPlugin.IPSUR} installed, and for some exercises you need the <code>e1071</code> package \cite{e1071}.
 </p>
 
 
@@ -3741,7 +3742,7 @@ For a random experiment \(E\), the set of all possible outcomes of \(E\) is call
 
 
 <p>
-Most of the probability work in this book is done with the <code>prob</code> package \cite{Kernsprob}. A sample space is (usually) represented by a <i>data frame</i>, that is, a rectangular collection of variables (see Section <a href="#sec-3-5-2">Multivariate Data</a>). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general <i>list</i> data structure. See Section <a href="#sec-4-6-2-1">How to <code>ps</code></a> for details.
+Most of the probability work in this book is done with the <code>prob</code> package \cite{prob}. A sample space is (usually) represented by a <i>data frame</i>, that is, a rectangular collection of variables (see Section <a href="#sec-3-5-2">Multivariate Data</a>). Each row of the data frame corresponds to an outcome of the experiment. The data frame choice is convenient both for its simplicity and its compatibility with the \(\mathsf{R}\) Commander. Data frames alone are, however, not sufficient to describe some of the more interesting probabilistic applications we will study later; to handle those we will need to consider a more general <i>list</i> data structure. See Section <a href="#sec-4-6-2-1">How to <code>ps</code></a> for details.
 </p>
 
 <div class="exampletoo">
@@ -3762,7 +3763,7 @@ The sample space <code>S</code> contains the column <code>lands</code> which sto
 </div>
 
 <p>
-Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the <code>expand.grid</code> function in the <code>base</code> package, <code>combn</code> in the <code>combinat</code> package \cite{combinat}, and <code>permsn</code> in the <code>prob</code> package
+Some sample spaces are so common that convenience wrappers were written to set them up with minimal effort. The underlying machinery that does the work includes the <code>expand.grid</code> function in the <code>base</code> package \cite{base}, <code>combn</code> in the <code>combinat</code> package \cite{combinat}, and <code>permsn</code> in the <code>prob</code> package \cite{prob}
 Consider the random experiment of tossing a coin. The outcomes are \(H\) and \(T\). We can set up the sample space quickly with the <code>tosscoin</code> function:
 </p>
 
@@ -4473,7 +4474,7 @@ This approach was espoused by Richard von Mises in the early twentieth century, 
 
 
 <p>
-The subjective approach interprets probability as the experimenter's <i>degree of belief</i> that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section <a href="#sec-Bayes--Rule">Bayes' Rule</a>. 
+The subjective approach interprets probability as the experimenter's <i>degree of belief</i> that the event will occur. The estimate of the probability of an event is based on the totality of the individual's knowledge at the time. As new information becomes available, the estimate is modified accordingly to best reflect his/her current knowledge. The method by which the probabilities are updated is commonly done with Bayes' Rule, discussed in Section <a href="#sec-4-8">Bayes' Rule</a>. 
 </p>
 <p>
 So for the coin toss example, a person may have \(\mathbb{P}(\mbox{Heads})=1/2\) in the absence of additional information. But perhaps the observer knows additional information about the coin or the thrower that would shift the probability in a certain direction. For instance, parlor magicians may be trained to be quite skilled at tossing coins, and some are so skilled that they may toss a fair coin and get nothing but Heads, indefinitely. I have <i>seen</i> this. It was similarly claimed in <i>Bringing Down the House</i> \cite{Mezrich2003} that MIT students were accomplished enough with cards to be able to cut a deck to the same location, every single time. In such cases, one clearly should use the additional information to assign \(\mathbb{P}(\mbox{Heads})\) away from the symmetry value of \(1/2\).
@@ -4712,21 +4713,20 @@ For any events \(A\) and \(B\),
 </li>
 <li><b>The General Addition Rule.</b>
   \begin{equation}
+  \label{eq-general-addition-rule-1}
   \mathbb{P}(A\cup B)=\mathbb{P}(A)+\mathbb{P}(B)-\mathbb{P}(A\cap B).
   \end{equation}
-  <a name="eq-general-addition-rule-1" class="target">eq-general-addition-rule-1</a> 
   More generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),&hellip;, \(A_{n}\),
   \begin{equation}
   \mathbb{P}\left(\bigcup_{i=1}^{n}A_{i}\right)=\sum_{i=1}^{n}\mathbb{P}(A_{i})-\sum_{i=1}^{n-1}\sum_{j=i+1}^{n}\mathbb{P}(A_{i}\cap A_{j})+\cdots+(-1)^{n-1}\mathbb{P}\left(\bigcap_{i=1}^{n}A_{i}\right)
   \end{equation}
-
 </li>
 <li><b>The Theorem of Total Probability.</b> 
   Let \(B_{1}\), \(B_{2}\), &hellip;, \(B_{n}\) be mutually exclusive and exhaustive. Then
   \begin{equation}
+  \label{eq-theorem-total-probability}
   \mathbb{P}(A)=\mathbb{P}(A\cap B_{1})+\mathbb{P}(A\cap B_{2})+\cdots+\mathbb{P}(A\cap B_{n}).
   \end{equation}
-  <a name="eq-theorem-total-probability" class="target">eq-theorem-total-probability</a> 
 </li>
 </ol>
 
@@ -5046,9 +5046,9 @@ n! & = & n(n-1)(n-2)\cdots3\cdot2\cdot1.
 <p>
 The quantity \(n!/[k!(n-k)!]\) is called a <i>binomial coefficient</i> and plays a special role in mathematics; it is denoted
 \begin{equation}
+\label{eq-binomial-coefficient}
 {n \choose k}=\frac{n!}{k!(n-k)!}
 \end{equation}
-<a name="eq-binomial-coefficient" id="eq-binomial-coefficient"></a>
 and is read ``\(n\) choose \(k\)''.
 </p>
 
@@ -5481,14 +5481,14 @@ The following theorem establishes that conditional probabilities behave just lik
 </li>
 <li><b>The Multiplication Rule.</b> For any two events \(A\) and \(B\),
   \begin{equation}
+  \label{eq-multiplication-rule-short}
   \mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B|A).
   \end{equation}
-  <a name="eq-multiplication-rule-short" class="target">eq-multiplication-rule-short</a> 
   And more generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),&hellip;, \(A_{n}\),
   \begin{equation}
+  \label{eq-multiplication-rule-long}
   \mathbb{P}(A_{1}\cap A_{2}\cap\cdots\cap A_{n})=\mathbb{P}(A_{1})\mathbb{P}(A_{2}|A_{1})\cdots\mathbb{P}(A_{n}|A_{1}\cap A_{2}\cap\cdots\cap A_{n-1}).
   \end{equation}
-  <a name="eq-multiplication-rule-long" class="target">eq-multiplication-rule-long</a> 
 </li>
 </ol>
 
@@ -5888,9 +5888,9 @@ Note that <code>iidspace</code> will assume <code>x</code> has equally likely ou
 
 </div>
 
-<div id="outline-container-sec-Bayes--Rule" class="outline-3">
-<h3 id="sec-Bayes--Rule"><a name="sec-4-8" id="sec-4-8"></a><span class="section-number-3">4.8</span> Bayes' Rule</h3>
-<div class="outline-text-3" id="text-sec-Bayes--Rule">
+<div id="outline-container-sec-Bayes-Rule" class="outline-3">
+<h3 id="sec-Bayes-Rule"><a name="sec-4-8" id="sec-4-8"></a><span class="section-number-3">4.8</span> Bayes' Rule</h3>
+<div class="outline-text-3" id="text-sec-Bayes-Rule">
 
 
 <p>
@@ -5900,9 +5900,9 @@ We mentioned the subjective view of probability in Section <a href="#sec-4-3">In
 <div class="thm">
 <p><b>Bayes' Rule</b>. Let \(B_{1}\), \(B_{2}\), &hellip;, \(B_{n}\) be mutually exclusive and exhaustive and let \(A\) be an event with \(\mathbb{P}(A)&gt;0\). Then 
 \begin{equation}
+\label{eq-bayes-rule}
 \mathbb{P}(B_{k}|A)=\frac{\mathbb{P}(B_{k})\mathbb{P}(A|B_{k})}{\sum_{i=1}^{n}\mathbb{P}(B_{i})\mathbb{P}(A|B_{i})},\quad k=1,2,\ldots,n.
 \end{equation}
-<a name="eq-bayes-rule" class="target">eq-bayes-rule</a> 
 </p>
 </div>
 
@@ -6611,7 +6611,7 @@ F
 
 
 <p>
-As easy as this is, it is even easier to do with the <code>distrEx</code> package \cite{Ruckdescheldistr}. We define a random variable <code>X</code> as an object, then compute things from the object such as mean, variance, and standard deviation with the functions <code>E</code>, <code>var</code>, and <code>sd</code>:
+As easy as this is, it is even easier to do with the <code>distrEx</code> package \cite{distrEx}. We define a random variable <code>X</code> as an object, then compute things from the object such as mean, variance, and standard deviation with the functions <code>E</code>, <code>var</code>, and <code>sd</code>:
 </p>
 
 
@@ -6909,7 +6909,7 @@ In particular, the CDF of \(X\) is defined for the entire real line, \(\mathbb{R
 
 
 <div class="exampletoo">
-<p>Another way to do Example <a href="#exa-toss-coin-3-withR">Toss coin 3 with R</a> is with the <code>distr</code> family of packages \cite{Ruckdescheldistr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object <code>X</code>, and then questions about the random variable translate to functions on and involving <code>X</code>. Random variables with distributions from the <code>base</code> package are specified by capitalizing the name of the distribution.
+<p>Another way to do Example <a href="#exa-toss-coin-3-withR">Toss coin 3 with R</a> is with the <code>distr</code> family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object <code>X</code>, and then questions about the random variable translate to functions on and involving <code>X</code>. Random variables with distributions from the <code>base</code> package are specified by capitalizing the name of the distribution.
 </p>
 
 
@@ -8325,7 +8325,7 @@ p(X)(0.71) - p(X)(0.14)
 
 
 <p>
-Compare this to the answer we found earlier. Now let us try expectation with the <code>distrEx</code> package \cite{Ruckdescheldistr}:
+Compare this to the answer we found earlier. Now let us try expectation with the <code>distrEx</code> package:
 </p>
 
 
@@ -8356,6 +8356,7 @@ f_{X}(x)=\frac{1}{b-a}, \quad a < x < b.
 \end{equation}
 The associated \(\mathsf{R}\) function is \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the particularly simple form of this PDF we can also write down explicitly a formula for the CDF \(F_{X}\):
 \begin{equation}
+\label{eq-unif-cdf}
 F_{X}(t)=
 \begin{cases}
 0, & t < 0,\\
@@ -8363,9 +8364,7 @@ F_{X}(t)=
 1, & t \geq b.
 \end{cases}
 \end{equation}
-<a name="eq-unif-cdf" id="eq-unif-cdf"></a>
-</p>
-<p>
+
 The continuous uniform distribution is the continuous analogue of the discrete uniform distribution; it is used to model experiments whose outcome is an interval of numbers that are ``equally likely'' in the sense that any two intervals of equal length in the support have the same probability associated with them.
 </p>
 
@@ -8437,7 +8436,7 @@ Z=\frac{X-\mu}{\sigma},\mbox{ or rewriting, }X=\sigma Z+\mu.
 \]
 Therefore
 \[
-M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tX}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
+M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\mathbb{E}\mathrm{e}^{t(\sigma Z+\mu)}=\mathbb{E}\mathrm{e}^{\sigma tZ}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t),
 \]
 and we know that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get
 \[
@@ -8646,9 +8645,9 @@ The goal of this section is to determine the distribution of \(U=g(X)\) based on
 <p>
 Let \(X\) have PDF \(f_{X}\) and let \(g\) be a function which is one-to-one with a differentiable inverse \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
+\label{eq-univ-trans-pdf-long}
 f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.
 \end{equation}
-<a name="eq-univ-trans-pdf-long" id="eq-univ-trans-pdf-long"></a>
 </p>
 </div>
 
@@ -8656,9 +8655,9 @@ f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1
 <div class="rem">
 <p>The formula in Equation <a href="#eq-univ-trans-pdf-long">eq-univ-trans-pdf-long</a> is nice, but does not really make any sense. It is better to write in the intuitive form
 \begin{equation}
+\label{eq-univ-trans-pdf-short}
 f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.
 \end{equation}
-<a name="eq-univ-trans-pdf-short" id="eq-univ-trans-pdf-short"></a>
 </p>
 </div>
 
@@ -8711,9 +8710,9 @@ f_{U}(u)=f_{X}(x)\left|\frac{1}{\mathrm{d} u/\mathrm{d} x}\right|.
 \end{equation}
 In many cases there are cancellations and the work is shorter. Of course, it is not always true that
 \begin{equation}
+\label{eq-univ-jacob-recip}
 \frac{\mathrm{d} x}{\mathrm{d} u}=\frac{1}{\mathrm{d} u/\mathrm{d} x},
 \end{equation}
-<a name="eq-univ-jacob-recip" id="eq-univ-jacob-recip"></a>
 but for the well-behaved examples in this book the trick works just fine.
 </p>
 
@@ -9041,7 +9040,7 @@ ind <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> c(
 <div class="rem">
 <p>Here are some useful things to know about the chi-square distribution.
 </p><ol>
-<li>If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example <a href="#exa-distn-of-z-squared">Distn Z2</a>, and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem <a href="#thm-Xbar-and-S">Xbar and S</a> in Section <a href="#sec-8-2-2">Sample Variance Distribution</a>.
+<li>If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example <a href="#exa-distn-of-z-squared">Distn Z2</a>, and the fact is important when it comes time to find the distribution of the sample variance, \(S^{2}\). See Theorem <a href="#thm-Xbar-andS">Xbar and S</a> in Section <a href="#sec-8-2-2">Sample Variance Distribution</a>.
 </li>
 <li>The chi-square distribution is supported on the positive \(x\)-axis, with a right-skewed distribution.
 </li>
@@ -9049,9 +9048,9 @@ ind <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> c(
 </li>
 <li>The MGF of \(X\sim\mathsf{chisq}(\mathtt{df}=p)\) is
    \begin{equation}
+   \label{eq-mgf-chisq}
    M_{X}(t)=\left(1-2t\right)^{-p},\quad t < 1/2.
    \end{equation}
-   <a name="eq-mgf-chisq" class="target">eq-mgf-chisq</a> 
 </li>
 </ol>
 
@@ -9212,7 +9211,7 @@ We write \(X\sim\mathsf{weibull}(\mathtt{shape}=\alpha,\,\mathtt{scale}=\beta)\)
 
 
 <p>
-There is some support of moments and moment generating functions for some continuous probability distributions included in the <code>actuar</code> package \cite{Dutangactuar}. The convention is <code>m</code> in front of the distribution name for raw moments, and <code>mgf</code> in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
+There is some support of moments and moment generating functions for some continuous probability distributions included in the <code>actuar</code> package \cite{actuar}. The convention is <code>m</code> in front of the distribution name for raw moments, and <code>mgf</code> in front of the distribution name for the moment generating function. At the time of this writing, the following distributions are supported: gamma, inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 </p>
 
 <div class="exampletoo">
@@ -9392,9 +9391,9 @@ The interested reader who would like to learn more about any of the below mentio
 <p>
 Consider two discrete random variables \(X\) and \(Y\) with PMFs \(f_{X}\) and \(f_{Y}\) that are supported on the sample spaces \(S_{X}\) and \(S_{Y}\), respectively. Let \(S_{X,Y}\) denote the set of all possible observed <i>pairs</i> \((x,y)\), called the <i>joint support set</i> of \(X\) and \(Y\). Then the <i>joint probability mass function</i> of \(X\) and \(Y\) is the function \(f_{X,Y}\) defined by
 \begin{equation}
+\label{eq-joint-pmf}
 f_{X,Y}(x,y)=\mathbb{P}(X=x,\, Y=y),\quad \mbox{for }(x,y)\in S_{X,Y}.
 \end{equation}
-<a name="eq-joint-pmf" id="eq-joint-pmf"></a>
 Every joint PMF satisfies
 \begin{equation}
 f_{X,Y}(x,y)>0\mbox{ for all }(x,y)\in S_{X,Y},
@@ -9414,9 +9413,9 @@ f_{X}(x) & = & \mathbb{P}(X=x),\\
 \end{eqnarray}
 By interchanging the roles of \(X\) and \(Y\) it is clear that 
 \begin{equation}
+\label{eq-marginal-pmf}
 f_{Y}(y)=\sum_{x\in S_{Y}}f_{X,Y}(x,y).
 \end{equation}
-<a name="eq-marginal-pmf" id="eq-marginal-pmf"></a>
 Given the joint PMF we may recover the marginal PMFs, but the converse is not true. Even if we have <i>both</i> marginal distributions they are not sufficient to determine the joint PMF; more information is needed
 </p>
 <p>
@@ -9460,14 +9459,14 @@ Let the random experiment again be to roll a fair die twice, except now let us d
 U & = & \mbox{the maximum of the two rolls, and }\\
 V & = & \mbox{the sum of the two rolls.}
 \end{eqnarray*}
-We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Table <a href="#tab-max-and-sum-two-dice">Max-sum two dice</a>. 
+We see that the support of \(U\) is \(S_{U}= \{ 1,2,\ldots,6 \} \) and the support of \(V\) is \(S_{V}= \{ 2,3,\ldots,12 \} \). We may represent the sample space with a matrix, and for each entry in the matrix we may calculate the value that \(U\) assumes. The result is in the left half of Figure <a href="#fig-max-and-sum-two-dice">Max-sum two dice</a>. 
 </p>
 <p>
-We can use the table to calculate the marginal PMF of \(U\), because from Example <a href="#exa-Toss-a-six-sided-die-twice">Toss die twice</a> we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the top left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\mathbb{P}(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
+We can use the table to calculate the marginal PMF of \(U\), because from Example <a href="#exa-Toss-a-six-sided-die-twice">Toss die twice</a> we know that each entry in the matrix has probability \(1/36\) associated with it. For instance, there is only one outcome in the matrix with \(U=1\), namely, the bottom left corner. This single entry has probability \(1/36\), therefore, it must be that \(f_{U}(1)=\mathbb{P}(U=1)=1/36\). Similarly we see that there are three entries in the matrix with \(U=2\), thus \(f_{U}(2)=3/36\). Continuing in this fashion we will find the marginal distribution of \(U\) may be written
 \begin{equation}
 f_{U}(u)=\frac{2u-1}{36},\quad u=1,\,2,\ldots,6.
 \end{equation}
-We may do a similar thing for \(V\); see the right half of Table <a href="#tab-max-and-sum-two-dice">Max-sum two dice</a>. Collecting all of the probability we will find that the marginal PMF of \(V\) is
+We may do a similar thing for \(V\); see the right half of Figure <a href="#fig-max-and-sum-two-dice">Max-sum two dice</a>. Collecting all of the probability we will find that the marginal PMF of \(V\) is
 \begin{equation}
 f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
@@ -9537,7 +9536,7 @@ p3 + geom_text(size = 6) + xlab(<span style="font-style: italic;">"First roll"</
 </div>
 
 <p>
-Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears twice, but \((2,3)\) appears only once. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example <a href="#exa-toss-two-dice-joint-pmf">Two dice joint</a>. See Table <a href="#tab-max-sum-joint-pmf">Max-sum joint</a>.
+Again, each of these pairs has probability \(1/36\) associated with it and we are looking at the joint PDF of \((U,V)\) albeit in an unusual form. Many of the pairs are repeated, but some of them are not: \((1,2)\) appears only once, but \((2,3)\) appears twice. We can make more sense out of this by writing a new table with \(U\) on one side and \(V\) along the top. We will accumulate the probability just like we did in Example <a href="#exa-toss-two-dice-joint-pmf">Two dice joint</a>. See Table <a href="#tab-max-sum-joint-pmf">Max-sum joint</a>.
 </p>
 <table  border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" id="tab-max-sum-joint-pmf">
 <caption>The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively.</caption>
@@ -9861,13 +9860,13 @@ and the expected value of \(Y\) is
 Finally, the expected value of \(XY\) is
 \begin{eqnarray*}
 \mathbb{E} XY & = & \int_{0}^{1}\int_{0}^{1}xy\,\frac{6}{5}\left(x+y^{2}\right)\mathrm{d} x\,\mathrm{d} y,\\
- & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{10}xy^{4}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
- & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{10}y^{4}\right)\mathrm{d} y,\\
- & = & \frac{1}{5}+\frac{3}{50},
+ & = & \int_{0}^{1}\left.\left(\frac{2}{5}x^{3}y+\frac{3}{5}x^{2}y^{3}\right)\right|_{x=0}^{1}\mathrm{d} y,\\
+ & = & \int_{0}^{1}\left(\frac{2}{5}y+\frac{3}{5}y^{3}\right)\mathrm{d} y,\\
+ & = & \frac{1}{5}+\frac{3}{20},
 \end{eqnarray*}
-which is 13/50. Therefore the covariance of \((X,Y)\) is
+which is 7/20. Therefore the covariance of \((X,Y)\) is
 \[
-\mbox{Cov}(X,Y)=\frac{13}{50}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=-\frac{1}{100}.
+\mbox{Cov}(X,Y)=\frac{7}{20}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=\frac{2}{25}.
 \]
 </p>
 </div>
@@ -9902,7 +9901,7 @@ Euv - Eu * Ev
 Compare this answer to what we got in Example <a href="#exa-max-sum-dice-covariance">Max-sum covariance</a>.
 </p>
 <p>
-To do the continuous case we could use the computer algebra utilities of <code>Yacas</code> and the associated \(\mathsf{R}\) package <code>Ryacas</code> \cite{ryacas}. See Section <a href="#sec-7-7-1">Bivariate Trans with R</a> for another example where the <code>Ryacas</code> package appears.
+To do the continuous case we could use the computer algebra utilities of <code>Yacas</code> and the associated \(\mathsf{R}\) package <code>Ryacas</code> \cite{Ryacas}. See Section <a href="#sec-7-7-1">Bivariate Trans with R</a> for another example where the <code>Ryacas</code> package appears.
 </p>
 </div>
 </div>
@@ -9943,7 +9942,7 @@ f_{X,Y}(x,y) =
 Conditional distributions play a fundamental role in Bayesian probability and statistics. There is a parameter \(\theta\) which is of primary interest, and about which we would like to learn. But rather than observing \(\theta\) directly, we instead observe a random variable \(X\) whose probability distribution depends on \(\theta\). Using the information we provided by \(X,\) we would like to update the information that we have about \(\theta\).
 </p>
 <p>
-Our initial beliefs about \(\theta\) are represented by a probability distribution, called the <i>prior distribution</i>, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the <i>likelihood function</i>, also called the <i>likelihood of</i> \(X\) <i>conditional on</i> \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the <i>posterior distribution of</i> \(\theta\) <i>given the observation</i> \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section <a href="#sec-Bayes--Rule">Bayes' Rule</a> where it was called Bayes' Rule:
+Our initial beliefs about \(\theta\) are represented by a probability distribution, called the <i>prior distribution</i>, denoted by \(\pi\). The PDF \(f_{X|\theta}\) is called the <i>likelihood function</i>, also called the <i>likelihood of</i> \(X\) <i>conditional on</i> \(\theta\). Given an observation \(X=x\), we would like to update our beliefs \(\pi\) to a new distribution, called the <i>posterior distribution of</i> \(\theta\) <i>given the observation</i> \(X=x\), denoted \(\pi_{\theta|x}\). It may seem a mystery how to obtain \(\pi_{\theta|x}\) based only on the information provided by \(\pi\) and \(f_{X|\theta}\), but it should not be. We have already studied this in Section <a href="#sec-4-8">Bayes' Rule</a> where it was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
@@ -9961,7 +9960,7 @@ f_{X|\theta}(x|\theta)=\theta^{x}(1-\theta)^{1-x},\quad x=0,1.
 \]
 Based on the observation \(X=x\), we will update the prior distribution to the posterior distribution, and we will do so with Bayes' Rule: it says
 \begin{eqnarray*}
-\pi(\theta|x) & \propto & \pi(\theta)\, f(x|\theta),\\
+\pi(\theta|x) & \propto & f(x|\theta) \, \pi(\theta),\\
  & = & \theta^{x}(1-\theta)^{1-x}\cdot3(1-\theta)^{2},\\
  & = & 3\,\theta^{x}(1-\theta)^{3-x},\quad 0 < \theta < 1,
 \end{eqnarray*}
@@ -10320,9 +10319,9 @@ The conditional distribution of \(Y|\, X=x\) is \(\mathsf{norm}(\mathtt{mean}=\m
 <p>
 There are a few things to note about Proposition <a href="#pro-mvnorm-cond-dist">pro-mvnorm-cond-dist</a> which will be important in Chapter <a href="#sec-11">Simple Linear Regression</a>. First, the conditional mean of \(Y|x\) is linear in \(x\), with slope
 \begin{equation}
+\label{eq-population-slope-slr}
 \rho\,\frac{\sigma_{Y}}{\sigma_{X}}.
 \end{equation}
-<a name="eq-population-slope-slr" id="eq-population-slope-slr"></a>
 Second, the conditional variance of \(Y|x\) is independent of \(x\). 
 </p>
 
@@ -10334,7 +10333,7 @@ Second, the conditional variance of \(Y|x\) is independent of \(x\).
 
 
 <p>
-The multivariate normal distribution is implemented in both the <code>mvtnorm</code> package \cite{Genzmvtnorm} and the <code>mnormt</code> package \cite{mnormt}. We use the <code>mvtnorm</code> package in this book simply because it is a dependency of another package used in the book. 
+The multivariate normal distribution is implemented in both the <code>mvtnorm</code> package \cite{mvtnorm:1} and the <code>mnormt</code> package \cite{mnormt}. We use the <code>mvtnorm</code> package in this book simply because it is a dependency of another package used in the book. 
 </p>
 <p>
 The <code>mvtnorm</code> package has functions <code>dmvnorm</code> and <code>rmvnorm</code> for the PDF and to generate random vectors, respectively. Let us get started with a graph of the bivariate normal PDF. We can make the plot with the following code, where the workhorse is the <code>persp</code> function in base \(\mathsf{R}\).
@@ -10407,9 +10406,9 @@ f_{U,V}(u,v)=f_{X,Y}\left[x(u,v),\, y(u,v)\right]\left|\frac{\partial(x,y)}{\par
 \end{equation}
 or we can rewrite more shortly as
 \begin{equation}
+\label{eq-biv-trans-pdf-short}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.
 \end{equation}
-<a name="eq-biv-trans-pdf-short" id="eq-biv-trans-pdf-short"></a>
 Take a moment and compare Equation <a href="#eq-biv-trans-pdf-short">eq-biv-trans-pdf-short</a> to Equation <a href="#eq-univ-trans-pdf-short">eq-univ-trans-pdf-short</a>. Do you see the connection? 
 </p>
 
@@ -10426,9 +10425,9 @@ f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}}\rig
 \end{equation}
 In some cases there will be a cancellation and the work will be lot shorter. Of course, it is not always true that
 \begin{equation}
+\label{eq-biv-jacob-recip}
 \frac{\partial(x,y)}{\partial(u,v)}=\frac{1}{\frac{\partial(u,v)}{\partial(x,y)}},
 \end{equation}
-<a name="eq-biv-jacob-recip" id="eq-biv-jacob-recip"></a>
 but for the well-behaved examples that we will see in this book it works just fine&hellip; do you see the connection between Equations <a href="#eq-biv-jacob-recip">eq-biv-jacob-recip</a> and <a href="#eq-univ-jacob-recip">eq-univ-jacob-recip</a>?
 </p>
 </div>
@@ -10452,7 +10451,7 @@ in which case the Jacobian of the inverse transformation is
 -3 & 2\\
 \frac{5}{2} & -\frac{3}{2}
 \end{vmatrix}
-= 3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
+= -3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
 \]
 As \((x,y)\) traverses \(\mathbb{R}^{2}\), so too does \((u,v)\). Since the joint PDF of \((X,Y)\) is
 \[
@@ -10460,9 +10459,9 @@ f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\righ
 \]
 we get that the joint PDF of \((U,V)\) is
 \begin{equation}
+\label{eq-biv-norm-hidden}
 f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad (u,v)\in\mathbb{R}^{2}.
 \end{equation}
-<a name="eq-biv-norm-hidden" id="eq-biv-norm-hidden"></a>
 </p>
 </div>
 
@@ -10531,7 +10530,7 @@ for every \(\mathbf{x}\) in their joint support \(S_{\mathbf{X}}\), and we say t
 \begin{equation}
 f_{\mathbf{X}}(\mathbf{x^{\ast}})=f_{\mathbf{X}}(\mathbf{x}),
 \end{equation}
-for any reordering \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
+for any reordering (permutation) \(\mathbf{x^{\ast}}\) of the elements of \(\mathbf{x}=(x_{1},x_{2},\ldots,x_{n})\) in the joint support.
 </p>
 
 <div class="prop">
@@ -10578,9 +10577,9 @@ Bruno de Finetti was a strong proponent of the subjective approach to probabilit
 <div class="thm">
 <p><b>De Finetti's Theorem.</b> Let \(X_{1}\), \(X_{2}\), &hellip; be a sequence of \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\) random variables such that \((X_{1},\ldots,X_{k})\) are exchangeable for every \(k\). Then there exists a random variable \(\Theta\) with support \([0,1]\) and PDF \(f_{\Theta}(\theta)\) such that
 \begin{equation}
+\label{eq-definetti-binary}
 \mathbb{P}(X_{1}=x_{1},\ldots,\, X_{k}=x_{k})=\int_{0}^{1}\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta)\,\mathrm{d}\theta,
 \end{equation}
-<a name="eq-definetti-binary" id="eq-definetti-binary"></a>
 for all \(x_{i}=0,\,1\), \(i=1,\,2,\ldots,k\).
 </p>
 </div>
@@ -10599,7 +10598,7 @@ where we sum over all possible coins. The right-hand side of Equation <a href="#
 Of course, the integral's value does not change if we jumble the \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The power of de Finetti's Theorem is that <i>every</i> infinite binary exchangeable sequence can be written in the above form.
 </p>
 <p>
-The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation <a href="#eq-definetti-binary">eq-definetti-binary</a> to Section <a href="#sec-Bayes--Rule">Bayes' Rule</a> and Section <a href="#sec-7-3">Conditional Distributions</a>.
+The connection to subjective probability: our prior information about \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\). Compare Equation <a href="#eq-definetti-binary">eq-definetti-binary</a> to Section <a href="#sec-4-8">Bayes' Rule</a> and Section <a href="#sec-7-3">Conditional Distributions</a>.
 </p>
 <p>
 The multivariate normal distribution immediately generalizes from the bivariate case. If the matrix \(\Sigma\) is nonsingular then the joint PDF of \(\mathbf{X}\sim\mathsf{mvnorm}(\mathtt{mean}=\upmu,\,\mathtt{sigma}=\Sigma)\) is
@@ -10734,7 +10733,7 @@ X1      0     1     2     3     4     5     6
 Do some examples of <code>rmultinom</code>.
 </p>
 <p>
-Another way to do the plot is with the <code>scatterplot3d</code> function in the <code>scatterplot3d</code> package \cite{Liggesscatterplot3d}. It looks like this: 
+Another way to do the plot is with the <code>scatterplot3d</code> function in the <code>scatterplot3d</code> package \cite{scatterplot3d}. It looks like this: 
 </p><pre class="example">
 library("scatterplot3d")
 X &lt;- t(as.matrix(expand.grid(0:6, 0:6)))
@@ -11022,10 +11021,10 @@ This distribution was first published by W. S. Gosset (1900) under the pseudonym
 \begin{equation}
 f_{X}(x)=\frac{\Gamma[(r+1)/2]}{\sqrt{r\pi}\ \Gamma(r/2)}\left(1+\frac{x^{2}}{r}\right)^{-(r+1)/2},\quad -\infty < x < \infty.
 \end{equation}
-Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) <i>degrees of freedom</i>, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure <a href="#fig-Student-s-t-dist-vary-df">Student's-t-dist-vary-df</a>. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely <code>dt</code>, <code>pt</code>,=qt=, and <code>rt</code>, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
+Any random variable \(X\) with the preceding PDF is said to have Student's \(t\) distribution with \(r\) <i>degrees of freedom</i>, and we write \(X\sim\mathsf{t}(\mathtt{df}=r)\). The shape of the PDF is similar to the normal, but the tails are considerably heavier. See Figure <a href="#fig-Students-t-dist-vary-df">Student's-t-dist-vary-df</a>. As with the normal distribution, there are four functions in \(\mathsf{R}\) associated with the \(t\) distribution, namely <code>dt</code>, <code>pt</code>,=qt=, and <code>rt</code>, which compute the PDF, CDF, quantile function, and generate random variates, respectively.
 </p>
 <p>
-The code to produce Figure <a href="#fig-Student-s-t-dist-vary-df">Student's-t-dist-vary-df</a> is
+The code to produce Figure <a href="#fig-Students-t-dist-vary-df">Student's-t-dist-vary-df</a> is
 </p>
 
 
@@ -11141,7 +11140,7 @@ approaches a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) distribution as 
 
 
 <p>
-The <code>TeachingDemos</code> package \cite{Snowteachingdemos} has <code>clt.examp</code> and the <code>distrTeach</code> \cite{Ruckdescheldistr} package has <code>illustrateCLT</code>. Try the following at the command line (output omitted):
+The <code>TeachingDemos</code> package \cite{TeachingDemos} has <code>clt.examp</code> and the <code>distrTeach</code> \cite{distrTeach} package has <code>illustrateCLT</code>. Try the following at the command line (output omitted):
 </p>
 
 
@@ -11158,7 +11157,7 @@ and
 
 
 <p>
-The <code>IPSUR</code>  package has the functions <code>clt1</code>, <code>clt2</code>, and <code>clt3</code> (see Exercise <a href="#xca-clt123">clt123</a> at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
+The <code>IPSUR</code>  package \cite{IPSUR} has the functions <code>clt1</code>, <code>clt2</code>, and <code>clt3</code> (see Exercise <a href="#xca-clt123">clt123</a> at the end of this chapter). Its purpose is to investigate what happens to the sampling distribution of \(\overline{X}\) when the population distribution is mound shaped, finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\), \(\mathsf{unif}(\mathtt{a}=0,\,\mathtt{b}=10)\), and \(\mathsf{gamma}(\mathtt{shape}=1.21,\,\mathtt{scale}=1/2.37)\), respectively. 
 </p>
 <p>
 For example, when the command <code>clt1()</code>  is issued a plot window opens to show a graph of the PDF of a \(\mathsf{t}(\mathtt{df}=3)\) distribution. On the display are shown numerical values of the population mean and variance. While the students examine the graph the computer is simulating random samples of size <code>sample.size = 2</code> from the population distribution <code>rt</code> a total of <code>N.iter = 100000</code> times, and sample means are calculated of each sample. Next follows a histogram of the simulated sample means, which closely approximates the sampling distribution of \(\overline{X}\), see Section <a href="#sec-8-5">Simulated Sampling Distributions</a>. Also shown are the sample mean and sample variance of all of the simulated  \( \overline{X} \) values. As a final step, when the student clicks the second plot, a normal curve with the same mean and variance as the simulated \( \overline{X} \) values is superimposed over the histogram. Students should compare the population theoretical mean and variance to the simulated mean and variance of the sampling distribution. They should also compare the shape of the simulated sampling distribution to the shape of the normal distribution.
@@ -11191,9 +11190,9 @@ There are often two populations under consideration, and it sometimes of interes
 <div class="prop">
 <p>Let \(X_{1}\), \(X_{2}\), &hellip; , \(X_{n_{1}}\) be an \(SRS(n_{1})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{X},\,\mathtt{sd}=\sigma_{X})\) distribution and let \(Y_{1}\), \(Y_{2}\), &hellip; , \(Y_{n_{2}}\) be an \(SRS(n_{2})\) from a \(\mathsf{norm}(\mathtt{mean}=\mu_{Y},\,\mathtt{sd}=\sigma_{Y})\) distribution. Suppose that \(X_{1}\), \(X_{2}\), &hellip; , \(X_{n_{1}}\) and \(Y_{1}\), \(Y_{2}\), &hellip; , \(Y_{n_{2}}\) are independent samples. Then the quantity
 \begin{equation}
+\label{eq-diff-indep-sample-means}
 \frac{\overline{X}-\overline{Y}-(\mu_{X}-\mu_{Y})}{\sqrt{\left.\sigma_{X}^{2}\right/ n_{1}+\left.\sigma_{Y}^{2}\right/ n_{2}}}
 \end{equation}
-<a name="eq-diff-indep-sample-means" id="eq-diff-indep-sample-means"></a>
 has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling distribution. Equivalently, \(\overline{X}-\overline{Y}\) has a \(\mathsf{norm}(\mathtt{mean}=\mu_{X}-\mu_{Y},\,\mathtt{sd}=\sqrt{\left.\sigma_{X}^{2}\right/ n_{1}+\left.\sigma_{Y}^{2}\right/ n_{2}})\) sampling distribution.
 </p>
 </div>
@@ -11276,7 +11275,7 @@ has an \(\mathsf{f}(\mathtt{df1}=n_{1}-1,\,\mathtt{df2}=n_{2}-1)\) sampling dist
 <div class="proof">
 <p>We know from Theorem <a href="#thm-Xbar-andS">Xbar and S</a> that \((n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{1}-1)\) and \((n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}\) is distributed \(\mathsf{chisq}(\mathtt{df}=n_{2}-1)\). Now write
 \[
-F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{Y}^{2}\right/ (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right/ (n_{2}-1)}\cdot\frac{\left.1\right/ \sigma_{X}^{2}}{\left.1\right/ \sigma_{Y}^{2}},
+F=\frac{\sigma_{Y}^{2}S_{X}^{2}}{\sigma_{X}^{2}S_{Y}^{2}}=\frac{\left.(n_{1}-1)S_{X}^{2}\right/ (n_{1}-1)}{\left.(n_{2}-1)S_{Y}^{2}\right/ (n_{2}-1)}\cdot\frac{\left.1\right/ \sigma_{X}^{2}}{\left.1\right/ \sigma_{Y}^{2}},
 \]
 by multiplying and dividing the numerator with \(n_{1}-1\) and doing likewise for the denominator with \(n_{2}-1\). Now we may regroup the terms into
 \[
@@ -11868,7 +11867,7 @@ $objective
 Note that we did not need <code>maximum = TRUE</code> because we minimized the negative log-likelihood. The answer for the MLE is essentially the same as before, but the <code>$objective</code> value was different, of course.
 </p>
 <p>
-For multiparameter problems we may use a similar approach by way of the <code>mle</code> function in the <code>stats4</code> package. 
+For multiparameter problems we may use a similar approach by way of the <code>mle</code> function in the <code>stats4</code> package \cite{stats4}. 
 </p>
 
 <div class="exampletoo">
@@ -11914,7 +11913,7 @@ The numerical MLEs were very close to the theoretical MLEs. We already knew that
 </div>
 
 <p>
-There is functionality in the <code>distrTest</code> package \cite{Ruckdescheldistr} to calculate theoretical MLEs; we will skip examples of these for the time being.
+There is functionality in the <code>distrTest</code> package \cite{distrTest} to calculate theoretical MLEs; we will skip examples of these for the time being.
 </p>
 </div>
 </div>
@@ -11967,9 +11966,9 @@ is a \(100(1-\alpha)\%\) <i>confidence interval for</i> \(\mu\). The quantity \(
 <div class="rem">
 <p>The interval is also sometimes written more compactly as
 \begin{equation}
+\label{eq-z-interval}
 \overline{X}\pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}.
 \end{equation}
-<a name="eq-z-interval" id="eq-z-interval"></a>
 </p>
 </div>
 
@@ -12136,9 +12135,9 @@ where \(S\) is the sample standard deviation.
 <ul>
 <li>If the underlying population is normal then we may replace \(z_{\alpha/2}\) with \(t_{\alpha/2}(\mathtt{df}=n-1)\). The resulting \(100(1-\alpha)\%\) confidence interval is
      \begin{equation}
+     \label{eq-one-samp-t-int}
      \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}.
      \end{equation}
-     <a name="eq-one-samp-t-int" class="target">eq-one-samp-t-int</a> 
 </li>
 <li>if the underlying population is not normal, but approximately normal, then we may use the \(t\) interval, Equation <a href="#eq-one-samp-t-int">eq-one-samp-t-int</a>. The interval will have approximately \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if the population is highly skewed or the data have outliers, then we should ask a professional statistician for advice.
 </li>
@@ -12250,9 +12249,9 @@ Suppose that \(\sigma_{X}\) and \(\sigma_{Y}\) are known. We would like a confid
 \end{equation}
 Therefore, a \( 100(1-\alpha)\% \) confidence interval for \(\mu_{X}-\mu_{Y}\) is given by
 \begin{equation}
+\label{eq-two-samp-mean-CI}
 \left(\overline{X}-\overline{Y}\right)\pm z_{\alpha/2}\sqrt{\frac{\sigma_{X}^{2}}{n}+\frac{\sigma_{Y}^{2}}{m}}.
 \end{equation}
-<a name="eq-two-samp-mean-CI" id="eq-two-samp-mean-CI"></a>
 Unfortunately, most of the time the values of \(\sigma_{X}\) and \(\sigma_{Y}\) are unknown. This leads us to the following:
 </p><ul>
 <li>If both sample sizes are large, then we may appeal to the CLT/SLLN (see Section <a href="#sec-8-3">Central Limit Theorem</a>) and substitute \(S_{X}^{2}\) and \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the interval <a href="#eq-two-samp-mean-CI">eq-two-samp-mean-CI</a>. The resulting confidence interval will have approximately \(100(1-\alpha)\%\) confidence.
@@ -12347,9 +12346,9 @@ We are given an \(SRS(n)\) \(X_{1}\), \(X_{2}\), &hellip;, \(X_{n}\) distributed
 \]
 Thus if \(n\) is large (here is the CLT) then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) would be given by
 \begin{equation}
+\label{eq-ci-p-no-good}
 \overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.
 \end{equation}
-<a name="eq-ci-p-no-good" id="eq-ci-p-no-good"></a>
 OOPS&hellip;! Equation <a href="#eq-ci-p-no-good">eq-ci-p-no-good</a> is of no use to us because the \underbar{unknown} parameter \(p\) is in the formula! (If we knew what \(p\) was to plug in the formula then we would not need a confidence interval in the first place.) There are two solutions to this problem.
 </p><ol>
 <li>Replace \(p\) with \(\hat{p}=\overline{X}\). Then an approximate \(100(1-\alpha)\%\) confidence interval for \(p\) is given by 
@@ -12517,7 +12516,7 @@ I am thinking about <code>sigma.test</code> in the <code>TeachingDemos</code> pa
 
 
 <p>
-I am thinking about <code>fitdistr</code> from the <code>MASS</code> package \cite{Venables2002}.
+I am thinking about <code>fitdistr</code> from the <code>MASS</code> package \cite{MASS}.
 </p>
 </div>
 </div>
@@ -12569,10 +12568,10 @@ For proportions, recall that the asymptotic formula to estimate \(p\) was
 \]
 Reasoning as above we would want
 \begin{align}
+\label{eq-samp-size-prop-ME}
 E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.
 \end{align}
-<a name="eq-samp-size-prop-ME" id="eq-samp-size-prop-ME"></a>
 OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\) on both sides of Equation <a href="#eq-samp-size-prop-ME">eq-samp-size-prop-ME</a>. Again, there are two solutions to the problem.
 </p>
 <ol>
@@ -13649,7 +13648,7 @@ Here are some properties of power functions:
 
 
 <p>
-I am thinking about <code>replicate</code>\index{replicate@\texttt{replicate}} here, and also <code>power.examp</code>\index{power.examp@\texttt{power.examp}} from the <code>TeachingDemos</code> package. There is an even better plot in upcoming work from the <code>HH</code> package.
+I am thinking about <code>replicate</code>\index{replicate@\texttt{replicate}} here, and also <code>power.examp</code>\index{power.examp@\texttt{power.examp}} from the <code>TeachingDemos</code> package. There is an even better plot in upcoming work from the <code>HH</code> package \cite{HH}.
 </p>
 
 
@@ -13823,7 +13822,7 @@ Y_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i}, \quad i = 1,2,\ldots,n.
 
 
 <p>
-The <code>speed</code> represents how fast the car was going (\(x\)) in miles per hour and <code>dist</code> (\(Y\)) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the <code>qplot</code> command in the <code>ggplot2</code> package. 
+The <code>speed</code> represents how fast the car was going (\(x\)) in miles per hour and <code>dist</code> (\(Y\)) measures how far it took the car to stop, in feet. We can make a simple scatterplot of the data with the <code>qplot</code> command in the <code>ggplot2</code> package \cite{ggplot2}. 
 </p>
 
 
@@ -13895,18 +13894,18 @@ L(\beta_{0},\beta_{1},\sigma)= & \prod_{i=1}^{n}f_{Y_{i}}(y_{i}),\\
 \end{alignat}
 We take the natural logarithm to get
 \begin{equation}
+\label{eq-regML-lnL}
 \ln L(\beta_{0},\beta_{1},\sigma)=-\frac{n}{2}\ln(2\pi\sigma^{2})-\frac{\sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i})^{2}}{2\sigma^{2}}.
 \end{equation}
-<a name="eq-regML-lnL" id="eq-regML-lnL"></a>
  We would like to maximize this function of \( \beta_{0} \) and \( \beta_{1} \). See Appendix <a href="#sec-21-6">Multivariable Calculus</a> which tells us that we should find critical points by means of the partial derivatives. Let us start by differentiating with respect to \( \beta_{0} \):
 \begin{equation}
 \frac{\partial}{\partial\beta_{0}}\ln L=0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-1),
 \end{equation}
 and the partial derivative equals zero when \( \sum_{i=1}^{n}(y_{i}-\beta_{0}-\beta_{1}x_{i}) = 0 \), that is, when
 \begin{equation}
+\label{eq-regML-a}
 n \beta_{0} + \beta_{1} \sum_{i=1}^{n} x_{i} = \sum_{i = 1}^{n}y_{i}.
 \end{equation}
-<a name="eq-regML-a" id="eq-regML-a"></a>
 Moving on, we next take the partial derivative of \( \ln L \) (Equation <a href="#eq-regML-lnL">eq-regML-lnL</a>) with respect to \( \beta_{1} \) to get
 \begin{alignat}{1}
 \frac{\partial}{\partial\beta_{1}}\ln L=\  & 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\
@@ -13914,9 +13913,9 @@ Moving on, we next take the partial derivative of \( \ln L \) (Equation <a href=
 \end{alignat}
 and this equals zero when the last sum equals zero, that is, when
 \begin{equation}
+\label{eq-regML-b}
 \beta_{0} \sum_{i = 1}^{n}x_{i} + \beta_{1} \sum_{i = 1}^{n}x_{i}^{2} = \sum_{i = 1}^{n}x_{i}y_{i}.
 \end{equation}
-<a name="eq-regML-b" id="eq-regML-b"></a>
 Solving the system of equations <a href="#eq-regML-a">eq-regML-a</a> and <a href="#eq-regML-b">eq-regML-b</a>
 \begin{eqnarray}
 n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
@@ -13924,9 +13923,9 @@ n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \end{eqnarray}
 for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise <a href="#xca-find-mles-SLR">xca-find-mles-SLR</a>) gives
 \begin{equation}
+\label{eq-regline-slope-formula}
 \hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right/ n}
 \end{equation}
-<a name="eq-regline-slope-formula" id="eq-regline-slope-formula"></a>
 and
 \begin{equation}
 \hat{\beta}_{0} = \overline{y} - \hat{\beta}_{1}\overline{x}.
@@ -13946,9 +13945,9 @@ where \(\hat{\beta}_{0}\) and \(\hat{\beta}_{1}\) are given as above. For notati
 <div class="rem">
 <p>The formula for \( b_{1} \) in Equation <a href="#eq-regline-slope-formula">eq-regline-slope-formula</a> gets the job done but does not really make any sense. There are many equivalent formulas for \( b_{1} \) that are more intuitive, or at the least are easier to remember. One of the author's favorites is
 \begin{equation}
+\label{eq-sample-correlation-formula}
 b_{1} = r\frac{s_{y}}{s_{x}},
 \end{equation}
-<a name="eq-sample-correlation-formula" id="eq-sample-correlation-formula"></a>
 where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation coefficient and the sample standard deviations of the \(Y\) and \(x\) data, respectively. See Exercise <a href="#xca-show-alternate-slope-formula">xca-show-alternate-slope-formula</a>. Also, notice the similarity between Equation <a href="#eq-sample-correlation-formula">eq-sample-correlation-formula</a> and Equation <a href="#eq-population-slope-slr">eq-population-slope-slr</a>.
 </p>
 </div>
@@ -14359,18 +14358,18 @@ Since \(\sigma\) is unknown we estimate it with \(S\) (we should expect the appe
 <p>
 A \( 100(1-\alpha)\% \) <i>confidence interval (CI) for</i> \(\mu(x_{0})\) is given by
 \begin{equation}
+\label{eq-SLR-conf-int-formula}
 \hat{Y}\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-2)\, S\sqrt{\frac{1}{n}+\frac{(x_{0}-\overline{x}^{2})}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
-<a name="eq-SLR-conf-int-formula" id="eq-SLR-conf-int-formula"></a>
 Prediction intervals are a little bit different. In order to find confidence bounds for a new observation of \(Y\) (we will denote it \(Y_{\mbox{new}}\)) we use the fact that
 \begin{equation}
 Y_{\mbox{new}}\sim\mathtt{norm}\left(\mathtt{mean}=\mu(x_{0}),\,\mathtt{sd}=\sigma\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}\right).
 \end{equation}
 Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \( 100(1-\alpha)\% \) prediction interval (PI) for a future value of \(Y\) at \(x_{0}\) is given by 
 \begin{equation}
+\label{eq-SLR-pred-int-formula}
 \hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
-<a name="eq-SLR-pred-int-formula" id="eq-SLR-pred-int-formula"></a>
 We notice that the prediction interval in Equation <a href="#eq-SLR-pred-int-formula">eq-SLR-pred-int-formula</a> is wider than the confidence interval in Equation <a href="#eq-SLR-conf-int-formula">eq-SLR-conf-int-formula</a>, as we expected at the beginning of the section.
 </p>
 
@@ -14461,7 +14460,7 @@ The type of interval is dictated by the <code>interval</code> argument (which is
 We earlier guessed that a bound on the value of a single new observation would be inherently less certain than a bound for an average (mean) value; therefore, we expect the CIs for the mean to be tighter than the PIs for a new observation. A close look at the standard deviations in Equations <a href="#eq-SLR-conf-int-formula">eq-SLR-conf-int-formula</a> and <a href="#eq-SLR-pred-int-formula">eq-SLR-pred-int-formula</a> confirms our guess, but we would like to see a picture to drive the point home.
 </p>
 <p>
-We may plot the confidence and prediction intervals with one fell swoop using the <code>ci.plot</code> function from the <code>HH</code> package \cite{Heibergerhh}. The graph is displayed in Figure <a href="#fig-Scatter-cars-CIPI">Scatter-cars-CIPI</a>.
+We may plot the confidence and prediction intervals with one fell swoop using the <code>ci.plot</code> function from the <code>HH</code> package \cite{HH}. The graph is displayed in Figure <a href="#fig-Scatter-cars-CIPI">Scatter-cars-CIPI</a>.
 </p>
 
 
@@ -14596,9 +14595,9 @@ SSR=\sum_{i=1}^{n}(\hat{Y_{i}}-\overline{Y})^{2},
 \end{equation}
 also known as the <i>regression sum of squares</i>. It is not obvious, but some algebra proved a famous result known as the <b>ANOVA Equality</b>:
 \begin{equation}
+\label{eq-anovaeq}
 \sum_{i=1}^{n}(Y_{i}-\overline{Y})^{2}=\sum_{i=1}^{n}(\hat{Y_{i}}-\overline{Y})^{2}+\sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})^{2}
 \end{equation}
-<a name="eq-anovaeq" id="eq-anovaeq"></a>
 or in other words,
 \begin{equation}
 SSTO=SSR+SSE.
@@ -14699,16 +14698,11 @@ We choose the principal square root because the slope of the regression line is 
 
 <p>
 There is another way to test the significance of the linear regression model. In SLR, the new way also tests the hypothesis \(H_{0}:\beta_{1}=0\) versus \(H_{1}:\beta_{1}\neq0\), but it is done with a new test statistic called the <i>overall F statistic</i>. It is defined by
-</p>
-
-
 \begin{equation}
+\label{eq-slr-overall-F-statistic}
 F=\frac{SSR}{SSE/(n-2)}.
 \end{equation}
-<p>
-<a name="eq-slr-overall-F-statistic" id="eq-slr-overall-F-statistic"></a>
-</p>
-<p>
+
 Under the regression assumptions and when \(H_{0}\) is true, the \(F\) statistic has an \(\mathtt{f}(\mathtt{df1}=1,\,\mathtt{df2}=n-2)\) distribution. We reject \(H_{0}\) when \(F\) is large &ndash; that is, when the explained variation is large relative to the unexplained variation.
 </p>
 <p>
@@ -14912,7 +14906,7 @@ By default the same explanatory variables are used in the new model which produc
 BP=n\sum_{i=1}^{n}\hat{W}_{i}^{2}\div\sum_{i=1}^{n}W_{i}^{2}.
 \end{equation}
 We reject the null hypothesis if \(BP\) is too large, which happens when the explained variation i the new model is large relative to the unexplained variation in the original model.
-We do it in \(\mathsf{R}\) with the <code>bptest</code> function from the <code>lmtest</code> package \cite{Zeileislmtest}. 
+We do it in \(\mathsf{R}\) with the <code>bptest</code> function from the <code>lmtest</code> package \cite{lmtest}. 
 </p>
 
 
@@ -15095,15 +15089,15 @@ The formula has a nice interpretation in the SLR model: if the distance from \(x
 <p>
 Leverages have nice mathematical properties; for example, they satisfy
 \begin{equation}
+\label{eq-slr-leverage-between}
 0\leq h_{ii}\leq1,
 \end{equation}
-<a name="eq-slr-leverage-between" id="eq-slr-leverage-between"></a>
 and their sum is
 \begin{eqnarray}
+\label{eq-slr-average-leverage}
 \sum_{i=1}^{n}h_{ii} & = & \sum_{i=1}^{n}\left[\frac{1}{n}+\frac{(x_{i}-\overline{x})^{2}}{\sum_{k=1}^{n}(x_{k}-\overline{x})^{2}}\right],\\
  & = & \frac{n}{n}+\frac{\sum_{i}(x_{i}-\overline{x})^{2}}{\sum_{k}(x_{k}-\overline{x})^{2}},\\
  & = & 2.
-<<eq-slr-average-leverage>>(INVISIBLE)
 \end{eqnarray}
 
 A rule of thumb is to consider leverage values to be large if they are more than double their average size (which is \(2/n\) according to Equation <a href="#eq-slr-average-leverage">eq-slr-average-leverage</a>). So leverages larger than \(4/n\) are suspect. Another rule of thumb is to say that values bigger than 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate moderate leverage.
@@ -15131,9 +15125,9 @@ Now delete the \(i^{\mathrm{th}}\) case and fit the regression function to the r
 \end{equation}
 so that the <i>studentized deleted residuals</i> \(t_{i}\) defined by
 \begin{equation}
+\label{eq-slr-studentized-deleted-resids}
 t_{i}=\frac{D_{i}}{S_{(i)}/(1-h_{ii})},\quad i=1,2,\ldots,n,
 \end{equation}
-<a name="eq-slr-studentized-deleted-resids" id="eq-slr-studentized-deleted-resids"></a>
 have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed values of \(t_{i}\) to this distribution to decide whether or not an observation is extreme. 
 </p>
 <p>
@@ -15326,9 +15320,9 @@ A rule of thumb is to flag observations whose \(DFFIT\) exceeds one in absolute 
 The \(DFFITS\) are good for measuring the influence on a single fitted value, but we may want to measure the influence an observation has on all of the fitted values simultaneously. The statistics used for measuring this are Cook's distances which may be calculated
 by the formula
 \begin{equation}
+\label{eq-slr-cooks-distance}
 D_{i}=\frac{E_{i}^{2}}{(p+1)S^{2}}\cdot\frac{h_{ii}}{(1-h_{ii})^{2}},\quad i=1,2,\ldots,n.
 \end{equation}
-<a name="eq-slr-cooks-distance" id="eq-slr-cooks-distance"></a>
 It shows that Cook's distance depends both on the residual \(E_{i}\) and the leverage \(h_{ii}\) and in this way \(D_{i}\) contains information about outlying \(x\) and \(y\) values.
 </p>
 <p>
@@ -15621,7 +15615,7 @@ The data are in the <code>datasets</code> package and are already on the search 
 
 
 <p>
-Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the <code>splom</code> function in the <code>lattice</code> package \cite{Sarkarlattice} as shown below. The plot is shown in Figure <a href="#fig-splom-trees">splom-trees</a>.
+Let us take a look at a visual display of the data. For multiple variables, instead of a simple scatterplot we use a scatterplot matrix which is made with the <code>splom</code> function in the <code>lattice</code> package \cite{lattice} as shown below. The plot is shown in Figure <a href="#fig-splom-trees">splom-trees</a>.
 </p>
 
 
@@ -15671,7 +15665,7 @@ The interpretation is simple. The intercept \(\beta_{0}\) represents the mean <c
 In simple linear regression, we had one independent variable and our linear regression surface was 1D, simply a line. In multiple regression there are many independent variables and so our linear regression surface will be many-D&hellip; in general, a hyperplane. But when there are only two explanatory variables the hyperplane is just an ordinary plane and we can look at it with a 3D scatterplot. 
 </p>
 <p>
-One way to do this is with the \(\mathsf{R}\) Commander in the <code>Rcmdr</code> package \cite{Foxrcmdr}. It has a 3D scatterplot option under the <code>Graphs</code> menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, <i>etc</i>. But that particular display does not translate well to a printed book.
+One way to do this is with the \(\mathsf{R}\) Commander in the <code>Rcmdr</code> package \cite{Rcmdr}. It has a 3D scatterplot option under the <code>Graphs</code> menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, <i>etc</i>. But that particular display does not translate well to a printed book.
 </p>
 <p>
 Another way to do it is with the <code>scatterplot3d</code> function in the <code>scatterplot3d</code> package. The code follows, and the result is shown in Figure <a href="#fig-3D-scatterplot-trees">3D-scatterplot-trees</a>.
@@ -15743,11 +15737,11 @@ since \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is symmetric. Setting the derivative
 In the case that \(\mathbf{X}^{\mathrm{T}}\mathbf{X}\) is invertible
 we may solve the equation for \(\upbeta\) to get the maximum likelihood estimator of \(\upbeta\) which we denote by \(\mathbf{b}\):
 \begin{equation}
+\label{eq-b-formula-matrix}
 \mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}.
 \end{equation}
-<a name="eq-b-formula-matrix" id="eq-b-formula-matrix"></a>
-</p>
 
+</p>
 <div class="rem">
 <p>The formula in Equation <a href="#eq-b-formula-matrix">eq-b-formula-matrix</a> is convenient for mathematical study but is inconvenient for numerical computation. Researchers have devised much more efficient algorithms for the actual calculation of the parameter estimates, and we do not explore them here.
 </p>
@@ -15872,9 +15866,9 @@ Now let us write a column vector \(\mathbf{x}_{0}=(x_{10},x_{20})^{\mathrm{T}}\)
 <p>
 We can represent \(\hat{Y}(\mathbf{x}_{0})\) by the matrix equation
 \begin{equation}
+\label{eq-mlr-single-yhat-matrix}
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b},
 \end{equation}
-<a name="eq-mlr-single-yhat-matrix" id="eq-mlr-single-yhat-matrix"></a>
 which is just a fancy way to write
 \begin{equation}
 \hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
@@ -16075,9 +16069,9 @@ We showed in Section <a href="#sec-12-2-1">MLR Parameter Estimates</a> that \(\m
 \end{equation}
 Now recall Theorem <a href="#thm-mvnorm-dist-matrix-prod">thm-mvnorm-dist-matrix-prod</a> that we said we were going to need eventually (the time is now). That proposition guarantees that
 \begin{equation}
+\label{eq-distn-b-mlr}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right),
 \end{equation}
-<a name="eq-distn-b-mlr" id="eq-distn-b-mlr"></a>
 since
 \begin{equation}
 \mathbb{E}\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}(\mathbf{X}\upbeta)=\upbeta,
@@ -16267,19 +16261,19 @@ As before, the interval type is decided by the <code>interval</code> argument an
 <p>
 We saw in Section <a href="#sec-12-2-3">MLR MSE SE</a> that the error sum of squares \(SSE\) can be conveniently written in MLR as 
 \begin{equation}
+\label{eq-mlr-sse-matrix}
 SSE=\mathbf{Y}^{\mathrm{T}}(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
-<a name="eq-mlr-sse-matrix" id="eq-mlr-sse-matrix"></a>
 It turns out that there are equally convenient formulas for the total sum of squares \(SSTO\) and the regression sum of squares \(SSR\). They are:
 \begin{alignat}{1}
+\label{eq-mlr-ssto-matrix}
 SSTO= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{I}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}
 \end{alignat}
-<a name="eq-mlr-ssto-matrix" id="eq-mlr-ssto-matrix"></a>
 and
 \begin{alignat}{1}
+\label{eq-mlr-ssr-matrix}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.
 \end{alignat}
-<a name="eq-mlr-ssr-matrix" id="eq-mlr-ssr-matrix"></a>
 (The matrix \(\mathbf{J}\) is defined in Appendix <a href="#sec-21-5">Linear Algebra</a>.) Immediately from Equations <a href="#eq-mlr-sse-matrix">eq-mlr-sse-matrix</a>, <a href="#eq-mlr-ssto-matrix">eq-mlr-ssto-matrix</a>, and <a href="#eq-mlr-ssr-matrix">eq-mlr-ssr-matrix</a> we get the <i>Anova Equality</i>
 \begin{equation} 
 SSTO=SSE+SSR.
@@ -16387,9 +16381,9 @@ For the <code>trees</code> data, we see that \( F =  254.972337410669 \) with a 
 
 </div>
 
-<div id="outline-container-sub-mlr-Student-s-t-Tests" class="outline-4">
-<h4 id="sub-mlr-Student-s-t-Tests"><a name="sec-12-3-3" id="sec-12-3-3"></a><span class="section-number-4">12.3.3</span> Student's <i>t</i> Tests</h4>
-<div class="outline-text-4" id="text-sub-mlr-Student-s-t-Tests">
+<div id="outline-container-sub-mlr-Students-t-Tests" class="outline-4">
+<h4 id="sub-mlr-Students-t-Tests"><a name="sec-12-3-3" id="sec-12-3-3"></a><span class="section-number-4">12.3.3</span> Student's <i>t</i> Tests</h4>
+<div class="outline-text-4" id="text-sub-mlr-Students-t-Tests">
 
 
 <p>
@@ -16978,7 +16972,7 @@ There are other &ndash; shorter &ndash; ways to plot regression lines by groups,
 
 
 <p>
-We saw in Section <a href="#sec-12-3-2">MLR Overall F</a> how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section <a href="#sub-mlr-Student-s-t-Tests">MLR Student's t Tests</a> how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
+We saw in Section <a href="#sec-12-3-2">MLR Overall F</a> how to test \(H_{0}:\beta_{0}=\beta_{1}=\cdots=\beta_{p}=0\) with the overall \(F\) statistic and we saw in Section <a href="#sec-12-3-3">MLR Student's t Tests</a> how to test \(H_{0}:\beta_{i}=0\) that a particular coefficient \(\beta_{i}\) is zero. Sometimes, however, we would like to test whether a certain part of the model is significant. Consider the regression model
 \begin{equation}
 Y=\beta_{0}+\beta_{1}x_{1}+\cdots+\beta_{j}x_{j}+\beta_{j+1}x_{j+1}+\cdots+\beta_{p}x_{p}+\epsilon,
 \end{equation}
@@ -17144,9 +17138,9 @@ V=\pi r^{2}h\quad \mbox{or}\quad V=4\pi dh,
 \end{equation}
 where \(r\) and \(d\) represent the radius and diameter of the tree, respectively. With this in mind, it would seem that a more appropriate model for \(\mu\) might be
 \begin{equation}
+\label{eq-trees-nonlin-reg}
 \mu(x_{1},x_{2})=\beta_{0}x_{1}^{\beta_{1}}x_{2}^{\beta_{2}},
 \end{equation}
-<a name="eq-trees-nonlin-reg" id="eq-trees-nonlin-reg"></a>
 where \(\beta_{1}\) and \(\beta_{2}\) are parameters to adjust for the fact that a black cherry tree is not a perfect cylinder.
 </p>
 <p>
@@ -17620,7 +17614,7 @@ mean(medstar) - median(rivers)
 
 
 <div class="exampletoo">
-<p><b>The boot package in R</b>. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the <code>boot</code> package. Further, inside the <code>boot</code> package there is even a function called <code>boot</code>\index{boot@\texttt{boot}}. The basic syntax is of the form:
+<p><b>The boot package in R</b>. It turns out that there are many bootstrap procedures and commands already built into base \(\mathsf{R}\), in the <code>boot</code> package. Further, inside the <code>boot</code> package \cite{boot:1} there is even a function called <code>boot</code>\index{boot@\texttt{boot}}. The basic syntax is of the form:
 </p>
 <pre class="example">
  boot(data, statistic, R)
@@ -18082,7 +18076,7 @@ If you ever write the \(\mathsf{R}\) help mailing list with a question, then you
 
 
 
-<pre class="example">R version 2.14.0 (2011-10-31)
+<pre class="example">R version 2.14.1 (2011-12-22)
 Platform: i686-pc-linux-gnu (32-bit)
 
 locale:
@@ -18099,28 +18093,29 @@ attached base packages:
 [11] base     
 
 other attached packages:
- [1] TeachingDemos_2.7       scatterplot3d_0.3-33   
- [3] RcmdrPlugin.IPSUR_0.1-7 Rcmdr_1.7-0            
- [5] car_2.0-11              nnet_7.3-1             
- [7] qcc_2.2                 MASS_7.3-16            
- [9] prob_0.9-2              lmtest_0.9-29          
-[11] zoo_1.7-6               Hmisc_3.9-0            
-[13] HH_2.1-32               leaps_2.9              
-[15] multcomp_1.2-8          lattice_0.20-0         
-[17] ggplot2_0.8.9           proto_0.3-9.2          
-[19] reshape_0.8.4           plyr_1.6               
-[21] e1071_1.5-26            class_7.3-3            
-[23] distrEx_2.3             evd_2.2-4              
-[25] distr_2.3.2             SweaveListingUtils_0.5 
-[27] sfsmisc_1.0-16          startupmsg_0.7.1       
-[29] diagram_1.5.2           shape_1.3.1            
-[31] combinat_0.0-8          coin_1.0-18            
-[33] modeltools_0.2-17       mvtnorm_0.9-9991       
-[35] survival_2.36-9         boot_1.3-3             
-[37] aplpack_1.2.3           actuar_1.1-2           
+ [1] TeachingDemos_2.7        scatterplot3d_0.3-33    
+ [3] RcmdrPlugin.IPSUR_0.1-7  Rcmdr_1.8-1             
+ [5] car_2.0-11               nnet_7.3-1              
+ [7] qcc_2.2                  MASS_7.3-16             
+ [9] prob_0.9-2               lmtest_0.9-29           
+[11] zoo_1.7-6                Hmisc_3.9-0             
+[13] HH_2.2-23                latticeExtra_0.6-19     
+[15] RColorBrewer_1.0-5       leaps_2.9               
+[17] multcomp_1.2-8           lattice_0.20-0          
+[19] ggplot2_0.8.9            proto_0.3-9.2           
+[21] reshape_0.8.4            plyr_1.6                
+[23] e1071_1.6                class_7.3-3             
+[25] distrEx_2.3.1            evd_2.2-4               
+[27] distr_2.3.3              SweaveListingUtils_0.5.2
+[29] sfsmisc_1.0-19           startupmsg_0.7.2        
+[31] diagram_1.6              shape_1.3.4             
+[33] combinat_0.0-8           coin_1.0-20             
+[35] modeltools_0.2-18        mvtnorm_0.9-9991        
+[37] survival_2.36-10         boot_1.3-3              
+[39] aplpack_1.2.4            actuar_1.1-2            
 
 loaded via a namespace (and not attached):
-[1] cluster_1.14.1 tools_2.14.0
+[1] cluster_1.14.1 tools_2.14.1
 </pre>
 
 
@@ -18802,7 +18797,7 @@ head(A)
 Note that there are as many preliminary columns of <code>A</code> as there are dimensions to the table. The rows of <code>A</code> contain every possible combination of levels from each of the dimensions. There is also a <code>Freq</code> column, which shows how many observations there were at that particular combination of levels. 
 </p>
 <p>
-The form of <code>A</code> is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of <code>A</code> exactly the number of times shown in the <code>Freq</code> column. The <code>reshape</code> package \cite{Wickhamreshape} has the function <code>untable</code> designed for that very purpose: 
+The form of <code>A</code> is often sufficient for our purposes, but more often we need to do more work: we would usually like to repeat each row of <code>A</code> exactly the number of times shown in the <code>Freq</code> column. The <code>reshape</code> package \cite{reshape} has the function <code>untable</code> designed for that very purpose: 
 </p>
 
 
@@ -19587,15 +19582,14 @@ if for every \(\epsilon &gt; 0\) there exists an integer \(N \geq 1\) such that 
 
 
 \begin{equation}
+\label{eq-gauss-series}
 \sum_{k=1}^{n}k=1+2+\cdots+n=\frac{n(n+1)}{2}
 \end{equation}
-<p>
-<a name="eq-gauss-series" id="eq-gauss-series"></a>
 \begin{equation}
+\label{eq-gauss-series-sq}
 \sum_{k=1}^{n}k^{2}=1^{2}+2^{2}+\cdots+n^{2}=\frac{n(n+1)(2n+3)}{6}
 \end{equation}
-<a name="eq-gauss-series-sq" id="eq-gauss-series-sq"></a>
-</p>
+
 
 </div>
 
@@ -19605,11 +19599,10 @@ if for every \(\epsilon &gt; 0\) there exists an integer \(N \geq 1\) such that 
 
 
 \begin{equation}
+\label{eq-binom-series}
 \sum_{k=0}^{n}{n \choose k}\, a^{n-k}b^{k}=(a+b)^{n}
 \end{equation}
-<p>
-<a name="eq-binom-series" id="eq-binom-series"></a>
-</p>
+
 </div>
 </div>
 
@@ -19664,11 +19657,10 @@ In both of the above the series on the left is convergent if the series on the r
 
 
 \begin{equation}
+\label{eq-geom-series}
 \sum_{k=0}^{\infty} x^{k} = \frac{1}{1 - x},\quad |x| < 1.
 \end{equation}
-<p>
-<a name="eq-geom-series" id="eq-geom-series"></a>
-</p>
+
 </div>
 
 </div>
@@ -19679,27 +19671,27 @@ In both of the above the series on the left is convergent if the series on the r
 
 
 \begin{equation}
+\label{eq-exp-series}
 \sum_{k=0}^{\infty}\frac{x^{k}}{k!} = \mathrm{e}^{x},\quad -\infty < x < \infty.
 \end{equation}
-<p>
-<a name="eq-exp-series" id="eq-exp-series"></a>
-</p>
+
 <p>
 Other Series
 \begin{equation}
+\label{eq-negbin-series}
 \sum_{k=0}^{\infty}{m+k-1 \choose m-1}x^{k}=\frac{1}{(1-x)^{m}},\quad |x|<1.
 \end{equation}
-<a name="eq-negbin-series" id="eq-negbin-series"></a>
+
 \begin{equation}
+\label{eq-log-series}
 -\sum_{k=1}^{\infty}\frac{x^{n}}{n}=\ln(1-x),\quad |x| < 1.
 \end{equation}
-<a name="eq-log-series" id="eq-log-series"></a>
 \begin{equation}
+\label{eq-binom-series-infinite}
 \sum_{k=0}^{\infty}{n \choose k}x^{k}=(1+x)^{n},\quad |x| < 1.
 \end{equation}
-<a name="eq-binom-series-infinite" id="eq-binom-series-infinite"></a>
-</p>
-</div>
+
+</p></div>
 </div>
 
 </div>
@@ -20145,7 +20137,7 @@ It is also possible to communicate with \(\mathsf{R}\) through OpenOffice.org, w
 <p>OpenOffice.org (OO.o) is an open source desktop productivity suite which mirrors Microsoft\(\circledR\) Office. It is especially nice because it works on all operating systems. OO.o can read most document formats, and in particular, it will read <code>.doc</code> files. The standard OO.o file extension for documents is <code>.odt</code>, which stands for ``open document text''.
 </p>
 <p>
-The <code>odfWeave</code>  package \cite{odfweave} provides a way to generate an <code>.odt</code> file with \(\mathsf{R}\) input and output code formatted correctly and inserted in the correct places, without any additional work. In this way, one does not need to worry about all of the trouble of typesetting \(\mathsf{R}\) output. Another advantage of <code>odfWeave</code> is that it allows you to generate the report dynamically; if the data underlying the report change or are updated, then a few clicks (or commands) will generate a brand new report.
+The <code>odfWeave</code>  package \cite{odfWeave} provides a way to generate an <code>.odt</code> file with \(\mathsf{R}\) input and output code formatted correctly and inserted in the correct places, without any additional work. In this way, one does not need to worry about all of the trouble of typesetting \(\mathsf{R}\) output. Another advantage of <code>odfWeave</code> is that it allows you to generate the report dynamically; if the data underlying the report change or are updated, then a few clicks (or commands) will generate a brand new report.
 </p>
 <p>
 One disadvantage is that the source <code>.odt</code>  file is not easy to read, because it is difficult to visually distinguish the noweb parts (where the \(\mathsf{R}\) code is) from the non-noweb parts. This can be fixed by manually changing the font of the noweb sections to, for instance, Courier font, size <code>10pt</code>. But it is extra work. It would be nice if a program would discriminate between the two different sections and automatically typeset the respective parts in their correct fonts. This is one of the advantages to \LyX{}.
@@ -20241,10 +20233,10 @@ Program Listings and the \(\mathsf{R}\) language
 
 
 <p>
-The prettyR package 
+The prettyR package \cite{prettyR}.
 </p>
 <p>
-The Hmisc package
+The Hmisc package \cite{Hmisc}.
 </p>
 
 
@@ -20332,7 +20324,7 @@ Now choose \(  2170129411388188.0 \)as your secret seed&hellip; write it down in
 
 
 <p>
-You will need three (3) things to generate this document for yourself, in addition to a current \(\mathsf{R}\) distribution which at the time of this writing is \texttt{  R version 2.14.0 (2011-10-31) } :
+You will need three (3) things to generate this document for yourself, in addition to a current \(\mathsf{R}\) distribution which at the time of this writing is \texttt{  R version 2.14.1 (2011-12-22) } :
 </p><ol>
 <li>a LaTeX distribution,
 </li>
@@ -20624,7 +20616,7 @@ Detective Pyork E. Pig
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-12-20 22:24:09 EST</p>
+<p class="date">Date: 2011-12-27 23:06:19 EST</p>
 <p class="author">Author: G. Jay Kerns</p>
 <p class="creator">Org version 7.8.02 with Emacs version 23</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>

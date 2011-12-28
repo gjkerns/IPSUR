@@ -913,7 +913,7 @@ par(mfrow = c(1,1)) # back to normal
 A pareto diagram is a lot like a bar graph except the bars are rearranged such that they decrease in height going from left to right. The rearrangement is handy because it can visually reveal structure (if any) in how fast the bars decrease -- this is much more difficult when the bars are jumbled. 
 
 #+begin_exampletoo
-*U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto-chart]]. The code follows.
+*U.S. State Facts and Features.* The =state.division=\index{Data sets!state.division@\texttt{state.division}} data record the division (New England, Middle Atlantic, South Atlantic, East South Central, West South Central, East North Central, West North Central, Mountain, and Pacific) of the fifty states. We can make a pareto diagram with either the =RcmdrPlugin.IPSUR=\index{R packages@\textsf{R} packages!RcmdrPlugin.IPSUR@\texttt{RcmdrPlugin.IPSUR}} package \cite{RcmdrPlugin.IPSUR} or with the =pareto.chart=\index{pareto.chart@\texttt{pareto.chart}} function from the =qcc=\index{R packages@\textsf{R} packages!qcc@\texttt{qcc}} package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto-chart]]. The code follows.
 
 #+name: Pareto-chart
 #+begin_src R :exports code :results silent
@@ -2049,7 +2049,7 @@ Note that this one general class of random experiments contains as a special cas
 
 **** How to do it with \(\mathsf{R}\) 
 
-The =prob= package accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
+The =prob= package \cite{prob} accomplishes sampling from urns with the =urnsamples=\index{urnsamples@\texttt{urnsamples}} function, which has arguments =x=, =size=, =replace=, and =ordered=. The argument =x= represents the urn from which sampling is to be done. The =size= argument tells how large the sample will be. The =ordered= and =replace= arguments are logical and specify how sampling will be performed. We will discuss each in turn.
 
 #+begin_exampletoo
 # <<exa-sample-urn-two-from-three>>
@@ -2239,7 +2239,7 @@ Notice that =setdiff= is not symmetric. Further, note that we can calculate the 
 
 #+begin_note
 
-When the =prob= package loads you will notice a message: =The following object(s) are masked from package:base: intersect, setdiff=. The reason for this message is that there already exist methods for the functions =intersect=, =setdiff=, =subset=, and =union= in the =base= package which ships with \(\mathsf{R}\). However, these methods were designed for when the arguments are vectors of the same mode. Since we are manipulating sample spaces which are data frames and lists, it was necessary to write methods to handle those cases as well. When the =prob= package is loaded, \(\mathsf{R}\) recognizes that there are multiple versions of the same function in the search path and acts to shield the new definitions from the existing ones. But there is no cause for alarm, thankfully, because the =prob= functions have been carefully defined to match the usual =base= package definition in the case that the arguments are vectors. 
+When the =prob= package \cite{prob} loads you will notice a message: =The following object(s) are masked from package:base: intersect, setdiff=. The reason for this message is that there already exist methods for the functions =intersect=, =setdiff=, =subset=, and =union= in the =base= package which ships with \(\mathsf{R}\). However, these methods were designed for when the arguments are vectors of the same mode. Since we are manipulating sample spaces which are data frames and lists, it was necessary to write methods to handle those cases as well. When the =prob= package is loaded, \(\mathsf{R}\) recognizes that there are multiple versions of the same function in the search path and acts to shield the new definitions from the existing ones. But there is no cause for alarm, thankfully, because the =prob= functions have been carefully defined to match the usual =base= package definition in the case that the arguments are vectors. 
 
 #+end_note
 
@@ -2302,7 +2302,7 @@ The ELM is only available when there are finitely many elements in the sample sp
 
 **** How to do it with \(\mathsf{R}\)
 
-In the =prob= package, a probability space is an object of outcomes =S= and a vector of probabilities (called =probs=) with entries that correspond to each outcome in =S=. When =S= is a data frame, we may simply add a column called =probs= to =S= and we will be finished; the probability space will simply be a data frame which we may call =S=. In the case that S is a list, we may combine the =outcomes= and =probs= into a larger list, =space=; it will have two components: =outcomes= and =probs=. The only requirements we need are for the entries of =probs= to be nonnegative and =sum(probs)= to be one.
+In the =prob= package \cite{prob}, a probability space is an object of outcomes =S= and a vector of probabilities (called =probs=) with entries that correspond to each outcome in =S=. When =S= is a data frame, we may simply add a column called =probs= to =S= and we will be finished; the probability space will simply be a data frame which we may call =S=. In the case that S is a list, we may combine the =outcomes= and =probs= into a larger list, =space=; it will have two components: =outcomes= and =probs=. The only requirements we need are for the entries of =probs= to be nonnegative and =sum(probs)= to be one.
 
 To accomplish this in \(\mathsf{R}\), we may use the =probspace= function. The general syntax is =probspace(x, probs)=, where =x= is a sample space of outcomes and =probs= is a vector (of the same length as the number of outcomes in =x=). The specific choice of =probs= depends on the context of the problem, and some examples follow to demonstrate some of the more common choices. 
 
@@ -2524,7 +2524,7 @@ It should be clear that there are only four possible royal flushes. Thus, if we 
 
 **** How to do it with \(\mathsf{R}\)
 
-Probabilities are calculated in the =prob= package with the =prob= function.
+Probabilities are calculated in the =prob= package \cite{prob} with the =prob= function.
 
 Consider the experiment of drawing a card from a standard deck of playing cards. Let's denote the probability space associated with the experiment as =S=, and let the subsets =A= and =B= be defined by the following: 
 
@@ -3302,7 +3302,7 @@ In this way, probabilities found by Bayes' rule are always on the cutting edge, 
 
 *** How to do it with \(\mathsf{R}\)
 
-There are not any special functions for Bayes' Rule in the =prob= package, but problems like the ones above are easy enough to do by hand.
+There are not any special functions for Bayes' Rule in the =prob= package \cite{prob}, but problems like the ones above are easy enough to do by hand.
 
 #+begin_exampletoo
 *Misfiling assistants* (continued from Example [[exa-misfiling-assistants][Misfiling Assistants]]). We store the prior probabilities and the likelihoods in vectors and go to town.
@@ -3806,7 +3806,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 #+end_html
 
 #+begin_exampletoo
-Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package are specified by capitalizing the name of the distribution.
+Another way to do Example [[exa-toss-coin-3-withR][Toss coin 3 with R]] is with the =distr= family of packages \cite{distr}. They use an object oriented approach to random variables, that is, a random variable is stored in an object =X=, and then questions about the random variable translate to functions on and involving =X=. Random variables with distributions from the =base= package\cite{base} are specified by capitalizing the name of the distribution.
 
 #+begin_src R :exports both :results output pp  
 X <- Binom(size = 3, prob = 1/2)
@@ -3822,7 +3822,7 @@ p(X)(2)   # cdf of X evaluated at x = 2
 
 #+end_exampletoo
 
-Random variables defined via the =distr= package may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][binom-plot-distr]] for an example.
+Random variables defined via the =distr= package \cite{distr} may be /plotted/, which will return graphs of the PMF, CDF, and quantile function (introduced in Section [[sub-Normal-Quantiles-QF][Normal Quantiles]]). See Figure [[fig-binom-plot-distr][binom-plot-distr]] for an example.
 
 #+name: binom-plot-distr
 #+begin_src R :exports code :results silent
@@ -4036,7 +4036,7 @@ M_{X}(t)=\sum_{r=0}^{\infty}\frac{\mathbb{E} X^{r}}{r!}t^{r},\quad \mbox{for all
 
 **** How to do it with \(\mathsf{R}\)
 
-The =distrEx= package provides an expectation operator =E= which can be used on random variables that have been defined in the ordinary =distr= sense:
+The =distrEx= package \cite{distrEx} provides an expectation operator =E= which can be used on random variables that have been defined in the ordinary =distr= sense:
 
 #+begin_src R :exports both :results output pp  
 X <- Binom(size = 3, prob = 0.45)
@@ -4752,7 +4752,7 @@ which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
 
 **** How to do it with \(\mathsf{R}\)
 
-There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the =distr=\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package way.
+There exist utilities to calculate probabilities and expectations for general continuous random variables, but it is better to find a built-in model, if possible. Sometimes it is not possible. We show how to do it the long way, and the =distr=\index{R packages@\textsf{R} packages!distr@\texttt{distr}} package \cite{distr} way.
 
 #+begin_exampletoo
 Let \(X\) have PDF \(f(x)=3x^{2}\), \(0<x<1\) and find \(\mathbb{P}(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a beta random variable for the sake of argument.)
@@ -4779,7 +4779,7 @@ Compare this to the answer we got in Example [[exa-cont-pdf-3x4][Cont-pdf3x4]]. 
 #+end_exampletoo
 
 #+begin_exampletoo
-Let us redo Example [[exa-cont-pdf3x2][Cont-pdf3x2]] with the =distr= package. The method is similar to that encountered in Section [[sub-disc-rv-how-r][Discrete RV How R]] in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. We define an absolutely continuous random variable:
+Let us redo Example [[exa-cont-pdf3x2][Cont-pdf3x2]] with the =distr= package \cite{distr}. The method is similar to that encountered in Section [[sub-disc-rv-how-r][Discrete RV How R]] in Chapter [[cha-Discrete-Distributions][Discrete Distributions]]. We define an absolutely continuous random variable:
 
 #+begin_src R :exports both :results output pp
 f <- function(x) 3*x^2
@@ -4787,7 +4787,7 @@ X <- AbscontDistribution(d = f, low1 = 0, up1 = 1)
 p(X)(0.71) - p(X)(0.14)
 #+end_src
 
-Compare this to the answer we found earlier. Now let us try expectation with the =distrEx= package:
+Compare this to the answer we found earlier. Now let us try expectation with the =distrEx= package \cite{distrEx}:
 #+begin_src R :exports both :results output pp 
 E(X); var(X); 3/80
 #+end_src
@@ -5132,7 +5132,7 @@ This is what we will later call a /chi-square distribution with 1 degree of free
 
 **** How to do it with \(\mathsf{R}\)
 
-The =distr= package has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example [[exa-lin-trans-norm][Linear Trans-Norm]] quite nicely:
+The =distr= package \cite{distr} has functionality to investigate transformations of univariate distributions. There are exact results for ordinary transformations of the standard distributions, and =distr= takes advantage of these in many cases. For instance, the =distr= package can handle the transformation in Example [[exa-lin-trans-norm][Linear Trans-Norm]] quite nicely:
 
 #+begin_src R :exports both :results output pp 
 X <- Norm(mean = 0, sd = 1)
@@ -5847,7 +5847,7 @@ which is 7/20. Therefore the covariance of \((X,Y)\) is
 
 **** How to do it with \(\mathsf{R}\)
 
-There are not any specific functions in the =prob= package designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example [[exa-max-sum-dice-covariance][Max-sum covariance]].
+There are not any specific functions in the =prob= package \cite{prob} designed for multivariate expectation. This is not a problem, though, because it is easy enough to do expectation the long way -- with column operations. We just need to keep the definition in mind. For instance, we may compute the covariance of \((U,V)\) from Example [[exa-max-sum-dice-covariance][Max-sum covariance]].
 
 #+begin_src R :exports both :results output pp 
 Eu <- sum(S$U*S$probs)
@@ -6484,7 +6484,7 @@ Here are some facts about the multinomial distribution.
 
 *** How to do it with \(\mathsf{R}\)
 
-There is support for the multinomial distribution in base \(\mathsf{R}\), namely in the =stats= package. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
+There is support for the multinomial distribution in base \(\mathsf{R}\), namely in the =stats= package \cite{stats}. The =dmultinom= function represents the PMF and the =rmultinom= function generates random variates.
 
 #+begin_src R :exports both :results output pp 
 tmp <- t(xsimplex(3, 6))
@@ -7754,7 +7754,7 @@ I am thinking one and two sample problems here.
 
 *** How to do it with \(\mathsf{R}\)
 
-I am thinking about =sigma.test= in the =TeachingDemos= package and =var.test= in base \(\mathsf{R}\) here.
+I am thinking about =sigma.test= in the =TeachingDemos= package \cite{TeachingDemos} and =var.test= in base \(\mathsf{R}\) \cite{base} here.
 
 ** Fitting Distributions
 :PROPERTIES:
@@ -7837,7 +7837,7 @@ I am thinking about =power.t.test=, =power.prop.test=, =power.anova.test=, and I
 :CUSTOM_ID: sec-Other-Topics
 :END:
 
-Mention =mle= from the =stats4= package.
+Mention =mle= from the =stats4= package \cite{stats4}.
 
 #+latex: \newpage{}
 
@@ -8130,7 +8130,7 @@ x <- rnorm(37, mean = 2, sd = 3)
 z.test(x, mu = 1, sd = 3, conf.level = 0.90)
 #+end_src
 
-The =RcmdrPlugin.IPSUR= package does not have a menu for =z.test= yet. 
+The =RcmdrPlugin.IPSUR= package \cite{RcmdrPlugin.IPSUR} does not have a menu for =z.test= yet. 
 
 #+begin_src R :exports both :results output pp 
 x <- rnorm(13, mean = 2, sd = 3)
@@ -8156,7 +8156,7 @@ Give some data and a hypothesis.
 #+end_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
-I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package.
+I am thinking about =sigma.test=\index{sigma.test@\texttt{sigma.test}} in the =TeachingDemos= package \cite{TeachingDemos}.
 
 #+begin_src R :exports both :results output pp 
 sigma.test(women$height, sigma = 8)
@@ -8350,7 +8350,7 @@ Here are some properties of power functions:
 
 *** How to do it with \(\mathsf{R}\)
 
-I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package. There is an even better plot in upcoming work from the =HH= package \cite{HH}.
+I am thinking about =replicate=\index{replicate@\texttt{replicate}} here, and also =power.examp=\index{power.examp@\texttt{power.examp}} from the =TeachingDemos= package \cite{TeachingDemos}. There is an even better plot in upcoming work from the =HH= package \cite{HH}.
 
 #+name: power-examp
 #+begin_src R :exports code :results silent
@@ -8504,7 +8504,7 @@ segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 
 #+begin_exampletoo
 # <<exa-Speed-and-Stopping>>
-*Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
+*Speed and stopping distance of cars.* We will use the data frame \texttt{cars}\index{Data sets!cars@\texttt{cars}} from the =datasets= package \cite{datasets}. It has two variables: =speed= and =dist=. We can take a look at some of the values in the data frame: 
 #+begin_src R :exports both :results output pp 
 head(cars)
 #+end_src
@@ -9162,7 +9162,7 @@ The Shapiro-Wilk test is based on the statistic
 W=\frac{\left(\sum_{i=1}^{n}a_{i}E_{(i)}\right)^{2}}{\sum_{j=1}^{n}E_{j}^{2}},
 \end{equation}
 where the \(E_{(i)}\) are the ordered residuals and the \(a_{i}\) are constants derived from the order statistics of a sample of size \(n\) from a normal distribution. See Section [[sub-Shapiro-Wilk-Normality-Test][Shapiro Wilk Normality Test]].
-We perform the Shapiro-Wilk test below, using the =shapiro.test= function from the =stats= package. The hypotheses are
+We perform the Shapiro-Wilk test below, using the =shapiro.test= function from the =stats= package \cite{stats}. The hypotheses are
 \[
 H_{0}:\mbox{ the residuals are normally distributed }
 \]
@@ -9289,7 +9289,7 @@ We may statistically test whether there is evidence of autocorrelation in the re
 \begin{equation}
 D=\frac{\sum_{i=2}^{n}(E_{i}-E_{i-1})^{2}}{\sum_{j=1}^{n}E_{j}^{2}}.
 \end{equation}
-Exact critical values are difficult to obtain, but \(\mathsf{R}\) will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
+Exact critical values are difficult to obtain, but \(\mathsf{R}\) will calculate the /p-value/ to great accuracy. It is performed with the =dwtest= function from the =lmtest= package \cite{lmtest}. We will conduct a two sided test that the correlation is not zero, which is not the default (the default is to test that the autocorrelation is positive).
 
 #+begin_src R :exports both :results output pp 
 dwtest(cars.lm, alternative = "two.sided")
@@ -9683,7 +9683,7 @@ Measurements were made of the girth, height, and volume of timber in 31 felled b
 2. =Height=: tree height in feet (\(x_{2}\)).
 3. =Volume=: volume of the tree in cubic feet. (\(y\))
 
-The data are in the =datasets= package and are already on the search path; they can be viewed with
+The data are in the =datasets= package \cite{datasets} and are already on the search path; they can be viewed with
 
 #+begin_src R :exports both :results output pp 
 head(trees)
@@ -9735,7 +9735,7 @@ In simple linear regression, we had one independent variable and our linear regr
 
 One way to do this is with the \(\mathsf{R}\) Commander in the =Rcmdr= package \cite{Rcmdr}. It has a 3D scatterplot option under the =Graphs= menu. It is especially great because the resulting graph is dynamic; it can be moved around with the mouse, zoomed, /etc/. But that particular display does not translate well to a printed book.
 
-Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package. The code follows, and the result is shown in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
+Another way to do it is with the =scatterplot3d= function in the =scatterplot3d= package \cite{scatterplot3d}. The code follows, and the result is shown in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
 #+name: 3D-scatterplot-trees
 #+begin_src R :exports code :results silent
@@ -10526,7 +10526,7 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 
 It may look intimidating but there is reason to the madness. First we =split= the =trees= data into two pieces, with groups determined by the =Tall= variable. Next we add the fitted values to each piece via =predict=. Then we set up a =plot= for the variables =Volume= versus =Girth=, but we do not plot anything yet (=type = n=) because we want to use different symbols for the two groups. Next we add =points= to the plot for the =Tall = yes= trees and use an open circle for a plot character (=pch = 1=), followed by =points= for the =Tall = no= trees with a triangle character (=pch = 2=). Finally, we add regression =lines= to the plot, one for each group.
 
-There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= \cite{car} package and the =xyplot= function in the =lattice= package. We elected to introduce the reader to the above approach since many advanced plots in \(\mathsf{R}\) are done in a similar, consecutive fashion.
+There are other -- shorter -- ways to plot regression lines by groups, namely the =scatterplot= function in the =car= package \cite{car}  and the =xyplot= function in the =lattice= package \cite{lattice}. We elected to introduce the reader to the above approach since many advanced plots in \(\mathsf{R}\) are done in a similar, consecutive fashion.
 
 ** Partial /F/ Statistic
 :PROPERTIES:
@@ -11116,7 +11116,7 @@ Here are some things about permutation tests to keep in mind.
 # All code released under GPL Version 3
 #+end_src
 
-This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package which is available from \(\mathsf{R}\)-Forge:
+This chapter is still under substantial revision. At any time you can preview any released drafts with the development version of the =IPSUR= package  which is available from \(\mathsf{R}\)-Forge:
 
 #+begin_src R :exports code :eval never
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
@@ -11552,7 +11552,7 @@ For more information please refer to the \(\mathsf{R}\) /Data Import/Export Manu
 
 *** Data in Packages
 
-There are many data sets stored in the =datasets= package of base \(\mathsf{R}\). To see a list of them all issue the command =data(package = "datasets")=. The output is omitted here because the list is so long. The names of the data sets are listed in the left column. Any data set in that list is already on the search path by default, which means that a user can use it immediately without any additional work. 
+There are many data sets stored in the =datasets= package \cite{datasets} of base \(\mathsf{R}\). To see a list of them all issue the command =data(package = "datasets")=. The output is omitted here because the list is so long. The names of the data sets are listed in the left column. Any data set in that list is already on the search path by default, which means that a user can use it immediately without any additional work. 
 
 There are many other data sets available in the thousands of contributed packages. To see the data sets available in those packages that are currently loaded into memory issue the single command =data()=. If you would like to see all of the data sets that are available in all packages that are installed on your computer (but not necessarily loaded), issue the command 
 
@@ -11566,7 +11566,7 @@ To load the data set =foo= in the contributed package =bar= issue the commands =
 Many sources of data are simple text files. The entries in the file are separated by delimeters such as TABS (tab-delimeted), commas (comma separated values, or =.csv=, for short) or even just white space (no special name). A lot of data on the Internet are stored with text files, and even if they are not, a person can copy-paste information from a web page to a text file, save it on the computer, and read it into \(\mathsf{R}\). 
 
 *** Other Software Files
-Often the data set of interest is stored in some other, proprietary, format by third-party software such as Minitab, SAS, or SPSS. The =foreign= package supports import/conversion from many of these formats. Please note, however, that data sets from other software sometimes have properties with no direct analogue in \(\mathsf{R}\). In those cases the conversion process may lose some information which will need to be reentered manually from within \(\mathsf{R}\). See the /Data Import/Export Manual/.
+Often the data set of interest is stored in some other, proprietary, format by third-party software such as Minitab, SAS, or SPSS. The =foreign= package \cite{foreign} supports import/conversion from many of these formats. Please note, however, that data sets from other software sometimes have properties with no direct analogue in \(\mathsf{R}\). In those cases the conversion process may lose some information which will need to be reentered manually from within \(\mathsf{R}\). See the /Data Import/Export Manual/.
 
 As an example, suppose the data are stored in the SPSS file =foo.sav= which the user has copied to the working directory; it can be imported with the commands
 
@@ -11640,7 +11640,7 @@ head(Tmp)
 :CUSTOM_ID: sec-Exporting-a-Data
 :END: 
 
-The basic function is =write.table=. The =MASS= package also has a =write.matrix= function.
+The basic function is =write.table=. The =MASS= package \cite{MASS} also has a =write.matrix= function.
 
 ** Reshaping Data
 :PROPERTIES:
