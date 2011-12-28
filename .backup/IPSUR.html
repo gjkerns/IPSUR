@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Introduction to Probability and Statistics Using R"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2011-12-28 13:47:25 EST"/>
+<meta name="generated" content="2011-12-28 16:31:02 EST"/>
 <meta name="author" content="G. Jay Kerns"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -383,6 +383,27 @@ org_html_manager.setup();  // activate after the parameters are set
 <h2 id="sec-1"><span class="section-number-2">1</span> An Introduction to Probability and Statistics</h2>
 <div class="outline-text-2" id="text-1">
 
+
+
+
+<div class="outline-2">
+  <h2>Getting Started</h2>
+  <div class="outline-text-2">
+    <p>
+      If you are new here, the first thing you should do is type <code>?</code> (or click the <code>HELP</code> link in the upper left).  There you will find many keyboard shortcuts to make your life easier.  These include:
+    </p>
+    <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+      <caption>Keyboard Shortcuts</caption>
+      <colgroup><col class="left" /><col class="left" />
+      </colgroup>
+      <tbody>
+        <tr><td class="left"><b>n</b> / <b>p</b></td><td class="left">goto the next / previous section</td></tr>
+        <tr><td class="left"><b>i</b> / <b>C</b></td><td class="left">table of contents / tags index</td></tr>
+        <tr><td class="left"><b>s</b> / <b>r</b></td><td class="left">search forward / backward</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <p>
 This chapter has proved to be the hardest to write, by far. The trouble is that there is so much to say &ndash; and so many people have already said it so much better than I could. When I get something I like I will release it here.
@@ -985,7 +1006,7 @@ UseMethod("intersect")
 <pre class="example">
 function (x) 
 UseMethod("rev")
-&lt;bytecode: 0xa175514&gt;
+&lt;bytecode: 0x9fa5514&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1021,7 +1042,7 @@ Now we learn that there are two different <code>rev(x)</code> functions, only on
 <pre class="example">
 function (x) 
 if (length(x)) x[length(x):1L] else x
-&lt;bytecode: 0xc41660c&gt;
+&lt;bytecode: 0xc24150c&gt;
 &lt;environment: namespace:base&gt;
 </pre>
 
@@ -1040,7 +1061,7 @@ methods(wilcox.test)
 <pre class="example">
 function (x, ...) 
 UseMethod("wilcox.test")
-&lt;bytecode: 0xa824ec0&gt;
+&lt;bytecode: 0xa654ec0&gt;
 &lt;environment: namespace:stats&gt;
 [1] wilcox.test.default* wilcox.test.formula*
 
@@ -14269,7 +14290,7 @@ The first part of the input to the <code>lm</code> function, <code>dist ~ speed<
 The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept and slope, respectively, are shown above. The regression line is thus given by \( \hat{\mu}(\mathtt{speed}) =  -17.58 +  3.93 \cdot \mathtt{speed} \).
 </p>
 <p>
-It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and hen follow with a call to the <code>abline</code> function. The inputs to <code>abline</code> are the coefficients of <code>cars.lm</code>; see Figure <a href="#fig-Scatter-cars-regline">Scatter-cars-regline</a>.
+It is good practice to visually inspect the data with the regression line added to the plot. To do this we first scatterplot the original data and then follow with a call to the <code>abline</code> function. The inputs to <code>abline</code> are the coefficients of <code>cars.lm</code>; see Figure <a href="#fig-Scatter-cars-regline">Scatter-cars-regline</a>.
 </p>
 
 
@@ -14280,8 +14301,7 @@ It is good practice to visually inspect the data with the regression line added 
 </div>
 
 
-<pre class="src src-R">ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + 
-       geom_smooth(method = lm, se = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
+<pre class="src src-R">ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + geom_smooth(method = lm, se = <span style="font-weight: bold; text-decoration: underline;">FALSE</span>)
 </pre>
 
 
@@ -15968,9 +15988,7 @@ Another way to do it is with the <code>scatterplot3d</code> function in the <cod
 
 
 
-<pre class="src src-R">s3d <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> with(trees, scatterplot3d(Girth, Height, Volume, 
-                                 pch = 16, highlight.3d = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>, 
-                                 angle = 60))
+<pre class="src src-R">s3d <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = <span style="font-weight: bold; text-decoration: underline;">TRUE</span>, angle = 60))
 fit <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> lm(Volume ~ Girth + Height, data = trees)
 </pre>
 
@@ -16843,7 +16861,7 @@ We will fit the quadratic model to the <code>trees</code> data and display the r
 
 
 
-<pre class="src src-R">treesquad.lm <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> lm(Volume ~ scale(Girth) + I(scale(Girth)^2),                    data = trees)
+<pre class="src src-R">treesquad.lm <span style="font-weight: bold; text-decoration: underline;">&lt;-</span> lm(Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
 summary(treesquad.lm)
 </pre>
 
@@ -18917,7 +18935,6 @@ If your document contains nontrivial examples of program code, we recommend rele
 </table>
 
 
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
 <colgroup><col class="left" /><col class="left" />
@@ -18929,6 +18946,7 @@ If your document contains nontrivial examples of program code, we recommend rele
 <tr><td class="left">Publisher:</td><td class="left">G. Jay Kerns</td></tr>
 </tbody>
 </table>
+
 
 
 </div>
@@ -21059,7 +21077,7 @@ Detective Pyork E. Pig
 </div>
 
 <div id="postamble">
-<p class="date">Date: 2011-12-28 13:47:25 EST</p>
+<p class="date">Date: 2011-12-28 16:31:02 EST</p>
 <p class="author">Author: G. Jay Kerns</p>
 <p class="creator">Org version 7.8.02 with Emacs version 23</p>
 <a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
