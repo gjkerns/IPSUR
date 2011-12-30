@@ -6,7 +6,7 @@
 #+OPTIONS:   H:5 toc:3 \n:nil @:t ::t |:t ^:{} -:t f:nil *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:nil
 #+INFOJS_OPT: view:info toc:nil sdepth:2 ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js
-#+LINK_UP: IPSUR.html   
+#+LINK_UP: IPSUR.html
 #+LINK_HOME: http://ipsur.org/index.html
 #+STYLE: <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 #+EXPORT_SELECT_TAGS:
@@ -713,9 +713,9 @@ The rightmost graph in Figure [[fig-histograms-bins][histograms-bins]] shows wha
 #+latex: \end{exampletoo}
 #+html: </div>
 
-**** Stemplots (more to be said in Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]])
+**** Stem-and-leaf displays (more to be said in Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]])
 
-Stemplots have two basic parts: /stems/ and /leaves/. The final digit of the data values is taken to be a /leaf/, and the leading digit(s) is (are) taken to be /stems/. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
+Stem-and-leaf displays (also known as stemplots) have two basic parts: /stems/ and /leaves/. The final digit of the data values is taken to be a /leaf/, and the leading digit(s) is (are) taken to be /stems/. We draw a vertical line, and to the left of the line we list the stems. To the right of the line, we list the leaves beside their corresponding stem. There will typically be several leaves for each stem, in which case the leaves accumulate to the right. It is sometimes necessary to round the data values, especially for larger data sets.
 
 #+latex: \begin{exampletoo}
 #+html: <div class="exampletoo">
@@ -730,7 +730,7 @@ stem.leaf(UKDriverDeaths, depth = FALSE)
 
 The display shows a more or less balanced mound-shaped distribution, with one or maybe two humps, a big one and a smaller one just to its right. Note that the data have been rounded to the tens place so that each datum gets only one leaf to the right of the dividing line.
 
-Notice that the \texttt{depth}s\index{depths} have been suppressed. To learn more about this option and many others, see Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]]. Unlike a histogram, the original data values may be recovered from the stemplot display -- modulo the rounding -- that is, starting from the top and working down we can read off the data values 1050, 1070, 1110, 1130, and so forth. 
+Notice that the \texttt{depth}s\index{depths} have been suppressed. To learn more about this option and many others, see Section [[sec-Exploratory-Data-Analysis][Exploratory Data Analysis]]. Unlike a histogram, the original data values may be recovered from the stem-and-leaf display -- modulo the rounding -- that is, starting from the top and working down we can read off the data values 1050, 1070, 1110, 1130, and so forth. 
 
 **** Index plots
 
@@ -1133,7 +1133,7 @@ When we speak of the /shape/ of a data set, we are usually referring to the shap
 A distribution is said to be /right-skewed/ (or /positively skewed/) if the right tail seems to be stretched from the center. A /left-skewed/ (or /negatively skewed/) distribution is stretched to the left side. A symmetric distribution has a graph that is balanced about its center, in the sense that half of the graph may be reflected about a central line of symmetry to match the other
 half.
 
-We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][stripcharts]] and the =precip= data in Figure [[fig-histograms-bins][histograms-bins]] appear right-skewed. The =UKDriverDeaths= data in Example [[exa-ukdriverdeaths-first][UK Driver Deaths]] is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stemplot).
+We have already encountered skewed distributions: both the discoveries data in Figure [[fig-stripcharts][stripcharts]] and the =precip= data in Figure [[fig-histograms-bins][histograms-bins]] appear right-skewed. The =UKDriverDeaths= data in Example [[exa-ukdriverdeaths-first][UK Driver Deaths]] is relatively symmetric (but note the one extreme value 2654 identified at the bottom of the stem-and-leaf display).
 
 **** Kurtosis
 
@@ -1376,7 +1376,7 @@ so that the =UKDriverDeaths= data appear to be mesokurtic, or at least not subst
 
 This field was founded (mostly) by John Tukey (1915-2000). Its tools are useful when not much is known regarding the underlying causes associated with the data set, and are often used for checking assumptions. For example, suppose we perform an experiment and collect some data... now what? We look at the data using exploratory visual tools.
 
-*** More About Stemplots
+*** More About Stem-and-leaf Displays
 
 There are many bells and whistles associated with stemplots, and the =stem.leaf= function can do many of them.
 
@@ -1391,7 +1391,7 @@ There are many bells and whistles associated with stemplots, and the =stem.leaf=
 The basic command is =stem(x)= or a more sophisticated version written by Peter Wolf called =stem.leaf(x)= in the \(\mathsf{R}\) Commander. We will describe =stem.leaf= since that is the one used by \(\mathsf{R}\) Commander.
 
 
-WARNING: Sometimes when making a stem plot the result will not be what you expected. There are several reasons for this: 
+WARNING: Sometimes when making a stem-and-leaf display the result will not be what you expected. There are several reasons for this: 
 - Stemplots by default will trim extreme observations (defined in Section [[sub-Outliers][Outliers]]) from the display. This in some cases will result in stemplots that are not as wide as expected.
 - The leafs digit is chosen automatically by =stem.leaf= according to an algorithm that the computer believes will represent the data well. Depending on the choice of the digit, =stem.leaf= may drop digits from the data or round the values in unexpected ways.
 
@@ -1402,7 +1402,7 @@ Let us take a look at the =rivers= data set
 stem.leaf(rivers)
 #+end_src
 
-The stemplot shows a right-skewed shape to the =rivers= data distribution. Notice that the last digit of each of the data values were dropped from the display. Notice also that there were eight extreme observations identified by the computer, and their exact values are listed at the bottom of the stemplot. Look at the scale on the left of the stemplot and try to imagine how ridiculous the graph would have looked had we tried to include enough stems to include these other eight observations; the stemplot would have stretched over several pages. Notice finally that we can use the depths to approximate the sample median for these data. The median lies in the row identified by =(18)=, which means that the median is the average of the ninth and tenth observation on that row. Those two values correspond to =43= and =43=, so a good guess for the median would be 430. (For the record, the sample median is \(\widetilde{x}=425\). Recall that stemplots round the data to the nearest stem-leaf pair.) 
+The stem-and-leaf display shows a right-skewed shape to the =rivers= data distribution. Notice that the last digit of each of the data values were dropped from the display. Notice also that there were eight extreme observations identified by the computer, and their exact values are listed at the bottom of the stemplot. Look at the scale on the left of the stemplot and try to imagine how ridiculous the graph would have looked had we tried to include enough stems to include these other eight observations; the stemplot would have stretched over several pages. Notice finally that we can use the depths to approximate the sample median for these data. The median lies in the row identified by =(18)=, which means that the median is the average of the ninth and tenth observation on that row. Those two values correspond to =43= and =43=, so a good guess for the median would be 430. (For the record, the sample median is \(\widetilde{x}=425\). Recall that stemplots round the data to the nearest stem-leaf pair.) 
 
 Next let us see what the =precip= data look like.
 
@@ -7741,7 +7741,7 @@ For a fixed sample size \(n\), if \(1-\alpha\) increases, then the confidence in
 # <<exa-plant-one-samp-z-int>>
 *Results from an Experiment on Plant Growth.* The =PlantGrowth= data frame gives the results of an experiment to measure plant yield (as measured by the weight of the plant). We would like to a 95% confidence interval for the mean weight of the plants. Suppose that we know from prior research that the true population standard deviation of the plant weights is \(0.7\) g.
 
-The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stemplot of the data:
+The parameter of interest is \(\mu\), which represents the true mean weight of the population of all plants of the particular species in the study. We will first take a look at a stem-and-leaf display of the data:
 
 #+latex: \end{exampletoo}
 #+html: </div>
