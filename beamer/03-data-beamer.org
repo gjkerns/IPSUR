@@ -1,0 +1,1363 @@
+#    IPSUR: Introduction to Probability and Statistics Using R
+#    Copyright (C) 2013 G. Jay Kerns
+#
+#    This file is part of IPSUR.
+#
+#    IPSUR is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    IPSUR is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
+
+
+#+STARTUP: beamer
+#+TITLE: Chapter 3: Data Description
+#+AUTHOR: G. Jay Kerns, Youngstown State University
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+OPTIONS: H:2
+#+BEAMER_THEME: default
+#+BEAMER_COLOR_THEME: beaver
+#+BEAMER_HEADER: \institute{Spring 2013}
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+#+PROPERTY: session *R*
+
+
+<<echo=FALSE>>=
+options(width = 45, useFancyQuotes = FALSE)
+par(cex = 0.5)
+@
+
+* Types of Data
+
+datum: any piece of information
+
+data set: collection of data related to each other somehow 
+
+- Categories of Data
+  - quantitative: associated with a measurement of some quantity 
+    on an observational unit,
+  - qualitative: associated with some quality or property of the 
+    observational unit,
+  - logical: represents true/false, important later
+  - missing: should be there but aren't
+  - other types: everything else
+
+
+
+* Quantitative Data
+
+Quantitative data: any that measure the quantity of something
+
+- invariably assume numerical values
+
+- can be further subdivided: 
+
+  - Discrete data take values in a finite or countably infinite 
+    set of numbers
+
+  - Continuous data take values in an interval of numbers. AKA 
+    scale, interval, measurement
+
+- distinction between discrete and continuous data not always 
+  clear-cut
+
+
+
+* 
+
+Example
+Annual Precipitation in US Cities. (precip) avg amount rainfall 
+(in.) for 70 cities in US and Puerto Rico.
+
+<<>>=
+
+str(precip)
+
+precip[1:4]
+
+@
+
+
+Second block, here
+quantitative, continuous
+
+
+
+* 
+
+Example
+Lengths of Major North American Rivers. =rivers= lengths (mi) of 
+rivers in North America. See ?rivers.
+
+<<>>=
+
+str(rivers)
+
+rivers[1:4]
+
+@
+
+
+
+* 
+
+Yearly Numbers of Important Discoveries. =discoveries= numbers of
+"great" inventions/discoveries in each year from 1860 to 1959 (from
+1975 World Almanac)
+
+<<>>=
+
+str(discoveries)
+
+discoveries[1:4]
+
+@
+
+* Displaying Quantitative Data
+
+- Strip charts (or Dot plots): 
+  - for either discrete or continuous data 
+  - usually best when data not too large. 
+
+Second block here
+
+- the stripchart function
+  - three methods:
+    - =overplot= - only distinct values
+    - =jitter= - add noise in y direction
+    - =stack= - repeats on top of one another
+
+
+
+
+* 
+
+<<eval = FALSE>>=
+
+stripchart(precip, xlab="rainfall")
+
+stripchart(rivers, method="jitter", xlab="length")
+
+stripchart(discoveries, method="stack", xlab="number")
+
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, fig = TRUE, width = 4.5, height = 2.75>>=
+par(cex = 0.5)
+stripchart(precip, xlab="rainfall")
+@
+
+[Figure 1:
+Stripchart of precip
+]
+
+
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, fig = TRUE, width = 4.5, height = 2.75>>=
+par(cex = 0.5)
+stripchart(rivers, method="jitter", xlab="length")
+@
+
+[Figure 2:
+Stripchart of rivers
+]
+
+
+]
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, fig = TRUE, width = 4.5, height = 2.75>>=
+par(cex = 0.5)
+stripchart(discoveries, method="stack", xlab="number")
+@
+
+[Figure 3:
+Stripchart of discoveries
+]
+
+
+]
+
+
+
+* Histograms
+
+- Histograms
+  - typically for continuous data
+  - decide on bins/classes, make bars proportional to membership
+  - often misidentified (bar graphs)
+
+<<eval = FALSE>>=
+
+hist(precip, main = "")
+
+hist(precip, freq = FALSE, main = "")
+
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, fig=true, height = 3, width = 3.5>>=
+par(mfrow = c(1,2), cex = 0.4)
+hist(precip, main = "")
+hist(precip, freq = FALSE, main = "")
+par(mfrow = c(1,1))
+@
+
+[Figure 4:
+Histograms of precip
+]
+
+
+]
+
+
+* Remarks about histograms
+
+- choose different bins, get a different histogram
+- many algorithms for choosing bins automatically
+- should investigate several bin choices
+  - look for stability
+  - try to capture underlying story of data
+
+
+* Stemplots
+
+- Stemplots have two basic parts: stems and leaves
+  - initial digit(s) taken for stem
+  - trailing digits stand for leaves
+  - leaves accumulate to the right
+
+Example 
+
+Road Casualties in Great Britain 1969-84. A time series of
+total car drivers killed or seriously injured in Great Britain monthly
+from Jan 1969 to Dec 1984.
+
+
+
+* Stemplot of UK Driver Deaths
+
+<<eval = FALSE>>=
+library(aplpack)
+stem.leaf(UKDriverDeaths, depth = FALSE)
+@
+
+
+
+<<echo = FALSE>>=
+library(aplpack)
+stem.leaf(UKDriverDeaths, depth = FALSE)
+@
+
+
+
+
+* Code for stemplots
+
+
+<<>>=
+
+UKDriverDeaths[1:4]
+
+stem.leaf(UKDriverDeaths, depth = FALSE)
+
+@
+
+
+
+* Index Plots
+
+Good for plotting data ordered in time
+
+- a 2-D plot, with index (observation number) on x-axis, value on
+  y-axis
+
+- two methods
+  - spikes: draws vertical line up to value (type = "h")
+  - points: simple dot at the observed height (type = "p")
+
+Second block here 
+Example 
+Level of Lake Huron 1875-1972. annual measurements of the level (in
+feet) of Lake Huron from 1875--1972.
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, fig=true, height = 2.75, width = 3.5>>=
+par(mfrow = c(2,1), cex = 0.4)
+plot(LakeHuron, type = "h")
+plot(LakeHuron, type = "p")
+par(mfrow = c(1,1))
+@
+
+[Figure 5:
+Index plots of LakeHuron
+]
+
+
+]
+
+
+
+* Qualitative Data, Categorical Data, Factors
+
+- Qualitative data: any data that are not numerical, or do not 
+  represent numerical quantities
+  - some data look quantitative. Example: shoe size
+  - some data identify the observation, not of much interest
+- Factors subdivide data into categories 
+  - possible values of a factor: levels 
+  - factors may be nominal or ordinal 
+    - nominal: levels are names, only (gender, political party, 
+      ethnicity)
+    - ordinal: levels are ordered (SES, class rank, shoe size)
+
+
+
+* 
+
+Example:
+U.S. State Facts and Features. postal abbreviations
+
+<<>>=
+str(state.abb)
+@
+
+
+Example
+U.S. State Facts and Features. The region in which a state 
+resides
+
+<<>>=
+state.region[1:4]
+@
+
+
+
+* Qualitative Data
+
+- Factors have special status in R
+  - represented internally by numbers, but not always printed that way
+  - constructed with =factor= command
+- Displaying Qualitative Data
+  - first try: make a (contingency) table with =table= function
+  - =prop.table= makes a relative frequency table
+
+Example
+U.S. State Facts and Features. State division
+
+
+
+* Displaying Qualitative Data
+
+
+<<keep.source = TRUE>>=
+Tbl <- table(state.division)
+Tbl               # frequencies
+@
+
+
+
+
+* Displaying Qualitative Data
+
+
+
+<<keep.source = TRUE>>=
+Tbl/sum(Tbl)      # relative frequencies
+@
+
+
+* Displaying Qualitative Data
+
+<<keep.source = TRUE>>=
+prop.table(Tbl)   # same thing
+@
+
+
+
+* Bar Graphs
+- discrete analogue of the histogram
+- make bar for each level of a factor
+- may show frequencies or relative frequencies
+- impression given depends on order of bars (default: alphabetical)
+
+Example
+U.S. State Facts and Features. State region
+
+<<eval = FALSE>>=
+barplot(table(state.region))
+barplot(prop.table(table(state.region)))
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, fig=true, height = 2.75, width = 4.5>>=
+par(mfrow = c(1,2), cex = 0.5) # 2 plots: 1 row, 2 columns
+barplot(table(state.region))
+barplot(prop.table(table(state.region)))
+par(mfrow = c(1,1))
+@
+
+[Figure 6:
+(Relative) frequency bar graphs of state.region
+]
+]
+
+
+* Pareto Diagram
+
+- a bar graph with ordered bars
+- bar with highest (relative) frequency goes on left
+- bars drop from left to right
+- can sometimes help discern hidden structure
+
+Example
+U.S. State Facts and Features. State division
+
+<<eval = FALSE>>=
+library(qcc)
+pareto.chart(table(state.division), ylab="Frequency")
+@
+
+
+* 
+
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height =2.75, width = 
+4.5>>=
+par(cex.axis=0.5, mex=0.5,  cex.main=0.5)
+library(qcc)
+pareto.chart(table(state.division), ylab="Frequency", col="gray")
+@
+
+[Figure 7:
+Pareto diagram of state.division
+]
+]
+
+
+
+* Dot Charts
+
+- a bar graph on its side
+- has dots instead of bars
+- can show complicated multivariate relationships
+
+Example
+U.S. State Facts and Features. State region
+
+<<eval = FALSE>>=
+x <- table(state.region)
+dotchart(as.vector(x), labels = names(x))
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+x <- table(state.region)
+dotchart(as.vector(x), labels = names(x))
+@
+
+[Figure 8:
+Dot chart of state.region
+]
+]
+
+
+* Other Data Types
+
+- Logical
+  <<>>=
+  x <- 5:9
+  y <- (x < 7.3)
+  y
+  !y
+  @
+
+- Missing
+
+
+
+* Other Data Types
+
+- Missing: represented by =NA=
+  <<>>=
+  x <- c(3, 7, NA, 4, 7)
+  y <- c(5, NA, 1, 2, 2)
+  x + y
+  @
+
+- Some functions have =na.rm= argument
+  <<>>=
+  is.na(x)
+  z <- x[!is.na(x)]
+  sum(z)
+  @
+
+
+* Features of Data Distributions
+
+Four Basic Features
+1. Center: middle or general tendency
+2. Spread: small means tightly clustered, large means highly variable
+3. Shape: symmetry versus skewness, kurtosis
+4. Unusual Features: anything else that pops out at you about the data
+
+
+
+* More about shape
+
+Symmetry versus Skewness
+- symmetric
+- right (positive) and left (negative) skewness
+Kurtosis
+- leptokurtic - steep peak, heavy tails
+- platykurtic - flatter, thin tails
+- mesokurtic - right in the middle
+
+
+
+* Unusual features: clusters and gaps
+
+<<eval = FALSE>>=
+stem.leaf(faithful$eruptions)
+@
+
+
+
+<<echo = FALSE>>=
+library(aplpack)
+stem.leaf(faithful$eruptions)
+@
+
+
+
+
+* Unusual features: extreme observations
+
+- Extreme observation: falls far from the rest of the data
+  - possible sources
+    - could be typo
+    - could be in wrong study
+    - could be indicative of something deeper
+- Quantitatively measure features: Descriptive Statistics
+  - qualitative data: frequencies or relative frequencies
+  - quantitative data: measures of CUSS
+
+
+
+* Measures of center: sample mean x (read "x-bar"):
+
+
+\[
+\overline{x}=\frac{x_{1}+x_{2}+\cdots+x_{n}}{n}=\frac{1}{n}\sum_{i=1}^{n}x_{i}.
+\]
+
+- Good: natural, easy to compute, nice properties
+- Bad: sensitive to extreme values
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+stack.loss    # built-in data
+mean(stack.loss)
+@
+
+
+
+* Measures of center: sample median \tilde{x}:
+
+How to find it
+
+1. sort the data into an increasing sequence of $n$ numbers 
+2. $\tilde{x}$ lies in position $(n+1)/2$
+- Good: resistant to extreme values, easy to describe
+- Bad: not as mathematically tractable, need to sort the data to 
+  calculate
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+median(stack.loss)
+@
+
+
+
+* Measures of center: trimmed mean \(\overline{x}_{t}\):
+
+How to find it
+1. "trim" a proportion of data from both ends of the ordered list
+2. find the sample mean of what's left
+   - Good: also resistant to extreme values, has good properties, too
+   - Bad: still need to sort data to get rid of outliers
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+mean(stack.loss, trim = 0.05)
+@
+
+* Order Statistics
+
+
+Given data \(x_{1}, x_{2}, ...,x_{n}\), sort in an increasing 
+sequence
+\[
+x_{(1)}\leq x_{(2)}\leq x_{(3)}\leq\cdots\leq x_{(n)}
+\]
+
+- \(x_{(k)}\) is the \(k^{\mathrm{th}}\) order statistic
+- approx \(100(k/n)\%\) of the observations fall below \(x_{(k)}\)
+
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+sort(stack.loss)
+@
+
+
+* Sample quantile, order /p/, \((0 \leq p \leq 1)\), denoted \(\tilde{q}_p\)
+
+
+We describe the default (type = 7)
+1. get the order statistics \(x_{(1)}, x_{(2)}, ...,x_{(n)}\).
+2. calculate \((n - 1)p + 1\) , write in form \(k.d\), with \(k\) an
+   integer and \(d\) a decimal
+3. \( \tilde{q}_{p}=x_{(k)}+d(x_{(k+1)}-x_{(k)}) \).
+   - approximately \(100p\%\) of the data fall below the value \(\tilde{q}_{p}\)
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+quantile(stack.loss, probs = c(0, 0.25, 0.37))
+@
+
+
+* Measures of spread: sample variance, std. deviation
+
+The sample variance \(s^{2}\)
+\[
+s^{2}=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i}-\xbar)^{2}
+\]
+
+The sample standard deviation is $s = \sqrt{s^{2}}$. 
+- Good: tractable, nice mathematical/statistical properties
+- Bad: sensitive to extreme values
+
+How to do it with R
+
+<<keep.source = TRUE>>=
+var(stack.loss); sd(stack.loss)
+@
+
+
+
+* Interpretation of /s/
+
+- Chebychev's Rule The proportion of observations within k standard
+  deviations of the mean is at least $1-1/k^{2}$, i.e., at least 75%,
+  89%, and 94% of the data are within 2, 3, and 4 standard deviations
+  of the mean, respectively.
+- Empirical Rule: If data follow a bell-shaped curve, then
+  approximately 68%, 95%, and 99.7% of the data are within 1, 2, and 3
+  standard deviations of the mean, respectively.
+
+
+
+
+* Measures of spread: interquartile range
+The /Interquartile range/ IQR
+
+\[
+IQR=\tilde{q}_{0.75}-\tilde{q}_{0.25}
+\]
+
+- Good: resistant to outliers
+- Bad: only considers middle 50% of the data
+
+How to do it with R
+
+<<>>=
+IQR(stack.loss)
+@
+
+
+* Measures of spread: median absolute deviation
+
+
+The /median absolute deviation/ MAD:
+
+1. get the order statistics, find the median $\tilde{x}$.
+
+2. calculate the absolute deviations:
+   \[
+   \left|x_{1}-\tilde{x}\right|,\ \left|x_{2}-\tilde{x}\right|,\ \ldots,\left|x_{n}-\tilde{x}\right|
+   \]
+3. the $MAD \propto \mbox{median}\left\{ \left|x_{1}-\tilde{x}\right|,\ \left|x_{2}-\tilde{x}\right|,\ \ldots,\left|x_{n}-\tilde{x}\right|\right\}$ 
+
+
+- Good: excellently robust
+- Bad: not as popular, not as intuitive
+
+How to do it with R
+
+<<>>=
+mad(stack.loss)
+@
+
+
+
+* Measures of spread: the range
+
+The /range/ $R$:
+
+\[
+R=x_{(n)}-x_{(1)}
+\]
+
+- Good (not so much): easy to describe and calculate 
+- Bad: ignores everything but the most extreme observations
+
+How to do it with R
+
+<<>>=
+range(stack.loss)
+diff(range(stack.loss))
+@
+
+
+
+* Measures of shape: sample skewness
+
+The sample skewness $g_{1}$:
+\[
+g_{1}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\xbar)^{3}}{s^{3}}.
+\]
+
+Things to notice:
+- invariant w.r.t. location and scale
+- $-\infty<g_{1}<\infty$
+- sign of $g_{1}$  indicates direction of skewness ($\pm$)
+
+How to do it with R
+
+<<>>=
+library(e1071)
+skewness(stack.loss)
+@
+
+
+
+* Measures of shape: sample skewness
+
+How big is BIG? 
+\[
+4.34\ \mbox{versus }0.434??
+\]
+
+Rule of thumb:
+If $|g_{1}| > 2\sqrt{6/n}$, then the data distribution is
+substantially skewed (in the direction of the sign of $g_{1}$).
+
+<<>>=
+skewness(discoveries)
+2*sqrt(6/length(discoveries))
+@
+
+
+
+* Measures of shape: sample excess kurtosis
+
+The sample excess kurtosis $g_{2}$:
+\[
+g_{2}=\frac{1}{n}\frac{\sum_{i=1}^{n}(x_{i}-\xbar)^{4}}{s^{4}}-3.
+\]
+
+Things to note:
+- invariant w.r.t. location and scale
+- $-2 \leq g_{2} < \infty$
+- $g_{2} > 0$ indicates leptokurtosis, $g_{2} < 0$ indicates platykurtosis
+
+How to do it with R
+
+<<>>=
+library(e1071)
+kurtosis(stack.loss)
+@
+
+
+
+
+* Measures of shape: sample excess kurtosis
+
+Again, how big is BIG? 
+
+
+Rule of thumb:
+If $|g_{2}| > 4\sqrt{6/n}$, then the data distribution is
+substantially kurtic.
+
+<<>>=
+kurtosis(UKDriverDeaths)
+4*sqrt(6/length(UKDriverDeaths))
+@
+
+
+* Exploratory data analysis: more on stemplots
+- Trim Outliers: observations that fall far from the bulk of the other
+  data often obscure structure to the data and are best left out. Use
+  the =trim.outliers= argument to =stem.leaf=.
+- Split Stems: we sometimes fix "skyscraper" stemplots by increasing
+  the number of lines available for a given stem. The end result is a
+  more spread out stemplot which often looks better. Use the =m=
+  argument to =stem.leaf=
+- Depths: give insight into balance of the data around the
+  median. Frequencies are accumulated from the outside inward,
+  including outliers. Use =depths = TRUE=.
+
+<<eval = FALSE>>=
+stem.leaf(faithful$eruptions)
+@
+
+* Exploratory data analysis: more on stemplots
+
+<<echo = FALSE>>=
+stem.leaf(faithful$eruptions)
+@
+
+
+* Hinges and the 5NS
+
+- Find the order statistics $x_{(1)}, x_{(2)}, ..., x_{(n)}$. 
+- The lower hinge $h_{L}$ is in position $L=\left\lfloor
+  (n+3)/2\right\rfloor /2$
+- The upper hinge $h_{U}$ is in position $n + 1 - L$.
+
+Given the hinges, the five number summary (5NS) is 
+\[
+5NS=(x_{(1)},\ h_{L},\ \tilde{x},\ h_{U},\ x_{(n)}).
+\]
+
+How to do it with R
+
+<<>>=
+fivenum(stack.loss)
+@
+
+* Boxplots
+
+Boxplot: a visual display of the 5NS. Can visually assess multiple
+features of the data set:
+
+- Center: estimated by the sample median, \tilde{x}
+- Spread: judged by the width of the box, h_{U}-h_{L}
+- Shape: indicated by the relative lengths of the whiskers, position
+  of the median inside box.
+- Extreme observations: identified by open circles
+
+How to do it with R
+
+<<eval = FALSE>>=
+boxplot(rivers, horizontal = TRUE)
+@
+
+
+* Outliers
+- potential: falls beyond 1.5 times the width of the box
+  \[
+  \mbox{less than }h_{L}-1.5(h_{U}-h_{L})\mbox{ or greater than }h_{U}+1.5(h_{U}-h_{L})
+  \]
+- suspected: falls beyond 3 times the width of the box
+  \[
+  \mbox{less than }h_{L}-3(h_{U}-h_{L})\mbox{ or greater than }h_{U}+3(h_{U}-h_{L})
+  \]
+
+
+How to do it with R
+
+<<>>=
+boxplot.stats(rivers)$out
+@
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+boxplot(rivers, horizontal = TRUE)
+@
+
+[Figure 9:
+Boxplot of rivers
+]
+]
+
+
+
+* Standardizing variables
+
+- useful to see how observation relates to other observations
+- AKA measure of relative standing, z-score
+  \[
+  z_{i}=\frac{x_{i}-\xbar}{s},\quad i=1,2,\ldots,n
+  \]
+- unitless
+- positive (negative) z-score falls above (below) mean
+
+How to do it with R
+
+<<>>=
+scale(precip)[1:3]
+@
+
+* Multivariate data: data frames
+
+- usually have two (or more) measurements associated with each subject
+- display in rectangular array
+  - each row corresponds to a subject
+  - columns contain the measurements for each variable
+
+How to do it with R
+
+<<keep.source=TRUE>>=
+x <- 5:6;  y <- letters[3:4]; z <- c(0.1, 3.8)
+data.frame(v1 = x, v2 = y, v3 = z)
+@
+
+
+
+* More on data frames
+
+- must have same number of rows in each column
+- all measurements in single column must be same type
+- indexing is two-dimensional; the columns have names
+
+How to do it with R
+
+<<keep.source=TRUE>>=
+A <- data.frame(v1 = x, v2 = y, v3 = z)
+A[2, 1];  A[1,];  A[, 3]
+@
+
+
+
+* Bivariate data: qualitative versus qualitative
+
+Two categorical variables
+- usually make a two-way contingency table 
+- in the R Commander with Statistics $\triangleright$ Contingency
+  Tables $\triangleright$ Two-way Tables
+
+How to do it with R
+
+<<keep.source=TRUE>>=
+library(RcmdrPlugin.IPSUR)
+data(RcmdrTestDrive)
+xtabs(~ gender + smoking, data = RcmdrTestDrive)
+@
+
+
+
+* Bivariate data: more on tables
+
+- Descriptive statistics: for now, marginal totals/percentages
+- more to talk about later: odds ratio, relative risk
+
+How to do it with R
+
+<<keep.source=TRUE>>=
+A <- xtabs(Freq ~ Survived + Class, data = Titanic)
+addmargins(A)
+@
+
+
+
+
+* Bivariate data: more on tables
+
+<<keep.source=TRUE>>=
+library(abind)
+colPercents(A)
+rowPercents(A)
+@
+
+
+
+
+
+* Plotting two categorical variables
+
+- Stacked bar charts
+- Side-by-side bar charts
+- Spine plots
+
+How to do it with R
+
+<<keep.source=TRUE>>=
+barplot(A, legend.text = TRUE)
+barplot(A, legend.text = TRUE, beside = TRUE)
+spineplot(A)
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+barplot(A, legend.text = TRUE)
+@
+
+[Figure 10:
+Stacked bar chart of Titanic data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+barplot(A, legend.text = TRUE, beside = TRUE)
+@
+
+[Figure 11:
+Side-by-side bar chart of Titanic data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+spineplot(A)
+@
+
+[Figure 12:
+Spine plot of Titanic data
+]
+]
+
+
+
+* Bivariate data: quantitative versus quantitative
+
+- Can do univariate graphs of both variables separately
+- Make scatterplots for both variables simultaneously
+
+How to do it with R
+
+<<eval = FALSE>>=
+plot(conc ~ rate, data = Puromycin)
+library(lattice)
+xyplot(conc ~ rate, data = Puromycin)
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.5)
+plot(conc ~ rate, data = Puromycin)
+@
+
+[Figure 13:
+Scatterplot of Puromycin data (using plain old plot)
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+library(lattice)
+print(xyplot(conc ~ rate, data = Puromycin, scales = list(cex 
+=0.5)))
+@
+
+[Figure 14:
+Scatterplot of Puromycin data (using xyplot)
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(xyplot(accel ~ dist, data = attenu))
+@
+
+[Figure 15:
+Scatterplot of attenu data
+]
+]
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(xyplot(eruptions ~ waiting, data = faithful))
+@
+
+[Figure 16:
+Scatterplot of faithful data
+]
+]
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(xyplot(Petal.Width ~ Petal.Length, data = iris))
+@
+
+[Figure 17:
+Scatterplot of iris data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(xyplot(pressure ~ temperature, data = pressure))
+@
+
+[Figure 18:
+Scatterplot of pressure data
+]
+]
+
+
+* Measuring Linear association
+
+
+The sample Pearson product-moment correlation coefficient:
+\[
+r=\frac{\sum_{i=1}^{n}(x_{i}-\xbar)(y_{i}-\ybar)}{\sqrt{\sum_{i=1}^{n}(x_{i}-\xbar)}\sqrt{\sum_{i=1}^{n}(y_{i}-\ybar)}}
+\]
+
+- independent of scale
+- $-1\leq r\leq1$, equality when points lie on straight line 
+
+
+How to do it with R
+
+<<>>=
+with(iris, cor(Petal.Width, Petal.Length))
+with(attenu, cor(dist, accel))
+@
+
+
+
+* More about linear correlation
+
+- measures strength and direction of linear association
+- Rules of thumb:
+  - $0 < \vert r \vert <0.3$, weak linear association
+  - $0.3 < \vert r \vert < 0.7$, moderate linear association
+  - $0.7 < \vert r \vert < 1$, strong linear association
+- Just because $r \approx 0$ doesn't mean there isn't any association
+
+* One quantitative, one categorical
+
+- Break down quantitative var by groups of subjects
+  - compare centers and spreads: variation within versus between
+    groups
+  - compare clusters and gaps
+  - compare outliers and unusual features
+  - compare shapes.
+- graphical and numerical
+
+* Comparison of groups
+
+How to do it with R
+
+<<eval = FALSE>>=
+stripchart(weight ~ feed, method="stack", data=chickwts)
+library(lattice)
+histogram(~age | education, data = infert)
+bwplot(~count | spray, data = InsectSprays)
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex=0.4)
+stripchart(weight ~ feed, method="stack", data=chickwts)
+@
+
+[Figure 19:
+Stripcharts of chickwts data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(histogram(~age | education, data = infert))
+@
+
+[Figure 20:
+Histograms of infert data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(bwplot(~count | spray, data = InsectSprays))
+@
+
+[Figure 21:
+Boxplots of InsectSprays data
+]
+]
+
+
+* Multiple variables
+
+
+With more variables, complexity increases
+
+- multi-way contingency tables (bunch of categorical vars)
+  - mosaic plots, dotcharts
+- sample variance-covariance matrices
+  - scatterplot matrices
+- comparing groups: coplots
+
+How to do it with R
+
+<<eval = FALSE>>=
+splom(~cbind(Murder, Assault, Rape), data = USArrests)
+?dotchart; ?xyplot;  ?mosaicplot
+@
+
+
+
+* 
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+print(splom(~cbind(Murder, Assault, Rape), data = USArrests))
+@
+
+[Figure 22:
+Scatterplot matrix of USArrests data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height = 2.75, width = 
+4.5>>=
+par(cex = 0.5)
+mosaicplot(Titanic)
+@
+
+[Figure 23:
+Mosaic plot of Titanic data
+]
+]
+
+
+* 
+
+
+[float Figure:
+<<echo = FALSE, results = hide, fig=true, height =3.5, width = 
+4.5>>=
+par(cex = 0.15)
+coplot(lat ~ long | depth, data = quakes)
+@
+
+[Figure 24:
+Shingle plot of quakes data
+]
+]
