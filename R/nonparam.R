@@ -18,7 +18,6 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
-#
 
 install.packages("IPSUR", repos="http://R-Forge.R-project.org")
 library("IPSUR")

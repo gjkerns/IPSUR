@@ -18,7 +18,6 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
-#
 
 k <- 1
 n <- sample(10:30, size=10, replace = TRUE)
