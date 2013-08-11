@@ -21,7 +21,7 @@
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline
 #+OPTIONS: author:t c:nil creator:comment d:nil date:t e:t email:nil
 #+OPTIONS: f:nil inline:t num:t p:nil pri:nil stat:t tags:nil
-#+OPTIONS: tasks:t tex:t timestamp:t toc:3 todo:t |:t
+#+OPTIONS: tasks:t tex:t timestamp:t toc:1 todo:t |:t
 #+SELECT_TAGS: 
 #+PROPERTY: session *R*
 #+PROPERTY: exports results
@@ -1749,7 +1749,7 @@ par(mfrow = c(1,1)) # back to normal
 #+CAPTION[Bar graphs of the =state.region= data]: \small The left graph is a frequency barplot made with =table= and the right is a relative frequency barplot made with =prop.table=.
 #+ATTR_LaTeX: :width 0.5\textwidth :placement [ht!]
 #+RESULTS: bar-gr-stateregion
-[[file:ps/datadesc-fig-bar-gr-stateregion.ps]]
+[[file:ps/datadesc-bar-gr-stateregion.ps]]
 
 # +END_exampletoo
 
@@ -1788,7 +1788,7 @@ pareto.chart(table(state.division), ylab="Frequency")
 #+CAPTION: \small Pareto chart of the =state.division= data.
 #+ATTR_LaTeX: :width 0.5\textwidth :placement [ht!]
 #+RESULTS: Pareto-chart
-[[file:ps/datadesc-fig-bar-gr-stateregion.ps]]
+[[file:ps/datadesc-bar-gr-stateregion.ps]]
 
 # +END_exampletoo
 
@@ -4487,10 +4487,7 @@ complicated problems.
 # <<exa-three-child-family>>
 Imagine a three child family, each child being either Boy (\(B\)) or
 Girl (\(G\)). An example sequence of siblings would be \(BGB\). The
-sample space may be written \[ S=\left\{
-\begin{array}{cccc} BBB, & BGB, & GBB, & GGB,\\ BBG, & BGG, & GBG, &
-GGG \end{array} \right\}.  
-\] 
+sample space may be written \[ S=\left\{ BBB,\ BGB,\ GBB,\ GGB,\ BBG,\ BGG,\ GBG,\ GGG,\ \right\}.\] 
 
 Note that for many reasons (for instance, it turns out that girls are
 slightly more likely to be born than boys), this sample space is /not/
@@ -6525,14 +6522,7 @@ The default name for the variable is =disunif.sim1=.
 The binomial distribution is based on a /Bernoulli trial/, which is a
 random experiment in which there are only two possible outcomes:
 success (\(S\)) and failure (\(F\)). We conduct the Bernoulli trial
-and let
-\begin{equation}
-X=
-\begin{cases}
-1 & \mbox{if the outcome is $S$},\\
-0 & \mbox{if the outcome is $F$}.
-\end{cases}
-\end{equation}
+and let @@latex:\begin{equation} X = \begin{cases} 1 & \mbox{if the outcome is $S$},\\ 0 & \mbox{if the outcome is $F$}. \end{cases} \end{equation}@@
 If the probability of success is \(p\) then the probability of failure
 must be \(1-p=q\) and the PMF of \(X\) is
 \begin{equation}
@@ -6687,17 +6677,7 @@ equal \(\mathbb{P}(X=0\mbox{ or
 }X=1)=\mathbb{P}(X=0)+\mathbb{P}(X=1)\). Continuing in this fashion,
 we may figure out the values of \(F_{X}(x)\) for all possible inputs
 \(-\infty<x<\infty\), and we may summarize our observations with the
-following piecewise defined function:
-\[
-F_{X}(x)=\mathbb{P}(X\leq x)=
-\begin{cases}
-0, & x<0,\\
-\frac{1}{8}, & 0\leq x<1,\\
-\frac{1}{8}+\frac{3}{8}=\frac{4}{8}, & 1\leq x<2,\\
-\frac{4}{8}+\frac{3}{8}=\frac{7}{8}, & 2\leq x<3,\\
-1, & x\geq3.
-\end{cases}
-\]
+following piecewise defined function: @@latex:\[ F_{X}(x)=\mathbb{P}(X\leq x) = \begin{cases} 0, & x < 0,\\ \frac{1}{8}, & 0\leq x < 1,\\ \frac{1}{8} + \frac{3}{8} = \frac{4}{8}, & 1\leq x < 2,\\ \frac{4}{8} + \frac{3}{8} = \frac{7}{8}, & 2\leq x < 3,\\ 1, & x \geq 3. \end{cases} \]@@
 In particular, the CDF of \(X\) is defined for the entire real line,
 \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph
 of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is
@@ -8189,16 +8169,7 @@ The associated \(\mathsf{R}\) function is
 \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write
 \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the
 particularly simple form of this PDF we can also write down explicitly
-a formula for the CDF \(F_{X}\):
-\begin{equation}
-\label{eq-unif-cdf}
-F_{X}(t)=
-\begin{cases}
-0, & t < 0,\\
-\frac{t-a}{b-a}, & a\leq t < b,\\
-1, & t \geq b.
-\end{cases}
-\end{equation}
+a formula for the CDF \(F_{X}\): @@latex:\begin{equation} \label{eq-unif-cdf} F_{X}(t) = \begin{cases} 0, & t < 0,\\ \frac{t-a}{b-a}, & a\leq t < b,\\ 1, & t \geq b. \end{cases} \end{equation}@@
 
 The continuous uniform distribution is the continuous analogue of the
 discrete uniform distribution; it is used to model experiments whose
@@ -10340,13 +10311,7 @@ X= & -3U+2V,\\
 Y= & \ \frac{5}{2}U-\frac{3}{2}V,
 \end{align*}
 in which case the Jacobian of the inverse transformation is
-\[
-\begin{vmatrix}
--3 & 2\\
-\frac{5}{2} & -\frac{3}{2}
-\end{vmatrix}
-= -3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.
-\]
+@@latex:\[ \begin{vmatrix} -3 & 2\\ \frac{5}{2} & -\frac{3}{2} \end{vmatrix} = -3\left(-\frac{3}{2}\right)-2\left(\frac{5}{2}\right) = -\frac{1}{2}.\]@@
 As \((x,y)\) traverses \(\mathbb{R}^{2}\), so too does \((u,v)\). Since the joint PDF of \((X,Y)\) is
 \[
 f_{X,Y}(x,y)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left(x^{2}+y^{2}\right)\right\} ,\quad (x,y)\in\mathbb{R}^{2},
@@ -11645,19 +11610,15 @@ catch-and-release, but unlike before, we will not tag the fish. We
 will simply note the species of any caught fish before returning it to
 the pond.
 
-Suppose we catch \(n\) fish. Let
-\[
-X_{i}=
-\begin{cases}
-1, & \mbox{if the \(i\mathrm{th}\) fish is a bass,}\\
-0, & \mbox{if the \(i\mathrm{th}\) fish is a bluegill.}
-\end{cases}
-\] Since we are returning the fish to the pond once caught, we may
-think of this as a sampling scheme with replacement where the
-proportion of bass \(p\) does not change. Given that we allow the fish
-sufficient time to "mix" once returned, it is not completely
-unreasonable to model our fishing experiment as a sequence of
-Bernoulli trials, so that the \(X_{i}\)'s would be IID
+Suppose we catch \(n\) fish. Let @@latex:\[ X_{i} = \begin{cases} 1, &
+\mbox{if the \(i\mathrm{th}\) fish is a bass,}\\ 0, & \mbox{if the
+\(i\mathrm{th}\) fish is a bluegill.} \end{cases} \]@@ Since we are
+returning the fish to the pond once caught, we may think of this as a
+sampling scheme with replacement where the proportion of bass \(p\)
+does not change. Given that we allow the fish sufficient time to "mix"
+once returned, it is not completely unreasonable to model our fishing
+experiment as a sequence of Bernoulli trials, so that the \(X_{i}\)'s
+would be IID
 \(\mathsf{binom(\mathtt{size}}=1,\,\mathtt{prob}=p)\). Under those
 assumptions we would have
 \begin{eqnarray*}
@@ -11894,27 +11855,14 @@ optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 
 #+BEGIN_SRC R :exports none :results silent
 A <- optimize(L, interval = c(0,1), x = x, maximum = TRUE)
+amax <- A$maximum; aobj <- A$objective
 #+END_SRC
 
 Note that the =optimize= function by default minimizes the function
 =L=, so we have to set =maximum = TRUE= to get an MLE. The returned
-value of =$maximum= gives an approximate value of the MLE to be \(
-SRC_R{round(A$maximum, 3)} 0.406
- 0.406
- 0.406
- 0.406
- 0.406
- 0.406
- 0.406
- \) and =objective= gives =L= evaluated at
-the MLE which is approximately \( SRC_R{round(A$objective, 3)} 0
- 0
- 0
- 0
- 0
- 0
- 0
- \).
+value of =$maximum= gives an approximate value of the MLE to be
+SRC_R{round(amax, 3)} 0.406 and =objective= gives =L= evaluated at the
+MLE which is approximately SRC_R{round(aobj, 3)} 0.
 
 We previously remarked that it is usually more numerically convenient
 to maximize the log-likelihood (or minimize the negative
@@ -14061,23 +14009,7 @@ coef(cars.lm)
 :  -17.579095    3.932409
 
 The parameter estimates \( b_{0} \) and \( b_{1} \) for the intercept
-and slope, respectively, are shown above. The regression line is thus
-given by \( \hat{\mu}(\mathtt{speed}) = SRC_R{tmpcoef[1]} -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- +
-SRC_R{tmpcoef[2]} 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- \cdot \mathtt{speed} \).
+and slope, respectively, are shown above. 
 
 It is good practice to visually inspect the data with the regression
 line added to the plot. To do this we first scatterplot the original
@@ -14164,24 +14096,9 @@ estimate:
 # <<exa-regline-cars-pe-8mph>>
 We may use the regression line to obtain a point estimate of the mean
 stopping distance for a car traveling 8 mph: \( \hat{\mu}(15) =
-b_{0} + (8) (b_{1}) \approx SRC_R{tmpcoef[1]} -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- -17.58
- + (8) (
-SRC_R{tmpcoef[2]} 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- 3.93
- ) \approx 13.88 \). We would also use 13.88 as a
-point estimate for the stopping distance of a future car traveling 8
-mph.
+b_{0} + (8) (b_{1})\) which is approximately 13.88. We would also use
+13.88 as a point estimate for the stopping distance of a future car
+traveling 8 mph.
 # +END_exampletoo
 
 
@@ -14301,41 +14218,18 @@ tmps <- round(summary(cars.lm)$sigma, 2)
 #+END_SRC
 
 In the last section, we calculated the fitted value for \(x=8\) and
-found it to be approximately \( \hat{\mu}(8)\approx SRC_R{tmpred} 13.88
- 13.88
- 13.88
- 13.88
- 13.88
- 13.88
- 13.88
-
-\). Now, it turns out that there was only one recorded observation at
+found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R{tmpred} 13.88. Now, it turns out that there was only one recorded observation at
 \(x = 8\), and we have seen this value in the output of =head(cars)=
 in Example [[exa-Speed-and-Stopping]]; it was \(\mathtt{dist} = 16\) ft
 for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the residual
-should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - SRC_R{tmpred} 13.88
- 13.88
- 13.88
- 13.88
- 13.88
- 13.88
- 13.88
-
-\). Now take a look at the last entry of =residuals(cars.lm)=,
+should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - \) SRC_R{tmpred} 13.88. Now take a look at the last entry of =residuals(cars.lm)=,
 above. It is not a coincidence.
 
 The estimate \(S\) for \(\sigma\) is called the =Residual standard
 error= and for the =cars= data is shown a few lines up on the
 =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in
 Section [[sub-slr-interval-est-params][Interval Estimation]]). We may read it from there to be \(
-S\approx SRC_R{tmps} 15.38
- 15.38
- 15.38
- 15.38
- 15.38
- 15.38
- 15.38
- \), or we can access it directly from the
+S\approx\) SRC_R{tmps} 15.38, or we can access it directly from the
 =summary= object.
 
 #+BEGIN_SRC R :exports both :results output pp
@@ -14453,24 +14347,11 @@ In the =Coefficients= section we find the parameter estimates and
 their respective standard errors in the second and third columns; the
 other columns are discussed in Section [[sec-Model-Utility-SLR][SLR Model Utility]]. If we
 wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use
-\( b_{1} = SRC_R{A[2,1]} 3.932
- 3.932
- 3.932
- 3.932
- 3.932
- 3.932
- 3.932
- \) and \( S_{b_{1}} = SRC_R{A[2,2]} 0.416
- 0.416
- 0.416
- 0.416
- 0.416
- 0.416
- 0.416
- \)
-together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \) critical
-value to calculate \( b_{1} \pm \mathsf{t}_{0.025}(\mathtt{df} = 23)
-\cdot S_{b_{1}} \).  Or, we could use the =confint= function.
+\( b_{1} = \) SRC_R{A[2,1]} 3.932 and \( S_{b_{1}} = \) SRC_R{A[2,2]}
+0.416 together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \)
+critical value to calculate \( b_{1} \pm
+\mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could
+use the =confint= function.
 
 #+BEGIN_SRC R :exports both :results output pp 
 confint(cars.lm)
@@ -14481,22 +14362,8 @@ confint(cars.lm)
 : (Intercept) -31.167850 -3.990340
 : speed         3.096964  4.767853
 
-With 95% confidence, the random interval \( [ SRC_R{B[2,1]} 3.097
- 3.097
- 3.097
- 3.097
- 3.097
- 3.097
- 3.097
-,
-SRC_R{B[2,2]} 4.768
- 4.768
- 4.768
- 4.768
- 4.768
- 4.768
- 4.768
- ] \) covers the parameter \(\beta_{1}\).
+With 95% confidence, the random interval SRC_R{B[2,1]} 3.097 to
+SRC_R{B[2,2]} 4.768 covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
 :PROPERTIES:
@@ -14592,32 +14459,9 @@ predict(cars.lm, newdata = new, interval = "confidence")
 : 2  6.015358 -2.973341 15.00406
 : 3 65.001489 58.597384 71.40559
 
-#+BEGIN_SRC R :exports none
+#+BEGIN_SRC R :exports none :results output pp 
 carsCI <- round(predict(cars.lm, newdata = new, interval = "confidence"), 2)
 #+END_SRC
-
-#+RESULTS:
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
-2.08	-7.64	11.81
-6.02	-2.97	15
-65	58.6	71.41
 
 Prediction intervals are given by
 
@@ -14647,90 +14491,20 @@ can be changed with the =level= argument).
 Using the =cars= data,
 1. Report a point estimate of and a 95% confidence interval for the
    mean stopping distance for a car travelling 5 mph.  The fitted
-   value for \(x=5\) is \( SRC_R{carsCI[1, 1]} 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- \), so a point estimate
-   would be \( SRC_R{carsCI[1, 1]} 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- 2.08
- \) ft. The 95% CI is given by \( [
-   SRC_R{carsCI[1, 2]} -7.64
- -7.64
- -7.64
- -7.64
- -7.64
- -7.64
- -7.64
-, SRC_R{carsCI[1, 3]} 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- ] \), so with 95%
-   confidence the mean stopping distance lies somewhere between \(
-   SRC_R{carsCI[1, 2]} -7.64
- -7.64
- -7.64
- -7.64
- -7.64
- -7.64
- -7.64
- \) ft and \( SRC_R{carsCI[1, 3]} 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- 11.81
- \) ft.
+   value for \(x = 5\) is SRC_R{carsCI[1, 1]} 2.08, so a point
+   estimate would be \( SRC_R{carsCI[1, 1]} 2.08 ft. The 95% CI is
+   given by SRC_R{carsCI[1, 2]} -7.64 to SRC_R{carsCI[1, 3]} 11.81, so
+   with 95% confidence the mean stopping distance lies somewhere
+   between SRC_R{carsCI[1, 2]} -7.64 ft and SRC_R{carsCI[1, 3]} 11.81
+   ft.
 2. Report a point prediction for and a 95% prediction interval for the
    stopping distance of a hypothetical car travelling 21 mph.  The
-   fitted value for \(x = 21\) is \( SRC_R{carsPI[3, 1]} 65
- 65
- 65
- 65
- 65
- 65
- 65
- \), so a
-   point prediction for the stopping distance is \( SRC_R{carsPI[3,
-   1]} \) ft. The 95% PI is \( [ SRC_R{carsPI[3, 2]} 33.42
- 33.42
- 33.42
- 33.42
- 33.42
- 33.42
- 33.42
-, SRC_R{carsPI[3,
-   3]} ] \), so with 95% confidence we may assert that the
-   hypothetical stopping distance for a car travelling 21 mph would
-   lie somewhere between \( SRC_R{carsPI[3, 2]} 33.42
- 33.42
- 33.42
- 33.42
- 33.42
- 33.42
- 33.42
- \) ft and \(
-   SRC_R{carsPI[3, 3]} 96.58
- 96.58
- 96.58
- 96.58
- 96.58
- 96.58
- 96.58
- \) ft.
+   fitted value for \(x = 21\) is SRC_R{carsPI[3, 1]} 65, so a point
+   prediction for the stopping distance is SRC_R{carsPI[3, 1]} ft. The
+   95% PI is SRC_R{carsPI[3, 2]} 33.42 to SRC_R{carsPI[3,3]}, so with
+   95% confidence we may assert that the hypothetical stopping
+   distance for a car travelling 21 mph would lie somewhere between
+   SRC_R{carsPI[3, 2]} 33.42 ft and SRC_R{carsPI[3, 3]} 96.58 ft.
 # +END_exampletoo
 
 *** Graphing the Confidence and Prediction Bands
@@ -15040,14 +14814,7 @@ anova(cars.lm)
 tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 #+END_SRC
 
-Here we see that the \(F\) statistic is \( SRC_R{tmpf} 89.57
- 89.57
- 89.57
- 89.57
- 89.57
- 89.57
- 89.57
- \) with a
+Here we see that the \(F\) statistic is SRC_R{tmpf} 89.57 with a
 \(p\)-value very close to zero. The conclusion: there is very strong
 evidence that \(H_{0}:\beta_{1} = 0 \) is false, that is, there is
 strong evidence that \( \beta_{1} \neq 0 \). Moreover, we conclude
@@ -15333,12 +15100,12 @@ of violation.
      where \(\lambda\) is a constant. (The method proposed by Box and
      Cox will determine a suitable value of \(\lambda\) automatically
      by maximum likelihood). The class contains the transformations
-     \begin{alignat*}{1} \lambda=2,\quad & Y^{\ast}=Y^{2}\\
-     \lambda=0.5,\quad & Y^{\ast}=\sqrt{Y}\\
-     \lambda=0,\quad & Y^{\ast}=\ln\: Y\\
-     \lambda=-1,\quad & Y^{\ast}=1/Y \end{alignat*} Alternatively, we
-     can use the method of /weighted least squares/. This is studied
-     in more detail in later classes.
+     @@latex:\begin{alignat*}{1} \lambda=2,\quad &
+     Y^{\ast}=Y^{2}\\ \lambda=0.5,\quad &
+     Y^{\ast}=\sqrt{Y}\\ \lambda=0,\quad & Y^{\ast}=\ln\:
+     Y\\ \lambda=-1,\quad & Y^{\ast}= 1/Y \end{alignat*}@@
+     Alternatively, we can use the method of /weighted least
+     squares/. This is studied in more detail in later classes.
 - Error distribution is not normal :: The same transformations for
      stabilizing the variance are equally appropriate for smoothing
      the residuals to a more Gaussian form. In fact, often we will
@@ -16221,41 +15988,13 @@ treesFIT <- round(predict(trees.lm, newdata = new), 1)
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth=
    9.1 in and =Height= 69 ft.  The fitted value for \(x_{1}=9.1\) and
-   \(x_{2}=69\) is \( SRC_R{treesFIT[ 1 ]} 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- \), so a point estimate
-   would be \( SRC_R{treesFIT[ 1 ]} 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- 8.3
- \) cubic feet.
+   \(x_{2} = 69\) is SRC_R{treesFIT[ 1 ]} 8.3, so a point estimate
+   would be SRC_R{treesFIT[ 1 ]} 8.3 cubic feet.
 2. Report a point prediction for and a 95% prediction interval for the
    =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87
-   ft.  The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is \(
-   SRC_R{treesFIT[ 3 ]} 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- \), so a point prediction for the =Volume= is
-   \( SRC_R{treesFIT[ 3 ]} 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- 30.4
- \) cubic feet.
+   ft.  The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is
+   SRC_R{treesFIT[ 3 ]} 30.4, so a point prediction for the =Volume=
+   is SRC_R{treesFIT[ 3 ]} 30.4 cubic feet.
 # +END_exampletoo
 
 *** Mean Square Error and Standard Error
@@ -16316,8 +16055,8 @@ treesumry$sigma
 #+RESULTS:
 : [1] 3.881832
 
-For the =trees= data we find \(s\approx SRC_R{round(treesumry$sigma,
-3)} \).
+For the =trees= data we find \(s \approx\) SRC_R{round(treesumry$sigma,
+3)}.
 
 *** Interval Estimates of the Parameters
 :PROPERTIES:
@@ -16398,22 +16137,8 @@ treesPAR <- round(confint(trees.lm), 1)
 
 For example, using the calculations above we say that for the
 regression model =Volume ~ Girth + Height= we are 95% confident that
-the parameter \(\beta_{1}\) lies somewhere in the interval \( [
-SRC_R{treesPAR[2, 1]} 4.2
- 4.2
- 4.2
- 4.2
- 4.2
- 4.2
- 4.2
-, SRC_R{treesPAR[2, 2]} 5.2
- 5.2
- 5.2
- 5.2
- 5.2
- 5.2
- 5.2
- ] \).
+the parameter \(\beta_{1}\) lies somewhere in the interval
+SRC_R{treesPAR[2, 1]} 4.2 to SRC_R{treesPAR[2, 2]} 5.2.
 
 *** Confidence and Prediction Intervals
 
@@ -16427,7 +16152,7 @@ In Equation [[eq-mlr-single-yhat-matrix]] we wrote \(
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and
 in Equation [[eq-distn-b-mlr]] we saw that
 \begin{equation}
-\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
+\mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean} = \upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
 The following is therefore immediate from Theorem
 [[thm-mvnorm-dist-matrix-prod]]:
@@ -16506,67 +16231,18 @@ the default confidence level is 95% (which can be changed with the
 Using the =trees= data, 
 
 1. Report a 95% confidence interval for the mean =Volume= of a tree of
-   =Girth= 9.1 in and =Height= 69 ft. The 95% CI is given by \( [
-   SRC_R{treesCI[1, 2]} 5.8
- 5.8
- 5.8
- 5.8
- 5.8
- 5.8
- 5.8
-, SRC_R{treesCI[1, 3]} 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- ] \), so with 95%
-   confidence the mean =Volume= lies somewhere between \(
-   SRC_R{treesCI[1, 2]} 5.8
- 5.8
- 5.8
- 5.8
- 5.8
- 5.8
- 5.8
- \) cubic feet and \( SRC_R{treesCI[1, 3]} 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- 10.8
- \)
-   cubic feet.
+   =Girth= 9.1 in and =Height= 69 ft. The 95% CI is given by
+   SRC_R{treesCI[1, 2]} 5.8 to SRC_R{treesCI[1, 3]} 10.8, so with 95%
+   confidence the mean =Volume= lies somewhere between
+   SRC_R{treesCI[1, 2]} 5.8 cubic feet and \( SRC_R{treesCI[1, 3]}
+   10.8 cubic feet.
 2. Report a 95% prediction interval for the =Volume= of a hypothetical
    tree of =Girth= 12.5 in and =Height= 87 ft. The 95% prediction
-   interval is given by \( [ SRC_R{treesCI[3, 2]} 26.9
- 26.9
- 26.9
- 26.9
- 26.9
- 26.9
- 26.9
-, SRC_R{treesCI[3,
-   3]} ] \), so with 95% confidence we may assert that the
+   interval is given by SRC_R{treesCI[3, 2]} 26.9 to
+   SRC_R{treesCI[3,3]}, so with 95% confidence we may assert that the
    hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height= 87
-   ft would lie somewhere between \( SRC_R{treesCI[3, 2]} 26.9
- 26.9
- 26.9
- 26.9
- 26.9
- 26.9
- 26.9
- \) cubic
-   feet and \( SRC_R{treesCI[3, 3]} 33.8
- 33.8
- 33.8
- 33.8
- 33.8
- 33.8
- 33.8
- \) feet.
+   ft would lie somewhere between SRC_R{treesCI[3, 2]} 26.9 cubic feet
+   and SRC_R{treesCI[3, 3]} 33.8 feet.
 
 # +END_exampletoo
 
@@ -16601,16 +16277,37 @@ SSTO=SSE+SSR.
 R^{2}=1-\frac{SSE}{SSTO}.
 \end{equation}
 
-We interpret \(R^{2}\) as the proportion of total variation that is explained by the multiple regression model. In MLR we must be careful, however, because the value of \(R^{2}\) can be artificially inflated by the addition of explanatory variables to the model, regardless of whether or not the added variables are useful with respect to prediction of the response variable. In fact, it can be proved that the addition of a single explanatory variable to a regression model will increase the value of \(R^{2}\), /no matter how worthless/ the explanatory variable is. We could model the height of the ocean tides, then add a variable for the length of cheetah tongues on the Serengeti plain, and our \(R^{2}\) would inevitably increase. 
+We interpret \(R^{2}\) as the proportion of total variation that is
+explained by the multiple regression model. In MLR we must be careful,
+however, because the value of \(R^{2}\) can be artificially inflated
+by the addition of explanatory variables to the model, regardless of
+whether or not the added variables are useful with respect to
+prediction of the response variable. In fact, it can be proved that
+the addition of a single explanatory variable to a regression model
+will increase the value of \(R^{2}\), /no matter how worthless/ the
+explanatory variable is. We could model the height of the ocean tides,
+then add a variable for the length of cheetah tongues on the Serengeti
+plain, and our \(R^{2}\) would inevitably increase.
 
-This is a problem, because as the philosopher, Occam, once said: "causes should not be multiplied beyond necessity". We address the problem by penalizing \(R^{2}\) when parameters are added to the model. The result is an /adjusted/ \(R^{2}\) which we denote by \(\overline{R}^{2}\).
+This is a problem, because as the philosopher, Occam, once said:
+"causes should not be multiplied beyond necessity". We address the
+problem by penalizing \(R^{2}\) when parameters are added to the
+model. The result is an /adjusted/ \(R^{2}\) which we denote by
+\(\overline{R}^{2}\).
 \begin{equation}
 \overline{R}^{2}=\left(R^{2}-\frac{p}{n-1}\right)\left(\frac{n-1}{n-p-1}\right).
 \end{equation}
-It is good practice for the statistician to weigh both \(R^{2}\) and \(\overline{R}^{2}\) during assessment of model utility. In many cases their values will be very close to each other. If their values differ substantially, or if one changes dramatically when an explanatory variable is added, then (s)he should take a closer look at the explanatory variables in the model.
+It is good practice for the statistician to weigh both \(R^{2}\) and
+\(\overline{R}^{2}\) during assessment of model utility. In many cases
+their values will be very close to each other. If their values differ
+substantially, or if one changes dramatically when an explanatory
+variable is added, then (s)he should take a closer look at the
+explanatory variables in the model.
 
 **** How to do it with \(\mathsf{R}\)
-For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\) from the =summary= output or access the values directly by name as shown (recall that we stored the =summary= object in =treesumry=).
+For the =trees= data, we can get \(R^{2}\) and \(\overline{R}^{2}\)
+from the =summary= output or access the values directly by name as
+shown (recall that we stored the =summary= object in =treesumry=).
 
 #+BEGIN_SRC R :exports both :results output pp 
 treesumry$r.squared
@@ -16627,7 +16324,9 @@ treesumry$adj.r.squared
 #+RESULTS:
 : [1] 0.9442322
 
-High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that the model fits very well, which agrees with what we saw in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
+High values of \(R^{2}\) and \( \overline{R}^2 \) such as these
+indicate that the model fits very well, which agrees with what we saw
+in Figure [[fig-3D-scatterplot-trees][3D-scatterplot-trees]].
 
 *** Overall /F/-Test
 :PROPERTIES:
@@ -16635,18 +16334,27 @@ High values of \(R^{2}\) and \( \overline{R}^2 \) such as these indicate that th
 :END:
 
 Another way to assess the model's utility is to to test the hypothesis
-\[
-H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus }H_{1}:\mbox{ at least one $\beta_{i}\neq0$}.
-\]
-The idea is that if all \(\beta_{i}\)'s were zero, then the explanatory variables \(X_{1},\ldots,X_{p}\) would be worthless predictors for the response variable \(Y\). We can test the above hypothesis with the overall \(F\) statistic, which in MLR is defined by
+\[ H_{0}:\beta_{1}=\beta_{2}=\cdots=\beta_{p}=0\mbox{ versus
+}H_{1}:\mbox{ at least one $\beta_{i}\neq0$}.  \] The idea is that if
+all \(\beta_{i}\)'s were zero, then the explanatory variables
+\(X_{1},\ldots,X_{p}\) would be worthless predictors for the response
+variable \(Y\). We can test the above hypothesis with the overall
+\(F\) statistic, which in MLR is defined by
 \begin{equation}
 F=\frac{SSR/p}{SSE/(n-p-1)}.
 \end{equation}
-When the regression assumptions hold and under \(H_{0}\), it can be shown that \(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject \(H_{0}\) when \(F\) is large, that is, when the explained variation is large relative to the unexplained variation.
+When the regression assumptions hold and under \(H_{0}\), it can be
+shown that
+\(F\sim\mathsf{f}(\mathtt{df1}=p,\,\mathtt{df2}=n-p-1)\). We reject
+\(H_{0}\) when \(F\) is large, that is, when the explained variation
+is large relative to the unexplained variation.
 
 **** How to do it with \(\mathsf{R}\)
 
-The overall \(F\) statistic and its associated /p/-value is listed at the bottom of the =summary= output, or we can access it directly by name; it is stored in the =fstatistic= component of the =summary= object. 
+The overall \(F\) statistic and its associated /p/-value is listed at
+the bottom of the =summary= output, or we can access it directly by
+name; it is stored in the =fstatistic= component of the =summary=
+object.
 
 #+BEGIN_SRC R :exports both :results output pp 
 treesumry$fstatistic
@@ -16656,14 +16364,10 @@ treesumry$fstatistic
 :    value    numdf    dendf 
 : 254.9723   2.0000  28.0000
 
-For the =trees= data, we see that \( F = SRC_R{treesumry$fstatistic[ 1 ]} 254.972337410669
- 254.972337410669
- 254.972337410669
- 254.972337410669
- 254.972337410669
- 254.972337410669
- 254.972337410669
- \) with a /p/-value =< 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide strong evidence that not all \(\beta_{i}\)'s are zero.
+For the =trees= data, we see that \( F = \)
+SRC_R{treesumry$fstatistic[ 1 ]} 254.972337410669 with a /p/-value =<
+2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide
+strong evidence that not all \(\beta_{i}\)'s are zero.
 
 *** Student's /t/ Tests
 :PROPERTIES:
@@ -16678,15 +16382,34 @@ and we have seen how to test the hypothesis \(H_{0}:\beta_{1}=\beta_{2}=\cdots=\
 \begin{equation}
 H_{0}:\beta_{i}=0\mbox{ versus }H_{1}:\beta_{i}\neq0,
 \end{equation}
-where \(\beta_{i}\) is the coefficient for the \(i^{\textrm{th}}\) independent variable. We test the hypothesis by calculating a statistic, examining it's null distribution, and rejecting \(H_{0}\) if the /p-value/ is small. If \(H_{0}\) is rejected, then we conclude that there is a significant relationship between \(Y\) and \(x_{i}\) /in the regression model/ \(Y\sim(x_{1},\ldots,x_{p})\). This last part of the sentence is very important because the significance of the variable \(x_{i}\) sometimes depends on the presence of other independent variables in the model[fn:fn-multic].
+where \(\beta_{i}\) is the coefficient for the \(i^{\textrm{th}}\)
+independent variable. We test the hypothesis by calculating a
+statistic, examining it's null distribution, and rejecting \(H_{0}\)
+if the /p-value/ is small. If \(H_{0}\) is rejected, then we conclude
+that there is a significant relationship between \(Y\) and \(x_{i}\)
+/in the regression model/ \(Y\sim(x_{1},\ldots,x_{p})\). This last
+part of the sentence is very important because the significance of the
+variable \(x_{i}\) sometimes depends on the presence of other
+independent variables in the model[fn:fn-multic].
 
-[fn:fn-multic] In other words, a variable might be highly significant one moment but then fail to be significant when another variable is added to the model. When this happens it often indicates a problem with the explanatory variables, such as /multicollinearity/. See Section \ref{sub-Multicollinearity}.
+[fn:fn-multic] In other words, a variable might be highly significant
+one moment but then fail to be significant when another variable is
+added to the model. When this happens it often indicates a problem
+with the explanatory variables, such as /multicollinearity/. See
+Section \ref{sub-Multicollinearity}.
 
-To test the hypothesis we go to find the sampling distribution of \( b_{i} \), the estimator of the corresponding parameter \( \beta_{i} \), when the null hypothesis is true. We saw in Section [[sub-mlr-interval-est-params][MLR Interval Estimate Parameters]] that 
+To test the hypothesis we go to find the sampling distribution of \(
+b_{i} \), the estimator of the corresponding parameter \( \beta_{i}
+\), when the null hypothesis is true. We saw in Section [[sub-mlr-interval-est-params][MLR Interval
+Estimate Parameters]] that
 \begin{equation}
 T_{i}=\frac{b_{i}-\beta_{i}}{S_{b_{i}}}
 \end{equation}
-has a Student's \(t\) distribution with \(n-(p+1)\) degrees of freedom. (Remember, we are estimating \(p+1\) parameters.) Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a \(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
+has a Student's \(t\) distribution with \(n-(p+1)\) degrees of
+freedom. (Remember, we are estimating \(p+1\) parameters.)
+Consequently, under the null hypothesis \(H_{0}:\beta_{i}=0\) the
+statistic \(t_{i}=b_{i}/S_{b_{i}}\) has a
+\(\mathsf{t}(\mathtt{df}=n-p-1)\) distribution.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -16721,7 +16444,11 @@ Multiple R-squared:  0.948,	Adjusted R-squared:  0.9442
 F-statistic:   255 on 2 and 28 DF,  p-value: < 2.2e-16
 #+end_example
 
-We see from the /p-values/ that there is a significant linear relationship between =Volume= and =Girth= and between =Volume= and =Height= in the regression model =Volume ~ Girth + Height=. Further, it appears that the =Intercept= is significant in the aforementioned model.
+We see from the /p-values/ that there is a significant linear
+relationship between =Volume= and =Girth= and between =Volume= and
+=Height= in the regression model =Volume ~ Girth + Height=. Further,
+it appears that the =Intercept= is significant in the aforementioned
+model.
 
 ** Polynomial Regression
 :PROPERTIES:
@@ -17108,13 +16835,7 @@ but we will replace the variable =Height= by a new variable =Tall=
 which indicates whether or not the cherry tree is taller than a
 certain threshold (which for the sake of argument will be the sample
 median height of 76 ft). That is, =Tall= will be defined by
-\begin{equation}
-\mathtt{Tall}=
-\begin{cases}
-\mathtt{yes}, & \mbox{if }\mathtt{Height}>76,\\
-\mathtt{no}, & \mbox{if }\mathtt{Height}\leq76.
-\end{cases}
-\end{equation}
+@@latex:\begin{equation} \mathtt{Tall} = \begin{cases} \mathtt{yes}, & \mbox{if }\mathtt{Height} > 76,\\ \mathtt{no}, & \mbox{if }\mathtt{Height}\leq 76. \end{cases} \end{equation}@@
 
 We can construct =Tall= very quickly in \(\mathsf{R}\) with the =cut=
 function:
@@ -17144,13 +16865,7 @@ this chapter accordingly.
 Once we have =Tall=, we include it in the regression model just like
 we would any other variable. It is handled internally in a special
 way. Define a "dummy variable" =Tallyes= that takes values
-\begin{equation}
-\mathtt{Tallyes}=
-\begin{cases}
-1, & \mbox{if }\mathtt{Tall}=\mathtt{yes},\\
-0, & \mbox{otherwise.}
-\end{cases}
-\end{equation}
+@@latex:\begin{equation} \mathtt{Tallyes} = \begin{cases} 1, & \mbox{if }\mathtt{Tall}=\mathtt{yes},\\ 0, & \mbox{otherwise.} \end{cases} \end{equation}@@
 That is, =Tallyes= is an /indicator variable/ which indicates when a
 respective tree is tall. The model may now be written as
 \begin{equation}
@@ -17243,13 +16958,7 @@ details.
 In general, if an explanatory variable =foo= is qualitative with \(n\)
 levels =bar1=, =bar2=, ..., =barn= then \(\mathsf{R}\) will by default
 automatically define \(n-1\) indicator variables in the following way:
-\begin{eqnarray*}
-\mathtt{foobar2} & = & \begin{cases}
-1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\
-0, & \mbox{otherwise.}\end{cases},\,\ldots,\,\mathtt{foobarn}=\begin{cases}
-1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\
-0, & \mbox{otherwise.}\end{cases}
-\end{eqnarray*}
+@@latex:\begin{eqnarray*} \mathtt{foobar2} & = & \begin{cases} 1, & \mbox{if }\mathtt{foo}=\mathtt{"bar2"},\\ 0, & \mbox{otherwise.}\end{cases},\,\ldots,\,\mathtt{foobarn}=\begin{cases} 1, & \mbox{if }\mathtt{foo}=\mathtt{"barn"},\\ 0, & \mbox{otherwise.}\end{cases} \end{eqnarray*}@@
 The level =bar1= is represented by
 \(\mathtt{foobar2}=\cdots=\mathtt{foobarn}=0\). We just need to make
 sure that =foo= is stored as a factor and \(\mathsf{R}\) will take
@@ -18435,21 +18144,17 @@ A <- show(oneway_test(len ~ supp, data = ToothGrowth))
 B <- t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 #+END_SRC
 
-The \(p\)-value for the \(t\)-test was \( SRC_R{round(B$p.value, 3)} 0.03
- 0.03
-     
-\), while the permutation test \(p\)-value was \(
-SRC_R{round(A$p.value, 3)} 0.061
- 0.061
-      \). Note that there is an underlying
-normality assumption for the \(t\)-test, which isn't present in the
-permutation test. If the normality assumption may be questionable,
-then the permutation test would be more reasonable. We see what can
-happen when using a test in a situation where the assumptions are not
-met: smaller \(p\)-values. In situations where the normality
-assumptions are not met, for example, small sample scenarios, the
-permutation test is to be preferred. In particular, if accuracy is
-very important then we should use the permutation test.
+The \(p\)-value for the \(t\)-test was SRC_R{round(B$p.value, 3)},
+while the permutation test \(p\)-value was SRC_R{round(A$p.value, 3)}
+0.061. Note that there is an underlying normality assumption for the
+\(t\)-test, which isn't present in the permutation test. If the
+normality assumption may be questionable, then the permutation test
+would be more reasonable. We see what can happen when using a test in
+a situation where the assumptions are not met: smaller
+\(p\)-values. In situations where the normality assumptions are not
+met, for example, small sample scenarios, the permutation test is to
+be preferred. In particular, if accuracy is very important then we
+should use the permutation test.
 
 #+BEGIN_rem
 Here are some things about permutation tests to keep in mind.
@@ -20770,14 +20475,14 @@ code with the secret key) that you used to generate them. Next
 semester, choose a new key and generate a new copy to be distributed
 to the new class.
 
-#+begin_quote
+#+BEGIN_QUOTE
 But more generally, if you are not keen on the way I explained (or
-failed to explain) something, then you are _free_ to rewrite it. If
-you would like to cover more (or less) material, then you are _free_
+failed to explain) something, then you are free to rewrite it. If
+you would like to cover more (or less) material, then you are free
 to add (or delete) whatever Chapters/Sections/Paragraphs that you
 wish. And since you have the source code, you do not need to retype
 the wheel.
-#+end_quote
+#+END_QUOTE
 
 Some individuals will argue that the nature of a statistics textbook
 like this one, many of the exercises being randomly generated /by
@@ -20895,23 +20600,9 @@ examine the case and begin solving these mysterious murders.
 
 "First off," Dr. Fudd-Einstein explained, "these people all worked at
 the University at some point or another. Also, there also seems to be
-a trend in the fact that they all had a =salary= between \(
-SRC_R{round(min(RcmdrTestDrive$salary))} 377
- 377
- 377
- 377
- 377
- 377
- 377
- \) and \(
-SRC_R{round(max(RcmdrTestDrive$salary))} 1156
- 1156
- 1156
- 1156
- 1156
- 1156
- 1156
- \) when they retired."
+a trend in the fact that they all had a =salary= between
+SRC_R{round(min(RcmdrTestDrive$salary))} 377 and
+SRC_R{round(max(RcmdrTestDrive$salary))} 1156 when they retired."
 
 "That’s not really a lot to live off of," explained Professor Bird.
 
@@ -20928,14 +20619,7 @@ Dr. Fudd-Einstein.
 
 "This coming Monday. But if there were all of these killings, how in
 the world could one person do it? It just doesn’t seem to be possible;
-stay up \( SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7
- 7
- 7
- 7
- 7
- 7
- 7
- \) days
+stay up SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days
 straight and be able to kill all of these people and have the energy
 to continue on," Professor Bird exclaimed, doubting the guilt of only
 one person.
@@ -21047,23 +20731,8 @@ lots... wait a minute, take a look at this," Professor Bird said as he
 scrolled down in the police information. "Granny’s signature is on
 each of these faculty members’ =parking= tickets. Kind of odd,
 considering the Chief-of-Parking signed each personally. The deceased
-had from as few as \( SRC_R{min(RcmdrTestDrive$parking)} 1
- 1
- 1
- 1
- 1
- 1
- 1
- \) ticket to
-as many as \( SRC_R{max(RcmdrTestDrive$parking)} 8
- 8
- 8
- 8
- 8
- 8
- 8
- \). All tickets were
-unpaid.
+had from as few as SRC_R{min(RcmdrTestDrive$parking)} 1 ticket to as
+many as SRC_R{max(RcmdrTestDrive$parking)} 8. All tickets were unpaid.
 
 "And look at this, Granny married Old Man Acme after graduation. He
 was a resident of Chicago and rumored to be a consigliere to one of
@@ -21091,40 +20760,12 @@ up."
 
 "What do you mean?" inquired Professor Bird.
 
-"Well, look here. The data file from the Chief's email shows \(
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168
- 168
- 168
- 168
- 168
- 168
- \) murders, but there have only been
-\( SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166
- 166
- 166
- 166
- 166
- 166
- 166
- \). This doesn’t make any
+"Well, look here. The data file from the Chief's email shows
+SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 murders, but there have only been
+SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166. This doesn’t make any
 sense. I’ll have to straighten it out. Hey, wait a minute. Look at
-this, Person number \( SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} 167
- 167
- 167
- 167
- 167
- 167
- 167
- \) and
-Person number \( SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168
- 168
- 168
- 168
- 168
- 168
- \) seem to match our
+this, Person number SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} 167 and Person
+number SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 seem to match our
 stats. But how can that be?"
 
 It was at this moment that our two heroes were shot from behind and
@@ -21132,17 +20773,7 @@ fell over the computer, dead. The killer hit =Delete= on the computer
 and walked out slowly (considering they had arthritis) and cackling
 loudly in the now quiet computer lab.
 
-And so, I guess my question to you the reader is, did Granny murder \(
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168
- 168
- 168
- 168
- 168
- 168
- \) people, or did the murderer slip
-through the cracks of justice? You be the statistician and come to
-your own conclusion.
+And so, I guess my question to you the reader is, did Granny murder SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 people, or did the murderer slip through the cracks of justice? You be the statistician and come to your own conclusion.
 
 Detective Pyork E. Pig 
 
