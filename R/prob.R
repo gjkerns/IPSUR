@@ -19,7 +19,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-postscript(file="ps/prob/diagram.ps")
+postscript(file="ps/prob-diagram.ps")
 require(diagram)
 par(mex = 0.2, cex = 0.5)
 openplotmat(frame.plot=TRUE)

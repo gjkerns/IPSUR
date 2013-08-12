@@ -69,7 +69,7 @@ stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
 stripchart(discoveries, method="stack", xlab="number")
 
-postscript(file="ps/datadesc/stripcharts.ps")
+postscript(file="ps/datadesc-stripcharts.ps")
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
@@ -80,14 +80,14 @@ dev.off()
 hist(precip, main = "")
 hist(precip, freq = FALSE, main = "")
 
-postscript(file="ps/datadesc/histograms.ps")
+postscript(file="ps/datadesc-histograms.ps")
 par(mfrow = c(1,2))
 hist(precip, main = "")
 hist(precip, freq = FALSE, main = "")
 par(mfrow = c(1,1))
 dev.off()
 
-postscript(file="ps/datadesc/histograms-bins.ps")
+postscript(file="ps/datadesc-histograms-bins.ps")
 par(mfrow = c(1,3))
 hist(precip, breaks = 10, main = "")
 hist(precip, breaks = 25, main = "")
@@ -101,7 +101,7 @@ plot(LakeHuron)
 plot(LakeHuron, type = "p")
 plot(LakeHuron, type = "h")
 
-postscript(file="ps/datadesc/indpl-lakehuron.ps")
+postscript(file="ps/datadesc-indpl-lakehuron.ps")
 par(mfrow = c(3,1))
 plot(LakeHuron)
 plot(LakeHuron, type = "p")
@@ -132,18 +132,18 @@ prop.table(Tbl)   # same thing
 barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 
-postscript(file="ps/datadesc/bar-gr-stateregion.ps")
+postscript(file="ps/datadesc-bar-gr-stateregion.ps")
 par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
 barplot(table(state.region), cex.names = 0.50)
 barplot(prop.table(table(state.region)), cex.names = 0.50)
 par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-postscript(file="ps/datadesc/Pareto-chart.ps")
+postscript(file="ps/datadesc-Pareto-chart.ps")
 pareto.chart(table(state.division), ylab="Frequency")
 dev.off()
 
-postscript(file="ps/datadesc/dot-charts.ps")
+postscript(file="ps/datadesc-dot-charts.ps")
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x))
 dev.off()
@@ -206,31 +206,31 @@ mosaicplot(z, main = "Relation between eye color and sex")
 
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 
-postscript(file="ps/datadesc/xyplot-group.ps")
+postscript(file="ps/datadesc-xyplot-group.ps")
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
 
 bwplot(~weight | feed, data = chickwts)
 
-postscript(file="ps/datadesc/bwplot.ps")
+postscript(file="ps/datadesc-bwplot.ps")
 print(bwplot(~weight | feed, data = chickwts))
 dev.off()
 
 histogram(~age | education, data = infert)
 
-postscript(file="ps/datadesc/histograms-lattice.ps")
+postscript(file="ps/datadesc-histograms-lattice.ps")
 print(histogram(~age | education, data = infert))
 dev.off()
 
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 
-postscript(file="ps/datadesc/xyplot.ps")
+postscript(file="ps/datadesc-xyplot.ps")
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
 
-postscript(file="ps/datadesc/coplot.ps")
+postscript(file="ps/datadesc-coplot.ps")
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 
@@ -329,13 +329,13 @@ x <- nsamp(n, k, rep = r, ord = TRUE)
 
 prod(x) 
 
-(11*10*9)*(7*6*5*4)*313 
+(11*10*9)*(7*6*5*4)*31^3 
 
-prod(9:11)*prod(4:7)*313 
+prod(9:11)*prod(4:7)*31^3 
 
-prod(factorial(c(11,7))/factorial(c(8,3)))*313 
+prod(factorial(c(11,7))/factorial(c(8,3)))*31^3 
 
-postscript(file="ps/prob/birthday.ps")
+postscript(file="ps/prob-birthday.ps")
 g <- Vectorize(pbirthday.ipsur)
 plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
 remove(g)
@@ -349,7 +349,7 @@ abline(h = 0.5)
 abline(v = 23, lty = 2)
 remove(g)
 
-postscript(file="ps/prob/twodiceAB.ps")
+postscript(file="ps/prob-twodiceAB.ps")
 A <- rolldie(2)
 B <- subset(A, X1==X2)
 C <- subset(A, X1+X2 > 7)
@@ -452,7 +452,7 @@ A
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
 diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 
-postscript(file="ps/discdist/binom-cdf-base.ps")
+postscript(file="ps/discdist-binom-cdf-base.ps")
 plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
 abline(h = c(0,1), lty = 2, col = "grey")
 lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -466,7 +466,7 @@ X
 d(X)(1)   # pmf of X evaluated at x = 1
 p(X)(2)   # cdf of X evaluated at x = 2
 
-postscript(file="ps/discdist/binom-plot-distr.ps")
+postscript(file="ps/discdist-binom-plot-distr.ps")
 plot(X, cex = 0.2)
 dev.off()
 
@@ -480,7 +480,7 @@ sd(X)
 x <- c(4, 7, 9, 11, 12)
 ecdf(x)
 
-postscript(file="ps/discdist/empirical-CDF.ps")
+postscript(file="ps/discdist-empirical-CDF.ps")
 plot(ecdf(x))
 dev.off()
 
@@ -548,7 +548,7 @@ p(W)(0.5)
 W <- sin(exp(X) + 27)
 p(W)(0.5)
 
-postscript(file="ps/contdist/chisq-dist-vary-df.ps")
+postscript(file="ps/contdist-chisq-dist-vary-df.ps")
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
@@ -556,11 +556,11 @@ dev.off()
 
 mgamma(1:4, shape = 13, rate = 1)
 
-postscript(file="ps/contdist/gamma-mgf.ps")
+postscript(file="ps/contdist-gamma-mgf.ps")
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
 dev.off()
 
-postscript(file="ps/multdist/max-and-sum-two-dice.ps")
+postscript(file="ps/multdist-max-and-sum-two-dice.ps")
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
 A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
@@ -577,7 +577,7 @@ print(p1, vp = vplayout(1, 1))
 print(p2, vp = vplayout(1, 2))
 dev.off()
 
-postscript(file="ps/multdist/max-sum-two-dice-joint.ps")
+postscript(file="ps/multdist-max-sum-two-dice-joint.ps")
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
 p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") + 
@@ -611,7 +611,7 @@ f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
 persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
-postscript(file="ps/multdist/mvnorm-pdf.ps")
+postscript(file="ps/multdist-mvnorm-pdf.ps")
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
@@ -627,12 +627,12 @@ round(ProbTable, 3)
 cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70)
 
-postscript(file="ps/multdist/multinom-pmf2.ps")
+postscript(file="ps/multdist-multinom-pmf2.ps")
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 dev.off()
 
-postscript(file="ps/sampdist/Students-t-dist-vary-df.ps")
+postscript(file="ps/sampdist-Students-t-dist-vary-df.ps")
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
 for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
@@ -650,7 +650,7 @@ mean(iqrs)    # close to 1
 
 sd(iqrs)
 
-postscript(file="ps/sampdist/simulated-IQR.ps")
+postscript(file="ps/sampdist-simulated-IQR.ps")
 hist(iqrs, breaks = 20)
 dev.off()
 
@@ -660,11 +660,11 @@ mean(mads)    # close to 1.349
 
 sd(mads)
 
-postscript(file="ps/sampdist/simulated-MAD.ps")
+postscript(file="ps/sampdist-simulated-MAD.ps")
 hist(mads, breaks = 20)
 dev.off()
 
-postscript(file="ps/estimate/capture-recapture.ps")
+postscript(file="ps/estimate-capture-recapture.ps")
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -675,13 +675,13 @@ lines(9, heights[9], type = "h", lwd = 2)
 points(9, 0, pch = 4, lwd = 3, cex = 2)
 dev.off()
 
-postscript(file="ps/estimate/fishing-part-two.ps")
+postscript(file="ps/estimate-fishing-part-two.ps")
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 dev.off()
 
-postscript(file="ps/estimate/species-mle.ps")
+postscript(file="ps/estimate-species-mle.ps")
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -702,6 +702,7 @@ L <- function(p,x) prod(dbinom(x, size = 1, prob = p))
 optimize(L, interval = c(0,1), x = x, maximum = TRUE)
 
 A <- optimize(L, interval = c(0,1), x = x, maximum = TRUE)
+amax <- A$maximum; aobj <- A$objective
 
 minuslogL <- function(p,x){
                 -sum(dbinom(x, size = 1, prob = p, log = TRUE))
@@ -718,7 +719,7 @@ summary(MaxLikeEst)
 
 mean(x); var(x)*29/30; sd(x)/sqrt(30)
 
-postscript(file="ps/hypoth/ci-examp.ps")
+postscript(file="ps/hypoth-ci-examp.ps")
 ci.examp()
 dev.off()
 
@@ -775,7 +776,7 @@ sigma.test(women$height, sigma = 8)
 
 t.test(extra ~ group, data = sleep, paired = TRUE)
 
-ks.test(randu$x, "punif")
+with(randu, ks.test(x, "punif"))
 
 with(women, shapiro.test(height))
 
@@ -785,7 +786,7 @@ temp <- lm(weight ~ feed, data = chickwts)
 
 anova(temp)
 
-postscript(file="ps/hypoth/between-versus-within.ps")
+postscript(file="ps/hypoth-between-versus-within.ps")
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
 f <- function(x){dnorm(x, mean = 2)}
@@ -797,7 +798,7 @@ curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 dev.off()
 
-postscript(file="ps/hypoth/some-F-plots-HH.ps")
+postscript(file="ps/hypoth-some-F-plots-HH.ps")
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
 F.curve(df1 = 5, df2 = 30, col='blue')
@@ -805,11 +806,11 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 dev.off()
 
-postscript(file="ps/hypoth/power-examp.ps")
+postscript(file="ps/hypoth-power-examp.ps")
 power.examp()
 dev.off()
 
-postscript(file="ps/slr/philosophy.ps")
+postscript(file="ps/slr-philosophy.ps")
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h = 0, v = 0, col = "gray60")
 abline(a = 2.5, b = 0.5, lwd = 2)
@@ -826,7 +827,7 @@ dev.off()
 
 head(cars)
 
-postscript(file="ps/slr/carscatter.ps")
+postscript(file="ps/slr-carscatter.ps")
 plot(dist ~ speed, data = cars)
 dev.off()
 
@@ -838,7 +839,7 @@ cars.lm <- lm(dist ~ speed, data = cars)
 
 coef(cars.lm)
 
-postscript(file="ps/slr/carline.ps")
+postscript(file="ps/slr-carline.ps")
 ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + geom_smooth(method = lm, se = FALSE)
 dev.off()
 
@@ -876,7 +877,7 @@ carsPI <- round(predict(cars.lm, newdata = new, interval = "prediction"), 2)
 library(HH)
 ci.plot(cars.lm)
 
-postscript(file="ps/slr/carscipi.ps")
+postscript(file="ps/slr-carscipi.ps")
 print(ci.plot(cars.lm))
 dev.off()
 
@@ -892,19 +893,19 @@ anova(cars.lm)
 
 tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 
-postscript(file="ps/slr/Normal-q-q-plot-cars.ps")
+postscript(file="ps/slr-Normal-q-q-plot-cars.ps")
 plot(cars.lm, which = 2)
 dev.off()
 
 shapiro.test(residuals(cars.lm))
 
-postscript(file="ps/slr/std-resids-fitted-cars.ps")
+postscript(file="ps/slr-std-resids-fitted-cars.ps")
 plot(cars.lm, which = 3)
 dev.off()
 
 bptest(cars.lm)
 
-postscript(file="ps/slr/resids-fitted-cars.ps")
+postscript(file="ps/slr-resids-fitted-cars.ps")
 plot(cars.lm, which = 1)
 dev.off()
 
@@ -933,7 +934,7 @@ dff[1:5]
 cooksD <- cooks.distance(cars.lm)
 cooksD[1:4]
 
-postscript(file="ps/slr/Cooks-distance-cars.ps")
+postscript(file="ps/slr-Cooks-distance-cars.ps")
 plot(cars.lm, which = 4)
 dev.off()
 
@@ -944,7 +945,7 @@ influence.measures(cars.lm)
 
 plot(cars.lm)
 
-postscript(file="ps/slr/Diagnostic-plots-cars.ps")
+postscript(file="ps/slr-Diagnostic-plots-cars.ps")
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
@@ -955,11 +956,11 @@ identify(leverage, sres, n = 4)   # identify 4 points
 
 head(trees)
 
-postscript(file="ps/mlr/splom-trees.ps")
+postscript(file="ps/mlr-splom-trees.ps")
 splom(trees)
 dev.off()
 
-postscript(file="ps/mlr/3D-scatterplot-trees.ps")
+postscript(file="ps/mlr-3D-scatterplot-trees.ps")
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
 dev.off()
@@ -1006,14 +1007,14 @@ treesumry$fstatistic
 
 treesumry
 
-postscript(file="ps/mlr/Scatterplot-Volume-Girth-trees.ps")
+postscript(file="ps/mlr-Scatterplot-Volume-Girth-trees.ps")
 qplot(Girth, Volume, data = trees)
 dev.off()
 
 treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
 summary(treesquad.lm)
 
-postscript(file="ps/mlr/Fitting-the-Quadratic.ps")
+postscript(file="ps/mlr-Fitting-the-Quadratic.ps")
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 dev.off()
@@ -1040,7 +1041,7 @@ class(trees$Tall)
 treesdummy.lm <- lm(Volume ~ Girth + Tall, data = trees)
 summary(treesdummy.lm)
 
-postscript(file="ps/mlr/dummy-variable-trees.ps")
+postscript(file="ps/mlr-dummy-variable-trees.ps")
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
@@ -1085,7 +1086,7 @@ srs <- rnorm(25, mean = 3)
 resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
 
-postscript(file="ps/resamp/Bootstrap-se-mean.ps")
+postscript(file="ps/resamp-Bootstrap-se-mean.ps")
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
@@ -1100,7 +1101,7 @@ resamps <- replicate(1000, sample(rivers, 141, TRUE), simplify = FALSE)
 medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
 
-postscript(file="ps/resamp/Bootstrapping-se-median.ps")
+postscript(file="ps/resamp-Bootstrapping-se-median.ps")
 hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 
