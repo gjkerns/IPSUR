@@ -45,8 +45,10 @@ backup:
 
 clean:
 	-rm -r $(texdir)
+	-rm -r ~/.org-timestamps
 
 distclean:
 	-rm -r $(texdir)
 	-rm -r $(psdir)
 	-rm -r $(backdir)
+	-rm -r ~/.org-timestamps
