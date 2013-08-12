@@ -36,7 +36,6 @@
 #+LATEX: \input{include/frontmatter}
 #+LATEX: \input{include/preface-second}
 #+LATEX: \input{include/preface-first}
-#+INCLUDE: "include/prelim.R" src R :exports none :results hide
 #+CREATOR: Emacs 24.3.1 (Org mode 8.0.7)
 
 * An Introduction to Probability and Statistics                     :introps:
@@ -104,6 +103,16 @@ material in later editions of this book.
 #+LaTeX: \setcounter{thm}{0}
 
 #+BEGIN_SRC R :exports none :results silent
+# Preliminary code to load before start
+# clear everything to start
+rm(list = ls())
+# initial customizations
+seed <- 42
+set.seed(seed)
+options(width = 60)
+options(useFancyQuotes = FALSE)
+cexlab <- 1.5
+# load packages needed by the book
 library("actuar")
 library("aplpack")
 library("boot")    # already recommended package
@@ -125,7 +134,6 @@ library("reshape")  # dependency of ggplot2
 library("scatterplot3d")
 library("stats4")
 library("TeachingDemos")
-par(cex.lab = 5)
 #+END_SRC
 
 * An Introduction to R                                               :introR:
@@ -1211,9 +1219,9 @@ literally a textbook example of a right skewed distribution.
 #+NAME: stripcharts
 #+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-stripcharts.ps
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
-stripchart(precip, xlab="rainfall")
-stripchart(rivers, method="jitter", xlab="length")
-stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3))
+stripchart(precip, xlab="rainfall", cex.lab = cexlab)
+stripchart(rivers, method="jitter", xlab="length", cex.lab = cexlab)
+stripchart(discoveries, method="stack", xlab="number", ylim = c(0,3), cex.lab = cexlab)
 par(mfrow = c(1,1)) # back to normal
 #+END_SRC
 
@@ -1267,8 +1275,8 @@ histogram (=freq = FALSE=).
 #+NAME: histograms
 #+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-histograms.ps
 par(mfrow = c(1,2))
-hist(precip, main = "")
-hist(precip, freq = FALSE, main = "")
+hist(precip, main = "", cex.lab = cexlab)
+hist(precip, freq = FALSE, main = "", cex.lab = cexlab)
 par(mfrow = c(1,1))
 #+END_SRC
 
@@ -1298,9 +1306,9 @@ which was produced by the following code.
 #+NAME: histograms-bins
 #+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-histograms-bins.ps
 par(mfrow = c(1,3))
-hist(precip, breaks = 10, main = "")
-hist(precip, breaks = 25, main = "")
-hist(precip, breaks = 50, main = "")
+hist(precip, breaks = 10, main = "", cex.lab = cexlab)
+hist(precip, breaks = 25, main = "", cex.lab = cexlab)
+hist(precip, breaks = 50, main = "", cex.lab = cexlab)
 par(mfrow = c(1,1))
 #+END_SRC
 
@@ -1419,9 +1427,9 @@ there appears to be some seasonal variation that increases over time.
 #+NAME: indpl-lakehuron
 #+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-indpl-lakehuron.ps
 par(mfrow = c(3,1))
-plot(LakeHuron)
-plot(LakeHuron, type = "p")
-plot(LakeHuron, type = "h")
+plot(LakeHuron, cex.lab = cexlab)
+plot(LakeHuron, type = "p", cex.lab = cexlab)
+plot(LakeHuron, type = "h", cex.lab = cexlab)
 par(mfrow = c(1,1))
 #+END_SRC
 
@@ -1679,7 +1687,7 @@ package \cite{qcc}. See Figure [[fig-Pareto-chart][Pareto-chart]]. The code foll
 
 #+NAME: Pareto-chart
 #+BEGIN_SRC R :exports both :results graphics silent :file ps/datadesc-Pareto-chart.ps
-pareto.chart(table(state.division), ylab="Frequency")
+pareto.chart(table(state.division), ylab="Frequency", cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-Pareto-chart
@@ -1709,7 +1717,7 @@ was produced by the following code.
 #+NAME: dot-charts
 #+BEGIN_SRC R :exports both :results graphics :file ps/datadesc-dot-charts.ps
 x <- table(state.region)
-dotchart(as.vector(x), labels = names(x))
+dotchart(as.vector(x), labels = names(x), cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-dot-charts
@@ -1855,8 +1863,7 @@ are usually several values that would serve as a center, and our later
 tasks will be focused on choosing an appropriate one for the data at
 hand. Judging from the histogram that we saw in Figure
 [[fig-histograms-bins][histograms-bins]], a measure of center would be about
-SRC_R{round(mean(precip))} 35
-.
+SRC_R{round(mean(precip))} 35.
 
 *** Spread
 :PROPERTIES:
@@ -8243,8 +8250,7 @@ $estim.prec
 temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 #+END_SRC
 
-The answer is shown in =$root= which is approximately SRC_R{temp} 134.8952
-
+The answer is shown in =$root= which is approximately SRC_R{temp}
 134.8952, that is, a person with this IQ score or higher falls in the
 top 1% of all IQ scores.
 #+END_exampletoo
@@ -11295,10 +11301,8 @@ mu <- round(rnorm(10, mean = 20))
 
 #+begin_xca
 Suppose that we observe a random sample \(X_{1}\), \(X_{2}\), ... ,
-\(X_{n}\) of size SRS( n = SRC_R{n[1]} 24
- 12 ) from a \(
-\mathsf{norm}(\mathtt{mean}= SRC_R{mu[1]} 20
- 22 ) \) distribution.
+\(X_{n}\) of size SRS( n = SRC_R{n[1]} 24) from a \(
+\mathsf{norm}(\mathtt{mean}= SRC_R{mu[1]} 20 )\) distribution.
 1. What is the mean of \(\overline{X}\)?
 2. What is the standard deviation of \(\overline{X}\)?
 3. What is the distribution of \(\overline{X}\)? (approximately)
@@ -11735,10 +11739,8 @@ amax <- A$maximum; aobj <- A$objective
 Note that the =optimize= function by default minimizes the function
 =L=, so we have to set =maximum = TRUE= to get an MLE. The returned
 value of =$maximum= gives an approximate value of the MLE to be
-SRC_R{round(amax, 3)} 0.406
- 0.406 and =objective= gives =L= evaluated at the
-MLE which is approximately SRC_R{round(aobj, 3)} 0
- 0.
+SRC_R{round(amax, 3)} 0.406 and =objective= gives =L= evaluated at the
+MLE which is approximately SRC_R{round(aobj, 3)} 0.
 
 We previously remarked that it is usually more numerically convenient
 to maximize the log-likelihood (or minimize the negative
@@ -13922,13 +13924,11 @@ Using the regression line for the =cars= data:
 2. Interpret the slope \(\beta_{1}\). The true slope \(\beta_{1}\)
    represents the increase in average stopping distance for each mile
    per hour faster that the car drives. In this case, we estimate the
-   car to take approximately SRC_R{tmpcoef[2]} 3.93
- 3.93 additional feet
+   car to take approximately SRC_R{tmpcoef[2]} 3.93 additional feet
    to stop for each additional mph increase in speed.
 3. Interpret the intercept \( \beta_{0} \). This would represent the
    mean stopping distance for a car traveling 0 mph (which our
-   regression line estimates to be \( SRC_R{tmpcoef[1]} -17.58
- -17.58. Of
+   regression line estimates to be \( SRC_R{tmpcoef[1]} -17.58. Of
    course, this interpretation does not make any sense for this
    example, because a car travelling 0 mph takes 0 ft to stop (it was
    not moving in the first place)! What went wrong? Looking at the
@@ -14082,23 +14082,20 @@ tmps <- round(summary(cars.lm)$sigma, 2)
 #+END_SRC
 
 In the last section, we calculated the fitted value for \(x=8\) and
-found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R{tmpred} 13.88
-
+found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R{tmpred}
 13.88. Now, it turns out that there was only one recorded observation
 at \(x = 8\), and we have seen this value in the output of
 =head(cars)= in Example [[exa-Speed-and-Stopping]]; it was \(\mathtt{dist}
 = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the
 residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - \)
-SRC_R{tmpred} 13.88
- 13.88. Now take a look at the last entry of
+SRC_R{tmpred} 13.88. Now take a look at the last entry of
 =residuals(cars.lm)=, above. It is not a coincidence.
 
 The estimate \(S\) for \(\sigma\) is called the =Residual standard
 error= and for the =cars= data is shown a few lines up on the
 =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in
 Section [[sub-slr-interval-est-params][Interval Estimation]]). We may read it from there to be \(
-S\approx\) SRC_R{tmps} 15.38
- 15.38, or we can access it directly from the
+S\approx\) SRC_R{tmps} 15.38, or we can access it directly from the
 =summary= object.
 
 #+BEGIN_SRC R :exports both :results output pp
@@ -14216,9 +14213,7 @@ In the =Coefficients= section we find the parameter estimates and
 their respective standard errors in the second and third columns; the
 other columns are discussed in Section [[sec-Model-Utility-SLR][SLR Model Utility]]. If we
 wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use
-\( b_{1} = \) SRC_R{A[2,1]} 3.932
- 3.932 and \( S_{b_{1}} = \) SRC_R{A[2,2]} 0.416
-
+\( b_{1} = \) SRC_R{A[2,1]} 3.932 and \( S_{b_{1}} = \) SRC_R{A[2,2]}
 0.416 together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \)
 critical value to calculate \( b_{1} \pm
 \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could
@@ -14233,10 +14228,8 @@ confint(cars.lm)
 : (Intercept) -31.167850 -3.990340
 : speed         3.096964  4.767853
 
-With 95% confidence, the random interval SRC_R{B[2,1]} 3.097
- 3.097 to
-SRC_R{B[2,2]} 4.768
- 4.768 covers the parameter \(\beta_{1}\).
+With 95% confidence, the random interval SRC_R{B[2,1]} 3.097 to
+SRC_R{B[2,2]} 4.768 covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
 :PROPERTIES:
@@ -14366,32 +14359,19 @@ can be changed with the =level= argument).
 Using the =cars= data,
 1. Report a point estimate of and a 95% confidence interval for the
    mean stopping distance for a car travelling 5 mph.  The fitted
-   value for \(x = 5\) is SRC_R{carsCI[1, 1]} 2.08
- 2.08, so a point
-   estimate would be SRC_R{carsCI[1, 1]} 2.08
- 2.08 ft. The 95% CI is
-   given by SRC_R{carsCI[1, 2]} -7.64
- -7.64 to SRC_R{carsCI[1, 3]} 11.81
- 11.81, so
+   value for \(x = 5\) is SRC_R{carsCI[1, 1]} 2.08, so a point
+   estimate would be SRC_R{carsCI[1, 1]} 2.08 ft. The 95% CI is
+   given by SRC_R{carsCI[1, 2]} -7.64 to SRC_R{carsCI[1, 3]} 11.81, so
    with 95% confidence the mean stopping distance lies somewhere
-   between SRC_R{carsCI[1, 2]} -7.64
- -7.64 ft and SRC_R{carsCI[1, 3]} 11.81
- 11.81
-   ft.
+   between SRC_R{carsCI[1, 2]} -7.64 ft and SRC_R{carsCI[1, 3]} 11.81 ft.
 2. Report a point prediction for and a 95% prediction interval for the
    stopping distance of a hypothetical car travelling 21 mph.  The
-   fitted value for \(x = 21\) is SRC_R{carsPI[3, 1]} 65
- 65, so a point
-   prediction for the stopping distance is SRC_R{carsPI[3, 1]} 65
- ft. The
-   95% PI is SRC_R{carsPI[3, 2]} 33.42
- 33.42 to SRC_R{carsPI[3,3]} 96.58
-, so with
+   fitted value for \(x = 21\) is SRC_R{carsPI[3, 1]} 65, so a point
+   prediction for the stopping distance is SRC_R{carsPI[3, 1]} 65 ft. The
+   95% PI is SRC_R{carsPI[3, 2]} 33.42 to SRC_R{carsPI[3,3]} 96.58, so with
    95% confidence we may assert that the hypothetical stopping
    distance for a car travelling 21 mph would lie somewhere between
-   SRC_R{carsPI[3, 2]} 33.42
- 33.42 ft and SRC_R{carsPI[3, 3]} 96.58
- 96.58 ft.
+   SRC_R{carsPI[3, 2]} 33.42 ft and SRC_R{carsPI[3, 3]} 96.58 ft.
 #+END_exampletoo
 
 *** Graphing the Confidence and Prediction Bands
@@ -14703,8 +14683,7 @@ anova(cars.lm)
 tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 #+END_SRC
 
-Here we see that the \(F\) statistic is SRC_R{tmpf} 89.57
- 89.57 with a
+Here we see that the \(F\) statistic is SRC_R{tmpf} 89.57 with a
 \(p\)-value very close to zero. The conclusion: there is very strong
 evidence that \(H_{0}:\beta_{1} = 0 \) is false, that is, there is
 strong evidence that \( \beta_{1} \neq 0 \). Moreover, we conclude
@@ -15879,17 +15858,13 @@ treesFIT <- round(predict(trees.lm, newdata = new), 1)
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth=
    9.1 in and =Height= 69 ft.  The fitted value for \(x_{1}=9.1\) and
-   \(x_{2} = 69\) is SRC_R{treesFIT[ 1 ]} 8.3
- 8.3, so a point estimate
-   would be SRC_R{treesFIT[ 1 ]} 8.3
- 8.3 cubic feet.
+   \(x_{2} = 69\) is SRC_R{treesFIT[ 1 ]} 8.3, so a point estimate
+   would be SRC_R{treesFIT[ 1 ]} 8.3 cubic feet.
 2. Report a point prediction for and a 95% prediction interval for the
    =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87
    ft.  The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is
-   SRC_R{treesFIT[ 3 ]} 30.4
- 30.4, so a point prediction for the =Volume=
-   is SRC_R{treesFIT[ 3 ]} 30.4
- 30.4 cubic feet.
+   SRC_R{treesFIT[ 3 ]} 30.4, so a point prediction for the =Volume=
+   is SRC_R{treesFIT[ 3 ]} 30.4 cubic feet.
 #+END_exampletoo
 
 *** Mean Square Error and Standard Error
@@ -15950,8 +15925,7 @@ treesumry$sigma
 #+RESULTS:
 : [1] 3.881832
 
-For the =trees= data we find \(s \approx\) SRC_R{round(treesumry$sigma,
-3)}.
+For the =trees= data we find \(s \approx\) SRC_R{round(treesumry$sigma,3)}.
 
 *** Interval Estimates of the Parameters
 :PROPERTIES:
@@ -16033,9 +16007,7 @@ treesPAR <- round(confint(trees.lm), 1)
 For example, using the calculations above we say that for the
 regression model =Volume ~ Girth + Height= we are 95% confident that
 the parameter \(\beta_{1}\) lies somewhere in the interval
-SRC_R{treesPAR[2, 1]} 4.2
- 4.2 to SRC_R{treesPAR[2, 2]} 5.2
- 5.2.
+SRC_R{treesPAR[2, 1]} 4.2 to SRC_R{treesPAR[2, 2]} 5.2.
 
 *** Confidence and Prediction Intervals
 
@@ -16129,25 +16101,16 @@ Using the =trees= data,
 
 1. Report a 95% confidence interval for the mean =Volume= of a tree of
    =Girth= 9.1 in and =Height= 69 ft. The 95% CI is given by
-   SRC_R{treesCI[1, 2]} 5.8
- 5.8 to SRC_R{treesCI[1, 3]} 10.8
- 10.8, so with 95%
+   SRC_R{treesCI[1, 2]} 5.8 to SRC_R{treesCI[1, 3]} 10.8, so with 95%
    confidence the mean =Volume= lies somewhere between
-   SRC_R{treesCI[1, 2]} 5.8
- 5.8 cubic feet and SRC_R{treesCI[1, 3]} 10.8
-
-   10.8 cubic feet.
+   SRC_R{treesCI[1, 2]} 5.8 cubic feet and SRC_R{treesCI[1, 3]} 10.8 cubic feet.
 2. Report a 95% prediction interval for the =Volume= of a hypothetical
    tree of =Girth= 12.5 in and =Height= 87 ft. The 95% prediction
-   interval is given by SRC_R{treesCI[3, 2]} 26.9
- 26.9 to
-   SRC_R{treesCI[3,3]} 33.8
-, so with 95% confidence we may assert that the
-   hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height= 87
-   ft would lie somewhere between SRC_R{treesCI[3, 2]} 26.9
- 26.9 cubic feet
-   and SRC_R{treesCI[3, 3]} 33.8
- 33.8 feet.
+   interval is given by SRC_R{treesCI[3, 2]} 26.9 to
+   SRC_R{treesCI[3,3]} 33.8, so with 95% confidence we may assert that
+   the hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height=
+   87 ft would lie somewhere between SRC_R{treesCI[3, 2]} 26.9
+   cubic feet and SRC_R{treesCI[3, 3]} 33.8 feet.
 
 #+END_exampletoo
 
@@ -16269,8 +16232,7 @@ treesumry$fstatistic
 : 254.9723   2.0000  28.0000
 
 For the =trees= data, we see that \( F = \)
-SRC_R{treesumry$fstatistic[ 1 ]} 254.972337410669
- 254.972337410669 with a /p/-value =<
+SRC_R{treesumry$fstatistic[ 1 ]} 254.972337410669 with a /p/-value =<
 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide
 strong evidence that not all \(\beta_{i}\)'s are zero.
 
@@ -18045,19 +18007,17 @@ A <- show(oneway_test(len ~ supp, data = ToothGrowth))
 B <- t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 #+END_SRC
 
-The \(p\)-value for the \(t\)-test was SRC_R{round(B$p.value, 3)} 0.03
-,
-while the permutation test \(p\)-value was SRC_R{round(A$p.value, 3)} 0.061
-
-0.061. Note that there is an underlying normality assumption for the
-\(t\)-test, which isn't present in the permutation test. If the
-normality assumption may be questionable, then the permutation test
-would be more reasonable. We see what can happen when using a test in
-a situation where the assumptions are not met: smaller
-\(p\)-values. In situations where the normality assumptions are not
-met, for example, small sample scenarios, the permutation test is to
-be preferred. In particular, if accuracy is very important then we
-should use the permutation test.
+The \(p\)-value for the \(t\)-test was SRC_R{round(B$p.value, 3)}
+0.03, while the permutation test \(p\)-value was
+SRC_R{round(A$p.value, 3)} 0.061. Note that there is an underlying
+normality assumption for the \(t\)-test, which isn't present in the
+permutation test. If the normality assumption may be questionable,
+then the permutation test would be more reasonable. We see what can
+happen when using a test in a situation where the assumptions are not
+met: smaller \(p\)-values. In situations where the normality
+assumptions are not met, for example, small sample scenarios, the
+permutation test is to be preferred. In particular, if accuracy is
+very important then we should use the permutation test.
 
 #+BEGIN_rem
 Here are some things about permutation tests to keep in mind.
@@ -20210,10 +20170,8 @@ own risk.
 
 One fine sunny day, Police Chief R. Runner called up the forensics
 department at Acme-Looney University. There had been
-SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166
- 166 murders in the past
-SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7
- 7 days, approximately
+SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166 murders in the past
+SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days, approximately
 one murder every hour, of many of the local Human workers, shop
 keepers, and residents of Toon Town. These alarming rates threatened
 to destroy the fragile balance of Toon and Human camaraderie that had
@@ -20270,10 +20228,8 @@ examine the case and begin solving these mysterious murders.
 "First off," Dr. Fudd-Einstein explained, "these people all worked at
 the University at some point or another. Also, there also seems to be
 a trend in the fact that they all had a =salary= between
-SRC_R{round(min(RcmdrTestDrive$salary))} 377
- 377 and
-SRC_R{round(max(RcmdrTestDrive$salary))} 1156
- 1156 when they retired."
+SRC_R{round(min(RcmdrTestDrive$salary))} 377 and
+SRC_R{round(max(RcmdrTestDrive$salary))} 1156 when they retired."
 
 "That’s not really a lot to live off of," explained Professor Bird.
 
@@ -20290,8 +20246,7 @@ Dr. Fudd-Einstein.
 
 "This coming Monday. But if there were all of these killings, how in
 the world could one person do it? It just doesn’t seem to be possible;
-stay up SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7
- 7 days
+stay up SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days
 straight and be able to kill all of these people and have the energy
 to continue on," Professor Bird exclaimed, doubting the guilt of only
 one person.
@@ -20403,10 +20358,8 @@ lots... wait a minute, take a look at this," Professor Bird said as he
 scrolled down in the police information. "Granny’s signature is on
 each of these faculty members’ =parking= tickets. Kind of odd,
 considering the Chief-of-Parking signed each personally. The deceased
-had from as few as SRC_R{min(RcmdrTestDrive$parking)} 1
- 1 ticket to as
-many as SRC_R{max(RcmdrTestDrive$parking)} 8
- 8. All tickets were unpaid.
+had from as few as SRC_R{min(RcmdrTestDrive$parking)} 1 ticket to as
+many as SRC_R{max(RcmdrTestDrive$parking)} 8. All tickets were unpaid.
 
 "And look at this, Granny married Old Man Acme after graduation. He
 was a resident of Chicago and rumored to be a consigliere to one of
@@ -20435,15 +20388,11 @@ up."
 "What do you mean?" inquired Professor Bird.
 
 "Well, look here. The data file from the Chief's email shows
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168 murders, but there have only been
-SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166
- 166. This doesn’t make any
+SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 murders, but there have only been
+SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166. This doesn’t make any
 sense. I’ll have to straighten it out. Hey, wait a minute. Look at
-this, Person number SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} 167
- 167 and Person
-number SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168 seem to match our
+this, Person number SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} 167 and Person
+number SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 seem to match our
 stats. But how can that be?"
 
 It was at this moment that our two heroes were shot from behind and
@@ -20452,8 +20401,7 @@ and walked out slowly (considering they had arthritis) and cackling
 loudly in the now quiet computer lab.
 
 And so, I guess my question to you the reader is, did Granny murder
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168
- 168 people, or did the murderer slip
+SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 people, or did the murderer slip
 through the cracks of justice? You be the statistician and come to
 your own conclusion.
 
@@ -20477,8 +20425,6 @@ Detective Pyork E. Pig
 \printindex{}
 #+end_latex
 
-
-
-
-
-
+#+BEGIN_SRC R :exports none :results silent
+save.image("R/IPSUR.RData")
+#+END_SRC
