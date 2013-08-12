@@ -33,11 +33,14 @@ all:
 
 latex:
 	-mkdir $(texdir)
-	-mkdir $(psdir)
 	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-cd $(texdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(texdir)/$(orgfile).pdf $(texdir)/$(orgfile).ps
 	-rm -r ~/.org-timestamps
+
+figures:
+	-mkdir $(psdir)
+	emacs -Q --batch --eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (find-file \"~/git/IPSUR/IPSUR.org\") (org-babel-execute-buffer) (kill-buffer))"
 
 backup:
 	-mkdir $(backdir)
