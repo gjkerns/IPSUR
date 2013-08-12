@@ -6,7 +6,7 @@
 Introduction to Probability and Statistics Using R
 }
 \description{
-This package contains the Emacs Org Mode source code used to generate IPSUR, an introductory probability and statistics textbook, alongside other supplementary materials.  The book is released under the GNU Free Documentation License.
+This package contains the GNU-Emacs Org Mode source code used to generate IPSUR, an introductory probability and statistics textbook, alongside other supplementary materials.  The book is released under the GNU Free Documentation License.
 }
 \details{
 \tabular{ll}{
