@@ -5153,11 +5153,18 @@ same: =1/choose(52,2)=.
 
 Putting all of this together we do 
 
-#+BEGIN_SRC R :exports code :results silent :eval never
+#+BEGIN_SRC R :exports code :results output pp :cache yes
 L <- cards()
 M <- urnsamples(L, size = 2)
 N <- probspace(M)
+N[[1]][[1]];  N$probs[1]
 #+END_SRC
+
+#+RESULTS[8abfbbaacd3af28ad892eff896d2918972f4d9bd]:
+:   rank suit
+: 1    2 Club
+: 2    3 Club
+: [1] 0.0007541478
 
 Now that we have the probability space =N= we are ready to do some
 probability. We use the =prob= function, just like before. The only
@@ -5166,7 +5173,7 @@ we were interested in \(\mathbb{P}(\mbox{both Aces})\). But if the
 cards are both Aces then the =rank= of both cards should be =A=, which
 sounds like a job for the =all= function:
 
-#+BEGIN_SRC R :exports both :results output pp :eval never
+#+BEGIN_SRC R :exports both :results output pp
 prob::prob(N, all(rank == "A"))
 #+END_SRC
 

@@ -1,4 +1,14 @@
 
+# Preliminary code to load before start
+# clear everything to start
+rm(list = ls())
+# initial customizations
+seed <- 42
+set.seed(seed)
+options(width = 60)
+options(useFancyQuotes = FALSE)
+cexlab <- 1.5
+# load packages needed by the book
 library("actuar")
 library("aplpack")
 library("boot")    # already recommended package

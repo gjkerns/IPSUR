@@ -19,9 +19,10 @@
 psdir   = ps
 pdfdir  = pdf
 htmldir = html
-texdir = tex
+texdir  = tex
 orgfile = IPSUR
 backdir = backup
+Rdir    = R
 
 all:
 	-mkdir $(texdir)
@@ -42,6 +43,10 @@ figures:
 	-mkdir $(psdir)
 	emacs -Q --batch --eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (find-file \"~/git/IPSUR/IPSUR.org\") (org-babel-execute-buffer) (kill-buffer))"
 
+Rtangle:
+	-mkdir $(Rdir)
+	emacs -Q --batch --eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (find-file \"~/git/IPSUR/IPSUR.org\") (org-babel-tangle) (kill-buffer))"
+
 backup:
 	-mkdir $(backdir)
 	cp $(texdir)/$(orgfile).pdf $(backdir)/$(orgfile).pdf 
@@ -54,4 +59,5 @@ distclean:
 	-rm -r $(texdir)
 	-rm -r $(psdir)
 	-rm -r $(backdir)
+	-rm -r $(Rdir)
 	-rm -r ~/.org-timestamps
