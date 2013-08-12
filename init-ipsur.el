@@ -16,7 +16,6 @@
 ;;    You should have received a copy of the GNU General Public License
 ;;    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-
 (defvar org-dist "~/git/org-mode")
 (add-to-list 'load-path (concat org-dist "/lisp"))
 (add-to-list 'load-path (concat org-dist "/contrib/lisp"))
