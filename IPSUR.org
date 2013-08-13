@@ -4506,9 +4506,9 @@ prob::prob(S, suit == "Heart")
 : [1] 0.25
 
 We also find =prob::prob(B) = 0.23= (listed here approximately, but
-12/52 actually) and =prob::prob(S) = 1=. Internally, the =prob=
-function operates by summing the =probs= column of its argument. It
-will find subsets on-the-fly if desired.
+12/52 actually). Internally, the =prob= function operates by summing
+the =probs= column of its argument. It will find subsets on-the-fly if
+desired.
 
 We have as yet glossed over the details. More specifically, =prob= has
 three arguments: =x=, which is a probability space (or a subset of
@@ -5532,7 +5532,8 @@ a vector of possible outcomes.
 
 Note that =iidspace= will assume =x= has equally likely outcomes if no
 =probs= argument is specified. Also note that the argument =x= is a
-/vector/, not a data frame. Something like =iidspace(tosscoin(1),...)=
+/vector/, not a data frame. Something like 
+: iidspace(tosscoin(1),...)
 would give an error.
 
 ** Bayes' Rule
@@ -6355,9 +6356,11 @@ follow.
 
 *** With the \(\mathsf{R}\) Commander:
 
-Follow the sequence =Probability= \(\triangleright\) =Discrete
-Distributions= \(\triangleright\) =Discrete Uniform distribution=
-\(\triangleright\) =Simulate Discrete uniform variates...=.
+Follow the sequence 
+1. =Probability= \(\triangleright\) 
+2. =Discrete Distributions= \(\triangleright\) 
+3. =Discrete Uniform distribution= \(\triangleright\) 
+4. =Simulate Discrete uniform variates...=.
 
 Suppose we would like to roll a fair die 3000 times. In the =Number of
 samples= field we enter =1=. Next, we describe what interval of
@@ -7054,11 +7057,12 @@ defective processors. A quality control consultant randomly collects 5
 processors for inspection to determine whether or not they are
 defective. Let \(X\) denote the number of defectives in the sample.
 
-Find the probability of exactly 3 defectives in the sample, that is, find \(\mathbb{P}(X=3)\).  /Solution:/ We know that \(X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)\). So the required probability is just
-\[
-f_{X}(3)=\frac{{17 \choose 3}{233 \choose 2}}{{250 \choose 5}}.
-\]
-To calculate it in \(\mathsf{R}\) we just type 
+Find the probability of exactly 3 defectives in the sample, that is,
+find \(\mathbb{P}(X=3)\).  /Solution:/ We know that
+\(X\sim\mathsf{hyper}(\mathtt{m}=17,\,\mathtt{n}=233,\,\mathtt{k}=5)\). So
+the required probability is just \[ f_{X}(3)=\frac{{17 \choose 3}{233
+\choose 2}}{{250 \choose 5}}.  \] To calculate it in \(\mathsf{R}\) we
+just type
 
 #+BEGIN_SRC R :exports both :results output pp  
 dhyper(3, m = 17, n = 233, k = 5)
@@ -7067,11 +7071,14 @@ dhyper(3, m = 17, n = 233, k = 5)
 #+RESULTS:
 : [1] 0.002351153
 
-To find it with the \(\mathsf{R}\) Commander we go =Probability=
-\(\triangleright\) =Discrete Distributions= \(\triangleright\)
-=Hypergeometric distribution= \(\triangleright\) =Hypergeometric
-probabilities...=. We fill in the parameters \(m=17\), \(n=233\), and
-\(k=5\). Click =OK=, and the following table is shown in the window.
+To find it with the \(\mathsf{R}\) Commander we go 
+1. =Probability= \(\triangleright\) 
+2. =Discrete Distributions= \(\triangleright\) 
+3. =Hypergeometric distribution= \(\triangleright\) 
+4. =Hypergeometric probabilities...=. 
+
+We fill in the parameters \(m = 17\), \(n = 233\), and \(k =
+5\). Click =OK=, and the following table is shown in the window.
 
 #+BEGIN_SRC R :exports both :results output pp  
 A <- data.frame(Pr=dhyper(0:4, m = 17, n = 233, k = 5))
@@ -8933,7 +8940,8 @@ For the plot we can use the function in the following form:
 
 #+NAME: gamma-mgf
 #+BEGIN_SRC R :exports both :results graphics :file ps/contdist-gamma-mgf.ps
-plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
+plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, 
+     from=-0.1, to=0.1, ylab = "gamma mgf")
 #+END_SRC
 
 #+NAME: fig-gamma-mgf
@@ -9418,10 +9426,10 @@ colSums(temp)
 #+RESULTS:
 :          1          2          3          4          5          6 
 : 0.02777778 0.08333333 0.13888889 0.19444444 0.25000000 0.30555556
-:          2          3          4          5          6          7          8          9 
-: 0.02777778 0.05555556 0.08333333 0.11111111 0.13888889 0.16666667 0.13888889 0.11111111 
-:         10         11         12 
-: 0.08333333 0.05555556 0.02777778
+:          2          3          4          5          6          7
+: 0.02777778 0.05555556 0.08333333 0.11111111 0.13888889 0.16666667 
+:          8          9         10         11         12
+: 0.13888889 0.11111111 0.08333333 0.05555556 0.02777778
 
 You should check that the answers that we have obtained exactly match
 the same (somewhat laborious) calculations that we completed in
@@ -13809,7 +13817,9 @@ to =abline= are the coefficients of =cars.lm=; see Figure
 
 #+NAME: carline
 #+BEGIN_SRC R :exports both :results graphics :file ps/slr-carline.ps
-ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + geom_smooth(method = lm, se = FALSE)
+ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point(shape = 19) + 
+  geom_smooth(method = lm, se = FALSE)
 #+END_SRC
 
 #+NAME: fig-carline
@@ -15494,7 +15504,8 @@ the result is shown in Figure [[fig-3D-scatterplot-trees]].
 
 #+NAME: 3D-scatterplot-trees
 #+BEGIN_SRC R :exports both :results graphics :file ps/mlr-3D-scatterplot-trees.ps
-s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
+s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, 
+                                 highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
 #+END_SRC
 
