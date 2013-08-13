@@ -4303,8 +4303,9 @@ For any events \(A\) and \(B\),
    The left inequality is immediate from Axiom [[ax-prob-nonnegative]], and the second inequality follows from Property 3 since \(A\subset S\).
    #+END_proof
 
-1. *The General Addition Rule.* <<eq-general-addition-rule-1>>
+1. *The General Addition Rule.*
    \begin{equation}
+   \label{eq-general-addition-rule-1}
    \mathbb{P}(A\cup B)=\mathbb{P}(A)+\mathbb{P}(B)-\mathbb{P}(A\cap B).
    \end{equation}
    More generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),..., \(A_{n}\),
@@ -4313,8 +4314,8 @@ For any events \(A\) and \(B\),
    \end{equation}
 1. *The Theorem of Total Probability.* Let \(B_{1}\), \(B_{2}\), ...,
    \(B_{n}\) be mutually exclusive and exhaustive. Then
-   <<eq-theorem-total-probability>>
    \begin{equation}
+   \label{eq-theorem-total-probability}
    \mathbb{P}(A)=\mathbb{P}(A\cap B_{1})+\mathbb{P}(A\cap B_{2})+\cdots+\mathbb{P}(A\cap B_{n}).
    \end{equation}
 
@@ -4643,8 +4644,9 @@ members is
 #+END_prop
 
 The quantity \(n!/[k!(n-k)!]\) is called a /binomial coefficient/ and
-plays a special role in mathematics; it is denoted <<eq-binomial-coefficient>> 
+plays a special role in mathematics; it is denoted  
 \begin{equation}
+\label{eq-binomial-coefficient}
 {n \choose k}=\frac{n!}{k!(n-k)!}
 \end{equation}
 and is read "\(n\) choose \(k\)".
@@ -5087,13 +5089,14 @@ For any events \(A\), \(B\), and \(C\) with \(\mathbb{P}(A)>0\),
 3. \( \mathbb{P} [ ( B\cup C ) | A ] = \mathbb{P} (B|A) +
    \mathbb{P}(C|A) - \mathbb{P} [ (B \cap C|A) ].\)
 4. *The Multiplication Rule.* For any two events \(A\) and \(B\),
-   <<eq-multiplication-rule-short>>
    \begin{equation}
+   \label{eq-multiplication-rule-short}
    \mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B|A).
    \end{equation}
    And more generally, for events \(A_{1}\), \(A_{2}\), \(A_{3}\),...,
-   \(A_{n}\), <<eq-multiplication-rule-long>> 
+   \(A_{n}\),
    \begin{equation}
+   \label{eq-multiplication-rule-long}
    \mathbb{P}(A_{1}\cap A_{2}\cap\cdots\cap A_{n})=\mathbb{P}(A_{1})\mathbb{P}(A_{2}|A_{1})\cdots\mathbb{P}(A_{n}|A_{1}\cap A_{2}\cap\cdots\cap A_{n-1}).
    \end{equation}
 #+END_prop
@@ -5393,11 +5396,10 @@ If the events \(A\) and \(B\) are independent then
 
 #+BEGIN_proof
 Suppose that \(A\) and \(B\) are independent. We will show the second
-one; the others are similar. We need to show that
-\[
-\mathbb{P}(A^{c}\cap B)=\mathbb{P}(A^{c})\mathbb{P}(B).
-\]
-To this end, note that the Multiplication Rule, Equation [[eq-multiplication-rule-short]] implies 
+one; the others are similar. We need to show that \[
+\mathbb{P}(A^{c}\cap B)=\mathbb{P}(A^{c})\mathbb{P}(B).  \] To this
+end, note that the Multiplication Rule, Equation
+\eqref{eq-multiplication-rule-short} implies
 \begin{eqnarray*}
 \mathbb{P}(A^{c}\cap B) & = & \mathbb{P}(B)\mathbb{P}(A^{c}|B),\\
  & = & \mathbb{P}(B)[1-\mathbb{P}(A|B)],\\
@@ -5546,25 +5548,23 @@ available.
 exclusive and exhaustive and let \(A\) be an event with
 \(\mathbb{P}(A)>0\). Then
 \begin{equation}
-<<eq-bayes-rule>> \mathbb{P}(B_{k}|A)=\frac{\mathbb{P}(B_{k})\mathbb{P}(A|B_{k})}{\sum_{i=1}^{n}\mathbb{P}(B_{i})\mathbb{P}(A|B_{i})},\quad k=1,2,\ldots,n.
+\label{eq-bayes-rule}
+\mathbb{P}(B_{k}|A)=\frac{\mathbb{P}(B_{k})\mathbb{P}(A|B_{k})}{\sum_{i=1}^{n}\mathbb{P}(B_{i})\mathbb{P}(A|B_{i})},\quad k=1,2,\ldots,n.
 \end{equation}
 #+END_thm
 
 #+BEGIN_proof
 The proof follows from looking at \(\mathbb{P}(B_{k}\cap A)\) in two
 different ways. For simplicity, suppose that \(P(B_{k})>0\) for all
-\(k\). Then
-\[
-\mathbb{P}(A)\mathbb{P}(B_{k}|A)=\mathbb{P}(B_{k}\cap A)=\mathbb{P}(B_{k})\mathbb{P}(A|B_{k}).
-\]
-Since \(\mathbb{P}(A)>0\) we may divide through to obtain 
-\[
+\(k\). Then \[ \mathbb{P}(A)\mathbb{P}(B_{k}|A)=\mathbb{P}(B_{k}\cap
+A)=\mathbb{P}(B_{k})\mathbb{P}(A|B_{k}).  \] Since \(\mathbb{P}(A)>0\)
+we may divide through to obtain \[
 \mathbb{P}(B_{k}|A)=\frac{\mathbb{P}(B_{k})\mathbb{P}(A|B_{k})}{\mathbb{P}(A)}.
-\]
-Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation [[eq-theorem-total-probability]]) gives the denominator of the last expression to be
-\[
-\mathbb{P}(A)=\sum_{k=1}^{n}\mathbb{P}(B_{k}\cap A)=\sum_{k=1}^{n}\mathbb{P}(B_{k})\mathbb{P}(A|B_{k}).
-\]
+\] Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of
+Total Probability (Equation \eqref{eq-theorem-total-probability} )
+gives the denominator of the last expression to be \[
+\mathbb{P}(A)=\sum_{k=1}^{n}\mathbb{P}(B_{k}\cap
+A)=\sum_{k=1}^{n}\mathbb{P}(B_{k})\mathbb{P}(A|B_{k}).  \]
 #+END_proof
 
 What does it mean? Usually in applications we are given (or know) /a
@@ -5670,21 +5670,15 @@ Now let's find the denominator, \(\mathbb{P}(A)\). The key here is the
 notion that if a file is misplaced, then either Moe or Larry or Curly
 must have filed it; there is no one else around to do the
 misfiling. Further, these possibilities are mutually exclusive. We may
-use the Theorem of Total Probability [[eq-theorem-total-probability]] to write
-\[ 
-\mathbb{P}(A)=\mathbb{P}(A\cap M)+\mathbb{P}(A\cap L)+\mathbb{P}(A\cap C).
-\]
-Luckily, we have computed these above. Thus
-\[
-\mathbb{P}(A)=0.0018+0.0021+0.0010=0.0049.
-\]
-Therefore, Bayes' Rule yields
-\[
-\mathbb{P}(M|A)=\frac{0.0018}{0.0049}\approx0.37.
-\]
-This last quantity is called the posterior probability that Moe
-misfiled the document, since it incorporates the observed data that a
-randomly selected file was misplaced (which is governed by the misfile
+use the Theorem of Total Probability
+\eqref{eq-theorem-total-probability} to write \[
+\mathbb{P}(A)=\mathbb{P}(A\cap M)+\mathbb{P}(A\cap L)+\mathbb{P}(A\cap
+C).  \] Luckily, we have computed these above. Thus \[
+\mathbb{P}(A)=0.0018+0.0021+0.0010=0.0049.  \] Therefore, Bayes' Rule
+yields \[ \mathbb{P}(M|A)=\frac{0.0018}{0.0049}\approx0.37.  \] This
+last quantity is called the posterior probability that Moe misfiled
+the document, since it incorporates the observed data that a randomly
+selected file was misplaced (which is governed by the misfile
 rate). We can use the same argument to calculate
 
 #+CAPTION: [Misfiling assistants: posterior]{}
@@ -7274,7 +7268,7 @@ give the PMF, CDF, quantile function, and simulate random variates,
 respectively.
 
 Again it is clear that \(f(x)\geq0\) and we check that \(\sum f(x)=1\)
-(see Equation [[eq-geom-series]] in Appendix [[#sec-Sequences-and-Series]]):
+(see Equation \eqref{eq-geom-series} in Appendix [[#sec-Sequences-and-Series]]):
 \begin{alignat*}{1}
 \sum_{x=0}^{\infty}p(1-p)^{x}= & p\sum_{x=0}^{\infty}q^{x}=p\,\frac{1}{1-q}=1.
 \end{alignat*}
@@ -8030,7 +8024,7 @@ The associated \(\mathsf{R}\) function is
 \(\mathsf{dunif}(\mathtt{min}=a,\,\mathtt{max}=b)\). We write
 \(X\sim\mathsf{unif}(\mathtt{min}=a,\,\mathtt{max}=b)\). Due to the
 particularly simple form of this PDF we can also write down explicitly
-a formula for the CDF \(F_{X}\): @@latex:\begin{equation} <<eq-unif-cdf>> F_{X}(t) = \begin{cases} 0, & t < 0,\\ \frac{t-a}{b-a}, & a\leq t < b,\\ 1, & t \geq b. \end{cases} \end{equation}@@
+a formula for the CDF \(F_{X}\): @@latex:\begin{equation} \label{eq-unif-cdf} F_{X}(t) = \begin{cases} 0, & t < 0,\\ \frac{t-a}{b-a}, & a\leq t < b,\\ 1, & t \geq b. \end{cases} \end{equation}@@
 
 The continuous uniform distribution is the continuous analogue of the
 discrete uniform distribution; it is used to model experiments whose
@@ -8329,12 +8323,13 @@ would be a good time to review Appendix [[#sec-Differential-and-Integral]].
 \(g\) be a function which is one-to-one with a differentiable inverse
 \(g^{-1}\). Then the PDF of \(U=g(X)\) is given by
 \begin{equation}
-<<eq-univ-trans-pdf-long>> f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.
+\label{eq-univ-trans-pdf-long}
+f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1}(u)\right|.
 \end{equation}
 #+END_prop
 
 #+BEGIN_rem
-The formula in Equation [[eq-univ-trans-pdf-long]] is nice, but does not
+The formula in Equation \eqref{eq-univ-trans-pdf-long} is nice, but does not
 really make any sense. It is better to write in the intuitive form
 \begin{equation}
 \label{eq-univ-trans-pdf-short}
@@ -8444,7 +8439,7 @@ function is /monotone/ (this point will be revisited later). Now since
 \mathrm{e}^{-y})=1-\mathbb{P}(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \] Now recalling that the CDF of a
 \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable
-satisfies \(F(u)=u\) (see Equation [[eq-unif-cdf]]), we can say \[
+satisfies \(F(u)=u\) (see Equation \eqref{eq-unif-cdf}), we can say \[
 F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad \mbox{for
 }y>0.  \] We have consequently found the formula for the CDF of \(Y\);
 to obtain the PDF \(f_{Y}\) we need only differentiate \(F_{Y}\): \[
@@ -9097,7 +9092,8 @@ all of \(\mathbb{R}^{2}\) by setting \(f_{X,Y}(x,y)=0\) for
 In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are
 called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are
 given only the joint PMF then we may recover each of the marginal PMFs
-by using the Theorem of Total Probability (see Equation [[eq-theorem-total-probability]]): observe
+by using the Theorem of Total Probability (see Equation
+\eqref{eq-theorem-total-probability}): observe
 \begin{eqnarray}
 f_{X}(x) & = & \mathbb{P}(X=x),\\
  & = & \sum_{y\in S_{Y}}\mathbb{P}(X=x,\, Y=y),\\
@@ -9122,7 +9118,7 @@ function/ \(F_{X,Y}\) defined by \[ F_{X,Y}(x,y)=\mathbb{P}(X\leq x,\,
 Y\leq y),\quad \mbox{for }(x,y)\in\mathbb{R}^{2}.  \] The bivariate
 joint CDF is not quite as tractable as the univariate CDFs, but in
 principle we could calculate it by adding up quantities of the form in
-Equation [[eq-joint-pmf]]. The joint CDF is typically not used in practice due to
+Equation \eqref{eq-joint-pmf}. The joint CDF is typically not used in practice due to
 its inconvenient form; one can usually get by with the joint PMF
 alone.
 
@@ -9256,7 +9252,7 @@ we did in Example [[exa-toss-two-dice-joint-pmf]]. See Table [[tab-max-sum-joint
 The joint support of \((U,V)\) is concentrated along the main
 diagonal; note that the nonzero entries do not form a rectangle. Also
 notice that if we form row and column totals we are doing exactly the
-same thing as Equation [[eq-marginal-pmf]], so that the marginal
+same thing as Equation \eqref{eq-marginal-pmf}, so that the marginal
 distribution of \(U\) is the list of totals in the right "margin" of
 the Table [[tab-max-sum-joint-pmf]], and the marginal distribution of \(V\) is the
 list of totals in the bottom "margin".
@@ -9594,7 +9590,7 @@ was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
-Compare the above expression to Equation [[eq-bayes-rule]].
+Compare the above expression to Equation \eqref{eq-bayes-rule}.
 
 #+BEGIN_exampletoo
 
@@ -10094,8 +10090,8 @@ or we can rewrite more shortly as
 \label{eq-biv-trans-pdf-short}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.
 \end{equation}
-Take a moment and compare Equation [[eq-biv-trans-pdf-short]] to Equation
-[[eq-univ-trans-pdf-short]]. Do you see the connection?
+Take a moment and compare Equation \eqref{eq-biv-trans-pdf-short} to Equation
+\eqref{eq-univ-trans-pdf-short}. Do you see the connection?
 
 #+BEGIN_rem
 It is sometimes easier to /postpone/ solving for the inverse
@@ -10119,7 +10115,7 @@ shorter. Of course, it is not always true that
 \end{equation}
 but for the well-behaved examples that we will see in this book it
 works just fine... do you see the connection between Equations
-[[eq-biv-jacob-recip]] and [[eq-univ-jacob-recip]]?
+\eqref{eq-biv-jacob-recip} and \eqref{eq-univ-jacob-recip}?
 #+END_rem
 
 
@@ -10153,7 +10149,7 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 
 
 #+BEGIN_rem
-It may not be obvious, but Equation [[eq-biv-norm-hidden]] is the PDF of a
+It may not be obvious, but Equation \eqref{eq-biv-norm-hidden} is the PDF of a
 \(\mathsf{mvnorm}\) distribution. For a more general result see
 Theorem [[thm-mvnorm-dist-matrix-prod]].
 #+END_rem
@@ -10316,7 +10312,7 @@ that look like
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}
 where we sum over all possible coins. The right-hand side of Equation
-[[eq-definetti-binary]] is a sophisticated way to denote this process.
+\eqref{eq-definetti-binary} is a sophisticated way to denote this process.
 
 Of course, the integral's value does not change if we jumble the
 \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The
@@ -10327,8 +10323,8 @@ The connection to subjective probability: our prior information about
 \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of
 the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on
 \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum
-x_{i}}\). Compare Equation [[eq-definetti-binary]] to Section [[#sec-Bayes-Rule]]
-and Section [[#sec-Conditional-Distributions]].
+x_{i}}\). Compare Equation \eqref{eq-definetti-binary} to Section
+[[#sec-Bayes-Rule]] and Section [[#sec-Conditional-Distributions]].
 
 The multivariate normal distribution immediately generalizes from the
 bivariate case. If the matrix \(\Sigma\) is nonsingular then the joint
@@ -10398,7 +10394,8 @@ Several comments are in order. First, the joint support set
 {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}=\frac{n!}{x_{1}!\, x_{2}!\,\cdots x_{k}!}
 \end{equation}
 is called a /multinomial coefficient/ which generalizes the notion of
-a binomial coefficient we saw in Equation [[eq-binomial-coefficient]].
+a binomial coefficient we saw in Equation
+\eqref{eq-binomial-coefficient}.
 
 The form and notation we have just described matches the
 \(\mathsf{R}\) usage but is not standard among other texts. Most other
@@ -10530,7 +10527,7 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and
 \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the
 distribution of \(X+Y\) (you may want to refer to Equation
-[[eq-mgf-chisq]]).
+\eqref{eq-mgf-chisq}).
 #+END_xca
 
 #+BEGIN_xca
@@ -11018,7 +11015,7 @@ are given by Proposition [[pro-mean-sd-lin-comb-two]].
 
 #+BEGIN_rem
 Even if the distribution of one or both of the samples is not normal,
-the quantity in Equation [[eq-diff-indep-sample-means]] will be
+the quantity in Equation \eqref{eq-diff-indep-sample-means} will be
 approximately normal provided both sample sizes are large.
 #+END_rem
 
@@ -11797,10 +11794,10 @@ But now consider the following string of equivalent inequalities:
 -z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\overline{X}-\mu\leq z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
 \]
 \[
--\overline{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq-\mu\leq-\overline{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right),
+-\overline{X} - z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq - \mu \leq - \overline{X} + z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right),
 \]
 \[
-\overline{X}-z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right)\leq\mu\leq\overline{X}+z_{\alpha/2}\left(\frac{\sigma}{\sqrt{n}}\right).
+\overline{X} - z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right) \leq \mu \leq \overline{X} + z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right).
 \]
 That is, 
 \begin{equation}
@@ -11858,7 +11855,7 @@ ci.examp()
 #+END_SRC
 
 #+NAME: fig-ci-examp
-#+CAPTION[Simulated confidence intervals]: \small The graph was generated by the =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95% confidence interval for the population mean using Equation \ref{eq-z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that "cover" the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.
+#+CAPTION[Simulated confidence intervals]: \small The graph was generated by the =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95% confidence interval for the population mean using Equation \eqref{eq-z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that "cover" the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.
 #+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
 #+RESULTS: ci-examp
 [[file:ps/hypoth-ci-examp.ps]]
@@ -11996,9 +11993,9 @@ where \(S\) is the sample standard deviation.
      \label{eq-one-samp-t-int}
      \overline{X}\pm t_{\alpha/2}(\mathtt{df}=n-1)\frac{S}{\sqrt{n}}.
      \end{equation}
-   - if the underlying population is not normal, but approximately
+   - If the underlying population is not normal, but approximately
      normal, then we may use the \(t\) interval, Equation
-     [[eq-one-samp-t-int]]. The interval will have approximately
+     \eqref{eq-one-samp-t-int}. The interval will have approximately
      \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if
      the population is highly skewed or the data have outliers, then
      we should ask a professional statistician for advice.
@@ -12115,7 +12112,7 @@ Unfortunately, most of the time the values of \(\sigma_{X}\) and
 - If both sample sizes are large, then we may appeal to the CLT/SLLN
   (see Section [[#sec-Central-Limit-Theorem]]) and substitute \(S_{X}^{2}\) and
   \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the
-  interval [[eq-two-samp-mean-CI]]. The resulting confidence interval will
+  interval \eqref{eq-two-samp-mean-CI}. The resulting confidence interval will
   have approximately \(100(1-\alpha)\%\) confidence.
 - If one or more of the sample sizes is small then we are in trouble,
   unless -the underlying populations are both normal and
@@ -12210,7 +12207,7 @@ confidence interval for \(p\) would be given by
 \label{eq-ci-p-no-good}
 \overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.
 \end{equation}
-OOPS...! Equation [[eq-ci-p-no-good]] is of no use to us because the
+OOPS...! Equation \eqref{eq-ci-p-no-good} is of no use to us because the
 \underbar{unknown} parameter \(p\) is in the formula! (If we knew what
 \(p\) was to plug in the formula then we would not need a confidence
 interval in the first place.) There are two solutions to this problem.
@@ -12386,7 +12383,7 @@ E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.
 \end{align}
 OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\)
-on both sides of Equation [[eq-samp-size-prop-ME]]. Again, there are two
+on both sides of Equation \eqref{eq-samp-size-prop-ME}. Again, there are two
 solutions to the problem.
 
 1. If we have a good idea of what \(p\) is, say \(p^{\ast}\) then we
@@ -13711,7 +13708,7 @@ and the partial derivative equals zero when \(
 n \beta_{0} + \beta_{1} \sum_{i=1}^{n} x_{i} = \sum_{i = 1}^{n}y_{i}.
 \end{equation}
 Moving on, we next take the partial derivative of \( \ln L \)
-(Equation [[eq-regML-lnL]]) with respect to \( \beta_{1} \) to get
+(Equation \eqref{eq-regML-lnL}) with respect to \( \beta_{1} \) to get
 \begin{alignat}{1} \frac{\partial}{\partial\beta_{1}}\ln L=\ &
 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\ =
 &
@@ -13722,7 +13719,7 @@ is, when
 \label{eq-regML-b}
 \beta_{0} \sum_{i = 1}^{n}x_{i} + \beta_{1} \sum_{i = 1}^{n}x_{i}^{2} = \sum_{i = 1}^{n}x_{i}y_{i}.
 \end{equation}
-Solving the system of equations [[eq-regML-a]] and [[eq-regML-b]]
+Solving the system of equations \eqref{eq-regML-a} and \eqref{eq-regML-b}
 \begin{eqnarray}
 n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \beta_{0}\sum_{i = 1}^{n}x_{i}+\beta_{1}\sum_{i = 1}^{n}x_{i}^{2} & = & \sum_{i = 1}^{n}x_{i}y_{i}
@@ -13751,7 +13748,7 @@ above. For notation we will usually write \( b_{0} = \hat{\beta_{0}}
 b_{1}x \).
 
 #+BEGIN_rem
-The formula for \( b_{1} \) in Equation [[eq-regline-slope-formula]] gets
+The formula for \( b_{1} \) in Equation \eqref{eq-regline-slope-formula} gets
 the job done but does not really make any sense. There are many
 equivalent formulas for \( b_{1} \) that are more intuitive, or at the
 least are easier to remember. One of the author's favorites is
@@ -13763,8 +13760,8 @@ where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation
 coefficient and the sample standard deviations of the \(Y\) and \(x\)
 data, respectively. See Exercise
 [[xca-show-alternate-slope-formula]]. Also, notice the similarity between
-Equation [[eq-sample-correlation-formula]] and Equation
-[[eq-population-slope-slr]].
+Equation \eqref{eq-sample-correlation-formula} and Equation
+\eqref{eq-population-slope-slr}.
 #+END_rem
 
 **** How to do it with \(\mathsf{R}\)
@@ -14025,7 +14022,7 @@ for the parameter being estimated. We will continue in that vein, and
 to get started we will determine the sampling distributions of the
 parameter estimates, \(b_{1}\) and \(b_{0}\).
 
-To that end, we can see from Equation [[eq-regline-slope-formula]] (and it
+To that end, we can see from Equation \eqref{eq-regline-slope-formula} (and it
 is made clear in Chapter [[#cha-multiple-linear-regression]]) that \(b_{1}\) is
 just a linear combination of normally distributed random variables, so
 \(b_{1}\) is normally distributed too. Further, it can be shown that
@@ -14191,9 +14188,9 @@ Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \(
 \hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
 We notice that the prediction interval in Equation
-[[eq-SLR-pred-int-formula]] is wider than the confidence interval in
-Equation [[eq-SLR-conf-int-formula]], as we expected at the beginning of
-the section.
+\eqref{eq-SLR-pred-int-formula} is wider than the confidence interval
+in Equation \eqref{eq-SLR-conf-int-formula}, as we expected at the
+beginning of the section.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -14286,9 +14283,9 @@ We earlier guessed that a bound on the value of a single new
 observation would be inherently less certain than a bound for an
 average (mean) value; therefore, we expect the CIs for the mean to be
 tighter than the PIs for a new observation. A close look at the
-standard deviations in Equations [[eq-SLR-conf-int-formula]] and
-[[eq-SLR-pred-int-formula]] confirms our guess, but we would like to see a
-picture to drive the point home.
+standard deviations in Equations \eqref{eq-SLR-conf-int-formula} and
+\eqref{eq-SLR-pred-int-formula} confirms our guess, but we would like
+to see a picture to drive the point home.
 
 We may plot the confidence and prediction intervals with one fell
 swoop using the =ci.plot= function from the =HH= package
@@ -14302,8 +14299,8 @@ ci.plot(cars.lm)
 Notice that the bands curve outward from the regression line as the
 \(x\) values move away from the center. This is expected once we
 notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation
-formulas in Equations [[eq-SLR-conf-int-formula]] and
-[[eq-SLR-pred-int-formula]].
+formulas in Equations \eqref{eq-SLR-conf-int-formula} and
+\eqref{eq-SLR-pred-int-formula}.
 
 #+NAME: carscipi
 #+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscipi.ps
@@ -14550,7 +14547,7 @@ All this being said, we have not yet gained much from the overall
 [[#sub-slr-hypoth-test-params]] how to test \(H_{0}:\beta_{1} =
 0\)... we use the Student's \(t\) statistic. What is worse is that (in
 the simple linear regression model) it can be proved that the \(F\) in
-Equation [[eq-slr-overall-F-statistic]] is exactly the Student's
+Equation \eqref{eq-slr-overall-F-statistic} is exactly the Student's
 \(t\) statistic for \(\beta_{1}\) squared,
 
 \begin{equation}
@@ -14942,7 +14939,7 @@ and their sum is
 
 A rule of thumb is to consider leverage values to be large if they are
 more than double their average size (which is \(2/n\) according to
-Equation [[eq-slr-average-leverage]]). So leverages larger than \(4/n\)
+Equation \eqref{eq-slr-average-leverage}). So leverages larger than \(4/n\)
 are suspect. Another rule of thumb is to say that values bigger than
 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate
 moderate leverage.
@@ -14972,8 +14969,8 @@ t_{i}=\frac{D_{i}}{S_{(i)}/(1-h_{ii})},\quad i=1,2,\ldots,n,
 have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed values of \(t_{i}\) to this distribution to decide whether or not an observation is extreme. 
 
 The folklore in regression classes is that a test based on the
-statistic in Equation [[eq-slr-studentized-deleted-resids]] can be too
-liberal. A rule of thumb is if we suspect an observation to be an
+statistic in Equation \eqref{eq-slr-studentized-deleted-resids} can be
+too liberal. A rule of thumb is if we suspect an observation to be an
 outlier /before/ seeing the data then we say it is significantly
 outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if
 we suspect an observation to be an outlier /after/ seeing the data
@@ -15149,7 +15146,7 @@ of thumb is to classify observations falling higher than the
 
 [fn:fn-cook] Cook's distances are actually defined by a different
 formula than the one shown. The formula in Equation
-\ref{eq-slr-cooks-distance} is algebraically equivalent to the
+\eqref{eq-slr-cooks-distance} is algebraically equivalent to the
 defining formula and is, in the author's opinion, more transparent.
 
 **** How to do it with \(\mathsf{R}\)
@@ -15263,7 +15260,7 @@ side of the plot, near the horizontal axis.
 #+LaTeX: \setcounter{thm}{0}
 
 #+BEGIN_xca
-Prove the ANOVA equality, Equation [[eq-anovaeq]]. /Hint/:
+Prove the ANOVA equality, Equation \eqref{eq-anovaeq}. /Hint/:
 show that
 \[
 \sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
@@ -15282,7 +15279,7 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 
 #+BEGIN_xca
 <<xca-show-alternate-slope-formula>> Show that the formula given in
-Equation [[eq-sample-correlation-formula]] is equivalent to \[
+Equation \eqref{eq-sample-correlation-formula} is equivalent to \[
 \hat{\beta}_{1} =
 \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right/
 n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right/
@@ -15566,7 +15563,7 @@ topic falls outside the scope of this book. The interested reader can
 consult an advanced text such as Rao \cite{Rao1999}.
 
 #+BEGIN_rem
-The formula in Equation [[eq-b-formula-matrix]] is convenient for
+The formula in Equation \eqref{eq-b-formula-matrix} is convenient for
 mathematical study but is inconvenient for numerical
 computation. Researchers have devised much more efficient algorithms
 for the actual calculation of the parameter estimates, and we do not
@@ -15641,7 +15638,7 @@ They are expressed more compactly by the matrix equation
 \begin{equation}
 \hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
 \end{equation}
-From Equation [[eq-b-formula-matrix]] we know that
+From Equation \eqref{eq-b-formula-matrix} we know that
 \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\),
 so we can rewrite
 \begin{eqnarray}
@@ -15656,7 +15653,7 @@ later courses. Some facts about \(\mathbf{H}\) are
 - \(\mathbf{H}\) is a symmetric square matrix, of dimension
   \(\mathrm{n}\times\mathrm{n}\).
 - The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\)
-  (compare to Equation [[eq-slr-leverage-between]]).
+  (compare to Equation \eqref{eq-slr-leverage-between}).
 - The trace is \(\mathrm{tr}(\mathbf{H})=p\).
 - \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/)
   which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of
@@ -15862,7 +15859,7 @@ and
 the first equality following because the matrix
 \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\) is symmetric.
 
-There is a lot that we can glean from Equation [[eq-distn-b-mlr]]. First,
+There is a lot that we can glean from Equation \eqref{eq-distn-b-mlr}. First,
 it follows that the estimator \(\mathbf{b}\) is unbiased (see Section
 [[#sec-Point-Estimation-1]]). Second, the variances of \(b_{0}\), \(b_{1}\),
 ..., \(b_{n}\) are exactly the diagonal elements of
@@ -15919,9 +15916,9 @@ future observations, but how good are our estimates? We need
 confidence and prediction intervals to gauge their accuracy, and lucky
 for us the formulas look similar to the ones we saw in SLR.
 
-In Equation [[eq-mlr-single-yhat-matrix]] we wrote \(
+In Equation \eqref{eq-mlr-single-yhat-matrix} we wrote \(
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and
-in Equation [[eq-distn-b-mlr]] we saw that
+in Equation \eqref{eq-distn-b-mlr} we saw that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean} = \upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
@@ -16038,7 +16035,10 @@ and
 \label{eq-mlr-ssr-matrix}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.
 \end{alignat}
-(The matrix \(\mathbf{J}\) is defined in Appendix [[#sec-Linear-Algebra]].) Immediately from Equations [[eq-mlr-sse-matrix]], [[eq-mlr-ssto-matrix]], and [[eq-mlr-ssr-matrix]] we get the /Anova Equality/
+(The matrix \(\mathbf{J}\) is defined in Appendix
+[[#sec-Linear-Algebra]].) Immediately from Equations
+\eqref{eq-mlr-sse-matrix}, \eqref{eq-mlr-ssto-matrix}, and
+\eqref{eq-mlr-ssr-matrix} we get the /Anova Equality/
 \begin{equation} 
 SSTO=SSE+SSR.
 \end{equation}
@@ -16865,7 +16865,7 @@ fact that a black cherry tree is not a perfect cylinder.
 How can we fit this model? The model is not linear in the parameters
 any more, so our linear regression methods will not work... or will
 they? In the =trees= example we may take the logarithm of both sides
-of Equation [[eq-trees-nonlin-reg]] to get
+of Equation \eqref{eq-trees-nonlin-reg} to get
 \begin{equation}
 \mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
 \end{equation}
@@ -17062,9 +17062,9 @@ AIC=-2\ln L+2(p+1)
 #+LaTeX: \setcounter{thm}{0}
 
 #+BEGIN_xca
-<<xca-anova-equality>> Use Equations [[eq-mlr-sse-matrix]],
-[[eq-mlr-ssto-matrix]], and [[eq-mlr-ssr-matrix]] to prove the Anova Equality:
-\[ SSTO=SSE+SSR.\]
+<<xca-anova-equality>> Use Equations \eqref{eq-mlr-sse-matrix},
+\eqref{eq-mlr-ssto-matrix}, and \eqref{eq-mlr-ssr-matrix} to prove the
+Anova Equality: \[ SSTO = SSE + SSR.\]
 #+END_xca
 
 * Resampling Methods                                                 :resamp:
@@ -19190,7 +19190,7 @@ If \(g\) is a differentiable function whose range is the interval
 
 #+CAPTION: [Some integrals (constants of integration omitted)]{Some integrals (constants of integration omitted).}
 #+NAME: tab-Useful-Integrals
-| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n\neq-1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \mathrm{abs}(x) \) |
+| \(\int x^{n}\,\mathrm{d} x=x^{n+1}/(n+1),\ n \neq - 1\) | \(\int\mathrm{e}^{x}\,\mathrm{d} x=\mathrm{e}^{x}\) | \(\int x^{-1}\,\mathrm{d} x=\ln \mathrm{abs}(x) \) |
 | \(\int\tan x\:\mathrm{d} x=\ln \mathrm{abs}(\sec x)\) | \(\int a^{x}\,\mathrm{d} x=a^{x}/\ln a\)            | \(\int(x^{2}+1)^{-1}\,\mathrm{d} x=\tan^{-1}x\) |
 
 **** Integration by Parts
