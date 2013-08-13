@@ -1898,7 +1898,7 @@ about a central line of symmetry to match the other half.
 We have already encountered skewed distributions: both the discoveries
 data in Figure [[fig-stripcharts]] and the =precip= data in Figure
 [[fig-histograms-bins]] appear right-skewed. The =UKDriverDeaths= data in
-Example [[#exa-ukdriverdeaths-first]] is relatively symmetric (but note the one
+Example [[exa-ukdriverdeaths-first]] is relatively symmetric (but note the one
 extreme value 2654 identified at the bottom of the stem-and-leaf
 display).
 
@@ -4304,7 +4304,7 @@ For any events \(A\) and \(B\),
   #+end_proof
 1. \(0\leq\mathbb{P}(A)\leq1\).
   #+begin_proof
-  The left inequality is immediate from Axiom [[#ax-prob-nonnegative]], and the second inequality follows from Property 3 since \(A\subset S\).
+  The left inequality is immediate from Axiom [[ax-prob-nonnegative]], and the second inequality follows from Property 3 since \(A\subset S\).
   #+end_proof
 
 1. *The General Addition Rule.*
@@ -4372,7 +4372,7 @@ Head; thus, \(\mathbb{P}(\mbox{at least 1 Head})=3/4\).
 
 What is \(\mathbb{P}(\mbox{no Heads})\)? Notice that the event \(\{
 \mbox{no Heads} \} = \{ \mbox{at least one Head} \} ^{c}\), which by
-Property [[#enu-prop-prob-complement]] means \(\mathbb{P}(\mbox{no
+Property [[enu-prop-prob-complement]] means \(\mathbb{P}(\mbox{no
 Heads})=1-\mathbb{P}(\mbox{at least one head})=1-3/4=1/4\). It is
 obvious in this simple example that the only outcome with no Heads is
 \(TT\), however, this complementation trick can be handy in more
@@ -4708,7 +4708,7 @@ above.
 
 We will compute the number of outcomes for each of the four
 =urnsamples= examples that we saw in Example
-[[#exa-sample-urn-two-from-three]]. Recall that we took a sample of size two from an
+[[exa-sample-urn-two-from-three]]. Recall that we took a sample of size two from an
 urn with three distinguishable elements.
 #+END_exampletoo
 
@@ -4831,7 +4831,7 @@ for the first person's birthday, 365 possibilities for the second, and
 so forth. The total number of possible birthday sequences is therefore
 \(\#(S)=365^{n}\).
 
-Now we will use the complementation trick we saw in Example [[#exa-three-child-family]]. We realize that the only situation in which \(A\) does
+Now we will use the complementation trick we saw in Example [[exa-three-child-family]]. We realize that the only situation in which \(A\) does
 /not/ occur is if there are /no/ matches among all people in the room,
 that is, only when everybody's birthday is different, so \[
 \mathbb{P}(A)=1-\mathbb{P}(A^{c})=1-\frac{\#(A^{c})}{\#(S)}, \] since
@@ -5019,7 +5019,7 @@ outcomes that also fall in \(B\), thus, the probability of \(B\) given
 
 *** How to do it with \(\mathsf{R}\)
 
-Continuing with Example [[#exa-Toss-a-six-sided-die-twice]], the first thing to do is set
+Continuing with Example [[exa-Toss-a-six-sided-die-twice]], the first thing to do is set
 up the probability space with the =rolldie= function.
 
 #+BEGIN_SRC R :exports both :results output pp  
@@ -5125,7 +5125,7 @@ B)=\mathbb{P}(A)\mathbb{P}(B|A)=\frac{4}{52}\cdot\frac{3}{51}\approx0.00452.
 :CUSTOM_ID: sub-howto-ps-objects
 :END:
 
-Continuing Example [[#exa-two-cards-both-aces]], we set up the probability space by way
+Continuing Example [[exa-two-cards-both-aces]], we set up the probability space by way
 of a three step process. First we employ the =cards= function to get a
 data frame =L= with two columns: =rank= and =suit=. Both columns are
 stored internally as factors with 13 and 4 levels, respectively.
@@ -5177,7 +5177,7 @@ prob::prob(N, all(rank == "A"))
 : [1] 0.004524887
 
 Note that this value matches what we found in Example
-[[#exa-two-cards-both-aces]], above. We could calculate all sorts of
+[[exa-two-cards-both-aces]], above. We could calculate all sorts of
 probabilities at this point; we are limited only by the complexity of
 the event's computer representation.
 
@@ -5199,8 +5199,8 @@ C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.
 
 **** How to do it with \(\mathsf{R}\)
 
-Example [[#exa-urn-7-red-3-green]] is similar to Example
-[[#exa-two-cards-both-aces]], but it is even easier. We need to set up
+Example [[exa-urn-7-red-3-green]] is similar to Example
+[[exa-two-cards-both-aces]], but it is even easier. We need to set up
 an urn (vector =L=) to hold the balls, we sample from =L= to get the
 sample space (data frame =M=), and we associate a probability vector
 (column =probs=) with the outcomes (rows of =M=) of the sample
@@ -5235,7 +5235,7 @@ prob::prob(N, isrep(N, "red", 3))
 : [1] 0.2916667
 
 Note that this answer matches what we found in Example
-[[#exa-urn-7-red-3-green]]. Now let us try some other probability
+[[exa-urn-7-red-3-green]]. Now let us try some other probability
 questions. What is the probability of getting two =red='s?
 
 #+BEGIN_SRC R :exports both :results output pp  
@@ -5412,7 +5412,7 @@ one; the others are similar. We need to show that
 \[
 \mathbb{P}(A^{c}\cap B)=\mathbb{P}(A^{c})\mathbb{P}(B).
 \]
-To this end, note that the Multiplication Rule, Equation [[#eq-multiplication-rule-short]] implies 
+To this end, note that the Multiplication Rule, Equation [[eq-multiplication-rule-short]] implies 
 \begin{eqnarray*}
 \mathbb{P}(A^{c}\cap B) & = & \mathbb{P}(B)\mathbb{P}(A^{c}|B),\\
  & = & \mathbb{P}(B)[1-\mathbb{P}(A|B)],\\
@@ -5442,7 +5442,7 @@ We can now deduce the pattern for \(n\) events, \(n>3\). The events
 will be mutually independent only if they satisfy the product equality
 pairwise, then in groups of three, in groups of four, and so forth, up
 to all \(n\) events at once. For \(n\) events, there will be
-\(2^{n}-n-1\) equations that must be satisfied (see Exercise [[#xca-numb-cond-indep]]). Although these requirements for a set of events to
+\(2^{n}-n-1\) equations that must be satisfied (see Exercise [[xca-numb-cond-indep]]). Although these requirements for a set of events to
 be mutually independent may seem stringent, the good news is that for
 most of the situations considered in this book the conditions will all
 be met (or at least we will suppose that they are).
@@ -5484,7 +5484,7 @@ A <- subset(S, isrep(S, vals = "T", nrep = 10))
 #+RESULTS:
 : [1] 0.9990234
 
-Compare this answer to what we got in Example [[#exa-toss-ten-coins]].
+Compare this answer to what we got in Example [[exa-toss-ten-coins]].
 
 #+END_exampletoo
 
@@ -5503,7 +5503,7 @@ of =x= in a single trial.
 
 #+BEGIN_exampletoo
 
-*An unbalanced coin* (continued, see Example [[#exa-unbalanced-coin]]). It was
+*An unbalanced coin* (continued, see Example [[exa-unbalanced-coin]]). It was
 easy enough to set up the probability space for one unbalanced toss,
 however, the situation becomes more complicated when there are many
 tosses involved. Clearly, the outcome \(HHH\) should not have the same
@@ -5578,7 +5578,7 @@ Since \(\mathbb{P}(A)>0\) we may divide through to obtain
 \[
 \mathbb{P}(B_{k}|A)=\frac{\mathbb{P}(B_{k})\mathbb{P}(A|B_{k})}{\mathbb{P}(A)}.
 \]
-Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation [[#eq-theorem-total-probability]]) gives the denominator of the last expression to be
+Now remembering that \(\{ B_{k} \}\) is a partition, the Theorem of Total Probability (Equation [[eq-theorem-total-probability]]) gives the denominator of the last expression to be
 \[
 \mathbb{P}(A)=\sum_{k=1}^{n}\mathbb{P}(B_{k}\cap A)=\sum_{k=1}^{n}\mathbb{P}(B_{k})\mathbb{P}(A|B_{k}).
 \]
@@ -5688,7 +5688,7 @@ Now let's find the denominator, \(\mathbb{P}(A)\). The key here is the
 notion that if a file is misplaced, then either Moe or Larry or Curly
 must have filed it; there is no one else around to do the
 misfiling. Further, these possibilities are mutually exclusive. We may
-use the Theorem of Total Probability [[#eq-theorem-total-probability]] to write
+use the Theorem of Total Probability [[eq-theorem-total-probability]] to write
 \[ 
 \mathbb{P}(A)=\mathbb{P}(A\cap M)+\mathbb{P}(A\cap L)+\mathbb{P}(A\cap C).
 \]
@@ -5743,7 +5743,7 @@ to do by hand.
 
 #+BEGIN_exampletoo
 
-*Misfiling assistants* (continued from Example [[#exa-misfiling-assistants]]). We store the prior probabilities and the likelihoods in
+*Misfiling assistants* (continued from Example [[exa-misfiling-assistants]]). We store the prior probabilities and the likelihoods in
 vectors and go to town.
 
 #+BEGIN_SRC R :exports both :results output pp  
@@ -5758,7 +5758,7 @@ post / sum(post)
 
 #+END_exampletoo
 
-Compare these answers with what we got in Example [[#exa-misfiling-assistants]]. We would replace =prior= with =post= in a future
+Compare these answers with what we got in Example [[exa-misfiling-assistants]]. We would replace =prior= with =post= in a future
 calculation. We could raise =like= to a power to see how the posterior
 is affected by future document mistakes. (Do you see why? Think back
 to Section [[#sec-Independent-Events]].)
@@ -5805,7 +5805,7 @@ fastpost / sum(fastpost)
 #+RESULTS:
 : [1] 0.0003355044 0.1473949328 0.8522695627
 
-Compare this to what we got in Example [[#exa-misfiling-assistants-multiple]].
+Compare this to what we got in Example [[exa-misfiling-assistants-multiple]].
 
 ** Random Variables
 :PROPERTIES:
@@ -6192,7 +6192,7 @@ provided the (potentially infinite) series \(\sum|x|f_{X}(x)\) is convergent. An
 \begin{equation}
 \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x),
 \end{equation}
-which can be computed (see Exercise [[#xca-variance-shortcut]]) with the
+which can be computed (see Exercise [[xca-variance-shortcut]]) with the
 alternate formula \(\sigma^{2}=\sum
 x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the
 standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
@@ -6200,7 +6200,7 @@ standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
 #+BEGIN_exampletoo
 
 # <<exa-disc-pmf-mean>>
-We will calculate the mean of \(X\) in Example [[#exa-Toss-a-coin]].
+We will calculate the mean of \(X\) in Example [[exa-Toss-a-coin]].
 \[
 \mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=1.5.
 \]
@@ -6248,7 +6248,7 @@ the family name instead of the defining formula.
 :END:
 
 The mean and variance of a discrete random variable is easy to compute
-at the console. Let's return to Example [[#exa-disc-pmf-mean]]. We will start
+at the console. Let's return to Example [[exa-disc-pmf-mean]]. We will start
 by defining a vector =x= containing the support of \(X\), and a vector
 =f= to contain the values of \(f_{X}\) at the respective outcomes in
 =x=:
@@ -6462,7 +6462,7 @@ We next find the mean:
 = & np.
 \end{alignat*}
 A similar argument shows that \(\mathbb{E} X(X-1)=n(n-1)p^{2}\) (see
-Exercise [[#xca-binom-factorial-expectation]]). Therefore
+Exercise [[xca-binom-factorial-expectation]]). Therefore
 \begin{alignat*}{1}
 \sigma^{2}= & \mathbb{E} X(X-1)+\mathbb{E} X-[\mathbb{E} X]^{2},\\
 = & n(n-1)p^{2}+np-(np)^{2},\\
@@ -6600,7 +6600,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
 #+BEGIN_exampletoo
 
-Another way to do Example [[#exa-toss-coin-3-withR]] is with the =distr=
+Another way to do Example [[exa-toss-coin-3-withR]] is with the =distr=
 family of packages \cite{distr}. They use an object oriented approach
 to random variables, that is, a random variable is stored in an object
 =X=, and then questions about the random variable translate to
@@ -6694,7 +6694,7 @@ and we prove the identity
 \begin{equation}
 \mathbb{E}(X-\mu)^{2}=\mathbb{E} X^{2}-(\mathbb{E} X)^{2}
 \end{equation}
-in Exercise [[#xca-variance-shortcut]]. Intuitively, for repeated observations
+in Exercise [[xca-variance-shortcut]]. Intuitively, for repeated observations
 of \(X\) we would expect the sample mean of the \(g(X)\) values to
 closely approximate \(\mathbb{E}\, g(X)\) as the sample size increases
 without bound.
@@ -6785,7 +6785,7 @@ text like this one. Interested readers could consult Billingsley
 #+end_proof
 
 
-We will see an example of Theorem [[#thm-mgf-unique]] in action.
+We will see an example of Theorem [[thm-mgf-unique]] in action.
 
 #+BEGIN_exampletoo
 
@@ -7072,7 +7072,7 @@ urn. We have the same trouble if \(K>N\). The good news is that the
 majority of examples we study have \(K\leq M\) and \(K\leq N\) and we
 will happily take the support to be \(x=0,\ 1,\ \ldots,\ K\).
 
-It is shown in Exercise [[#xca-hyper-mean-variance]] that
+It is shown in Exercise [[xca-hyper-mean-variance]] that
 \begin{equation}
 \mu=K\frac{M}{M+N},\quad \sigma^{2}=K\frac{MN}{(M+N)^{2}}\frac{M+N-K}{M+N-1}.
 \end{equation}
@@ -7305,7 +7305,7 @@ give the PMF, CDF, quantile function, and simulate random variates,
 respectively.
 
 Again it is clear that \(f(x)\geq0\) and we check that \(\sum f(x)=1\)
-(see Equation [[#eq-geom-series]] in Appendix [[#sec-Sequences-and-Series]]):
+(see Equation [[eq-geom-series]] in Appendix [[#sec-Sequences-and-Series]]):
 \begin{alignat*}{1}
 \sum_{x=0}^{\infty}p(1-p)^{x}= & p\sum_{x=0}^{\infty}q^{x}=p\,\frac{1}{1-q}=1.
 \end{alignat*}
@@ -7525,7 +7525,7 @@ is \[
 
 Suppose the car wash above is in operation from 8AM to 6PM, and we let
 \(Y\) be the number of customers that appear in this period. Since
-this period covers a total of 10 hours, from Remark [[#rem-poisson-process]] we
+this period covers a total of 10 hours, from Remark [[rem-poisson-process]] we
 get that \(Y\sim\mathsf{pois}(\mathtt{lambda}=5\ast10=50)\). What is
 the probability that there are between 48 and 50 customers, inclusive?
 /Solution/: We want \(\mathbb{P}(48\leq
@@ -7814,7 +7814,7 @@ the CDF always exists.
 
 #+BEGIN_rem
 We can say the following about continuous random variables:
-- Usually, the set \(A\) in [[#enu-contrvcond3]] takes the form of an
+- Usually, the set \(A\) in [[enu-contrvcond3]] takes the form of an
   interval, for example, \(A=[c,d]\), in which case
   \begin{equation}
   \mathbb{P}(X\in A)=\int_{c}^{d}f_{X}(x)\:\mathrm{d} x.
@@ -7996,7 +7996,7 @@ integrate(f, lower = 0.14, upper = 0.71)
 #+RESULTS:
 : 0.355167 with absolute error < 3.9e-15
 
-Compare this to the answer we found in Example [[#exa-cont-pdf3x2]]. We could
+Compare this to the answer we found in Example [[exa-cont-pdf3x2]]. We could
 integrate the function \(x \cdot f(x)=\) =3*x^3= from zero to one to
 get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E}
 X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance.
@@ -8018,7 +8018,7 @@ integrate(g, lower = 1, upper = Inf)
 #+RESULTS:
 : 1.5 with absolute error < 1.7e-14
 
-Compare this to the answer we got in Example [[#exa-cont-pdf-3x4]]. Use =-Inf=
+Compare this to the answer we got in Example [[exa-cont-pdf-3x4]]. Use =-Inf=
 for \(-\infty\).
 
 #+END_exampletoo
@@ -8026,7 +8026,7 @@ for \(-\infty\).
 
 #+BEGIN_exampletoo
 
-Let us redo Example [[#exa-cont-pdf3x2]] with the =distr= package
+Let us redo Example [[exa-cont-pdf3x2]] with the =distr= package
 \cite{distr}. The method is similar to that encountered in Section
 [[#sub-disc-rv-how-r]] in Chapter [[#cha-Discrete-Distributions]]. We define an
 absolutely continuous random variable:
@@ -8051,7 +8051,7 @@ E(X); var(X); 3/80
 : [1] 0.03768305
 : [1] 0.0375
 
-Compare these answers to the ones we found in Example [[#exa-cont-pdf3x2]]. Why
+Compare these answers to the ones we found in Example [[exa-cont-pdf3x2]]. Why
 are they different? Because the =distrEx= package resorts to numerical
 methods when it encounters a model it does not recognize. This means
 that the answers we get for calculations may not exactly match the
@@ -8094,7 +8094,7 @@ relatively simple to calculate:
  & =\frac{b+a}{2},
 \end{align*}
 using the popular formula for the difference of squares. The variance
-is left to Exercise [[#xca-variance-dunif]].
+is left to Exercise [[xca-variance-dunif]].
 #+END_exampletoo
 
 ** The Normal Distribution
@@ -8216,7 +8216,7 @@ that correspond to that area.
 #+BEGIN_exampletoo
 
 # <<exa-iq-quantile-state-problem>>
-Assuming the IQ model of Example [[#exa-iq-model]], what is the lowest possible
+Assuming the IQ model of Example [[exa-iq-model]], what is the lowest possible
 IQ score that a person can have and still be in the top 1% of all IQ
 scores?  /Solution/: If a person is in the top 1%, then that means
 that 99% of the people have lower IQ scores. So, in other words, we
@@ -8228,7 +8228,7 @@ let us see how to do this the long way. We define the function
 =uniroot= function. It uses numerical procedures to find the root so
 we need to give it an interval of \(x\) values in which to search for
 the root. We can get an educated guess from the Empirical Rule
-[[#fac-Empirical-Rule]]; the root should be somewhere between two and three
+[[fac-Empirical-Rule]]; the root should be somewhere between two and three
 standard deviations (15 each) above the mean (which is 100).
 #+BEGIN_SRC R :exports both :results output pp 
 g <- function(x) pnorm(x, mean = 100, sd = 15) - 0.99
@@ -8260,7 +8260,7 @@ top 1% of all IQ scores.
 #+END_exampletoo
 
 
-The discussion in Example [[#exa-iq-quantile-state-problem]] was centered on the search for a
+The discussion in Example [[exa-iq-quantile-state-problem]] was centered on the search for a
 value \(x\) that solved an equation \(F(x)=p\), for some given
 probability \(p\), or in mathematical parlance, the search for
 \(F^{-1}\), the inverse of the CDF of \(X\), evaluated at \(p\). This
@@ -8323,7 +8323,7 @@ quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x,
 
 #+BEGIN_exampletoo
 
-Back to Example [[#exa-iq-quantile-state-problem]], we are looking for \(Q_{X}(0.99)\), where
+Back to Example [[exa-iq-quantile-state-problem]], we are looking for \(Q_{X}(0.99)\), where
 \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could
 not be easier to do with \(\mathsf{R}\).
 
@@ -8382,7 +8382,7 @@ f_{U}(u)=f_{X}\left[g^{-1}(u)\right]\ \left|\frac{\mathrm{d}}{\mathrm{d} u}g^{-1
 #+end_prop
 
 #+BEGIN_rem
-The formula in Equation [[#eq-univ-trans-pdf-long]] is nice, but does not
+The formula in Equation [[eq-univ-trans-pdf-long]] is nice, but does not
 really make any sense. It is better to write in the intuitive form
 \begin{equation}
 \label{eq-univ-trans-pdf-short}
@@ -8458,10 +8458,11 @@ but for the well-behaved examples in this book the trick works just fine.
 
 #+BEGIN_rem
 In the case that \(g\) is not monotone we cannot apply Proposition
-[[#pro-func-cont-rvs-pdf-formula]] directly. However, hope is not lost. Rather, we
-break the support of \(X\) into pieces such that \(g\) is monotone on
-each one. We apply Proposition [[#pro-func-cont-rvs-pdf-formula]] on each piece, and
-finish up by adding the results together.
+[[pro-func-cont-rvs-pdf-formula]] directly. However, hope is not
+lost. Rather, we break the support of \(X\) into pieces such that
+\(g\) is monotone on each one. We apply Proposition
+[[pro-func-cont-rvs-pdf-formula]] on each piece, and finish up by
+adding the results together.
 #+END_rem
 
 *** The CDF method
@@ -8493,7 +8494,7 @@ function is /monotone/ (this point will be revisited later). Now since
 \mathrm{e}^{-y})=1-\mathbb{P}(X\leq\mathrm{e}^{-y})=1-F_{X}(\mathrm{e}^{-y}).
 \] Now recalling that the CDF of a
 \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) random variable
-satisfies \(F(u)=u\) (see Equation [[#eq-unif-cdf]]), we can say \[
+satisfies \(F(u)=u\) (see Equation [[eq-unif-cdf]]), we can say \[
 F_{Y}(y)=1-F_{X}(\mathrm{e}^{-y})=1-\mathrm{e}^{-y},\quad \mbox{for
 }y>0.  \] We have consequently found the formula for the CDF of \(Y\);
 to obtain the PDF \(f_{Y}\) we need only differentiate \(F_{Y}\): \[
@@ -8564,7 +8565,7 @@ The =distr= package \cite{distr} has functionality to investigate
 transformations of univariate distributions. There are exact results
 for ordinary transformations of the standard distributions, and
 =distr= takes advantage of these in many cases. For instance, the
-=distr= package can handle the transformation in Example [[#exa-lin-trans-norm]] quite nicely:
+=distr= package can handle the transformation in Example [[exa-lin-trans-norm]] quite nicely:
 
 #+BEGIN_SRC R :exports both :results output pp 
 X <- Norm(mean = 0, sd = 1)
@@ -8582,7 +8583,7 @@ variable is again normal, and it even knows what the correct =mean=
 and =sd= should be. But it is impossible for =distr= to know
 everything, and it is not long before we venture outside of the
 transformations that =distr= recognizes. Let us try Example
-[[#exa-lnorm-transformation]]:
+[[exa-lnorm-transformation]]:
 
 #+BEGIN_SRC R :exports both :results output pp 
 Y <- exp(X)
@@ -8716,7 +8717,7 @@ any \(s,\, t>0\),
 \begin{equation}
 \mathbb{P}(X>s+t\,|\, X>t)=\mathbb{P}(X>s).
 \end{equation}
-See Exercise [[#xca-prove-the-memoryless]].
+See Exercise [[xca-prove-the-memoryless]].
 
 **** The Gamma Distribution
 :PROPERTIES:
@@ -8798,9 +8799,9 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 Here are some useful things to know about the chi-square distribution.
 1. If \(Z\sim\mathtt{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\), then
    \(Z^{2}\sim\mathsf{chisq}(\mathtt{df}=1)\). We saw this in Example
-   [[#exa-distn-of-z-squared]], and the fact is important when it
+   [[exa-distn-of-z-squared]], and the fact is important when it
    comes time to find the distribution of the sample variance,
-   \(S^{2}\). See Theorem [[#thm-Xbar-andS]] in Section
+   \(S^{2}\). See Theorem [[thm-Xbar-andS]] in Section
    [[#sub-Samp-Var-Dist]].
 2. The chi-square distribution is supported on the positive
    \(x\)-axis, with a right-skewed distribution.
@@ -8906,7 +8907,7 @@ mean and variance are
 \begin{equation} 
 \mu=\frac{\alpha}{\alpha+\beta}\mbox{ and }\sigma^{2}=\frac{\alpha\beta}{\left(\alpha+\beta\right)^{2}\left(\alpha+\beta+1\right)}.
 \end{equation}
-See Example [[#exa-cont-pdf3x2]]. This distribution comes up a lot in Bayesian
+See Example [[exa-cont-pdf3x2]]. This distribution comes up a lot in Bayesian
 statistics because it is a good model for one's prior beliefs about a
 population proportion \(p\), \(0\leq p\leq1\).
 
@@ -8942,7 +8943,7 @@ We write
 associated \(\mathsf{R}\) function is =dlnorm(x, meanlog = 0, sdlog =
 1)=. Notice that the support is concentrated on the positive \(x\)
 axis; the distribution is right-skewed with a heavy tail. See Example
-[[#exa-lnorm-transformation]].
+[[exa-lnorm-transformation]].
 
 **** The Weibull Distribution
 :PROPERTIES:
@@ -9148,7 +9149,7 @@ all of \(\mathbb{R}^{2}\) by setting \(f_{X,Y}(x,y)=0\) for
 In the context of this chapter, the PMFs \(f_{X}\) and \(f_{Y}\) are
 called the /marginal PMFs/ of \(X\) and \(Y\), respectively. If we are
 given only the joint PMF then we may recover each of the marginal PMFs
-by using the Theorem of Total Probability (see Equation [[#eq-theorem-total-probability]]): observe
+by using the Theorem of Total Probability (see Equation [[eq-theorem-total-probability]]): observe
 \begin{eqnarray}
 f_{X}(x) & = & \mathbb{P}(X=x),\\
  & = & \sum_{y\in S_{Y}}\mathbb{P}(X=x,\, Y=y),\\
@@ -9173,7 +9174,7 @@ function/ \(F_{X,Y}\) defined by \[ F_{X,Y}(x,y)=\mathbb{P}(X\leq x,\,
 Y\leq y),\quad \mbox{for }(x,y)\in\mathbb{R}^{2}.  \] The bivariate
 joint CDF is not quite as tractable as the univariate CDFs, but in
 principle we could calculate it by adding up quantities of the form in
-Equation [[#eq-joint-pmf]]. The joint CDF is typically not used in practice due to
+Equation [[eq-joint-pmf]]. The joint CDF is typically not used in practice due to
 its inconvenient form; one can usually get by with the joint PMF
 alone.
 
@@ -9188,7 +9189,7 @@ on the first.
 Roll a fair die twice. Let \(X\) be the face shown on the first roll,
 and let \(Y\) be the face shown on the second roll. We have already
 seen this example in Chapter [[#cha-Probability]], Example
-[[#exa-Toss-a-six-sided-die-twice]]. For this example, it suffices to
+[[exa-Toss-a-six-sided-die-twice]]. For this example, it suffices to
 define \[ f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6.
 \] The marginal PMFs are given by \(f_{X}(x)=1/6\),
 \(x=1,2,\ldots,6\), and \(f_{Y}(y)=1/6\), \(y=1,2,\ldots,6\), since \[
@@ -9226,7 +9227,7 @@ matrix we may calculate the value that \(U\) assumes. The result is in
 the left half of Figure [[fig-max-and-sum-two-dice]].
 
 We can use the table to calculate the marginal PMF of \(U\), because
-from Example [[#exa-Toss-a-six-sided-die-twice]] we know that each entry in the matrix has
+from Example [[exa-Toss-a-six-sided-die-twice]] we know that each entry in the matrix has
 probability \(1/36\) associated with it. For instance, there is only
 one outcome in the matrix with \(U=1\), namely, the bottom left
 corner. This single entry has probability \(1/36\), therefore, it must
@@ -9292,7 +9293,7 @@ form. Many of the pairs are repeated, but some of them are not:
 \((1,2)\) appears only once, but \((2,3)\) appears twice. We can make
 more sense out of this by writing a new table with \(U\) on one side
 and \(V\) along the top. We will accumulate the probability just like
-we did in Example [[#exa-toss-two-dice-joint-pmf]]. See Table [[#tab-max-sum-joint-pmf]].
+we did in Example [[exa-toss-two-dice-joint-pmf]]. See Table [[tab-max-sum-joint-pmf]].
 
 #+NAME: tab-max-sum-joint-pmf
 #+CAPTION: [The joint PMF of \((U,V)\)]{The outcomes of \(U\) are along the left and the outcomes of \(V\) are along the top. Empty entries in the table have zero probability. The row totals (on the right) and column totals (on the bottom) correspond to the marginal distribution of \(U\) and \(V\), respectively.}
@@ -9311,9 +9312,9 @@ we did in Example [[#exa-toss-two-dice-joint-pmf]]. See Table [[#tab-max-sum-joi
 The joint support of \((U,V)\) is concentrated along the main
 diagonal; note that the nonzero entries do not form a rectangle. Also
 notice that if we form row and column totals we are doing exactly the
-same thing as Equation [[#eq-marginal-pmf]], so that the marginal
+same thing as Equation [[eq-marginal-pmf]], so that the marginal
 distribution of \(U\) is the list of totals in the right "margin" of
-the Table [[#tab-max-sum-joint-pmf]], and the marginal distribution of \(V\) is the
+the Table [[tab-max-sum-joint-pmf]], and the marginal distribution of \(V\) is the
 list of totals in the bottom "margin".
 #+END_exampletoo
 
@@ -9374,7 +9375,7 @@ are not independent. See Section [[#sec-Independent-Random-Variables]].
 
 *** How to do it with \(\mathsf{R}\)
 
-We will show how to do Example [[#exa-max-sum-two-dice]] using \(\mathsf{R}\);
+We will show how to do Example [[exa-max-sum-two-dice]] using \(\mathsf{R}\);
 it is much simpler to do it with \(\mathsf{R}\) than without. First we
 set up the sample space with the =rolldie= function. Next, we add
 random variables \(U\) and \(V\) with the =addrv= function. We take a
@@ -9423,7 +9424,7 @@ head(UV)
 : 6 4 5 0.05555556
 
 The data frame is difficult to understand. It would be better to have
-a tabular display like Table [[#tab-max-sum-joint-pmf]]. We can do that with
+a tabular display like Table [[tab-max-sum-joint-pmf]]. We can do that with
 the =xtabs= function.
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -9440,7 +9441,7 @@ xtabs(round(probs,3) ~ U + V, data = UV)
 :   5 0.000 0.000 0.000 0.000 0.056 0.056 0.056 0.056 0.028 0.000 0.000
 :   6 0.000 0.000 0.000 0.000 0.000 0.056 0.056 0.056 0.056 0.056 0.028
 
-Compare these values to the ones shown in Table [[#tab-max-sum-joint-pmf]]. We
+Compare these values to the ones shown in Table [[tab-max-sum-joint-pmf]]. We
 can repeat the process with =marginal= to get the univariate marginal
 distributions of \(U\) and \(V\) separately.
 
@@ -9486,7 +9487,7 @@ colSums(temp)
 
 You should check that the answers that we have obtained exactly match
 the same (somewhat laborious) calculations that we completed in
-Example [[#exa-max-sum-two-dice]].
+Example [[exa-max-sum-two-dice]].
 
 ** Joint and Marginal Expectation
 :PROPERTIES:
@@ -9524,7 +9525,7 @@ as handy as the shortcut for the variance:
 \begin{equation}
 \mbox{Cov}(X,Y)=\mathbb{E}(XY)-(\mathbb{E} X)(\mathbb{E} Y).
 \end{equation}
-The proof is left to Exercise [[#xca-Prove-cov-shortcut]].
+The proof is left to Exercise [[xca-Prove-cov-shortcut]].
 
 The Pearson product moment correlation between \(X\) and \(Y\) is the
 covariance between \(X\) and \(Y\) rescaled to fall in the interval
@@ -9544,7 +9545,7 @@ some important facts about the correlation coefficient:
 # <<exa-max-sum-dice-covariance>>
 
 We will compute the covariance for the discrete distribution in
-Example [[#exa-max-sum-two-dice]]. The expected value of \(U\) is \[ \mathbb{E}
+Example [[exa-max-sum-two-dice]]. The expected value of \(U\) is \[ \mathbb{E}
 U=\sum_{u=1}^{6}u\,
 f_{U}(u)=\sum_{u=1}^{6}u\,\frac{2u-1}{36}=1\left(\frac{1}{36}\right)+2\left(\frac{3}{36}\right)+\cdots+6\left(\frac{11}{36}\right)=\frac{161}{36},
 \] and the expected value of \(V\) is \[ \mathbb{E}
@@ -9567,7 +9568,7 @@ We will do a continuous example so that you can see how it works.
 
 
 Let us find the covariance of the variables \((X,Y)\) from Example
-[[#exa-joint-pdf]]. The expected value of \(X\) is \[ \mathbb{E}
+[[exa-joint-pdf]]. The expected value of \(X\) is \[ \mathbb{E}
 X=\int_{0}^{1}x\cdot\frac{6}{5}\left(x+\frac{1}{3}\right)\mathrm{d}
 x=\left.\frac{2}{5}x^{3}+\frac{1}{5}x^{2}\right|_{x=0}^{1}=\frac{3}{5},
 \] and the expected value of \(Y\) is \[ \mathbb{E}
@@ -9593,7 +9594,7 @@ designed for multivariate expectation. This is not a problem, though,
 because it is easy enough to do expectation the long way -- with
 column operations. We just need to keep the definition in mind. For
 instance, we may compute the covariance of \((U,V)\) from Example
-[[#exa-max-sum-dice-covariance]].
+[[exa-max-sum-dice-covariance]].
 
 #+BEGIN_SRC R :exports both :results output pp 
 Eu <- sum(S$U*S$probs)
@@ -9605,7 +9606,7 @@ Euv - Eu * Ev
 #+RESULTS:
 : [1] 2.916667
 
-Compare this answer to what we got in Example [[#exa-max-sum-dice-covariance]].
+Compare this answer to what we got in Example [[exa-max-sum-dice-covariance]].
 
 To do the continuous case we could use the computer algebra utilities
 of =Yacas= and the associated \(\mathsf{R}\) package =Ryacas=
@@ -9656,7 +9657,7 @@ was called Bayes' Rule:
 \begin{equation} 
 \pi(\theta|x)=\frac{\pi(\theta)\, f(x|\theta)}{\int\pi(u)\, f(x|u)\mathrm{d} u}.
 \end{equation} 
-Compare the above expression to Equation [[#eq-bayes-rule]].
+Compare the above expression to Equation [[eq-bayes-rule]].
 
 #+BEGIN_exampletoo
 
@@ -9755,7 +9756,7 @@ then we say that \(X\) and \(Y\) are independent.
 
 #+BEGIN_exampletoo
 
-In Example [[#exa-toss-two-dice-joint-pmf]] we considered the random experiment of
+In Example [[exa-toss-two-dice-joint-pmf]] we considered the random experiment of
 rolling a fair die twice. There we found the joint PMF to be \[
 f_{X,Y}(x,y)=\frac{1}{36},\quad x=1,\ldots,6,\ y=1,\ldots,6, \] and we
 found the marginal PMFs \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and
@@ -9769,7 +9770,7 @@ f_{Y}(y). \]
 
 #+BEGIN_exampletoo
 
-In Example [[#exa-max-sum-two-dice]] we considered the same experiment but
+In Example [[exa-max-sum-two-dice]] we considered the same experiment but
 different random variables \(U\) and \(V\). We can prove that \(U\)
 and \(V\) are not independent if we can find a single pair \((u,v)\)
 where the independence equality does not hold. There are many such
@@ -9802,7 +9803,7 @@ This is straightforward from the definition.
 and this last quantity is exactly \(\left(\mathbb{E} u(X)\right)\left(\mathbb{E} v(Y)\right)\). 
 #+end_proof
 
-Now that we have Proposition [[#pro-indep-implies-prodexpect]] we mention a
+Now that we have Proposition [[pro-indep-implies-prodexpect]] we mention a
 corollary that will help us later to quickly identify those random
 variables which are /not/ independent.
 
@@ -9820,13 +9821,13 @@ the correlation is 0.
 
 #+BEGIN_rem
 # <<rem-cov0-not-imply-indep>>
-Unfortunately, the converse of Corollary [[#cor-indep-implies-uncorr]] is
+Unfortunately, the converse of Corollary [[cor-indep-implies-uncorr]] is
 not true. That is, there are many random variables which are dependent
 yet their covariance and correlation is zero. For more details, see
 Casella and Berger \cite{Casella2002}.
 #+END_rem
 
-Proposition [[#pro-indep-implies-prodexpect]] is useful to us and we will
+Proposition [[pro-indep-implies-prodexpect]] is useful to us and we will
 receive mileage out of it, but there is another fact which will play
 an even more important role. Unfortunately, the proof is beyond the
 techniques presented here. The inquisitive reader should consult
@@ -9844,7 +9845,7 @@ If \(X\) and \(Y\) are independent, then \(u(X)\) and \(v(Y)\) are independent f
 :END:
 
 Another important corollary of Proposition
-[[#pro-indep-implies-prodexpect]] will allow us to find the distribution of
+[[pro-indep-implies-prodexpect]] will allow us to find the distribution of
 sums of random variables.
 
 #+begin_cor
@@ -9857,7 +9858,7 @@ M_{X+Y}(t)=M_{X}(t)\cdot M_{Y}(t).
 
 #+begin_proof
 Choose \(u(x)=\mathrm{e}^{x}\) and \(v(y)=\mathrm{e}^{y}\) in
-Proposition [[#pro-indep-implies-prodexpect]], and remember the identity
+Proposition [[pro-indep-implies-prodexpect]], and remember the identity
 \(\mathrm{e}^{t(x+y)}=\mathrm{e}^{tx}\,\mathrm{e}^{ty}\).
 #+end_proof
 
@@ -9909,7 +9910,7 @@ standard deviation of \(Y\) are given by the formulas
 #+end_prop
 
 #+begin_proof
-We use Proposition [[#pro-expectation-properties]]: \[ \mathbb{E}
+We use Proposition [[pro-expectation-properties]]: \[ \mathbb{E}
 Y=\mathbb{E}\left(a_{1}X_{1}+a_{2}X_{2}\right)=a_{1}\mathbb{E}
 X_{1}+a_{2}\mathbb{E} X_{2}=a_{1}\mu_{1}+a_{2}\mu_{2}.  \] For the
 standard deviation, we will find the variance and take the square root
@@ -9981,7 +9982,7 @@ and the value is the same if we exchange \(x\) and \(y\). Therefore
 #+END_exampletoo
 
 
-Looking at Example [[#exa-binom-exchangeable]] more closely we see that the
+Looking at Example [[exa-binom-exchangeable]] more closely we see that the
 fact that \((X,Y)\) are exchangeable has nothing to do with the
 \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution; it
 only matters that they are independent (so that the joint PDF factors)
@@ -10025,7 +10026,7 @@ where in an abuse of notation we have written \(\mathbf{x}\) for
 \((x,y)\). Note that the formula only holds when \(\rho\neq\pm1\).
 
 #+BEGIN_rem
-In Remark [[#rem-cov0-not-imply-indep]] we noted that just because random
+In Remark [[rem-cov0-not-imply-indep]] we noted that just because random
 variables are uncorrelated it does not necessarily mean that they are
 independent. However, there is an important exception to this rule:
 the bivariate normal distribution. Indeed,
@@ -10072,7 +10073,7 @@ where
 \end{equation}
 #+end_prop
 
-There are a few things to note about Proposition [[#pro-mvnorm-cond-dist]]
+There are a few things to note about Proposition [[pro-mvnorm-cond-dist]]
 which will be important in Chapter [[#cha-simple-linear-regression]]. First,
 the conditional mean of \(Y|x\) is linear in \(x\), with slope
 \begin{equation}
@@ -10161,8 +10162,8 @@ or we can rewrite more shortly as
 \label{eq-biv-trans-pdf-short}
 f_{U,V}(u,v)=f_{X,Y}(x,y)\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.
 \end{equation}
-Take a moment and compare Equation [[#eq-biv-trans-pdf-short]] to Equation
-[[#eq-univ-trans-pdf-short]]. Do you see the connection?
+Take a moment and compare Equation [[eq-biv-trans-pdf-short]] to Equation
+[[eq-univ-trans-pdf-short]]. Do you see the connection?
 
 #+BEGIN_rem
 It is sometimes easier to /postpone/ solving for the inverse
@@ -10186,7 +10187,7 @@ shorter. Of course, it is not always true that
 \end{equation}
 but for the well-behaved examples that we will see in this book it
 works just fine... do you see the connection between Equations
-[[#eq-biv-jacob-recip]] and [[#eq-univ-jacob-recip]]?
+[[eq-biv-jacob-recip]] and [[eq-univ-jacob-recip]]?
 #+END_rem
 
 
@@ -10220,9 +10221,9 @@ f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}
 
 
 #+BEGIN_rem
-It may not be obvious, but Equation [[#eq-biv-norm-hidden]] is the PDF of a
+It may not be obvious, but Equation [[eq-biv-norm-hidden]] is the PDF of a
 \(\mathsf{mvnorm}\) distribution. For a more general result see
-Theorem [[#thm-mvnorm-dist-matrix-prod]].
+Theorem [[thm-mvnorm-dist-matrix-prod]].
 #+END_rem
 
 *** How to do it with \(\mathsf{R}\)
@@ -10338,7 +10339,7 @@ exactly \(\left(\mathbb{E} Y\right)^{2}\), and recall the identity
 #+end_proof
 
 There is a corresponding statement of Fact
-[[#fac-indep-then-function-indep]] for the multivariate case. The proof is
+[[fac-indep-then-function-indep]] for the multivariate case. The proof is
 also omitted here.
 
 #+begin_fact
@@ -10384,7 +10385,7 @@ that look like
 \theta^{\sum x_{i}}(1-\theta)^{k-\sum x_{i}}\, f_{\Theta}(\theta),
 \end{equation}
 where we sum over all possible coins. The right-hand side of Equation
-[[#eq-definetti-binary]] is a sophisticated way to denote this process.
+[[eq-definetti-binary]] is a sophisticated way to denote this process.
 
 Of course, the integral's value does not change if we jumble the
 \(x_{i}\)'s, so \((X_{1},\ldots,X_{k})\) are clearly exchangeable. The
@@ -10395,7 +10396,7 @@ The connection to subjective probability: our prior information about
 \(\theta\) corresponds to \(f_{\Theta}(\theta)\) and the likelihood of
 the sequence \(X_{1}=x_{1},\ldots,\, X_{k}=x_{k}\) (conditional on
 \(\theta\)) corresponds to \(\theta^{\sum x_{i}}(1-\theta)^{k-\sum
-x_{i}}\). Compare Equation [[#eq-definetti-binary]] to Section [[#sec-Bayes-Rule]]
+x_{i}}\). Compare Equation [[eq-definetti-binary]] to Section [[#sec-Bayes-Rule]]
 and Section [[#sec-Conditional-Distributions]].
 
 The multivariate normal distribution immediately generalizes from the
@@ -10467,7 +10468,7 @@ Several comments are in order. First, the joint support set
 {n \choose x_{1}\, x_{2}\,\cdots\, x_{k}}=\frac{n!}{x_{1}!\, x_{2}!\,\cdots x_{k}!}
 \end{equation}
 is called a /multinomial coefficient/ which generalizes the notion of
-a binomial coefficient we saw in Equation [[#eq-binomial-coefficient]].
+a binomial coefficient we saw in Equation [[eq-binomial-coefficient]].
 
 The form and notation we have just described matches the
 \(\mathsf{R}\) usage but is not standard among other texts. Most other
@@ -10600,7 +10601,7 @@ Y). \)
 Suppose \(X\sim\mathsf{chisq}(\mathtt{df}=p_{1})\) and
 \(Y\sim\mathsf{chisq}(\mathtt{df}=p_{2})\) are independent. Find the
 distribution of \(X+Y\) (you may want to refer to Equation
-[[#eq-mgf-chisq]]).
+[[eq-mgf-chisq]]).
 #+end_xca
 
 #+begin_xca
@@ -10728,7 +10729,7 @@ and \(\sigma_{\overline{X}}=\sigma/\sqrt{n}\).
 
 #+begin_proof
 Plug in \(a_{1}=a_{2}=\cdots=a_{n}=1/n\) in Proposition
-[[#pro-mean-sd-lin-comb]].
+[[pro-mean-sd-lin-comb]].
 #+end_proof
 
 The next fact will be useful to us when it comes time to prove the
@@ -10752,7 +10753,7 @@ M_{\overline{X}}(t) & = & \mathbb{E}\,\mathrm{e}^{t\overline{X}},\\
  & = & \mathbb{E}\,\mathrm{e}^{tX_{1}/n}\mathrm{e}^{tX_{2}/n}\cdots\mathrm{e}^{tX_{n}/n}.
 \end{eqnarray*}
 And because \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) are independent,
-Proposition [[#pro-indep-implies-prodexpect]] allows us to distribute the
+Proposition [[pro-indep-implies-prodexpect]] allows us to distribute the
 expectation among each term in the product, which is \[
 \mathbb{E}\mathrm{e}^{tX_{1}/n}\,\mathbb{E}\mathrm{e}^{tX_{2}/n}\cdots\mathbb{E}\mathrm{e}^{tX_{n}/n}.
 \] The last step is to recognize that each term in last product above
@@ -10779,11 +10780,11 @@ sampling distribution.
 
 #+begin_proof
 The mean and standard deviation of \(\overline{X}\) follow directly
-from Proposition [[#pro-mean-sd-xbar]]. To address the shape, first
+from Proposition [[pro-mean-sd-xbar]]. To address the shape, first
 remember from Section [[#sec-The-Normal-Distribution]] that the
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) MGF is of
 the form \[ M(t)=\exp\left[ \mu t+\sigma^{2}t^{2}/2\right] .  \] Now
-use Proposition [[#pro-mgf-xbar]] to find
+use Proposition [[pro-mgf-xbar]] to find
 \begin{eqnarray*}
 M_{\overline{X}}(t) & = & \left[M\left(\frac{t}{n}\right)\right]^{n},\\
  & = & \left[\exp\left( \mu(t/n)+\sigma^{2}(t/n)^{2}/2\right) \right]^{n},\\
@@ -10854,9 +10855,9 @@ We know from Section [[#sub-samp-mean-dist-of]] that
 \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and we know
 from Section [[#sub-Samp-Var-Dist]] that
 \(V\sim\mathsf{chisq}(\mathtt{df}=n-1)\). Further, since we are
-sampling from a normal distribution, Theorem [[#thm-Xbar-andS]] gives
+sampling from a normal distribution, Theorem [[thm-Xbar-andS]] gives
 that \(\overline{X}\) and \(S^{2}\) are independent and by Fact
-[[#fac-indep-then-function-indep]] so are \(Z\) and \(V\). In summary,
+[[fac-indep-then-function-indep]] so are \(Z\) and \(V\). In summary,
 the distribution of \(T\) is the same as the distribution of the
 quantity \(Z/\sqrt{V/r}\), where
 \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and
@@ -10941,7 +10942,7 @@ underlying distribution is /not/ normal. We saw in Section [[#sec-sampling-from-
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) distribution
 then \(\overline{X} \sim \mathsf{norm}(\mathtt{mean} =
 \mu,\,\mathtt{sd} = \sigma/\sqrt{n})\). In other words, we may say
-(owing to Fact [[#fac-lin-trans-norm-is-norm]]) when the underlying
+(owing to Fact [[fac-lin-trans-norm-is-norm]]) when the underlying
 population is normal that the sampling distribution of \(Z\) defined
 by
 \begin{equation}
@@ -10977,7 +10978,7 @@ when the sample size is large.
 
 #+BEGIN_rem
 Notice that the shape of the underlying population's distribution is
-not mentioned in Theorem [[#thm-central-limit-thrm]]; indeed, the result is true for any
+not mentioned in Theorem [[thm-central-limit-thrm]]; indeed, the result is true for any
 population that is well-behaved enough to have a finite standard
 deviation. In particular, if the population is normally distributed
 then we know from Section [[#sub-samp-mean-dist-of]] that the distribution
@@ -11011,7 +11012,7 @@ example(illustrateCLT)
 #+END_SRC
 
 The =IPSUR= package \cite{IPSUR} has the functions =clt1=, =clt2=, and
-=clt3= (see Exercise [[#xca-clt123]] at the end of this chapter). Its purpose
+=clt3= (see Exercise [[xca-clt123]] at the end of this chapter). Its purpose
 is to investigate what happens to the sampling distribution of
 \(\overline{X}\) when the population distribution is mound shaped,
 finite support, and skewed, namely \(\mathsf{t}(\mathtt{df}=3)\),
@@ -11087,12 +11088,12 @@ since the samples \(X_{1}\), \(X_{2}\), ..., \(X_{n_{1}}\) and
 \(Y_{1}\), \(Y_{2}\), ..., \(Y_{n_{2}}\) are independent, so too are
 \(\overline{X}\) and \(\overline{Y}\). The distribution of their
 difference is thus normal as well, and the mean and standard deviation
-are given by Proposition [[#pro-mean-sd-lin-comb-two]].
+are given by Proposition [[pro-mean-sd-lin-comb-two]].
 #+end_proof
 
 #+BEGIN_rem
 Even if the distribution of one or both of the samples is not normal,
-the quantity in Equation [[#eq-diff-indep-sample-means]] will be
+the quantity in Equation [[eq-diff-indep-sample-means]] will be
 approximately normal provided both sample sizes are large.
 #+END_rem
 
@@ -11140,10 +11141,10 @@ approximately normal for \(n_{2}\) sufficiently large, also by the
 CLT. Further, \(\hat{p}_{1}\) and \(\hat{p}_{2}\) are independent
 since they are derived from independent samples. And a difference of
 independent (approximately) normal distributions is (approximately)
-normal[fn:fn-nofollow], by Exercise [[#xca-diff-indep-norm]].
+normal[fn:fn-nofollow], by Exercise [[xca-diff-indep-norm]].
 
 The expressions for the mean and standard deviation follow immediately
-from Proposition [[#pro-mean-sd-lin-comb-two]] combined with the formulas
+from Proposition [[pro-mean-sd-lin-comb-two]] combined with the formulas
 for the \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\)
 distribution from Chapter [[#cha-Discrete-Distributions]].
 #+end_proof
@@ -11174,7 +11175,7 @@ sampling distribution.
 #+end_prop
 
 #+begin_proof
-We know from Theorem [[#thm-Xbar-andS]] that
+We know from Theorem [[thm-Xbar-andS]] that
 \((n_{1}-1)S_{X}^{2}/\sigma_{X}^{2}\) is distributed
 \(\mathsf{chisq}(\mathtt{df}=n_{1}-1)\) and
 \((n_{2}-1)S_{Y}^{2}/\sigma_{Y}^{2}\) is distributed
@@ -11553,7 +11554,7 @@ at \(\hat{p}\), so it is theoretically possible that the critical
 value \(\hat{p}=\overline{x}\) is located at a minimum[fn:fn-sdt]
 instead of a maximum! We should be thorough and check that \(L'>0\)
 when \(p<\overline{x}\) and \(L'<0\) when \(p>\overline{x}\). Then by
-the First Derivative Test (Theorem [[#thm-First-Derivative-Test]]) we could be certain that
+the First Derivative Test (Theorem [[thm-First-Derivative-Test]]) we could be certain that
 \(\hat{p}=\overline{x}\) is indeed a maximum likelihood estimator, and
 not a minimum likelihood estimator.
 #+END_rem
@@ -11637,7 +11638,7 @@ Some comments about maximum likelihood estimators:
   Casella and Berger \cite{Casella2002} for more.
 #+END_rem
 
-Notice, in Example [[#exa-bass-bluegill]] we had \(X_{i}\) IID
+Notice, in Example [[exa-bass-bluegill]] we had \(X_{i}\) IID
 \(\mathsf{binom}(\mathtt{size}=1,\,\mathtt{prob}=p)\), and we saw that
 the MLE was \(\hat{p}=\overline{X}\). But further
 \begin{eqnarray*}
@@ -11663,7 +11664,7 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an
 
 Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be an \(SRS(n)\) from a
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\)
-distribution. It can be shown (in Exercise [[#xca-norm-mu-sig-MLE]]) that
+distribution. It can be shown (in Exercise [[xca-norm-mu-sig-MLE]]) that
 if \(\mbox{$\theta$}=(\mu,\sigma^{2})\) then the MLE of \(\theta\) is
 \begin{equation}
 \hat{\theta}=(\hat{\mu},\hat{\sigma}^{2}),
@@ -11672,7 +11673,7 @@ where \(\hat{\mu}=\overline{X}\) and
 \begin{equation}
 \hat{\sigma^{2}}=\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}\right)^{2}=\frac{n-1}{n}S^{2}.
 \end{equation}
-We of course know from [[#pro-mean-sd-xbar]] that \(\hat{\mu}\) is
+We of course know from [[pro-mean-sd-xbar]] that \(\hat{\mu}\) is
 unbiased. What about \(\hat{\sigma^{2}}\)? Let us check:
 \begin{eqnarray*}
 \mathbb{E}\,\hat{\sigma^{2}} & = & \mathbb{E}\,\frac{n-1}{n}S^{2}\\
@@ -11709,7 +11710,7 @@ function to find MLEs. The arguments are the function to be maximized
 take place, and optionally any other arguments to be passed to the
 likelihood if needed.
 
-Let us see how to do Example [[#exa-bass-bluegill]]. Recall that our
+Let us see how to do Example [[exa-bass-bluegill]]. Recall that our
 likelihood function was given by
 \begin{equation}
 L(p)=p^{\sum x_{i}}(1-p)^{n-\sum x_{i}}.
@@ -11783,7 +11784,7 @@ random observations \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) that are IID
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) which is not
 unreasonable based on a histogram and other exploratory measures. We
 will find the MLE of \(\theta=(\mu,\sigma^{2})\). We claimed in
-Example [[#exa-normal-MLE-both]] that
+Example [[exa-normal-MLE-both]] that
 \(\hat{\theta}=(\hat{\mu},\hat{\sigma}^{2})\) had the form given
 above. Let us check whether this is plausible numerically. The
 negative log-likelihood function is
@@ -12080,7 +12081,7 @@ where \(S\) is the sample standard deviation.
      \end{equation}
    - if the underlying population is not normal, but approximately
      normal, then we may use the \(t\) interval, Equation
-     [[#eq-one-samp-t-int]]. The interval will have approximately
+     [[eq-one-samp-t-int]]. The interval will have approximately
      \(100(1-\alpha)\%\) confidence of covering \(\mu\). However, if
      the population is highly skewed or the data have outliers, then
      we should ask a professional statistician for advice.
@@ -12135,7 +12136,7 @@ distribution.  PANIC
 #+END_exampletoo
  
 *** How to do it with \(\mathsf{R}\)
-We can do Example [[#exa-plant-one-samp-z-int]] with the following code.
+We can do Example [[exa-plant-one-samp-z-int]] with the following code.
 
 #+BEGIN_SRC R :exports both :results output pp 
 temp <- with(PlantGrowth, z.test(weight, stdev = 0.7))
@@ -12197,7 +12198,7 @@ Unfortunately, most of the time the values of \(\sigma_{X}\) and
 - If both sample sizes are large, then we may appeal to the CLT/SLLN
   (see Section [[#sec-Central-Limit-Theorem]]) and substitute \(S_{X}^{2}\) and
   \(S_{Y}^{2}\) for \(\sigma_{X}^{2}\) and \(\sigma_{Y}^{2}\) in the
-  interval [[#eq-two-samp-mean-CI]]. The resulting confidence interval will
+  interval [[eq-two-samp-mean-CI]]. The resulting confidence interval will
   have approximately \(100(1-\alpha)\%\) confidence.
 - If one or more of the sample sizes is small then we are in trouble,
   unless -the underlying populations are both normal and
@@ -12210,7 +12211,7 @@ Unfortunately, most of the time the values of \(\sigma_{X}\) and
   \begin{equation}
   U=\frac{n-1}{\sigma^{2}}S_{X}^{2}+\frac{m-1}{\sigma^{2}}S_{Y}^{2}.
   \end{equation}
-  Then by Exercise [[#xca-sum-indep-chisq]] we know that
+  Then by Exercise [[xca-sum-indep-chisq]] we know that
   \(U\sim\mathsf{chisq}(\mathtt{df}=n+m-2)\) and it is not a large
   leap to believe that \(U\) is independent of
   \(\overline{X}-\overline{Y}\); thus
@@ -12292,7 +12293,7 @@ confidence interval for \(p\) would be given by
 \label{eq-ci-p-no-good}
 \overline{X}\pm z_{\alpha/2}\sqrt{\frac{p(1-p)}{n}}.
 \end{equation}
-OOPS...! Equation [[#eq-ci-p-no-good]] is of no use to us because the
+OOPS...! Equation [[eq-ci-p-no-good]] is of no use to us because the
 \underbar{unknown} parameter \(p\) is in the formula! (If we knew what
 \(p\) was to plug in the formula then we would not need a confidence
 interval in the first place.) There are two solutions to this problem.
@@ -12311,7 +12312,7 @@ interval in the first place.) There are two solutions to this problem.
    satisfies \(f(p)\leq0\). But \(f\) is quadratic in \(p\) so its
    graph is a parabola; it has two roots, and these roots form the
    limits of the confidence interval. We can find them with the
-   quadratic formula (see Exercise [[#xca-CI-quad-form]]):
+   quadratic formula (see Exercise [[xca-CI-quad-form]]):
    \begin{equation}
    \left.\left[\left(\hat{p}+\frac{z_{\alpha/2}^{2}}{2n}\right)\pm z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z_{\alpha/2}^{2}}{(2n)^{2}}}\right]\right/ \left(1+\frac{z_{\alpha/2}^{2}}{n}\right)
    \end{equation}
@@ -12468,7 +12469,7 @@ E & =z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}},\mbox{ or}\\
 n & =z_{\alpha/2}^{2}\frac{\hat{p}(1-\hat{p})}{E^{2}}.
 \end{align}
 OOPS! Recall that \(\hat{p}=Y/n\), which would put the variable \(n\)
-on both sides of Equation [[#eq-samp-size-prop-ME]]. Again, there are two
+on both sides of Equation [[eq-samp-size-prop-ME]]. Again, there are two
 solutions to the problem.
 
 1. If we have a good idea of what \(p\) is, say \(p^{\ast}\) then we
@@ -12709,7 +12710,7 @@ If the confidence interval is
 The /null hypothesis/ \(H_{0}\) is a "nothing" hypothesis, whose
 interpretation could be that nothing has changed, there is no
 difference, there is nothing special taking place, /etc/. In Example
-[[#exa-widget-machine]] the null hypothesis would be \(H_{0}:\, p = 0.10.\)
+[[exa-widget-machine]] the null hypothesis would be \(H_{0}:\, p = 0.10.\)
 The /alternative hypothesis/ \(H_{1}\) is the hypothesis that
 something has changed, in this case, \(H_{1}:\, p \neq 0.10\). Our
 goal is to statistically /test/ the hypothesis \(H_{0}:\, p = 0.10\)
@@ -12744,7 +12745,7 @@ We want \(\alpha\) to be small which conventionally means, say,
 anything, in principle).
 - The /rejection region/ (also known as the /critical region/) for the
   test is the set of sample values which would result in the rejection
-  of \(H_{0}\). For Example [[#exa-widget-machine]], the rejection region
+  of \(H_{0}\). For Example [[exa-widget-machine]], the rejection region
   would be all possible samples that result in a 95% confidence
   interval that does not cover \(p = 0.10\).
 - The above example with \(H_{1}:\,p \neq 0.10\) is called a
@@ -12871,7 +12872,7 @@ with the officer's claim at the \(\alpha = 0.01\) significance level.
 #+BEGIN_exampletoo
 
 # <<exa-prop-test-pvalue-B>>
-We are going to do Example [[#exa-prop-test-pvalue-A]] all over
+We are going to do Example [[exa-prop-test-pvalue-A]] all over
 again. Everything will be exactly the same except for one
 change. Suppose we choose significance level \(\alpha = 0.05\) instead
 of \(\alpha = 0.01\). Are the 1973 data consistent with the officer's
@@ -12929,7 +12930,7 @@ sample outcome \(x\)".
 #+BEGIN_exampletoo
 
 Calculate the \(p\)-value for the test in Examples
-[[#exa-prop-test-pvalue-A]] and [[#exa-prop-test-pvalue-B]].
+[[exa-prop-test-pvalue-A]] and [[exa-prop-test-pvalue-B]].
 
 The \(p\)-value for this test is the probability of obtaining a
 \(z\)-score equal to our observed test statistic (which had
@@ -12950,9 +12951,9 @@ pnorm(-1.680919)
 We see that the \(p\)-value is strictly between the significance
 levels \(\alpha = 0.01\) and \(\alpha = 0.05\). This makes sense: it
 has to be bigger than \(\alpha = 0.01\) (otherwise we would have
-rejected \(H_{0}\) in Example [[#exa-prop-test-pvalue-A]]) and it must also
+rejected \(H_{0}\) in Example [[exa-prop-test-pvalue-A]]) and it must also
 be smaller than \(\alpha = 0.05\) (otherwise we would not have
-rejected \(H_{0}\) in Example [[#exa-prop-test-pvalue-B]]). Indeed,
+rejected \(H_{0}\) in Example [[exa-prop-test-pvalue-B]]). Indeed,
 \(p\)-values are a characteristic indicator of whether or not we would
 have rejected at assorted significance levels, and for this reason a
 statistician will often skip the calculation of critical regions and
@@ -13650,11 +13651,12 @@ variance \( \sigma^{2} \):
 #+BEGIN_rem
 We assume both the normality of the errors \(\epsilon\) and the
 linearity of the mean function \( \mu \). Recall from Proposition
-[[#pro-mvnorm-cond-dist]] of Chapter [[#cha-Multivariable-Distributions]] that if \(
-(X,Y)\sim\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear
-function of \(x\). This is not a coincidence. In more advanced classes
-we study the case that both \(X\) and \(Y\) are random, and in
-particular, when they are jointly normally distributed.
+[[pro-mvnorm-cond-dist]] of Chapter
+[[#cha-Multivariable-Distributions]] that if \( (X,Y) \sim
+\mathsf{mvnorm} \) then the mean of \(Y|x\) is a linear function of
+\(x\). This is not a coincidence. In more advanced classes we study
+the case that both \(X\) and \(Y\) are random, and in particular, when
+they are jointly normally distributed.
 #+END_rem
 
 *** What does it all mean?
@@ -13800,7 +13802,7 @@ and the partial derivative equals zero when \(
 n \beta_{0} + \beta_{1} \sum_{i=1}^{n} x_{i} = \sum_{i = 1}^{n}y_{i}.
 \end{equation}
 Moving on, we next take the partial derivative of \( \ln L \)
-(Equation [[#eq-regML-lnL]]) with respect to \( \beta_{1} \) to get
+(Equation [[eq-regML-lnL]]) with respect to \( \beta_{1} \) to get
 \begin{alignat}{1} \frac{\partial}{\partial\beta_{1}}\ln L=\ &
 0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\ =
 &
@@ -13811,12 +13813,12 @@ is, when
 \label{eq-regML-b}
 \beta_{0} \sum_{i = 1}^{n}x_{i} + \beta_{1} \sum_{i = 1}^{n}x_{i}^{2} = \sum_{i = 1}^{n}x_{i}y_{i}.
 \end{equation}
-Solving the system of equations [[#eq-regML-a]] and [[#eq-regML-b]]
+Solving the system of equations [[eq-regML-a]] and [[eq-regML-b]]
 \begin{eqnarray}
 n\beta_{0} + \beta_{1}\sum_{i = 1}^{n}x_{i} & = & \sum_{i = 1}^{n}y_{i}\\
 \beta_{0}\sum_{i = 1}^{n}x_{i}+\beta_{1}\sum_{i = 1}^{n}x_{i}^{2} & = & \sum_{i = 1}^{n}x_{i}y_{i}
 \end{eqnarray}
-for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise [[#xca-find-mles-SLR]]) gives
+for \( \beta_{0} \) and \( \beta_{1} \) (in Exercise [[xca-find-mles-SLR]]) gives
 \begin{equation}
 \label{eq-regline-slope-formula}
 \hat{\beta}_{1} = \frac{\sum_{i = 1}^{n}x_{i}y_{i} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)\left(\sum_{i = 1}^{n}y_{i}\right)\right] n}{\sum_{i = 1}^{n}x_{i}^{2} - \left.\left(\sum_{i = 1}^{n}x_{i}\right)^{2}\right/ n}
@@ -13840,7 +13842,7 @@ above. For notation we will usually write \( b_{0} = \hat{\beta_{0}}
 b_{1}x \).
 
 #+BEGIN_rem
-The formula for \( b_{1} \) in Equation [[#eq-regline-slope-formula]] gets
+The formula for \( b_{1} \) in Equation [[eq-regline-slope-formula]] gets
 the job done but does not really make any sense. There are many
 equivalent formulas for \( b_{1} \) that are more intuitive, or at the
 least are easier to remember. One of the author's favorites is
@@ -13851,9 +13853,9 @@ b_{1} = r\frac{s_{y}}{s_{x}},
 where \(r\), \( s_{y} \), and \( s_{x} \) are the sample correlation
 coefficient and the sample standard deviations of the \(Y\) and \(x\)
 data, respectively. See Exercise
-[[#xca-show-alternate-slope-formula]]. Also, notice the similarity between
-Equation [[#eq-sample-correlation-formula]] and Equation
-[[#eq-population-slope-slr]].
+[[xca-show-alternate-slope-formula]]. Also, notice the similarity between
+Equation [[eq-sample-correlation-formula]] and Equation
+[[eq-population-slope-slr]].
 #+END_rem
 
 **** How to do it with \(\mathsf{R}\)
@@ -13945,11 +13947,12 @@ Using the regression line for the =cars= data:
 :END:
 
 We said at the beginning of the chapter that our goal was to estimate
-\( \mu = \mathbb{E} Y \), and the arguments in Section [[#sub-point-estimate-mle-slr]] showed how to obtain an estimate \( \hat{\mu} \) of \( \mu
-\) when the regression assumptions hold. Now we will reap the benefits
-of our work in more ways than we previously disclosed. Given a
-particular value \(x_{0}\), there are two values we would like to
-estimate:
+\( \mu = \mathbb{E} Y \), and the arguments in Section
+[[#sub-point-estimate-mle-slr]] showed how to obtain an estimate \(
+\hat{\mu} \) of \( \mu \) when the regression assumptions hold. Now we
+will reap the benefits of our work in more ways than we previously
+disclosed. Given a particular value \(x_{0}\), there are two values we
+would like to estimate:
 1. the mean value of \(Y\) at \(x_{0}\), and
 2. a future value of \(Y\) at \(x_{0}\). The first is a number,
    \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\),
@@ -13968,7 +13971,7 @@ traveling 8 mph.
 
 Note that we actually have observed data for a car traveling 8 mph;
 its stopping distance was 16 ft as listed in the fifth row of the
-=cars= data (which we saw in Example [[#exa-Speed-and-Stopping]]).
+=cars= data (which we saw in Example [[exa-Speed-and-Stopping]]).
 
 #+BEGIN_SRC R :exports both :results output pp
 cars[5, ]
@@ -13989,7 +13992,7 @@ In an abuse of notation we will sometimes write \(\hat{Y}\) or
 \(x_{0}\) does not belong to the original data if the context of the
 statement obviates any danger of confusion.
 
-We saw in Example [[#exa-regline-cars-interpret]] that spooky things can
+We saw in Example [[exa-regline-cars-interpret]] that spooky things can
 happen when we are cavalier about point estimation. While it is
 usually acceptable to predict/estimate at values of \(x_{0}\) that
 fall within the range of the original \(x\) data, it is reckless to
@@ -14031,7 +14034,7 @@ predict(cars.lm, newdata = data.frame(speed = c(6, 8, 21)))
 
 Note that there were no observed cars that traveled 6 mph or 21
 mph. Also note that our estimate for a car traveling 8 mph matches the
-value we computed by hand in Example [[#exa-regline-cars-pe-8mph]].
+value we computed by hand in Example [[exa-regline-cars-pe-8mph]].
 
 *** Mean Square Error and Standard Error
 
@@ -14085,7 +14088,7 @@ In the last section, we calculated the fitted value for \(x=8\) and
 found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R{tmpred}
 13.88. Now, it turns out that there was only one recorded observation
 at \(x = 8\), and we have seen this value in the output of
-=head(cars)= in Example [[#exa-Speed-and-Stopping]]; it was \(\mathtt{dist}
+=head(cars)= in Example [[exa-Speed-and-Stopping]]; it was \(\mathtt{dist}
 = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the
 residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - \)
 SRC_R{tmpred} 13.88. Now take a look at the last entry of
@@ -14118,7 +14121,7 @@ for the parameter being estimated. We will continue in that vein, and
 to get started we will determine the sampling distributions of the
 parameter estimates, \(b_{1}\) and \(b_{0}\).
 
-To that end, we can see from Equation [[#eq-regline-slope-formula]] (and it
+To that end, we can see from Equation [[eq-regline-slope-formula]] (and it
 is made clear in Chapter [[#cha-multiple-linear-regression]]) that \(b_{1}\) is
 just a linear combination of normally distributed random variables, so
 \(b_{1}\) is normally distributed too. Further, it can be shown that
@@ -14284,8 +14287,8 @@ Of course, \(\sigma\) is unknown so we estimate it with \(S\) and a \(
 \hat{Y}(x_{0})\pm\mathsf{t}_{\alpha/2}(\mathtt{df}=n-1)\: S\,\sqrt{1+\frac{1}{n}+\frac{(x_{0}-\overline{x})^{2}}{\sum_{i=1}^{n}(x_{i}-\overline{x})^{2}}}.
 \end{equation}
 We notice that the prediction interval in Equation
-[[#eq-SLR-pred-int-formula]] is wider than the confidence interval in
-Equation [[#eq-SLR-conf-int-formula]], as we expected at the beginning of
+[[eq-SLR-pred-int-formula]] is wider than the confidence interval in
+Equation [[eq-SLR-conf-int-formula]], as we expected at the beginning of
 the section.
 
 **** How to do it with \(\mathsf{R}\)
@@ -14379,8 +14382,8 @@ We earlier guessed that a bound on the value of a single new
 observation would be inherently less certain than a bound for an
 average (mean) value; therefore, we expect the CIs for the mean to be
 tighter than the PIs for a new observation. A close look at the
-standard deviations in Equations [[#eq-SLR-conf-int-formula]] and
-[[#eq-SLR-pred-int-formula]] confirms our guess, but we would like to see a
+standard deviations in Equations [[eq-SLR-conf-int-formula]] and
+[[eq-SLR-pred-int-formula]] confirms our guess, but we would like to see a
 picture to drive the point home.
 
 We may plot the confidence and prediction intervals with one fell
@@ -14395,8 +14398,8 @@ ci.plot(cars.lm)
 Notice that the bands curve outward from the regression line as the
 \(x\) values move away from the center. This is expected once we
 notice the \((x_{0}-\overline{x})^{2}\) term in the standard deviation
-formulas in Equations [[#eq-SLR-conf-int-formula]] and
-[[#eq-SLR-pred-int-formula]].
+formulas in Equations [[eq-SLR-conf-int-formula]] and
+[[eq-SLR-pred-int-formula]].
 
 #+NAME: carscipi
 #+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscipi.ps
@@ -14643,7 +14646,7 @@ All this being said, we have not yet gained much from the overall
 [[#sub-slr-hypoth-test-params]] how to test \(H_{0}:\beta_{1} =
 0\)... we use the Student's \(t\) statistic. What is worse is that (in
 the simple linear regression model) it can be proved that the \(F\) in
-Equation [[#eq-slr-overall-F-statistic]] is exactly the Student's
+Equation [[eq-slr-overall-F-statistic]] is exactly the Student's
 \(t\) statistic for \(\beta_{1}\) squared,
 
 \begin{equation}
@@ -15035,7 +15038,7 @@ and their sum is
 
 A rule of thumb is to consider leverage values to be large if they are
 more than double their average size (which is \(2/n\) according to
-Equation [[#eq-slr-average-leverage]]). So leverages larger than \(4/n\)
+Equation [[eq-slr-average-leverage]]). So leverages larger than \(4/n\)
 are suspect. Another rule of thumb is to say that values bigger than
 0.5 indicate high leverage, while values between 0.3 and 0.5 indicate
 moderate leverage.
@@ -15065,7 +15068,7 @@ t_{i}=\frac{D_{i}}{S_{(i)}/(1-h_{ii})},\quad i=1,2,\ldots,n,
 have a \(\mathsf{t}(\mathtt{df}=n-3)\) distribution and we compare observed values of \(t_{i}\) to this distribution to decide whether or not an observation is extreme. 
 
 The folklore in regression classes is that a test based on the
-statistic in Equation [[#eq-slr-studentized-deleted-resids]] can be too
+statistic in Equation [[eq-slr-studentized-deleted-resids]] can be too
 liberal. A rule of thumb is if we suspect an observation to be an
 outlier /before/ seeing the data then we say it is significantly
 outlying if its two-tailed \(p\)-value is less than \(\alpha\), but if
@@ -15356,7 +15359,7 @@ side of the plot, near the horizontal axis.
 #+LaTeX: \setcounter{thm}{0}
 
 #+begin_xca
-Prove the ANOVA equality, Equation [[#eq-anovaeq]]. /Hint/:
+Prove the ANOVA equality, Equation [[eq-anovaeq]]. /Hint/:
 show that
 \[
 \sum_{i=1}^{n}(Y_{i}-\hat{Y_{i}})(\hat{Y_{i}}-\overline{Y})=0.
@@ -15376,7 +15379,7 @@ n\beta_{0}+\beta_{1}\sum_{i=1}^{n}x_{i} & = & \sum_{i=1}^{n}y_{i}\\
 
 #+begin_xca
 # <<xca-show-alternate-slope-formula>>
-Show that the formula given in Equation [[#eq-sample-correlation-formula]]
+Show that the formula given in Equation [[eq-sample-correlation-formula]]
 is equivalent to \[ \hat{\beta}_{1} =
 \frac{\sum_{i=1}^{n}x_{i}y_{i}-\left.\left(\sum_{i=1}^{n}x_{i}\right)\left(\sum_{i=1}^{n}y_{i}\right)\right/
 n}{\sum_{i=1}^{n}x_{i}^{2}-\left.\left(\sum_{i=1}^{n}x_{i}\right)^{2}\right/
@@ -15660,7 +15663,7 @@ topic falls outside the scope of this book. The interested reader can
 consult an advanced text such as Rao \cite{Rao1999}.
 
 #+BEGIN_rem
-The formula in Equation [[#eq-b-formula-matrix]] is convenient for
+The formula in Equation [[eq-b-formula-matrix]] is convenient for
 mathematical study but is inconvenient for numerical
 computation. Researchers have devised much more efficient algorithms
 for the actual calculation of the parameter estimates, and we do not
@@ -15735,7 +15738,7 @@ They are expressed more compactly by the matrix equation
 \begin{equation}
 \hat{\mathbf{Y}}=\mathbf{X}\mathbf{b}.
 \end{equation}
-From Equation [[#eq-b-formula-matrix]] we know that
+From Equation [[eq-b-formula-matrix]] we know that
 \(\mathbf{b}=\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{X}^{\mathrm{T}}\mathbf{Y}\),
 so we can rewrite
 \begin{eqnarray}
@@ -15750,7 +15753,7 @@ later courses. Some facts about \(\mathbf{H}\) are
 - \(\mathbf{H}\) is a symmetric square matrix, of dimension
   \(\mathrm{n}\times\mathrm{n}\).
 - The diagonal entries \(h_{ii}\) satisfy \(0\leq h_{ii}\leq1\)
-  (compare to Equation [[#eq-slr-leverage-between]]).
+  (compare to Equation [[eq-slr-leverage-between]]).
 - The trace is \(\mathrm{tr}(\mathbf{H})=p\).
 - \(\mathbf{H}\) is /idempotent/ (also known as a /projection matrix/)
   which means that \(\mathbf{H}^{2}=\mathbf{H}\). The same is true of
@@ -15872,7 +15875,7 @@ The residuals are given by
 \begin{equation}
 \mathbf{E}=\mathbf{Y}-\hat{\mathbf{Y}}=\mathbf{Y}-\mathbf{H}\mathbf{Y}=(\mathbf{I}-\mathbf{H})\mathbf{Y}.
 \end{equation}
-Now we can use Theorem [[#thm-mvnorm-dist-matrix-prod]] to see that the
+Now we can use Theorem [[thm-mvnorm-dist-matrix-prod]] to see that the
 residuals are distributed
 \begin{equation}
 \mathbf{E}\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0},\,\mathtt{sigma}=\sigma^{2}(\mathbf{I}-\mathbf{H})),
@@ -15938,7 +15941,7 @@ distribution of \(\mathbf{Y}\), which we assumed to be
 \begin{equation}
 \mathbf{Y}\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{X}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{I}\right).
 \end{equation}
-Now recall Theorem [[#thm-mvnorm-dist-matrix-prod]] that we said we were
+Now recall Theorem [[thm-mvnorm-dist-matrix-prod]] that we said we were
 going to need eventually (the time is now). That proposition
 guarantees that
 \begin{equation}
@@ -15956,7 +15959,7 @@ and
 the first equality following because the matrix
 \(\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\) is symmetric.
 
-There is a lot that we can glean from Equation [[#eq-distn-b-mlr]]. First,
+There is a lot that we can glean from Equation [[eq-distn-b-mlr]]. First,
 it follows that the estimator \(\mathbf{b}\) is unbiased (see Section
 [[#sec-Point-Estimation-1]]). Second, the variances of \(b_{0}\), \(b_{1}\),
 ..., \(b_{n}\) are exactly the diagonal elements of
@@ -16013,14 +16016,14 @@ future observations, but how good are our estimates? We need
 confidence and prediction intervals to gauge their accuracy, and lucky
 for us the formulas look similar to the ones we saw in SLR.
 
-In Equation [[#eq-mlr-single-yhat-matrix]] we wrote \(
+In Equation [[eq-mlr-single-yhat-matrix]] we wrote \(
 \hat{Y}(\mathbf{x}_{0})=\mathbf{x}_{0}^{\mathrm{T}}\mathbf{b} \), and
-in Equation [[#eq-distn-b-mlr]] we saw that
+in Equation [[eq-distn-b-mlr]] we saw that
 \begin{equation}
 \mathbf{b}\sim\mathsf{mvnorm}\left(\mathtt{mean} = \upbeta,\,\mathtt{sigma}=\sigma^{2}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\right).
 \end{equation}
 The following is therefore immediate from Theorem
-[[#thm-mvnorm-dist-matrix-prod]]:
+[[thm-mvnorm-dist-matrix-prod]]:
 \begin{equation}
 \hat{Y}(\mathbf{x}_{0})\sim\mathsf{mvnorm}\left(\mathtt{mean}=\mathbf{x}_{0}^{\mathrm{T}}\upbeta,\,\mathtt{sigma}=\sigma^{2}\mathbf{x}_{0}^{\mathrm{T}}\left(\mathbf{X}^{\mathrm{T}}\mathbf{X}\right)^{-1}\mathbf{x}_{0}\right).
 \end{equation}
@@ -16132,11 +16135,11 @@ and
 \label{eq-mlr-ssr-matrix}
 SSR= & \mathbf{Y}^{\mathrm{T}}\left(\mathbf{H}-\frac{1}{n}\mathbf{J}\right)\mathbf{Y}.
 \end{alignat}
-(The matrix \(\mathbf{J}\) is defined in Appendix [[#sec-Linear-Algebra]].) Immediately from Equations [[#eq-mlr-sse-matrix]], [[#eq-mlr-ssto-matrix]], and [[#eq-mlr-ssr-matrix]] we get the /Anova Equality/
+(The matrix \(\mathbf{J}\) is defined in Appendix [[#sec-Linear-Algebra]].) Immediately from Equations [[eq-mlr-sse-matrix]], [[eq-mlr-ssto-matrix]], and [[eq-mlr-ssr-matrix]] we get the /Anova Equality/
 \begin{equation} 
 SSTO=SSE+SSR.
 \end{equation}
-(See Exercise [[#xca-anova-equality]].) We define the /multiple coefficient of determination/ by the formula
+(See Exercise [[xca-anova-equality]].) We define the /multiple coefficient of determination/ by the formula
 \begin{equation} 
 R^{2}=1-\frac{SSE}{SSTO}.
 \end{equation}
@@ -16524,7 +16527,7 @@ correlated (see Section [[#sub-Multicollinearity]]). The only remedy to this
 ailment is to rescale =Girth=, which we should have done in the first
 place.
 
-In Example [[#exa-mlr-trees-poly-no-rescale]] of Section [[#sec-Partial-F-Statistic]].
+In Example [[exa-mlr-trees-poly-no-rescale]] of Section [[#sec-Partial-F-Statistic]].
 
 *Note:* The =trees= data do not have any qualitative explanatory
 variables, so we will construct one for illustrative
@@ -16961,7 +16964,7 @@ fact that a black cherry tree is not a perfect cylinder.
 How can we fit this model? The model is not linear in the parameters
 any more, so our linear regression methods will not work... or will
 they? In the =trees= example we may take the logarithm of both sides
-of Equation [[#eq-trees-nonlin-reg]] to get
+of Equation [[eq-trees-nonlin-reg]] to get
 \begin{equation}
 \mu^{\ast}(x_{1},x_{2})=\ln\left[\mu(x_{1},x_{2})\right]=\ln\beta_{0}+\beta_{1}\ln x_{1}+\beta_{2}\ln x_{2},
 \end{equation}
@@ -17159,8 +17162,8 @@ AIC=-2\ln L+2(p+1)
 
 #+begin_xca
 # <<xca-anova-equality>>
-Use Equations [[#eq-mlr-sse-matrix]], [[#eq-mlr-ssto-matrix]], and
-[[#eq-mlr-ssr-matrix]] to prove the Anova Equality: \[ SSTO=SSE+SSR.\]
+Use Equations [[eq-mlr-sse-matrix]], [[eq-mlr-ssto-matrix]], and
+[[eq-mlr-ssr-matrix]] to prove the Anova Equality: \[ SSTO=SSE+SSR.\]
 #+end_xca
 
 * Resampling Methods                                                 :resamp:
@@ -17501,7 +17504,7 @@ resampled, =statistic= is a defined function, /of two arguments/, that
 tells which statistic should be computed, and the parameter
 \(\mathsf{R}\) specifies how many resamples should be taken.
 
-For the standard error of the mean (Example [[#exa-Bootstrap-se-mean]]):
+For the standard error of the mean (Example [[exa-Bootstrap-se-mean]]):
 
 #+BEGIN_SRC R :exports both :results output pp 
 mean_fun <- function(x, indices) mean(x[indices])
@@ -17524,7 +17527,7 @@ t1*  3.05766 -0.01117741     0.21834
 #+end_example
 
 For the standard error of the median (Example
-[[#exa-Bootstrap-se-median]]):
+[[exa-Bootstrap-se-median]]):
 
 #+BEGIN_SRC R :exports both :results output pp 
 median_fun <- function(x, indices) median(x[indices])
