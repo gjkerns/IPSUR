@@ -16,6 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
+basedir = git
 psdir   = ps
 pdfdir  = pdf
 htmldir = html
@@ -27,17 +28,21 @@ Rdir    = R
 all:
 	-mkdir $(texdir)
 	-mkdir $(psdir)
-	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-cd $(texdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(texdir)/$(orgfile).pdf $(texdir)/$(orgfile).ps
 	-rm -r ~/.org-timestamps
 
-latex:
+tex:
 	-mkdir $(texdir)
-	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
-	-cd $(texdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
-	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(texdir)/$(orgfile).pdf $(texdir)/$(orgfile).ps
+	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-rm -r ~/.org-timestamps
+
+pdf:
+	-rm $(pdfdir)
+	cp -R $(texdir) $(pdfdir)
+	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
+	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(pdfdir)/$(orgfile).pdf $(pdfdir)/$(orgfile).ps
 
 figures:
 	-mkdir $(psdir)
@@ -53,6 +58,7 @@ backup:
 
 clean:
 	-rm -r $(texdir)
+	-rm -r $(pdfdir)
 	-rm -r ~/.org-timestamps
 
 distclean:
