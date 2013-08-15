@@ -1628,8 +1628,8 @@ a bar graph with the =barplot=
 @@latex:\index{barplot@\texttt{barplot}}@@ function:
 
 #+BEGIN_SRC R :exports code :eval never
-barplot(table(state.region), cex.names = 0.50)
-barplot(prop.table(table(state.region)), cex.names = 0.50)
+barplot(table(state.region), cex.names = 1.20)
+barplot(prop.table(table(state.region)), cex.names = 1.20)
 #+END_SRC
 
 See Figure [[fig-bar-gr-stateregion]]. The display on the left is a frequency
@@ -1641,16 +1641,16 @@ Central, and finally Northeast. Over 30% of the states are in the
 South.
 
 Notice the =cex.names= @@latex:\index{cex.names@\texttt{cex.names}}@@
-argument that we used, above. It shrinks the names on the \(x\) axis
-by 50% which makes them easier to read. See =?par=
+argument that we used, above. It expands the names on the \(x\) axis
+by 20% which makes them easier to read. See =?par=
 @@latex:\index{par@\texttt{par}}@@ for a detailed list of additional
 plot parameters.
 
 #+NAME: bar-gr-stateregion
 #+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-bar-gr-stateregion.ps
-par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
-barplot(table(state.region), cex.names = 0.50)
-barplot(prop.table(table(state.region)), cex.names = 0.50)
+par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
+barplot(table(state.region), cex.names = 1.2)
+barplot(prop.table(table(state.region)), cex.names = 1.2)
 par(mfrow = c(1,1)) # back to normal
 #+END_SRC
 
