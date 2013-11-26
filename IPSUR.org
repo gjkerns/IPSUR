@@ -12678,10 +12678,10 @@ anything, in principle).
 [fn:fn-typetwo] There is no mathematical difference between the
 errors, however. The bottom line is that we choose one type of error
 to control with an iron fist, and we try to minimize the probability
-of making the other type. That being said, null hypotheses are often
-by design to correspond to the "simpler" model, so it is often easier
-to analyze (and thereby control) the probabilities associated with
-Type I Errors.
+of the other type. That being said, null hypotheses are often by
+design to correspond to the "simpler" model, so it is often easier to
+analyze (and thereby control) the probabilities associated with Type I
+Errors.
 
 We are ready for tests of hypotheses for one proportion.  We know from
 Section BLANK that when \(H_{0}:\,p = p_{0}\) is true and \(n\) is
@@ -12693,7 +12693,6 @@ approximately, and the approximation gets better as the sample size gets bigger.
 \begin{equation}
 Z = \frac{\hat{p} - p_{0}}{sqrt{p_{0}(1 - p_{0})/n}}  \sim \mathsf{norm}(\mathtt{mean} = 0, \mathtt{sd} = 1).
 \end{equation}
-
 
 #+NAME: tab-ztest-one-sample-prop
 #+CAPTION: Hypothesis tests, population proportion, large sample
@@ -12709,7 +12708,6 @@ Z = \frac{\hat{p} - p_{0}}{sqrt{p_{0}(1 - p_{0})/n}}  \sim \mathsf{norm}(\mathtt
   - need at least 15 successes and at least 15 failures
 
 #+BEGIN_exampletoo
-
 Find
 1. The null and alternative hypotheses.
 2. Check your assumptions.
@@ -12721,7 +12719,7 @@ Find
 
 
 #+BEGIN_exampletoo
-<<exa-prop-test-pvalue-A>> Suppose \(p = \mbox{the proportion of
+<<exa-prop-test-pvalue-A>> Suppose \(p = \mathrm{the\ proportion\ of\
 students}\) who are admitted to the graduate school of the University
 of California at Berkeley, and suppose that a public relations officer
 boasts that UCB has historically had a 40% acceptance rate for its
@@ -12885,10 +12883,27 @@ will reject \(H_{0}\) at the \(\alpha\)-level of significance if the
 
 #+BEGIN_rem
 If we have two populations with proportions \(p_{1}\) and \(p_{2}\)
-then we can test the null hypothesis \(H_{0}:\,p_{1} = p_{2}\).
+then we can test the null hypothesis \(H_{0}:\,p_{1} = p_{2}\). In
+that which follows,
+- we observe independent simple random samples of size \(n_{1}\) and
+  \(n_{2}\) from Bernoulli populations with respective probabilities
+  of success \(p_{1}\) and \(p_{2}\),
+- we write \(y_{1}\) and \(y_{2}\) for the respective numbers of
+  successes from each of the two groups,
+- we estimate \(p_{1}\) and \(p_{2}\) with \(\hat{p}_{1} = y_{1}/n_{1}
+  \) and \(\hat{p}_{2} = y_{2}/n_{2}\), while we estimate the pooled
+  probability \(\hat{p}\) with \((y_{1} + y_{2})/(n_{1} + n_{2}\), and
+- finally, \[z = \frac{\hat{p}_{1} - \hat{p}_{2}}{\sqrt{\hat{p}(1 - \hat{p})\left( \frac{1}{n_{1}} + \frac{1}{n_{2}} \right)}}. \]
 #+END_rem
 
-Table Here.
+
+#+NAME: tab-ztest-two-sample-prop
+#+CAPTION: Hypothesis tests, difference in population proportions, large sample
+| \(H_{0}\)         | \(H_{a}\)                | Rejection Region                  |
+|-------------------+--------------------------+-----------------------------------|
+| \(p_{1} = p_{2}\) | \(p_{1} - p_{2} > 0\)    | \(z > z_{\alpha}\)                |
+| \(p_{1} = p_{2}\) | \(p_{1} - p_{2} < 0\)    | \(z < -z_{\alpha}\)               |
+| \(p_{1} = p_{2}\) | \(p_{1} - p_{2} \neq 0\) | \( \vert z \vert > z_{\alpha/2}\) |
 
 
 Example.
@@ -12922,10 +12937,12 @@ sample estimates:
 Do the following to make the plot.
 
 
-Use Yates' continuity correction when the expected frequency of
-successes is less than 10. You can use it all of the time, but you
-will have a decrease in power. For large samples the correction does
-not matter.
+*Remark*: In the above we set =correct = FALSE= to tell the computer
+that we did not want to use Yates' continuity correction (reference
+BLANK).  It is customary to use Yates when the expected frequency of
+successes is less than 10. (reference BLANK) You can use it all of the
+time, but you will have a decrease in power. For large samples the
+correction does not matter.
 
 **** With the \(\mathsf{R}\) Commander
 
@@ -12998,13 +13015,14 @@ In this example we
 
 
 #+BEGIN_rem
-Another name for a \(p\)-value is /tail-end probability/. We reject
-\(H_{0}\) when the \(p\)-value is small.  The quantity
-\(\sigma/\sqrt{n}\), when \(\sigma\) is known, is called the /standard
-error of the sample mean/. In general, if we have an estimator
-\(\hat{\theta}\) then \(\sigma_{\hat{\theta}}\) is called the
-/standard error/ of \(\hat{\theta}\). We usually need to estimate
-\(\sigma_{\hat{\theta}}\) with \(\hat{\sigma_{\hat{\theta}}}\).
+- Another name for a \(p\)-value is /tail-end probability/. We reject
+  \(H_{0}\) when the \(p\)-value is small.
+- The quantity \(\sigma/\sqrt{n}\), when \(\sigma\) is known, is
+  called the /standard error of the sample mean/. In general, if we
+  have an estimator \(\hat{\theta}\) then \(\sigma_{\hat{\theta}}\) is
+  called the /standard error/ of \(\hat{\theta}\). We usually need to
+  estimate \(\sigma_{\hat{\theta}}\) with
+  \(\hat{\sigma_{\hat{\theta}}}\).
 #+END_rem
 
 **** How to do it with \(\mathsf{R}\)
@@ -13144,9 +13162,8 @@ can plug them in to our statistic:
 \begin{equation} 
 Z = \frac{\overline{X} - \overline{Y}}{\sqrt{\sigma_{X}^{2}/n + \sigma_{Y}^{2}/m}};
 \end{equation}
-the result will have a
-\(\mathsf{norm}(\mathtt{mean} = 0,\,\mathtt{sd} = 1)\) distribution when
-\(H_{0}:\,\mu_{X} = \mu_{Y}\) is true.
+the result will have a \(\mathsf{norm}(\mathtt{mean} = 0,\,\mathtt{sd}
+= 1)\) distribution when \(H_{0}:\,\mu_{X} = \mu_{Y}\) is true.
 #+END_rem
 
 #+BEGIN_rem
@@ -13161,7 +13178,7 @@ Z = \frac{\overline{X} - \overline{Y}}{\sqrt{S_{X}^{2}/n + S_{Y}^{2}/m}}.
 #+END_rem
 
 #+BEGIN_rem
-It is usually important to construct side-by-side boxplots and other
+It is often helpful to construct side-by-side boxplots and other
 visual displays in concert with the hypothesis test. This gives a
 visual comparison of the samples and helps to identify departures from
 the test's assumptions -- such as outliers.
@@ -13264,17 +13281,20 @@ The test statistic we will use is Wilk's \(W\), which looks like this:
 \begin{equation}
 W = \frac{\left(\sum_{i = 1}^{n} a_{i}x_{(i)} \right)^{2}}{\sum_{i = 1}^{n}(x_{i} - \overline{x})^{2}},
 \end{equation}
-where the \(x_{(i)}\)'s are the order statistics (see Section BLANK) and the constants \(a_{i}\) form the components of a vector \(\mathbf{a}_{1\times\mathrm{n}}\) defined by
+where the \(x_{(i)}\)'s are the order statistics (see Section BLANK)
+and the constants \(a_{i}\) form the components of a vector
+\(\mathbf{a}_{1\times\mathrm{n}}\) defined by
 \begin{equation}
 \mathbf{a}=\frac{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}}{\sqrt{\mathbf{m}^{\mathrm{T}}\mathbf{V}^{-1}\mathbf{V}^{-1}\mathbf{m}}},
 \end{equation}
-where \(\mathbf{m}_{\mathrm{n}\times1}\) and
-\(\mathbf{V}_{\mathrm{n}\times\mathrm{n}}\) are the mean and
-covariance matrix, respectively, of the order statistics from an
-\(\mathsf{mvnorm}\left(\mathtt{mean} = \mathbf{0},\,\mathtt{sigma} =
+where \(\mathbf{m}_{\mathrm{n}\times1}\) and \(\mathbf{V}_{\mathrm{n}
+\times \mathrm{n}} \) are the mean and covariance matrix,
+respectively, of the order statistics from an \(\mathsf{mvnorm}
+\left(\mathtt{mean} = \mathbf{0},\,\mathtt{sigma} =
 \mathbf{I}\right)\) distribution.  This test statistic \(W\) was
 published in 1965 by (you guessed it): Shapiro and
-Wilk\cite{Wilk1965}.  In contrast to most other test statistics we know, we reject \(H_{0}\) if \(W\) is too /small/.
+Wilk\cite{Wilk1965}.  In contrast to most other test statistics we
+know, we reject \(H_{0}\) if \(W\) is too /small/.
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -17066,9 +17086,8 @@ topic will receive more attention in a later edition.
 *** Akaike's Information Criterion
 
 \[
-AIC=-2\ln L+2(p+1)
+AIC = -2\ln L + 2(p + 1)
 \]
-
 
 #+LaTeX: \newpage{}
 
