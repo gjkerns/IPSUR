@@ -1655,8 +1655,8 @@ par(mfrow = c(1,1)) # back to normal
 #+END_SRC
 
 #+NAME: fig-bar-gr-stateregion
-#+CAPTION[Bar graphs of the =state.region= data]: \small The left graph is a frequency barplot made with =table= and the right is a relative frequency barplot made with =prop.table=.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Bar graphs of the =state.region= data]: \small The top graph is a frequency barplot made with =table= and the bottom is a relative frequency barplot made with =prop.table=.
+#+ATTR_LaTeX: :width 1.0\textwidth :placement [ht!] :options angle=-90
 #+RESULTS: bar-gr-stateregion
 [[file:ps/datadesc-bar-gr-stateregion.ps]]
 
@@ -1698,7 +1698,7 @@ pareto.chart(table(state.division), ylab="Frequency", cex.lab = cexlab)
 #+CAPTION: \small Pareto chart of the =state.division= data.
 #+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
 #+RESULTS: Pareto-chart
-[[file:ps/datadesc-bar-gr-stateregion.ps]]
+[[file:ps/datadesc-Pareto-chart.ps]]
 
 #+END_exampletoo
 
@@ -5347,7 +5347,8 @@ Toss a coin twice. The sample space is \(S= \{ HH,\ HT,\ TH,\ TT \}
 \(\mathbb{P}(2^{\mathrm{nd}}\mbox{ toss is }H)=2/4\), and
 \(\mathbb{P}(\mbox{both }H)=1/4\). Then
 
-\begin{align*} \mathbb{P}(2^{\mathrm{nd}}\mbox{ toss is }H\ |\ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\mathbb{P}(\mbox{both }H)}{\mathbb{P}(1^{\mathrm{st}}\mbox{ toss is }H)},\\
+\begin{align*} 
+\mathbb{P}(2^{\mathrm{nd}}\mbox{ toss is }H\ \vert \ 1^{\mathrm{st}}\mbox{ toss is }H) & =\frac{\mathbb{P}(\mbox{both }H)}{\mathbb{P}(1^{\mathrm{st}}\mbox{ toss is }H)}, \\
  & =\frac{1/4}{2/4},\\
  & =\mathbb{P}(2^{\mathrm{nd}}\mbox{ toss is }H).
 \end{align*}
@@ -11030,17 +11031,19 @@ the quantity in Equation \eqref{eq-diff-indep-sample-means} will be
 approximately normal provided both sample sizes are large.
 #+END_rem
 
-#+BEGIN_rem
-For the special case of \(\mu_{X}=\mu_{Y}\) we have shown that 
+*Remark:* For the special case of \(\mu_{X}=\mu_{Y}\) we have shown
+ that
 \begin{equation}
-\frac{\overline{X}-\overline{Y}}{\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}}}
-\end{equation} has a
-\(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling
-distribution, or in other words, \(\overline{X}-\overline{Y}\) has a
-\(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=\sqrt{\sigma_{X}^{2}/n_{1}+\sigma_{Y}^{2}/n_{2}})\)
-sampling distribution. This will be important when it comes time to do
-hypothesis tests; see Section [[#sec-Conf-Interv-for-Diff-Means]].
-#+END_rem
+\frac{\overline{X} - \overline{Y}}{\sqrt{ \sigma_{X}^{2}/ n_{1} + \sigma_{Y}^{2}/n_{2}}}
+\end{equation}
+
+has a \(\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) sampling
+distribution, or in other words, \(\overline{X} - \overline{Y}\) has a
+\(\mathsf{norm}(\mathtt{mean} = 0,\,\mathtt{sd} = \sqrt{\sigma_{X}^{2}
+/ n_{1} + \sigma_{Y}^{2} / n_{2}})\) sampling distribution. This will
+be important when it comes time to do hypothesis tests; see Section
+[[#sec-Conf-Interv-for-Diff-Means]].
+
 
 *** Difference of Independent Sample Proportions
 
@@ -13740,12 +13743,11 @@ n \beta_{0} + \beta_{1} \sum_{i=1}^{n} x_{i} = \sum_{i = 1}^{n}y_{i}.
 \end{equation}
 Moving on, we next take the partial derivative of \( \ln L \)
 (Equation \eqref{eq-regML-lnL}) with respect to \( \beta_{1} \) to get
-\begin{alignat}{1} \frac{\partial}{\partial\beta_{1}}\ln L=\ &
-0-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}2(y_{i}-\beta_{0}-\beta_{1}x_{i})(-x_{i}),\\ =
-&
-\frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}y_{i}-\beta_{0}x_{i}-\beta_{1}x_{i}^{2}\right),
-\end{alignat} and this equals zero when the last sum equals zero, that
-is, when
+
+\begin{alignat}{1}
+\frac{\partial}{\partial \beta_{1}} \ln L = \ & 0 - \frac{1}{2\sigma^{2}} \sum_{i=1}^{n} 2 (y_{i} - \beta_{0} - \beta_{1} x_{i})(-x_{i}),\\ = & \frac{1}{\sigma^{2}}\sum_{i = 1}^{n}\left(x_{i} y_{i} - \beta_{0}x_{i} - \beta_{1}x_{i}^{2}\right),
+\end{alignat}
+and this equals zero when the last sum equals zero, that is, when
 \begin{equation}
 \label{eq-regML-b}
 \beta_{0} \sum_{i = 1}^{n}x_{i} + \beta_{1} \sum_{i = 1}^{n}x_{i}^{2} = \sum_{i = 1}^{n}x_{i}y_{i}.
@@ -15635,12 +15637,14 @@ We see from the output that for the =trees= data our parameter
 estimates are \[ \mathbf{b}=\begin{bmatrix}-58.0 & 4.7 &
 0.3\end{bmatrix}, \] and consequently our estimate of the mean
 response is \(\hat{\mu}\) given by
-\begin{alignat}{1} \hat{\mu}(x_{1},x_{2})= & \
-b_{0}+b_{1}x_{1}+b_{2}x_{2},\\ \approx & -58.0+4.7x_{1}+0.3x_{2}.
-\end{alignat} We could see the entire model matrix \(\mathbf{X}\) with
-the =model.matrix=
-@@latex:\index{model.matrix@\texttt{model.matrix}}@@ function, but in
-the interest of brevity we only show the first few rows.
+\begin{alignat}{1} 
+\hat{\mu}(x_{1},x_{2}) = & \ b_{0} + b_{1} x_{1} + b_{2}x_{2},\\ \approx & -58.0 + 4.7 x_{1} + 0.3 x_{2}.
+\end{alignat} 
+
+We could see the entire model matrix \(\mathbf{X}\) with the
+=model.matrix= @@latex:\index{model.matrix@\texttt{model.matrix}}@@
+function, but in the interest of brevity we only show the first few
+rows.
 
 #+BEGIN_SRC R :exports both :results output pp 
 head(model.matrix(trees.lm))
