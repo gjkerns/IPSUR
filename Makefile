@@ -16,26 +16,27 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-basedir = git
-psdir   = ps
-pdfdir  = pdf
-htmldir = html
-texdir  = tex
-orgfile = IPSUR
-backdir = backup
-Rdir    = R
+basedir  = git
+ipsurdir = IPSUR
+psdir    = ps
+pdfdir   = pdf
+htmldir  = html
+texdir   = tex
+orgfile  = IPSUR
+backdir  = backup
+Rdir     = R
 
 all:
 	-mkdir $(texdir)
 	-mkdir $(psdir)
-	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-cd $(texdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(texdir)/$(orgfile).pdf $(texdir)/$(orgfile).ps
 	-rm -r ~/.org-timestamps
 
 tex:
 	-mkdir $(texdir)
-	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/IPSUR/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-rm -r ~/.org-timestamps
 
 pdf:
@@ -44,13 +45,21 @@ pdf:
 	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(pdfdir)/$(orgfile).pdf $(pdfdir)/$(orgfile).ps
 
+texpdf:
+	-mkdir $(texdir)
+	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	cp -R $(texdir) $(pdfdir)
+	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
+	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(pdfdir)/$(orgfile).pdf $(pdfdir)/$(orgfile).ps
+	-rm -r ~/.org-timestamps
+
 figures:
 	-mkdir $(psdir)
-	emacs -Q --batch --eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (find-file \"~/git/IPSUR/IPSUR.org\") (org-babel-execute-buffer) (kill-buffer))"
+	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-execute-buffer) (kill-buffer))"
 
 Rtangle:
 	-mkdir $(Rdir)
-	emacs -Q --batch --eval "(progn (load \"~/git/IPSUR/init-ipsur.el\") (R) (find-file \"~/git/IPSUR/IPSUR.org\") (org-babel-tangle) (kill-buffer))"
+	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-tangle) (kill-buffer))"
 
 backup:
 	-mkdir $(backdir)
