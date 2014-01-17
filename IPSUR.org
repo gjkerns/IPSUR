@@ -6172,17 +6172,17 @@ standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
  
 #+BEGIN_exampletoo
 <<exa-disc-pmf-mean>> We will calculate the mean of \(X\) in Example
-[[exa-Toss-a-coin]].  \[
-\mu=\sum_{x=0}^{3}xf_{X}(x)=0\cdot\frac{1}{8}+1\cdot\frac{3}{8}+2\cdot\frac{3}{8}+3\cdot\frac{1}{8}=1.5.
-\] We interpret \(\mu = 1.5\) by reasoning that if we were to repeat
-the random experiment many times, independently each time, observe
-many corresponding outcomes of the random variable \(X\), and take the
-sample mean of the observations, then the calculated value would fall
-close to 1.5. The approximation would get better as we observe more
-and more values of \(X\) (another form of the Law of Large Numbers;
-see Section [[#sec-Interpreting-Probabilities]]). Another way it is
-commonly stated is that \(X\) is 1.5 "on the average" or "in the long
-run".
+[[exa-Toss-a-coin]].  \[ \mu = \sum_{x = 0}^{3}xf_{X}(x) = 0 \cdot
+\frac{1}{8} + 1 \cdot \frac{3}{8} + 2 \cdot
+\frac{3}{8}+3\cdot\frac{1}{8} = 1.5. \] We interpret \(\mu = 1.5\) by
+reasoning that if we were to repeat the random experiment many times,
+independently each time, observe many corresponding outcomes of the
+random variable \(X\), and take the sample mean of the observations,
+then the calculated value would fall close to 1.5. The approximation
+would get better as we observe more and more values of \(X\) (another
+form of the Law of Large Numbers; see Section
+[[#sec-Interpreting-Probabilities]]). Another way it is commonly stated is
+that \(X\) is 1.5 "on the average" or "in the long run".
 #+END_exampletoo
 
 
@@ -6315,24 +6315,22 @@ and 100, inclusive. Let \(X\) be the number chosen. Then
 \]
 We find a direct formula for the mean of \(X\sim\mathsf{disunif}(m)\):
 \begin{equation}
-\mu=\sum_{x=1}^{m}xf_{X}(x)=\sum_{x=1}^{m}x\cdot\frac{1}{m}=\frac{1}{m}(1+2+\cdots+m)=\frac{m+1}{2},
+\mu = \sum_{x = 1}^{m}xf_{X}(x) = \sum_{x = 1}^{m}x \cdot \frac{1}{m} = \frac{1}{m}(1 + 2 + \cdots + m) = \frac{m + 1}{2},
 \end{equation}
-where we have used the famous identity \(1+2+\cdots+m=m(m+1)/2\). That
-is, if we repeatedly choose integers at random from 1 to \(m\) then,
-on the average, we expect to get \((m+1)/2\). To get the variance we
-first calculate
-\[
-\sum_{x=1}^{m}x^{2}f_{X}(x)=\frac{1}{m}\sum_{x=1}^{m}x^{2}=\frac{1}{m}\frac{m(m+1)(2m+1)}{6}=\frac{(m+1)(2m+1)}{6},
-\]
-and finally,
+where we have used the famous identity \(1 + 2 + \cdots + m = m(m +
+1)/2\). That is, if we repeatedly choose integers at random from 1 to
+\(m\) then, on the average, we expect to get \((m+1)/2\). To get the
+variance we first calculate \[ \sum_{x = 1}^{m} x^{2} f_{X}(x) =
+\frac{1}{m} \sum_{x = 1}^{m} x^{2} = \frac{1}{m}\frac{m(m + 1)(2m +
+1)}{6} = \frac{(m + 1)(2m + 1)}{6}, \] and finally,
 \begin{equation}
-\sigma^{2}=\sum_{x=1}^{m}x^{2}f_{X}(x)-\mu^{2}=\frac{(m+1)(2m+1)}{6}-\left(\frac{m+1}{2}\right)^{2}=\cdots=\frac{m^{2}-1}{12}.
+\sigma^{2} = \sum_{x = 1}^{m} x^{2} f_{X}(x) - \mu^{2} = \frac{(m + 1)(2m + 1)}{6} - \left(\frac{m + 1}{2}\right)^{2} = \cdots = \frac{m^{2} - 1}{12}.
 \end{equation}
 
 #+BEGIN_exampletoo
 
-Roll a die and let \(X\) be the upward face showing. Then \(m=6\),
-\(\mu=7/2=3.5\), and \(\sigma^{2}=(6^{2}-1)/12=35/12\).
+Roll a die and  let \(X\) be the upward face showing.  Then \(m = 6\),
+\(\mu = 7/2 = 3.5\), and \(\sigma^{2} = (6^{2} - 1)/12 = 35/12\).
 #+END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
@@ -6422,11 +6420,8 @@ We say that \(X\) has a /binomial distribution/ and we write
 \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). It is
 clear that \(f_{X}(x)\geq0\) for all \(x\) in the support because the
 value is the product of nonnegative numbers. We next check that \(\sum
-f(x)=1\):
-\[
-\sum_{x=0}^{n}{n \choose x}p^{x}(1-p)^{n-x}=[p+(1-p)]^{n}=1^{n}=1.
-\]
-We next find the mean:
+f(x)=1\): \[ \sum_{x = 0}^{n}{n \choose x} p^{x} (1 - p)^{n - x} =
+[p + (1 - p)]^{n} = 1^{n} = 1.  \] We next find the mean:
 \begin{alignat*}{1}
 \mu= & \sum_{x=0}^{n}x\,{n \choose x}p^{x}(1-p)^{n-x},\\
 = & \sum_{x=1}^{n}x\,\frac{n!}{x!(n-x)!}p^{x}q^{n-x},\\
@@ -6434,7 +6429,7 @@ We next find the mean:
 = & np\,\sum_{x-1=0}^{n-1}{n-1 \choose x-1}p^{(x-1)}(1-p)^{(n-1)-(x-1)},\\
 = & np.
 \end{alignat*}
-A similar argument shows that \(\mathbb{E} X(X-1)=n(n-1)p^{2}\) (see
+A similar argument shows that \(\mathbb{E} X(X - 1) = n(n - 1)p^{2}\) (see
 Exercise [[xca-binom-factorial-expectation]]). Therefore
 \begin{alignat*}{1}
 \sigma^{2}= & \mathbb{E} X(X-1)+\mathbb{E} X-[\mathbb{E} X]^{2},\\
@@ -6640,13 +6635,19 @@ plot(X, cex = 0.2)
 :CUSTOM_ID: sub-expectation-operator
 :END:
 
-We next generalize some of the concepts from Section [[#sub-mean-variance-sd]]. There we saw that every[fn:fn-converge] PMF has two important numbers associated with it:
+We next generalize some of the concepts from Section
+[[#sub-mean-variance-sd]]. There we saw that every[fn:fn-converge] PMF has
+two important numbers associated with it:
 
 \begin{equation}
-\mu=\sum_{x\in S}xf_{X}(x),\quad \sigma^{2}=\sum_{x\in S}(x-\mu)^{2}f_{X}(x).
+\mu = \sum_{x \in S}x f_{X}(x),\quad \sigma^{2} = \sum_{x \in S}(x - \mu)^{2} f_{X}(x).
 \end{equation}
 
-Intuitively, for repeated observations of \(X\) we would expect the sample mean to closely approximate \(\mu\) as the sample size increases without bound. For this reason we call \(\mu\) the /expected value/ of \(X\) and we write \(\mu=\mathbb{E} X\), where \(\mathbb{E}\) is an /expectation operator/.
+Intuitively, for repeated observations of \(X\) we would expect the
+sample mean to closely approximate \(\mu\) as the sample size
+increases without bound. For this reason we call \(\mu\) the /expected
+value/ of \(X\) and we write \(\mu=\mathbb{E} X\), where
+\(\mathbb{E}\) is an /expectation operator/.
 
 [fn:fn-converge] Not every, only those PMFs for which the (potentially infinite) series converges.
 
@@ -6656,14 +6657,14 @@ of/ \(g(X)\) by
 \begin{equation}
 \mathbb{E}\, g(X)=\sum_{x\in S}g(x)f_{X}(x),
 \end{equation}
-provided the (potentially infinite) series \(\sum_{x}|g(x)|f(x)\) is
+provided the (potentially infinite) series \(\sum_{x} \vert g(x) \vert f(x)\) is
 convergent. We say that \(\mathbb{E} g(X)\) /exists/.
 #+END_defn
 
-In this notation the variance is \(\sigma^{2}=\mathbb{E}(X-\mu)^{2}\)
-and we prove the identity
+In this notation the variance is \(\sigma^{2} = \mathbb{E}(X -
+\mu)^{2}\) and we prove the identity
 \begin{equation}
-\mathbb{E}(X-\mu)^{2}=\mathbb{E} X^{2}-(\mathbb{E} X)^{2}
+\mathbb{E}(X - \mu)^{2} = \mathbb{E} X^{2} - (\mathbb{E} X)^{2}
 \end{equation}
 in Exercise [[xca-variance-shortcut]]. Intuitively, for repeated observations
 of \(X\) we would expect the sample mean of the \(g(X)\) values to
@@ -6685,9 +6686,9 @@ random variable \(X\), and any constant \(c\):
 #+END_prop
 
 #+BEGIN_proof
-Go directly from the definition. For example, \[ \mathbb{E}[c\cdot
-g(X)]=\sum_{x\in S}c\cdot g(x)f_{X}(x)=c\cdot\sum_{x\in
-S}g(x)f_{X}(x)=c\mathbb{E} g(X).  \]
+Go directly from the definition. For example, \[ \mathbb{E}[c \cdot
+g(X)] = \sum_{x \in S} c \cdot g(x) f_{X}(x) = c \cdot \sum_{x \in S}
+g(x) f_{X}(x) = c \mathbb{E} g(X).  \]
 #+END_proof
 
 *** Moment Generating Functions
@@ -6702,23 +6703,22 @@ Given a random variable \(X\), its /moment generating function/
 M_{X}(t)=\mathbb{E}\mathrm{e}^{tX}=\sum_{x\in S}\mathrm{e}^{tx}f_{X}(x),
 \end{equation}
 provided the (potentially infinite) series is convergent for all \(t\)
-in a neighborhood of zero (that is, for all \(-\epsilon<t<\epsilon\),
-for some \(\epsilon>0\)).
+in a neighborhood of zero (that is, for all \(-\epsilon < t <
+\epsilon\), for some \(\epsilon > 0\)).
 #+END_defn
 
 Note that for any MGF \(M_{X}\),
 \begin{equation}
-M_{X}(0)=\mathbb{E}\mathrm{e}^{0\cdot X}=\mathbb{E}1=1.
+M_{X}(0) = \mathbb{E} \mathrm{e}^{0 \cdot X} = \mathbb{E} 1 = 1.
 \end{equation}
 We will calculate the MGF for the two distributions introduced above.
 
 #+BEGIN_exampletoo
 
-Find the MGF for \(X\sim\mathsf{disunif}(m)\). Since \(f(x)=1/m\), the
-MGF takes the form 
-\[
-M(t)=\sum_{x=1}^{m}\mathrm{e}^{tx}\frac{1}{m}=\frac{1}{m}(\mathrm{e}^{t}+\mathrm{e}^{2t}+\cdots+\mathrm{e}^{mt}),\quad \mbox{for any $t$.}  
-\]
+Find the MGF for \(X\sim\mathsf{disunif}(m)\). Since \(f(x) = 1/m\),
+the MGF takes the form \[ M(t) = \sum_{x = 1}^{m} \mathrm{e}^{tx}
+\frac{1}{m} = \frac{1}{m}(\mathrm{e}^{t} + \mathrm{e}^{2t} + \cdots +
+\mathrm{e}^{mt}),\quad \mbox{for any $t$.}  \]
 
 #+END_exampletoo
 
@@ -6785,7 +6785,9 @@ and so if we plug in zero for \(t\) we see
 \begin{equation}
 M'(0)=\sum_{x\in S}x\mathrm{e}^{0}f(x)=\sum_{x\in S}xf(x)=\mu=\mathbb{E} X.
 \end{equation}
-Similarly, \(M''(t)=\sum x^{2}\mathrm{e}^{tx}f(x)\) so that \(M''(0)=\mathbb{E} X^{2}\). And in general, we can see[fn:fn-details] that
+Similarly, \(M''(t) = \sum x^{2} \mathrm{e}^{tx} f(x) \) so that
+\(M''(0) = \mathbb{E} X^{2}\). And in general, we can
+see[fn:fn-details] that
 \begin{equation}
 M_{X}^{(r)}(0)=\mathbb{E} X^{r}=\mbox{\(r^{\mathrm{th}}\) moment of \(X\) about the origin.}
 \end{equation}
@@ -6804,8 +6806,8 @@ summation is valid in that neighborhood, and our remarks hold true.
 
 #+BEGIN_exampletoo
 
-Let \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\mbox{
-with $M(t)=(q+p\mathrm{e}^{t})^{n}$}\).
+Let \(X \sim \mathsf{binom}(\mathtt{size} = n,\,\mathtt{prob} = p)
+\mbox{ with $M(t) = (q + p \mathrm{e}^{t})^{n}$}\).
 
 We calculated the mean and variance of a binomial random variable in
 Section [[#sec-binom-dist]] by means of the binomial series. But
@@ -6831,7 +6833,7 @@ See how much easier that was?
 #+END_exampletoo
 
 #+BEGIN_rem
-We learned in this section that \(M^{(r)}(0)=\mathbb{E} X^{r}\). We
+We learned in this section that \(M^{(r)}(0) = \mathbb{E} X^{r}\). We
 remember from Calculus II that certain functions \(f\) can be
 represented by a Taylor series expansion about a point \(a\), which
 takes the form
