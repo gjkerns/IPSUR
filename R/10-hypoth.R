@@ -28,7 +28,7 @@ head(A)
 xtabs(Freq ~ Admit, data = A)
 
 phat <- 1755/(1755 + 2771)
-(phat - 0.4)/sqrt(0.4 * 0.6/(1755 + 2771))
+(phat - 0.4)/sqrt(0.4 * 0.6/(1755 + 2771)) 
 
 -qnorm(0.95)
 

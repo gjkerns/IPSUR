@@ -44,48 +44,48 @@ tosscoin(1)
 
 tosscoin(3)
 
-rolldie(1)
+rolldie(1) 
 
-head(cards())
+head(cards()) 
 
 urnsamples(1:3, size = 2, replace = TRUE, ordered = TRUE)
 
 urnsamples(1:3, size = 2, replace = FALSE, ordered = TRUE)
 
-urnsamples(1:3, size = 2, replace = FALSE, ordered = FALSE)
+urnsamples(1:3, size = 2, replace = FALSE, ordered = FALSE) 
 
-urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE)
+urnsamples(1:3, size = 2, replace = TRUE, ordered = FALSE) 
 
 S <- tosscoin(2, makespace = TRUE) 
-S[1:3, ]
+S[1:3, ] 
 
-S[c(2,4), ]
+S[c(2,4), ] 
 
-S <- cards()
+S <- cards() 
 
-subset(S, suit == "Heart")
+subset(S, suit == "Heart") 
 
 subset(S, rank %in% 7:9)
 
-subset(rolldie(3), X1+X2+X3 > 16)
+subset(rolldie(3), X1+X2+X3 > 16) 
 
 x <- 1:10 
 y <- 8:12 
 y %in% x
 
-isin(x,y)
+isin(x,y) 
 
 x <- 1:10 
-y <- c(3,3,7)
+y <- c(3,3,7) 
 
 all(y %in% x)
-isin(x,y)
+isin(x,y) 
 
 isin(x, c(3,4,5), ordered = TRUE) 
-isin(x, c(3,5,4), ordered = TRUE)
+isin(x, c(3,5,4), ordered = TRUE) 
 
 S <- rolldie(4) 
-subset(S, isin(S, c(2,2,6), ordered = TRUE))
+subset(S, isin(S, c(2,2,6), ordered = TRUE)) 
 
 S <- cards() 
 A <- subset(S, suit == "Heart") 
@@ -97,46 +97,46 @@ intersect(A,B)
 
 setdiff(A,B)
 
-setdiff(B,A)
+setdiff(B,A) 
 
 outcomes <- rolldie(1) 
 p <- rep(1/6, times = 6) 
-probspace(outcomes, probs = p)
+probspace(outcomes, probs = p) 
 
-probspace(1:6, probs = p)
+probspace(1:6, probs = p) 
 
-probspace(1:6)
+probspace(1:6) 
 
 rolldie(1, makespace = TRUE)
 
-probspace(tosscoin(1), probs = c(0.70, 0.30))
+probspace(tosscoin(1), probs = c(0.70, 0.30)) 
 
 S <- cards(makespace = TRUE) 
 A <- subset(S, suit == "Heart") 
 B <- subset(S, rank %in% 7:9)
 
-prob::prob(A)
+prob::prob(A) 
 
-prob::prob(S, suit == "Heart")
+prob::prob(S, suit == "Heart") 
 
 nsamp(n=3, k=2, replace = TRUE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = FALSE) 
-nsamp(n=3, k=2, replace = TRUE, ordered = FALSE)
+nsamp(n=3, k=2, replace = TRUE, ordered = FALSE) 
 
 n <- c(11,7,31) 
 k <- c(3,4,3) 
-r <- c(FALSE,FALSE,TRUE)
+r <- c(FALSE,FALSE,TRUE) 
 
-x <- nsamp(n, k, rep = r, ord = TRUE)
+x <- nsamp(n, k, rep = r, ord = TRUE) 
 
-prod(x)
+prod(x) 
 
-(11*10*9)*(7*6*5*4)*31^3
+(11*10*9)*(7*6*5*4)*31^3 
 
-prod(9:11)*prod(4:7)*31^3
+prod(9:11)*prod(4:7)*31^3 
 
-prod(factorial(c(11,7))/factorial(c(8,3)))*31^3
+prod(factorial(c(11,7))/factorial(c(8,3)))*31^3 
 
 postscript(file="ps/prob-birthday.ps")
 g <- Vectorize(pbirthday.ipsur)
@@ -177,6 +177,7 @@ prob::prob(S, X1+X2 >= 8, given = (X1==X2) )
 L <- cards()
 M <- urnsamples(L, size = 2)
 N <- probspace(M)
+N[[1]][[1]];  N$probs[1]
 
 prob::prob(N, all(rank == "A"))
 
@@ -201,7 +202,7 @@ S <- tosscoin(10, makespace = TRUE)
 A <- subset(S, isrep(S, vals = "T", nrep = 10))
 1 - prob::prob(A)
 
-iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3))
+iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3)) 
 
 prior <- c(0.6, 0.3, 0.1)
 like <- c(0.003, 0.007, 0.010)
@@ -216,16 +217,16 @@ fastpost <- prior * like^8
 fastpost / sum(fastpost)
 
 S <- rolldie(3, nsides = 4, makespace = TRUE) 
-S <- addrv(S, U = X1-X2+X3)
+S <- addrv(S, U = X1-X2+X3) 
 
 head(S)
 
-prob::prob(S, U > 6)
+prob::prob(S, U > 6) 
 
 S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V") 
 S <- addrv(S, FUN = sum, invars = c("X1","X2","X3"), name = "W") 
-head(S)
+head(S) 
 
-marginal(S, vars = "V")
+marginal(S, vars = "V") 
 
-marginal(S, vars = c("V", "W"))
+marginal(S, vars = c("V", "W")) 

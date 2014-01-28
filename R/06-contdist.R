@@ -65,5 +65,6 @@ dev.off()
 mgamma(1:4, shape = 13, rate = 1)
 
 postscript(file="ps/contdist-gamma-mgf.ps")
-plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, from=-0.1, to=0.1, ylab = "gamma mgf")
+plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, 
+     from=-0.1, to=0.1, ylab = "gamma mgf")
 dev.off()

@@ -91,13 +91,13 @@ Tbl/sum(Tbl)      # relative frequencies
 
 prop.table(Tbl)   # same thing
 
-barplot(table(state.region), cex.names = 0.50)
-barplot(prop.table(table(state.region)), cex.names = 0.50)
+barplot(table(state.region), cex.names = 1.20)
+barplot(prop.table(table(state.region)), cex.names = 1.20)
 
 postscript(file="ps/datadesc-bar-gr-stateregion.ps")
-par(mfrow = c(1,2)) # 2 plots: 1 row, 2 columns
-barplot(table(state.region), cex.names = 0.50)
-barplot(prop.table(table(state.region)), cex.names = 0.50)
+par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
+barplot(table(state.region), cex.names = 1.2)
+barplot(prop.table(table(state.region)), cex.names = 1.2)
 par(mfrow = c(1,1)) # back to normal
 dev.off()
 

@@ -26,7 +26,8 @@ splom(trees)
 dev.off()
 
 postscript(file="ps/mlr-3D-scatterplot-trees.ps")
-s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, highlight.3d = TRUE, angle = 60))
+s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, 
+                                 highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
 dev.off()
 
@@ -88,14 +89,6 @@ new <- data.frame(Girth = c(9.1, 11.6, 12.5))
 predict(treesquad.lm, newdata = new, interval = "prediction")
 
 summary(lm(Volume ~ Girth + I(Girth^2), data = trees))
-
-treesint.lm <- lm(Volume ~ Girth + Height + Girth:Height, data = trees)
-summary(treesint.lm)
-
-confint(treesint.lm)
-
-new <- data.frame(Girth = c(9.1, 11.6, 12.5), Height = c(69, 74, 87))
-predict(treesint.lm, newdata = new, interval = "prediction")
 
 trees$Tall <- cut(trees$Height, breaks = c(-Inf, 76, Inf), 
                   labels = c("no","yes"))

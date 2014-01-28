@@ -42,17 +42,17 @@ C <- B[, -5]
 rownames(C) <- 1:dim(C)[1]
 head(C)
 
-tab <- matrix(1:6, nrow = 2, ncol = 3)
-rownames(tab) <- c('first', 'second')
-colnames(tab) <- c('A', 'B', 'C')
-tab  # Counts
+  tab <- matrix(1:6, nrow = 2, ncol = 3)
+  rownames(tab) <- c('first', 'second')
+  colnames(tab) <- c('A', 'B', 'C')
+  tab  # Counts
 
-p <- c("milk","tea")
-g <- c("milk","tea")
-catgs <- expand.grid(poured = p, guessed = g)
-cnts <- c(3, 1, 1, 3)
-D <- cbind(catgs, count = cnts)
-xtabs(count ~ poured + guessed, data = D)
+  p <- c("milk","tea")
+  g <- c("milk","tea")
+  catgs <- expand.grid(poured = p, guessed = g)
+  cnts <- c(3, 1, 1, 3)
+  D <- cbind(catgs, count = cnts)
+  xtabs(count ~ poured + guessed, data = D)
 
 library("foreign")
 read.spss("foo.sav")
@@ -70,8 +70,8 @@ head(Tmp)
 Tmp <- with(Puromycin, Puromycin[order(-xtfrm(state)), ])
 head(Tmp)
 
-library("odfWeave")
-odfWeave(file = "infile.odt", dest = "outfile.odt")
+   library("odfWeave")
+   odfWeave(file = "infile.odt", dest = "outfile.odt")
 
 summary(cbind(Sepal.Length, Sepal.Width) ~ Species, data = iris)
 

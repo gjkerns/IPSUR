@@ -49,7 +49,9 @@ cars.lm <- lm(dist ~ speed, data = cars)
 coef(cars.lm)
 
 postscript(file="ps/slr-carline.ps")
-ggplot(cars, aes(x = speed, y = dist)) + geom_point(shape = 19) + geom_smooth(method = lm, se = FALSE)
+ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point(shape = 19) + 
+  geom_smooth(method = lm, se = FALSE)
 dev.off()
 
 cars[5, ]
