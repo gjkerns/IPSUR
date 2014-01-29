@@ -4505,7 +4505,7 @@ B <- subset(S, rank %in% 7:9)
 Now it is easy to calculate 
 
 #+BEGIN_SRC R :exports both :results output pp   
-prob::prob(A) 
+Prob(A) 
 #+END_SRC 
 
 #+RESULTS:
@@ -4514,13 +4514,13 @@ prob::prob(A)
 Note that we can get the same answer with 
 
 #+BEGIN_SRC R :exports both :results output pp   
-prob::prob(S, suit == "Heart") 
+Prob(S, suit == "Heart") 
 #+END_SRC 
 
 #+RESULTS:
 : [1] 0.25
 
-We also find =prob::prob(B) = 0.23= (listed here approximately, but
+We also find =Prob(B) = 0.23= (listed here approximately, but
 12/52 actually). Internally, the =prob= function operates by summing
 the =probs= column of its argument. It will find subsets on-the-fly if
 desired.
@@ -4533,9 +4533,9 @@ and =given=, which is described in Section [[#sec-Conditional-Probability]].
 /WARNING/. The =event= argument is used to define a subset of =x=,
 that is, the only outcomes used in the probability calculation will be
 those that are elements of =x= and satisfy =event= simultaneously. In
-other words, =prob::prob(x, event)= calculates
+other words, =Prob(x, event)= calculates
 
-: prob::prob(intersect(x, subset(x, event)))
+: Prob(intersect(x, subset(x, event)))
 
 Consequently, =x= should be the entire probability space in the case
 that =event= is non-null.
@@ -5060,8 +5060,8 @@ And now we are ready to calculate probabilities. To do conditional
 probability, we use the =given= argument of the =prob= function:
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(A, given = B)
-prob::prob(B, given = A)
+Prob(A, given = B)
+Prob(B, given = A)
 #+END_SRC
 
 #+RESULTS:
@@ -5073,8 +5073,8 @@ separately as long as we reference the original probability space
 \(S\) as the first argument of the =prob= calculation:
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(S, X1==X2, given = (X1 + X2 >= 8) )
-prob::prob(S, X1+X2 >= 8, given = (X1==X2) )
+Prob(S, X1==X2, given = (X1 + X2 >= 8) )
+Prob(S, X1+X2 >= 8, given = (X1==X2) )
 #+END_SRC
 
 #+RESULTS:
@@ -5182,7 +5182,7 @@ cards are both Aces then the =rank= of both cards should be =A=, which
 sounds like a job for the =all= function:
 
 #+BEGIN_SRC R :exports both :results output pp
-prob::prob(N, all(rank == "A"))
+Prob(N, all(rank == "A"))
 #+END_SRC
 
 #+RESULTS:
@@ -5235,7 +5235,7 @@ see whether the value =red= appears =3= times. The result is exactly
 what we need to define an event with the =prob= function. Observe
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(N, isrep(N, "red", 3))
+Prob(N, isrep(N, "red", 3))
 #+END_SRC
 
 #+RESULTS:
@@ -5246,7 +5246,7 @@ Note that this answer matches what we found in Example
 questions. What is the probability of getting two =red='s?
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(N, isrep(N, "red", 2))
+Prob(N, isrep(N, "red", 2))
 #+END_SRC
 
 #+RESULTS:
@@ -5257,7 +5257,7 @@ compute this in Section [[#sec-other-discrete-distributions]]. What is the
 probability of observing =red=, then =green=, then =red=?
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(N, isin(N, c("red","green","red"), ordered = TRUE))
+Prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 #+END_SRC
 
 #+RESULTS:
@@ -5268,7 +5268,7 @@ Rule). What is the probability of observing =red=, =green=, and =red=,
 in no particular order?
 
 #+BEGIN_SRC R :exports both :results output pp  
-prob::prob(N, isin(N, c("red","green","red")))
+Prob(N, isin(N, c("red","green","red")))
 #+END_SRC
 
 #+RESULTS:
@@ -5484,7 +5484,7 @@ Head?
 #+BEGIN_SRC R :exports both :results output pp  
 S <- tosscoin(10, makespace = TRUE)
 A <- subset(S, isrep(S, vals = "T", nrep = 10))
-1 - prob::prob(A)
+1 - Prob(A)
 #+END_SRC
 
 #+RESULTS:
@@ -5928,7 +5928,7 @@ We see from the \(U\) column it is operating just like it should. We
 can now answer questions like
 
 #+BEGIN_SRC R :exports both :results output pp   
-prob::prob(S, U > 6) 
+Prob(S, U > 6) 
 #+END_SRC 
 
 #+RESULTS:
