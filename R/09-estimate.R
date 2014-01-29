@@ -19,6 +19,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
+# This chapter's package dependencies
+library(TeachingDemos)
+library(Hmisc)
+library(RcmdrPlugin.IPSUR)
+library(reshape)
+
 postscript(file="ps/estimate-capture-recapture.ps")
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)

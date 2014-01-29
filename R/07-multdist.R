@@ -19,6 +19,12 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
+# This chapter's package dependencies
+library(prob)
+library(ggplot2)
+library(mvtnorm)
+library(lattice)
+
 postscript(file="ps/multdist-max-and-sum-two-dice.ps")
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")

@@ -19,6 +19,11 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
+# This chapter's package dependencies
+library(ggplot2)
+library(scatterplot3d)
+library(lattice)
+
 head(trees)
 
 postscript(file="ps/mlr-splom-trees.ps")
