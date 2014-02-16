@@ -1,0 +1,3054 @@
+#    IPSUR: Introduction to Probability and Statistics Using R
+#    Copyright (C) 2014 G. Jay Kerns
+#
+#    This file is part of IPSUR.
+#
+#    IPSUR is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    IPSUR is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
+
+#+STARTUP:  beamer
+#+TITLE:    STAT 3743: Probability and Statistics
+#+AUTHOR:   G. Jay Kerns, Youngstown State University
+#+EMAIL:    gkerns@ysu.edu
+#+DATE:     Spring 2014
+#+CREATOR:  Emacs 24.3.50.1 (Org mode 8.2.4)
+#+OPTIONS:  H:2 texht:t toc:nil
+#+PROPERTY: session *R*
+#+PROPERTY: exports results
+#+PROPERTY: results output
+#+PROPERTY: eval no-export
+#+PROPERTY: tangle yes
+#+BEAMER_THEME: 
+#+BEAMER_FRAME_LEVEL: 2
+#+EPRESENT_FRAME_LEVEL: 2
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [bigger]
+#+LaTeX_HEADER: \newcommand{\E}{\mathrm{I\! E}}
+#+LaTeX_HEADER: %\usepackage{handoutWithNotes}
+#+LaTeX_HEADER: %\pgfpagesuselayout{2 on 1 with notes landscape}[letterpaper,border shrink=5mm]
+#+LaTeX_HEADER: \usepackage{pgfpages}
+#+LaTeX_HEADER: \pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm,landscape]
+#+SELECT_TAGS: prob
+
+* Introduction 							      :intro:
+
+#+BEGIN_SRC R :exports results
+set.seed(42)
+options(width = 90, useFancyQuotes = FALSE)
+par(cex = 0.5)
+#+END_SRC
+
+** What are statistics?
+- L. status \(\longrightarrow\) a "standing", or "condition"
+- 1700's Germans: "Statistik" \(\rightsquigarrow\) Political Science
+- each datum \(\longrightarrow\) statistic
+- all data \(\longrightarrow\) statistics
+
+** What are statistics?
+
+Statistics[fn:1] (loosely): decision making under uncertainty.
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+/Statistics/ is that branch of knowledge which deals with the
+multiplicity of data, its
+1. collection, 
+2. analysis, and 
+3. interpretation
+
+
+[fn:1] Information-Statistical Data Mining: Warehouse Integration with
+Examples of Oracle Basics (The Springer International Series in
+Engineering and Computer Science) by Bon K. Sy and Arjun K. Gupta (Nov
+30, 2003)
+
+** 								:B_fullframe:
+   :PROPERTIES:
+   :BEAMER_env: fullframe
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plot.png
+require(diagram)
+par(mex = 0.2, cex = 0.5)
+openplotmat(frame.plot=TRUE)
+straightarrow(from = c(0.46,0.74), to = c(0.53,0.71), arr.pos = 1)
+straightarrow(from = c(0.3,0.65), to = c(0.3,0.51), arr.pos = 1)
+textellipse(mid = c(0.74,0.55), box.col = grey(0.95), radx = 0.24, rady = 0.22, lab = c(expression(bold(underline(DETERMINISTIC))), expression(2*H[2]+O[2] %->% H[2]*O), "3 + 4 = 7"), cex = 2 )
+textrect(mid = c(0.3, 0.75), radx = 0.15, rady = 0.1, lab = c("Experiments"), cex = 2 )
+textellipse(mid = c(0.29,0.25), box.col = grey(0.95), radx = 0.27, rady = 0.22, lab = c(expression(bold(underline(RANDOM))), "toss coin, roll die", "count ants on sidewalk", "measure rainfall" ), cex = 2 )
+#+END_SRC
+
+#+CAPTION: Two types of experiments
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plot.png]]
+
+
+** Random experiments
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The /sample space/ is the set of all possible outcomes. It is denoted by \(S\).
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+- Toss a coin  S =
+- number of pets owned by students in class  S =
+- color of a student's eyes S =
+
+** Random experiments
+- outcomes associated w/ random experiments called /random variables/:
+  \(X\), \(Y\), \(Z\), etc.
+- observed values: \(x\), \(y\), \(z\)
+
+*** Do a Random Experiment					  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+#+LaTeX: \vspace{1.5in}
+
+** Random Experiments
+
+*** Make a Frequency Table					  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+#+LaTeX: \vspace{2in}
+
+** Random experiments
+
+- In general, do random experiment \(n\) times
+- For outcome \(x\), get frequency \(f_{x}\)
+- Turns out, \(f_{x}\) can be crazy for small values of \(n\)
+- However, \(\lim_{n\to\infty}\frac{f_{x}}{n} = p(x)\), where \(p(x)\)
+  is the "probability of outcome \(x\)"
+- \(p\) is the /probability mass function/ (PMF) of \(X\),
+  \(p_{X}(x)=\Pr(X=x),\quad\mbox{for \ensuremath{x\in S}}\)
+
+** Random variable characteristics
+
+Let \(X\) be a r.v. taking values in the sample space \(S=\left\{
+x_{1},\, x_{2},\,\ldots,x_{k}\right\}\)
+
+Then \[ p(x_{i})=\Pr(X=x_{i}), \quad i=1,2,\ldots,k \] And \[
+\sum_{i=1}^{k}p(x_{i}) = p(x_{1})+p(x_{2})+\cdots+p(x_{k}), = 1 \]
+
+** Random variable characteristics
+
+The /mean/ of the r.v. \(X\) is \[ \mu = \sum_{i=1}^{k} x_{i}
+p(x_{i}), = x_{1}p(x_{1}) + x_{2}p(x_{2}) + \cdots + x_{k}p(x_{k}) \]
+
+*** Remarks							    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+- the mean is a center or average value of \(X\)
+- \(\mu\) can be any number or decimal
+- \(\mu\) is the "first moment about the origin"
+
+** Random variable characteristics
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Pick a coin out of your pocket. Your pocket has BLANK many pennies, BLANK many nickels, BLANK many dimes , and BLANK many quarters.  \[ X = \mbox{value of selected coin} \]
+
+#+LaTeX: \vspace{1.25in}
+
+** Random variable characteristics
+
+The variance of the r.v. \(X\) is \[ \sigma^{2} =
+\sum_{i=1}^{k}(x_{i}-\mu)^{2}p(x_{i}), \]
+
+*** Compute it for the above 					  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+
+#+LaTeX: \vspace{1.25in}
+
+** Random variable characteristics
+- mean measures CENTER, variance measures SPREAD
+- \(\sigma^{2} \geq 0\)
+- \(\sigma=\sqrt{\sigma^{2}}\) is the /standard deviation/
+
+*** Shortcut							    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+#+LaTeX: \vspace{1.5in}
+
+** Other characteristics
+
+Do random experiment \(n\) times, observe \(x_{1}\), \(x_{2}\), ...,
+\(x_{n}\).
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The /empirical distribution/ puts mass \(1/n\) on each of the values \(x_{1}\), \(x_{2}\), ..., \(x_{n}\).
+
+*** The mean of the EDistn					    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+#+LaTeX: \vspace{1.5in}
+
+** Other characteristics
+
+*** Variance of the Empirical Distribution			    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+\[ v = \sum_{i=1}^{n}(x_{i}-\overline{x})^{2}\cdot\frac{1}{n} \]
+
+*** Sample variance						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+\[ s^{2} = \frac{1}{n-1} \sum_{i = 1}^{n}(x_{i} - \overline{x})^{2} \] 
+
+*** Sample standard deviation					    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+\[s = \sqrt{s^{2}}\]
+
+** Examples of random variables
+
+*** Write down a bunch of random variables:			  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+#+LaTeX: \vspace{2.5in}
+
+* Data Description						       :data:
+
+** Types of Data
+
+- datum: any piece of information
+
+- data set: collection of data related to each other somehow 
+
+*** Categories of Data						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+- quantitative :: associated with a measurement of some quantity on an
+                  observational unit,
+- qualitative :: associated with some quality or property of the
+                 observational unit,
+- logical :: represents true/false, important later
+- missing :: should be there but aren't
+- other types :: everything else
+
+** Quantitative Data
+
+Quantitative data: any that measure the quantity of something
+- invariably assume numerical values
+- can be further subdivided: 
+  - Discrete data take values in a finite or countably infinite set of
+    numbers
+  - Continuous data take values in an interval of numbers. AKA scale,
+    interval, measurement
+- distinction between discrete and continuous data not always clear-cut
+
+** 
+Annual Precipitation in US Cities. (precip) avg amount rainfall (in.)
+for 70 cities in US and Puerto Rico.
+
+#+BEGIN_SRC R :exports both
+str(precip)
+precip[1:4]
+#+END_SRC
+
+quantitative, continuous
+
+** 
+Lengths of Major North American Rivers. (rivers) lengths (mi) of
+rivers in North America. See =?rivers=.
+
+#+BEGIN_SRC R :exports both
+str(rivers)
+rivers[1:4]
+#+END_SRC
+
+** 
+Yearly Numbers of Important Discoveries. (discoveries) numbers of
+"great" inventions/discoveries in each year from 1860 to 1959 (from
+1975 World Almanac)
+
+#+BEGIN_SRC R :exports both
+str(discoveries)
+discoveries[1:4]
+#+END_SRC
+
+** Displaying Quantitative Data
+
+- Strip charts (or Dot plots): 
+  - for either discrete or continuous data 
+  - usually best when data not too large. 
+- the =stripchart= function
+  - three methods:
+    - =overplot= - only distinct values
+    - =jitter= - add noise in y direction
+    - =stack= - repeats on top of one another
+
+** 
+#+BEGIN_SRC R :exports code :eval never
+stripchart(precip, xlab="rainfall")
+stripchart(rivers, method="jitter", xlab="length")
+stripchart(discoveries, method="stack", xlab="number")
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plota.png
+par(cex = 0.5)
+stripchart(precip, xlab="rainfall")
+#+END_SRC
+
+#+CAPTION: Strip chart of =precip=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plota.png]]
+
+** 
+#+BEGIN_SRC R :results graphics :file img/plotb.png
+par(cex = 0.5)
+stripchart(rivers, method="jitter", xlab="length")
+#+END_SRC
+
+#+CAPTION: Jitter strip chart of =rivers=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotb.png]]
+
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotc.png
+par(cex = 0.5)
+stripchart(discoveries, method="stack", xlab="number")
+#+END_SRC
+
+#+CAPTION: Stacked strip chart of =discoveries=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotc.png]]
+
+
+Stripchart of =discoveries=
+
+** Histograms
+- typically for continuous data
+- decide on bins/classes, make bars proportional to membership
+- often misidentified (bar graphs)
+
+#+BEGIN_SRC R :exports code :eval never
+hist(precip, main = "")
+hist(precip, freq = FALSE, main = "")
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+#+BEGIN_SRC R :results graphics :file img/plotd.png
+par(mfrow = c(1,2), cex = 0.4)
+hist(precip, main = "")
+hist(precip, freq = FALSE, main = "")
+par(mfrow = c(1,1))
+#+END_SRC
+
+#+CAPTION: Histograms of =precip=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotd.png]]
+
+
+** Remarks about histograms
+- choose different bins, get a different histogram
+- many algorithms for choosing bins automatically
+- should investigate several bin choices
+  - look for stability
+  - try to capture underlying story of data
+
+** Stemplots
+- Stemplots have two basic parts: stems and leaves
+  - initial digit(s) taken for stem
+  - trailing digits stand for leaves
+  - leaves accumulate to the right
+
+*** Road Casualties in Great Britain 1969-84			  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+A time series of total car drivers killed or seriously injured in Great Britain monthly from Jan 1969 to Dec 1984.
+
+** Stemplot of UK Driver Deaths
+#+BEGIN_SRC R :exports code :eval never
+library(aplpack)
+stem.leaf(UKDriverDeaths, depth = FALSE)
+#+END_SRC
+
+#+LaTeX: \begin{tiny}
+#+BEGIN_SRC R 
+library(aplpack)
+stem.leaf(UKDriverDeaths, depth = FALSE)
+#+END_SRC
+
+#+LaTeX: \end{tiny}
+
+** Code for Stemplots
+#+BEGIN_SRC R exports both
+UKDriverDeaths[1:4]
+stem.leaf(UKDriverDeaths, depth = FALSE)
+#+END_SRC
+
+** Index Plots
+
+Good for plotting data ordered in time
+- a 2-D plot, with index (observation number) on x-axis, value on
+  y-axis
+- two methods
+  - spikes: draws vertical line up to value type = "h"
+  - points: simple dot at the observed height type = "p"
+
+*** Level of Lake Huron 1875--1972				  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Annual measurements of the level (in feet) of Lake Huron from 1875--1972
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plote.png
+par(mfrow = c(2,1), cex = 0.4)
+plot(LakeHuron, type = "h")
+plot(LakeHuron, type = "p")
+par(mfrow = c(1,1))
+#+END_SRC
+
+#+CAPTION: Index plots of =LakeHuron=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plote.png]]
+
+
+** Qualitative Data, Categorical Data, Factors
+
+- Qualitative data :: any data that are not numerical, or do not
+  represent numerical quantities
+  - some data look quantitative. Example: shoe size
+  - some data identify the observation, not of much interest
+- Factors :: subdivide data into categories 
+  - possible values of a factor: levels 
+  - factors may be nominal or ordinal 
+    - nominal: levels are names, only (gender, political party,
+      ethnicity)
+    - ordinal: levels are ordered (SES, class rank, shoe size)
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+*** U.S. State Facts and Features
+Postal abbreviations
+
+#+BEGIN_SRC R :exports both
+str(state.abb)
+#+END_SRC
+
+*** U.S. State Facts and Features 
+The region in which a state resides
+
+#+BEGIN_SRC R :exports both
+state.region[1:4]
+#+END_SRC
+
+** Qualitative Data
+- Factors have special status in R
+  - represented internally by numbers, but not always printed that way
+  - constructed with =factor= command
+- Displaying Qualitative Data
+  - first try: make a (contingency) table with =table= function
+  - =prop.table= makes a relative frequency table
+
+*** U.S. State Facts and Features				  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+State division
+
+** Displaying Qualitative Data
+#+BEGIN_SRC R :exports both
+Tbl <- table(state.division)
+Tbl               # frequencies
+#+END_SRC
+
+
+** Displaying Qualitative Data
+#+BEGIN_SRC R :exports both
+Tbl/sum(Tbl)      # relative frequencies
+#+END_SRC
+
+** Displaying Qualitative Data
+#+BEGIN_SRC R :exports both
+prop.table(Tbl)   # same thing
+#+END_SRC
+
+** Bar Graphs
+- discrete analogue of the histogram
+- make bar for each level of a factor
+- may show frequencies or relative frequencies
+- impression given depends on order of bars (default: alphabetical)
+
+
+*** U.S. State Facts and Features				  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+State region
+
+#+BEGIN_SRC R :exports code :eval never
+barplot(table(state.region))
+barplot(prop.table(table(state.region)))
+#+END_SRC
+
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotf.png
+par(mfrow = c(1,2), cex = 0.5) # 2 plots: 1 row, 2 columns
+barplot(table(state.region))
+barplot(prop.table(table(state.region)))
+par(mfrow = c(1,1))
+#+END_SRC
+
+#+CAPTION: (Relative) frequency bar graphs of =state.region=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotf.png]]
+(Relative) frequency bar graphs of =state.region=
+
+
+** Pareto Diagram
+- a bar graph with ordered bars
+- bar with highest (relative) frequency goes on left
+- bars drop from left to right
+- can sometimes help discern hidden structure
+
+*** U.S. State Facts and Features				  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+State division
+
+#+BEGIN_SRC R :eval never
+library(qcc)
+pareto.chart(table(state.division), ylab="Frequency")
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotg.png
+par(cex.axis = 0.5, mex = 0.5,  cex.main = 0.5)
+library(qcc)
+pareto.chart(table(state.division), ylab="Frequency", col="gray")
+#+END_SRC
+
+#+CAPTION: Pareto diagram of =state.division=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotg.png]]
+
+Pareto diagram of =state.division=
+
+** Dot charts
+- a bar graph on its side
+- has dots instead of bars
+- can show complicated multivariate relationships
+
+*** U.S. State Facts and Features				  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+State region
+
+#+BEGIN_SRC R :exports code :eval never
+x <- table(state.region)
+dotchart(as.vector(x), labels = names(x))
+#+END_SRC
+
+** 								    :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+
+#+BEGIN_SRC R :results graphics :file img/ploth.png
+par(cex=0.5)
+x <- table(state.region)
+dotchart(as.vector(x), labels = names(x))
+#+END_SRC
+
+#+CAPTION: Dot chart of =state.region=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/ploth.png]]
+
+** Other data types
+- Logical
+  #+BEGIN_SRC R :exports both
+  x <- 5:9
+  y <- (x < 7.3)
+  y
+  !y
+  #+END_SRC
+
+** Other data types (cont)
+- Missing: represented by =NA=
+  #+BEGIN_SRC R :exports both
+  x <- c(3, 7, NA, 4, 7)
+  y <- c(5, NA, 1, 2, 2)
+  x + y
+  #+END_SRC
+- Some functions have =na.rm= argument
+  #+BEGIN_SRC R :exports both
+  is.na(x)
+  z <- x[!is.na(x)]
+  sum(z)
+  #+END_SRC
+
+** Features of Data Distributions
+
+*** Four Basic Features						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+1. Center: middle or general tendency
+2. Spread: small means tightly clustered, large means highly variable
+3. Shape: symmetry versus skewness, kurtosis
+4. Unusual Features: anything else that pops out at you about the data
+
+** More about shape
+
+*** Symmetry versus Skewness					    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+- symmetric
+- right (positive) and left (negative) skewness
+
+*** Kurtosis							    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+- leptokurtic - steep peak, heavy tails
+- platykurtic - flatter, thin tails
+- mesokurtic - right in the middle
+
+** Unusual features: clusters or gaps
+
+#+BEGIN_SRC R :exports code :eval never
+with(faithful, stem.leaf(eruptions))
+#+END_SRC
+
+#+LaTeX: \begin{tiny}
+
+#+BEGIN_SRC R :exports results 
+library(aplpack)
+with(faithful, stem.leaf(eruptions))
+#+END_SRC
+
+#+LaTeX: \end{tiny}
+
+** Unusual features: extreme observations
+- Extreme observation: falls far from the rest of the data
+  - possible sources
+    - could be typo
+    - could be in wrong study
+    - could be indicative of something deeper
+- Quantitatively measure features: Descriptive Statistics
+  - qualitative data: frequencies or relative frequencies
+  - quantitative data: measures of CUSS
+
+** Measures of center: sample sean
+*** Sample Mean							    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+\[ \overline{x} = \frac{x_{1} + x_{2} + \cdots+x_{n}}{n} =
+ \frac{1}{n}\sum_{i = 1}^{n} x_{i}.  \]
+- Good: natural, easy to compute, nice properties
+- Bad: sensitive to extreme values
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+stack.loss    # built-in data
+mean(stack.loss)
+#+END_SRC
+
+
+** Measures of center: sample median
+How to find it
+1. sort the data into an increasing sequence of n numbers 
+2. \(\tilde{x}\) lies in position \((n + 1)/2\)
+- Good: resistant to extreme values, easy to describe
+- Bad: not as mathematically tractable, need to sort the data to 
+  calculate
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+#+BEGIN_SRC R :exports both
+median(stack.loss)
+#+END_SRC
+
+** Measures of center: trimmed mean
+How to find it
+1. "trim" a proportion of data from both ends of the ordered list
+2. find the sample mean of what's left
+
+- Good: also resistant to extreme values, has good properties, too
+- Bad: still need to sort data to get rid of outliers
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code
+mean(stack.loss, trim = 0.05)
+#+END_SRC
+
+** Order Statistics
+Given data \(x_{1}\), \(x_{2}\), ..., \(x_{n}\), sort in an increasing
+sequence \[ x_{(1)} \leq x_{(2)} \leq x_{(3)} \leq \cdots \leq x_{(n)}
+\]
+- \(x_{(k)}\) is the \(k^{\mathrm{th}}\) order statistic
+- approx \(100(k/n)\%\) of the observations fall below \(x_{(k)}\)
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code
+sort(stack.loss)
+#+END_SRC
+
+** Sample quantile, order \(p\),  \(0 \leq p \leq 1\), denoted \(\tilde{q}_{p}\)
+We describe the default (type = 7)
+1. get the order statistics \(x_{(1)}\), \(x_{(2)}\), ..., \(x_{(n)}\).
+2. calculate \((n - 1)p + 1\), write in form \(k.d\), with \(k\) an
+   integer and \(d\) a decimal
+3. \(\tilde{q}_{p} = x_{(k)} + d(x_{(k+1)} - x_{(k)})\).
+- approximately \(100p\%\) of the data fall below the value
+  \(\tilde{q}_{p}\).
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code
+quantile(stack.loss, probs = c(0, 0.25, 0.37))
+#+END_SRC
+
+** Measures of spread: sample variance,  std deviation
+*** 							       :B_definition:
+   :PROPERTIES:
+   :BEAMER_env: definition
+   :END:
+The sample variance \(s^{2}\) \[ s^{2} = \frac{1}{n - 1}\sum_{i =
+1}^{n}(x_{i} - \overline{x})^{2} \] The sample standard deviation is
+\(s = \sqrt{s^{2}}\).
+
+- Good: tractable, nice mathematical/statistical properties
+- Bad: sensitive to extreme values
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code
+var(stack.loss); sd(stack.loss)
+#+END_SRC
+
+** Interpretation of /s/
+
+*** Chebychev's Rule					       :B_alertblock:
+   :PROPERTIES:
+   :BEAMER_env: alertblock
+   :END:
+The proportion of observations within k standard deviations of the
+mean is at least \(1 - 1/k^{2}\), i.e., at least \(75\%\), \(89\%\),
+and \(94\%\) of the data are within 2, 3, and 4 standard deviations of
+the mean, respectively.
+
+*** Empirical Rule					       :B_alertblock:
+   :PROPERTIES:
+   :BEAMER_env: alertblock
+   :END:
+If data follow a bell-shaped curve, then approximately \(68\%\),
+\(95\%\), and \(99.7\%\) of the data are within 1, 2, and 3 standard
+deviations of the mean, respectively.
+
+** Measures of spread: interquartile range
+*** The Interquartile range IQR				       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+\[ IQR = \tilde{q}_{0.75} - \tilde{q}_{0.25} \]
+- Good: resistant to outliers
+- Bad: only considers middle \(50\%\) of the data
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code
+IQR(stack.loss)
+#+END_SRC
+
+
+** Measures of spread: median absolute deviation (MAD)
+
+*** How to do it						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+1. get the order statistics, find the median \(\tilde{x}\).
+2. calculate the absolute deviations: \(\left|x_{1} -
+   \tilde{x}\right|,\ \left|x_{2}-\tilde{x}\right|,\
+   \ldots,\left|x_{n}-\tilde{x}\right|\)
+3. the \(MAD\propto\mbox{median}\left\{ \left| x_{1} - \tilde{x}
+   \right|, \ \left|x_{2}-\tilde{x}\right|,\
+   \ldots,\left|x_{n}-\tilde{x}\right|\right\}\)
+- Good: excellently robust
+- Bad: not as popular, not as intuitive
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports code
+mad(stack.loss)
+#+END_SRC
+
+** Measures of spread: the range
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The range \(R\): \[ R = x_{(n)} - x_{(1)} \]
+- Good (not so much): easy to describe and calculate 
+- Bad: ignores everything but the most extreme observations
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports code
+range(stack.loss)
+diff(range(stack.loss))
+#+END_SRC
+
+** Measures of shape: sample skewness
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The sample skewness \(g_{1}\): \[ g_{1} = \frac{1}{n}\frac{\sum_{i =
+1}^{n}(x_{i} - \overline{x})^{3}}{s^{3}}.  \]
+
+Things to notice:
+- invariant w.r.t. location and scale
+- \(-\infty < g_{1} < \infty\)
+- sign of \(g_{1}\) indicates direction of skewness (\(\pm\))
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports both
+library(e1071)
+skewness(stack.loss)
+#+END_SRC
+
+** Measures of shape: sample skewness
+
+How big is BIG? \(4.34\mathrm{ versus }0.434\)??
+
+*** Rule of Thumb					       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+If \(\vert g_{1} \vert > 2\sqrt{6/n}\), then the data distribution is
+substantially skewed (in the direction of the sign of \(g_{1}\)).
+
+#+BEGIN_SRC R :exports both
+skewness(discoveries)
+2*sqrt(6/length(discoveries))
+#+END_SRC
+
+** Measures of shape: sample excess kurtosis
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The sample excess kurtosis \(g_{2}\): \[ g_{2} =
+\frac{1}{n}\frac{\sum_{i = 1}^{n}(x_{i} -
+\overline{x})^{4}}{s^{4}} - 3.  \]
+
+Things to note:
+- invariant w.r.t. location and scale
+- \(-2 \leq g_{2} < \infty\)
+- \(g_{2} > 0\) indicates leptokurtosis, \(g_{2} < 0\) indicates
+  platykurtosis
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports both
+library(e1071)
+kurtosis(stack.loss)
+#+END_SRC
+
+
+** Measures of shape: sample excess kurtosis
+Again, how big is BIG? 
+
+If \(\vert g_{2} \vert > 4\sqrt{6/n}\), then the data distribution is
+substantially kurtic.
+
+#+BEGIN_SRC R :exports both
+kurtosis(UKDriverDeaths)
+4*sqrt(6/length(UKDriverDeaths))
+#+END_SRC
+
+** Exploratory Data Analysis: more about stemplots
+- Trim Outliers: observations that fall far from the bulk of the other
+  data often obscure structure to the data and are best left out. Use
+  the =trim.outliers= argument to =stem.leaf=.
+- Split Stems: we sometimes fix "skyscraper" stemplots by increasing
+  the number of lines available for a given stem. The end result is a
+  more spread out stemplot which often looks better. Use the =m=
+  argument to =stem.leaf=
+- Depths: give insight into balance of the data around the
+  median. Frequencies are accumulated from the outside inward,
+  including outliers. Use =depths = TRUE=.
+
+** More about stemplots
+
+#+BEGIN_SRC R :eval never
+with(faithful, stem.leaf(eruptions))
+#+END_SRC
+
+#+LaTeX: \begin{tiny}
+
+#+BEGIN_SRC R :exports results 
+with(faithful, stem.leaf(eruptions))
+#+END_SRC
+
+#+LaTeX: \end{tiny}
+
+** Hinges and the 5NS
+- Find the order statistics \(x_{(1)}\), \(x_{(2)}\), ...,
+  \(x_{(n)}\).
+- The lower hinge \(h_{L}\) is in position \(L = \left\lfloor
+  (n+3)/2\right\rfloor /2\)
+- The upper hinge \(h_{U}\) is in position \(n + 1 - L\).
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+Given the hinges, the five number summary (5NS) is \[ 5NS = (x_{(1)},\
+h_{L},\ \tilde{x},\ h_{U},\ x_{(n)}). \]
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports both
+fivenum(stack.loss)
+#+END_SRC
+
+
+** Boxplots
+
+Boxplot: a visual display of the 5NS. Can visually assess multiple
+features of the data set:
+- Center: estimated by the sample median, \(\tilde{x}\)
+- Spread: judged by the width of the box, \(h_{U} - h_{L}\)
+- Shape: indicated by the relative lengths of the whiskers, position
+  of the median inside box.
+- Extreme observations: identified by open circles
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+boxplot(rivers, horizontal = TRUE)
+#+END_SRC
+
+** Outliers
+- potential: falls beyond 1.5 times the width of the box, less than
+  \(h_{L} - 1.5(h_{U}-h_{L})\) or greater than \(h_{U} + 1.5(h_{U} -
+  h_{L})\)
+- suspected: falls beyond 3 times the width of the box, less than
+  \(h_{L} - 3(h_{U}-h_{L})\) or greater than \(h_{U}+3(h_{U}-h_{L})\)
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+boxplot.stats(rivers)$out
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+#+BEGIN_SRC R :results graphics :file img/ploti.png
+par(cex=0.5)
+boxplot(rivers, horizontal = TRUE)
+#+END_SRC
+
+#+CAPTION: Boxplot of =rivers=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/ploti.png]]
+
+
+** Standardizing variables
+- useful to see how observation relates to other observations
+- AKA measure of relative standing, z-score \[ z_{i} = \frac{x_{i} -
+  \overline{x}}{s},\quad i = 1,2,\ldots,n \]
+- unitless
+- positive (negative) z-score falls above (below) mean
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+scale(precip)[1:3]
+#+END_SRC
+
+** Multivariate data: data frames
+- usually have two (or more) measurements associated with each subject
+- display in rectangular array
+  - each row corresponds to a subject
+  - columns contain the measurements for each variable
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+x <- 5:6;  y <- letters[3:4]; z <- c(0.1, 3.8)
+data.frame(v1 = x, v2 = y, v3 = z)
+#+END_SRC
+
+** More on data frames
+- must have same number of rows in each column
+- all measurements in single column must be same type
+- indexing is two-dimensional; the columns have names
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+A <- data.frame(v1 = x, v2 = y, v3 = z)
+A[2, 1];  A[1,];  A[, 3]
+#+END_SRC
+
+
+** Bivariate data: qualitative versus qualitative
+- usually make a two-way contingency table 
+- in the R Commander with Statistics \(\triangleright\) Contingency
+  Tables \(\triangleright\)
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+library(RcmdrPlugin.IPSUR)
+data(RcmdrTestDrive)
+xtabs(~ gender + smoking, data = RcmdrTestDrive)
+#+END_SRC
+
+
+** Bivariate data: more on tables
+- Descriptive statistics: for now, marginal totals/percentages
+- more to talk about later: odds ratio, relative risk
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+A <- xtabs(Freq ~ Survived + Class, data = Titanic)
+addmargins(A)
+#+END_SRC
+
+#+RESULTS:
+:         Class
+: Survived  1st  2nd  3rd Crew  Sum
+:      No   122  167  528  673 1490
+:      Yes  203  118  178  212  711
+:      Sum  325  285  706  885 2201
+
+** Bivariate data: more on tables
+
+#+LaTeX: \begin{small}
+#+BEGIN_SRC R :exports both
+library(abind)
+colPercents(A)
+rowPercents(A)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+        Class
+Survived   1st   2nd   3rd Crew
+   No     37.5  58.6  74.8   76
+   Yes    62.5  41.4  25.2   24
+   Total 100.0 100.0 100.0  100
+   Count 325.0 285.0 706.0  885
+        Class
+Survived  1st  2nd  3rd Crew Total Count
+     No   8.2 11.2 35.4 45.2   100  1490
+     Yes 28.6 16.6 25.0 29.8   100   711
+#+end_example
+
+#+LaTeX: \end{small}
+
+** Plotting two categorical variables
+- Stacked bar charts
+- Side-by-side bar charts
+- Spine plots
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+barplot(A, legend.text = TRUE)
+barplot(A, legend.text = TRUE, beside = TRUE)
+spineplot(A)
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotj.png
+par(cex = 0.5)
+barplot(A, legend.text = TRUE)
+#+END_SRC
+
+#+CAPTION: Stacked bar chart of =Titanic= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotj.png]]
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotk.png
+par(cex = 0.5)
+barplot(A, legend.text = TRUE, beside = TRUE)
+#+END_SRC
+
+#+CAPTION: Side-by-side bar chart of =Titanic= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotk.png]]
+
+Side-by-side bar chart of =Titanic= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotl.png
+par(cex = 0.5)
+spineplot(A)
+#+END_SRC
+
+#+CAPTION: Spine plot of =Titanic= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotl.png]]
+
+
+
+** Bivariate data: quantitative versus quantitative
+
+- Can do univariate graphs of both variables separately
+- Make scatterplots for both variables simultaneously
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+plot(conc ~ rate, data = Puromycin)
+library(lattice)
+xyplot(conc ~ rate, data = Puromycin)
+#+END_SRC
+
+
+** 
+#+BEGIN_SRC R :results graphics :file img/plotm.png
+par(cex = 0.5)
+plot(conc ~ rate, data = Puromycin)
+#+END_SRC
+
+#+CAPTION: Scatterplot of =Puromycin= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotm.png]]
+
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotn.png
+library(lattice)
+print(xyplot(conc ~ rate, data = Puromycin, scales = list(cex 
+=0.5)))
+#+END_SRC
+
+#+CAPTION: Scatterplot of =Puromycin= data (with =xyplot=)
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotn.png]]
+Scatterplot of =Puromycin= data (using =xyplot=)
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/ploto.png
+print(xyplot(accel ~ dist, data = attenu))
+#+END_SRC
+
+#+CAPTION: Scatterplot of =attenu= (with =xyplot=)
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/ploto.png]]
+Scatterplot of =attenu= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotp.png
+print(xyplot(eruptions ~ waiting, data = faithful))
+#+END_SRC
+
+#+CAPTION: Scatterplot of =faithful= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotp.png]]
+Scatterplot of =faithful= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotq.png
+print(xyplot(Petal.Width ~ Petal.Length, data = iris))
+#+END_SRC
+
+#+CAPTION: Scatterplot of =iris= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotq.png]]
+Scatterplot of =iris= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotr.png
+print(xyplot(pressure ~ temperature, data = pressure))
+#+END_SRC
+
+#+CAPTION: Scatterplot of =pressure= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotr.png]]
+Scatterplot of =pressure= data
+
+** Measuring linear association
+
+** 							       :B_definition:
+   :PROPERTIES:
+   :BEAMER_env: definition
+   :END:
+The sample Pearson product-moment correlation coefficient \[ r =
+\frac{\sum_{i = 1}^{n}(x_{i} - \overline{x})(y_{i} -
+\overline{y})}{\sqrt{\sum_{i = 1}^{n}(x_{i} -
+\overline{x})^{2}}\sqrt{\sum_{i = 1}^{n}(y_{i} - \overline{y})^{2}}} \]
+- independent of scale
+- \(-1 \leq r \leq 1\), equality when points lie on straight line 
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+with(iris, cor(Petal.Width, Petal.Length))
+with(attenu, cor(dist, accel))
+#+END_SRC
+
+** More about linear correlation
+- measures strength and direction of linear association
+- Rules of thumb:
+  - \(0 < \vert r\vert  < 0.3\), weak linear association
+  - \(0.3 < \vert r\vert <0.7\), moderate linear association
+  - \(0.7 < \vert r\vert  < 1\), strong linear association
+- Just because \(r \approx 0\) doesn't mean there isn't any association
+
+** One quantitative, one categorical
+
+- Break down quantitative var by groups of subjects
+  - compare centers and spreads: variation within versus between groups
+  - compare clusters and gaps
+  - compare outliers and unusual features
+  - compare shapes.
+- graphical and numerical
+
+** Comparison of groups
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+stripchart(weight ~ feed, method="stack", data=chickwts)
+library(lattice)
+histogram(~age | education, data = infert)
+bwplot(~count | spray, data = InsectSprays)
+#+END_SRC
+
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+#+BEGIN_SRC R :results graphics :file img/plots.png
+par(cex = 0.4)
+stripchart(weight ~ feed, method="stack", data=chickwts)
+#+END_SRC
+
+#+CAPTION: Strip chart of =chickwts= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plots.png]]
+
+Stripcharts of =chickwts= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plott.png
+print(histogram(~age | education, data = infert))
+#+END_SRC
+
+#+CAPTION: Histograms of =infert= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plott.png]]
+Histograms of =infert= data
+
+** 
+#+BEGIN_SRC R :results graphics :file img/plotu.png
+print(bwplot(~count | spray, data = InsectSprays))
+#+END_SRC
+
+#+CAPTION: Box-and-whisker plots of =InsectSprays=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotu.png]]
+Boxplots of =InsectSprays= data
+
+** Multiple variables
+
+With more variables, complexity increases
+- multi-way contingency tables (bunch of categorical vars)
+  - mosaic plots, dotcharts
+- sample variance-covariance matrices
+  - scatterplot matrices
+- comparing groups: coplots
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+splom(~cbind(Murder, Assault, Rape), data = USArrests)
+?dotchart; ?xyplot;  ?mosaicplot
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotv.png
+print(splom(~cbind(Murder, Assault, Rape), data = USArrests))
+#+END_SRC
+
+#+CAPTION: Scatterplot matrix of =USArrests=
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotv.png]]
+
+Scatterplot matrix of =USArrests= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotw.png
+par(cex = 0.5)
+mosaicplot(Titanic)
+#+END_SRC
+
+#+CAPTION: Mosaic plot of =Titanic= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotw.png]]
+Mosaic plot of =Titanic= data
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/plotx.png
+par(cex = 0.15)
+coplot(lat ~ long | depth, data = quakes)
+#+END_SRC
+
+#+CAPTION: Coplot of =quakes= data
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotx.png]]
+
+Shingle plot of =quakes= data
+
+* Probability 							       :prob:
+
+** Probability
+- Random experiment: outcome not known in advance
+- Sample space: set of all possible outcomes (S)
+- Probability related to Set Theory
+  - subsets \(A\), \(B\), \(C\), etc. are events
+  - \(\emptyset\) represents the empty set 
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports code :eval never
+library(prob)
+S <- data.frame(lands = c("down","up","side"))
+S <- tosscoin(3)
+#+END_SRC
+
+** Set theory review
+
+| Name         | Denoted                    | Defined by elements       | R syntax        |
+|--------------+----------------------------+---------------------------+-----------------|
+| Union        | \(A\cup B\)                | in \(A\) or \(B\) or both | union(A, B)     |
+| Intersection | \(A\cap B\)                | in both \(A\) and \(B\)   | intersect(A, B) |
+| Difference   | \(A\) \textbackslash \(B\) | in \(A\) but not in \(B\) | setdiff(A, B)   |
+| Complement   | \(A^{c}\)                  | in \(S\) but not in \(A\) | setdiff(S, A)   |
+
+** Algebra of sets
+- \(A\cup\emptyset = A,\quad A \cap \emptyset = \emptyset, A \cup S =
+  S,\quad A \cap S = A, ...\)
+- Commutative property: \(A \cup B = B \cup A, \quad A \cap B = B \cap A\)
+- Associative property: \((A\cup B)\cup C = A \cup (B \cup C),\quad (A
+  \cap B) \cap C = A \cap (B \cap C)\)
+- Distributive property: \(A \cup (B \cap C) = (A \cup B) \cap (A \cup
+  B),\quad A \cap (B \cup C) = (A \cap B) \cup (A \cap B)\)
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Write "neither \(A\) nor \(B\) occurs"
+#+LaTeX: \vspace{0.5in}
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+"\(A\) occurs, but not \(B\)"
+#+LaTeX: \vspace{0.5in}
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+"\(A\) or \(B\) occurs, but not both"
+#+LaTeX: \vspace{0.5in}
+
+** 
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The sets \(A\) and \(B\) are /mutually exclusive/ or /disjoint/ if
+\(A\cap B = \mathrm{\emptyset}\). We say \(A_{1}\), \(A_{2}\), ...,
+\(A_{k}\) are m.e. if \(A_{i}\cap A_{j} = \mathrm{\emptyset}\) when
+\(i\neq j\).
+
+*** Model Assignment						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+- Have all kinds of events, want to know chance of an event \(A\)
+- The probability of \(A\) is the proportion of times that A occurs in
+  repeated trials of a random experiment as the number of trials
+  increases without bound.
+
+
+** Axioms for Probability
+*** Axiom 1						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\(\Pr(A) \geq 0\) for any event \(A\subset S\). 
+
+*** Axiom 2						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\(\Pr(S) = 1\).
+
+*** Axiom 3						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+If the events \(A_{1}\), \(A_{2}\), \(A_{3}\) ... are disjoint then \[
+\Pr\left(\bigcup_{i = 1}^{\infty}A_{i}\right) = \sum_{i =
+1}^{\infty}\Pr(A_{i}).  \]
+
+** Probability Properties
+
+*** Property 1						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\[ \Pr(A^{c}) = 1 - \Pr(A) \] 
+
+*** Property 2						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\[ \Pr(\emptyset)=0 \]
+
+*** Property 3						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+If \(A\subset B\), then \[\Pr(A) \leq \Pr(B)\]
+
+#+LaTeX: \vspace{0.5in}
+
+** Properties of probability
+
+*** Property 4						       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\(0 \leq \Pr(A) \leq 1\)
+
+#+LaTeX: \vspace{0.5in}
+
+*** Property 5 (General Addition Rule) 			       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+\(\Pr(A \cup B) = \Pr(A) + \Pr(B) - \Pr(A \cap B)\)
+
+** Properties of probability
+*** What about 3 events?				       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+#+LaTeX: \vspace{1in}
+
+*** Boole's Inequality 						     :B_note:
+    :PROPERTIES:
+    :BEAMER_env: note
+    :END:
+\[\Pr(A \cup B) \leq \Pr(A) + \Pr(B)\]
+
+** How do we assign probabilities?
+Finite sample space \[ S = \left\{ e_{1},\, e_{2},\, \ldots,\:
+e_{N}\right\} \]
+
+Need
+1. \(p_{i} \geq 0\)
+2. \(\Pr(S) = \sum_{i=1}^{N} p_{i} = 1\)
+
+*** Equally likely outcomes				       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+means \[ p_{1} = p_{2} = \cdots = p_{N} = p \quad \Longrightarrow
+\quad p = 1/N \]
+
+** How do we assign probabilities?
+Given \(A\subset S\), write \[A = \left\{ a_{i_{1}}, a_{i_{2}},
+\ldots, a_{i_{k}} \right\}\]
+
+Then \[ \Pr(A) = \Pr(a_{i_{1}}) + \Pr(a_{i_{2}}) + \cdots +
+\Pr(a_{i_{k}}), = \frac{1}{N} + \frac{1}{N} + \cdots + \frac{1}{N}, =
+\frac{k}{N} = \frac{\#(A)}{\#(S)}. \] 
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+*** 							  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a coin
+#+LaTeX: \medskip
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss 2 coins 
+#+LaTeX: \vspace{0.2in}
+\[ \Pr(\mbox{at least 1 head}) = \] 
+#+LaTeX: \vspace{0.2in}
+\[ \Pr(\mbox{no heads})= \] 
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Three child family
+#+LaTeX: \vspace{0.2in}
+\[ \Pr(\mbox{exactly 2 boys})= \] 
+#+LaTeX: \vspace{0.2in}
+\[ \Pr(\mbox{at most 2 boys})= \]
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Roll a die
+#+LaTeX: \vspace{0.2in}
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Deck of cards. Select 1 card at random.
+#+LaTeX: \vspace{0.1in}
+\[ A\longrightarrow\left\{ \mbox{Ace}\right\} \Pr(A)= \]
+#+LaTeX: \vspace{0.1in}
+\[ B\longrightarrow\left\{ \mbox{Clubs}\right\} \Pr(B)= \]
+#+LaTeX: \vspace{0.1in}
+\[ \Pr(A\cap B) = \]
+#+LaTeX: \vspace{0.1in}
+\[ \Pr(A\cup B) = \]
+
+** Examples
+*** 							       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+Poker hand \(\longrightarrow\) STUD poker
+
+\[S=\left\{ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\right\}\]
+#+LaTeX: \vspace{0.2in}
+\[ \Pr(\mbox{Royal Flush})= \]
+#+LaTeX: \vspace{0.6in}
+
+
+** How to count
+
+*** Multiplication principle 				       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+An experiment has two steps. First step can be done in \(n_{1}\) ways,
+Second step can be done in \(n_{2}\) ways. The whole experiment may be
+done in \[ n_{1}n_{2}\mbox{ ways} \] If it has \(k\) steps which can
+be done in \(n_{1}\), \(n_{2}\), ..., \(n_{k}\) ways, then the whole
+experiment may be done in \[ n_{1}n_{2}\cdots n_{k}\mbox{ ways} \]
+
+** Examples
+- Want to eat a pizza
+- Toss 6 coins
+- Roll 112 dice
+- What about \(\Pr(70\ \mbox{sixes})\)?
+
+** How to count
+
+*** 								  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+The number of ways to select an ordered sample of \(k\) subjects from
+a population that has \(n\) distinguishable members is
+- \(n^{k}\) if sampling is done with replacement,
+- \(n(n - 1)(n - 2)\cdots(n - k + 1)\) if sampling is done without
+  replacement.
+
+*** 							       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+Here, ORDER is IMPORTANT
+
+** Examples
+- Flip a coin 7 times
+- 20 students, select president, vice-president, treasurer
+- Rent 5 movies. Want to watch 3 movies on the first night.
+
+** How to count
+*** 								  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+The number of ways to select an unordered sample of \(k\) subjects
+from a population that has \(n\) distinguishable members is
+- \((n - 1 + k)!/[(n - 1)!k!]\) if sampling is done with replacement,
+- \(n!/[k!(n - k)!]\) if sampling is done without replacement.  
+
+#+LaTeX: \vspace{0.2in}
+\(n!/[k!(n - k)!]\) is a binomial coefficient "n choose k" \[ {n
+\choose k} = \frac{n!}{k!(n-k)!}  \]
+
+** More about binomial coefficients
+
+** Birthday problem
+- \(n\) people in a class
+- 365 days/year, equally likely
+- \(\Pr(\mbox{at least two have same birthday})\)
+
+\[ 1-\frac{\#(A)}{\#(S)} = \]
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+#+BEGIN_SRC R :results graphics :file img/ploty.png
+par(cex = 0.5)
+library(RcmdrPlugin.IPSUR)
+g <- Vectorize(pbirthday.ipsur)
+plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
+abline(h = 0.5)
+abline(v = 23, lty = 2)
+remove(g)
+#+END_SRC
+
+#+CAPTION: Birthday problem
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/ploty.png]]
+
+The birthday problem
+
+** Poker hands
+52 cards \(\longrightarrow\) 5 card hand
+
+\[ S = \left \{ \mbox{all possible 5 card hands} \right\} \]
+
+(should shuffle HOW MANY times???)
+
+\[ A = \mbox{Royal Flush}=\left\{ A,\, K,\, Q,\, J,\,\mbox{all same
+suit}\right\} \]
+
+#+LaTeX: \vspace{0.2in}
+
+\[ B=\left\{ \mbox{Four of a kind}\right\} \]
+
+#+LaTeX: \vspace{0.5in}
+
+
+** Conditional Probability
+
+52 cards \(\longrightarrow\) draw 2 cards (without replacement)
+
+
+\[ A = \left\{ \mbox{1st card drawn is Ace}\right\} \]
+
+\[ B = \left\{ \mbox{2nd card drawn is Ace}\right\} \]
+
+Then
+\[ \Pr(A)= \]
+
+\[ \Pr(B)= \]
+
+#+LaTeX: \vspace{0.5in}
+
+** Conditional probability
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+The /conditional probability/ of \(B\) given that the event \(A\)
+occurred is \[ \Pr(B \vert A) = \frac{\Pr(A\cap B)}{\Pr(A)}, \quad
+\mbox{if }\Pr(A) > 0.  \]
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a coin twice. 
+\[ A = \left\{ \mbox{a head occurs}\right\} \]
+\[ B = \left\{ \mbox{a head and tail occurs}\right\} \]
+- \(\Pr(A \vert B) = \)
+- \(\Pr(B \vert A) = \)
+
+** Conditional probability
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a die twice.
+
+\[ A=\left\{ \mbox{outcomes match}\right\} \]
+\[ B=\left\{ \mbox{sum of outcomes \ensuremath{\geq8}}\right\} \]
+
+- \(\Pr(A)=\)
+  - \(\Pr(B)=\)
+  - \(\Pr(A\cap B)=\)
+  - \(\Pr(A \vert B)=\)
+  - \(\Pr(B \vert A)=\)
+
+** Properties
+
+*** 								    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+For any fixed event \(A\) with \(\Pr(A) > 0\),
+1. \(\Pr(B \vert A) \geq 0\), for all events \(B \subset S\),
+2. \(\Pr(S \vert A) = 1\), and
+3. If \(B_{1}\), \(B_{2}\), \(B_{3}\),... are disjoint events, then \[
+   \Pr \left( \bigcup_{k = 1}^{\infty} B_{k} \: \vert A \right) =
+   \sum_{k = 1}^{\infty}\Pr(B_{k} \vert A). \]
+
+** More properties
+
+*** 								    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+For any events \(A\), \(B\), and \(C\) with \(\Pr(A) > 0\),
+1. \(\Pr(B^{c} \vert A) = 1 - \Pr(B \vert A)\).
+2. If \(B\subset C\) then \(\Pr(B \vert A) \leq \Pr(C \vert A)\).
+3. \(\Pr[(B \cup C)|A] = \Pr(B \vert A) + \Pr(C \vert A)-\Pr[(B\cap C
+   \vert A)]\).
+4. For any two events \(A\) and \(B\), \(\Pr(A\cap B)=\Pr(A)\Pr(B
+   \vert A)\).
+
+
+*** For 3 events:						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+#+LaTeX: \vspace{0.5in}
+
+** Conditional probability
+Recall the aces problem \[ A = \left\{ \mbox{1st card drawn is Ace} \right\}\]
+
+\[ B = \left\{ \mbox{2nd card drawn is Ace}\right\} \]
+
+- \(\Pr(\mbox{both Aces})=\)
+
+#+LaTeX: \vspace{0.35in}
+
+** Conditional probability
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Urn with 10 balls, 7 red and 3 green. Select 3 balls successively from
+the urn.
+
+\[ A = \left\{ \mbox{1st ball red}\right\} \]
+\[ B = \left\{ \mbox{2nd ball red}\right\} \]
+\[ C = \left\{ \mbox{3rd ball red}\right\} \]
+
+- \(\Pr(\mbox{all red})=\)
+
+#+LaTeX: \vspace{0.35in}
+
+** Good example
+Two urns. First: 5 red, 3 green. Second: 2 red, 6 green. 
+1 ball transferred. Select 1 ball.  
+
+#+LaTeX: \vspace{2in}
+
+\[ \Pr(\mbox{red})= \] 
+
+** What if you don't look?
+#+LaTeX: \vspace{2.2in}
+
+\[ \Pr(\mbox{second card is Ace})= \]
+
+** Independent Events
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss two coins
+- \(\Pr(\mbox{1st }H)=\)
+- \(\Pr(\mbox{2nd }H)=\)
+- \(\Pr(\mbox{both }H)=\)
+
+#+LaTeX: \vspace{0.1in}
+\[ \Pr(\mbox{2nd }H \vert \mbox{ 1st }H)= \]
+
+** Independence
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+Events \(A\) and \(B\) are /independent/ if \[ \Pr(A \cap B) = \Pr(A)
+\Pr(B), \] otherwise they are dependent.
+
+#+LaTeX: \vspace{0.3in}
+
+Intuition: \[ \Pr(A \vert B) = \Pr(A)\quad\mbox{when \mbox{\emph{A},\emph{ B}}
+independent} \]
+
+** Properties
+
+*** 							       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+If \(A\) and \(B\) are independent then
+- \(A\) and \(B^{c}\) are independent,
+- \(A^{c}\) and \(B\) are independent,
+- \(A^{c}\) and \(B^{c}\) are independent.
+
+#+LaTeX: \vspace{0.3in}
+
+What about 3 or more events?
+
+** Mutual independence
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+\(A\), \(B\) and \(C\) are /mutually independent/ if
+
+\[ \Pr(A\cap B) = \Pr(A)\Pr(B)\]\[ \Pr(A\cap C) = \Pr(A)\Pr(C)\]\[
+\Pr(B\cap C) = \Pr(B)\Pr(C), \] and \[ \Pr(A\cap B\cap
+C)=\Pr(A)\Pr(B)\Pr(C).  \]
+
+** Mutual independence
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss 100 coins.  \[ \Pr(\mbox{at least 1 head})= \] 
+
+#+LaTeX: \vspace{2in}
+
+** Mutual independence
+
+*** 								     :B_note:
+    :PROPERTIES:
+    :BEAMER_env: note
+    :END:
+Pairwise independence does NOT imply mutual.
+
+#+LaTeX: \vspace{0.2in}
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+1. Toss coins, roll dice, etc.
+2. Draw two cards without replacement
+3. Space shuttle. 4 computers, \(A\), \(B\), \(C\), \(D\),
+   \(\Pr(\mbox{fail}) = 0.10\)
+
+** Space shuttle (cont.)
+
+Scheme: computers in series. If computers independent, \[\Pr(\mbox{at
+least one computer works})\]
+
+#+LaTeX: \vspace{2in}
+
+
+** Bayes' Rule
+
+*** 								  :B_theorem:
+    :PROPERTIES:
+    :BEAMER_env: theorem
+    :END:
+Let \(B_{1}\), \(B_{2}\), ..., \(B_{n}\) be mutually exclusive and
+exhaustive and let\(A\) be an event with \(\Pr(A) > 0\). Then \[
+\Pr(B_{k} \vert A) = \frac{\Pr(B_{k})\Pr(A \vert B_{k})}{\sum_{i =
+1}^{n}\Pr(B_{i})\Pr(A \vert B_{i})},\quad k = 1,2,\ldots,n.  \]
+
+** Bayes' Rule (intuition)
+
+** Bayes' Rule: what does it mean?
+Given (or know) a priori probabilities \(\Pr(B_{k})\). Collect some
+data, which is \(A\).  
+
+#+LaTeX: \vspace{2.1in}
+
+How to update \(\Pr(B_{k})\) to \(\Pr(B_{k} \vert A)\)?
+
+** Example: misfiling assistants
+Moe, Larry, and Curly
+
+|          | Moe | Larry | Curly |
+|----------+-----+-------+-------|
+| Workload | 60% |   30% |   10% |
+
+#+LaTeX: \vspace{0.4in}
+
+|       | Moe     | Larry   | Curly   |
+|-------+---------+---------+---------|
+| Prior | \Pr(M)= | \Pr(L)= | \Pr(C)= |
+
+
+** Misfiling assistants (cont.)
+
+|              |   Moe | Larry | Curly |
+|--------------+-------+-------+-------|
+| Misfile Rate | 0.003 | 0.007 | 0.010 |
+
+#+LaTeX: \vspace{1.5in}
+
+|           | Moe                       | Larry                     | Curly                     |
+|-----------+---------------------------+---------------------------+---------------------------|
+| Posterior | \(\Pr(M \vert A)\approx\) | \(\Pr(L \vert A)\approx\) | \(\Pr(C \vert A)\approx\) |
+
+** Random Variables
+
+- Experiment \(E\)
+- Sample space \(S\)
+- Calculate number \(X\)
+
+*** 							       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+A /random variable/ \(X\) is a function \(X:S\to\mathbb{R}\) that
+associates to each outcome \(\omega\in S\) exactly one number
+\(X(\omega) = x\). The support of \(X\) is the set of X's values: \[
+S_{X}=\left\{ x\,:\, X(\omega)=x,\ \omega\in S\right\} \]
+
+
+** Random variables
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a coin three times 
+#+LaTeX: \vspace{0.4in}
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a coin until tails 
+#+LaTeX: \vspace{0.4in}
+
+*** 								  :B_example:
+    :PROPERTIES:
+    :BEAMER_env: example
+    :END:
+Toss a coin, measure time until lands 
+
+* Discrete Distributions 					       :disc:
+
+** 
+Discrete r.v.'s have supports like \[
+S_{X}=\{u_{1},u_{2},\ldots,u_{k}\}\mbox{ or
+}S_{X}=\{u_{1},u_{2},u_{3}\ldots\} \]
+
+** Probability mass functions (PMFs)
+
+Discrete r.v.'s have probability mass functions (PMFs) \[ f_{X}(x) =
+\Pr(X=x),\quad x\in S_{X}.  \]  
+
+Every PMF satisfies
+1. \(f_{X}(x) > 0\) for \(x \in S\),
+2. \(\sum_{x\in S}f_{X}(x) = 1\), and
+3. \(\Pr(X\in A) = \sum_{x\in A}f_{X}(x)\), for any event \(A\subset
+   S\).
+
+** Example
+Toss a coin three times. \(X = \mbox{number of heads}\)
+
+** Expectations
+
+The mean \mu, a.k.a. \(\mathbb{E} X\mu=\mathbb{E} X=\sum_{x\in
+S}xf_{X}(x)\),
+
+The variance \[ \sigma^{2}=\mathbb{E}(X-\mu)^{2}=\sum_{x\in
+S}(x-\mu)^{2}f_{X}(x), \]
+
+The standard deviation \(\sigma=\sqrt{\sigma^{2}}\)
+
+** Example
+
+Toss a coin three times. \(X = \mbox{number of heads}\). Find \(\mu\)
+
+Interpretation: 
+
+** Cumulative distribution function (CDF)
+
+\[ F_{X}(t) = \Pr(X\leq t), \quad - \infty < t <
+\infty.  \]
+- \(F_{X}\) is nondecreasing
+- \(F_{X}\) is right-continuous 
+- \(\lim_{t\to-\infty}F_{X}(t) = 0\) and \(\lim_{t\to\infty}F_{X}(t) =
+  1\).
+
+Say \(X\) has "distribution" \(F_{X}\) and write \(X\sim F_{X}\) or
+\(X\sim f_{X}\)
+
+** Example
+Toss a coin three times
+- Find the CDF
+
+#+LaTeX: \vspace{2in}
+
+** Discrete uniform distribution
+\(X \sim \mathsf{disunif}(m)\) has PMF
+
+\[ f_{X}(x) = \frac{1}{m},\quad x = 1,2,\ldots,m \]
+
+Roll a die
+
+Select number at random from 1 to BLANK
+
+** Expectations
+- Find mean and variance of \(X\sim\mathsf{disunif}(m)\)
+- Find mean and variance for rolling a die
+
+#+LaTeX: \vspace{2in}
+
+** Bernoulli distribution
+
+*** Bernoulli trial					       :B_definition:
+    :PROPERTIES:
+    :BEAMER_env: definition
+    :END:
+Random experiment with two outcomes: success (S) and failure (F).
+
+*** Probability mass function 					    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+Write \(\Pr(S) = p\).
+\[ f_{X}(x) = p^{x}(1-p)^{1-x},\quad x = 0, 1 \]
+
+\[ \mathbb{E} X = \] 
+
+\[ \mbox{Var}(X) = \]
+
+** Binomial distribution
+
+- Bernoulli trials conducted \(n\) times,
+- the trials are independent,
+- the probability of success \(p\) does not change between trials.
+
+#+LaTeX: \bigskip
+
+If \(X = \mbox{number of successes}\) then the PMF of \(X\) is 
+
+\[ f_{X}(x)={n \choose x}p^{x}(1-p)^{n-x},\quad x=0,1,2,\ldots,n \]
+
+Write \[ X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p) \]
+
+** 
+- Check \(\sum f(x) = 1\): \[ \sum_{x=0}^{n}{n \choose
+  x}p^{x}(1-p)^{n-x}=[p+(1-p)]^{n}=1^{n}=1 \]
+
+- Find the mean: \[ \mu=\sum_{x=0}^{n}x\,{n \choose
+  x}p^{x}(1-p)^{n-x}= \] \[
+  \sum_{x=1}^{n}x\,\frac{n!}{x!(n-x)!}p^{x}q^{n-x} = n\cdot
+  p\sum_{x=1}^{n}\frac{(n-1)!}{(x-1)!(n-x)!}p^{x-1}q^{n-x} \]
+
+** Example
+Five child family. Let \(X = \mbox{number of boys}\).
+
+#+LaTeX: \vspace{2in}
+
+*** How to do it with R						    :B_block:
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC R :exports both
+dbinom(3, size = 5, prob = 0.5)
+#+END_SRC
+
+#+LaTeX: \vspace{2in}
+
+** Example
+Roll 15 dice. Find \(\Pr(\mbox{from 4 to 7 sixes})\).
+
+#+LaTeX: \vspace{2in}
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports both
+diff(pbinom(c(4,7), size = 15, prob = 1/6))
+#+END_SRC
+
+** Example 
+Seven child family, \(X = \mbox{number of boys}\), find CDF.
+
+#+LaTeX: \vspace{2in}
+
+*** How to do it with R
+
+#+BEGIN_SRC R :exports both
+dbinom(0:7, size = 7, prob = 1/2)
+#+END_SRC
+
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+#+BEGIN_SRC R :results graphics :file img/plotz.png
+par(cex = 0.5)
+plot(0, xlim = c(-1.2, 8.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
+abline(h = c(0,1), lty = 2, col = "grey")
+lines(stepfun(0:7, pbinom(-1:7, size = 7, prob = 0.5)), verticals = FALSE, do.p = FALSE)
+points(0:7, pbinom(0:7, size = 7, prob = 0.5), pch = 16, cex = 1.2)
+points(0:7, pbinom(-1:6, size = 7, prob = 0.5), pch = 1, cex = 1.2)
+#+END_SRC
+
+#+CAPTION: Cumulative distribution function
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotz.png]]
+
+
+** 
+Another way to do it with R
+
+#+BEGIN_SRC R :exports both
+library(distr)
+X <- Binom(size = 7, prob = 1/2)
+X
+d(X)(1)   # pmf of \(X\) evaluated at x = 1
+p(X)(2)   # cdf of \(X\) evaluated at x = 2
+# plot(X)
+#+END_SRC
+
+
+
+#+BEGIN_SRC R :results graphics :file img/plotaa.png
+par(cex=0.5)
+plot(X, cex = 0.2, mex = 0.2)
+#+END_SRC
+
+** 								    :B_frame:
+   :PROPERTIES:
+   :BEAMER_env: frame
+   :END:
+
+#+CAPTION: Plot of a random variable
+#+ATTR_LaTeX: :width 3.5in
+[[file:img/plotaa.png]]
+
+
+# 9-27-10
+
+** Expectation
+
+
+** Properties of E
+
+** Example: Binomial expectation
+
+** Moment generating functions
+
+** Properties of MGFs
+
+*** Discrete uniform
+
+*** Binomial
+
+** Why do they call it an MGF?
+
+** Example: Binom(n,p)
+
+** Applications
+
+*** Uniqueness Theorem
+
+*** Taylor's Series
+
+
+** Dependent Bernoulli trials
+
+** Hypergeometric mean, variance
+
+** Example, hypergeometric
+Pr(X=something)
+
+Pr(X <= something)
+
+# 9-29-10
+
+** Waiting time distributions
+
+Flip a coin until you get heads
+
+Conduct Bernoulli trials until observe success
+
+Let X = number of failures until first success
+
+PMF 
+
+\[f_{X}(x) = p(1 - p)^x,\ x=0,1,2,\ldots \]
+
+- check that \sum f = 1
+
+Know geometric series
+
+say X has a geometric distribution
+
+\[X \sim geom(prob = p)\]
+
+- mean
+- variance 
+- MGF
+
+** Example: Jeff Reed
+
+** Negative Binomial distribution
+
+PMF, mean, variance, MGF
+
+
+
+
+
+
+
+** Poisson distribution
+
+PMF, mean, variance, MGF
+
+
+* Continuous distributions					       :cont:
+
+** Definition
+
+** Probability density functions (PDF)
+
+** Properties
+- nonnegative
+- integral is one
+- probability is area under the curve
+- remarks
+
+# <2010-10-04 Mon> 
+
+** Continuous CDFs
+- nondecreasing
+- continuous function
+- limits at infinity
+- derivative of CDF is PDF
+
+** Expectation
+- mean, variance, MGF
+
+** Examples
+- finite support: =beta(4,1)=
+  + integral 1, probability, \mu, \sigma
+- infinite support: =exp(rate = 5)=
+  + integral 1, prob, \mu, \sigma
+
+** Continuous uniform distribution
+
+PDF, CDF, notation, R code, MGF
+
+** Uniform
+Find the mean, variance
+
+Special case: =unif(min = 0, max = 1)=
+
+** Normal distribution
+
+PDF, notation, R code
+
+** Standard Normal: Z
+
+\phi, \Phi
+
+If X ~ =norm(m,s)= then Z = (X-m)/s ~ =norm(0,1)=
+
+** Properties
+MGF of Z
+
+MGF of X
+
+MGF of Y = a + bX
+
+** 68-95-99.7 (Empirical) Rule
+
+** Example: find P(a < X < b) for something, say, IQ
+
+** Quantiles and the quantile function
+
+Want to go in reverse: given area, find the IQ
+
+# <2010-10-06 Wed> 
+
+** Quantile functions
+
+Definition of quantile function:
+
+\[ Q(p) = \min\{x : F(x) \geq p\},\ 0 < p < 1 \]
+
+*** Properties:
+1. defined, finite for 0 < p < 1
+2. left continuous
+3. reflect F about line y=x (continuous case)
+4. boundary limits exist but may be infinite
+
+** Special case: normal distribution
+
+Define z_{\alpha}
+
+Examples
+
+z_{0.025}, z_{0.01}, z_{0.005} 
+
+** Functions of random variables
+
+The idea
+
+*** Discrete case
+
+Make a table, accumulate probabilities
+
+Example: X ~ =binom=, Y = something
+
+** PDF method
+
+Introduce the formula and conditions
+
+Intuitive formula
+
+** Example: X ~ =norm=, Y = linear transformation
+
+*** 							       :B_alertblock:
+    :PROPERTIES:
+    :BEAMER_env: alertblock
+    :END:
+If X is *any* norm then lin. trans. is also normal
+
+** Example: X ~ =norm=, Y = exp(X) (lognormal) 
+
+** CDF method
+
+Introduce the method
+
+Example: X ~ =unif(0,1)=, Y = -ln(X) (exponential)
+
+
+** Probability Integral Transform
+
+** Why the PIT is important
+
+
+# <2010-10-11 Mon> 
+
+
+
+*** How to do it with R
+
+
+
+** Exponential distribution
+
+PDF, Graph, Notation, CDF, Graph
+
+** Find the MGF
+
+** Find the mean, variance
+
+** Memoryless property
+
+** Relationship with Poisson model
+
+*** Gamma distribution
+
+PDF, Notation, Parameters
+
+** The Gamma Function
+
+** Properties of the Gamma Function
+
+** MGF, mean and variance
+
+** Motivation: relationship with Poisson process
+
+** Example: car wash
+
+** How to do it with R
+
+** Special case: Chi square distribution
+
+** Even more continuous distributions
+- Cauchy
+- Beta
+- Logistic
+- Lognormal
+- Weibull
+- Student's t distribution
+- F distribution
+
+
+* Multivariate Distributions					       :mult:
+
+** Comparison of univariate versus multivariate
+
+Discrete case: joint PMFs, CDFs
+
+** Example: roll fair die twice
+
+
+
+# <2010-10-13 Wed> 
+
+
+** Marginal distributions
+
+Continuous case: joint PDFs, marginals
+
+** Joint expectation
+
+Definition
+
+** Independence
+
+Analogy with independent events
+
+Definition (pairwise)
+
+** Comment for multivariate mutual independence
+
+** Independent, Identically Distributed (IID)
+
+Simple Random Sample of size n
+
+** Expectation of functions of independent random variables
+
+
+* Sampling Distributions					       :samp:
+
+** Simple Random Samples
+
+BACKGROUND
+
+Mean and variance of linear combination of independent sample
+
+
+
+
+# <2010-10-18 Mon> 
+
+** Mean and variance of X-bar
+
+** MGF of linear combination of independent sample
+
+** MGF of X-bar
+
+** Example: SRS(11) from =gamma=, find dist'n of X-bar
+
+** Proposition: SRS(n) from =norm=, then X-bar is normal, too
+
+** Sum of independent =chisq= is =chisq=, and =df='s add
+
+** Sum of squared standard normals is =chisq= with =df= = n
+
+** Theorem: 
+SRS(n) from =norm=, then
+1. X-bar and S^2 are independent
+2. S^2 is scaled =chisq= with =df= = n - 1
+
+** Linear combinations of independent normals is normal, too
+
+
+** Central Limit Theorem
+
+statement of the theorem
+
+** Remarks:
+- if X's are normal, then X-bar is normal
+- if X's are close to normal, then X-bar is close to normal, too
+- Discrete/continuous doesn't matter
+- how large is large?
+
+# <2010-10-20 Wed> 
+
+
+Example: SRS(40) have \mu = 21 and \sigma = 7.  Find probability for X-bar.
+
+** Student's t distribution and the F distribution
+
+*** Student's t
+
+where it comes from, notation
+
+Remarks
+- looks like =norm= but with heavy tails
+- as =df= gets large approaches =norm(0,1)=
+
+Why it's called "Student's t" and William Sealy Gosset
+
+*** F distribution
+
+where it comes from, notation
+
+Sir Ronald Aylmer Fisher and Snedecor
+
+Graphs of the PDF
+
+If F ~ =f(n1,n2)= then 1/F ~ =f(n2,n1)=
+
+
+** Other types of sampling distributions
+
+Two =norm= samples, difference in means
+
+Simulation based
+
+
+* Estimation								:est:
+
+** Maximum likelihood
+
+Example: go fishing, count the number of sharks
+
+Likelihood function, L
+
+Maximize L, for us, with derivative
+
+X-bar pops out of nowhere!
+
+
+
+
+
+# <2010-10-25 Mon>
+
+Check it's a max with FDT or SDT
+
+General case for maximum likelihood 
+
+Remarks
+- MLE: maximum likelihood estimator
+- point estimators of a parameter
+- sometimes take logs before differentiating
+
+Example: MLE for =geom= distribution
+
+More remarks
+- can do it for more than one parameter
+- sometimes need sophisticated numerical methods
+- MLEs not unique, in general
+- sometimes an MLE does not exist
+- MLEs are just one of many types of point estimator
+
+Definition of unbiased estimator
+
+Example: X-bar is unbiased in the sharks problem
+
+Example: in two-parameter =norm= case, MLE of variance is biased, but sample variance is unbiased
+
+
+** Confidence intervals for means
+
+why CI's are important for estimation
+
+intuition for the z-interval
+
+Definition of z-interval, confidence interval, confidence coefficient
+
+Example: 90% confidence interval for \mu
+
+Remarks
+- for fixed confidence, as sample size increases the CI gets shorter
+- for fixed sample size, as confidence increases the CI gets wider
+
+Example: SRS(10) from pop'n, find 95% CI for \mu
+
+1. identify Parameter of interest, in context
+2. check Assumptions
+3. choose relevant Name of procedure based on above
+4. actually calculate the Interval
+5. state Conclusion, in context of problem
+
+
+
+
+# <2010-10-27 Wed>
+
+PANIC
+
+If \sigma is unknown, use s instead
+
+Remarks
+- if n is large then approx 100(1 - \alpha )% confidence
+- if n small
+-- if pop'n normal then use Student's t critical value, get t-interval
+-- if pop'n non-normal 
+--- if approx normal then still not too bad
+--- if highly skewed or outliers, ask statistician
+- can have one-sided intervals, too
+
+
+Example:  SRS(7) from pop'n, assume =norm=, find CI for \mu
+
+** Confidence intervals for difference of two means
+
+intuition for the confidence interval
+
+First suppose variances known: two-sample z-interval
+
+If variances are unknown:
+- samples both large: use sample variances, approximate 100(1-\alpha )% confidence
+- one (or both) samples small, then in trouble unless
+-- pop'ns both normal
+--- if variances equal: pooled t-interval
+--- variances unequal: Welch interval
+
+** Example: independent SRS(4) and SRS(7), =norm=
+
+
+
+
+
+# <2010-11-01 Mon>
+
+** Welch-Aspin interval explained
+
+** How to do it with R
+
+** Confidence intervals for proportions
+
+Examples of proportions
+
+** The asymptotic z-interval for proportions
+
+** Example: SRS(4791) from =binom=, find 95% CI for p
+
+Score interval: see book
+
+** Confidence intervals (asymptotic) for two proportions
+
+*** One-sided CIs for p
+
+** How to do it with R
+
+
+** Sample size
+
+margin of error, E
+
+sample sizes for means, easy
+
+** Example: find n such that x-bar plus/minus E is 95% CI
+
+Remarks
+- always round up
+
+For proportions, little bit harder
+1. replace p with prior guess
+2. replace p(1 - p) with 1/4, can't do worse
+
+** Example: monkeys who don't like bananas, find sample size for proportion, both methods
+
+Sample size for small pop'ns, use hypergeometric distribution
+
+
+* Hypothesis Testing							:hyp:
+
+** For proportions
+
+Example: shotgun machine, want to improve performance, install thing-a-majig
+
+Terminology
+- null hypothesis
+- alternative hypothesis
+
+
+
+
+# <2010-11-03 Wed>
+
+Basic hypothesis testing procedure
+1. set up hypotheses, collect some data
+2. assume null is true, construct 95% CI for parameter
+3. if CI doesn't cover null value, reject H0, otherwise, don't reject
+
+More terminology
+- Type I error, Type II error
+- significance level
+- rejection region
+- two-sided and one-sided tests
+
+Tests of hypotheses for one proportion (asymptotic)
+
+Draw pictures
+
+Example: observe bunch of shotguns, do hypothesis test
+
+Example: do another hypothesis test, but for different significance levels
+
+p-value of a hypothesis test
+
+Example: find p-value for previous test
+
+Hypothesis testing: "reject H0 if p-value is small"
+
+Tests of hypotheses for two proportions
+
+** For one mean and/or one variance
+Given SRS(n) from =norm=, unknown mean
+
+*** For means
+
+- \sigma known: z-tests for one mean
+- \sigma unknown: t-tests for one mean
+
+If \sigma unknown but n is large then use z-test
+
+Example: SRS(9) from =norm=, hypothesis test for the mean, find p-value
+
+
+
+# <2010-11-15 Mon>
+
+More about p-values
+
+Standard error of the sample mean
+
+Standard errors in general
+
+*** For variances
+
+Tests of hypothesis for a variance
+
+Example: =salary= from =RcmdrTestDrive=
+
+How to do it with R
+
+=sigma.test= from the =TeachingDemos= package
+
+** For two means and/or two variances
+
+*** For two means
+
+Independent two-sample t-test (pooled)
+
+Example: mean =before= by =smoking= in =RcmdrTestDrive=
+
+Remarks
+- two-sample z-test
+- large sample approximation
+
+*** For two variances
+
+Two-sample F-test
+
+Example: variance of =before= by =smoking= in =RcmdrTestDrive=
+
+How to do it with R
+
+=var.test= from base R
+
+
+
+
+# <2010-11-17 Wed>
+
+Remarks
+- side-by-side displays
+- watch assumptions
+-- normality
+-- equal variances
+
+*** For paired samples
+
+Paired t-test
+
+Example: compare =before= vs. =after= in =RcmdrTestDrive=
+
+
+* Simple Linear Regression						:slr:
+
+** Motivation
+
+Regression Assumptions
+
+What does it mean?
+
+Maximum likelihood derivation of least-squares
+
+
+
+
+# <2010-11-24 Mon>
+
+
+** Parameter estimates
+
+Example:  =salary= modeled by =order= in =RcmdrTestDrive=
+
+How to do it with R: the =lm= function
+
+Take a look at the fitted line
+
+Residuals = ACTUAL - PREDICTED
+
+MLE of residual standard error
+
+Why is it called "Regression"?
+
+** Interval estimation
+
+** Sampling distributions
+
+** Confidence intervals for regression parameters
+
+** How to do it with R
+
+
+
+# <2010-11-29 Mon>
+
+** Residual analysis
+
+** Graphically/numerically
+
+** Assess normality
+
+** Assess constant variance
+
+** Assess independence
+
+
+* Other topics							      :other:
+
+** Chi-square goodness of fit
+
+Karl Pearson (1900)
+
+** Motivation/derivation
+
+** Remarks
+- observed versus expected
+- rule of thumb: expected counts at least 5
+
+** Example: Gregor Mendel's corn
+
+** How to do it with R
+
+
+# <2010-12-01 Wed>
+
+** Analysis of Variance (ANOVA)
+
+Motivation
+
+** ANOVA Decomposition
+
+** Between vs. within
+
+** Sampling dist's of SSTO, SSE
+
+** Cochran's Theorem
+
+** Sampling dist'n of SST
+
+** ANOVA Table
+
+** Example: =breaks= by =tension= in =warpbreaks= data
+
+** How to do it with R
+
+the =aov= function in base R
+
+** Remarks
+- constant variance
+- normality assumption
+- multi-way ANOVA
+- balanced sample sizes

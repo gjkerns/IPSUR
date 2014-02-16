@@ -1,5 +1,5 @@
 ;;    IPSUR: Introduction to Probability and Statistics Using R
-;;    Copyright (C) 2013 G. Jay Kerns
+;;    Copyright (C) 2014 G. Jay Kerns
 ;;
 ;;    This file is part of IPSUR.
 ;;
