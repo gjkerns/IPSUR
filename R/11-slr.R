@@ -19,11 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(ggplot2)
-library(HH)
-library(lmtest)
-
 postscript(file="ps/slr-philosophy.ps")
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h = 0, v = 0, col = "gray60")

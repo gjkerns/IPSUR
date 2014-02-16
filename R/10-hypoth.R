@@ -19,10 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(TeachingDemos)
-library(HH)
-
 dhyper(0, m = 26, n = 26, k = 5)
 
 -qnorm(0.99)

@@ -19,10 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(distrEx)
-library(actuar)
-
 f <- function(x) 3*x^2
 integrate(f, lower = 0.14, upper = 0.71)
 

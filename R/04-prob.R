@@ -19,11 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(diagram)
-library(prob)
-library(RcmdrPlugin.IPSUR)
-
 postscript(file="ps/prob-diagram.ps")
 require(diagram)
 par(mex = 0.2, cex = 0.5)
@@ -120,9 +115,9 @@ S <- cards(makespace = TRUE)
 A <- subset(S, suit == "Heart") 
 B <- subset(S, rank %in% 7:9)
 
-Prob(A) 
+prob::prob(A) 
 
-Prob(S, suit == "Heart") 
+prob::prob(S, suit == "Heart") 
 
 nsamp(n=3, k=2, replace = TRUE, ordered = TRUE) 
 nsamp(n=3, k=2, replace = FALSE, ordered = TRUE) 
@@ -173,30 +168,30 @@ head(S)                            #  first few rows
 A <- subset(S, X1 == X2)
 B <- subset(S, X1 + X2 >= 8)
 
-Prob(A, given = B)
-Prob(B, given = A)
+prob::prob(A, given = B)
+prob::prob(B, given = A)
 
-Prob(S, X1==X2, given = (X1 + X2 >= 8) )
-Prob(S, X1+X2 >= 8, given = (X1==X2) )
+prob::prob(S, X1==X2, given = (X1 + X2 >= 8) )
+prob::prob(S, X1+X2 >= 8, given = (X1==X2) )
 
 L <- cards()
 M <- urnsamples(L, size = 2)
 N <- probspace(M)
 N[[1]][[1]];  N$probs[1]
 
-Prob(N, all(rank == "A"))
+prob::prob(N, all(rank == "A"))
 
 L <- rep(c("red","green"), times = c(7,3))
 M <- urnsamples(L, size = 3, replace = FALSE, ordered = TRUE)
 N <- probspace(M)
 
-Prob(N, isrep(N, "red", 3))
+prob::prob(N, isrep(N, "red", 3))
 
-Prob(N, isrep(N, "red", 2))
+prob::prob(N, isrep(N, "red", 2))
 
-Prob(N, isin(N, c("red","green","red"), ordered = TRUE))
+prob::prob(N, isin(N, c("red","green","red"), ordered = TRUE))
 
-Prob(N, isin(N, c("red","green","red")))
+prob::prob(N, isin(N, c("red","green","red")))
 
 library(RcmdrPlugin.IPSUR)
 data(RcmdrTestDrive)  
@@ -205,7 +200,7 @@ addmargins(.Table) # Table with marginal distributions
 
 S <- tosscoin(10, makespace = TRUE)
 A <- subset(S, isrep(S, vals = "T", nrep = 10))
-1 - Prob(A)
+1 - prob::prob(A)
 
 iidspace(c("H","T"), ntrials = 3, probs = c(0.7, 0.3)) 
 
@@ -226,7 +221,7 @@ S <- addrv(S, U = X1-X2+X3)
 
 head(S)
 
-Prob(S, U > 6) 
+prob::prob(S, U > 6) 
 
 S <- addrv(S, FUN = max, invars = c("X1","X2","X3"), name = "V") 
 S <- addrv(S, FUN = sum, invars = c("X1","X2","X3"), name = "W") 

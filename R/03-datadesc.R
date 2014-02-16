@@ -19,13 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(aplpack)
-library(qcc)
-library(e1071)
-library(lattice)
-library(ggplot2)
-
 str(precip)
 
 precip[1:4]

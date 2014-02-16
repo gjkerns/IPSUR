@@ -19,23 +19,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(prob)
-library(ggplot2)
-library(mvtnorm)
-library(lattice)
-library(grid)
-
 postscript(file="ps/multdist-max-and-sum-two-dice.ps")
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
 A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
 p1 <- ggplot(A, aes(x=X1, y=X2, label=U))
 p1 <- p1 + geom_text(size = 6) + xlab("X1 = First roll") + 
-      ylab("X2 = Second roll") + labs(title = "U = max(X1,X2)")
+      ylab("X2 = Second roll") + opts(title = "U = max(X1,X2)")
 p2 <- ggplot(A, aes(x=X1, y=X2, label=V))
 p2 <- p2 + geom_text(size = 6) + xlab("X1 = First roll") + 
-      ylab("") + labs(title = "V = X1 + X2")
+      ylab("") + opts(title = "V = X1 + X2")
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(1, 2)))
 vplayout <- function(x, y) viewport(layout.pos.row = x, layout.pos.col = y)
@@ -47,7 +40,7 @@ postscript(file="ps/multdist-max-sum-two-dice-joint.ps")
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
 p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") + 
-  labs(title = "Joint distribution of (U,V) pairs")
+  opts(title = "Joint distribution of (U,V) pairs")
 dev.off()
 
 S <- rolldie(2, makespace = TRUE)
@@ -91,7 +84,7 @@ ProbTable <- xtabs(probs ~ X1 + X2, data = S)
 round(ProbTable, 3)
 
 cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
-            pch = 16, cex = 1.5, screen = list(z = 15, x = -70))
+            pch = 16, cex = 1.5), screen = list(z = 15, x = -70)
 
 postscript(file="ps/multdist-multinom-pmf2.ps")
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 

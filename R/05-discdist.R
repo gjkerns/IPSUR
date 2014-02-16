@@ -19,9 +19,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-# This chapter's package dependencies
-library(distrEx)
-
 x <- c(0,1,2,3)
 f <- c(1/8, 3/8, 3/8, 1/8)
 
