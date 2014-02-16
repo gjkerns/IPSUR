@@ -16,7 +16,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
+.PHONY: pkg
+
 basedir  = git
+buildir  = build
 ipsurdir = IPSUR
 psdir    = ps
 pdfdir   = pdf
@@ -57,6 +60,12 @@ figures:
 	-mkdir $(psdir)
 	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-execute-buffer) (kill-buffer))"
 
+pkg:
+	R CMD build pkg
+
+check:
+	R CMD check *.tar.gz
+
 Rtangle:
 	-mkdir $(Rdir)
 	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-tangle) (kill-buffer))"
@@ -68,6 +77,7 @@ backup:
 clean:
 	-rm -r $(texdir)
 	-rm -r $(pdfdir)
+	-rm -r IPSUR.Rcheck
 	-rm -r ~/.org-timestamps
 
 distclean:
@@ -75,4 +85,5 @@ distclean:
 	-rm -r $(psdir)
 	-rm -r $(backdir)
 	-rm -r $(Rdir)
+	-rm -r IPSUR.Rcheck
 	-rm -r ~/.org-timestamps
