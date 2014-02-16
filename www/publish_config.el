@@ -8,7 +8,7 @@
 (setq org-publish-project-alist
       '(;; These are the main web files
 	("ipsurweb-notes"
-	 :base-directory "~/gitm/ipsurweb/" ;; Change this to your local dir
+	 :base-directory "~/git/IPSUR/www/" ;; Change this to your local dir
 	 :base-extension "org"
 	 :publishing-directory "output"
 	 :recursive t
@@ -24,7 +24,7 @@
 	
 	;; These are static files (images, pdf, etc)
 	("ipsurweb-static"
-	 :base-directory "~/gitm/ipsurweb/" ;; Change this to your local dir
+	 :base-directory "~/git/IPSUR/www/" ;; Change this to your local dir
 	 :base-extension "css\\|js\\|png\\|jpg\\|ico\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|txt\\|asc"
 	 :publishing-directory "output"
 	 :recursive t
