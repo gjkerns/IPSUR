@@ -42,7 +42,7 @@
 	;; These are static files (images, pdf, etc)
 	("ipsurweb-static"
 	 :base-directory "~/git/IPSUR/www/" ;; Change this to your local dir
-	 :base-extension "css\\|js\\|png\\|jpg\\|ico\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|txt\\|asc"
+	 :base-extension "css\\|R\\|RData\\|js\\|png\\|jpg\\|ico\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|txt\\|asc"
 	 :publishing-directory "~/git/IPSURweb"
 	 :recursive t
 	 :publishing-function org-publish-attachment)	
