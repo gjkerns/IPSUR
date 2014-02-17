@@ -17,6 +17,7 @@
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
 .PHONY: pkg
+.PHONY: www
 
 basedir  = git
 buildir  = build
@@ -69,6 +70,23 @@ check:
 Rtangle:
 	-mkdir $(Rdir)
 	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-tangle) (kill-buffer))"
+
+web:
+	@echo "Generating HTML..."
+	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/www/publish_config.el\") (org-publish \"ipsurweb\"))"
+	@echo "HTML generation done"
+	-rm -r ~/.org-timestamps
+
+publish:
+	@echo "Generating HTML..."
+	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/www/publish_config.el\") (org-publish \"ipsurweb\"))"
+	@echo "HTML generation done"
+	-rm -r ~/.org-timestamps
+	cd ~/git/IPSURweb
+	git add -A
+	git commit -m "publishing website"
+	git push
+	cd ~/git/IPSUR
 
 backup:
 	-mkdir $(backdir)

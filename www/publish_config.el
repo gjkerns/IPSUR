@@ -1,3 +1,20 @@
+;;    IPSUR: Introduction to Probability and Statistics Using R
+;;    Copyright (C) 2014 G. Jay Kerns
+;;
+;;    This file is part of IPSUR.
+;;
+;;    IPSUR is free software: you can redistribute it and/or modify
+;;    it under the terms of the GNU General Public License as published by
+;;    the Free Software Foundation, either version 3 of the License, or
+;;    (at your option) any later version.
+;;
+;;    IPSUR is distributed in the hope that it will be useful,
+;;    but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;    GNU General Public License for more details.
+::
+;;    You should have received a copy of the GNU General Public License
+;;    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
 (defvar org-dist "~/git/org-mode")
 (add-to-list 'load-path (concat org-dist "/lisp"))
@@ -10,7 +27,7 @@
 	("ipsurweb-notes"
 	 :base-directory "~/git/IPSUR/www/" ;; Change this to your local dir
 	 :base-extension "org"
-	 :publishing-directory "output"
+	 :publishing-directory "~/git/IPSURweb"
 	 :recursive t
 	 :publishing-function org-html-publish-to-html
 	 :headline-levels 4             ; Just the default for this project.
@@ -26,7 +43,7 @@
 	("ipsurweb-static"
 	 :base-directory "~/git/IPSUR/www/" ;; Change this to your local dir
 	 :base-extension "css\\|js\\|png\\|jpg\\|ico\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|txt\\|asc"
-	 :publishing-directory "output"
+	 :publishing-directory "~/git/IPSURweb"
 	 :recursive t
 	 :publishing-function org-publish-attachment)	
 	("ipsurweb" :components ("ipsurweb-notes" "ipsurweb-static"))))
