@@ -1,0 +1,85 @@
+#    IPSUR: Introduction to Probability and Statistics Using R
+#    Copyright (C) 2014 G. Jay Kerns
+#
+#    This file is part of IPSUR.
+#
+#    IPSUR is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    IPSUR is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
+
+This document gives guidance on how to install IPSUR.
+
+* How to install the R package IPSUR
+
+** From CRAN
+
+#+BEGIN_SRC R
+install.packages("IPSUR", dependencies = TRUE)
+#+END_SRC
+
+or the more lengthy
+
+#+BEGIN_SRC R
+install.packages("IPSUR", dependencies = TRUE)
+#+END_SRC
+
+- Note: if you install all the dependencies then it will take a long
+  time to download and install all of the assorted packages (which are
+  mostly associated with the R Commander).
+
+** From R-Forge
+
+#+BEGIN_SRC R
+install.packages("IPSUR", repos="http://R-Forge.R-project.org")
+#+END_SRC
+
+** From GitHub
+
+For this method you will need the development files required to build
+the package from source.
+
+#+BEGIN_SRC R
+library(devtools)
+install_github("gjkerns/IPSUR", subdir = "pkg")
+#+END_SRC
+
+* How to download the entire revision history 
+
+** From Savannah
+
+#+BEGIN_SRC sh
+$ git clone git://git.savannah.nongnu.org/ipsur.git
+#+END_SRC
+
+** From GitHub
+
+#+BEGIN_SRC sh
+$ git clone https://github.com/gjkerns/IPSUR.git
+#+END_SRC
+
+** From R-Forge (a limited history of the R-package only)
+
+#+BEGIN_SRC sh
+svn checkout svn://svn.r-forge.r-project.org/svnroot/ipsur/
+#+END_SRC
+
+* How to build IPSUR once you have downloaded the history
+
+You will need to modify the =Makefile= to set a bunch of configuration
+variables to your system.  Then to build the LaTeX files and the PDF
+of the book:
+
+#+BEGIN_SRC sh
+$ cd /path/to/IPSUR
+$ make texpdf
+#+END_SRC
+
