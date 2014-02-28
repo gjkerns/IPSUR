@@ -13,7 +13,8 @@ population <- get(population, mode = "function")
 xbar <- rep(0, N.iter)
 graphics.off()
 
-curve( function(x) dt(x, df = r ),
+f <- function(x) dt(x, df = r )
+curve( f,
         xlim = c(-5,5),
         xlab = "Support Set",
         ylab = "Density",
@@ -88,8 +89,9 @@ text(   up,
         
 ######################################
 # Draw limiting Normal curve
-z <- locator( n = 1 )      
-curve(  function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar)), 
+z <- locator( n = 1 )
+g <- function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar))
+curve(  g, 
         lwd = 2,
         col = "red",
         add = TRUE )
