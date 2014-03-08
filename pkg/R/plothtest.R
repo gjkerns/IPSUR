@@ -66,7 +66,7 @@ if (x$method == "1-sample proportions test with continuity correction" || x$meth
   mu <- x$null.value
   obs.mean <- -diff(x$estimate)
   n <- x$parameter + 2
-  std.dev <- obs.mean/x$statistic*sqrt(n)
+  std.dev <- (obs.mean - mu)/x$statistic*sqrt(n)
   deg.freedom <- x$parameter
   if(x$alternative == "two.sided"){
     alpha.right <- (1 - attr(x$conf.int, "conf.level"))/2
@@ -85,7 +85,7 @@ if (x$method == "1-sample proportions test with continuity correction" || x$meth
   mu <- x$null.value
   obs.mean <- -diff(x$estimate)
   n <- x$parameter + 2
-  std.dev <- obs.mean/x$statistic*sqrt(n)
+  std.dev <- (obs.mean - mu)/x$statistic*sqrt(n)
   deg.freedom <- x$parameter
   if(x$alternative == "two.sided"){
     alpha.right <- (1 - attr(x$conf.int, "conf.level"))/2
