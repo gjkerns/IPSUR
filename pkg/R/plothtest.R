@@ -1,5 +1,5 @@
-# Written by G. Jay Kerns, 9/11/2009
-# Another, much better version currently in development
+# Last modified 2014-03-08
+# Original version in collaboration with Richard Heiberger
 
 
 ###################################################
@@ -47,7 +47,7 @@ if (x$method == "1-sample proportions test with continuity correction" || x$meth
   mu <- x$null.value
   obs.mean <- x$estimate
   n <- x$parameter + 1
-  std.dev <- x$estimate/x$statistic*sqrt(n)
+  std.dev <- sqrt(n)*(x$estimate - mu)/x$statistic
   deg.freedom <- x$parameter
   if(x$alternative == "two.sided"){
     alpha.right <- (1 - attr(x$conf.int, "conf.level"))/2
