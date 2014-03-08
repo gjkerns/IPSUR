@@ -1,9 +1,6 @@
 ##################################################
 # The Central Limit Theorem                       
 
-
-
-
 clt2 <- function(population = "runif",
                  a = 0,
                  b = 10,
@@ -16,12 +13,14 @@ population <- get(population, mode = "function")
 xbar <- rep(0, N.iter)
 graphics.off()
 
-curve( function(x) dunif(x, min = a, max = b ),
-        xlim = c(a-1,b+1), ylim = c(0, 1.3/(b-a)),
-        xlab = "Support Set",
-        ylab = "Density",
-        lwd = 2,
-        main = "The Population Distribution \n (while we're waiting)" )
+f <- function(x) dunif(x, min = a, max = b )
+curve( f,
+       xlim = c(a-1,b+1), ylim = c(0, 1.3/(b-a)),
+       xlab = "Support Set",
+       ylab = "Density",
+       lwd = 2,
+       main = "The Population Distribution \n (while we're waiting)" )
+
 abline( h = 0 , col = "grey" )
 
 
@@ -90,8 +89,9 @@ text(   up,
         
 ######################################
 # Draw limiting Normal curve
-z <- locator( n = 1 )      
-curve(  function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar)), 
+z <- locator( n = 1 )   
+g <- function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar))
+curve(  g, 
         lwd = 2,
         col = "red",
         add = TRUE )

@@ -15,7 +15,8 @@ xbar <- rep(0, N.iter)
 graphics.off()
 
 
-curve( function(x) dgamma(x, shape = alpha, scale = theta ),
+h <- function(x) dgamma(x, shape = alpha, scale = theta )
+curve( h,
         xlim = c(0, alpha*theta*(1 + 3*theta)),
         xlab = "Support Set",
         ylab = "Density",
@@ -94,8 +95,9 @@ text(   up,
         
 ######################################
 # Draw limiting Normal curve
-z = locator( n = 1 )      
-curve(  function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar)), 
+z = locator( n = 1 )  
+g <- function(x) dnorm(x, mean = xbar.mean, sd = sd(xbar))
+curve(  g, 
         lwd = 2,
         col = "red",
         add = TRUE )
