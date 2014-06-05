@@ -40,6 +40,7 @@ all:
 
 tex:
 	-mkdir $(texdir)
+	-mkdir $(psdir)
 	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-rm -r ~/.org-timestamps
 
@@ -51,6 +52,7 @@ pdf:
 
 texpdf:
 	-mkdir $(texdir)
+	-mkdir $(psdir)
 	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	cp -R $(texdir) $(pdfdir)
 	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
@@ -100,7 +102,7 @@ clean:
 
 distclean:
 	-rm -r $(texdir)
-	-rm -r $(psdir)
+	-rm -r $(pdfdir)
 	-rm -r $(backdir)
 	-rm -r $(Rdir)
 	-rm -r IPSUR.Rcheck

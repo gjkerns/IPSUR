@@ -84,6 +84,3 @@
 	
 	("ipsurlatex" :components ("ipsurlatex-org" "ipsurlatex-tex" "ipsurlatex-other" "ipsurlatex-ps"))
 	))
-
-
-
