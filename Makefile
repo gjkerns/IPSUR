@@ -40,23 +40,20 @@ all:
 
 tex:
 	-mkdir $(texdir)
-	-mkdir $(psdir)
 	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	-rm -r ~/.org-timestamps
 
 pdf:
 	-rm $(pdfdir)
 	cp -R $(texdir) $(pdfdir)
-	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
-	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(pdfdir)/$(orgfile).pdf $(pdfdir)/$(orgfile).ps
+	-cd $(pdfdir); pdflatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); pdflatex $(orgfile).tex
 
 texpdf:
 	-mkdir $(texdir)
 	-mkdir $(psdir)
 	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
 	cp -R $(texdir) $(pdfdir)
-	-cd $(pdfdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
-	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(pdfdir)/$(orgfile).pdf $(pdfdir)/$(orgfile).ps
+	-cd $(pdfdir); pdflatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); pdflatex $(orgfile).tex
 	-rm -r ~/.org-timestamps
 
 figures:

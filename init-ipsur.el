@@ -70,6 +70,13 @@
 	 :publishing-directory "~/git/IPSUR/tex/ps"
 	 :publishing-function org-publish-attachment)
 
+	("ipsurlatex-pdf"
+	 :base-directory "~/git/IPSUR/ps/"
+	 :base-extension "pdf"
+	 :recursive t
+	 :publishing-directory "~/git/IPSUR/tex/ps"
+	 :publishing-function org-publish-attachment)
+
 	("ipsurlatex-tex"
 	 :base-directory "~/git/IPSUR/include/"
 	 :base-extension "tex"
@@ -82,5 +89,5 @@
 	 :publishing-directory "~/git/IPSUR/tex/include"
 	 :publishing-function org-publish-attachment)
 	
-	("ipsurlatex" :components ("ipsurlatex-org" "ipsurlatex-tex" "ipsurlatex-other" "ipsurlatex-ps"))
+	("ipsurlatex" :components ("ipsurlatex-org" "ipsurlatex-tex"  "ipsurlatex-pdf" "ipsurlatex-other" "ipsurlatex-ps"))
 	))

@@ -1093,7 +1093,7 @@ were continuous, even though strictly speaking they are not
 continuous. See the examples.
 
 #+ATTR_LATEX: :options [\textbf{Annual Precipitation in US Cities}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The vector =precip= @@latex:\index{Data sets!precip@\texttt{precip}}@@
 contains average amount of rainfall (in inches) for each of 70 cities
 in the United States and Puerto Rico. Let us take a look at the data:
@@ -1118,10 +1118,10 @@ The output shows that =precip= is a numeric vector which has been
 /named/, that is, each value has a name associated with it (which can
 be set with the =names= @@latex:\index{names@\texttt{names}}@@ function). These
 are quantitative continuous data.
-#+END_exampletoo
+# +END_exampletoo
 
 #+ATTR_LATEX: :options [\textbf{Lengths of Major North American Rivers}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The U.S. Geological Survey recorded the lengths (in miles) of several
 rivers in North America. They are stored in the vector =rivers=
 @@latex:\index{Data sets!rivers@\texttt{rivers}}@@ in the =datasets=
@@ -1143,10 +1143,10 @@ rounded to the nearest mile. Thus, strictly speaking, these are
 discrete data. But we will find it convenient later to take data like
 these to be continuous for some of our statistical procedures.
 
-#+END_exampletoo
+# +END_exampletoo
 
 #+ATTR_LATEX: :options [\textbf{Yearly Numbers of Important Discoveries}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The vector =discoveries= @@latex:\index{Data
 sets!discoveries@\texttt{discoveries}}@@ contains numbers of "great"
 inventions/discoveries in each year from 1860 to 1959, as reported by
@@ -1159,7 +1159,7 @@ str(discoveries)
 #+RESULTS:
 :  Time-Series [1:100] from 1860 to 1959: 5 3 0 2 0 3 2 3 6 1 ...
 
-#+END_exampletoo
+# +END_exampletoo
 
 The output is telling us that =discoveries= is a /time series/ (see
 Section [[#sub-other-data-types]] for more) of length 100. The entries are
@@ -1220,7 +1220,7 @@ display. The third graph strip charts =discoveries= data which are
 literally a textbook example of a right skewed distribution.
 
 #+NAME: stripcharts
-#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-stripcharts.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-stripcharts.pdf
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall", cex.lab = cexlab)
 stripchart(rivers, method="jitter", xlab="length", cex.lab = cexlab)
@@ -1230,9 +1230,9 @@ par(mfrow = c(1,1)) # back to normal
 
 #+NAME: fig-stripcharts
 #+CAPTION[Strip charts of =precip=, =rivers=, and =discoveries=]: \small Three stripcharts of three data sets.  The first graph uses the =overplot= method, the second the =jitter= method, and the third the =stack= method.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: stripcharts
-[[file:ps/datadesc-stripcharts.ps]]
+[[file:ps/datadesc-stripcharts.pdf]]
 
 The =DOTplot= @@latex:\index{DOTplot@\texttt{DOTplot}}@@ function in the
 =UsingR= @@latex:\index{R packages!UsingR@\texttt{UsingR}}@@ package
@@ -1253,7 +1253,7 @@ frequency). The term histogram was coined by Karl Pearson in 1891, see
 \cite{Miller}.
 
 #+ATTR_LATEX: :options [\textbf{Annual Precipitation in US Cities}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-annual>> We are going to take another look at the =precip=
 @@latex:\index{Data sets!precip@\texttt{precip}}@@ data that we
 investigated earlier. The strip chart in Figure [[fig-stripcharts]]
@@ -1277,7 +1277,7 @@ title from being displayed -- it would have said "Histogram of
 histogram (=freq = FALSE=).
 
 #+NAME: histograms
-#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-histograms.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-histograms.pdf
 par(mfrow = c(1,2))
 hist(precip, main = "", cex.lab = cexlab)
 hist(precip, freq = FALSE, main = "", cex.lab = cexlab)
@@ -1286,11 +1286,11 @@ par(mfrow = c(1,1))
 
 #+NAME: fig-histograms
 #+CAPTION: \small (Relative) frequency histograms of the =precip= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms
-[[file:ps/datadesc-histograms.ps]]
+[[file:ps/datadesc-histograms.pdf]]
 
-#+END_exampletoo
+# +END_exampletoo
 
 Please mind the biggest weakness of histograms: the graph obtained
 strongly depends on the bins chosen. Choose another set of bins, and
@@ -1310,7 +1310,7 @@ distribution. Watch what happens when we change the bins slightly
 which was produced by the following code.
 
 #+NAME: histograms-bins
-#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-histograms-bins.ps
+#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-histograms-bins.pdf
 par(mfrow = c(1,3))
 hist(precip, breaks = 10, main = "", cex.lab = cexlab)
 hist(precip, breaks = 25, main = "", cex.lab = cexlab)
@@ -1320,9 +1320,9 @@ par(mfrow = c(1,1))
 
 #+NAME: fig-histograms-bins
 #+CAPTION: \small More histograms of the =precip= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms-bins
-[[file:ps/datadesc-histograms-bins.ps]]
+[[file:ps/datadesc-histograms-bins.pdf]]
 
 The leftmost graph (with =breaks = 10=) shows that the distribution is
 not balanced at all. There are two humps: a big one in the middle and
@@ -1350,7 +1350,7 @@ sometimes necessary to round the data values, especially for larger
 data sets.
 
 #+ATTR_LATEX: :options [\textbf{Driver Deaths in the United Kingdom}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-ukdriverdeaths-first>> =UKDriverDeaths= @@latex:\index{Data
 sets!UKDriverDeaths@\texttt{UKDriverDeaths}}@@ is a time series that
 contains the total car drivers killed or seriously injured in Great
@@ -1400,7 +1400,7 @@ data values may be recovered from the stem-and-leaf display -- modulo
 the rounding -- that is, starting from the top and working down we can
 read off the data values 1050, 1070, 1110, 1130, and so forth.
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Index plots
 
@@ -1434,7 +1434,7 @@ The plots show an overall decreasing trend to the observations, and
 there appears to be some seasonal variation that increases over time.
 
 #+NAME: indpl-lakehuron
-#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-indpl-lakehuron.ps
+#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-indpl-lakehuron.pdf
 par(mfrow = c(3,1))
 plot(LakeHuron, cex.lab = cexlab)
 plot(LakeHuron, type = "p", cex.lab = cexlab)
@@ -1444,9 +1444,9 @@ par(mfrow = c(1,1))
 
 #+NAME: fig-indpl-lakehuron
 #+CAPTION: \small Index plots of the =LakeHuron= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: indpl-lakehuron
-[[file:ps/datadesc-indpl-lakehuron.ps]]
+[[file:ps/datadesc-indpl-lakehuron.pdf]]
 
 **** Density estimates						       :TODO:
 
@@ -1510,7 +1510,7 @@ their values do not convey any numeric meaning or obey any
 mathematical rules (that is, Stage III cancer is not Stage I cancer +
 Stage II cancer).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The =state.abb= @@latex:\index{Data sets!state.abb@\texttt{state.abb}}@@ vector
 gives the two letter postal abbreviations for all 50 states.
 
@@ -1524,11 +1524,11 @@ str(state.abb)
 These would be ID data. The =state.name= @@latex:\index{Data
 sets!state.name@\texttt{state.name}}@@ vector lists all of the complete
 names and those data would also be ID.
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+ATTR_LATEX: :options [\textbf{U.S. State Facts and Features}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The U.S. Department of Commerce of the U.S. Census Bureau releases all
 sorts of information in the /Statistical Abstract of the United
 States/, and the =state.region= @@latex:\index{Data
@@ -1550,7 +1550,7 @@ The =str= @@latex:\index{str@\texttt{str}}@@ output shows that =state.region= is
 already stored internally as a factor and it lists a couple of the
 factor levels. To see all of the levels we printed the first five
 entries of the vector in the second line.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Displaying Qualitative Data
 :PROPERTIES:
@@ -1629,7 +1629,7 @@ are ordered alphabetically (by default), which may sometimes obscure
 patterns in the display.
 
 #+ATTR_LATEX: :options [\textbf{U.S. State Facts and Features}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The =state.region= data lists each of the 50 states and the region to
 which it belongs, be it Northeast, South, North Central, or West. See
 =?state.region=. It is already stored internally as a factor. We make
@@ -1656,7 +1656,7 @@ by 20% which makes them easier to read. See =?par=
 plot parameters.
 
 #+NAME: bar-gr-stateregion
-#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-bar-gr-stateregion.ps
+#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-bar-gr-stateregion.pdf
 par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
 barplot(table(state.region), cex.names = 1.2)
 barplot(prop.table(table(state.region)), cex.names = 1.2)
@@ -1665,11 +1665,11 @@ par(mfrow = c(1,1)) # back to normal
 
 #+NAME: fig-bar-gr-stateregion
 #+CAPTION[Bar graphs of the =state.region= data]: \small The top graph is a frequency barplot made with =table= and the bottom is a relative frequency barplot made with =prop.table=.
-#+ATTR_LaTeX: :width 1.0\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 1.0\textwidth :placement [ht!]
 #+RESULTS: bar-gr-stateregion
-[[file:ps/datadesc-bar-gr-stateregion.ps]]
+[[file:ps/datadesc-bar-gr-stateregion.pdf]]
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Pareto Diagrams
 :PROPERTIES:
@@ -1683,7 +1683,7 @@ structure (if any) in how fast the bars decrease -- this is much more
 difficult when the bars are jumbled.
 
 #+ATTR_LATEX: :options [\textbf{U.S. State Facts and Features}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 The =state.division= @@latex:\index{Data
 sets!state.division@\texttt{state.division}}@@ data record the
 division (New England, Middle Atlantic, South Atlantic, East South
@@ -1699,17 +1699,17 @@ packages!qcc@\texttt{qcc}}@@ package \cite{qcc}. See Figure
 [[fig-Pareto-chart]]. The code follows.
 
 #+NAME: Pareto-chart
-#+BEGIN_SRC R :exports both :results graphics silent :file ps/datadesc-Pareto-chart.ps
+#+BEGIN_SRC R :exports both :results graphics silent :file ps/datadesc-Pareto-chart.pdf
 pareto.chart(table(state.division), ylab="Frequency", cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-Pareto-chart
 #+CAPTION: \small Pareto chart of the =state.division= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Pareto-chart
-[[file:ps/datadesc-Pareto-chart.ps]]
+[[file:ps/datadesc-Pareto-chart.pdf]]
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Dot Charts
 :PROPERTIES:
@@ -1725,24 +1725,24 @@ together in one graph. See Section [[#sec-Comparing-Data-Sets]]. We will give
 an example here using the same data as above for comparison. The graph
 was produced by the following code.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 #+NAME: dot-charts
-#+BEGIN_SRC R :exports both :results graphics :file ps/datadesc-dot-charts.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/datadesc-dot-charts.pdf
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x), cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-dot-charts
 #+CAPTION: \small Dot chart of the \texttt{state.region} data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: dot-charts
-[[file:ps/datadesc-dot-charts.ps]]
+[[file:ps/datadesc-dot-charts.pdf]]
 
 See Figure [[fig-dot-charts]]. Compare it to Figure
 [[fig-bar-gr-stateregion]].
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Pie Graphs
 :PROPERTIES:
@@ -2346,10 +2346,10 @@ sample skewness and the =kurtosis= function for the sample excess
 kurtosis. Both functions have a =na.rm= argument which is =FALSE= by
 default.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 We said earlier that the =discoveries= data looked positively skewed;
 let's see what the statistics say:
-#+END_exampletoo
+# +END_exampletoo
 
 #+BEGIN_SRC R :exports both :results output pp  
 skewness(discoveries)
@@ -2627,7 +2627,7 @@ The quickest way to visually identify outliers is with a boxplot,
 described above. Another way is with the =boxplot.stats= function.
 
 #+ATTR_LATEX: :options [\textbf{Lengths of Major North American Rivers}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 We will look for potential outliers in the =rivers= data.
 
 #+BEGIN_SRC R :exports both :results output pp  
@@ -2647,7 +2647,7 @@ boxplot.stats(rivers, coef = 3)$out
 #+RESULTS:
 : [1] 2348 3710 2315 2533 1885
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Standardizing variables
 
@@ -2689,7 +2689,7 @@ The corresponding objects in \(\mathsf{R}\) are called /data frames/,
 and they can be constructed with the =data.frame= function. Each row
 is an observation, and each column is a variable.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose we have two vectors =x= and =y= and we want to make a data
 frame out of them.
@@ -2700,7 +2700,7 @@ y <- letters[3:6]
 A <- data.frame(v1 = x, v2 = y)
 #+END_SRC
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 Notice that =x= and =y= are the same length. This is /necessary/. Also
@@ -2885,15 +2885,15 @@ xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 #+END_SRC
 
 #+NAME: xyplot-group
-#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-xyplot-group.ps
+#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-xyplot-group.pdf
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+END_SRC
 
 #+NAME: fig-xyplot-group
 #+CAPTION[Scatterplot of Petal width versus length in the =iris= data.]: \small Scatterplot of Petal width versus length in the =iris= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: xyplot-group
-[[file:ps/datadesc-xyplot-group.ps]]
+[[file:ps/datadesc-xyplot-group.pdf]]
 
 - Scatterplot matrices
   - splom( ~ cbind(GNP.deflator,GNP,Unemployed,Armed.Forces,Population,Year,Employed),  data = longley) 
@@ -2962,15 +2962,15 @@ bwplot(~weight | feed, data = chickwts)
 #+END_SRC
 
 #+NAME: bwplot
-#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-bwplot.ps
+#+BEGIN_SRC R :exports results :results graphics silent :file ps/datadesc-bwplot.pdf
 print(bwplot(~weight | feed, data = chickwts))
 #+END_SRC
 
 #+NAME: fig-bwplot
 #+CAPTION: \small Boxplots of =weight= by =feed= type in the =chickwts= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: bwplot
-[[file:ps/datadesc-bwplot.ps]]
+[[file:ps/datadesc-bwplot.pdf]]
 
 **** Histograms
 
@@ -2979,15 +2979,15 @@ histogram(~age | education, data = infert)
 #+END_SRC
 
 #+NAME: histograms-lattice
-#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-histograms-lattice.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-histograms-lattice.pdf
 print(histogram(~age | education, data = infert))
 #+END_SRC
 
 #+NAME: fig-histograms-lattice
 #+CAPTION[Histograms of =age= by =education= level]: \small Histograms of =age= by =education= level from the =infert= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms-lattice
-[[file:ps/datadesc-histograms-lattice.ps]]
+[[file:ps/datadesc-histograms-lattice.pdf]]
 
 **** Scatterplots
 
@@ -2996,15 +2996,15 @@ xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 #+END_SRC
 
 #+NAME: xyplot
-#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-xyplot.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-xyplot.pdf
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 #+END_SRC
 
 #+NAME: fig-xyplot
 #+CAPTION[An =xyplot= of =Petal.Length= versus =Petal.Width= by =Species=]: \small An =xyplot= of =Petal.Length= versus =Petal.Width= by =Species= in the =iris= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: xyplot
-[[file:ps/datadesc-xyplot.ps]]
+[[file:ps/datadesc-xyplot.pdf]]
 
 **** Coplots
 
@@ -3013,15 +3013,15 @@ coplot(conc ~ uptake | Type * Treatment, data = CO2)
 #+END_SRC
 
 #+NAME: coplot
-#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-coplot.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/datadesc-coplot.pdf
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 #+END_SRC
 
 #+NAME: fig-coplot
 #+CAPTION: \small A =coplot= of =conc= versus =uptake= by =Type= and =Treatment=.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: coplot
-[[file:ps/datadesc-coplot.ps]]
+[[file:ps/datadesc-coplot.pdf]]
 
 #+LaTeX: \newpage{}
 
@@ -3223,7 +3223,7 @@ period, /etc/.
 - what we mean by 'random variables', and where they come from
 
 #+NAME: diagram
-#+BEGIN_SRC R :exports results :results graphics :file ps/prob-diagram.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/prob-diagram.pdf
 require(diagram)
 par(mex = 0.2, cex = 0.5)
 openplotmat(frame.plot=TRUE)
@@ -3243,9 +3243,9 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 
 #+NAME: fig-diagram
 #+CAPTION[Two types of experiments]: \small Two types of experiments
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: diagram
-[[file:ps/prob-diagram.ps]]
+[[file:ps/prob-diagram.pdf]]
 
 ** Sample Spaces
 :PROPERTIES:
@@ -3272,7 +3272,7 @@ some of the more interesting probabilistic applications we will study
 later; to handle those we will need to consider a more general /list/
 data structure. See Section [[#sub-howto-ps-objects]] for details.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Consider the random experiment of dropping a Styrofoam cup onto the
 floor from a height of four feet. The cup hits the ground and
@@ -3294,7 +3294,7 @@ S
 The sample space =S= contains the column =lands= which stores the
 outcomes =down=, =up=, and =side=.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 Some sample spaces are so common that convenience wrappers were
@@ -3428,12 +3428,12 @@ to be done. The =size= argument tells how large the sample will
 be. The =ordered= and =replace= arguments are logical and specify how
 sampling will be performed. We will discuss each in turn.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-sample-urn-two-from-three>> Let our urn simply contain three
 balls, labeled 1, 2, and 3, respectively. We are going to take a
 sample of size 2 from the urn.
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Ordered, With Replacement
 
@@ -4114,7 +4114,7 @@ as the number of outcomes in =x=). The specific choice of =probs=
 depends on the context of the problem, and some examples follow to
 demonstrate some of the more common choices.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 The Equally Likely Model asserts that every outcome of the sample
 space has the same probability, thus, if a sample space has \(n\)
@@ -4198,7 +4198,7 @@ or just =rolldie(1, TRUE)=. Many of the other sample space functions
 (=tosscoin=, =cards=, =roulette=, /etc/.) have similar =makespace=
 arguments. Check the documentation for details.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 One sample space function that does NOT have a =makespace= option is
@@ -4209,7 +4209,7 @@ the user to carefully consider the experiment to decide whether or not
 the outcomes are equally likely and then use =probspace= to assign the
 model.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-unbalanced-coin>> *An unbalanced coin.* While the =makespace=
 argument to =tosscoin= is useful to represent the tossing of a /fair/
 coin, it is not always appropriate. For example, suppose our coin is
@@ -4229,7 +4229,7 @@ probspace(tosscoin(1), probs = c(0.70, 0.30))
 The same procedure can be used to represent an unbalanced die,
 roulette wheel, /etc/.
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Words of Warning
 
@@ -4364,16 +4364,16 @@ In other words, under the equally likely model, the probability of an
 event \(A\) is determined by the number of elementary events that
 \(A\) contains.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Consider the random experiment \(E\) of tossing a coin. Then the
 sample space is \(S=\{H,T\}\), and under the equally likely model,
 these two outcomes have \(\mathbb{P}(H)=\mathbb{P}(T)=1/2\). This
 model is taken when it is reasonable to assume that the coin is fair.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose the experiment \(E\) consists of tossing a fair coin
 twice. The sample space may be represented by \(S=\{HH,\, HT,\, TH,\,
@@ -4392,10 +4392,10 @@ Heads})=1-\mathbb{P}(\mbox{at least one head})=1-3/4=1/4\). It is
 obvious in this simple example that the only outcome with no Heads is
 \(TT\), however, this complementation trick can be handy in more
 complicated problems.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-three-child-family>> Imagine a three child family, each child
 being either Boy (\(B\)) or Girl (\(G\)). An example sequence of
 siblings would be \(BGB\). The sample space may be written \[ S =
@@ -4420,19 +4420,19 @@ quicker way would be to recognize that the only way that the event
 Thus \[ \mathbb{P}(\mbox{at most 2 Boys}) = 1 - \mathbb{P}(GGG) = 1 -
 1/8 = 7/8. \]
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Consider the experiment of rolling a six-sided die, and let the
 outcome be the face showing up when the die comes to rest. Then \( S =
 \{ 1,\,2,\,3,\,4,\,5,\,6 \} \). It is usually reasonable to suppose
 that the die is fair, so that the six outcomes are equally likely.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Consider a standard deck of 52 cards. These are usually labeled with
 the four /suits/: Clubs, Diamonds, Hearts, and Spades, and the 13
@@ -4462,10 +4462,10 @@ Addition Rule to get
  & = & 16/52.
 \end{eqnarray*}
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Staying with the deck of cards, let another random experiment be the
 selection of a five card stud poker hand, where "five card stud"
@@ -4485,7 +4485,7 @@ then we could simply divide four by that number and we would have our
 answer under the equally likely model. This is the subject of Section
 [[#sec-Methods-of-Counting]].
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -4567,7 +4567,7 @@ distinct ways, respectively, then the experiment may be performed in
 \(n_{1} n_{2} \cdots n_{k}\) distinct ways.
 #+END_prop
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We would like to order a pizza. It will be sure to have cheese (and
 marinara sauce), but we may elect to add one or more of the following
@@ -4588,10 +4588,10 @@ to be made. The Multiplication Principle says that we should multiply
 the 2's to find the total number of possible pizzas: \(2 \cdot 2 \cdot
 2 \cdot 2 \cdot 2 = 2^{5} = 32\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We would like to buy a desktop computer to study statistics. We go to
 a website to build our computer our way. Given a line of products we
@@ -4600,7 +4600,7 @@ have many options to customize our computer. In particular, there are
 memory, 4 hard drives of differing sizes, and 10 choices for a
 monitor. How many possible types of computer must the company be
 prepared to build? *Answer:* \(2 \cdot 3 \cdot 4 \cdot 4 \cdot 10 = 960\)
-#+END_exampletoo
+# +END_exampletoo
 
 *** Ordered Samples
 
@@ -4629,27 +4629,27 @@ n! & = & n(n - 1)(n - 2) \cdots 3 \cdot 2 \cdot 1.
 The number of permutations of \(n\) elements is \(n!\).
 #+END_fact
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Take a coin and flip it 7 times. How many sequences of Heads and Tails
 are possible? *Answer:* \(2^{7}=128\).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 In a class of 20 students, we randomly select a class president, a
 class vice-president, and a treasurer. How many ways can this be
 done? *Answer:* \(20\cdot19\cdot18=6840\).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We rent five movies to watch over the span of two nights. We wish to
 watch 3 movies on the first night. How many distinct sequences of 3
 movies could we possibly watch? *Answer:* \(5\cdot4\cdot3=60\).
-#+END_exampletoo
+# +END_exampletoo
 
 *** Unordered Samples
 
@@ -4669,22 +4669,22 @@ plays a special role in mathematics; it is denoted
 \end{equation}
 and is read "\(n\) choose \(k\)".
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 You rent five movies to watch over the span of two nights, but only
 wish to watch 3 movies the first night. Your friend, Fred, wishes to
 borrow some movies to watch at his house on the first night. You owe
 Fred a favor, and allow him to select 2 movies from the set of 5. How
 many choices does Fred have? *Answer:* \({5 \choose 2}=10\).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Place 3 six-sided dice into a cup. Next, shake the cup well and pour
 out the dice. How many distinct rolls are possible? *Answer:*
 \((6-1+3)!/[(6-1)!3!]={8 \choose 5}=56\).
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -4717,13 +4717,13 @@ above.
 |-------------------+---------------------+-----------------------------|
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We will compute the number of outcomes for each of the four
 =urnsamples= examples that we saw in Example
 [[exa-sample-urn-two-from-three]]. Recall that we took a sample of size two from an
 urn with three distinguishable elements.
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_SRC R :exports both :results output pp   
@@ -4748,7 +4748,7 @@ vectors instead of numbers for =n=, =k=, =replace=, and =ordered=
 results in a vector of corresponding answers. This becomes
 particularly convenient for combinatorics problems.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 There are 11 artists who each submit a portfolio containing 7
 paintings for competition in an art exhibition. Unfortunately, the
@@ -4814,7 +4814,7 @@ prod(factorial(c(11,7))/factorial(c(8,3)))*31^3
 #+RESULTS:
 : [1] 24774195600
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 As one can guess, in many of the standard counting problems there
@@ -4824,7 +4824,7 @@ same using =nsamp= versus =factorial= and =choose=. But the virtue of
 one-stop shop. Ultimately, it is up to the user to choose the method
 that works best for him/herself.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *The Birthday Problem.* Suppose that there are \(n\) people together
 in a room. Each person announces the date of his/her birthday in
@@ -4883,10 +4883,10 @@ Students are usually surprised to hear that, using the formula above,
 one needs only \(n=23\) students to have a greater than 50% chance of
 at least one match. Figure [[fig-birthday]] shows a graph of the birthday
 probabilities:
-#+END_exampletoo
+# +END_exampletoo
 
 #+NAME: birthday
-#+BEGIN_SRC R :exports results :results graphics :file ps/prob-birthday.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/prob-birthday.pdf
 g <- Vectorize(pbirthday.ipsur)
 plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
 remove(g)
@@ -4894,9 +4894,9 @@ remove(g)
 
 #+NAME: fig-birthday
 #+CAPTION[The birthday problem]: \small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: birthday
-[[file:ps/prob-birthday.ps]]
+[[file:ps/prob-birthday.pdf]]
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -4957,7 +4957,7 @@ text on probability theory, such as Billingsley, Resnick, or Ash
 Dooleans-Dade.
 #+END_defn
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Toss a coin twice. The sample space is given by \(S=\{ HH,\ HT,\ TH,\
 TT \} \). Let \(A= \{ \mbox{a head occurs} \} \) and \(B= \{ \mbox{a
@@ -4982,10 +4982,10 @@ longer need to account for the outcome \(TT\), and the remaining three
 outcomes are equally likely with exactly two outcomes lying in the set
 \(B\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-Toss-a-six-sided-die-twice>> Toss a six-sided die twice. The
 sample space consists of all ordered pairs \((i,j)\) of the numbers
 \(1,2,\ldots,6\), that is, \( S = \{ (1,1),\ (1,2),\ldots,(6,6) \}
@@ -4995,7 +4995,7 @@ sample space consists of all ordered pairs \((i,j)\) of the numbers
 represented by a matrix:
 
 #+NAME: twodiceAB
-#+BEGIN_SRC R :exports both :results graphics :file ps/prob-twodiceAB.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/prob-twodiceAB.pdf
 A <- rolldie(2)
 B <- subset(A, X1==X2)
 C <- subset(A, X1+X2 > 7)
@@ -5007,9 +5007,9 @@ p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
 
 #+NAME: fig-twodiceAB
 #+CAPTION[Rolling two dice]: \small Rolling two dice. The outcomes in A are marked with X, the outcomes in B are marked with O.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: twodiceAB
-[[file:ps/prob-twodiceAB.ps]]
+[[file:ps/prob-twodiceAB.pdf]]
 
 The outcomes lying in the event \(A\) are marked with the symbol
 "X", the outcomes falling in \(B\) are marked with "O", and the
@@ -5029,7 +5029,7 @@ that \(A\) occurred (we are on the diagonal), there are 3 out of 6
 outcomes that also fall in \(B\), thus, the probability of \(B\) given
 \(A\) is 1/2.
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -5123,14 +5123,14 @@ The Multiplication Rule is very important because it allows us to find
 probabilities in random experiments that have a sequential structure,
 as the next example shows.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-two-cards-both-aces>> At the beginning of the section we drew
 two cards from a standard playing deck. Now we may answer our original
 question, what is \(\mathbb{P}(\mbox{both Aces})\)?  \[
 \mathbb{P}(\mbox{both Aces})=\mathbb{P}(A\cap
 B)=\mathbb{P}(A)\mathbb{P}(B|A)=\frac{4}{52}\cdot\frac{3}{51}\approx0.00452.
 \]
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 :PROPERTIES:
@@ -5195,7 +5195,7 @@ probabilities at this point; we are limited only by the complexity of
 the event's computer representation.
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-urn-7-red-3-green>> Consider an urn with 10 balls inside, 7 of
 which are red and 3 of which are green. Select 3 balls successively
 from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \),
@@ -5203,7 +5203,7 @@ from the urn. Let \( A = \{ 1^{\mathrm{st}} \mbox{ ball is red} \} \),
 3^{\mathrm{rd}} \mbox{ ball is red} \} \). Then \[
 \mathbb{P}(\mbox{all 3 balls are red})=\mathbb{P}(A\cap B\cap
 C)=\frac{7}{10}\cdot\frac{6}{9}\cdot\frac{5}{8}\approx 0.2917.  \]
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -5278,7 +5278,7 @@ Prob(N, isin(N, c("red","green","red")))
 We already knew this. It is the probability of observing two =red='s,
 above.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Consider two urns, the first with 5 red balls and 3 green balls, and
 the second with 2 red balls and 6 green balls. Your friend randomly
@@ -5301,10 +5301,10 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 \end{align*}
 (which is 7/24 in lowest terms).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We saw the =RcmdrTestDrive= data set in Chapter [[#cha-introduction-to-R]]
 in which a two-way table of the smoking status versus the gender was
@@ -5347,7 +5347,7 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 \end{align*}
 (which is 1153/2192 in lowest terms).
 
-#+END_exampletoo
+# +END_exampletoo
 
 Using the same reasoning, we can return to the example from the
 beginning of the section and show that 
@@ -5455,7 +5455,7 @@ be mutually independent may seem stringent, the good news is that for
 most of the situations considered in this book the conditions will all
 be met (or at least we will suppose that they are).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-toss-ten-coins>> Toss ten coins. What is the probability of
 observing at least one Head? Answer: Let \(A_{i}= \{ \mbox{the
 }i^{\mathrm{th}}\mbox{ coin shows }H \} ,\
@@ -5473,11 +5473,11 @@ Tails. Therefore,
 \end{align*}
 which is approximately \(0.9990234\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Toss ten coins. What is the probability of observing at least one
 Head?
@@ -5493,7 +5493,7 @@ A <- subset(S, isrep(S, vals = "T", nrep = 10))
 
 Compare this answer to what we got in Example [[exa-toss-ten-coins]].
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Independent, Repeated Experiments
 
@@ -5508,7 +5508,7 @@ situation. It has three arguments: =x=, which is a vector of outcomes,
 experiment, and =probs= to specify the probabilities of the outcomes
 of =x= in a single trial.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *An unbalanced coin* (continued, see Example [[exa-unbalanced-coin]]). It was
 easy enough to set up the probability space for one unbalanced toss,
@@ -5546,7 +5546,7 @@ or =urnsamples= functions). The same procedure could be used to model
 an unbalanced die or any other experiment that may be represented with
 a vector of possible outcomes.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 Note that =iidspace= will assume =x= has equally likely outcomes if no
@@ -5595,7 +5595,7 @@ some data, which we represent by the event \(A\). We want to know: how
 do we *update* \(\mathbb{P}(B_{k})\) to \(\mathbb{P}(B_{k}|A)\)? The
 answer: Bayes' Rule.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-misfiling-assistants>> *Misfiling Assistants.* In this problem,
 there are three assistants working at a company: Moe, Larry, and
 Curly. Their primary job duty is to file paperwork in the filing
@@ -5713,10 +5713,10 @@ intricate interplay between the time on the job and the misfile
 rate. It is not obvious who the winner (or in this case, loser) will
 be, and the statistician needs to consult Bayes' Rule to determine the
 best course of action.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-misfiling-assistants-multiple>> Suppose the boss gets a change
 of heart and does not fire anybody. But the next day (s)he randomly
 selects another file and again finds it to be misplaced. To decide
@@ -5730,7 +5730,7 @@ from the day before.
 In this way, probabilities found by Bayes' rule are always on the
 cutting edge, always updated with respect to the best information
 available at the time.
-#+END_exampletoo
+# +END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -5738,7 +5738,7 @@ There are not any special functions for Bayes' Rule in the =prob=
 package \cite{prob}, but problems like the ones above are easy enough
 to do by hand.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *Misfiling assistants* (continued from Example [[exa-misfiling-assistants]]). We store the prior probabilities and the likelihoods in
 vectors and go to town.
@@ -5753,7 +5753,7 @@ post / sum(post)
 #+RESULTS:
 : [1] 0.3673469 0.4285714 0.2040816
 
-#+END_exampletoo
+# +END_exampletoo
 
 Compare these answers with what we got in Example [[exa-misfiling-assistants]]. We would replace =prior= with =post= in a future
 calculation. We could raise =like= to a power to see how the posterior
@@ -5761,7 +5761,7 @@ is affected by future document mistakes. (Do you see why? Think back
 to Section [[#sec-Independent-Events]].)
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let us incorporate the posterior probability (=post=) information from
 the last example and suppose that the assistants misfile seven more
@@ -5780,7 +5780,7 @@ post / sum(post)
 We see that the individual with the highest probability of having
 misfiled all eight documents given the observed data is no longer
 Larry, but Curly.
-#+END_exampletoo
+# +END_exampletoo
 
 There are two important points. First, we did not divide =post= by the
 sum of its entries until the very last step; we do not need to
@@ -5828,7 +5828,7 @@ letters \(x\), \(y\), and \(z\). Just as \(S\) is the set of all
 possible outcomes of \(E\), we call the set of all possible values of
 \(X\) the /support/ of \(X\) and denote it by \(S_{X}\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(E\) be the experiment of flipping a coin twice. We have seen
 that the sample space is \( S = \{ HH,\ HT,\ TH,\ TT \} \). Now define
@@ -5845,20 +5845,20 @@ possibilities:
 Taking a look at the second row of the table, we see that the support
 of \(X\) -- the set of all numbers that \(X\) assumes -- would be \(
 S_{X}= \{ 0,1,2 \} \).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(E\) be the experiment of flipping a coin repeatedly until
 observing a Head. The sample space would be \(S= \{ H,\ TH,\ TTH,\
 TTTH,\ \ldots \} \). Now define the random variable \(Y=\mbox{the
 number of Tails before the first head}\). Then the support of \(Y\)
 would be \( S_{Y}= \{ 0,1,2,\ldots \} \).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(E\) be the experiment of tossing a coin in the air, and define
 the random variable \( Z = \mbox{the time (in seconds) until the coin
@@ -5869,7 +5869,7 @@ short amount of time; in practice, the set \((0,\infty)\) is
 admittedly too large. However, we will find that in many circumstances
 it is mathematically convenient to study the extended set rather than
 a restricted one.
-#+END_exampletoo
+# +END_exampletoo
 
 
 There are important differences between the supports of \(X\), \(Y\),
@@ -6137,7 +6137,7 @@ PMFs satisfy
 3. \(\mathbb{P}(X\in A)=\sum_{x\in A}f_{X}(x)\), for any event
    \(A\subset S\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-Toss-a-coin>> Toss a coin 3 times. The sample space would be \[
 S=\{ HHH,\ HTH,\ THH,\ TTH,\ HHT,\ HTT,\ THT,\ TTT\}.  \]
 
@@ -6159,7 +6159,7 @@ probability (the total is 1). We can represent the PMF with a table:
 |------------------------------+-----+-----+-----+-----+-------|
 | \(f_{X}(x)=\mathbb{P}(X=x)\) | 1/8 | 3/8 | 3/8 | 1/8 |     1 |
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Mean, Variance, and Standard Deviation
 :PROPERTIES:
@@ -6181,7 +6181,7 @@ alternate formula \(\sigma^{2}=\sum
 x{}^{2}f_{X}(x)-\mu^{2}\). Directly defined from the variance is the
 standard deviation \(\sigma=\sqrt{\sigma^{2}}\).
  
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-disc-pmf-mean>> We will calculate the mean of \(X\) in Example
 [[exa-Toss-a-coin]].  \[ \mu = \sum_{x = 0}^{3}xf_{X}(x) = 0 \cdot
 \frac{1}{8} + 1 \cdot \frac{3}{8} + 2 \cdot
@@ -6194,7 +6194,7 @@ would get better as we observe more and more values of \(X\) (another
 form of the Law of Large Numbers; see Section
 [[#sec-Interpreting-Probabilities]]). Another way it is commonly stated is
 that \(X\) is 1.5 "on the average" or "in the long run".
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -6338,11 +6338,11 @@ variance we first calculate \[ \sum_{x = 1}^{m} x^{2} f_{X}(x) =
 \sigma^{2} = \sum_{x = 1}^{m} x^{2} f_{X}(x) - \mu^{2} = \frac{(m + 1)(2m + 1)}{6} - \left(\frac{m + 1}{2}\right)^{2} = \cdots = \frac{m^{2} - 1}{12}.
 \end{equation}
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Roll a die and  let \(X\) be the upward face showing.  Then \(m = 6\),
 \(\mu = 7/2 = 3.5\), and \(\sigma^{2} = (6^{2} - 1)/12 = 35/12\).
-#+END_exampletoo
+# +END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -6449,7 +6449,7 @@ Exercise [[xca-binom-factorial-expectation]]). Therefore
 = & np-np^{2}=np(1-p).
 \end{alignat*}
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 A four-child family. Each child may be either a boy (\(B\)) or a girl
 (\(G\)). For simplicity we suppose that
@@ -6463,7 +6463,7 @@ f_{X}(2)={4 \choose 2}(1/2)^{2}(1/2)^{2}=\frac{6}{2^{4}}.
 \]
 The mean number of boys is \(4(1/2)=2\) and the variance of \(X\) is
 \(4(1/2)(1/2)=1\).
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -6471,7 +6471,7 @@ The corresponding \(\mathsf{R}\) function for the PMF and CDF are
 =dbinom= and =pbinom=, respectively. We demonstrate their use in the
 following examples.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We can calculate it in \(\mathsf{R}\) Commander under the =Binomial
 Distribution= menu with the =Binomial probabilities= menu item.
@@ -6490,14 +6490,14 @@ A
 : 3 0.2500
 : 4 0.0625
 
-#+END_exampletoo
+# +END_exampletoo
 
 We know that the
 \(\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\) distribution
 is supported on the integers 0, 1, 2, 3, and 4; thus the table is
 complete. We can read off the answer to be \(\mathbb{P}(X=2)=0.3750\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Roll 12 dice simultaneously, and let \(X\) denote the number of 6's
 that appear. We wish to find the probability of getting seven, eight,
@@ -6525,10 +6525,10 @@ diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 : [1] 0.001291758
 : [1] 0.001291758
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-toss-coin-3-withR>> Toss a coin three times and let \(X\) be the
 number of Heads observed. We know from before that
 \(X\sim\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) which
@@ -6558,10 +6558,10 @@ In particular, the CDF of \(X\) is defined for the entire real line,
 \(\mathbb{R}\). The CDF is right continuous and nondecreasing. A graph
 of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF is
 shown in Figure [[fig-binom-cdf-base]].
-#+END_exampletoo
+# +END_exampletoo
 
 #+NAME: binom-cdf-base
-#+BEGIN_SRC R :exports results :results graphics :file ps/discdist-binom-cdf-base.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/discdist-binom-cdf-base.pdf
 plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
 abline(h = c(0,1), lty = 2, col = "grey")
 lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -6571,11 +6571,11 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
 #+NAME: fig-binom-cdf-base
 #+CAPTION[Graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF]: \small A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: binom-cdf-base
-[[file:ps/discdist-binom-cdf-base.ps]]
+[[file:ps/discdist-binom-cdf-base.pdf]]
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Another way to do Example [[exa-toss-coin-3-withR]] is with the =distr=
 family of packages \cite{distr}. They use an object oriented approach
@@ -6608,7 +6608,7 @@ p(X)(2)   # cdf of X evaluated at x = 2
 : [1] 0.375
 : [1] 0.875
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 Random variables defined via the =distr= package \cite{distr} may be
@@ -6617,15 +6617,16 @@ function (introduced in Section [[#sub-Normal-Quantiles-QF]]). See
 Figure [[fig-binom-plot-distr]] for an example.
 
 #+NAME: binom-plot-distr
-#+BEGIN_SRC R :exports results :results graphics :file ps/discdist-binom-plot-distr.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/discdist-binom-plot-distr.pdf
+X <- Binom(size = 3, prob = 1/2)
 plot(X, cex = 0.2)
 #+END_SRC
 
 #+NAME: fig-binom-plot-distr
 #+CAPTION[The \textsf{binom}(=size= = 3, =prob= = 0.5) distribution from the =distr= package]: \small The \textsf{binom}(=size= = 3, =prob= = 0.5) distribution from the =distr= package.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: binom-plot-distr
-[[file:ps/discdist-binom-plot-distr.ps]]
+[[file:ps/discdist-binom-plot-distr.pdf]]
 
 
 #+CAPTION: [Correspondence between =stats= and =distr=.]{Correspondence between =stats= and =distr=. We are given \(X\sim\mathsf{dbinom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).  For the =distr= package we must first set \(\mathtt{X\ <-\ Binom(size=}n\mathtt{,\ prob=}p\mathtt{)}\).}
@@ -6724,20 +6725,20 @@ M_{X}(0) = \mathbb{E} \mathrm{e}^{0 \cdot X} = \mathbb{E} 1 = 1.
 \end{equation}
 We will calculate the MGF for the two distributions introduced above.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Find the MGF for \(X\sim\mathsf{disunif}(m)\). Since \(f(x) = 1/m\),
 the MGF takes the form \[ M(t) = \sum_{x = 1}^{m} \mathrm{e}^{tx}
 \frac{1}{m} = \frac{1}{m}(\mathrm{e}^{t} + \mathrm{e}^{2t} + \cdots +
 \mathrm{e}^{mt}),\quad \mbox{for any $t$.}  \]
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 Find the MGF for
 \(X\sim\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\).
-#+END_exampletoo
+# +END_exampletoo
 
 \begin{alignat*}{1}
 M_{X}(t)= & \sum_{x=0}^{n}\mathrm{e}^{tx}\,{n \choose x}\, p^{x}(1-p)^{n-x},\\
@@ -6767,14 +6768,14 @@ text like this one. Interested readers could consult Billingsley
 
 We will see an example of Theorem [[thm-mgf-unique]] in action.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose we encounter a random variable which has MGF
 \[
 M_{X}(t)=(0.3+0.7\mathrm{e}^{t})^{13}.
 \]
 Then \(X\sim\mathsf{binom}(\mathtt{size}=13,\,\mathtt{prob}=0.7)\).
-#+END_exampletoo
+# +END_exampletoo
 
 An MGF is also known as a "Laplace Transform" and is manipulated in
 that context in many branches of science and engineering.
@@ -6815,7 +6816,7 @@ details in our derivation. Suffice it to say that when the MGF exists
 in a neighborhood of \(t=0\), the exchange of differentiation and
 summation is valid in that neighborhood, and our remarks hold true.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X \sim \mathsf{binom}(\mathtt{size} = n,\,\mathtt{prob} = p)
 \mbox{ with $M(t) = (q + p \mathrm{e}^{t})^{n}$}\).
@@ -6841,7 +6842,7 @@ Therefore
 = & np-np^{2}=npq.
 \end{alignat*}
 See how much easier that was?
-#+END_exampletoo
+# +END_exampletoo
 
 #+BEGIN_rem
 We learned in this section that \(M^{(r)}(0) = \mathbb{E} X^{r}\). We
@@ -6961,15 +6962,15 @@ what the =ecdf= looks like, and there is a special plot method for
 =ecdf= objects.
 
 #+NAME: empirical-CDF
-#+BEGIN_SRC R :exports both :results graphics :file ps/discdist-empirical-CDF.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/discdist-empirical-CDF.pdf
 plot(ecdf(x))
 #+END_SRC
 
 #+NAME: fig-empirical-CDF
 #+CAPTION[The empirical CDF]: \small The empirical CDF. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: empirical-CDF
-[[file:ps/discdist-empirical-CDF.ps]]
+[[file:ps/discdist-empirical-CDF.pdf]]
 
 See Figure [[fig-empirical-CDF]]. The graph is of a right-continuous function
 with jumps exactly at the locations stored in =x=. There are no
@@ -7064,7 +7065,7 @@ The associated \(\mathsf{R}\) functions for the PMF and CDF are
 functions: =qhyper=, which we will discuss in Section
 [[#sub-Normal-Quantiles-QF]], and =rhyper=, discussed below.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose in a certain shipment of 250 Pentium processors there are 17
 defective processors. A quality control consultant randomly collects 5
@@ -7224,7 +7225,7 @@ rhyper(10, m = 17, n = 233, k = 5)
 #+RESULTS:
 :  [1] 0 0 0 2 0 0 0 0 0 0
 
-#+END_exampletoo
+# +END_exampletoo
 
 **** Sampling With and Without Replacement
 :PROPERTIES:
@@ -7300,7 +7301,7 @@ We will find in the next section that the mean and variance are
 \mu=\frac{1-p}{p}=\frac{q}{p}\mbox{ and }\sigma^{2}=\frac{q}{p^{2}}.
 \end{equation}
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 The Pittsburgh Steelers place kicker, Jeff Reed, made 81.2% of his
 attempted field goals in his career up to 2006. Assuming that his
@@ -7320,7 +7321,7 @@ pgeom(4, prob = 0.812, lower.tail = FALSE)
 #+RESULTS:
 : [1] 0.0002348493
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_note
@@ -7370,7 +7371,7 @@ Therefore
 \end{equation}
 since \(|q|=|1-p|<1\). 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We flip a coin repeatedly and let \(X\) count the number of Tails
 until we get seven Heads. What is \(\mathbb{P}(X=5)?\) /Solution/: We
@@ -7419,16 +7420,16 @@ M''(0)= & \left.\frac{rq\mathrm{e}^{t}(1-q\mathrm{e}^{t})-rq\mathrm{e}^{t}(-q\ma
 = & \frac{rq}{p^{2}}+\left(\frac{rq}{p}\right)^{2}.
 \end{alignat*}
 Finally we may say \( \sigma^{2} = M''(0) - [M'(0)]^{2} = rq/p^{2}. \)
-#+END_exampletoo
+# +END_exampletoo
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 A random variable has MGF
 \[
 M_{X}(t)=\left(\frac{0.19}{1-0.81\mathrm{e}^{t}}\right)^{31}.
 \]
 Then \(X\sim\mathsf{nbinom}(\mathtt{size}=31,\,\mathtt{prob}=0.19)\).
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_note
@@ -7493,7 +7494,7 @@ that is,
 \end{equation}
 #+END_rem
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 On the average, five cars arrive at a particular car wash every
 hour. Let \(X\) count the number of cars that arrive from 10AM to
 11AM. Then \(X\sim\mathsf{pois}(\mathtt{lambda}=5)\). Also,
@@ -7502,10 +7503,10 @@ during this period?  /Solution/: The probability that no car arrives
 is \[
 \mathbb{P}(X=0)=\mathrm{e}^{-5}\frac{5^{0}}{0!}=\mathrm{e}^{-5}\approx0.0067.
 \]
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose the car wash above is in operation from 8AM to 6PM, and we let
 \(Y\) be the number of customers that appear in this period. Since
@@ -7522,7 +7523,7 @@ diff(ppois(c(47, 50), lambda = 50))
 #+RESULTS:
 : [1] 0.1678485
 
-#+END_exampletoo
+# +END_exampletoo
 
 ** Functions of Discrete Random Variables
 :PROPERTIES:
@@ -7539,7 +7540,7 @@ PMF of the random variable \(Y\)? The answer, of course, depends on
 [[#sec-Differential-and-Integral]]), the solution can be found by simple
 substitution.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\sim\mathsf{nbinom}(\mathtt{size}=r,\,\mathtt{prob}=p)\). We
 saw in [[#sec-other-discrete-distributions]] that \(X\) represents the number
@@ -7564,7 +7565,7 @@ f_{Y}(y) & = & f_{X}(y-r),\\
  & = & {r+(y-r)-1 \choose r-1}\, p^{r}(1-p)^{y-r},\\
  & = & {y-1 \choose r-1}\, p^{r}(1-p)^{y-r},\quad y=r,\, r+1,\ldots
 \end{eqnarray*}
-#+END_exampletoo
+# +END_exampletoo
 
 Even when the function \(h\) is not one-to-one, we may still find the
 PMF of \(Y\) simply by accumulating, for each \(y\), the probability
@@ -7578,7 +7579,7 @@ f_{Y}(y)=\sum_{\{x\in S_{X}|\, h(x)=y\}}f_{X}(x)
 \end{equation}
 #+END_prop
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\sim\mathsf{binom}(\mathtt{size}=4,\,\mathtt{prob}=1/2)\), and let \(Y=(X-1)^{2}\). Consider the following table:
 
@@ -7609,7 +7610,7 @@ There is not a special name for the distribution of \(Y\), it is just
 an example of what to do when the transformation of a random variable
 is not one-to-one. The method is the same for more complicated
 problems.
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_prop
@@ -7884,7 +7885,7 @@ M_{X}(t)=\mathbb{E}\:\mathrm{e}^{tX}=\int_{-\infty}^{\infty}\mathrm{e}^{tx}f_{X}
 provided the integral exists (is finite) for all \(t\) in a
 neighborhood of \(t=0\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-cont-pdf3x2>> Let the continuous random variable \(X\) have PDF
 \[ f_{X}(x)=3x^{2},\quad 0\leq x\leq 1. \] We will see later that
 \(f_{X}\) belongs to the /Beta/ family of distributions. It is easy to
@@ -7916,10 +7917,10 @@ formula \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
  & =3/5.
 \end{align*}
 which gives \(\sigma^{2}=3/5-(3/4)^{2}=3/80\).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-cont-pdf-3x4>> We will try one with unbounded support to brush
 up on improper integration. Let the random variable \(X\) have PDF \[
 f_{X}(x)=\frac{3}{x^{4}},\quad x>1.  \] We can show that
@@ -7953,7 +7954,7 @@ Again we use the shortcut \(\sigma^{2}=\mathbb{E} X^{2}-\mu^{2}\):
  & =3,
 \end{align*}
 which closes the example with \(\sigma^{2}=3-(3/2)^{2}=3/4\).
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -7963,7 +7964,7 @@ built-in model, if possible. Sometimes it is not possible. We show how
 to do it the long way, and the =distr= @@latex:\index{R packages@\textsf{R}
 packages!distr@\texttt{distr}}@@ package \cite{distr} way.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\) have PDF \(f(x)=3x^{2}\), \(0<x<1\) and find
 \(\mathbb{P}(0.14\leq X\leq0.71)\). (We will ignore that \(X\) is a
@@ -7982,10 +7983,10 @@ integrate the function \(x \cdot f(x)=\) =3*x^3= from zero to one to
 get the mean, and use the shortcut \(\sigma^{2}=\mathbb{E}
 X^{2}-\left(\mathbb{E} X\right)^{2}\) for the variance.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\) have PDF \(f(x)=3/x^{4}\), \(x>1\). We may integrate the
 function \(g(x) = x \cdot f(x)=\) =3/x^3= from zero to infinity to get
@@ -8002,10 +8003,10 @@ integrate(g, lower = 1, upper = Inf)
 Compare this to the answer we got in Example [[exa-cont-pdf-3x4]]. Use =-Inf=
 for \(-\infty\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let us redo Example [[exa-cont-pdf3x2]] with the =distr= package
 \cite{distr}. The method is similar to that encountered in Section
@@ -8037,7 +8038,7 @@ are they different? Because the =distrEx= package resorts to numerical
 methods when it encounters a model it does not recognize. This means
 that the answers we get for calculations may not exactly match the
 theoretical values. Be careful.
-#+END_exampletoo
+# +END_exampletoo
 
 ** The Continuous Uniform Distribution
 :PROPERTIES:
@@ -8061,7 +8062,7 @@ outcome is an interval of numbers that are "equally likely" in the
 sense that any two intervals of equal length in the support have the
 same probability associated with them.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Choose a number in \( [0,1] \) at random, and let \(X\) be the number
 chosen. Then \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
@@ -8076,7 +8077,7 @@ relatively simple to calculate:
 \end{align*}
 using the popular formula for the difference of squares. The variance
 is left to Exercise [[xca-variance-dunif]].
-#+END_exampletoo
+# +END_exampletoo
 
 ** The Normal Distribution
 :PROPERTIES:
@@ -8130,7 +8131,7 @@ and the quantity in the parentheses is the total area under a \(\mathsf{norm}(\m
 M_{Z}(t)=\mathrm{e}^{t^{2}/2},\quad -\infty < t < \infty.
 \end{equation}
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 The MGF of
 \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\) is then
@@ -8142,7 +8143,7 @@ tZ}\mathrm{e}^{t\mu}=\mathrm{e}^{t\mu}M_{Z}(\sigma t), \] and we know
 that \(M_{Z}(t)=\mathrm{e}^{t^{2}/2}\), thus substituting we get \[
 M_{X}(t)=\mathrm{e}^{t\mu}\mathrm{e}^{(\sigma t)^{2}/2}=\exp\left\{
 \mu t+\sigma^{2}t^{2}/2\right\} , \] for \(-\infty<t<\infty\).
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_fact
@@ -8153,14 +8154,14 @@ M_{Y}(t)=\mathrm{e}^{ta}M_{X}(bt).
 \end{equation}
 #+END_fact
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 The 68-95-99.7 Rule. We saw in Section [[#sub-Measures-of-Spread]] that when an
 empirical distribution is approximately bell shaped there are specific
 proportions of the observations which fall at varying distances from
 the (sample) mean. We can see where these come from -- and obtain more
 precise proportions -- with the following:
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -8170,7 +8171,7 @@ pnorm(1:3) - pnorm(-(1:3))
 #+RESULTS:
 : [1] 0.6826895 0.9544997 0.9973002
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-iq-model>> Let the random experiment consist of a person taking
 an IQ test, and let \(X\) be the score on the test. The scores on such
 a test are typically standardized to have a mean of 100 and a standard
@@ -8180,7 +8181,7 @@ bell-shaped distribution. What is \(\mathbb{P}(85\leq X\leq115)\)?
 /Solution/: this one is easy because the limits 85 and 115 fall
 exactly one standard deviation (below and above, respectively) from
 the mean of 100. The answer is therefore approximately 68%.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Normal Quantiles and the Quantile Function
 :PROPERTIES:
@@ -8192,7 +8193,7 @@ the area under the PDF between those values. In this section, we go in
 reverse: we are given an area, and we would like to find the value(s)
 that correspond to that area.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-iq-quantile-state-problem>> Assuming the IQ model of Example
 [[exa-iq-model]], what is the lowest possible IQ score that a person can
 have and still be in the top 1% of all IQ scores?  /Solution/: If a
@@ -8235,7 +8236,7 @@ temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 The answer is shown in =$root= which is approximately SRC_R{temp}
 134.8952, that is, a person with this IQ score or higher falls in the
 top 1% of all IQ scores.
-#+END_exampletoo
+# +END_exampletoo
 
 
 The discussion in Example [[exa-iq-quantile-state-problem]] was centered on the search for a
@@ -8299,7 +8300,7 @@ the =q= prefix to the distribution name, except for the ECDF whose
 quantile function is exactly the \( Q_{x}(p) = \mathsf{quantile}(x,
 \mathtt{probs} = p, \mathtt{type} = 1) \) function.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Back to Example [[exa-iq-quantile-state-problem]], we are looking for \(Q_{X}(0.99)\), where
 \(X\sim\mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=15)\). It could
@@ -8313,14 +8314,14 @@ qnorm(0.99, mean = 100, sd = 15)
 : [1] 134.8952
 
 Compare this answer to the one obtained earlier with =uniroot=.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Find the values \(z_{0.025}\), \(z_{0.01}\), and \(z_{0.005}\) (these
 will play an important role from Chapter [[#cha-Estimation]] onward).
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -8366,7 +8367,7 @@ f_{U}(u)=f_{X}(x)\left|\frac{\mathrm{d} x}{\mathrm{d} u}\right|.
 \end{equation}
 #+END_rem
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-lnorm-transformation>> Let
 \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\), and
 let \(Y=\mathrm{e}^{X}\). What is the PDF of \(Y\)?  *Solution:*
@@ -8380,14 +8381,14 @@ y)\cdot\left|\frac{1}{y}\right|=\frac{1}{\sigma\sqrt{2\pi}}\exp\left\{
 we have dropped the absolute value bars since \(y>0\). The random
 variable \(Y\) is said to have a /lognormal distribution/; see Section
 [[#sec-Other-Continuous-Distributions]].
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-lin-trans-norm>> Suppose
 \(X\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let
 \(Y=4-3X\). What is the PDF of \(Y\)?
-#+END_exampletoo
+# +END_exampletoo
 
 
 The support of \(X\) is \((-\infty,\infty)\), and as \(x\) goes from
@@ -8449,7 +8450,7 @@ which is just another way to write
 \(F_{X}[g^{-1}(y)]\). Differentiating this last quantity with respect
 to \(y\) will yield the PDF of \(Y\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose \(X\sim\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\) and
 suppose that we let \(Y=-\ln\, X\). What is the PDF of \(Y\)?
@@ -8477,16 +8478,16 @@ y}\left(1-\mathrm{e}^{-y}\right)=0-\mathrm{e}^{-y}(-1), \] or
 \(f_{Y}(y)=\mathrm{e}^{-y}\) for \(y>0\). This turns out to be a
 member of the exponential family of distributions, see Section
 [[#sec-Other-Continuous-Distributions]].
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *The Probability Integral Transform*. Given a continuous random
 variable \(X\) with strictly increasing CDF \(F_{X}\), let the random
 variable \(Y\) be defined by \(Y=F_{X}(X)\). Then the distribution of
 \(Y\) is \(\mathsf{unif}(\mathtt{min}=0,\,\mathtt{max}=1)\).
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_proof
@@ -8510,7 +8511,7 @@ variables having a discrete component (that is, with jumps in their
 CDF).
 #+END_fact
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-distn-of-z-squared>> Let
 \(Z\sim\mathsf{norm}(\mathtt{mean}=0,\,\mathtt{sd}=1)\) and let
 \(U=Z^{2}\). What is the PDF of \(U\)?  Notice first that
@@ -8530,7 +8531,7 @@ u^{-1/2}\frac{1}{\sqrt{2\pi}}\,\mathrm{e}^{-(\sqrt{u})^{2}/2}=(2\pi
 u)^{-1/2}\mathrm{e}^{-u/2},\quad u > 0.  \] This is what we will later
 call a /chi-square distribution with 1 degree of freedom/. See Section
 [[#sec-Other-Continuous-Distributions]].
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -8721,13 +8722,13 @@ we let \(Y\) measure the length of time until the
 \(\alpha\) is an integer this distribution is also known as the
 /Erlang/ distribution.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 At a car wash, two customers arrive per hour on the average. We decide
 to measure how long it takes until the third customer arrives. If
 \(Y\) denotes this random time then
 \(Y\sim\mathsf{gamma}(\mathtt{shape}=3,\,\mathtt{rate}=1/2)\).
-#+END_exampletoo
+# +END_exampletoo
 
 *** The Chi square, Student's \(t\), and Snedecor's \(F\) Distributions
 :PROPERTIES:
@@ -8756,7 +8757,7 @@ there is exactly \(\alpha\) area under the
 The code to produce Figure [[fig-chisq-dist-vary-df]] is
 
 #+NAME: chisq-dist-vary-df
-#+BEGIN_SRC R :exports both :results graphics :file ps/contdist-chisq-dist-vary-df.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/contdist-chisq-dist-vary-df.pdf
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
@@ -8764,9 +8765,9 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
 #+NAME: fig-chisq-dist-vary-df
 #+CAPTION[Chi square distribution for various degrees of freedom]: \small The chi square distribution for various degrees of freedom.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: chisq-dist-vary-df
-[[file:ps/contdist-chisq-dist-vary-df.ps]]
+[[file:ps/contdist-chisq-dist-vary-df.pdf]]
 
 #+BEGIN_rem
 Here are some useful things to know about the chi-square distribution.
@@ -8941,7 +8942,7 @@ distribution name for the moment generating function. At the time of
 this writing, the following distributions are supported: gamma,
 inverse Gaussian, (non-central) chi-squared, exponential, and uniform.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Calculate the first four raw moments for
 \(X\sim\mathsf{gamma}(\mathtt{shape}=13,\,\mathtt{rate}=1)\) and plot
@@ -8959,18 +8960,18 @@ mgamma(1:4, shape = 13, rate = 1)
 For the plot we can use the function in the following form:
 
 #+NAME: gamma-mgf
-#+BEGIN_SRC R :exports both :results graphics :file ps/contdist-gamma-mgf.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/contdist-gamma-mgf.pdf
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, 
      from=-0.1, to=0.1, ylab = "gamma mgf")
 #+END_SRC
 
 #+NAME: fig-gamma-mgf
 #+CAPTION[Plot of the \textsf{gamma}(=shape= = 13, =rate= = 1) MGF]: \small A plot of the \textsf{gamma}(=shape= = 13, =rate= = 1) MGF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: gamma-mgf
-[[file:ps/contdist-gamma-mgf.ps]]
+[[file:ps/contdist-gamma-mgf.pdf]]
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+LaTeX: \newpage{}
@@ -9165,7 +9166,7 @@ We now introduce some examples of bivariate discrete
 distributions. The first we have seen before, and the second is based
 on the first.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-toss-two-dice-joint-pmf>> Roll a fair die twice. Let \(X\) be
 the face shown on the first roll, and let \(Y\) be the face shown on
 the second roll. We have already seen this example in Chapter
@@ -9176,7 +9177,7 @@ x=1,\ldots,6,\ y=1,\ldots,6.  \] The marginal PMFs are given by
 \(y=1,2,\ldots,6\), since \[
 f_{X}(x)=\sum_{y=1}^{6}\frac{1}{36}=\frac{1}{6},\quad x=1,\ldots,6, \]
 and the same computation with the letters switched works for \(Y\).
-#+END_exampletoo
+# +END_exampletoo
 
 In the previous example, and in many other ones, the joint support can
 be written as a product set of the support of \(X\) "times" the
@@ -9190,7 +9191,7 @@ that in general it is not required for \(S_{X,Y}\) to be of rectangle
 form. We next investigate just such an example.
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-max-sum-two-dice>> Let the random experiment again be to roll a
 fair die twice, except now let us define the random variables \(U\)
 and \(V\) by
@@ -9225,7 +9226,7 @@ f_{V}(v)=\frac{6-|v-7|}{36},\quad v=2,\,3,\ldots,12.
 \end{equation}
 
 #+NAME: max-and-sum-two-dice
-#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-max-and-sum-two-dice.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-max-and-sum-two-dice.pdf
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
 A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
@@ -9244,16 +9245,16 @@ print(p2, vp = vplayout(1, 2))
 
 #+NAME: fig-max-and-sum-two-dice
 #+CAPTION[Max and Sum of two dice]: \small Rolling two dice. The value of U is the maximum of the two rolls, while the value of V is the sum of the two rolls.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: max-and-sum-two-dice
-[[file:ps/multdist-max-and-sum-two-dice.ps]]
+[[file:ps/multdist-max-and-sum-two-dice.pdf]]
 
 We may collapse the two matrices from Figure [[fig-max-and-sum-two-dice]] into
 one, big matrix of pairs of values \((u,v)\). The result is shown in
 Table [[fig-max-sum-two-dice-joint]].
 
 #+NAME: max-sum-two-dice-joint
-#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-max-sum-two-dice-joint.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-max-sum-two-dice-joint.pdf
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
 p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") + 
@@ -9262,9 +9263,9 @@ p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") +
 
 #+NAME: fig-max-sum-two-dice-joint
 #+CAPTION[Joint outcomes of Max and Sum]: \small Rolling two dice. Joint values of U and V are shown as pairs, for each outcome in the sample space.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: max-sum-two-dice-joint
-[[file:ps/multdist-max-sum-two-dice-joint.ps]]
+[[file:ps/multdist-max-sum-two-dice-joint.pdf]]
 
 Again, each of these pairs has probability \(1/36\) associated with it
 and we are looking at the joint PDF of \((U,V)\) albeit in an unusual
@@ -9295,7 +9296,7 @@ same thing as Equation \eqref{eq-marginal-pmf}, so that the marginal
 distribution of \(U\) is the list of totals in the right "margin" of
 the Table [[tab-max-sum-joint-pmf]], and the marginal distribution of \(V\) is the
 list of totals in the bottom "margin".
-#+END_exampletoo
+# +END_exampletoo
 
 
 Continuing the reasoning for the discrete case, given two continuous
@@ -9328,7 +9329,7 @@ f_{Y}(y)=\int_{S_{X}}f_{X,Y}(x,y)\,\mathrm{d} x, \quad y \in S_{Y}.
 [fn:fn-jointnoexist] Strictly speaking, the joint density function
 does not necessarily exist. But the joint CDF always exists.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-joint-pdf>> Let the joint PDF of \((X,Y)\) be given by \[
 f_{X,Y}(x,y)=\frac{6}{5}\left(x+y^{2}\right),\quad 0 < x < 1,\ 0 < y
 < 1.  \] The marginal PDF of \(X\) is
@@ -9346,7 +9347,7 @@ f_{Y}(y) & = & \int_{0}^{1}\frac{6}{5}\left(x+y^{2}\right)\,\mathrm{d} x,\\
 for \(0 < y < 1\). In this example the joint support set was a
 rectangle \([0,1]\times[0,1]\), but it turns out that \(X\) and \(Y\)
 are not independent. See Section [[#sec-Independent-Random-Variables]].
-#+END_exampletoo
+# +END_exampletoo
 
 *** How to do it with \(\mathsf{R}\)
 
@@ -9515,7 +9516,7 @@ some important facts about the correlation coefficient:
 1. The range of correlation is \(-1\leq\rho_{X,Y}\leq1\).
 1. Equality holds above (\(\rho_{X,Y}=\pm1\)) if and only if \(Y\) is a linear function of \(X\) with probability one.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-max-sum-dice-covariance>> We will compute the covariance for the
 discrete distribution in Example [[exa-max-sum-two-dice]]. The expected
 value of \(U\) is \[ \mathbb{E} U=\sum_{u=1}^{6}u\,
@@ -9531,12 +9532,12 @@ U\right)\left(\mathbb{E}
 V\right)=\frac{308}{9}-\frac{161}{36}\cdot7=\frac{35}{12}.  \] All we
 need now are the standard deviations of \(U\) and \(V\) to calculate
 the correlation coefficient (omitted).
-#+END_exampletoo
+# +END_exampletoo
 
 
 We will do a continuous example so that you can see how it works.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 
 Let us find the covariance of the variables \((X,Y)\) from Example
@@ -9557,7 +9558,7 @@ which is 7/20. Therefore the covariance of \((X,Y)\) is
 \[
 \mbox{Cov}(X,Y)=\frac{7}{20}-\left(\frac{3}{5}\right)\left(\frac{9}{20}\right)=\frac{2}{25}.
 \]
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -9597,13 +9598,13 @@ f_{Y|x}(y|x)=\frac{f_{X,Y}(x,y)}{f_{X}(x)},\quad y\in S_{Y}.
 \end{equation}
 We define \(f_{X|y}\) in a similar fashion.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let the joint PMF of \(X\) and \(Y\) be given by
 \[
 f_{X,Y}(x,y) =
 \]
-#+END_exampletoo
+# +END_exampletoo
 
 *** Bayesian Connection
 
@@ -9631,7 +9632,7 @@ was called Bayes' Rule:
 \end{equation} 
 Compare the above expression to Equation \eqref{eq-bayes-rule}.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Suppose the parameter \(\theta\) is the \(\mathbb{P}(\mbox{Heads})\)
 for a biased coin. It could be any value from 0 to 1. Perhaps we have
@@ -9669,7 +9670,7 @@ distribution. That is to say, our posterior distribution is precisely
 \] The Bayesian statistician uses the posterior distribution for all
 matters concerning inference about \(\theta\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -9726,7 +9727,7 @@ f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)\quad \mbox{for every }x\in S_{X},\ y\in S_{Y},
 \end{equation}
 then we say that \(X\) and \(Y\) are independent.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 In Example [[exa-toss-two-dice-joint-pmf]] we considered the random experiment of
 rolling a fair die twice. There we found the joint PMF to be \[
@@ -9737,10 +9738,10 @@ found the marginal PMFs \(f_{X}(x)=1/6\), \(x=1,2,\ldots,6\), and
 joint support the joint PMF satisfies \[
 f_{X,Y}(x,y)=\frac{1}{36}=\left(\frac{1}{6}\right)\left(\frac{1}{6}\right)=f_{X}(x)\,
 f_{Y}(y). \]
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 In Example [[exa-max-sum-two-dice]] we considered the same experiment but
 different random variables \(U\) and \(V\). We can prove that \(U\)
@@ -9749,7 +9750,7 @@ where the independence equality does not hold. There are many such
 pairs. One of them is \((6,12)\): \[
 f_{U,V}(6,12)=\frac{1}{36}\neq\left(\frac{11}{36}\right)\left(\frac{1}{36}\right)=f_{U}(6)\,
 f_{V}(12).  \]
-#+END_exampletoo
+# +END_exampletoo
 
 
 Independent random variables are very useful to the
@@ -9834,7 +9835,7 @@ Proposition [[pro-indep-implies-prodexpect]], and remember the identity
 
 Let us take a look at some examples of the corollary in action.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\sim\mathsf{binom}(\mathtt{size}=n_{1},\,\mathtt{prob}=p)\) and
 \(Y\sim\mathsf{binom}(\mathtt{size}=n_{2},\,\mathtt{prob}=p)\) be
@@ -9844,10 +9845,10 @@ M_{Y}(t)=\left(q+p\mathrm{e}^{t}\right)^{n_{1}}\left(q+p\mathrm{e}^{t}\right)^{n
 \(\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\)
 distribution. Therefore,
 \(X+Y\sim\mathsf{binom}(\mathtt{size}=n_{1}+n_{2},\,\mathtt{prob}=p)\).
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let
 \(X\sim\mathsf{norm}(\mathtt{mean}=\mu_{1},\,\mathtt{sd}=\sigma_{1})\)
@@ -9860,7 +9861,7 @@ M_{Y}(t)=\exp\left\{ \mu_{1}t+t^{2}\sigma_{1}^{2}/2\right\}
 , \] which is the MGF of a
 \(\mathsf{norm}\left(\mathtt{mean}=\mu_{1}+\mu_{2},\,\mathtt{sd}=\sqrt{\sigma_{1}^{2}+\sigma_{2}^{2}}\right)\)
 distribution.
-#+END_exampletoo
+# +END_exampletoo
 
 
 Even when we cannot use the MGF trick to identify the exact
@@ -9921,7 +9922,7 @@ changes to their joint random behavior. While independence speaks to a
 /lack of influence/ between the two variables, exchangeability aims to
 capture the /symmetry/ between them.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let \(X\) and \(Y\) have joint PDF
 \begin{multline}
@@ -9933,10 +9934,10 @@ which confirms that \(X\) and \(Y\) are exchangeable. Here, \(\alpha\)
 is said to be an association parameter. This particular example is one
 from the Farlie-Gumbel-Morgenstern family of distributions; see
 \cite{Kotz2000}.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-binom-exchangeable>> Suppose \(X\) and \(Y\) are IID
 \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\). Then their
 joint PMF is
@@ -9947,7 +9948,7 @@ f_{X,Y}(x,y) & = & f_{X}(x)f_{Y}(y)\\
 \end{eqnarray*}
 and the value is the same if we exchange \(x\) and \(y\). Therefore
 \((X,Y)\) are exchangeable.
-#+END_exampletoo
+# +END_exampletoo
 
 
 Looking at Example [[exa-binom-exchangeable]] more closely we see that the
@@ -10088,7 +10089,7 @@ We chose the standard bivariate normal,
 to display.
 
 #+NAME: mvnorm-pdf
-#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-mvnorm-pdf.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-mvnorm-pdf.pdf
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
@@ -10097,9 +10098,9 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 #+NAME: fig-mvnorm-pdf
 #+CAPTION[Graph of a bivariate normal PDF]: \small A graph of a bivariate normal PDF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: mvnorm-pdf
-[[file:ps/multdist-mvnorm-pdf.ps]]
+[[file:ps/multdist-mvnorm-pdf.pdf]]
 
 ** Bivariate Transformations of Random Variables
 :PROPERTIES:
@@ -10158,7 +10159,7 @@ works just fine... do you see the connection between Equations
 #+END_rem
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Let
 \((X,Y)\sim\mathsf{mvnorm}(\mathtt{mean}=\mathbf{0}_{2\times1},\,\mathtt{sigma}=\mathbf{I}_{2\times2})\)
@@ -10184,7 +10185,7 @@ we get that the joint PDF of \((U,V)\) is
 \label{eq-biv-norm-hidden}
 f_{U,V}(u,v)=\frac{1}{2\pi}\exp\left\{ -\frac{1}{2}\left[\left(-3u+2v\right)^{2}+\left(\frac{5u-3v}{2}\right)^{2}\right]\right\} \cdot\frac{1}{2},\quad (u,v)\in\mathbb{R}^{2}.
 \end{equation}
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -10459,7 +10460,7 @@ thus shown that the
 distribution is the same as a
 \(\mathsf{binom}(\mathtt{size}=n,\,\mathtt{prob}=p)\) distribution.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *Dinner with Barack Obama.* During the 2008 U.S. presidential primary,
 Barack Obama offered to have dinner with three randomly selected
@@ -10468,7 +10469,7 @@ in the contributor database. For the sake of argument, Suppose that
 the database was approximately representative of the U.S. population
 as a whole, Suppose Barack Obama wants to have [[http://pewresearch.org/pubs/773/fewer-voters-identify-as-republicans][dinner]] with 36
 democrat, 27 republican, and 37 independent.
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -10540,16 +10541,16 @@ cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 #+END_SRC
 
 #+NAME: multinom-pmf2
-#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-multinom-pmf2.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/multdist-multinom-pmf2.pdf
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 #+END_SRC
 
 #+NAME: fig-multinom-pmf2
 #+CAPTION[Plot of a multinomial PMF.]: \small A plot of a multinomial PMF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: multinom-pmf2
-[[file:ps/multdist-multinom-pmf2.ps]]
+[[file:ps/multdist-multinom-pmf2.pdf]]
 
 #+LaTeX: \newpage{}
 
@@ -10847,7 +10848,7 @@ CDF, quantile function, and generate random variates, respectively.
 The code to produce Figure [[fig-Students-t-dist-vary-df]] is
 
 #+NAME: Students-t-dist-vary-df
-#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-Students-t-dist-vary-df.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-Students-t-dist-vary-df.pdf
 curve(dt(x, df = 30), from = -3, to = 3, lwd = 3, ylab = "y")
 ind <- c(1, 2, 3, 5, 10)
 for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
@@ -10855,20 +10856,20 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 
 #+NAME: fig-Students-t-dist-vary-df
 #+CAPTION[Student's \(t\) distribution for various degrees of freedom]: \small A plot of Student's \(t\) distribution for various degrees of freedom.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Students-t-dist-vary-df
-[[file:ps/sampdist-Students-t-dist-vary-df.ps]]
+[[file:ps/sampdist-Students-t-dist-vary-df.pdf]]
 
 Similar to that done for the normal we may define
 \(\mathsf{t}_{\alpha}(\mathtt{df}=n-1)\) as the number on the
 \(x\)-axis such that there is exactly \(\alpha\) area under the
 \(\mathsf{t}(\mathtt{df}=n-1)\) curve to its right.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Find \(\mathsf{t}{}_{0.01}(\mathtt{df}=23)\) with the quantile
 function.
-#+END_exampletoo
+# +END_exampletoo
 
 #+BEGIN_SRC R :exports both :results output pp 
 qt(0.01, df = 23, lower.tail = FALSE)
@@ -11208,15 +11209,15 @@ sd(iqrs)
 Now let's take a look at a plot of the simulated values
 
 #+NAME: simulated-IQR
-#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-simulated-IQR.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-simulated-IQR.pdf
 hist(iqrs, breaks = 20)
 #+END_SRC
 
 #+NAME: fig-simulated-IQR
 #+CAPTION[Plot of simulated IQRs]: \small A plot of simulated IQRs.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: simulated-IQR
-[[file:ps/sampdist-simulated-IQR.ps]]
+[[file:ps/sampdist-simulated-IQR.pdf]]
 
 *** The Median Absolute Deviation
 
@@ -11245,15 +11246,15 @@ sd(mads)
 Now let's take a look at a plot of the simulated values
 
 #+NAME: simulated-MAD
-#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-simulated-MAD.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/sampdist-simulated-MAD.pdf
 hist(mads, breaks = 20)
 #+END_SRC
 
 #+NAME: fig-simulated-MAD
 #+CAPTION[Plot of simulated MADs]: \small A plot of simulated MADs.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: simulated-MAD
-[[file:ps/sampdist-simulated-MAD.ps]]
+[[file:ps/sampdist-simulated-MAD.pdf]]
 
 #+LaTeX: \newpage{}
 
@@ -11364,7 +11365,7 @@ do inference in the form of hypothesis tests in the next chapter.
 
 The following example is how I was introduced to maximum likelihood.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-how-many-fish>> Suppose we have a small pond in our backyard,
 and in the pond there live some fish. We would like to know how many
 fish live in the pond. How can we estimate this? One procedure
@@ -11420,10 +11421,10 @@ possible values of \(F\), which one makes the above probability the
 biggest? We can answer this question with a plot of
 \(\mathbb{P}(X=x)\) versus \(F\). See Figure
 [[fig-capture-recapture]].
-#+END_exampletoo
+# +END_exampletoo
 
 #+NAME: capture-recapture
-#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-capture-recapture.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-capture-recapture.pdf
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -11436,12 +11437,12 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 
 #+NAME: fig-capture-recapture
 #+CAPTION[Capture-recapture experiment]: \small A plot of maximum likelihood for the capture-recapture experiment.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: capture-recapture
-[[file:ps/estimate-capture-recapture.ps]]
+[[file:ps/estimate-capture-recapture.pdf]]
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-bass-bluegill>> In the last example we were only concerned with
 how many fish were in the pond, but now, we will ask a different
 question. Suppose it is known that there are only two species of fish
@@ -11483,7 +11484,7 @@ quantity is a function of \(p\), called the /likelihood function/
 in Figure [[fig-fishing-part-two]].
 
 #+NAME: fishing-part-two
-#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-fishing-part-two.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-fishing-part-two.pdf
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
@@ -11491,9 +11492,9 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 
 #+NAME: fig-fishing-part-two
 #+CAPTION[Assorted likelihood functions for fishing, part two]: \small Assorted likelihood functions for fishing, part two.   Three graphs are shown of \(L\) when \(\sum x_{i}\) equals 3, 4, and 5, respectively, from left to right. We pick an \(L\) that matches the observed data and then maximize \(L\) as a function of \(p\). If \(\sum x_{i}=4\), then the maximum appears to occur somewhere around \(p \approx 0.6\).
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: fishing-part-two
-[[file:ps/estimate-fishing-part-two.ps]]
+[[file:ps/estimate-fishing-part-two.pdf]]
 
 
 We want the value of \(p\) which has the highest likelihood, that is,
@@ -11528,7 +11529,7 @@ likelihood estimator, and not a minimum likelihood estimator.
 #+END_rem
 
 The result is shown in Figure [[fig-species-mle]].
-#+END_exampletoo
+# +END_exampletoo
 
 [fn:fn-sdt] We can tell from the graph that our value of \(\hat{p}\)
 is a maximum instead of a minimum so we do not really need to worry
@@ -11536,7 +11537,7 @@ for this example. Other examples are not so easy, however, and we
 should be careful to be cognizant of this extra step.
 
 #+NAME: species-mle
-#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-species-mle.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/estimate-species-mle.pdf
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -11554,9 +11555,9 @@ text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, p
 
 #+NAME: fig-species-mle
 #+CAPTION[Species maximum likelihood]: \small Species maximum likelihood.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: species-mle
-[[file:ps/estimate-species-mle.ps]]
+[[file:ps/estimate-species-mle.pdf]]
 
 In general, we have a family of PDFs \(f(x|\theta)\) indexed by a
 parameter \(\theta\) in some parameter space \(\Theta\). We want to
@@ -11626,7 +11627,7 @@ then the statistic \(s(X_{1},X_{2},\ldots,X_{n})\) is said to be an
 /unbiased estimator/ of \(\theta\). Otherwise, it is /biased/.
 #+END_defn
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-normal-MLE-both>> Let \(X_{1}\), \(X_{2}\), ... , \(X_{n}\) be
 an \(SRS(n)\) from a
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\)
@@ -11652,7 +11653,7 @@ from which we may conclude two things:
 - \(S^{2}=n\hat{\sigma^{2}}/(n-1)\) is an unbiased estimator of
   \(\sigma^{2}\).
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 One of the most common questions in an introductory statistics class
@@ -11741,7 +11742,7 @@ same as before, but the =$objective= value was different, of course.
 For multiparameter problems we may use a similar approach by way of
 the =mle= function in the =stats4= package \cite{stats4}.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 
 *Plant Growth.* We will investigate the =weight= variable of the
@@ -11810,7 +11811,7 @@ knew that the standard error of \(\hat{\mu}=\overline{X}\) is
 \(\sigma/\sqrt{n}\), and the numerical estimate of this was very close
 too.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 There is functionality in the =distrTest= package \cite{distrTest} to
@@ -11900,15 +11901,15 @@ unknown).
 See Figure [[fig-ci-examp]], which is a graphical display of these ideas.
 
 #+NAME: ci-examp
-#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-ci-examp.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-ci-examp.pdf
 ci.examp()
 #+END_SRC
 
 #+NAME: fig-ci-examp
 #+CAPTION[Simulated confidence intervals]: \small The graph was generated by the =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95% confidence interval for the population mean using Equation \eqref{eq-z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that "cover" the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: ci-examp
-[[file:ps/hypoth-ci-examp.ps]]
+[[file:ps/hypoth-ci-examp.pdf]]
 
 Under the above framework, we can reason that an "interval" with a
 /larger/ confidence coefficient corresponds to a /wider/ sheet of
@@ -11925,7 +11926,7 @@ For a fixed sample size \(n\), if \(1-\alpha\) increases, then the
 confidence interval gets /WIDER/.
 #+END_rem
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-plant-one-samp-z-int>> *Results from an Experiment on Plant
 Growth.* The =PlantGrowth= data frame gives the results of an
 experiment to measure plant yield (as measured by the weight of the
@@ -11938,7 +11939,7 @@ weight of the population of all plants of the particular species in
 the study. We will first take a look at a stem-and-leaf display of the
 data:
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -12009,12 +12010,12 @@ all plants of this species lies somewhere between 4.823 g and 5.323 g,
 that is, we are 95% confident that the interval \([4.823,\,5.323]\)
 covers \(\mu\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Give some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an \(SRS(n)\)
 from a \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\)
 distribution. Maybe small sample?
-#+END_exampletoo
+# +END_exampletoo
 
 
 1. What is the parameter of interest? in the context of the problem.
@@ -12091,13 +12092,13 @@ and satisfy
 #+END_rem
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Small sample, some data with \(X_{1}\), \(X_{2}\), ..., \(X_{n}\) an
 \(SRS(n)\) from a
 \(\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\)
 distribution.  PANIC
-#+END_exampletoo
+# +END_exampletoo
  
 *** How to do it with \(\mathsf{R}\)
 We can do Example [[exa-plant-one-samp-z-int]] with the following code.
@@ -12410,12 +12411,12 @@ interval for \(\mu\). The question is: how big does \(n\) have to be?
 For the case of a population mean the answer is easy: we set up an
 equation and solve for \(n\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Given a situation, given \(\sigma\), given \(E\), we would like to
 know how big \(n\) has to be to ensure that \(\overline{X}\pm5\) is a
 95% confidence interval for \(\mu\).
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -12452,10 +12453,10 @@ solutions to the problem.
    The quantity \(z_{\alpha/2}^{2}/4E^{2}\) is large enough to
    guarantee \(100(1-\alpha)\%\) confidence.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Proportion example.
-#+END_exampletoo
+# +END_exampletoo
 
 #+BEGIN_rem
 For very small populations sometimes the value of \(n\) obtained from
@@ -12635,7 +12636,7 @@ the cards. I never do.
 :CUSTOM_ID: sec-Tests-for-Proportions
 :END:
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-widget-machine>>
 We have a machine that makes widgets. 
 - Under normal operation, about 0.10 of the widgets produced are
@@ -12670,7 +12671,7 @@ If the confidence interval is
   that the torque converter is doing anything at all, positive or
   negative.
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Terminology
 
@@ -12752,7 +12753,7 @@ Z = \frac{\hat{p} - p_{0}}{sqrt{p_{0}(1 - p_{0})/n}}  \sim \mathsf{norm}(\mathtt
 - The sample size \(n\) is large
   - need at least 15 successes and at least 15 failures
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 Find
 1. The null and alternative hypotheses.
 2. Check your assumptions.
@@ -12760,10 +12761,10 @@ Find
    level.
 4. Calculate the value of the test statistic and state your
    conclusion.
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-prop-test-pvalue-A>> Suppose \(p = \mathrm{the\ proportion\ of\
 students}\) who are admitted to the graduate school of the University
 of California at Berkeley, and suppose that a public relations officer
@@ -12829,10 +12830,10 @@ hypothesis that the true proportion of students admitted to graduate
 school is less than 40% and say that the observed data are consistent
 with the officer's claim at the \(\alpha = 0.01\) significance level.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-prop-test-pvalue-B>> We are going to do Example
 [[exa-prop-test-pvalue-A]] all over again. Everything will be exactly the
 same except for one change. Suppose we choose significance level
@@ -12842,7 +12843,7 @@ consistent with the officer's claim?
 Our null and alternative hypotheses are the same. Our observed test
 statistic is the same: it was approximately \(-1.68\). But notice that
 our critical value has changed: \(\alpha = 0.05\) and \(-z_{0.05}\) is
-#+END_exampletoo
+# +END_exampletoo
 
 #+BEGIN_SRC R :exports both :results output pp 
 -qnorm(0.95)
@@ -12888,7 +12889,7 @@ of significance \(\alpha\) at which an experimenter using the test
 statistic \(T\) would reject \(H_{0}\) on the basis of the observed
 sample outcome \(x\)".
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Calculate the \(p\)-value for the test in Examples
 [[exa-prop-test-pvalue-A]] and [[exa-prop-test-pvalue-B]].
@@ -12899,7 +12900,7 @@ The \(p\)-value for this test is the probability of obtaining a
 example is less than the observed test statistic. In other words, we
 want to know the area under a standard normal curve on the interval
 \((-\infty,\,-1.680919]\). We can get this easily with
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -13048,7 +13049,7 @@ If \(\sigma\) is unknown but \(n\) is large then we can use the
 \(z\)-test.
 #+END_rem
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 In this example we
 1. Find the null and alternative hypotheses.
@@ -13056,7 +13057,7 @@ In this example we
 3. Calculate the value of the test statistic and state the conclusion.
 4. Find the \(p\)-value.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+BEGIN_rem
@@ -13135,12 +13136,12 @@ distribution. We would like to test \(H_{0}:\,\sigma^{2} =
 1)S^{2}}{\sigma^{2}} \sim \mathsf{chisq}(\mathtt{df} = n - 1).  \]
 Table here.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Give some data and a hypothesis.
 - Give an \(\alpha\)-level and test the critical region way.
 - Find the \(p\)-value for the test.
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 I am thinking about =sigma.test=
@@ -13438,7 +13439,7 @@ anova(temp)
 Plot for the intuition of between versus within group variation.
 
 #+NAME: between-versus-within
-#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-between-versus-within.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-between-versus-within.pdf
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
 f <- function(x){dnorm(x, mean = 2)}
@@ -13452,13 +13453,13 @@ rug(y1)
 
 #+NAME: fig-between-versus-within
 #+CAPTION[Between group versus within group variation]: \small A plot of between group versus within group variation.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: between-versus-within
-[[file:ps/hypoth-between-versus-within.ps]]
+[[file:ps/hypoth-between-versus-within.pdf]]
 
 
 #+NAME: some-F-plots-HH
-#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-some-F-plots-HH.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-some-F-plots-HH.pdf
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
 F.curve(df1 = 5, df2 = 30, col='blue')
@@ -13468,9 +13469,9 @@ par(old.omd)
 
 #+NAME: fig-some-F-plots-HH
 #+CAPTION[Some \(F\) plots from the \texttt{HH} package]: \small Some \(F\) plots from the \texttt{HH} package.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: some-F-plots-HH
-[[file:ps/hypoth-some-F-plots-HH.ps]]
+[[file:ps/hypoth-some-F-plots-HH.pdf]]
 
 ** Sample Size and Power
 :PROPERTIES:
@@ -13504,15 +13505,15 @@ from the =TeachingDemos= package \cite{TeachingDemos}. There is an
 even better plot in upcoming work from the =HH= package \cite{HH}.
 
 #+NAME: power-examp
-#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-power-examp.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/hypoth-power-examp.pdf
 power.examp()
 #+END_SRC
 
 #+NAME: fig-power-examp
 #+CAPTION[Plot of significance level and power]: \small This graph was generated by the =power.examp= function from the =TeachingDemos= package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the /power/ to detect a non-null mean value of \(\mu=1\). With the command the =run.power.examp()= at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the =tkrplot= package \cite{tkrplot} for =run.power.examp=.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: power-examp
-[[file:ps/hypoth-power-examp.ps]]
+[[file:ps/hypoth-power-examp.pdf]]
 
 #+LaTeX: \newpage{}
 
@@ -13674,7 +13675,7 @@ circumstances that the data show /heteroscedasticity/. There are
 methods to address it, but they fall outside the realm of SLR.
 
 #+NAME: philosophy
-#+BEGIN_SRC R :exports results :results graphics :file ps/slr-philosophy.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/slr-philosophy.pdf
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h = 0, v = 0, col = "gray60")
 abline(a = 2.5, b = 0.5, lwd = 2)
@@ -13691,12 +13692,12 @@ segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 
 #+NAME: fig-philosophy
 #+CAPTION[Philosophical foundations of SLR]: \small Philosophical foundations of SLR.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: philosophy
-[[file:ps/slr-philosophy.ps]]
+[[file:ps/slr-philosophy.pdf]]
 
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-Speed-and-Stopping>> *Speed and stopping distance of cars.* We
 will use the data frame \texttt{cars} @@latex:\index{Data
 sets!cars@\texttt{cars}}@@ from the =datasets= package
@@ -13721,15 +13722,15 @@ feet. We can make a simple scatterplot of the data with the =qplot=
 command in the =ggplot2= package \cite{ggplot2}.
 
 #+NAME: carscatter
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscatter.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscatter.pdf
 plot(dist ~ speed, data = cars)
 #+END_SRC
 
 #+NAME: fig-carscatter
 #+CAPTION[Scatterplot of =dist= versus =speed= for the =cars= data]: \small A scatterplot of =dist= versus =speed= for the =cars= data.  There is clearly an upward trend to the plot which is approximately linear. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carscatter
-[[file:ps/slr-carscatter.ps]]
+[[file:ps/slr-carscatter.pdf]]
 
 You can see the output in Figure [[fig-Scatter-cars]], which was produced by the
 following code.
@@ -13741,7 +13742,7 @@ qplot(speed, dist, data = cars)
 There is a pronounced upward trend to the data points, and the pattern
 looks approximately linear. There does not appear to be substantial
 fanning out of the points or extreme values.
-#+END_exampletoo
+# +END_exampletoo
 
 ** Estimation
 :PROPERTIES:
@@ -13887,7 +13888,7 @@ to =abline= are the coefficients of =cars.lm=; see Figure
 [[fig-Scatter-cars-regline]].
 
 #+NAME: carline
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carline.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carline.pdf
 ggplot(cars, aes(x = speed, y = dist)) + 
   geom_point(shape = 19) + 
   geom_smooth(method = lm, se = FALSE)
@@ -13895,9 +13896,9 @@ ggplot(cars, aes(x = speed, y = dist)) +
 
 #+NAME: fig-carline
 #+CAPTION[Scatterplot with added regression line for the =cars= data]: \small A scatterplot with an added regression line for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carline
-[[file:ps/slr-carline.ps]]
+[[file:ps/slr-carline.pdf]]
 
 To calculate points on the regression line we may simply plug the
 desired \(x\) value(s) into \( \hat{\mu} \), either by hand, or with
@@ -13905,7 +13906,7 @@ the =predict= function. The inputs to =predict= are the fitted linear
 model object, =cars.lm=, and the desired \(x\) value(s) represented by
 a data frame. See the example below.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-regline-cars-interpret>> Using the regression line for the
 =cars= data:
 1. What is the meaning of \( \mu(60) = \beta_{0} + \beta_{1}(8) \)?
@@ -13926,7 +13927,7 @@ a data frame. See the example below.
    data is 4 mph. Therefore, if we predict what would happen for
    slower speeds then we would be /extrapolating/, a dangerous
    practice which often gives nonsensical results.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Point Estimates of the Regression Line
 :PROPERTIES:
@@ -13945,13 +13946,13 @@ would like to estimate:
    \(\mu(x_{0})\), and the second is a random variable, \(Y(x_{0})\),
    but our point estimate is the same for both: \(\hat{\mu}(x_{0})\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-regline-cars-pe-8mph>> We may use the regression line to obtain
 a point estimate of the mean stopping distance for a car traveling 8
 mph: \( \hat{\mu}(15) = b_{0} + (8) (b_{1})\) which is approximately
 13.88. We would also use 13.88 as a point estimate for the stopping
 distance of a future car traveling 8 mph.
-#+END_exampletoo
+# +END_exampletoo
 
 
 Note that we actually have observed data for a car traveling 8 mph;
@@ -14284,7 +14285,7 @@ encountered in Section [[#sub-slr-point-est-regline]]. There we neglected to
 take advantage of its additional =interval= argument. The general
 syntax follows.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We will find confidence and prediction intervals for the stopping
 distance of a car travelling 5, 6, and 21 mph (note from the graph
@@ -14334,14 +14335,14 @@ predict(cars.lm, newdata = new, interval = "prediction")
 carsPI <- round(predict(cars.lm, newdata = new, interval = "prediction"), 2)
 #+END_SRC
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 The type of interval is dictated by the =interval= argument (which is
 =none= by default), and the default confidence level is 95\% (which
 can be changed with the =level= argument).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Using the =cars= data,
 1. Report a point estimate of and a 95% confidence interval for the
@@ -14359,7 +14360,7 @@ Using the =cars= data,
    95% confidence we may assert that the hypothetical stopping
    distance for a car travelling 21 mph would lie somewhere between
    SRC_R{carsPI[3, 2]} 33.42 ft and SRC_R{carsPI[3, 3]} 96.58 ft.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Graphing the Confidence and Prediction Bands
 
@@ -14387,15 +14388,15 @@ formulas in Equations \eqref{eq-SLR-conf-int-formula} and
 \eqref{eq-SLR-pred-int-formula}.
 
 #+NAME: carscipi
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscipi.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-carscipi.pdf
 print(ci.plot(cars.lm))
 #+END_SRC
 
 #+NAME: fig-carscipi
 #+CAPTION[Scatterplot with confidence/prediction bands for the =cars= data]: \small A scatterplot with confidence/prediction bands for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carscipi
-[[file:ps/slr-carscipi.ps]]
+[[file:ps/slr-carscipi.pdf]]
 
 ** Model Utility and Inference
 :PROPERTIES:
@@ -14723,15 +14724,15 @@ line. We would say there is some evidence that the residuals are not
 perfectly normal.
 
 #+NAME: Normal-q-q-plot-cars
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-Normal-q-q-plot-cars.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-Normal-q-q-plot-cars.pdf
 plot(cars.lm, which = 2)
 #+END_SRC
 
 #+NAME: fig-Normal-q-q-plot-cars
 #+CAPTION[Normal q-q plot of the residuals for the =cars= data]: \small Used for checking the normality assumption. Look out for any curvature or substantial departures from the straight line; hopefully the dots hug the line closely.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Normal-q-q-plot-cars
-[[file:ps/slr-Normal-q-q-plot-cars.ps]]
+[[file:ps/slr-Normal-q-q-plot-cars.pdf]]
 
 **** Testing the Normality Assumption
 
@@ -14816,15 +14817,15 @@ these data there does appear to be somewhat of a slight fanning-out of
 the residuals.
 
 #+NAME: std-resids-fitted-cars
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-std-resids-fitted-cars.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-std-resids-fitted-cars.pdf
 plot(cars.lm, which = 3)
 #+END_SRC
 
 #+NAME: fig-std-resids-fitted-cars
 #+CAPTION[Plot of standardized residuals against the fitted values for the =cars= data]: \small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: std-resids-fitted-cars
-[[file:ps/slr-std-resids-fitted-cars.ps]]
+[[file:ps/slr-std-resids-fitted-cars.pdf]]
 
 **** Testing the Constant Variance Assumption
 
@@ -14865,6 +14866,7 @@ For these data we would not reject the null hypothesis at the
 assumption of constant variance.
 
 *** Independence Assumption
+    SCHEDULED: <2014-06-05 Thu>
 :PROPERTIES:
 :CUSTOM_ID: sub-Independence-Assumption
 :END:
@@ -14889,15 +14891,15 @@ examine the residual plot in Figure [[fig-resids-fitted-cars]]. There is no
 obvious cyclical wave pattern or structure to the residual plot.
 
 #+NAME: resids-fitted-cars
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-resids-fitted-cars.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-resids-fitted-cars.pdf
 plot(cars.lm, which = 1)
 #+END_SRC
 
 #+NAME: fig-resids-fitted-cars
 #+CAPTION[Plot of the residuals versus the fitted values for the =cars= data]: \small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: resids-fitted-cars
-[[file:ps/slr-resids-fitted-cars.ps]]
+[[file:ps/slr-resids-fitted-cars.pdf]]
 
 **** Testing the Independence Assumption
 
@@ -15251,15 +15253,15 @@ We can look at a plot of the Cook's distances with the command
 =plot(cars.lm, which = 4)=.
 
 #+NAME: Cooks-distance-cars
-#+BEGIN_SRC R :exports both :results graphics :file ps/slr-Cooks-distance-cars.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/slr-Cooks-distance-cars.pdf
 plot(cars.lm, which = 4)
 #+END_SRC
 
 #+NAME: fig-Cooks-distance-cars
 #+CAPTION[Cook's distances for the =cars= data]: \small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Cooks-distance-cars
-[[file:ps/slr-Cooks-distance-cars.ps]]
+[[file:ps/slr-Cooks-distance-cars.pdf]]
 
 Observations with the largest Cook's D values are labeled, hence we
 see that observations 23, 39, and 49 are suspicious. However, we need
@@ -15303,7 +15305,7 @@ shown on the same display. The diagnostic plots for the =cars= data
 are shown in Figure [[fig-Diagnostic-plots-cars]]:
 
 #+NAME: Diagnostic-plots-cars
-#+BEGIN_SRC R :exports results :results graphics :file ps/slr-Diagnostic-plots-cars.ps
+#+BEGIN_SRC R :exports results :results graphics :file ps/slr-Diagnostic-plots-cars.pdf
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))
@@ -15311,9 +15313,9 @@ par(mfrow = c(1,1))
 
 #+NAME: fig-Diagnostic-plots-cars
 #+CAPTION[Diagnostic plots for the =cars= data]: \small Diagnostic plots for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Diagnostic-plots-cars
-[[file:ps/slr-Diagnostic-plots-cars.ps]]
+[[file:ps/slr-Diagnostic-plots-cars.pdf]]
 
 We have discussed all of the plots except the last, which is possibly
 the most interesting. It shows Residuals vs. Leverage, which will
@@ -15492,7 +15494,7 @@ equivalent to the more lengthy
 Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\beta_{2}x_{2i}+\cdots+\beta_{p}x_{pi}+\epsilon_{i},\quad i=1,2,\ldots,n.
 \end{equation}
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 *Girth, Height, and Volume for Black Cherry trees.* @@latex:\index{Data
 sets!trees@\texttt{trees}}@@ Measurements were made of the girth,
@@ -15527,15 +15529,15 @@ which is made with the =splom= function in the =lattice= package
 [[fig-splom-trees]].
 
 #+NAME: splom-trees
-#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-splom-trees.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-splom-trees.pdf
 splom(trees)
 #+END_SRC
 
 #+NAME: fig-splom-trees
 #+CAPTION[Scatterplot matrix of =trees= data]: \small A scatterplot matrix of the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: splom-trees
-[[file:ps/mlr-splom-trees.ps]]
+[[file:ps/mlr-splom-trees.pdf]]
 
 The dependent (response) variable =Volume= is listed in the first row
 of the scatterplot matrix. Moving from left to right, we see an
@@ -15548,7 +15550,7 @@ Y=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon,
 in which case the quantity
 \(\mu(x_{1},x_{2})=\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}\) would
 represent the mean value of \(Y\) at the point \((x_{1},x_{2})\).
-#+END_exampletoo
+# +END_exampletoo
 
 *** What does it mean?
 
@@ -15581,7 +15583,7 @@ Another way to do it is with the =scatterplot3d= function in the
 the result is shown in Figure [[fig-3D-scatterplot-trees]].
 
 #+NAME: 3D-scatterplot-trees
-#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-3D-scatterplot-trees.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-3D-scatterplot-trees.pdf
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, 
                                  highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
@@ -15589,9 +15591,9 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 
 #+NAME: fig-3D-scatterplot-trees
 #+CAPTION[3D scatterplot with regression plane for the =trees= data]: \small A 3D scatterplot with regression plane for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: 3D-scatterplot-trees
-[[file:ps/mlr-3D-scatterplot-trees.ps]]
+[[file:ps/mlr-3D-scatterplot-trees.pdf]]
 
 Looking at the graph we see that the data points fall close to a plane
 in three dimensional space. (The plot looks remarkably good. In the
@@ -15776,7 +15778,7 @@ which is just a fancy way to write
 \hat{Y}(x_{10},x_{20})=b_{0}+b_{1}x_{10}+b_{2}x_{20}.
 \end{equation}
  
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 If we wanted to predict the average volume of black cherry trees that
 have =Girth = 15= in and are =Height = 77= ft tall then we would use
@@ -15789,7 +15791,7 @@ the estimate
 We would use the same estimate \(\hat{Y}=35.6\) to predict the
 measured =Volume= of another black cherry tree -- yet to be observed
 -- that has =Girth = 15= in and is =Height = 77= ft tall.
-#+END_exampletoo
+# +END_exampletoo
 
 **** How to do it with \(\mathsf{R}\)
 
@@ -15846,7 +15848,7 @@ predict(trees.lm, newdata = new)
 treesFIT <- round(predict(trees.lm, newdata = new), 1)
 #+END_SRC
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth=
@@ -15858,7 +15860,7 @@ Using the =trees= data,
    ft.  The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is
    SRC_R{treesFIT[ 3 ]} 30.4, so a point prediction for the =Volume=
    is SRC_R{treesFIT[ 3 ]} 30.4 cubic feet.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Mean Square Error and Standard Error
 :PROPERTIES:
@@ -16088,7 +16090,7 @@ As before, the interval type is decided by the =interval= argument and
 the default confidence level is 95% (which can be changed with the
 =level= argument).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 Using the =trees= data, 
 
@@ -16105,7 +16107,7 @@ Using the =trees= data,
    87 ft would lie somewhere between SRC_R{treesCI[3, 2]} 26.9
    cubic feet and SRC_R{treesCI[3, 3]} 33.8 feet.
 
-#+END_exampletoo
+# +END_exampletoo
 
 ** Model Utility and Inference
 :PROPERTIES:
@@ -16326,15 +16328,15 @@ assumption was reasonable. Sometimes, however, plots of the data
 suggest that the linear model is incomplete and should be modified.
 
 #+NAME: Scatterplot-Volume-Girth-trees
-#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-Scatterplot-Volume-Girth-trees.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-Scatterplot-Volume-Girth-trees.pdf
 qplot(Girth, Volume, data = trees)
 #+END_SRC
 
 #+NAME: fig-Scatterplot-Volume-Girth-trees
 #+CAPTION[Scatterplot of =Volume= versus =Girth= for the =trees= data]: \small Scatterplot of =Volume= versus =Girth= for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Scatterplot-Volume-Girth-trees
-[[file:ps/mlr-Scatterplot-Volume-Girth-trees.ps]]
+[[file:ps/mlr-Scatterplot-Volume-Girth-trees.pdf]]
 
 For example, let us examine a scatterplot of =Volume= versus =Girth= a
 little more closely. See Figure [[fig-Scatterplot-Volume-Girth-trees]]. There
@@ -16392,7 +16394,7 @@ There are multiple ways to fit a quadratic model to the variables
    recover the approach in 2 with =poly(Girth, degree = 2, raw =
    TRUE)=.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We will fit the quadratic model to the =trees= data and display the
 results with =summary=, being careful to rescale the data before
@@ -16435,22 +16437,22 @@ quadratic function using the =lines= function, which adds a line to
 the plot tracing the estimated mean response.
 
 #+NAME: Fitting-the-Quadratic
-#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-Fitting-the-Quadratic.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-Fitting-the-Quadratic.pdf
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 #+END_SRC
 
 #+NAME: fig-Fitting-the-Quadratic
 #+CAPTION[Quadratic model for the =trees= data]: \small A quadratic model for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Fitting-the-Quadratic
-[[file:ps/mlr-Fitting-the-Quadratic.ps]]
+[[file:ps/mlr-Fitting-the-Quadratic.pdf]]
 
 The plot is shown in Figure [[fig-Fitting-the-Quadratic]]. Pay attention to
 the scale on the \(x\)-axis: it is on the scale of the transformed
 =Girth= data and not on the original scale.
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 
@@ -16671,7 +16673,7 @@ We can see a plot of the two regression lines with the following
 mouthful of code.
 
 #+NAME: dummy-variable-trees
-#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-dummy-variable-trees.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/mlr-dummy-variable-trees.pdf
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
@@ -16684,9 +16686,9 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 
 #+NAME: fig-dummy-variable-trees
 #+CAPTION[A dummy variable model for the =trees= data]: \small A dummy variable model for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: dummy-variable-trees
-[[file:ps/mlr-dummy-variable-trees.ps]]
+[[file:ps/mlr-dummy-variable-trees.pdf]]
 
 It may look intimidating but there is reason to the madness. First we
 =split= the =trees= data into two pieces, with groups determined by
@@ -16769,7 +16771,7 @@ complete model. The way to test whether the improvement is significant
 is to compute =lm= objects both for the complete model and the reduced
 model then compare the answers with the =anova= function.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-mlr-trees-poly-no-rescale>> For the =trees= data, let us fit a
 polynomial regression model and for the sake of argument we will
 ignore our own good advice and fail to rescale the explanatory
@@ -16870,7 +16872,7 @@ test of =Height^2= at the beginning of this example. In fact, the
 /p-values/ are /exactly/ the same. Perhaps now we gain some insight
 into the true meaning of the univariate tests.
 
-#+END_exampletoo
+# +END_exampletoo
 
 ** Residual Analysis and Diagnostic Tools
 :PROPERTIES:
@@ -17318,7 +17320,7 @@ distribution to estimate properties of the statistic. We will
 illustrate the bootstrap procedure in the special case that the
 statistic \(S\) is a standard error.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-Bootstrap-se-mean>> *Standard error of the mean.* In this
 example we illustrate the bootstrap by estimating the standard error
 of the sample meanand we will do it in the special case that the
@@ -17347,16 +17349,16 @@ A histogram of the 1000 values of \(\overline{x}\) is shown in Figure
 [[fig-Bootstrap-se-mean]], and was produced by the following code.
 
 #+NAME: Bootstrap-se-mean
-#+BEGIN_SRC R :exports both :results graphics :file ps/resamp-Bootstrap-se-mean.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/resamp-Bootstrap-se-mean.pdf
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 #+END_SRC
 
 #+NAME: fig-Bootstrap-se-mean
 #+CAPTION[Bootstrapping the standard error of the mean, simulated data]: \small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Bootstrap-se-mean
-[[file:ps/resamp-Bootstrap-se-mean.ps]]
+[[file:ps/resamp-Bootstrap-se-mean.pdf]]
 
 We have overlain what we know to be the true sampling distribution of
 \(\overline{X}\), namely, a
@@ -17381,7 +17383,7 @@ mean(xbarstar) - mean(srs)
 : [1] 3.05766
 : [1] -0.001229869
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 Notice how close the two values are. The difference between them is an
@@ -17427,7 +17429,7 @@ the information contained in the original sample.
 #+END_rem
 
 #+ATTR_LATEX: :options [\textbf{Standard error of the median}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-Bootstrap-se-median>> We look at one where we do not know the
 answer ahead of time. This example uses the =rivers=
 @@latex:\index{Data sets!rivers@\texttt{rivers}}@@ data set. Recall
@@ -17448,15 +17450,15 @@ sd(medstar)
 : [1] 27.60941
 
 #+NAME: Bootstrapping-se-median
-#+BEGIN_SRC R :exports both :results graphics :file ps/resamp-Bootstrapping-se-median.ps
+#+BEGIN_SRC R :exports both :results graphics :file ps/resamp-Bootstrapping-se-median.pdf
 hist(medstar, breaks = 40, prob = TRUE)
 #+END_SRC
 
 #+NAME: fig-Bootstrapping-se-median
 #+CAPTION[Bootstrapping the standard error of the median for the =rivers= data]: \small Bootstrapping the standard error of the median for the =rivers= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Bootstrapping-se-median
-[[file:ps/resamp-Bootstrapping-se-median.ps]]
+[[file:ps/resamp-Bootstrapping-se-median.pdf]]
 
 The graph is shown in Figure [[fig-Bootstrapping-se-median]], and was produced
 by the following code.
@@ -17476,11 +17478,11 @@ mean(medstar) - median(rivers)
 : [1] 426.47
 : [1] 1.47
 
-#+END_exampletoo
+# +END_exampletoo
 
 
 #+ATTR_LATEX: :options [\textbf{The boot package in R}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 It turns out that there are many bootstrap procedures and commands
 already built into base \(\mathsf{R}\), in the =boot=
 package. Further, inside the =boot= package \cite{boot:1} there is
@@ -17489,7 +17491,7 @@ even a function called =boot=
 
 :  boot(data, statistic, R)
 
-#+END_exampletoo
+# +END_exampletoo
 
 Here, =data= is a vector (or matrix) containing the data to be
 resampled, =statistic= is a defined function, /of two arguments/, that
@@ -17602,7 +17604,7 @@ a variable, for example, =data.boot=. We then plug =data.boot= into
 the function =boot.ci=.
 
 #+ATTR_LATEX: :options [\textbf{Percentile interval for the expected value of the median}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 <<exa-percentile-interval-median-first>> We will try the naive
 approach where we generate the resamples and calculate the percentile
 interval by hand.
@@ -17621,10 +17623,10 @@ quantile(thetast, c(0.025, 0.975))
 :  2.5% 97.5% 
 :    12    18
 
-#+END_exampletoo
+# +END_exampletoo
 
 #+ATTR_LATEX: :options [\textbf{Confidence interval for expected value of the median, second try}]
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 Now we will do it the right way with the =boot= function.
 
 #+BEGIN_SRC R :exports both :results output pp 
@@ -17647,7 +17649,7 @@ Level      Normal             Percentile            BCa
 Calculations and Intervals on Original Scale
 #+END_example
 
-#+END_exampletoo
+# +END_exampletoo
 
 *** Student's \(t\) intervals ("normal intervals")
 
@@ -17674,7 +17676,7 @@ interval
  will have approximately \(100(1-\alpha)\%\) confidence of containing
  \(\mathbb{E}(\mathrm{statistic})\).
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
 
 We will use the t-interval method to find the bootstrap CI for the
 median. We have looked at the bootstrap distribution; it appears to be
@@ -17683,7 +17685,7 @@ the bias is approximately 40, which on the scale of these data is
 practically negligible. Thus, we may consider looking at the
 \(t\)-intervals. Note that, since our sample is so large, instead of
 \(t\)-intervals we will essentially be using \(z\)-intervals.
-#+END_exampletoo
+# +END_exampletoo
 
 We see that, considering the scale of the data, the confidence
 intervals compare with each other quite well.
@@ -17736,7 +17738,7 @@ when the null hypothesis is true. Small \(p\)-values are evidence
 against the null hypothesis. It is not immediately obvious how to use
 resampling methods here, so we discuss an example.
 
-#+BEGIN_exampletoo
+# +BEGIN_exampletoo
  
 A study concerned differing dosages of the antiretroviral drug
 AZT. The common dosage is 300mg daily. Higher doses cause more side
@@ -17764,7 +17766,7 @@ indeed be the same, or just one big group. In that case, the observed
 difference in the sample means just reflects the random assignment
 into the arbitrary =x1= and =x2= categories. It is now clear how we
 may resample, consistent with the null hypothesis.
-#+END_exampletoo
+# +END_exampletoo
 
 *** Procedure:
 
