@@ -16608,7 +16608,7 @@ summary(treesdummy.lm)
 #+END_SRC
 
 #+RESULTS:
-#+BEGIN_example
+#+begin_example
 
 Call:
 lm(formula = Volume ~ Girth + Tall, data = trees)
@@ -16628,7 +16628,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 3.875 on 28 degrees of freedom
 Multiple R-squared:  0.9481,	Adjusted R-squared:  0.9444 
 F-statistic: 255.9 on 2 and 28 DF,  p-value: < 2.2e-16
-#+END_example
+#+end_example
 
 From the output we see that all parameter estimates are statistically
 significant and we conclude that the mean response differs for trees
@@ -16675,7 +16675,7 @@ mouthful of code.
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
-plot(Volume ~ Girth, data = trees, type = "n")
+plot(Volume ~ Girth, data = trees)
 points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
 points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
 lines(Fit ~ Girth, data = treesTall[["yes"]])
