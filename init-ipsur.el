@@ -64,17 +64,17 @@
 	 )
 	
 	("ipsurlatex-ps"
-	 :base-directory "~/git/IPSUR/ps/"
+	 :base-directory "~/git/IPSUR/fig/"
 	 :base-extension "ps"
 	 :recursive t
-	 :publishing-directory "~/git/IPSUR/tex/ps"
+	 :publishing-directory "~/git/IPSUR/tex/fig"
 	 :publishing-function org-publish-attachment)
 
 	("ipsurlatex-pdf"
-	 :base-directory "~/git/IPSUR/ps/"
+	 :base-directory "~/git/IPSUR/fig/"
 	 :base-extension "pdf"
 	 :recursive t
-	 :publishing-directory "~/git/IPSUR/tex/ps"
+	 :publishing-directory "~/git/IPSUR/tex/fig"
 	 :publishing-function org-publish-attachment)
 
 	("ipsurlatex-tex"

@@ -22,6 +22,7 @@
 basedir  = git
 buildir  = build
 ipsurdir = IPSUR
+figdir   = fig
 psdir    = ps
 pdfdir   = pdf
 htmldir  = html
@@ -48,13 +49,7 @@ pdf:
 	cp -R $(texdir) $(pdfdir)
 	-cd $(pdfdir); pdflatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); pdflatex $(orgfile).tex
 
-texpdf:
-	-mkdir $(texdir)
-	-mkdir $(psdir)
-	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
-	cp -R $(texdir) $(pdfdir)
-	-cd $(pdfdir); pdflatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); pdflatex $(orgfile).tex
-	-rm -r ~/.org-timestamps
+texpdf: tex pdf
 
 figures:
 	-mkdir $(psdir)
