@@ -47,7 +47,7 @@ tex:
 pdf:
 	-rm $(pdfdir)
 	cp -R $(texdir) $(pdfdir)
-	-cd $(pdfdir); pdflatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); pdflatex $(orgfile).tex
+	-cd $(pdfdir); xelatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); xelatex $(orgfile).tex; xelatex $(orgfile).tex
 
 texpdf: tex pdf
 
