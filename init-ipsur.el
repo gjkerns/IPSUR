@@ -57,6 +57,7 @@
 	("ipsurlatex-org"
 	 :base-directory "~/git/IPSUR/"
 	 :base-extension "org"
+	 :exclude "INSTALL.org"
 	 :publishing-directory "~/git/IPSUR/tex"
 	 :publishing-function org-latex-publish-to-latex
 	 :auto-sitemap nil
