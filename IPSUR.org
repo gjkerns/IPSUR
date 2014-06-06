@@ -27,7 +27,6 @@
 #+PROPERTY: exports results
 #+PROPERTY: results value raw
 #+PROPERTY: cache no
-#+PROPERTY: eval no-export
 #+LaTeX_CLASS: scrbook
 #+LaTeX_CLASS_OPTIONS: [captions=tableheading]
 #+LaTeX_CLASS_OPTIONS: [10pt,english,twoside]
@@ -109,6 +108,7 @@ seed <- 42
 set.seed(seed)
 options(width = 60)
 options(useFancyQuotes = FALSE)
+ps.options(horizontal = FALSE)
 cexlab <- 1.5
 # load packages needed by the book
 library("actuar")
@@ -1230,7 +1230,7 @@ par(mfrow = c(1,1)) # back to normal
 
 #+NAME: fig-stripcharts
 #+CAPTION[Strip charts of =precip=, =rivers=, and =discoveries=]: \small Three stripcharts of three data sets.  The first graph uses the =overplot= method, the second the =jitter= method, and the third the =stack= method.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: stripcharts
 [[file:fig/datadesc-stripcharts.ps]]
 
@@ -1285,8 +1285,8 @@ par(mfrow = c(1,1))
 #+END_SRC
 
 #+NAME: fig-histograms
-#+CAPTION: \small (Relative) frequency histograms of the =precip= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[(Relative) frequency histograms of the =precip= data]: \small (Relative) frequency histograms of the =precip= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms
 [[file:fig/datadesc-histograms.ps]]
 
@@ -1319,8 +1319,8 @@ par(mfrow = c(1,1))
 #+END_SRC
 
 #+NAME: fig-histograms-bins
-#+CAPTION: \small More histograms of the =precip= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[More histograms of the =precip= data]: \small More histograms of the =precip= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms-bins
 [[file:fig/datadesc-histograms-bins.ps]]
 
@@ -1443,8 +1443,8 @@ par(mfrow = c(1,1))
 #+END_SRC
 
 #+NAME: fig-indpl-lakehuron
-#+CAPTION: \small Index plots of the =LakeHuron= data
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Index plots of the =LakeHuron= data]: \small Index plots of the =LakeHuron= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: indpl-lakehuron
 [[file:fig/datadesc-indpl-lakehuron.ps]]
 
@@ -1665,7 +1665,7 @@ par(mfrow = c(1,1)) # back to normal
 
 #+NAME: fig-bar-gr-stateregion
 #+CAPTION[Bar graphs of the =state.region= data]: \small The top graph is a frequency barplot made with =table= and the bottom is a relative frequency barplot made with =prop.table=.
-#+ATTR_LaTeX: :width 1.0\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 1.0\textwidth :placement [ht!]
 #+RESULTS: bar-gr-stateregion
 [[file:fig/datadesc-bar-gr-stateregion.ps]]
 
@@ -1704,8 +1704,8 @@ pareto.chart(table(state.division), ylab="Frequency", cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-Pareto-chart
-#+CAPTION: \small Pareto chart of the =state.division= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Pareto chart of the =state.division= data]: \small Pareto chart of the =state.division= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Pareto-chart
 [[file:fig/datadesc-Pareto-chart.ps]]
 
@@ -1734,8 +1734,8 @@ dotchart(as.vector(x), labels = names(x), cex.lab = cexlab)
 #+END_SRC
 
 #+NAME: fig-dot-charts
-#+CAPTION: \small Dot chart of the \texttt{state.region} data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Dot chart of the \texttt{state.region} data]: \small Dot chart of the \texttt{state.region} data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: dot-charts
 [[file:fig/datadesc-dot-charts.ps]]
 
@@ -1877,7 +1877,7 @@ are usually several values that would serve as a center, and our later
 tasks will be focused on choosing an appropriate one for the data at
 hand. Judging from the histogram that we saw in Figure
 [[fig-histograms-bins]], a measure of center would be about
-SRC_R{round(mean(precip))} 35.
+SRC_R[:eval no-export]{round(mean(precip))} 35.
 
 *** Spread
 :PROPERTIES:
@@ -2890,8 +2890,8 @@ print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 #+END_SRC
 
 #+NAME: fig-xyplot-group
-#+CAPTION[Scatterplot of Petal width versus length in the =iris= data.]: \small Scatterplot of Petal width versus length in the =iris= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Scatterplot of Petal width versus length in the =iris= data]: \small Scatterplot of Petal width versus length in the =iris= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: xyplot-group
 [[file:fig/datadesc-xyplot-group.ps]]
 
@@ -2967,8 +2967,8 @@ print(bwplot(~weight | feed, data = chickwts))
 #+END_SRC
 
 #+NAME: fig-bwplot
-#+CAPTION: \small Boxplots of =weight= by =feed= type in the =chickwts= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Boxplots of =weight= by =feed= type in the =chickwts= data]: \small Boxplots of =weight= by =feed= type in the =chickwts= data.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: bwplot
 [[file:fig/datadesc-bwplot.ps]]
 
@@ -2985,7 +2985,7 @@ print(histogram(~age | education, data = infert))
 
 #+NAME: fig-histograms-lattice
 #+CAPTION[Histograms of =age= by =education= level]: \small Histograms of =age= by =education= level from the =infert= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: histograms-lattice
 [[file:fig/datadesc-histograms-lattice.ps]]
 
@@ -3002,7 +3002,7 @@ print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 
 #+NAME: fig-xyplot
 #+CAPTION[An =xyplot= of =Petal.Length= versus =Petal.Width= by =Species=]: \small An =xyplot= of =Petal.Length= versus =Petal.Width= by =Species= in the =iris= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: xyplot
 [[file:fig/datadesc-xyplot.ps]]
 
@@ -3018,8 +3018,8 @@ print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 #+END_SRC
 
 #+NAME: fig-coplot
-#+CAPTION: \small A =coplot= of =conc= versus =uptake= by =Type= and =Treatment=.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[A =coplot= of =conc= versus =uptake= by =Type= and =Treatment=]: \small A =coplot= of =conc= versus =uptake= by =Type= and =Treatment=.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: coplot
 [[file:fig/datadesc-coplot.ps]]
 
@@ -3242,8 +3242,8 @@ textellipse(mid = c(0.29,0.25), box.col = grey(0.95),
 #+END_SRC
 
 #+NAME: fig-diagram
-#+CAPTION[Two types of experiments]: \small Two types of experiments
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+CAPTION[Two types of experiments]: \small Two types of experiments.
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: diagram
 [[file:fig/prob-diagram.ps]]
 
@@ -4707,9 +4707,8 @@ the space. The arguments are =n=, the number of (distinguishable)
 objects in the urn, =k=, the sample size, and =replace=, =ordered=, as
 above.
 
-
-#+CAPTION: Sampling \(k\) from \(n\) objects with \texttt{urnsamples}
 #+NAME: tab-Sampling-k-from-n
+#+CAPTION[Sampling \(k\) from \(n\) objects with =urnsamples=]: Sampling \(k\) from \(n\) objects with =urnsamples=.
 |                   | =ordered = TRUE=    | =ordered = FALSE=           |
 |-------------------+---------------------+-----------------------------|
 | =replace = TRUE=  | \(n^{k}\)           | \((n-1+k)! / [(n-1)!k!]\)   |
@@ -4894,7 +4893,7 @@ remove(g)
 
 #+NAME: fig-birthday
 #+CAPTION[The birthday problem]: \small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: birthday
 [[file:fig/prob-birthday.ps]]
 
@@ -5007,7 +5006,7 @@ p + geom_text(size = 15) + xlab("First roll") + ylab("Second roll")
 
 #+NAME: fig-twodiceAB
 #+CAPTION[Rolling two dice]: \small Rolling two dice. The outcomes in A are marked with X, the outcomes in B are marked with O.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: twodiceAB
 [[file:fig/prob-twodiceAB.ps]]
 
@@ -5602,7 +5601,7 @@ Curly. Their primary job duty is to file paperwork in the filing
 cabinet when papers become available. The three assistants have
 different work schedules:
 
-#+CAPTION: Misfiling assistants: workload
+#+CAPTION[Misfiling assistants: workload]: Misfiling assistants: workload.
 |          | Moe      | Larry    | Curly    |
 |----------+----------+----------+----------|
 | Workload | \(60\%\) | \(30\%\) | \(10\%\) |
@@ -5616,7 +5615,7 @@ Larry and Curly, respectively, filed the document. What are these
 events' respective probabilities? In the absence of additional
 information, reasonable prior probabilities would just be
 
-#+CAPTION: Misfiling assistants: prior
+#+CAPTION[Misfiling assistants: prior]: Misfiling assistants: prior.
 |                   | Moe | Larry | Curly |
 |-------------------+-----+-------+-------|
 | Prior Probability | 0.6 |   0.3 |   0.1 |
@@ -5647,7 +5646,7 @@ Curly's filing accuracy in the past (due to historical performance
 evaluations). The performance information may be represented by the
 following table:
 
-#+CAPTION: Misfiling assistants: misfile rate
+#+CAPTION[Misfiling assistants: misfile rate]: Misfiling assistants: misfile rate.
 |              |   Moe | Larry | Curly |
 |--------------+-------+-------+-------|
 | Misfile Rate | 0.003 | 0.007 | 0.010 |
@@ -5703,7 +5702,7 @@ the document, since it incorporates the observed data that a randomly
 selected file was misplaced (which is governed by the misfile
 rate). We can use the same argument to calculate
 
-#+CAPTION: Misfiling assistants: posterior
+#+CAPTION[Misfiling assistants: posterior]: Misfiling assistants: posterior.
 |                       | Moe           | Larry         | Curly         |
 |-----------------------+---------------+---------------+---------------|
 | Posterior Probability | \(\approx0.37\) | \(\approx0.43\) | \(\approx0.20\) |
@@ -5837,7 +5836,7 @@ example, \(X(HH)=2\), while \(X(HT)=1\). We may make a table of the
 possibilities:
 
 #+NAME: tab-flip-coin-twice
-#+CAPTION: Flipping a coin twice.
+#+CAPTION[Flipping a coin twice]: Flipping a coin twice.
 | \(\omega\in S\) | \(HH\) | \(HT\) | \(TH\) | \(TT\) |
 |-----------------+--------+--------+--------+--------|
 | \(X(\omega)=x\) |      2 |      1 |      1 |      0 |
@@ -6571,7 +6570,7 @@ points(0:3, pbinom(-1:2, size = 3, prob = 0.5), pch = 1, cex = 1.2)
 
 #+NAME: fig-binom-cdf-base
 #+CAPTION[Graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF]: \small A graph of the \(\mathsf{binom}(\mathtt{size}=3,\,\mathtt{prob}=1/2)\) CDF. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: binom-cdf-base
 [[file:fig/discdist-binom-cdf-base.ps]]
 
@@ -6624,7 +6623,7 @@ plot(X, cex = 0.2)
 
 #+NAME: fig-binom-plot-distr
 #+CAPTION[The \textsf{binom}(=size= = 3, =prob= = 0.5) distribution from the =distr= package]: \small The \textsf{binom}(=size= = 3, =prob= = 0.5) distribution from the =distr= package.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: binom-plot-distr
 [[file:fig/discdist-binom-plot-distr.ps]]
 
@@ -6968,7 +6967,7 @@ plot(ecdf(x))
 
 #+NAME: fig-empirical-CDF
 #+CAPTION[The empirical CDF]: \small The empirical CDF. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: empirical-CDF
 [[file:fig/discdist-empirical-CDF.ps]]
 
@@ -8233,7 +8232,7 @@ $estim.prec
 temp <- round(uniroot(g, interval = c(130, 145))$root, 4)
 #+END_SRC
 
-The answer is shown in =$root= which is approximately SRC_R{temp}
+The answer is shown in =$root= which is approximately SRC_R[:eval no-export]{temp}
 134.8952, that is, a person with this IQ score or higher falls in the
 top 1% of all IQ scores.
 # +END_exampletoo
@@ -8765,7 +8764,7 @@ for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
 
 #+NAME: fig-chisq-dist-vary-df
 #+CAPTION[Chi square distribution for various degrees of freedom]: \small The chi square distribution for various degrees of freedom.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: chisq-dist-vary-df
 [[file:fig/contdist-chisq-dist-vary-df.ps]]
 
@@ -8967,7 +8966,7 @@ plot(function(x){mgfgamma(x, shape = 13, rate = 1)},
 
 #+NAME: fig-gamma-mgf
 #+CAPTION[Plot of the \textsf{gamma}(=shape= = 13, =rate= = 1) MGF]: \small A plot of the \textsf{gamma}(=shape= = 13, =rate= = 1) MGF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: gamma-mgf
 [[file:fig/contdist-gamma-mgf.ps]]
 
@@ -9245,7 +9244,7 @@ print(p2, vp = vplayout(1, 2))
 
 #+NAME: fig-max-and-sum-two-dice
 #+CAPTION[Max and Sum of two dice]: \small Rolling two dice. The value of U is the maximum of the two rolls, while the value of V is the sum of the two rolls.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: max-and-sum-two-dice
 [[file:fig/multdist-max-and-sum-two-dice.ps]]
 
@@ -9263,7 +9262,7 @@ p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") +
 
 #+NAME: fig-max-sum-two-dice-joint
 #+CAPTION[Joint outcomes of Max and Sum]: \small Rolling two dice. Joint values of U and V are shown as pairs, for each outcome in the sample space.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: max-sum-two-dice-joint
 [[file:fig/multdist-max-sum-two-dice-joint.ps]]
 
@@ -10098,7 +10097,7 @@ persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
 #+NAME: fig-mvnorm-pdf
 #+CAPTION[Graph of a bivariate normal PDF]: \small A graph of a bivariate normal PDF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: mvnorm-pdf
 [[file:fig/multdist-mvnorm-pdf.ps]]
 
@@ -10548,7 +10547,7 @@ print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2,
 
 #+NAME: fig-multinom-pmf2
 #+CAPTION[Plot of a multinomial PMF]: \small A plot of a multinomial PMF.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: multinom-pmf2
 [[file:fig/multdist-multinom-pmf2.ps]]
 
@@ -10856,7 +10855,7 @@ for (i in ind) curve(dt(x, df = i), -3, 3, add = TRUE)
 
 #+NAME: fig-Students-t-dist-vary-df
 #+CAPTION[Student's \(t\) distribution for various degrees of freedom]: \small A plot of Student's \(t\) distribution for various degrees of freedom.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Students-t-dist-vary-df
 [[file:fig/sampdist-Students-t-dist-vary-df.ps]]
 
@@ -11215,7 +11214,7 @@ hist(iqrs, breaks = 20)
 
 #+NAME: fig-simulated-IQR
 #+CAPTION[Plot of simulated IQRs]: \small A plot of simulated IQRs.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: simulated-IQR
 [[file:fig/sampdist-simulated-IQR.ps]]
 
@@ -11252,7 +11251,7 @@ hist(mads, breaks = 20)
 
 #+NAME: fig-simulated-MAD
 #+CAPTION[Plot of simulated MADs]: \small A plot of simulated MADs.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: simulated-MAD
 [[file:fig/sampdist-simulated-MAD.ps]]
 
@@ -11269,8 +11268,8 @@ mu <- round(rnorm(10, mean = 20))
 
 #+BEGIN_xca
 Suppose that we observe a random sample \(X_{1}\), \(X_{2}\), ... ,
-\(X_{n}\) of size SRS( n = SRC_R{n[1]} 24) from a \(
-\mathsf{norm}(\mathtt{mean}= SRC_R{mu[1]} 20 )\) distribution.
+\(X_{n}\) of size SRS( n = SRC_R[:eval no-export]{n[1]} 24) from a \(
+\mathsf{norm}(\mathtt{mean}= SRC_R[:eval no-export]{mu[1]} 20 )\) distribution.
 1. What is the mean of \(\overline{X}\)?
 2. What is the standard deviation of \(\overline{X}\)?
 3. What is the distribution of \(\overline{X}\)? (approximately)
@@ -11437,7 +11436,7 @@ points(9, 0, pch = 4, lwd = 3, cex = 2)
 
 #+NAME: fig-capture-recapture
 #+CAPTION[Capture-recapture experiment]: \small A plot of maximum likelihood for the capture-recapture experiment.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: capture-recapture
 [[file:fig/estimate-capture-recapture.ps]]
 
@@ -11492,7 +11491,7 @@ curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 
 #+NAME: fig-fishing-part-two
 #+CAPTION[Assorted likelihood functions for fishing, part two]: \small Assorted likelihood functions for fishing, part two.   Three graphs are shown of \(L\) when \(\sum x_{i}\) equals 3, 4, and 5, respectively, from left to right. We pick an \(L\) that matches the observed data and then maximize \(L\) as a function of \(p\). If \(\sum x_{i}=4\), then the maximum appears to occur somewhere around \(p \approx 0.6\).
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: fishing-part-two
 [[file:fig/estimate-fishing-part-two.ps]]
 
@@ -11555,7 +11554,7 @@ text(mle, mleobj/6, substitute(hat(theta)==a, list(a=round(mle, 4))), cex = 2, p
 
 #+NAME: fig-species-mle
 #+CAPTION[Species maximum likelihood]: \small Species maximum likelihood.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: species-mle
 [[file:fig/estimate-species-mle.ps]]
 
@@ -11709,8 +11708,8 @@ amax <- A$maximum; aobj <- A$objective
 Note that the =optimize= function by default minimizes the function
 =L=, so we have to set =maximum = TRUE= to get an MLE. The returned
 value of =$maximum= gives an approximate value of the MLE to be
-SRC_R{round(amax, 3)} 0.406 and =objective= gives =L= evaluated at the
-MLE which is approximately SRC_R{round(aobj, 3)} 0.
+SRC_R[:eval no-export]{round(amax, 3)} 0.406 and =objective= gives =L= evaluated at the
+MLE which is approximately SRC_R[:eval no-export]{round(aobj, 3)} 0.
 
 We previously remarked that it is usually more numerically convenient
 to maximize the log-likelihood (or minimize the negative
@@ -11907,7 +11906,7 @@ ci.examp()
 
 #+NAME: fig-ci-examp
 #+CAPTION[Simulated confidence intervals]: \small The graph was generated by the =ci.examp= function from the =TeachingDemos= package. Fifty (50) samples of size twenty five (25) were generated from a \( \mathsf{norm}(\mathtt{mean}=100,\,\mathtt{sd}=10) \) distribution, and each sample was used to find a 95% confidence interval for the population mean using Equation \eqref{eq-z-interval}. The 50 confidence intervals are represented above by horizontal lines, and the respective sample means are denoted by vertical slashes. Confidence intervals that "cover" the true mean value of 100 are plotted in black; those that fail to cover are plotted in a lighter color. In the plot we see that only one (1) of the simulated intervals out of the 50 failed to cover \(\mu=100\), which is a success rate of 98%. If the number of generated samples were to increase from 50 to 500 to 50000, ..., then we would expect our success rate to approach the exact value of 95%.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: ci-examp
 [[file:fig/hypoth-ci-examp.ps]]
 
@@ -12741,7 +12740,7 @@ Z = \frac{\hat{p} - p_{0}}{sqrt{p_{0}(1 - p_{0})/n}}  \sim \mathsf{norm}(\mathtt
 \end{equation}
 
 #+NAME: tab-ztest-one-sample-prop
-#+CAPTION: Hypothesis tests, population proportion, large sample
+#+CAPTION[Hypothesis tests, population proportion, large sample]: Hypothesis tests, population proportion, large sample.
 | \(H_{0}\)         | \(H_{a}\)            | Rejection Region                  |
 |-------------------+----------------------+-----------------------------------|
 | \(p = p_{0}\)     | \(p > p_{0}\)        | \(z > z_{\alpha}\)                |
@@ -12944,7 +12943,7 @@ that which follows,
 
 
 #+NAME: tab-ztest-two-sample-prop
-#+CAPTION: Hypothesis tests, difference in population proportions, large sample
+#+CAPTION[Hypothesis tests, difference in population proportions, large sample]: Hypothesis tests, difference in population proportions, large sample.
 | \(H_{0}\)         | \(H_{a}\)                | Rejection Region                  |
 |-------------------+--------------------------+-----------------------------------|
 | \(p_{1} = p_{2}\) | \(p_{1} - p_{2} > 0\)    | \(z > z_{\alpha}\)                |
@@ -13025,7 +13024,7 @@ distribution. We would like to test \(H_{0}:\mu = \mu_{0}\).
    \]
    
    #+NAME: tab-ztest-one-sample
-   #+CAPTION: Hypothesis tests, population mean, large sample
+   #+CAPTION[Hypothesis tests, population mean, large sample]: Hypothesis tests, population mean, large sample.
    | \(H_{0}\)         | \(H_{a}\)            | Rejection Region                  |
    |-------------------+----------------------+-----------------------------------|
    | \(\mu = \mu_{0}\) | \(\mu > \mu_{0}\)    | \(z > z_{\alpha}\)                |
@@ -13037,7 +13036,7 @@ distribution. We would like to test \(H_{0}:\mu = \mu_{0}\).
    T = \frac{\overline{X} - \mu_{0}}{S/\sqrt{n}} \sim \mathsf{t}(\mathtt{df} = n - 1).
    \]
    #+NAME: tab-ttest-one-sample
-   #+CAPTION: Hypothesis tests, population mean, small sample
+   #+CAPTION[Hypothesis tests, population mean, small sample]: Hypothesis tests, population mean, small sample.
    | \(H_{0}\)         | \(H_{a}\)            | Rejection Region                        |
    |-------------------+----------------------+-----------------------------------------|
    | \(\mu = \mu_{0}\) | \(\mu > \mu_{0}\)    | \(t > t_{\alpha}(n - 1)\)               |
@@ -13244,7 +13243,7 @@ For a nonparametric alternative to the two-sample \(F\) test see
 Chapter [[#cha-Nonparametric-Statistics]].
 
 #+NAME: tab-two-t-test-pooled
-#+CAPTION: Rejection regions, difference in means, pooled t-test
+#+CAPTION[Rejection regions, difference in means, pooled t-test]: Rejection regions, difference in means, pooled t-test.
 | \(H_{0}\)           | \(H_{a}\)              | Rejection Region                             |
 |---------------------+------------------------+----------------------------------------------|
 | \(\mu_{D} = D_{0}\) | \(\mu_{D} > D_{0}\)    | \(t > t_{\alpha}(n + m - 2)\)                |
@@ -13255,7 +13254,7 @@ Chapter [[#cha-Nonparametric-Statistics]].
 *** Paired Samples
 
 #+NAME: tab-two-t-test-paired
-#+CAPTION: Rejection regions, difference in means, pairled t-test
+#+CAPTION[Rejection regions, difference in means, pairled t-test]: Rejection regions, difference in means, pairled t-test.
 | \(H_{0}\)           | \(H_{a}\)              | Rejection Region                             |
 |---------------------+------------------------+----------------------------------------------|
 | \(\mu_{D} = D_{0}\) | \(\mu_{D} > D_{0}\)    | \(t > t_{\alpha}(n_{D} - 1)\)                |
@@ -13453,7 +13452,7 @@ rug(y1)
 
 #+NAME: fig-between-versus-within
 #+CAPTION[Between group versus within group variation]: \small A plot of between group versus within group variation.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: between-versus-within
 [[file:fig/hypoth-between-versus-within.ps]]
 
@@ -13469,7 +13468,7 @@ par(old.omd)
 
 #+NAME: fig-some-F-plots-HH
 #+CAPTION[Some \(F\) plots from the \texttt{HH} package]: \small Some \(F\) plots from the \texttt{HH} package.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: some-F-plots-HH
 [[file:fig/hypoth-some-F-plots-HH.ps]]
 
@@ -13511,7 +13510,7 @@ power.examp()
 
 #+NAME: fig-power-examp
 #+CAPTION[Plot of significance level and power]: \small This graph was generated by the =power.examp= function from the =TeachingDemos= package. The plot corresponds to the hypothesis test \(H_{0}:\,\mu=\mu_{0}\) versus \(H_{1}:\,\mu=\mu_{1}\) (where \(\mu_{0}=0\) and \(\mu_{1}=1\), by default) based on a single observation \(X\sim\mathsf{norm}(\mathtt{mean}=\mu,\,\mathtt{sd}=\sigma)\). The top graph is of the \(H_{0}\) density while the bottom is of the \(H_{1}\) density. The significance level is set at \(\alpha=0.05\), the sample size is \(n=1\), and the standard deviation is \(\sigma=1\). The pink area is the significance level, and the critical value \(z_{0.05}\approx1.645\) is marked at the left boundary -- this defines the rejection region. When \(H_{0}\) is true, the probability of falling in the rejection region is exactly \(\alpha=0.05\). The same rejection region is marked on the bottom graph, and the probability of falling in it (when \(H_{1}\)  is true) is the blue area shown at the top of the display to be approximately \(0.26\). This probability represents the /power/ to detect a non-null mean value of \(\mu=1\). With the command the =run.power.examp()= at the command line the same plot opens, but in addition, there are sliders available that allow the user to interactively change the sample size \(n\), the standard deviation \(\sigma\), the true difference between the means \(\mu_{1}-\mu_{0}\), and the significance level \(\alpha\). By playing around the student can investigate the effect each of the aforementioned parameters has on the statistical power. Note that you need the =tkrplot= package \cite{tkrplot} for =run.power.examp=.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: power-examp
 [[file:fig/hypoth-power-examp.ps]]
 
@@ -13692,7 +13691,7 @@ segments(4,4.5, 4 + dnorm(0,0,0.5),4.5, lty = 2, col = "gray")
 
 #+NAME: fig-philosophy
 #+CAPTION[Philosophical foundations of SLR]: \small Philosophical foundations of SLR.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: philosophy
 [[file:fig/slr-philosophy.ps]]
 
@@ -13728,7 +13727,7 @@ plot(dist ~ speed, data = cars)
 
 #+NAME: fig-carscatter
 #+CAPTION[Scatterplot of =dist= versus =speed= for the =cars= data]: \small A scatterplot of =dist= versus =speed= for the =cars= data.  There is clearly an upward trend to the plot which is approximately linear. 
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carscatter
 [[file:fig/slr-carscatter.ps]]
 
@@ -13896,7 +13895,7 @@ ggplot(cars, aes(x = speed, y = dist)) +
 
 #+NAME: fig-carline
 #+CAPTION[Scatterplot with added regression line for the =cars= data]: \small A scatterplot with an added regression line for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carline
 [[file:fig/slr-carline.ps]]
 
@@ -13915,11 +13914,11 @@ a data frame. See the example below.
 2. Interpret the slope \(\beta_{1}\). The true slope \(\beta_{1}\)
    represents the increase in average stopping distance for each mile
    per hour faster that the car drives. In this case, we estimate the
-   car to take approximately SRC_R{tmpcoef[2]} 3.93 additional feet
+   car to take approximately SRC_R[:eval no-export]{tmpcoef[2]} 3.93 additional feet
    to stop for each additional mph increase in speed.
 3. Interpret the intercept \( \beta_{0} \). This would represent the
    mean stopping distance for a car traveling 0 mph (which our
-   regression line estimates to be \( SRC_R{tmpcoef[1]} -17.58. Of
+   regression line estimates to be \( SRC_R[:eval no-export]{tmpcoef[1]} -17.58. Of
    course, this interpretation does not make any sense for this
    example, because a car travelling 0 mph takes 0 ft to stop (it was
    not moving in the first place)! What went wrong? Looking at the
@@ -14071,20 +14070,20 @@ tmps <- round(summary(cars.lm)$sigma, 2)
 #+END_SRC
 
 In the last section, we calculated the fitted value for \(x=8\) and
-found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R{tmpred}
+found it to be approximately \( \hat{\mu}(8) \approx\) SRC_R[:eval no-export]{tmpred}
 13.88. Now, it turns out that there was only one recorded observation
 at \(x = 8\), and we have seen this value in the output of
 =head(cars)= in Example [[exa-Speed-and-Stopping]]; it was \(\mathtt{dist}
 = 16\) ft for a car with \( \mathtt{speed} = 8 \) mph. Therefore, the
 residual should be \(E = Y - \hat{Y}\) which is \(E \approx 16 - \)
-SRC_R{tmpred} 13.88. Now take a look at the last entry of
+SRC_R[:eval no-export]{tmpred} 13.88. Now take a look at the last entry of
 =residuals(cars.lm)=, above. It is not a coincidence.
 
 The estimate \(S\) for \(\sigma\) is called the =Residual standard
 error= and for the =cars= data is shown a few lines up on the
 =summary(cars.lm)= output (see How to do it with \(\mathsf{R}\) in
 Section [[#sub-slr-interval-est-params]]). We may read it from there to be \(
-S\approx\) SRC_R{tmps} 15.38, or we can access it directly from the
+S\approx\) SRC_R[:eval no-export]{tmps} 15.38, or we can access it directly from the
 =summary= object.
 
 #+BEGIN_SRC R :exports both :results output pp
@@ -14201,7 +14200,7 @@ In the =Coefficients= section we find the parameter estimates and
 their respective standard errors in the second and third columns; the
 other columns are discussed in Section [[#sec-Model-Utility-SLR]]. If we
 wanted, say, a 95% confidence interval for \(\beta_{1}\) we could use
-\( b_{1} = \) SRC_R{A[2,1]} 3.932 and \( S_{b_{1}} = \) SRC_R{A[2,2]}
+\( b_{1} = \) SRC_R[:eval no-export]{A[2,1]} 3.932 and \( S_{b_{1}} = \) SRC_R[:eval no-export]{A[2,2]}
 0.416 together with a \( \mathsf{t}_{0.025}(\mathtt{df}=23) \)
 critical value to calculate \( b_{1} \pm
 \mathsf{t}_{0.025}(\mathtt{df} = 23) \cdot S_{b_{1}} \).  Or, we could
@@ -14216,8 +14215,8 @@ confint(cars.lm)
 : (Intercept) -31.167850 -3.990340
 : speed         3.096964  4.767853
 
-With 95% confidence, the random interval SRC_R{B[2,1]} 3.097 to
-SRC_R{B[2,2]} 4.768 covers the parameter \(\beta_{1}\).
+With 95% confidence, the random interval SRC_R[:eval no-export]{B[2,1]} 3.097 to
+SRC_R[:eval no-export]{B[2,2]} 4.768 covers the parameter \(\beta_{1}\).
 
 *** Interval Estimates of the Regression Line
 :PROPERTIES:
@@ -14347,19 +14346,19 @@ can be changed with the =level= argument).
 Using the =cars= data,
 1. Report a point estimate of and a 95% confidence interval for the
    mean stopping distance for a car travelling 5 mph.  The fitted
-   value for \(x = 5\) is SRC_R{carsCI[1, 1]} 2.08, so a point
-   estimate would be SRC_R{carsCI[1, 1]} 2.08 ft. The 95% CI is
-   given by SRC_R{carsCI[1, 2]} -7.64 to SRC_R{carsCI[1, 3]} 11.81, so
+   value for \(x = 5\) is SRC_R[:eval no-export]{carsCI[1, 1]} 2.08, so a point
+   estimate would be SRC_R[:eval no-export]{carsCI[1, 1]} 2.08 ft. The 95% CI is
+   given by SRC_R[:eval no-export]{carsCI[1, 2]} -7.64 to SRC_R[:eval no-export]{carsCI[1, 3]} 11.81, so
    with 95% confidence the mean stopping distance lies somewhere
-   between SRC_R{carsCI[1, 2]} -7.64 ft and SRC_R{carsCI[1, 3]} 11.81 ft.
+   between SRC_R[:eval no-export]{carsCI[1, 2]} -7.64 ft and SRC_R[:eval no-export]{carsCI[1, 3]} 11.81 ft.
 2. Report a point prediction for and a 95% prediction interval for the
    stopping distance of a hypothetical car travelling 21 mph.  The
-   fitted value for \(x = 21\) is SRC_R{carsPI[3, 1]} 65, so a point
-   prediction for the stopping distance is SRC_R{carsPI[3, 1]} 65 ft. The
-   95% PI is SRC_R{carsPI[3, 2]} 33.42 to SRC_R{carsPI[3,3]} 96.58, so with
+   fitted value for \(x = 21\) is SRC_R[:eval no-export]{carsPI[3, 1]} 65, so a point
+   prediction for the stopping distance is SRC_R[:eval no-export]{carsPI[3, 1]} 65 ft. The
+   95% PI is SRC_R[:eval no-export]{carsPI[3, 2]} 33.42 to SRC_R[:eval no-export]{carsPI[3,3]} 96.58, so with
    95% confidence we may assert that the hypothetical stopping
    distance for a car travelling 21 mph would lie somewhere between
-   SRC_R{carsPI[3, 2]} 33.42 ft and SRC_R{carsPI[3, 3]} 96.58 ft.
+   SRC_R[:eval no-export]{carsPI[3, 2]} 33.42 ft and SRC_R[:eval no-export]{carsPI[3, 3]} 96.58 ft.
 # +END_exampletoo
 
 *** Graphing the Confidence and Prediction Bands
@@ -14394,7 +14393,7 @@ print(ci.plot(cars.lm))
 
 #+NAME: fig-carscipi
 #+CAPTION[Scatterplot with confidence/prediction bands for the =cars= data]: \small A scatterplot with confidence/prediction bands for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: carscipi
 [[file:fig/slr-carscipi.ps]]
 
@@ -14670,7 +14669,7 @@ anova(cars.lm)
 tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 #+END_SRC
 
-Here we see that the \(F\) statistic is SRC_R{tmpf} 89.57 with a
+Here we see that the \(F\) statistic is SRC_R[:eval no-export]{tmpf} 89.57 with a
 \(p\)-value very close to zero. The conclusion: there is very strong
 evidence that \(H_{0}:\beta_{1} = 0 \) is false, that is, there is
 strong evidence that \( \beta_{1} \neq 0 \). Moreover, we conclude
@@ -14730,7 +14729,7 @@ plot(cars.lm, which = 2)
 
 #+NAME: fig-Normal-q-q-plot-cars
 #+CAPTION[Normal q-q plot of the residuals for the =cars= data]: \small Used for checking the normality assumption. Look out for any curvature or substantial departures from the straight line; hopefully the dots hug the line closely.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Normal-q-q-plot-cars
 [[file:fig/slr-Normal-q-q-plot-cars.ps]]
 
@@ -14823,7 +14822,7 @@ plot(cars.lm, which = 3)
 
 #+NAME: fig-std-resids-fitted-cars
 #+CAPTION[Plot of standardized residuals against the fitted values for the =cars= data]: \small Used for checking the constant variance assumption. Watch out for any fanning out (or in) of the dots; hopefully they fall in a constant band.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: std-resids-fitted-cars
 [[file:fig/slr-std-resids-fitted-cars.ps]]
 
@@ -14897,7 +14896,7 @@ plot(cars.lm, which = 1)
 
 #+NAME: fig-resids-fitted-cars
 #+CAPTION[Plot of the residuals versus the fitted values for the =cars= data]: \small Used for checking the independence assumption. Watch out for any patterns or structure; hopefully the points are randomly scattered on the plot.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: resids-fitted-cars
 [[file:fig/slr-resids-fitted-cars.ps]]
 
@@ -15259,7 +15258,7 @@ plot(cars.lm, which = 4)
 
 #+NAME: fig-Cooks-distance-cars
 #+CAPTION[Cook's distances for the =cars= data]: \small Used for checking for influential and/our outlying observations. Values with large Cook's distance merit further investigation.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Cooks-distance-cars
 [[file:fig/slr-Cooks-distance-cars.ps]]
 
@@ -15313,7 +15312,7 @@ par(mfrow = c(1,1))
 
 #+NAME: fig-Diagnostic-plots-cars
 #+CAPTION[Diagnostic plots for the =cars= data]: \small Diagnostic plots for the =cars= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Diagnostic-plots-cars
 [[file:fig/slr-Diagnostic-plots-cars.ps]]
 
@@ -15535,7 +15534,7 @@ splom(trees)
 
 #+NAME: fig-splom-trees
 #+CAPTION[Scatterplot matrix of =trees= data]: \small A scatterplot matrix of the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: splom-trees
 [[file:fig/mlr-splom-trees.ps]]
 
@@ -15591,7 +15590,7 @@ fit <- lm(Volume ~ Girth + Height, data = trees)
 
 #+NAME: fig-3D-scatterplot-trees
 #+CAPTION[3D scatterplot with regression plane for the =trees= data]: \small A 3D scatterplot with regression plane for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: 3D-scatterplot-trees
 [[file:fig/mlr-3D-scatterplot-trees.ps]]
 
@@ -15853,13 +15852,13 @@ treesFIT <- round(predict(trees.lm, newdata = new), 1)
 Using the =trees= data,
 1. Report a point estimate of the mean =Volume= of a tree of =Girth=
    9.1 in and =Height= 69 ft.  The fitted value for \(x_{1}=9.1\) and
-   \(x_{2} = 69\) is SRC_R{treesFIT[ 1 ]} 8.3, so a point estimate
-   would be SRC_R{treesFIT[ 1 ]} 8.3 cubic feet.
+   \(x_{2} = 69\) is SRC_R[:eval no-export]{treesFIT[ 1 ]} 8.3, so a point estimate
+   would be SRC_R[:eval no-export]{treesFIT[ 1 ]} 8.3 cubic feet.
 2. Report a point prediction for and a 95% prediction interval for the
    =Volume= of a hypothetical tree of =Girth= 12.5 in and =Height= 87
    ft.  The fitted value for \(x_{1} = 12.5\) and \(x_{2} = 87\) is
-   SRC_R{treesFIT[ 3 ]} 30.4, so a point prediction for the =Volume=
-   is SRC_R{treesFIT[ 3 ]} 30.4 cubic feet.
+   SRC_R[:eval no-export]{treesFIT[ 3 ]} 30.4, so a point prediction for the =Volume=
+   is SRC_R[:eval no-export]{treesFIT[ 3 ]} 30.4 cubic feet.
 # +END_exampletoo
 
 *** Mean Square Error and Standard Error
@@ -15920,7 +15919,7 @@ treesumry$sigma
 #+RESULTS:
 : [1] 3.881832
 
-For the =trees= data we find \(s \approx\) SRC_R{round(treesumry$sigma,3)}.
+For the =trees= data we find \(s \approx\) SRC_R[:eval no-export]{round(treesumry$sigma,3)}.
 
 *** Interval Estimates of the Parameters
 :PROPERTIES:
@@ -16002,7 +16001,7 @@ treesPAR <- round(confint(trees.lm), 1)
 For example, using the calculations above we say that for the
 regression model =Volume ~ Girth + Height= we are 95% confident that
 the parameter \(\beta_{1}\) lies somewhere in the interval
-SRC_R{treesPAR[2, 1]} 4.2 to SRC_R{treesPAR[2, 2]} 5.2.
+SRC_R[:eval no-export]{treesPAR[2, 1]} 4.2 to SRC_R[:eval no-export]{treesPAR[2, 2]} 5.2.
 
 *** Confidence and Prediction Intervals
 
@@ -16096,16 +16095,16 @@ Using the =trees= data,
 
 1. Report a 95% confidence interval for the mean =Volume= of a tree of
    =Girth= 9.1 in and =Height= 69 ft. The 95% CI is given by
-   SRC_R{treesCI[1, 2]} 5.8 to SRC_R{treesCI[1, 3]} 10.8, so with 95%
+   SRC_R[:eval no-export]{treesCI[1, 2]} 5.8 to SRC_R[:eval no-export]{treesCI[1, 3]} 10.8, so with 95%
    confidence the mean =Volume= lies somewhere between
-   SRC_R{treesCI[1, 2]} 5.8 cubic feet and SRC_R{treesCI[1, 3]} 10.8 cubic feet.
+   SRC_R[:eval no-export]{treesCI[1, 2]} 5.8 cubic feet and SRC_R[:eval no-export]{treesCI[1, 3]} 10.8 cubic feet.
 2. Report a 95% prediction interval for the =Volume= of a hypothetical
    tree of =Girth= 12.5 in and =Height= 87 ft. The 95% prediction
-   interval is given by SRC_R{treesCI[3, 2]} 26.9 to
-   SRC_R{treesCI[3,3]} 33.8, so with 95% confidence we may assert that
+   interval is given by SRC_R[:eval no-export]{treesCI[3, 2]} 26.9 to
+   SRC_R[:eval no-export]{treesCI[3,3]} 33.8, so with 95% confidence we may assert that
    the hypothetical =Volume= of a tree of =Girth= 12.5 in and =Height=
-   87 ft would lie somewhere between SRC_R{treesCI[3, 2]} 26.9
-   cubic feet and SRC_R{treesCI[3, 3]} 33.8 feet.
+   87 ft would lie somewhere between SRC_R[:eval no-export]{treesCI[3, 2]} 26.9
+   cubic feet and SRC_R[:eval no-export]{treesCI[3, 3]} 33.8 feet.
 
 # +END_exampletoo
 
@@ -16230,7 +16229,7 @@ treesumry$fstatistic
 : 254.9723   2.0000  28.0000
 
 For the =trees= data, we see that \( F = \)
-SRC_R{treesumry$fstatistic[ 1 ]} 254.972337410669 with a /p/-value =<
+SRC_R[:eval no-export]{treesumry$fstatistic[ 1 ]} 254.972337410669 with a /p/-value =<
 2.2e-16=. Consequently we reject \(H_{0}\), that is, the data provide
 strong evidence that not all \(\beta_{i}\)'s are zero.
 
@@ -16334,7 +16333,7 @@ qplot(Girth, Volume, data = trees)
 
 #+NAME: fig-Scatterplot-Volume-Girth-trees
 #+CAPTION[Scatterplot of =Volume= versus =Girth= for the =trees= data]: \small Scatterplot of =Volume= versus =Girth= for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Scatterplot-Volume-Girth-trees
 [[file:fig/mlr-Scatterplot-Volume-Girth-trees.ps]]
 
@@ -16444,7 +16443,7 @@ a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 
 #+NAME: fig-Fitting-the-Quadratic
 #+CAPTION[Quadratic model for the =trees= data]: \small A quadratic model for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Fitting-the-Quadratic
 [[file:fig/mlr-Fitting-the-Quadratic.ps]]
 
@@ -16686,7 +16685,7 @@ lines(Fit ~ Girth, data = treesTall[["no"]])
 
 #+NAME: fig-dummy-variable-trees
 #+CAPTION[A dummy variable model for the =trees= data]: \small A dummy variable model for the =trees= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: dummy-variable-trees
 [[file:fig/mlr-dummy-variable-trees.ps]]
 
@@ -17356,7 +17355,7 @@ curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 
 #+NAME: fig-Bootstrap-se-mean
 #+CAPTION[Bootstrapping the standard error of the mean, simulated data]: \small The original data were 25 observations generated from a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=1)\) distribution. We next resampled to get 1000 resamples, each of size 25, and calculated the sample mean for each resample. A histogram of the 1000 values of \(\overline{x}\) is shown above. Also shown (with a solid line) is the true sampling distribution of \(\overline{X}\), which is a \(\mathsf{norm}(\mathtt{mean}=3,\,\mathtt{sd}=0.2)\) distribution. Note that the histogram is centered at the sample mean of the original data, while the true sampling distribution is centered at the true value of \(\mu=3\). The shape and spread of the histogram is similar to the shape and spread of the true sampling distribution.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Bootstrap-se-mean
 [[file:fig/resamp-Bootstrap-se-mean.ps]]
 
@@ -17456,7 +17455,7 @@ hist(medstar, breaks = 40, prob = TRUE)
 
 #+NAME: fig-Bootstrapping-se-median
 #+CAPTION[Bootstrapping the standard error of the median for the =rivers= data]: \small Bootstrapping the standard error of the median for the =rivers= data.
-#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!] :options angle=-90
+#+ATTR_LaTeX: :width 0.9\textwidth :placement [ht!]
 #+RESULTS: Bootstrapping-se-median
 [[file:fig/resamp-Bootstrapping-se-median.ps]]
 
@@ -17835,9 +17834,9 @@ A <- show(oneway_test(len ~ supp, data = ToothGrowth))
 B <- t.test(len ~ supp, data = ToothGrowth, alt = "greater", var.equal = TRUE)
 #+END_SRC
 
-The \(p\)-value for the \(t\)-test was SRC_R{round(B$p.value, 3)}
+The \(p\)-value for the \(t\)-test was SRC_R[:eval no-export]{round(B$p.value, 3)}
 0.03, while the permutation test \(p\)-value was
-SRC_R{round(A$p.value, 3)} 0.061. Note that there is an underlying
+SRC_R[:eval no-export]{round(A$p.value, 3)} 0.061. Note that there is an underlying
 normality assumption for the \(t\)-test, which isn't present in the
 permutation test. If the normality assumption may be questionable,
 then the permutation test would be more reasonable. We see what can
@@ -18540,7 +18539,7 @@ permit their use in free software.
 :END:
 
 | Title:     | Introduction to Probability and Statistics Using \(\mathsf{R}\), Second Edition |
-| Year:      | 2011                                                                            |
+| Year:      | 2014                                                                            |
 | Authors:   | G. Jay Kerns                                                                    |
 | Publisher: | G. Jay Kerns                                                                    |
 
@@ -20114,8 +20113,8 @@ own risk.
 
 One fine sunny day, Police Chief R. Runner called up the forensics
 department at Acme-Looney University. There had been
-SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166 murders in the past
-SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days, approximately
+SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ] - 2} 166 murders in the past
+SRC_R[:eval no-export]{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days, approximately
 one murder every hour, of many of the local Human workers, shop
 keepers, and residents of Toon Town. These alarming rates threatened
 to destroy the fragile balance of Toon and Human camaraderie that had
@@ -20172,8 +20171,8 @@ examine the case and begin solving these mysterious murders.
 "First off," Dr. Fudd-Einstein explained, "these people all worked at
 the University at some point or another. Also, there also seems to be
 a trend in the fact that they all had a =salary= between
-SRC_R{round(min(RcmdrTestDrive$salary))} 377 and
-SRC_R{round(max(RcmdrTestDrive$salary))} 1156 when they retired."
+SRC_R[:eval no-export]{round(min(RcmdrTestDrive$salary))} 377 and
+SRC_R[:eval no-export]{round(max(RcmdrTestDrive$salary))} 1156 when they retired."
 
 "That’s not really a lot to live off of," explained Professor Bird.
 
@@ -20190,7 +20189,7 @@ Dr. Fudd-Einstein.
 
 "This coming Monday. But if there were all of these killings, how in
 the world could one person do it? It just doesn’t seem to be possible;
-stay up SRC_R{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days
+stay up SRC_R[:eval no-export]{round((dim(RcmdrTestDrive)[ 1 ] - 2)/24)} 7 days
 straight and be able to kill all of these people and have the energy
 to continue on," Professor Bird exclaimed, doubting the guilt of only
 one person.
@@ -20302,8 +20301,8 @@ lots... wait a minute, take a look at this," Professor Bird said as he
 scrolled down in the police information. "Granny’s signature is on
 each of these faculty members’ =parking= tickets. Kind of odd,
 considering the Chief-of-Parking signed each personally. The deceased
-had from as few as SRC_R{min(RcmdrTestDrive$parking)} 1 ticket to as
-many as SRC_R{max(RcmdrTestDrive$parking)} 8. All tickets were unpaid.
+had from as few as SRC_R[:eval no-export]{min(RcmdrTestDrive$parking)} 1 ticket to as
+many as SRC_R[:eval no-export]{max(RcmdrTestDrive$parking)} 8. All tickets were unpaid.
 
 "And look at this, Granny married Old Man Acme after graduation. He
 was a resident of Chicago and rumored to be a consigliere to one of
@@ -20332,11 +20331,11 @@ up."
 "What do you mean?" inquired Professor Bird.
 
 "Well, look here. The data file from the Chief's email shows
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 murders, but there have only been
-SRC_R{dim(RcmdrTestDrive)[ 1 ] - 2} 166. This doesn’t make any
+SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ]} 168 murders, but there have only been
+SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ] - 2} 166. This doesn’t make any
 sense. I’ll have to straighten it out. Hey, wait a minute. Look at
-this, Person number SRC_R{dim(RcmdrTestDrive)[ 1 ] - 1} 167 and Person
-number SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 seem to match our
+this, Person number SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ] - 1} 167 and Person
+number SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ]} 168 seem to match our
 stats. But how can that be?"
 
 It was at this moment that our two heroes were shot from behind and
@@ -20345,7 +20344,7 @@ and walked out slowly (considering they had arthritis) and cackling
 loudly in the now quiet computer lab.
 
 And so, I guess my question to you the reader is, did Granny murder
-SRC_R{dim(RcmdrTestDrive)[ 1 ]} 168 people, or did the murderer slip
+SRC_R[:eval no-export]{dim(RcmdrTestDrive)[ 1 ]} 168 people, or did the murderer slip
 through the cracks of justice? You be the statistician and come to
 your own conclusion.
 
