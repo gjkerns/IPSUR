@@ -16,18 +16,16 @@
 #    You should have received a copy of the GNU General Public License
 #    along with IPSUR.  If not, see <http://www.gnu.org/licenses/>.
 
-
 # Preliminary code to load before start
-
 # clear everything to start
 rm(list = ls())
-
 # initial customizations
 seed <- 42
 set.seed(seed)
 options(width = 60)
 options(useFancyQuotes = FALSE)
-
+ps.options(horizontal = FALSE, width = 7, height = 7, paper = "special")
+cexlab <- 1.5
 # load packages needed by the book
 library("actuar")
 library("aplpack")
@@ -50,4 +48,3 @@ library("reshape")  # dependency of ggplot2
 library("scatterplot3d")
 library("stats4")
 library("TeachingDemos")
-

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -23,7 +24,7 @@ library(ggplot2)
 library(HH)
 library(lmtest)
 
-postscript(file="ps/slr-philosophy.ps")
+postscript(file="fig/slr-philosophy.ps")
 plot(c(0,5), c(0,6.5), type = "n", xlab="x", ylab="y")
 abline(h = 0, v = 0, col = "gray60")
 abline(a = 2.5, b = 0.5, lwd = 2)
@@ -40,7 +41,7 @@ dev.off()
 
 head(cars)
 
-postscript(file="ps/slr-carscatter.ps")
+postscript(file="fig/slr-carscatter.ps")
 plot(dist ~ speed, data = cars)
 dev.off()
 
@@ -52,7 +53,7 @@ cars.lm <- lm(dist ~ speed, data = cars)
 
 coef(cars.lm)
 
-postscript(file="ps/slr-carline.ps")
+postscript(file="fig/slr-carline.ps")
 ggplot(cars, aes(x = speed, y = dist)) + 
   geom_point(shape = 19) + 
   geom_smooth(method = lm, se = FALSE)
@@ -92,7 +93,7 @@ carsPI <- round(predict(cars.lm, newdata = new, interval = "prediction"), 2)
 library(HH)
 ci.plot(cars.lm)
 
-postscript(file="ps/slr-carscipi.ps")
+postscript(file="fig/slr-carscipi.ps")
 print(ci.plot(cars.lm))
 dev.off()
 
@@ -108,19 +109,19 @@ anova(cars.lm)
 
 tmpf <- round(as.numeric(carsumry$fstatistic[1]), 2)
 
-postscript(file="ps/slr-Normal-q-q-plot-cars.ps")
+postscript(file="fig/slr-Normal-q-q-plot-cars.ps")
 plot(cars.lm, which = 2)
 dev.off()
 
 shapiro.test(residuals(cars.lm))
 
-postscript(file="ps/slr-std-resids-fitted-cars.ps")
+postscript(file="fig/slr-std-resids-fitted-cars.ps")
 plot(cars.lm, which = 3)
 dev.off()
 
 bptest(cars.lm)
 
-postscript(file="ps/slr-resids-fitted-cars.ps")
+postscript(file="fig/slr-resids-fitted-cars.ps")
 plot(cars.lm, which = 1)
 dev.off()
 
@@ -149,7 +150,7 @@ dff[1:5]
 cooksD <- cooks.distance(cars.lm)
 cooksD[1:4]
 
-postscript(file="ps/slr-Cooks-distance-cars.ps")
+postscript(file="fig/slr-Cooks-distance-cars.ps")
 plot(cars.lm, which = 4)
 dev.off()
 
@@ -160,7 +161,7 @@ influence.measures(cars.lm)
 
 plot(cars.lm)
 
-postscript(file="ps/slr-Diagnostic-plots-cars.ps")
+postscript(file="fig/slr-Diagnostic-plots-cars.ps")
 par(mfrow = c(2,2))
 plot(cars.lm)
 par(mfrow = c(1,1))

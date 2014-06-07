@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -22,7 +23,7 @@ srs <- rnorm(25, mean = 3)
 resamps <- replicate(1000, sample(srs, 25, TRUE), simplify = FALSE)
 xbarstar <- sapply(resamps, mean, simplify = TRUE)
 
-postscript(file="ps/resamp-Bootstrap-se-mean.ps")
+postscript(file="fig/resamp-Bootstrap-se-mean.ps")
 hist(xbarstar, breaks = 40, prob = TRUE)
 curve(dnorm(x, 3, 0.2), add = TRUE) # overlay true normal density
 dev.off()
@@ -37,7 +38,7 @@ resamps <- replicate(1000, sample(rivers, 141, TRUE), simplify = FALSE)
 medstar <- sapply(resamps, median, simplify = TRUE)
 sd(medstar)
 
-postscript(file="ps/resamp-Bootstrapping-se-median.ps")
+postscript(file="fig/resamp-Bootstrapping-se-median.ps")
 hist(medstar, breaks = 40, prob = TRUE)
 dev.off()
 

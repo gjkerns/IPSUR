@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -25,11 +26,11 @@ library(lattice)
 
 head(trees)
 
-postscript(file="ps/mlr-splom-trees.ps")
+postscript(file="fig/mlr-splom-trees.ps")
 splom(trees)
 dev.off()
 
-postscript(file="ps/mlr-3D-scatterplot-trees.ps")
+postscript(file="fig/mlr-3D-scatterplot-trees.ps")
 s3d <- with(trees, scatterplot3d(Girth, Height, Volume, pch = 16, 
                                  highlight.3d = TRUE, angle = 60))
 fit <- lm(Volume ~ Girth + Height, data = trees)
@@ -77,14 +78,14 @@ treesumry$fstatistic
 
 treesumry
 
-postscript(file="ps/mlr-Scatterplot-Volume-Girth-trees.ps")
+postscript(file="fig/mlr-Scatterplot-Volume-Girth-trees.ps")
 qplot(Girth, Volume, data = trees)
 dev.off()
 
 treesquad.lm <- lm(Volume ~ scale(Girth) + I(scale(Girth)^2), data = trees)
 summary(treesquad.lm)
 
-postscript(file="ps/mlr-Fitting-the-Quadratic.ps")
+postscript(file="fig/mlr-Fitting-the-Quadratic.ps")
 a <- ggplot(trees, aes(scale(Girth), Volume))
 a + stat_smooth(method = lm, formula = y ~ poly(x, 2)) + geom_point()
 dev.off()
@@ -103,11 +104,11 @@ class(trees$Tall)
 treesdummy.lm <- lm(Volume ~ Girth + Tall, data = trees)
 summary(treesdummy.lm)
 
-postscript(file="ps/mlr-dummy-variable-trees.ps")
+postscript(file="fig/mlr-dummy-variable-trees.ps")
 treesTall <- split(trees, trees$Tall)
 treesTall[["yes"]]$Fit <- predict(treesdummy.lm, treesTall[["yes"]])
 treesTall[["no"]]$Fit <- predict(treesdummy.lm, treesTall[["no"]])
-plot(Volume ~ Girth, data = trees, type = "n")
+plot(Volume ~ Girth, data = trees)
 points(Volume ~ Girth, data = treesTall[["yes"]], pch = 1)
 points(Volume ~ Girth, data = treesTall[["no"]], pch = 2)
 lines(Fit ~ Girth, data = treesTall[["yes"]])

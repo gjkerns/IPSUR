@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -24,7 +25,7 @@ library(Hmisc)
 library(RcmdrPlugin.IPSUR)
 library(reshape)
 
-postscript(file="ps/estimate-capture-recapture.ps")
+postscript(file="fig/estimate-capture-recapture.ps")
 heights = rep(0, 16)
 for (j in 7:15) heights[j] <- dhyper(3, m = 7, n = j - 7, k = 4)
 plot(6:15, heights[6:15], pch = 16, cex = 1.5, xlab = "number of fish in pond", ylab = "Likelihood")
@@ -35,13 +36,13 @@ lines(9, heights[9], type = "h", lwd = 2)
 points(9, 0, pch = 4, lwd = 3, cex = 2)
 dev.off()
 
-postscript(file="ps/estimate-fishing-part-two.ps")
+postscript(file="fig/estimate-fishing-part-two.ps")
 curve(x^5*(1-x)^2, 0, 1, xlab = "p", ylab = "L(p)")
 curve(x^4*(1-x)^3, 0, 1, add = TRUE)
 curve(x^3*(1-x)^4, 0, 1, add = TRUE)
 dev.off()
 
-postscript(file="ps/estimate-species-mle.ps")
+postscript(file="fig/estimate-species-mle.ps")
 dat <- rbinom(27, size = 1, prob = 0.3)
 like <- function(x){
 r <- 1
@@ -79,7 +80,7 @@ summary(MaxLikeEst)
 
 mean(x); var(x)*29/30; sd(x)/sqrt(30)
 
-postscript(file="ps/hypoth-ci-examp.ps")
+postscript(file="fig/hypoth-ci-examp.ps")
 ci.examp()
 dev.off()
 

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -46,7 +47,7 @@ A
 pbinom(9, size=12, prob=1/6) - pbinom(6, size=12, prob=1/6)
 diff(pbinom(c(6,9), size = 12, prob = 1/6))  # same thing
 
-postscript(file="ps/discdist-binom-cdf-base.ps")
+postscript(file="fig/discdist-binom-cdf-base.ps")
 plot(0, xlim = c(-1.2, 4.2), ylim = c(-0.04, 1.04), type = "n", xlab = "number of successes", ylab = "cumulative probability")
 abline(h = c(0,1), lty = 2, col = "grey")
 lines(stepfun(0:3, pbinom(-1:3, size = 3, prob = 0.5)), verticals = FALSE, do.p = FALSE)
@@ -60,7 +61,8 @@ X
 d(X)(1)   # pmf of X evaluated at x = 1
 p(X)(2)   # cdf of X evaluated at x = 2
 
-postscript(file="ps/discdist-binom-plot-distr.ps")
+postscript(file="fig/discdist-binom-plot-distr.ps")
+X <- Binom(size = 3, prob = 1/2)
 plot(X, cex = 0.2)
 dev.off()
 
@@ -74,7 +76,7 @@ sd(X)
 x <- c(4, 7, 9, 11, 12)
 ecdf(x)
 
-postscript(file="ps/discdist-empirical-CDF.ps")
+postscript(file="fig/discdist-empirical-CDF.ps")
 plot(ecdf(x))
 dev.off()
 

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -59,7 +60,7 @@ p(W)(0.5)
 W <- sin(exp(X) + 27)
 p(W)(0.5)
 
-postscript(file="ps/contdist-chisq-dist-vary-df.ps")
+postscript(file="fig/contdist-chisq-dist-vary-df.ps")
 curve(dchisq(x, df = 3), from = 0, to = 20, ylab = "y")
 ind <- c(4, 5, 10, 15)
 for (i in ind) curve(dchisq(x, df = i), 0, 20, add = TRUE)
@@ -67,7 +68,7 @@ dev.off()
 
 mgamma(1:4, shape = 13, rate = 1)
 
-postscript(file="ps/contdist-gamma-mgf.ps")
+postscript(file="fig/contdist-gamma-mgf.ps")
 plot(function(x){mgfgamma(x, shape = 13, rate = 1)}, 
      from=-0.1, to=0.1, ylab = "gamma mgf")
 dev.off()

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -60,7 +61,7 @@ temp <- lm(weight ~ feed, data = chickwts)
 
 anova(temp)
 
-postscript(file="ps/hypoth-between-versus-within.ps")
+postscript(file="fig/hypoth-between-versus-within.ps")
 y1 <- rnorm(300, mean = c(2,8,22))
 plot(y1, xlim = c(-1,25), ylim = c(0,0.45) , type = "n")
 f <- function(x){dnorm(x, mean = 2)}
@@ -72,7 +73,7 @@ curve(f, from = 19, to = 25, add = TRUE, lwd = 2)
 rug(y1)
 dev.off()
 
-postscript(file="ps/hypoth-some-F-plots-HH.ps")
+postscript(file="fig/hypoth-some-F-plots-HH.ps")
 old.omd <- par(omd = c(.05,.88, .05,1))
 F.setup(df1 = 5, df2 = 30)
 F.curve(df1 = 5, df2 = 30, col='blue')
@@ -80,6 +81,6 @@ F.observed(3, df1 = 5, df2 = 30)
 par(old.omd)
 dev.off()
 
-postscript(file="ps/hypoth-power-examp.ps")
+postscript(file="fig/hypoth-power-examp.ps")
 power.examp()
 dev.off()

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -25,7 +26,7 @@ library(mvtnorm)
 library(lattice)
 library(grid)
 
-postscript(file="ps/multdist-max-and-sum-two-dice.ps")
+postscript(file="fig/multdist-max-and-sum-two-dice.ps")
 A <- rolldie(2, makespace = TRUE)
 A <- addrv(A, max, name = "U")
 A <- addrv(A, sum, name = "V", invars = c("X1", "X2"))
@@ -42,7 +43,7 @@ print(p1, vp = vplayout(1, 1))
 print(p2, vp = vplayout(1, 2))
 dev.off()
 
-postscript(file="ps/multdist-max-sum-two-dice-joint.ps")
+postscript(file="fig/multdist-max-sum-two-dice-joint.ps")
 labs <- with(A, paste("(", U, ",", V, ")", sep = ""))
 p3 <- ggplot(A, aes(x = X1, y = X2, label = labs))
 p3 + geom_text(size = 6) + xlab("First roll") + ylab("Second roll") + 
@@ -76,7 +77,7 @@ f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
 persp(x, y, z, theta = -30, phi = 30, ticktype = "detailed")
 
-postscript(file="ps/multdist-mvnorm-pdf.ps")
+postscript(file="fig/multdist-mvnorm-pdf.ps")
 x <- y <- seq(from = -3, to = 3, length.out = 30)
 f <- function(x,y) dmvnorm(cbind(x,y), mean = c(0,0), sigma = diag(2))
 z <- outer(x, y, FUN = f)
@@ -92,7 +93,7 @@ round(ProbTable, 3)
 cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5, screen = list(z = 15, x = -70))
 
-postscript(file="ps/multdist-multinom-pmf2.ps")
+postscript(file="fig/multdist-multinom-pmf2.ps")
 print(cloud(probs ~ X1 + X2, data = S, type = c("p","h"), lwd = 2, 
             pch = 16, cex = 1.5), screen = list(z = 15, x = -70))
 dev.off()

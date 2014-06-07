@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -37,7 +38,7 @@ stripchart(precip, xlab="rainfall")
 stripchart(rivers, method="jitter", xlab="length")
 stripchart(discoveries, method="stack", xlab="number")
 
-postscript(file="ps/datadesc-stripcharts.ps")
+postscript(file="fig/datadesc-stripcharts.ps")
 par(mfrow = c(3,1)) # 3 plots: 3 rows, 1 column
 stripchart(precip, xlab="rainfall", cex.lab = cexlab)
 stripchart(rivers, method="jitter", xlab="length", cex.lab = cexlab)
@@ -48,14 +49,14 @@ dev.off()
 hist(precip, main = "")
 hist(precip, freq = FALSE, main = "")
 
-postscript(file="ps/datadesc-histograms.ps")
+postscript(file="fig/datadesc-histograms.ps")
 par(mfrow = c(1,2))
 hist(precip, main = "", cex.lab = cexlab)
 hist(precip, freq = FALSE, main = "", cex.lab = cexlab)
 par(mfrow = c(1,1))
 dev.off()
 
-postscript(file="ps/datadesc-histograms-bins.ps")
+postscript(file="fig/datadesc-histograms-bins.ps")
 par(mfrow = c(1,3))
 hist(precip, breaks = 10, main = "", cex.lab = cexlab)
 hist(precip, breaks = 25, main = "", cex.lab = cexlab)
@@ -69,7 +70,7 @@ plot(LakeHuron)
 plot(LakeHuron, type = "p")
 plot(LakeHuron, type = "h")
 
-postscript(file="ps/datadesc-indpl-lakehuron.ps")
+postscript(file="fig/datadesc-indpl-lakehuron.ps")
 par(mfrow = c(3,1))
 plot(LakeHuron, cex.lab = cexlab)
 plot(LakeHuron, type = "p", cex.lab = cexlab)
@@ -100,18 +101,18 @@ prop.table(Tbl)   # same thing
 barplot(table(state.region), cex.names = 1.20)
 barplot(prop.table(table(state.region)), cex.names = 1.20)
 
-postscript(file="ps/datadesc-bar-gr-stateregion.ps")
+postscript(file="fig/datadesc-bar-gr-stateregion.ps")
 par(mfrow = c(2,1)) # 2 plots: 2 rows, 1 column
 barplot(table(state.region), cex.names = 1.2)
 barplot(prop.table(table(state.region)), cex.names = 1.2)
 par(mfrow = c(1,1)) # back to normal
 dev.off()
 
-postscript(file="ps/datadesc-Pareto-chart.ps")
+postscript(file="fig/datadesc-Pareto-chart.ps")
 pareto.chart(table(state.division), ylab="Frequency", cex.lab = cexlab)
 dev.off()
 
-postscript(file="ps/datadesc-dot-charts.ps")
+postscript(file="fig/datadesc-dot-charts.ps")
 x <- table(state.region)
 dotchart(as.vector(x), labels = names(x), cex.lab = cexlab)
 dev.off()
@@ -174,31 +175,31 @@ mosaicplot(z, main = "Relation between eye color and sex")
 
 xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species)
 
-postscript(file="ps/datadesc-xyplot-group.ps")
+postscript(file="fig/datadesc-xyplot-group.ps")
 print(xyplot(Petal.Width ~ Petal.Length, data = iris, group = Species))
 dev.off()
 
 bwplot(~weight | feed, data = chickwts)
 
-postscript(file="ps/datadesc-bwplot.ps")
+postscript(file="fig/datadesc-bwplot.ps")
 print(bwplot(~weight | feed, data = chickwts))
 dev.off()
 
 histogram(~age | education, data = infert)
 
-postscript(file="ps/datadesc-histograms-lattice.ps")
+postscript(file="fig/datadesc-histograms-lattice.ps")
 print(histogram(~age | education, data = infert))
 dev.off()
 
 xyplot(Petal.Length ~ Petal.Width | Species, data = iris)
 
-postscript(file="ps/datadesc-xyplot.ps")
+postscript(file="fig/datadesc-xyplot.ps")
 print(xyplot(Petal.Length ~ Petal.Width | Species, data = iris))
 dev.off()
 
 coplot(conc ~ uptake | Type * Treatment, data = CO2)
 
-postscript(file="ps/datadesc-coplot.ps")
+postscript(file="fig/datadesc-coplot.ps")
 print(coplot(conc ~ uptake | Type * Treatment, data = CO2))
 dev.off()
 

@@ -1,3 +1,4 @@
+
 #    IPSUR: Introduction to Probability and Statistics Using R
 #    Copyright (C) 2014  G. Jay Kerns
 #
@@ -23,7 +24,7 @@ library(diagram)
 library(prob)
 library(RcmdrPlugin.IPSUR)
 
-postscript(file="ps/prob-diagram.ps")
+postscript(file="fig/prob-diagram.ps")
 require(diagram)
 par(mex = 0.2, cex = 0.5)
 openplotmat(frame.plot=TRUE)
@@ -142,7 +143,7 @@ prod(9:11)*prod(4:7)*31^3
 
 prod(factorial(c(11,7))/factorial(c(8,3)))*31^3
 
-postscript(file="ps/prob-birthday.ps")
+postscript(file="fig/prob-birthday.ps")
 g <- Vectorize(pbirthday.ipsur)
 plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
 remove(g)
@@ -156,7 +157,7 @@ abline(h = 0.5)
 abline(v = 23, lty = 2)
 remove(g)
 
-postscript(file="ps/prob-twodiceAB.ps")
+postscript(file="fig/prob-twodiceAB.ps")
 A <- rolldie(2)
 B <- subset(A, X1==X2)
 C <- subset(A, X1+X2 > 7)
