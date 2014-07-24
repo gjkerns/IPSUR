@@ -6,18 +6,13 @@
 
 genXdata <- function(n, nvar = 1,
                      mu = rep(0, nvar),
-                     Sigma = diag(nvar),
-                     varnames = paste("x", 1:nvar, sep = ""),
-                     intercept = TRUE,
+                     Sigma = diag(length(mu)),
+                     varnames = paste("x", 1:length(mu), sep = ""),
                      roundto = NULL
                      ){
   require(MASS)
   tmp <- as.data.frame(mvrnorm(n, mu = mu, Sigma = Sigma))
   names(tmp) <- varnames
-  if (intercept){
-    x0 <- rep(1, nrow(tmp))
-    tmp <- cbind(x0, tmp)
-  } 
   if (!is.null(roundto)){
     tmp <- round(tmp, roundto)
   }
@@ -31,9 +26,8 @@ X = genXdata(10, nvar = 3, roundto = 2)
 # logistic regression data
 
 genLogRegData <- function(xdata,
-                         beta = rep(1, ncol(xdata)),
-                         yname = "y"
-                         ){
+                          beta = rep(1, ncol(xdata)),
+                          yname = "y"){
   tmp <- as.matrix(xdata) %*% beta
   probs <- exp(tmp)/(1 + exp(tmp))
   y <- apply(probs, 1, function(p){rbinom(1, size = 1, prob = p)})
@@ -42,7 +36,11 @@ genLogRegData <- function(xdata,
 }
 
 
-genLogRegData(X, beta = c(1,2,3))
+params <- c(1,2,3,4)
+require(MASS)
+xmean <- Null(params)[ , 1]
+X = genXdata(10, mu = m, roundto = 2)
+genLogRegData(X, beta = params)
 
 
 ######################################################3
@@ -102,7 +100,14 @@ genIndepTable(n = 100, nfixed = TRUE)
 genIndepTable(n = 100, nfixed = TRUE, as.df = TRUE)
 genIndepTable(n = 100, nfixed = TRUE, as.df = TRUE, untable = FALSE)
 
+tmp = genIndepTable(n = 10, nfixed = TRUE, as.df = TRUE)
+tmp
 
+model.matrix(~., data = tmp)
+tmp2 = as.data.frame(model.matrix(~ X*Y, data = tmp))
+tmp2
+
+genLogRegData(tmp2)
 
 A = genIndepTable(n = 500, nfixed = TRUE, as.df = TRUE)
 chisq.test(xtabs(~., data = A))
