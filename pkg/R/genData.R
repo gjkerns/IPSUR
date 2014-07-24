@@ -4,23 +4,28 @@
 
 # continuous X data
 
-genXdata <- function(n, ncol = 1,
-                     mu = rep(0, ncol),
-                     Sigma = diag(ncol),
-                     varnames = paste("x", 1:ncol, sep = ""),
+genXdata <- function(n, nvar = 1,
+                     mu = rep(0, nvar),
+                     Sigma = diag(nvar),
+                     varnames = paste("x", 1:nvar, sep = ""),
+                     intercept = TRUE,
                      roundto = NULL
                      ){
   require(MASS)
   tmp <- as.data.frame(mvrnorm(n, mu = mu, Sigma = Sigma))
   names(tmp) <- varnames
+  if (intercept){
+    x0 <- rep(1, nrow(tmp))
+    tmp <- cbind(x0, tmp)
+  } 
   if (!is.null(roundto)){
     tmp <- round(tmp, roundto)
   }
   tmp
 }
 
-genXdata(10, ncol = 3, roundto = 2)
-X = genXdata(10, ncol = 3, roundto = 2)
+genXdata(10, nvar = 3, roundto = 2)
+X = genXdata(10, nvar = 3, roundto = 2)
 
 #######################################################
 # logistic regression data
