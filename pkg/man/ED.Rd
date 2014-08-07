@@ -1,12 +1,12 @@
-\name{EDvisits}
-\alias{EDvisits}
+\name{ED}
+\alias{ED}
 \docType{data}
 \title{Hospital Emergency Department Visits and Readmission Rates}
 \description{
 
 }
 
-\usage{data(EDvisits)}
+\usage{data(ED)}
 \format{
   A data frame with 164 observations of 8 variables.
   \describe{
