@@ -19,41 +19,37 @@
 .PHONY: pkg
 .PHONY: www
 
-basedir  = git
-buildir  = build
-ipsurdir = IPSUR
-figdir   = fig
-psdir    = ps
-pdfdir   = pdf
-htmldir  = html
-texdir   = tex
+basedir  := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+buildir  = $(basedir)/build
+figdir   = $(basedir)/fig
+psdir    = $(basedir)/ps
+pdfdir   = $(basedir)/pdf
+htmldir  = $(basedir)/html
+texdir   = $(basedir)/tex
 orgfile  = IPSUR
-backdir  = backup
-Rdir     = R
+backdir  = $(basedir)/backup
+Rdir     = $(basedir)/R
 
 all:
 	-mkdir $(texdir)
 	-mkdir $(psdir)
-	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	emacs --batch -eval "(progn (load \"$(basedir)/init-ipsur.el\") (R) (ipsur-publish \"ipsurlatex\"))"
 	-cd $(texdir); latex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); latex $(orgfile).tex; latex $(orgfile).tex; dvips $(orgfile)
 	gs -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sPAPERSIZE=a4 -dPDFSETTINGS=/printer -dCompatibilityLevel=1.3 -dMaxSubsetPct=100 -dSubsetFonts=true -dEmbedAllFonts=true -sOutputFile=$(texdir)/$(orgfile).pdf $(texdir)/$(orgfile).ps
 	-rm -r ~/.org-timestamps
 
 tex:
 	-mkdir $(texdir)
-	emacs -Q -batch -eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (org-publish \"ipsurlatex\"))"
+	emacs --batch --eval "(progn (load \"$(basedir)/init-ipsur.el\") (ipsur-publish \"ipsurlatex\"))"
 	-rm -r ~/.org-timestamps
 
 pdf:
-	-rm $(pdfdir)
-	cp -R $(texdir) $(pdfdir)
-	-cd $(pdfdir); xelatex $(orgfile).tex; bibtex $(orgfile); makeindex $(orgfile); xelatex $(orgfile).tex; xelatex $(orgfile).tex
+	emacs --batch --eval "(progn (load \"$(basedir)/init-ipsur.el\") (ipsur-publish-pdf)"
 
 texpdf: tex pdf
 
 figures:
-	-mkdir $(psdir)
-	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-execute-buffer) (kill-buffer))"
+	emacs --batch --eval "(progn (load \"$(basedir)/init-ipsur.el\") (ipsur-make-figures))"
 
 pkg:
 	R CMD build pkg
@@ -63,38 +59,36 @@ check:
 
 Rtangle:
 	-mkdir $(Rdir)
-	emacs -Q --batch --eval "(progn (load \"~/$(basedir)/$(ipsurdir)/init-ipsur.el\") (R) (find-file \"~/$(basedir)/$(ipsurdir)/$(orgfile).org\") (org-babel-tangle) (kill-buffer))"
+	emacs --batch --eval "(progn (load \"$(basedir)/init-ipsur.el\") (R) (ipsur-init) (find-file \"$(basedir)/$(orgfile).org\") (org-babel-tangle) (kill-buffer))"
 
 web:
 	@echo "Generating HTML..."
-	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/www/publish_config.el\") (org-publish \"ipsurweb\"))"
+	emacs --batch -eval "(progn (load \"$(basedir)/init-ipsur.el\") (ipsur-publish \"ipsurweb\"))"
 	@echo "HTML generation done"
 	-rm -r ~/.org-timestamps
 
 publish:
 	@echo "Generating HTML..."
-	emacs -Q -batch -eval "(progn (load \"~/git/IPSUR/www/publish_config.el\") (org-publish \"ipsurweb\"))"
+	emacs --batch -eval "(progn (load \"$(basedir)/init-ipsur.el\") (ipsur-publish \"ipsurweb\"))"
 	@echo "HTML generation done"
 	-rm -r ~/.org-timestamps
-	cd ~/git/IPSURweb
+	cd $(basedir)/html
 	git add -A
 	git commit -m "publishing website"
 	git push
-	cd ~/git/IPSUR
+	cd $(basedir)/
 
 backup:
 	-mkdir $(backdir)
-	cp $(texdir)/$(orgfile).pdf $(backdir)/$(orgfile).pdf 
+	cp $(orgfile).pdf $(backdir)/$(orgfile).pdf 
 
 clean:
-	-rm -r $(texdir)
-	-rm -r $(pdfdir)
+	-rm IPSUR.{aux,bbl,blg,brf,idx,ilg,ind,lof,log,lot,out,tex,toc}
 	-rm -r IPSUR.Rcheck
 	-rm -r ~/.org-timestamps
 
 distclean:
-	-rm -r $(texdir)
-	-rm -r $(pdfdir)
+	-rm IPSUR.{aux,bbl,blg,brf,idx,ilg,ind,lof,log,lot,out,pdf,tex,toc}
 	-rm -r $(backdir)
 	-rm -r $(Rdir)
 	-rm -r IPSUR.Rcheck
