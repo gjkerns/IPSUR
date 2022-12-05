@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Package Development with renv</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Package Development with renv</h1>
+
+
+
+<div id="development" class="section level2">
+<h2>Development</h2>
+<p>Often, R packages will have other R packages as dependencies. For
+this, one must declare their R package dependencies within the package
+<code>DESCRIPTION</code> file. If you want to prepare your environment
+for package development, you can use:</p>
+<pre><code>renv::install()</code></pre>
+<p>to install the packages as declared in the package’s
+<code>DESCRIPTION</code> file. This action is roughly analogous to
+<code>remotes::install_deps()</code>.</p>
+<p>If you’re developing a package that you intend to release to CRAN,
+then you likely want to build and test your package against the latest
+versions of your dependencies as available on CRAN. For this, you should
+consider using:</p>
+<pre><code>renv::update()</code></pre>
+<p>to ensure your package dependencies are up-to-date, as
+appropriate.</p>
+</div>
+<div id="isolation" class="section level2">
+<h2>Isolation</h2>
+<p>Normally, a package under development should be tested against the
+latest-available versions of its dependencies on CRAN. However, in some
+cases, you may need to ensure your package is compatible with other
+packages also currently under development.</p>
+<p>In these cases, the <code>renv</code> project library can be useful –
+you can install the development version(s) of your dependencies into the
+project library, without worrying about clobbering any packages already
+installed in your user library.</p>
+<p>In these cases, you can declare your development dependencies using
+the <code>Remotes</code> field of the <code>DESCRIPTION</code> file;
+e.g.</p>
+<pre><code>Remotes:
+  r-lib/ggplot2</code></pre>
+<p>and <code>renv::install()</code> will parse that remotes declaration
+and retrieve the requested package. See the <code>remotes</code>
+vignette, <a href="https://CRAN.R-project.org/package=remotes/vignettes/dependencies.html">Dependency
+resolution for R package development</a>, for more details.</p>
+</div>
+<div id="testing" class="section level2">
+<h2>Testing</h2>
+<p>While developing your package, you may want to use a continuous
+integration service (such as <a href="https://www.travis-ci.org/">Travis
+CI</a>) to build and test your package remotely. You can use
+<code>renv</code> to help facilitate this testing – see the <a href="https://CRAN.R-project.org/package=renv/vignettes/ci.html">Continuous
+Integration</a> vignette for more information. In particular, clever use
+of the <code>renv</code> cache can help save time that might normally be
+spent on package installation. See <a href="https://github.com/rstudio/renv/blob/main/.github/workflows/R-CMD-check.yaml" class="uri">https://github.com/rstudio/renv/blob/main/.github/workflows/R-CMD-check.yaml</a>
+for an example of how <code>renv</code> uses itself for package
+management in its own CI tests.</p>
+</div>
+<div id="r-cmd-build-and-the-project-library" class="section level2">
+<h2>R CMD build and the Project Library</h2>
+<p>By default, when building a package tarball, R will copy all files
+within the package directory to a temporary build directory before
+building the package. This can be time consuming if your project
+contains a large number of files. For this reason, <code>renv</code>
+places the project library for package projects within a separate
+external directory by default. This directory is:</p>
+<pre><code>tools::R_user_dir(&quot;renv/library&quot;, &quot;cache&quot;)</code></pre>
+<p>If you want to use your own custom path, you can use, for
+example:</p>
+<pre><code>RENV_PATHS_LIBRARY_ROOT = ~/.renv/library</code></pre>
+<p>If you’d prefer to keep your project library within the project
+directory, you can instead set:</p>
+<pre><code>RENV_PATHS_LIBRARY = renv/library</code></pre>
+<p>within an appropriate <code>.Renviron</code> startup profile.</p>
+<p>By default, library paths will be formed using the project name,
+alongside a unique identifier generated from the full project path.
+These paths are of the form:</p>
+<pre><code>&lt;name&gt;-&lt;id&gt;</code></pre>
+<p>If you’d prefer to omit the <code>&lt;id&gt;</code>, then you can set
+the environment variable:</p>
+<pre><code>RENV_PATHS_LIBRARY_ROOT_ASIS = TRUE</code></pre>
+<p>to instruct <code>renv</code> to forego the use of an identifier.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

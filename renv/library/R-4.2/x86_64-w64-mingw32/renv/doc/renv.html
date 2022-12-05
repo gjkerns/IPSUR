@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Kevin Ushey" />
+
+<meta name="date" content="2022-09-27" />
+
+<title>Introduction to renv</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to renv</h1>
+<h4 class="author">Kevin Ushey</h4>
+<h4 class="date">2022-09-27</h4>
+
+
+
+<p>The <code>renv</code> package is a new effort to bring project-local R dependency management to your projects. The goal is for <code>renv</code> to be a robust, stable replacement for the <a href="https://rstudio.github.io/packrat/">Packrat</a> package, with fewer surprises and better default behaviors.</p>
+<p>Underlying the philosophy of <code>renv</code> is that any of your existing workflows should just work as they did before – <code>renv</code> helps manage library paths (and other project-specific state) to help isolate your project’s R dependencies, and the existing tools you’ve used for managing R packages (e.g. <code>install.packages()</code>, <code>remove.packages()</code>) should work as they did before.</p>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
+<p>The general workflow when working with <code>renv</code> is:</p>
+<ol style="list-style-type: decimal">
+<li><p>Call <code>renv::init()</code> to initialize a new project-local environment with a private R library,</p></li>
+<li><p>Work in the project as normal, installing and removing new R packages as they are needed in the project,</p></li>
+<li><p>Call <code>renv::snapshot()</code> to save the state of the project library to the lockfile (called <code>renv.lock</code>),</p></li>
+<li><p>Continue working on your project, installing and updating R packages as needed.</p></li>
+<li><p>Call <code>renv::snapshot()</code> again to save the state of your project library if your attempts to update R packages were successful, or call <code>renv::restore()</code> to revert to the previous state as encoded in the lockfile if your attempts to update packages introduced some new problems.</p></li>
+</ol>
+<p>The <code>renv::init()</code> function attempts to ensure the newly-created project library includes all R packages currently used by the project. It does this by crawling R files within the project for dependencies with the <code>renv::dependencies()</code> function. The discovered packages are then installed into the project library with the <code>renv::hydrate()</code> function, which will also attempt to save time by copying packages from your user library (rather than reinstalling from CRAN) as appropriate.</p>
+<p>Calling <code>renv::init()</code> will also write out the infrastructure necessary to automatically load and use the private library for new R sessions launched from the project root directory. This is accomplished by creating (or amending) a project-local <code>.Rprofile</code> with the necessary code to load the project when the R session is started.</p>
+<p>If you’d like to initialize a project without attempting dependency discovery and installation – that is, you’d prefer to manually install the packages your project requires on your own – you can use <code>renv::init(bare = TRUE)</code> to initialize a project with an empty project library.</p>
+</div>
+<div id="reproducibility" class="section level2">
+<h2>Reproducibility</h2>
+<p>Using <code>renv</code>, it’s possible to “save” and “load” the state of your project library. More specifically, you can use:</p>
+<ul>
+<li><p><code>renv::snapshot()</code> to save the state of your project to <code>renv.lock</code>; and</p></li>
+<li><p><code>renv::restore()</code> to restore the state of your project from <code>renv.lock</code>.</p></li>
+</ul>
+<p>For each package used in your project, <code>renv</code> will record the package version, and (if known) the external source from which that package can be retrieved. <code>renv::restore()</code> uses that information to retrieve and reinstall those packages in your project.</p>
+<div id="caveats" class="section level3">
+<h3>Caveats</h3>
+<p>It is important to emphasize that <strong>renv is not a panacea for reproducibility</strong>. Rather, it is a tool that can help make projects reproducible by solving one small part of the problem: it records the version of R + R packages being used in a project, and provides tools for reinstalling the declared versions of those packages in a project. Ultimately, making a project reproducible requires some thoughtfulness from the user: what does it mean for a particular project to be reproducible, and how can <code>renv</code> (and other tools) be used to accomplish that particular goal of reproducibility?</p>
+<p>There are a still a number of factors that can affect whether this project could truly be reproducible in the future – for example,</p>
+<ol style="list-style-type: decimal">
+<li><p>The results produced by a particular project might depend on other components of the system it’s being run on – for example, the operating system itself, the versions of system libraries in use, the compiler(s) used to compile R and the R packages used, and so on. Keeping a ‘stable’ machine image is a separate challenge, but <a href="https://www.docker.com/">Docker</a> is one popular solution. See also <code>vignette(&quot;docker&quot;, package = &quot;renv&quot;)</code> for recommendations on how Docker can be used together with <code>renv</code>.</p></li>
+<li><p>The R packages that the project depends on may no longer be available. If your project depends on R packages available on CRAN, it’s possible those packages may be removed in the future – either by request of the package maintainer, or by the maintainers of CRAN itself. This is quite rare, but needs consideration if reproducibility of a project is paramount.</p></li>
+</ol>
+<p>In addition, be aware that package installation may fail if a package was originally installed through a CRAN-available binary, but that binary is no longer available. <code>renv</code> will attempt to install the package from sources in this situation, but attempts to install from source can (and often do) fail due to missing system prerequisites for compilation of a package. The <code>renv::equip()</code> function may be useful in these scenarios, especially on Windows: it will download external software commonly used when compiling R packages from sources, and instruct R to use that software during compilation.</p>
+<p>A salient example of this is the <code>rmarkdown</code> package, as it relies heavily on the <a href="https://pandoc.org/"><code>pandoc</code></a> command line utility. However, because pandoc is not bundled with the <code>rmarkdown</code> package (it is normally provided by RStudio, or installed separately by the user), simply restoring an <code>renv</code> project using <code>rmarkdown</code> may not be sufficient – one also needs to ensure the project is run in a environment with the correct version of <code>pandoc</code> available.</p>
+</div>
+</div>
+<div id="infrastructure" class="section level2">
+<h2>Infrastructure</h2>
+<p>The following files are written to and used by projects using <code>renv</code>:</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>File</strong></th>
+<th><strong>Usage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.Rprofile</code></td>
+<td>Used to activate <code>renv</code> for new R sessions launched in the project.</td>
+</tr>
+<tr class="even">
+<td><code>renv.lock</code></td>
+<td>The lockfile, describing the state of your project’s library at some point in time.</td>
+</tr>
+<tr class="odd">
+<td><code>renv/activate.R</code></td>
+<td>The activation script run by the project <code>.Rprofile</code>.</td>
+</tr>
+<tr class="even">
+<td><code>renv/library</code></td>
+<td>The private project library.</td>
+</tr>
+<tr class="odd">
+<td><code>renv/settings.dcf</code></td>
+<td>Project settings – see <code>?settings</code> for more details.</td>
+</tr>
+</tbody>
+</table>
+<p>In particular, <code>renv/activate.R</code> ensures that the project library is made active for newly launched R sessions. It is automatically sourced via a call to <code>source(&quot;renv/activate.R&quot;)</code>, which is inserted into the project <code>.Rprofile</code> when <code>renv::init()</code> or <code>renv::activate()</code> is called. This ensures that any new R processes launched within the project directory will use the project library, and hence are isolated from the regular user library.</p>
+<p>For development and collaboration, the <code>.Rprofile</code>, <code>renv.lock</code> and <code>renv/activate.R</code> files should be committed to your version control system; the <code>renv/library</code> directory should normally be ignored. Note that <code>renv::init()</code> will attempt to write the requisite ignore statements to the project <code>.gitignore</code>.</p>
+</div>
+<div id="dependency-discovery" class="section level2">
+<h2>Dependency Discovery</h2>
+<p>By default, <code>renv::snapshot()</code> will examine your project’s R files to determine which packages are used in your project, and will include only those packages (alongside their recursive dependencies) in the lockfile. This is done via a call to the <code>renv::dependencies()</code> function. We call this an “implicit” snapshot, since the packages your project depends on are implicit based on how packages appear to be used in your project. <code>renv</code> uses static analysis to determine which packages appear to be used; e.g. by scanning your code for calls to <code>library()</code> or <code>require()</code>.</p>
+<p>While useful, this approach is not 100% reliable in detecting the packages required by your project. If you find that <code>renv</code>’s dependency discovery is failing to discover one or more packages used in your project, one escape hatch is to include a file called <code>_dependencies.R</code> with code of the form:</p>
+<pre><code>library(&lt;pkg&gt;)</code></pre>
+<div id="ignore-files" class="section level3">
+<h3>Ignore Files</h3>
+<p>By default, <code>renv</code> reads the <code>.gitignore</code> files in your project (if any) to infer which files should be ignored when scanning for dependencies. If you find that <code>renv</code>’s dependency discovery is scanning files you don’t want to be scanned, you can use an <code>.renvignore</code> file to instruct <code>renv</code> to ignore certain patterns of files in the project. For example, you might use:</p>
+<pre><code>/data</code></pre>
+<p>to tell <code>renv</code> not to scan files within the <code>data</code> folder.</p>
+<p>If you’d prefer that <code>renv</code> ignored all folders by default, except for some subset of folders where you place your code files, you could use something like:</p>
+<pre><code>*
+!/code</code></pre>
+<p>In this case, <code>renv</code> will only scan your <code>code</code> folder at the root of the project directory for dependencies.</p>
+</div>
+<div id="explicit-snapshots" class="section level3">
+<h3>Explicit Snapshots</h3>
+<p>If you’d instead prefer to explicitly declare which packages are used in your project, you can do so by creating a <code>DESCRIPTION</code> file at your project root. These <code>DESCRIPTION</code> files should be formatted similarly to those used by default in R package development – see <a href="https://r-pkgs.org/Metadata.html#sec-description">the R-pkgs book</a> for more details.</p>
+<p>In this case, your <code>DESCRIPTION</code> file might look like:</p>
+<pre><code>Type: project
+Description: My project.
+Depends:
+    tidyverse,
+    devtools,
+    shiny,
+    data.table</code></pre>
+<p>The packages used in your project can be part of either the <code>Depends</code> or <code>Imports</code> fields.</p>
+</div>
+</div>
+<div id="collaborating" class="section level2">
+<h2>Collaborating</h2>
+<p>When sharing a project with other collaborators, you may want to ensure everyone is working with the same environment – otherwise, code in the project may unexpectedly fail to run because of changes in behavior between different versions of the packages in use. <code>renv</code> can help to make such collaboration easier – see <code>vignette(&quot;collaborating&quot;, package = &quot;renv&quot;)</code> for more details.</p>
+</div>
+<div id="package-sources" class="section level2">
+<h2>Package Sources</h2>
+<p><code>renv</code> is able to install and restore packages from a variety of sources, including:</p>
+<ul>
+<li><a href="https://cran.r-project.org/">CRAN</a>,</li>
+<li><a href="https://www.bioconductor.org/">Bioconductor</a>,</li>
+<li><a href="https://github.com/">GitHub</a></li>
+<li><a href="https://about.gitlab.com/">Gitlab</a></li>
+<li><a href="https://bitbucket.org/">Bitbucket</a></li>
+</ul>
+<p><code>renv</code> uses an installed package’s <code>DESCRIPTION</code> file to infer its source. For example, packages installed from the CRAN repositories typically have the field:</p>
+<pre><code>Repository: CRAN</code></pre>
+<p>set, and <code>renv</code> takes this as a signal that the package was retrieved from CRAN.</p>
+<div id="inferring-package-sources" class="section level3">
+<h3>Inferring Package Sources</h3>
+<p>The following fields are checked, in order, when inferring a package’s source:</p>
+<ol style="list-style-type: decimal">
+<li><p>The <code>RemoteType</code> field; typically written for packages installed by the <code>devtools</code>, <code>remotes</code> and <code>pak</code> packages,</p></li>
+<li><p>The <code>Repository</code> field; for example, packages retrieved from CRAN will typically have the <code>Repository: CRAN</code> field,</p></li>
+<li><p>The <code>biocViews</code> field; typically present for packages installed from the Bioconductor repositories,</p></li>
+</ol>
+<p>As a fallback, if <code>renv</code> is unable to determine a package’s source from the <code>DESCRIPTION</code> file directly, but a package of the same name is available in the active R repositories (as specified in <code>getOption(&quot;repos&quot;)</code>), then the package will be treated as though it was installed from an R package repository.</p>
+<p>If all of the above methods fail, <code>renv</code> will finally check for a package available from the <em>cellar</em>. See <a href="cellar.html">here</a> for more details. The package cellar is typically used as an escape hatch, for packages which do not have a well-defined remote source, or for packages which might not be remotely accessible from your machine.</p>
+</div>
+<div id="unknown-sources" class="section level3">
+<h3>Unknown Sources</h3>
+<p>If <code>renv</code> is unable to infer a package’s source, it will inform you during <code>renv::snapshot()</code> – for example, if we attempted to snapshot a package called <code>skeleton</code> with no known source:</p>
+<pre><code>&gt; renv::snapshot()
+The following package(s) were installed from an unknown source:
+
+        skeleton
+
+renv may be unable to restore these packages in the future.
+Consider reinstalling these packages from a known source (e.g. CRAN).
+
+Do you want to proceed? [y/N]:</code></pre>
+<p>While you can still create a lockfile with such packages, <code>restore()</code> will likely fail unless you can ensure this package is installed through some other mechanism.</p>
+</div>
+<div id="custom-r-package-repositories" class="section level3">
+<h3>Custom R Package Repositories</h3>
+<p>Custom and local R package repositories are supported as well. The only requirement is that these repositories are set as part of the <code>repos</code> R option, and that these repositories are named. For example, you might use:</p>
+<pre><code>repos &lt;- c(CRAN = &quot;https://cloud.r-project.org&quot;, WORK = &quot;https://work.example.org&quot;)
+options(repos = repos)</code></pre>
+<p>to tell <code>renv</code> to work with both the official CRAN package repository, as well as a package repository you have hosted and set up in your work environment.</p>
+</div>
+</div>
+<div id="upgrading-renv" class="section level2">
+<h2>Upgrading renv</h2>
+<p>After initializing a project with <code>renv</code>, that project will then be ‘bound’ to the particular version of <code>renv</code> that was used to initialize the project. If you need to upgrade (or otherwise change) the version of <code>renv</code> associated with a project, you can use <code>renv::upgrade()</code>. This will install the latest-available version of <code>renv</code> from your declared package repositories. Alternatively, if you’re currently using a development version of <code>renv</code> as installed from GitHub in your project, then <code>renv</code> will install the latest-available version of <code>renv</code> from GitHub.</p>
+<p>With each commit of <code>renv</code>, we bump the package version and also tag the commit with the associated package version. This implies that you can call, for example:</p>
+<pre><code>renv::upgrade(version = &quot;0.16.0&quot;)</code></pre>
+<p>to request the installation of that particular version of <code>renv</code> if so required.</p>
+</div>
+<div id="cache" class="section level2">
+<h2>Cache</h2>
+<p>One of <code>renv</code>’s primary features is the use of a global package cache, which is shared across all projects using <code>renv</code>. The <code>renv</code> package cache provides two primary benefits:</p>
+<ol style="list-style-type: decimal">
+<li><p>Future calls to <code>renv::restore()</code> and <code>renv::install()</code> will become much faster, as <code>renv</code> will be able to find and re-use packages already installed in the cache.</p></li>
+<li><p>Because it is not necessary to have duplicate versions of your packages installed in each project, the <code>renv</code> cache should also help you save disk space relative to an approach with project-specific libraries without a global cache.</p></li>
+</ol>
+<p>To understand the <code>renv</code> cache, we need to first understand what an R <em>library</em> is. An R library is, effectively, a directory of installed R packages which can be loaded and used within an R session. These are the directories reported by e.g. <code>.libPaths()</code>, and R uses these directories when searching for packages to load (e.g. in response to a call to <code>library(dplyr)</code>).</p>
+<p>When using <code>renv</code> with the global package cache, the project library is instead formed as a directory of symlinks (or, on Windows, junction points) into the <code>renv</code> global package cache. Hence, while each <code>renv</code> project is isolated from other projects on your system, they can still re-use the same installed packages as required.</p>
+<p>The process by which packages enter the cache is roughly as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>Package installation is requested via e.g. <code>install.packages()</code>, or <code>renv::install()</code>, or as part of <code>renv::restore()</code>.</p></li>
+<li><p>If <code>renv</code> is able to find the requested version of the package in the cache, then that package is linked into the project library, and installation is complete.</p></li>
+<li><p>Otherwise, the package is downloaded and installed into the project library.</p></li>
+<li><p>After installation of the package has successfully completed, the package is then copied into the global package cache, and then linked back into the project library.</p></li>
+</ol>
+<p>In some cases, <code>renv</code> will be unable to directly link from the global package cache to your project library – for example, if the package cache and your project library live on different disk volumes. In such a case, <code>renv</code> will instead copy the package from the cache into the project library.</p>
+<div id="cache-location" class="section level3">
+<h3>Cache Location</h3>
+<p>By default, <code>renv</code> generates its cache in the following folders:</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Platform</strong></th>
+<th><strong>Location</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Linux</td>
+<td><code>~/.local/share/renv</code></td>
+</tr>
+<tr class="even">
+<td>macOS</td>
+<td><code>~/Library/Application Support/renv</code></td>
+</tr>
+<tr class="odd">
+<td>Windows</td>
+<td><code>%LOCALAPPDATA%/renv</code></td>
+</tr>
+</tbody>
+</table>
+<p>If you’d like to share the package cache across multiple users, you can do so by setting the <code>RENV_PATHS_CACHE</code> environment variable to a shared path. This variable can be set in an R startup file to make it apply to all R sessions. For example, it could be set within:</p>
+<ul>
+<li>A project-local <code>.Renviron</code>;</li>
+<li>The user-level <code>~/.Renviron</code>;</li>
+<li>A site-wide file at <code>$(R RHOME)/etc/Renviron.site</code>.</li>
+</ul>
+<p>You may also want to set <code>RENV_PATHS_CACHE</code> so that the global package cache can be stored on the same volume as the projects you normally work on. This is especially important when working projects stored on a networked filesystem.</p>
+<p>In general, we recommend using the R installation’s site-wide <code>Renviron.site</code> if you’d like to ensure the same cache path is visible to all users of R on a system.</p>
+</div>
+<div id="multiple-caches" class="section level3">
+<h3>Multiple Caches</h3>
+<p>It is also possible to configure <code>renv</code> to use multiple cache locations – for example, you might want to make both a user-local package cache, as well as a global administrator-managed cache, visible within an <code>renv</code> project. To do so, you can specify the paths to the cache separated with a <code>:</code> – for example,</p>
+<pre><code>RENV_PATHS_CACHE = /path/to/local/cache:/path/to/global/cache</code></pre>
+<p>In such a case, <code>renv</code> will iterate over the cache locations in order when trying to find a package, and newly-installed packages will enter the first writable cache path listed in <code>RENV_PATHS_CACHE</code>.</p>
+</div>
+<div id="shared-cache-locations" class="section level3">
+<h3>Shared Cache Locations</h3>
+<p>When the <code>renv</code> cache is enabled, if that cache is shared and visible to multiple users, then each of those users will have an opportunity to install packages into the <code>renv</code> cache. However, some care must be taken to ensure that these packages can be used by different users in your environment:</p>
+<ol style="list-style-type: decimal">
+<li><p>Packages copied into the cache may have <a href="https://en.wikipedia.org/wiki/Access-control_list">Access-control Lists</a>, or ACLs, which might prevent others from using packages that have been installed into the cache. If this is the case, it’s important that ACLs be set (or updated) on cache entries so that the cache is accessible to each user requiring access. When deploying <code>renv</code> in an enterprise environment, the system administrator should take care to ensure ACLs (if any) allow users access to packages within the <code>renv</code> cache.</p></li>
+<li><p>By default, packages copied into the cache will remain “owned” by the user that requested installation of that package. If you’d like <code>renv</code> to instead re-assign ownership of the cached package to a separate user account, you can set the <code>RENV_CACHE_USER</code> environment variable. When set, <code>renv</code> will attempt to run <code>chown -R &lt;package&gt; &lt;user&gt;</code> to update cache ownership after the package has been copied into the cache.</p></li>
+</ol>
+</div>
+<div id="caveats-1" class="section level3">
+<h3>Caveats</h3>
+<p>While we recommend enabling the cache by default, if you’re having trouble with <code>renv</code> when the cache is enabled, it can be disabled by setting the project setting <code>renv::settings$use.cache(FALSE)</code>. Doing this will ensure that packages are then installed into your project library directly, without attempting to link and use packages from the <code>renv</code> cache.</p>
+<p>If you find a problematic package has entered the cache (for example, an installed package has become corrupted), that package can be removed with the <code>renv::purge()</code> function. See the <code>?purge</code> documentation for caveats and things to be aware of when removing packages from the cache.</p>
+<p>You can also force a package to be re-installed and re-cached with the following functions:</p>
+<pre><code># restore packages from the lockfile, bypassing the cache
+renv::restore(rebuild = TRUE)
+
+# re-install a package
+renv::install(&quot;&lt;package&gt;&quot;, rebuild = TRUE)
+
+# rebuild all packages in the project
+renv::rebuild()</code></pre>
+<p>See each function’s respective documentation for more details.</p>
+</div>
+</div>
+<div id="installation-from-source" class="section level2">
+<h2>Installation from Source</h2>
+<p>In the end, <code>renv</code> still needs to install R packages – either from binaries available from CRAN, or from sources when binaries are not available. Installation from source can be challenging for a few reasons:</p>
+<ol style="list-style-type: decimal">
+<li><p>Your system will need to have a compatible compiler toolchain available. In some cases, R packages may depend on C / C++ features that aren’t available in an older system toolchain, especially in some older Linux enterprise environments.</p></li>
+<li><p>Your system will need requisite system libraries, as many R packages contain compiled C / C++ code that depend on and link to these packages.</p></li>
+</ol>
+<!-- TODO: renv::equip() for Linux + macOS; use sysreqsdb -->
+</div>
+<div id="downloads" class="section level2">
+<h2>Downloads</h2>
+<p>By default, <code>renv</code> uses <a href="https://curl.se/"><code>curl</code></a> for file downloads when available. This allows <code>renv</code> to support a number of download features across multiple versions of R, including:</p>
+<ul>
+<li>Custom headers (used especially for authentication),</li>
+<li>Connection timeouts,</li>
+<li>Download retries on transient errors.</li>
+</ul>
+<p>If <code>curl</code> is not available on your machine, it is highly recommended that you install it. Newer versions of Windows 10 come with a bundled version of <code>curl.exe</code>; other users on Windows can use <code>renv::equip()</code> to download and install a recent copy of <code>curl</code>. Newer versions of macOS come with a bundled version of <code>curl</code> that is adequate for usage with <code>renv</code>, and most Linux package managers have a modern version of <code>curl</code> available in their package repositories.</p>
+<p><code>curl</code> downloads can be configured through <code>renv</code>’s configuration settings – see <code>?renv::config</code> for more details.</p>
+<p>If you’ve already configured R’s downloader and would like to bypass <code>renv</code>’s attempts to use <code>curl</code>, you can use the R option <code>renv.download.override</code>. For example, executing:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.download.override =</span> utils<span class="sc">::</span>download.file)</span></code></pre></div>
+<p>would instruct <code>renv</code> to use R’s own download machinery when attempting to download files from the internet (respecting the R options <code>download.file.method</code> and <code>download.file.extra</code> as appropriate). Advanced users can also provide their own download function, provided its signature matches that of <code>utils::download.file()</code>.</p>
+<p>You can also instruct <code>renv</code> to use a different download method by setting the <code>RENV_DOWNLOAD_METHOD</code> environment variable. For example:</p>
+<pre><code># use Windows&#39; internal download machinery
+Sys.setenv(RENV_DOWNLOAD_METHOD = &quot;wininet&quot;)
+
+# use R&#39;s bundled libcurl implementation
+Sys.setenv(RENV_DOWNLOAD_METHOD = &quot;libcurl&quot;)</code></pre>
+<p>Note that other features (e.g. authentication) may not be supported when using an alternative download file method – you will have to configure the downloader yourself if that is required. See <code>?download.file</code> for more details.</p>
+<div id="proxies" class="section level3">
+<h3>Proxies</h3>
+<p>If your downloads need to go through a proxy server, then there are a variety of approaches you can take to make this work:</p>
+<ol style="list-style-type: decimal">
+<li><p>Set the <code>http_proxy</code> and / or <code>https_proxy</code> environment variables. These environment variables can contain the full URL to your proxy server, including a username + password if necessary.</p></li>
+<li><p>You can use a <code>.curlrc</code> (<code>_curlrc</code> on Windows) to provide information about the proxy server to be used. This file should be placed in your home folder (see <code>Sys.getenv(&quot;HOME&quot;)</code>, or <code>Sys.getenv(&quot;R_USER&quot;)</code> on Windows); alternatively, you can set the <code>CURL_HOME</code> environment variable to point to a custom ‘home’ folder to be used by <code>curl</code> when resolving the runtime configuration file. On Windows, you can also place your <code>_curlrc</code> in the same directory where the <code>curl.exe</code> binary is located.</p></li>
+</ol>
+<p>See the curl documentation on <a href="https://everything.curl.dev/usingcurl/proxies.html">proxies</a> and <a href="https://everything.curl.dev/cmdline/configfile.html">config files</a> for more details.</p>
+<p>As an <a href="https://github.com/rstudio/renv/issues/146">example</a>, the following <code>_curlrc</code> works when using authentication with NTLM and SSPI on Windows:</p>
+<pre><code>--proxy &quot;your.proxy.dns:port&quot;
+--proxy-ntlm
+--proxy-user &quot;:&quot;
+--insecure</code></pre>
+<p>The <a href="https://cran.r-project.org/package=curl">curl</a> R package also has a helper:</p>
+<pre><code>curl::ie_get_proxy_for_url()</code></pre>
+<p>which may be useful when attempting to discover this proxy address.</p>
+</div>
+</div>
+<div id="authentication" class="section level2">
+<h2>Authentication</h2>
+<p>Your project may make use of packages which are available from remote sources requiring some form of authentication to access – for example, a GitHub enterprise server. Usually, either a personal access token (PAT) or username + password combination is required for authentication. <code>renv</code> is able to authenticate when downloading from such sources, using the same system as the <a href="https://cran.r-project.org/package=remotes">remotes</a> package. In particular, environment variables are used to record and transfer the required authentication information.</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Remote Source</strong></th>
+<th><strong>Authentication</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GitHub</td>
+<td><code>GITHUB_PAT</code></td>
+</tr>
+<tr class="even">
+<td>GitLab</td>
+<td><code>GITLAB_PAT</code></td>
+</tr>
+<tr class="odd">
+<td>Bitbucket</td>
+<td><code>BITBUCKET_USER</code> + <code>BITBUCKET_PASSWORD</code></td>
+</tr>
+<tr class="even">
+<td>Git Remotes</td>
+<td><code>GIT_PAT</code> / <code>GIT_USER</code> + <code>GIT_PASSWORD</code></td>
+</tr>
+</tbody>
+</table>
+<p>These credentials can be stored in e.g. <code>.Renviron</code>, or can be set in your R session through other means as appropriate.</p>
+<p>If you require custom authentication for different packages (for example, your project makes use of packages available on different GitHub enterprise servers), you can use the <code>renv.auth</code> R option to provide package-specific authentication settings. <code>renv.auth</code> can either be a a named list associating package names with environment variables, or a function accepting a package name + record, and returning a list of environment variables. For example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define a function providing authentication</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.auth =</span> <span class="cf">function</span>(package, record) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (package <span class="sc">==</span> <span class="st">&quot;MyPackage&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">GITHUB_PAT =</span> <span class="st">&quot;&lt;pat&gt;&quot;</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># use a named list directly</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.auth =</span> <span class="fu">list</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">MyPackage =</span> <span class="fu">list</span>(<span class="at">GITHUB_PAT =</span> <span class="st">&quot;&lt;pat&gt;&quot;</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively, set package-specific option</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.auth.MyPackage =</span> <span class="fu">list</span>(<span class="at">GITHUB_PAT =</span> <span class="st">&quot;&lt;pat&gt;&quot;</span>))</span></code></pre></div>
+<p>For packages installed from Git remotes, <code>renv</code> will attempt to use <code>git</code> from the command line to download and restore the associated package. Hence, it is recommended that authentication is done through SSH keys when possible.</p>
+<div id="authentication-with-custom-headers" class="section level3">
+<h3>Authentication with Custom Headers</h3>
+<p>If you want to set arbitrary headers when downloading files using <code>renv</code>, you can do so using the <code>renv.download.headers</code> R option. It should be a function that accepts a URL, and returns a named character vector indicating the headers which should be supplied when accessing that URL.</p>
+<p>For example, suppose you have a package repository hosted at <code>https://my/repository</code>, and the credentials required to access that repository are stored in the <code>AUTH_HEADER</code> environment variable. You could define <code>renv.download.headers</code> like so:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">renv.download.headers =</span> <span class="cf">function</span>(url) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">grepl</span>(<span class="st">&quot;^https://my/repository&quot;</span>, url))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">Authorization =</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;AUTH_HEADER&quot;</span>)))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<p>With the above, <code>renv</code> will set the <code>Authorization</code> header whenever it attempts to download files from the repository at URL <code>https://my/repository</code>.</p>
+</div>
+</div>
+<div id="shims" class="section level2">
+<h2>Shims</h2>
+<p>To help you take advantage of the package cache, <code>renv</code> places a couple of shims on the search path:</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Function</strong></th>
+<th><strong>Shim</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>install.packages()</code></td>
+<td><code>renv::install()</code></td>
+</tr>
+<tr class="even">
+<td><code>remove.packages()</code></td>
+<td><code>renv::remove()</code></td>
+</tr>
+<tr class="odd">
+<td><code>update.packages()</code></td>
+<td><code>renv::update()</code></td>
+</tr>
+</tbody>
+</table>
+<p>In effect, calling <code>install.packages()</code> within an <code>renv</code> project will call <code>renv::install()</code> instead. This can be useful when installing packages which have already been cached. For example, if you use <code>renv::install(&quot;dplyr&quot;)</code>, and <code>renv</code> detects that the latest version on CRAN has already been cached, then <code>renv</code> will just install using the copy available in the cache – thereby skipping some of the installation overhead.</p>
+<p>If you’d like to bypass these shims within an session, you can explicitly call the version of these functions from the <code>utils</code> package, e.g. with <code>utils::install.packages(&lt;...&gt;)</code>.</p>
+<p>If you’d prefer not to use the <code>renv</code> shims at all, they can be disabled by setting the R option <code>options(renv.config.shims.enabled = FALSE)</code>, or by setting the environment variable <code>RENV_CONFIG_SHIMS_ENABLED = FALSE</code>. See <code>?config</code> for more details.</p>
+</div>
+<div id="history" class="section level2">
+<h2>History</h2>
+<p>If you’re using a version control system with your project, then as you call <code>renv::snapshot()</code> and later commit new lockfiles to your repository, you may find it necessary later to recover older versions of your lockfiles. <code>renv</code> provides the functions <code>renv::history()</code> to list previous revisions of your lockfile, and <code>renv::revert()</code> to recover these older lockfiles.</p>
+<p>Currently, only Git repositories are supported by <code>renv::history()</code> and <code>renv::revert()</code>.</p>
+</div>
+<div id="comparison-with-packrat" class="section level2">
+<h2>Comparison with Packrat</h2>
+<p><code>renv</code> differs from Packrat in the following ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>The <code>renv</code> lockfile <code>renv.lock</code> is formatted as <a href="https://www.json.org/">JSON</a>. This should make the lockfile easier to use and consume with other tools.</p></li>
+<li><p><code>renv</code> no longer attempts to explicitly download and track R package source tarballs within your project. This was a frustrating default that operated under the assumption that you might later want to be able to restore a project’s private library without access to a CRAN repository. In practice, this is almost never the case, and the time spent downloading + storing the package sources seemed to outweigh the potential reproducibility benefits.</p></li>
+<li><p>Packrat tried to maintain the distinction between so-called ‘stale’ packages; that is, R packages which were installed by Packrat but were not recorded in the lockfile for some reason. This distinction was (1) overall not useful, and (2) confusing. <code>renv</code> no longer makes this distinction: <code>snapshot()</code> saves the state of your project library to <code>renv.lock</code>, <code>restore()</code> loads the state of your project library from <code>renv.lock</code>, and that’s all.</p></li>
+<li><p>In <code>renv</code>, the global package cache is enabled by default. This should reduce overall disk-space usage as packages can effectively be shared across each project using <code>renv</code>.</p></li>
+<li><p><code>renv</code>’s dependency discovery machinery is more configurable. The function <code>renv::dependencies()</code> is exported, and users can create <code>.renvignore</code> files to instruct <code>renv</code> to ignore specific files and folders in their projects. (See <code>?renv::dependencies</code> for more information.)</p></li>
+</ol>
+</div>
+<div id="migrating-from-packrat" class="section level2">
+<h2>Migrating from Packrat</h2>
+<p>The <code>renv::migrate()</code> function makes it possible to migrate projects from Packrat to <code>renv</code>. See the <code>?migrate</code> documentation for more details. In essence, calling <code>renv::migrate(&quot;&lt;project path&gt;&quot;)</code> will be enough to migrate the Packrat library and lockfile such that they can then be used by <code>renv</code>.</p>
+</div>
+<div id="uninstalling-renv" class="section level2">
+<h2>Uninstalling renv</h2>
+<p>If you find <code>renv</code> isn’t the right fit for your project, deactivating and uninstalling it is easy.</p>
+<ul>
+<li><p>To deactivate <code>renv</code> in a project, use <code>renv::deactivate()</code>. This removes the <code>renv</code> auto-loader from the project <code>.Rprofile</code>, but doesn’t touch any other <code>renv</code> files used in the project. If you’d like to later re-activate <code>renv</code>, you can do so with <code>renv::activate()</code>.</p></li>
+<li><p>To remove <code>renv</code> from a project, use <code>renv::deactivate()</code> to first remove the <code>renv</code> auto-loader from the project <code>.Rprofile</code>, then delete the project’s <code>renv</code> folder and <code>renv.lock</code> lockfile as desired.</p></li>
+</ul>
+<p>If you want to completely remove any installed <code>renv</code> infrastructure components from your entire system, you can do so with the following R code:</p>
+<pre><code>root &lt;- renv::paths$root()
+unlink(root, recursive = TRUE)</code></pre>
+<p>The <code>renv</code> package can then also be uninstalled via:</p>
+<pre><code>utils::remove.packages(&quot;renv&quot;)</code></pre>
+<p>Note that if you’ve customized any of <code>renv</code>’s infrastructure paths as described in <code>?renv::paths</code>, then you’ll need to find and remove those customized folders as well.</p>
+</div>
+<div id="future-work" class="section level2">
+<h2>Future Work</h2>
+<p><code>renv</code>, like Packrat, is designed to work standalone without the need to depend on any non-base R packages. However, the following (future) integrations are planned:</p>
+<ul>
+<li><p>Use <a href="https://github.com/r-lib/pak">pak</a> for parallel package installation,</p></li>
+<li><p>Use <a href="https://github.com/r-hub/sysreqsdb">sysreqsdb</a> to validate and install system dependencies as required before attempting to install the associated packages.</p></li>
+</ul>
+<p>These integrations will be optional (so that <code>renv</code> can always work standalone) but we hope that they will further improve the speed and reliability of <code>renv</code>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

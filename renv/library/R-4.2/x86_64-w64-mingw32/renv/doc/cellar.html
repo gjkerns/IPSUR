@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>The Package Cellar</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The Package Cellar</h1>
+
+
+
+<p>In some cases, your project may depend on R packages which are not
+available from any external source, or that external source may not
+accessible from the machine calling <code>renv::restore()</code>. To
+help accommodate these scenarios, <code>renv</code> allows you to
+prepare a package “cellar”, to be used as an ad-hoc repository of
+packages during restore. This allows you to provide package tarballs
+that can be used to restore packages which cannot be retrieved from any
+other source.</p>
+<p>The environment variable <code>RENV_PATHS_CELLAR</code> can be used
+to customize the package cellar location. It should point to a directory
+containing package binaries and sources, with a structure of the
+form:</p>
+<ul>
+<li><code>${RENV_PATHS_CELLAR}/&lt;package&gt;_&lt;version&gt;.tar.gz</code>;
+or</li>
+<li><code>${RENV_PATHS_CELLAR}/&lt;package&gt;/&lt;package&gt;_&lt;version&gt;.tar.gz</code></li>
+</ul>
+<p>Alternatively, you can also use a project-local cellar by placing
+your packages within a folder located at
+<code>&lt;project&gt;/renv/cellar</code>. Note that this folder does not
+exist by default; you must create it to opt-in.</p>
+<ul>
+<li><code>&lt;project&gt;/renv/cellar/&lt;package&gt;_&lt;version&gt;.tar.gz</code>;
+or</li>
+<li><code>&lt;project&gt;/renv/cellar/&lt;package&gt;/&lt;package&gt;_&lt;version&gt;.tar.gz</code></li>
+</ul>
+<p>As an example, if your project depended on a package
+<code>skeleton 1.0.0</code>, you could place a tarball for this package
+in one of the following locations:</p>
+<ul>
+<li><code>${RENV_PATHS_CELLAR}/skeleton_1.0.0.tar.gz</code></li>
+<li><code>${RENV_PATHS_CELLAR}/skeleton/skeleton_1.0.0.tar.gz</code></li>
+<li><code>&lt;project&gt;/renv/cellar/skeleton_1.0.0.tar.gz</code>;
+or</li>
+<li><code>&lt;project&gt;/renv/cellar/skeleton/skeleton_1.0.0.tar.gz</code></li>
+</ul>
+<p>Once this is done, <code>renv</code> will consult these directories
+during future attempts to restore your packages.</p>
+<p>To directly install a package from the cellar, you must specify the
+package version, or provide the full path to the tarball:</p>
+<ul>
+<li><code>renv::install(&quot;&lt;package&gt;@&lt;version&gt;&quot;)</code></li>
+<li><code>renv::install(&quot;&lt;project&gt;/renv/cellar/&lt;package&gt;_&lt;version&gt;.tar.gz&quot;)</code></li>
+</ul>
+<p>During restore, if a compatible package is located within the cellar,
+that copy of the package will be preferred even if that package might
+otherwise be accessible from its associated remote source. For example,
+if <code>skeleton 1.0.0</code> was also available on CRAN,
+<code>renv::restore()</code> would still use the tarball available in
+the cellar rather than the version available from CRAN.</p>
+<p>If you want to see what paths <code>renv</code> is using for the
+cellar, you can use:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">:::</span><span class="fu">renv_paths_cellar</span>()</span></code></pre></div>
+<p>See <code>?paths</code> for more details.</p>
+<div id="explicit-sources" class="section level2">
+<h2>Explicit Sources</h2>
+<p>You can also provide explicit source paths in the lockfile if
+desired. This is most useful if you are building an <code>renv</code>
+lockfile “by hand”, or need to tweak an existing lockfile to point at a
+separate package for installation. For example, you could have a package
+record in <code>renv.lock</code> of the form:</p>
+<pre><code>{
+  &quot;Package&quot;: &quot;skeleton&quot;,
+  &quot;Version&quot;: &quot;1.0.1&quot;,
+  &quot;Source&quot;: &quot;/mnt/r/pkg/skeleton_1.0.1.tar.gz&quot;
+}</code></pre>
+<p>Packages should have the following extensions, depending on whether
+the archive contains a binary copy of the package or the package
+sources:</p>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Platform</strong></th>
+<th><strong>Binary</strong></th>
+<th><strong>Sources</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Windows</td>
+<td><code>.zip</code></td>
+<td><code>.tar.gz</code></td>
+</tr>
+<tr class="even">
+<td>macOS</td>
+<td><code>.tgz</code></td>
+<td><code>.tar.gz</code></td>
+</tr>
+<tr class="odd">
+<td>Linux</td>
+<td><code>.tar.gz</code></td>
+<td><code>.tar.gz</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that on Linux, both binaries and sources should have the
+<code>.tar.gz</code> extension, but R and <code>renv</code> will handle
+this as appropriate during installation.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

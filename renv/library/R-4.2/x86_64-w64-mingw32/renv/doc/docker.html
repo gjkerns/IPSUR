@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Using renv with Docker</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Using renv with Docker</h1>
+
+
+
+<p>While <code>renv</code> can help capture the state of your R library
+at some point in time, there are still other aspects of the system that
+can influence the run-time behavior of your R application. In
+particular, the same R code can produce different results depending
+on:</p>
+<ul>
+<li>The operating system in use,</li>
+<li>The compiler flags used when R and packages are built,</li>
+<li>The LAPACK / BLAS system(s) in use,</li>
+<li>The versions of system libraries installed and in use,</li>
+</ul>
+<p>And so on. <a href="https://www.docker.com/">Docker</a> is a tool
+that helps solve this problem through the use of
+<strong>containers</strong>. Very roughly speaking, one can think of a
+container as a small, self-contained system within which different
+applications can be run. Using Docker, one can declaratively state how a
+container should be built (what operating system it should use, and what
+system software should be installed within), and use that system to run
+applications. (For more details, please see <a href="https://environments.rstudio.com/docker" class="uri">https://environments.rstudio.com/docker</a>.)</p>
+<p>Using Docker and <code>renv</code> together, one can then ensure that
+both the underlying system, alongside the required R packages, are fixed
+and constant for a particular application.</p>
+<p>The main challenges in using Docker with <code>renv</code> are:</p>
+<ul>
+<li><p>Ensuring that the <code>renv</code> cache is visible to Docker
+containers, and</p></li>
+<li><p>Ensuring that required R package dependencies are available at
+run-time.</p></li>
+</ul>
+<p>This vignette will assume you are already familiar with Docker; if
+you are not yet familiar with Docker, the <a href="https://docs.docker.com/">Docker Documentation</a> provides a
+thorough introduction. To learn more about using Docker to manage R
+environments, visit <a href="https://environments.rstudio.com/docker.html">environments.rstudio.com</a>.</p>
+<p>We’ll discuss two strategies for using <code>renv</code> with
+Docker:</p>
+<ol style="list-style-type: decimal">
+<li>Using <code>renv</code> to install packages when the Docker image is
+generated;</li>
+<li>Using <code>renv</code> to install packages when Docker containers
+are run.</li>
+</ol>
+<p>We’ll also explore the pros and cons of each strategy.</p>
+<div id="creating-docker-images-with-renv" class="section level2">
+<h2>Creating Docker Images with renv</h2>
+<p>With Docker, <a href="https://docs.docker.com/engine/reference/builder/">Dockerfiles</a>
+are used to define new images. Dockerfiles can be used to declaratively
+specify how a Docker image should be created. A Docker image captures
+the state of a machine at some point in time – e.g., a Linux operating
+system after downloading and installing R 4.2. Docker containers can be
+created using that image as a base, allowing different independent
+applications to run using the same pre-defined machine state.</p>
+<p>First, you’ll need to get <code>renv</code> installed on your Docker
+image. The easiest way to accomplish this is with the
+<code>remotes</code> package. For example, if you wanted to install a
+specific version of <code>renv</code> from GitHub:</p>
+<pre><code>ENV RENV_VERSION 0.16.0
+RUN R -e &quot;install.packages(&#39;remotes&#39;, repos = c(CRAN = &#39;https://cloud.r-project.org&#39;))&quot;
+RUN R -e &quot;remotes::install_github(&#39;rstudio/renv@${RENV_VERSION}&#39;)&quot;</code></pre>
+<p>Next, if you’d like the <code>renv.lock</code> lockfile to be used to
+install R packages when the Docker image is built, you’ll need to copy
+it to the container:</p>
+<pre><code>WORKDIR /project
+COPY renv.lock renv.lock</code></pre>
+<p>Next, you need to tell <code>renv</code> which library paths to use
+for package installation. You can either set the
+<code>RENV_PATHS_LIBRARY</code> environment variable to a writable path
+within your Docker container, or copy the <code>renv</code> auto-loader
+tools into the container so that a project-local library can be
+automatically provisioned and used when R is launched.</p>
+<pre><code># approach one
+ENV RENV_PATHS_LIBRARY renv/library
+
+# approach two
+RUN mkdir -p renv
+COPY .Rprofile .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.dcf renv/settings.dcf</code></pre>
+<p>Finally, you can run <code>renv::restore()</code> to restore packages
+as defined in the lockfile:</p>
+<pre><code>RUN R -e &quot;renv::restore()&quot;</code></pre>
+<p>With this, <code>renv</code> will download and install the requisite
+packages as appropriate when the image is created. Any new containers
+created from this image will hence have those R packages installed and
+visible at run-time.</p>
+</div>
+<div id="dynamically-provisioning-r-libraries-with-renv" class="section level2">
+<h2>Dynamically Provisioning R Libraries with renv</h2>
+<p>The aforementioned approach is useful if you have multiple
+applications with identical package requirements. However, on occasion,
+one will have multiple applications built from a single base image, but
+each application will have its own independent R package requirements.
+In this case, rather than including the package dependencies in the
+image itself, it would be preferable for each container to provision its
+own library at run-time, based on that application’s
+<code>renv.lock</code> lockfile.</p>
+<p>In effect, this is as simple as ensuring that
+<code>renv::restore()</code> happens at container run-time, rather than
+image build time. However, on its own, <code>renv::restore()</code> is
+slow – it needs to download and install packages, which could take
+prohibitively long if an application needs to be run repeatedly.</p>
+<p>The <code>renv</code> package cache can be used to help ameliorate
+this issue. When the cache is enabled, whenever <code>renv</code>
+attempts to install or restore an R package, it first checks to see
+whether that package is already available within the <code>renv</code>
+cache. If it is, that instance of the package is linked into the project
+library. Otherwise, the package is first installed into the
+<code>renv</code> cache, and then that newly-installed copy is linked
+for use in the project.</p>
+<p>In effect, if the <code>renv</code> cache is available, you should
+only need to pay the cost of package installation once – after that, the
+newly-installed package will be available for re-use across different
+projects. At the same time, each project’s package library will remain
+independent and isolated from one another, so installing a package
+within one container won’t affect another container.</p>
+<p>However, by default, each Docker container will have its own
+independent filesystem. Ideally, we’d like for <em>all</em> containers
+launched from a particular image to have access to the same
+<code>renv</code> cache. To accomplish this, we’ll have to tell each
+container to use an <code>renv</code> cache located on a shared
+mount.</p>
+<p>In sum, if we’d like to allow for run-time provisioning of R package
+dependencies, we will need to ensure the <code>renv</code> cache is
+located on a shared volume, which is visible to any containers launched.
+We will accomplish this by:</p>
+<ol style="list-style-type: decimal">
+<li><p>Setting the <code>RENV_PATHS_CACHE</code> environment variable,
+to tell the instance of <code>renv</code> running in each container
+where the global cache lives;</p></li>
+<li><p>Telling Docker to mount some filesystem location from the host
+filesystem, at some location (<code>RENV_PATHS_CACHE_HOST</code>), to a
+container-specific location
+(<code>RENV_PATHS_CACHE_CONTAINER</code>).</p></li>
+</ol>
+<p>For example, if you had a container running a Shiny application:</p>
+<pre><code># the location of the renv cache on the host machine
+RENV_PATHS_CACHE_HOST=/opt/local/renv/cache
+
+# where the cache should be mounted in the container
+RENV_PATHS_CACHE_CONTAINER=/renv/cache
+
+# run the container with the host cache mounted in the container
+docker run --rm \
+    -e &quot;RENV_PATHS_CACHE=${RENV_PATHS_CACHE_CONTAINER}&quot; \
+    -v &quot;${RENV_PATHS_CACHE_HOST}:${RENV_PATHS_CACHE_CONTAINER}&quot; \
+    -p 14618:14618 \
+    R -s -e &#39;renv::restore(); shiny::runApp(host = &quot;0.0.0.0&quot;, port = 14618)&#39;</code></pre>
+<p>With this, any calls to <code>renv</code> APIs within the created
+docker container will have access to the mounted cache. The first time
+you run a container, <code>renv</code> will likely need to populate the
+cache, and so some time will be spent downloading and installing the
+required packages. Subsequent runs will be much faster, as
+<code>renv</code> will be able to reuse the global package cache.</p>
+<p>The primary downside with this approach compared to the image-based
+approach is that it requires you to modify how containers are created,
+and requires a bit of extra orchestration in how containers are
+launched. However, once the <code>renv</code> cache is active,
+newly-created containers will launch very quickly, and a single image
+can then be used as a base for a myriad of different containers and
+applications, each with their own independent package dependencies.</p>
+</div>
+<div id="handling-the-renv-autoloader" class="section level2">
+<h2>Handling the renv Autoloader</h2>
+<p>When is launched within a project folder, the <code>renv</code>
+auto-loader (if present) will attempt to download and install
+<code>renv</code> into the project library. Depending on how your Docker
+container is configured, this could fail. For example:</p>
+<pre><code>Error installing renv:
+======================
+ERROR: unable to create ‘/usr/local/pipe/renv/library/master/R-4.0/x86_64-pc-linux-gnu/renv’
+Warning messages:
+1: In system2(r, args, stdout = TRUE, stderr = TRUE) :
+  running command &#39;&#39;/usr/lib/R/bin/R&#39; --vanilla CMD INSTALL -l &#39;renv/library/master/R-4.0/x86_64-pc-linux-gnu&#39; &#39;/tmp/RtmpwM7ooh/renv_0.12.2.tar.gz&#39; 2&gt;&amp;1&#39; had status 1
+2: Failed to find an renv installation: the project will not be loaded.
+Use `renv::activate()` to re-initialize the project.</code></pre>
+<p>Bootstrapping <code>renv</code> into the project library might be
+un-necessary for you. If that is the case, then you can avoid this
+behavior by launching R with the <code>--vanilla</code> flag set; for
+example:</p>
+<pre><code>R --vanilla -s -e &#39;renv::restore()&#39;</code></pre>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
