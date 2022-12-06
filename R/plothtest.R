@@ -1,7 +1,7 @@
 # Last modified 2014-03-08
 # Original version in collaboration with Richard Heiberger
 
-#' @exportMethod 
+#' @export
 plot.htest <- function (x, hypoth.or.conf = 'Hypoth',...) { 
     if (x$method == "1-sample proportions test with continuity correction" || x$method == "1-sample proportions test without continuity correction"){
         mu <- x$null.value
