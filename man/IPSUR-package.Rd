@@ -12,8 +12,8 @@ An introductory probability and statistics textbook, alongside other supplementa
 \tabular{ll}{
 Package: \tab IPSUR\cr
 Type: \tab Package\cr
-Version: \tab 4.0.1127\cr
-Date: \tab 2021-01-01\cr
+Version: \tab 4.0.1206\cr
+Date: \tab 2022-12-06\cr
 Depends: \tab R (>= 2.10)\cr
 Imports: \tab actuar, aplpack, binom, boot, coin, distrEx, e1071, HH (>= 2.1-32), Hmisc, lmtest, mvtnorm, prob, qcc, RcmdrPlugin.IPSUR (>= 0.1-6), reshape, scatterplot3d, TeachingDemos (>= 2.5), vcd\cr
 Suggests: \tab diagram, emdbook, ggplot2, lattice, RcmdrMisc\cr
