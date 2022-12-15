@@ -3062,9 +3062,9 @@ Open \textsf{R} and issue the following commands at the command line to get star
 
 <<echo=FALSE>>=
 #library("RcmdrPlugin.IPSUR")
-data(RcmdrTestDrive)
-attach(RcmdrTestDrive)
-names(RcmdrTestDrive)
+#data(RcmdrTestDrive)
+#attach(RcmdrTestDrive)
+#names(RcmdrTestDrive)
 @
 
 To load the data in the \textsf{R} Commander (\texttt{Rcmdr}), click the
@@ -4717,20 +4717,20 @@ at least one match. Figure~\ref{fig:birthday} shows a graph of the birthday
 probabilities:
 
 <<birthday, echo=FALSE, fig=TRUE, include=FALSE, height=3.1,width=5>>=
-g <- Vectorize(pbirthday.ipsur)
-plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
-remove(g)
-abline(h = 0.5, lty = 2)
-abline(v = 23, lty = 2)
+#g <- Vectorize(pbirthday.ipsur)
+#plot(1:50, g(1:50), xlab = "Number of people in room", ylab = "Prob(at least one match)")
+#remove(g)
+#abline(h = 0.5, lty = 2)
+#abline(v = 23, lty = 2)
 @
 
-\begin{figure}
-\begin{center}
-\includegraphics{IPSUR-birthday}
-\end{center}
-\caption[The birthday problem.]{{\small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}}
-\label{fig:birthday}
-\end{figure}
+% \begin{figure}
+% \begin{center}
+% \includegraphics{IPSUR-birthday}
+% \end{center}
+% \caption[The birthday problem.]{{\small The birthday problem. The horizontal line is at \(p=0.50\) and the vertical line is at \(n=23\).}}
+% \label{fig:birthday}
+% \end{figure}
 
 \subsubsection{How to do it with \textsf{R}}
 
@@ -5105,9 +5105,9 @@ and notice that \(A\cap B\) and \(A^{c}\cap B\) are disjoint. Therefore
 
 <<echo=TRUE>>=
 #library(RcmdrPlugin.IPSUR)
-data(RcmdrTestDrive)
-.Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
-addmargins(.Table) # Table with marginal distributions
+#data(RcmdrTestDrive)
+#.Table <- xtabs( ~ smoking + gender, data = RcmdrTestDrive)
+#addmargins(.Table) # Table with marginal distributions
 @
 
 
@@ -6088,7 +6088,7 @@ deviation with the functions \texttt{E}, \texttt{var}, and \texttt{sd}:
 <<echo=TRUE>>=
 library(distrEx)
 X <- DiscreteDistribution(supp = 0:3, prob = c(1,3,3,1)/8)
-E(X); var(X); sd(X)
+E(X); # var(X); sd(X)
 @
 
 \section{The Discrete Uniform Distribution} \label{sec:disc-uniform-dist}
@@ -6635,7 +6635,7 @@ computing a sample mean of the function of interest.
 There are methods for other population parameters:
 
 <<echo=TRUE>>=
-var(X)
+#var(X)
 sd(X)
 @
 
@@ -7742,7 +7742,7 @@ p(X)(0.71) - p(X)(0.14)
 Compare this to the answer we found earlier. Now let us try
 expectation with the \texttt{distrEx} package \cite{distrEx}:
 <<echo=TRUE>>=
-E(X); var(X); 3/80
+#E(X); var(X); 3/80
 @
 
 Compare these answers to the ones we found in Example~\ref{exm:cont-pdf3x2}. Why are they different? Because the \texttt{distrEx}
@@ -20596,284 +20596,6 @@ one-to-one transformation \(T\) maps points
 derivatives of \(T\) (lined up in the natural manner), and instead of
 a double integral we have a multiple integral over multidimensional
 sets \(A\) and \(B\).
-
-\chapter{RcmdrTestDrive Story} \label{cha:rcmdrtestdrive-story}
-
-The goal of \texttt{RcmdrTestDrive} was to have a data set sufficiently rich
-in the types of data represented such that a person could load it into
-the \(\mathsf{R}\) Commander and be able to explore all of \texttt{Rcmdr}'s
-menu options at once. I decided early-on that an efficient way to do
-this would be to generate the data set randomly, and later add to the
-list of variables as more \texttt{Rcmdr} menu options became
-available. Generating the data was easy, but generating a story that
-related all of the respective variables proved to be less so.
-
-In the Summer of 2006 I gave a version of the raw data and variable
-names to my STAT 3743 Probability and Statistics class and invited
-each of them to write a short story linking all of the variables
-together in a coherent narrative. No further direction was given.
-
-The most colorful of those I received was written by Jeffery
-Cornfield, submitted July 12, 2006, and is included below with his
-permission. It was edited slightly by the present author and updated
-to respond dynamically to the random generation of \texttt{RcmdrTestDrive};
-otherwise, the story has been unchanged.
-
-\subsubsection{Case File: ALU-179 ``Murder Madness in Toon Town''}
-
-\begin{quote}
-\textit{WARNING} This file is not for the faint of heart, dear reader,
-because it is filled with horrible images that will haunt your
-nightmares. If you are weak of stomach, have irritable bowel syndrome,
-or are simply paranoid, DO NOT READ FURTHER! Otherwise, read at your
-own risk.
-\end{quote}
-
-One fine sunny day, Police Chief R. Runner called up the forensics
-department at Acme-Looney University. There had been
-\Sexpr{dim(RcmdrTestDrive)[1] - 2} murders in the past
-\Sexpr{round((dim(RcmdrTestDrive)[1] - 2)/24)} days, approximately
-one murder every hour, of many of the local Human workers, shop
-keepers, and residents of Toon Town. These alarming rates threatened
-to destroy the fragile balance of Toon and Human camaraderie that had
-developed in Toon Town.
-
-Professor Twee T. Bird, a world-renowned forensics specialist and a
-Czechoslovakian native, received the call. ``Professor, we need your
-expertise in this field to identify the pattern of the killer or
-killers,'' Chief Runner exclaimed. ``We need to establish a link between
-these people to stop this massacre.''
-
-``Yes, Chief Runner, please give me the details of the case,'' Professor
-Bird declared with a heavy native accent, (though, for the sake of the
-case file, reader, I have decided to leave out the accent due to the
-fact that it would obviously drive you -- if you will forgive the pun
--- looney!)
-
-``All prints are wiped clean and there are no identifiable marks on the
-bodies of the victims. All we are able to come up with is the
-possibility that perhaps there is some kind of alternative method of
-which we are unaware. We have sent a secure e-mail with a listing of
-all of the victims' \texttt{races}, \texttt{genders}, locations of the bodies, and
-the sequential \texttt{order} in which they were killed. We have also
-included other information that might be helpful,'' said Chief Runner.
-
-``Thank you very much. Perhaps I will contact my colleague in the
-Statistics Department here, Dr. Elmer Fudd-Einstein,'' exclaimed
-Professor Bird. ``He might be able to identify a pattern of attack with
-mathematics and statistics.''
-
-``Good luck trying to find him, Professor. Last I heard, he had a
-bottle of scotch and was in the Hundred Acre Woods hunting rabbits,''
-Chief Runner declared in a manner that questioned the beloved doctor's
-credibility.
-
-``Perhaps I will take a drive to find him. The fresh air will do me
-good.''
-
-\begin{quote}
-I will skip ahead, dear reader, for much occurred during this
-time. Needless to say, after a fierce battle with a mountain cat that
-the Toon-ology Department tagged earlier in the year as ``Sylvester,''
-Professor Bird found Dr. Fudd-Einstein and brought him back, with much
-bribery of alcohol and the promise of the future slaying of those
-``wascally wabbits'' (it would help to explain that Dr. Fudd-Einstein
-had a speech impediment which was only worsened during the consumption
-of alcohol.)
-\end{quote}
-
-Once our two heroes returned to the beautiful Acme-Looney University,
-and once Dr. Fudd-Einstein became sober and coherent, they set off to
-examine the case and begin solving these mysterious murders.
-
-``First off,'' Dr. Fudd-Einstein explained, ``these people all worked at
-the University at some point or another. Also, there also seems to be
-a trend in the fact that they all had a \texttt{salary} between
-\Sexpr{round(min(RcmdrTestDrive$salary))} and
-\Sexpr{round(max(RcmdrTestDrive$salary))} when they retired.''
-
-``That's not really a lot to live off of,'' explained Professor Bird.
-
-``Yes, but you forget that the Looney Currency System works differently
-than the rest of the American Currency System. One Looney is
-equivalent to Ten American Dollars. Also, these faculty members are
-the ones who faced a cut in their salary, as denoted by
-\texttt{reduction}. Some of them dropped quite substantially when the
-University had to fix that little \textit{faux pas} in the Chemistry
-Department. You remember: when Dr. D. Duck tried to create that
-‘Everlasting Elixir?' As a result, these faculty left the
-university. Speaking of which, when is his memorial service?'' inquired
-Dr. Fudd-Einstein.
-
-``This coming Monday. But if there were all of these killings, how in
-the world could one person do it? It just doesn't seem to be possible;
-stay up \Sexpr{round((dim(RcmdrTestDrive)[1] - 2)/24)} days
-straight and be able to kill all of these people and have the energy
-to continue on,'' Professor Bird exclaimed, doubting the guilt of only
-one person.
-
-``Perhaps then, it was a group of people, perhaps there was more than
-one killer placed throughout Toon Town to commit these crimes. If I
-feed in these variables, along with any others that might have a
-pattern, the Acme Computer will give us an accurate reading of
-suspects, with a scant probability of error. As you know, the Acme
-Computer was developed entirely in house here at Acme-Looney
-University,'' Dr. Fudd-Einstein said as he began feeding the numbers
-into the massive server.
-
-``Hey, look at this,'' Professor Bird exclaimed, ``What's with this
-\texttt{before} and \texttt{after} information?''
-
-``Scroll down; it shows it as a note from the coroner's
-office. Apparently Toon Town Coroner Marvin -- that strange fellow
-from Mars, Pennsylvania -- feels, in his opinion, that given the fact
-that the cadavers were either \texttt{smokers} or non-smokers, and given
-their personal health, and family medical history, that this was their
-life expectancy before contact with cigarettes or second-hand smoke
-and after,'' Dr. Fudd-Einstein declared matter-of-factly.
-
-``Well, would race or gender have something to do with it, Elmer?''
-inquired Professor Bird.
-
-``Maybe, but I would bet my money on somebody was trying to quiet these
-faculty before they made a big ruckus about the secret
-money-laundering of Old Man Acme. You know, most people think that is
-how the University receives most of its funds, through the mob
-families out of Chicago. And I would be willing to bet that these
-faculty figured out the connection and were ready to tell the Looney
-Police.'' Dr. Fudd-Einstein spoke lower, fearing that somebody would
-overhear their conversation.
-
-Dr. Fudd-Einstein then pressed \texttt{Enter} on the keyboard and waited for
-the results. The massive computer roared to life\ldots and when I say
-roared, I mean it literally \textit{roared}. All the hidden bells, whistles,
-and alarm clocks in its secret compartments came out and created such
-a loud racket that classes across the university had to come to a
-stand-still until it finished computing.
-
-Once it was completed, the computer listed 4 names:
-
-
-
-\texttt{SUSPECTS}
-
-\begin{itemize}
-\item \texttt{Yosemite Sam ("Looney" Insane Asylum)}
-\item \texttt{Wile E. Coyote (deceased)}
-\item \texttt{Foghorn Leghorn (whereabouts unknown)}
-\item \texttt{Granny (1313 Mockingbird Lane, Toon Town USA)}
-\end{itemize}
-
-Dr. Fudd-Einstein and Professor Bird looked on in silence. They could
-not believe their eyes. The greatest computer on the Gulf of Mexico
-seaboard just released the most obscure results imaginable.
-
-``There seems to be a mistake. Perhaps something is off,'' Professor
-Bird asked, still unable to believe the results.
-
-``Not possible; the Acme Computer takes into account every kind of
-connection available. It considers affiliations to groups, and
-affiliations those groups have to other groups. It checks the FBI,
-CIA, British intelligence, NAACP, AARP, NSA, JAG, TWA, EPA, FDA, USWA,
-R, MAPLE, SPSS, SAS, and Ben \& Jerry's files to identify
-possible links, creating the most powerful computer in the
-world\ldots with a tweak of Toon fanaticism,'' Dr. Fudd-Einstein
-proclaimed, being a proud co-founder of the Acme Computer Technology.
-
-``Wait a minute, Ben \& Jerry? What would eating ice cream have to do
-with anything?'' Professor Bird inquired.
-
-``It is in the works now, but a few of my fellow statistician
-colleagues are trying to find a mathematical model to link the type of
-ice cream consumed to the type of person they might become. Assassins
-always ate vanilla with chocolate sprinkles, a little known fact they
-would tell you about Oswald and Booth,'' Dr. Fudd-Einstein declared.
-
-``I've heard about this. My forensics graduate students are trying to
-identify car thieves with either rocky road or mint chocolate chip\ldots so
-far, the pattern is showing a clear trend with chocolate chip,''
-Professor Bird declared.  ``Well, what do we know about these suspects,
-Twee?'' Dr. Fudd-Einstein asked.
-
-``Yosemite Sam was locked up after trying to rob that bank in the West
-Borough. Apparently his guns were switched and he was sent the Acme
-Kids Joke Gun and they blew up in his face. The containers of peroxide
-they contained turned all of his facial hair red. Some little child is
-running around Toon Town with a pair of .38's to this day.
-
-``Wile E. Coyote was that psychopath working for the Yahtzee - the
-fanatics who believed that Toons were superior to Humans. He strapped
-sticks of Acme Dynamite to his chest to be a martyr for the cause, but
-before he got to the middle of Toon Town, this defective TNT blew him
-up. Not a single other person -- Toon or Human -- was even close.
-
-``Foghorn Leghorn is the most infamous Dog Kidnapper of all times. He
-goes to the homes of prominent Dog citizens and holds one of their
-relatives for ransom. If they refuse to pay, he sends them to the
-pound. Either way, they're sure stuck in the dog house,'' Professor
-Bird laughed. Dr. Fudd-Einstein didn't seem amused, so Professor Bird
-continued.
-
-``Granny is the most beloved alumnus of Acme-Looney University. She was
-in the first graduating class and gives graciously each year to the
-university. Without her continued financial support, we wouldn't have
-the jobs we do. She worked as a parking attendant at the University
-lots\ldots wait a minute, take a look at this,'' Professor Bird said as he
-scrolled down in the police information. ``Granny's signature is on
-each of these faculty members' \texttt{parking} tickets. Kind of odd,
-considering the Chief-of-Parking signed each personally. The deceased
-had from as few as \Sexpr{min(RcmdrTestDrive$parking)} ticket to as
-many as \Sexpr{max(RcmdrTestDrive$parking)}. All tickets were unpaid.
-
-``And look at this, Granny married Old Man Acme after graduation. He
-was a resident of Chicago and rumored to be a consigliere to one of
-the most prominent crime families in Chicago, the Chuck Jones/Warner
-Crime Family,'' Professor Bird read from the screen as a cold feeling
-of terror rose from the pit of his stomach.
-
-``Say, don't you live at her house? Wow, you're living under the same
-roof as one of the greatest criminals/murderers of all time!''
-Dr. Fudd-Einstein said in awe and sarcasm.
-
-``I would never have suspected her, but I guess it makes sense. She is
-older, so she doesn't need near the amount of sleep as a younger
-person. She has access to all of the vehicles so she can copy license
-plate numbers and follow them to their houses. She has the finances to
-pay for this kind of massive campaign on behalf of the Mob, and she
-hates anyone that even remotely smells like smoke,'' Professor Bird
-explained, wishing to have his hit of nicotine at this time.
-
-``Well, I guess there is nothing left to do but to call Police Chief
-Runner and have him arrest her,'' Dr. Fudd-Einstein explained as he
-began dialing. ``What I can't understand is how in the world the Police
-Chief sent me all of this information and somehow seemed to screw it
-up.''
-
-``What do you mean?'' inquired Professor Bird.
-
-`` Well, look here. The data file from the Chief's email shows
-\Sexpr{dim(RcmdrTestDrive)[1]} murders, but there have only been
-\Sexpr{dim(RcmdrTestDrive)[1] - 2}. This doesn't make any
-sense. I'll have to straighten it out. Hey, wait a minute. Look at
-this, Person number \Sexpr{dim(RcmdrTestDrive)[1] - 1} and Person
-number \Sexpr{dim(RcmdrTestDrive)[1]} seem to match our
-stats. But how can that be?''
-
-It was at this moment that our two heroes were shot from behind and
-fell over the computer, dead. The killer hit \texttt{Delete} on the computer
-and walked out slowly (considering they had arthritis) and cackling
-loudly in the now quiet computer lab.
-
-And so, I guess my question to you the reader is, did Granny murder
-\Sexpr{dim(RcmdrTestDrive)[1]} people, or did the murderer slip
-through the cracks of justice? You be the statistician and come to
-your own conclusion.
-
-Detective Pyork E.~Pig
-
-\textbf{End File}
-
-\vfill{}
 
 
 \cleardoublepage
