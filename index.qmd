@@ -3,30 +3,46 @@ title: "IPSUR: Introduction to Probability and Statistics Using R"
 image: profile.png
 ---
 
-Introduction to Probability and Statistics Using R is a textbook written for an undergraduate course in probability and statistics.
-
-IPSUR is FREE, in the GNU sense of the word.
+Introduction to Probability and Statistics Using R is a textbook written for an undergraduate course in probability and statistics. IPSUR is FREE, in the GNU sense of the word.
 
 ## Install
 
-This package is distributed via GitHub, and not CRAN.  You will need the `devtools` package to install `IPSUR`,  Launch `R` and type the following at the command prompt "\>":
+This package is distributed via GitHub, and not CRAN. Here are the steps to install `IPSUR` on your own system.
+
+### CRAN dependencies
+
+First install the `CRAN` packages that are referenced in `IPSUR`. Launch `R` and type the following at the command prompt "\>":
+
 
 ```{r, eval=FALSE}
+install.packages(c("actuar", "aplpack", "binom", "boot", "coin", "diagram",
+                   "distrEx", "e1071", "emdbook", "ggplot2", "HH", "Hmisc",
+                   "lmtest", "mvtnorm", "qcc", "reshape", "RcmdrMisc",
+                   "scatterplot3d", "TeachingDemos", "vcd"))
+```
+
+There should be a lot of packages installed at this step.
+
+### Other dependencies
+
+You will need the `devtools` package to install the `prob` package from GitHub.  
+
+```{r, eval=FALSE}
+install.packages("combinat")  # the prob package depends on combinat
 install.packages("devtools")  # if you don't have it already
+devtools::install_github("gjkerns/prob")
 ```
 
 and then install `IPSUR` with 
 
 ```{r, eval=FALSE}
-devtools::install_github("gjkerns/prob")
 devtools::install_github("gjkerns/IPSUR")
 ```
 
-You will run into lots of errors because of missing dependencies.  See the file `renv.lock` for info on packages to install.  These packages are important because they are used in the `IPSUR` narrative.
 
 ## Load
 
-Once IPSUR is downloaded and installed, it must be loaded into R. Load the package with the library function:
+Once IPSUR is downloaded and installed, it must be loaded into R. Load the package with the `library` function:
 
 ```{r, eval=FALSE}
 library(IPSUR)

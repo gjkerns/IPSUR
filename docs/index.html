@@ -179,7 +179,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
+  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a>
+  <ul class="collapse">
+  <li><a href="#cran-dependencies" id="toc-cran-dependencies" class="nav-link" data-scroll-target="#cran-dependencies">CRAN dependencies</a></li>
+  <li><a href="#other-dependencies" id="toc-other-dependencies" class="nav-link" data-scroll-target="#other-dependencies">Other dependencies</a></li>
+  </ul></li>
   <li><a href="#load" id="toc-load" class="nav-link" data-scroll-target="#load">Load</a></li>
   <li><a href="#develop" id="toc-develop" class="nav-link" data-scroll-target="#develop">Develop</a></li>
   </ul>
@@ -204,30 +208,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Introduction to Probability and Statistics Using R is a textbook written for an undergraduate course in probability and statistics.</p>
-<p>IPSUR is FREE, in the GNU sense of the word.</p>
+<p>Introduction to Probability and Statistics Using R is a textbook written for an undergraduate course in probability and statistics. IPSUR is FREE, in the GNU sense of the word.</p>
 <section id="install" class="level2">
 <h2 class="anchored" data-anchor-id="install">Install</h2>
-<p>This package is distributed via GitHub, and not CRAN. You will need the <code>devtools</code> package to install <code>IPSUR</code>, Launch <code>R</code> and type the following at the command prompt “&gt;”:</p>
+<p>This package is distributed via GitHub, and not CRAN. Here are the steps to install <code>IPSUR</code> on your own system.</p>
+<section id="cran-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="cran-dependencies">CRAN dependencies</h3>
+<p>First install the <code>CRAN</code> packages that are referenced in <code>IPSUR</code>. Launch <code>R</code> and type the following at the command prompt “&gt;”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)  <span class="co"># if you don't have it already</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"actuar"</span>, <span class="st">"aplpack"</span>, <span class="st">"binom"</span>, <span class="st">"boot"</span>, <span class="st">"coin"</span>, <span class="st">"diagram"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"distrEx"</span>, <span class="st">"e1071"</span>, <span class="st">"emdbook"</span>, <span class="st">"ggplot2"</span>, <span class="st">"HH"</span>, <span class="st">"Hmisc"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"lmtest"</span>, <span class="st">"mvtnorm"</span>, <span class="st">"qcc"</span>, <span class="st">"reshape"</span>, <span class="st">"RcmdrMisc"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"scatterplot3d"</span>, <span class="st">"TeachingDemos"</span>, <span class="st">"vcd"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There should be a lot of packages installed at this step.</p>
+</section>
+<section id="other-dependencies" class="level3">
+<h3 class="anchored" data-anchor-id="other-dependencies">Other dependencies</h3>
+<p>You will need the <code>devtools</code> package to install the <code>prob</code> package from GitHub.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"combinat"</span>)  <span class="co"># the prob package depends on combinat</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)  <span class="co"># if you don't have it already</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gjkerns/prob"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and then install <code>IPSUR</code> with</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gjkerns/prob"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gjkerns/IPSUR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gjkerns/IPSUR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You will run into lots of errors because of missing dependencies. See the file <code>renv.lock</code> for info on packages to install. These packages are important because they are used in the <code>IPSUR</code> narrative.</p>
+</section>
 </section>
 <section id="load" class="level2">
 <h2 class="anchored" data-anchor-id="load">Load</h2>
-<p>Once IPSUR is downloaded and installed, it must be loaded into R. Load the package with the library function:</p>
+<p>Once IPSUR is downloaded and installed, it must be loaded into R. Load the package with the <code>library</code> function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(IPSUR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(IPSUR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>and finally launch your PDF viewer with</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read</span>(IPSUR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read</span>(IPSUR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="develop" class="level2">
